@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="SummaryData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="CashierDailySummarry" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="collectionsummary" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+				<xs:element name="date" 			type="xs:date" 		minOccurs="0" 	/>
+				<xs:element name="fullnames" 		type="xs:string" minOccurs="0" />   
+				<xs:element name="userid"    		type="xs:string" minOccurs="0" />           
+				<xs:element name="cash" 	type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="deposit" 	type="xs:float" 	minOccurs="0" 	default="0.00"/>
+				<xs:element name="CashRefund" 	type="xs:float" 	minOccurs="0" 	default="0.00"/>
+				<xs:element name="DepositRefund" 	type="xs:float" 	minOccurs="0" 	default="0.00"/>
+				           
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>        
+        <xs:element name="Facility" maxOccurs="1" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+			 <xs:element name="name" type="xs:string" minOccurs="0" />
+              <xs:element name="logo" type="xs:string" minOccurs="0" />
+			  <xs:element name="motto" type="xs:string" minOccurs="0" />
+              <xs:element name="address" type="xs:string" minOccurs="0" />
+              <xs:element name="tel" type="xs:string" minOccurs="0" />
+              <xs:element name="cell" type="xs:string" minOccurs="0" />
+              <xs:element name="fax" type="xs:string" minOccurs="0" />
+              <xs:element name="email" type="xs:string" minOccurs="0" />
+              <xs:element name="url" type="xs:string" minOccurs="0" />
+              <xs:element name="footer" type="xs:string" minOccurs="0" />
+              <xs:element name="template" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>       
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

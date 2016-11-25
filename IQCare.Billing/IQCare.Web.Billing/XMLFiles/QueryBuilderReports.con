@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="yes"?>
+<QBReportList>
+  <xs:schema id="QBReportList" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="QBReportList" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="QueryBuilderReports">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="CategoryId" type="xs:int" minOccurs="0" />
+                <xs:element name="CategoryName" type="xs:string" minOccurs="0" />
+                <xs:element name="ReportId" type="xs:int" minOccurs="0" />
+                <xs:element name="ReportName" type="xs:string" minOccurs="0" />
+                <xs:element name="ReportDescription" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <QueryBuilderReports>
+    <CategoryId>1</CategoryId>
+    <CategoryName>Billing</CategoryName>
+    <ReportId>1</ReportId>
+    <ReportName>Total Collections by Type</ReportName>
+    <ReportDescription>Total Collections by Type</ReportDescription>
+  </QueryBuilderReports>
+  <QueryBuilderReports>
+    <CategoryId>1</CategoryId>
+    <CategoryName>Billing</CategoryName>
+    <ReportId>2</ReportId>
+    <ReportName>Receipt Analysis</ReportName>
+    <ReportDescription>Receipt Analysis</ReportDescription>
+  </QueryBuilderReports>
+</QBReportList>

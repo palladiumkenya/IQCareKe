@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace IQCare.FormBuilder
+{
+    partial class frmFormBuilder
+    {
+
+        private TextBox txtDisplayName;
+        private Label lblDisplayName;
+    }
+}

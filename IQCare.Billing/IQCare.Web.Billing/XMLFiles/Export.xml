@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TABLEWITHVISITID>
+  <ItemName TableName="AppAdmin" VisitIdName="" PatientID="" ID="Id"/>
+  <ItemName TableName="Mst_patient" VisitIdName="" PatientID="" ID=""/>
+  <!--<ItemName TableName="Mst_Patient" VisitIdName="" PatientID="Ptn_Pk" ID=""/>-->
+  <ItemName TableName="ord_Visit" VisitIdName="Visit_Id" PatientID="Ptn_Pk" ID=""/>
+  
+  <ItemName TableName="ord_PatientPharmacyOrder" VisitIdName="VisitId" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_PatientPharmacyOrder" VisitIdName="" PatientID="" ID="Ptn_pharmacy_pk" />
+  <ItemName TableName="dtl_PatientPharmacyOrderNonARV" VisitIdName="" PatientID="" ID="Ptn_pharmacy_pk"/>-->
+  <ItemName TableName="dtl_Adherence_Missed_Reason" VisitIdName="Visit_pk" PatientID="PtnPk" ID=""/>
+  <ItemName TableName="dtl_ARTSponsor" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_Adherence_Reason" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_FamilyInfo" VisitIdName="" PatientID="Ptn_pk" ID=""/>-->
+  <ItemName TableName="dtl_FollowupEducation" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_HIVAIDSCareTypes" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_InfantInfo" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_InfantParent" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_patient_meetings" VisitIdName="" PatientID="Ptn_pk" ID=""/>-->
+  <ItemName TableName="dtl_PatientAdherence" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientAllergy" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientAppointment" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientARTRestart" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientARVInfo" VisitIdName="VisitId" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientArvTherapy" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientAssessment" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_PatientCareEnded" VisitIdName="" PatientID="Ptn_pk" ID=""/>-->
+  <ItemName TableName="dtl_PatientClinicalNotes" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientClinicalStatus" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientContacts" VisitIdName="VisitId" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_patientCounseling" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientDelivery" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientDisclosure" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientDisease" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientHIVBarrier" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientHivOther" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientHivPrevCareEnrollment" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientHivPrevCareIE" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_PatientHomeVisit" VisitIdName="" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientHouseHoldInfo" VisitIdName="" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="Dtl_PatientOIDeathReason" VisitIdName="" PatientID="Ptn_pk" ID=""/>-->
+  <ItemName TableName="dtl_PatientOtherTreatment" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientPriorART" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientReferredTo" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientStage" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientSymptoms" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientTBHIVCare" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientTBType" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientTrackingCare" VisitIdName="" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_PatientTransfer" VisitIdName="" PatientID="Ptn_pk" ID=""/>-->
+  <ItemName TableName="dtl_PatientVitals" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PMTCTDetails" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PMTCTStatus" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_RegimenMap" VisitIdName="Visit_pk" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="ord_PatientLabOrder" VisitIdName="VisitId" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientCareEnded" VisitIdName="CareEndedId" PatientID="Ptn_pk" ID=""/>
+  <ItemName TableName="dtl_PatientCareRestarted" VisitIdName="CareEndedId" PatientID="Ptn_pk" ID=""/>
+  <!--<ItemName TableName="dtl_PatientLabResults" VisitIdName="" PatientID="Ptn_pk" ID="LabID"/>-->
+  <ItemName TableName="Lnk_PatientProgramStart" VisitIdName="" PatientID="Ptn_pk" ID=""/>
+ </TABLEWITHVISITID>

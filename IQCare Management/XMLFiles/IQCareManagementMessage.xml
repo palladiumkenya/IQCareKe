@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+  <!-- Custom Errors-->
+  <Message Id ="#C1" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;MessageText&lt;/DataElement&gt; "/>
+  <Message Id ="BlankTextBox" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be blank."/>
+  <Message Id ="BlankDropDown" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; is not selected."/>
+  <Message Id ="BlankList" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; is not selected."/>
+  <Message Id ="FillTextBox" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be saved without the generic ."/>
+  <Message Id ="UncheckedButton" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; required."/>
+  <Message Id ="DuplicateStrength" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;MessageText&lt;/DataElement&gt; is a duplicate. Provide another strength."/>
+  <Message Id ="DrugAllergy_SulfaDrug" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; None, Not Documented, Sulfa Drug or Other in Drug Allergies."/>
+  <Message Id ="FileFormat" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; should be txt or xls."/>
+  <Message Id ="DuplicateIndentifier" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; is a duplicate. Provide another Idenifier Number."/>
+  <Message Id ="StoreNotAuthorize" Type ="!" Buttons ="" Text ="Selected Store is not authorize to access this functionality."/>
+
+  <!-- Login Screen/Security -->
+  <Message Id ="BlankUserName" Type ="!" Buttons ="" Text ="Enter username first."/>
+  <Message Id ="BlankPassword" Type ="!" Buttons ="" Text ="Enter password first."/>
+  <Message Id ="BlankLocation" Type ="!" Buttons ="" Text ="Select Facility/Satellite first."/>
+  <Message Id ="PasswordNotMatch" Type ="!" Buttons ="" Text ="Incorrect password. Please try again."/>
+  <Message Id ="UpdateMessage" Type="!" Buttons="" Text="Password updated successfully."/>
+  <Message Id ="InvalidLogin" Type ="!" Buttons ="" Text ="Incorrect username and password. Please try again."/>
+  <Message Id ="UnAuthorizedAccess" Type ="!" Buttons ="" Text ="You are not authorized to access this functionality."/>
+  <Message Id ="SessionExpired" Type ="!" Buttons ="" Text ="Your session has expired. Please login again."/>
+  <Message Id ="SelectPatient" Type ="!" Buttons ="" Text ="Please select a patient."/>
+  <Message Id ="DataBackup" Type ="!" Buttons ="" Text ="Database backup completed."/>
+  <Message Id ="DataRestore" Type ="!" Buttons ="" Text ="Database restore completed."/>
+
+  <!--Administration-->
+  <Message Id ="SatelliteIDName" Type ="!" Buttons ="" Text ="Satellite ID and Name already exists."/>
+  <Message Id ="SatelliteName" Type ="!" Buttons ="" Text ="Satellite Name already exists."/>
+  <Message Id ="SatelliteID" Type ="!" Buttons ="" Text ="Satellite ID already exists."/>
+  <Message Id ="SatelliteName" Type ="!" Buttons ="" Text ="Satellite Name already exists."/>
+  <Message Id ="TestMessage" Type ="!" Buttons ="" Text ="Test Message."/>
+  <Message Id ="PasswordNotMatch" Type ="!" Buttons ="" Text ="Incorrect password. Please try again."/>
+<Message Id ="ExistPasswordNotMatch" Type ="!" Buttons ="" Text ="Existing password is incorrect. Please try again."/>
+<Message Id ="NewConfirmPasswordNotMatch" Type ="!" Buttons ="" Text ="New and confirm passwords do not match. Please try again."/>
+  <Message Id ="UserSaveRecord" Type ="?" Buttons ="" Text ="Add new user?"/>
+  <Message Id ="UpdateUserRecord" Type ="?" Buttons ="" Text ="Update user record?"/>
+  <Message Id ="RemoveUserRecord" Type ="?" Buttons ="" Text ="Remove user record?"/>
+ <Message Id ="UserExists" Type ="!" Buttons ="" Text ="User already exists. Please try again."/>
+  <Message Id ="UserSave" Type ="!" Buttons ="" Text ="New user created successfully."/>
+  <Message Id ="UserUpdate" Type ="!" Buttons ="" Text ="User record successfully updated."/>
+  <Message Id ="UserDelete" Type ="!" Buttons ="" Text ="User record successfully removed."/>
+  <Message Id ="UserListInactiveSelect" Type ="!" Buttons ="" Text ="Inactive user record cannot be displayed."/>
+  <Message Id ="AssessmentUpdate" Type ="!" Buttons ="" Text ="Assessment updated successfully."/>
+  <Message Id ="AssessmentSave" Type ="!" Buttons ="" Text ="New assessment created successfully."/>
+<Message Id ="AssessmentExists" Type ="!" Buttons ="" Text ="Assessment already exists. Please try again."/>
+  <Message Id ="AssessmentTypeUpdate" Type ="!" Buttons ="" Text ="Assessment type updated successfully."/>
+  <Message Id ="AssessmentTypeSave" Type ="!" Buttons ="" Text ="New assessment type created successfully."/>
+<Message Id ="AssessmentTypeExists" Type ="!" Buttons ="" Text ="Assessment type already exists. Please try Again."/>
+  <Message Id ="ReasonSave" Type ="!" Buttons ="" Text ="New reason created successfully."/>
+  <Message Id ="ReasonExists" Type ="!" Buttons ="" Text ="Reason already exists. Please try Again."/>
+  <Message Id ="ReasonCategorySave" Type ="!" Buttons ="" Text ="New reason category created successfully."/>
+  <Message Id ="ReasonCategoryExists" Type ="!" Buttons ="" Text ="Reason category already exists. Please try again."/>
+  <Message Id ="DiseaseSave" Type ="!" Buttons ="" Text ="New disease created successfully."/>
+  <Message Id ="DiseaseExists" Type ="!" Buttons ="" Text ="Disease already exists. Please try again."/>
+  <Message Id ="DiseaseUpdate" Type ="!" Buttons ="" Text ="Disease name updated successfully."/>
+  <Message Id ="EmployeeSave" Type ="!" Buttons ="" Text ="New employee created successfully."/>
+  <Message Id ="EmployeeExists" Type ="!" Buttons ="" Text ="Employee already exists. Please try again."/>
+  <Message Id ="LPTFPTransferExists" Type ="!" Buttons ="" Text ="LPTF Patient Transfer already exists. Please try again."/>
+
+  <Message Id ="LabExists" Type ="!" Buttons ="" Text ="Lab already exists. Please try again."/>
+  <Message Id ="UpdateLab" Type ="!" Buttons ="" Text ="Lab details could not be updated. Please try again."/>
+  <Message Id ="UnChkViralLoad" Type ="!" Buttons ="" Text ="Either uncheck Viral Load Detectable or Enter a value in Limit of Detection field."/>
+  <Message Id ="LabSelectList" Type ="!" Buttons ="" Text ="Please add Lab Results"/>
+
+  <Message Id ="UpdateEmployee" Type ="!" Buttons ="" Text ="Employee details could not be updated. Please try again."/>
+  <Message Id ="UpdateLPTFPTransfer" Type ="!" Buttons ="" Text ="LPTF Patient transfer could not be updated. Please try again."/>
+  <Message Id ="EmployeUpdate" Type ="!" Buttons ="" Text ="Employee name updated successfully."/>
+  <Message Id ="DesignationSave" Type ="!" Buttons ="" Text ="New designation created successfully."/>
+  <Message Id ="DesignationExists" Type ="!" Buttons ="" Text ="Designation already exists. Please try again."/>
+  <Message Id ="DesignationUpdate" Type ="!" Buttons ="" Text ="Designation name updated successfully."/>
+  <Message Id ="VisitSave" Type ="!" Buttons ="" Text ="New visit type created successfully."/>
+  <Message Id ="VisitExists" Type ="!" Buttons ="" Text ="Visit type already exists. Please try again."/>
+  <Message Id ="DrugSave" Type ="!" Buttons ="" Text ="This generic drug combination created successfully."/>
+  <Message Id ="DrugUpdate" Type ="!" Buttons ="" Text ="Drug updated successfully."/>
+  <Message Id ="DrugExists" Type ="!" Buttons ="" Text ="Drug already exists. Please try again."/>
+  <Message Id ="GenericExists" Type ="!" Buttons ="" Text ="Either generic name Or generic abbrevation already exists. Please try again."/>
+  <Message Id ="NonARVGenericExists" Type ="!" Buttons ="" Text ="This generic name already exists. Please try again."/>
+  <Message Id ="MaxMinRange" Type ="!" Buttons ="" Text ="Cannot be greater than maximum dose. Please try again."/>
+
+  <Message Id ="SelectGeneric" Type ="!" Buttons ="" Text ="You must select a generic."/>
+  <Message Id ="SelectARV" Type ="!" Buttons ="" Text ="You must select ARV type."/>
+  <Message Id ="SelectDrugType" Type ="!" Buttons ="" Text ="You cannot change drug type."/>
+  <Message Id ="NoGenericAvailable" Type ="!" Buttons ="" Text ="No generic exists for the selected drug type. Either add a new generic for this drug type or select a different drug type."/>
+  <Message Id ="NoFrequencyAvailable" Type ="!" Buttons ="" Text ="No frequency exists. Add a new frequency."/>
+  <Message Id ="NoStrengthAvailable" Type ="!" Buttons ="" Text ="No dose exists. Add a new dose."/>
+  <Message Id ="SelectStrength" Type ="!" Buttons ="" Text ="You must select strength for this generic."/>
+  <Message Id ="SelectFrequency" Type ="!" Buttons ="" Text ="You must select frequency for this generic."/>
+  <Message Id ="SelectARVOption" Type ="!" Buttons ="" Text ="Select either of the ARV Pickup options"/>
+  <Message Id ="PatientNotOnARV" Type ="!" Buttons ="" Text ="This patient is not on ARVs, enter a different ID"/>
+
+  <Message Id ="RemoveReasonRecord" Type ="?" Buttons ="" Text ="Remove reason record?"/>
+  <Message Id ="RemoveDiseaseRecord" Type ="?" Buttons ="" Text ="Remove disease record?"/>
+  <Message Id ="RemoveDrugRecord" Type ="?" Buttons ="" Text ="Remove drug record?"/>
+  <Message Id ="RemoveLabRecord" Type ="?" Buttons ="" Text ="Remove lab record?"/>
+  <Message Id ="RemoveDesignationRecord" Type ="?" Buttons ="" Text ="Remove designation record?"/>
+  <Message Id ="RemoveOccupationRecord" Type ="?" Buttons ="" Text ="Remove occupation record?"/>
+  <Message Id="EducationSave" Type ="!" Buttons ="" Text ="New education created successfully."/>
+  <Message Id="EducationExist" Type ="!" Buttons ="" Text ="Education already exists. Please try again."/>
+  <Message Id="EducationUpdate" Type ="!" Buttons ="" Text ="Education updated successfully."/>
+  <Message Id="OccupationSave" Type ="!" Buttons ="" Text ="New occupation created successfully."/>
+  <Message Id="OccupationExist" Type ="!" Buttons ="" Text ="Occupation already exists. Please try again."/>
+  <Message Id="OccupationUpdate" Type ="!" Buttons ="" Text ="Occupation updated successfully."/>
+  <Message Id="LabSave" Type ="!" Buttons ="" Text ="New lab created successfully."/>
+  <Message Id="LabExist" Type ="!" Buttons ="" Text ="Lab already exists. Please try again."/>
+  <Message Id="LabUpdate" Type ="!" Buttons ="" Text ="Lab updated successfully."/>
+  <Message Id ="FacilitySaveRecord" Type ="?" Buttons ="" Text ="Add new facility?"/>
+  <Message Id ="FacilityUpdateRecord" Type ="?" Buttons ="" Text ="Update facility record?"/>
+  <Message Id="FacilityMasterExists" Type ="!" Buttons ="" Text ="Facility already exists. Please try again."/>
+  <Message Id="FacilityMasterSave" Type ="!" Buttons ="" Text ="Facility created successfully."/>
+  <Message Id="FacilityMasterUpdate" Type ="!" Buttons ="" Text ="Facility updated successfully."/>
+  <Message Id="UserGroupDetailSaveRecord" Type ="?" Buttons ="" Text ="Add new user group feature?" />
+  <Message Id="UserGroupDetailSave" Type ="!" Buttons ="" Text ="User group feature created successfully."/>
+  <Message Id ="UserGroupDetailUpdateRecord" Type ="?" Buttons ="" Text ="Update user group feature record?"/>
+  <Message Id="UserGroupDetailUpdate" Type ="!" Buttons ="" Text ="User group feature updated successfully."/>
+  <Message Id="UserGroupDetailExists" Type ="!" Buttons ="" Text ="User group already exists. Please try again."/>
+  <Message Id="AddGeneric" Type="!" Buttons ="" Text ="You cannot select more than one generic for a non-ARV drug." />
+  <Message Id="BlankRow" Type="!" Buttons ="" Text ="Select at least one row." />
+  <Message Id ="ErrorUpdate" Type ="!" Buttons ="" Text ="Error in updating the record."/>
+  <Message Id ="EnterOneRecord" Type ="!" Buttons ="" Text ="You can only enter one record in a day."/>
+  <Message Id ="MaxMinDose" Type ="!" Buttons ="" Text ="Minimum dose value cannot be greater than the maximum dose value."/>
+  <Message Id ="UpdateDrugRecord" Type ="?" Buttons ="" Text ="Existing drug updated successfully. Do you want to exit ?"/>
+  <Message Id ="DrugTypeGeneric" Type ="?" Buttons ="" Text ="Generic already exists for the selected drug type. Do you want to update?."/>
+  <Message Id ="DeletePatientError" Type ="!" Buttons ="" Text ="Error in deleting patient record."/>
+  <Message Id ="DeletePatient" Type ="?" Buttons ="" Text ="Are you sure you want to delete this patient record?"/>
+  <Message Id ="PatientEnrollNotMatch" Type ="!" Buttons ="" Text ="Incorrect enrollment. Please try again."/>
+  <Message Id ="PatientInactive" Type ="!" Buttons ="" Text ="Selected patient is care ended."/>
+  <Message Id ="BackupSetupSave" Type ="!" Buttons ="" Text ="Backup Setup updated successfully."/>
+  <Message Id ="CustomRepRefresh" Type ="?" Buttons ="" Text ="Refresh reporting tables?"/>
+  <Message Id ="TimeFormat" Type ="?" Buttons ="" Text ="Choose Either 24 hr. Format or 12 Hr. Format"/>
+
+
+  <!-- Administration Custom List-->
+  <Message Id ="CustomSaveRecord" Type ="?" Buttons ="" Text ="Add New &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="CustomUpdateRecord" Type ="?" Buttons ="" Text ="Update &lt;DataElement&gt;Name&lt;/DataElement&gt; record?"/>
+  <Message Id="CustomMasterExists" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Name&lt;/DataElement&gt; already exists. Please try again."/>
+  <Message Id="CustomMasterSave" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Name&lt;/DataElement&gt; created successfully."/>
+  <Message Id="CustomMasterUpdate" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Name&lt;/DataElement&gt; updated successfully."/>
+  <Message Id ="CustomListPriotorize" Type ="!" Buttons ="" Text ="This priority number belongs to the default list. It cannot be used for prioritization."/>
+  <Message Id ="CustomListInactiveSelect" Type ="!" Buttons ="" Text ="Inactive record cannot be displayed."/>
+  <Message Id="CustomListInactiveUpdate" Type="!" Buttons="" Text="Inactive record cannot be updated."/>
+  <Message Id ="ChkPriority" Type ="!" Buttons ="" Text ="Priority cannot be zero" />
+
+
+  <!-- Administration Custom Field -->
+  <Message Id="CustomFieldSave" Type="!" Buttons="" Text="New custom fields created successfully."/>
+  <Message Id="CustomFieldExists" Type="!" Buttons="" Text="Custom fields already exists. Please try again."/>
+  <Message Id="CustomFieldUpdate" Type="!" Buttons="" Text="Custom fields updated successfully."/>
+  <Message Id="NameExists" Type="!" Buttons="" Text="Name already exists. Change your name criteria."/>
+  <Message Id ="BlankListValues" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be blank."/>
+
+  <!-- Clinical Forms-->
+  <Message Id ="CustomReactivateRecord" Type ="?" Buttons ="" Text ="Reactivate this patient?"/>
+  <Message Id ="CompareDate5" Type ="!" Buttons ="" Text ="Visit date cannot be greater than the current date"/>
+  <Message Id ="NonARTOrderbyDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be greater than the current date"/>
+  <Message Id ="NonARTDispensedbyDate" Type ="!" Buttons ="" Text ="Dispensed by date cannot be greater than the current date"/>
+  <Message Id ="App_Visit" Type ="!" Buttons ="" Text ="Appointment date cannot be less than the visit date"/>
+  <Message Id ="TBScreen" Type ="!" Buttons ="" Text ="Select at least one TB symptom"/>
+  <Message Id ="IE" Type ="?" Buttons ="" Text ="Initial Evaluation &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="Transfer" Type ="?" Buttons ="" Text ="Transfer &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="Enrolment" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="FollowupART" Type ="?" Buttons ="" Text ="ART Followup &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="NonARTFollowUp" Type ="?" Buttons ="" Text ="Non-ART Follow-Up &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="NoPatientExists" Type ="!" Buttons ="" Text ="No records found. Please try again."/>
+  <Message Id ="PatientAdd" Type ="!" Buttons ="" Text ="Added patient record."/>
+  <Message Id ="PatientUpdate" Type ="!" Buttons ="" Text ="Updated patient record."/>
+  <Message Id="PharmacyDetailExists" Type ="!" Buttons ="" Text ="Pharmacy form already exists on this date. You cannot enter two pharmacy forms with the same date."/>
+  <Message Id="RegimenLineExists" Type ="!" Buttons ="" Text ="Regimen line cannot be blank."/>
+  <Message Id="PharmacyDetailSave" Type ="!" Buttons ="" Text ="Pharmacy saved sucessfully."/>
+  <Message Id="ExistPharmacyDetailUpdate" Type ="!" Buttons ="" Text ="Pharmacy updated sucessfully."/>
+  <Message Id ="NoPharmacyRecordExists" Type ="!" Buttons ="" Text ="No records found. Please try again."/>
+  <Message Id ="FixedDose" Type ="!" Buttons ="" Text ="Fixed dose combination not allowed for non ARV Medication."/>
+  <Message Id ="NoDoseFrq" Type ="!" Buttons ="" Text ="Dose and Frequency for this generic does not exist."/>
+  <Message Id ="DuplicateDrug" Type ="!" Buttons ="" Text ="Drug name already exists."/>
+  <Message Id ="CannotInactivate" Type ="!" Buttons ="" Text ="This generic is associated with existing drugs, so it cannot be Inactivated."/>
+  <Message Id ="CannotAdd" Type ="!" Buttons ="" Text ="Cannot add new trade name in edit mode."/>
+  <Message Id ="CannotaddARVStatus" Type ="!" Buttons ="" Text ="ART cannot be dispensed to a patient whose ARV status is No ARV"/>
+  <Message Id ="GenericSelection" Type ="!" Buttons ="" Text ="Select at least one Generic."/>
+  <Message Id ="PharmacyDetailOrderTDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be greater than today’s date."/>
+  <Message Id ="PharmacySelectAdCounselor" Type ="!" Buttons ="" Text ="Select adherence counselor."/>
+  <Message Id ="PharmacyDetailOrderDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be less than the enrollment date."/>
+  <Message Id ="PharmacyDetailReportedTDate" Type ="!" Buttons ="" Text ="Reported by date cannot be greater than today’s date."/>
+  <Message Id ="PharmacyDetailReportedDate" Type ="!" Buttons ="" Text ="Reported by date cannot be less than the enrollment date."/>
+  <Message Id ="PharmacyDetailDispensedTDate" Type ="!" Buttons ="" Text ="Dispensed by date cannot be greater than today’s date."/>
+  <Message Id ="PharmacyDetailDispensedDate" Type ="!" Buttons ="" Text ="Dispensed by date cannot be less than the enrollment date."/>
+  <Message Id ="PharmacyOrderDispenseDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be greater than the dispensed by date."/>
+  <Message Id ="PharmacyOrderDispenseQuentity" Type ="!" Buttons ="" Text ="Dispensed quantity can not be blank"/>
+  <Message Id ="LabtobeDone" Type ="!" Buttons ="" Text ="Cannot be less than today's Date."/>
+  <Message Id ="LabtobeDoneRegistration" Type ="!" Buttons ="" Text ="Cannot be less than enrollment date."/>
+  <Message Id ="DD_Satellite" Type ="!" Buttons ="" Text ="From Satellite and To Satellite cannot be the same"/>
+  <Message Id ="TransferDate" Type ="!" Buttons ="" Text ="Transfer Date should be greater than the latest visit date."/>
+  <Message Id ="TransferDate_1" Type ="!" Buttons ="" Text ="Transfer Date should be less than today's date."/>
+  <Message Id ="TransferDate_2" Type ="!" Buttons ="" Text ="Transfer to satellites is not possible more than once on the same date."/>
+  <Message Id ="TransferDate_3" Type ="!" Buttons ="" Text ="Transfer date to satellites must be between the previous and last date."/>
+  <Message Id ="TransferDate_4" Type ="!" Buttons ="" Text ="The form should be created after the last transfer date"/>
+  <Message Id ="TransferDate_5" Type ="!" Buttons ="" Text ="The form should be updated before the last transfer date"/>
+  <Message Id ="TransferDate_6" Type ="!" Buttons ="" Text ="The form should be updated between previous and last transfer date"/>
+  <Message Id ="TransferDate_7" Type ="!" Buttons ="" Text ="The form should be updated after the last transfer date."/>
+  <Message Id ="RegistrationDate" Type ="!" Buttons ="" Text ="Enrollment date cannot be less than registration date."/>
+  <Message Id ="AgeMonthRange" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; should be between 0 to 12."/>
+  <Message Id ="GreatThanZero" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; should be greater than 0."/>
+  <Message Id ="PharmacyIncompleteData" Type ="!" Buttons ="" Text ="Incomplete Data for one or more of your drug selections."/>
+  <Message Id ="LabOrderDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be less than the lab order date."/>
+  <Message Id ="LabReportedDate" Type ="!" Buttons ="" Text ="Reported by date cannot be less than the lab order date."/>
+  <Message Id ="LabOrderReportedByDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be greater than the reported by date."/>
+
+  <Message Id ="IEsignature" Type ="!" Buttons ="" Text ="Select a Signature."/>
+
+  <Message Id="PharmacyDetailAge" Type ="!" Buttons ="" Text ="Patient's age should be less than 17 years."/>
+  <Message Id="PharmacyAdultDetailAge" Type ="!" Buttons ="" Text ="Patient's age should be greater than 14 years."/>
+  <Message Id="LabDetailExists" Type ="!" Buttons ="" Text ="Lab order form already exists on this date. You cannot enter two lab forms with the same date."/>
+  <Message Id="IEStartNewTreatment" Type ="!" Buttons ="" Text ="Cannot start new treatment. Patient is already on ART."/>
+  <Message Id ="EnrolmentAdd" Type ="!" Buttons ="" Text ="Enrollment record added successfully."/>
+  <Message Id ="EnrolmentUpdate" Type ="!" Buttons ="" Text ="Enrollment record updated successfully."/>
+  <Message Id ="EnrolmentIE_LAB" Type ="!" Buttons ="" Text ="The enrollment date cannot be greater than the date on the pharmacy, lab, or any clinical forms."/>
+  <Message Id ="EnrolmentExists" Type ="!" Buttons ="" Text ="Enrollment record already exists."/>
+  <Message Id="HospitalIdExists" Type ="!" Buttons="" Text ="Existing Hosp/Clinic # already exists." />
+  <Message Id="FileReferenceExists" Type ="!" Buttons="" Text ="File Reference already exists." />
+  <Message Id ="EnrolmentCantZero" Type ="!" Buttons ="" Text ="Patient Enrollment cannot be zero."/>
+  <Message Id ="PMTCT" Type ="!" Buttons ="" Text ="Males older than 3 years are not allowed to be referred from PMTCT."/>
+  <Message Id ="IEExists" Type ="!" Buttons ="" Text ="Initial evaluation form already exists on this date. You cannot enter two initial evaluation forms with the same date."/>
+  <Message Id ="ARTFUExists" Type ="!" Buttons ="" Text ="ART follow-up form already exists on this date. You cannot enter two ART follow-up forms with the same date."/>
+  <Message Id ="SaveNonART" Type ="?" Buttons ="" Text ="Save &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id="NonARTFollowUpSave" Type ="!" Buttons ="" Text ="Non-ART follow-up form details saved sucessfully."/>
+  <Message Id="PaediatricDetailSave" Type ="!" Buttons ="" Text ="Paediatric pharmacy form saved sucessfully."/>
+  <Message Id="NonARTFollowUpDetail" Type ="!" Buttons ="" Text ="Non-ART follow-up form could not be saved. Try again."/>
+  <Message Id ="UpdateNonART" Type ="?" Buttons ="" Text ="Save &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="NoNonARTPharmacyRecordExists" Type ="!" Buttons ="" Text ="No records found. Please try again."/>
+  <Message Id ="SavePaediatric" Type ="?" Buttons ="" Text ="Save &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="NoPaediatricRecordExists" Type ="!" Buttons ="" Text ="No records found. Please try again."/>
+  <Message Id="PaediatricDetailExists" Type ="!" Buttons ="" Text ="Paediatric pharmacy form already exists on this date. You cannot enter two paediatric pharmacy forms with the same date."/>
+  <Message Id="PaediatricDetailUpdate" Type ="!" Buttons ="" Text ="Paediatric pharmacy form updated successfully."/>
+  <Message Id ="SaveOther" Type ="!" Button ="" Text ="Patient already has a record. Do you want to save another Non-ART follow-up form today?" />
+  <Message Id="NonARTFollowUpUpdate" Type ="!" Buttons ="" Text ="Non-ART follow-up form updated successfully." />
+  <Message Id ="NonARTVisitDate" Type ="!" Buttons ="" Text ="Visit date cannot be greater than today’s date."/>
+  <Message Id ="CompareIEVisitDate" Type ="!" Buttons ="" Text ="Non-ART follow-up visit date cannot be less than the initial evaluation visit date."/>
+  <Message Id ="FamilyMemberExists" Type ="!" Buttons ="" Text ="This familiy member already exists."/>
+  <!--<Message Id ="EnrolmentIE_Date" Type ="!" Buttons ="" Text ="Initial evaluation date cannot be less than the enrollment date."/>-->
+  <Message Id ="EnrolmentIE_Exist" Type ="!" Buttons ="" Text ="You must complete the enrollment form first."/>
+  <Message Id ="Enrolment_Exist" Type ="!" Buttons ="" Text ="Visit date Should be after the enrollment date."/>
+
+  <Message Id ="InitialE_Date" Type ="!" Buttons ="" Text ="ART follow-up visit date cannot be less than the initial evaluation visit date."/>
+  <Message Id ="InitialE_Exist" Type ="!" Buttons ="" Text ="Initial evaluation must be completed before you can enter an ART follow-up form."/>
+  <Message Id ="CompareLabVisitDate" Type ="!" Buttons ="" Text ="Lab order by date cannot be less than the Patient Enrollment date."/>
+  <Message Id ="CompareLabTobeDoneDate" Type ="!" Buttons ="" Text ="Lab to be done date cannot be less than the patient enrollment date."/>
+  <Message Id ="LabToBeDoneGreater" Type ="!" Buttons ="" Text ="Lab to be done date cannot be greater than today’s date."/>
+  <Message Id ="NoRecordSelected" Type ="!" Buttons ="" Text ="Please enter at least one result."/>
+
+  <Message Id ="NonARTNextAppDate" Type ="!" Buttons ="" Text ="Next appointment date cannot be less than or equal to the visit date."/>
+  <Message Id ="NonARTLMPDate" Type ="!" Buttons ="" Text ="LMP date cannot be greater than the current date."/>
+  <Message Id ="ErrorinSavingPaediatricDetail" Type ="!" Buttons ="" Text ="There was an error in saving the paediatric pharmacy record."/>
+  <Message Id ="EnrolDate" Type ="!" Buttons ="" Text ="Enrollment date cannot be greater than the current date."/>
+  <Message Id ="DOBDate" Type ="!" Buttons ="" Text ="Date of birth cannot be greater than the current date."/>
+  <Message Id ="DOB_EnrolDate" Type ="!" Buttons ="" Text ="Date of birth cannot be greater than the enrollment date."/>
+  <Message Id ="NonARTDateCompare" Type ="!" Buttons ="" Text ="Dispensed by date cannot be less than the ordered by date."/>
+  <Message Id ="IECheckingForNonARTFollowUp" Type ="!" Buttons ="" Text ="Patient does not have an initial evaluation record. Non-ART follow-up forms cannot be saved until an initial evaluation form is completed."/>
+  <Message Id ="NoPatientIEExists" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; Patient does not have an initial evaluation form. Please try again."/>
+  <Message Id ="AddClinicalRecord" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; saved successfully. Do you want to close?"/>
+  <Message Id ="UpdateClinicalRecord" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; updated successfully. Do you want to close?"/>
+  <Message Id ="AddAnotherClinicalRecord" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;&lt;/DataElement&gt; Patient already has a record for this date. Do you want to save another record?"/>
+  <Message Id ="ClinicalRecordExist" Type ="!" Buttons ="" Text ="Non-ART follow-up already exists on this date. You cannot enter two Non-ART follow-up forms with the same date."/>
+  <Message Id ="NonARTPharmacy" Type ="!" Buttons ="" Text ="Pharmacy form cannot be blank."/>
+  <Message Id ="PharmacyOrderNonARTDate" Type ="!" Buttons ="" Text ="Pharmacy and Non-ART form cannot be created on the same date."/>
+
+  <Message Id ="VillageTownCityName" Type ="!" Buttons ="" Text ="Please select the Village/Town/CityName."/>
+  <Message Id ="DistrictCountyWard" Type ="!" Buttons ="" Text ="Please select the District/County/Ward."/>
+  <Message Id ="EmergencyContactName" Type ="!" Buttons ="" Text ="Enter the Emergency Contact Name."/>
+
+
+  <Message Id="PatientTrackingSave" Type ="?" Buttons ="" Text ="Patient Care Tracking &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="PatientTrackingUpdate" Type ="?" Buttons ="" Text ="Patient Care Tracking &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="OrderredVisitDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be less than the visit date."/>
+  <Message Id ="DispensedVisitDate" Type ="!" Buttons ="" Text ="Dispensed by date cannot be less than the visit date."/>
+  <Message Id ="PharmacyNoData" Type ="!" Buttons ="" Text ="There is no data to save. Please try again."/>
+  <Message Id ="FixedDoseCombNoData" Type ="!" Buttons ="" Text ="Please fill in all of the fields for the fixed dose combination."/>
+  <Message Id ="CheckAccessRight" Type ="!" Buttons ="" Text ="You do not have user rights to access this form."/>
+
+  <Message Id ="RemoveFormError" Type ="!" Buttons ="" Text ="An error occured while deleting this form. Please try again."/>
+  <Message Id ="DeleteForm" Type ="?" Buttons ="" Text ="Are you sure you want to delete &lt;DataElement&gt;FormName&lt;/DataElement&gt; record?"/>
+  <Message Id ="NoItemToAdd" Type ="!" Buttons ="" Text ="Please select the item you want to add."/>
+  <Message Id ="NoItemToRemove" Type ="!" Buttons ="" Text ="Please select the item you want to remove."/>
+  <Message Id ="ErrorDeleting" Type ="!" Buttons ="" Text ="An error occured while deleting the record."/>
+  <Message Id ="DeleteSuccess" Type ="!" Buttons ="" Text ="Record deleted successfully."/>
+  <Message Id ="SaveSuccess" Type ="!" Buttons ="" Text ="Data saved successfully."/>
+  <Message Id ="SelectHimself" Type ="!" Buttons ="" Text ="A patient cannot select himself as family member."/>
+  <Message Id ="DuplicateSelect" Type ="!" Buttons ="" Text ="This family member is already selected."/>
+  <Message Id ="CouncellingNotSelected" Type ="!" Buttons ="" Text ="Select the Counselling Type first."/>
+  <Message Id ="CouncellingTopicNotSelected" Type ="!" Buttons ="" Text ="Select the Counselling Topic first."/>
+  <Message Id ="MissingVisitDate" Type ="!" Buttons ="" Text ="Enter the visit date first."/>
+  <Message Id ="currentregimenchange" Type ="!" Buttons ="" Text ="Patient's current regimen cannot be changed because the patient's ARV Therapy is continue current treatment."/>
+  <Message Id ="Changeregimen" Type ="!" Buttons ="" Text ="Patient's current regimen must be changed because the patient's ARV Therapy is changed."/>
+  <Message Id ="TBSymptom" Type ="!" Buttons ="" Text ="Please select TB symptom"/>
+  <Message Id ="ARVRegimenNotFound" Type ="!" Buttons ="" Text ="Tteatment cannot be stopped as treatment has not started yet."/>
+
+  <!--Laboratory Forms -->
+  <Message Id ="ShowCautionMsg" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;Message&lt;/DataElement&gt;"/>
+  <Message Id ="AddLabRecord" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; saved successfully. Do you want to exit?"/>
+  <Message Id ="UpdateLabRecord" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; updated successfully. Do you want to exit?"/>
+
+  <Message Id ="UnitExists" Type ="!" Buttons ="" Text ="Unit already exists."/>
+  <Message Id ="DefaultUnitExists" Type ="!" Buttons ="" Text ="Default unit already exists."/>
+  <Message Id ="ChooseOtherDefault" Type ="!" Buttons ="" Text ="There must always be a default unit. To change the default please select another unit."/>
+  <Message Id ="MandatoryDefault" Type ="!" Buttons ="" Text ="At least one unit should be the default."/>
+  <Message Id ="Boundary" Type ="!" Buttons ="" Text ="Upper boundary cannot be less than the lower boundary."/>
+  <Message Id ="CannotInactivateUnit" Type ="!" Buttons ="" Text ="This is the default unit for the lab test - &lt;DataElement&gt;Control&lt;/DataElement&gt; - first change its default status then inactivate ."/>
+
+  <!-- Scheduler-->
+  <Message Id ="NoAppointmentRecordExists" Type ="!" Buttons ="" Text ="No appointment exists."/>
+  <Message Id ="PatientTrackingEnded" Type ="!" Buttons ="" Text ="Patient care has already been ended. You must reactivate the patient."/>
+  <Message Id ="ContactCareCompareDate1" Type ="!" Buttons ="" Text ="Date of last contact should be less than the death date."/>
+  <Message Id ="ContactCareCompareDate2" Type ="!" Buttons ="" Text ="Care ended date cannot be less than the death date."/>
+  <Message Id ="ContactCareCompareDate3" Type ="!" Buttons ="" Text ="Care ended date should be greater than the date of last contact."/>
+  <Message Id ="ContactCareCompareDate4" Type ="!" Buttons ="" Text ="Care ended date cannot be greater than the current date."/>
+  <Message Id ="ContactCareCompareDate5" Type ="!" Buttons ="" Text ="Date of last contact cannot be greater than the current date."/>
+  <Message Id ="ContactCareCompareDate6" Type ="!" Buttons ="" Text ="Date of missed scheduled appointment cannot be greater than current date."/>
+  <Message Id ="ContactCareCompareDate7" Type ="!" Buttons ="" Text ="Date of missed scheduled appointment cannot be greater than the date of last contact."/>
+  <Message Id ="ContactCareCompareDate8" Type ="!" Buttons ="" Text =" - reason for exit from the programme must be selected."/>
+  <Message Id ="ContactCareCompareDate9" Type ="!" Buttons ="" Text =" - patient care ended field must be completed."/>
+  <Message Id ="ContactCareCompareDate10" Type ="!" Buttons ="" Text ="Death date cannot be less than the the last contact date."/>
+  <Message Id ="ContactCareCompareDate11" Type ="!" Buttons ="" Text ="Death date cannot be greater than the care ended date."/>
+  <!--<Message Id ="ContactCareCompareDate12" Type ="!" Buttons ="" Text ="Patient is still on ART; therefore, care ended must be no."/>-->
+  <Message Id ="ContactCareCompareDate13" Type ="!" Buttons ="" Text ="Please enter ART program end date."/>
+  <Message Id ="ContactCareCompareDate14" Type ="!" Buttons ="" Text ="CareEnded/Last contact date already exists on this date."/>
+  <Message Id ="ContactCareCompareDate15" Type ="!" Buttons ="" Text ="Please enter date of death."/>
+  <Message Id ="ContactCareDeathReason" Type ="!" Buttons ="" Text ="Please select death reason."/>
+  <Message Id="ContactCareSign" Type="!" Buttons="" Text="Signature must be selected."/>
+  <Message Id ="ContactCareCompareDate16" Type ="!" Buttons ="" Text ="Dropped out reason must be selected."/>
+  <Message Id ="ContactCareCompareDate17" Type ="!" Buttons ="" Text ="LPTF Transfered To - must be selected."/>
+  <Message Id ="ContactCareCompareDate18" Type ="!" Buttons ="" Text ="Follow Up Reason must be selected."/>
+  <Message Id ="CareEndedDate" Type ="!" Buttons ="" Text ="Please select the date PMTCT Care Ended."/>
+  <Message Id="CompareDate5" Type ="!" Buttons ="" Text ="Visit date cannot be greater than current date."/>
+  <Message Id="HomeVisitSave" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; saved successfully. Do you want to close?"/>
+  <Message Id="NurseTeam" Type ="!" Buttons ="" Text ="Please select a nurse team."/>
+  <Message Id="HomeVisitCompareDate" Type ="!" Buttons ="" Text ="Home visit start date cannot be greater than current date."/>
+  <Message Id="RequireWeeks" Type ="!" Buttons ="" Text ="Number of weeks cannot be blank."/>
+  <Message Id="Caretracking1" Type ="!" Buttons ="" Text ="Patient ART Ended but still on care must be selected."/>
+  <Message Id="Caretracking2" Type ="!" Buttons ="" Text ="Patient Care Ended  must be selected."/>
+  <Message Id="BlankCaretracking" Type ="!" Buttons ="" Text ="No valid data to save. Please Retry.."/>
+  <Message Id ="StartEndDate" Type ="!" Buttons ="" Text ="To date cannot be less than from date."/>
+  <Message Id ="NoData" Type ="!" Buttons ="" Text ="No data available."/>
+  <Message Id ="DateCheck" Type ="!" Buttons ="" Text ="Birth/Marriage date cannot be earlier than 1900."/>
+  <Message Id ="DateCheckfuture" Type ="!" Buttons ="" Text ="Birth/Marriage date cannot be greater than current date."/>
+
+
+  <Message Id="HomeVisitCompareIEDate" Type ="!" Buttons ="" Text ="Start date cannot be less than the initial evaluation visit date."/>
+
+  <Message Id="VisitPerWeek" Type ="!" Buttons ="" Text ="Visits per week cannot be greater than 7."/>
+  <Message Id="CountEqualWeek" Type ="!" Buttons ="" Text ="Visits by week selected should be equal to number of weeks."/>
+  <Message Id="NotGreaterthan4" Type ="!" Buttons ="" Text ="Number of weeks cannot be greater than 4."/>
+  <Message Id="NotGreaterthanTotDays" Type ="!" Buttons ="" Text ="Visits by week cannot be greater than total number of visits."/>
+  <Message Id ="HomeVisit" Type ="?" Buttons ="" Text ="Home Visit &lt;DataElement&gt;Name&lt;/DataElement&gt; ?"/>
+  <Message Id ="HomeVisitUpdate" Type ="?" Buttons ="" Text ="&lt;DataElement&gt;FormName&lt;/DataElement&gt; updated successfully. Do you want to close?"/>
+  <Message Id="SelectWeeklyVisit" Type ="!" Buttons ="" Text ="You must select the days in weeks."/>
+
+  <!-- New Appointment-->
+  <Message Id="BlankAppointmentDate" Type ="!" Buttons ="" Text ="Appointment date cannot be blank."/>
+  <Message Id="NoProviderSelected" Type ="!" Buttons ="" Text ="Provider cannot be blank."/>
+  <Message Id="NoPurposeSelected" Type ="!" Buttons ="" Text ="Purpose cannot be blank."/>
+
+  <Message Id="AppointmentExist" Type ="!" Buttons ="" Text ="Appointment already exists for this patient on this date with the same purpose."/>
+  <Message Id="CompleteDateRange" Type ="!" Buttons ="" Text ="Enter the complete date range (From date and To date both)"/>
+  <Message Id="DatesRequired" Type ="!" Buttons ="" Text ="From date and to date are both required."/>
+  <Message Id="AppointmentWithInAYear" Type ="!" Buttons="" Text="Appointment must be in next one year."></Message>
+  <Message Id="InvalidDate" Type="!" Buttons="" Text="Invalid date entered">	</Message>
+  <Message Id="InvalidEnrollmentNumber" Type="!" Buttons="" Text="Invalid enrollment number entered.">	</Message>
+  <Message Id ="EnrolmentScheduler_Date" Type ="!" Buttons ="" Text ="New appointment date cannot be earlier than the enrollment date."/>
+  <Message Id ="DeleteAppointment" Type ="?" Buttons ="" Text ="Are you sure you want to delete this patient appointment ?"/>
+  <!-- Report Errors -->
+  <Message Id ="ReportErrorMessage" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt;"/>
+  <Message Id ="BlankTextBox" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be blank."/>
+  <Message Id ="InvalidFile" Type ="!" Buttons ="" Text ="Invalid file. Please provide a valid file."/>
+
+  <!-- Export Errors -->
+  <Message Id ="ExportSelectFieldGroup" Type ="!" Buttons ="" Text ="Select field groups."/>
+  <Message Id ="  " Type ="!" Buttons ="" Text ="More than 65000 records, please select relevant groups"/>
+  <Message Id ="TooManyRec" Type ="!" Buttons ="" Text ="Too many records generated, please select relevant groups."/>
+
+  <!-- NACA REPORT -->
+  <Message Id="OrderedFromDate" Type="!" Buttons ="" Text ="Ordered From date cannot Be greater than today's date."/>
+  <Message Id="OrderedToDate" Type="!" Buttons ="" Text ="Ordered To date cannot Be greater than today's date."/>
+
+  <!---NACP Report -->
+  <Message Id="Year"  Type="!"  Buttons ="" Text ="Year Cannot Be greater than today's date."/>
+  <Message Id="Month" Type="!" Buttons ="" Text ="Month Cannot Be greater than today's date." />
+  <Message Id="Quarter" Type="!" Buttons ="" Text ="Quarter Cannot Be greater than today's date." />
+  <!---Cohort Report -->
+  <Message Id="ARVYear" Type="!" Buttons ="" Text ="ARV Year cannot be greater than Progress Year" />
+  <Message Id="ARVMonth" Type="!" Buttons ="" Text ="ARV Month cannot be greater than Progress Month" />
+
+  <!--CTC Registration-->
+  <Message Id ="NoZero" Type ="!" Buttons ="" Text ="Patient Registration Number cannot be all zeros"/>
+  <Message Id ="PostHivTest" Type ="!" Buttons ="" Text ="Date of First Positive HIV Test cannot be greater than the current date."/>
+  <Message Id ="ConfirmHIV" Type ="!" Buttons ="" Text ="Date Confirmed HIV Positive cannot be greater than the Enrollment/current date."/>
+  <Message Id ="CompART_CurrentDate" Type ="!" Buttons ="" Text ="ART Start Date cannot be greater than the current date."/>
+  <Message Id ="CompART_RegDate" Type ="!" Buttons ="" Text ="ART Start Date cannot be greater than the enrollment date."/>
+  <Message Id ="RegimenName" Type ="!" Buttons ="" Text ="Regimen Name already exists."/>
+
+  <!--CTC PatientRecord 13-->
+  <Message Id ="ReadyDate" Type ="!" Buttons ="" Text ="Ready date cannot be greater than today’s date."/>
+  <Message Id="PatientRecordExists" Type ="!" Buttons ="" Text ="Patient record form already exists on this date. You cannot enter two patient record forms with the same date."/>
+  <Message Id ="GreaterEnrolDate" Type ="!" Buttons ="" Text ="Visit date cannot be less than the enrollment date."/>
+  <Message Id ="NoFutureDate" Type ="!" Buttons ="" Text ="Visit date cannot be greater than today’s date."/>
+  <Message Id ="SelectARVAdherenceStatus" Type ="!" Buttons ="" Text ="ARV Adherence Status should be selected."/>
+  <Message Id ="SelectARVReason" Type ="!" Buttons ="" Text ="ARV Reason should be selected."/>
+  <Message Id ="SelectARVAdherenceReason" Type ="!" Buttons ="" Text ="ARV Adherence Reason should be selected."/>
+  <Message Id ="SelectIllness" Type ="!" Buttons ="" Text ="Please select illness."/>
+  <Message Id ="SelectWhyEligible" Type ="!" Buttons ="" Text ="Please select Why Eligible."/>
+  <Message Id ="InitialVisitDate" Type ="!" Buttons ="" Text ="Visit date cannot be less than initial visit date."/>
+  <Message Id ="FollowupFormExists" Type ="!" Buttons ="" Text ="A follow up form already exists before this date."/>
+  <Message Id ="chkWeight" Type ="!" Buttons ="" Text ="Weight should be greater than 0 and less than 226."/>
+  <Message Id ="chkHeight" Type ="!" Buttons ="" Text ="Height should be greater than 0 and less than 251."/>
+  <Message Id ="EnterVisitDate" Type ="!" Buttons ="" Text ="Please enter visit date."/>
+  <Message Id ="OrderVisitDate" Type ="!" Buttons ="" Text ="Ordered by date cannot be greater than visit date."/>
+  <Message Id ="ReportVisitDate" Type ="!" Buttons ="" Text ="Reported by date cannot be greater than visit date."/>
+  <Message Id ="EligibleDate" Type ="!" Buttons ="" Text ="Eligible date cannot be greater than today’s date."/>
+  <Message Id ="LatestForm" Type ="!" Buttons ="" Text ="A Patient Record form already exists before this date."/>
+  <Message Id ="BirthDuration" Type ="!" Buttons ="" Text ="DOB date cannot be less than 9 months of EDD date."/>
+  <Message Id ="EDDDate" Type ="!" Buttons ="" Text ="EDD date cannot be more than 10 months greater the visit date."/>
+  <Message Id ="DOBDate" Type ="!" Buttons ="" Text ="DOB date cannot be greater than today’s date."/>
+  <Message Id ="EDDDOB" Type ="!" Buttons ="" Text ="DOB cannot be less than EDD date."/>
+  <Message Id ="TransferPatRec" Type ="!" Buttons ="" Text ="Visit date cannot be less than tranferred date."/>
+  <Message Id ="ARTEndCareTrak" Type ="!" Buttons ="" Text ="Patient has been ART Ended in care tracking from, please select correct ARV Status."/>
+  <Message Id ="ARVStatusPrev" Type ="!" Buttons ="" Text ="Previous ARV Status for this patient is  &lt;DataElement&gt;Control&lt;/DataElement&gt;, Please select the correct ARV Status."/>
+  <Message Id ="ARVStatusNext" Type ="!" Buttons ="" Text ="In Next Patient Record form ARV Status for this patient is  &lt;DataElement&gt;Control&lt;/DataElement&gt;, Please select correct ARV Status."/>
+  <Message Id ="NewARV" Type ="!" Buttons ="" Text ="Please select correct ARV Status."/>
+
+  <!--CTC Follow-up Education-->
+  <Message Id ="VisitDateFollowup" Type ="!" Buttons ="" Text ="Visit date cannot be less than the registration date."/>
+  <Message Id="DuplicateFollowupEducation" Type ="!" Buttons ="" Text ="Patient already has this education. Please try again."/>
+  <Message Id="FollowupEducationDateinPast" Type ="!" Buttons ="" Text ="Follow-Up Education start date cannot be in past. Please try again."/>
+
+  <!--CTC Patient Classification-->
+  <Message Id ="Classification" Type ="!" Buttons ="" Text ="Classification cannot be blank."/>
+  <Message Id="ClassificationExists" Type ="!" Buttons ="" Text ="You cannot enter same classification with the same date."/>
+  <Message Id="DuplicateClassification" Type ="!" Buttons ="" Text ="Patient is already under this classification. Please try again.."/>
+  <Message Id="ClassificationDateinPast" Type ="!" Buttons ="" Text ="Classification start date cannot be in past. Please try again.."/>
+  <Message Id ="EnrollDate" Type ="!" Buttons ="" Text ="Classification start date cannot be less than the enrollment date."/>
+  <!--Pharmacy Form-->
+  <Message Id ="fillPatinetRecord" Type ="!" Buttons ="" Text ="Please fill patient record form first."/>
+  <Message Id="PatientRecordExits" Type ="!" Buttons ="" Text ="Form cannot be saved because the patient record form exists after this date."/>
+
+
+  <Message Id ="arvsrunout" Type ="!" Buttons ="" Text ="Stock is below the minimum range for this patient."/>
+  <Message Id ="arvsoutofstock" Type ="!" Buttons ="" Text ="ARVs are out of stock."/>
+  <!--PaperLess-->
+  <Message Id="Laborderchklist" Type ="!" Buttons ="" Text ="Select at least one lab order for a test."/>
+  <Message Id="LaborderTestdate" Type ="!" Buttons ="" Text ="Laboratory test has already been ordered on this date"/>
+
+  <!--PMTCT-->
+  <Message Id="SelectBusinessRule" Type ="!" Buttons ="" Text ="Select at least one business rule."/>
+  <Message Id="SelectDisplayType" Type ="!" Buttons ="" Text ="Select display type."/>
+  <Message Id="EnterValue" Type ="!" Buttons ="" Text ="Enter the value ."/>
+  <Message Id="SelectValue" Type ="!" Buttons ="" Text ="Please select drug type value."/>
+  <Message Id="EnterCorrectValue" Type ="!" Buttons ="" Text ="Minimum value cannot be greater than or equal to the maximum value."/>
+  <Message Id="PMTCTEnrol_ANC" Type="!" Buttons="" Text="Enter at least one value either for ANC Number or PMTCT Number or Admission Number or Outpatient Number."/>
+  <Message Id="PMTCTDuplicate" Type="!" Buttons=""  Text ="Number already exists."/>
+  <Message Id="PMTCTDuplicateDate"  Type="!" Buttons=""  Text ="Form on this date already exists."/>
+  <Message Id="PMTCTFieldInactive" Type="!" Buttons=""  Text ="This field is used somewhere in the form. You can not inactive this field."/>
+  <Message Id="PMTCTFieldName" Type="!" Buttons=""  Text ="Field name can not be blank."/>
+  <Message Id="PMTCTFieldNamevalid" Type="!" Buttons=""  Text ="Please enter a valid field name."/>
+  <Message Id="PMTCTNoRecord" Type="!" Buttons=""  Text ="No Record found."/>
+  <Message Id="PMTCTDeleteField" Type="!" Buttons=""  Text ="This field is in use. You cannot delete this field."/>
+  <Message Id="PMTCTConfirmDelete" Type="?" Buttons=""  Text ="Do you want to delete this record?"/>
+  <Message Id="PMTCTInactivefield" Type="?" Buttons=""  Text ="Do you want inactivate this field?"/>
+  <Message Id="PMTCTActivefield" Type="?" Buttons=""  Text ="Do you want to activate this field?"/>
+  <Message Id="PMTCTChangeDisplayType" Type="?" Buttons=""  Text ="Do you want to change the display type? This will reset the select list and business rules "/>
+  <Message Id="PMTCTeditRecord" Type="?" Buttons=""  Text ="Do you want save the record that you have changed?"/>
+  <Message Id="PMTCTDeleteRecord" Type="?" Buttons=""  Text ="Do you want to delete this record?"/>
+  <Message Id="PMTCTPublishedForm" Type ="!" Buttons ="" Text ="A published form cannot be edited."/>
+  <Message Id="PMTCTNotDeleted" Type ="!" Buttons ="" Text ="This form is in used. You cannot delete this form."/>
+  <Message Id="PMTCTNotFound" Type ="!" Buttons ="" Text ="Form does not exist or you dont have right to delete this form"/>
+  <Message Id="PMTCTNotValid" Type ="!" Buttons ="" Text ="Enter a valid value only."/>
+  <Message Id="PMTCTNotDeletePredefine" Type ="!" Buttons ="" Text ="You cannot delete a pre-defined field"/>
+  <Message Id="PMTCTCustomfieldsave" Type ="!" Buttons ="" Text ="Data saved successfully."/>
+  <Message Id="PMTCTduplicatefield" Type ="!" Buttons ="" Text ="Field name already exists."/>
+  <Message Id="PMTCTSelectlistvalidate" Type ="!" Buttons ="" Text ="Please enter at least one value in the list"/>
+  <Message Id="PMTCTSelectlistduplicate" Type ="!" Buttons ="" Text ="List value already exists."/>
+  <Message Id="PMTCTsaveinactivefield" Type ="!" Buttons ="" Text ="You cannot update an inactive field."/>
+  <Message Id="PMTCTSelectAtleastOne" Type ="!" Buttons ="" Text ="Select the form."/>
+  <Message Id="PMTCTCustomRegDateValidate" Type="!" Buttons="" Text ="Visit date must be after PMTCT Registration Date."/>
+  <Message Id  ="PMTCTDisplayType" Type ="!" Buttons="" Text="Display type cannot be blank." />
+  <Message Id  ="MultiVisit" Type ="!" Buttons="" Text="Cannot create more than one form under Single Visit." />
+
+  <Message Id="EnterCorrectMaxNormal" Type ="!" Buttons ="" Text ="Maximum normal value cannot be greater than maximum value."/>
+  <Message Id="EnterCorrectMinNormal" Type ="!" Buttons ="" Text ="Minimum value cannot be greater than minimum normal value."/>
+  <Message Id="EnterCorrectMinMaxSelect" Type ="!" Buttons ="" Text ="Please select maximun/minimum Value."/>
+  <Message Id="EnterCorrectMinMaxNormalSelect" Type ="!" Buttons ="" Text ="Please select maximun/minimum normal Value."/>
+  
+
+  <!-- PMTCT FormBuilder -->
+  <Message Id="DeleteIndicator" Type="?" Buttons="" Text ="Do You Want to delete the indicator?"/>
+  <Message Id="UnDeleteIndicator" Type="?" Buttons="" Text ="Indicator is in use so it cannot be deleted."/>
+  <Message Id="IndicatorMandatory" Type="!" Buttons="" Text ="Please enter indicator"/>
+  <Message Id="BlankIndicator" Type="!" Buttons="" Text ="Indicator cannot be blank."/>
+  <Message Id="BlankQuery" Type="!" Buttons="" Text ="Query cannot be blank."/>
+  <Message Id="CheckSyntax" Type="!" Buttons="" Text ="Syntax checked!"/>
+  <Message Id="DupHomePageTechArea" Type="!" Buttons="" Text="Home page type and Service already exists."/>
+  <Message Id="PMTCTDupFormName" Type ="!" Buttons ="" Text ="Form name already exists."/>
+  <Message Id="PMTCTFormNameMandatory" Type ="!" Buttons ="" Text ="Please enter form name."/>
+  <Message Id="PMTCTSectionNameMandatory" Type ="!" Buttons ="" Text ="Please enter section name."/>
+  <Message Id="PMTCTNoSectionCreated" Type ="!" Buttons ="" Text ="Please create a section in the form."/>
+  <Message Id="PMTCTNoFieldCreated" Type ="!" Buttons ="" Text ="Please create Field in each Section"/>
+  <Message Id="PMTCTFieldLabelMandatory" Type ="!" Buttons ="" Text ="Please enter a field label"/>
+  <Message Id="PMTCTDupSectionName" Type ="!" Buttons ="" Text ="Duplicate section name is not allowed on the same form."/>
+
+  <Message Id="PMTCTDupTab" Type ="!" Buttons ="" Text ="Duplicate Tab name: &lt;DataElement&gt;Control&lt;/DataElement&gt; . It  is not allowed on the same form."/>
+  
+  <Message Id="PMTCTDupFieldLabel" Type ="!" Buttons ="" Text ="Same field label entered twice."/>
+  <Message Id="PMTCTDupFieldName" Type ="!" Buttons ="" Text ="Same field Name entered twice."/>
+  <Message Id="BlankFieldName" Type ="!" Buttons ="" Text ="Enter field name."/>
+  <Message Id="CheckVersion" Type="!" Buttons="" Text ="You are using the wrong version of the application. Please contact support staff." />
+  <Message Id="ImportFormsCheckVersion" Type="!" Buttons="" Text ="You are using a Different Version of Application to Import Form. Please use Same Version File." />
+  <Message Id="ImportScmMasterCheckVersion" Type="!" Buttons="" Text ="You are using a Different Version of Application to Import. Please use Same Version File." />
+  <Message Id="AddmissionNo" Type ="!" Buttons ="" Text ="Admission number cannot be null."/>
+  <Message Id="BrowseFile" Type ="!" Buttons ="" Text ="Please browse for an xml file first."/>
+  <Message Id="SelectForm" Type ="!" Buttons ="" Text ="No form selected for export."/>
+  <Message Id="SelectSCMList" Type ="!" Buttons ="" Text ="No item selected for export."/>
+  <Message Id="ImportSuccess" Type ="!" Buttons ="" Text ="File imported successfuly."/>
+  <Message Id="NoBusinessRule" Type ="!" Buttons ="" Text ="Business Rule is not applicable."/>
+  <Message Id="Browswrongfile" Type ="!" Buttons ="" Text ="Please select the appropriate xml file."/>
+
+  <Message Id ="ConfirmDelete" Type ="?" Buttons ="" Text ="Do you want to delete &lt;DataElement&gt;Control&lt;/DataElement&gt; ?"/>
+  <!-- Technical Areas -->
+
+  <Message Id="ModuleAndIdentifierUpdate" Type="!" Buttons="" Text ="Program Service updated." />
+  <Message Id="IdentifierExist" Type="!" Buttons="" Text ="Identifier already exists." />
+  <Message Id="IdentifierNo" Type="!" Buttons="" Text ="You cannot have more than four (4) identifiers in a Module." />
+  <Message Id="IdentifierRequired" Type="!" Buttons="" Text ="At least one identifier field is required to register in a Service." />
+  <Message Id="ModuleDelete" Type="!" Buttons="" Text ="Module deleted successfully." />
+  <Message Id="ModuleExist" Type="!" Buttons="" Text ="Service name already exists." />
+  <Message Id="ModuleSave" Type="!" Buttons="" Text ="Service cannot be saved without selecting an identifier." />
+  <Message Id="IdentifierTypeRequired" Type="!" Buttons="" Text ="Service, Identifier name and Type are required fields." />
+  <Message Id="ModuleRequired" Type="!" Buttons="" Text ="Service name cannot be blank." />
+  <Message Id="autopopulateidentifer" Type="!" Buttons="" Text ="Starting Number cannot be blank." />
+  <Message Id="moreautopopulateidentifer" Type="!" Buttons="" Text ="You can not save more then one system auto generated value in one technical area." />
+  <Message Id="ModuleAndIdentifierSave" Type="!" Buttons="" Text ="Program Service saved." />
+  <Message Id="SelectTechnicalArea" Type="!" Buttons="" Text ="Please select Service." />
+  <Message Id="SelectFormName" Type="!" Buttons="" Text ="Please select form name." />
+  <Message Id="SaveFormlink" Type="!" Buttons="" Text ="Service-Special Form Linking successfully Done." />
+  <Message Id="SelectedModule" Type="!" Buttons="" Text ="Selected module cannot be deleted." />
+  <Message Id="UpdateModule" Type="!" Buttons="" Text ="This Service name cannot be updated or the identifier name added." />
+  <Message Id="PublicTechenicalArea" Type ="!" Buttons ="" Text ="The published Service cannot be edited"/>
+
+  <!-- To show Publish/Unpublish Technical Areas -->
+
+  <Message Id="Publish" Type="?" Buttons="" Text ="Do you want to &lt;DataElement&gt;PgStatus&lt;/DataElement&gt; this form ?" />
+  <Message Id="PublishTechenicalArea" Type ="!" Buttons ="" Text ="The published Service cannot be edited"/>
+
+  <!--CareEnded txtAddReason-->
+  <Message Id="CheckDuplicateValue" Type="!"  Buttons="" Text="Duplicate selection. Please try again."/>
+  <Message Id="AddReason" Type="!" Buttons="" Text="Please enter Exit Reason!"/>
+  <Message Id="DuplicateFieldSelection" Type="!" Buttons="" Text="Duplicate field exists: &lt;DataElement&gt;FieldName&lt;/DataElement&gt;. Please try again."/>
+  <Message Id="BlankExitSelect" Type ="!" Buttons ="" Text ="Please select atleast one Exit Reason in select list"/>
+  <Message Id="UndeletePredefined" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be removed."/>
+
+  <Message Id ="DateMissedScheApp" Type ="!" Buttons ="" Text ="Date of Missed Scheduled Appointment cannot be blank."/>
+  <Message Id ="DateLastActualContact" Type ="!" Buttons ="" Text ="Date of Last Actual Contact cannot be blank."/>
+  <Message Id ="PatientExitReason" Type ="!" Buttons ="" Text ="Select Patient Exit Reason first."/>
+  <Message Id ="Signature" Type ="!" Buttons ="" Text ="Select Signature first."/>
+  <Message Id ="DateCareEnded" Type ="!" Buttons ="" Text ="Date Care Ended cannot be blank.."/>
+  <Message Id ="CareEndedSave" Type ="!" Buttons ="" Text ="Care Ended date save successfully."/>
+  <Message Id ="DateCareEndedExists" Type ="!" Buttons ="" Text ="This patient is already care ended on this care ended date."/>
+  <Message Id ="DateCareEndedactual" Type ="!" Buttons ="" Text ="Date Care Ended cannot less then Date of Last Actual Contact."/>
+  <Message Id ="Deathdate" Type ="!" Buttons ="" Text ="Please enter Death Date."/>
+  <Message Id ="DeathReason" Type ="!" Buttons ="" Text ="Please enter Death Reason."/>
+
+  <!-- PM Module Start -->
+
+  <Message Id="ProgramSave" Type ="!" Buttons ="" Text ="Data saved successfully."/>
+  <Message Id="SupplierSave" Type ="!" Buttons ="" Text ="Data saved successfully."/>
+  <Message Id="DonorSave" Type ="!" Buttons ="" Text ="Data saved successfully."/>
+  <Message Id="NoDatatoSave" Type ="!" Buttons ="" Text ="No new data to save!"/>
+  <Message Id ="FundingStartDate" Type ="!" Buttons ="" Text ="FundingStartDate cannot be blank. "/>
+  <Message Id="FundingEndDate" Type ="!" Buttons ="" Text ="FundingEndDate cannot be blank. "/>
+  <Message Id="ExistFunding" Type ="!" Buttons ="" Text ="Funding is Already made by Donor for this program between these dates."/>
+  <Message Id ="CompareStartEndDate" Type ="!" Buttons ="" Text ="Start Date cannot be greater than End Date. "/>
+  <Message Id="DuplicateItemName" Type ="!" Buttons ="" Text ="This name already exists. Please enter a different name."/>
+  <Message Id="SaveItem" Type ="!" Buttons ="" Text ="Please save the record before submit"/>
+  <Message Id="CheckStoreSourceDest" Type ="!" Buttons ="" Text ="Source and Destination cannot be same."/>
+  <Message Id="SourceDestAlreadyExist" Type ="!" Buttons ="" Text ="Source and Destination already exists."/>
+  <Message Id="RowUpdate" Type ="!" Buttons ="" Text ="This row cannot be updated."/>
+  <Message Id="ItemMasterUpdate" Type ="!" Buttons ="" Text ="Item Master sucessfully updated."/>
+  <Message Id="SysCacheRefresh" Type ="!" Buttons ="" Text ="System Cache refreshed."/>
+  <Message Id="PatientNotSelected" Type ="!" Buttons ="" Text ="No patient selected. Please select the patient first from the grid."/>
+  <Message Id ="PurchaseOrder" Type ="!" Buttons ="" Text ="Purchase Ordered date cannot be less than current date."/>
+  <Message Id ="PurchaseOrderItem" Type ="!" Buttons ="" Text ="At least one item  should be placed in a purchase order."/>
+  <Message Id ="PurchaseOrderQuantityZero" Type ="!" Buttons ="" Text ="Please Enter Ordered Quantity."/>
+  <Message Id ="ExpiryDate" Type ="!" Buttons ="" Text ="Expiry Date should be after today's date."/>
+  <Message Id="DuplicatePOItems" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; already exists in the Purchase Order. Please try again."/>
+  <Message Id="MissingSellingPrice" Type ="!" Buttons ="" Text ="Selling Price not configured. Please move to the Item Configuration to configure the selling price."/>
+  <Message Id="DrugDispenseQtyCompare" Type ="!" Buttons ="" Text ="Dispensing quantity cannot be greater than the available quantity."/>
+  <Message Id="DrugQtyCompare" Type ="!" Buttons ="" Text ="Dispensing quantity cannot be greater than the Prescribed quantity."/>
+  <Message Id="PurchaseOrderUnitempty" Type ="!" Buttons ="" Text ="Purchase unit item cannot be blank. "/>
+  <Message Id="PurchaseOrderPriceZero" Type ="!" Buttons ="" Text ="Price per unit item cannot be zero. "/>
+  <Message Id="GoodRecNoteEmpty" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; cannot be blank."/>
+  <Message Id="GoodRecNoteZero" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; shoud be more than zero."/>
+  <Message Id="GoodRecNoteItem" Type ="!" Buttons ="" Text ="At least one item should be received in a Good Received Note."/>
+  <Message Id="GRNrecQtnGreaterOrderQtn" Type ="!" Buttons ="" Text ="Receive Quantity cannot be greater than Order Quantity of the Item"/>
+  <Message Id="ISTAvaQTYGreaterOrderQtn" Type ="!" Buttons ="" Text ="Order quantity cannot be greater than avaliable item quantity "/>
+  <Message Id="GrnISTBatchNotAvliable" Type ="!" Buttons ="" Text ="This batch of the item is not avaliable in the store."/>
+  
+
+  <Message Id="PharmacyDispenseSave" Type ="!" Buttons ="" Text ="Pharmacy dispensed sucessfully."/>
+  <Message Id="PharmacyCannotAlterRow" Type ="!" Buttons ="" Text ="Selected item cannot be updated. Please issue new or move to Drug Return to make adjustment."/>
+  <Message Id="AdjustmentStockDate" Type ="!" Buttons ="" Text ="Adjustment date cannot be greater than today's date."/>
+  <Message Id="ReturnQtyGrtthanIssue" Type ="!" Buttons ="" Text ="Return Quantity cannot be greater than Issue Quantity."/>
+  <Message Id="NoDrugReturn" Type ="!" Buttons ="" Text ="Nothing to return. Record not saved."/>
+  <Message Id="PharmacyReturnSave" Type ="!" Buttons ="" Text ="Pharmacy Return saved sucessfully."/>
+  <Message Id="AdjustmentReason" Type ="!" Buttons ="" Text ="Select atleast a Adjustment Reason"/>
+  <Message Id="AdjustStockLevel" Type ="!" Buttons ="" Text ="Please Fill Value to Adjusted Quantity Column"/>
+  <Message Id="PurchasingDispensingSameStore" Type ="!" Buttons ="" Text ="Purchasing Store and Dispensing Store cannot be same."/>
+  <!-- PM Module End -->
+
+  <!-- SCM Module Start -->
+  <Message Id ="DuplicateStoreID" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; already exists. Please provide another store ID."/>
+  <Message Id ="DuplicateStoreName" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; already exists. Please provide another store name."/>
+  <Message Id="SCMVisitsPerMonthError" Type ="!" Buttons ="" Text ="Visits Should be a positive number"/>
+  <Message Id="SCMDataChangedSave" Type="?" Buttons=""  Text ="Data has been updated.  Would you like to save?"/>
+  <Message Id="SCMSave" Type="!" Buttons=""  Text ="Data has been saved."/>
+  <Message Id="SCMCancel" Type="!" Buttons=""  Text ="Updates cancelled. Data re-loaded."/>
+  <Message Id="AsofDate" Type ="!" Buttons ="" Text ="As of Date cannot be greater than the current date."/>
+
+  
+  <Message Id="StoreName" Type ="!" Buttons ="" Text ="Please select the store name first."/>
+
+  <Message Id="ExpiryDay" Type ="!" Buttons ="" Text ="Please select the expiry days first."/>
+
+  <Message Id="ItemName" Type ="!" Buttons ="" Text ="Please enter the item name first."/>
+  <Message Id="GridData" Type ="!" Buttons ="" Text ="There no data."/>
+  <Message Id="FromToDate" Type ="!" Buttons ="" Text ="From Date cannot be greater than the To Date."/>
+  
+  <Message Id="DonorIdduplicate" Type ="!" Buttons ="" Text ="ID already exist.Please provide another ID."/>
+  <Message Id="DonorIdNameduplicate" Type ="!" Buttons ="" Text ="ID or Name already exist.Please provide different ID or Name."/>
+  <Message Id="DonorNameduplicate" Type ="!" Buttons ="" Text ="Name already exist.Please provide another Name."/>
+
+  <Message Id="StoreIdduplicate" Type ="!" Buttons ="" Text ="Store ID already exist.Please provide another Store ID."/>
+  <Message Id="StoreNameduplicate" Type ="!" Buttons ="" Text ="Store Name already exist.Please provide another Store Name."/>
+
+  <Message Id="NoDrugReturnDate" Type ="!" Buttons ="" Text ="Return Date cannot be less than Dispensed Date."/>
+  <Message Id="QuanitytDetails" Type ="!" Buttons ="" Text ="Sum of Quantity can not more then Prescribed Quantity."/>
+  <Message Id="QuanitytData" Type ="!" Buttons ="" Text ="Please enter a valid quatity data."/>
+  <Message Id="NoAvailQty" Type ="!" Buttons ="" Text ="Quantity is not available for this Item."/>
+
+  <Message Id="DispenceCheck" Type ="!" Buttons ="" Text ="Dispensed Date already exists.please select other Dispensed Date."/>
+  <Message Id="PrintPresCheck" Type ="!" Buttons ="" Text ="There is no Item to be Print in the Prescription. Please check the Print Prescription checkbox for the Item."/>
+  <!-- SCM Module End -->
+  <!--icd-->
+  <Message Id ="DuplicateICD10" Type ="!" Buttons ="" Text ="ICD10 Name already exists. Please select another name."/>
+  <Message Id ="DuplicateBatchName" Type ="!" Buttons ="" Text ="This batch already assoicated with other item. Please enter a different batch."/>
+  <Message Id="BatchExists" Type ="!" Buttons ="" Text ="Batch Name already exist. Please enter a different batch."/>
+  <Message Id="ExpiryExistAss" Type ="!" Buttons ="" Text ="Expiry date already assoicated with item."/>
+  <!--icd end-->
+  
+  <!---IQCare Data Import-Export -->
+  <Message Id="FromDTgreaterToDate" Type ="!" Buttons ="" Text ="From Date cannot be greater that To Date."/>
+  <Message Id="ExportSuccess" Type ="!" Buttons ="" Text ="Export of IQCare Database Successful. \r\n New File: &lt;DataElement&gt;Control&lt;/DataElement&gt; copied in C:\IQCareDBBackup."/>
+  <!---IQCare Data Import-Export End -->
+</Messages>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DataToolBoxControl>
+	<Control Name="ListView" />
+	<Control Name="GridView" />
+	<Control Name="DetailsView" />
+	<Control Name="FormView" />
+	<Control Name="Repeater" />
+	<Control Name="DataList" />
+	<Control Name="LinqDataSource" />
+	<Control Name="EntityDataSource" />
+	<Control Name="SqlDataSource" />
+	<Control Name="AccessDataSource" />
+	<Control Name="ObjectDataSource" />
+	<Control Name="XmlDataSource" />
+	<Control Name="SiteMapDataSource" />
+</DataToolBoxControl>
+

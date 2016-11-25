@@ -1,0 +1,2385 @@
+/****** Object:  StoredProcedure [dbo].[pr_Lab_AddResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Lab_AddResults_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Lab_AddResults_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Lab_UpdateResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Lab_UpdateResults_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Lab_UpdateResults_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_GetLabResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_GetLabResults_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Laboratory_GetLabResults_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_GetLabTestID_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_GetLabTestID_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Laboratory_GetLabTestID_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Laboratory_GetPatientsLabs]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Laboratory_GetPatientsLabs]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Laboratory_GetPatientsLabs]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Laboratory_SaveDynamicResults]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Laboratory_SaveDynamicResults]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Laboratory_SaveDynamicResults]
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrder_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_SaveLabOrder_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrder_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[Laboratory_GetLabTestID]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Laboratory_GetLabTestID]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Laboratory_GetLabTestID]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_AddLabTest_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_AddLabTest_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_AddLabTest_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_AddLabTest]    Script Date: 04/24/2015 08:15:05 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_AddLabTest]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_AddLabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_UpdateLabTest]    Script Date: 04/24/2015 08:15:05 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_UpdateLabTest]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_UpdateLabTest]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTest_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_SelectLabTest_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_SelectLabTest_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTestByID_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_SelectLabTestByID_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_SelectLabTestByID_Constella]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_GetLabGroupTests]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_GetLabGroupTests]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_GetLabGroupTests]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SaveLabGroupTests]    Script Date: 12/11/2014 16:16:39 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_SaveLabGroupTests]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_SaveLabGroupTests]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_GetSubTestDetails_Constella]    Script Date: 05/14/2015 09:16:59 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_GetSubTestDetails_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Admin_GetSubTestDetails_Constella]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SaveLabGroupTests]    Script Date: 12/11/2014 16:16:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_SaveLabGroupTests]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2014 - August - 18
+-- Description:	Save test that are associated to a specific lab group
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Admin_SaveLabGroupTests]( @UserID int, @labGroupID int,@ItemList xml)
+
+AS
+BEGIN
+declare @LGItems Table(LabgroupID int,LabTestID int)
+
+INSERT INTO @LGItems
+SELECT rec.record.query(''LabgroupID'').value(''.'',''int'')LabgroupID,
+rec.record.query(''LabTestID'').value(''.'',''int'')LabTestID
+FROM @ItemList.nodes(''/root/row'') as rec(record)
+--update records that were previously deleted and have now been added back
+
+UPDATE Dtl_labGroupItems SET DeleteFlag=0,UpdateDate=GETDATE(),UserID=@UserID FROM Dtl_labGroupItems lgi
+JOIN @LGItems LGItems on LGItems.LabgroupID=lgi.LabgroupTestID and LGItems.LabTestID=lgi.LabTestID where DeleteFlag=1
+
+---mark records that have been unchecked
+
+UPDATE Dtl_labGroupItems SET DeleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID FROM Dtl_labGroupItems lgi
+LEFT JOIN @LGItems LGItems on LGItems.LabgroupID=lgi.LabGrouptestID and LGItems.LabTestID=lgi.LabTestID 
+where DeleteFlag=0 and LGItems.LabTestID is null and lgi.LabGroupTestID=@labGroupID
+
+--Insert new records
+ INSERT INTO Dtl_labGroupItems ( 
+ LabGroupTestID,
+ LabTestID,
+ DeleteFlag,
+ CreateDate,
+ UserID)
+ SELECT @labGroupID,LGItems.LabTestID,0,GETDATE(),@UserID
+ FROM @LGItems LGItems where NOT EXISTS(SELECT db.LabGroupTestID,db.LabTestID FROM dbo.Dtl_labGroupItems db where db.LabGroupTestID=LGItems.LabgroupID
+ and db.LabTestID=LGItems.LabTestID)
+ 
+
+
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTestByID_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTestByID_Constella]    Script Date: 04/24/2015 08:15:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_SelectLabTestByID_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[pr_Admin_SelectLabTestByID_Constella]                  
+(                  
+ @OrigLabTestID int                  
+)                  
+AS
+Begin
+Set Nocount On;
+
+--for lab master                
+--SELECT LabTestID, LabName, LabDepartmentID, LabTypeID, UserID,DeleteFlag,Sequence                  
+--FROM   mst_LabTest                  
+--where LabTestID=@OrigLabTestID    
+Select	l.SubTestID [LabTestID],
+		l.SubTestName [LabName],
+		a.LabDepartmentID,
+		a.LabTypeID,
+		l.UserID,
+		l.DeleteFlag,
+		a.Sequence,
+		a.DataType      --VY added a.DataType 2014-08-15           
+From mst_LabTest a
+Join
+	lnk_testParameter l On l.TestId = a.labtestId
+Where l.SubTestID = @OrigLabTestID;
+
+
+--for lab value                
+--SELECT     lt.LabTestID, lt.LabName, lt.LabDepartmentID, lt.LabTypeID, lt.UserID,lt.DeleteFlag,lt.Sequence,lv.SubTestId,lv.MaxBoundaryValue,lv.MinBoundaryValue,lv.Id,lv.deleteFlag as LV_DeleteFlag                  
+--FROM  mst_LabTest lt            
+--left outer join lnk_testParameter tp on lt.LabTestID=tp.TestID              
+--left outer join lnk_labValue lv on tp.SubTestID=lv.SubTestID              
+--where lt.LabTestID=@OrigLabTestID and lv.deleteflag = 0   
+
+Select	tp.SubTestID [LabTestID],
+		tp.SubTestName [LabName],
+		lt.LabDepartmentID,
+		lt.LabTypeID,
+		tp.UserID,
+		tp.DeleteFlag,
+		lt.Sequence,
+		lv.SubTestId,
+		lv.MaxBoundaryValue,
+		lv.MinBoundaryValue,
+		lv.Id,
+		lv.deleteFlag As LV_DeleteFlag
+From lnk_testParameter tp
+Left Outer Join
+	mst_LabTest lt On lt.LabTestID = tp.TestID
+Left Outer Join
+	lnk_labValue lv On tp.SubTestID = lv.SubTestID
+Where tp.SubTestID = @OrigLabTestID
+And lv.deleteflag = 0;
+
+--for lab parameter result               
+--SELECT     lt.LabTestID, lt.LabName, lt.LabDepartmentID, lt.LabTypeID, lt.UserID,lt.DeleteFlag,lt.Sequence,      
+--lp.ParameterID  ,lp.Result      
+----,lv.SubTestId,lv.MaxBoundaryValue,lv.MinBoundaryValue,lv.Id,lv.deleteFlag as LV_DeleteFlag                  
+--FROM  mst_LabTest lt            
+--inner join lnk_testParameter tp on lt.LabTestID=tp.TestID              
+--inner join lnk_parameterresult lp on tp.SubTestID=lp.ParameterID              
+--where lt.LabTestID=@OrigLabTestID         
+----and lv.deleteflag = 0    
+Select	tp.SubTestID [LabTestID],
+		tp.SubTestName [LabName],
+		lt.LabDepartmentID,
+		lt.LabTypeID,
+		lt.UserID,
+		tp.DeleteFlag,
+		lt.Sequence,
+		lp.ParameterID,
+		lp.Result
+--,lv.SubTestId,lv.MaxBoundaryValue,lv.MinBoundaryValue,lv.Id,lv.deleteFlag as LV_DeleteFlag                  
+From mst_LabTest lt
+Inner Join
+	lnk_testParameter tp On lt.LabTestID = tp.TestID
+Inner Join
+	lnk_parameterresult lp On tp.SubTestID = lp.ParameterID
+Where tp.SubTestID = @OrigLabTestID;
+--and lv.deleteflag = 0
+
+End' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTest_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+/****** Object:  StoredProcedure [dbo].[pr_Admin_SelectLabTest_Constella]    Script Date: 02/09/2016 11:54:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_Admin_SelectLabTest_Constella]      
+AS
+Set Nocount On;
+----SELECT     a.LabTestID, a.LabName, b.LabDepartmentName, c.LabTypeName, a.UserID,Status = Case a.DeleteFlag        
+----when 0 then 'Active' when 1 then 'InActive' end ,a.Sequence      
+----FROM  mst_LabTest a, mst_LabDepartment b, mst_LabType c      
+----WHERE a.LabDepartmentID = b.LabDepartmentID      
+----AND  a.LabTypeID=c.LabTypeID and a.LabTypeId = 1      
+----order by a.Sequence   
+Select	a.LabTestID MainTestID,
+		a.LabName MainTestName,
+		l.SubTestID [LabTestID],
+		l.SubTestName [LabName],
+		b.LabDepartmentName,
+		c.LabTypeName,
+		a.UserID,
+		Status =
+			Case l.DeleteFlag
+				When 0 Then 'Active'
+				When 1 Then 'InActive'
+			End,
+		a.Sequence,
+		a.datatype  --VY added dataType 2014-08-15   
+From lnk_testParameter l
+Inner Join mst_LabTest a On l.TestId = a.labtestId and a.DeleteFlag = 0 and l.DeleteFlag = 0
+Inner Join mst_LabDepartment b On a.LabDepartmentID = b.LabDepartmentID
+Inner Join mst_LabType c On a.LabTypeID = c.LabTypeID 
+--and a.LabTypeId = 1
+Order By a.LabName
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[pr_Admin_GetLabGroupTests]    Script Date: 12/11/2014 16:16:39 ******/
+/****** Object:  StoredProcedure [dbo].[pr_Admin_GetLabGroupTests]    Script Date: 02/09/2016 11:42:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2014 - August - 18
+-- Description:	Get test that are associated to a specific lab group
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Admin_GetLabGroupTests](@LabGroupTestID int)
+
+AS
+BEGIN
+
+Select	a.LabTestID [LabTestID],
+		a.LabName [LabName],
+		b.LabDepartmentName,
+		c.LabTypeName,
+		a.UserID,
+		Status =
+			Case a.DeleteFlag
+				When 0 Then 'Active'
+				When 1 Then 'InActive'
+			End,
+		a.Sequence,
+		a.datatype,
+		lgi.id,
+		Case
+			When lgi.ID Is Null Then 0
+			Else 1
+		End member
+From mst_LabTest a
+Inner Join mst_LabDepartment b On a.LabDepartmentID = b.LabDepartmentID
+Inner Join mst_LabType c On a.LabTypeID = c.LabTypeID
+Left Join dtl_labGroupItems lgi On lgi.LabtestID = a.LabTestID
+		And lgi.labGroupTestID = @LabGroupTestID
+		And lgi.DeleteFlag = 0
+Where a.DeleteFlag = 0
+Order By LabDepartmentName, LabTestID
+
+End
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_Admin_AddLabTest_Constella]    Script Date: 12/11/2014 16:16:39 ******/
+/****** Object:  StoredProcedure [dbo].[pr_Admin_AddLabTest_Constella]    Script Date: 04/24/2015 08:15:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_AddLabTest_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[pr_Admin_AddLabTest_Constella]      
+(      
+	 @LabName varchar(50),      
+	 @LabDepartmentID int,      
+	 @LabTypeID int,      
+	 @UserID int,      
+	 @DataType varchar(20),  
+	 @MaxBoundary numeric(12,2),  
+	 @MinBoundary numeric(12,2),  
+	 @sequence int      
+)      
+AS      
+declare @result int
+      
+begin
+      
+If Exists (Select LabTestID	From mst_LabTest	Where LabName = @LabName)
+Begin
+	Select 0;
+	Return; -- issue 2502
+End 
+Else      
+ Begin
+      
+        If Exists (Select *	From mst_LabTest	Where Sequence = @sequence	And LabTypeID = 1)
+		Begin
+			Update mst_LabTest Set	Sequence = Sequence + 1 Where Sequence >= @sequence
+		End      
+        Else      
+        Begin
+			Declare @MaxSR int;
+			Set @MaxSR = (Select Top 1 (Sequence)	From mst_LabTest	Where LabTypeID = 1	Order By Sequence Desc)
+			IF( @sequence > @MaxSR)      
+			Begin
+				Set @sequence = @MaxSR + 1
+			End
+      
+       End
+		Insert Into [mst_LabTest] (
+			[LabName],
+			[LabDepartmentID],
+			[LabTypeID],
+			[UserID],
+			[DeleteFlag],
+			[Sequence],
+			[CreateDate],
+			[DataType])
+		Values (
+			@LabName,
+			@LabDepartmentID,
+			@LabTypeID,
+			@UserID,
+			0,
+			@sequence,
+			Getdate(),
+			@DataType)--VY added DataType 2014-08-14 
+		Select @result = SCOPE_IDENTITY();			
+	End
+	 Declare @SubTestId int;
+	Insert Into lnk_TestParameter (
+		SubTestName,
+		TestId,
+		DeleteFlag,
+		UserId,
+		CreateDate)
+	Values (
+		@LabName,
+		@result,
+		0,
+		@UserID,
+		Getdate());
+   
+	Select @SubTestId = SCOPE_IDENTITY();
+      
+	If(@DataType=''Numeric'')  
+	Begin
+		
+		Insert Into lnk_LabValue (
+			SubTestID,
+			MaxBoundaryValue,
+			MinBoundaryValue,
+			UserID,
+			CreateDate,
+			DeleteFlag)
+		Values (
+			@SubTestId,
+			@MaxBoundary,
+			@MinBoundary,
+			@UserID,
+			Getdate(),
+			0);
+	End
+
+	Select (@result);
+      
+  
+End
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_AddLabTest]    Script Date: 05/21/2015 08:52:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_AddLabTest]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2015-Mar-02
+-- Description:	Create new Lab Tests
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Admin_AddLabTest]      
+(      
+	 @LabID int=0,
+	 @LabName varchar(50),      
+	 @LabDepartmentID int,      
+	 @UserID int,      
+	 @DataType varchar(20),
+	 @ItemsList xml
+	 
+)      
+AS      
+declare @result int
+
+begin
+if (@LabID=0)--means this is a sublab   
+BEGIN
+If Exists (Select LabTestID	From mst_LabTest	Where LabName = @LabName)
+Begin
+	Select 0;
+	Return;--Lab exist
+End 
+
+		Insert Into [mst_LabTest] (
+			[LabName],
+			[LabDepartmentID],
+			[LabTypeID],
+			[UserID],
+			[DeleteFlag],
+			[CreateDate],
+			[DataType])
+		Values (
+			@LabName,
+			@LabDepartmentID,
+			2,
+			@UserID,
+			0,
+			Getdate(),
+			@DataType);
+	
+	Select @result = SCOPE_IDENTITY();
+	
+END
+ELSE
+Set @result =@LabID
+
+If Exists (Select SubTestID	From lnk_TestParameter	Where SubTestName = @LabName)
+Begin
+	Select 0;
+	Return;--Lab exist
+End 
+/*	If(@DataType=''Group'')
+	BEGIN
+	select @result;
+	 return; 
+	 END*/
+	Declare @SubTestId int;
+	Insert Into lnk_TestParameter (
+		SubTestName,
+		TestId,
+		DeleteFlag,
+		UserId,
+		CreateDate)
+	Values (
+		@LabName,
+		@result,
+		0,
+		@UserID,
+		Getdate());
+	Select @SubTestId = SCOPE_IDENTITY();
+		     
+	If(@DataType=''Numeric'')  
+	Begin
+	declare @LabValues Table(
+            [MinBoundaryValue] decimal(18,2)
+           ,[MaxBoundaryValue] decimal(18,2)
+           ,[MinNormalRange] varchar(8)
+           ,[MaxNormalRange] varchar(8)
+           ,[DefaultUnit] int
+           ,[UnitID] int)
+          
+
+INSERT INTO @LabValues
+SELECT 
+bi.record.query(''MinBoundaryValue'').value(''.'',''decimal'')MinBoundaryValue,
+bi.record.query(''MaxBoundaryValue'').value(''.'',''decimal'')MaxBoundaryValue,
+bi.record.query(''MinNormalRange'').value(''.'',''varchar(8)'')MinNormalRange,
+bi.record.query(''MaxNormalRange'').value(''.'',''varchar(8)'')MaxNormalRange,
+bi.record.query(''DefaultUnit'').value(''.'',''int'')DefaultUnit,
+bi.record.query(''UnitID'').value(''.'',''int'')UnitID
+FROM @ItemsList.nodes(''/root/row'') as bi(record)
+	
+	
+		Insert Into lnk_LabValue (
+			SubTestID,
+			MinBoundaryValue,
+			MaxBoundaryValue,
+			MinNormalRange,
+			MaxNormalRange,
+			UserID,
+			CreateDate,
+			DefaultUnit,
+			UnitID,
+			DeleteFlag)
+		SELECT 
+			@SubTestId,
+			MinBoundaryValue,
+			MaxBoundaryValue,
+			case when isnumeric(MinNormalRange)=1 then MinNormalRange else NULL END,
+			case when isnumeric(MaxNormalRange)=1 then MinNormalRange else NULL END,
+			--MaxNormalRange,
+			@UserID,
+			GETDATE(),
+			DefaultUnit,
+			UnitID,
+			0 FROM @LabValues
+	End
+ELSE if (@DataType=''Select List'') 
+	BEGIN
+	declare @ParameterResults Table(
+            result varchar(50))
+            
+
+INSERT INTO @ParameterResults
+SELECT 
+bi.record.query(''result'').value(''.'',''varchar(50)'')result
+FROM @ItemsList.nodes(''/root/row'') as bi(record)
+	INSERT INTO lnk_parameterresult
+	([ParameterID]
+           ,[Result]
+           ,[UserID]
+           ,[CreateDate])
+           
+           SELECT 
+           @SubTestId,
+           result,
+           @UserID,
+           getDate()
+           From @ParameterResults
+
+	
+	END
+
+	Select (@result);
+	--select *  from @LabValues	
+
+      
+  
+End
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_UpdateLabTest]    Script Date: 5/7/2015 8:46:42 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_UpdateLabTest]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2015-Mar-05
+-- Description:	Update Lab Tests
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Admin_UpdateLabTest]      
+(      
+	 @LabID int,
+	 @LabName varchar(50),      
+	 @LabDepartmentID int,      
+	 @UserID int,      
+	 @DataType varchar(20),
+	 @ItemsList xml,
+	 @MainLabID int=0,
+	 @DeleteFlag int
+)               
+AS              
+ BEGIN            
+ if not exists ( select labname from mst_LabTest where labname=@LabName and labtestID=@MainLabID
+  union
+      select SubTestName from lnk_TestParameter where SubTestName=@LabName and SubTestID=@LabID
+ )
+ Begin
+	Select 0;
+	Return;--Lab dosnt exist
+End 
+
+  update lnk_TestParameter set SubTestName=@LabName, UpdateDate=getdate(),DeleteFlag=@DeleteFlag, UserId=@UserID
+	  where SubTestId=@LabID
+           
+   
+    update mst_LabTest set LabName = @LabName,LabDepartmentID =@LabDepartmentID,            
+     UserId =@UserID,DeleteFlag =@DeleteFlag ,UpdateDate = getdate()             
+      where LabTestID = @MainLabID
+
+ if(@DataType=''Numeric'')        
+    begin        
+ update lnk_parameterresult set DeleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID where ParameterID=@LabID
+
+	declare @LabValues Table(
+			ID int ,
+            [MinBoundaryValue] decimal(18,2)
+           ,[MaxBoundaryValue] decimal(18,2)
+           ,[MinNormalRange] decimal(18,2)
+           ,[MaxNormalRange] decimal(18,2)
+           ,[DefaultUnit] int
+           ,[UnitID] int)
+          
+
+INSERT INTO @LabValues 
+SELECT 
+bi.record.query(''ID'').value(''.'',''int'')ID,
+bi.record.query(''MinBoundaryValue'').value(''.'',''decimal'')MinBoundaryValue,
+bi.record.query(''MaxBoundaryValue'').value(''.'',''decimal'')MaxBoundaryValue,
+nullif(bi.record.query(''MinNormalRange'').value(''.'',''varchar(20)''),'''')MinNormalRange,
+nullif(bi.record.query(''MaxNormalRange'').value(''.'',''varchar(20)''),'''')MaxNormalRange,
+bi.record.query(''DefaultUnit'').value(''.'',''int'')DefaultUnit,
+bi.record.query(''UnitID'').value(''.'',''int'')UnitID
+FROM @ItemsList.nodes(''/root/row'') as bi(record);
+	
+UPDATE lnk_LabValue set MinBoundaryValue=a.MinBoundaryValue,MaxBoundaryValue=a.MaxBoundaryValue,
+MinNormalRange=a.MinNormalRange,MaxNormalRange=a.MaxNormalRange,DefaultUnit=a.DefaultUnit,UnitID=a.unitID, UserID=@UserID,UpdateDate=GETDATE(),DeleteFlag=0
+ FROM lnk_LabValue JOIN @LabValues a on	a.ID=lnk_LabValue.ID
+
+
+	
+		Insert Into lnk_LabValue (
+			SubTestID,
+			MinBoundaryValue,
+			MaxBoundaryValue,
+			MinNormalRange,
+			MaxNormalRange,
+			UserID,
+			CreateDate,
+			DefaultUnit,
+			UnitID,
+			DeleteFlag)
+		SELECT 
+			@LabID,
+			MinBoundaryValue,
+			MaxBoundaryValue,
+			MinNormalRange,
+			MaxNormalRange,
+			@UserID,
+			GETDATE(),
+			DefaultUnit,
+			UnitID,
+			0 FROM @LabValues b where isnull(b.ID,0)=0
+	End      
+
+ else if(@DataType=''Text'' or @DataType=''Group'')        
+ Begin 
+  update lnk_parameterresult set DeleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID where ParameterID=@LabID;
+  update lnk_LabValue set deleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID  where SubTestID=@LabID;    
+     
+  end    
+else if(@DataType=''Select List'')  
+     Begin        
+  update lnk_LabValue set deleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID  where SubTestID=@LabID;    
+
+
+declare @ParameterResults Table(
+            result varchar(50))
+            
+INSERT INTO @ParameterResults
+SELECT 
+bi.record.query(''result'').value(''.'',''varchar(50)'')result
+FROM @ItemsList.nodes(''/root/row'') as bi(record)
+
+update lnk_parameterresult set DeleteFlag=1,UpdateDate=GETDATE(),UserID=@UserID where DeleteFlag !=1 and ParameterID=@LabID 
+and result not in(Select result from @ParameterResults)
+
+
+	INSERT INTO lnk_parameterresult
+	([ParameterID]
+           ,[Result]
+           ,[UserID]
+           ,[CreateDate])
+           
+           SELECT 
+           @LabID,
+           result,
+           @UserID,
+           getDate()
+           From @ParameterResults where not exists(Select result from lnk_parameterresult where ParameterID=@LabID and DeleteFlag=0)
+     
+  end    
+       
+select 1;           
+end  
+ ' 
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[Laboratory_GetLabTestID]    Script Date: 12/11/2014 16:16:39 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Laboratory_GetLabTestID]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'
+ 
+Create PROCEDURE [dbo].[Laboratory_GetLabTestID] 
+      -- Add the parameters for the stored procedure here
+      @LabName varchar(15)
+AS
+BEGIN
+      -- SET NOCOUNT ON added to prevent extra result sets from
+      -- interfering with SELECT statements.
+      SET NOCOUNT ON;
+      Declare @SearchString varchar(20);
+      If ltrim(rtrim(@LabName)) <> ''''
+      Begin
+            Select @SearchString = ''%''+@LabName+''%'';
+            
+            Select      LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+                  D.LabDepartmentName
+            From dbo.mst_LabTest As LT
+            Inner Join 
+                  dbo.mst_LabDepartment As D          On LT.LabDepartmentID = D.LabDepartmentID
+            Where (LT.LabName Like @SearchString)
+            And LT.DeleteFlag = 0 
+            And D.DeleteFlag = 0
+            Group By    LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+                  D.LabDepartmentName;
+                  
+      End
+      
+    -- Insert statements for procedure here
+      
+      END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrder_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_SaveLabOrder_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrder_Constella]                                 
+@PatientId int ,      
+@LocationId int,      
+@OrderedByName int,                                
+@OrderedByDate varchar(40),      
+@ReportedByName int,      
+@ReportedByDate varchar(50),      
+@CheckedByName int,                            
+@CheckedByDate varchar(50),       
+@PreClinicLabDate varchar(50),      
+@LabPeriod int,      
+@UserId int,      
+@Transaction int,      
+@Orderid int,
+@LabNumber varchar(50)                               
+                              
+AS                     
+Declare @Visit_ID int                   
+                           
+BEGIN       
+                               
+ -- SET NOCOUNT ON added to prevent extra result sets from                                
+ -- interfering with SELECT statements.        
+                              
+ SET NOCOUNT ON;                                
+                    
+ if @Transaction = 1                       
+ begin                            
+                        
+                  
+   if exists(select * from ord_PatientLabOrder where ptn_pk = @patientid and orderedbydate = @OrderedByDate and (DeleteFlag=0 or DeleteFlag is null))                                
+    begin                    
+    select 0                                
+    return                                
+   end                       
+            
+   ------- Rupesh:22May08:inserting record in ord_visit - incase of ADD : starts -----                
+   Insert Into ord_Visit(Ptn_pk,LocationID,VisitDate,VisitType,DataQuality,UserID,Createdate)                                           
+   Values (@patientid,@LocationID,@OrderedByDate,6,1,@UserID,getdate())                                  
+                  
+   Select @Visit_ID = SCOPE_IDENTITY();                  
+   ------- Rupesh:22May08:inserting record in ord_visit - incase of ADD : ends -----                
+      
+   INSERT INTO ord_PatientLabOrder (Ptn_pk,LocationID,OrderedByName,                                
+   OrderedByDate,ReportedByName,ReportedByDate,CheckedByName,CheckedByDate,PreClinicLabDate,UserId,CreateDate,VisitID, LabPeriod,LabNumber)                                
+   values                                
+   (@patientid,@LocationID ,@OrderedByName ,                                
+   @OrderedByDate,@ReportedByName ,@ReportedByDate,@CheckedByName ,@CheckedByDate ,nullif(@PreClinicLabDate,''1/1/1900 12:00:00 AM''),                              
+   @UserId,getdate(),@Visit_ID, @LabPeriod,@LabNumber)                                
+     
+    Select @Orderid = SCOPE_IDENTITY();
+           
+    Select LabID, LocationId from ord_PatientLabOrder where LabID=@OrderId;       
+                                  
+    end       
+                           
+ else                            
+          
+ begin                      
+                  
+   declare @theOrderId int;      
+                    
+  set @theOrderId=(select top 1 LabId from ord_PatientLabOrder where ptn_pk = @patientid and orderedbydate = @OrderedByDate                    
+  and (DeleteFlag=0 or DeleteFlag is null))                    
+  if(@theOrderId is null or @theOrderId=@OrderId)-- its new date or same date                    
+  begin     
+                    
+   update ord_PatientLabOrder set OrderedbyName = @OrderedByName, OrderedByDate = @OrderedByDate,                            
+   ReportedByName = @ReportedByName,ReportedByDate = @ReportedByDate,CheckedByName = @CheckedByName,                 
+   CheckedByDate = @CheckedByDate,                      
+   PreClinicLabDate = nullif(@PreClinicLabDate,''1/1/1900 12:00:00 AM'')                       
+   ,UserId = @UserId,                             
+   UpdateDate = getdate(), LabPeriod = @LabPeriod,LabNumber=@LabNumber where LabId = @OrderId and Ptn_pk = @PatientId                     
+    
+    
+end                    
+  else                    
+   begin                    
+    select 0--- form on this date already exists         
+ return                                
+  end                       
+    end                  
+ ------- Rupesh:22May08:updating orderedBy date in ord_visit - incase of EDIT : starts -----                   
+ declare @VID int                
+ select @VID=VisitID from ord_PatientLabOrder where LabId=@OrderId                
+    Update ord_Visit set DataQuality=1, VisitDate=@OrderedByDate where Visit_Id=@VID                      
+ ------- Rupesh:22May08:updating orderedBy date in ord_visit - incase of EDIT : ends -----                   
+---Return LabId          
+select LabID, LocationId from ord_PatientLabOrder where LabID=@OrderId        
+--select @OrderId        
+----          
+END            
+                
+/*--------------------------------- Old code -------------------------------------------------                
+AS                                
+BEGIN                                
+ -- SET NOCOUNT ON added to prevent extra result sets from                   
+ -- interfering with SELECT statements.                                
+ SET NOCOUNT ON;                                
+                    
+if @Transaction = 1                       
+    begin                            
+                    
+  if exists(select * from ord_PatientLabOrder where ptn_pk = @patientid and orderedbydate = @OrderedByDate and (DeleteFlag=0 or DeleteFlag is null))                                
+  begin                    
+   select 0                                
+   return                                
+  end                       
+  INSERT INTO ord_PatientLabOrder (Ptn_pk,LocationID,OrderedByName,                        
+  OrderedByDate,ReportedByName,ReportedByDate,CheckedByName,CheckedByDate,PreClinicLabDate,UserId,CreateDate)                                
+  values                                
+  (@patientid,@LocationID ,@OrderedByName ,                                
+  @OrderedByDate,@ReportedByName ,@ReportedByDate,@CheckedByName ,@CheckedByDate ,nullif(@PreClinicLabDate,''1/1/1900 12:00:00 AM''),                              
+   @UserId,getdate())                                
+                            
+  select SCOPE_IDENTITY();                                
+                            
+    end                            
+                                
+else                            
+    begin                      
+  ------------- old code starts ------                    
+  /*                    
+        update ord_PatientLabOrder set OrderedbyName = @OrderedByName, OrderedByDate = @OrderedByDate,                            
+        ReportedByName = @ReportedByName,ReportedByDate = @ReportedByDate,CheckedByName = @CheckedByName,                            
+        CheckedByDate = @CheckedByDate,                      
+  PreClinicLabDate = nullif(@PreClinicLabDate,''1/1/1900 12:00:00 AM'')                       
+  --@PreClinicLabDate                      
+  ,UserId = @UserId,                             
+        UpdateDate = getdate() where LabId = @OrderId and Ptn_pk = @PatientId                     
+  */          
+  ------------- old code ends ------                    
+                      
+                    
+  -----Rupesh: new code starts : Duplicate form created in case of edit----------                    
+  declare @theOrderId int;                    
+  set @theOrderId=(select top 1 LabId from ord_PatientLabOrder where ptn_pk = @patientid and orderedbydate = @OrderedByDate                    
+  and (DeleteFlag=0 or DeleteFlag is null))                    
+  if(@theOrderId is null or @theOrderId=@OrderId)-- its new date or same date                    
+  begin                    
+   update ord_PatientLabOrder set OrderedbyName = @OrderedByName, OrderedByDate = @OrderedByDate,                            
+   ReportedByName = @ReportedByName,ReportedByDate = @ReportedByDate,CheckedByName = @CheckedByName,                            
+   CheckedByDate = @CheckedByDate,                      
+   PreClinicLabDate = nullif(@PreClinicLabDate,''1/1/1900 12:00:00 AM'')                       
+   --@PreClinicLabDate                      
+   ,UserId = @UserId,     
+   UpdateDate = getdate() where LabId = @OrderId and Ptn_pk = @PatientId                     
+  end                    
+  else                    
+  begin                    
+                       
+          select 0    --- form on this date already exists                            
+   return                                
+  end                       
+  -----Rupesh : new code ends : Duplicate form created in case of edit------------                    
+                            
+    end                               
+END                 
+  */
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'
+CREATE PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]                                       
+	@Ptn_pk int,                  
+	@LocationID int,                
+	@ParameterID int,                  
+	@UserId int,                  
+	@OrderedByName int,                                      
+	@OrderedByDate datetime,              
+	@Flag int,            
+	@LabID varchar(50),      
+	@FlagExist int ,  
+	@PreClinicLabDate datetime=null                           
+As                             
+Begin                                      
+                                     
+	SET NOCOUNT On;      
+	If (@FlagExist = 88)      
+	Begin      
+		If @LabID = 0          
+		Begin	                           
+			If @Flag = 0              
+			Begin                      
+				Insert Into ord_Visit
+				(
+					Ptn_pk,
+					LocationID,
+					VisitDate,
+					VisitType,
+					DataQuality,
+					UserID,
+					Createdate,
+					OrderedDate
+				)                                                 
+				Values 
+				(
+					@Ptn_pk,
+					@LocationID,
+					@OrderedByDate,
+					6,
+					0,
+					@UserID,
+					getdate(),
+					@OrderedByDate
+				) ;     
+				
+				Declare @Visit_ID int ;                    
+				Declare @LabOrderID int; 
+				   
+				Select @Visit_ID = Scope_identity();
+				                      
+				Insert Into ord_PatientLabOrder 
+				(
+					Ptn_pk,
+					LocationID,
+					OrderedByName,
+					OrderedByDate,
+					Createdate,
+					UserID,
+					VisitID,
+					PreClinicLabDate
+				)                                      
+				Values 
+				(
+					@Ptn_pk,
+					@LocationID ,
+					@OrderedByName ,
+					@OrderedByDate,
+					getdate(),
+					@UserID,
+					@Visit_ID,
+					@PreClinicLabDate
+				)  ;   
+				Select @LabOrderID = Scope_identity();            
+			End              
+			Else    Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19                  
+				 -- Declare @LabTestID int                
+				 -- Select @LabTestID = TestID From Lnk_TestParameter Where SubTestID=@ParameterID   
+				--check If test is a group
+				If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)=''Group'') Begin
+					Insert into Dtl_PatientLabResults (
+						LabID,
+						LocationId,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate
+					) 
+					Select Distinct       
+						@LabOrderID,
+						@LocationId,
+						@ParameterID,
+						P.SubTestID , 
+						1,
+						@UserID,
+						Getdate() 
+					From     Dtl_LabGroupItems As LG 
+					Inner Join
+						lnk_TestParameter As P On P.TestID = LG.LabTestID 
+					Inner Join
+						lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+					Where P.DeleteFlag = 0 
+					And (LG.DeleteFlag=0) 
+					And P1.TestID = @ParameterID;	
+				End
+				Else	Begin          
+					Insert Into Dtl_PatientLabResults 
+					(
+						LabID,LocationID,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate
+					) 
+					Select @LabOrderID,
+							@LocationID,
+							@ParameterID,
+							SubTestID,
+							1,
+							@UserId,
+							getDate()  
+					From lnk_TestParameter Where TestID=@ParameterID                 
+				End
+			---End VY change           
+			End 
+			 Select @LabOrderID [LabID], 
+					OrderedbyName, 
+					OrderedbyDate 
+			From ord_PatientLabOrder Where Ptn_pk=@Ptn_pk 
+			And LocationID=@LocationID      ;
+			    
+			Select ParameterID 
+			From Dtl_PatientLabResults 
+			Where LabID=@LabOrderID ;            
+		End          
+		Else           
+		Begin  
+			If @Flag = 0          
+			Begin          
+				Update ord_PatientLabOrder   Set  
+					Ptn_pk=@Ptn_pk, 
+					LocationID=@LocationID, 
+					OrderedByName=@OrderedByName, 
+					OrderedByDate=@OrderedByDate,           
+					UserID=@UserID, 
+					UpdateDate=getdate(),
+					PreClinicLabDate=@PreClinicLabDate 
+				Where LabID=@LabID   ;       
+				Delete From Dtl_PatientLabResults Where LabID=@LabID     ;     
+			End          
+			Else          
+			Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19 
+				--check If test is a group
+				If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)=''Group'')Begin
+		
+					Insert into Dtl_PatientLabResults (
+						LabID,
+						LocationId,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate
+					) 
+					Select Distinct       
+						@LabID,
+						@LocationId,
+						@ParameterID,
+						P.SubTestID , 
+						1,
+						@UserID,
+						Getdate() 
+					From            Dtl_LabGroupItems As LG 
+					Inner Join
+						lnk_TestParameter As P On P.TestID = LG.LabTestID 
+					Inner Join
+						lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+					Where P.DeleteFlag = 0 
+					And (LG.DeleteFlag=0) 
+					And P1.TestID = @ParameterID;
+				End
+				Else
+				Begin          
+					Insert Into Dtl_PatientLabResults 
+					(
+						LabID,
+						LocationID,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate
+					) 
+					Select @LabID,
+						   @LocationID,
+						   @ParameterID,
+						   SubTestID,
+						   1,
+						   @UserId,
+						   getDate()  
+					From lnk_TestParameter Where TestID=@ParameterID    ; 
+				End	    
+			 
+				---End VY change                 
+			End          
+	         
+			Select LabID, OrderedbyName, OrderedbyDate From ord_PatientLabOrder Where LabID=@LabID   ;       
+			Select ParameterID From Dtl_PatientLabResults Where LabID=@LabID         ;    
+		End	        
+	 End              
+	Else   
+	Begin 
+		If @Flag = 0          
+		Begin          
+			Delete From Dtl_PatientLabResults Where LabID=@LabID  ;        
+		End          
+		Else          
+		Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19 
+				--check If test is a group
+			If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)=''Group'')
+			Begin
+				Insert Into Dtl_PatientLabResults 
+				(
+					LabID,
+					LocationID,
+					LabTestID,
+					ParameterID,
+					Financed,
+					UserID,
+					CreateDate
+				) 
+				Select Distinct       
+					@LabID,
+					@LocationId,
+					@ParameterID,
+					P.SubTestID , 
+					1,
+					@UserID,
+					Getdate() 
+				From     Dtl_LabGroupItems As LG 
+				Inner Join
+					lnk_TestParameter As P On P.TestID = LG.LabTestID 
+				Inner Join
+					lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+				Where P.DeleteFlag = 0 
+				And (LG.DeleteFlag=0) 
+				And P1.TestID = @ParameterID;		
+			End
+			Else
+			Begin          
+				Insert Into Dtl_PatientLabResults 
+				(
+					LabID,
+					LocationID,
+					LabTestID,
+					ParameterID,
+					Financed,
+					UserID,
+					CreateDate
+				) 
+				Select @LabID,
+						@LocationID,
+						@ParameterID,
+						SubTestID,
+						1,
+						@UserId,
+						getDate()  
+				From lnk_TestParameter Where TestID=@ParameterID ;  
+			End	    
+  
+		---End VY change 
+		End          
+	     
+	  Select LabID, OrderedbyName, OrderedbyDate From ord_PatientLabOrder Where LabID=@LabID  ;        
+	  Select ParameterID From Dtl_PatientLabResults Where LabID=@LabID    ;  
+	 End          
+End
+
+' 
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_Laboratory_SaveDynamicResults]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Laboratory_SaveDynamicResults]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2014-08-08
+-- Description:	Procedure for saving dynamic lab results
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Laboratory_SaveDynamicResults](@labID int,@userID int,@ReportedByName int,@reportedByDate datetime,@itemList xml)
+AS
+BEGIN
+
+UPDATE ord_PatientLabOrder SET ReportedbyDate=@reportedByDate,ReportedbyName=@ReportedByName,UserID=@userID,UpdateDate=GETDATE()
+WHERE LabID=@labID;
+
+with labR as(
+SELECT lr.record.query(''ParameterID'').value(''.'',''int'')ParameterID,
+lr.record.query(''TestResults'').value(''.'',''varchar(20)'')TestResults,
+lr.record.query(''TestResults1'').value(''.'',''varchar(2000)'')TestResults1,
+lr.record.query(''TestResultId'').value(''.'',''int'')TestResultId,
+lr.record.query(''Units'').value(''.'',''int'')Units 
+FROM @itemList.nodes(''/root/row'') as lr(record))
+
+
+
+UPDATE dtl_PatientLabResults SET
+TestResults=nullif(labR.TestResults,''''),TestResults1=labR.TestResults1,TestResultId=labR.TestResultId,Units=labR.Units,UpdateDate=GETDATE()
+FROM labR where labR.ParameterID=dtl_PatientLabResults.ParameterID and dtl_PatientLabResults.LabID=@labID
+
+END' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Laboratory_GetPatientsLabs]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Laboratory_GetPatientsLabs]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2014-Jul-28
+-- Description:Get labs that have been ordered for a particular patient at a particular time
+-- =============================================
+CREATE PROCEDURE [dbo].[pr_Laboratory_GetPatientsLabs](@labID int)
+	
+AS
+BEGIN
+Select ord.Ptn_pk, ord.LabID,dtl.ParameterID, LabDepartmentName,lt.LabName, sub.SubTestName, ord.ptn_pk,ord.OrderedbyDate,
+coalesce(cast(dtl.TestResults as varchar(20)),pr.result,dtl.TestResults1)TestResults,pr.ResultID,
+ unit.MinBoundaryValue,MaxBoundaryValue,MinNormalRange,MaxNormalRange,dc.Name LabUnit,coalesce(dtl.units,unit.UnitID)UnitID
+  ,ord.ReportedbyName,ord.ReportedbyDate
+ from ord_PatientLabOrder ord
+JOIN dtl_PatientLabResults dtl on dtl.LabID=ord.LabID
+JOIN mst_LabTest lt on lt.LabTestID=dtl.LabTestID
+LEFT JOIN mst_LabDepartment dept on dept.LabDepartmentID=lt.LabDepartmentID
+LEFT JOIN lnk_TestParameter sub on sub.SubTestID=dtl.ParameterID
+LEFT JOIN lnk_LabValue unit on unit.subtestID=dtl.ParameterID
+left join mst_Decode dc on dc.id =coalesce(dtl.units,unit.UnitID)
+LEFT join lnk_parameterresult pr on pr.ResultID=dtl.TestResultId
+ where (DefaultUnit=1 or DefaultUnit is null) and  ord.LabID=@labID
+ order by dept.LabDepartmentName,lt.LabName, sub.SubTestName
+
+ select pr.resultID,pr.ParameterID,pr.result  from dtl_PatientLabResults lr
+ join lnk_parameterresult pr on pr.ParameterID=lr.ParameterID and lr.LabID=@labID
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_GetLabTestID_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_GetLabTestID_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[Pr_Laboratory_GetLabTestID_Constella]               
+@LabID int              
+AS              
+BEGIN              
+ -- SET NOCOUNT ON added to prevent extra result sets from              
+ -- interfering with SELECT statements.              
+ SET NOCOUNT ON;              
+ Select LabID, OrderedbyName, OrderedbyDate, LabPeriod from ord_PatientLabOrder where LabID=@LabID     
+    
+ Select ParameterID from Dtl_PatientLabResults where LabID=@LabID       
+     
+ --VY changed to return LAb test and not lab parameters 2014-08-20
+
+ select distinct l.LabTestID[TestId],l.LabName[TestName],m.labdepartmentname[Department] from  Dtl_PatientLabResults d  
+ inner join mst_labtest l on d.LabTestID=l.LabTestID
+ inner join mst_labdepartment m on m.LabDepartmentID=l.LabDepartmentID
+ where d.LabID=@LabID
+ /*select d.parameterid[TestId],l.LabName[TestName],m.labdepartmentname[Department] from  Dtl_PatientLabResults d  
+ inner join mst_labtest l on d.parameterid=l.LabTestID
+ inner join mst_labdepartment m on m.LabDepartmentID=l.LabDepartmentID
+ where d.LabID=@LabID*/
+ --END VY change
+    
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_GetLabResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_GetLabResults_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'--Pr_Laboratory_GetLabResults_Constella 25        
+CREATE PROCEDURE [dbo].[Pr_Laboratory_GetLabResults_Constella]             
+@LabID int            
+AS            
+BEGIN            
+ -- SET NOCOUNT ON added to prevent extra result sets from            
+ -- interfering with SELECT statements.            
+ SET NOCOUNT ON;            
+      
+/* --Query after Modification of dynamic unit    
+select a.LabID,a.LocationID,a.OrderedByName,a.OrderedByDate,a.ReportedByName,a.ReportedByDate,a.CheckedByName,a.CheckedByDate,a.PreClinicLabDate,          
+b.LabTestID,b.ParameterID [SubTestId],b.TestResults,b.TestResults1,b.TestResultId,b.Financed,          
+c.subtestname [SubTestName],d.LabTypeID ''LabTypeID'',d.LabName,b.Units,e.name as UnitName       
+from       
+ord_PatientlabOrder a,dtl_PatientLabResults b       
+left outer join mst_Decode e on e.Id=b.Units      
+, lnk_testParameter c,mst_labtest d            
+where a.labid = b.labid and a.labid =@LabID            
+and  b.parameterid = c.subtestid            
+and c.testid=d.labtestid                
+*/    
+--pick boundary value too with dynamic unit    
+select a.LabID,a.LocationID,a.OrderedByName,a.OrderedByDate,a.ReportedByName,a.ReportedByDate,a.CheckedByName,a.CheckedByDate,a.PreClinicLabDate, a.LabPeriod,         
+b.LabTestID,b.ParameterID [SubTestId],b.TestResults,b.TestResults1,b.TestResultId,b.Financed,          
+c.subtestname [SubTestName],d.LabTypeID ''LabTypeID'',d.LabName,b.Units,e.name as UnitName ,    
+f.MinBoundaryValue,f.MaxBoundaryValue,a.LabNumber      
+from       
+ord_PatientlabOrder a,dtl_PatientLabResults b       
+left outer join mst_Decode e on e.Id=b.Units      
+left outer join lnk_labValue f  on  f.UnitId=b.units and f.SubTestId=b.ParameterId    
+, lnk_testParameter c,mst_labtest d            
+where a.labid = b.labid and a.labid =@LabID            
+and  b.parameterid = c.subtestid            
+and c.testid=d.labtestid     
+    
+/*-- query before units were not dynamic      
+select a.LabID,a.LocationID,a.OrderedByName,a.OrderedByDate,a.ReportedByName,a.ReportedByDate,a.CheckedByName,a.CheckedByDate,a.PreClinicLabDate,          
+b.LabTestID,b.ParameterID [SubTestId],b.TestResults,b.TestResults1,b.TestResultId,b.Financed,          
+c.subtestname [SubTestName],d.LabTypeID ''LabTypeID'',d.LabName           
+--from ord_PatientLabOrder a left outer join dtl_PatientLabResults b on  a.labid = b.labid         
+--left outer join lnk_testParameter c on b.parameterid = c.subtestid         
+--left outer join mst_labtest d on  c.testid=d.labtestid           
+--where  a.labid =@LabID         
+from ord_PatientlabOrder a,dtl_PatientLabResults b, lnk_testParameter c,mst_labtest d            
+where a.labid = b.labid and a.labid =@LabID            
+and  b.parameterid = c.subtestid            
+and c.testid=d.labtestid            
+    -- Insert statements for procedure here            
+*/      
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Lab_UpdateResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Lab_UpdateResults_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[pr_Lab_UpdateResults_Constella]                                
+@LabID int, @LocationID int=null, @ParameterID int=null ,@TestResults decimal(18,4)=null,                              
+@TestResults1 varchar(2000)=null,@TestResultId int=null,@Financed int = null,@UnitId int=null,@UserId int=null                              
+AS                                
+BEGIN        
+ Declare @LabTestID int     
+Declare @Ptn_pk int       
+Declare @Visit_ID int      
+Declare @Subtestid int      
+Declare @itemtypeid int      
+Declare @ReportedbyDate datetime      
+Declare @SellingPrice decimal      
+Declare @CostPrice decimal      
+Declare @Margin decimal    
+    
+ Select @Ptn_pk=Ptn_pk,@ReportedbyDate=ReportedbyDate,@Visit_ID=VisitId      
+  from ord_PatientLabOrder where LabID=@LabID      
+      
+ select @Subtestid=a.Subtestid,@CostPrice=a.testcostprice,@Margin=a.testmargin,      
+ @SellingPrice=a.testsellingprice       
+ from Lnk_LabCostConfiguration a right outer join lnk_TestParameter b on b.subtestId=a.subtestId      
+ where b.subtestId= @ParameterID                              
+ if (@ParameterID = 100)                
+  Begin             
+                      
+    select @LabTestID = TestID from Lnk_TestParameter where SubTestID=@ParameterID             
+             
+    Insert into dtl_PatientLabResults(LabID, LocationID, LabTestID, ParameterID, TestResults, TestResults1,TestResultId, Financed, Units, UserId)              
+    values(@LabID, @LocationID, @LabTestID, @ParameterID, Nullif(@TestResults, ''99998888''), @TestResults1,@TestResultId,@Financed,@UnitId,@UserId)    
+    if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)    
+     BEGIN    
+    INSERT INTO Dtl_PatientBillTransaction(Ptn_Pk,VisitId,LocationId,TransactionDate,LabId,ItemId,Quantity,    
+    SellingPrice,CostPrice,Margin,BillAmount,UserId,CreateDate,PharmacyId,BatchId,DispensingUnit,ConsultancyFee,AdminFee,DoctorId)      
+    VALUES(@Ptn_pk,@Visit_ID,@LocationId,@ReportedbyDate,@LabID,@ParameterID,1,isnull(@SellingPrice,0),    
+    isnull(@CostPrice,0),isnull(@Margin,0),dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),@UserId,getdate(),0,0,0,0.00,0.00,0)    
+     END   
+  End              
+else               
+ Begin  -- for Paperless Business Rules           
+  if(@ParameterID = 97 or @ParameterID = 98 or @ParameterID = 99)          
+   Begin          
+  if (@TestResultId = 0)          
+  Begin          
+   Update dtl_PatientLabResults                  
+   Set TestResults=Nullif(@TestResults, ''99998888''),                
+   TestResults1=Nullif(@TestResults1,''''),                  
+   TestResultId=NULL,                  
+   Financed=@Financed,                  
+   Units=@UnitId,                  
+   UserID=@UserId,                  
+   UpdateDate=getdate()                  
+   where LabID=@LabID and ParameterID=@ParameterID     
+    if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)    
+    BEGIN    
+      Update Dtl_PatientBillTransaction SET TransactionDate=@ReportedbyDate,SellingPrice=isnull(@SellingPrice,0),CostPrice=isnull(@CostPrice,0),    
+      Margin=isnull(@Margin,0),BillAmount=dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),UserId=@UserId,updatedate=getdate()    
+      where LabId=@LabID and ItemId=@ParameterID and Ptn_Pk=@Ptn_pk and VisitId=@Visit_ID     
+    END    
+              
+     End          
+     else           
+    Begin          
+  Update dtl_PatientLabResults                  
+  Set TestResults=Nullif(@TestResults, ''99998888''),                
+  TestResults1=Nullif(@TestResults1,''''),                  
+  TestResultId=@TestResultId,                  
+  Financed=@Financed,                  
+  Units=@UnitId,                  
+  UserID=@UserId,                  
+  UpdateDate=getdate()                  
+  where LabID=@LabID and ParameterID=@ParameterID     
+   if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)    
+   BEGIN    
+    Update Dtl_PatientBillTransaction SET TransactionDate=@ReportedbyDate,SellingPrice=isnull(@SellingPrice,0),CostPrice=isnull(@CostPrice,0),    
+    Margin=isnull(@Margin,0),BillAmount=dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),UserId=@UserId,updatedate=getdate()    
+    where LabId=@LabID and ItemId=@ParameterID and Ptn_Pk=@Ptn_pk and VisitId=@Visit_ID     
+   END    
+            
+     End          
+             
+ End          
+else          
+  Begin        
+    print ''ds''       
+        
+    if(exists(select LabTestID from  dtl_PatientLabResults where LabID=@LabID and ParameterID=@ParameterID ))      
+     begin      
+     Update dtl_PatientLabResults                  
+  Set TestResults=Nullif(@TestResults, ''99998888''),                
+  TestResults1=Nullif(@TestResults1,''''),                  
+  TestResultId=@TestResultId,                  
+  Financed=@Financed,                  
+  Units=@UnitId,                  
+  UserID=@UserId,                  
+  UpdateDate=getdate()                  
+  where LabID=@LabID and ParameterID=@ParameterID      
+  if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)    
+   BEGIN   
+   if(exists(select LabID from  Dtl_PatientBillTransaction where LabId=@LabID and ItemId=@ParameterID and Ptn_Pk=@Ptn_pk and VisitId=@Visit_ID ))      
+   begin     
+    Update Dtl_PatientBillTransaction SET TransactionDate=@ReportedbyDate,SellingPrice=isnull(@SellingPrice,0),CostPrice=isnull(@CostPrice,0),    
+    Margin=isnull(@Margin,0),BillAmount=dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),UserId=@UserId,updatedate=getdate()    
+    where LabId=@LabID and ItemId=@ParameterID and Ptn_Pk=@Ptn_pk and VisitId=@Visit_ID   
+            End   
+     Else   
+   BEGIN      
+     INSERT INTO Dtl_PatientBillTransaction(Ptn_Pk,VisitId,LocationId,TransactionDate,LabId,ItemId,Quantity,    
+     SellingPrice,CostPrice,Margin,BillAmount,UserId,CreateDate,PharmacyId,BatchId,DispensingUnit,ConsultancyFee,AdminFee,DoctorId)      
+     VALUES(@Ptn_pk,@Visit_ID,@LocationId,@ReportedbyDate,@LabID,@ParameterID,1,isnull(@SellingPrice,0),    
+     isnull(@CostPrice,0),isnull(@Margin,0),dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),@UserId,getdate(),0,0,0,0.00,0.00,0)    
+   END   
+   END    
+          
+     end       
+    else      
+  begin      
+  select @LabTestID = TestID from Lnk_TestParameter where SubTestID=@ParameterID         
+    Insert into dtl_PatientLabResults(LabID, LocationID, LabTestID, ParameterID, TestResults, TestResults1,TestResultId, Financed, Units, UserId)              
+    values(@LabID, @LocationID, @LabTestID, @ParameterID, Nullif(@TestResults, ''99998888''), @TestResults1,@TestResultId,@Financed,@UnitId,@UserId)     
+  if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)    
+  BEGIN      
+       INSERT INTO Dtl_PatientBillTransaction(Ptn_Pk,VisitId,LocationId,TransactionDate,LabId,ItemId,Quantity,    
+       SellingPrice,CostPrice,Margin,BillAmount,UserId,CreateDate,PharmacyId,BatchId,DispensingUnit,ConsultancyFee,AdminFee,DoctorId)      
+       VALUES(@Ptn_pk,@Visit_ID,@LocationId,@ReportedbyDate,@LabID,@ParameterID,1,isnull(@SellingPrice,0),    
+    isnull(@CostPrice,0),isnull(@Margin,0),dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),@UserId,getdate(),0,0,0,0.00,0.00,0)    
+     END           
+  end      
+           
+  End             
+ End            
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Lab_AddResults_Constella]    Script Date: 12/11/2014 16:16:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Lab_AddResults_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'--temp change for removing validation          
+CREATE PROCEDURE [dbo].[pr_Lab_AddResults_Constella]                
+@LabID int, @LocationID int,@labTestID int, @ParameterID int ,@TestResults decimal(18,4),              
+@TestResults1 varchar(2000),@TestResultId int,@Financed int,@UnitId int,@UserId int               
+AS    
+Declare @Ptn_pk int   
+Declare @Visit_ID int  
+Declare @Subtestid int  
+Declare @itemtypeid int  
+Declare @ReportedbyDate datetime  
+Declare @SellingPrice decimal  
+Declare @CostPrice decimal  
+Declare @Margin decimal  
+  
+               
+BEGIN                
+      
+---- Rupesh 19Dec07----      
+--INSERT INTO dtl_PatientLabResults(LabID,LocationID,LabTestID,ParameterID,TestResults,TestResults1,TestResultId,Financed,Units,UserId,CreateDate)                
+--VALUES                
+--(@LabID ,@LocationId , @LabTestID , @ParameterID,@TestResults,@TestResults1,@TestResultId,@Financed,@UnitId,@UserId,getdate() )                
+      
+if(@TestResults=99998888)      
+ BEGIN      
+  INSERT INTO dtl_PatientLabResults(LabID,LocationID,LabTestID,ParameterID,TestResults1,TestResultId,Financed,Units,UserId,CreateDate)                
+  VALUES                
+  (@LabID ,@LocationId , @LabTestID , @ParameterID,@TestResults1,@TestResultId,@Financed,@UnitId,@UserId,getdate() )                
+ END      
+ELSE      
+ BEGIN      
+  INSERT INTO dtl_PatientLabResults(LabID,LocationID,LabTestID,ParameterID,TestResults,TestResults1,TestResultId,Financed,Units,UserId,CreateDate)                
+  VALUES                
+  (@LabID ,@LocationId , @LabTestID , @ParameterID,@TestResults,@TestResults1,@TestResultId,@Financed,@UnitId,@UserId,getdate() )                
+ END      
+    
+ update dtl_PatientLabResults set LocationID=(select LocationID from ord_PatientLabOrder where LabID=@LabID)    
+    where LabID=@LabID    
+--END          
+      
+    
+ Select @Ptn_pk=Ptn_pk,@ReportedbyDate=ReportedbyDate,@Visit_ID=VisitId  
+ from ord_PatientLabOrder where LabID=@LabID  
+  
+select @CostPrice=a.testcostprice,@Margin=a.testmargin,  
+@SellingPrice=a.testsellingprice   
+from Lnk_LabCostConfiguration a right outer join lnk_TestParameter b on b.subtestId=a.subtestId  
+where b.subtestId= @ParameterID   
+   
+if(@ParameterID<>'''')  
+  BEGIN
+   if(@TestResults<99998888 or @TestResults1<>'''' or @TestResultId>0)
+    BEGIN
+     --PRINT(''HELLO'')
+	  INSERT INTO Dtl_PatientBillTransaction(Ptn_Pk,VisitId,LocationId,TransactionDate,LabId,ItemId,Quantity,
+	  SellingPrice,CostPrice,Margin,BillAmount,UserId,CreateDate,PharmacyId,BatchId,DispensingUnit,ConsultancyFee,AdminFee,DoctorId)  
+	  VALUES(@Ptn_pk,@Visit_ID,@LocationId,@ReportedbyDate,@LabID,@ParameterID,1,isnull(@SellingPrice,0),
+	   isnull(@CostPrice,0),isnull(@Margin,0),dbo.fn_GetLabPerVisit_BillAmount_Futures(@SellingPrice,@ParameterID),@UserId,getdate(),0,0,0,0.00,0.00,0)
+     END
+  END                          
+END  
+  
+   
+          
+/*          
+//--backup    ajay      
+CREATE PROCEDURE [dbo].[pr_Lab_AddResults_Constella]                
+@LabID int, @LocationID int,@labTestID int, @ParameterID int ,@TestResults decimal(18,2),              
+@TestResults1 varchar(2000),@TestResultId int,@Financed int,@UserId int               
+AS                
+BEGIN                
+              
+INSERT INTO dtl_PatientLabResults(LabID,LocationID,LabTestID,ParameterID,TestResults,TestResults1,TestResultId,Financed,UserId,CreateDate)                
+VALUES                
+(@LabID ,@LocationId , @LabTestID , @ParameterID,@TestResults,@TestResults1,@TestResultId,@Financed,@UserId,getdate() )               
+                
+END          
+*/
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Admin_GetSubTestDetails_Constella]    Script Date: 05/14/2015 09:16:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_GetSubTestDetails_Constella]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'CREATE proc [dbo].[pr_Admin_GetSubTestDetails_Constella]              
+ @SubTestID int              
+as              
+begin              
+ --table 0              
+select ID UnitID,Name from mst_Decode where CodeID=30 and DeleteFlag=0 order by SRNo    
+    
+ --table 1    vy Eddited 2015-feb -26          
+   
+ 
+  SELECT a.SubTestID,a.SubTestName,c.UnitID, b.Name UnitName,c.MinBoundaryValue,c.MaxBoundaryValue, 
+  MinNormalRange,MaxNormalRange ,           
+ DefaultUnit = case c.DefaultUnit when 1 then ''Yes'' when 0 then ''No'' end,        
+ c.ID              
+ FROM lnk_TestParameter a,lnk_LabValue c
+ LEFT JOIN  mst_Decode b   on b.ID=c.UnitID          
+ WHERE a.SubTestID=c.SubTestID              
+          
+ and a.SubTestID=@SubTestID         
+ and (c.DeleteFlag=0 or c.DeleteFlag is null)    
+ and isnull(b.DeleteFlag,0)=0       
+ --table 2              
+      
+select SubTestName from  lnk_TestParameter where SubTestID=@SubTestID            
+             
+end
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Laboratory_GetPatientsLabs]    Script Date: 09/09/2015 12:15:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Vincent Yahuma
+-- Create date: 2014-Jul-28
+-- Description:Get labs that have been ordered for a particular patient at a particular time
+-- =============================================
+ALTER PROCEDURE [dbo].[pr_Laboratory_GetPatientsLabs](@labID int)
+	
+AS
+BEGIN
+Select ord.Ptn_pk, ord.LabID,dtl.ParameterID, LabDepartmentName,lt.LabName, sub.SubTestName, ord.ptn_pk,ord.OrderedbyDate,
+coalesce(cast(dtl.TestResults as varchar(20)),pr.result,dtl.TestResults1)TestResults,pr.ResultID,
+ unit.MinBoundaryValue,MaxBoundaryValue,MinNormalRange,MaxNormalRange,dc.Name LabUnit,coalesce(dtl.units,unit.UnitID)UnitID
+  ,ord.ReportedbyName,ord.ReportedbyDate,dtl.RequestNotes
+ from ord_PatientLabOrder ord
+JOIN dtl_PatientLabResults dtl on dtl.LabID=ord.LabID
+JOIN mst_LabTest lt on lt.LabTestID=dtl.LabTestID
+LEFT JOIN mst_LabDepartment dept on dept.LabDepartmentID=lt.LabDepartmentID
+LEFT JOIN lnk_TestParameter sub on sub.SubTestID=dtl.ParameterID
+LEFT JOIN lnk_LabValue unit on unit.subtestID=dtl.ParameterID
+left join mst_Decode dc on dc.id =coalesce(dtl.units,unit.UnitID)
+LEFT join lnk_parameterresult pr on pr.ResultID=dtl.TestResultId
+ where (DefaultUnit=1 or DefaultUnit is null) and  ord.LabID=@labID
+ order by dept.LabDepartmentName,lt.LabName, sub.SubTestName
+
+ select pr.resultID,pr.ParameterID,pr.result  from dtl_PatientLabResults lr
+ join lnk_parameterresult pr on pr.ParameterID=lr.ParameterID and lr.LabID=@labID
+END
+
+Go
+/****** Object:  StoredProcedure [dbo].[Laboratory_GetLabTestID]    Script Date: 09/10/2015 19:43:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+ALTER PROCEDURE [dbo].[Laboratory_GetLabTestID] 
+      -- Add the parameters for the stored procedure here
+      @LabName varchar(15),
+      @IncludeDepartment int =null,
+      @ExcludeLabDepartment int = null
+AS
+BEGIN
+      -- SET NOCOUNT ON added to prevent extra result sets from
+      -- interfering with SELECT statements.
+      SET NOCOUNT ON;
+      Declare @SearchString varchar(20);
+      If ltrim(rtrim(@LabName)) <> ''
+      Begin
+            Select @SearchString = '%'+@LabName+'%';
+            
+            Select      LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+                  D.LabDepartmentName
+            From dbo.mst_LabTest As LT
+            Inner Join 
+                  dbo.mst_LabDepartment As D          On LT.LabDepartmentID = D.LabDepartmentID
+            Where (LT.LabName Like @SearchString)
+            And LT.DeleteFlag = 0 
+            And D.DeleteFlag = 0
+            And (@IncludeDepartment Is Null Or @IncludeDepartment = D.LabDepartmentID)
+            And (@ExcludeLabDepartment Is Null OR @ExcludeLabDepartment <> D.LabDepartmentID)
+            Group By    LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+                  D.LabDepartmentName;
+                  
+      End
+      
+    -- Insert statements for procedure here
+      
+      END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]    Script Date: 09/11/2015 09:44:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrderTests_Constella]                                       
+	@Ptn_pk int,                  
+	@LocationID int,                
+	@ParameterID int,                  
+	@UserId int,                  
+	@OrderedByName int,                                      
+	@OrderedByDate datetime,              
+	@Flag int,            
+	@LabID varchar(50)='0',      
+	@FlagExist int ,  
+	@PreClinicLabDate datetime=null,
+	@RequestNotes varchar(255) = null   ,
+	@IsRadiology bit = 0   ,
+	@ModuleId int =null
+As                             
+Begin                                      
+                                     
+	SET NOCOUNT On;      
+	If (@FlagExist = 88)      
+	Begin      
+		If @LabID = 0          
+		Begin	                           
+			If @Flag = 0              
+			Begin           
+				declare @XRayOrderVisitTypeID int;
+				Select top 1 @XRayOrderVisitTypeID = VisitTypeID From mst_VisitType Where VisitName='XRay Order Form';           
+				Insert Into ord_Visit
+				(
+					Ptn_pk,
+					LocationID,
+					VisitDate,
+					VisitType,
+					DataQuality,
+					UserID,
+					Createdate,
+					OrderedDate,
+					ModuleId
+				)                                                 
+				Values 
+				(
+					@Ptn_pk,
+					@LocationID,
+					@OrderedByDate,
+					Case @IsRadiology When 0 Then 6 Else @XRayOrderVisitTypeID End,
+					0,
+					@UserID,
+					getdate(),
+					@OrderedByDate,
+					@ModuleId
+				) ;     
+				
+				Declare @Visit_ID int ;                    
+				Declare @LabOrderID int; 
+				   
+				Select @Visit_ID = Scope_identity();
+				                      
+				Insert Into ord_PatientLabOrder 
+				(
+					Ptn_pk,
+					LocationID,
+					OrderedByName,
+					OrderedByDate,
+					Createdate,
+					UserID,
+					VisitID,
+					PreClinicLabDate
+				)                                      
+				Values 
+				(
+					@Ptn_pk,
+					@LocationID ,
+					@OrderedByName ,
+					@OrderedByDate,
+					getdate(),
+					@UserID,
+					@Visit_ID,
+					@PreClinicLabDate
+				)  ;   
+				Select @LabOrderID = Scope_identity();            
+			End              
+			Else             
+			Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19                  
+				 -- Declare @LabTestID int                
+				 -- Select @LabTestID = TestID From Lnk_TestParameter Where SubTestID=@ParameterID   
+				--check If test is a group
+				If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)='Group')Begin
+				Insert into Dtl_PatientLabResults (
+						LabID,
+						LocationId,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate,						
+						RequestNotes
+					) 
+					Select Distinct       
+						@LabOrderID,
+						@LocationId,
+						@ParameterID,
+						P.SubTestID , 
+						1,
+						@UserID,
+						Getdate() ,
+						Null
+					From     Dtl_LabGroupItems As LG 
+					Inner Join
+						lnk_TestParameter As P On P.TestID = LG.LabTestID 
+					Inner Join
+						lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+					Where P.DeleteFlag = 0 
+					And (LG.DeleteFlag=0) 
+					And P1.TestID = @ParameterID;	
+				End
+				Else
+				Begin          
+					Insert Into Dtl_PatientLabResults 
+					(
+						LabID,LocationID,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate,
+						RequestNotes
+					) 
+					Select @LabOrderID,
+							@LocationID,
+							@ParameterID,
+							SubTestID,
+							1,
+							@UserId,
+							getDate() ,
+							@RequestNotes 
+					From lnk_TestParameter Where TestID=@ParameterID                    
+				End
+			---End VY change           
+			End 
+			 Select @LabOrderID[LabID], 
+					OrderedbyName, 
+					OrderedbyDate 
+			From ord_PatientLabOrder Where Ptn_pk=@Ptn_pk 
+			And LocationID=@LocationID      ;
+			    
+			Select ParameterID 
+			From Dtl_PatientLabResults 
+			Where LabID=@LabOrderID ;            
+		End          
+		Else           
+		Begin  
+			If @Flag = 0          
+			Begin          
+				Update ord_PatientLabOrder   Set  
+					Ptn_pk=@Ptn_pk, 
+					LocationID=@LocationID, 
+					OrderedByName=@OrderedByName, 
+					OrderedByDate=@OrderedByDate,           
+					UserID=@UserID, 
+					UpdateDate=getdate(),
+					PreClinicLabDate=@PreClinicLabDate 
+				Where LabID=@LabID   ;       
+				Delete From Dtl_PatientLabResults Where LabID=@LabID     ;     
+			End          
+			Else          
+			Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19 
+				--check If test is a group
+				If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)='Group')Begin
+				Insert into Dtl_PatientLabResults (
+						LabID,
+						LocationId,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate,
+						RequestNotes
+					) 
+					Select Distinct       
+						@LabID,
+						@LocationId,
+						@ParameterID,
+						P.SubTestID , 
+						1,
+						@UserID,
+						Getdate() ,
+						@RequestNotes
+					From            Dtl_LabGroupItems As LG 
+					Inner Join
+						lnk_TestParameter As P On P.TestID = LG.LabTestID 
+					Inner Join
+						lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+					Where P.DeleteFlag = 0 
+					And (LG.DeleteFlag=0) 
+					And P1.TestID = @ParameterID;
+				End
+				Else
+				Begin          
+					Insert Into Dtl_PatientLabResults 
+					(
+						LabID,
+						LocationID,
+						LabTestID,
+						ParameterID,
+						Financed,
+						UserID,
+						CreateDate,
+						RequestNotes
+					) 
+					Select @LabID,
+						   @LocationID,
+						   @ParameterID,
+						   SubTestID,
+						   1,
+						   @UserId,
+						   getDate()  ,
+						   @RequestNotes
+					From lnk_TestParameter Where TestID=@ParameterID    ; 
+				End	    
+				---End VY change                 
+			End          
+	         
+			Select LabID, OrderedbyName, OrderedbyDate From ord_PatientLabOrder Where LabID=@LabID   ;       
+			Select ParameterID From Dtl_PatientLabResults Where LabID=@LabID         ;    
+		End	        
+	 End              
+	Else   
+	Begin 
+		If @Flag = 0          
+		Begin          
+			Delete From Dtl_PatientLabResults Where LabID=@LabID  ;        
+		End          
+		Else          
+		Begin
+				--VY changed this to reflect labs selected and not test parameter selected 2014-08-19 
+				--check If test is a group
+			If ((Select Top 1 DataType From mst_LabTest Where LabTestID=@ParameterID)='Group')
+			Begin
+				Insert Into Dtl_PatientLabResults 
+				(
+					LabID,
+					LocationID,
+					LabTestID,
+					ParameterID,
+					Financed,
+					UserID,
+					CreateDate,
+					RequestNotes
+				) 
+				Select Distinct       
+					@LabID,
+					@LocationId,
+					@ParameterID,
+					P.SubTestID , 
+					1,
+					@UserID,
+					Getdate() ,
+					@RequestNotes
+				From     Dtl_LabGroupItems As LG 
+				Inner Join
+					lnk_TestParameter As P On P.TestID = LG.LabTestID 
+				Inner Join
+					lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+				Where P.DeleteFlag = 0 
+				And (LG.DeleteFlag=0) 
+				And P1.TestID = @ParameterID;		
+			End
+			Else
+			Begin          
+				Insert Into Dtl_PatientLabResults 
+				(
+					LabID,
+					LocationID,
+					LabTestID,
+					ParameterID,
+					Financed,
+					UserID,
+					CreateDate,
+					RequestNotes
+				) 
+				Select @LabID,
+						@LocationID,
+						@ParameterID,
+						SubTestID,
+						1,
+						@UserId,
+						getDate() ,
+						@RequestNotes 
+				From lnk_TestParameter Where TestID=@ParameterID ;  
+			End	    
+		 
+		---End VY change 
+		End          
+	     
+	  Select LabID, OrderedbyName, OrderedbyDate From ord_PatientLabOrder Where LabID=@LabID  ;        
+	  Select ParameterID From Dtl_PatientLabResults Where LabID=@LabID    ;  
+	 End          
+End
+
+/****** Object:  StoredProcedure [dbo].[Laboratory_GetLabTestID]    Script Date: 09/16/2015 14:07:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+ALTER PROCEDURE [dbo].[Laboratory_GetLabTestID] 
+      -- Add the parameters for the stored procedure here
+      @LabName varchar(15),
+      @IncludeDepartment int =null,
+      @ExcludeLabDepartment int = null
+AS
+BEGIN
+      -- SET NOCOUNT ON added to prevent extra result sets from
+      -- interfering with SELECT statements.
+      SET NOCOUNT ON;
+      Declare @SearchString varchar(20);
+      If ltrim(rtrim(@LabName)) <> ''
+      Begin
+            Select @SearchString = '%'+@LabName+'%';
+            
+            Select      LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+                  D.LabDepartmentName,
+				  LT.DataType
+            From dbo.mst_LabTest As LT
+            Inner Join 
+                  dbo.mst_LabDepartment As D          On LT.LabDepartmentID = D.LabDepartmentID
+            Where (LT.LabName Like @SearchString)
+            And LT.DeleteFlag = 0 
+            And D.DeleteFlag = 0
+            And (@IncludeDepartment Is Null Or @IncludeDepartment = D.LabDepartmentID)
+            And (@ExcludeLabDepartment Is Null OR @ExcludeLabDepartment <> D.LabDepartmentID)
+            Group By    LT.LabTestID,
+                  LT.LabName,
+                  LT.LabDepartmentID,
+				    LT.DataType,
+                  D.LabDepartmentName;
+                  
+      End
+      
+    -- Insert statements for procedure here
+      
+ END
+GO
+
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrder]    Script Date: 09/16/2015 14:09:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Laboratory_SaveLabOrder]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrder]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_SaveLabOrder]    Script Date: 09/16/2015 14:09:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+Create PROCEDURE [dbo].[Pr_Laboratory_SaveLabOrder]                                       
+	@Ptn_pk int,                  
+	@LocationID int,                
+	@ParameterID int,                  
+	@UserId int,                  
+	@OrderedByName int,                                      
+	@OrderedByDate datetime,              
+	@Flag int,            
+	@LabID varchar(50) = Null,      
+	@FlagExist int ,  
+	@PreClinicLabDate datetime=null,
+	@RequestNotes varchar(255) = null   ,
+	@IsRadiology bit = 0   ,
+	@itemList xml = null  ,    
+	@ModuleID int = null               
+As                             
+Begin
+
+Set Nocount On;
+
+	Select @LabID = Nullif(@LabID, '');
+	Declare @XRayOrderVisitTypeID int, @Visit_ID int, @LabOrderID int;
+	Select Top 1 @XRayOrderVisitTypeID = VisitTypeID
+	From mst_VisitType
+	Where VisitName = 'XRay Order Form';
+	Declare @Orderedlab Table(TestID int, TestNotes varchar(255), IsParent bit, IsGroup bit);
+	Declare @TestParameters Table(LabTestID int, ParameterID int);
+
+	With LabR	As (
+		Select	L.G.query('TestID').value('.', 'int') TestID,
+				nullif(L.G.query('TestNotes').value('.', 'varchar(255)'),'') TestNotes,
+				L.G.query('IsGroup').value('.', 'bit') IsGroup
+		From @itemList.nodes('/root/request') As L (G)
+	)
+	Insert Into @Orderedlab (
+		TestID,
+		TestNotes,
+		IsParent,
+		IsGroup)
+	Select	TestID,
+			TestNotes,
+			1 As Parent,
+			IsGroup
+	From LabR;
+
+
+	
+
+	Insert Into @TestParameters (
+		LabTestID,
+		ParameterID
+	)
+	Select Distinct 
+		O.TestID,
+		P.SubTestID
+	From     Dtl_LabGroupItems As LG 
+	Inner Join
+		lnk_TestParameter As P On P.TestID = LG.LabTestID 
+	Inner Join
+		lnk_TestParameter As P1 On P1.SubTestID = LG.LabGroupTestID 
+	Inner Join @Orderedlab O On O.TestID = P1.TestID
+	Where P.DeleteFlag = 0 
+	And (LG.DeleteFlag=0) 
+	And  O.IsGroup = 1
+	And P.SubTestID Not In (Select ParameterID From @TestParameters);	
+
+	Insert Into @TestParameters (
+		LabTestID,
+		ParameterID)
+	Select Distinct	O.TestID,
+					SubTestID
+	From lnk_TestParameter TP
+	Inner Join
+		@Orderedlab O On O.TestID = TP.TestID
+	Where O.IsGroup = 0 And TP.SubTestID Not In (Select ParameterID From @TestParameters);
+	
+	Begin Transaction  LabOrder
+	Begin Try
+
+		If (@LabID Is Null) Begin	--adding new Lab
+
+			--Separate the xray request to a different visity type
+		
+			Insert Into ord_Visit (
+				Ptn_pk,
+				LocationID,
+				VisitDate,
+				VisitType,
+				DataQuality,
+				UserID,
+				Createdate,
+				OrderedDate)
+			Values (
+				@Ptn_pk,
+				@LocationID,
+				@OrderedByDate,
+				Case @IsRadiology
+					When 0 Then 6
+					Else @XRayOrderVisitTypeID End,
+				0,
+				@UserID,
+				Getdate(),
+				@OrderedByDate );
+			Select @Visit_ID = Scope_identity();
+
+			Insert Into ord_PatientLabOrder (
+				Ptn_pk,
+				LocationID,
+				OrderedByName,
+				OrderedByDate,
+				Createdate,
+				UserID,
+				VisitID,
+				PreClinicLabDate)
+			Values (
+				@Ptn_pk,
+				@LocationID,
+				@OrderedByName,
+				@OrderedByDate,
+				Getdate(),
+				@UserID,
+				@Visit_ID,
+				@PreClinicLabDate );
+
+			Select @LabOrderID = Scope_identity();
+
+			Insert Into dtl_PatientLabTest (
+				LabOrderID,
+				LabTestID,
+				TestNotes,
+				DeleteFlag)
+			Select	@LabOrderID,
+					O.TestID,
+					O.TestNotes,
+					0
+			From @Orderedlab O;
+
+			Insert Into dtl_PatientLabResults (
+				LabID,
+				LocationId,
+				LabTestID,
+				ParameterID,
+				Financed,
+				UserID,
+				CreateDate)
+			Select	@LabOrderID,
+					@LocationID,
+					LabTestID,
+					ParameterID,
+					1 Financed,
+					@UserID,
+					Getdate()
+			From @TestParameters;
+
+			Select	LabId [LabID],
+					OrderedbyName,
+					OrderedbyDate
+			From ord_PatientLabOrder
+			Where Ptn_pk = @Ptn_pk
+			And LocationID = @LocationID
+			And LabID = @LabOrderID;
+
+			Select ParameterID	From Dtl_PatientLabResults		Where LabID = @LabOrderID;		
+		End 
+		Else Begin -- Updating
+			Select @LabOrderID = @LabID;
+				Update ord_PatientLabOrder Set
+				OrderedByName = @OrderedByName,
+				OrderedByDate = @OrderedByDate,
+				UserID = @UserID,
+				UpdateDate = Getdate(),
+				PreClinicLabDate = @PreClinicLabDate
+			Where LabID = @LabID;
+
+			Update LT Set
+				DeleteFlag = Case When O.TestID Is Null Then 1 Else 0 End,
+				TestNotes = Case When O.TestID Is Null Then LT.TestNotes Else O.TestNotes End
+			From dtl_PatientLabTest LT Left Outer Join @Orderedlab O On O.TestID = LT.LabTestID
+			Where LT.LabOrderID = @LabOrderID;
+
+			Insert Into dtl_PatientLabTest (
+					LabOrderID,
+					LabTestID,
+					TestNotes,
+					DeleteFlag)
+			Select @LabOrderID,
+				   O.TestID,
+					TestNotes,
+					0 
+			From  @Orderedlab O 
+			Where O.TestID Not In (Select LT.LabTestID From dtl_PatientLabTest LT Where LT.LabOrderID = @LabOrderID);
+
+			Delete From Dtl_PatientLabResults Where LabID = @LabOrderID;
+
+			Insert Into dtl_PatientLabResults (
+				LabID,
+				LocationId,
+				LabTestID,
+				ParameterID,
+				Financed,
+				UserID,
+				CreateDate)
+			Select	@LabOrderID,
+					@LocationID,
+					LabTestID,
+					ParameterID,
+					1 Financed,
+					@UserID,
+					Getdate()
+			From @TestParameters;
+
+			Select	LabId [LabID],
+					OrderedbyName,
+					OrderedbyDate
+			From ord_PatientLabOrder
+			Where Ptn_pk = @Ptn_pk
+			And LocationID = @LocationID
+			And LabID = @LabOrderID;
+
+			Select ParameterID	From Dtl_PatientLabResults		Where LabID = @LabOrderID;
+	End
+	IF @@TRANCOUNT > 0		Commit Transaction LabOrder;
+	End Try
+	Begin Catch
+		Declare @ErrorMessage NVARCHAR(4000),@ErrorSeverity Int,@ErrorState Int;
+		Select	@ErrorMessage = Error_message(),@ErrorSeverity = Error_severity(),@ErrorState = Error_state();  
+		Raiserror (@ErrorMessage, @ErrorSeverity, @ErrorState  );
+	IF @@TRANCOUNT > 0 	Rollback Transaction LabOrder;
+	End Catch;
+
+End
+GO
+
+/****** Object:  StoredProcedure [dbo].[Pr_Laboratory_GetLabTestID_Constella]    Script Date: 09/16/2015 12:43:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Pr_Laboratory_GetLabTestID_Constella]               
+@LabID int              
+AS              
+BEGIN
+-- SET NOCOUNT ON added to prevent extra result sets from              
+-- interfering with SELECT statements.              
+	Set Nocount On;
+	declare @RowCount int;
+	Select	LabID,
+			OrderedbyName,
+			OrderedbyDate,
+			LabPeriod
+	From ord_PatientLabOrder
+	Where LabID = @LabID;
+
+	Select ParameterID
+	From Dtl_PatientLabResults
+	Where LabID = @LabID
+
+--VY changed to return LAb test and not lab parameters 2014-08-20
+	
+		Select 
+			T.LabTestID TestID,
+			L.LabName TestName,
+			D.LabDepartmentName Department,
+			L.DataType,
+			T.LabTestOrderID,
+			T.TestNotes 
+		From dtl_PatientLabTest T Inner Join mst_LabTest L On T.LabTestID=L.LabTestID
+		Inner Join mst_LabDepartment D On D.LabDepartmentID = L.LabDepartmentID
+		Where T.LabOrderID = @LabID And T.DeleteFlag = 0;
+		
+		Select @RowCount=@@ROWCOUNT;
+		 
+		 If(@RowCount = 0) Begin
+			Select Distinct	l.LabTestID [TestId],
+							l.LabName [TestName],
+							m.labdepartmentname [Department],
+							L.DataType,
+							Null As LabTestOrderID,
+							'' TestNotes
+			From Dtl_PatientLabResults d
+			Inner Join
+				mst_labtest l On d.LabTestID = l.LabTestID
+			Inner Join
+				mst_labdepartment m On m.LabDepartmentID = l.LabDepartmentID
+			Where d.LabID = @LabID;
+		End
+
+
+End

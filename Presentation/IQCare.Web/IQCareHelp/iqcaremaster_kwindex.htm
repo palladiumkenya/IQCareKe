@@ -1,0 +1,587 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title>IQCare SCM User Guide V3.5.3</title>
+   <!-- Premium Pack Version 1.55 for HM6 Template design Copyright (c) 2008 - 2013 by Tim Green -->
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <meta name="robots" content="noindex, nofollow" />
+   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="jquery.scrollTo-min.js"></script>
+
+<style type="text/css">
+
+/* Styles for Index components (you can edit these) */   
+      
+        /* DON'T change the margin and padding values for #navtitle or #nav-subtitle!! */
+       
+       #navtitle { font-size: 12pt; font-weight: bold; color: #000; margin-bottom: 11px; margin-top: 0; padding-top: 10px; padding-right: 50px;}
+       
+       #nav-subtitle { font-size: 8pt; font-weight: bold; line-height: 95%; color: #5e687e; margin: 0 0 11px 0; padding-right: 50px; }
+       .idxsection  { font-family: Arial,Helvetica; font-weight: bold; font-size: 11pt; color: #000000; text-decoration: none;
+                      margin-top: 8px; margin-bottom: 3px; white-space: nowrap;}
+       .idxkeyword  { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; }
+       .idxkeyword2 { font-family: Arial,Helvetica; font-weight: normal; font-size: 10pt; color: #000000; }
+       .idxlink     { font-family: Arial,Helvetica; font-weight: normal; font-size: 8pt; color: #000000;  }
+
+       TABLE.idxtable { background: #fff; border-width: 1px; border-color: #000000; border-collapse: collapse; }
+       TD.idxtable    { background: #fff; }
+
+/* Suppress Index underlines in non-IE browsers */
+
+	a { color: black; text-decoration: none }
+	a:visited {color: black}
+	a:hover { text-decoration: underline }
+
+/* Tabbed Navigation Styles */
+
+a {outline: 0 none;} 
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Verdana, Tahoma, Arial, Sans-Serif;
+    }
+
+body {
+    background-image: url('bg_nav.gif'); 
+    background-repeat: repeat-y; 
+    background-position: -18px 0%;
+    background-attachment: fixed;
+    background-color: #eef4f8;
+    font: 11px/1.5em Verdana,Tahoma,Arial,Helvetica,Sans-Serif;
+    }
+
+.title-underline {
+    margin: 0; 
+    padding: 0; 
+    width: 83%;
+    }
+  
+#VerTabs {
+     float: left;
+     position: fixed;
+     top: 0; left: 0;
+     line-height: 100%;
+     text-align: center;
+     font-weight: bold;
+     font-size: 7pt;
+     width: 19px;
+     height: 100%;
+     background-color: #a7d7f8;
+     background-image: url('bg_nav.gif');
+     background-position: -18px 100%;
+     padding-right: 10px;
+     margin-left: 0px;
+     padding-left: 8px;
+   }
+
+#VerTabs a span {
+    display: block;
+    background: url("tab_top.gif") no-repeat left top;
+    /* Adjust Text centering with left and right padding */
+    padding: 14px 0px 5px 0px;
+    margin-bottom: -2px;
+    }
+    
+#VerTabs a {
+    display: block;
+    background: url("tab_bottom.gif") no-repeat left bottom;
+    padding: 0 0 7px 0;
+    text-decoration: none;
+    /* Left and right margins control tab width */
+    margin: 2px -1px 0 -1px;
+    color: #098ae2;
+    }
+
+#VerTabs #current a {
+    background-position: -42px 100%;
+    margin-right: -6px;
+    color: #000;
+	}
+
+#VerTabs #current a span {
+    background-position: -42px 0%;
+    }	
+
+#VerTabs .non-current {
+    margin-right: -4px;
+    color: #098ae2;
+    }
+    
+#VerTabs .non-current a:hover {
+    background-position: -42px 100%;
+    color: #000;
+    }
+
+#VerTabs .non-current a:hover span {
+	background-position: -42px 0%;
+    }	
+
+#ns-title {
+    clear: right;
+    width: 100%;
+    padding: 0;
+    padding-left: 8px;
+    margin-left: 38px;
+    position: fixed;
+    background-color: #eef4f8;
+    }
+
+#body-wrap {
+    clear: right;
+    padding: 0 5px 0 45px;
+    margin: 0;
+    height: auto;
+    }	
+
+
+#body-shift {
+    margin: 0;
+    padding: 0;
+    }
+
+/* Check from here */
+
+#callout-wrap {
+    display: none;
+    position: relative;
+    width: auto;
+    }
+   
+#callout {
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    display: block;
+    background: #fbf8a9;
+    border: 1px solid #757575;
+    padding: 3px;
+    } 
+    
+#callout p { 
+    padding: 0;
+    margin: 0;
+    }
+
+#scrollPadder {
+    margin: 0;
+    padding: 0;
+    float: left;
+   }  
+   
+   #indexRefs, #indexRefsNoJS { 
+      font-size: 8pt;; 
+   }
+   a.idxrefs {
+     font-weight: bold;
+   }    
+
+</style>
+
+<!-- Static styles for browsers with no/off JavaScript -->
+<noscript>
+<style type="text/css">
+#ns-title {  position: static; }
+#ns-title { width:83%;}
+#navtitle, #nav-subtitle { padding-right: 0;}
+.title-underline { width: 100%; }
+#indexRefs { display: none; }
+</style>
+</noscript>
+
+
+<!-- Adjustments for IE -->
+<!--[if lte IE 6]>
+<style type="text/css">
+body { width: 99%; }
+#VerTabs, #ns-title {position: static; background-color: transparent;}
+#ns-title { width: 83%; padding: 0; margin: 0;}
+#navtitle, #nav-subtitle { padding-right: 0; padding-left: 6px;}
+#indexRefs, #indexRefsNoJS {padding-left: 10px;}
+#body-shift, #body-wrap: {padding:0; margin:0 0 0 30px;; background-color: transparent;}
+.title-underline {margin: 0; padding: 0; width: 100%;}
+</style>
+<noscript>
+<style type="text/css">
+</style>
+</noscript>
+<![endif]-->
+<!--[if lte IE 9]>
+<style type="text/css">
+#navtitle, #nav-subtitle { margin-bottom: 4px; }
+TABLE.idxtable { filter: progid:DXImageTransform.Microsoft.Shadow(color=B0B0B0, Direction=135, Strength=4); }
+</style>
+<![endif]-->
+<script type="text/javascript">var headElement="ns-title",idxCallout="No index entries<br />beginning with",idxHl="#ffff00";</script>
+<script type="text/javascript" src="navinitv.js"></script>
+<script type="text/javascript" src="idxinit.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+</head>
+<body>
+
+<div id="VerTabs"><br /><br />
+<div class="non-current"><a href="iqcaremaster_content.htm" title="Table of Contents"><span>C<br />O<br />N<br />T<br />E<br />N<br />T<br />S</span></a></div>
+<div id="current"><a href="#" title="Keyword Index"><span>I<br />N<br />D<br />E<br />X</span></a></div>
+<div class="non-current"><a href="iqcaremaster_ftsearch.htm" title="Full-text Search"><span>S<br />E<br />A<br />R<br />C<br />H</span></a></div>
+</div>
+
+<div id="ns-title">
+<p id="navtitle">IQCare SCM User Guide V3.5.3</p>
+
+<div class="title-underline"> <hr /></div>
+
+<div id="indexRefs">
+  <a href="javascript:gotoIndex('#A')" class="idxrefs">A</a>
+  <a href="javascript:gotoIndex('#B')" class="idxrefs">B</a>
+  <a href="javascript:gotoIndex('#C')" class="idxrefs">C</a>
+  <a href="javascript:gotoIndex('#D')" class="idxrefs">D</a>
+  <a href="javascript:gotoIndex('#E')" class="idxrefs">E</a>
+  <a href="javascript:gotoIndex('#F')" class="idxrefs">F</a>
+  <a href="javascript:gotoIndex('#G')" class="idxrefs">G</a>
+  <a href="javascript:gotoIndex('#H')" class="idxrefs">H</a>
+  <a href="javascript:gotoIndex('#I')" class="idxrefs">I</a>
+  <a href="javascript:gotoIndex('#J')" class="idxrefs">J</a>
+  <a href="javascript:gotoIndex('#K')" class="idxrefs">K</a>
+  <a href="javascript:gotoIndex('#L')" class="idxrefs">L</a>
+  <a href="javascript:gotoIndex('#M')" class="idxrefs">M</a>
+  <a href="javascript:gotoIndex('#N')" class="idxrefs">N</a>
+  <br />
+  <a href="javascript:gotoIndex('#O')" class="idxrefs">O</a>
+  <a href="javascript:gotoIndex('#P')" class="idxrefs">P</a>
+  <a href="javascript:gotoIndex('#Q')" class="idxrefs">Q</a>
+  <a href="javascript:gotoIndex('#R')" class="idxrefs">R</a>
+  <a href="javascript:gotoIndex('#S')" class="idxrefs">S</a>
+  <a href="javascript:gotoIndex('#T')" class="idxrefs">T</a>
+  <a href="javascript:gotoIndex('#U')" class="idxrefs">U</a>
+  <a href="javascript:gotoIndex('#V')" class="idxrefs">V</a>
+  <a href="javascript:gotoIndex('#W')" class="idxrefs">W</a>
+  <a href="javascript:gotoIndex('#X')" class="idxrefs">X</a>
+  <a href="javascript:gotoIndex('#Y')" class="idxrefs">Y</a>
+  <a href="javascript:gotoIndex('#Z')" class="idxrefs">Z</a>
+
+<div id="callout-wrap">
+<div id="callout">
+<p>&nbsp;</p>
+</div>
+</div>
+<script type="text/javascript">
+document.write('<form id="searchForm" style="margin-top: 2px; margin-bottom: 2px;">' +
+'<input type="text" name="idxSearch" size="20" value="" id="idxSearch" class="zoom_searchbox" />' +
+'&nbsp;<button type="button" onclick="hmGoIndex();">Search</button></form>');
+// Index args checker
+if (window.frameElement) {
+if (parent.hmIndexArg != "") {
+  var indexCheck = setInterval(function(){
+    var box = document.getElementById("idxSearch");
+  try {if (box.name) {
+       clearInterval(indexCheck);
+       box.value = parent.hmIndexArg;
+       parent.hmIndexArg = "";
+       hmGoIndex();
+    }
+  } catch(err) {}
+  },100);
+} } // Index args checker 
+</script>
+</div><!-- indexRefs -->
+
+<!-- Noscript version of the index links -->
+<noscript>
+<div id="indexRefsNoJS">
+  <a href="#A" class="idxrefs">A</a>
+  <a href="#B" class="idxrefs">B</a>
+  <a href="#C" class="idxrefs">C</a>
+  <a href="#D" class="idxrefs">D</a>
+  <a href="#E" class="idxrefs">E</a>
+  <a href="#F" class="idxrefs">F</a>
+  <a href="#G" class="idxrefs">G</a>
+  <a href="#H" class="idxrefs">H</a>
+  <a href="#I" class="idxrefs">I</a>
+  <a href="#J" class="idxrefs">J</a>
+  <a href="#K" class="idxrefs">K</a>
+  <a href="#L" class="idxrefs">L</a>
+  <a href="#M" class="idxrefs">M</a>
+  <a href="#N" class="idxrefs">N</a>
+  <br />
+  <a href="#O" class="idxrefs">O</a>
+  <a href="#P" class="idxrefs">P</a>
+  <a href="#Q" class="idxrefs">Q</a>
+  <a href="#R" class="idxrefs">R</a>
+  <a href="#S" class="idxrefs">S</a>
+  <a href="#T" class="idxrefs">T</a>
+  <a href="#U" class="idxrefs">U</a>
+  <a href="#V" class="idxrefs">V</a>
+  <a href="#W" class="idxrefs">W</a>
+  <a href="#X" class="idxrefs">X</a>
+  <a href="#Y" class="idxrefs">Y</a>
+  <a href="#Z" class="idxrefs">Z</a>
+</div>
+</noscript>
+</div> <!-- ns-title-->
+
+<div id="body-shift">
+<div id="body-wrap">
+<script type="text/javascript">
+
+  function hmInitHideLinks(cssCode) {
+  	var styleElement = document.createElement("style");
+  	styleElement.type = "text/css";
+  	if (styleElement.styleSheet) {
+    	styleElement.styleSheet.cssText = cssCode;
+  	}
+  	else {
+    	styleElement.appendChild(document.createTextNode(cssCode));
+  	}
+  	document.getElementsByTagName("head")[0].appendChild(styleElement);
+  }
+
+  hmInitHideLinks("#idx div { display: none }");
+
+  var currentdiv = null;
+  var canhidelinks = true;
+
+  function hmshowLinks(divID) {
+    var thisdiv = document.getElementById(divID);
+    canhidelinks = true;
+    hmhideLinks();
+    if (thisdiv) {
+      currentdiv = thisdiv;
+      $(currentdiv).show();
+      $(currentdiv).mouseover(hmdivMouseOver).mouseout(hmdivMouseOut);
+      $(document).mouseup(hmhideLinks);
+    }
+  }
+  function hmdivMouseOver() { canhidelinks = false; };
+  function hmdivMouseOut() { canhidelinks = true; };
+  function hmhideLinks() {
+    if (canhidelinks) {
+      if (currentdiv) {
+        $(currentdiv).hide();
+        $(currentdiv).unbind("onmouseover", "onmouseout");
+      }
+      currentdiv = null;
+      $(document).unbind("onmouseup");
+    }
+  }
+</script>
+<div id="idx" style="margin:0;padding:0;border:none">
+<a name="A" id="A"></a><p class="idxsection">- A -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="user_group_administration.htm" target="hmcontent"><span class="idxkeyword">Access Rights</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_or_update_a_user.htm" target="hmcontent"><span class="idxkeyword2">add user</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_or_edit_a_user_group.htm" target="hmcontent"><span class="idxkeyword2">add user group</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="setting_the_e-signature.htm" target="hmcontent"><span class="idxkeyword2">e-signature</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="change_password.htm" target="hmcontent"><span class="idxkeyword2">password</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="scheduler.htm" target="hmcontent"><span class="idxkeyword">Appointments</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="new_appointment_via_a_form.htm" target="hmcontent"><span class="idxkeyword2">add via form</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="new_appointment_via_the_patient_home.htm" target="hmcontent"><span class="idxkeyword2">add via patient home</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="new_appointment_via_the_scheduler.htm" target="hmcontent"><span class="idxkeyword2">add via scheduler</span></a></p>
+<a name="B" id="B"></a><p class="idxsection">- B -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="back_uprestore.htm" target="hmcontent"><span class="idxkeyword">Back Up Database</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="kenyan_moh_blue_card.htm" target="hmcontent"><span class="idxkeyword">Blue Card</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Business Rules</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="aidrelief_forms_br.htm" target="hmcontent"><span class="idxkeyword2">AIDSRelief forms data dictionary</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facilityhomepagebusrules.htm" target="hmcontent"><span class="idxkeyword2">facility home page</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="patienthomepagebusrules.htm" target="hmcontent"><span class="idxkeyword2">patient home page</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="javascript:void(0)" onclick="return hmshowLinks('k5.4')"><span class="idxkeyword2">Required field</span></a></p>
+<div id="k5.4" style="position:relative;margin:0 0 0 40px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="business_rule_definitions.htm" target="hmcontent"><span class="idxlink">Business Rule Definitions</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="adding_business_rules.htm" target="hmcontent"><span class="idxlink">Add Business Rules</span></a></td></tr></table></td></tr></table>
+</div>
+<a name="C" id="C"></a><p class="idxsection">- C -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Caches</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="javascript:void(0)" onclick="return hmshowLinks('k6.1')"><span class="idxkeyword2">refresh report tables</span></a></p>
+<div id="k6.1" style="position:relative;margin:0 0 0 40px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="refresh_caches.htm" target="hmcontent"><span class="idxlink">Refresh Caches</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="refresh_reporting_tables.htm" target="hmcontent"><span class="idxlink">Refresh Reporting Tables</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="refresh_system_cache.htm" target="hmcontent"><span class="idxkeyword2">refresh system</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Care Ended</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_care_ended_fields.htm" target="hmcontent"><span class="idxkeyword2">fields</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configure_care_ended_forms.htm" target="hmcontent"><span class="idxkeyword2">form</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="manage_technical_areas.htm" target="hmcontent"><span class="idxkeyword">Conditional Fields</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configure_care_ended_forms.htm" target="hmcontent"><span class="idxkeyword2">add to Care Ended forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_conditional_fields.htm" target="hmcontent"><span class="idxkeyword2">add to forms</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Configuration</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facilitysatellite_page_field_details.htm" target="hmcontent"><span class="idxkeyword2">facillity</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_an_entry_in_a_custom_list.htm" target="hmcontent"><span class="idxkeyword2">laboratory</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_a_location.htm" target="hmcontent"><span class="idxkeyword2">location</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="customize_lists.htm" target="hmcontent"><span class="idxkeyword2">select lists</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="follow_up_education.htm" target="hmcontent"><span class="idxkeyword">Counseling Education</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="overview.htm" target="hmcontent"><span class="idxkeyword">Creative Commons</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="javascript:void(0)" onclick="return hmshowLinks('k12')"><span class="idxkeyword">Custom Fields</span></a></p>
+<div id="k12" style="position:relative;margin:0 0 0 20px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="addacustomfield.htm" target="hmcontent"><span class="idxlink">Add a Custom Field</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="back_uprestore.htm" target="hmcontent"><span class="idxlink">Back up/Restore</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="create_custom_fields.htm" target="hmcontent"><span class="idxkeyword2">Add - form builder</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configure_custom_fields.htm" target="hmcontent"><span class="idxkeyword2">add - static forms</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Custom Lists</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_custom_field_lists.htm" target="hmcontent"><span class="idxkeyword2">add custom</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_an_entry_in_a_custom_list.htm" target="hmcontent"><span class="idxkeyword2">add entries</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="customlistbyaidsreliefform.htm" target="hmcontent"><span class="idxkeyword2">HIV Care static forms custom lists</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="update_an_entry_in_a_restricted_custom_list.htm" target="hmcontent"><span class="idxkeyword2">update restricted</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Custom Reports</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="customreportfieldgroups_ar.htm" target="hmcontent"><span class="idxkeyword2">field groups - AIDSRelief forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="custom_reports.htm" target="hmcontent"><span class="idxkeyword2">overview</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="custom_report_functions.htm" target="hmcontent"><span class="idxkeyword2">query functions</span></a></p>
+<a name="D" id="D"></a><p class="idxsection">- D -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Data Dictionary</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="common_dynamic_forms_data_dict.htm" target="hmcontent"><span class="idxkeyword2">Common dynamic forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="common_static_forms.htm" target="hmcontent"><span class="idxkeyword2">Common static forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="aidrelief_forms_br.htm" target="hmcontent"><span class="idxkeyword2">HIV Care Static Forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="uganda_blue_card_data_dictrion.htm" target="hmcontent"><span class="idxkeyword2">Uganda Blue Card</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Data Quality</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="data_quality_check.htm" target="hmcontent"><span class="idxkeyword2">check</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="duplicate_patient_check.htm" target="hmcontent"><span class="idxkeyword2">duplicate patient check</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="field_level_validation.htm" target="hmcontent"><span class="idxkeyword2">field level validation</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Drugs</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="add_a_new_drug.htm" target="hmcontent"><span class="idxkeyword2">add trade</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="javascript:void(0)" onclick="return hmshowLinks('k17.2')"><span class="idxkeyword2">adult pharmacy form - AIDSRelief</span></a></p>
+<div id="k17.2" style="position:relative;margin:0 0 0 40px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="adult_pharmacy.htm" target="hmcontent"><span class="idxlink">Adult Pharmacy 3.1 and below</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="adult_pharmacy_2.htm" target="hmcontent"><span class="idxlink">Adult Pharmacy 3.2 and above</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="drugs_custom_list.htm" target="hmcontent"><span class="idxkeyword2">overview</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="javascript:void(0)" onclick="return hmshowLinks('k17.4')"><span class="idxkeyword2">paediatric pharmacy - AIDSRelief form</span></a></p>
+<div id="k17.4" style="position:relative;margin:0 0 0 40px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="paediatric_pharmacy.htm" target="hmcontent"><span class="idxlink">Paediatric Pharmacy 3.1 and below</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="paediatric_pharmacy_2.htm" target="hmcontent"><span class="idxlink">Paediatric Pharmacy 3.2 and above</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="glossary_and_definition_of_terms.htm" target="hmcontent"><span class="idxkeyword">Dynamic Form</span></a></p>
+<a name="E" id="E"></a><p class="idxsection">- E -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Enrollment</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="enrollment_form.htm" target="hmcontent"><span class="idxkeyword2">HIV Care enrollment</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="universal_registration_form.htm" target="hmcontent"><span class="idxkeyword2">registration</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Export</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="exporting_data.htm" target="hmcontent"><span class="idxkeyword2">data</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="export_a_report.htm" target="hmcontent"><span class="idxkeyword2">report results</span></a></p>
+<a name="F" id="F"></a><p class="idxsection">- F -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="javascript:void(0)" onclick="return hmshowLinks('k21')"><span class="idxkeyword">Facility Location</span></a></p>
+<div id="k21" style="position:relative;margin:0 0 0 20px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="findadd_patients_and_location.htm" target="hmcontent"><span class="idxlink">Find/Add Patients and Location</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="facilitysatellite_page_field_details.htm" target="hmcontent"><span class="idxlink">Facility/Satellite Page Field Details</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="initial_product_configuration.htm" target="hmcontent"><span class="idxkeyword">Facility Set Up</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Fields</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="create_custom_fields.htm" target="hmcontent"><span class="idxkeyword2">create custom</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="hiv_care_fields.htm" target="hmcontent"><span class="idxkeyword2">HIV Care pre-defined</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_fields.htm" target="hmcontent"><span class="idxkeyword2">manage</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="pmtct_fields.htm" target="hmcontent"><span class="idxkeyword2">PMTCT pre-defined</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Form Builder</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configure_care_ended_forms.htm" target="hmcontent"><span class="idxkeyword2">configure care ended</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_registration_form.htm" target="hmcontent"><span class="idxkeyword2">Configure registration</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="import_export_forms.htm" target="hmcontent"><span class="idxkeyword2">export forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_fields.htm" target="hmcontent"><span class="idxkeyword2">manage fields</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_forms.htm" target="hmcontent"><span class="idxkeyword2">manage forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="iqcare_management.htm" target="hmcontent"><span class="idxkeyword2">overview</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="publish_forms.htm" target="hmcontent"><span class="idxkeyword2">publish</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_technical_areas.htm" target="hmcontent"><span class="idxkeyword2">technical area</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="placeholder_field.htm" target="hmcontent"><span class="idxkeyword">Form Formatting</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="select_technical_area.htm" target="hmcontent"><span class="idxkeyword">Forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_forms.htm" target="hmcontent"><span class="idxkeyword2">build new</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="delete_a_form.htm" target="hmcontent"><span class="idxkeyword2">delete</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_forms.htm" target="hmcontent"><span class="idxkeyword2">dynamic forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="arformset.htm" target="hmcontent"><span class="idxkeyword2">HIV Care Static Forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="pmtct_form_set.htm" target="hmcontent"><span class="idxkeyword2">PMTCT</span></a></p>
+<a name="H" id="H"></a><p class="idxsection">- H -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="international_standards.htm" target="hmcontent"><span class="idxkeyword">HL7</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Home Pages</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_home_pages.htm" target="hmcontent"><span class="idxkeyword2">configure</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="the_facility_home_page.htm" target="hmcontent"><span class="idxkeyword2">facility - IQCare display</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="the_patient_home_page.htm" target="hmcontent"><span class="idxkeyword2">patient - IQCare display</span></a></p>
+<a name="I" id="I"></a><p class="idxsection">- I -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="international_standards.htm" target="hmcontent"><span class="idxkeyword">IDC10</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="other_user_guides.htm" target="hmcontent"><span class="idxkeyword">Installation</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="international_standards.htm" target="hmcontent"><span class="idxkeyword">Interoperability</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="iqcare_service.htm" target="hmcontent"><span class="idxkeyword">IQCare Service</span></a></p>
+<a name="K" id="K"></a><p class="idxsection">- K -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="kenya_moh_clinical_forms.htm" target="hmcontent"><span class="idxkeyword">Kenya MOH Forms</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="ke_anc_register_moh_405.htm" target="hmcontent"><span class="idxkeyword2">Kenya ANC register</span></a></p>
+<a name="L" id="L"></a><p class="idxsection">- L -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Laboratory</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configure_additional_labs.htm" target="hmcontent"><span class="idxkeyword2">additional labs</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="lab_order_form_configuration.htm" target="hmcontent"><span class="idxkeyword2">configuration</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="configuring_lab_units_and_boundary_values.htm" target="hmcontent"><span class="idxkeyword2">configure units</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="laboratory_orderlaboratory_results.htm" target="hmcontent"><span class="idxkeyword2">lab order form</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="special_forms_linking.htm" target="hmcontent"><span class="idxkeyword2">link to technical areas</span></a></p>
+<a name="M" id="M"></a><p class="idxsection">- M -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="uganda_blue_card_form_set.htm" target="hmcontent"><span class="idxkeyword">MOH HIV Card</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">MOH Reports</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facility_reports_-_pmtct.htm" target="hmcontent"><span class="idxkeyword2">Country PMTCT</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="nigeria_monthly_naca_report.htm" target="hmcontent"><span class="idxkeyword2">Nigeria HIV Care</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="tanzania_nacp.htm" target="hmcontent"><span class="idxkeyword2">Tanzania HIV Care</span></a></p>
+<a name="N" id="N"></a><p class="idxsection">- N -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="facility_setup_and_patient_number.htm" target="hmcontent"><span class="idxkeyword">National Number</span></a></p>
+<a name="O" id="O"></a><p class="idxsection">- O -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Open Source</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="overview.htm" target="hmcontent"><span class="idxkeyword2">CodePlex</span></a></p>
+<a name="P" id="P"></a><p class="idxsection">- P -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Paperless</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="paperless_facility.htm" target="hmcontent"><span class="idxkeyword2">description</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facilitysatellite_page_field_details.htm" target="hmcontent"><span class="idxkeyword2">set up</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Patient</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="care_tracking.htm" target="hmcontent"><span class="idxkeyword2">care end</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="delete_patient.htm" target="hmcontent"><span class="idxkeyword2">delete</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="enrollment_form.htm" target="hmcontent"><span class="idxkeyword2">enroll</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="the_patient_home_page.htm" target="hmcontent"><span class="idxkeyword2">home page</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facility_setup_and_patient_number.htm" target="hmcontent"><span class="idxkeyword2">number</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="patient_transfer.htm" target="hmcontent"><span class="idxkeyword2">transfer</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="facility_setup_and_patient_number.htm" target="hmcontent"><span class="idxkeyword">Patient Number</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Pharmacy</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="javascript:void(0)" onclick="return hmshowLinks('k42.1')"><span class="idxkeyword2">adult</span></a></p>
+<div id="k42.1" style="position:relative;margin:0 0 0 40px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="adult_pharmacy.htm" target="hmcontent"><span class="idxlink">Adult Pharmacy 3.1 and below</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="adult_pharmacy_2.htm" target="hmcontent"><span class="idxlink">Adult Pharmacy 3.2 and above</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="adult_pharmacy_ar_br.htm" target="hmcontent"><span class="idxkeyword2">adult - business rules</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="special_forms_linking.htm" target="hmcontent"><span class="idxkeyword2">link to technical areas</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="pediatric_pharmacy_ar_br.htm" target="hmcontent"><span class="idxkeyword2">paediatric</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="pediatric_pharmacy_ar_br.htm" target="hmcontent"><span class="idxkeyword2">paediatric - business rules</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="placeholder_field.htm" target="hmcontent"><span class="idxkeyword">Placeholder Field</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">PMTCT</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="donor_reports_-pmtct.htm" target="hmcontent"><span class="idxkeyword2">donor reports</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facility_reports_-_pmtct.htm" target="hmcontent"><span class="idxkeyword2">facility reports</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="pmtct_form_set.htm" target="hmcontent"><span class="idxkeyword2">form set</span></a></p>
+<a name="Q" id="Q"></a><p class="idxsection">- Q -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="quality_assurance.htm" target="hmcontent"><span class="idxkeyword">Quality Assurance</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="data_quality_check.htm" target="hmcontent"><span class="idxkeyword2">Data quality check</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="duplicate_patient_check.htm" target="hmcontent"><span class="idxkeyword2">Duplicate patient check</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="field_level_validation.htm" target="hmcontent"><span class="idxkeyword2">Field level validation</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="form_flow_ar.htm" target="hmcontent"><span class="idxkeyword2">Form flow</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="required_fields.htm" target="hmcontent"><span class="idxkeyword2">Required fields</span></a></p>
+<a name="R" id="R"></a><p class="idxsection">- R -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="universal_registration_form.htm" target="hmcontent"><span class="idxkeyword">Registration</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="javascript:void(0)" onclick="return hmshowLinks('k47')"><span class="idxkeyword">Reports</span></a></p>
+<div id="k47" style="position:relative;margin:0 0 0 20px;top:-3px">
+<table class="idxtable" style="padding:4px"><tr><td class="idxtable"><table style="border:none;padding0"><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="paediatric_pharmacy.htm" target="hmcontent"><span class="idxlink">Paediatric Pharmacy 3.1 and below</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="paediatric_pharmacy_2.htm" target="hmcontent"><span class="idxlink">Paediatric Pharmacy 3.2 and above</span></a></td></tr><tr style="vertical-align:baseline"><td><img src="ciconidx.gif" style="border:none" alt="Icon"></td><td><a href="aidrelief_forms_br.htm" target="hmcontent"><span class="idxlink">HIV Care Static Forms Data Dictionary</span></a></td></tr></table></td></tr></table>
+</div>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="data_quality_check.htm" target="hmcontent"><span class="idxkeyword2">data quality</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="donor_reports.htm" target="hmcontent"><span class="idxkeyword2">donor - HIV Care</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="donor_reports_-pmtct.htm" target="hmcontent"><span class="idxkeyword2">donor- PMTCT</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facility_reports.htm" target="hmcontent"><span class="idxkeyword2">facility - HIV Care</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="facility_reports_-_pmtct.htm" target="hmcontent"><span class="idxkeyword2">facility - PMTCT</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="predefinedreports.htm" target="hmcontent"><span class="idxkeyword2">pre-defined</span></a></p>
+<a name="S" id="S"></a><p class="idxsection">- S -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="glossary_and_definition_of_terms.htm" target="hmcontent"><span class="idxkeyword">Static Form</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="arformset.htm" target="hmcontent"><span class="idxkeyword2">HIV Care static form set</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="special_forms_linking.htm" target="hmcontent"><span class="idxkeyword2">Special form linking</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><a href="technical_support.htm" target="hmcontent"><span class="idxkeyword">Support</span></a></p>
+<a name="T" id="T"></a><p class="idxsection">- T -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Technical Area</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="manage_technical_areas.htm" target="hmcontent"><span class="idxkeyword2">configure</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="select_technical_area.htm" target="hmcontent"><span class="idxkeyword2">select - IQCare</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Track 1.0</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="track_1_0_exposed_infants.htm" target="hmcontent"><span class="idxkeyword2">Exposed Infants</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="track_1_0.htm" target="hmcontent"><span class="idxkeyword2">HIV Care</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="track_1_0_pmtct.htm" target="hmcontent"><span class="idxkeyword2">PMTCT</span></a></p>
+<a name="U" id="U"></a><p class="idxsection">- U -</p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">Uganda Blue Card</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="uganda_blue_card_form_set.htm" target="hmcontent"><span class="idxkeyword2">About the form set</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="uganda_blue_card_data_dictrion.htm" target="hmcontent"><span class="idxkeyword2">Data dictionary</span></a></p>
+<p class="idxkeyword" style="margin:0 0 0 0px"><span class="idxkeyword">User Guide</span></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="other_user_guides.htm" target="hmcontent"><span class="idxkeyword2">installation</span></a></p>
+<p class="idxkeyword2" style="margin:0 0 0 20px"><a href="overview.htm" target="hmcontent"><span class="idxkeyword2">print</span></a></p>
+</div>
+
+</div> <!-- body-wrap -->
+</div> <!-- body-shift -->
+<div id="scrollPadder" >&nbsp; </div>
+
+</body>
+</html>

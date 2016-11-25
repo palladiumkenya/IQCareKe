@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.fgi.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.fgi.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.fgi.org/">
+      <s:element name="GetFacilityPatientsCostPerMonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityPatientsCostPerMonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityPatientsCostPerMonthResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgCD4CostPerPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgCD4CostPerPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityAvgCD4CostPerPatientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgExcludingCD4CostPerPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgExcludingCD4CostPerPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityAvgExcludingCD4CostPerPatientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTotalCostLostToFollowup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityTotalCostLostToFollowupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityTotalCostLostToFollowupResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumTotalCostLostToFollowup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumTotalCostLostToFollowupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityCumTotalCostLostToFollowupResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgCostCovByProgramAndPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityAvgCostCovByProgramAndPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityAvgCostCovByProgramAndPatientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumCostCovByProgramAndPatient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionStartDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionEndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacilityCumCostCovByProgramAndPatientResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacilityCumCostCovByProgramAndPatientResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientDebitNoteTotalCostByMonth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PatientId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPatientDebitNoteTotalCostByMonthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPatientDebitNoteTotalCostByMonthResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetFacilityPatientsCostPerMonthSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityPatientsCostPerMonth" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityPatientsCostPerMonthSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityPatientsCostPerMonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgCD4CostPerPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgCD4CostPerPatient" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgCD4CostPerPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgCD4CostPerPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgExcludingCD4CostPerPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgExcludingCD4CostPerPatient" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgExcludingCD4CostPerPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgExcludingCD4CostPerPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTotalCostLostToFollowupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityTotalCostLostToFollowup" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityTotalCostLostToFollowupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityTotalCostLostToFollowupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumTotalCostLostToFollowupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumTotalCostLostToFollowup" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumTotalCostLostToFollowupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumTotalCostLostToFollowupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgCostCovByProgramAndPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgCostCovByProgramAndPatient" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityAvgCostCovByProgramAndPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityAvgCostCovByProgramAndPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumCostCovByProgramAndPatientSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumCostCovByProgramAndPatient" />
+  </wsdl:message>
+  <wsdl:message name="GetFacilityCumCostCovByProgramAndPatientSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacilityCumCostCovByProgramAndPatientResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDebitNoteTotalCostByMonthSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPatientDebitNoteTotalCostByMonth" />
+  </wsdl:message>
+  <wsdl:message name="GetPatientDebitNoteTotalCostByMonthSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPatientDebitNoteTotalCostByMonthResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FacilityReportsServiceSoap">
+    <wsdl:operation name="GetFacilityPatientsCostPerMonth">
+      <wsdl:input message="tns:GetFacilityPatientsCostPerMonthSoapIn" />
+      <wsdl:output message="tns:GetFacilityPatientsCostPerMonthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCD4CostPerPatient">
+      <wsdl:input message="tns:GetFacilityAvgCD4CostPerPatientSoapIn" />
+      <wsdl:output message="tns:GetFacilityAvgCD4CostPerPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgExcludingCD4CostPerPatient">
+      <wsdl:input message="tns:GetFacilityAvgExcludingCD4CostPerPatientSoapIn" />
+      <wsdl:output message="tns:GetFacilityAvgExcludingCD4CostPerPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth">
+      <wsdl:input message="tns:GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthSoapIn" />
+      <wsdl:output message="tns:GetFacilityTotalAvgCostofARVandOIPerPatientPerMonthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth">
+      <wsdl:input message="tns:GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthSoapIn" />
+      <wsdl:output message="tns:GetFacilityCumulAvgCostofARVandOIPerPatientPerMonthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalCostLostToFollowup">
+      <wsdl:input message="tns:GetFacilityTotalCostLostToFollowupSoapIn" />
+      <wsdl:output message="tns:GetFacilityTotalCostLostToFollowupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumTotalCostLostToFollowup">
+      <wsdl:input message="tns:GetFacilityCumTotalCostLostToFollowupSoapIn" />
+      <wsdl:output message="tns:GetFacilityCumTotalCostLostToFollowupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCostCovByProgramAndPatient">
+      <wsdl:input message="tns:GetFacilityAvgCostCovByProgramAndPatientSoapIn" />
+      <wsdl:output message="tns:GetFacilityAvgCostCovByProgramAndPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumCostCovByProgramAndPatient">
+      <wsdl:input message="tns:GetFacilityCumCostCovByProgramAndPatientSoapIn" />
+      <wsdl:output message="tns:GetFacilityCumCostCovByProgramAndPatientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDebitNoteTotalCostByMonth">
+      <wsdl:input message="tns:GetPatientDebitNoteTotalCostByMonthSoapIn" />
+      <wsdl:output message="tns:GetPatientDebitNoteTotalCostByMonthSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FacilityReportsServiceSoap" type="tns:FacilityReportsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFacilityPatientsCostPerMonth">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityPatientsCostPerMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCD4CostPerPatient">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityAvgCD4CostPerPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgExcludingCD4CostPerPatient">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityAvgExcludingCD4CostPerPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalCostLostToFollowup">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityTotalCostLostToFollowup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumTotalCostLostToFollowup">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityCumTotalCostLostToFollowup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCostCovByProgramAndPatient">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityAvgCostCovByProgramAndPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumCostCovByProgramAndPatient">
+      <soap:operation soapAction="http://www.fgi.org/GetFacilityCumCostCovByProgramAndPatient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDebitNoteTotalCostByMonth">
+      <soap:operation soapAction="http://www.fgi.org/GetPatientDebitNoteTotalCostByMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FacilityReportsServiceSoap12" type="tns:FacilityReportsServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFacilityPatientsCostPerMonth">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityPatientsCostPerMonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCD4CostPerPatient">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityAvgCD4CostPerPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgExcludingCD4CostPerPatient">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityAvgExcludingCD4CostPerPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityTotalAvgCostofARVandOIPerPatientPerMonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityCumulAvgCostofARVandOIPerPatientPerMonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityTotalCostLostToFollowup">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityTotalCostLostToFollowup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumTotalCostLostToFollowup">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityCumTotalCostLostToFollowup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityAvgCostCovByProgramAndPatient">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityAvgCostCovByProgramAndPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacilityCumCostCovByProgramAndPatient">
+      <soap12:operation soapAction="http://www.fgi.org/GetFacilityCumCostCovByProgramAndPatient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPatientDebitNoteTotalCostByMonth">
+      <soap12:operation soapAction="http://www.fgi.org/GetPatientDebitNoteTotalCostByMonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FacilityReportsService">
+    <wsdl:port name="FacilityReportsServiceSoap" binding="tns:FacilityReportsServiceSoap">
+      <soap:address location="http://localhost/IQCareServices/FacilityReportsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FacilityReportsServiceSoap12" binding="tns:FacilityReportsServiceSoap12">
+      <soap12:address location="http://localhost/IQCareServices/FacilityReportsService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StoreId" type="xs:int" minOccurs="0" />
+              <xs:element name="StoreName" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemId" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" type="xs:string" minOccurs="0" />
+              <xs:element name="BatchName" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpiryDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TransactionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Quanitity" type="xs:int" minOccurs="0" />
+              <xs:element name="DispensingUnit" type="xs:string" minOccurs="0" />
+              <xs:element name="Summary" type="xs:string" minOccurs="0" />
+              <xs:element name="OrderName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

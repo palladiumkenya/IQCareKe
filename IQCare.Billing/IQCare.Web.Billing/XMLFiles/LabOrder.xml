@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="Root" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Root" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+	  <xs:complexType>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+		  <xs:element name="Order">
+			<xs:complexType>
+			  <xs:sequence>
+				<xs:element name="orderid" type="xs:int" minOccurs="0" />
+				<xs:element name="ordernumber" type="xs:string" minOccurs="0" />
+				<xs:element name="orderstatus" type="xs:string" minOccurs="0" />
+				<xs:element name="orderdate" type="xs:dateTime" minOccurs="0" />
+				<xs:element name="ordernotes" type="xs:string" minOccurs="0" />
+				<xs:element name="orderby" type="xs:string" minOccurs="0" />
+				<xs:element name="servicearea" type="xs:string" minOccurs="0" />
+				<xs:element name="patientname" type="xs:string" minOccurs="0" />
+          <xs:element name="patientnumber" type="xs:string" minOccurs="0" />
+				<xs:element name="patientgender" type="xs:string" minOccurs="0" />
+				<xs:element name="patientdob" type="xs:dateTime" minOccurs="0" />
+          <xs:element name="patientageyears" type="xs:int" minOccurs="0" />
+          <xs:element name="facilityname" type="xs:string" minOccurs="0" />
+          <xs:element name="facilityaddress" type="xs:string" minOccurs="0" />
+          <xs:element name="facilitytel" type="xs:string" minOccurs="0" />
+          <xs:element name="facilityemail" type="xs:string" minOccurs="0" />
+          <xs:element name="facilitylogo" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+			</xs:complexType>
+		  </xs:element>
+		  <xs:element name="Result">
+			<xs:complexType>
+			  <xs:sequence>
+				<xs:element name="id" type="xs:int" minOccurs="0" />
+				<xs:element name="orderedtestid" type="xs:int" minOccurs="0" />
+				<xs:element name="orderid" type="xs:int" minOccurs="0" />
+				<xs:element name="testid" type="xs:int" minOccurs="0" />
+				<xs:element name="testname" type="xs:string" minOccurs="0" />
+				<xs:element name="department" type="xs:string" minOccurs="0" />
+				<xs:element name="testnote" type="xs:string" minOccurs="0" />
+				<xs:element name="resultnote" type="xs:string" minOccurs="0" />
+				<xs:element name="teststatus" type="xs:string" minOccurs="0" />
+				<xs:element name="parameterid" type="xs:int" minOccurs="0" />
+				<xs:element name="parametername" type="xs:string" minOccurs="0" />
+				<xs:element name="datatype" type="xs:string" minOccurs="0" />
+				<xs:element name="hasresult" type="xs:boolean" minOccurs="0" />
+				<xs:element name="resultdate" type="xs:dateTime" minOccurs="0" />
+				<xs:element name="resultby" type="xs:string" minOccurs="0" />
+				<xs:element name="unit" type="xs:string" minOccurs="0" />
+				<xs:element name="undetectable" type="xs:boolean" minOccurs="0" />
+				<xs:element name="detectionlimit" type="xs:decimal" minOccurs="0" />
+				<xs:element name="resultvalue" type="xs:string" minOccurs="0" />
+				<xs:element name="maxboundary" type="xs:decimal" minOccurs="0" />
+				<xs:element name="minboundary" type="xs:decimal" minOccurs="0" />
+				<xs:element name="maxnormalboundary" type="xs:decimal" minOccurs="0" />
+				<xs:element name="minnormalboundary" type="xs:decimal" minOccurs="0" />
+			  </xs:sequence>
+			</xs:complexType>
+		  </xs:element>
+		</xs:choice>
+	  </xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,119 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Service", "..\..\Interfaces\Interface.Service\Interface.Service.csproj", "{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Security", "..\..\Interfaces\Interface.Security\Interface.Security.csproj", "{E467EBA1-5014-43C1-9C72-3659181AA125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.SCM", "..\..\Interfaces\Interface.SCM\Interface.SCM.csproj", "{F7FD68D2-006E-41AC-90A7-887A3EA6A1BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Scheduler", "..\..\Interfaces\Interface.Scheduler\Interface.Scheduler.csproj", "{31A707F4-21CB-426A-AE6F-964E57BC561B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Reports", "..\..\Interfaces\Interface.Reports\Interface.Reports.csproj", "{844E3C1F-51F2-4FD5-922D-AF3EC9A49DA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Pharmacy", "..\..\Interfaces\Interface.Pharmacy\Interface.Pharmacy.csproj", "{ABC238D1-E5CA-4C6A-A944-483D603FE1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Laboratory", "..\..\Interfaces\Interface.Laboratory\Interface.Laboratory.csproj", "{8BEA1F24-AF9D-40E1-87E2-83D7CD66202B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.FormBuilder", "..\..\Interfaces\Interface.FormBuilder\Interface.FormBuilder.csproj", "{E83CF190-4C3E-4A52-8F70-B92863176A70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Clinical", "..\..\Interfaces\Interface.Clinical\Interface.Clinical.csproj", "{6CB08200-E2E0-44B3-B877-2564F2E4A4EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Administration", "..\..\Interfaces\Interface.Administration\Interface.Administration.csproj", "{88425A40-338F-405B-BF91-D3A0E74863DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.PatientCore", "..\..\Interfaces\Interface.PatientCore\Interface.PatientCore.csproj", "{A56DF612-ACBC-4399-B136-7783BF59E02C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Interfaces\\Interface.Service\\Interface.Service.csproj
+		SccProjectName1 = ../../Interfaces/Interface.Service
+		SccLocalPath1 = ..\\..\\Interfaces\\Interface.Service
+		SccProjectUniqueName2 = ..\\..\\Interfaces\\Interface.Security\\Interface.Security.csproj
+		SccProjectName2 = ../../Interfaces/Interface.Security
+		SccLocalPath2 = ..\\..\\Interfaces\\Interface.Security
+		SccProjectUniqueName3 = ..\\..\\Interfaces\\Interface.SCM\\Interface.SCM.csproj
+		SccProjectName3 = ../../Interfaces/Interface.SCM
+		SccLocalPath3 = ..\\..\\Interfaces\\Interface.SCM
+		SccProjectUniqueName4 = ..\\..\\Interfaces\\Interface.Scheduler\\Interface.Scheduler.csproj
+		SccProjectName4 = ../../Interfaces/Interface.Scheduler
+		SccLocalPath4 = ..\\..\\Interfaces\\Interface.Scheduler
+		SccProjectUniqueName5 = ..\\..\\Interfaces\\Interface.Reports\\Interface.Reports.csproj
+		SccProjectName5 = ../../Interfaces/Interface.Reports
+		SccLocalPath5 = ..\\..\\Interfaces\\Interface.Reports
+		SccProjectUniqueName6 = ..\\..\\Interfaces\\Interface.Pharmacy\\Interface.Pharmacy.csproj
+		SccProjectName6 = ../../Interfaces/Interface.Pharmacy
+		SccLocalPath6 = ..\\..\\Interfaces\\Interface.Pharmacy
+		SccProjectUniqueName7 = ..\\..\\Interfaces\\Interface.Laboratory\\Interface.Laboratory.csproj
+		SccProjectName7 = ../../Interfaces/Interface.Laboratory
+		SccLocalPath7 = ..\\..\\Interfaces\\Interface.Laboratory
+		SccProjectUniqueName8 = ..\\..\\Interfaces\\Interface.FormBuilder\\Interface.FormBuilder.csproj
+		SccProjectName8 = ../../Interfaces/Interface.FormBuilder
+		SccLocalPath8 = ..\\..\\Interfaces\\Interface.FormBuilder
+		SccProjectUniqueName9 = ..\\..\\Interfaces\\Interface.Clinical\\Interface.Clinical.csproj
+		SccProjectName9 = ../../Interfaces/Interface.Clinical
+		SccLocalPath9 = ..\\..\\Interfaces\\Interface.Clinical
+		SccProjectUniqueName10 = ..\\..\\Interfaces\\Interface.Administration\\Interface.Administration.csproj
+		SccProjectName10 = ../../Interfaces/Interface.Administration
+		SccLocalPath10 = ..\\..\\Interfaces\\Interface.Administration
+		SccProjectUniqueName11 = ..\\..\\Interfaces\\Interface.PatientCore\\Interface.PatientCore.csproj
+		SccProjectName11 = ../../Interfaces/Interface.PatientCore
+		SccLocalPath11 = ..\\..\\Interfaces\\Interface.PatientCore
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E467EBA1-5014-43C1-9C72-3659181AA125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E467EBA1-5014-43C1-9C72-3659181AA125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E467EBA1-5014-43C1-9C72-3659181AA125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E467EBA1-5014-43C1-9C72-3659181AA125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7FD68D2-006E-41AC-90A7-887A3EA6A1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7FD68D2-006E-41AC-90A7-887A3EA6A1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7FD68D2-006E-41AC-90A7-887A3EA6A1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7FD68D2-006E-41AC-90A7-887A3EA6A1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A707F4-21CB-426A-AE6F-964E57BC561B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A707F4-21CB-426A-AE6F-964E57BC561B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A707F4-21CB-426A-AE6F-964E57BC561B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A707F4-21CB-426A-AE6F-964E57BC561B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{844E3C1F-51F2-4FD5-922D-AF3EC9A49DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844E3C1F-51F2-4FD5-922D-AF3EC9A49DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844E3C1F-51F2-4FD5-922D-AF3EC9A49DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844E3C1F-51F2-4FD5-922D-AF3EC9A49DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC238D1-E5CA-4C6A-A944-483D603FE1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC238D1-E5CA-4C6A-A944-483D603FE1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC238D1-E5CA-4C6A-A944-483D603FE1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC238D1-E5CA-4C6A-A944-483D603FE1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BEA1F24-AF9D-40E1-87E2-83D7CD66202B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BEA1F24-AF9D-40E1-87E2-83D7CD66202B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BEA1F24-AF9D-40E1-87E2-83D7CD66202B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BEA1F24-AF9D-40E1-87E2-83D7CD66202B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83CF190-4C3E-4A52-8F70-B92863176A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83CF190-4C3E-4A52-8F70-B92863176A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83CF190-4C3E-4A52-8F70-B92863176A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83CF190-4C3E-4A52-8F70-B92863176A70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CB08200-E2E0-44B3-B877-2564F2E4A4EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB08200-E2E0-44B3-B877-2564F2E4A4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB08200-E2E0-44B3-B877-2564F2E4A4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB08200-E2E0-44B3-B877-2564F2E4A4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88425A40-338F-405B-BF91-D3A0E74863DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88425A40-338F-405B-BF91-D3A0E74863DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88425A40-338F-405B-BF91-D3A0E74863DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88425A40-338F-405B-BF91-D3A0E74863DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A56DF612-ACBC-4399-B136-7783BF59E02C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

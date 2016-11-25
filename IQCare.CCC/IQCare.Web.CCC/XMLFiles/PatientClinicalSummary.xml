@@ -1,0 +1,163 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ptn_Pk" type="xs:int" minOccurs="0" />
+              <xs:element name="Names" type="xs:string" minOccurs="0" />
+              <xs:element name="Address" type="xs:string" minOccurs="0" />
+              <xs:element name="phone" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientEnrollmentId" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientFacilityID" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientClinicId" type="xs:string" minOccurs="0" />
+              <xs:element name="RegistrationDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Status" type="xs:int" minOccurs="0" />
+              <xs:element name="IQNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="AGE" type="xs:int" minOccurs="0" />
+              <xs:element name="AgeInMonths" type="xs:int" minOccurs="0" />
+              <xs:element name="AGEINYEARMONTH" type="xs:string" minOccurs="0" />
+              <xs:element name="AgeText" type="xs:string" minOccurs="0" />
+              <xs:element name="SexNM" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ptn_Pk" type="xs:int" minOccurs="0" />
+              <xs:element name="Height" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VisitID" type="xs:int" minOccurs="0" />
+              <xs:element name="BMI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BSA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VisitType" type="xs:short" minOccurs="0" />
+              <xs:element name="Visit_OrderbyDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ptn_Pk" type="xs:int" minOccurs="0" />
+              <xs:element name="Current_x0020_ARV_x0020_Regimen" type="xs:string" minOccurs="0" />
+              <xs:element name="Current_x0020_ARV_x0020_StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AidsRelief_x0020_ARV_x0020_StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Hist_x0020_ARV_x0020_StartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Hist_x0020_ARV_x0020_StartDateCTC" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RegimenType" type="xs:string" minOccurs="0" />
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SideEffects" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ptn_Pk" type="xs:int" minOccurs="0" />
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table5">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table6">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Status" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table7">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string" minOccurs="0" />
+              <xs:element name="value" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table8">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemId" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" type="xs:string" minOccurs="0" />
+              <xs:element name="DispensingUnitName" type="xs:string" minOccurs="0" />
+              <xs:element name="Dose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OrderedByDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OrderedQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Duration" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DispensedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="QtyDisp" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Batch" type="xs:string" minOccurs="0" />
+              <xs:element name="Frequency" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpiryDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Instructions" type="xs:string" minOccurs="0" />
+              <xs:element name="VisitID" type="xs:int" minOccurs="0" />
+              <xs:element name="OrdRank" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table9">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TestId" type="xs:int" minOccurs="0" />
+              <xs:element name="TestName" type="xs:string" minOccurs="0" />
+              <xs:element name="OrderDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OrderBy" type="xs:int" minOccurs="0" />
+              <xs:element name="TestResult" type="xs:string" minOccurs="0" />
+              <xs:element name="resultDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ResultNote" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table10">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NoteText" type="xs:string" minOccurs="0" />
+              <xs:element name="NoteDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="EntryDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="NoteBy" type="xs:string" minOccurs="0" />
+              <xs:element name="ModuleName" type="xs:string" minOccurs="0" />
+              <xs:element name="VisitId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table11">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AppDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ModuleName" type="xs:string" minOccurs="0" />
+              <xs:element name="Reason" type="xs:string" minOccurs="0" />
+              <xs:element name="AppStatus" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table12">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BPSystolic" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BPDiastolic" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Visit_Id" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

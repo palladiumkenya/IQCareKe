@@ -1,0 +1,104 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Administration", "..\..\Entities\Entities.Administration\Entities.Administration.csproj", "{177E6CFA-F240-448E-8E53-22A77AF1EAF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Clinical", "..\..\Entities\Entities.Clinical\Entities.Clinical.csproj", "{CD80BD1F-19D3-416D-B192-D0C5EE0213D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7} = {177E6CFA-F240-448E-8E53-22A77AF1EAF7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Lab", "..\..\Entities\Entities.Lab\Entities.Lab.csproj", "{3C83E6CB-EC81-4696-A1FA-F717AAC1D22F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9} = {EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.FormBuilder", "..\..\Entities\Entities.FormBuilder\Entities.FormBuilder.csproj", "{B13D40BA-17B0-4F57-B1A6-B2A5ABFB6ECD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.PatientCore", "..\..\Entities\Entities.PatientCore\Entities.PatientCore.csproj", "{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED} = {1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7} = {177E6CFA-F240-448E-8E53-22A77AF1EAF7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Common", "..\..\Entities\Entities.Common\Entities.Common.csproj", "{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Queue", "..\..\Entities\Entities.Queue\Entities.Queue.csproj", "{7A0BD17E-D231-44DF-8903-21CE790A8BE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.Pharmacy", "..\..\Entities\Entities.Pharmacy\Entities.Pharmacy.csproj", "{FC97CD6C-BB98-4F49-84EA-7FDDB27D6EAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{177E6CFA-F240-448E-8E53-22A77AF1EAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD80BD1F-19D3-416D-B192-D0C5EE0213D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD80BD1F-19D3-416D-B192-D0C5EE0213D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD80BD1F-19D3-416D-B192-D0C5EE0213D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD80BD1F-19D3-416D-B192-D0C5EE0213D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C83E6CB-EC81-4696-A1FA-F717AAC1D22F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C83E6CB-EC81-4696-A1FA-F717AAC1D22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C83E6CB-EC81-4696-A1FA-F717AAC1D22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C83E6CB-EC81-4696-A1FA-F717AAC1D22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13D40BA-17B0-4F57-B1A6-B2A5ABFB6ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13D40BA-17B0-4F57-B1A6-B2A5ABFB6ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13D40BA-17B0-4F57-B1A6-B2A5ABFB6ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13D40BA-17B0-4F57-B1A6-B2A5ABFB6ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE4DAA7-C77C-4BA8-A299-C38CDA1C59A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A6430E4-50BF-4B66-B1D0-5D06E2AABBED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A0BD17E-D231-44DF-8903-21CE790A8BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A0BD17E-D231-44DF-8903-21CE790A8BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A0BD17E-D231-44DF-8903-21CE790A8BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A0BD17E-D231-44DF-8903-21CE790A8BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC97CD6C-BB98-4F49-84EA-7FDDB27D6EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC97CD6C-BB98-4F49-84EA-7FDDB27D6EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC97CD6C-BB98-4F49-84EA-7FDDB27D6EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC97CD6C-BB98-4F49-84EA-7FDDB27D6EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Entities\\Entities.Administration\\Entities.Administration.csproj
+		SccProjectName1 = ../../Entities/Entities.Administration
+		SccLocalPath1 = ..\\..\\Entities\\Entities.Administration
+		SccProjectUniqueName2 = ..\\..\\Entities\\Entities.Clinical\\Entities.Clinical.csproj
+		SccProjectName2 = ../../Entities/Entities.Clinical
+		SccLocalPath2 = ..\\..\\Entities\\Entities.Clinical
+		SccProjectUniqueName3 = ..\\..\\Entities\\Entities.Lab\\Entities.Lab.csproj
+		SccProjectName3 = ../../Entities/Entities.Lab
+		SccLocalPath3 = ..\\..\\Entities\\Entities.Lab
+		SccProjectUniqueName4 = ..\\..\\Entities\\Entities.PatientCore\\Entities.PatientCore.csproj
+		SccProjectName4 = ../../Entities/Entities.PatientCore
+		SccLocalPath4 = ..\\..\\Entities\\Entities.PatientCore
+		SccProjectUniqueName5 = ..\\..\\Entities\\Entities.Common\\Entities.Common.csproj
+		SccProjectName5 = ../../Entities/Entities.Common
+		SccLocalPath5 = ..\\..\\Entities\\Entities.Common
+		SccProjectUniqueName6 = ..\\..\\Entities\\Entities.Pharmacy\\Entities.Pharmacy.csproj
+		SccProjectName6 = ../../Entities/Entities.Pharmacy
+		SccLocalPath6 = ..\\..\\Entities\\Entities.Pharmacy
+		SccProjectUniqueName7 = ..\\..\\Entities\\Entities.FormBuilder\\Entities.FormBuilder.csproj
+		SccProjectName7 = ../../Entities/Entities.FormBuilder
+		SccLocalPath7 = ..\\..\\Entities\\Entities.FormBuilder
+		SccProjectUniqueName8 = ..\\..\\Entities\\Entities.Queue\\Entities.Queue.csproj
+		SccProjectName8 = ../../Entities/Entities.Queue
+		SccLocalPath8 = ..\\..\\Entities\\Entities.Queue
+	EndGlobalSection
+EndGlobal

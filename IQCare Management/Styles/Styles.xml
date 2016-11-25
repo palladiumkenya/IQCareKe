@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Style>
+
+  <Style Id ="txtGreyTextBoxCss" BackColor="Control" ForeColor ="" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+  <Style Id ="txtGreyTextBoxCssSCM" BackColor="Control" ForeColor ="" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+  <!--Button-->
+  <Style Id ="btnFlexible" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="" Height=""/>
+  <Style Id ="btnH25WFlexi" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="" Height="25"/>
+  <Style Id ="btnH25W80Flexi" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="120" Height="25"/>
+  <Style Id ="btnH35WFlexi" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="" Height="35"/>
+  <Style Id ="btnSingleText" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="60" Height="25"/>
+  <Style Id ="btnW100WFlexiSCM" BackColor="WhiteSmoke" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleCenter" Width="100" Height="25"/>
+  <!--CheckBox-->
+  <Style Id ="chkCheckbox" BackColor="White" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleLeft" Width="" Height="21"/>
+
+  <!--Form-->
+  <Style Id ="frmForm" BackColor="White" ForeColor ="" Font="Arial" FontStyle="" FontSize="9" Width="" Height="" />
+
+  <!--Grid-->
+  <Style Id="dgwDataGridView" BackColor="White" ForeColor=""  Font="Arial" FontStyle="" FontSize="8" Width="" Height="" BorderStyle="Fixed3D" CellBorderStyle="Single" ColumnHeaderDefaultCellStyle="SelectionBackColor=Color [Highlight], SelectionForeColor=Color [HighlightText], Font=[Font: Name=Microsoft Sans Serif, Size=9, Units=3, Bold=true,GdiCharSet=0, GdiVerticalFont=False], WrapMode=True, Alignment=MiddleLeft " />
+
+  <!--GroupBox-->
+  <Style Id ="grpGroupBox" BackColor="White" ForeColor ="" Font="Arial" FontStyle="" FontSize="10" Width="" Height="" />
+
+  <!--Label-->
+  <Style Id ="lblLabel" BackColor="White" ForeColor ="Black" Font="Arial" FontStyle="1" FontSize="8" TextAlign="MiddleLeft" Width="" Height="21" />
+  <Style Id ="lblLabelRequired" BackColor="White" ForeColor ="Blue" Font="Arial" FontStyle="0" FontSize="8" TextAlign="MiddleLeft" Width="" Height="21" />
+  <Style Id ="lblCopyRight" BackColor="White" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="7" TextAlign="Middle" Width="" Height="15" />
+  <Style Id ="lblVersion" BackColor="White" ForeColor ="White" Font="Arial" FontStyle="" FontSize="8" TextAlign="Middle" Width="" Height="15" />
+  <Style Id ="lblLabelPreviewHeader" BackColor="LightGray" ForeColor ="HotTrack" Font="Arial" FontStyle="1" FontSize="13" Width="" Height="" Bold="true" />
+  <Style Id ="lblLabelPreview" BackColor="White" ForeColor ="ControlText" Font="Arial" FontStyle="1" FontSize="8" Width="" Height="" Bold="true" />
+  <Style Id ="lblHeaderLabel" BackColor="Blue" ForeColor ="White" Font="Arial" FontStyle="1" FontSize="8" Width="" Height="" Bold="true" />
+
+  <!--RadioButton-->
+  <Style Id ="rdoButton" BackColor="White" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleLeft" Width="" Height="21"/>
+
+  <!--Panel-->
+  <Style Id ="pnlPanel" BackColor="White" ForeColor="" Font="Arial" FontStyle="" FontSize="8" BorderStyle="FixedSingle"  Padding="5,5,5,5"  Width="" Height=""/>
+  <Style Id ="pnlSubPanel" BackColor="White" ForeColor="" Font="Arial" FontStyle="" FontSize="8" BorderStyle="FixedSingle"  Width="" Height="" />
+  <Style Id ="pnlSubPanel1Css" BackColor="SkyBlue" ForeColor ="" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+  <Style Id ="pnlPanelPreview" BackColor="LightGray" ForeColor ="" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+
+  <!--TextBox-->
+  <Style Id ="txtTextBox" BackColor="White" ForeColor ="Black" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+
+  <!--Title-->
+  <Style Id ="lblFrameHeader" BackColor="White" ForeColor ="Navy" Font="Arial" FontStyle="" FontSize="10" TextAlign="MiddleLeft"  Width="" Height="21" />
+  <Style Id ="lblFrameTitle" BackColor="White" ForeColor ="CornflowerBlue" Font="Arial" FontStyle="" FontSize="8" TextAlign="MiddleLeft"  Width="" Height="21" />
+
+
+  <!--Listbox-->
+  <Style Id="lstListBox" BackColor="White" ForeColor="Black" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+
+  <!--DropDownList-->
+  <Style Id="ddlDropDownList" BackColor="White" ForeColor="Black" Font="Arial" FontStyle="" FontSize="8" Width="" Height="" />
+</Style>

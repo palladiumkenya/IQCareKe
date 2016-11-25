@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareServiceControl", "..\..\IQCareService\IQCareServiceControl\IQCareServiceControl.csproj", "{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQConnection", "..\..\IQCareService\IQConnection\IQConnection.csproj", "{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQServiceConfig", "..\..\IQCareService\IQServiceConfig\IQServiceConfig.csproj", "{81249336-E32F-41A2-B7E4-D2EB1666E9D7}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IQCareServiceSetup", "..\..\IQCareService\IQCareServiceSetup\IQCareServiceSetup.vdproj", "{B2103127-3AD9-4015-B8E3-DA0C756F866C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependancy", "..\..\IQCareService\Dependancy\Dependancy.csproj", "{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer.Service", "..\..\IQCareService\RemServer.Service\RemServer.Service.csproj", "{32C66861-E9CC-40F6-A791-8E8A4C864A34}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://futuresserver:8080/tfs/kehmis_iqcare
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\IQCareService\\IQCareServiceControl\\IQCareServiceControl.csproj
+		SccProjectName1 = ../../IQCareService/IQCareServiceControl
+		SccLocalPath1 = ..\\..\\IQCareService\\IQCareServiceControl
+		SccProjectUniqueName2 = ..\\..\\IQCareService\\IQConnection\\IQConnection.csproj
+		SccProjectName2 = ../../IQCareService/IQConnection
+		SccLocalPath2 = ..\\..\\IQCareService\\IQConnection
+		SccProjectUniqueName3 = ..\\..\\IQCareService\\IQServiceConfig\\IQServiceConfig.csproj
+		SccProjectName3 = ../../IQCareService/IQServiceConfig
+		SccLocalPath3 = ..\\..\\IQCareService\\IQServiceConfig
+		SccProjectUniqueName4 = ..\\..\\IQCareService\\IQCareServiceSetup\\IQCareServiceSetup.vdproj
+		SccProjectName4 = ../../IQCareService/IQCareServiceSetup
+		SccLocalPath4 = ..\\..\\IQCareService\\IQCareServiceSetup
+		SccProjectUniqueName5 = ..\\..\\IQCareService\\Dependancy\\Dependancy.csproj
+		SccProjectName5 = ../../IQCareService/Dependancy
+		SccLocalPath5 = ..\\..\\IQCareService\\Dependancy
+		SccProjectUniqueName6 = ..\\..\\IQCareService\\RemServer.Service\\RemServer.Service.csproj
+		SccProjectName6 = ../../IQCareService/RemServer.Service
+		SccLocalPath6 = ..\\..\\IQCareService\\RemServer.Service
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|x86.ActiveCfg = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|x86.Build.0 = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.ActiveCfg = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.Build.0 = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|x86.ActiveCfg = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|x86.Build.0 = Release|x86
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Debug|x86.ActiveCfg = Release|x86
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Debug|x86.Build.0 = Release|x86
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Release|x86.ActiveCfg = Release|x86
+		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Release|x86.Build.0 = Release|x86
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Debug|x86.ActiveCfg = Release|x86
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Debug|x86.Build.0 = Release|x86
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Release|x86.ActiveCfg = Release|x86
+		{81249336-E32F-41A2-B7E4-D2EB1666E9D7}.Release|x86.Build.0 = Release|x86
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Debug|Any CPU.ActiveCfg = Debug
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Debug|x86.ActiveCfg = Debug
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Debug|x86.Build.0 = Debug
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Release|Any CPU.ActiveCfg = Release
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Release|Any CPU.Build.0 = Release
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Release|x86.ActiveCfg = Release
+		{B2103127-3AD9-4015-B8E3-DA0C756F866C}.Release|x86.Build.0 = Release
+		{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}.Release|x86.ActiveCfg = Release|Any CPU
+		{32C66861-E9CC-40F6-A791-8E8A4C864A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C66861-E9CC-40F6-A791-8E8A4C864A34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32C66861-E9CC-40F6-A791-8E8A4C864A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C66861-E9CC-40F6-A791-8E8A4C864A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C66861-E9CC-40F6-A791-8E8A4C864A34}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

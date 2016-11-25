@@ -1,0 +1,2447 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?><ss:Workbook
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>4</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6DB0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6DC0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6DD0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6DE0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6F50000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6DA0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc1061500000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc1061510000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Color="#FFFFFF"/>
+   <ss:Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc1061520000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="11" ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6340000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6350000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Color="#C0C0C0"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10615E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6360000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6380000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Size="12" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6370000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Size="12"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C63A0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C63C0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6980000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6930000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6D80000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C6940000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc10C69F0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc10C69C0010C69200">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc10C6F00010C6F100">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc10C6300010C63300">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="11" ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc10615B0010615D00">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>1</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>12.0.0.6502         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Registers for Uganda">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="256" ss:ExpandedRowCount="4"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75"
+   ss:StyleID="wc10C6DA0000000000">
+   <ss:Column ss:Span="1" ss:Width="85.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="97.5"/>
+   <ss:Column ss:Span="252" ss:Width="85.5" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DB0000000000">
+     <ss:Data ss:Type="String">Registers for Uganda</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DB0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:Data ss:Type="String">Country</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DD0000000000">
+     <ss:Data ss:Type="String">ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DD0000000000">
+     <ss:Data ss:Type="String">Labor and Delivery</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DD0000000000">
+     <ss:Data ss:Type="String">Exposed Child</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="38.24999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DE0000000000">
+     <ss:Data ss:Type="String">Uganda</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">INTEGRATED ANTENATAL REGISTER</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">MATERNITY REGISTER</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">POST NATAL REGISTER</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Enrollment">
+  <ss:Names>
+   <ss:NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Enrollment!R4C1:R7C8"
+    ss:Hidden="1"/>
+  </ss:Names>
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:FreezePanes/>
+   <x:FrozenNoSplit/>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:TopRowBottomPane>4</x:TopRowBottomPane>
+   <x:SplitHorizontal>4</x:SplitHorizontal>
+   <x:ActivePane>2</x:ActivePane>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="28"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75"
+   ss:StyleID="wc10C6DA0000000000">
+   <ss:Column ss:Width="123.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="94.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="172.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="132.0"/>
+   <ss:Column ss:Width="87.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="90.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="86.25" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="82.5" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DB0000000000">
+     <ss:Data ss:Type="String">PMTCT Enrollment Information</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="3">
+    <ss:Cell ss:MergeAcross="2" ss:StyleID="mc10615B0010615D00">
+     <ss:Data ss:Type="String">Master</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:MergeAcross="4" ss:StyleID="mc10615B0010615D00">
+     <ss:Data ss:Type="String">Country Specific Labels</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">IQCare Label</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Data Type</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Business Rule</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Rwanda Fields captured in IQChart</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Kenya</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Tanzania</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Nigeria</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="38.24999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Patient Type</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Multi-Select</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ART PMTCT (Adult) PMTCT (Child)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Patient Type</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">First Name</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Middle Name</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Last Name</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">DOB</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age (years)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="7" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age at PMTCT Registration</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Tanzania: years</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age at PMTCT Registration</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="6" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Age at PMTCT Registration</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Sex (child)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Male, Female If PMTCT patient, then Female</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Sex</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="14" ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Marital Status </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">1=Married, 2=Widowed, 3=Divorsed, 4=Single 5=Separated)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Marital Status </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Marital Status </ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Village/Estate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Village/Estate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Village/Estate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="7" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Village</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Parish</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Parish</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="7" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Parish</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="18">
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:Data ss:Type="String">Patient Numbers</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+    <ss:Cell ss:StyleID="wc1061510000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="38.24999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">ANC No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Tanzania: Patient number/YYFacility Abbreviation e.g. 010/08GEI  Other Coutnries: an integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">ANC No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">ANC No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">ANC Card Number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Client No.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">ANC No</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">PMTCT No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">PMTCT code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">TRACNET No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Rwanda national patient numbering system for ART patients</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">TRACNET No.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">CTC ID number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">See CTC Rules</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">CTC ID number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Hospital Reg. No </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Hospital Reg. No </ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">VCT No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">VCT No</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Existing ANC No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Record existing ANC no. from maternity if previous births</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Re-Attendant</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">In-Patient No.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Kenya: maternity admissions number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">In-Patient No.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Under 5 Registration No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="6" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Under 5 Registration No</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Pediatrict Outpatient No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="8" ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">POP No</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="ANC">
+  <ss:Names>
+   <ss:NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=ANC!R4C2:R39C5"
+    ss:Hidden="1"/>
+  </ss:Names>
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:FreezePanes/>
+   <x:FrozenNoSplit/>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:TopRowBottomPane>13</x:TopRowBottomPane>
+   <x:SplitHorizontal>4</x:SplitHorizontal>
+   <x:ActivePane>2</x:ActivePane>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="43"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75"
+   ss:StyleID="wc10C6DA0000000000">
+   <ss:Column ss:Index="2" ss:Width="117.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="54.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="193.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="90.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="191.25" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DB0000000000">
+     <ss:Data ss:Type="String">Integrated Antenatal Register</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="3" ss:Height="15.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc1061520000000000"/>
+    <ss:Cell ss:MergeAcross="2" ss:StyleID="mc10C6300010C63300">
+     <ss:Data ss:Type="String">Master</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc1061520000000000"/>
+    <ss:Cell ss:StyleID="wc1061520000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:Data ss:Type="String">Register Number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Pre-defined Field Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Data Type</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Business Rule</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda Field Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:Data ss:Type="String">Notes</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="8" ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:Data ss:Type="String">Mother</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Client number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ANC number if available from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Name of client</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother's names from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Age</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Calcuate the age and display using the DOB from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Visit Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date other visits to the ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Visit Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">There is no date captured in the register itself, but a date should be captured.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Village/Estate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Auto populate from enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Village</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parish</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Auto populate from enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parish</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="63.74999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">6</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Visit No.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Initial ANC visit = visit 1; Keep running count of ANC visits Consider implementing like WHO field - with select list with a maximum of 10 visits (average number of visits = 4)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ANC Visit</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">7</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Gravidae</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Gravida</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="51.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">8</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parity</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[1,2,3, …15] Any preganancy where the mother carried for 7 or more months; Exludes abortions; Excludes current pregnancy.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parity</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="51.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">9</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">GestAge</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Decimal</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">xx.x &#45;- two digits and one decimal</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Gestational Age (weeks)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">The LMP indicator is not captured and the gestational age can not be calculated. This field will be entered into the register by the data clerk.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="63.74999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[C=Counselled but declined HIV testing TR=Tested results given, HIV Negative TRR=Tested results given, HIV Positive TRR&quot;= HIV Positive - Status previously known]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">C is a possiblity for a discordant couple where the woman is negative and the husband is possitive.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="63.74999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Partner PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[C=Counselled but declined HIV testing TR=Tested results given, HIV Negative TRR=Tested results given, HIV Positive TRR&quot;= HIV Positive - Status previously known]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Partner PMTCT Code</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="76.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">11</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">TB Status</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda: [NA - HIV negative client with no signs of TB;  1=HIV positive client suspecte of having TB; 2=Confirmed TB client not on treatment 3=Confirmed TB client and on treatement]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">TB Status</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">13</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Diagnosis</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Single-line text box</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Diagnosis</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">15</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ITN</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Yes/No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ITN</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="51.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">20</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Infant Feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[Exclusive breast feeding Replacement feeding  Mixed feeding Other]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Infant Feeding Option</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">No need to capture &quot;other&quot;</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">21</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Other Treatment</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Single-line text box</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Other Treatment</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">22</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Complications</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Single-line text box</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Complications/Risk Factors</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">23</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Referral Number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Ref In/Out</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6360000000000">
+     <ss:Data ss:Type="String">This field needs some investigation</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="27">
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:Data ss:Type="String">Laboratory</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">12</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Syphilis (RPR/VDRL)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Pos, Neg</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">12</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Syphilis</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">12</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Hb</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Decimal</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda (g/dL)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="32">
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:Data ss:Type="String">Pharmacy</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">14</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Tetinus Vaccine</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">TT1, TT2, TT3, TT4, TT5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">15</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Malaria Treatment</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">IPT1, IPT2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">16</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mebendazole</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Yes, No, NA</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">17</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Iron</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Yes/No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">18</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Folic Acid</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Yes/No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="76.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">19</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Regimen</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda: NVP Only AZT Only AZT+NVP AZT+3TC + NVP HAART</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="40">
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Maternity - Mother">
+  <ss:Names>
+   <ss:NamedRange ss:Name="_FilterDatabase"
+    ss:RefersTo="='Maternity - Mother'!R4C2:R33C5" ss:Hidden="1"/>
+  </ss:Names>
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:FreezePanes/>
+   <x:FrozenNoSplit/>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:TopRowBottomPane>10</x:TopRowBottomPane>
+   <x:SplitHorizontal>4</x:SplitHorizontal>
+   <x:ActivePane>2</x:ActivePane>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="34"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75"
+   ss:StyleID="wc10C6DA0000000000">
+   <ss:Column ss:Index="2" ss:Width="117.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="54.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="261.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="138.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="69.0" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DB0000000000">
+     <ss:Data ss:Type="String">Maternity Register - Mother</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DB0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc1061520000000000"/>
+    <ss:Cell ss:MergeAcross="2" ss:StyleID="mc10C6300010C63300">
+     <ss:Data ss:Type="String">Master</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc1061520000000000"/>
+    <ss:Cell ss:StyleID="wc1061520000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:Data ss:Type="String">Register Number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Pre-defined Field Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Data Type</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Business Rule</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda Field Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6340000000000">
+     <ss:Data ss:Type="String">Notes</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="8" ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0" ss:StyleID="wc10C6370000000000">
+    <ss:Cell ss:StyleID="wc10C6380000000000">
+     <ss:Data ss:Type="String">Mother</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6380000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6380000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6380000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6380000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6380000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Client number</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ANC number if available from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Name of client</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother's names from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Age</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Calcuate the age and display using the DOB from the enrollment form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6350000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Visit Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date of Admission</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ANC No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Autopopulate from ANC register if possible May be blank</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Client No.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="38.24999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Previous Visits</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Attended ANC - Standard Attended ANC - High Risk Not Booked</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Previous ANC Visits</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">In-Patient No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Integer</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">This will be entered into the enrollment from. (Or possibly in this form and autopopulated into the enrollment form.)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">IP No.</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="15" ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">7</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parity</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[1,2,3, …15] Calculate (parity from maternity + 1) and auto populate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Parity</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="153.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">8</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[C=Counselled or given information but declined HIV testing TR=Tested results given, client tested HIV Negative TRR=Tested results given, client tested HIV Positive TRR&quot;=Tested results given, client tested HIV Positive - Status previously knowns] This field is for women who visit the clinic just for delivery (&quot;walk-ins&quot;) and have not preveiously been tested and counselled. Note that TRR&quot; is applied to those women who were tested and counselled in the ANC plus those women who are in the ART program.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mother PMTCT Code</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="51.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">8</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Partner PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[C=Counselled but declined HIV testing TR=Tested results given, HIV Negative TRR=Tested results given, HIV Positive TRR&quot;= HIV Positive - Status previously known]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Partner PMTCT Code</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Diagnosis</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Text box</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Diagnosis</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">10a</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery Location</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String"> [Facility, Born before arrival]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery Location</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="51.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">11</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery Mode</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6360000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[Normal - Spontaeous Normal- Induced Vacuum extraction Caesarian]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mode of Delivery</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">12</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">This is the child's date of birth</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date of Delivery</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">18</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Infant feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[1=Exclusive breast feeding; 2= Replacement feeding; 3=Mixed feeding; 4=Other]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Infant feeding option</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:Index="8" ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="38.24999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="String">19a</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Mothers Condition</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">[D- Discharged alive DD - Discharge Dead R- Run away or left before discharged]</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Condition of mother at discharge</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">20</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery Conducted by</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Employee list</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Delivery by</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">21</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Next Appointment</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">6 weeks post natal</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date for postnatal care</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">22</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date of Discharge</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">22</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Discharged by</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Select List</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Employee list</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Discharged by</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Links to children of this patient</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Link to create a new child patient associated with the mother</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="5" ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:Data ss:Type="String">Adult Pharmacy</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc1061500000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="255.0" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:Data ss:Type="Number">9</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ARV Dispensed During Labour</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6360000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">Uganda: [NVP = NVP Swallowed NVP Dispenased 3TC Swallowed ART Tri-therapy swallowed None - no ART during Labour Tail - AZT + NVP dispensed during postpartum]  Note: because the pharmacy information will be entered into the pharmacy form, None = No ART during labor is not an option. The women will simply not have a pharmacy form filled in. Tail will be captured as part of the post natal pharmacy form.  A quesiton to be explored is how many pharmacy forms would be filled in. If all of the medications given during the maternity stay are on one form, we need to change the form to show the LAST ARV regimen dispensed. This information is required for the Track 1.0 report. We also need to understand how the counting works for a woman who delivers the last day of the month - and is still receiving medication into the next month.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000">
+     <ss:NamedCell ss:Name="_FilterDatabase"/>
+     <ss:Data ss:Type="String">ARV Drugs Taken</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6360000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="MoH Report">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1:R1C2</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="42"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75"
+   ss:StyleID="wc10C6DA0000000000">
+   <ss:Column ss:Width="327.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="54.74999999999999" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="45.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="90.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="68.25" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc10C6F00010C6F100">
+     <ss:Data ss:Type="String">PMTCT Monthly Report Form - MOH</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="3" ss:StyleID="wc10C6DB0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C63A0000000000"/>
+    <ss:Cell ss:StyleID="wc10C63C0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DB0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6980000000000">
+     <ss:Data ss:Type="String">Facility  ReportTest</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C63C0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DB0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc10C69C0010C69200">
+     <ss:Data ss:Type="String">Month\Year  FEBRUARY 2010</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="3" ss:StyleID="wc10C6DB0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:Data ss:Type="String">Report Result</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DC0000000000">
+     <ss:Data ss:Type="String">Total</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000">
+     <ss:Data ss:Type="String">Section A:  HIV Counselling and Testing </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">1.Number of New ANC clients </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">2. Number of pregnant women Pre-test counselled</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">3. Number of pregnant women tested for HIV</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">4. Number of pregnant women tested HIV positive </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">5. Number of partners counselled</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">6. Number of partners tested for HIV</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">7. Number of partners tested HIV positive </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000">
+     <ss:Data ss:Type="String">Section B:  Antiretroviral Drug Administration</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">1. Number of HIV (+) pregnant women received  Nevirapine (NVP) only</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">2. Number of HIV positive pregnant women started on Zidovudine (AZT) and received NVP</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">3 a. Number of HIV positive pregnant women receiving ART (Triple Therapy) - prophylaxis</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">3. Number of HIV positive pregnant women receiving ART (Triple Therapy) &#45;- treatment</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">4. Number of HIV positive pregnant women received other regimen for PMTCT (Specify regimen)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000">
+     <ss:Data ss:Type="String">Section C:  Labour and Delivery Care</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">1. Total number of deliveries</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">2. Number of HIV (+) deliveries </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">3. Number of HIV (+) deliveries given and swallowed) NVP during labour</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">4. Number of HIV (+) deliveries swallowed AZT and NVP during labour </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">5a. Number of HIV(+) deliveries receiving ART(Triple Therapy)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">5b. Number of HIV(+) deliveries receiving ART(Triple Therapy)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">6. Number of HIV positive deliveries receiving other regimen for PMTCT (Specify regimen).</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">7. Number of HIV (+) mothers initiating exclusive breast feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">8. Number of infants given Nevirapine(NVP) only</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">9. Number of infants given NVP and started on AZT </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6D80000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc10C6DE0000000000">
+     <ss:Data ss:Type="String">Section D: HIV testing for children aged 18months – 5yrs born to HIV (+) mothers </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6DE0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+    <ss:Cell ss:StyleID="wc10C6930000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">1. Number of children tested for HIV</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6F50000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">0-2 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">2-12 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">12-18 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">18 months-5 years</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6F50000000000">
+     <ss:Data ss:Type="String">2. Number of children testing HIV positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C6940000000000"/>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">0-2 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">2-12 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">12-18 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc10C6940000000000">
+     <ss:Data ss:Type="String">18 months-5 years</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10C69F0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc10615E0000000000"/>
+    <ss:Cell ss:StyleID="wc10C6DA0000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+  <o:DocumentProperties>
+   <o:Author>Stacey Berlow</o:Author>
+   <o:LastAuthor>User</o:LastAuthor>
+   <o:Created>2009-04-29T03:22:40Z</o:Created>
+   <o:LastSaved>2009-12-16T06:47:25Z</o:LastSaved>
+   <o:Version>11.9999</o:Version>
+  </o:DocumentProperties>
+</ss:Workbook>

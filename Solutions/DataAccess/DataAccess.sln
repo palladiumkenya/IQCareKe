@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer", "..\..\DataAccess\RemServer\RemServer.csproj", "{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.IQToolsReport", "..\..\DataAccess\Interface.IQToolsReport\Interface.IQToolsReport.csproj", "{E3813087-AA07-4FD2-A695-FF80F19F4763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Common", "..\..\DataAccess\DataAccess.Common\DataAccess.Common.csproj", "{FA6D554F-BC52-454A-89D5-F8E576B3843E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Base", "..\..\DataAccess\DataAccess.Base\DataAccess.Base.csproj", "{254BD540-00D8-46A2-9D35-39E8920B5750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Report", "..\..\DataAccess\DataAccess.Report\DataAccess.Report.csproj", "{8CD495D2-3A16-45E8-8A7F-876DD7BE550D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Entity", "..\..\DataAccess\DataAccess.Entity\DataAccess.Entity.csproj", "{B039AEFB-4059-4368-87BF-03545ACAB705}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Context", "..\..\DataAccess\DataAccess.Context\DataAccess.Context.csproj", "{BBA7160F-30A2-4AED-9EF2-25CBE75348E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Pharmacy", "..\..\DataAccess\DataAccess.Pharmacy\DataAccess.Pharmacy.csproj", "{96D8916C-6F85-4B27-BE55-C42C201F75DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{254BD540-00D8-46A2-9D35-39E8920B5750} = {254BD540-00D8-46A2-9D35-39E8920B5750}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59A182CA-7E3E-4130-AA78-6D2E86E0EB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3813087-AA07-4FD2-A695-FF80F19F4763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3813087-AA07-4FD2-A695-FF80F19F4763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3813087-AA07-4FD2-A695-FF80F19F4763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3813087-AA07-4FD2-A695-FF80F19F4763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA6D554F-BC52-454A-89D5-F8E576B3843E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6D554F-BC52-454A-89D5-F8E576B3843E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6D554F-BC52-454A-89D5-F8E576B3843E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6D554F-BC52-454A-89D5-F8E576B3843E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{254BD540-00D8-46A2-9D35-39E8920B5750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{254BD540-00D8-46A2-9D35-39E8920B5750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{254BD540-00D8-46A2-9D35-39E8920B5750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{254BD540-00D8-46A2-9D35-39E8920B5750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD495D2-3A16-45E8-8A7F-876DD7BE550D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD495D2-3A16-45E8-8A7F-876DD7BE550D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD495D2-3A16-45E8-8A7F-876DD7BE550D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD495D2-3A16-45E8-8A7F-876DD7BE550D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B039AEFB-4059-4368-87BF-03545ACAB705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B039AEFB-4059-4368-87BF-03545ACAB705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B039AEFB-4059-4368-87BF-03545ACAB705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B039AEFB-4059-4368-87BF-03545ACAB705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA7160F-30A2-4AED-9EF2-25CBE75348E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA7160F-30A2-4AED-9EF2-25CBE75348E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA7160F-30A2-4AED-9EF2-25CBE75348E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA7160F-30A2-4AED-9EF2-25CBE75348E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D8916C-6F85-4B27-BE55-C42C201F75DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\DataAccess\\Interface.IQToolsReport\\Interface.IQToolsReport.csproj
+		SccProjectName1 = ../../DataAccess/Interface.IQToolsReport
+		SccLocalPath1 = ..\\..\\DataAccess\\Interface.IQToolsReport
+		SccProjectUniqueName2 = ..\\..\\DataAccess\\RemServer\\RemServer.csproj
+		SccProjectName2 = ../../DataAccess/RemServer
+		SccLocalPath2 = ..\\..\\DataAccess\\RemServer
+		SccProjectUniqueName3 = ..\\..\\DataAccess\\DataAccess.Common\\DataAccess.Common.csproj
+		SccProjectName3 = ../../DataAccess/DataAccess.Common
+		SccLocalPath3 = ..\\..\\DataAccess\\DataAccess.Common
+		SccProjectUniqueName4 = ..\\..\\DataAccess\\DataAccess.Base\\DataAccess.Base.csproj
+		SccProjectName4 = ../../DataAccess/DataAccess.Base
+		SccLocalPath4 = ..\\..\\DataAccess\\DataAccess.Base
+		SccProjectUniqueName5 = ..\\..\\DataAccess\\DataAccess.Report\\DataAccess.Report.csproj
+		SccProjectName5 = ../../DataAccess/DataAccess.Report
+		SccLocalPath5 = ..\\..\\DataAccess\\DataAccess.Report
+		SccProjectUniqueName6 = ..\\..\\DataAccess\\DataAccess.Entity\\DataAccess.Entity.csproj
+		SccProjectName6 = ../../DataAccess/DataAccess.Entity
+		SccLocalPath6 = ..\\..\\DataAccess\\DataAccess.Entity
+		SccProjectUniqueName7 = ..\\..\\DataAccess\\DataAccess.Pharmacy\\DataAccess.Pharmacy.csproj
+		SccProjectName7 = ../../DataAccess/DataAccess.Pharmacy
+		SccLocalPath7 = ..\\..\\DataAccess\\DataAccess.Pharmacy
+		SccProjectUniqueName8 = ..\\..\\DataAccess\\DataAccess.Context\\DataAccess.Context.csproj
+		SccProjectName8 = ../../DataAccess/DataAccess.Context
+		SccLocalPath8 = ..\\..\\DataAccess\\DataAccess.Context
+	EndGlobalSection
+EndGlobal

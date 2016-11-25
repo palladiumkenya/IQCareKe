@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Facility.Reports.DebitNote"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:charting="clr-namespace:Microsoft.Windows.Controls.DataVisualization.Charting;assembly=Microsoft.Windows.Controls.DataVisualization" 
+             xmlns:DV="clr-namespace:Microsoft.Windows.Controls.DataVisualization;assembly=Microsoft.Windows.Controls.DataVisualization" 
+             xmlns:sharp="clr-namespace:Facility.Reports"
+             xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:CT="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             mc:Ignorable="d" Width="400" Height="300" FontFamily="Arial">
+   
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <charting:Chart x:Name="mcChart" Width="400" Height="200" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Total Patient Cost By Month">
+                <charting:Chart.TitleStyle>
+                    <Style TargetType="DV:Title">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="15" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Style>
+                </charting:Chart.TitleStyle>
+                <charting:Chart.LegendStyle>
+                    <Style TargetType="DV:Legend">
+                        <Setter Property="Width" Value="0" />
+                        <Setter Property="Height" Value="0" />
+                    </Style>
+                </charting:Chart.LegendStyle>
+                <charting:Chart.Axes>
+                    <charting:LinearAxis Orientation="Vertical" Title="Cost" />
+                </charting:Chart.Axes>
+                <charting:LineSeries Title="Cost" IndependentValueBinding="{Binding Path=Name}" DependentValueBinding="{Binding Path=Value}">
+                </charting:LineSeries>
+            </charting:Chart>
+        </StackPanel>
+
+    </Grid>
+    
+</UserControl>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Currency>
+  <ItemName Id = "0" Name = "Select"/>
+  <ItemName Id = "1" Name = "Afghanistan, Afghani (AFN)"/>
+  <ItemName Id = "2" Name = "Albania, Lek (ALL)"/>
+  <ItemName Id = "3" Name = "Albania, Lek (ALL)"/>
+  <ItemName Id = "4" Name = "Algeria, Dinar (DZD)"/>
+  <ItemName Id = "5" Name = "America (United States), Dollar (USD)"/>
+  <ItemName Id = "6" Name = "American Samoa, United States Dollar (USD)"/>
+  <ItemName Id = "7" Name = "Andorra, Euro (EUR)"/>
+  <ItemName Id = "8" Name = "Angola, Kwanza (AOA)"/>
+  <ItemName Id = "9" Name = "Anguilla, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "10" Name = "Antigua and Barbuda, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "11" Name = "Argentina, Peso (ARS)"/>
+  <ItemName Id = "12" Name = "Armenia, Dram (AMD)"/>
+  <ItemName Id = "13" Name = "Aruba, Guilder (AWG)"/>
+  <ItemName Id = "14" Name = "Ashmore and Cartier Islands, Australia Dollar (AUD)"/>
+  <ItemName Id = "15" Name = "Australia, Dollar (AUD)"/>
+  <ItemName Id = "16" Name = "Austria, Euro (EUR)"/>
+  <ItemName Id = "17" Name = "Austria, Schilling [obsolete] (ATS)"/>
+  <ItemName Id = "18" Name = "Azerbaijan, Manat (AZM)"/>
+  <ItemName Id = "19" Name = "Azerbaijan, New Manat (AZN)"/>
+  <ItemName Id = "20" Name = "Azores, Euro (EUR)"/>
+  <ItemName Id = "21" Name = "Bahamas, Dollar (BSD)"/>
+  <ItemName Id = "22" Name = "Bahrain, Dinar (BHD)"/>
+  <ItemName Id = "23" Name = "Bajan (Barbados), Dollar (BBD)"/>
+  <ItemName Id = "24" Name = "Balearic Islands, Euro (EUR)"/>
+  <ItemName Id = "25" Name = "Bangladesh, Taka (BDT)"/>
+  <ItemName Id = "26" Name = "Barbados, Dollar (BBD)"/>
+  <ItemName Id = "27" Name = "Belarus, Ruble (BYR)"/>
+  <ItemName Id = "28" Name = "Belgium, Euro (EUR)"/>
+  <ItemName Id = "29" Name = "Belgium, Franc [obsolete] (BEF)"/>
+  <ItemName Id = "30" Name = "Belize, Dollar (BZD)"/>
+  <ItemName Id = "31" Name = "Benin, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "32" Name = "Bermuda, Dollar (BMD)"/>
+  <ItemName Id = "33" Name = "Bhutan, India Rupee (INR)"/>
+  <ItemName Id = "34" Name = "Bhutan, Ngultrum (BTN)"/>
+  <ItemName Id = "35" Name = "Bolivia, Boliviano (BOB)"/>
+  <ItemName Id = "36" Name = "Bonaire, Netherlands Antilles Guilder (ANG)"/>
+  <ItemName Id = "37" Name = "Bosnia and Herzegovina, Convertible Marka (BAM)"/>
+  <ItemName Id = "38" Name = "Botswana, Pula (BWP)"/>
+  <ItemName Id = "39" Name = "Brazil, Real (BRL)"/>
+  <ItemName Id = "40" Name = "Britain (United Kingdom), Pound (GBP)"/>
+  <ItemName Id = "41" Name = "British Indian Ocean Territory, United Kingdom Pound (GBP)"/>
+  <ItemName Id = "42" Name = "British Indian Ocean Territory, United States Dollar (USD)"/>
+  <ItemName Id = "43" Name = "British Virgin Islands, United States Dollar (USD)"/>
+  <ItemName Id = "44" Name = "Brunei, Dollar (BND)"/>
+  <ItemName Id = "45" Name = "Brunei, Singapore Dollar (SGD)"/>
+  <ItemName Id = "46" Name = "Bulgaria, Lev (BGN)"/>
+  <ItemName Id = "47" Name = "Burkina Faso, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "48" Name = "Burma (Myanmar), Kyat (MMK)"/>
+  <ItemName Id = "49" Name = "Burundi, Franc (BIF)"/>
+  <ItemName Id = "50" Name = "Cambodia, Riel (KHR)"/>
+  <ItemName Id = "51" Name = "Cameroon, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "52" Name = "Canada, Dollar (CAD)"/>
+  <ItemName Id = "53" Name = "Canary Islands, Euro (EUR)"/>
+  <ItemName Id = "54" Name = "Cape Verde, Escudo (CVE)"/>
+  <ItemName Id = "55" Name = "Cayman Islands, Dollar (KYD)"/>
+  <ItemName Id = "56" Name = "Central African Republic, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "57" Name = "CFA Communauté Financière Africaine BCEAO Franc (XOF)"/>
+  <ItemName Id = "58" Name = "CFA Communauté Financière Africaine BEAC Franc (XAF)"/>
+  <ItemName Id = "59" Name = "Chad, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "60" Name = "Chile, Peso (CLP)"/>
+  <ItemName Id = "61" Name = "China, Yuan Renminbi (CNY)"/>
+  <ItemName Id = "62" Name = "Christmas Island, Australia Dollar (AUD)"/>
+  <ItemName Id = "63" Name = "Cocos (Keeling Islands, Australia Dollar (AUD)"/>
+  <ItemName Id = "64" Name = "Colombia, Peso (COP)"/>
+  <ItemName Id = "65" Name = "Communauté Financière Africaine BCEAO Franc (XOF)"/>
+  <ItemName Id = "66" Name = "Communauté Financière Africaine BEAC Franc (XAF)"/>
+  <ItemName Id = "67" Name = "Comoros, Franc (KMF)"/>
+  <ItemName Id = "68" Name = "Comptoirs Français du Pacifique Franc (XPF)"/>
+  <ItemName Id = "69" Name = "Congo/Brazzaville, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "70" Name = "Congo/Kinshasa, Franc (CDF)"/>
+  <ItemName Id = "71" Name = "Cook Islands, New Zealand Dollar (NZD)"/>
+  <ItemName Id = "72" Name = "Coral Sea Islands, Australia Dollar (AUD)"/>
+  <ItemName Id = "73" Name = "Costa Rica, Colon (CRC)"/>
+  <ItemName Id = "74" Name = "Côte d'Ivoire, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "75" Name = "Croatia, Kuna (HRK)"/>
+  <ItemName Id = "76" Name = "Cuba, Convertible Peso (CUC)"/>
+  <ItemName Id = "77" Name = "Cuba, Peso (CUP)"/>
+  <ItemName Id = "78" Name = "Curaço, Netherlands Antilles Guilder (ANG)"/>
+  <ItemName Id = "79" Name = "Cyprus, Pound (CYP)"/>
+  <ItemName Id = "80" Name = "Czech Republic, Koruna (CZK)"/>
+  <ItemName Id = "81" Name = "Denmark, Krone (DKK)"/>
+  <ItemName Id = "82" Name = "Djibouti, Franc (DJF)"/>
+  <ItemName Id = "83" Name = "Dominica, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "84" Name = "Dominican Republic, Peso (DOP)"/>
+  <ItemName Id = "85" Name = "Dutch (Netherlands), Euro (EUR)"/>
+  <ItemName Id = "86" Name = "Dutch (Netherlands), Guilder [obsolete] (NLG)"/>
+  <ItemName Id = "87" Name = "East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "88" Name = "East Timor, United States Dollar (USD)"/>
+  <ItemName Id = "89" Name = "Ecuador, United States Dollar (USD)"/>
+  <ItemName Id = "90" Name = "Egypt, Pound (EGP)"/>
+  <ItemName Id = "91" Name = "El Salvador, Colon (SVC)"/>
+  <ItemName Id = "92" Name = "El Salvador, United States Dollar (USD)"/>
+  <ItemName Id = "93" Name = "England (United Kingdom), Pound (GBP)"/>
+  <ItemName Id = "94" Name = "Equatorial Guinea, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "95" Name = "Eritrea, Nakfa (ERN)"/>
+  <ItemName Id = "96" Name = "Estonia, Kroon (EEK)"/>
+  <ItemName Id = "97" Name = "Ethiopia, Birr (ETB)"/>
+  <ItemName Id = "98" Name = "Euro (EUR)"/>
+  <ItemName Id = "99" Name = "Europa Island, Euro (EUR)"/>
+  <ItemName Id = "100" Name = "Falkland Islands, Pound (FKP)"/>
+  <ItemName Id = "101" Name = "Faroe Islands, Denmark Krone (DKK)"/>
+  <ItemName Id = "102" Name = "Fiji, Dollar (FJD)"/>
+  <ItemName Id = "103" Name = "Finland, Euro (EUR)"/>
+  <ItemName Id = "104" Name = "Finland, Markka [obsolete] (FIM)"/>
+  <ItemName Id = "105" Name = "France, Euro (EUR)"/>
+  <ItemName Id = "106" Name = "France, Franc [obsolete] (FRF)"/>
+  <ItemName Id = "107" Name = "French Guiana, Euro (EUR)"/>
+  <ItemName Id = "108" Name = "French Polynesia, Comptoirs Français du Pacifique Franc (XPF)"/>
+  <ItemName Id = "109" Name = "French Polynesia, Euro (EUR)"/>
+  <ItemName Id = "110" Name = "French Southern and Antarctic Lands, Euro (EUR)"/>
+  <ItemName Id = "111" Name = "Gabon, CFA Franc BEAC (XAF)"/>
+  <ItemName Id = "112" Name = "Gambia, Dalasi (GMD)"/>
+  <ItemName Id = "113" Name = "Gaza Strip, Israel New Shekel (ILS)"/>
+  <ItemName Id = "114" Name = "Georgia, Lari (GEL)"/>
+  <ItemName Id = "115" Name = "Germany, Deutsche Mark [obsolete] (DEM)"/>
+  <ItemName Id = "116" Name = "Germany, Euro (EUR)"/>
+  <ItemName Id = "117" Name = "Ghana, Cedi (GHC)"/>
+  <ItemName Id = "118" Name = "Gibraltar, Pound (GIP)"/>
+  <ItemName Id = "119" Name = "Gold Ounce (XAU)"/>
+  <ItemName Id = "120" Name = "Great Britain (United Kingdom), Pound (GBP)"/>
+  <ItemName Id = "121" Name = "Greece, Drachma [obsolete] (GRD)"/>
+  <ItemName Id = "122" Name = "Greece, Euro (EUR)"/>
+  <ItemName Id = "123" Name = "Greenland, Denmark Krone (DKK)"/>
+  <ItemName Id = "124" Name = "Grenada, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "125" Name = "Guadeloupe, Euro (EUR)"/>
+  <ItemName Id = "126" Name = "Guam, United States Dollar (USD)"/>
+  <ItemName Id = "127" Name = "Guatemala, Quetzal (GTQ)"/>
+  <ItemName Id = "128" Name = "Guernsey, Pound (GGP)"/>
+  <ItemName Id = "129" Name = "Guinea, Franc (GNF)"/>
+  <ItemName Id = "130" Name = "Guinea-Bissau, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "131" Name = "Guyana, Dollar (GYD)"/>
+  <ItemName Id = "132" Name = "Haiti, Gourde (HTG)"/>
+  <ItemName Id = "133" Name = "Holland (Netherlands), Euro (EUR)"/>
+  <ItemName Id = "134" Name = "Holland (Netherlands), Guilder [obsolete] (NLG)"/>
+  <ItemName Id = "135" Name = "Holy See (Vatican City), Euro (EUR)"/>
+  <ItemName Id = "136" Name = "Holy See (Vatican City), Lira [obsolete] (VAL)"/>
+  <ItemName Id = "137" Name = "Honduras, Lempira (HNL)"/>
+  <ItemName Id = "138" Name = "Hong Kong, Dollar (HKD)"/>
+  <ItemName Id = "139" Name = "Hungary, Forint (HUF)"/>
+  <ItemName Id = "140" Name = "Iceland, Krona (ISK)"/>
+  <ItemName Id = "141" Name = "India, Rupee (INR)"/>
+  <ItemName Id = "142" Name = "Indonesia, Rupiah (IDR)"/>
+  <ItemName Id = "143" Name = "International Monetary Fund Special Drawing Right (XDR)"/>
+  <ItemName Id = "144" Name = "Iran, Rial (IRR)"/>
+  <ItemName Id = "145" Name = "Iraq, Dinar (IQD)"/>
+  <ItemName Id = "146" Name = "Ireland, Euro (EUR)"/>
+  <ItemName Id = "147" Name = "Ireland, Pound [obsolete] (IEP)"/>
+  <ItemName Id = "148" Name = "Islas Malvinas (Falkland Islands), Pound (FKP)"/>
+  <ItemName Id = "149" Name = "Isle of Man, Pound (IMP)"/>
+  <ItemName Id = "150" Name = "Israel, New Shekel (ILS)"/>
+  <ItemName Id = "151" Name = "Italy, Euro (EUR)"/>
+  <ItemName Id = "152" Name = "Italy, Lira [obsolete] (ITL)"/>
+  <ItemName Id = "153" Name = "Ivory Coast (Côte d'Ivoire), CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "154" Name = "Jamaica, Dollar (JMD)"/>
+  <ItemName Id = "155" Name = "Japan, Yen (JPY)"/>
+  <ItemName Id = "156" Name = "Jersey, Pound (JEP)"/>
+  <ItemName Id = "157" Name = "Johnson, United States Dollar (USD)"/>
+  <ItemName Id = "158" Name = "Jordan, Dinar (JOD)"/>
+  <ItemName Id = "159" Name = "Juan de Nova, Euro (EUR)"/>
+  <ItemName Id = "160" Name = "Kazakhstan, Tenge (KZT)"/>
+  <ItemName Id = "161" Name = "Kenya, Shilling (KES)"/>
+  <ItemName Id = "162" Name = "Kiribati, Australia Dollar (AUD)"/>
+  <ItemName Id = "163" Name = "Kuwait, Dinar (KWD)"/>
+  <ItemName Id = "164" Name = "Kyrgyzstan, Som (KGS)"/>
+  <ItemName Id = "165" Name = "Laos, Kip (LAK)"/>
+  <ItemName Id = "166" Name = "Latvia, Lat (LVL)"/>
+  <ItemName Id = "167" Name = "Lebanon, Pound (LBP)"/>
+  <ItemName Id = "168" Name = "Lesotho, Loti (LSL)"/>
+  <ItemName Id = "169" Name = "Liberia, Dollar (LRD)"/>
+  <ItemName Id = "170" Name = "Libya, Dinar (LYD)"/>
+  <ItemName Id = "171" Name = "Liechtenstein, Switzerland Franc (CHF)"/>
+  <ItemName Id = "172" Name = "Lithuania, Litas (LTL)"/>
+  <ItemName Id = "173" Name = "Luxembourg, Euro (EUR)"/>
+  <ItemName Id = "174" Name = "Luxembourg, Franc [obsolete] (LUF)"/>
+  <ItemName Id = "175" Name = "Macau, Pataca (MOP)"/>
+  <ItemName Id = "176" Name = "Macedonia, Denar (MKD)"/>
+  <ItemName Id = "177" Name = "Madagascar, Ariary (MGA)"/>
+  <ItemName Id = "178" Name = "Madagascar, Franc [obsolete] (MGF)"/>
+  <ItemName Id = "179" Name = "Madeira Islands, Euro (EUR)"/>
+  <ItemName Id = "180" Name = "Malawi, Kwacha (MWK)"/>
+  <ItemName Id = "181" Name = "Malaysia, Ringgit (MYR)"/>
+  <ItemName Id = "182" Name = "Maldives, Rufiyaa (MVR)"/>
+  <ItemName Id = "183" Name = "Mali, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "184" Name = "Malta, Lira (MTL)"/>
+  <ItemName Id = "185" Name = "Malvinas (Falkland Islands), Pound (FKP)"/>
+  <ItemName Id = "186" Name = "Marshall Islands, United States Dollar (USD)"/>
+  <ItemName Id = "187" Name = "Martinique, Euro (EUR)"/>
+  <ItemName Id = "188" Name = "Mauritania, Ouguiya (MRO)"/>
+  <ItemName Id = "189" Name = "Mauritius, Rupee (MUR)"/>
+  <ItemName Id = "190" Name = "Mayotte, Euro (EUR)"/>
+  <ItemName Id = "191" Name = "Mexico, Peso (MXN)"/>
+  <ItemName Id = "192" Name = "Micronesia, United States Dollar (USD)"/>
+  <ItemName Id = "193" Name = "Midway Islands, United States Dollar (USD)"/>
+  <ItemName Id = "194" Name = "Moldova, Leu (MDL)"/>
+  <ItemName Id = "195" Name = "Monaco, Euro (EUR)"/>
+  <ItemName Id = "196" Name = "Mongolia, Tughrik (MNT)"/>
+  <ItemName Id = "197" Name = "Montenegro, Euro (EUR)"/>
+  <ItemName Id = "198" Name = "Montserrat, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "199" Name = "Morocco, Dirham (MAD)"/>
+  <ItemName Id = "200" Name = "Mozambique, Metical (MZN)"/>
+  <ItemName Id = "201" Name = "Mozambique, Metical [being phased out] (MZM)"/>
+  <ItemName Id = "202" Name = "Myanmar (Burma), Kyat (MMK)"/>
+  <ItemName Id = "203" Name = "Namibia, Dollar (NAD)"/>
+  <ItemName Id = "204" Name = "Nauru, Australia Dollar (AUD)"/>
+  <ItemName Id = "205" Name = "Navassa, Haiti Gourde (HTG)"/>
+  <ItemName Id = "206" Name = "Navassa, United States Dollar (USD)"/>
+  <ItemName Id = "207" Name = "Nepal, China Yuan Renminbi (CNY)"/>
+  <ItemName Id = "208" Name = "Nepal, Rupee (NPR)"/>
+  <ItemName Id = "209" Name = "Netherlands Antilles, Guilder (ANG)"/>
+  <ItemName Id = "210" Name = "Netherlands, Euro (EUR)"/>
+  <ItemName Id = "211" Name = "Netherlands, Guilder [obsolete] (NLG)"/>
+  <ItemName Id = "212" Name = "New Caledonia, Comptoirs Français du Pacifique Franc (XPF)"/>
+  <ItemName Id = "213" Name = "New Zealand, Dollar (NZD)"/>
+  <ItemName Id = "214" Name = "Nicaragua, Cordoba (NIO)"/>
+  <ItemName Id = "215" Name = "Niger, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "216" Name = "Nigeria, Naira (NGN)"/>
+  <ItemName Id = "217" Name = "Niue, New Zealand Dollar (NZD)"/>
+  <ItemName Id = "218" Name = "Norfolk Island, Australia Dollar (AUD)"/>
+  <ItemName Id = "219" Name = "North Korea, Won (KPW)"/>
+  <ItemName Id = "220" Name = "Northern Mariana Islands, United States Dollar (USD)"/>
+  <ItemName Id = "221" Name = "Norway, Krone (NOK)"/>
+  <ItemName Id = "222" Name = "Oman, Rial (OMR)"/>
+  <ItemName Id = "223" Name = "Pakistan, Rupee (PKR)"/>
+  <ItemName Id = "224" Name = "Palau, United States Dollar (USD)"/>
+  <ItemName Id = "225" Name = "Palladium Ounce (XPD)"/>
+  <ItemName Id = "226" Name = "Panama, Balboa (PAB)"/>
+  <ItemName Id = "227" Name = "Panama, United States Dollar (USD)"/>
+  <ItemName Id = "228" Name = "Papua New Guinea, Kina (PGK)"/>
+  <ItemName Id = "229" Name = "Paracel Islands, China Yuan Renminbi (CNY)"/>
+  <ItemName Id = "230" Name = "Paracel Islands, Vietnam Dong (VND)"/>
+  <ItemName Id = "231" Name = "Paraguay, Guarani (PYG)"/>
+  <ItemName Id = "232" Name = "Peru, Nuevo Sol (PEN)"/>
+  <ItemName Id = "233" Name = "Philippines, Peso (PHP)"/>
+  <ItemName Id = "234" Name = "Pitcairn, New Zealand Dollar (NZD)"/>
+  <ItemName Id = "235" Name = "Platinum Ounce (XPT)"/>
+  <ItemName Id = "236" Name = "Poland, Zloty (PLN)"/>
+  <ItemName Id = "237" Name = "Portugal, Escudo [obsolete] (PTE)"/>
+  <ItemName Id = "238" Name = "Portugal, Euro (EUR)"/>
+  <ItemName Id = "239" Name = "Puerto Rico, United States Dollar (USD)"/>
+  <ItemName Id = "240" Name = "Qatar, Riyal (QAR)"/>
+  <ItemName Id = "241" Name = "Reunion, Euro (EUR)"/>
+  <ItemName Id = "242" Name = "Romania, Leu [being phased out] (ROL)"/>
+  <ItemName Id = "243" Name = "Romania, New Leu (RON)"/>
+  <ItemName Id = "244" Name = "Russia, Ruble (RUB)"/>
+  <ItemName Id = "245" Name = "Rwanda, Franc (RWF)"/>
+  <ItemName Id = "246" Name = "Saba, Netherlands Antilles Guilder (ANG)"/>
+  <ItemName Id = "247" Name = "Saint Helena, Pound (SHP)"/>
+  <ItemName Id = "248" Name = "Saint Kitts and Nevis, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "249" Name = "Saint Lucia, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "250" Name = "Saint Pierre and Miquelon, Euro (EUR)"/>
+  <ItemName Id = "251" Name = "Saint Vincent and The Grenadines, East Caribbean Dollar (XCD)"/>
+  <ItemName Id = "252" Name = "Saint-Martin, Euro (EUR)"/>
+  <ItemName Id = "253" Name = "Samoa, Tala (WST)"/>
+  <ItemName Id = "254" Name = "San Marino, Euro (EUR)"/>
+  <ItemName Id = "255" Name = "São Tome and Principe, Dobra (STD)"/>
+  <ItemName Id = "256" Name = "Saudi Arabia, Riyal (SAR)"/>
+  <ItemName Id = "257" Name = "Scotland (United Kingdom), Pound (GBP)"/>
+  <ItemName Id = "258" Name = "Seborga, Luigino (SPL)"/>
+  <ItemName Id = "259" Name = "Senegal, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "260" Name = "Serbia, Dinar (CSD)"/>
+  <ItemName Id = "261" Name = "Seychelles, Rupee (SCR)"/>
+  <ItemName Id = "262" Name = "Sierra Leone, Leone (SLL)"/>
+  <ItemName Id = "263" Name = "Silver Ounce (XAG)"/>
+  <ItemName Id = "264" Name = "Singapore, Dollar (SGD)"/>
+  <ItemName Id = "265" Name = "Sint Eustatius, Netherlands Antilles Guilder (ANG)"/>
+  <ItemName Id = "266" Name = "Sint Maarten, Netherlands Antilles Guilder (ANG)"/>
+  <ItemName Id = "267" Name = "Slovakia, Koruna (SKK)"/>
+  <ItemName Id = "268" Name = "Slovenia, Tolar (SIT)"/>
+  <ItemName Id = "269" Name = "Solomon Islands, Dollar (SBD)"/>
+  <ItemName Id = "270" Name = "Somalia, Shilling (SOS)"/>
+  <ItemName Id = "271" Name = "South Africa, Rand (ZAR)"/>
+  <ItemName Id = "272" Name = "South Georgia, United Kingdom Pound (GBP)"/>
+  <ItemName Id = "273" Name = "South Korea, Won (KRW)"/>
+  <ItemName Id = "274" Name = "South Sandwich Islands, United Kingdom Pound (GBP)"/>
+  <ItemName Id = "275" Name = "Spain, Euro (EUR)"/>
+  <ItemName Id = "276" Name = "Spain, Peseta [obsolete] (ESP)"/>
+  <ItemName Id = "277" Name = "Sri Lanka, Rupee (LKR)"/>
+  <ItemName Id = "278" Name = "Sudan, Dinar (SDD)"/>
+  <ItemName Id = "279" Name = "Suriname, Dollar (SRD)"/>
+  <ItemName Id = "280" Name = "Suriname, Guilder (SRG) [obsolete]"/>
+  <ItemName Id = "281" Name = "Svalbard and Jan Mayen, Norway Krone (NOK)"/>
+  <ItemName Id = "282" Name = "Swaziland, Lilangeni (SZL)"/>
+  <ItemName Id = "283" Name = "Swaziland, South Africa Rand (ZAR)"/>
+  <ItemName Id = "284" Name = "Sweden, Krona (SEK)"/>
+  <ItemName Id = "285" Name = "Switzerland, Franc (CHF)"/>
+  <ItemName Id = "286" Name = "Syria, Pound (SYP)"/>
+  <ItemName Id = "287" Name = "Taiwan, New Dollar (TWD)"/>
+  <ItemName Id = "288" Name = "Tajikistan, Russia Ruble (RUB)"/>
+  <ItemName Id = "289" Name = "Tajikistan, Somoni (TJS)"/>
+  <ItemName Id = "290" Name = "Tanzania, Shilling (TZS)"/>
+  <ItemName Id = "291" Name = "Thailand, Baht (THB)"/>
+  <ItemName Id = "292" Name = "Togo, CFA Franc BCEAO (XOF)"/>
+  <ItemName Id = "293" Name = "Tokelau, New Zealand Dollar (NZD)"/>
+  <ItemName Id = "294" Name = "Tonga, Pa'anga (TOP)"/>
+  <ItemName Id = "295" Name = "Transnistria, Moldova Leu (MDL)"/>
+  <ItemName Id = "296" Name = "Trinidad and Tobago, Dollar (TTD)"/>
+  <ItemName Id = "297" Name = "Tunisia, Dinar (TND)"/>
+  <ItemName Id = "298" Name = "Turkey, Lira (TRL) [obsolete]"/>
+  <ItemName Id = "299" Name = "Turkey, New Lira (TRY)"/>
+  <ItemName Id = "300" Name = "Turkmenistan, Manat (TMM)"/>
+  <ItemName Id = "301" Name = "Turks and Caicos Islands, United States Dollar (USD)"/>
+  <ItemName Id = "302" Name = "Tuvalu, Australia Dollar (AUD)"/>
+  <ItemName Id = "303" Name = "Tuvalu, Dollar (TVD)"/>
+  <ItemName Id = "304" Name = "Uganda, Shilling (UGX)"/>
+  <ItemName Id = "305" Name = "Ukraine, Hryvna (UAH)"/>
+  <ItemName Id = "306" Name = "United Arab Emirates, Dirham (AED)"/>
+  <ItemName Id = "307" Name = "United Kingdom, Pound (GBP)"/>
+  <ItemName Id = "308" Name = "United States, Dollar (USD)"/>
+  <ItemName Id = "309" Name = "Uruguay, Peso (UYU)"/>
+  <ItemName Id = "310" Name = "Uzbekistan, Som (UZS)"/>
+  <ItemName Id = "311" Name = "Vanuatu, Vatu (VUV)"/>
+  <ItemName Id = "312" Name = "Vatican City, Euro (EUR)"/>
+  <ItemName Id = "313" Name = "Vatican City, Lira [obsolete] (VAL)"/>
+  <ItemName Id = "314" Name = "Venezuela, Bolivar (VEB)"/>
+  <ItemName Id = "315" Name = "Vietnam, Dong (VND)"/>
+  <ItemName Id = "316" Name = "Virgin Islands, United States Dollar (USD)"/>
+  <ItemName Id = "317" Name = "Wake Island, United States Dollar (USD)"/>
+  <ItemName Id = "318" Name = "Wallis and Futuna Islands, Comptoirs Français du Pacifique Franc (XPF)"/>
+  <ItemName Id = "319" Name = "West Bank, Israel New Shekel (ILS)"/>
+  <ItemName Id = "320" Name = "West Bank, Jordan Dinar (JOD)"/>
+  <ItemName Id = "321" Name = "Western Sahara, Morocco Dirham (MAD)"/>
+  <ItemName Id = "322" Name = "Western Samoa (Samoa), Tala (WST)"/>
+  <ItemName Id = "323" Name = "Yemen, Rial (YER)"/>
+  <ItemName Id = "324" Name = "Zambia, Kwacha (ZMK)"/>
+  <ItemName Id = "325" Name = "Zimbabwe, Dollar (ZWN)"/>
+
+</Currency>

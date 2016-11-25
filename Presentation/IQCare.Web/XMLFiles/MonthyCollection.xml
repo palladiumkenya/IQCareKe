@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="MonthlyData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="DetailedMonthlyCollection" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Collections" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+				<xs:element name="date" 		    type="xs:date" 		minOccurs="0" />   
+				<xs:element name="totalsales"       type="xs:float" 	minOccurs="0"   default="0.00" />           
+				<xs:element name="inpatient" 	    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="maternity" 	    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="xray" 		    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="lab" 			    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="thearte" 		    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="mortuary" 	    type="xs:float" 	minOccurs="0" 	default="0.00" /> 
+				<xs:element name="opd" 			    type="xs:float" 	minOccurs="0" 	default="0.00" /> 
+				<xs:element name="pharmacy" 	    type="xs:float" 	minOccurs="0" 	default="0.00" /> 
+				<xs:element name="others" 		    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="cashreceipts"     type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="nhifreceipts"     type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="otherreceipts"    type="xs:float" 	minOccurs="0" 	default="0.00" />	
+				<xs:element name="waivers" 		    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="exemption" 	    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="absconders" 	    type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="facilityaccount" 	type="xs:float" 	minOccurs="0" 	default="0.00" />
+				<xs:element name="bankaccount" 		type="xs:float" 	minOccurs="0" 	default="0.00" />				
+            </xs:sequence>
+          </xs:complexType>
+		  </xs:element>
+		  <xs:element name="OtherIncome" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+				<xs:element name="category" type="xs:string" 	minOccurs="0" />   
+				<xs:element name="amount"   type="xs:float" 	minOccurs="0" default="0.00" />    		
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

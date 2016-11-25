@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MedicineList>
+	<Medicine ID="10001" MedicineName="1. ARV Medications" Generic="0" />
+	<Medicine ID="10002" MedicineName="NRTI" Generic="0" />
+	<Medicine ID="175" MedicineName="Lamivudine(3TC)" Generic="1" />
+	<Medicine ID="307" MedicineName="Zidovudine(AZT)" Generic="1" />
+	<Medicine ID="274" MedicineName="Stavudine(D4T)" Generic="1" />
+	<Medicine ID="280" MedicineName="Tenofovir(TDF)" Generic="1" />
+
+	<Medicine ID="1" MedicineName="Abacavir(ABC)" Generic="1" />
+  <Medicine ID="103" MedicineName="Emtricitabine(FTC)" Generic="1" />
+	
+	<Medicine ID="10004" MedicineName="NNRTI" Generic="0" />
+	<Medicine ID="102" MedicineName="Efavirenz(EFV)" Generic="1" />
+	<Medicine ID="212" MedicineName="Nevirapine,SD-NVP(NVP)" Generic="1" />
+	<Medicine ID="10005" MedicineName="PI" Generic="0" />
+	<Medicine ID="182" MedicineName="Lopinavir(LOPr)" Generic="1" />
+  <Medicine ID="22" MedicineName="Atazanavir(ATV)" Generic="1" />
+  <Medicine ID="265" MedicineName="Ritonavir(RTV)" Generic="1" /> 
+  <Medicine ID="268" MedicineName="Saquinavir(SQV)" Generic="1" />
+         
+	<Medicine ID="10006" MedicineName="2. OI Prophylaxis" Generic="0" />
+	<Medicine ID="277" MedicineName="Sulfa/TMX" Generic="1" />
+	<Medicine ID="123" MedicineName="Fluconazole" Generic="1" />
+  <!--<Medicine ID="486" MedicineName="Cotrimoxazole" Generic="0" />
+  <Medicine ID="85" MedicineName="Diflucan" Generic="0" />-->
+  <Medicine ID="150" MedicineName="INH" Generic="0" />
+	
+</MedicineList>

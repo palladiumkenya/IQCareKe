@@ -1,0 +1,398 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head> 
+   <!-- Premium Pack Version 1.55 for HM6 Template design Copyright (c) 2008 - 2013 by Tim Green -->
+   <title>Custom Report Functions</title> 
+   <meta name="generator" content="Help &amp; Manual" /> 
+   <meta name="keywords" content="Custom Reports,Custom Reports query functions" />
+   <meta name="description" content="Custom Report Functions" />
+   <meta name="copyright" content="© 2013 Futures Group" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <script type="text/javascript">
+   var togglesReady = true;
+   var tablesReady = true; 
+   </script>
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet" />
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="jquery.scrollTo-min.js"></script>
+   <script type="text/javascript" src="nsh.js"></script>
+
+
+   <script type="text/javascript">
+var togTocButton = "";
+$(document).ready(function() {
+  chromeBugCheck("block",false);
+   
+   });
+</script>
+
+
+
+<!-- CSS set with project variables and local attributes -->
+<style type="text/css">
+   body { background: #fff; } 
+   #breadcrumbs { width: 100%; background-color: white; border: 1px solid #000; padding: 2px 0 1px 2px;
+   margin: 3px 0; font-size: 8pt; color: #000;}
+   #breadcrumbs a { color: #000; text-decoration: none;}
+   #breadcrumbs a:visited { color: #000; }
+   #breadcrumbs a:hover { color: #098ae2; text-decoration: none; }
+   .help-url { font-size: 8pt; font-family: Verdana, Helvetica, sans-serif; 
+               color: #000; text-align: center; margin: 15px 15px 0px 15px; 
+               padding-top: 5px; padding-bottom: 15px; border-top: 1px solid #000;}
+   .help-url a { color: #000; text-decoration: none; }
+   .help-url a:visited { color: #000; }
+   .help-url a:hover { color: #000; text-decoration: underline; }
+   .highlight {background-color: #ffff40;}
+</style>
+
+
+
+<!-- Adjustment for IE -->
+<!--[if lte IE 9]>
+<style type="text/css">
+.topichead { padding-right: 0; }
+#autoTocWrapper ul li { padding: 3px 3px 4px 3px;}
+</style>
+<![endif]-->
+<!--[if lte IE 7]>
+<style type="text/css">
+#innerdiv {height: 100%;}
+</style>
+<![endif]-->
+   
+
+
+<script type="text/javascript"> 
+$(document).ready(function() {
+var doc = document;  
+try {
+if (parent.initialtocstate != null) doc = parent.document;
+doc.title = $("<div/>").html("IQCare SCM User Guide V3.5.3 - Custom Report Functions").text();
+window.onunload = function() {doc.title = $("<div/>").html("IQCare SCM User Guide V3.5.3").text();}
+} catch(err) {}
+});</script>
+
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "custom_report_functions.htm");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head> 
+<body>
+<!--ZOOMSTOP-->
+
+<div id="printheader">
+<span id="printtitle">IQCare SCM User Guide V3.5.3</span><br />
+<h1 class="p_Heading1"><span class="f_Heading1">Custom Report Functions</span></h1>
+</div>
+<div id="idheader" style= "background: #a7d7f8 url('bg_topichd.gif') repeat-x bottom;"> 
+<table id="breadtable" width="100%" border="0" cellspacing="0" cellpadding="0"> 
+  <tr >
+  <td align="left" class="breadhead" height="5">
+        
+  </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="headtable"> 
+
+<!-- Script version of NavHeader -->
+<tr id="scriptNavHead" valign="middle" style="height: auto;">
+   
+   <td align="left" class="topichead">
+   <h1 class="p_Heading1"><span class="f_Heading1">Custom Report Functions</span></h1>
+
+   </td>
+   
+   <td align="center" width="20" class="idnav" valign="bottom">
+     <a href="dynamic_and_manual_entry_queries.htm"
+        onmouseover="document.images.prev.src='button_prev_h.gif'" 
+        onmouseout="document.images.prev.src='button_prev.gif'">
+        <img name="prev" src="button_prev.gif" border="0" alt="Previous topic" title="Previous topic" /></a>
+     
+   </td>
+   
+   <td align="center" width="20" class="idnav" valign="bottom">
+     <a href="create_a_custom_report.htm"
+        onmouseover="document.images.next.src='button_next_h.gif'" 
+        onmouseout="document.images.next.src='button_next.gif'"><img name="next" src="button_next.gif" border="0" alt="Next topic" title="Next topic" /></a>
+        
+   </td>
+   
+   
+   
+  
+   <td width="4">&nbsp;</td>
+  </tr>
+<!-- End script navheader version -->
+
+<!-- NoScript version of navheader -->
+  <tr id="noScriptNavHead" valign="middle" style="height: auto;"> 
+    <td align="left" class="topichead"> 
+    <h1 class="p_Heading1"><span class="f_Heading1">Custom Report Functions</span></h1>
+
+    </td>
+    <td align="center" width="20" class="idnav" valign="bottom">
+     <a href="dynamic_and_manual_entry_queries.htm">
+        <img src="button_prev.gif" border="0" alt="Previous topic" title="Previous topic" /></a>
+     
+   </td>
+   <td align="center" width="20" class="idnav" valign="bottom">
+     <a href="create_a_custom_report.htm">
+        <img src="button_next.gif" border="0" alt="Next topic" title="Next topic" /></a>
+        
+   </td>
+   
+   
+   
+   
+   <td width="4">&nbsp;</td>
+  </tr>
+<!-- End noscript navheader version -->
+  </table>
+<div id="autoTocWrapper"></div></div> 
+
+<div id="idcontent"><div id="innerdiv">
+
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+<!--ZOOMRESTART-->
+<p>IQCare custom reports have a number of functions that allow you to aggregate data. These are found under the “Function” select list. These functions tend to be used with more complex reports. Below is a very simple example that illustrates how to set up the custom report and the results for each function. Screen shots of how this example is done in IQCare are provided in the IQCare Help/ Custom Report Functions. This link can be found in the left hand navigation.</p>
+<p>&nbsp;</p>
+<p><img src="_img121_zoom73.png" width="672" height="123" alt="_img121" style="border:none" /></p>
+<p>&nbsp;</p>
+<p><span style="font-weight: bold;">Report Functions Example</span></p>
+<p>In this example there are two patients, Jones and Smith. Jones has been dispensed Lamivudine and Nevirapine on three different dates. Smith has been dispensed only Lamivudine on two dates.</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 10px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Last Name</span></p>
+</td>
+<td style="vertical-align:middle; width:130px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Dispensed by Date</span></p>
+</td>
+<td style="vertical-align:middle; width:115px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Generic Name</span></p>
+</td>
+<td style="vertical-align:middle; width:136px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Quantity Dispensed</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; height:38px; padding:4px; border:solid 1px #000000;"><p>Jones</p>
+</td>
+<td style="vertical-align:middle; width:130px; height:38px; padding:4px; border:solid 1px #000000;"><p>10-Sep-2006</p>
+</td>
+<td style="vertical-align:middle; width:115px; height:38px; padding:4px; border:solid 1px #000000;"><p>Lamivudine</p>
+<p>Nevirapine</p>
+</td>
+<td style="vertical-align:middle; width:136px; height:38px; padding:4px; border:solid 1px #000000;"><p>28</p>
+<p>28</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; height:41px; padding:4px; border:solid 1px #000000;"><p>Jones</p>
+</td>
+<td style="vertical-align:middle; width:130px; height:41px; padding:4px; border:solid 1px #000000;"><p>7-Oct 2006</p>
+</td>
+<td style="vertical-align:middle; width:115px; height:41px; padding:4px; border:solid 1px #000000;"><p>Lamivudine</p>
+<p>Nevirapine</p>
+</td>
+<td style="vertical-align:middle; width:136px; height:41px; padding:4px; border:solid 1px #000000;"><p>56</p>
+<p>56</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; height:35px; padding:4px; border:solid 1px #000000;"><p>Jones</p>
+</td>
+<td style="vertical-align:middle; width:130px; height:35px; padding:4px; border:solid 1px #000000;"><p>15-Dec- 2006</p>
+</td>
+<td style="vertical-align:middle; width:115px; height:35px; padding:4px; border:solid 1px #000000;"><p>Lamivudine</p>
+<p>Nevirapine</p>
+</td>
+<td style="vertical-align:middle; width:136px; height:35px; padding:4px; border:solid 1px #000000;"><p>28</p>
+<p>28</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; height:23px; padding:4px; border:solid 1px #000000;"><p>Smith</p>
+</td>
+<td style="vertical-align:middle; width:130px; height:23px; padding:4px; border:solid 1px #000000;"><p>6-Aug-2006</p>
+</td>
+<td style="vertical-align:middle; width:115px; height:23px; padding:4px; border:solid 1px #000000;"><p>Lamivudine</p>
+</td>
+<td style="vertical-align:middle; width:136px; height:23px; padding:4px; border:solid 1px #000000;"><p>28</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:middle; width:104px; height:23px; padding:4px; border:solid 1px #000000;"><p>Smith</p>
+</td>
+<td style="vertical-align:middle; width:130px; height:23px; padding:4px; border:solid 1px #000000;"><p>3-Sep-2006</p>
+</td>
+<td style="vertical-align:middle; width:115px; height:23px; padding:4px; border:solid 1px #000000;"><p>Lamivudine</p>
+</td>
+<td style="vertical-align:middle; width:136px; height:23px; padding:4px; border:solid 1px #000000;"><p>28</p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Using the data in this example, each function will be used to show how it can be used. Note that this is only one example. There are many ways to use these functions. You will need to do some trial and error to be able to produce the reports you need. </p>
+<p>&nbsp;</p>
+<p>Note: when you use a function of one of the fields, you must place all of the other with the Group function.</p>
+<p>&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 0px 10px;"><table style="border:none; border-spacing:0px; border-collapse:collapse;">
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Function</span></p>
+</td>
+<td style="vertical-align:top; width:90px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Description</span></p>
+</td>
+<td style="vertical-align:top; width:208px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Example – Field Set Up</span></p>
+</td>
+<td style="vertical-align:top; width:264px; background-color:#e0e0e0; padding:4px; border:solid 1px #000000;"><p><span style="font-weight: bold;">Example – Return Set</span></p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Group</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Groups like FieldValues</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Dispensed by Date – Group</p>
+<p>Generic Drug Name – Group</p>
+<p>Dispensed Quantity – Group</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>The result set will grouped by Last Name</p>
+<p>The data is grouped by the field found in the first column select. For example, if you changed the order and put Generic Name first, the report would be grouped by the generic name.</p>
+<p>Smith – Lamivudine – 28 – 06-Aug-2006</p>
+<p>Smith – Lamivudine – 28 – 03-Sep-2006 </p>
+<p>Jones – Lamivudine – 28 – 10-Sep-2006</p>
+<p>Jones – Nevirapine – 28 – 10-Sep-2006</p>
+<p>Jones – Lamivudine – 56 – 07-Oct-2006</p>
+<p>Jones – Nevirapine – 56 – 07-Oct-2006</p>
+<p>Jones – Lamivudine – 28 – 15-Dec-2006</p>
+<p>Jones – Nevirapine – 28 – 15-Dec-2006</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Sum</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Sums the FieldValues</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Generic Drug Name – Group</p>
+<p>Dispensed Quantity – Sum</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>The result set will add up all of the quality dispensed values for each generic drug and each patient. </p>
+<p>Jones – Lamivudine – 112</p>
+<p>Jones – Nevirapine – 112</p>
+<p>Smith – Lamivudine – 56</p>
+<p>&nbsp;</p>
+<p>Note that the Dispensed by Date is not included in this query. Because each Dispensed by Date is unique, the data can not be summed up. If there was more than one Lamivudine dispensed on a Dispensed by Date, each of those would be added up. But IQCare doesn’t allow this situation.</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Count</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Counts all of the instances of a FieldValue</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Generic Drug Name – Count</p>
+<p>Dispensed Quantity – Group</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>The result set will count all of the instances of Lamivudine and Nevirapine with each different dispensed quantity, 28 and 56. In our example, for patient Jones, there are 4 instances of Lamivudine with the quantity dispensed of 28 days.</p>
+<p>Jones – 4 – 28</p>
+<p>Jones – 2 – 56</p>
+<p>Smith – 2 – 28</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Max</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Selects the largest or latest FieldValue</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Dispensed by Date – Max</p>
+<p>Generic Name – Group</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>For each Last Name and Generic Drug combination, the largest or latest date is selected. </p>
+<p>Jones – 15 –Dec-2006 – Lamivudine</p>
+<p>Jones – 15 –Dec-2006 – Nevirapine</p>
+<p>Smith – 3 Sep-2006 -- &nbsp;Lamivudine</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Min</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Selects the smallest or earliest FieldValue</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Dispensed by Date – Min</p>
+<p>Generic Drug Name – Group</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>For each Last Name and Generic Drug combination, the smallest or earliest date is selected. </p>
+<p>Jones – 10-Sep-2006 – Lamivudine</p>
+<p>Jones – 10-Sep-2006 – Nevirapine</p>
+<p>Smith – 6-Aug-2006 – Lamivudine</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Count Distinct</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>Counts the number of unique instances of a FieldValue</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – Group</p>
+<p>Generic Drug Name – Count Distinct</p>
+<p>Dispensed Quantity – Group</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>Result set will count all of the instances of each Generic Drug Name</p>
+</td>
+</tr>
+<tr style="text-align:left;vertical-align:top;">
+<td style="vertical-align:top; width:67px; padding:4px; border:solid 1px #000000;"><p>Distinct</p>
+</td>
+<td style="vertical-align:top; width:90px; padding:4px; border:solid 1px #000000;"><p>If there are duplicates on the set, only the first instance is displayed</p>
+</td>
+<td style="vertical-align:top; width:208px; padding:4px; border:solid 1px #000000;"><p>Last Name – (no Group)</p>
+<p>Generic Drug Name –Distinct</p>
+<p>Dispensed Quantity (no Group)</p>
+</td>
+<td style="vertical-align:top; width:264px; padding:4px; border:solid 1px #000000;"><p>For each Last name, only one instance of the Generic Drug Name and quantity combination will display.</p>
+<p>Jones – Lamivudine – 28</p>
+<p>Jones – Nevirapine – 28 </p>
+<p>Jones – Lamivudine – 56</p>
+<p>Smith – Lamivudine – 28 </p>
+</td>
+</tr>
+</table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<!--ZOOMSTOP--> 
+
+</div></div> 
+</body>
+<script type="text/javascript">
+var togglesStart = togglesCount = HMToggles.length;
+var doJump = setInterval(function() {
+	togglesCount = HMToggles.length;
+	if (togglesCount > togglesStart) {
+		togglesStart = togglesCount;
+		} else {
+		togglesReady = true;
+		}
+	if (togglesReady && tablesReady) {
+	$("body").css("visibility","visible");
+	clearInterval(doJump);
+	toggleJump(false);
+	if (typeof doResize == 'function') doResize();
+	$("div#idcontent").focus();
+	}
+},200);
+</script>
+</html>

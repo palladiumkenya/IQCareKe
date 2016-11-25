@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<ss:Workbook xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0521590000000000">
+   <ss:Alignment/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc053F000000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc053F070000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+   <ss:NumberFormat ss:Format="d/mmm/yy"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0521550000000000">
+   <ss:Alignment/>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>4</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>12.0.0.4518         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Sheet1">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="7"
+   ss:DefaultColumnWidth="108.75" ss:DefaultRowHeight="12.75">
+   <ss:Row ss:StyleID="wc0521550000000000">
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">ItemName</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">DispensingUnit</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">ExpiryDate</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">BatchName</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">OpeningStock</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">QtyDispensed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">QtyRecieved</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0521590000000000">
+     <ss:Data ss:Type="String">ClosingQty</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-ABC300 300mg</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-20</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AB</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">230</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">230</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-ABC300 300mg</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-27</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">100</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">100</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-ABC300 300mg</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-28</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AD</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">40</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">40</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-Acyclovir opthalmic 20mg/ml</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-27</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AF</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">150</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">150</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-Acyclovir opthalmic 20mg/ml</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-27</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AI</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Abacavir-Ziagen &#160; 300mg</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Tablet</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F070000000000">
+     <ss:Data ss:Type="DateTime">2012-01-13</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="String">Batch-AK</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">111</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc053F000000000000">
+     <ss:Data ss:Type="Number">111</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet2">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet3">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+</ss:Workbook>

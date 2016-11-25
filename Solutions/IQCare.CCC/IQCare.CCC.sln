@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities.CCC", "..\..\IQCare.CCC\Entities.CCC\Entities.CCC.csproj", "{BBCC4817-4E69-4722-A560-8988A795CE50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.CCC", "..\..\IQCare.CCC\Interface.CCC\Interface.CCC.csproj", "{174B280E-08D7-4FE7-B080-3A017F0944CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.CCC", "..\..\IQCare.CCC\DataAccess.CCC\DataAccess.CCC.csproj", "{8CC162FB-01FB-42AE-B63F-47E007E469E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD9CC7D-0CA8-4746-8565-AE446765410A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBCC4817-4E69-4722-A560-8988A795CE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBCC4817-4E69-4722-A560-8988A795CE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBCC4817-4E69-4722-A560-8988A795CE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCC4817-4E69-4722-A560-8988A795CE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{174B280E-08D7-4FE7-B080-3A017F0944CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{174B280E-08D7-4FE7-B080-3A017F0944CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{174B280E-08D7-4FE7-B080-3A017F0944CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{174B280E-08D7-4FE7-B080-3A017F0944CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC162FB-01FB-42AE-B63F-47E007E469E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC162FB-01FB-42AE-B63F-47E007E469E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC162FB-01FB-42AE-B63F-47E007E469E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC162FB-01FB-42AE-B63F-47E007E469E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\IQCare.CCC\\IQCare.Web.CCC\\IQCare.Web.CCC.csproj
+		SccProjectName1 = ../../IQCare.CCC/IQCare.Web.CCC
+		SccLocalPath1 = ..\\..\\IQCare.CCC\\IQCare.Web.CCC
+		SccProjectUniqueName2 = ..\\..\\IQCare.CCC\\Entities.CCC\\Entities.CCC.csproj
+		SccProjectName2 = ../../IQCare.CCC/Entities.CCC
+		SccLocalPath2 = ..\\..\\IQCare.CCC\\Entities.CCC
+		SccProjectUniqueName3 = ..\\..\\IQCare.CCC\\Interface.CCC\\Interface.CCC.csproj
+		SccProjectName3 = ../../IQCare.CCC/Interface.CCC
+		SccLocalPath3 = ..\\..\\IQCare.CCC\\Interface.CCC
+		SccProjectUniqueName4 = ..\\..\\IQCare.CCC\\DataAccess.CCC\\DataAccess.CCC.csproj
+		SccProjectName4 = ../../IQCare.CCC/DataAccess.CCC
+		SccLocalPath4 = ..\\..\\IQCare.CCC\\DataAccess.CCC
+	EndGlobalSection
+EndGlobal

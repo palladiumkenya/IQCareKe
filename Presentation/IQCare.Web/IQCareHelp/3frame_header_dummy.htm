@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+   <title>Using the 3-Frame Option</title> 
+   <!-- Template design (c) copyright 2008 by Tim Green and EC Software -->
+   <meta name="generator" content="Help &amp; Manual" /> 
+   <meta name="description" content="Using this template project" />
+   <meta name="copyright" content="&copy; 2008 EC Software" /> 
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+   <link type="text/css" href="default.css" rel="stylesheet" /> 
+</head>
+
+<body>
+<div style="padding: 5px 5px 3px 10px">
+<p style="margin: 0px 0px 8px 0px;"><span style="font-size: 12pt; font-weight: bold;">Using the 3-frame layout option in Webhelp</span></p>
+<p style="margin: 0px 0px 0px 24px;">Selecting the Premium Pack <span style="font-style: italic; font-weight: bold;">&quot;3-frame layout&quot;</span> option displays an additional frame above the main help into which you can load an HTML page to integrate the help in your own website. You can define the height and HTML page name in the skin or template file but you must create the HTML page you want to use yourself.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<p style="margin: 0px 0px 0px 24px;">The following instructions apply both for the <span style="font-style: italic;">*.hmxz</span> project template version and for the <span style="font-style: italic;">*.hmxz</span> skin version. For detailed instructions please refer to the Premium Pack help chapter, which you can find in the main Help &amp; Manual Help.</p>
+<p style="margin: 0px 0px 0px 24px;">&nbsp;</p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 3px 24px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:15px"><span style="font-weight: bold; font-size: 10pt; font-family: 'Arial'; color: #000000;">1.</span></td><td>Create the HTML file you want to load in the top frame. It should be suitable for loading into a narrow, banner-type strip.<span style="font-weight: bold;"> </span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 3px 24px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:15px"><span style="font-weight: bold; font-size: 10pt; font-family: 'Arial'; color: #000000;">2.</span></td><td>If you want to store the HTML file in the same folder as your output add the HTML file and any graphics used in it to the Baggage Files section in <span style="font-style: italic;">Project Files &gt; Baggage Files.</span> If your HTML file is stored somewhere else you just need to include the URL to it in the next step.</td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 3px 24px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:15px"><span style="font-weight: bold; font-size: 10pt; font-family: 'Arial'; color: #000000;">3.</span></td><td>Go to <span style="font-style: italic;">Configuration &gt; Common Properties &gt; Text Variables</span> and enter the URL and/or name of the HTML file and the height of the top frame in the variables <span class="f_CourierFixed">3FRAME_PAGE</span> and <span class="f_CourierFixed">3FRAME_HEIGHT.</span> You can also turn on scrollbars in the top frame by entering &quot;yes&quot; or &quot;auto&quot; as the value for <span class="f_CourierFixed">3FRAME_SCROLLING</span> but this is not recommended. Enter &quot;no&quot; for all normal web pages.</td></tr></table></div>
+
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 3px 24px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:15px"><span style="font-weight: bold; font-size: 10pt; font-family: 'Arial'; color: #000000;">4.</span></td><td>Delete the <span class="f_CourierFixed">3frame_header_dummy.htm</span> file containing these instructions from the Baggage section to prevent it from being included with your published output. </td></tr></table></div>
+
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 0px 3px 24px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:15px"><span style="font-weight: bold; font-size: 10pt; font-family: 'Arial'; color: #000000;">5.</span></td><td>When you publish your project select the <span style="font-style: italic; font-weight: bold;">&quot;3-frame layout&quot;</span> option in the <span style="font-style: italic;">Include Options:</span> box in the Publish dialog.</td></tr></table></div>
+
+<p>&nbsp;</p>
+</div>
+</body>
+</html>

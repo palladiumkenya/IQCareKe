@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?><ss:Workbook
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A0094">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A33B8">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090ABAF8">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A4B5C">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A5144">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A52B8">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0809643C">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A55AC">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#969696" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A56A8">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#969696" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A57A4">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#969696" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A58D8">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0809B56C">
+   <ss:Alignment/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A5B1C">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0809C24C">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A4478">
+   <ss:Alignment ss:Vertical="Center"/>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A5048">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A54B0">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc090A59D4">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc090AF3D8090A4A60">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc090A4080090A437C">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc090A2028090A2220">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Center"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="14" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>1</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>11.0.0.6555         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Sheet1">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="12"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="12.75">
+   <ss:Column ss:Width="0.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="445.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="118.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="168.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="44.25" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="113.25" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="120.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="150.0" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="18.0" ss:AutoFitHeight="0" ss:StyleID="wc090A0094">
+    <ss:Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="mc090A2028090A2220">
+     <ss:Data ss:Type="String">                                                                    TB Cases when starting or after starting ARVs</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc090A0094"/>
+    <ss:Cell ss:StyleID="wc090A0094"/>
+    <ss:Cell ss:StyleID="wc090A0094"/>
+    <ss:Cell ss:StyleID="wc090A0094"/>
+   </ss:Row>
+   <ss:Row ss:Height="27.0" ss:AutoFitHeight="0" ss:StyleID="wc090A33B8">
+    <ss:Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="mc090A4080090A437C">
+     <ss:Data ss:Type="String">                                                                     Patients who started ARV during Period              </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc090A33B8"/>
+    <ss:Cell ss:StyleID="wc090A33B8"/>
+    <ss:Cell ss:StyleID="wc090A33B8"/>
+    <ss:Cell ss:StyleID="wc090A33B8"/>
+   </ss:Row>
+   <ss:Row ss:Height="24.75" ss:AutoFitHeight="0" ss:StyleID="wc090A4478">
+    <ss:Cell ss:Index="2" ss:StyleID="wc090ABAF8">
+     <ss:Data ss:Type="String">Facility Name :   St Jone</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc090AF3D8090A4A60">
+     <ss:Data ss:Type="String">Reporting Period:  01-Mar-2009 To 31-Mar-2009</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc090A4B5C"/>
+    <ss:Cell ss:StyleID="wc090A4B5C"/>
+    <ss:Cell ss:StyleID="wc090A4B5C"/>
+    <ss:Cell ss:StyleID="wc090A4B5C"/>
+   </ss:Row>
+   <ss:Row ss:Height="24.75" ss:AutoFitHeight="0" ss:StyleID="wc090A33B8">
+    <ss:Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="mc090A2028090A2220"/>
+   </ss:Row>
+   <ss:Row ss:Height="24.0" ss:AutoFitHeight="0" ss:StyleID="wc090A5048">
+    <ss:Cell ss:StyleID="wc090A5144"/>
+    <ss:Cell ss:StyleID="wc090A52B8">
+     <ss:Data ss:Type="String">Number of Patients started ARVs during this date range :</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809643C">
+     <ss:Data ss:Type="Number">17</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="18.0" ss:AutoFitHeight="0" ss:StyleID="wc090A54B0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc090A55AC"/>
+    <ss:Cell ss:StyleID="wc090A56A8">
+     <ss:Data ss:Type="String">Number of Patients</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc090A57A4">
+     <ss:Data ss:Type="String">As % of patient's on ARVs</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="8">
+    <ss:Cell ss:Index="2" ss:StyleID="wc090A58D8">
+     <ss:Data ss:Type="String">Had TB when starting ARVs</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809B56C">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809B56C">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="11" ss:Height="18.0" ss:AutoFitHeight="0"
+    ss:StyleID="wc090A59D4">
+    <ss:Cell ss:Index="2" ss:StyleID="wc090A5B1C">
+     <ss:Data ss:Type="String">Got TB after starting ARVs of which</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809C24C">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809C24C">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc0809B56C">
+     <ss:Data ss:Type="String">Got TB in Month-3 Year-2009 after starting ARVs</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809B56C">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0809B56C">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet2">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet3">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+  <o:DocumentProperties>
+   <o:Author>User</o:Author>
+   <o:LastAuthor>jdas</o:LastAuthor>
+   <o:Created>2008-12-22T06:20:07Z</o:Created>
+   <o:LastSaved>2009-01-12T09:43:51Z</o:LastSaved>
+   <o:Version>11.9999</o:Version>
+  </o:DocumentProperties>
+</ss:Workbook>

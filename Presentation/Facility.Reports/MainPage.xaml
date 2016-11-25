@@ -1,0 +1,521 @@
+﻿<UserControl xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" 
+             x:Class="Facility.Reports.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:charting="clr-namespace:Microsoft.Windows.Controls.DataVisualization.Charting;assembly=Microsoft.Windows.Controls.DataVisualization" 
+             xmlns:DV="clr-namespace:Microsoft.Windows.Controls.DataVisualization;assembly=Microsoft.Windows.Controls.DataVisualization" 
+             xmlns:sharp="clr-namespace:Facility.Reports"
+             xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:CT="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             mc:Ignorable="d" FontFamily="Arial" d:DesignHeight="480" d:DesignWidth="640">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible" BorderThickness="0">
+        <Grid x:Name="LayoutRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="0" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="320" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="600" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="4" Grid.Column="1">
+                <charting:Chart x:Name="mcChart" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Average Total Cost per Patient per Month (Admin, Consult, All Lab, All Pharmacy)">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadPatientsCostLink" Click="DownloadPatientsCostLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="1">
+                <charting:Chart x:Name="mcChartAvgCD4" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Average CD4 Cost per Patient per Month">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="7" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadPatientsCD4CostLink" Click="DownloadPatientsCD4CostLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="8" Grid.Column="1">
+                <charting:Chart x:Name="mcChartAvgExcludingCD4" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Average Cost of Labs Excluding CD4 per Patient per Month">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="9" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadPatientsExcludingCD4CostLink" Click="DownloadPatientsExcludingCD4CostLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="10" Grid.Column="1">
+                <charting:Chart x:Name="mcChartAvgCostCoveredByProgramPatient" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost1}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost2}"></charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="11" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadAvgCostCoveredByProgramPatientLink" Click="DownloadAvgCostCoveredByProgramPatientLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="12" Grid.Column="1">
+                <charting:Chart x:Name="mcChartArvAvgCostCoveredByProgramPatient" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost1}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost2}"></charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="13" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadArvAvgCostCoveredByProgramPatientLink" Click="DownloadArvAvgCostCoveredByProgramPatientLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="14" Grid.Column="1">
+                <chartingToolkit:Chart Name="mcChartAvgARVandOI" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Total Average Cost of OIs and ARV Drugs per Patient per Month">
+                    <chartingToolkit:Chart.TitleStyle>
+                        <Style TargetType="CT:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </chartingToolkit:Chart.TitleStyle>
+                    <chartingToolkit:Chart.Series>
+                        <sharp:StackedColumnSeries x:Name="series1" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"></sharp:StackedColumnSeries>
+                        <sharp:StackedColumnSeries x:Name="series2" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"></sharp:StackedColumnSeries>
+                    </chartingToolkit:Chart.Series>
+                    <!--<chartingToolkit:Chart.Axes>
+                        <chartingToolkit:LinearAxis Orientation="Y" Location="Left" Title="Cost(KSH)"></chartingToolkit:LinearAxis>
+                    </chartingToolkit:Chart.Axes>-->
+                </chartingToolkit:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="15" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadAvgARVandOILink" Click="DownloadAvgARVandOILink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="16" Grid.Column="1">
+                <chartingToolkit:Chart Name="mcChartCumARVandOI" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Cumulative Average Cost of ARVs and OIs per Patient per Month">
+                    <chartingToolkit:Chart.TitleStyle>
+                        <Style TargetType="CT:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </chartingToolkit:Chart.TitleStyle>
+                    <chartingToolkit:Chart.Series>
+                        <sharp:StackedColumnSeries x:Name="Cumseries1" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"></sharp:StackedColumnSeries>
+                        <sharp:StackedColumnSeries x:Name="Cumseries2" IndependentValueBinding="{Binding Name}" DependentValueBinding="{Binding Value}"></sharp:StackedColumnSeries>
+                    </chartingToolkit:Chart.Series>
+                    <chartingToolkit:Chart.Axes>
+                        <chartingToolkit:LinearAxis Orientation="Y" Location="Left" Title="Cost(KSH)"></chartingToolkit:LinearAxis>
+                    </chartingToolkit:Chart.Axes>
+                </chartingToolkit:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="17" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadCumARVandOILink" Click="DownloadCumARVandOILink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="18" Grid.Column="1">
+                <charting:Chart x:Name="mcChartCumCostCoveredByProgramPatient" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Cumulative Total Cost of OIs Covered by Program, OIs Purchased by Patient per Patient per Month">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:LineSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost1}">
+                    </charting:LineSeries>
+                    <charting:LineSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost2}"></charting:LineSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="19" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadCumCostCoveredByProgramPatientLink" Click="DownloadCumCostCoveredByProgramPatientLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="20" Grid.Column="1">
+                <charting:Chart x:Name="mcChartTotalCostLostToFollowup" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Total Cost of Lost to Follow up per Patient per Month">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:ColumnSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost}">
+                        <charting:ColumnSeries.IndependentCategoryAxis>
+                            <charting:CategoryAxis Orientation="Horizontal" Location="Bottom">
+                                <charting:CategoryAxis.AxisLabelStyle>
+                                    <Style TargetType="charting:AxisLabel">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="charting:AxisLabel">
+                                                    <Grid Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                        <TextBox Text="{Binding}" Grid.Column="0" Height="25" Background="White" Width="60" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                                                            <TextBox.RenderTransform>
+                                                                <RotateTransform Angle="270" CenterY="12" CenterX="12" />
+                                                            </TextBox.RenderTransform>
+                                                        </TextBox>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </charting:CategoryAxis.AxisLabelStyle>
+                            </charting:CategoryAxis>
+                        </charting:ColumnSeries.IndependentCategoryAxis>
+                    </charting:ColumnSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="21" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadTotalCostLostToFollowupLink" Click="DownloadTotalCostLostToFollowupLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="22" Grid.Column="1">
+                <charting:Chart x:Name="mcChartCumTotalCostLostToFollowup" Width="500" Height="300" Background="White" MouseLeftButtonDown="mcChart_MouseLeftButtonDown" HorizontalAlignment="Left" Title="Total Cumulative Cost of Lost to Follow up Patent per Month">
+                    <charting:Chart.TitleStyle>
+                        <Style TargetType="DV:Title">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </charting:Chart.TitleStyle>
+                    <charting:Chart.LegendStyle>
+                        <Style TargetType="DV:Legend">
+                            <Setter Property="Width" Value="0" />
+                            <Setter Property="Height" Value="0" />
+                        </Style>
+                    </charting:Chart.LegendStyle>
+                    <charting:Chart.Axes>
+                        <charting:LinearAxis Orientation="Vertical" Title="Cost(KSH)" />
+                    </charting:Chart.Axes>
+                    <charting:LineSeries Title="Cost" IndependentValueBinding="{Binding Path=MonthYear}" DependentValueBinding="{Binding Path=AvgCost}">
+                    </charting:LineSeries>
+                </charting:Chart>
+            </StackPanel>
+            <StackPanel Grid.Row="23" Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="125" />
+                        <ColumnDefinition Width="25" />
+                    </Grid.ColumnDefinitions>
+                    <HyperlinkButton Content="Export" Foreground="Blue" Name="DownloadCumTotalCostLostToFollowupLink" Click="DownloadCumTotalCostLostToFollowupLink_Click" Grid.Column="1" Grid.Row="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" />
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+
+</UserControl>
+ 
+
+ 

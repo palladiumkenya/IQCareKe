@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MultiSelectList>
+  <TableNamewithColumn DetailTableName="dtl_FollowupEducation" Id="Id, Ptn_pk, CouncellingTopicId, Comments"  Other="Comments" MasterTable="Mst_PMTCTDecode" />
+  <TableNamewithColumn DetailTableName="dtl_PatientOIDeathReason" Id="CareEndedId,Ptn_pk,LocationId,InfectionId,UserId,CreateDate,UpdateDate"  Other="OtherDesc" MasterTable="Mst_HIVDisease" />
+  <TableNamewithColumn DetailTableName="dtl_PatientSymptoms" Id="Ptn_pk,LocationId,Visit_pk,SymptomID,SymptomDescription,UserId,CreateDate,UpdateDate"  Other="SymptomDescription" MasterTable="mst_Symptom" />
+  <TableNamewithColumn DetailTableName="dtl_Adherence_Missed_Reason" Id="Ptn_pk,LocationId,Visit_pk,MissedReasonID,Other_Desc,UserId,CreateDate,UpdateDate"  Other="Other_Desc" MasterTable="mst_reason" />
+</MultiSelectList>

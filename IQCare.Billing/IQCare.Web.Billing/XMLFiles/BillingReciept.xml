@@ -1,0 +1,60 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="RECEIPTDATA" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Receipt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Items" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID"                 type="xs:string" />
+              <xs:element name="BillItemDate"       type="xs:string" />
+              <xs:element name="Item"               type="xs:string" />
+              <xs:element name="Quantity"           type="xs:int" minOccurs="0"/>
+              <xs:element name="SellingPrice"       type="xs:float" minOccurs="0"/>
+              <xs:element name="Amount"             type="xs:float" minOccurs="0"/>
+              <xs:element name="UserFirstName"      type="xs:string" minOccurs="0"/>
+              <xs:element name="UserLastName"       type="xs:string" minOccurs="0"/>
+              <xs:element name="UserID"             type="xs:int" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Transaction" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PatientID"                 type="xs:string" />
+              <xs:element name="PatientLastName"                 type="xs:string" />
+              <xs:element name="PatientFirstName"                 type="xs:string" />
+              <xs:element name="PatientSex"                 type="xs:string" />
+              <xs:element name="PatientAge"                 type="xs:string" />
+              <xs:element name="FacilityName"                 type="xs:string" />
+              <xs:element name="FacilityTel"                 type="xs:string" />
+              <xs:element name="FacilityCell"       type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityFax"        type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityAddress"                 type="xs:string" />
+              <xs:element name="FacilityEmail"                 type="xs:string" />
+              <xs:element name="FacilityFooter"                 type="xs:string" />
+              <xs:element name="FacilityURL"                 type="xs:string" />
+              <xs:element name="FacilityLogo"                 type="xs:string" />
+              <xs:element name="Currency"             type="xs:string" />
+              <xs:element name="InvoiceNumber"             type="xs:string" />
+              <xs:element name="InvoiceDate"            type="xs:dateTime" />
+              <xs:element name="InvoiceAmount"         type="xs:float" />
+              <xs:element name="ReceiptNumber"      type="xs:string" />
+              <xs:element name="Amount"             type="xs:float" minOccurs="0"/>
+              <xs:element name="TenderedAmount"    type="xs:float"  />
+              <xs:element name="OutstandingAmount"    type="xs:float"  />
+			  <xs:element name="AvailableDeposit"         type="xs:float" />
+			  <xs:element name="Change"         		  type="xs:float"  />
+              <xs:element name="TransactionDate"    type="xs:dateTime" minOccurs="0"/>
+              <xs:element name="TransactionType"    type="xs:string" minOccurs="0"/>
+              <xs:element name="RefNumber"          type="xs:string" minOccurs="0"/>
+              <xs:element name="CashierFirstName"      type="xs:string" minOccurs="0"/>
+              <xs:element name="CashierLastName"       type="xs:string" minOccurs="0"/>
+              <xs:element name="CashierUserID"             type="xs:int" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

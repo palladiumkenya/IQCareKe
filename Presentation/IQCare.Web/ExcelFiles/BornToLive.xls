@@ -1,0 +1,2197 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?><ss:Workbook
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc06B25C0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc06B25D0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc06B25E0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A70C0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7240000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7250000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7260000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7270000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"
+    ss:Italic="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9A60000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"
+    ss:Italic="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7280000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"
+    ss:Italic="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7290000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"
+    ss:Italic="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A72A0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7450000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A75D0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7340000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A73C0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7780000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7790000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9AA0000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77B0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77C0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77D0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77F0000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7800000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9AE0000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7890000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A78A0000000000">
+   <ss:Alignment ss:Vertical="Center"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A77A0000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc06B2500000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A78E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A75E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A78F0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9800000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9810000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9820000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7400000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9830000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A73E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9840000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9850000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9860000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9870000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9880000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A9890000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98A0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98B0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98C0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98D0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98E0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A7380000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc08A98F0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A7750008A78C00">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A7860008A78800">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A7750008A77700">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A75B000000000008A75C00">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A753000000000008A75400">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A74C0008A74D00">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A743000000000008A74400">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="8" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A73A000000000008A73B00">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A7320008A73300">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="12" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A7220008A72300">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="12" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A71A0008A71B00">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="9" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc08A70A0008A70B00">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="3.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="14" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>1</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>12.0.0.6502         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Sheet1">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>64</x:TopRowVisible>
+   <x:LeftColumnVisible>3</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="123"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+   <ss:Column ss:Width="12.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="213.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="166.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="163.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="150.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="144.0" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="122.25" ss:AutoFitWidth="0"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc06B25C0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25C0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="18.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc06B25E0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A70A0008A70B00">
+     <ss:Data ss:Type="String"> &quot;BORN TO LIVE&quot; </ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A71A0008A71B00"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7220008A72300">
+     <ss:Data ss:Type="String"> Monitoring &amp; Evaluation Form</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7220008A72300">
+     <ss:Data ss:Type="String">Monthly Report </ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7220008A72300">
+     <ss:Data ss:Type="String">Due: 2nd of every monthly </ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7240000000000"/>
+    <ss:Cell ss:StyleID="wc08A7250000000000"/>
+    <ss:Cell ss:StyleID="wc08A7250000000000"/>
+    <ss:Cell ss:StyleID="wc08A7250000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc06B25D0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7260000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7270000000000"/>
+    <ss:Cell ss:StyleID="wc08A9A60000000000">
+     <ss:Data ss:Type="String">Hospital : St Peters(PMTCT)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9A60000000000">
+     <ss:Data ss:Type="String">Reporting Month :November</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A9A60000000000">
+     <ss:Data ss:Type="String">Compiled Date : 02-Dec-2009</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7290000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="14.25" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7270000000000"/>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7280000000000"/>
+    <ss:Cell ss:StyleID="wc08A7290000000000"/>
+   </ss:Row>
+   <ss:Row ss:Hidden="1" ss:Height="0.0">
+    <ss:Cell ss:StyleID="wc08A72A0000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7320008A73300"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:MergeDown="1" ss:StyleID="mc08A73A000000000008A73B00"/>
+    <ss:Cell ss:MergeDown="1" ss:StyleID="mc08A743000000000008A74400"/>
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc08A74C0008A74D00">
+     <ss:Data ss:Type="String">ANC </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:MergeDown="1" ss:StyleID="mc08A753000000000008A75400">
+     <ss:Data ss:Type="String">Maternity</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeDown="1" ss:StyleID="mc08A753000000000008A75400">
+     <ss:Data ss:Type="String">Postnatal</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeDown="1" ss:StyleID="mc08A75B000000000008A75C00">
+     <ss:Data ss:Type="String">Monthly Total</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="3" ss:StyleID="wc08A7450000000000">
+     <ss:Data ss:Type="String">Static</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7450000000000">
+     <ss:Data ss:Type="String">Mobile</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">A</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Client Visits (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># 1st visits </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Repeat visits</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">B</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Counseling  and Testing  (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7450000000000">
+     <ss:Data ss:Type="String"># 1st visit women known to be HIV+  </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women who had couseling for HIV</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women who had couseling &amp; HIV test</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women who had couseling &amp; HIV test at 1st visit</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women testing HIV positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">C</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77B0000000000">
+     <ss:Data ss:Type="String">Staging  (for current month only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77D0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># women tested for CD4 count</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV+ women staged </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7800000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># women referred as HIV+, HIV-tested &amp; staged. </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">D</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Anti- Retrovirals  (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women issued with sd-NVP(to swallow at onset of labour)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women issued with Infant NVP Syrup(To be given after birth)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Regimen 1: HAART</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># pregnant women &quot;newly enrolled&quot; in HAART</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A77F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV+ pregnant women already started on HAART before 1st ANC visit this month to this facility</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># women continuing on HAART in PMTCT program </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AE0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AE0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Regimen 2. AZT/NVP (with or without 3TC trail)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">6</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Pregnant women&quot;newly enrolled&quot; on AZT (at 28 weeks or later) </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">7</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Pregnant women continuing on AZT </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">8</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women administered NVP+ AZT(600mg) /3TC during delivery</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">9</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants given NVP Syrup and enrolled on AZT (for 6-wks) + 3TC (for 1 wk)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">10</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women completed AZT/3TC (i.e. completed 7-days post-partum) - Dispensed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AE0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">11</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants completed sd-NVP+ AZT (6-wks) + 3TC (1-wk) - Dispensed.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000"/>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Regimen 3: SD-NEVIRAPINE only</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">12</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women administered sd-NVP ONLY During Delivery </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">13</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants administered NVP Syrup ONLY after birth</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">E</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7860008A78800">
+     <ss:Data ss:Type="String">ANC Partner Counseling and testing (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Partners counseled and tested </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Partners tested positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7890000000000"/>
+    <ss:Cell ss:StyleID="wc08A7890000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV +ve male partners newly referred to ART Clinic</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Discordant Couples Reported (for mth only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">F</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="4" ss:StyleID="mc08A7750008A78C00">
+     <ss:Data ss:Type="String">Deliveries (for current month only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="7" ss:StyleID="wc08A7780000000000"
+     ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Total deliveries</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># known HIV-positive women delivered</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">G</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="4" ss:StyleID="mc08A7750008A78C00">
+     <ss:Data ss:Type="String">Cotrimoxazole (for current month only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="7" ss:StyleID="wc08A7780000000000"
+     ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women started on Cotrimoxazole</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women continuing on Cotrimoxazole</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Exposed infants started on Cotrimoxazole </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants continuing on Cotrimoxazole</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">H</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Early Infant Diagnosis &amp; Rapid Tests (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants tested by PCR at 6 weeks - 3 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Reactive infants at 6 weeks - 3 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Non-reactive infants at 6 weeks - 3 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># infants tested by PCR at &gt;3months - 17 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Reactive infants of PCR at &gt;3months - 17 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">6</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Non-reactive infants of PCR at &gt;3months - 17 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">7</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Reactive infants tested by anti-body test at 18 Months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">8</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Non-reactive infants tested by anti-body test at 18 Months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">I</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77B0000000000">
+     <ss:Data ss:Type="String">Referals of HIV + Clients (for current month only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77D0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV + Mothers referred to CCC for follow-up </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc06B2500000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Exposed infants referred to CCC for follow-up</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A78E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A78E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">J</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77B0000000000">
+     <ss:Data ss:Type="String">Children (0-4 Years) ART (for current month only)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A77B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A75E0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Children newly enrolled for HIV care </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Children started on ARVs by the end of the month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Children enrolled &amp; eligible for ART but have not been started on ART</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">K</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Breastfeeding (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV-positive women counseled on infant feeding </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A78A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Women reported exclusive breastfeeding practices </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Infants receiving replacement feeding </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># women counseled in sexual and reproductive health, natural FP</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A75D0000000000">
+     <ss:Data ss:Type="String">L</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:MergeAcross="5" ss:StyleID="mc08A7750008A77700">
+     <ss:Data ss:Type="String">Community follow-up and Referrals (for current month only)</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Exposed Infants on followup</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A77F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">2</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># HIV+ Women on followup</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">3</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Patients with reported community follow-up via mentor mother* or Men Taking Action (MTA) affiliate champion.</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A77A0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A7340000000000">
+     <ss:Data ss:Type="Number">4</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000">
+     <ss:Data ss:Type="String"># Community referrals (new enrollments) for ANC and/or HIV services made/completed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7790000000000"/>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="34.49999999999999" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A78F0000000000">
+     <ss:Data ss:Type="Number">5</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9800000000000">
+     <ss:Data ss:Type="String"># PMTCT-CCC clients reported as lost to follow-up (missed appointments, being tracked as defaulter either pregnant/HAART or short-course AZT-NVP client)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A73C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9AA0000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A7780000000000" ss:Formula="=SUM(RC[-2]:RC[-1])">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9810000000000">
+     <ss:Data ss:Type="String">Compiled by :</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9810000000000"/>
+    <ss:Cell ss:StyleID="wc08A9810000000000"/>
+    <ss:Cell ss:StyleID="wc08A9810000000000"/>
+    <ss:Cell ss:StyleID="wc08A9810000000000"/>
+    <ss:Cell ss:StyleID="wc08A9820000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A70C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7400000000000">
+     <ss:Data ss:Type="String">_____________________________________</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9830000000000">
+     <ss:Data ss:Type="String">_______________________</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A73E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A9840000000000"/>
+    <ss:Cell ss:StyleID="wc08A7400000000000"/>
+    <ss:Cell ss:StyleID="wc08A9850000000000">
+     <ss:Data ss:Type="String">________</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A9860000000000"/>
+    <ss:Cell ss:StyleID="wc08A9870000000000">
+     <ss:Data ss:Type="String">Name and designation</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc08A9880000000000">
+     <ss:Data ss:Type="String">Signature </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="5" ss:StyleID="wc08A9890000000000"/>
+    <ss:Cell ss:StyleID="wc08A9870000000000"/>
+    <ss:Cell ss:StyleID="wc08A98A0000000000">
+     <ss:Data ss:Type="String">Date</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98D0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98D0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98D0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98D0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98E0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98B0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98C0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A7380000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+    <ss:Cell ss:StyleID="wc08A98F0000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet2">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet3">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+  </ss:Table>
+ </ss:Worksheet>
+  <o:DocumentProperties>
+   <o:Author>User</o:Author>
+   <o:LastAuthor>User</o:LastAuthor>
+   <o:LastPrinted>2009-11-24T12:32:44Z</o:LastPrinted>
+   <o:Created>2009-11-24T12:17:23Z</o:Created>
+   <o:LastSaved>2009-12-02T07:53:34Z</o:LastSaved>
+   <o:Company>Futures Group</o:Company>
+   <o:Version>12.00</o:Version>
+  </o:DocumentProperties>
+</ss:Workbook>

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.IQControl", "..\..\IQCare.Library\IQCare.IQControl\IQCare.IQControl.csproj", "{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareCustomReportConfig", "..\..\IQCare.Library\IQCareReport\IQCareCustomReportConfig.csproj", "{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\IQCare.Library\\IQCare.IQControl\\IQCare.IQControl.csproj
+		SccProjectName1 = ../../IQCare.Library/IQCare.IQControl
+		SccLocalPath1 = ..\\..\\IQCare.Library\\IQCare.IQControl
+		SccProjectUniqueName2 = ..\\..\\IQCare.Library\\IQCareReport\\IQCareCustomReportConfig.csproj
+		SccProjectName2 = ../../IQCare.Library/IQCareReport
+		SccLocalPath2 = ..\\..\\IQCare.Library\\IQCareReport
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<ss:Workbook xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0A04590000000000">
+   <ss:Alignment/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0A26000000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0A26070000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font/>
+   <ss:Interior/>
+   <ss:NumberFormat ss:Format="d/mmm/yy"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc0A04550000000000">
+   <ss:Alignment/>
+   <ss:Font ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>4</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>12.0.0.6211         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Sheet1">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="2"
+   ss:DefaultColumnWidth="108.75" ss:DefaultRowHeight="12.75">
+   <ss:Row ss:StyleID="wc0A04550000000000">
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Patient Name</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Enrollment No</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Exiting Patient ID</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Date Dispensed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Longest Duration</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Next Collection</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Days</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A04590000000000">
+     <ss:Data ss:Type="String">Late/Early</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc0A26000000000000">
+     <ss:Data ss:Type="String">check  form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A26000000000000">
+     <ss:Data ss:Type="String">12-11-10-454</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A26000000000000"/>
+    <ss:Cell ss:StyleID="wc0A26070000000000">
+     <ss:Data ss:Type="DateTime">2009-11-01</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A26000000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A26000000000000"/>
+    <ss:Cell ss:StyleID="wc0A26000000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc0A26000000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet2">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet3">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+ </ss:Worksheet>
+</ss:Workbook>

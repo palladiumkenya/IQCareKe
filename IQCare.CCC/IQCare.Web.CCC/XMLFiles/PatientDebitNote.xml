@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+              <xs:element name="TransactionDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BillDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="BillId" type="xs:int" minOccurs="0" />
+              <xs:element name="quantity" type="xs:int" minOccurs="0" />
+              <xs:element name="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Adminsitration" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Cost" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ChargedPrice" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="LastName" type="xs:string" minOccurs="0" />
+              <xs:element name="LocationID" type="xs:int" minOccurs="0" />
+              <xs:element name="CountryID" type="xs:string" minOccurs="0" />
+              <xs:element name="PosID" type="xs:string" minOccurs="0" />
+              <xs:element name="SatelliteID" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientEnrollmentID" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientClinicID" type="xs:string" minOccurs="0" />
+              <xs:element name="RegistrationDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Sex" type="xs:int" minOccurs="0" />
+              <xs:element name="DOB" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VillageName" type="xs:int" minOccurs="0" />
+              <xs:element name="DistrictName" type="xs:int" minOccurs="0" />
+              <xs:element name="Province" type="xs:int" minOccurs="0" />
+              <xs:element name="Address" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone" type="xs:string" minOccurs="0" />
+              <xs:element name="MaritalStatus" type="xs:int" minOccurs="0" />
+              <xs:element name="EducationLevel" type="xs:int" minOccurs="0" />
+              <xs:element name="Literacy" type="xs:int" minOccurs="0" />
+              <xs:element name="EmployeeID" type="xs:int" minOccurs="0" />
+              <xs:element name="Status" type="xs:int" minOccurs="0" />
+              <xs:element name="StatusChangedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IQNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="Notes" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

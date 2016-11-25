@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC234801-3F23-4C49-8250-72573B1953E4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQCare.Web</RootNamespace>
+    <AssemblyName>IQCare.Web.Billing</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
+    <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <DesktopBuildPackageLocation>
+    </DesktopBuildPackageLocation>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\Library\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Common">
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Logger">
+      <HintPath>..\..\References\Application.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\..\Library\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Administration">
+      <HintPath>..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Billing">
+      <HintPath>..\..\References\Entities.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Clinical">
+      <HintPath>..\..\References\Entities.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Lookup">
+      <HintPath>..\..\References\Entities.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore">
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Administration">
+      <HintPath>..\..\References\Interface.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Billing">
+      <HintPath>..\..\References\Interface.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Clinical">
+      <HintPath>..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Laboratory">
+      <HintPath>..\..\References\Interface.Laboratory.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Lookup">
+      <HintPath>..\..\References\Interface.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PatientCore">
+      <HintPath>..\..\References\Interface.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Pharmacy">
+      <HintPath>..\..\References\Interface.Pharmacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Reports">
+      <HintPath>..\..\References\Interface.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Scheduler">
+      <HintPath>..\..\References\Interface.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Billing.Logic">
+      <HintPath>..\..\References\IQCare.Billing.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.CustomConfig">
+      <HintPath>..\..\References\IQCare.CustomConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\IQCare.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.UILogic">
+      <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.WebService">
+      <HintPath>..\..\References\IQCare.Web.WebService.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Owc11, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\..\..\Library\Microsoft.Office.Interop.Owc11.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.UI, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Billing\BillKnockOff.aspx" />
+    <Content Include="Billing\Default.aspx" />
+    <Content Include="Billing\frmBillingAdmin_PaymentType.aspx" />
+    <Content Include="Billing\frmBillingFindAddBill.aspx" />
+    <Content Include="Billing\frmBillingReportPage.aspx" />
+    <Content Include="Billing\frmBilling_BillingPanel.aspx" />
+    <Content Include="Billing\frmBilling_ClientBill.aspx" />
+    <Content Include="Billing\frmBilling_Discount.aspx" />
+    <Content Include="Billing\frmBilling_Invoice.aspx" />
+    <Content Include="Billing\frmBilling_PayBill.aspx" />
+    <Content Include="Billing\frmBilling_PriceList.aspx" />
+    <Content Include="Billing\frmBilling_Reciept.aspx" />
+    <Content Include="Billing\frmBilling_Reports.aspx" />
+    <Content Include="Billing\frmBilling_ReversalApproval.aspx" />
+    <Content Include="Billing\frmCustomReportPrint.aspx" />
+    <Content Include="Billing\frmFindPatient.aspx" />
+    <Content Include="Billing\Home.aspx" />
+    <Content Include="Billing\PatientDeposits.ascx" />
+    <Content Include="Billing\PayBillCashAndDeposit.ascx" />
+    <Content Include="Billing\PayBillCorporate.ascx" />
+    <Content Include="Billing\PayBillExempt.ascx" />
+    <Content Include="Billing\PriceList_1_0.xsl" />
+    <Content Include="Billing\PrintPriceList.aspx" />
+    <Content Include="Billing\TransactionReversal.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Billing\BillKnockOff.aspx.cs">
+      <DependentUpon>BillKnockOff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\BillKnockOff.aspx.designer.cs">
+      <DependentUpon>BillKnockOff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBillingAdmin_PaymentType.aspx.cs">
+      <DependentUpon>frmBillingAdmin_PaymentType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBillingAdmin_PaymentType.aspx.designer.cs">
+      <DependentUpon>frmBillingAdmin_PaymentType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBillingFindAddBill.aspx.cs">
+      <DependentUpon>frmBillingFindAddBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBillingFindAddBill.aspx.designer.cs">
+      <DependentUpon>frmBillingFindAddBill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBillingReportPage.aspx.cs">
+      <DependentUpon>frmBillingReportPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBillingReportPage.aspx.designer.cs">
+      <DependentUpon>frmBillingReportPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_BillingPanel.aspx.cs">
+      <DependentUpon>frmBilling_BillingPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_BillingPanel.aspx.designer.cs">
+      <DependentUpon>frmBilling_BillingPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_ClientBill.aspx.cs">
+      <DependentUpon>frmBilling_ClientBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_ClientBill.aspx.designer.cs">
+      <DependentUpon>frmBilling_ClientBill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Discount.aspx.cs">
+      <DependentUpon>frmBilling_Discount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Discount.aspx.designer.cs">
+      <DependentUpon>frmBilling_Discount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Invoice.aspx.cs">
+      <DependentUpon>frmBilling_Invoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Invoice.aspx.designer.cs">
+      <DependentUpon>frmBilling_Invoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_PayBill.aspx.cs">
+      <DependentUpon>frmBilling_PayBill.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_PayBill.aspx.designer.cs">
+      <DependentUpon>frmBilling_PayBill.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_PriceList.aspx.cs">
+      <DependentUpon>frmBilling_PriceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_PriceList.aspx.designer.cs">
+      <DependentUpon>frmBilling_PriceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Reciept.aspx.cs">
+      <DependentUpon>frmBilling_Reciept.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Reciept.aspx.designer.cs">
+      <DependentUpon>frmBilling_Reciept.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Reports.aspx.cs">
+      <DependentUpon>frmBilling_Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_Reports.aspx.designer.cs">
+      <DependentUpon>frmBilling_Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmBilling_ReversalApproval.aspx.cs">
+      <DependentUpon>frmBilling_ReversalApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmBilling_ReversalApproval.aspx.designer.cs">
+      <DependentUpon>frmBilling_ReversalApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmCustomReportPrint.aspx.cs">
+      <DependentUpon>frmCustomReportPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmCustomReportPrint.aspx.designer.cs">
+      <DependentUpon>frmCustomReportPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\frmFindPatient.aspx.cs">
+      <DependentUpon>frmFindPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\frmFindPatient.aspx.designer.cs">
+      <DependentUpon>frmFindPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\PatientDeposits.ascx.cs">
+      <DependentUpon>PatientDeposits.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\PatientDeposits.ascx.designer.cs">
+      <DependentUpon>PatientDeposits.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\PayBillCashAndDeposit.ascx.cs">
+      <DependentUpon>PayBillCashAndDeposit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\PayBillCashAndDeposit.ascx.designer.cs">
+      <DependentUpon>PayBillCashAndDeposit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\PayBillCorporate.ascx.cs">
+      <DependentUpon>PayBillCorporate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\PayBillCorporate.ascx.designer.cs">
+      <DependentUpon>PayBillCorporate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\PayBillExempt.ascx.cs">
+      <DependentUpon>PayBillExempt.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\PayBillExempt.ascx.designer.cs">
+      <DependentUpon>PayBillExempt.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\PrintPriceList.aspx.cs">
+      <DependentUpon>PrintPriceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\PrintPriceList.aspx.designer.cs">
+      <DependentUpon>PrintPriceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Billing\Reports\BillingOutstandingSalesDetails.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingOutstandingSalesDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\BillingOutstandingSalesSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingOutstandingSalesSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\BillingSalesSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BillingSalesSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\CashMovement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CashMovement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\CollectionSummaryByPaymentMode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionSummaryByPaymentMode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DailyCashierSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyCashierSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DailyCollectionSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyCollectionSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DailyDepartmentalCollection.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailyDepartmentalCollection.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DepartmentalCashCollection.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentalCashCollection.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DepartmentalSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepartmentalSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\DepositReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepositReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\FacilityMonthlyCollection.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FacilityMonthlyCollection.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\ReversalReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReversalReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\rptBillingReciept.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBillingReciept.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\rptBillingRecieptThermal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBillingRecieptThermal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\rptInvoice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptInvoice.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\Reports\rptRevenueSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptRevenueSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Billing\TransactionReversal.ascx.cs">
+      <DependentUpon>TransactionReversal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Billing\TransactionReversal.ascx.designer.cs">
+      <DependentUpon>TransactionReversal.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Billing\Reports\BillingOutstandingSalesDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillingOutstandingSalesDetails.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\BillingOutstandingSalesSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillingOutstandingSalesSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\BillingSalesSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BillingSalesSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\CashMovement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CashMovement.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\CollectionSummaryByPaymentMode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CollectionSummaryByPaymentMode.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DailyCashierSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DailyCashierSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DailyCollectionSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DailyCollectionSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DailyDepartmentalCollection.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DailyDepartmentalCollection.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DepartmentalCashCollection.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepartmentalCashCollection.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DepartmentalSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepartmentalSummary.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\DepositReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DepositReceipt.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\FacilityMonthlyCollection.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FacilityMonthlyCollection.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\ReversalReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReversalReceipt.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\rptBillingReciept.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBillingReciept.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\rptBillingRecieptThermal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBillingRecieptThermal.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\rptInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptInvoice.cs</LastGenOutput>
+    </Content>
+    <Content Include="Billing\Reports\rptRevenueSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptRevenueSummary.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49795</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
+	<Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />	
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

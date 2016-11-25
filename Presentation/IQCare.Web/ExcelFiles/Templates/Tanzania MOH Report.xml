@@ -1,0 +1,1065 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Stacey Berlow</Author>
+  <LastAuthor>User</LastAuthor>
+  <Created>2009-02-22T08:24:01Z</Created>
+  <LastSaved>2010-02-18T10:27:07Z</LastSaved>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>7935</WindowHeight>
+  <WindowWidth>14220</WindowWidth>
+  <WindowTopX>-165</WindowTopX>
+  <WindowTopY>-165</WindowTopY>
+  <TabRatio>692</TabRatio>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m82921700">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="m82921710">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s36">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s37">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s38">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s39">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+  </Style>
+  <Style ss:ID="s40">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#333300" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s41">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s42">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s43">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#333300" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s44">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#333300" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s45">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF0000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s46">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s47">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s48">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF0000"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s49">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF0000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s50">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s51">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+   <NumberFormat ss:Format="0"/>
+  </Style>
+  <Style ss:ID="s52">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF0000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s53">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF0000" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s54">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s55">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s57">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s58">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s59">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s60">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#333300"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s61">
+   <Alignment ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600"/>
+  </Style>
+  <Style ss:ID="s64">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s65">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s66">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="8" ss:Color="#FF6600"/>
+   <Interior/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Monthly MoH   no">
+  <Table ss:ExpandedColumnCount="55" ss:ExpandedRowCount="60" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s21" ss:DefaultColumnWidth="31.5"
+   ss:DefaultRowHeight="11.25">
+   <Column ss:StyleID="s22" ss:AutoFitWidth="0" ss:Width="280.5"/>
+   <Column ss:StyleID="s23" ss:AutoFitWidth="0" ss:Width="75.75"/>
+   <Column ss:StyleID="s23" ss:AutoFitWidth="0" ss:Width="67.5"/>
+   <Column ss:StyleID="s22" ss:AutoFitWidth="0" ss:Width="148.5"/>
+   <Column ss:StyleID="s22" ss:AutoFitWidth="0" ss:Width="183"/>
+   <Row ss:AutoFitHeight="0" ss:Height="15.75">
+    <Cell ss:MergeAcross="1" ss:StyleID="m82921700"><Data ss:Type="String">PMTCT Monthly Report Form - MOH</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:MergeAcross="1" ss:StyleID="m82921710"><Data ss:Type="String">FOR THE MONTH OF</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s39"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="17.25" ss:StyleID="s40">
+    <Cell ss:StyleID="s41"><Data ss:Type="String">ANC Counseling and Testing</Data></Cell>
+    <Cell ss:StyleID="s41"><Data ss:Type="String">Result</Data></Cell>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s43"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s45">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 01. New ANC clients this month</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 02. Previously known to be HIV positive</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 03. Total number tasted</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 04. Number of new client had HIV test at ANC</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 05. Tested HIV-Positive</Data></Cell>
+    <Cell ss:StyleID="s50"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s51"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 06. Post-test counseled for positive and negative</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 07. Number of partners tested for HIV</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">ANC 08. Tested HIV-Positive</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s41"><Data ss:Type="String">PMTCT Maternity (L&amp;D) Monthly Summary Form</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s45">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">All women attending L&amp;D for the given report period</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s45">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 01 Number of women who delivered</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 02 Number of women with known HIV status from ANC </Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 03 Number of women with known HIV-Positive status</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 04 Number of women with unknown HIV status at delivery</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 05 Number of women tested for HIV at/after delivery </Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 06 Number of women tested HIV-Positive at/after delivery </Data></Cell>
+    <Cell ss:StyleID="s50"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s51"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s41"><Data ss:Type="String">All HIV positive women</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s52">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 07. All HIV-Positive(MAT03+MAT06)</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s53"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 08. Number who swallowed NVP only at L&amp;D</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s51"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 09. Number who swallowed NVP, AZT &amp; 3TC at L&amp;D</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 10. Number who are on ART at L&amp;D</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 11. Number of women dispensed with Tail*</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT12. Number of infant(s) received NVP</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT13. Number of infant(s) who were discharged with 1 week AZT</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s55"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT13. Number of infant(s) who were discharged with 4 weeks AZT</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 14. Number started on exclusive breastfeed</Data></Cell>
+    <Cell ss:StyleID="s50"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 15. Number started to replacement feed</Data></Cell>
+    <Cell ss:StyleID="s50"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MAT 16.  Number discharged with CTC appointment</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s59"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s41"><Data ss:Type="String">Mother Child Follow up Monthly Summary Form</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s40">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 1. Total number of HV-exposed children newly registered this month</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 2. Total number on Exclusive Breast Feeding</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 3. Total number on Exclusive Replacement Feeding</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 4. Total number of children initiated on contrimoxazole this month</Data></Cell>
+    <Cell ss:StyleID="s61"/>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="22.5">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 5. Total number of children initiated on contrimoxazole by 2 months of age</Data></Cell>
+    <Cell ss:StyleID="s61"/>
+    <Cell ss:StyleID="s62"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 6. Total number of children tested this month</Data></Cell>
+    <Cell ss:StyleID="s61"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 7. Total number of children tested for HIV positive by using PCR</Data></Cell>
+    <Cell ss:StyleID="s61"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 8. Total number of children tested for HIV positive by using Ab Test</Data></Cell>
+    <Cell ss:StyleID="s61"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 9. Total number of children tested for confirmed positive 18 months</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="22.5">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 10. Total number of children tested for confirmed positive by using PCR</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 11. Total number of children referred to CTC</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 12. Number using FP Methods</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s41"><Data ss:Type="String">PMTCT Care Monthly Summary Form</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s45">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 1. Number of client enrolled this month</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 2. Number of client started on contrimoxazole </Data></Cell>
+    <Cell ss:StyleID="s50"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 3. Number counselled on Infant Feeding</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 4. Number disclosed their HIV status</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">PCR 5. Number of client staged for ART eligibility this month</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">PCR 6. Number of client reported medically eligible this month</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s65"/>
+    <Cell ss:StyleID="s66"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 7. Number of client enrolled on CTC this month</Data></Cell>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s47"/>
+    <Cell ss:StyleID="s42"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 8. Number given NVP at ANC</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">MC 9. Number given AZT and NVP at ANC</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">PCR 10. Number taking ART at ANC</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s55"/>
+    <Cell ss:StyleID="s42"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:Index="3" ss:StyleID="s38"/>
+    <Cell ss:StyleID="s39"/>
+    <Cell ss:StyleID="s39"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Unsynced/>
+   <Selected/>
+   <TopRowVisible>27</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>32</ActiveRow>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

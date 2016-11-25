@@ -1,0 +1,195 @@
+/*
+//************************************************************************************
+// weeklycalendar 
+// Copyright (C) 2006, Massimo Beatini
+//
+// This software is provided "as-is", without any express or implied warranty. In 
+// no event will the authors be held liable for any damages arising from the use 
+// of this software.
+//
+// Permission is granted to anyone to use this software for any purpose, including 
+// commercial applications, and to alter it and redistribute it freely, subject to 
+// the following restrictions:
+//
+// 1. The origin of this software must not be misrepresented; you must not claim 
+//    that you wrote the original software. If you use this software in a product, 
+//    an acknowledgment in the product documentation would be appreciated but is 
+//    not required.
+//
+// 2. Altered source versions must be plainly marked as such, and must not be 
+//    misrepresented as being the original software.
+//
+// 3. This notice may not be removed or altered from any source distribution.
+//
+//************************************************************************************
+*/
+/* CSS Document */
+/*Altered by Futures Group*/
+
+div.calendar {
+	font-family: Arial,  Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	background-color: #ffffff;
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:190px;
+	height:auto;
+	z-index:1000;
+	cursor: pointer;
+	visibility: hidden;
+	border: 1px solid #666699;
+	
+
+	
+}
+table.calendar {
+	font-family:  Arial, Helvetica, Verdana,sans-serif;
+	font-size: 11px;
+	border: none;
+	width:100%;
+}
+tr.firstrow 
+{
+	background-color: #666699;
+}
+td.day {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border:none;
+	width: 14%;
+	text-align: center;
+}
+td.today {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border: 1px solid #666699;
+	width: 14%;
+	text-align: center;
+	color: #CC0000;
+}
+
+
+td.weekends 
+{
+	background-color:#FFFFFF;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border:none;
+	width: 14%;
+	text-align: center;
+}
+
+td.weekends_out 
+{
+	background-color:#FFFFFF;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border:none;
+	width: 14%;
+	color: #CCCCCC;
+	text-align: center;
+}
+td.day_out {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	width: 14%;
+	text-align: center;
+	color: #CCCCCC;
+	background-color: #ffffff;
+}
+td.day_c {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border: 1px solid #666699;
+	width: 14%;
+	text-align: center;
+	color: white;
+	background-color: black;
+	
+}
+
+
+
+/* class to hidden week col*/
+td.weekhidden
+{
+	display:none;
+}
+td.week
+{
+	font-weight: bold;
+	font-size: 11px;
+	width: 14%;
+	color: #000000;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	background-color: #FFFFFF;
+	text-align: center;
+}
+td.weeksel
+{
+	font-weight: bold;
+	font-size: 11px;
+	width: 14%;
+	color: #000066;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	background-color: #ffffff;
+	text-align: center;
+}
+
+td.wd {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000066;
+	background-color: #FFFFFF;	
+	text-align: center;
+	width: 14%;
+}
+
+
+
+td.closew {
+		font-family: Arial, Helvetica, Verdana, sans-serif;
+
+	font-size: 11px;
+	border: 1px none #000033;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: black;
+	font-variant: small-caps;
+	text-align: center;
+	width: 14%;
+}
+td.nav {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	font-size: 11px;
+	width: 14%;
+	text-align: center;
+	border: none;
+	background-color: #000066;
+
+}
+select.nav {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	
+	font-size: 10px;
+	text-align: left;
+	background-color: #ffffff;
+	color: #000000;
+	border: none;
+}
+
+td.divider
+
+{
+height:1px;
+background-color:#666699;
+}

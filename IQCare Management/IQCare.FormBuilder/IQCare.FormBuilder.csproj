@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC595C57-2718-4639-AD31-25CF08BF1A2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQCare.FormBuilder</RootNamespace>
+    <AssemblyName>IQCare.FormBuilder</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\management\</RedDir>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\obj\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.ActiveQueryBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDatabaseSoftware.EventMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.EventMetadataProvider2.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDatabaseSoftware.ExpressionEditor2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.ExpressionEditor2.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDatabaseSoftware.OLEDBMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveDatabaseSoftware.UniversalMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\ActiveDatabaseSoftware.UniversalMetadataProvider2.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Application.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Interface.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.FormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Interface.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmConfigLabTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigLabTest.Designer.cs">
+      <DependentUpon>frmConfigLabTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormBuilder.Designer.cs">
+      <DependentUpon>frmFormBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormBusinessRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormBusinessRule.Designer.cs">
+      <DependentUpon>frmFormBusinessRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormModuleLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormModuleLink.Designer.cs">
+      <DependentUpon>frmFormModuleLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmICD10Selector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmICD10Selector.Designer.cs">
+      <DependentUpon>frmICD10Selector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportExportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportExportData.Designer.cs">
+      <DependentUpon>frmImportExportData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageFBTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageFBTab.Designer.cs">
+      <DependentUpon>frmManageFBTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMasterList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMasterList.Designer.cs">
+      <DependentUpon>frmMasterList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrderForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrderForms.Designer.cs">
+      <DependentUpon>frmOrderForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCareEndConditionalDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCareEndConditionalDisplay.Designer.cs">
+      <DependentUpon>frmCareEndConditionalDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCareEnded.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCareEnded.Designer.cs">
+      <DependentUpon>frmCareEnded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCareEndedList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCareEndedList.Designer.cs">
+      <DependentUpon>frmCareEndedList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConditionalDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConditionalDisplay.Designer.cs">
+      <DependentUpon>frmConditionalDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientRegistrationFormBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientRegistrationFormBuilder.Designer.cs">
+      <DependentUpon>frmPatientRegistrationFormBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientRegistrationManageForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientRegistrationManageForms.Designer.cs">
+      <DependentUpon>frmPatientRegistrationManageForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRptFieldValidations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRptFieldValidations.Designer.cs">
+      <DependentUpon>frmRptFieldValidations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSCM_PharmacyMasterImportExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSCM_PharmacyMasterImportExport.Designer.cs">
+      <DependentUpon>frmSCM_PharmacyMasterImportExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmServiceBusinessRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServiceBusinessRule.Designer.cs">
+      <DependentUpon>frmServiceBusinessRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplFormLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplFormLink.Designer.cs">
+      <DependentUpon>frmSplFormLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHomePage.Designer.cs">
+      <DependentUpon>frmHomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="clsCommon.cs" />
+    <Compile Include="frmBusinessRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBusinessRule.Designer.cs">
+      <DependentUpon>frmBusinessRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFieldDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFieldDetails.Designer.cs">
+      <DependentUpon>frmFieldDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomePageList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHomePageList.Designer.cs">
+      <DependentUpon>frmHomePageList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportExportForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportExportForms.Designer.cs">
+      <DependentUpon>frmImportExportForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageForms.Designer.cs">
+      <DependentUpon>frmManageForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageSection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageSection.Designer.cs">
+      <DependentUpon>frmManageSection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModule.Designer.cs">
+      <DependentUpon>frmModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModuleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModuleDetails.Designer.cs">
+      <DependentUpon>frmModuleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPreview.Designer.cs">
+      <DependentUpon>frmPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuery.Designer.cs">
+      <DependentUpon>frmQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQueryBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQueryBuilder.designer.cs">
+      <DependentUpon>frmQueryBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSelectList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSelectList.Designer.cs">
+      <DependentUpon>frmSelectList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewAssociation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewAssociation.Designer.cs">
+      <DependentUpon>frmViewAssociation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gridviewform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gridviewform.Designer.cs">
+      <DependentUpon>Gridviewform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserCtrlFormBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserCtrlFormBuilder.Designer.cs">
+      <DependentUpon>UserCtrlFormBuilder.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmFormBuilder.resx">
+      <DependentUpon>frmFormBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormBusinessRule.resx">
+      <DependentUpon>frmFormBusinessRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormModuleLink.resx">
+      <DependentUpon>frmFormModuleLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmICD10Selector.resx">
+      <DependentUpon>frmICD10Selector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportExportData.resx">
+      <DependentUpon>frmImportExportData.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageFBTab.resx">
+      <DependentUpon>frmManageFBTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMasterList.resx">
+      <DependentUpon>frmMasterList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrderForms.resx">
+      <DependentUpon>frmOrderForms.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCareEndConditionalDisplay.resx">
+      <DependentUpon>frmCareEndConditionalDisplay.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCareEnded.resx">
+      <DependentUpon>frmCareEnded.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCareEndedList.resx">
+      <DependentUpon>frmCareEndedList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConditionalDisplay.resx">
+      <DependentUpon>frmConditionalDisplay.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientRegistrationFormBuilder.resx">
+      <DependentUpon>frmPatientRegistrationFormBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientRegistrationManageForms.resx">
+      <DependentUpon>frmPatientRegistrationManageForms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRptFieldValidations.resx">
+      <DependentUpon>frmRptFieldValidations.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSCM_PharmacyMasterImportExport.resx">
+      <DependentUpon>frmSCM_PharmacyMasterImportExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServiceBusinessRule.resx">
+      <DependentUpon>frmServiceBusinessRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplFormLink.resx">
+      <DependentUpon>frmSplFormLink.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHomePage.resx">
+      <DependentUpon>frmHomePage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBusinessRule.resx">
+      <DependentUpon>frmBusinessRule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFieldDetails.resx">
+      <DependentUpon>frmFieldDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHomePageList.resx">
+      <DependentUpon>frmHomePageList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportExportForms.resx">
+      <DependentUpon>frmImportExportForms.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageForms.resx">
+      <DependentUpon>frmManageForms.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageSection.resx">
+      <DependentUpon>frmManageSection.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModule.resx">
+      <DependentUpon>frmModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModuleDetails.resx">
+      <DependentUpon>frmModuleDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPreview.resx">
+      <DependentUpon>frmPreview.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuery.resx">
+      <DependentUpon>frmQuery.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQueryBuilder.resx">
+      <DependentUpon>frmQueryBuilder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSelectList.resx">
+      <DependentUpon>frmSelectList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewAssociation.resx">
+      <DependentUpon>frmViewAssociation.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gridviewform.resx">
+      <DependentUpon>Gridviewform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\UserCtrlFormBuilder.resx">
+      <DependentUpon>UserCtrlFormBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnUp.Image.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnDown.Image.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FileMove.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+  </Target>
+</Project>

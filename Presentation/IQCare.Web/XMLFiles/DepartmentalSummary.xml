@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="ReportData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="DepartmentalSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Facility" maxOccurs="1" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string" minOccurs="0" />
+              <xs:element name="logo" type="xs:string" minOccurs="0" />
+              <xs:element name="motto" type="xs:string" minOccurs="0" />
+              <xs:element name="address" type="xs:string" minOccurs="0" />
+              <xs:element name="tel" type="xs:string" minOccurs="0" />
+              <xs:element name="cell" type="xs:string" minOccurs="0" />
+              <xs:element name="fax" type="xs:string" minOccurs="0" />
+              <xs:element name="email" type="xs:string" minOccurs="0" />
+              <xs:element name="url" type="xs:string" minOccurs="0" />
+              <xs:element name="footer" type="xs:string" minOccurs="0" />
+              <xs:element name="template" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DailyCollection" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="date" 			      type="xs:date" 		minOccurs="0" 	/>
+              <xs:element name="department" 	    type="xs:string" 	minOccurs="0" 	/>
+              <xs:element name="paymentname" 		  type="xs:string" 	minOccurs="0" />
+              <xs:element name="billamount"    	  type="xs:float" 	minOccurs="0"   default="0.00" />
+              <xs:element name="amount" 	        type="xs:float" 	minOccurs="0" 	default="0.00" />
+              <xs:element name="amountpayable" 	  type="xs:float" 	minOccurs="0" 	default="0.00" />
+              <xs:element name="collectedamount" 	type="xs:float" 	minOccurs="0" 	default="0.00"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

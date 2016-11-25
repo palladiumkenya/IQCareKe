@@ -1,0 +1,402 @@
+<?xml version="1.0" standalone="no"?>
+<NewDataSet>
+  <Table1>
+    <ReportName>MoH 711</ReportName>
+  </Table1>
+  <Table1>
+    <ReportName>CDC Track 1</ReportName>
+  </Table1>
+  <Table1>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+  </Table1>
+  <Table1>
+    <ReportName>Cohort Analysis</ReportName>
+  </Table1>
+  <Table1>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+  </Table1>
+  <!--Report Name:MoH 711-->
+  <Table2>
+    <TableName>Mst_patient</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>referredfrom</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>1</FeatureId>
+    <ModuleId>2</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Dtl_patientstage</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>WHOStage</ListName>
+    <FieldID>133</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Ord_PatientPharmacyOrder</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>DispensedByDate</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>Dtl_patientclinicalstatus</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>pregnant</ListName>
+    <FieldID> 68</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>1</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>ARTended</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>ARTenddate </ListName>
+    <FieldID>137</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>CareEnded </ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>CareEndedDate</ListName>
+    <FieldID>76</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>PatientExitReason</ListName>
+    <FieldID>72</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>DroppedOutReason</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>Dtl_patientpharmacyorder</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>Duration</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>Dtl_patientpharmacyordernonarv</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>Duration</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Mst_LabTest</TableName>
+    <ReportName>MoH 711</ReportName>
+    <FormName />
+    <ListName>LabName</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>5</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <!--Report Name:CDC Track 1-->
+  
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>ARTended</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>ARTenddate</ListName>
+    <FieldID>137</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>CareEnded</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>CareEndedDate</ListName>
+    <FieldID>76</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>PatientExitReason</ListName>
+    <FieldID>72</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>DroppedOutReason</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>Mst_LabTest</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>LabName</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>5</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Mst_patient</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>referredfrom</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Mst_LPTF</TableName>
+    <ReportName>CDC Track 1</ReportName>
+    <FormName />
+    <ListName>ARFunded</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <!--Report Name:AIDSRelief Monthly Report-->
+   <Table2>
+    <TableName>Ord_PatientPharmacyOrder</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>DispensedByDate</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>ARTended</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>ARTenddate </ListName>
+    <FieldID>137</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>CareEnded </ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>CareEndedDate</ListName>
+    <FieldID>76</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Mst_provider</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>name</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Dtl_PatientLabResults</TableName>
+    <ReportName>AIDSRelief Monthly Report</ReportName>
+    <FormName />
+    <ListName>labtestid</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>5</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <!--Report Name:Cohort Analysis-->
+  <Table2>
+    <TableName>Ord_PatientPharmacyOrder</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>DispensedByDate</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <Table2>
+    <TableName>Mst_patient</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>referredfrom</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>ARTended</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>ARTenddate </ListName>
+    <FieldID>137</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>3</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>CareEnded </ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>CareEndedDate</ListName>
+    <FieldID>76</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>Dtl_PatientLabResults</TableName>
+    <ReportName>Cohort Analysis</ReportName>
+    <FormName />
+    <ListName>labtestid</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>5</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  
+  <!--Report Name:Missed ARV Pick Up Analysis-->
+  <Table2>
+    <TableName>Ord_PatientPharmacyOrder</TableName>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+    <FormName />
+    <ListName>DispensedByDate</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>3</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+    <FormName />
+    <ListName>ARTended</ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName>dtl_PatientCareEnded</TableName>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+    <FormName />
+    <ListName>ARTenddate </ListName>
+    <FieldID>137</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>3</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+    <FormName />
+    <ListName>CareEnded </ListName>
+    <FieldID>0</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+  <Table2>
+    <TableName> dtl_PatientCareEnded</TableName>
+    <ReportName>Missed ARV Pick Up Analysis</ReportName>
+    <FormName />
+    <ListName>CareEndedDate</ListName>
+    <FieldID>76</FieldID>
+    <FeatureId>0</FeatureId>
+    <ModuleId>0</ModuleId>
+  </Table2>
+</NewDataSet>

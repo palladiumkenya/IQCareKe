@@ -1,0 +1,57 @@
+﻿div.rounded {
+    clear:both;
+    max-width:100%;
+}
+
+div.rounded div.top-outer {
+    background:url(../img/tl.png) no-repeat left bottom;
+    padding:0px;
+    width:100%;
+}
+
+div.rounded div.top-outer div.top-inner {
+    background:url(../img/tr.png) no-repeat right bottom;
+    margin-left:9px;
+}
+
+div.rounded div.top-outer div.top-inner div.top {
+    background:url(../img/tm.png) repeat;
+    height:23px;
+    margin-right:9px;
+    font-size:.01em;
+}
+
+div.rounded div.mid-outer {
+    background:url(../img/l.png) left repeat-y;
+    clear:both;
+    width:100%;
+}
+
+div.rounded div.mid-outer div.mid-inner {
+    background:url(../img/r.png) right repeat-y;
+    margin-left:5px;    
+}
+
+div.rounded div.mid-outer div.mid-inner div.mid {
+	background-color:#ffffff;
+    margin-right:5px;
+}
+
+div.rounded div.bottom-outer {
+    background:url(../img/bl.png) no-repeat left top;
+    clear:both;
+    padding:0px;
+    width:100%;
+}
+
+div.rounded div.bottom-outer div.bottom-inner {
+    background:url(../img/br.png) no-repeat right top;
+    margin-left:4px;
+}
+
+div.rounded div.bottom-outer div.bottom-inner div.bottom {
+    background:url(../img/bm.png) repeat;
+    height:9px;
+    margin-right:4px;
+    font-size:.01em;
+}

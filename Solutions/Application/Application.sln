@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Common", "..\..\Application\Application.Common\Application.Common.csproj", "{0D193582-0B9B-49A6-8E3D-D96582C6B524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Logger", "..\..\Application\Application.EventLogger\Application.Logger.csproj", "{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Interface", "..\..\Application\Application.Interface\Application.Interface.csproj", "{22462AF4-C366-4401-88EF-285EA96EE3FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Presentation", "..\..\Application\Application.Presentation\Application.Presentation.csproj", "{2E7534C9-101D-4B6D-8E57-056101E4D54D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.BusinessProcess", "..\..\Application\Application.BusinessProcess\Application.BusinessProcess.csproj", "{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://futuresserver:8080/tfs/kehmis_iqcare
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Application\\Application.Presentation\\Application.Presentation.csproj
+		SccProjectName1 = ../../Application/Application.Presentation
+		SccLocalPath1 = ..\\..\\Application\\Application.Presentation
+		SccProjectUniqueName2 = ..\\..\\Application\\Application.Interface\\Application.Interface.csproj
+		SccProjectName2 = ../../Application/Application.Interface
+		SccLocalPath2 = ..\\..\\Application\\Application.Interface
+		SccProjectUniqueName3 = ..\\..\\Application\\Application.EventLogger\\Application.Logger.csproj
+		SccProjectName3 = ../../Application/Application.EventLogger
+		SccLocalPath3 = ..\\..\\Application\\Application.EventLogger
+		SccProjectUniqueName4 = ..\\..\\Application\\Application.Common\\Application.Common.csproj
+		SccProjectName4 = ../../Application/Application.Common
+		SccLocalPath4 = ..\\..\\Application\\Application.Common
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D193582-0B9B-49A6-8E3D-D96582C6B524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D193582-0B9B-49A6-8E3D-D96582C6B524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D193582-0B9B-49A6-8E3D-D96582C6B524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D193582-0B9B-49A6-8E3D-D96582C6B524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22462AF4-C366-4401-88EF-285EA96EE3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22462AF4-C366-4401-88EF-285EA96EE3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22462AF4-C366-4401-88EF-285EA96EE3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22462AF4-C366-4401-88EF-285EA96EE3FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7534C9-101D-4B6D-8E57-056101E4D54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7534C9-101D-4B6D-8E57-056101E4D54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7534C9-101D-4B6D-8E57-056101E4D54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7534C9-101D-4B6D-8E57-056101E4D54D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

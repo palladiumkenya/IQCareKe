@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsCDCReports" targetNamespace="http://tempuri.org/dsCDCReports.xsd" xmlns:mstns="http://tempuri.org/dsCDCReports.xsd" xmlns="http://tempuri.org/dsCDCReports.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsCDCReports" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtHIVPaliative">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VCountMLess15EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountMAbove15EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountFLess15EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountFAbove15EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountMLess15NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountMAbove15NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountFLess15NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountFAbove15NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareMLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareFLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareMAbove15" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareFAbove15" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtPediatricHIVPaliative">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VCountM0To1EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountMLess2To4EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountMLess5To14EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF0To1EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF2To4EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF5To15EverEnrolled" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountM0To1NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountM2To4NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountM5To14NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF0To1NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF2To4NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="VCountF5To14NewEnrollee" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareM0To1" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareM2To4" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareM5To14" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareF0To1" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareF2To4" type="xs:int" minOccurs="0" />
+              <xs:element name="RHIVCareF5To14" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtARTCare">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StartedMalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedMalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedFemalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedFemalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedPregnantFemales" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersMalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersMalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersFemalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersFemalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersPregnantFemales" type="xs:int" minOccurs="0" />
+              <xs:element name="NewMalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewMalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewFemalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewFemalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="NewPregnantFemales" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersMalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersMalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersFemalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersFemalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersPregnantFemales" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalFemalesLessThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalFemalesGreaterThan15" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalPregnantFemales" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtPediatricARTCare">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StartedMalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedFemalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="StartedFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersMalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersFemalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="NewTransfersFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="NewMalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="NewMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="NewMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="NewFemalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="NewFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="NewFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersMalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersFemalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TransfersFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalFemalesLessThan2" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalFemalesBetween5And14" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtChangeInCD4HalfYearly">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MonCohortStartedART1" type="xs:string" minOccurs="0" />
+              <xs:element name="BaseLineCohortPerson1" type="xs:int" minOccurs="0" />
+              <xs:element name="BaseLineCohortCD41" type="xs:int" minOccurs="0" />
+              <xs:element name="CD4ChohortCountBaseLine1" type="xs:int" minOccurs="0" />
+              <xs:element name="CohortPerson6Mon1" type="xs:int" minOccurs="0" />
+              <xs:element name="CohortCD46Mon1" type="xs:int" minOccurs="0" />
+              <xs:element name="CD4ChohortCount6Mon1" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtChangeInCD4Yearly">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MonCohortStartedART" type="xs:string" minOccurs="0" />
+              <xs:element name="BaseLineCohortPerson" type="xs:int" minOccurs="0" />
+              <xs:element name="BaseLineCohortCD4" type="xs:int" minOccurs="0" />
+              <xs:element name="CD4ChohortCountBaseLine" type="xs:int" minOccurs="0" />
+              <xs:element name="CohortPerson12Mon" type="xs:int" minOccurs="0" />
+              <xs:element name="CohortCD412Mon" type="xs:int" minOccurs="0" />
+              <xs:element name="CD4ChohortCount12Mon" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtARTCareFollowUp">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StoppedARTMalesLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTMalesGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTFemalesLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTFemalesGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleTransferredOutLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleTransferredOutGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleTransferredOutLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleTransferredOutGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleDeathLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleDeathGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleDeathLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleDeathGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleLostFollowupLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleLostFollowupGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleLostFollowupLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleLostFollowupGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleUnknownLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="MaleUnknownGreater15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleUnknownLess15" type="xs:int" minOccurs="0" />
+              <xs:element name="FemaleUnknownGreater15" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtPediatricARTCareFollowUp">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StoppedARTMalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTFemalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="StoppedARTFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTMalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTFemalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="TransARTFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTMalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTFemalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="DeathARTFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTMalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTFemalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="LostFollowupARTFemalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTMalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTMalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTMalesBetween5And14" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTFemalesLess2" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTFemalesBetween2And4" type="xs:int" minOccurs="0" />
+              <xs:element name="UnknownARTFemalesBetween5And14" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtFacilitySetUp">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacilityName" type="xs:string" minOccurs="0" />
+              <xs:element name="PepFarStartDate" type="xs:string" minOccurs="0" />
+              <xs:element name="QtrStartDate" type="xs:string" minOccurs="0" />
+              <xs:element name="QtrEndDate" type="xs:string" minOccurs="0" />
+              <xs:element name="grantee" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

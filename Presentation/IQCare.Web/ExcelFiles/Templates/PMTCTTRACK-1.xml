@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>User</LastAuthor>
+  <Created>1996-10-14T23:33:28Z</Created>
+  <LastSaved>2009-10-29T06:37:05Z</LastSaved>
+  <Version>11.8028</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9300</WindowHeight>
+  <WindowWidth>15135</WindowWidth>
+  <WindowTopX>120</WindowTopX>
+  <WindowTopY>120</WindowTopY>
+  <AcceptLabelsInFormulas/>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141592">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141602">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141612">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141622">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141440">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141450">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141460">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15141470">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15155972">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Left" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Right" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Top" ss:LineStyle="Double" ss:Weight="3"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15155982">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Right" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15155992">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15156002">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m15156012">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Double" ss:Weight="3"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s28">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s63">
+   <Interior ss:Color="#969696" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="18" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:AutoFitWidth="0" ss:Width="23.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="289.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="145.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="153"/>
+   <Column ss:Index="6" ss:AutoFitWidth="0" ss:Width="15"/>
+   <Column ss:Index="8" ss:AutoFitWidth="0" ss:Width="15"/>
+   <Column ss:Index="10" ss:AutoFitWidth="0" ss:Width="15"/>
+   <Column ss:AutoFitWidth="0" ss:Width="53.25"/>
+   <Column ss:Hidden="1" ss:AutoFitWidth="0" ss:Width="2.25"/>
+   <Row ss:AutoFitHeight="0" ss:Height="14.25">
+    <Cell ss:Index="2" ss:MergeAcross="10" ss:StyleID="m15155972"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="14.25"/>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5">
+    <Cell ss:Index="2" ss:StyleID="s28"><Data ss:Type="String">Date facility began receiving support from PEPFAR (mm/dd/yy): </Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5">
+    <Cell ss:Index="2" ss:StyleID="s28"><Data ss:Type="String">Quarter beginning (mm/dd/yy):</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s28"><Data ss:Type="String">Quarter ending (mm/dd/yy):</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5">
+    <Cell ss:Index="2" ss:StyleID="s28"><Data ss:Type="String">Grantee:</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s28"><Data ss:Type="String">Facility Name:</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5">
+    <Cell ss:Index="2" ss:StyleID="s28"><Data ss:Type="String">Location:</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s28"><Data ss:Type="String">Facility Type:</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5">
+    <Cell ss:Index="2" ss:StyleID="s28"><Data ss:Type="String">Country:</Data></Cell>
+   </Row>
+   <Row ss:Index="9">
+    <Cell ss:MergeAcross="10" ss:StyleID="m15155982"><Data ss:Type="String">                                                                                                                       INDICATORS PMTCT TRACK 1.0 REPORT</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="7" ss:MergeAcross="1" ss:StyleID="m15155992"><Data
+      ss:Type="String">ANC</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m15156002"><Data ss:Type="String">L&amp;D</Data></Cell>
+    <Cell ss:MergeAcross="1" ss:StyleID="m15156012"><Data ss:Type="String">Total </Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="m15141440"><Data ss:Type="String">Total number of pregnant women (New clients)</Data></Cell>
+    <Cell><Data ss:Type="String">a</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">b</Data></Cell>
+    <Cell ss:Index="10"><Data ss:Type="String">c</Data></Cell>
+    <Cell ss:Formula="=SUM(RC[-4]+RC[-2])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="m15141450"><Data ss:Type="String">Number of pregnant women who were counseled, tested and received results</Data></Cell>
+    <Cell><Data ss:Type="String">d</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">e</Data></Cell>
+    <Cell ss:Index="10"><Data ss:Type="String">f</Data></Cell>
+    <Cell ss:Formula="=SUM(RC[-4]+RC[-2])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="m15141460"><Data ss:Type="String">Number of pregnant women with known HIV status</Data></Cell>
+    <Cell><Data ss:Type="String">g</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">h</Data></Cell>
+    <Cell ss:Index="10"><Data ss:Type="String">i</Data></Cell>
+    <Cell ss:Formula="=SUM(RC[-4]+RC[-2])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="m15141470"><Data ss:Type="String">Number of pregnant women with known HIV+ status</Data></Cell>
+    <Cell><Data ss:Type="String">j</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">k</Data></Cell>
+    <Cell ss:Index="10"><Data ss:Type="String">l</Data></Cell>
+    <Cell ss:Formula="=SUM(RC[-4]+RC[-2])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:MergeAcross="3" ss:StyleID="m15141592"><Data ss:Type="String">Number of pregnant HIV+ women receiving ARVs </Data></Cell>
+    <Cell><Data ss:Type="String">m</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">n</Data></Cell>
+    <Cell ss:Index="10"><Data ss:Type="String">o</Data></Cell>
+    <Cell ss:Formula="=SUM(RC[-4]+RC[-2])"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:MergeAcross="3" ss:StyleID="m15141602"><Data
+      ss:Type="String">   Single drug prophylactic regimen </Data></Cell>
+    <Cell><Data ss:Type="String">p</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">g</Data></Cell>
+    <Cell ss:Index="10" ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:MergeAcross="3" ss:StyleID="m15141612"><Data
+      ss:Type="String">   Multi-drug prophylactic regimen</Data></Cell>
+    <Cell><Data ss:Type="String">r</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">s</Data></Cell>
+    <Cell ss:Index="10" ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:MergeAcross="3" ss:StyleID="m15141622"><Data
+      ss:Type="String">   ART</Data></Cell>
+    <Cell><Data ss:Type="String">t</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">u</Data></Cell>
+    <Cell ss:Index="10" ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>8</ActiveRow>
+     <RangeSelection>R9C1:R9C11</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet2">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

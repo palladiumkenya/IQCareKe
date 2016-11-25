@@ -1,0 +1,390 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?><ss:Workbook
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC1A68">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#FFFFFF"/>
+   <ss:Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC2B8C">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC2D20">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC04F0">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior/>
+   <ss:NumberFormat ss:Format="d/mmm/yy"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC0E04">
+   <ss:Alignment/>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior/>
+   <ss:NumberFormat ss:Format="d/mmm/yy"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC3FA4">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC4220">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <ss:Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC445C">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC456C">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC46EC">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="#000000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC1850">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#FFFFFF"/>
+   <ss:Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC4124">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc07DC434C">
+   <ss:Alignment ss:Vertical="Bottom"/>
+   <ss:Font ss:FontName="Calibri" ss:Size="11" ss:Color="#000000"/>
+   <ss:Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:SpreadsheetAutoFit/>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>1</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>11.0.0.8166         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Sheet1">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+   <x:Unsynced/>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="22"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+   <ss:Column ss:Width="0.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="371.25" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Index="4" ss:Width="138.0" ss:AutoFitWidth="0"/>
+   <ss:Row ss:StyleID="wc07DC1850">
+    <ss:Cell ss:Index="4" ss:StyleID="wc07DC1A68">
+     <ss:Data ss:Type="String">OGAC</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="3" ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Date facility began receiving support from PEPFAR (mm/dd/yy): </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Quarter beginning (mm/dd/yy):</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC04F0">
+     <ss:Data ss:Type="DateTime">2009-10-01</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Quarter ending (mm/dd/yy):</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC0E04">
+     <ss:Data ss:Type="DateTime">2009-12-31</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Grantee:</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C">
+     <ss:Data ss:Type="String">AIDSRELIEF</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Facility Name:</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="Default">
+     <ss:Data ss:Type="String">ART + PMTCT Clinic</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Location:</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C">
+     <ss:Data ss:Type="String">ART + PMTCT Clinic</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Facility Type:</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2D20">
+     <ss:Data ss:Type="String">Country:</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C">
+     <ss:Data ss:Type="String">Uganda</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC3FA4">
+     <ss:Data ss:Type="String">Clinic Type: </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="Default">
+     <ss:Data ss:Type="String">PMTCT</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:Index="10" ss:StyleID="wc07DC4124">
+    <ss:Cell ss:Index="4" ss:StyleID="wc07DC4220">
+     <ss:Data ss:Type="String"> OGAC</ss:Data>
+    </ss:Cell>
+   </ss:Row>
+   <ss:Row ss:StyleID="wc07DC434C">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC445C"/>
+    <ss:Cell ss:StyleID="wc07DC445C"/>
+    <ss:Cell ss:StyleID="wc07DC445C"/>
+    <ss:Cell ss:StyleID="wc07DC456C">
+     <ss:Data ss:Type="String">Total</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC445C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of women accessing ANC services </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of women receiving counseling </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Total number of pregnant women receiving testing services </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of pregnant women counselled, tested and received results </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number tested HIV positive </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of HIV (+) pregnant women received  Nevirapine (NVP) only</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of HIV positive pregnant women started on Zidovudine (AZT) and received NVP</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of HIV positive pregnant women started on Zidovudine (AZT) and Lamivudine(3TC) received NVP</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of HIV positive pregnant women receiving HAART (Triple Therapy) - prophylaxis</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row ss:Height="25.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of HIV+ve pregnant/lactating women who received food/nutrition supplementation</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+   <ss:Row>
+    <ss:Cell ss:Index="2" ss:StyleID="wc07DC46EC">
+     <ss:Data ss:Type="String">Number of babies receiving ARV prophylaxis </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+    <ss:Cell ss:StyleID="wc07DC2B8C"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet2">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+   <x:Unsynced/>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="1" ss:ExpandedRowCount="1"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+  </ss:Table>
+ </ss:Worksheet>
+ <ss:Worksheet ss:Name="Sheet3">
+  <x:WorksheetOptions>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+   <x:Unsynced/>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="1" ss:ExpandedRowCount="1"
+   ss:DefaultColumnWidth="48.0" ss:DefaultRowHeight="15.0">
+  </ss:Table>
+ </ss:Worksheet>
+  <o:DocumentProperties>
+   <o:Author>User</o:Author>
+   <o:LastAuthor>User</o:LastAuthor>
+   <o:Created>2009-12-16T08:56:24Z</o:Created>
+   <o:LastSaved>2009-12-16T09:09:27Z</o:LastSaved>
+   <o:Version>12.00</o:Version>
+  </o:DocumentProperties>
+</ss:Workbook>

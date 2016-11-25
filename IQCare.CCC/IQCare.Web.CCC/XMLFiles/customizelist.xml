@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<CUSTOMIZELIST>
+	<!--IQCare AidsRelief Forms -->
+	<ItemName TableName="Reason" CategoryId="1" FormName="./frmAdmin_CustomList.aspx" ListName="Adherence Codes" FeatureID="18" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Symptom" CategoryId="11" FormName="./frmAdmin_CustomList.aspx" ListName="ARV Side Effects" FeatureID="19" Update="0" SystemId="1" ModuleId="2" CountryID="99" />
+	<ItemName TableName="Decode" CategoryId="16" FormName="./frmAdmin_CustomList.aspx" ListName="Barriers to HIV Care" FeatureID="20" Update="0" SystemId="1" ModuleId="2" CountryID="99" />
+    <ItemName TableName="Decode" CategoryId="1007" FormName="./frmAdmin_CustomList.aspx" ListName="ARV Eligibility" FeatureID="20" Update="0" SystemId="0" ModuleId="203" CountryID="99" />
+	<ItemName TableName="district" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="District/County/Ward" FeatureID="21" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="" CategoryId="0" FormName="./frmAdmin_DrugList.aspx" ListName="Drugs" FeatureID="22" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+    <ItemName TableName="" CategoryId="0" FormName="./frmAdmin_itemMasterList.aspx" ListName="Items Master" FeatureID="22" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+	<ItemName TableName="FrequencyUnits" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Drug Frequency" FeatureID="37" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+  
+  <ItemName TableName="Frequency" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Frequency" FeatureID="166" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+
+    <ItemName TableName="Education" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Educational Level" FeatureID="23" Update="1" SystemId="1" ModuleId="2" CountryID="99" />
+	<ItemName TableName="Decode" CategoryId="8" FormName="./frmAdmin_CustomList.aspx" ListName="Emergency Contact Relationship" FeatureID="24" Update="1" SystemId="1" ModuleId="0" CountryID="99" />
+	<ItemName TableName="Designation" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Employee Designation" FeatureID="25" Update="1" SystemId="1" ModuleId="0" CountryID="99" />
+	<ItemName TableName="Employee" CategoryId="0" FormName="./frmAdmin_EmployeeMasterList.aspx" ListName="Employee Name" FeatureID="26" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="9" FormName="./frmAdmin_CustomList.aspx" ListName="Employment Status" FeatureID="27" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<!--<ItemName TableName="" CategoryId="0" FormName="./frmAdmin_LabTestList.aspx" ListName="Additional Labs" FeatureID="44" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>-->
+	<ItemName TableName="" CategoryId="0" FormName="../Laboratory/Admin/LabTestMaster.aspx" ListName="Laboratory Configuration" FeatureID="52" Update="0" SystemId="0" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="12" FormName="./frmAdmin_CustomList.aspx" ListName="Marital Status" FeatureID="29" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Occupation" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Occupation" FeatureID="30" Update="1" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="HivDisease" CategoryId="1" FormName="./frmAdmin_CustomList.aspx" ListName="OI or AIDS Defining Illness" FeatureID="31" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<!--<ItemName TableName="Decode" CategoryId="17" FormName="./frmAdmin_CustomList.aspx" ListName="Patient Referred" FeatureID="36" Update="0" SystemId="1" />-->
+	<ItemName TableName="Decode" CategoryId="32" FormName="./frmAdmin_CustomList.aspx" ListName="Pharmacy Unit" FeatureID="39" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="30" FormName="./frmAdmin_CustomList.aspx" ListName="Laboratory Unit" FeatureID="53" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Symptom" CategoryId="4" FormName="./frmAdmin_CustomList.aspx" ListName="Presenting Complaint(s)" FeatureID="32" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="province" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Province/State" FeatureID="33" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Reason" CategoryId="2" FormName="./frmAdmin_CustomList.aspx" ListName="Therapy Change Code" FeatureID="34" Update="0" SystemId="1" ModuleId="203" CountryID="99"/>
+	<ItemName TableName="HIVAIDSCareTypes" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="HIV/AIDS Care Types" FeatureID="40" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="ARTSponsor" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="ART Sponsor" FeatureID="41" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="HIVDisclosure" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="HIV Disclosure Status" FeatureID="43" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="26" FormName="./frmAdmin_CustomList.aspx" ListName="Scheduler - Appointment purpose" FeatureID="45" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="village" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Village/Town/City Name" FeatureID="35" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="Provider" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="ARV Providers" FeatureID="51" Update="0" SystemId="1" ModuleId="2" CountryID="99"/>
+	
+	<!--<ItemName TableName="StoppedReason" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Stopped Reason" FeatureID="54" Update="0" SystemId="0" ModuleId="2" CountryID="99"/>-->
+	<ItemName TableName="RelationshipType" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Patient Relation Type" FeatureID="57" Update="0" SystemId="0" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="HIVCareStatus" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="HIV Care Status" FeatureID="58" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+
+	<!--IQCare - CTC2 Forms -->
+
+	<!--
+<ItemName TableName="Employee" CategoryId="0" FormName="./frmAdmin_EmployeeMasterList.aspx" ListName="Staff" FeatureID="60" Update="1" SystemId="2" />-->
+	<ItemName TableName="province" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Region" FeatureID="60" Update="1" SystemId="2" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="district" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="District" FeatureID="21" Update="1" SystemId="2" ModuleId="0" CountryID="99"/>
+	<!--<ItemName TableName="district" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="District" FeatureID="62" Update="0" SystemId="2" />-->
+	<ItemName TableName="Ward" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Ward" FeatureID="64" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Division" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Division" FeatureID="62" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="RegionDistrict" CategoryId="0" FormName="./frmAdmin_LinkMaster.aspx" ListName="Region-District" FeatureID="61" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="DistrictWard" CategoryId="0" FormName="./frmAdmin_LinkMaster.aspx" ListName="District-Ward" FeatureID="65" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+  <ItemName TableName="WardVillage" CategoryId="0" FormName="./frmAdmin_LinkMaster.aspx" ListName="Ward-Village" FeatureID="66" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+  <!--<ItemName TableName="WardVillage" CategoryId="0" FormName="./frmAdmin_LinkVillageMaster.aspx" ListName="Ward-Village" FeatureID="66" Update="1" SystemId="2" />--> 
+	<ItemName TableName="DistrictDivision" CategoryId="0" FormName="./frmAdmin_LinkMaster.aspx" ListName="District-Division" FeatureID="63" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="VillageChairPerson" CategoryId="0" FormName="./frmAdmin_VillageChairperson.aspx" ListName="Village ChairPerson" FeatureID="67" Update="0" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="CouncellingType" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Counselling Type" FeatureID="74" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="CouncellingTopic" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Counselling Topic" FeatureID="75" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="CouncellingTypeTopic" CategoryId="0" FormName="./frmAdmin_LinkMaster.aspx" ListName="Counselling Type-Counselling Topic" FeatureID="76" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="LostFollowreason" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Lost to Follow Up" FeatureID="78" Update="0" SystemId="0" ModuleId="0" CountryID="99" />
+	<!--<ItemName TableName="LPTF" CategoryId="0" FormName="./frmAdmin_LPTFPatientTransferList.aspx" ListName="LPTF Patient Transfer" FeatureID="55" Update="1" SystemId="1" ModuleId="2" CountryID="99"/>-->
+	<ItemName TableName="LPTF" CategoryId="0" FormName="./frmAdmin_LPTFPatientTransferList.aspx" ListName="LPTF Patient Transfer" FeatureID="55" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+		<!--<ItemName TableName="" CategoryId="0" FormName="./frmAdmin_IQCStageCustomItems.aspx" ListName="Region District" FeatureID="" Update="1" SystemId="2" />-->
+	<ItemName TableName="village" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Village" FeatureID="35" Update="1" SystemId="2" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="ARTSponsor" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Patient Classification" FeatureID="67" Update="0" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="12" FormName="./frmAdmin_IQCCustomList.aspx" ListName="Marital Status" FeatureID="29" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+		<!--<ItemName TableName="AidsDefEvents" CategoryId="0" FormName="./frmAdmin_IQCStageCustomList.aspx" ListName="AIDS Defining Events" FeatureID="68" Update="0" SystemId="2" />-->
+	<ItemName TableName="Decode" CategoryId="1005" FormName="./frmAdmin_IQCCustomList.aspx" ListName="Patient Referred To" FeatureID="82" Update="0" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="1001" FormName="./frmAdmin_CustomList.aspx" ListName="Prior Exposure" FeatureID="69" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+    <ItemName TableName="" CategoryId="0" FormName="./frmAdmin_RegimenGenericList.aspx" ListName="Regimen" FeatureID="70" Update="0" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Symptom" CategoryId="13" FormName="./frmAdmin_IQCCustomList.aspx" ListName="Problems/Symptoms/Side Effects" FeatureID="77" Update="0" SystemId="0" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="Reason" CategoryId="3" FormName="./frmAdmin_IQCCustomList.aspx" ListName="ARV-Stop/Change Reason" FeatureID="79" Update="1" SystemId="0" ModuleId="203" CountryID="99"/>
+	<ItemName TableName="Reason" CategoryId="4" FormName="./frmAdmin_IQCCustomList.aspx" ListName="No ARV Reason" FeatureID="80" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Reason" CategoryId="5" FormName="./frmAdmin_IQCCustomList.aspx" ListName="ARV Adherence Reason - Poor" FeatureID="81" Update="1" SystemId="2" ModuleId="2" CountryID="99"/>
+	<ItemName TableName="Decode" CategoryId="17" FormName="./frmAdmin_CustomList.aspx" ListName="Patient Referred From" FeatureID="42" Update="0" SystemId="0" ModuleId="2" CountryID="99"/>
+  
+		
+	<!--PMTCT-->
+    <ItemName TableName="PMTCTdecode" CategoryId="1" FormName="./frmAdmin_CustomList.aspx" ListName="Additional Treatment" FeatureID="84" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="2" FormName="./frmAdmin_CustomList.aspx" ListName="Mother Known HIV Status" FeatureID="85" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="3" FormName="./frmAdmin_CustomList.aspx" ListName="Delivery Mode" FeatureID="86" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="4" FormName="./frmAdmin_CustomList.aspx" ListName="Feeding Option" FeatureID="87" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <!-- childHIVStatus-->
+    <ItemName TableName="PMTCTdecode" CategoryId="5" FormName="./frmAdmin_CustomList.aspx" ListName="Child HIV Status" FeatureID="88" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    
+    <ItemName TableName="PMTCTdecode" CategoryId="6" FormName="./frmAdmin_CustomList.aspx" ListName="Family Planning Method" FeatureID="89" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="7" FormName="./frmAdmin_CustomList.aspx" ListName="Mother PMTCT Code" FeatureID="90" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="8" FormName="./frmAdmin_CustomList.aspx" ListName="Partner PMTCT Code" FeatureID="91" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="9" FormName="./frmAdmin_CustomList.aspx" ListName="Delivery Location" FeatureID="92" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <!-- <ItemName TableName="PMTCTdecode" CategoryId="10" FormName="./frmAdmin_CustomList.aspx" ListName="Labour Duration" FeatureID="93" Update="0" SystemId="0" ModuleId="1" CountryID="0" /> -->
+
+    <ItemName TableName="PMTCTdecode" CategoryId="11" FormName="./frmAdmin_CustomList.aspx" ListName="Mother Condition After Delivery" FeatureID="94" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="12" FormName="./frmAdmin_CustomList.aspx" ListName="Delivery Conducted By" FeatureID="95" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="13" FormName="./frmAdmin_CustomList.aspx" ListName="Mother HIV Status" FeatureID="96" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="14" FormName="./frmAdmin_CustomList.aspx" ListName="Discharged By" FeatureID="97" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="15" FormName="./frmAdmin_CustomList.aspx" ListName="Parity" FeatureID="98" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+
+
+    <ItemName TableName="PMTCTdecode" CategoryId="16" FormName="./frmAdmin_CustomList.aspx" ListName="Gravidae" FeatureID="99" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="17" FormName="./frmAdmin_CustomList.aspx" ListName="Delivery Outcome" FeatureID="100" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="18" FormName="./frmAdmin_CustomList.aspx" ListName="APGAR Score 1" FeatureID="101" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="19" FormName="./frmAdmin_CustomList.aspx" ListName="APGAR Score 5" FeatureID="102" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="20" FormName="./frmAdmin_CustomList.aspx" ListName="Mother HIV Pretest Counseling" FeatureID="103" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+
+    <ItemName TableName="PMTCTdecode" CategoryId="21" FormName="./frmAdmin_CustomList.aspx" ListName="Mother Accept HIV Testing" FeatureID="104" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="22" FormName="./frmAdmin_CustomList.aspx" ListName="Mother HIV Test Result" FeatureID="105" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="23" FormName="./frmAdmin_CustomList.aspx" ListName="Syphilis Test Result" FeatureID="106" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="24" FormName="./frmAdmin_CustomList.aspx" ListName="Counseled On" FeatureID="107" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="25" FormName="./frmAdmin_CustomList.aspx" ListName="Partner HIV Test Result" FeatureID="108" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+
+    <ItemName TableName="PMTCTdecode" CategoryId="26" FormName="./frmAdmin_CustomList.aspx" ListName="Partner Referred To" FeatureID="109" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="27" FormName="./frmAdmin_CustomList.aspx" ListName="Other Medical Condition" FeatureID="110" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    
+    <ItemName TableName="PMTCTdecode" CategoryId="28" FormName="./frmAdmin_CustomList.aspx" ListName="Referred From" FeatureID="112" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="29" FormName="./frmAdmin_CustomList.aspx" ListName="Malaria Treatment" FeatureID="113" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+
+    <ItemName TableName="PMTCTdecode" CategoryId="30" FormName="./frmAdmin_CustomList.aspx" ListName="Breast Status" FeatureID="114" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="31" FormName="./frmAdmin_CustomList.aspx" ListName="Cervix Status" FeatureID="115" Update="0" SystemId="0" ModuleId="1" CountryID="0" />
+    <ItemName TableName="PMTCTdecode" CategoryId="32" FormName="./frmAdmin_CustomList.aspx" ListName="TB Status" FeatureID="116" Update="0" SystemId="0" ModuleId="0" CountryID="0" />
+    <ItemName TableName="TBRegimen" CategoryId="0" FormName="./frmAdmin_TBRegimenGenericList.aspx" ListName="TB Regimen" FeatureID="111" Update="0" SystemId="0" ModuleId="0" CountryID="0"/>-->
+
+    <ItemName TableName="Decode" CategoryId="214" FormName="./frmAdmin_CustomList.aspx" ListName="Waiting List" FeatureID="185" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>
+
+    
+    <!--Added items for billing here-->
+    <!--<ItemName TableName="Decode" CategoryId="212" FormName=".Billing/frmBillingAdmin_PaymentType.aspx" ListName="Payment Type" FeatureID="176" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>-->
+    <!--Added Lab groups-->
+    <!--<ItemName TableName="" CategoryId="0" FormName="./frmAdmin_LaboratoryGroups.aspx" ListName="Lab Test Groups" FeatureID="181" Update="1" SystemId="0" ModuleId="0" CountryID="99"/>-->
+    <!--- Added maanging admission wards -->
+    <ItemName TableName="" CategoryId="0" FormName="./frmAdmin_AdmissionWards.aspx" ListName="Admission Wards" FeatureID="253" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+    <ItemName TableName="LabDepartment" CategoryId="0" FormName="./frmAdmin_CustomList.aspx" ListName="Lab Department" FeatureID="44" Update="1" SystemId="1" ModuleId="0" CountryID="99"/>
+
+    <!--- Added maanging Clinical Services -->
+    <ItemName TableName="" CategoryId="0" FormName="../ClinicalService/Admin/ServiceMaster.aspx" ListName="Manage Patient Services" FeatureID="253" Update="1" SystemId="0" ModuleId="0" CountryID="99" />
+
+  </CUSTOMIZELIST>

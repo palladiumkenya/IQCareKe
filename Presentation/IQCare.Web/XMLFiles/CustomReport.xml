@@ -1,0 +1,69 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReportName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Query" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Value1" type="xs:string" minOccurs="0" />
+              <xs:element name="Value2" type="xs:string" minOccurs="0" />
+              <xs:element name="Value3" type="xs:string" minOccurs="0" />
+              <xs:element name="Value4" type="xs:string" minOccurs="0" />
+              <xs:element name="Value5" type="xs:string" minOccurs="0" />
+              <xs:element name="Value6" type="xs:string" minOccurs="0" />
+              <xs:element name="Value7" type="xs:string" minOccurs="0" />
+              <xs:element name="Value8" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Label1" type="xs:string" minOccurs="0" />
+              <xs:element name="Label2" type="xs:string" minOccurs="0" />
+              <xs:element name="Label3" type="xs:string" minOccurs="0" />
+              <xs:element name="Label4" type="xs:string" minOccurs="0" />
+              <xs:element name="Label5" type="xs:string" minOccurs="0" />
+              <xs:element name="Label6" type="xs:string" minOccurs="0" />
+              <xs:element name="Label7" type="xs:string" minOccurs="0" />
+              <xs:element name="Label8" type="xs:string" minOccurs="0" />
+              <xs:element name="Label9" type="xs:string" minOccurs="0" />
+              <xs:element name="Label10" type="xs:string" minOccurs="0" />
+              <xs:element name="Label11" type="xs:string" minOccurs="0" />
+              <xs:element name="Label12" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Column1" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table5">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sequence" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

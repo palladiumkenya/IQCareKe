@@ -1,0 +1,1222 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?><ss:Workbook
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <x:ExcelWorkbook>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+ <ss:Styles>
+  <ss:Style ss:ID="Default">
+   <ss:Alignment ss:Horizontal="Automatic" ss:Rotate="0.0" ss:Vertical="Bottom"
+    ss:ReadingOrder="Context"/>
+   <ss:Borders>
+   </ss:Borders>
+   <ss:Font ss:FontName="Arial" ss:Size="10" ss:Color="Automatic" ss:Bold="0"
+    ss:Italic="0" ss:Underline="None"/>
+   <ss:Interior ss:Color="Automatic" ss:Pattern="None"/>
+   <ss:NumberFormat ss:Format="General"/>
+   <ss:Protection ss:Protected="1"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B100000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B110000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B120000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B130000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B150000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B160000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#333300" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B140000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#333300" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B180000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B1A0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B170000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF0000" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B690000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B1C0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+   <ss:NumberFormat ss:Format="0"/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B1D0000000000">
+   <ss:Alignment ss:Vertical="Top"/>
+   <ss:Font ss:Size="8"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B1E0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Color="#FF0000"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B1F0000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B600000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B610000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF6600" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B620000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#333300"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B630000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Color="#FF6600"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B640000000000">
+   <ss:Alignment ss:Horizontal="Right" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Color="#FF6600"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B650000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF6600"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc099B660000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Color="#FF6600"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc09385C0000000000">
+   <ss:Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="wc09385B0000000000">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Font ss:Size="8" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc093850000938EF00">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="8" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+  <ss:Style ss:ID="mc0938E6000938E700">
+   <ss:Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <ss:Borders>
+    <ss:Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+    <ss:Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1.0"/>
+   </ss:Borders>
+   <ss:Font ss:Size="12" ss:Bold="1"/>
+   <ss:Interior/>
+  </ss:Style>
+ </ss:Styles>
+ <c:ComponentOptions>
+  <c:Label>
+   <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+  </c:Label>
+  <c:MaxHeight>80%</c:MaxHeight>
+  <c:MaxWidth>80%</c:MaxWidth>
+  <c:NextSheetNumber>1</c:NextSheetNumber>
+ </c:ComponentOptions>
+ <x:WorkbookOptions>
+  <c:OWCVersion>12.0.0.6502         </c:OWCVersion>
+ </x:WorkbookOptions>
+ <ss:Worksheet ss:Name="Monthly MoH   no">
+  <x:WorksheetOptions>
+   <x:Selected/>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1:R1C2</x:Selection>
+   <x:TopRowVisible>0</x:TopRowVisible>
+   <x:LeftColumnVisible>0</x:LeftColumnVisible>
+   <x:ProtectContents>False</x:ProtectContents>
+   <x:Unsynced/>
+  </x:WorksheetOptions>
+  <c:WorksheetOptions>
+  </c:WorksheetOptions>
+  <ss:Table ss:ExpandedColumnCount="55" ss:ExpandedRowCount="65"
+   ss:DefaultColumnWidth="31.5" ss:DefaultRowHeight="11.25"
+   ss:StyleID="wc09385B0000000000">
+   <ss:Column ss:Width="280.5" ss:AutoFitWidth="0" ss:StyleID="wc09385C0000000000"/>
+   <ss:Column ss:Width="75.75" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="67.5" ss:AutoFitWidth="0"/>
+   <ss:Column ss:Width="148.5" ss:AutoFitWidth="0" ss:StyleID="wc09385C0000000000"/>
+   <ss:Column ss:Width="183.0" ss:AutoFitWidth="0" ss:StyleID="wc09385C0000000000"/>
+   <ss:Row ss:Height="15.75" ss:AutoFitHeight="0">
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc0938E6000938E700">
+     <ss:Data ss:Type="String">PMTCT Monthly Report Form - MOH</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:MergeAcross="1" ss:StyleID="mc093850000938EF00">
+     <ss:Data ss:Type="String">FOR THE MONTH OF  FEBRUARY 2009</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000"/>
+    <ss:Cell ss:StyleID="wc099B110000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="17.25" ss:AutoFitHeight="0" ss:StyleID="wc099B140000000000">
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">ANC Counseling and Testing</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">Result</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B160000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B170000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 01. New ANC clients this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1A0000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 02. Previously known to be HIV positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 03. Total number tasted</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 04. Number of new client had HIV test at ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 05. Tested HIV-Positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1C0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 06. Post-test counseled for positive and negative</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 07. Number of partners tested for HIV</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">ANC 08. Tested HIV-Positive</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000"/>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">PMTCT Maternity (L&amp;D) Monthly Summary Form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B170000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">All women attending L&amp;D for the given report period</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1A0000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B170000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 01 Number of women who delivered</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1A0000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 02 Number of women with known HIV status from ANC </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 03 Number of women with known HIV-Positive status</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 04 Number of women with unknown HIV status at delivery</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 05 Number of women tested for HIV at/after delivery </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 06 Number of women tested HIV-Positive at/after delivery </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1C0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">All HIV positive women</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B170000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 07. All HIV-Positive(MAT03+MAT06)</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1A0000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 08. Number who swallowed NVP only at L&amp;D</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1C0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 09. Number who swallowed NVP, AZT &amp; 3TC at L&amp;D</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 10. Number who are on ART at L&amp;D</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 11. Number of women dispensed with Tail*</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT12. Number of infant(s) received NVP</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT13. Number of infant(s) who were discharged with 1 week AZT</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT13. Number of infant(s) who were discharged with 4 weeks AZT</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 14. Number started on exclusive breastfeed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MAT 15. Number started to replacement feed</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B1E0000000000">
+     <ss:Data ss:Type="String">MAT 16.  Number discharged with CTC appointment</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1F0000000000"/>
+    <ss:Cell ss:StyleID="wc099B600000000000"/>
+    <ss:Cell ss:StyleID="wc099B610000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000"/>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">Mother Child Follow up Monthly Summary Form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B140000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 1. Total number of HV-exposed children newly registered this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B620000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+    <ss:Cell ss:StyleID="wc099B140000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 2. Total number on Exclusive Breast Feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 3. Total number on Exclusive Replacement Feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 4. Total number of children initiated on contrimoxazole this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 5. Total number of children initiated on contrimoxazole by 2 months of age</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 6. Total number of children tested this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 7. Total number of children tested for HIV positive by using PCR</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 8. Total number of children tested for HIV positive by using Ab Test</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 9. Total number of children tested for confirmed positive 18 months</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:Height="22.5" ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 10. Total number of children tested for confirmed positive by using PCR</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B1E0000000000">
+     <ss:Data ss:Type="String">MC 11. Total number of children referred to CTC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 12. Number using FP Methods</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000"/>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B150000000000">
+     <ss:Data ss:Type="String">PMTCT Care Monthly Summary Form</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0" ss:StyleID="wc099B170000000000">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 1. Number of client enrolled this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B1A0000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+    <ss:Cell ss:StyleID="wc099B170000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 2. Number of client started on contrimoxazole </ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">1</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 3. Number counselled on Infant Feeding</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 4. Number disclosed their HIV status</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B630000000000">
+     <ss:Data ss:Type="String">PCR 5. Number of client staged for ART eligibility this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B640000000000"/>
+    <ss:Cell ss:StyleID="wc099B650000000000"/>
+    <ss:Cell ss:StyleID="wc099B660000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B630000000000">
+     <ss:Data ss:Type="String">PCR 6. Number of client reported medically eligible this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B640000000000"/>
+    <ss:Cell ss:StyleID="wc099B650000000000"/>
+    <ss:Cell ss:StyleID="wc099B660000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 7. Number of client enrolled on CTC this month</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B180000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 8. Number given NVP at ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">MC 9. Number given AZT and NVP at ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:StyleID="wc099B100000000000">
+     <ss:Data ss:Type="String">PCR 10. Number taking ART at ANC</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B690000000000">
+     <ss:Data ss:Type="Number">0</ss:Data>
+    </ss:Cell>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:StyleID="wc099B120000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+    <ss:Cell ss:StyleID="wc099B130000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+   <ss:Row ss:AutoFitHeight="0">
+    <ss:Cell ss:Index="2" ss:StyleID="wc099B1D0000000000"/>
+    <ss:Cell ss:Index="4" ss:StyleID="wc09385C0000000000"/>
+    <ss:Cell ss:StyleID="wc09385C0000000000"/>
+   </ss:Row>
+  </ss:Table>
+ </ss:Worksheet>
+  <o:DocumentProperties>
+   <o:Author>Stacey Berlow</o:Author>
+   <o:LastAuthor>User</o:LastAuthor>
+   <o:Created>2009-02-22T08:24:01Z</o:Created>
+   <o:LastSaved>2010-02-18T10:27:07Z</o:LastSaved>
+   <o:Version>11.9999</o:Version>
+  </o:DocumentProperties>
+</ss:Workbook>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA879D23-73A1-43C5-BD1F-5F22BCCE4A0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dependancy</RootNamespace>
+    <AssemblyName>Dependancy</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Application.BusinessProcess">
+      <HintPath>..\..\References\Application.BusinessProcess.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Common">
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Interface">
+      <HintPath>..\..\References\Application.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Logger">
+      <HintPath>..\..\References\Application.Logger.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation">
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Administration">
+      <HintPath>..\..\References\BusinessProcess.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Billing">
+      <HintPath>..\..\References\BusinessProcess.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Clinical">
+      <HintPath>..\..\References\BusinessProcess.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.FormBuilder">
+      <HintPath>..\..\References\BusinessProcess.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.IQReports">
+      <HintPath>..\..\References\BusinessProcess.IQReports.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Laboratory">
+      <HintPath>..\..\References\BusinessProcess.Laboratory.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Lookup">
+      <HintPath>..\..\References\BusinessProcess.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\BusinessProcess.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Pharmacy">
+      <HintPath>..\..\References\BusinessProcess.Pharmacy.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Reports">
+      <HintPath>..\..\References\BusinessProcess.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Scheduler">
+      <HintPath>..\..\References\BusinessProcess.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.SCM">
+      <HintPath>..\..\References\BusinessProcess.SCM.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Security">
+      <HintPath>..\..\References\BusinessProcess.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.Service">
+      <HintPath>..\..\References\BusinessProcess.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Base">
+      <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Common">
+      <HintPath>..\..\References\DataAccess.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Entity">
+      <HintPath>..\..\References\DataAccess.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Lookup">
+      <HintPath>..\..\References\DataAccess.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Pharmacy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\DataAccess.Pharmacy.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Report">
+      <HintPath>..\..\References\DataAccess.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\References\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Administration">
+      <HintPath>..\..\References\Interface.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Billing">
+      <HintPath>..\..\References\Interface.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Clinical">
+      <HintPath>..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.FormBuilder">
+      <HintPath>..\..\References\Interface.FormBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.IQToolsReport">
+      <HintPath>..\..\References\Interface.IQToolsReport.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Laboratory">
+      <HintPath>..\..\References\Interface.Laboratory.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Lookup">
+      <HintPath>..\..\References\Interface.Lookup.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\References\Interface.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Pharmacy">
+      <HintPath>..\..\References\Interface.Pharmacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Reports">
+      <HintPath>..\..\References\Interface.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Scheduler">
+      <HintPath>..\..\References\Interface.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.SCM">
+      <HintPath>..\..\References\Interface.SCM.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Security">
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Service">
+      <HintPath>..\..\References\Interface.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.WebService">
+      <HintPath>..\..\References\IQCare.Web.WebService.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="netchartdir">
+      <HintPath>..\..\References\netchartdir.dll</HintPath>
+    </Reference>
+    <Reference Include="Sand.Security.Cryptography">
+      <HintPath>..\..\References\Sand.Security.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dependency.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

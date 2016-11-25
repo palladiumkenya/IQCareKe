@@ -1,0 +1,289 @@
+<%@ Master Language="C#" AutoEventWireup="True"
+    Inherits="IQCare.Web.Reports.ReportHeaderFooter" Codebehind="ReportHeaderFooter.master.cs" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version="1.0" ?>
+<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title id="lblTitle" runat="server">International Quality Care Patient Management and
+        Monitoring System <%=Session["AppLocation"].ToString()%> </title>
+  <link type="text/css" href="../Style/_assets/css/grid.css" rel="stylesheet" />
+  <link type="text/css" href="../Style/_assets/css/round.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../style/styles.css" />
+     <link rel="stylesheet" type="text/css" href="../style/calendar.css" />
+     <link rel="stylesheet" type="text/css" href="../Style/StyleSheet.css" />
+    <script language="javascript" type="text/javascript" src="../incl/IQCareScript.js"></script>
+
+    <script language="javascript" type="text/javascript" src="../incl/menu.js"></script>
+
+    <script language="javascript" type="text/javascript" src="../incl/jsCommon.js"></script>
+
+    <script language="javascript" type="text/javascript" src="../incl/weeklycalendar.js"></script>
+
+    <script language="javascript" type="text/javascript" src="../incl/highlightLabels.js"></script>
+
+    <script language="javascript" type="text/javascript" src="../incl/dateformat.js"></script>
+
+    <script language="javascript" type="text/javascript">buildWeeklyCalendar(1);</script>
+
+    <script language="javascript" type="text/javascript">
+        //        var sPath = window.location.pathname;
+        //        var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+        //        var browserName=navigator.appName;
+        //        if(browserName!="Microsoft Internet Explorer")
+        //        {
+        //            
+        //            if(sPage=="frmReportViewerARV.aspx")
+        //            {
+        //               document.write('<link rel="stylesheet" type="text/css" href="../style/StyleSheetBrowser.css" />');
+        //               document.write("<style>#container {z-index: 1; margin: 0px auto; width: 950px; height:1600px ; position: relative; background-color: #ffffff; text-align: left</style>")
+        //            }
+        //            else if(sPage=="frmReportViewer.aspx")
+        //            {
+        //                document.write('<link rel="stylesheet" type="text/css" href="../style/StyleSheetBrowser.css" />');
+        //                document.write("<style>#container {z-index: 1; margin: 0px auto; width: 950px; height:1600px ; position: relative; background-color: #ffffff; text-align: left</style>")     
+        //            }
+        //            else
+        //            {
+        //                document.write('<link rel="stylesheet" type="text/css" href="../style/StyleSheetBrowser.css" />');
+        //            }
+        //            
+        //        }
+        //        else
+        //        {
+        //           
+        //           document.write('<link rel="stylesheet" type="text/css" href="../style/styles.css" />');
+        //        }
+    </script>
+</head>
+<body>
+    <form runat="server">
+    <div id="container">
+     <div class="utility" align="right">
+            <a class="utility" href="../IQCareHelp/index.aspx" onclick="window.open('../IQCareHelp/index.html'); return false">
+                Help</a> | <a class="utility" href="../AdminForms/frmAdmin_ChangePassword.aspx">Password</a> | <a class="utility" href="mailto:iqsupport@futuresgroup.com">Report Defect</a>|
+            <a class="utility" href="../frmLogOff.aspx">Logout</a>
+        </div>
+        <!-- level one nav  -->
+        <div id="levelone">
+            <table cellspacing="0" cellpadding="0" width="950" border="0">
+                <tbody>
+                    <tr>
+                        <asp:Label ID="lblpntStatus" CssClass="textstylehidden" runat="server" Text="Label"></asp:Label>
+                        <td class="navbutton" width="121" height="26" rowspan="2">
+                            <a class="innerbutton" href="../frmFindAddPatient.aspx">Find/Add Patient</a><br>
+                        </td>
+                        <td class="navbutton" onmouseover="expand(this);" onmouseout="collapse(this);" width="70"
+                            height="26" rowspan="2">
+                            <a class="innerbutton">Reports</a><br>
+                            <!--begin dropdown -->
+                            <div class="navbutton">
+                                <table class="menu" cellspacing="0" cellpadding="0" width="155" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminFacilityReport" runat="server" href="frmReportFacilityJump.aspx">
+                                                    Facility Reports</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminDonorReport" runat="server" href="frmReportDonorJump.aspx">
+                                                    Donor Reports</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminCustomReport" runat="server" href="frmReportCustom.aspx">
+                                                    Custom Reports</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="QueryBuilderReports" runat="server" href="frmQueryBuilderReports.aspx">
+                                                    QueryBuilder Reports</a>
+                                            </td>
+                                        </tr>
+                                        
+                                     <%--    <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminaReport" runat="server" href="../Reports/frmReporta.aspx">
+                                                    a Reports</a>
+                                            </td>
+                                        </tr>--%>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--end  dropdown -->
+                        </td>
+                        <td class="navbutton" width="80" height="26" rowspan="2">
+                            <a class="innerbutton" id="mnuSchedular" runat="server" href="../Scheduler/frmScheduler_AppointmentMain.aspx">
+                                Scheduler</a><br>
+                        </td>
+                        <td class="navbutton" onmouseover="expand(this);" onmouseout="collapse(this);" width="110"
+                            height="26" rowspan="2">
+                            <a class="innerbutton" href="../frmFacilityHome.aspx">Administration</a><br>
+                            <!-- begin dropdown -->
+                            <div class="navbutton">
+                                <table class="menu" cellspacing="0" cellpadding="0" width="180" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminFacility" runat="server" href="../AdminForms/frmAdmin_FacilityList.aspx">
+                                                    Facility Setup</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminCustom" runat="server" href="../AdminForms/frmAdmin_PMTCT_CustomItems.aspx">
+                                                    Customize Lists</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminUser" runat="server" href="../AdminForms/frmAdmin_UserList.aspx">
+                                                    User Administration</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminUserGroup" runat="server" href="../AdminForms/frmAdmin_UserGroupList.aspx">
+                                                    User Group Administration</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminDeletePatient" runat="server" href="../adminForms/frmAdmin_DeletePatient.aspx">
+                                                    Delete Patient</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminCustomConfig" runat="server" href="../adminForms/frmConfig_Customfields.aspx">
+                                                    Configure Custom Fields</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminExport" runat="server" href="../AdminForms/frmAdmin_Export.aspx">
+                                                    Export</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminRefreshCache" runat="server" href="../frmSystemCache.aspx">
+                                                    Refresh System Cache</a>
+                                            </td>
+                                        </tr>
+                                        <%--<tr>
+                                            <td>
+                                                <a class="menuitem" id="mnuAdminRefreshTables" runat="server" href="../frmRefreshReportFiles.aspx">
+                                                    Refresh Reporting Tables</a>
+                                            </td>
+                                        </tr>
+                                         <TR>
+          <TD><A class=menuitem
+            href="../frmconstruction.htm">Scheduler 
+            Configuration</A> </TD></TR>--%>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end dropdown -->
+                        </td>
+                        <td class="navbutton" onmouseover="expand(this);" onmouseout="collapse(this);" width="80"
+                            height="26" rowspan="2">
+                            <a class="innerbutton" href="../frmDBBackup.aspx">Backup</a><br>
+                            <div class="navbutton">
+                                <table class="menu" cellspacing="0" cellpadding="0" width="189" border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" href="../frmDBBackup.aspx">Backup/Restore Database</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="menuitem" href="../frmDBBackupSetup.aspx" onclick="window.open('../frmDBBackupSetup.aspx'); return false">
+                                                    Backup/Restore Setup</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="navbutton" onmouseover="imgswap('tab','../images/tab_right_over');" onmouseout="imgswap('tab','../images/tab_right');"
+                            width="98" height="26" rowspan="2">
+                            <a class="innerbutton2" href="../frmFacilityHome.aspx">Facility Home</a><br>
+                        </td>
+                        <td valign="top" width="23" height="26" rowspan="2">
+                            <img id="tab" height="27" alt="tab" src="../IMAGES/tab_right.gif" width="23" border="0"
+                                name="tab"></td>
+                        <td class="breadcrumb" valign="bottom" height="21">
+                            <a class="breadcrumb">
+                                <asp:Label ID="lblRoot" runat="server" Text=""></asp:Label></a>
+                            <asp:Label ID="lblMark" runat="server" Text="»"></asp:Label>
+                            <a class="breadcrumb">
+                                <asp:Label ID="lblheader" runat="server" Text=""></asp:Label></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="topline" height="5">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="main">
+            <div id="bluetop">
+            </div>
+            <img id="logo" height="94" alt="International Quality Care " src="../IMAGES/iq_logo.gif"
+                width="236" border="0">
+            <img id="pmms" height="53" alt="Patient Management and Monitoring System" src="../IMAGES/pmms.gif"
+                width="264" border="0">
+            <img id="collage" height="117" src="../IMAGES/collage.jpg" width="424" border="0">
+            <div id="username">
+                <asp:Label ID="lblUserName" runat="server" Text="Lanette Burrows"></asp:Label></div>
+            <div id="date" align="right">
+                <asp:Label ID="lblDate" runat="server" Text="30 September 2006"></asp:Label></div>
+            <div id="border">
+            </div>
+            <img id="tabfacility" height="23" alt="Facility Name" src="../IMAGES/tab_facility.gif"
+                width="377" border="0">
+            <div id="facility">
+                <asp:Label ID="lblLocation" runat="server" Text="Nsambya Hospital and Medical Center"></asp:Label></div>
+            <div class="contentpad">
+                    <div class="nomargin">
+                    </div>
+            <asp:ContentPlaceHolder ID="reportheaderfooter" runat="server">
+            </asp:ContentPlaceHolder>
+            <!-- end content area -->
+            <%-- <p class="footer">
+                    International Quality Care Patient Management and Monitoring System
+                    <asp:Label ID="lblversion" Text="Version B1.0" runat="server"></asp:Label>
+                    Copyright © 2006 AIDSRelief. All rights reserved. Release Date:
+                    <asp:Label ID="lblrelDate" Text="Date" runat="server"></asp:Label></p>--%>
+            <table width="900">
+                <tr style="width: 100%">
+                    <td align="left" style="width: 50%">
+                        <p>
+                            <img src="../Images/Futures-Logo-RGB-Sm72.jpg" width="70" vspace="5" hspace="5" border="0">
+                            <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" onclick="window.open('http://creativecommons.org/licenses/by-nc-sa/3.0/'); return false">
+                                <img src="../Images/CreativeCommon.jpg" width="70" vspace="5" border="0"></a>
+                        </p>
+                    </td>
+                    <td align="right" style="width: 50%">
+                        <label class="right" style="width: 300">
+                            Version :
+                            <asp:Label CssClass="blue11 nomargin" ID="lblversion" Text="Version B1.0" runat="server"></asp:Label></label>
+                        <br />
+                        <label class="right" style="width: 300">
+                            Release Date :
+                            <asp:Label CssClass="blue11 nomargin" ID="lblrelDate" Text="Date" runat="server"></asp:Label></label>
+                    </td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

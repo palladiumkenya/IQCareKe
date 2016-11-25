@@ -1,0 +1,121 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone" type="xs:string" minOccurs="0" />
+              <xs:element name="HIVDiagnosisDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PatientEnrollmentId" type="xs:string" minOccurs="0" />
+              <xs:element name="Signature" type="xs:string" minOccurs="0" />
+              <xs:element name="patientClinicId" type="xs:string" minOccurs="0" />
+              <xs:element name="DOB" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CareEndedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CareEnded" type="xs:int" minOccurs="0" />
+              <xs:element name="PatientExitReason" type="xs:string" minOccurs="0" />
+              <xs:element name="DroppedoutReason" type="xs:int" minOccurs="0" />
+              <xs:element name="DroppedoutReasonOther" type="xs:string" minOccurs="0" />
+              <xs:element name="DeathReason" type="xs:int" minOccurs="0" />
+              <xs:element name="Ptn_pk" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WhyEligible" type="xs:int" minOccurs="0" />
+              <xs:element name="TLC" type="xs:int" minOccurs="0" />
+              <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="WHOStage" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevARVsCD4" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ARTStartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="InitialRegimenCode" type="xs:string" minOccurs="0" />
+              <xs:element name="WABStage" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevLowestCD4Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PrevLowestCD4Percent" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevMostRecentViral" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PrevMostRecentViralLoadDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PrevSingleDoseNVP" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevSingleDoseNVPDate1" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevSingleDoseNVPDate2" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RegimenType" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevARVRegimen1Name" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevARVRegimen1Months" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevARVRegimen2Name" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevARVRegimen2Months" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevARVRegimen3Name" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevARVRegimen3Months" type="xs:int" minOccurs="0" />
+              <xs:element name="PrevARVRegimen4Name" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevARVRegimen4Months" type="xs:int" minOccurs="0" />
+              <xs:element name="CurrentART" type="xs:string" minOccurs="0" />
+              <xs:element name="CurrentARTStartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="PharmacyCurrentARTStartDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="SingleDoseMonth" type="xs:int" minOccurs="0" />
+              <xs:element name="Regimen1" type="xs:string" minOccurs="0" />
+              <xs:element name="Regimen2" type="xs:string" minOccurs="0" />
+              <xs:element name="Regimen3" type="xs:string" minOccurs="0" />
+              <xs:element name="Regimen4" type="xs:string" minOccurs="0" />
+              <xs:element name="DispensedDate1" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DispensedDate2" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DispensedDate3" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DispensedDate4" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="RegimenMonths1" type="xs:int" minOccurs="0" />
+              <xs:element name="RegimenMonths2" type="xs:int" minOccurs="0" />
+              <xs:element name="RegimenMonths3" type="xs:int" minOccurs="0" />
+              <xs:element name="RegimenMonths4" type="xs:int" minOccurs="0" />
+              <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VisitId" type="xs:int" minOccurs="0" />
+              <xs:element name="DateOfDiseaseStr" type="xs:string" minOccurs="0" />
+              <xs:element name="Name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LabDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CD4" type="xs:string" minOccurs="0" />
+              <xs:element name="ViralLoad" type="xs:string" minOccurs="0" />
+              <xs:element name="OtherLabResult" type="xs:string" minOccurs="0" />
+              <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DroppedOutReasonDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="CareEndedDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table5">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DeathReasonDesc" type="xs:string" minOccurs="0" />
+              <xs:element name="CareEndedDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table6">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VisitDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="RECEIPTDATA" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="Receipt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">     
+        <xs:element name="Transaction" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>	
+				<xs:element name="ID"                 		type="xs:string" />
+				<xs:element name="TransactionDate"    		type="xs:string" />
+				<xs:element name="TransactionDescription"   type="xs:string" />   
+				<xs:element name="TransactionType"     	    type="xs:string" />   	
+				<xs:element name="ReceiptNumber"            type="xs:string" />			  
+				<xs:element name="TransactionAmount"        type="xs:float"  />
+				<xs:element name="AvailableDeposit"         type="xs:float" />
+				<xs:element name="CashierFirstName"      	type="xs:string" />
+				<xs:element name="CashierLastName"       	type="xs:string"/>
+				<xs:element name="CashierUserId"            type="xs:int"/>
+				<xs:element name="PatientID"                type="xs:string" />
+				<xs:element name="PatientLastName"          type="xs:string" />
+				<xs:element name="PatientFirstName"         type="xs:string" />
+				<xs:element name="PatientSex"               type="xs:string" />
+       <xs:element name="PatientAge"                 type="xs:string" />
+				<xs:element name="FacilityName"             type="xs:string" />
+				<xs:element name="FacilityTel"              type="xs:string" />
+				<xs:element name="FacilityCell"       		type="xs:string"/>
+				<xs:element name="FacilityFax"        		type="xs:string"/>
+				<xs:element name="FacilityAddress"          type="xs:string" />
+				<xs:element name="FacilityEmail"            type="xs:string" />
+				<xs:element name="FacilityFooter"           type="xs:string" />
+				<xs:element name="FacilityURL"              type="xs:string" />
+				<xs:element name="FacilityLogo"             type="xs:string" />
+				<xs:element name="Currency"             	type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

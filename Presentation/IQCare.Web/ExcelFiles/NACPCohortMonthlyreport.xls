@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:c="urn:schemas-microsoft-com:office:component:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>User</LastAuthor>
+  <Created>2009-03-30T06:19:39Z</Created>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>10005</WindowHeight>
+  <WindowWidth>10005</WindowWidth>
+  <WindowTopX>120</WindowTopX>
+  <WindowTopY>135</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s21">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s22">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:Size="14" ss:Bold="1"/>
+   <Interior/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:Bold="1"/>
+   <Interior/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s24">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s25">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior ss:Color="#333333" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s26">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:Bold="1"/>
+   <Interior ss:Color="#333333" ss:Pattern="Solid"/>
+   <NumberFormat ss:Format="@"/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s27">
+   <NumberFormat ss:Format="@"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="NACPCohortMonthlyreport">
+  <Table ss:ExpandedColumnCount="15" ss:ExpandedRowCount="51" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s27">
+   <Column ss:Index="6" ss:StyleID="s27" ss:AutoFitWidth="0" ss:Width="246"/>
+   <Row ss:AutoFitHeight="0" ss:Height="28.5" ss:StyleID="s21">
+    <Cell ss:Index="6" ss:StyleID="s22"><Data ss:Type="String">St Jone</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">National Care and Treatment programme cohort analyis Form</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="7" ss:StyleID="s23"><Data ss:Type="String">CohortJan-07</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">6 mo Jul-07</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">12 mo Jan-08</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">24 mo Jan-09</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">36 mo Jan-10</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">48 mo Jan-11</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">60 mo Jan-12</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">72 mo Jan-13</Data></Cell>
+    <Cell ss:StyleID="s23"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21"/>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">G</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Started on ART in this clinic original cohort</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">TI</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Transfers in</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">TO</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Transfers in</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">N</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Net current cohort</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">H</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">On original 1st line regimen</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">I</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">On original 1st line regimen</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="4" ss:StyleID="s23"><Data ss:Type="String">J</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">On 2nd line or other regimen(switched)</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Current regimen unrecorded</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="5.25" ss:StyleID="s25">
+    <Cell ss:Index="5" ss:StyleID="s26"/>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Stopped/Current ARV status unrecorded</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Died</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Unkonwn</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Lost to follwo up/did not visit for three months</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="5.25" ss:StyleID="s25">
+    <Cell ss:Index="5" ss:StyleID="s26"/>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number of cohort alive and on ART</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Percent of cohort alive and on ART</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6" ss:StyleID="s25">
+    <Cell ss:Index="5" ss:StyleID="s26"/>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number of patients aged 7 years or more with CD4</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number with CD4&gt;=200  Percent with CD4&gt;=200</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="String">0  0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="5.25" ss:StyleID="s25">
+    <Cell ss:Index="5" ss:StyleID="s26"/>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number Working</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number Ambulatory</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number Bedridden</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number functional status unrecorded</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="5.25" ss:StyleID="s25">
+    <Cell ss:Index="5" ss:StyleID="s26"/>
+    <Cell ss:Index="7" ss:StyleID="s24"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21">
+    <Cell ss:Index="5" ss:StyleID="s23"><Data ss:Type="String">Number who visited and were recorded on ARVs as many times as there are months</Data></Cell>
+    <Cell ss:Index="7" ss:StyleID="s24"><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:StyleID="s21" ss:Span="20"/>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <LeftColumnVisible>6</LeftColumnVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>15</ActiveRow>
+     <ActiveCol>14</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+   <x:ViewableRange>R1:R262144</x:ViewableRange>
+   <x:Selection>R1C1</x:Selection>
+  </WorksheetOptions>
+  <c:WorksheetOptions>   </c:WorksheetOptions>
+ </Worksheet>
+ <c:ComponentOptions>
+   <c:Label>
+    <c:Caption>Microsoft Office Spreadsheet</c:Caption>
+   </c:Label>
+   <c:MaxHeight>80%</c:MaxHeight>
+   <c:MaxWidth>80%</c:MaxWidth>
+   <c:NextSheetNumber>1</c:NextSheetNumber>
+  </c:ComponentOptions>
+ <x:WorkbookOptions>
+   <c:OWCVersion>12.0.0.4518         </c:OWCVersion>
+  </x:WorkbookOptions>
+</Workbook>

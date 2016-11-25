@@ -1,0 +1,111 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemId" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" type="xs:string" minOccurs="0" />
+              <xs:element name="Item_x0020_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="DispensingUnitId" type="xs:int" minOccurs="0" />
+              <xs:element name="DispensingUnitName" type="xs:string" minOccurs="0" />
+              <xs:element name="StrengthId" type="xs:int" minOccurs="0" />
+              <xs:element name="FrequencyId" type="xs:int" minOccurs="0" />
+              <xs:element name="FrequencyName" type="xs:string" minOccurs="0" />
+              <xs:element name="MorningDose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MiddayDose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EveningDose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NightDose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QtyDisp" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OrderedbyDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CostPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Margin" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SellingPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BillAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="UnitSellingPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="visitId" type="xs:int" minOccurs="0" />
+              <xs:element name="OrderedQuantity" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Dose" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Duration" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DispensedByDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ProgId" type="xs:int" minOccurs="0" />
+              <xs:element name="ReportingID" type="xs:string" minOccurs="0" />
+              <xs:element name="Height" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PharmacyNotes" type="xs:string" minOccurs="0" />
+              <xs:element name="VisitId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+              <xs:element name="middlename" type="xs:string" minOccurs="0" />
+              <xs:element name="lastname" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientEnrollmentId" type="xs:string" minOccurs="0" />
+              <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+              <xs:element name="Gender" type="xs:string" minOccurs="0" />
+              <xs:element name="Age" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DOB" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="phone" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacilityLogo" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityTel" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityCell" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityFax" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityEmail" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityURL" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityFooter" type="xs:string" minOccurs="0" />
+              <xs:element name="FacilityTemplate" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PrescriberName" type="xs:string" minOccurs="0" />
+              <xs:element name="Designation" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table5">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Allergy" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table6">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DispenserName" type="xs:string" minOccurs="0" />
+              <xs:element name="Designation" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table7">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FacilityImage" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

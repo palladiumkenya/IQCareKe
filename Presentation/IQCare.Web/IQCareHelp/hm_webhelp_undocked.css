@@ -1,0 +1,93 @@
+/* General Background */
+	body, html {
+	background-color: #f1f1f1;
+	overflow: hidden;
+	}
+
+/* General Layout */
+ div#hmheader {
+   top: 29px; left: 8px; right: 8px;
+   margin-bottom: 0;
+   padding-left: 10px;
+   width: auto;
+   } 
+div#atocIcon { right: 5px; }
+
+div#hmbox {
+	position: absolute;
+	top: 28px; right: 5px; left: 5px; bottom: 5px;
+	border: 1px solid #767f92;
+	background-color: #fff;
+	margin: 0px; padding: 0px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 2px 2px 2px #898989;
+	-webkit-box-shadow: 2px 2px 2px #898989;
+	box-shadow: 2px 2px 2px #898989;
+	overflow: hidden;
+   }
+
+div#idcontent {
+  position: absolute;
+  top: 0; right: 2px; bottom: 2px; left: 5px;
+  padding: 8px;
+  overflow-y: scroll;
+  overflow-x: auto; 
+}
+
+/* root element for tabs  */
+ul.tabs { 
+	display: block;
+	list-style:none; 
+	margin:0 !important; 
+	padding:0;	
+	height:30px;
+	position: absolute;
+	top: 0px;
+	left: 20px;
+	/* left: -100px; */
+	z-index: 800;
+	font-family:"Lucida Grande","bitstream vera sans","trebuchet ms",sans-serif,verdana;
+}
+
+/* single tab */
+ul.tabs li { 
+	float:left;	 
+	text-indent:0;
+	padding:0;
+	margin:0 !important;
+	list-style-image:none !important; 
+}
+
+/* Undocked tab */
+ul.tabs a { 
+	font-size:13px;
+	display:block;
+	height: 22px;  
+	line-height:21px;
+	width: auto;
+	text-align:center;	
+	text-decoration:none;
+	color:#eeeeee;
+	padding:0px 12px 0px 7px;
+	margin:0px 4px 0px 0px;	
+	position:relative;
+	top:6px;
+	border: 1px solid #767f92;
+	border-bottom: 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+	-moz-box-shadow: 2px -1px 4px -1px #898989;
+	-webkit-box-shadow: 2px -1px 4px -1px #898989;
+	box-shadow: 2px -1px 4px -1px #898989;
+
+	background-color: #687186;
+	background: -moz-linear-gradient(top,  #ffffff 3%,  #5a6378 35%);
+	background: -ms-linear-gradient(top,  #ffffff 3%,  #5a6378 35%);
+	background: -webkit-linear-gradient(top,  #ffffff 3%,  #5a6378 35%);
+	background: -o-linear-gradient(top,rgb(255,255,255) 3%,rgb(90,99,120) 35%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#5a6378);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#5a6378)";	
+}

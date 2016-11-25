@@ -1,0 +1,213 @@
+/* Text Styles */
+hr { color: #000000}
+body, table, tr, th /* Normal */
+{
+ font-size: 10pt;
+ font-family: Arial;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+ text-decoration: none;
+}
+span.f_CodeExample /* Code Example */
+{
+ font-size: 8pt;
+ font-family: 'Courier New';
+}
+span.f_Comment /* Comment */
+{
+}
+span.f_DefaultParagraphFont /* Default Paragraph Font */
+{
+}
+span.f_DefaultParagraphFont-1 /* Default Paragraph Font-1 */
+{
+ font-size: 12pt;
+ font-family: 'Times New Roman';
+}
+span.f_heading1 /* heading 1 */
+{
+ font-size: 16pt;
+ font-weight: bold;
+}
+span.f_heading1-1 /* heading 1-1 */
+{
+ font-size: 16pt;
+ font-weight: bold;
+}
+span.f_heading2 /* heading 2 */
+{
+ font-size: 14pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.f_heading2-1 /* heading 2-1 */
+{
+ font-size: 14pt;
+ font-style: italic;
+ font-weight: bold;
+}
+span.f_heading3 /* heading 3 */
+{
+ font-size: 13pt;
+ font-weight: bold;
+}
+span.f_Heading1 /* Heading1 */
+{
+ font-size: 16pt;
+ font-weight: bold;
+}
+span.f_Hyperlink /* Hyperlink */
+{
+ color: #0000ff;
+ text-decoration: underline;
+}
+span.f_Hyperlink-1 /* Hyperlink-1 */
+{
+ font-size: 12pt;
+ font-family: 'Times New Roman';
+ color: #0000ff;
+ text-decoration: underline;
+}
+span.f_ImageCaption /* Image Caption */
+{
+ font-size: 8pt;
+ font-weight: bold;
+}
+span.f_Normal-1 /* Normal-1 */
+{
+ font-size: 12pt;
+ font-family: 'Times New Roman';
+}
+span.f_Notes /* Notes */
+{
+}
+span.f_Tabletext /* Tabletext */
+{
+ font-size: 9pt;
+ font-family: 'Arial Narrow';
+}
+span.f_toc2 /* toc 2 */
+{
+ font-size: 14pt;
+ font-weight: bold;
+}
+span.f_toc2-1 /* toc 2-1 */
+{
+ font-size: 14pt;
+ font-weight: bold;
+}
+/* Paragraph styles */
+p /* Normal */
+{
+ text-align: left;
+ text-indent: 0px;
+ padding: 0px 0px 0px 0px;
+ margin: 0px 0px 0px 10px;
+}
+.p_CodeExample /* Code Example */
+{
+ white-space: nowrap;
+ margin: 0px 0px 0px 0px;
+}
+.p_Comment /* Comment */
+{
+}
+.p_DefaultParagraphFont /* Default Paragraph Font */
+{
+ margin: 0px 0px 0px 0px;
+}
+.p_DefaultParagraphFont-1 /* Default Paragraph Font-1 */
+{
+ margin: 0px 0px 0px 0px;
+}
+.p_heading1 /* heading 1 */
+{
+ margin: 16px 0px 4px 10px;
+}
+.p_heading1-1 /* heading 1-1 */
+{
+ margin: 16px 0px 4px 0px;
+}
+.p_heading2 /* heading 2 */
+{
+ margin: 16px 0px 4px 10px;
+}
+.p_heading2-1 /* heading 2-1 */
+{
+ margin: 16px 0px 4px 0px;
+}
+.p_heading3 /* heading 3 */
+{
+ margin: 16px 0px 4px 10px;
+}
+.p_Heading1 /* Heading1 */
+{
+ font-size: 100%;
+ font-weight: normal;
+ text-align: left;
+ text-indent: 0px;
+ padding: 0px 0px 0px 0px;
+ margin: 0px 0px 0px 10px;
+}
+.p_Hyperlink /* Hyperlink */
+{
+ margin: 0px 0px 0px 0px;
+}
+.p_Hyperlink-1 /* Hyperlink-1 */
+{
+ margin: 0px 0px 0px 0px;
+}
+.p_ImageCaption /* Image Caption */
+{
+}
+.p_Normal-1 /* Normal-1 */
+{
+ margin: 0px 0px 0px 0px;
+}
+.p_Notes /* Notes */
+{
+}
+.p_Tabletext /* Tabletext */
+{
+ margin: 1px 0px 1px 0px;
+}
+.p_toc2 /* toc 2 */
+{
+ text-align: center;
+ margin: 8px 0px 0px 16px;
+}
+.p_toc2-1 /* toc 2-1 */
+{
+ text-align: center;
+ margin: 8px 0px 0px 16px;
+}
+
+
+#hmpopupdiv /* used for javascript text popups */
+{
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #FFFFFF;
+  padding: 6px;
+  border:1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #888;
+}
+
+#hmlightbox /* image lightbox */
+{
+  border: none;
+  padding: 8px;
+  background: #FFF;
+  font-size: 110%;
+  font-weight: bold;
+  color: #777;
+  box-shadow: 5px 5px 5px #888;
+}
+
+img.dropdown-toggle-icon /* pointer for toggle icons */
+{
+  cursor: pointer;
+}

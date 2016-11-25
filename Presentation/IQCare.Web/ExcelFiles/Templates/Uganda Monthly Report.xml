@@ -1,0 +1,1586 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Stacey Berlow</Author>
+  <LastAuthor>User</LastAuthor>
+  <Created>2009-04-29T03:22:40Z</Created>
+  <LastSaved>2009-12-16T06:47:25Z</LastSaved>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8445</WindowHeight>
+  <WindowWidth>12180</WindowWidth>
+  <WindowTopX>-75</WindowTopX>
+  <WindowTopY>-135</WindowTopY>
+  <TabRatio>832</TabRatio>
+  <ActiveSheet>4</ActiveSheet>
+  <FirstVisibleSheet>4</FirstVisibleSheet>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m83072652">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="m83072662">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s23">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s24">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s25">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+  </Style>
+  <Style ss:ID="s26">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s27">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s28">
+   <Alignment ss:Vertical="Top"/>
+  </Style>
+  <Style ss:ID="s29">
+   <Alignment ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s30">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s31">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s32">
+   <Alignment ss:Vertical="Top"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s33">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s34">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s35">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+  </Style>
+  <Style ss:ID="s36">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s37">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s38">
+   <Alignment ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s39">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s40">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font x:Family="Swiss" ss:Color="#FFFFFF"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s41">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+  </Style>
+  <Style ss:ID="s42">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s43">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s44">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s45">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="11" ss:Bold="1"/>
+   <Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s46">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s47">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+  </Style>
+  <Style ss:ID="s48">
+   <Alignment ss:Vertical="Top"/>
+   <Font ss:Color="#C0C0C0"/>
+  </Style>
+  <Style ss:ID="s49">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Font ss:Color="#C0C0C0"/>
+  </Style>
+  <Style ss:ID="s50">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s51">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s52">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s53">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s54">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="12" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s55">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="12" ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#000080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s56">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss" ss:Size="12"/>
+  </Style>
+  <Style ss:ID="s57">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s58">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s59">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s60">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s61">
+   <Alignment ss:Vertical="Top"/>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:Indent="1" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s64">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s70">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+   <Interior ss:Color="#FFFF99" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Registers for Uganda">
+  <Table ss:ExpandedColumnCount="256" ss:ExpandedRowCount="4" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s28">
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="85.5"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="85.5"/>
+   <Column ss:StyleID="s25" ss:Width="97.5"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="85.5" ss:Span="1"/>
+   <Column ss:Index="6" ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="85.5"
+    ss:Span="250"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s27"><Data ss:Type="String">Registers for Uganda</Data></Cell>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s27"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Country</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">ANC</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Labor and Delivery</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Exposed Child</Data></Cell>
+   </Row>
+   <Row ss:Height="38.25">
+    <Cell ss:StyleID="s38"><Data ss:Type="String">Uganda</Data></Cell>
+    <Cell ss:StyleID="s39"><Data ss:Type="String">INTEGRATED ANTENATAL REGISTER</Data></Cell>
+    <Cell ss:StyleID="s39"><Data ss:Type="String">MATERNITY REGISTER</Data></Cell>
+    <Cell ss:StyleID="s39"><Data ss:Type="String">POST NATAL REGISTER</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>0</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Enrollment">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Enrollment!R4C1:R7C8"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="28" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s28">
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="123.75"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="94.5"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="172.5"/>
+   <Column ss:StyleID="s28" ss:Width="132"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="87"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="90"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="86.25"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="82.5"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s27"><Data ss:Type="String">PMTCT Enrollment Information</Data></Cell>
+   </Row>
+   <Row ss:Index="3">
+    <Cell ss:MergeAcross="2" ss:StyleID="s70"><Data ss:Type="String">Master</Data></Cell>
+    <Cell ss:MergeAcross="4" ss:StyleID="s70"><Data ss:Type="String">Country Specific Labels</Data></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s29"><Data ss:Type="String">IQCare Label</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Data Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s30"><Data ss:Type="String">Business Rule</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s30"><Data ss:Type="String">Rwanda&#10;Fields captured in IQChart</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Kenya</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Tanzania</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Uganda</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Nigeria</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="38.25">
+    <Cell><Data ss:Type="String">Patient Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Multi-Select</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">ART&#10;PMTCT (Adult)&#10;PMTCT (Child)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Patient Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Text</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">First Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Text</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Middle Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Last Name</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Last Name</Data></Cell>
+    <Cell><Data ss:Type="String">Last Name</Data></Cell>
+    <Cell><Data ss:Type="String">Last Name</Data></Cell>
+    <Cell><Data ss:Type="String">Last Name</Data></Cell>
+    <Cell><Data ss:Type="String">Last Name</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DOB</Data></Cell>
+    <Cell><Data ss:Type="String">Date</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">DOB</Data></Cell>
+    <Cell><Data ss:Type="String">DOB</Data></Cell>
+    <Cell><Data ss:Type="String">DOB</Data></Cell>
+    <Cell><Data ss:Type="String">DOB</Data></Cell>
+    <Cell><Data ss:Type="String">DOB</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Age</Data></Cell>
+    <Cell><Data ss:Type="String">Integer</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Age</Data></Cell>
+    <Cell><Data ss:Type="String">Age (years)</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Age</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Age at PMTCT Registration</Data></Cell>
+    <Cell><Data ss:Type="String">Integer</Data></Cell>
+    <Cell><Data ss:Type="String">Tanzania: years</Data></Cell>
+    <Cell><Data ss:Type="String">Age at PMTCT Registration</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">Age at PMTCT Registration</Data></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="String">Sex (child)</Data></Cell>
+    <Cell><Data ss:Type="String">Select List</Data></Cell>
+    <Cell><Data ss:Type="String">Male, Female&#10;If PMTCT patient, then Female</Data></Cell>
+    <Cell><Data ss:Type="String">Sex</Data></Cell>
+   </Row>
+   <Row ss:Index="14" ss:Height="25.5">
+    <Cell><Data ss:Type="String">Marital Status </Data></Cell>
+    <Cell><Data ss:Type="String">Select List</Data></Cell>
+    <Cell><Data ss:Type="String">1=Married, 2=Widowed, 3=Divorsed, 4=Single 5=Separated)</Data></Cell>
+    <Cell><Data ss:Type="String">Marital Status </Data></Cell>
+    <Cell><Data ss:Type="String">Marital Status </Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Village/Estate</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Village/Estate</Data></Cell>
+    <Cell><Data ss:Type="String">Village/Estate</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Village</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Parish</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Parish</Data></Cell>
+    <Cell ss:Index="7"><Data ss:Type="String">Parish</Data></Cell>
+   </Row>
+   <Row ss:Index="18">
+    <Cell ss:StyleID="s36"><Data ss:Type="String">Patient Numbers</Data></Cell>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s40"/>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s37"/>
+    <Cell ss:StyleID="s37"/>
+   </Row>
+   <Row ss:Height="38.25">
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC No</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data></Cell>
+    <Cell><Data ss:Type="String">Tanzania: Patient number/YYFacility Abbreviation e.g. 010/08GEI &#10;Other Coutnries: an integer</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC No</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC No</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC Card Number</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Client No.</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">PMTCT No</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s25"><Data ss:Type="String">PMTCT code</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s25"><Data ss:Type="String">TRACNET No</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data></Cell>
+    <Cell><Data ss:Type="String">Rwanda national patient numbering system for ART patients</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">TRACNET No.</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">CTC ID number</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data></Cell>
+    <Cell><Data ss:Type="String">See CTC Rules</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">CTC ID number</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Hospital Reg. No </Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Hospital Reg. No </Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">VCT No</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">VCT No</Data></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s33"><Data ss:Type="String">Existing ANC No</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell><Data ss:Type="String">Record existing ANC no. from maternity if previous births</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Re-Attendant</Data></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">In-Patient No.</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell><Data ss:Type="String">Kenya: maternity admissions number</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">In-Patient No.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Under 5 Registration No</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="6"><Data ss:Type="String">Under 5 Registration No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Pediatrict Outpatient No</Data></Cell>
+    <Cell><Data ss:Type="String">Text</Data></Cell>
+    <Cell ss:Index="8"><Data ss:Type="String">POP No</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>0</VerticalResolution>
+   </Print>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>4</SplitHorizontal>
+   <TopRowBottomPane>4</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="ANC">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=ANC!R4C2:R39C5"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="43" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s28">
+   <Column ss:Index="2" ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="117.75"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="54"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="193.5"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="90.75"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="191.25"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s27"><Data ss:Type="String">Integrated Antenatal Register</Data></Cell>
+   </Row>
+   <Row ss:Index="3" ss:Height="15">
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">Master</Data></Cell>
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:StyleID="s45"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Register Number</Data></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Pre-defined Field Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Data Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Business Rule</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Uganda Field Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:Index="8" ss:StyleID="s47"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s50"><Data ss:Type="String">Mother</Data></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Client number</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">ANC number if available from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Name of client</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Mother's names from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Age</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Calcuate the age and display using the DOB from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:Index="2"><Data ss:Type="String">Visit Date</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date other visits to the ANC</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Visit Date</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">There is no date captured in the register itself, but a date should be captured.</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Village/Estate</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Text</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Auto populate from enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Village</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Parish</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Text</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Auto populate from enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Parish</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"/>
+   </Row>
+   <Row ss:Height="63.75">
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="String">Visit No.</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Integer</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Initial ANC visit = visit 1;&#10;Keep running count of ANC visits&#10;Consider implementing like WHO field - with select list with a maximum of 10 visits (average number of visits = 4)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">ANC Visit</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="String">Gravidae</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Integer</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">Gravida</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="51">
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="String">Parity</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">[1,2,3, …15]&#10;Any preganancy where the mother carried for 7 or more months; Exludes abortions; Excludes current pregnancy.</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Parity</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="51">
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="String">GestAge</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Decimal</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">xx.x &#45;- two digits and one decimal</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Gestational Age (weeks)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">The LMP indicator is not captured and the gestational age can not be calculated. This field will be entered into the register by the data clerk.</Data></Cell>
+   </Row>
+   <Row ss:Height="63.75">
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Mother PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[C=Counselled but declined HIV testing&#10;TR=Tested results given, HIV Negative&#10;TRR=Tested results given, HIV Positive&#10;TRR&quot;= HIV Positive - Status previously known]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Mother PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">C is a possiblity for a discordant couple where the woman is negative and the husband is possitive.</Data></Cell>
+   </Row>
+   <Row ss:Height="63.75">
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Partner PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[C=Counselled but declined HIV testing&#10;TR=Tested results given, HIV Negative&#10;TRR=Tested results given, HIV Positive&#10;TRR&quot;= HIV Positive - Status previously known]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Partner PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="76.5">
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell ss:StyleID="s35"><Data ss:Type="String">TB Status</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Uganda: [NA - HIV negative client with no signs of TB; &#10;1=HIV positive client suspecte of having TB;&#10;2=Confirmed TB client not on treatment&#10;3=Confirmed TB client and on treatement]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s35"><Data ss:Type="String">TB Status</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">13</Data></Cell>
+    <Cell><Data ss:Type="String">Diagnosis</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Single-line text box</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">Diagnosis</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">15</Data></Cell>
+    <Cell><Data ss:Type="String">ITN</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Yes/No</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">ITN</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="51">
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell ss:StyleID="s34"><Data ss:Type="String">Infant Feeding</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[Exclusive breast feeding&#10;Replacement feeding &#10;Mixed feeding&#10;Other]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Infant Feeding Option</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">No need to capture &quot;other&quot;</Data></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">21</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Other Treatment</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Single-line text box</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5" ss:StyleID="s24"><Data ss:Type="String">Other Treatment</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="String">Complications</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Single-line text box</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Complications/Risk Factors</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">23</Data></Cell>
+    <Cell><Data ss:Type="String">Referral Number</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Integer</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">Ref In/Out</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s44"><Data ss:Type="String">This field needs some investigation</Data></Cell>
+   </Row>
+   <Row ss:Index="27">
+    <Cell ss:StyleID="s50"><Data ss:Type="String">Laboratory</Data></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String">Syphilis (RPR/VDRL)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Pos, Neg</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String">Syphilis</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s34"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Hb</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s26"><Data ss:Type="String">Decimal</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s26"><Data ss:Type="String">Uganda (g/dL)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Index="32">
+    <Cell ss:StyleID="s50"><Data ss:Type="String">Pharmacy</Data></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">14</Data></Cell>
+    <Cell ss:StyleID="s43"><Data ss:Type="String">Tetinus Vaccine</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">TT1, TT2, TT3, TT4, TT5</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"/>
+   </Row>
+   <Row ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">15</Data></Cell>
+    <Cell ss:StyleID="s43"><Data ss:Type="String">Malaria Treatment</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">IPT1, IPT2</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"/>
+   </Row>
+   <Row ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">16</Data></Cell>
+    <Cell ss:StyleID="s43"><Data ss:Type="String">Mebendazole</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Yes, No, NA</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"/>
+   </Row>
+   <Row ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">17</Data></Cell>
+    <Cell ss:StyleID="s43"><Data ss:Type="String">Iron</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Yes/No</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"/>
+   </Row>
+   <Row ss:StyleID="s32">
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell ss:StyleID="s43"><Data ss:Type="String">Folic Acid</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><Data ss:Type="String">Yes/No</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s42"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"/>
+   </Row>
+   <Row ss:Height="76.5">
+    <Cell><Data ss:Type="Number">19</Data></Cell>
+    <Cell><Data ss:Type="String">Regimen</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="4"><Data ss:Type="String">Uganda:&#10;NVP Only&#10;AZT Only&#10;AZT+NVP&#10;AZT+3TC + NVP&#10;HAART</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Index="40">
+    <Cell ss:Index="2" ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+    <Cell ss:StyleID="s41"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>0</VerticalResolution>
+   </Print>
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>4</SplitHorizontal>
+   <TopRowBottomPane>13</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>16</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Maternity - Mother">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase"
+    ss:RefersTo="='Maternity - Mother'!R4C2:R33C5" ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="34" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s28">
+   <Column ss:Index="2" ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="117.75"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="54"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="261.75"/>
+   <Column ss:StyleID="s25" ss:AutoFitWidth="0" ss:Width="138.75"/>
+   <Column ss:StyleID="s28" ss:AutoFitWidth="0" ss:Width="69"/>
+   <Row ss:Height="15.75">
+    <Cell ss:StyleID="s27"><Data ss:Type="String">Maternity Register - Mother</Data></Cell>
+    <Cell ss:StyleID="s27"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row ss:Height="15">
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:MergeAcross="2" ss:StyleID="s45"><Data ss:Type="String">Master</Data></Cell>
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:StyleID="s45"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Register Number</Data></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Pre-defined Field Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Data Type</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Business Rule</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Uganda Field Name</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s46"><Data ss:Type="String">Notes</Data></Cell>
+    <Cell ss:Index="8" ss:StyleID="s47"/>
+   </Row>
+   <Row ss:Height="15.75" ss:StyleID="s56">
+    <Cell ss:StyleID="s54"><Data ss:Type="String">Mother</Data></Cell>
+    <Cell ss:StyleID="s55"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s55"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s55"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s55"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Client number</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">ANC number if available from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Name of client</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Mother's names from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s48"><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Age</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><Data ss:Type="String">Calcuate the age and display using the DOB from the enrollment form</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s49"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Visit Date</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Date</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">Date of Admission</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ANC No</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Autopopulate from ANC register if possible&#10;May be blank</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Client No.</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="38.25">
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Previous Visits</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Attended ANC - Standard&#10;Attended ANC - High Risk&#10;Not Booked</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Previous ANC Visits</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">In-Patient No</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Integer</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">This will be entered into the enrollment from. (Or possibly in this form and autopopulated into the enrollment form.)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">IP No.</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Index="15" ss:Height="25.5">
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Parity</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[1,2,3, …15]&#10;Calculate (parity from maternity + 1) and auto populate</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Parity</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="153">
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Mother PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[C=Counselled or given information but declined HIV testing&#10;TR=Tested results given, client tested HIV Negative&#10;TRR=Tested results given, client tested HIV Positive&#10;TRR&quot;=Tested results given, client tested HIV Positive - Status previously knowns]&#10;This field is for women who visit the clinic just for delivery (&quot;walk-ins&quot;) and have not preveiously been tested and counselled.&#10;Note that TRR&quot; is applied to those women who were tested and counselled in the ANC plus those women who are in the ART program.</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">Mother PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="51">
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Partner PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[C=Counselled but declined HIV testing&#10;TR=Tested results given, HIV Negative&#10;TRR=Tested results given, HIV Positive&#10;TRR&quot;= HIV Positive - Status previously known]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s24"><Data ss:Type="String">Partner PMTCT Code</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Diagnosis</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Text</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Text box</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Diagnosis</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">10a</Data></Cell>
+    <Cell><Data ss:Type="String">Delivery Location</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String"> [Facility, Born before arrival]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">Delivery Location</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="51">
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="String">Delivery Mode</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s44"><Data ss:Type="String">[Normal - Spontaeous&#10;Normal- Induced&#10;Vacuum extraction&#10;Caesarian]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Mode of Delivery</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String">Delivery Date</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">This is the child's date of birth</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date of Delivery</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell><Data ss:Type="Number">18</Data></Cell>
+    <Cell ss:StyleID="s33"><Data ss:Type="String">Infant feeding</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[1=Exclusive breast feeding; 2= Replacement feeding; 3=Mixed feeding; 4=Other]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Infant feeding option</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:Index="8" ss:StyleID="s25"/>
+   </Row>
+   <Row ss:Height="38.25">
+    <Cell><Data ss:Type="String">19a</Data></Cell>
+    <Cell><Data ss:Type="String">Mothers Condition</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">[D- Discharged alive&#10;DD - Discharge Dead&#10;R- Run away or left before discharged]</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Condition of mother at discharge</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">20</Data></Cell>
+    <Cell><Data ss:Type="String">Delivery Conducted by</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Employee list</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Delivery by</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s24"/>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">21</Data></Cell>
+    <Cell><Data ss:Type="String">Next Appointment</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">6 weeks post natal</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date for postnatal care</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="String">Date of Discharge</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Date</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="Number">22</Data></Cell>
+    <Cell><Data ss:Type="String">Discharged by</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Select List</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Employee list</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Discharged by</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5" ss:StyleID="s28"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Links to children of this patient</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5" ss:StyleID="s28"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Link to create a new child patient associated with the mother</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:Index="5" ss:StyleID="s28"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5" ss:StyleID="s28"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s50"><Data ss:Type="String">Adult Pharmacy</Data></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s31"/>
+   </Row>
+   <Row ss:Height="255">
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell ss:StyleID="s25"><Data ss:Type="String">ARV Dispensed During Labour</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s25"><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s44"><Data ss:Type="String">Uganda: [NVP = NVP Swallowed&#10;NVP Dispenased&#10;3TC Swallowed&#10;ART Tri-therapy swallowed&#10;None - no ART during Labour&#10;Tail - AZT + NVP dispensed during postpartum]&#10;&#10;Note: because the pharmacy information will be entered into the pharmacy form, None = No ART during labor is not an option. The women will simply not have a pharmacy form filled in. Tail will be captured as part of the post natal pharmacy form. &#10;A quesiton to be explored is how many pharmacy forms would be filled in. If all of the medications given during the maternity stay are on one form, we need to change the form to show the LAST ARV regimen dispensed. This information is required for the Track 1.0 report.&#10;We also need to understand how the counting works for a woman who delivers the last day of the month - and is still receiving medication into the next month.</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell ss:StyleID="s28"><Data ss:Type="String">ARV Drugs Taken</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s25"/>
+    <Cell ss:StyleID="s25"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s28"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <FreezePanes/>
+   <FrozenNoSplit/>
+   <SplitHorizontal>4</SplitHorizontal>
+   <TopRowBottomPane>10</TopRowBottomPane>
+   <ActivePane>2</ActivePane>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+    </Pane>
+    <Pane>
+     <Number>2</Number>
+     <ActiveRow>15</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="MoH Report">
+  <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="40" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s52">
+   <Column ss:StyleID="s52" ss:AutoFitWidth="0" ss:Width="327"/>
+   <Column ss:StyleID="s52" ss:AutoFitWidth="0" ss:Width="54.75"/>
+   <Column ss:StyleID="s52" ss:AutoFitWidth="0" ss:Width="45"/>
+   <Column ss:StyleID="s52" ss:AutoFitWidth="0" ss:Width="90.75"/>
+   <Column ss:StyleID="s34" ss:AutoFitWidth="0" ss:Width="68.25"/>
+   <Row ss:Height="15.75">
+    <Cell ss:MergeAcross="1" ss:StyleID="m83072662"><Data ss:Type="String">PMTCT Monthly Report Form - MOH</Data></Cell>
+    <Cell ss:StyleID="s27"/>
+   </Row>
+   <Row ss:Height="15.75">
+    <Cell ss:MergeAcross="1" ss:StyleID="m83072652"><Data ss:Type="String">FOR THE MONTH OF </Data></Cell>
+    <Cell ss:StyleID="s27"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s59"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Report Result</Data></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="String">Total</Data></Cell>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s60"/>
+    <Cell ss:StyleID="s61"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s38"><Data ss:Type="String">Section A:  HIV Counselling and Testing </Data></Cell>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s59"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">1.Number of New ANC clients </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">2. Number of pregnant women Pre-test counselled</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">3. Number of pregnant women tested for HIV</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">4. Number of pregnant women tested HIV positive </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s24"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">5. Number of partners counselled</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">6. Number of partners tested for HIV</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">7. Number of partners tested HIV positive </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s38"><Data ss:Type="String">Section B:  Antiretroviral Drug Administration</Data></Cell>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s59"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">1. Number of HIV (+) pregnant women received  Nevirapine (NVP) only</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">2. Number of HIV positive pregnant women started on Zidovudine (AZT) and received NVP</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">3 a. Number of HIV positive pregnant women receiving ART (Triple Therapy) - prophylaxis</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">3. Number of HIV positive pregnant women receiving ART (Triple Therapy) &#45;- treatment</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">4. Number of HIV positive pregnant women received other regimen for PMTCT (Specify regimen)</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s38"><Data ss:Type="String">Section C:  Labour and Delivery Care</Data></Cell>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s59"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">1. Total number of deliveries</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">2. Number of HIV (+) deliveries </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s24"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">3. Number of HIV (+) deliveries given and swallowed) NVP during labour</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">4. Number of HIV (+) deliveries swallowed AZT and NVP during labour </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">5a. Number of HIV(+) deliveries receiving ART(Triple Therapy)</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">5b. Number of HIV(+) deliveries receiving ART(Triple Therapy)</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s57"><Data ss:Type="String">6. Number of HIV positive deliveries receiving other regimen for PMTCT (Specify regimen).</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">7. Number of HIV (+) mothers initiating exclusive breast feeding</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">8. Number of infants given Nevirapine(NVP) only</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">9. Number of infants given NVP and started on AZT </Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row ss:Height="25.5">
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Section D: HIV testing for children aged 18months – 5yrs born to HIV (+) mothers </Data></Cell>
+    <Cell ss:StyleID="s38"/>
+    <Cell ss:StyleID="s58"/>
+    <Cell ss:StyleID="s58"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">1. Number of children tested for HIV</Data></Cell>
+    <Cell ss:StyleID="s57"/>
+    <Cell ss:StyleID="s26"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0-2 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">2-12 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">12-18 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">18 months-5 years</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s57"><Data ss:Type="String">2. Number of children testing HIV positive</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">0-2 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">2-12 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">12-18 months</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">18 months-5 years</Data></Cell>
+    <Cell ss:StyleID="s64"/>
+    <Cell ss:StyleID="s53"/>
+    <Cell ss:StyleID="s26"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>0</VerticalResolution>
+   </Print>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>1</ActiveRow>
+     <RangeSelection>R2C1:R2C2</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

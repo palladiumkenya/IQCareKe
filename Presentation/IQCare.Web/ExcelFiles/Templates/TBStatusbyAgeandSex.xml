@@ -1,0 +1,740 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>User</Author>
+  <LastAuthor>User</LastAuthor>
+  <Created>2008-12-22T06:20:07Z</Created>
+  <LastSaved>2009-03-18T03:28:21Z</LastSaved>
+  <Version>11.9999</Version>
+ </DocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8445</WindowHeight>
+  <WindowWidth>3675</WindowWidth>
+  <WindowTopX>240</WindowTopX>
+  <WindowTopY>120</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m88870180">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m88884924">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="14" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m88884934">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="14" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m88884944">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="m88884954">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s28">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders/>
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s29">
+   <Font x:Family="Swiss"/>
+  </Style>
+  <Style ss:ID="s35">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s36">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="14" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s44">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s45">
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s46">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" ss:Indent="4"/>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s47">
+   <Alignment ss:Vertical="Top"/>
+   <Borders/>
+   <Font x:Family="Swiss" ss:Size="12" ss:Bold="1"/>
+   <Interior/>
+  </Style>
+  <Style ss:ID="s48">
+   <Interior/>
+  </Style>
+  <Style ss:ID="s49">
+   <Font ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s50">
+   <Alignment ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s51">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s52">
+   <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+   <Font ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s53">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s54">
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+  </Style>
+  <Style ss:ID="s55">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+   <Borders/>
+  </Style>
+  <Style ss:ID="s56">
+   <Borders/>
+  </Style>
+  <Style ss:ID="s57">
+   <Font x:Family="Swiss" ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s58">
+   <Alignment ss:Vertical="Top"/>
+   <Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s59">
+   <Alignment ss:Vertical="Top" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:Color="#FFFFFF" ss:Bold="1"/>
+   <Interior ss:Color="#808080" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="91" x:FullColumns="1"
+   x:FullRows="1">
+   <Column ss:AutoFitWidth="0" ss:Width="18"/>
+   <Column ss:AutoFitWidth="0" ss:Width="315"/>
+   <Column ss:Width="156.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="124.5"/>
+   <Column ss:AutoFitWidth="0" ss:Width="0.75"/>
+   <Column ss:AutoFitWidth="0" ss:Width="113.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="120"/>
+   <Column ss:AutoFitWidth="0" ss:Width="150"/>
+   <Row ss:AutoFitHeight="0" ss:Height="13.5"/>
+   <Row ss:AutoFitHeight="0" ss:Height="18">
+    <Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="m88884924"><Data
+      ss:Type="String">TB Status on Most Recent Visit During Period</Data></Cell>
+    <Cell ss:StyleID="s28"/>
+    <Cell ss:StyleID="s28"/>
+    <Cell ss:StyleID="s28"/>
+    <Cell ss:StyleID="s28"/>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18.75">
+    <Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="m88884934"><Data
+      ss:Type="String">Period:</Data></Cell>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="9">
+    <Cell ss:Index="2" ss:StyleID="s36"/>
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s36"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18.75">
+    <Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="m88884944"><Data
+      ss:Type="String">Facility Name</Data></Cell>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="9">
+    <Cell ss:Index="2" ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s35"/>
+    <Cell ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18">
+    <Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="m88884954"><Data
+      ss:Type="String">Patients Screened for TB or Unspecified</Data></Cell>
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="9">
+    <Cell ss:Index="2" ss:StyleID="s47"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s48"/>
+    <Cell ss:StyleID="s45"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">No TB Status Given</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+    <Cell ss:StyleID="s52"/>
+    <Cell ss:StyleID="s52"/>
+    <Cell ss:StyleID="s46"/>
+    <Cell ss:StyleID="s52"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75"/>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">Currently on INH Prophylaxis (IPT)</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75">
+    <Cell ss:Index="2" ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s51"><Data ss:Type="String"> Not Suspected/no signs or symptoms </Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75">
+    <Cell ss:Index="2" ss:StyleID="s57"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s58"><Data ss:Type="String">TB suspected and sputum sample sent or results recorded </Data></Cell>
+    <Cell ss:StyleID="s59"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s59"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75"/>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">TB suspected and referred for evaluation</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75">
+    <Cell ss:Index="2" ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="16.5">
+    <Cell ss:Index="2" ss:MergeAcross="2" ss:StyleID="m88870180"><Data
+      ss:Type="String">Patients with TB</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="8.25" ss:StyleID="s48">
+    <Cell ss:Index="2" ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+    <Cell ss:StyleID="s44"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">TB confirmed</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75">
+    <Cell ss:Index="2" ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="16.5" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">Currently on TB treatment</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="6.75">
+    <Cell ss:Index="2" ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+    <Cell ss:StyleID="s56"/>
+   </Row>
+   <Row ss:AutoFitHeight="0" ss:Height="18" ss:StyleID="s49">
+    <Cell ss:Index="2" ss:StyleID="s50"><Data ss:Type="String">TB treatment Has TB (code from old CTC form)</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">Not on ARV</Data></Cell>
+    <Cell ss:StyleID="s51"><Data ss:Type="String">On ARV</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Female (15+)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:Index="7" ss:StyleID="s46"/>
+    <Cell ss:Index="10" ss:StyleID="s55"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Female (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Adult Male (15+))</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (5-14)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (2-4)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s53"><Data ss:Type="String">Child Male (0-1)</Data></Cell>
+    <Cell ss:StyleID="s54"/>
+    <Cell ss:StyleID="s54"/>
+   </Row>
+   <Row ss:Index="91" ss:StyleID="s49">
+    <Cell ss:Index="3" ss:StyleID="s29"/>
+    <Cell ss:StyleID="s29"/>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <Selected/>
+   <TopRowVisible>69</TopRowVisible>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>90</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet2">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

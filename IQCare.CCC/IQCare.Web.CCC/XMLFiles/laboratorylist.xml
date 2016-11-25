@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<MedicineList>
+	<Laboratory ID="302" LaboratoryName="HIV Serology" />
+	<Laboratory ID="578" LaboratoryName="CD4" />
+	<Laboratory ID="514" LaboratoryName="Viral Load" />
+	<Laboratory ID="525" LaboratoryName="Store Plasma" />
+	<Laboratory ID="305" LaboratoryName="HCT/Hb" />
+	<Laboratory ID="319" LaboratoryName="WBC" />
+	<Laboratory ID="167" LaboratoryName="Diff" />
+	<Laboratory ID="374" LaboratoryName="Placelets" />
+	<Laboratory ID="315" LaboratoryName="AST/SGOT" />
+	<Laboratory ID="315" LaboratoryName="ALT/SGPT" />
+	<Laboratory ID="315" LaboratoryName="Creatine" />
+	<Laboratory ID="315" LaboratoryName="Amylase" />
+	<Laboratory ID="315" LaboratoryName="Pregnancy" />
+	<Laboratory ID="315" LaboratoryName="Crytococcal Ag" />
+	<Laboratory ID="315" LaboratoryName="CSF India Lnk" />
+	<Laboratory ID="315" LaboratoryName="CSF Gram Stain" />
+	<Laboratory ID="315" LaboratoryName="Culture" />
+	<Laboratory ID="315" LaboratoryName="Biochemistry Glucose" />
+	<Laboratory ID="315" LaboratoryName="Protein" />
+	<Laboratory ID="315" LaboratoryName="Malaria parasite" />
+	<Laboratory ID="315" LaboratoryName="Serum Crypto Ag" />
+	<Laboratory ID="315" LaboratoryName="AFB" />
+	<Laboratory ID="315" LaboratoryName="Gram Stain" />
+	<Laboratory ID="315" LaboratoryName="Urinalysis" />
+	<Laboratory ID="315" LaboratoryName="Culture/Sensitivity" />
+	<Laboratory ID="315" LaboratoryName="Stool O/P" />
+	<Laboratory ID="315" LaboratoryName="Cell count" />
+	<Laboratory ID="315" LaboratoryName="RBCs" />
+	<Laboratory ID="315" LaboratoryName="WBCs" />
+	<Laboratory ID="315" LaboratoryName="Neutrophils" />
+	<Laboratory ID="315" LaboratoryName="Lymphocytes" />
+	<Laboratory ID="315" LaboratoryName="Chest X-Ray" />
+</MedicineList>

@@ -1,0 +1,599 @@
+form 
+{
+	margin: 0px
+}
+.formbg 
+{
+	background-color: #e1e1e1
+}
+.whitebg {
+	background-color: #ffffff
+}
+body 
+{
+	font-size: 12px; margin: 14px 0px 0px; color: #000000; font-family: arial, helvetica, verdana, sans-serif; background-color: #ffffff; text-align: center;height: 100%;
+}
+#main {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; z-index: 1; left: 0px; border-left: #666699 1px solid; width: 950px; border-bottom: #666699 1px solid; position: relative;top: 22px;
+}
+#bluetop {
+	padding-right: 0px; padding-left: 0px; font-size: 4px; left: 0px; padding-bottom: 0px; width: 100%; padding-top: 0px; position: absolute; top: 0px; height: 4px; background-color: #ccccff
+}
+#bluetopusernamedate{
+	padding-right: 0px; padding-left: 0px; font-size: 4px; left: 0px; padding-bottom: 0px; width: 100%; padding-top: 0px; position: absolute; top: 0px; height: 12px; background-color: #ccccff
+}
+#usernameclinical {
+	padding-left: 15px; font-weight: bold; font-size: 11px; z-index: 4; left: 0px; padding-bottom: 0px;  width: 90%; color: #666699; padding-top: 1px; font-family: arial,helvetica,sans-serif; position: absolute; top: 20px; height: 17px; background-color: #ccccff
+} 
+#logo {
+	z-index: 10; left: 10px; position: absolute; top: 8px
+}
+#pmms {
+	z-index: 10; left: 269px; position: absolute; top: 28px
+}
+#collage {
+	z-index: 5; left: 524px; position: absolute; top: 5px
+}
+#username {
+	padding-left: 15px; font-weight: bold; font-size: 11px; z-index: 4; left: 0px; width: 525px; color: #666699; padding-top: 1px; font-family: arial,helvetica,sans-serif; position: absolute; top: 105px; height: 17px; background-color: #ccccff
+}
+#dateclinical {
+	padding-left: 15px; font-weight: bold; font-size: 11px; z-index: 5; left: 230px; width: 300px; color: #666699; padding-top: 1px; font-family: arial,helvetica,sans-serif; position: absolute; top: 20px; height: 17px; background-color: #ccccff
+}
+#borderclinical {
+	border-top: #666699 1px solid; z-index: 10; left: 0px; width: 580px; position: absolute; top: 37px; height: 6px; background-color: #ffffff
+}
+#facilityclinical {
+	font-weight: bold; font-size: 16px; z-index: 25; left: 596px; width: 350px; color: #000066; font-family: arial,helvetica,sans-serif; position: absolute; top: 20px; text-align: center
+}
+#tabclinical {
+	z-index: 20; left: 571px; position: absolute; top: 19px
+}
+
+#date {
+	padding-right: 12px; font-weight: bold; font-size: 11px;z-index: 5; left: 230px; width: 300px; position: absolute; top: 105px; height: 17px; background-color: transparent; text-align: right
+}
+#border {
+	border-top: #666699 1px solid; z-index: 10; left: 0px; width: 580px; position: absolute; top: 122px; height: 6px; background-color: #ffffff
+}
+#tabfacility {
+	z-index: 20; left: 571px; position: absolute; top: 104px
+}
+#facility {
+	font-weight: bold; font-size: 16px; z-index: 25; left: 596px; width: 350px; color: #000066; font-family: arial,helvetica,sans-serif; position: absolute; top: 107px; text-align: center
+}
+#contentholding {
+	z-index: 10; left: 0px; width: 100%; position: relative; top: 120px;clear:both;
+}
+#contentholdinghome {
+	z-index: 10; left: 0px; width: 100%; position: relative; top: 135px;
+}
+
+#contentholdingclinical {
+	z-index: 10; left: 0px; width: 100%; position: relative; top: 5px;
+}
+#contentholdingfacility {
+	z-index: 10; left: 0px; width: 100%; position: relative; top: 140px; height: 100%
+}
+#formfacility {
+	font-weight: bold; font-size: 16px; left: 596px; width: 350px; color: #000066; font-family: arial,helvetica,sans-serif; position: absolute; top: 39px; text-align: center
+}
+#formcontentholding {
+	z-index: 10; left: 0px; width: 100%; position: relative; top: 5px; height: 100%
+}
+#level2nav {
+	font-weight: bold; font-size: 12px; z-index: 100; width: 100%; color: #ffffff; height: 20px; background-color: #666699; text-align: center
+}
+#singleelement {
+	padding-bottom: 200px; padding-top: 100px; text-align: center
+}
+#multipleelement
+{
+	 padding-bottom: 150px; padding-top: 20px; text-align: center
+}
+
+
+
+.topmargin{
+	margin: 10px 0px 0px 10px
+}
+div.border {
+	border:#666699 1px solid;
+}
+.border {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; 
+}
+table.border {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; 
+}
+td.border {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; 
+}
+td.pad18 {
+	padding-right: 3px; padding-left: 18px; padding-bottom: 3px; padding-top: 3px
+}
+a.button {
+	border-right: #666699 1px solid; padding-right: 5px; border-top: #666699 1px solid; padding-left: 5px; font-weight: bold; font-size: 11px; margin-left: 12px; border-left: #666699 1px solid; color: #000066; border-bottom: #666699 1px solid; height: 15px; background-color: #99cc66; text-decoration: none
+}
+
+label 
+{
+	font-size: 12px; color: #000000; font-family: arial, helvetica, verdana, sans-serif; font-weight: bold; vertical-align:1%; margin-right: 6px
+}
+label.right {
+	width: 50%; text-align: right
+}
+label.right85 {
+	width: 85%; text-align:right
+}
+label.right70 {
+	width: 50%; text-align: right
+}
+label.right60 {
+	width: 50%; text-align: right
+}
+label.right50 {
+	width: 50%; text-align: right
+}
+label.right40 {
+	width: 50%; text-align: right
+}
+label.right35 {
+	width: 50%; text-align: right
+}
+label.right33 {
+	width: 50%; text-align: right
+}
+label.right30 {
+	width: 50%; text-align: right
+}
+label.right27 {
+	width: 50%; text-align: right
+}
+label.right29 {
+	width: 50%; text-align: right
+}
+label.right24{
+	width: 50%; text-align: right
+}
+label.right25 {
+	width: 50%; text-align: right
+}
+label.right20 {
+	width: 50%; text-align: right
+}
+label.right15 {
+	width: 50%; text-align: right
+}
+.right15 {
+	width: 50%; text-align: right
+}
+label.right11 {
+	width: 50%;  text-align: right
+}
+label.right10 {
+	width: 50%;  text-align: right
+}
+
+label.toppad {
+	margin-top: 10px
+	
+}
+label.duration
+{
+	font-weight: bold; vertical-align: 25%; color: #000000; margin-right: 6px
+}
+label.patientinfo {
+	margin-left: 10px; vertical-align: 0%; margin-right: 6px
+}
+
+label.disabled{color: gray;} 
+
+
+td {
+	font-size: 12px; color: #000000; font-family: arial, helvetica, verdana, sans-serif
+}
+
+h1, h2, h3, h4, h5 
+{
+	color: #000066; font-family: arial, helvetica, verdana, sans-serif
+}
+h1 {
+	margin-top: 0px; font-size: 18px
+}
+h2 {
+	font-size: 16px
+}
+h3 {
+	font-size: 14px
+}
+h4 {
+	font-size: 12px
+}
+
+.loginpageheight
+{
+	z-index: 1; margin: 0px auto; width: 950px; position: relative; background-color: #ffffff; text-align: left;border-color:Red;
+}
+td.login {
+	padding-right: 5px; padding-left: 15px; padding-bottom: 0px; padding-top: 15px
+}
+.pad18_Facility {
+	padding-right: 3px; padding-left: 10px; padding-bottom: 3px; padding-top: 3px
+}
+.textjustify
+{
+	text-align :justify; 
+}
+.utility {
+	font-weight: bold; font-size: 11px; color: #000066; font-family: arial, helvetica, verdana, sans-serif; text-decoration: none
+}
+a.utility:link {
+	font-weight: bold; font-size: 11px; color: #000066; font-family: arial, helvetica, verdana, sans-serif; text-decoration: none
+}
+a.utility:active {
+	font-weight: bold; font-size: 11px; color: #000066; font-family: arial, helvetica, verdana, sans-serif; text-decoration: none
+}
+a.utility:visited {
+	font-weight: bold; font-size: 11px; color: #000066; font-family: arial, helvetica, verdana, sans-serif; text-decoration: none
+}
+a.utility:hover {
+	font-weight: bold; font-size: 11px; color: #000066; font-family: arial, helvetica, verdana, sans-serif; text-decoration: none
+}
+.utility {
+	padding-right: 2px; text-decoration: none
+}
+.blue11 {
+	font-size: 11px; color: #grey
+}
+.nomargin {
+	margin: 0px
+}
+a.button:link {
+	border-right: #666699 1px solid; padding-right: 5px; border-top: #666699 1px solid; padding-left: 5px; font-weight: bold; font-size: 11px; margin-left: 12px; border-left: #666699 1px solid; color: #000066; border-bottom: #666699 1px solid; height: 15px; background-color: #99cc66; text-decoration: none
+}
+
+.blue 
+{
+	color: #000066
+}
+.rightalign
+{ 
+	width:40px; text-align:right;
+ }
+.center {
+	text-align: center
+}
+.large {
+	font-size: 16px
+}
+.textstylehidden
+{
+	width : 0%;
+	font-size: 9pt; 
+ 	color: #000000; 
+	font-family:  verdana,arial, helvetica, sans; 
+	display: none;
+	background-color: #e1e1e1; 
+}
+.pad5 
+{
+	padding-right: 5px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px
+}
+.pad6 {
+	padding-right: 5px; padding-left: 0px; margin-right:5px; padding-bottom: 2px; padding-top: 2px
+}
+.pad7 {
+	padding-right: 0px; padding-left: 0px; margin-right:0px; padding-bottom: 0px; padding-top: 0px;
+}
+.smallerlabel {
+	font-weight: normal; font-size: 9px
+}
+.smallerlabel1 {
+	font-weight: normal; font-size: 8px
+}
+
+table.grid {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; border-collapse: collapse
+}
+table.grid th {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid
+}
+table.grid td {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid
+}
+div.gridview {
+	border-right: #666699 1px ; border-top: #666699 1px solid; display: inline;margin: 10px 2px; overflow: auto; border-left: #666699 1px; width: 900px; border-bottom: #666699 1px solid; height: 300px; text-align:left; position:relative; 
+    z-index: 10;
+}
+
+input {
+	font-size: 11px; font-family: arial, helvetica,verdana,sans-serif
+}
+select {
+	font-size: 11px; font-family: arial, helvetica,verdana,sans-serif
+}
+option {
+	font-size: 11px; font-family: arial, helvetica,verdana,sans-serif
+}
+textarea {
+	font-size: 11px; font-family: arial, helvetica,verdana,sans-serif
+}
+textarea.notes {
+	margin-top: 4px; height: 92px
+}
+textarea.aligndown {
+	vertical-align: -25%
+}
+input.inputsmall {
+	font-size: 10px
+}
+.required {
+	color: #000099
+}
+
+
+
+
+h2.forms {
+	margin: 0px 0px 0px 6px;
+}
+h3.forms {
+	margin: 0px 0px 0px 6px
+}
+h3.formsreport
+{
+   margin: 6px 0px 0px 0px 
+}
+div.divborder
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:90%; height :111px; overflow :auto; float: left; text-align:left;
+}
+.margin3 {
+	margin-left: 3px; margin-right: 6px
+}
+ .margin5 {
+	margin-left: 5px; margin-right: 6px
+}
+ 
+.margin10 {
+	margin-left: 10px; margin-right: 6px
+}
+.margin15 {
+	margin-left: 15px; margin-right: 6px; 
+}
+.margin20 
+{
+	margin-left: 20px; margin-right: 6px
+}
+.margin50 {
+	margin-left: 50px
+}
+.margin35 {
+	margin-left: 35px
+}
+.margin80 
+{
+	margin-left: 80px
+}
+.bold {
+	font-weight: bold; font-size: 12px 
+}
+div.checkbox {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; width: 90%; border-bottom: #666699 1px solid; height: 92px; text-align: left; float: left;
+}
+div.checkboxns 
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; width: 90%; border-bottom: #666699 1px solid; height: 92px; text-align: left; float: left;
+}
+.check {
+	padding-left: 10px; font-weight: normal; vertical-align: 29%; width: 100%; margin-right: 0px; background-color: #ffffff
+}
+
+div.checkboxleft {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; border-bottom: #666699 1px solid; text-align: left; float: left; width: 47%; margin-right: 0px; height: 92px 
+}
+div.checkboxright {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; border-bottom: #666699 1px solid; text-align: left; float: right; width: 48%; margin-right: 0px; height: 92px; margin-left: 0px
+}
+
+td.form, td.formcenter
+{
+    border-right: #666699 1px solid; 
+    border-top: #666699 1px solid;
+    border-left: #666699 1px solid; 
+    border-bottom: #666699 1px solid;
+    padding-right: 5px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px;
+    background-color: #ffffff;
+}
+ .MultiLineTextBox
+{
+    resize: none;
+    height:70px;
+    overflow: auto;
+    padding: 7px 10px;
+    width: 300px;    
+    border: 1px solid #aaa;
+    resize:none;
+}
+
+.margin10left {
+	margin-left: 10px
+}
+
+.smalllabel {
+	font-size: 10px; vertical-align: 29%; font-weight: bold
+}
+
+
+
+div.gridviewdebitnote {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 3px 10px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; height: 200px; text-align:left; position:relative; 
+}
+
+div.gridviewFaclity {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 3px 10px; overflow: auto; border-left: #666699 1px solid; width: 90%; border-bottom: #666699 1px solid; height: 75px; text-align:left; position:relative; 
+}
+
+
+div.gridviewfindAdd {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 1px 5px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; height: 300px; text-align: left;position:relative; 
+}
+
+div.gridviewfamilyinfo {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; height: 100px; text-align: left;position:relative; 
+}
+div.gridviewLab {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; height: 200px; text-align: left;position:relative; 
+}
+
+div.gridviewbackup {
+	border-right: #666699 1px ; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px ; width: 100%; border-bottom: #666699 1px solid; height: 100px; text-align: left
+}
+
+
+
+
+div.customdivborder
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:95%; height :170px; overflow:auto;padding-right:20px;padding-top:10px
+}
+div.customdivbordermultiselect 
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:100%; height :170px; overflow:auto; text-align:left;
+}
+div.customdivborder1
+{
+	padding-right:20px; 
+}
+div.customdivbordericd
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:100%; height :170px; overflow :auto;
+}
+div.diseasesymptomdivborder
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:100%; height :125px; overflow:auto;
+}
+div.divborderPaperlessLab
+{
+	border-right: #666699 1px solid; border-top: #666699 1px solid; border-left: #666699 1px solid; border-bottom: #666699 1px solid; width:90%; height :180px; overflow:scroll
+}
+.pad10 {
+	padding-right: 10px; padding-left: 10px; padding-bottom: 10px; padding-top: 10px
+}
+
+.textstyle
+{
+	font-size: 9pt;
+	font-family: verdana,arial, helvetica, sans;
+	
+}
+div.treeview
+{
+	border: #666699 1px solid;
+	margin: 15px 6px 25px 6px;
+	height: 300px; text-align: left;
+	display: inline-block;
+    display: -moz-inline-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width:98%;
+}
+
+.popupWindow
+{
+	position: absolute;
+	width: 470px;
+	border: solid 1px black;
+	margin: 0px 0px 0px 20px;
+	background-color: white;
+	display: none;
+	color: #2557ad;
+}
+
+.alert {
+	font-weight: bold; color: #cc0000
+}
+.leftallign
+{
+	text-align:left;
+}
+.leftallign1
+{
+	text-align:left; padding-left:2px;
+}
+div.searchresultfixedheader
+{
+	 position:relative;    
+      z-index: 10;
+      font-weight: bold;
+      color:Black;
+      background-color:#99cc99;
+}
+div.tabscroll {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline;margin: 1px 10px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; text-align: left;position:relative; 
+}
+div.contentpad {
+	padding-left: 10px; width: 98%
+}
+
+.margin {
+	margin: 15px 0px 5px
+}
+
+td.breadcrumb {
+	padding-left: 5px; font-size: 11px;  padding-bottom: 1px; border-bottom: #666699 1px solid; background-color: #ffffff; text-align: left
+}
+a.breadcrumb {
+	font-size: 11px; color: #666699; text-decoration: underline
+}
+a.breadcrumb:link {
+	font-size: 11px; color: #666699; text-decoration: underline
+}
+a.breadcrumb:active {
+	font-size: 11px; color: #666699; text-decoration: underline
+}
+a.breadcrumb:visited {
+	font-size: 11px; color: #666699; text-decoration: underline
+}
+
+.greenbutton {
+	font-weight: bold  ; background-color:#9CCF63 
+}
+.labelright
+{text-align:right;}
+
+div.crystalreportviewer {
+	border-right: #666699 1px solid; border-top: #666699 1px solid; display: inline; margin: 3px 20px; overflow: auto; border-left: #666699 1px solid; width: 100%; border-bottom: #666699 1px solid; height: 500px; text-align: left;	font-size: 9pt;	font-family: verdana,arial, helvetica, sans;
+}
+.ImageLogo{
+	padding-bottom: 5px;padding-top: 5px;width:70px;border:0px;
+	}
+	
+textarea {
+    resize: none;
+    }
+
+.modalBackground {
+	background-color:Gray;
+	filter:alpha(opacity=70);
+	opacity:0.7;
+}
+
+.modalPopup {
+	background-color:#ffffdd;
+	border-width:3px;
+	border-style:solid;
+	border-color:Gray;
+	padding:3px;
+	width:250px;
+}
+
+.modalPopup p {
+    padding: 5px;
+}
+.ajax__calendar_day_disabled
+{
+    background-color:#ccc !important;
+    color:#eee !important;
+}
