@@ -1139,19 +1139,19 @@ namespace IQCare.FormBuilder
                     if (dgwFieldDetails.Columns[e.ColumnIndex].Name == "Field Name")
                     {
                         blnFieldNameChange = true;
-                        Int32 ID = Convert.ToInt32(dgwFieldDetails.Rows[e.RowIndex].Cells["ID"].Value);
+                        int _id = Convert.ToInt32(dgwFieldDetails.Rows[e.RowIndex].Cells["ID"].Value);
                         string Value = dgwFieldDetails.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                        if (Convert.ToInt32(ID) > 0)
+                        if (_id > 0)
                         {
-                            GblIQCare.objHashtbl.Add(ID, Value);
+                            GblIQCare.objHashtbl.Add(_id, Value);
                             blnNameChange = true;
                         }
                     }
                     else if (dgwFieldDetails.Columns[e.ColumnIndex].Name == "Display Type")
                     {
-                        Int32 ID = Convert.ToInt32(dgwFieldDetails.Rows[e.RowIndex].Cells["ID"].Value);
+                        string _id = Convert.ToString(dgwFieldDetails.Rows[e.RowIndex].Cells["ID"].Value);
                         blnDisplayTypeChange = true;
-                        if (ID != null)
+                        if (!string.IsNullOrEmpty(_id))
                         {
                             object List = dgwFieldDetails.Rows[e.RowIndex].Cells["List"].Value;
                             object brule = dgwFieldDetails.Rows[e.RowIndex].Cells["Business Rule"].Value;
@@ -1173,11 +1173,11 @@ namespace IQCare.FormBuilder
                             }
 
                             string fieldname = Convert.ToString(dgwFieldDetails.Rows[e.RowIndex].Cells["Field Name"].Value);
-                            if (ID.ToString() != "0")
+                            if (_id != "0")
                             {
                                 if (List.ToString() == "1" || brule.ToString() == "1")
                                 {
-                                    Boolean blnChange = ChangeDisplayType(Convert.ToInt32(ID), 9, Convert.ToInt32(GetControlID(DisplayType)), predefinestatus, fieldname);
+                                    bool blnChange = ChangeDisplayType(Convert.ToInt32(_id), 9, Convert.ToInt32(GetControlID(DisplayType)), predefinestatus, fieldname);
                                     if (blnChange)
                                     {
                                         blnDisplayType = true;
