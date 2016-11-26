@@ -71,4 +71,34 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ..\\..\\Entities\\Entities.Administration\\Entities.Administration.csproj
+		SccProjectName1 = ../../Entities/Entities.Administration
+		SccLocalPath1 = ..\\..\\Entities\\Entities.Administration
+		SccProjectUniqueName2 = ..\\..\\Entities\\Entities.Clinical\\Entities.Clinical.csproj
+		SccProjectName2 = ../../Entities/Entities.Clinical
+		SccLocalPath2 = ..\\..\\Entities\\Entities.Clinical
+		SccProjectUniqueName3 = ..\\..\\Entities\\Entities.Lab\\Entities.Lab.csproj
+		SccProjectName3 = ../../Entities/Entities.Lab
+		SccLocalPath3 = ..\\..\\Entities\\Entities.Lab
+		SccProjectUniqueName4 = ..\\..\\Entities\\Entities.PatientCore\\Entities.PatientCore.csproj
+		SccProjectName4 = ../../Entities/Entities.PatientCore
+		SccLocalPath4 = ..\\..\\Entities\\Entities.PatientCore
+		SccProjectUniqueName5 = ..\\..\\Entities\\Entities.Common\\Entities.Common.csproj
+		SccProjectName5 = ../../Entities/Entities.Common
+		SccLocalPath5 = ..\\..\\Entities\\Entities.Common
+		SccProjectUniqueName6 = ..\\..\\Entities\\Entities.Pharmacy\\Entities.Pharmacy.csproj
+		SccProjectName6 = ../../Entities/Entities.Pharmacy
+		SccLocalPath6 = ..\\..\\Entities\\Entities.Pharmacy
+		SccProjectUniqueName7 = ..\\..\\Entities\\Entities.FormBuilder\\Entities.FormBuilder.csproj
+		SccProjectName7 = ../../Entities/Entities.FormBuilder
+		SccLocalPath7 = ..\\..\\Entities\\Entities.FormBuilder
+		SccProjectUniqueName8 = ..\\..\\Entities\\Entities.Queue\\Entities.Queue.csproj
+		SccProjectName8 = ../../Entities/Entities.Queue
+		SccLocalPath8 = ..\\..\\Entities\\Entities.Queue
+	EndGlobalSection
 EndGlobal
