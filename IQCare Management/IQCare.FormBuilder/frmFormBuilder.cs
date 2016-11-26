@@ -353,10 +353,7 @@ namespace IQCare.FormBuilder
         /// The style
         /// </summary>
         private clsCssStyle theStyle = new clsCssStyle();
-        /// <summary>
-        /// The i panel top
-        /// </summary>
-        private int iPanelTop = 14;
+      
         /// <summary>
         /// The DGW remove selected row
         /// </summary>
@@ -426,22 +423,6 @@ namespace IQCare.FormBuilder
         /// </summary>
         private const int iDataGridTop = 44;
 
-        /// <summary>
-        /// The i panel count
-        /// </summary>
-        private int iPanelCount;
-        /// <summary>
-        /// The i control count
-        /// </summary>
-        private int iControlCount;
-        /// <summary>
-        /// The i selected field row identifier
-        /// </summary>
-        private int iSelectedFieldRowId;
-        /// <summary>
-        /// The is handle added
-        /// </summary>
-        private bool IsHandleAdded;
         /// <summary>
         /// The dt manage section position
         /// </summary>
