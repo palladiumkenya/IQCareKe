@@ -231,13 +231,13 @@ namespace IQCare.SCM
             this.lblStore.TabIndex = 16;
             this.lblStore.Text = "StoreName";
             this.AutoScaleDimensions = new SizeF(6f, 16f);
-             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+             this.AutoScaleMode = AutoScaleMode.Font;
+             this.BorderStyle = BorderStyle.FixedSingle;
             this.Controls.Add((Control)this.cmbnocopies);
             this.Controls.Add((Control)this.lblnoofcopies);
             this.Controls.Add((Control)this.pnlprint);
             this.Controls.Add((Control)this.lblexpire1);
-            this.Font = new Font("Arial Narrow", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
+            this.Font = new Font("Arial Narrow", 9f, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.Margin = new Padding(3, 4, 3, 4);
             this.Name = "UserPrintControl";
             this.Size = new Size(287, 180);
@@ -253,14 +253,14 @@ namespace IQCare.SCM
         {
             try
             {
-                new clsCssStyle().setStyle((Control)this);
+                new clsCssStyle().setStyle(this);
                 this.cmbnocopies.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
                 MsgBuilder MessageBuilder = new MsgBuilder();
                 MessageBuilder.DataElements["MessageText"] = ex.Message.ToString();
-                int num = (int)IQCareWindowMsgBox.ShowWindowConfirm("#C1", MessageBuilder, (Control)this);
+                int num = (int)IQCareWindowMsgBox.ShowWindowConfirm("#C1", MessageBuilder, this);
             }
         }
     }
