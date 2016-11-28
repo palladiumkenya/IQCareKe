@@ -1,11 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="true" CodeBehind="PatientEncounter.aspx.cs" Inherits="IQCare.Web.CCC.Encounter.PatientEncounter" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucTriage.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
   
         <div class="container-fluid">
-        <div class="row"></div>
         
         <div class="row">
-             
+            <div class="col-md-12">
+                <uc:PatientDetails ID="PatientSummary" runat="server" />
+            </div>
             <div class="col-md-12 col-xs-12">
 
                  <ul class="nav nav-tabs" role="tablist">

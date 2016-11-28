@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="true" CodeBehind="OneTimeEventsTracker.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEventsTracker" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucTriage.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
+        <div class="col-md-12">
+             <uc:PatientDetails ID="PatientSummary" runat="server" />
+        </div>
         <div class="row">
             <div class="col-md-12"><h5 class="pull-left"><i class="fa fa-th-large fa-2x" aria-hidden="true"> Patient One Time Events Tracker</i> </h5></div> 
         </div>
@@ -13,7 +17,7 @@
                     <div class="panel-body">
                         
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 alert alert-info"><label class=" pull-left"><small class="text-primary">Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2 label label-success"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                             <div class="col-md-2">
                                  <div class="col-md-12"><label class="control-label pull-left"> Stage1,Date</label></div>
@@ -357,7 +361,7 @@
                             </div>
                         </div><%-- .col-md-12--%>
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 alert alert-info" ><label class="pull-left"><small class="text-primary">INH Prophylaxis</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2 label label-default" ><label class="pull-left"><small>INH Prophylaxis</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"><label class="control-label pull-left"> Prophylaxis</label></div>
                             <div class="col-md-2">
                                  <div class="col-md-12"><label class="control-label pull-left"> Start Date</label></div>
@@ -460,7 +464,7 @@
                             <div class="col-md-3"></div>
                         </div><%--.col-md-12--%>
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 alert alert-info" ><label class="pull-left"><small class="text-primary">Vaccination Adult</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2 label label-success" ><label class="pull-left"><small >Vaccination Adult</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"></div>
                             <div class="col-md-2">
                                  <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblHBV">
@@ -480,7 +484,7 @@
                             </div>
                         </div><%-- .col-md-12--%>
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 alert alert-info"><label class="pull-left"><small class="text-primary">Vaccination Child</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2 label label-success"><label class="pull-left"><small>Vaccination Child</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"></div>
                             <div class="col-md-9">
                                 <div class="panel panel-default">

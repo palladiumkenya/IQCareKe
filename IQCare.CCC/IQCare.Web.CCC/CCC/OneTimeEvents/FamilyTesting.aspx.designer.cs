@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
     public partial class FamilyTesting {
         
         /// <summary>
+        /// PatientSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        
+        /// <summary>
         /// relationship control.
         /// </summary>
         /// <remarks>
