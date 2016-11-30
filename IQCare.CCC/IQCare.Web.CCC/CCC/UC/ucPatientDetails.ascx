@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucTriage.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucTriage" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientDetails.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucTriage" %>
 
 
     <div class="row">

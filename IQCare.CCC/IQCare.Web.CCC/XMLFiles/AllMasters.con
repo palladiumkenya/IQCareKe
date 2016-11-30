@@ -435,7 +435,7 @@
               <xs:sequence>
                 <xs:element name="ModuleID" type="xs:int" minOccurs="0" />
                 <xs:element name="ModuleName" type="xs:string" minOccurs="0" />
-                <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="DeleteFlag" type="xs:boolean" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -105563,7 +105563,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>398</ID>
+    <ID>404</ID>
     <Name>Under 5</Name>
     <CodeID>1010</CodeID>
     <SRNo>1</SRNo>
@@ -105572,7 +105572,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>399</ID>
+    <ID>405</ID>
     <Name>Maternity</Name>
     <CodeID>1010</CodeID>
     <SRNo>1</SRNo>
@@ -105581,7 +105581,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>400</ID>
+    <ID>406</ID>
     <Name>Prisoner</Name>
     <CodeID>1010</CodeID>
     <SRNo>1</SRNo>
@@ -108648,6 +108648,14 @@
   <Mst_Feature>
     <FeatureId>198</FeatureId>
     <FeatureName>Billing Reversal Approval</FeatureName>
+    <ReportFlag>0</ReportFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <AdminFlag>1</AdminFlag>
+    <SystemID>0</SystemID>
+  </Mst_Feature>
+  <Mst_Feature>
+    <FeatureId>199</FeatureId>
+    <FeatureName>Billing - Return deposit</FeatureName>
     <ReportFlag>0</ReportFlag>
     <DeleteFlag>0</DeleteFlag>
     <AdminFlag>1</AdminFlag>
@@ -117972,122 +117980,122 @@
   <Mst_Module>
     <ModuleID>1</ModuleID>
     <ModuleName>PMTCT</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>2</ModuleID>
     <ModuleName>HIVCARE-STATICFORM</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>3</ModuleID>
     <ModuleName>SMART ART FORM</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>4</ModuleID>
     <ModuleName>TB Module</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>5</ModuleID>
     <ModuleName>ANC Maternity and Postnatal</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>6</ModuleID>
     <ModuleName>TB</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>7</ModuleID>
     <ModuleName>PACTMother</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>8</ModuleID>
     <ModuleName>PACTInfant</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>9</ModuleID>
     <ModuleName>Initial Evaluation and Follow Up</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>10</ModuleID>
     <ModuleName>TB Intensive Case Finding</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>11</ModuleID>
     <ModuleName>Cervical Cancer Case Finding</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>12</ModuleID>
     <ModuleName>HTC Module</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>13</ModuleID>
     <ModuleName>Nutrition Module</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>14</ModuleID>
     <ModuleName>PEP </ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>15</ModuleID>
     <ModuleName>MCH</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>16</ModuleID>
     <ModuleName>Reproductive Health</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>18</ModuleID>
     <ModuleName>Transit</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>201</ModuleID>
     <ModuleName>PM/SCM</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>202</ModuleID>
     <ModuleName>HIV Care/ART Card (UG)</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>203</ModuleID>
     <ModuleName>CCC Patient Card MoH 257</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>204</ModuleID>
     <ModuleName>Pharmacy</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>205</ModuleID>
     <ModuleName>Laboratory</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>206</ModuleID>
     <ModuleName>Ward Admission</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
     <ModuleID>210</ModuleID>
     <ModuleName>Billing</ModuleName>
-    <DeleteFlag>0</DeleteFlag>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_ModDecode>
     <ID>1</ID>

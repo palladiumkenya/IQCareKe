@@ -50,7 +50,7 @@
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
-    <Content Include="CCC\UC\ucTriage.ascx" />
+    <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\daterangepicker.css" />
@@ -125,12 +125,12 @@
     <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
       <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\ucTriage.ascx.cs">
-      <DependentUpon>ucTriage.ascx</DependentUpon>
+    <Compile Include="CCC\UC\ucPatientDetails.ascx.cs">
+      <DependentUpon>ucPatientDetails.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\ucTriage.ascx.designer.cs">
-      <DependentUpon>ucTriage.ascx</DependentUpon>
+    <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
+      <DependentUpon>ucPatientDetails.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
