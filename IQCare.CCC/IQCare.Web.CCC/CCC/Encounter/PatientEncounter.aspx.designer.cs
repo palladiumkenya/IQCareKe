@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.Encounter {
     public partial class PatientEncounter {
         
         /// <summary>
+        /// PatientSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        
+        /// <summary>
         /// lblTINA control.
         /// </summary>
         /// <remarks>
