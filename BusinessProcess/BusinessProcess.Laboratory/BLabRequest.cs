@@ -1,16 +1,15 @@
-﻿using System;
+﻿using DataAccess.Base;
+using DataAccess.Common;
+using DataAccess.Context;
+using DataAccess.Entity;
+using Entities.Lab;
+using Interface.Laboratory;
+using Interface.PatientCore;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Xml.Linq;
-using DataAccess.Base;
-using DataAccess.Common;
-using DataAccess.Entity;
-
-using Entities.Lab;
-using Interface.Laboratory;
-using Interface.PatientCore;
-using DataAccess.Context;
 
 namespace BusinessProcess.Laboratory
 {
@@ -34,9 +33,9 @@ namespace BusinessProcess.Laboratory
             ClsUtility.Init_Hashtable();
             if (patientId.HasValue)
             {
-                ClsUtility.AddExtendedParameters("@PatientId", System.Data.SqlDbType.Int, patientId.Value);
+                ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientId.Value);
             }
-            ClsUtility.AddExtendedParameters("@LocationId", System.Data.SqlDbType.Int, locationId);
+            ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
             DateTime? nullDate = null;
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetLabOrder", ClsUtility.ObjectEnum.DataTable);
             ClsUtility.Init_Hashtable();
@@ -77,12 +76,12 @@ namespace BusinessProcess.Laboratory
             }
             if (dateTo.HasValue)
             {
-                ClsUtility.AddExtendedParameters("@DateTo", System.Data.SqlDbType.DateTime, dateTo.Value);
+                ClsUtility.AddExtendedParameters("@DateTo", SqlDbType.DateTime, dateTo.Value);
             }
-            ClsUtility.AddExtendedParameters("@LocationId", System.Data.SqlDbType.Int, locationId);
+            ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
             if (!string.IsNullOrEmpty(orderStatus))
             {
-                ClsUtility.AddParameters("@OrderStatus", System.Data.SqlDbType.VarChar, orderStatus);
+                ClsUtility.AddParameters("@OrderStatus", SqlDbType.VarChar, orderStatus);
             }
             DateTime? nullDate = null;
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetLabOrder", ClsUtility.ObjectEnum.DataTable);
@@ -110,19 +109,19 @@ namespace BusinessProcess.Laboratory
                               OrderStatus = rowView["OrderStatus"].ToString(),
                               OrderedTest = this.GetOrderedTests(Convert.ToInt32(rowView["LabOrderId"]))
 
-                          }).ToList<LabOrder>();
+                          }).ToList();
             return result;
         }
         public List<LabOrderTest> GetOrderedTests(int orderId, int? labOrderTestId = null)
         {
             ClsObject obj = new ClsObject();
             ClsUtility.Init_Hashtable();
-            ClsUtility.AddExtendedParameters("@LabOrderId", System.Data.SqlDbType.Int, orderId);
+            ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, orderId);
             if (labOrderTestId.HasValue)
             {
-                ClsUtility.AddExtendedParameters("@LabOrderTestId", System.Data.SqlDbType.Int, labOrderTestId.Value);
+                ClsUtility.AddExtendedParameters("@LabOrderTestId", SqlDbType.Int, labOrderTestId.Value);
             }
-    
+
             int? nullint = null;
             DateTime? nullDate = null;
             TestDepartment nullDepartment = null;
@@ -132,30 +131,30 @@ namespace BusinessProcess.Laboratory
             var result = (from row in dt.AsEnumerable()
                           select new LabOrderTest
                           {
-                              Id = row.Field<Int32>("TestOrderId"),
+                              Id = row.Field<int>("TestOrderId"),
                               OrderDate = Convert.ToDateTime(row["OrderDate"]),
                               OrderNumber = row["OrderNumber"].ToString(),
-                              OrderedBy = row.Field<Int32>("OrderedBy"),
-                              ServiceAreaId = row.Field<Int32>("ModuleId"),
-                              DeleteFlag = row.Field<Boolean>("DeleteFlag"),
-                              LabOrderId = row.Field<Int32>("LabOrderId"),
-                              ParentLabTestId = row["ParentTestId"] == DBNull.Value ? nullint : row.Field<Int32>("ParentTestId"),
+                              OrderedBy = row.Field<int>("OrderedBy"),
+                              ServiceAreaId = row.Field<int>("ModuleId"),
+                              DeleteFlag = row.Field<bool>("DeleteFlag"),
+                              LabOrderId = row.Field<int>("LabOrderId"),
+                              ParentLabTestId = row["ParentTestId"] == DBNull.Value ? nullint : row.Field<int>("ParentTestId"),
                               Test = new LabTest()
                               {
-                                  Id = row.Field<Int32>("TestId"),
-                                  DeleteFlag = row.Field<Boolean>("TestDeleteFlag"),
+                                  Id = row.Field<int>("TestId"),
+                                  DeleteFlag = row.Field<bool>("TestDeleteFlag"),
                                   Name = row["TestName"].ToString(),
                                   ReferenceId = row["ReferenceId"].ToString(),
                                   Department = row["DepartmentId"] != DBNull.Value ? new TestDepartment() { Id = Convert.ToInt32(row["DepartmentId"]), Name = row["Department"].ToString() } : nullDepartment,
-                                  IsGroup = row.Field<Boolean>("IsGroup")
+                                  IsGroup = row.Field<bool>("IsGroup")
                               },
                               TestNotes = row["TestNotes"].ToString(),
                               ResultBy = row["ResultBy"] == DBNull.Value ? nullint : Convert.ToInt32(row["ResultBy"]),
                               ResultDate = row["ResultDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(row["ResultDate"]),
                               ResultNotes = row["ResultNotes"].ToString(),
-                              ParameterResults = this.GetLabTestParameterResult(row.Field<Int32>("TestOrderId"))
+                              ParameterResults = GetLabTestParameterResult(row.Field<int>("TestOrderId"))
                           }
-                      ).ToList<LabOrderTest>();
+                      ).ToList();
 
             return result;
         }
@@ -165,7 +164,7 @@ namespace BusinessProcess.Laboratory
             ClsObject obj = new ClsObject();
             ClsUtility.Init_Hashtable();
             PatientCore.PatientCoreServices pt = new PatientCore.PatientCoreServices();
-            ClsUtility.AddExtendedParameters("@LabOrderId", System.Data.SqlDbType.Int, LabOrderId);
+            ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, LabOrderId);
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetLabOrder", ClsUtility.ObjectEnum.DataTable);
 
@@ -196,10 +195,10 @@ namespace BusinessProcess.Laboratory
                     OrderStatus = rowView["OrderStatus"].ToString(),
                     OrderedTest = this.GetOrderedTests(Convert.ToInt32(rowView["LabOrderId"]))
                 };
-                
+
             }
             return order;
-        }       
+        }
 
         public List<LabTestParameterResult> GetLabTestParameterResult(int LabTestOrderId)
         {
@@ -213,7 +212,7 @@ namespace BusinessProcess.Laboratory
                 Double? nullDouble = null;
                 bool? nullBool = null;
                 int? nullInt = null;
-               // DateTime? nullDate = null;
+                // DateTime? nullDate = null;
                 var result = (from row in dt.AsEnumerable()
                               select new LabTestParameterResult()
                               {
@@ -259,12 +258,12 @@ namespace BusinessProcess.Laboratory
             }
         }
 
-       
+
 
         public LabOrder SaveLabOrder(LabOrder labOrder, int UserId, int LocationId)
         {
-           // this.Connection = DataMgr.GetConnection();
-           // this.Transaction = DataMgr.BeginTransaction(this.Connection);
+            // this.Connection = DataMgr.GetConnection();
+            // this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
             ClsObject obj = new ClsObject();
             //  obj.Connection = this.Connection;
@@ -298,7 +297,7 @@ namespace BusinessProcess.Laboratory
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_SaveLabOrder", ClsUtility.ObjectEnum.DataTable);
             ClsUtility.Init_Hashtable();
             obj = null;
-          
+
             labOrder.Id = Convert.ToInt32(dt.Rows[0]["LabOrderId"]);
             labOrder.OrderNumber = dt.Rows[0]["OrderNumber"].ToString();
             labOrder.VisitId = Convert.ToInt32(dt.Rows[0]["VisitId"]);
@@ -306,14 +305,14 @@ namespace BusinessProcess.Laboratory
             labOrder.UserId = Convert.ToInt32(dt.Rows[0]["UserId"]); ;
             labOrder.LocationId = Convert.ToInt32(dt.Rows[0]["LocationId"]);
 
-            List<LabOrderTest> orderedTests = this.GetOrderedTests(labOrder.Id);
+            List<LabOrderTest> orderedTests = GetOrderedTests(labOrder.Id);
 
             foreach (LabOrderTest testSaved in orderedTests)
             {
-                
+
                 LabOrderTest submittedTest = labOrder.OrderedTest.Where(t => t.TestId == testSaved.TestId).FirstOrDefault();
 
-                if (null != submittedTest && null != submittedTest.ParameterResults && submittedTest.ResultBy.HasValue && submittedTest.ResultDate.HasValue 
+                if (null != submittedTest && null != submittedTest.ParameterResults && submittedTest.ResultBy.HasValue && submittedTest.ResultDate.HasValue
                     && submittedTest.ParameterResults.Count > 0 && submittedTest.ParameterResults.Count(p => p.HasResult) > 0)
                 {
                     List<LabTestParameterResult> results = testSaved.ParameterResults;
@@ -330,22 +329,22 @@ namespace BusinessProcess.Laboratory
                             result.ResultUnit = submittedParam.ResultUnit;
                             result.Config = submittedParam.Config;
                             result.DetectionLimit = submittedParam.DetectionLimit;
-                            result.Undetectable = submittedParam.Undetectable;                           
+                            result.Undetectable = submittedParam.Undetectable;
 
                         }
-                       
+
                     }
 
                     this.SaveLabResults(results, testSaved.Id, submittedTest.ResultNotes, UserId, submittedTest.ResultBy.Value, submittedTest.ResultDate.Value);
                 }
             }
-           
+
 
             return labOrder;
         }
 
         public int SaveLabResults(
-            List<Entities.Lab.LabTestParameterResult> results,
+            List<LabTestParameterResult> results,
             int LabTestOrderId,
             string ResultNotes,
             int userId,
@@ -359,7 +358,7 @@ namespace BusinessProcess.Laboratory
             ClsUtility.AddParameters("@ResultNotes", SqlDbType.VarChar, ResultNotes);
             ClsUtility.AddExtendedParameters("@ResultBy", SqlDbType.Int, ResultBy);
             ClsUtility.AddExtendedParameters("@ResultDate", SqlDbType.DateTime, ResultDate);
-            Double? nullDouble = null;
+            double? nullDouble = null;
             XDocument docX = new XDocument(
                 new XElement("root", (from result in results
                                       select new XElement("result",
@@ -392,8 +391,17 @@ namespace BusinessProcess.Laboratory
                 return repo.GetAllFilterd(orderFilters);
             else
             {
-                return repo.GetAll().ToList<LabOrder>();
+                return repo.GetAll().ToList();
             }
+        }
+
+        public void DeleteLabOrder(int labOrderId, int userId, string deleteReason)
+        {
+            LabOrderRepository repo = new LabOrderRepository();
+            LabOrder order = repo.Find(labOrderId);
+            order.DeletedBy = userId;
+            order.DeleteReason = deleteReason;
+            repo.Delete(order);
         }
     }
 }

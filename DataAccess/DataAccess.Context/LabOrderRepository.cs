@@ -5,7 +5,7 @@ using System.Linq;
 using Entities.Lab;
 namespace DataAccess.Context
 {
-    public class LabOrderRepository : Repository<LabOrder>
+    public class LabOrderRepository : Repository<LabOrder>, IDisposable
     {
         public LabOrderRepository()
         {
@@ -51,12 +51,32 @@ namespace DataAccess.Context
                 }
 
             }
-            return laborders.ToList<LabOrder>();
+            return laborders.ToList();
             
         }
         public void Dispose()
         {
-           // CloseDecryptedSession();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+        private bool disposed = false;
+
+        public override void Delete(LabOrder entityToDelete)
+        {
+            labContext.Database.ExecuteSqlCommand("Exec Laboratory_DeleteLabOrder @LabOrderId ={0}, @DeletedBy = {1}, @DeleteReason = {2}", entityToDelete.Id, entityToDelete.DeletedBy,entityToDelete.DeleteReason);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    labContext.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        
+        
     }
 }

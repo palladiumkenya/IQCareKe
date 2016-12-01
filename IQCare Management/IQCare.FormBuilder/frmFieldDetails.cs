@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Application.Common;
+using Application.Presentation;
+using Interface.FormBuilder;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Application.Common;
-using Interface.FormBuilder;
-using Application.Presentation;
 using System.Xml.Linq;
 
 namespace IQCare.FormBuilder
@@ -26,12 +23,12 @@ namespace IQCare.FormBuilder
         DataTable dtFieldDetail;
         DataSet mainDataset = new DataSet();
         Bitmap blankImg;
-        public Boolean blnDisplayType = false;
-        public Boolean blnFieldNameChange = false;
-        public Boolean blnActiveField = false;
-        public Boolean blnDisplayTypeChange = false;
-        public Boolean blnNameChange = false;
-        public Boolean blnRecordSave = false;
+        public bool blnDisplayType = false;
+        public bool blnFieldNameChange = false;
+        public bool blnActiveField = false;
+        public bool blnDisplayTypeChange = false;
+        public bool blnNameChange = false;
+        public bool blnRecordSave = false;
         DataView dv = new DataView();
         public int gblFieldID = 0;
         public string gblFieldName = string.Empty;
@@ -68,7 +65,7 @@ namespace IQCare.FormBuilder
             objBindControls.Win_BindCombo(cmbTechArea, dtAddAll, "ModuleName", "ModuleId");
             cmbTechArea.SelectedIndex = 0;
             GblIQCare.strSelectListstr = "";
-     
+
             if (GblIQCare.iManageCareEnded == 1)
             {
                 label2.Visible = false;
@@ -139,8 +136,8 @@ namespace IQCare.FormBuilder
         /// <summary>
         /// This function is used to bind grid with database
         /// </summary>
-        /// <param name="FieldName"></param>
-        public void BindGrid(string FieldName, int iTechArea)
+        /// <param name="fieldName"></param>
+        public void BindGrid(string fieldName, int iTechArea)
         {
             try
             {
@@ -150,7 +147,7 @@ namespace IQCare.FormBuilder
                 GblIQCare.DsFieldDetailsCon = null;
                 IsHandleAdded = false;
                 objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
-                mainDataset = objFieldDetail.GetCustomFields(FieldName, iTechArea, GblIQCare.iManageCareEnded);
+                mainDataset = objFieldDetail.GetCustomFields(fieldName, iTechArea, GblIQCare.iManageCareEnded);
                 GblIQCare.DsFieldDetailsCon = mainDataset;
                 dtFieldDetail = CreateTable();
                 GblIQCare.objHashtbl.Clear();
@@ -171,7 +168,7 @@ namespace IQCare.FormBuilder
                             row["FieldDesc"] = r["fieldDesc"].ToString();
                             row["ControlID"] = Convert.ToInt32(r["controlID"].ToString());
                             row["ControlName"] = r["Name"].ToString();
-                            row["ReferenceId"] =referenceId;
+                            row["ReferenceId"] = referenceId;
                             row["Predefined"] = GetPredefine(Convert.ToInt32(r["Predefine"].ToString()));
                             row["DeleteFlag"] = Convert.ToInt32(r["DeleteFlag"].ToString());
                             row["UpdatedBy"] = r["UserName"].ToString();
@@ -181,15 +178,15 @@ namespace IQCare.FormBuilder
                             // if(referenceId == "SELECTLIST_TEXTBOX" || referenceId=="SELECT_LIST" || referenceId=="SELECT_LIST_MULTI") 
                             // {
                             //     row["List"] = 1  ;
-                                    
+
                             // }
                             //else
                             // {
-                                 row["List"] = r["LookupValues"].ToString() !="" ? 1 : 0;
-                           //  }
+                            row["List"] = r["LookupValues"].ToString() != "" ? 1 : 0;
+                            //  }
                             //Convert.ToString(GetListDetails(Convert.ToInt32(r["ID"].ToString()), mainDataset.Tables[2], Convert.ToInt32(r["Predefine"].ToString())));
                             //row["ListValue"] = Convert.ToString(GetListValues(Convert.ToInt32(r["ID"].ToString()), mainDataset.Tables[2], Convert.ToInt32(r["Predefine"].ToString())));
-                             row["ListValue"] = r["LookupValues"].ToString();
+                            row["ListValue"] = r["LookupValues"].ToString();
                             row["BussinessRule"] = Convert.ToString(GetBussinessRules(Convert.ToInt32(r["ID"].ToString()), mainDataset.Tables[1], Convert.ToInt32(r["Predefine"].ToString())));
                             row["ModuleId"] = Convert.ToInt32(r["ModuleID"].ToString());
                             dtFieldDetail.Rows.Add(row);
@@ -267,7 +264,7 @@ namespace IQCare.FormBuilder
             }
             return dt;
         }
-       
+
         public void ShowGrid(DataSet ds, DataTable dt)
         {
             ClearGrid();
@@ -366,7 +363,7 @@ namespace IQCare.FormBuilder
                     r["BussinessRule"].ToString(), r["DeleteFlag"].ToString(), r["AssociatedFields"].ToString(), r["LastUpdate"].ToString(), r["UpdatedBy"].ToString(),
                     r["id"].ToString(), r["ListValue"].ToString(), r["Auto"].ToString(), r["ModuleId"].ToString(), r["ReferenceId"].ToString());
             }
-           
+
             int RowCount = dt.Rows.Count;
             if (blnRecordSave)
             {
@@ -568,7 +565,7 @@ namespace IQCare.FormBuilder
                 dgwFieldDetails.Rows[RowCount - 1].DefaultCellStyle.BackColor = Color.White;
                 dgwFieldDetails.Rows[RowCount - 1].DefaultCellStyle.ForeColor = Color.Black;
             }
-          
+
             int newrowindex = dgwFieldDetails.Rows.Count - 1;
             dgwFieldDetails.Rows[newrowindex].Cells[9].Value = "0";
             dgwFieldDetails.Rows[newrowindex].Cells[10].Value = "";
@@ -603,7 +600,7 @@ namespace IQCare.FormBuilder
             {
                 dgwFieldDetails.Columns.Clear();
                 dgwFieldDetails.Rows.Clear();
-            
+
             }
         }
         /// <summary>
@@ -619,9 +616,9 @@ namespace IQCare.FormBuilder
             GblIQCare.dtBusinessValues.Rows.Clear();
             if (FieldID != 0)
             {
-              //  IFieldDetail objFieldDetail;
-               // objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
-               // mainDataset = objFieldDetail.GetCustomFields("", Convert.ToInt32(cmbTechArea.SelectedValue), GblIQCare.iManageCareEnded);
+                //  IFieldDetail objFieldDetail;
+                // objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
+                // mainDataset = objFieldDetail.GetCustomFields("", Convert.ToInt32(cmbTechArea.SelectedValue), GblIQCare.iManageCareEnded);
                 if (mainDataset.Tables[4].Rows.Count > 0)
                 {
 
@@ -781,7 +778,7 @@ namespace IQCare.FormBuilder
                         display = currentRow.Cells["Display Type"].Value.ToString();
                         GblIQCare.strYesNo = display;
                     }
-                         
+
                     if (display.Trim() == "Select List" || display == "4" || display.Trim() == "Multi Select" || display == "9" || display.Trim() == "Yes No" || display == "6" || controlReferenceId == "SELECTLIST_TEXTBOX")
                     {
                         GblIQCare.strSelectList = "frmFieldDetails";
@@ -930,13 +927,13 @@ namespace IQCare.FormBuilder
             {
                 string display = string.Empty;
                 string controlReferenceId = string.Empty;
-               DataGridViewRow currentRow= dgwFieldDetails.Rows[e.RowIndex];
-               DataGridViewColumn currentColumn = dgwFieldDetails.Columns[e.ColumnIndex];
-               if (currentRow.Cells["Display Type"].Value != null)
+                DataGridViewRow currentRow = dgwFieldDetails.Rows[e.RowIndex];
+                DataGridViewColumn currentColumn = dgwFieldDetails.Columns[e.ColumnIndex];
+                if (currentRow.Cells["Display Type"].Value != null)
                 {
                     display = currentRow.Cells["Display Type"].Value.ToString();
                 }
-               if (currentRow.Cells["Control Reference Id"].Value != null)
+                if (currentRow.Cells["Control Reference Id"].Value != null)
                 {
                     controlReferenceId = currentRow.Cells["Control Reference Id"].Value.ToString();
                 }
@@ -975,7 +972,7 @@ namespace IQCare.FormBuilder
                 }
                 else if (currentColumn.Name == "Business Rule")
                 {
-                    if (e.Value != null &&  e.Value.ToString() == "1")
+                    if (e.Value != null && e.Value.ToString() == "1")
                     {
                         e.Value = img2;
                     }
@@ -986,7 +983,7 @@ namespace IQCare.FormBuilder
                 }
                 else if (currentColumn.Name == "Active")
                 {
-                    if (e.Value != null &&  e.Value.ToString() == "0")
+                    if (e.Value != null && e.Value.ToString() == "0")
                     {
                         e.Value = img2;
                     }
@@ -1002,7 +999,7 @@ namespace IQCare.FormBuilder
                     //{
                     //    display = dgwFieldDetails.Rows[e.RowIndex].Cells[1].Value.ToString();
                     //}
-                    if (e.Value != null &&  e.Value.ToString() != "0")
+                    if (e.Value != null && e.Value.ToString() != "0")
                     {
                         // if (display.Trim() == "Select List" || display.Trim() == "Multi Select" || display.Trim() == "Yes No")
                         if (controlReferenceId.Trim() == "SELECT_LIST" || controlReferenceId.Trim() == "SELECT_LIST_MULTI" || controlReferenceId.Trim() == "SELECTLIST_TEXTBOX" || controlReferenceId.Trim() == "YES_NO")
@@ -1036,8 +1033,8 @@ namespace IQCare.FormBuilder
                         }
                         else if (e.Value.ToString() == "C")
                         {
-                           // DataView theDV = new DataView(mainDataset.Tables[6]);
-                          //  dgwFieldDetails.Columns[6].Name = "Associated Fields";
+                            // DataView theDV = new DataView(mainDataset.Tables[6]);
+                            //  dgwFieldDetails.Columns[6].Name = "Associated Fields";
                             try
                             {
                                 if (currentRow.Cells["Associated Fields"].Value != null && Convert.ToInt32(currentRow.Cells["Associated Fields"].Value) > 0)
@@ -1275,7 +1272,7 @@ namespace IQCare.FormBuilder
         /// <param name="id"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public Boolean ChangeDisplayType(int id, int flag, int controlID, int predefinestatus, string fieldName)
+        public bool ChangeDisplayType(int id, int flag, int controlId, int predefinestatus, string fieldName)
         {
             IFieldDetail objFieldDetail;
 
@@ -1720,7 +1717,7 @@ namespace IQCare.FormBuilder
                                     XDocument xmlDoc = new XDocument();
                                     XElement xElm = new XElement("selectlist",
                                                         from l in strListValue.Split(';')
-                                                        select new XElement("option", l )
+                                                        select new XElement("option", l)
                                                     );
                                     xmlDoc.Add(xElm);
 
@@ -1786,7 +1783,7 @@ namespace IQCare.FormBuilder
                                         if (strList == "1" || strbrule == "1")
                                         {
 
-                                            Boolean blnChange = ChangeDisplayType(Convert.ToInt32(id), 9, Convert.ToInt32(strcontrolid), predefineStatus, strname);
+                                            bool blnChange = ChangeDisplayType(Convert.ToInt32(id), 9, Convert.ToInt32(strcontrolid), predefineStatus, strname);
                                             blnSave = blnChange;
                                         }
                                     }
@@ -1915,7 +1912,7 @@ namespace IQCare.FormBuilder
                                     {
                                         if (strList == "1" || strbrule == "1")
                                         {
-                                            Boolean blnChange = ChangeDisplayType(Convert.ToInt32(id), 2, Convert.ToInt32(strcontrolid), predefineStatus, strname);
+                                            bool blnChange = ChangeDisplayType(id, 2, Convert.ToInt32(strcontrolid), predefineStatus, strname);
                                             blnSave = blnChange;
                                         }
                                     }
@@ -1949,8 +1946,10 @@ namespace IQCare.FormBuilder
                                                 iModuleId = Convert.ToInt32(r.Cells[11].Value.ToString());
                                             }
                                             else
+                                            {
                                                 iModuleId = 0;
-                                            objDsDuplicate = objFieldDetail.GetDuplicateCustomFields(Convert.ToInt32(id), strname, iModuleId, GblIQCare.iManageCareEnded);
+                                            }
+                                            objDsDuplicate = objFieldDetail.GetDuplicateCustomFields(id, strname, iModuleId, GblIQCare.iManageCareEnded);
                                             if (objDsDuplicate.Tables[0].Rows.Count > 0)
                                             {
                                                 IQCareWindowMsgBox.ShowWindow("PMTCTduplicatefield", this);
@@ -2066,26 +2065,26 @@ namespace IQCare.FormBuilder
         /// <summary>
         /// This function validate whether there is data in select list or not
         /// </summary>
-        /// <param name="ControlID"></param>
+        /// <param name="controlId"></param>
         /// <param name="ControlValue"></param>
         /// <returns></returns>
-        public Boolean fnValidate(int ControlID, string ControlValue)
+        public bool fnValidate(int controlId, string controlValue)
         {
-            Boolean blnreturn = true;
-            if (ControlID == 4 || ControlID == 9 || ControlID == 0)
+            bool blnreturn = true;
+            if (controlId == 4 || controlId == 9 || controlId == 0)
             {
-                if (ControlValue == "")
+                if (controlValue == "")
                 {
                     blnreturn = false;
                 }
             }
             return blnreturn;
         }
-        public Boolean fnValidateFieldName(string strVal)
+        public bool fnValidateFieldName(string strVal)
         {
             //-=\\/!@#$%^ &*()+|.,<>?`~\";:'[]{},"-"
             string[] arStr = { "*", "?", "=", "/", "\\", "!", "@", "#", "$", "%", "^", "&", "(", ")", ":", "[", "]", "+", "~" };
-            Boolean blnreturn = true;
+            bool blnreturn = true;
             for (int i = 0; i < arStr.Length; i++)
             {
                 if (strVal.Contains(arStr[i].ToString()))

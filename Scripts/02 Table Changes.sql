@@ -262,6 +262,21 @@ Begin
   Alter table dbo.mst_LabTestMaster Add DeleteDate datetime NULL
 End
 Go
+If Not Exists (Select * From sys.columns Where Name = N'DeletedBy' And Object_ID = Object_id(N'ord_labOrder'))    
+Begin
+  Alter table dbo.ord_labOrder Add DeletedBy int NULL
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'DeleteDate' And Object_ID = Object_id(N'ord_labOrder'))    
+Begin
+  Alter table dbo.ord_labOrder Add DeleteDate datetime NULL
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'DeleteReason' And Object_ID = Object_id(N'ord_labOrder'))    
+Begin
+  Alter table dbo.ord_labOrder Add DeleteReason varchar(250) NULL
+End
+Go
 If Not Exists (Select * From sys.columns Where Name = N'SettledAmount' And Object_ID = Object_id(N'mst_bill'))    
 Begin
   Alter table dbo.mst_bill Add SettledAmount Decimal(18,2) Default 0

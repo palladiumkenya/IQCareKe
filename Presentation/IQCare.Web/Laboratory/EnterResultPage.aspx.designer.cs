@@ -67,24 +67,6 @@ namespace IQCare.Web.Laboratory {
         protected global::System.Web.UI.WebControls.HiddenField hdappcurrentdate;
         
         /// <summary>
-        /// labelOrderNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelOrderNumber;
-        
-        /// <summary>
-        /// labelTestOrderStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelTestOrderStatus;
-        
-        /// <summary>
         /// divErrorComponent control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,24 @@ namespace IQCare.Web.Laboratory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// labelOrderNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelOrderNumber;
+        
+        /// <summary>
+        /// labelTestOrderStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelTestOrderStatus;
         
         /// <summary>
         /// labelTestNotes control.
@@ -175,15 +175,6 @@ namespace IQCare.Web.Laboratory {
         protected global::System.Web.UI.WebControls.DropDownList ddlLabReportedbyName;
         
         /// <summary>
-        /// lblreportedbydate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblreportedbydate;
-        
-        /// <summary>
         /// txtlabReportedbyDate control.
         /// </summary>
         /// <remarks>
@@ -191,24 +182,6 @@ namespace IQCare.Web.Laboratory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtlabReportedbyDate;
-        
-        /// <summary>
-        /// ImageButton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
-        
-        /// <summary>
-        /// cbeReportDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender cbeReportDate;
         
         /// <summary>
         /// buttonSave control.

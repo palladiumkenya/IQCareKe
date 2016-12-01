@@ -77,6 +77,13 @@ namespace Entities.Lab
         /// </value>
         public bool DeleteFlag { get; set; }
         /// <summary>
+        /// Gets or sets the delete reason.
+        /// </summary>
+        /// <value>
+        /// The delete reason.
+        /// </value>
+        public string DeleteReason { get; set; }
+        /// <summary>
         /// Gets or sets the order date.
         /// </summary>
         /// <value>
@@ -112,7 +119,13 @@ namespace Entities.Lab
         /// The user identifier.
         /// </value>
         public int UserId { get; set; }
-
+        /// <summary>
+        /// Gets or sets the deleted by.
+        /// </summary>
+        /// <value>
+        /// The deleted by.
+        /// </value>
+        public int? DeletedBy { get; set; }
         public virtual Patient Client { get; set; }
         /// <summary>
         /// Gets or sets the clinical notes.

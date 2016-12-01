@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Application.Presentation;
+using Entities.Lab;
+using Entities.PatientCore;
+using Interface.Laboratory;
+using IQCare.Web.UILogic;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Interface.Laboratory;
-using Application.Presentation;
-using Entities.PatientCore;
-using Entities.Lab;
-using Entities.Common;
-using System.Data;
 
 namespace IQCare.Web.Laboratory.Request
 {
-    public partial class FindLabOrder : System.Web.UI.Page
+    public partial class FindLabOrder : Page
     {
         AuthenticationManager Authentication = new AuthenticationManager();
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
@@ -71,7 +70,7 @@ namespace IQCare.Web.Laboratory.Request
                     DataView theDV = new DataView(theDS.Tables["Users"]);
                     if (theDV.Table != null)
                     {
-                        dt = (DataTable)theUtils.CreateTableFromDataView(theDV);
+                        dt = theUtils.CreateTableFromDataView(theDV);
                     }
                 }
                 return dt;
@@ -117,11 +116,24 @@ namespace IQCare.Web.Laboratory.Request
             int orderId = int.Parse(grdPatienOrder.SelectedDataKey.Values["Id"].ToString());
             int patientId = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientId"].ToString());
             int moduleId = int.Parse(grdPatienOrder.SelectedDataKey.Values["ModuleId"].ToString());
+            if(moduleId <= 0)
+            {
+                EnrollmentService es = new EnrollmentService(patientId);
+               List<PatientEnrollment> pe =  es.GetPatientEnrollment(CurrentSession.Current);
+                if(pe!= null)
+                {
+                    moduleId = pe.FirstOrDefault().ServiceAreaId;
+                    base.Session["TechnicalAreaName"] = pe.FirstOrDefault().ServiceArea.Name;
+                }
+            }else
+            {
+                base.Session["TechnicalAreaName"] = this.GetModuleName(moduleId);
+            }
             // patientID = Int32.Parse(theDR.ItemArray[0].ToString());
             base.Session["PatientId"] = patientId;
             base.Session["PatientVisitId"] = orderId;
             base.Session["TechnicalAreaId"] = moduleId;
-            base.Session["TechnicalAreaName"] = this.GetModuleName(moduleId);
+          
             Session["PatientInformation"] = null;
             theUrl = "~/Laboratory/LabResultPage.aspx";
             base.Session[SessionKey.LabClient] = null;
@@ -205,7 +217,7 @@ namespace IQCare.Web.Laboratory.Request
             }
             else
             {
-                List<KeyValuePair<string, Object>> param = base.Session[SessionKey.LabClient] as List<KeyValuePair<string, Object>>;
+                List<KeyValuePair<string, object>> param = base.Session[SessionKey.LabClient] as List<KeyValuePair<string, object>>;
                 int patientId = (int)param.Find(l => l.Key == "PatientID").Value;
                 int location = (int)param.Find(l => l.Key == "LocationID").Value;
                 lblname.Text = string.Format("{0} {1} {2}", (string)(param.Find(l => l.Key == "FirstName").Value.ToString())

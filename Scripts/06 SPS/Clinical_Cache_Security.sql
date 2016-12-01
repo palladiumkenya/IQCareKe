@@ -7618,7 +7618,7 @@ Declare @FeatureName varchar(100)
 	, FV.SectionName
 	, FV.SectionInfo
 	, FV.PaddedFieldId FieldId
-	, FieldName = Case When FieldID = 71 Then 'PlaceHolder' + convert(varchar, FV.FieldOrder) + convert(varchar, FV.SectionId) Else FV.FieldName End 
+	, FieldName = Case When FieldID = 71 And FV.Predefined = 1 Then 'PlaceHolder' + convert(varchar, FV.FieldOrder) + convert(varchar, FV.SectionId) Else FV.FieldName End 
 	, FieldLabel
 	, FV.Predefined
 	, FV.PDFTableName

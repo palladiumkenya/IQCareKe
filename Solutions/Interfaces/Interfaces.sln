@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Service", "..\..\Interfaces\Interface.Service\Interface.Service.csproj", "{931D6A00-5F40-4BA6-80B4-3FA8D4D92FA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Security", "..\..\Interfaces\Interface.Security\Interface.Security.csproj", "{E467EBA1-5014-43C1-9C72-3659181AA125}"
@@ -23,46 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Administration", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.PatientCore", "..\..\Interfaces\Interface.PatientCore\Interface.PatientCore.csproj", "{A56DF612-ACBC-4399-B136-7783BF59E02C}"
 EndProject
-Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Interfaces\\Interface.Service\\Interface.Service.csproj
-		SccProjectName1 = ../../Interfaces/Interface.Service
-		SccLocalPath1 = ..\\..\\Interfaces\\Interface.Service
-		SccProjectUniqueName2 = ..\\..\\Interfaces\\Interface.Security\\Interface.Security.csproj
-		SccProjectName2 = ../../Interfaces/Interface.Security
-		SccLocalPath2 = ..\\..\\Interfaces\\Interface.Security
-		SccProjectUniqueName3 = ..\\..\\Interfaces\\Interface.SCM\\Interface.SCM.csproj
-		SccProjectName3 = ../../Interfaces/Interface.SCM
-		SccLocalPath3 = ..\\..\\Interfaces\\Interface.SCM
-		SccProjectUniqueName4 = ..\\..\\Interfaces\\Interface.Scheduler\\Interface.Scheduler.csproj
-		SccProjectName4 = ../../Interfaces/Interface.Scheduler
-		SccLocalPath4 = ..\\..\\Interfaces\\Interface.Scheduler
-		SccProjectUniqueName5 = ..\\..\\Interfaces\\Interface.Reports\\Interface.Reports.csproj
-		SccProjectName5 = ../../Interfaces/Interface.Reports
-		SccLocalPath5 = ..\\..\\Interfaces\\Interface.Reports
-		SccProjectUniqueName6 = ..\\..\\Interfaces\\Interface.Pharmacy\\Interface.Pharmacy.csproj
-		SccProjectName6 = ../../Interfaces/Interface.Pharmacy
-		SccLocalPath6 = ..\\..\\Interfaces\\Interface.Pharmacy
-		SccProjectUniqueName7 = ..\\..\\Interfaces\\Interface.Laboratory\\Interface.Laboratory.csproj
-		SccProjectName7 = ../../Interfaces/Interface.Laboratory
-		SccLocalPath7 = ..\\..\\Interfaces\\Interface.Laboratory
-		SccProjectUniqueName8 = ..\\..\\Interfaces\\Interface.FormBuilder\\Interface.FormBuilder.csproj
-		SccProjectName8 = ../../Interfaces/Interface.FormBuilder
-		SccLocalPath8 = ..\\..\\Interfaces\\Interface.FormBuilder
-		SccProjectUniqueName9 = ..\\..\\Interfaces\\Interface.Clinical\\Interface.Clinical.csproj
-		SccProjectName9 = ../../Interfaces/Interface.Clinical
-		SccLocalPath9 = ..\\..\\Interfaces\\Interface.Clinical
-		SccProjectUniqueName10 = ..\\..\\Interfaces\\Interface.Administration\\Interface.Administration.csproj
-		SccProjectName10 = ../../Interfaces/Interface.Administration
-		SccLocalPath10 = ..\\..\\Interfaces\\Interface.Administration
-		SccProjectUniqueName11 = ..\\..\\Interfaces\\Interface.PatientCore\\Interface.PatientCore.csproj
-		SccProjectName11 = ../../Interfaces/Interface.PatientCore
-		SccLocalPath11 = ..\\..\\Interfaces\\Interface.PatientCore
-	EndGlobalSection
+Global	
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

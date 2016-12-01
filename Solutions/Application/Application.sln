@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Common", "..\..\Application\Application.Common\Application.Common.csproj", "{0D193582-0B9B-49A6-8E3D-D96582C6B524}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Logger", "..\..\Application\Application.EventLogger\Application.Logger.csproj", "{4B3D2173-22B8-4560-A5F1-A4C7CEB441E6}"
@@ -11,25 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Presentation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.BusinessProcess", "..\..\Application\Application.BusinessProcess\Application.BusinessProcess.csproj", "{7E4C94BA-1706-49DE-BF5E-B5CA7170899E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{EF658EE8-996C-411D-BBE8-C90991C729B1}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://futuresserver:8080/tfs/kehmis_iqcare
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Application\\Application.Presentation\\Application.Presentation.csproj
-		SccProjectName1 = ../../Application/Application.Presentation
-		SccLocalPath1 = ..\\..\\Application\\Application.Presentation
-		SccProjectUniqueName2 = ..\\..\\Application\\Application.Interface\\Application.Interface.csproj
-		SccProjectName2 = ../../Application/Application.Interface
-		SccLocalPath2 = ..\\..\\Application\\Application.Interface
-		SccProjectUniqueName3 = ..\\..\\Application\\Application.EventLogger\\Application.Logger.csproj
-		SccProjectName3 = ../../Application/Application.EventLogger
-		SccLocalPath3 = ..\\..\\Application\\Application.EventLogger
-		SccProjectUniqueName4 = ..\\..\\Application\\Application.Common\\Application.Common.csproj
-		SccProjectName4 = ../../Application/Application.Common
-		SccLocalPath4 = ..\\..\\Application\\Application.Common
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

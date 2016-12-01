@@ -247,6 +247,33 @@ namespace IQCare.Web.Laboratory {
         protected global::System.Web.UI.WebControls.Button btnExitPage;
         
         /// <summary>
+        /// txtDeleteReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDeleteReason;
+        
+        /// <summary>
+        /// rfvReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReason;
+        
+        /// <summary>
+        /// deleteConfirmed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button deleteConfirmed;
+        
+        /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>

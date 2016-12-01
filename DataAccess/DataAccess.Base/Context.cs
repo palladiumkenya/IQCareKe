@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Common;
+using System;
 
 namespace DataAccess.Base
 {
@@ -34,9 +35,21 @@ namespace DataAccess.Base
 
             return this.Set<T>();
         }
+
+        public void BeginTransaction()
+        {
+            
+        }
+
+        public void RollBack()
+        {
+            
+        }
     }
     public interface IUnitOfWork
     {
+        void BeginTransaction();
+        void RollBack();
         void Commit();
         IDbSet<T> Set<T>() where T : class;
     }

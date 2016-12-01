@@ -18,16 +18,22 @@
         };
         var prm = Sys.WebForms.PageRequestManager.getInstance();
         prm.add_pageLoaded(FilterGrid);
+        function resetFun() {
+             var radioButtons = $('#<%=rbtlst_findOrder.ClientID%>');
+            var selectedValue = radioButtons.find('input:checked').val(); // selected value
+            var selectedText = radioButtons.find('input:checked').next().html();
+            if (selectedValue == "Patient") window.location.href = "FindLabPatient.aspx?FormName=FindLabPatient&mnuClicked=FindLabPatient";
+           // alert("Selected Text: " + selectedText + " Selected Value: " + selectedValue);
+        }
+        //$("[id*=rbtlst_findOrder] input").live("click", function () {
 
-//        $("[id*=rbtlst_findOrder] input").live("click", function () {
+        //    var selectedValue = $(this).val();
 
-//            var selectedValue = $(this).val();
+        //    var selectedText = $(this).next().html();
+        //    if (selectedValue == "Patient")
+        //        alert("Selected Text: " + selectedText + " Selected Value: " + selectedValue);
 
-//            var selectedText = $(this).next().html();
-//            if (selectedValue == "Patient")
-//                alert("Selected Text: " + selectedText + " Selected Value: " + selectedValue);
-
-//        });
+        //});
     </script>
     <div>
         <h2 class="forms" align="left">
@@ -41,8 +47,8 @@
                                 <td align="left">
                                     <label style="padding-left: 10px" id="lblpurpose" runat="server">
                                         Search for:</label>
-                                    <asp:RadioButtonList ID="rbtlst_findOrder" runat="server" AutoPostBack="True" RepeatDirection="Horizontal"
-                                        OnSelectedIndexChanged="FindOrder_SelectedIndexChanged">
+                                    <asp:RadioButtonList ID="rbtlst_findOrder" runat="server" AutoPostBack="False" RepeatDirection="Horizontal"
+                                        OnSelectedIndexChanged="FindOrder_SelectedIndexChanged" onchange="javascript:resetFun();">
                                         <asp:ListItem Text="Pending Orders" Selected="True" Value="Pending"></asp:ListItem>
                                         <asp:ListItem Text="Find Patient" Value="Patient"></asp:ListItem>
                                     </asp:RadioButtonList>

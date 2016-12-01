@@ -22,14 +22,6 @@ namespace Interface.Laboratory
         /// <param name="ExcludeDepartment">The exclude department.</param>
         /// <returns></returns>
         DataTable FindLabByName(string SearchText, bool excludeGroup=false);
-
-        /// <summary>
-        /// Gets the lab order.
-        /// </summary>
-        /// <param name="LabOrderId">The lab order identifier.</param>
-        /// <returns></returns>
-       // DataSet GetLabOrder(int LabOrderId);
-
         /// <summary>
         /// Gets the lab order.
         /// </summary>
@@ -64,31 +56,18 @@ namespace Interface.Laboratory
         /// <param name="LabTestOrderId">The lab test order identifier.</param>
         /// <returns></returns>
         List<LabTestParameterResult> GetLabTestParameterResult(int LabTestOrderId);
-
-        /// <summary>
-        /// Gets the lab test parameter result.
-        /// </summary>
-        /// <param name="LabTestOrderId">The lab test order identifier.</param>
-        /// <param name="LabTestId">The lab test identifier.</param>
-        /// <returns></returns>
-       // DataTable GetLabTestParameterResult(int LabTestOrderId, int LabTestId);
-
-        /// <summary>
-        /// Saves the lab order.
-        /// </summary>
-        /// <param name="labOrder">The lab order.</param>
-        /// <param name="UserId">The user identifier.</param>
-        /// <param name="LocationId">The location identifier.</param>
-        /// <returns></returns>
-     //   DataSet SaveLabOrder(LabOrder labOrder, int UserId, int LocationId);
-
         /// <summary>
         /// Saves the lab order.
         /// </summary>
         /// <param name="labOrder">The lab order.</param>
         /// <returns></returns>
         LabOrder SaveLabOrder(LabOrder labOrder, int UserId, int LocationId);
-
+        /// <summary>
+        /// Deletes the lab order.
+        /// </summary>
+        /// <param name="labOrderId">The lab order identifier.</param>
+        /// <param name="userId">The user identifier.</param>
+        void DeleteLabOrder(int labOrderId, int userId, string deleteReason);
         /// <summary>
         /// Saves the lab results.
         /// </summary>

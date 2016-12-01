@@ -13,7 +13,7 @@ using IQCare.Web.UILogic;
 
 namespace IQCare.Web.Laboratory
 {
-    public partial class EnterResultPage : System.Web.UI.Page
+    public partial class EnterResultPage : Page
     {
         /// <summary>
         /// The redirect URL
@@ -45,7 +45,7 @@ namespace IQCare.Web.Laboratory
 
             DataView theDV = new DataView(this.UserList);
 
-            string rowFilter = "EmployeeId Is Not Null Or EmployeeId > 0 And UserDeleteFlag = 0 And EmployeeDeleteFlag = 0";
+            string rowFilter = "(EmployeeId Is Not Null Or EmployeeId > 0) And UserDeleteFlag = 0 And EmployeeDeleteFlag = 0";
 
             if (IsPaperless && this.EmployeeId > 0)
             {
@@ -74,7 +74,7 @@ namespace IQCare.Web.Laboratory
         }
         protected string ColCount(object datatype)
         {
-            return (datatype.ToString().ToUpper() == "NUMERIC") ? "1" : "4";
+            return (datatype.ToString().ToUpper() == "NUMERIC") ? "3" : "9";
         }
         protected string ShowTextDiv(object datatype)
         {
@@ -85,7 +85,7 @@ namespace IQCare.Web.Laboratory
         {
             return (datatype.ToString().ToUpper() == "SELECTLIST") ? "" : "none";
         }
-
+        protected string showNotes = "none";
         protected string ShowNumDiv(object datatype)
         {
             return (datatype.ToString().ToUpper() == "NUMERIC") ? "" : "none";
@@ -95,22 +95,9 @@ namespace IQCare.Web.Laboratory
         {
             return ((datatype.ToString().ToUpper() == "TEXT" || datatype.ToString().ToUpper() == "SELECTLIST") && resultText.ToString().Trim() != "") ? "" : "none";
         }
-        protected string sDataEntry
-        {
-            get
-            {
-                return this.isDataEntry ? "" : "none";
-            }
-        }
-        protected string sEdit
-        {
-            get
-            {
-                return this.LabOrderId > 0 ? "none" : "";
-            }
-        }
+       
         private bool isError = false;
-        private bool isDataEntry = false;
+
 
      
         int UserId
@@ -210,35 +197,10 @@ namespace IQCare.Web.Laboratory
             else
             {
                 SystemSetting.LogError(ex);
-                //lblError.Text = "An error has occured within IQCARE during processing. Please contact the support team.  " + ex.Message;
-                //this.isError = this.divError.Visible = true;
-                //Exception lastError = ex;
-                //lastError.Data.Add("Domain", "Lab Result Management");
-                //try
-                //{
-                //    Application.Logger.EventLogger logger = new Application.Logger.EventLogger();
-                //    logger.LogError(ex);
-                //}
-                //catch
-                //{
-
-                //}
+                
             }
         }
-        //private void NotifyAction(string strMessage, string strTitle, bool errorFlag, string onOkScript = "")
-        //{
-        //    lblNoticeInfo.Text = strMessage;
-        //    lblNotice.Text = strTitle;
-        //    lblNoticeInfo.ForeColor = (errorFlag) ? System.Drawing.Color.DarkRed : System.Drawing.Color.DarkGreen;
-        //    lblNoticeInfo.Font.Bold = true;
-        //    imgNotice.ImageUrl = (errorFlag) ? "~/images/mb_hand.gif" : "~/images/mb_information.gif";
-        //    btnOkAction.OnClientClick = "";
-        //    if (onOkScript != "")
-        //    {
-        //        btnOkAction.OnClientClick = onOkScript;
-        //    }
-        //    this.notifyPopupExtender.Show();
-        //}
+     
         protected void Page_PreRender(object sender, EventArgs e)
         {
 
@@ -301,6 +263,7 @@ namespace IQCare.Web.Laboratory
                     thisTestOrder.OrderNumber);
                 labelTestOrderStatus.Text = thisTestOrder.TestOrderStatus;
                 labelTestNotes.Text = thisTestOrder.TestNotes;
+                showNotes = !string.IsNullOrEmpty(thisTestOrder.TestNotes.Trim())? "" : "none";
                 this.LabTestId = thisTestOrder.TestId;
                 this.LabOrderTestId = thisTestOrder.Id;
                 this.LabOrderTestId = thisTestOrder.LabOrderId;
@@ -369,10 +332,7 @@ namespace IQCare.Web.Laboratory
         {
             
 
-           // LabOrderTest selectedLab = (LabOrderTest)Session[SessionKey.SelectedLabTestOrder];
-           // List<LabOrderTest> orderTests = requestMgr.GetOrderedTests(selectedLab.LabOrderId, selectedLab.Id);
-         //   thisTestOrder = orderTests.FirstOrDefault();
-
+         
             LabOrderTest thisTest = this.thisTestOrder;
             List<LabTestParameterResult> paramToSave = new List<LabTestParameterResult>(); 
            // testToSave.ParameterResults = new List<LabTestParameterResult>();
@@ -403,7 +363,7 @@ namespace IQCare.Web.Laboratory
                 DropDownList ddlResultList = dataItem.FindControl("ddlResultList") as DropDownList;
                 TextBox txtResultText = dataItem.FindControl("textResultText") as TextBox;
                 Label labelResultText = dataItem.FindControl("labelResultText") as Label;
-                string parameterName = (dataItem.FindControl("labelParameterName") as Label).Text;
+               // string parameterName = (dataItem.FindControl("labelParameterName") as Label).Text;
                 CheckBox cBox = dataItem.FindControl("checkUndetectable") as CheckBox;
                 TextBox txtLimit = dataItem.FindControl("textDetectionLimit") as TextBox;
                 TextBox txtResultValue = dataItem.FindControl("textResultValue") as TextBox;
@@ -424,7 +384,7 @@ namespace IQCare.Web.Laboratory
                 LabTestParameterResult thisParam = thisTest.ParameterResults.Where(pr => pr.Id == resultId).DefaultIfEmpty(null).FirstOrDefault();
                 if (!hasResult || null == thisParam)
                 {
-                    this.isDataEntry = true;
+                    //isDataEntry = true;
                     continue;
 
                 }
@@ -509,17 +469,22 @@ namespace IQCare.Web.Laboratory
             Session[SessionKey.SelectedLabTestOrder] = null;
             Response.Redirect(RedirectUrl);
         }
-        private void InjectScript(ref CheckBox cBox, ref TextBox txtBox)
+        private void InjectScript(ref CheckBox cBox, ref TextBox txtLimitBox, ref TextBox txtValueBox)
         {
             string checkUndectable = cBox.ClientID;
-            string detectionLimit = txtBox.ClientID;
+            string detectionLimit = txtLimitBox.ClientID;
+            string valueBox = txtValueBox.ClientID;
             string script = @"$(function () {$(""#" + checkUndectable + @""").click(function () {
              $(""#" + detectionLimit + @""").val("""");
             if ($(this).is("":checked"")) {
                 $(""#" + detectionLimit + @""").removeAttr(""disabled"");
                 $(""#" + detectionLimit + @""").focus();
+                $(""#" + valueBox + @""").val("""");
+                $(""#" + valueBox + @""").attr(""disabled"", ""disabled"");
             } else {
                 $(""#" + detectionLimit + @""").attr(""disabled"", ""disabled"");
+                $(""#" + valueBox + @""").removeAttr(""disabled"");
+                $(""#" + valueBox + @""").focus();
             }
         }); });";
             ScriptManager.RegisterStartupScript(cBox, cBox.GetType(), checkUndectable, script, true);
@@ -619,7 +584,7 @@ namespace IQCare.Web.Laboratory
                 string strDataType = rowView.ResultDataType;
                 double? strResultValue = rowView.ResultValue;
                 string strResultText = rowView.ResultText;
-                Double? strLimit = rowView.DetectionLimit;
+                double? strLimit = rowView.DetectionLimit;
                 int strParameterId = rowView.ParameterId;
 
                 bool hasResult = rowView.HasResult;
@@ -642,7 +607,7 @@ namespace IQCare.Web.Laboratory
 
                     if (null != cBox)
                     {
-                        this.InjectScript(ref cBox, ref txtLimit);
+                        this.InjectScript(ref cBox, ref txtLimit, ref txtResultValue);
                     }
 
                     this.PopulateUnits(ref ddlResultUnit, ref txtLimit,strParameterId);

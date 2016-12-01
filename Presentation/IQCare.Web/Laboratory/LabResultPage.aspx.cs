@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Application.Common;
+using Application.Presentation;
+using Entities.Lab;
+using Entities.PatientCore;
+using Interface.Clinical;
+using Interface.Laboratory;
+using IQCare.Web.UILogic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using AjaxControlToolkit;
-using Application.Presentation;
-using Entities.Lab;
-using Interface.Laboratory;
 using Telerik.Web.UI;
-using IQCare.Web.Laboratory.Admin;
-using Interface.Clinical;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace IQCare.Web.Laboratory
 {
@@ -97,7 +95,7 @@ namespace IQCare.Web.Laboratory
             return ((datatype.ToString().ToUpper() == "TEXT" || datatype.ToString().ToUpper() == "SELECT LIST") && !(resultText.ToString().Trim() != null && String.IsNullOrEmpty(resultText.ToString().Trim()))) ? "" : "none";
         }
         AuthenticationManager Authentication = new AuthenticationManager();
-        protected bool HasPermission
+        protected bool HasResultPermission
         {
             get
             {
@@ -108,7 +106,7 @@ namespace IQCare.Web.Laboratory
         {
             get
             {
-                return HasPermission ? "" : "none";
+                return HasResultPermission ? "" : "none";
             }
         }
         /// <summary>
@@ -135,15 +133,17 @@ namespace IQCare.Web.Laboratory
                 }
                 else
                 {
-                    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect(RedirectUrl, true);
                 }
             }
-            else
+            
+            if(CurrentSession.Current.HasFunctionRight("LABORATORY", FunctionAccess.Delete))
             {
+                sDelete = "";
             }
         }
-
+        protected string sDelete = "none";
         /// <summary>
         /// Gets or sets the ordered labs.
         /// </summary>
@@ -198,20 +198,38 @@ namespace IQCare.Web.Laboratory
             {
                 IPatientHome PatientManager;
                 PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-                System.Data.DataSet theDS = PatientManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
+                DataSet theDS = PatientManager.GetPatientDetails(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["SystemId"]), Convert.ToInt32(Session["TechnicalAreaId"]));
                 PatientManager = null;
 
 
                 Session["PatientInformation"] = theDS.Tables[0];
             }
             this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
+            if (this.thisLabOrder.ModuleId <= 0)
+            {
+                EnrollmentService es = new EnrollmentService(PatientId);
+                List<PatientEnrollment> pe = es.GetPatientEnrollment(CurrentSession.Current);
+                if (pe != null)
+                {
+                    Session["TechnicalAreaId"] = this.thisLabOrder.ModuleId = pe.FirstOrDefault().ServiceAreaId;
+                    base.Session["TechnicalAreaName"] = pe.FirstOrDefault().ServiceArea.Name;
+                }
+            }
+            else
+            {
+                Session["TechnicalAreaId"] = this.thisLabOrder.ModuleId;
+            }
+            CurrentSession session = CurrentSession.Current.ResetCurrentModule();
+            PatientService service = new PatientService(session, this.PatientId, this.ModuleId);
+            // CurrentSession.Current.SetCurrentModule(this.ModuleId);
+            CurrentSession.Current.SetCurrentPatient(this.PatientId, this.ModuleId);
 
             this.LabOrderId = this.thisLabOrder.Id;
 
             labelClinicalNotes.Text = this.thisLabOrder.ClinicalNotes; //dt.Rows[0]["ClinicalNotes"].ToString();
             //  labellaborderedbydate.Text = this.thisLabOrder.OrderDate.ToString("dd-MMM-yyyy");
             labelLabtobeDone.Text = this.thisLabOrder.PreClinicDate.HasValue ? this.thisLabOrder.PreClinicDate.Value.ToString("dd-MMM-yyyy") : "";
-            labelOrderNumber.Text = String.Format("Order Number : {0}  | Status : {1} | Ordered by {2} on {3}",
+            labelOrderNumber.Text = string.Format("Order Number : {0}  | Status : {1} | Ordered by {2} on {3}",
                 thisLabOrder.OrderNumber,
                 thisLabOrder.OrderStatus,
                 this.GetUserFullName(this.thisLabOrder.OrderedBy),
@@ -377,7 +395,7 @@ namespace IQCare.Web.Laboratory
                     DataView theDV = new DataView(theDS.Tables["Users"]);
                     if (theDV.Table != null)
                     {
-                        dt = (DataTable)theUtils.CreateTableFromDataView(theDV);
+                        dt = theUtils.CreateTableFromDataView(theDV);
                     }
                 }
                 return dt;
@@ -515,7 +533,7 @@ namespace IQCare.Web.Laboratory
 
                 int labOrdertestId = rowView.Id;
                 Label labReportedbyDate = e.Item.FindControl("labReportedbyDate") as Label;
-                Label labelReportedbyName = e.Item.FindControl("labelReportedbyName") as Label;
+              //  Label labelReportedbyName = e.Item.FindControl("labelReportedbyName") as Label;
                 Button buttonResult = e.Item.FindControl("buttonResult") as Button;
                 Label labelRequestNotes = e.Item.FindControl("labelRequestNotes") as Label;
 
@@ -535,14 +553,17 @@ namespace IQCare.Web.Laboratory
                 if (rowView.ResultBy.HasValue && rowView.ResultBy.HasValue)
                 {
 
-                    labelReportedbyName.Text = this.GetUserFullName(rowView.ResultBy.Value);
+                   // labelReportedbyName.Text = this.GetUserFullName(rowView.ResultBy.Value);
                     labReportedbyDate.Text = rowView.ResultDate.Value.ToString("dd-MMM-yyyy hh:mm");
-                    buttonResult.Visible = false;
+                    // buttonResult.Visible = false;
+                    buttonResult.Enabled = false;
+                    buttonResult.Text = this.GetUserFullName(rowView.ResultBy.Value);
                 }
                 else
                 {
-                    labelReportedbyName.Visible = false;
-                    buttonResult.Visible = this.HasPermission;
+                    //labelReportedbyName.Visible = false;
+                    buttonResult.Enabled = this.HasResultPermission;
+                    buttonResult.Text = "Enter Result";
                     //buttonResult.OnClientClick = "javascript:pageopen();return"//
 
                 }
@@ -654,10 +675,19 @@ namespace IQCare.Web.Laboratory
                     {
                         Guid g = Guid.NewGuid();
                         base.Session[SessionKey.SelectedLabTestOrder] = thisTest;
-                        System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                       HttpContext.Current.ApplicationInstance.CompleteRequest();
                         Response.Redirect("~/Laboratory/EnterResultPage.aspx?key=" + g.ToString(), true);
                     }
                 }
+            }
+        }
+
+        protected void deleteConfirmed_Click(object sender, EventArgs e)
+        {
+            if (CurrentSession.Current.HasFunctionRight("LABORATORY", FunctionAccess.Delete))
+            {
+                requestMgr.DeleteLabOrder(this.LabOrderId, UserId, txtDeleteReason.Text.Trim());
+                IQCareMsgBox.NotifyAction(string.Format("Lab order {0} has been deleted", thisLabOrder.OrderNumber), "Delete LabOrder", false, this, string.Format("window.location.href='{0}'", RedirectUrl));
             }
         }
     }

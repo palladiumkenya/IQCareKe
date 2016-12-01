@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Application.Common;
+using Application.Presentation;
+using System;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Application.Common;
-using Application.Presentation;
-using IQCare.Web.Laboratory.Admin;
 
 namespace IQCare.Web.Laboratory.Request
 {
-    public partial class FindLabPatient : System.Web.UI.Page
+    public partial class FindLabPatient : Page
     {
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace IQCare.Web.Laboratory.Request
         /// <exception cref="System.NotImplementedException"></exception>
         void FindPatient_SelectedPatientChanged(object sender, CommandEventArgs e)
         {
-            List<KeyValuePair<string, Object>> param = e.CommandArgument as List<KeyValuePair<string, Object>>;
+            List<KeyValuePair<string, object>> param = e.CommandArgument as List<KeyValuePair<string, object>>;
             PatientId = (int)param.Find(l => l.Key == "PatientID").Value;
             LocationId = (int)param.Find(l => l.Key == "LocationID").Value;
 

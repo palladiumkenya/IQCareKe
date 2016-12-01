@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Entity;
-using System.Linq.Expressions;
+﻿using Application.Common;
 using Entities.Common;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
-using Application.Common;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Context
 {
     public abstract class Repository<TEntity> : MarshalByRefObject where TEntity : class
     {
         internal LabContext labContext;
+        internal DbSet<TEntity> dbSet;
         protected Repository()
         {
          
             labContext = new LabContext();
+            dbSet = labContext.Set<TEntity>();
         }
         /// <summary>
         /// Closes the decrypted session.
@@ -46,11 +47,19 @@ namespace DataAccess.Context
         /// Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public void Delete(object id)
+        public virtual void Delete(object id)
         {
             var entityToDelete = labContext.Set<TEntity>().Find(id);
             labContext.Set<TEntity>().Remove(entityToDelete);
             labContext.SaveChanges();
+        }
+        public virtual void Delete(TEntity entityToDelete)
+        {
+            if(labContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+                dbSet.Remove(entityToDelete);
+            }
         }
         public virtual IQueryable<TEntity> Filter(Expression<Func<TEntity, bool>> filter)
         {
@@ -97,6 +106,7 @@ namespace DataAccess.Context
             labContext.Database.Log = Console.Write;
         }
         public abstract List<TEntity> GetAllFilterd(IFilter filter);
+        
         
     }
 }
