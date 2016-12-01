@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <label class="control-label" for="txtDeleteReason">You are about to delete a lab order. Provide a reason for this deletion.</label>
-                                        <asp:TextBox ID="txtDeleteReason" runat="server" AutoCompleteType="None" CssClass="form-control textarea" MaxLength="250" placeholder="Why do you want to delete this" ValidationGroup="del"></asp:TextBox>
+                                        <asp:TextBox ID="txtDeleteReason" runat="server" autocomplete="off" AutoCompleteType="None" CssClass="form-control textarea" MaxLength="250" placeholder="Why do you want to delete this" ValidationGroup="del"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ID="rfvReason" ControlToValidate="txtDeleteReason" Display="Dynamic" ErrorMessage="*" ValidationGroup="del"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="modal-footer">
