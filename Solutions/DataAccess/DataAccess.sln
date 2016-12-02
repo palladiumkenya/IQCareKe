@@ -63,35 +63,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\DataAccess\\Interface.IQToolsReport\\Interface.IQToolsReport.csproj
-		SccProjectName1 = ../../DataAccess/Interface.IQToolsReport
-		SccLocalPath1 = ..\\..\\DataAccess\\Interface.IQToolsReport
-		SccProjectUniqueName2 = ..\\..\\DataAccess\\RemServer\\RemServer.csproj
-		SccProjectName2 = ../../DataAccess/RemServer
-		SccLocalPath2 = ..\\..\\DataAccess\\RemServer
-		SccProjectUniqueName3 = ..\\..\\DataAccess\\DataAccess.Common\\DataAccess.Common.csproj
-		SccProjectName3 = ../../DataAccess/DataAccess.Common
-		SccLocalPath3 = ..\\..\\DataAccess\\DataAccess.Common
-		SccProjectUniqueName4 = ..\\..\\DataAccess\\DataAccess.Base\\DataAccess.Base.csproj
-		SccProjectName4 = ../../DataAccess/DataAccess.Base
-		SccLocalPath4 = ..\\..\\DataAccess\\DataAccess.Base
-		SccProjectUniqueName5 = ..\\..\\DataAccess\\DataAccess.Report\\DataAccess.Report.csproj
-		SccProjectName5 = ../../DataAccess/DataAccess.Report
-		SccLocalPath5 = ..\\..\\DataAccess\\DataAccess.Report
-		SccProjectUniqueName6 = ..\\..\\DataAccess\\DataAccess.Entity\\DataAccess.Entity.csproj
-		SccProjectName6 = ../../DataAccess/DataAccess.Entity
-		SccLocalPath6 = ..\\..\\DataAccess\\DataAccess.Entity
-		SccProjectUniqueName7 = ..\\..\\DataAccess\\DataAccess.Pharmacy\\DataAccess.Pharmacy.csproj
-		SccProjectName7 = ../../DataAccess/DataAccess.Pharmacy
-		SccLocalPath7 = ..\\..\\DataAccess\\DataAccess.Pharmacy
-		SccProjectUniqueName8 = ..\\..\\DataAccess\\DataAccess.Context\\DataAccess.Context.csproj
-		SccProjectName8 = ../../DataAccess/DataAccess.Context
-		SccLocalPath8 = ..\\..\\DataAccess\\DataAccess.Context
-	EndGlobalSection
+	EndGlobalSection	
 EndGlobal
