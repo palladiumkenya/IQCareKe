@@ -4,7 +4,6 @@ using Interface.FormBuilder;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -76,43 +75,43 @@ namespace IQCare.FormBuilder
             this.pnlPanel.Controls.Add(this.btnSave);
             this.pnlPanel.Controls.Add(this.txtFormName);
             this.pnlPanel.Controls.Add(this.lblFormName);
-            this.pnlPanel.Location = new System.Drawing.Point(2, 3);
+            this.pnlPanel.Location = new Point(2, 3);
             this.pnlPanel.Name = "pnlPanel";
-            this.pnlPanel.Size = new System.Drawing.Size(965, 585);
+            this.pnlPanel.Size = new Size(965, 585);
             this.pnlPanel.TabIndex = 0;
             this.pnlPanel.Tag = "pnlPanel";
             // 
             // btnformbusinessrules
             // 
-            this.btnformbusinessrules.Location = new System.Drawing.Point(776, 0);
+            this.btnformbusinessrules.Location = new Point(776, 0);
             this.btnformbusinessrules.Name = "btnformbusinessrules";
-            this.btnformbusinessrules.Size = new System.Drawing.Size(163, 23);
+            this.btnformbusinessrules.Size = new Size(163, 23);
             this.btnformbusinessrules.TabIndex = 16;
             this.btnformbusinessrules.Text = "Form Business Rules";
             this.btnformbusinessrules.UseVisualStyleBackColor = true;
-            this.btnformbusinessrules.Click += new System.EventHandler(this.btnformbusinessrules_Click);
+            this.btnformbusinessrules.Click += new EventHandler(this.btnformbusinessrules_Click);
             // 
             // txtTabCaptionPlaceHolder
             // 
-            this.txtTabCaptionPlaceHolder.Location = new System.Drawing.Point(629, 442);
+            this.txtTabCaptionPlaceHolder.Location = new Point(629, 442);
             this.txtTabCaptionPlaceHolder.MaxLength = 50;
             this.txtTabCaptionPlaceHolder.Name = "txtTabCaptionPlaceHolder";
-            this.txtTabCaptionPlaceHolder.Size = new System.Drawing.Size(226, 20);
+            this.txtTabCaptionPlaceHolder.Size = new Size(226, 20);
             this.txtTabCaptionPlaceHolder.TabIndex = 15;
             this.txtTabCaptionPlaceHolder.Tag = "txtTextBox";
             this.txtTabCaptionPlaceHolder.Visible = false;
-            this.txtTabCaptionPlaceHolder.Leave += new System.EventHandler(this.txtTabCaptionPlaceHolder_Leave);
+            this.txtTabCaptionPlaceHolder.Leave += new EventHandler(this.txtTabCaptionPlaceHolder_Leave);
             // 
             // btnManageTab
             // 
-            this.btnManageTab.Location = new System.Drawing.Point(269, 551);
+            this.btnManageTab.Location = new Point(269, 551);
             this.btnManageTab.Name = "btnManageTab";
-            this.btnManageTab.Size = new System.Drawing.Size(106, 26);
+            this.btnManageTab.Size = new Size(106, 26);
             this.btnManageTab.TabIndex = 14;
             this.btnManageTab.Tag = "btnH25WFlexi";
             this.btnManageTab.Text = "Manage &Tabs";
             this.btnManageTab.UseVisualStyleBackColor = true;
-            this.btnManageTab.Click += new System.EventHandler(this.btnManageTab_Click);
+            this.btnManageTab.Click += new EventHandler(this.btnManageTab_Click);
             // 
             // btnAddTab
             // 
@@ -373,27 +372,27 @@ namespace IQCare.FormBuilder
         /// <summary>
         /// The img list
         /// </summary>
-        private Image imgList = Image.FromFile(frmFormBuilder.strGetPath + "\\List.bmp");
+        private Image imgList = Image.FromFile(strGetPath + "\\List.bmp");
         /// <summary>
         /// The img disabled list
         /// </summary>
-        private Image imgDisabledList = Image.FromFile(frmFormBuilder.strGetPath + "\\listdesible.bmp");
+        private Image imgDisabledList = Image.FromFile(strGetPath + "\\listdesible.bmp");
         /// <summary>
         /// The img business rule
         /// </summary>
-        private Image imgBusinessRule = Image.FromFile(frmFormBuilder.strGetPath + "\\brule.bmp");
+        private Image imgBusinessRule = Image.FromFile(strGetPath + "\\brule.bmp");
         /// <summary>
         /// The img inactive br
         /// </summary>
-        private Image imgInactiveBR = Image.FromFile(frmFormBuilder.strGetPath + "\\nonactive.bmp");
+        private Image imgInactiveBR = Image.FromFile(strGetPath + "\\nonactive.bmp");
         /// <summary>
         /// The img button up
         /// </summary>
-        private Image imgButtonUp = Image.FromFile(frmFormBuilder.strGetPath + "\\btnUp.Image.gif");
+        private Image imgButtonUp = Image.FromFile(strGetPath + "\\btnUp.Image.gif");
         /// <summary>
         /// The img button down
         /// </summary>
-        private Image imgButtonDown = Image.FromFile(frmFormBuilder.strGetPath + "\\btnDown.Image.gif");
+        private Image imgButtonDown = Image.FromFile(strGetPath + "\\btnDown.Image.gif");
         /// <summary>
         /// The i panel left
         /// </summary>
@@ -623,7 +622,7 @@ namespace IQCare.FormBuilder
             }
             GblIQCare.blncontrolunabledesable = !(this.dsUpdateMode.Tables[5].Rows[0]["Signature"].ToString() == "1");
             dataSet2.Dispose();
-            dataSet1 = (DataSet)null;
+            dataSet1 = null;
         }
 
         /// <summary>
@@ -671,8 +670,8 @@ namespace IQCare.FormBuilder
             userCtrlFormBuilder.propMultipleVisit = GblIQCare.blnMultivisit;
             userCtrlFormBuilder.dsFieldDetails = this.dsFieldDetails;
             userCtrlFormBuilder.Tag = (object)"pnlSubPanel";
-            this.theStyle.setStyle((Control)userCtrlFormBuilder);
-            this.tabFormBuilder.TabPages[frmFormBuilder.tabID].Controls.Add((Control)userCtrlFormBuilder);
+            this.theStyle.setStyle(userCtrlFormBuilder);
+            this.tabFormBuilder.TabPages[frmFormBuilder.tabID].Controls.Add(userCtrlFormBuilder);
             ++frmFormBuilder.tabID;
             return userCtrlFormBuilder;
         }
@@ -758,7 +757,7 @@ namespace IQCare.FormBuilder
                 Columns = {
           new DataColumn()
           {
-            DataType = System.Type.GetType("System.Int32"),
+            DataType = Type.GetType("System.Int32"),
             ColumnName = "TabID"
           },
           new DataColumn()
@@ -768,7 +767,7 @@ namespace IQCare.FormBuilder
           },
           new DataColumn()
           {
-            DataType = System.Type.GetType("System.Int32"),
+            DataType = Type.GetType("System.Int32"),
             ColumnName = "FeatureID"
           },
           new DataColumn()

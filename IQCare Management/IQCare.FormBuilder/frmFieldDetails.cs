@@ -242,11 +242,11 @@ namespace IQCare.FormBuilder
             DataTable dt = new DataTable();
 
             DataColumn ControlID = new DataColumn("ControlID");
-            ControlID.DataType = System.Type.GetType("System.Int32");
+            ControlID.DataType = Type.GetType("System.Int32");
             dt.Columns.Add(ControlID);
 
             DataColumn Name = new DataColumn("Name");
-            Name.DataType = System.Type.GetType("System.String");
+            Name.DataType = Type.GetType("System.String");
             dt.Columns.Add(Name);
 
             DataRow DRSelect;
@@ -297,7 +297,7 @@ namespace IQCare.FormBuilder
             theDVNew.RowFilter = string.Format("ControlId <> 13 and ControlId <> 18");
             IQCareUtils theUtils = new IQCareUtils();
             DataTable DT = new DataTable();
-            DT = (DataTable)theUtils.CreateTableFromDataView(theDVNew);
+            DT = theUtils.CreateTableFromDataView(theDVNew);
             //DisplayType.DataSource = BindSelect(ds.Tables[3]);
             DisplayType.DataSource = BindSelect(DT);
             //
@@ -609,12 +609,12 @@ namespace IQCare.FormBuilder
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        public void BindBusinessRulesTable(Int32 index, Int32 FieldID, string thePredefined)
+        public void BindBusinessRulesTable(int index, int fieldId, string thePredefined)
         {
             GblIQCare.dtBusinessValues.Clear();
             GblIQCare.dtBusinessValues.Columns.Clear();
             GblIQCare.dtBusinessValues.Rows.Clear();
-            if (FieldID != 0)
+            if (fieldId != 0)
             {
                 //  IFieldDetail objFieldDetail;
                 // objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
@@ -624,9 +624,9 @@ namespace IQCare.FormBuilder
 
                     dv = mainDataset.Tables[4].DefaultView;
                     if (thePredefined == "P")
-                        dv.RowFilter = "FieldID='" + FieldID + "' and Predefined =1";
+                        dv.RowFilter = "FieldID='" + fieldId + "' and Predefined =1";
                     else
-                        dv.RowFilter = "FieldID='" + FieldID + "' and Predefined =0";
+                        dv.RowFilter = "FieldID='" + fieldId + "' and Predefined =0";
                     DataView DvFilter = new DataView();
                     DataTable dt = new DataTable();
                     dt = dv.ToTable();
@@ -635,13 +635,13 @@ namespace IQCare.FormBuilder
                         if (dt.Rows.Count > 0)
                         {
                             GblIQCare.dtBusinessValues = dt;
-                            if (!(GblIQCare.objhashBusinessRule.ContainsKey(FieldID)))
+                            if (!(GblIQCare.objhashBusinessRule.ContainsKey(fieldId)))
                             {
-                                GblIQCare.objhashBusinessRule.Add(FieldID, dt);
+                                GblIQCare.objhashBusinessRule.Add(fieldId, dt);
                             }
                             else
                             {
-                                GblIQCare.objhashBusinessRule[FieldID] = dt;
+                                GblIQCare.objhashBusinessRule[fieldId] = dt;
                             }
                         }
                     }
@@ -1056,9 +1056,9 @@ namespace IQCare.FormBuilder
 
         }
 
-        public Boolean findICD10List(int fieldid)
+        public bool findICD10List(int fieldid)
         {
-            Boolean icd10 = false;
+            bool icd10 = false;
 
             IFieldDetail objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
             DataSet theDSTV = objFieldDetail.GetICD10Values(fieldid);
@@ -1216,28 +1216,21 @@ namespace IQCare.FormBuilder
         /// <returns></returns>
         string GetControlID(string Controltext)
         {
-            string controlID = string.Empty;
-
-            if (controlID == "")
-            {
-                controlID = "0";
-
-
-            }
+            string controlId = "0";
             foreach (DataRow r in mainDataset.Tables[3].Rows)
             {
                 if (r["Name"].ToString() == Controltext)
                 {
-                    controlID = r["ControlId"].ToString();
+                    controlId = r["ControlId"].ToString();
                 }
                 else if (r["ControlId"].ToString() == Controltext)
                 {
-                    controlID = r["ControlId"].ToString();
+                    controlId = r["ControlId"].ToString();
                 }
 
 
             }
-            return controlID;
+            return controlId;
         }
         /// <summary>
         /// This function is used to get control name
@@ -1646,7 +1639,7 @@ namespace IQCare.FormBuilder
         /// <param name="e"></param>
         private void btnsave_Click(object sender, EventArgs e)
         {
-            Boolean blnSave = true;
+            bool blnSave = true;
             GblIQCare.strRetainSelectList = "";
             GblIQCare.strRetainSelectField = "";
             GblIQCare.dtTempValue.Clear();
@@ -1657,7 +1650,7 @@ namespace IQCare.FormBuilder
             {
                 IFieldDetail objFieldDetail;
                 objFieldDetail = (IFieldDetail)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BFieldDetails,BusinessProcess.FormBuilder");
-                Int32 str = Convert.ToInt32(r.Cells["ID"].Value);
+                int str = Convert.ToInt32(r.Cells["ID"].Value);
                 string strfieldName = Convert.ToString(r.Cells["Field Name"].Value);
                 string strControlType = Convert.ToString(r.Cells["Display Type"].Value);
                 string strPredefineStatus = Convert.ToString(r.Cells["Predefined"].Value);
@@ -1666,7 +1659,7 @@ namespace IQCare.FormBuilder
                     if (r.Cells[0].Value != null)
                     {
                         string strListValue = "";
-                        Int32 id = Convert.ToInt32(r.Cells["ID"].Value);
+                        int id = Convert.ToInt32(r.Cells["ID"].Value);
                         string predefine = Convert.ToString(r.Cells["Predefined"].Value);
                         string strname = r.Cells["Field Name"].Value.ToString();
                         DataTable dtBusinessRule = new DataTable();
@@ -1754,7 +1747,7 @@ namespace IQCare.FormBuilder
                             if (r.Cells[0].Value != null)
                             {
                                 string strListValue = "";
-                                Int32 id = Convert.ToInt32(r.Cells[9].Value);
+                                int id = Convert.ToInt32(r.Cells[9].Value);
                                 string strname = Convert.ToString(r.Cells[0].Value);
                                 string strcontrolid = GetControlID(r.Cells[1].Value.ToString());
 
@@ -2123,7 +2116,7 @@ namespace IQCare.FormBuilder
                 {
                     cb.DropDownStyle = ComboBoxStyle.DropDown;
                     cb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                    cb.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+                    cb.AutoCompleteMode = AutoCompleteMode.Suggest;
                     cb.SelectedIndexChanged -= new EventHandler(cb_SelectedIndexChanged);
                     cb.SelectedIndexChanged += new EventHandler(cb_SelectedIndexChanged);
                 }
@@ -2203,7 +2196,7 @@ namespace IQCare.FormBuilder
         private void cmbTechArea_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cmbTechArea.SelectedValue.GetType().ToString() == "System.Data.DataRowView")
-                BindGrid(txtfieldName.Text, Convert.ToInt32(((System.Data.DataRowView)(cmbTechArea.SelectedValue)).Row.ItemArray[0]));
+                BindGrid(txtfieldName.Text, Convert.ToInt32(((DataRowView)(cmbTechArea.SelectedValue)).Row.ItemArray[0]));
             else
                 BindGrid(txtfieldName.Text, Convert.ToInt32(cmbTechArea.SelectedValue));
 
