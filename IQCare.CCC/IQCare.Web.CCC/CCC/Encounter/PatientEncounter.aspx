@@ -32,10 +32,10 @@
 
                     
                       <div  role="tabpanel" class="tab-pane fade" id="encounter">
-                         <div class="row">
+                         
                              <div class="col-md-12"><h5 class="pull-left"><i class="fa fa-crosshairs fa-2x" aria-hidden="true"> Patient Encounter </i></h5></div>
                              <div class="col-md-12">
-                                 <div class="wizard" data-initialize="wizard" id="myWizard">
+                                 <div class="wizard" data-initialize="wizard"  id="ptnEncounter">
                                     <div class="steps-container">
 	                                    <ul class="steps">
 		                                   
@@ -999,11 +999,12 @@
 
  
                                         </div><%-- .data-step-4--%>
+
                                  </div><%-- .wizard--%>
                              </div> <%--.col-md-12--%>
                          </div>
+                      
                       </div><!-- .encounter-->
-                    </div>
                       <div  role="tabpanel"     class="tab-pane fade"      id="vlTracker">...</div><!-- .viraload tracker-->
                       <div  role="tabpanel"     class="tab-pane fade"      id="Laboratory">...</div><!-- .laboratory-->
                       <div  role="tabpanel"     class="tab-pane fade"      id="Pharmacy">...</div><!-- .pharmacy-->
@@ -1020,7 +1021,7 @@
             $('#EDCD').datepicker();
             $('#AntigenDate').datepicker();
             $('#NextAppDate').datepicker();
-            $('#myWizard').wizard();
+            $('#ptnEncounter').wizard();
         });
 
     </script>

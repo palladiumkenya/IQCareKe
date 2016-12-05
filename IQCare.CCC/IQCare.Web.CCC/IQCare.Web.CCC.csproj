@@ -61,6 +61,12 @@
     <Content Include="Content\css\parsley.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fuelux\css\fuelux.css" />
+    <Content Include="Content\fuelux\css\fuelux.min.css" />
+    <Content Include="Content\fuelux\fonts\fuelux.svg" />
+    <Content Include="Content\fuelux\js\fuelux.js" />
+    <Content Include="Content\fuelux\js\fuelux.min.js" />
+    <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\img\iqSolutions.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\moment.js" />
@@ -86,6 +92,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="MasterPage\GreenCard.Master" />
+    <Content Include="Content\fuelux\css\fuelux.css.map" />
+    <Content Include="Content\fuelux\fonts\fuelux.eot" />
+    <Content Include="Content\fuelux\fonts\fuelux.ttf" />
+    <Content Include="Content\fuelux\fonts\fuelux.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
