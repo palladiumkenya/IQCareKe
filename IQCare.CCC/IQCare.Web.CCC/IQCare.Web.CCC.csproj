@@ -48,9 +48,12 @@
   <ItemGroup>
     <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
+    <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
+    <Content Include="CCC\UC\ucPatientTriage.ascx" />
+    <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\daterangepicker.css" />
@@ -63,6 +66,7 @@
     <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\parsley.js" />
     <Content Include="CCC\Home.aspx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="MasterPage\levelOneNavigationUserControl.ascx" />
     <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
     <Content Include="MasterPage\Menu.css" />
@@ -111,6 +115,13 @@
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">
+      <DependentUpon>Baseline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\Baseline.aspx.designer.cs">
+      <DependentUpon>Baseline.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\OneTimeEvents\FamilyTesting.aspx.cs">
       <DependentUpon>FamilyTesting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,6 +142,27 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
       <DependentUpon>ucPatientDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriage.ascx.cs">
+      <DependentUpon>ucPatientTriage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriage.ascx.designer.cs">
+      <DependentUpon>ucPatientTriage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucVisitDetails.ascx.cs">
+      <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
+      <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

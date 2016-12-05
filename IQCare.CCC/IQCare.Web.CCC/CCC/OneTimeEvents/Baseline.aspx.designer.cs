@@ -7,243 +7,270 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Encounter {
+namespace IQCare.Web.CCC.OneTimeEvents {
     
     
-    public partial class PatientEncounter {
+    public partial class Baseline {
         
         /// <summary>
-        /// PatientSummary control.
+        /// lblTINA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        protected global::System.Web.UI.WebControls.Label lblTINA;
         
         /// <summary>
-        /// adverseEvent control.
+        /// lblTIDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText adverseEvent;
+        protected global::System.Web.UI.WebControls.Label lblTIDate;
         
         /// <summary>
-        /// medicineCauseingae control.
+        /// lblARTStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText medicineCauseingae;
+        protected global::System.Web.UI.WebControls.Label lblARTStartDate;
         
         /// <summary>
-        /// severity control.
+        /// lblRegimen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText severity;
+        protected global::System.Web.UI.WebControls.Label lblRegimen;
         
         /// <summary>
-        /// adverseAction control.
+        /// TIRegimen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText adverseAction;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText TIRegimen;
         
         /// <summary>
-        /// btnAdverseEventsAdd control.
+        /// lblfacility control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAdverseEventsAdd;
+        protected global::System.Web.UI.WebControls.Label lblfacility;
         
         /// <summary>
-        /// pregnancyStatus control.
+        /// lblmflcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect pregnancyStatus;
+        protected global::System.Web.UI.WebControls.Label lblmflcode;
         
         /// <summary>
-        /// AntigenToday control.
+        /// lblcounty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect AntigenToday;
+        protected global::System.Web.UI.WebControls.Label lblcounty;
         
         /// <summary>
-        /// antigenDuration control.
+        /// lblDateOfHIVDiagnosis control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect antigenDuration;
+        protected global::System.Web.UI.WebControls.Label lblDateOfHIVDiagnosis;
         
         /// <summary>
-        /// btnAmtigenAdd control.
+        /// lblDateOfEnrollment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAmtigenAdd;
+        protected global::System.Web.UI.WebControls.Label lblDateOfEnrollment;
         
         /// <summary>
-        /// ChronicIllness control.
+        /// lblwhostage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ChronicIllness;
+        protected global::System.Web.UI.WebControls.Label lblwhostage;
         
         /// <summary>
-        /// ChronicIllnessTreatment control.
+        /// lblDateOfARTInitiation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ChronicIllnessTreatment;
+        protected global::System.Web.UI.WebControls.Label lblDateOfARTInitiation;
         
         /// <summary>
-        /// ChronicIllnessDose control.
+        /// lblARTUse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ChronicIllnessDose;
+        protected global::System.Web.UI.WebControls.Label lblARTUse;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// AddPriorHistory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton AddPriorHistory;
         
         /// <summary>
-        /// examinationNotes control.
+        /// lblMUAC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea examinationNotes;
+        protected global::System.Web.UI.WebControls.Label lblMUAC;
         
         /// <summary>
-        /// Diagnosis control.
+        /// lblWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Diagnosis;
+        protected global::System.Web.UI.WebControls.Label lblWeight;
         
         /// <summary>
-        /// DiagnosisTreatment control.
+        /// lblheight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
+        protected global::System.Web.UI.WebControls.Label lblheight;
         
         /// <summary>
-        /// btnAddDiagnosis control.
+        /// lblBMI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddDiagnosis;
+        protected global::System.Web.UI.WebControls.Label lblBMI;
         
         /// <summary>
-        /// ReferredFor control.
+        /// lblDateStartedOn1stLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ReferredFor;
+        protected global::System.Web.UI.WebControls.Label lblDateStartedOn1stLine;
         
         /// <summary>
-        /// PrescribedBy control.
+        /// DateStartedOn1stLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect PrescribedBy;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText DateStartedOn1stLine;
         
         /// <summary>
-        /// RegimenLine control.
+        /// lblARTCohort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect RegimenLine;
+        protected global::System.Web.UI.WebControls.Label lblARTCohort;
         
         /// <summary>
-        /// substitution control.
+        /// ARTCohort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect substitution;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText ARTCohort;
         
         /// <summary>
-        /// Dose control.
+        /// lblBaselineViralLoad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Dose;
+        protected global::System.Web.UI.WebControls.Label lblBaselineViralLoad;
         
         /// <summary>
-        /// Frequency control.
+        /// BVL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Frequency;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText BVL;
         
         /// <summary>
-        /// Quantity control.
+        /// lblBaselineVLDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Quantity;
+        protected global::System.Web.UI.WebControls.Label lblBaselineVLDate;
         
         /// <summary>
-        /// Duration control.
+        /// BVLDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Duration;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText BVLDate;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }
