@@ -35,8 +35,8 @@
                          
                              <div class="col-md-12"><h5 class="pull-left"><i class="fa fa-crosshairs fa-2x" aria-hidden="true"> Patient Encounter </i></h5></div>
                              <div class="col-md-12">
-                                 <div class="wizard" data-initialize="wizard"  id="ptnEncounter">
-                                    <div class="steps-container">
+                                  <div class="wizard" data-initialize="wizard"  id="ptnEncounter">
+                                       <div class="steps-container">
 	                                    <ul class="steps">
 		                                   
                                             <li data-step="1" data-name="campaign">
@@ -53,17 +53,19 @@
 		                                    </li>
 	                                    </ul>
                                     </div>
-                                    <div class="actions">
+                                       
+                                       <div class="actions">
 	                                    <button type="button" class="btn btn-default btn-prev">
 		                                    <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
 	                                    <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
 		                                    <span class="glyphicon glyphicon-arrow-right"></span>
 	                                    </button>
                                     </div>
-                                    <div class="step-content">
+                                    
+                                      <div class="step-content">
 	                                    
 
-	                                    <div class="step-pane active sample-pane" data-step="1">
+	                                       <div class="step-pane active sample-pane" data-step="1">
 		                                    <div class="col-md-12"><small class="muted pull-left"><strong>Presenting Complaints </strong></small></div> <div class="col-md-12"><hr /> </div>  
 
                                             <div class="row">
@@ -610,7 +612,7 @@
 
 	                                    </div>
 	                                    
-                                        <div class="step-pane sample-pane" data-step="2">
+                                           <div class="step-pane sample-pane" data-step="2">
                                              <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Examination</strong></small></div> <div class="col-md-12"><hr /> </div>  
                                              <div class="row">
                                                  <div class="col-md-1">
@@ -663,7 +665,7 @@
                                              
 	                                    </div>
 
-                                        <div class="step-pane sample-pane" data-step="3">
+                                           <div class="step-pane sample-pane" data-step="3">
                                              <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT MANAGEMENT</strong></small></div> <div class="col-md-12"><hr /> </div>  
                                              <div class="row">
                                                   <div class="col-md-1">
@@ -673,47 +675,45 @@
                                                   <div class="col-md-11">
                                                   
                                                        <div class="col-md-4">
-                                                       <h1 class="col-md-12"><small class="pull-left">Positive Health,Dignity & Prevention (PHDP)</small></h1>
-                                                       <div class="col-md-12"><hr /></div>
+                                                           <h1 class="col-md-12"><small class="pull-left">Positive Health,Dignity & Prevention (PHDP)</small></h1>
+                                                           <div class="col-md-12"><hr /></div>
                                                             
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblAdc">
-                                                                         <input class="sr-only" type="checkbox" id="adc" value="option1"> <span class="checkbox-label"><strong> Adherance Counselling (Adc) </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblAdc">
+                                                                             <input class="sr-only" type="checkbox" id="adc" value="option1"> <span class="checkbox-label"><strong> Adherance Counselling (Adc) </strong></span>
+                                                                         </label>
+                                                                </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblcondom">
-                                                                         <input class="sr-only" type="checkbox" id="CondonUse" value="option1"> <span class="checkbox-label"><strong> Condom Distribution (CD) </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblcondom">
+                                                                             <input class="sr-only" type="checkbox" id="CondonUse" value="option1"> <span class="checkbox-label"><strong> Condom Distribution (CD) </strong></span>
+                                                                         </label>
+                                                                </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblsubstanceAbuse">
-                                                                         <input class="sr-only" type="checkbox" id="SubstanceAbuse" value="option1"> <span class="checkbox-label"><strong> Substance Abuse (SA) </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblsubstanceAbuse">
+                                                                             <input class="sr-only" type="checkbox" id="SubstanceAbuse" value="option1"> <span class="checkbox-label"><strong> Substance Abuse (SA) </strong></span>
+                                                                         </label>
+                                                                </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lbldsp">
-                                                                         <input class="sr-only" type="checkbox" id="DisclosureToSexPartner" value="option1"> <span class="checkbox-label"><strong> Disclosure to Sex Partner (Disc) </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lbldsp">
+                                                                             <input class="sr-only" type="checkbox" id="DisclosureToSexPartner" value="option1"> <span class="checkbox-label"><strong> Disclosure to Sex Partner (Disc) </strong></span>
+                                                                         </label>
+                                                                </div>
 
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPartnerTesting">
-                                                                         <input class="sr-only" type="checkbox" id="Partner Testing" value="option1"> <span class="checkbox-label"><strong> Partner Testing (PT) </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPartnerTesting">
+                                                                             <input class="sr-only" type="checkbox" id="Partner Testing" value="option1"> <span class="checkbox-label"><strong> Partner Testing (PT) </strong></span>
+                                                                         </label>
+                                                                </div>
 
-                                                             <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblstiscreening">
-                                                                         <input class="sr-only" type="checkbox" id="STIScreening" value="option1"> <span class="checkbox-label"><strong> STI Screening (STI)</strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                             
-                                                  </div>
+                                                                <div class="form-group col-md-12">
+                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblstiscreening">
+                                                                             <input class="sr-only" type="checkbox" id="STIScreening" value="option1"> <span class="checkbox-label"><strong> STI Screening (STI)</strong></span>
+                                                                         </label>
+                                                                 </div>
+                                                       </div>
 
                                                        <div class="col-md-8">
                                                             
@@ -750,7 +750,7 @@
                                                                       </div>
                                                                  </div> 
                                                             </div>
-                                                 </div>
+                                                       </div>
                                                    
                                                   </div><%-- .col-md-11--%>
                                                     
@@ -998,11 +998,11 @@
                                             </div> <%--.row--%>
 
  
-                                        </div><%-- .data-step-4--%>
-
-                                 </div><%-- .wizard--%>
-                             </div> <%--.col-md-12--%>
-                         </div>
+                                        </div><%-- .data-step-3--%>
+                                     
+                                      </div><%-- .step-content--%>
+                               </div> <%-- .wizard--%>
+                             </div><%--.col-md-12--%>
                       
                       </div><!-- .encounter-->
                       <div  role="tabpanel"     class="tab-pane fade"      id="vlTracker">...</div><!-- .viraload tracker-->
@@ -1013,6 +1013,7 @@
             </div><!-- .col-md-12 -->
         </div><!-- .row -->
     </div><!-- .container-fluid -->
+
     <script type="text/javascript">
         $(document).ready(function () {
 
