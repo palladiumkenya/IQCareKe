@@ -51,6 +51,7 @@
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
+    <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
@@ -65,7 +66,7 @@
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\moment.js" />
     <Content Include="Content\js\parsley.js" />
-    <Content Include="CCC\Home.aspx" />
+    <Content Include="CCC\Patient\Home.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="MasterPage\levelOneNavigationUserControl.ascx" />
     <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
@@ -108,11 +109,18 @@
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Home.aspx.cs">
+    <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\ServiceArea.aspx.designer.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Home.aspx.designer.cs">
+    <Compile Include="CCC\Patient\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">
@@ -166,7 +174,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Config.Core\Config.Core.csproj">
+      <Project>{646960b7-1498-434c-b385-da1c344b9919}</Project>
+      <Name>Config.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Config.Data\Config.Data.csproj">
+      <Project>{fbe1355f-e166-4505-a6d7-f9d7bba35d36}</Project>
+      <Name>Config.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
