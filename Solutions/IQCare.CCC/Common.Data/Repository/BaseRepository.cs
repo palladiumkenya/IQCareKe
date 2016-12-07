@@ -5,15 +5,19 @@ using Common.Core.Model;
 
 namespace Common.Data.Repository
 {
-    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
-        internal readonly BaseContext Context;
+        protected internal BaseContext Context;
         internal IDbSet<T> Dbset;
 
-        public BaseRepository(BaseContext context)
+        public BaseRepository()
+        {
+            Dbset = Context.Set<T>();
+        }
+
+        public BaseRepository(BaseContext context):this()
         {
             Context = context;
-            Dbset = Context.Set<T>();
         }
 
         public virtual T GetById(int id)
