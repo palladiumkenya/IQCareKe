@@ -6,7 +6,7 @@ namespace Config.Data
 {
     public class ConfigContext:BaseContext
     {
-        public ConfigContext()
+        public ConfigContext():base()
         {
         }
 

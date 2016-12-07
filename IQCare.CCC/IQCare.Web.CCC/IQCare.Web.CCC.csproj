@@ -175,6 +175,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Common.Core\Common.Core.csproj">
+      <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
+      <Name>Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Common.Data\Common.Data.csproj">
+      <Project>{1CAA9075-C252-468D-AE8C-C692BA8BEED9}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Solutions\IQCare.CCC\Config.Core\Config.Core.csproj">
       <Project>{646960b7-1498-434c-b385-da1c344b9919}</Project>
       <Name>Config.Core</Name>

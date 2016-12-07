@@ -8,6 +8,7 @@ using Config.Data;
 using Config.Core;
 using Config.Core.Interfaces;
 using Config.Data.Repository;
+using Config.Core.Model;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -15,12 +16,17 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            IServiceAreaRepository SArea=new ServiceAreaRepository(context)
+            IServiceAreaRepository SArea = new ServiceAreaRepository();
+            List<ServiceArea> ServiceList = SArea.GetAll().ToList();
+            DropDownList1.DataSource = ServiceList;
+            DropDownList1.DataTextField = "DisplayName";
+            DropDownList1.DataValueField = "Id";
+            DropDownList1.DataBind();
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
