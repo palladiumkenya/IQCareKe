@@ -37,22 +37,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\IQCare.CCC\\IQCare.Web.CCC\\IQCare.Web.CCC.csproj
-		SccProjectName1 = ../../IQCare.CCC/IQCare.Web.CCC
-		SccLocalPath1 = ..\\..\\IQCare.CCC\\IQCare.Web.CCC
-		SccProjectUniqueName2 = ..\\..\\IQCare.CCC\\Entities.CCC\\Entities.CCC.csproj
-		SccProjectName2 = ../../IQCare.CCC/Entities.CCC
-		SccLocalPath2 = ..\\..\\IQCare.CCC\\Entities.CCC
-		SccProjectUniqueName3 = ..\\..\\IQCare.CCC\\Interface.CCC\\Interface.CCC.csproj
-		SccProjectName3 = ../../IQCare.CCC/Interface.CCC
-		SccLocalPath3 = ..\\..\\IQCare.CCC\\Interface.CCC
-		SccProjectUniqueName4 = ..\\..\\IQCare.CCC\\DataAccess.CCC\\DataAccess.CCC.csproj
-		SccProjectName4 = ../../IQCare.CCC/DataAccess.CCC
-		SccLocalPath4 = ..\\..\\IQCare.CCC\\DataAccess.CCC
-	EndGlobalSection
 EndGlobal

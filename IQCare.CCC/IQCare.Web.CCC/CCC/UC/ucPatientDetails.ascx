@@ -1,9 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientDetails.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucTriage" %>
 
-
-    <div class="row">
-
-        <div class="col-md-12 jumbotron">
+        <div class="col-md-12 well well-sm" style="padding-bottom:2%">
              <div class="col-md-12">
                   <small class="pull-left text-primary">Patient Detail(s)</small>
             </div>
@@ -36,36 +33,8 @@
                         <div class="col-md-2"><small class="text-success"><i>population type</i></small></div>
                         <div class="col-md-2"><small class="text-success"><i>Patient Status</i></small></div>
                     </div>
-
-                    <div class="col-md-12 form-group" style="padding-top:3%">
-                                       
-                        <div class="col-md-2">
-                              Pending Labs <span class="badge">42</span>
-                        </div>
-                        <div class="col-md-2">
-                             Pharmacy <span class="badge">42</span>
-                        </div>
-                        <div class="col-md-2">
-                             Missed Appts <span class="badge">42</span> 
-                        </div>
-                        <div class="col-md-2">
-                            Met Appts <span class="badge">42</span>
-                        </div>
-                        <div class="col-md-4 label label-info">
-                            <small><i class="fa fa-arrow-circle-o-right fa-2x" aria-hidden="true"> SERVICE AREA : <label class="" runat="server" id="lblServiceArea"></label></i></small>
-                        </div>
-                        
-                    
-                </div>
-
-
-                </div>
-
-                
-            </div>
-
-            
-            
+                </div><%-- .col-md-10--%>
+            </div><%--.col-md-12--%>
         </div>
-    </div>
+
 
