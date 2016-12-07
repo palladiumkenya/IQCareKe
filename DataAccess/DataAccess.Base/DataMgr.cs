@@ -81,13 +81,23 @@ namespace DataAccess.Base
             }
             return connection;
         }
+        /// <summary>
+        /// Gets the connection for ORM use.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetOrmConnectionString()
+        {
+            Utility objUtil = new Utility();
+            string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
+            return constr;
+        }
 
         /// <summary>
         /// Gets the connection string.
         /// </summary>
         /// <param name="connectionMode">The connection mode.</param>
         /// <returns></returns>
-         static string GetConnectionString(ConnectionMode connectionMode)
+        static string GetConnectionString(ConnectionMode connectionMode)
         {
             Utility objUtil = new Utility();
             string key = "ConnectionString";
