@@ -9,14 +9,32 @@ End
 Go
 Update AppAdmin Set VersionName= 'Kenya HMIS'
 Go
-  Alter table dbo.AppAdmin Alter Column VersionName  varchar(50) Not Null
-  Go
-  Alter table dbo.AppAdmin Alter Column AppVer  varchar(50) Not Null
-  Go
-  Alter table dbo.AppAdmin Alter Column DBVer  varchar(50) Not Null
-  Go
-  Alter table dbo.AppAdmin Alter Column RelDate  datetime Not Null
-  Go
+Alter table dbo.AppAdmin Alter Column VersionName  varchar(50) Not Null
+Go
+Alter table dbo.AppAdmin Alter Column AppVer  varchar(50) Not Null
+Go
+Alter table dbo.AppAdmin Alter Column DBVer  varchar(50) Not Null
+Go
+Alter table dbo.AppAdmin Alter Column RelDate  datetime Not Null
+Go
+Alter table dtl_LabOrderTestResult drop column HasResult
+Go
+Alter table dtl_LabOrderTestResult alter column ResultValue [decimal](18,2)
+Go
+Alter table dtl_LabOrderTestResult alter column DetectionLimit [decimal](18,2)
+Go
+Alter table dtl_LabTestParameterConfig alter column [MinBoundary] [decimal](18, 2) NULL
+Go
+Alter table dtl_LabTestParameterConfig alter column [MaxBoundary] [decimal](18, 2) NULL
+Go
+Alter table dtl_LabTestParameterConfig alter column[MinNormalRange] [decimal](18, 2) NULL
+Go
+Alter table dtl_LabTestParameterConfig alter column [MaxNormalRange] [decimal](18, 2) NULL
+Go	
+Alter table dtl_LabTestParameterConfig alter column [DetectionLimit] [decimal](18, 2) NULL
+Go
+Alter table dtl_LabOrderTestResult add  [HasResult]  AS (CONVERT([bit],case when [resultvalue] IS NULL AND [resulttext] IS NULL AND [resultoption] IS NULL then (0) else (1) end,(0)))
+Go
 --Migrate the ART History filled in district from int to text
 If not Exists (Select * From sys.columns Where Name = N'FromDistrict' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE') And system_type_id=TYPE_ID('varchar'))    
 Begin
@@ -71,7 +89,6 @@ Begin
 	EXEC sp_RENAME '[dbo].[dtl_PatientHivPrevCareIE].[ARTTransferInFrom2]' , 'ARTTransferInFrom', 'COLUMN'
 	End
 	GO
-
 
 
 If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'dtl_PatientPharmacyOrder'))    

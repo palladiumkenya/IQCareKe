@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="True"
     Inherits="IQCare.Web.Clinical.CustomForm_v2" Title="Untitled Page" MaintainScrollPositionOnPostback="true"
     EnableEventValidation="false" CodeBehind="CustomForm.aspx.cs" %>
- <%@ Register assembly="IQCare.IQControl" namespace="IQCare.IQControl" tagprefix="iq" %>
+
+<%@ Register Assembly="IQCare.IQControl" Namespace="IQCare.IQControl" TagPrefix="iq" %>
 <%@ MasterType VirtualPath="~/MasterPage/IQCare.master" %>
 <%@ Register Assembly="AjaxControlToolkit" TagPrefix="act" Namespace="AjaxControlToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="Server">
@@ -255,8 +256,8 @@
             function EnableValuechkbox(thechkboxId, theID, fieldId, confieldId) {
                 if (theID != "") {
                     if (document.getElementById(thechkboxId).checked == true && fieldId == confieldId) {
-                        document.getElementById(theID).disabled = false;  
-                       
+                        document.getElementById(theID).disabled = false;
+
                         PageMethods.removecontrolstatus(theID, OnControlSuccess, OnControlError);
                         var span = document.getElementById(theID).getElementsByTagName('span');
                         var inputchkbox = document.getElementById(theID).getElementsByTagName('input');
@@ -283,45 +284,45 @@
                 }
             }
 
-           /* function EnableValuechkbox(thechkboxId, theID, fieldId, confieldId,fieldName) {
-                if (theID != "") {                     
-                    //if (document.getElementById(thechkboxId).checked == true && fieldId == confieldId) {
-                    thechkboxId = "#" + thechkboxId;
-                    var div = "#" + fieldName;
-                    $(div).hide()
-                       if($(thechkboxId).is(':checked') && fieldId == confieldId)    {
-                           document.getElementById(theID).disabled = false;
-                           var div = "#" + fieldName;
-                           $(div).show();
-                        // document.getElementById(fieldName).setAttribute("display", "");
-
-                        
-                        PageMethods.removecontrolstatus(theID, OnControlSuccess, OnControlError);
-                        var span = document.getElementById(theID).getElementsByTagName('span');
-                        var inputchkbox = document.getElementById(theID).getElementsByTagName('input');
-                        for (var i = 0; i < span.length; i++) {
-                            span[i].disabled = false;
-                        }
-
-                        for (var i = 0; i < inputchkbox.length; i++) {
-                            if (inputchkbox[i].type.toString().toLowerCase() == "checkbox") {
-                                document.getElementById(inputchkbox[i].id).disabled = false;
-                            }
-                        }
-                    }
-                    if (document.getElementById(thechkboxId).checked == false && fieldId == confieldId) {
-                        if (theID.indexOf("TXT") != -1) {
-                            document.getElementById(theID).value = '';
-                        }
-                        if (theID.indexOf("SELECTLIST") != -1) {
-                            document.getElementById(theID).selectedIndex = 0;
-                        }
-                        document.getElementById(theID).disabled = true;
-
-                    }
-                }
-            }
-             */
+            /* function EnableValuechkbox(thechkboxId, theID, fieldId, confieldId,fieldName) {
+                 if (theID != "") {                     
+                     //if (document.getElementById(thechkboxId).checked == true && fieldId == confieldId) {
+                     thechkboxId = "#" + thechkboxId;
+                     var div = "#" + fieldName;
+                     $(div).hide()
+                        if($(thechkboxId).is(':checked') && fieldId == confieldId)    {
+                            document.getElementById(theID).disabled = false;
+                            var div = "#" + fieldName;
+                            $(div).show();
+                         // document.getElementById(fieldName).setAttribute("display", "");
+ 
+                         
+                         PageMethods.removecontrolstatus(theID, OnControlSuccess, OnControlError);
+                         var span = document.getElementById(theID).getElementsByTagName('span');
+                         var inputchkbox = document.getElementById(theID).getElementsByTagName('input');
+                         for (var i = 0; i < span.length; i++) {
+                             span[i].disabled = false;
+                         }
+ 
+                         for (var i = 0; i < inputchkbox.length; i++) {
+                             if (inputchkbox[i].type.toString().toLowerCase() == "checkbox") {
+                                 document.getElementById(inputchkbox[i].id).disabled = false;
+                             }
+                         }
+                     }
+                     if (document.getElementById(thechkboxId).checked == false && fieldId == confieldId) {
+                         if (theID.indexOf("TXT") != -1) {
+                             document.getElementById(theID).value = '';
+                         }
+                         if (theID.indexOf("SELECTLIST") != -1) {
+                             document.getElementById(theID).selectedIndex = 0;
+                         }
+                         document.getElementById(theID).disabled = true;
+ 
+                     }
+                 }
+             }
+              */
 
 
 
@@ -569,72 +570,119 @@
                 }
             }
         </script>
-         <div id="DIVCustomForm" runat="server">
-            <h1 class="margin" id="formDescription" runat="server" visible="false">
-            </h1>
-            <asp:Label runat="server" Visible="false" ID="lblFeatureName"></asp:Label>
-            <div id="DivVisitDate" class="border center formbg" runat="server">
-                <table id="tbl1" cellspacing="6" cellpadding="0" width="100%" border="0" runat="server">
-                    <tbody>
+        <div class="row">
+            <div class="col-md-3">
+                <h1 class="margin" id="formDescription" runat="server" visible="false"></h1>
+                <asp:Label runat="server" Visible="false" ID="lblFeatureName"></asp:Label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-4" style="vertical-align: middle">
+                        <label class="required pull-right control-label" for="VisitDate" id="Label1" style="vertical-align: middle" runat="server">Visit Date:</label>
+                        <%--<asp:Label ID="Label1" runat="server" Text="Visit Date:" CssClass="required pull-right control-label"></asp:Label>--%>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <asp:TextBox ID="txtvisitDate" class="form-control" MaxLength="11" name="txtvisitDate"
+                                runat="server" />
+                            <span class="input-group-addon">
+                                <img id="appDateimg1" onclick="w_displayDatePicker('<%=txtvisitDate.ClientID%>');"
+                                    height="22" alt="Date Helper" src="../images/cal_icon.gif" width="22"
+                                    border="0" />
+                                <span class="smallerlabel" id="appDatespan1">(DD-MMM-YYYY)</span> </span>
+                        </div>
+                    </div>
+                </div>
+                <asp:HiddenField ID="hdnVisitData" runat="server" />
+                <asp:HiddenField ID="hdnWeight" runat="server" />
+                <asp:HiddenField ID="hdnHeight" runat="server" />
+                <asp:HiddenField ID="hdnBNI" runat="server" />
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div id="DIVCustomForm" runat="server">
+
+            <%--     <div id="DivVisitDate" class="border center formbg" runat="server">--%>
+            <%--  <table id="tbl1" cellspacing="6" cellpadding="0" width="100%" border="0" runat="server">--%>
+
+            <%--  <tbody>
                         <tr>
-                            <td class="form" align="center" valign="top" colspan="2">
-                                <label class="required" for="VisitDate" id="lblvisitdate">
+                            <td class="form" align="center" valign="top" colspan="2">--%>
+            <%--<label class="required" for="VisitDate" id="lblvisitdate">
                                     <asp:Label ID="Label1" runat="server" Text="Visit Date:"></asp:Label>
                                 </label>
-                                <asp:TextBox ID="txtvisitDate" MaxLength="11" runat="server" Width="15%"></asp:TextBox>
+                                <asp:TextBox ID="txtvisitDate" MaxLength="11" runat="server" Width="15%" CssClass="form-control"></asp:TextBox>
                                 <img id="Img8" onclick="w_displayDatePicker('<%= txtvisitDate.ClientID %>');" height="22"
                                     alt="Date Helper" hspace="3" src="../images/cal_icon1.gif" width="22" border="0"
                                     style="vertical-align: middle;" />
-                                <span class="smallerlabel">(DD-MMM-YYYY)</span>
-                                <asp:HiddenField ID="hdnVisitData" runat="server" />
-                                <asp:HiddenField ID="hdnWeight" runat="server" />
-                                <asp:HiddenField ID="hdnHeight" runat="server" />
-                                <asp:HiddenField ID="hdnBNI" runat="server" />
-                            </td>
+                                <span class="smallerlabel">(DD-MMM-YYYY)</span>--%>
+
+
+            <%--   </td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
-            <br />
-            <asp:Panel class="border formbg" align="left" ID="PnlforTab" runat="server" Width="100%">
+                </table>--%>
+            <%--  </div>--%>
+            <div class="row">
                 <br />
-            </asp:Panel>
-            <br />
+            </div>
+            <div class="col-md-12">
+                <asp:Panel class="border formbg" align="left" ID="PnlforTab" runat="server" Width="100%">
+                    <br />
+                </asp:Panel>
+                <br />
+            </div>
             <div class="border center formbg">
-                <table cellspacing="6" cellpadding="0" width="100%">
-                    <tbody>
-                        <tr id="TrSignatureAll" runat="server" visible="false">
-                            <td class="form" align="center" valign="top" colspan="2">
-                                <label for="VisitDate">
-                                    Signature:</label>
-                                <asp:DropDownList ID="ddSignature" runat="server">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <asp:TextBox ID="txtSysDate" runat="server" CssClass="textstylehidden"></asp:TextBox>
-                            <td class="form" align="center" colspan="2">
-                                <asp:HiddenField ID="hdfldDOB" runat="server" />
-                                <asp:HiddenField ID="theHitCntrl" runat="server" />
-                                <asp:HiddenField ID="hdnPrevTabId" runat="server" />
-                                <asp:HiddenField ID="hdnCurrentTabId" runat="server" />
-                                <asp:HiddenField ID="hdnPrevTabIndex" runat="server" />
-                                <asp:HiddenField ID="hdnCurrenTabIndex" runat="server" />
-                                <asp:HiddenField ID="hdnSaveTabData" runat="server" />
-                                <asp:HiddenField ID="hdnStringASCIIValue" runat="server" />
-                                <asp:HiddenField ID="hdnVisitId" runat="server" />
-                                <asp:HiddenField ID="hdnPrevTabName" runat="server" />
-                                <asp:HiddenField ID="hdnCurrenTabName" runat="server" />
-                                <asp:Button ID="btnsave" Text="Save" runat="server" Visible="false" OnClick="btnsave_Click" />
-                                <asp:Button ID="btncomplete" runat="server" Visible="false" Text="Data Quality Check"
-                                    OnClick="btncomplete_Click" />
-                                <asp:Button ID="btnCancel" Text="Close" runat="server" OnClick="btnCancel_Click">
-                                </asp:Button>
-                                <asp:Button ID="btnPrint" Text="Print All" Visible="false" runat="server" OnClientClick="WindowPrintAll()" />
-                            </td>
-                        </tr>                        
-                    </tbody>
-                </table>
+                <%--   <table cellspacing="6" cellpadding="0" width="100%">
+                    <tbody>--%>
+                <div class="row" id="TrSignatureAll" runat="server" visible="false">
+                    <%--<td class="form" colspan="2" style="text-align: center; vertical-align: top;">--%>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-1">
+                        <label class="required control-label pull-left" style="padding-right: 0;" for="ddSignature"
+                            id="labelsignature">
+                            *Signature:</label>
+                    </div>
+                    <div class="col-md-3 pull-left" style="padding-left: 0;">
+                        <asp:DropDownList ID="ddSignature" runat="server" CssClass="form-control">
+                        </asp:DropDownList>
+                    </div>
+                    <div class="col-md-4"></div>
+
+                    <%--  </td>--%>
+                </div>
+                <div class="row">
+
+                    <%--<td class="form" align="center" colspan="2">--%>
+                    <div class="col-md-3">
+                        <asp:TextBox ID="txtSysDate" runat="server" CssClass="textstylehidden"></asp:TextBox>
+                        <asp:HiddenField ID="hdfldDOB" runat="server" />
+                        <asp:HiddenField ID="theHitCntrl" runat="server" />
+                        <asp:HiddenField ID="hdnPrevTabId" runat="server" />
+                        <asp:HiddenField ID="hdnCurrentTabId" runat="server" />
+                        <asp:HiddenField ID="hdnPrevTabIndex" runat="server" />
+                        <asp:HiddenField ID="hdnCurrenTabIndex" runat="server" />
+                        <asp:HiddenField ID="hdnSaveTabData" runat="server" />
+                        <asp:HiddenField ID="hdnStringASCIIValue" runat="server" />
+                        <asp:HiddenField ID="hdnVisitId" runat="server" />
+                        <asp:HiddenField ID="hdnPrevTabName" runat="server" />
+                        <asp:HiddenField ID="hdnCurrenTabName" runat="server" />
+                    </div>
+                    <div class="col-md-6">
+                        <asp:Button ID="btnsave" Text="Save" runat="server" Visible="false" OnClick="btnsave_Click" CssClass="btn btn-primary" /><!--
+    -->
+                        <asp:Button ID="btncomplete" runat="server" Visible="false" Text="Data Quality Check"
+                            OnClick="btncomplete_Click" CssClass="btn btn-success" /><!--
+    -->
+                        <asp:Button ID="btnCancel" Text="Close" runat="server" OnClick="btnCancel_Click" CssClass="btn btn-default" Font-Bold="true"></asp:Button><!--
+    -->
+                        <asp:Button ID="btnPrint" Text="Print All" Visible="false" runat="server" OnClientClick="WindowPrintAll()" Font-Bold="true" CssClass="btn btn-default" />
+                    </div>
+                    <%--</td>--%>
+                    <div class="col-md-3"></div>
+                </div>
+                <%-- </tbody>
+                </table>--%>
             </div>
         </div>
         <div id="divhidden" runat="server" style="display: none">

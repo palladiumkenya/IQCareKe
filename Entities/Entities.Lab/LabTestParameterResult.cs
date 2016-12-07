@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Lab
 {
@@ -6,6 +7,7 @@ namespace Entities.Lab
     /// 
     /// </summary>
     [Serializable]
+    [Table("dtl_LabOrderTestResult")]
     public class LabTestParameterResult
     {
         int? nullInt = null;
@@ -14,7 +16,7 @@ namespace Entities.Lab
         /// </summary>
         /// <value>
         /// The identifier.
-        /// </value>
+        /// </value>     
         public int Id { get; set; }
         /// <summary>
         /// Gets or sets the lab order identifier.
@@ -30,12 +32,15 @@ namespace Entities.Lab
         /// <value>
         /// The lab test identifier.
         /// </value>
-        public TestParameter Parameter { get; set; }
+        public virtual TestParameter Parameter { get; set; }
 
-        public int ParameterId { get { return Parameter.Id; } }
+       
+        [ForeignKey("Parameter")]
+        public int ParameterId { get; set; }
 
         public string ParameterName { get { return Parameter.Name; } }
         public string ResultDataType { get { return Parameter.DataType; } }
+        [NotMapped]
         public string SampleType { get; set; }
         /// <summary>
         /// Gets or sets the lab order test identifier.
@@ -58,7 +63,7 @@ namespace Entities.Lab
         /// <value>
         /// The result value.
         /// </value>
-        public Double? ResultValue { get; set; }
+        public decimal? ResultValue { get; set; }
         /// <summary>
         /// Gets or sets the result by.
         /// </summary>
@@ -79,7 +84,7 @@ namespace Entities.Lab
         /// <value>
         /// The detection limit.
         /// </value>
-        public Double? DetectionLimit { get; set; }
+        public decimal? DetectionLimit { get; set; }
         /// <summary>
         /// Gets or sets the result text.
         /// </summary>
@@ -101,21 +106,24 @@ namespace Entities.Lab
         /// <value>
         /// The result unit.
         /// </value>
-        public ResultUnit ResultUnit { get; set; }
+     
+        public virtual ResultUnit ResultUnit { get; set; }
 
-        public int? ResultUnitId { get { return (null == ResultUnit) ? nullInt : ResultUnit.Id; } }
 
+        [ForeignKey("ResultUnit")]
+        public int? ResultUnitId { get; set; }
+
+        [NotMapped]
         public string ResultUnitName { get { return (null == ResultUnit) ? "" : ResultUnit.Text; } }
 
+        [ForeignKey("Config")]
+        [Column("ResultConfigId")]
         public int? ConfigId
         {
-            get
-            {
-                if (null != this.Config) return Config.Id;
-                return null;
-            }
+            get;set;
         }
-        public ParameterResultConfig Config { get; set; }
+      
+        public virtual ParameterResultConfig Config { get; set; }
         /// <summary>
         /// Gets or sets the user identifier.
         /// </summary>
@@ -144,11 +152,12 @@ namespace Entities.Lab
         /// <value>
         /// <c>true</c> if this instance has result; otherwise, <c>false</c>.
         /// </value>
+        [NotMapped]
         public bool HasResult
         {
             get
             {
-                if (ResultValue.HasValue || !(ResultText != null && String.IsNullOrEmpty(ResultText)) || !(ResultOption != null && String.IsNullOrEmpty(ResultOption)))
+                if (ResultValue.HasValue || !(ResultText != null && string.IsNullOrEmpty(ResultText)) || !(ResultOption != null && string.IsNullOrEmpty(ResultOption)))
                 {
                     return true;
                 }

@@ -30,10 +30,10 @@
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="SubTestId" type="xs:int" minOccurs="0" />
-                <xs:element name="MinBoundaryValue" type="xs:decimal" minOccurs="0" />
-                <xs:element name="MaxBoundaryValue" type="xs:decimal" minOccurs="0" />
-                <xs:element name="MinNormalRange" type="xs:decimal" minOccurs="0" />
-                <xs:element name="MaxNormalRange" type="xs:decimal" minOccurs="0" />
+                <xs:element name="MinBoundaryValue" type="xs:double" minOccurs="0" />
+                <xs:element name="MaxBoundaryValue" type="xs:double" minOccurs="0" />
+                <xs:element name="MinNormalRange" type="xs:double" minOccurs="0" />
+                <xs:element name="MaxNormalRange" type="xs:double" minOccurs="0" />
                 <xs:element name="TextNormalRange" type="xs:string" minOccurs="0" />
                 <xs:element name="DefaultUnit" type="xs:boolean" minOccurs="0" />
                 <xs:element name="UnitId" type="xs:int" minOccurs="0" />
@@ -2111,10 +2111,10 @@
   </Lnk_TestParameter>
   <Lnk_LabValue>
     <SubTestId>1</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>5000.00</MaxBoundaryValue>
-    <MinNormalRange>500.00</MinNormalRange>
-    <MaxNormalRange>1200.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>5000</MaxBoundaryValue>
+    <MinNormalRange>500</MinNormalRange>
+    <MaxNormalRange>1200</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>127</UnitId>
@@ -2122,10 +2122,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>2</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>100.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>100</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2133,10 +2133,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
-    <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
-    <MinNormalRange>50.00</MinNormalRange>
-    <MaxNormalRange>2000000.00</MaxNormalRange>
+    <MinBoundaryValue>50</MinBoundaryValue>
+    <MaxBoundaryValue>2000000</MaxBoundaryValue>
+    <MinNormalRange>50</MinNormalRange>
+    <MaxNormalRange>2000000</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>129</UnitId>
@@ -2144,10 +2144,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>5</SubTestId>
-    <MinBoundaryValue>5.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
-    <MinNormalRange>25.00</MinNormalRange>
-    <MaxNormalRange>55.00</MaxNormalRange>
+    <MinBoundaryValue>5</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
+    <MinNormalRange>25</MinNormalRange>
+    <MaxNormalRange>55</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2155,10 +2155,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>6</SubTestId>
-    <MinBoundaryValue>1.50</MinBoundaryValue>
-    <MaxBoundaryValue>20.00</MaxBoundaryValue>
-    <MinNormalRange>8.00</MinNormalRange>
-    <MaxNormalRange>14.00</MaxNormalRange>
+    <MinBoundaryValue>1.5</MinBoundaryValue>
+    <MaxBoundaryValue>20</MaxBoundaryValue>
+    <MinNormalRange>8</MinNormalRange>
+    <MaxNormalRange>14</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>130</UnitId>
@@ -2166,10 +2166,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>7</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>4.00</MinNormalRange>
-    <MaxNormalRange>11.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>4</MinNormalRange>
+    <MaxNormalRange>11</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>125</UnitId>
@@ -2177,10 +2177,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>9</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>100.00</MinNormalRange>
-    <MaxNormalRange>400.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>100</MinNormalRange>
+    <MaxNormalRange>400</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>125</UnitId>
@@ -2188,10 +2188,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>10</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>3000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>35.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>3000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>35</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>138</UnitId>
@@ -2199,10 +2199,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>11</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>34.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>35.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>34</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>35</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>138</UnitId>
@@ -2210,10 +2210,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>12</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>20.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>1.50</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>20</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>1.5</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>133</UnitId>
@@ -2221,10 +2221,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>13</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1200.00</MaxBoundaryValue>
-    <MinNormalRange>50.00</MinNormalRange>
-    <MaxNormalRange>180.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1200</MaxBoundaryValue>
+    <MinNormalRange>50</MinNormalRange>
+    <MaxNormalRange>180</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>138</UnitId>
@@ -2232,10 +2232,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>28</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>500</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>128</UnitId>
@@ -2243,10 +2243,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>29</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>500</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>128</UnitId>
@@ -2254,10 +2254,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>30</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>500</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>128</UnitId>
@@ -2265,10 +2265,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>31</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>500</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>128</UnitId>
@@ -2276,10 +2276,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>32</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>4.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>4</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>135</UnitId>
@@ -2287,10 +2287,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>54</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>4.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>4</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>135</UnitId>
@@ -2298,10 +2298,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>82</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
-    <MinNormalRange>2.00</MinNormalRange>
-    <MaxNormalRange>10.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
+    <MinNormalRange>2</MinNormalRange>
+    <MaxNormalRange>10</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2309,10 +2309,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>83</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>50.00</MinNormalRange>
-    <MaxNormalRange>80.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>50</MinNormalRange>
+    <MaxNormalRange>80</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2320,10 +2320,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>84</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
-    <MinNormalRange>1.00</MinNormalRange>
-    <MaxNormalRange>5.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
+    <MinNormalRange>1</MinNormalRange>
+    <MaxNormalRange>5</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2331,10 +2331,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>85</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>20.00</MinNormalRange>
-    <MaxNormalRange>40.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>20</MinNormalRange>
+    <MaxNormalRange>40</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2342,10 +2342,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>86</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>2.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>2</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2353,10 +2353,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>87</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>5.00</MinNormalRange>
-    <MaxNormalRange>10.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>5</MinNormalRange>
+    <MaxNormalRange>10</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2364,10 +2364,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>88</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>1.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>1</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2375,10 +2375,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>89</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>10.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>10</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>137</UnitId>
@@ -2386,10 +2386,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>90</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>2.00</MaxBoundaryValue>
-    <MinNormalRange>1.00</MinNormalRange>
-    <MaxNormalRange>1.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>2</MaxBoundaryValue>
+    <MinNormalRange>1</MinNormalRange>
+    <MaxNormalRange>1</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2397,10 +2397,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>91</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2408,10 +2408,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>92</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2419,10 +2419,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>93</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2430,10 +2430,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>94</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2441,10 +2441,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>95</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2452,10 +2452,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>96</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>4.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>4</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>136</UnitId>
@@ -2463,54 +2463,54 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>106</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>133.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>133</MaxNormalRange>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>58</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>10.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>10</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>62</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>150.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>150</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>69</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>300.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>300</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>76</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>500.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>500</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>78</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1.70</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1.7</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>54</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>100.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>100</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>133</UnitId>
@@ -2518,10 +2518,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>54</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>25.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>25.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>25</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>25</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>139</UnitId>
@@ -2529,10 +2529,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>32</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>2000.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>2000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>2000</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>133</UnitId>
@@ -2540,10 +2540,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>32</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>1000.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>1000</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>131</UnitId>
@@ -2551,10 +2551,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>107</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>500.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>500.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>500</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>500</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>129</UnitId>
@@ -2563,7 +2563,7 @@
   <Lnk_LabValue>
     <SubTestId>5</SubTestId>
     <MinBoundaryValue>0.05</MinBoundaryValue>
-    <MaxBoundaryValue>0.60</MaxBoundaryValue>
+    <MaxBoundaryValue>0.6</MaxBoundaryValue>
     <MinNormalRange>0.05</MinNormalRange>
     <MaxNormalRange>0.06</MaxNormalRange>
     <TextNormalRange />
@@ -2573,10 +2573,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>6</SubTestId>
-    <MinBoundaryValue>5.00</MinBoundaryValue>
-    <MaxBoundaryValue>15.00</MaxBoundaryValue>
-    <MinNormalRange>5.00</MinNormalRange>
-    <MaxNormalRange>15.00</MaxNormalRange>
+    <MinBoundaryValue>5</MinBoundaryValue>
+    <MaxBoundaryValue>15</MaxBoundaryValue>
+    <MinNormalRange>5</MinNormalRange>
+    <MaxNormalRange>15</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>135</UnitId>
@@ -2584,10 +2584,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>7</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>100.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>100</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2595,10 +2595,10 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>83</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1.00</MaxBoundaryValue>
-    <MinNormalRange>0.00</MinNormalRange>
-    <MaxNormalRange>1.00</MaxNormalRange>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1</MaxBoundaryValue>
+    <MinNormalRange>0</MinNormalRange>
+    <MaxNormalRange>1</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>124</UnitId>
@@ -2606,8 +2606,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>85</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>124</UnitId>
@@ -2615,8 +2615,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>87</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>124</UnitId>
@@ -2624,8 +2624,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>89</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>124</UnitId>
@@ -2633,8 +2633,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>9</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>126</UnitId>
@@ -2642,8 +2642,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>10</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>3.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>3</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>134</UnitId>
@@ -2651,8 +2651,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>11</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>3.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>3</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>134</UnitId>
@@ -2660,8 +2660,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>12</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1000</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>135</UnitId>
@@ -2669,8 +2669,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>12</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1200.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>1200</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>139</UnitId>
@@ -2678,8 +2678,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>13</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>10.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>10</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>134</UnitId>
@@ -2687,113 +2687,113 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>156</SubTestId>
-    <MinBoundaryValue>0.80</MinBoundaryValue>
-    <MaxBoundaryValue>7.00</MaxBoundaryValue>
+    <MinBoundaryValue>0.8</MinBoundaryValue>
+    <MaxBoundaryValue>7</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>157</SubTestId>
-    <MinBoundaryValue>0.10</MinBoundaryValue>
-    <MaxBoundaryValue>1.20</MaxBoundaryValue>
+    <MinBoundaryValue>0.1</MinBoundaryValue>
+    <MaxBoundaryValue>1.2</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>158</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>159</SubTestId>
-    <MinBoundaryValue>20.00</MinBoundaryValue>
-    <MaxBoundaryValue>60.00</MaxBoundaryValue>
+    <MinBoundaryValue>20</MinBoundaryValue>
+    <MaxBoundaryValue>60</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>160</SubTestId>
-    <MinBoundaryValue>3.00</MinBoundaryValue>
-    <MaxBoundaryValue>14.00</MaxBoundaryValue>
+    <MinBoundaryValue>3</MinBoundaryValue>
+    <MaxBoundaryValue>14</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>161</SubTestId>
-    <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>70.00</MaxBoundaryValue>
+    <MinBoundaryValue>50</MinBoundaryValue>
+    <MaxBoundaryValue>70</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>162</SubTestId>
-    <MinBoundaryValue>12.00</MinBoundaryValue>
-    <MaxBoundaryValue>16.00</MaxBoundaryValue>
+    <MinBoundaryValue>12</MinBoundaryValue>
+    <MaxBoundaryValue>16</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>163</SubTestId>
-    <MinBoundaryValue>35.00</MinBoundaryValue>
-    <MaxBoundaryValue>49.00</MaxBoundaryValue>
+    <MinBoundaryValue>35</MinBoundaryValue>
+    <MaxBoundaryValue>49</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>164</SubTestId>
-    <MinBoundaryValue>80.00</MinBoundaryValue>
-    <MaxBoundaryValue>100.00</MaxBoundaryValue>
+    <MinBoundaryValue>80</MinBoundaryValue>
+    <MaxBoundaryValue>100</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>165</SubTestId>
-    <MinBoundaryValue>27.00</MinBoundaryValue>
-    <MaxBoundaryValue>34.00</MaxBoundaryValue>
+    <MinBoundaryValue>27</MinBoundaryValue>
+    <MaxBoundaryValue>34</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>166</SubTestId>
-    <MinBoundaryValue>31.00</MinBoundaryValue>
-    <MaxBoundaryValue>37.00</MaxBoundaryValue>
+    <MinBoundaryValue>31</MinBoundaryValue>
+    <MaxBoundaryValue>37</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>167</SubTestId>
-    <MinBoundaryValue>11.00</MinBoundaryValue>
-    <MaxBoundaryValue>16.00</MaxBoundaryValue>
+    <MinBoundaryValue>11</MinBoundaryValue>
+    <MaxBoundaryValue>16</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>168</SubTestId>
-    <MinBoundaryValue>35.00</MinBoundaryValue>
-    <MaxBoundaryValue>56.00</MaxBoundaryValue>
+    <MinBoundaryValue>35</MinBoundaryValue>
+    <MaxBoundaryValue>56</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>169</SubTestId>
-    <MinBoundaryValue>100.00</MinBoundaryValue>
-    <MaxBoundaryValue>300.00</MaxBoundaryValue>
+    <MinBoundaryValue>100</MinBoundaryValue>
+    <MaxBoundaryValue>300</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>170</SubTestId>
-    <MinBoundaryValue>6.50</MinBoundaryValue>
-    <MaxBoundaryValue>12.00</MaxBoundaryValue>
+    <MinBoundaryValue>6.5</MinBoundaryValue>
+    <MaxBoundaryValue>12</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>171</SubTestId>
-    <MinBoundaryValue>9.00</MinBoundaryValue>
-    <MaxBoundaryValue>17.00</MaxBoundaryValue>
+    <MinBoundaryValue>9</MinBoundaryValue>
+    <MaxBoundaryValue>17</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
@@ -2806,36 +2806,36 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>173</SubTestId>
-    <MinBoundaryValue>60.00</MinBoundaryValue>
-    <MaxBoundaryValue>83.00</MaxBoundaryValue>
+    <MinBoundaryValue>60</MinBoundaryValue>
+    <MaxBoundaryValue>83</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>174</SubTestId>
-    <MinBoundaryValue>28.00</MinBoundaryValue>
-    <MaxBoundaryValue>54.00</MaxBoundaryValue>
+    <MinBoundaryValue>28</MinBoundaryValue>
+    <MaxBoundaryValue>54</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>175</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>17.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>17</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>176</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>3.40</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>3.4</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>32</SubTestId>
-    <MinBoundaryValue>60.00</MinBoundaryValue>
-    <MaxBoundaryValue>83.00</MaxBoundaryValue>
+    <MinBoundaryValue>60</MinBoundaryValue>
+    <MaxBoundaryValue>83</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
     <UnitId>131</UnitId>
@@ -2843,8 +2843,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>178</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>5.20</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>5.2</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
@@ -2857,15 +2857,15 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>180</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
     <MaxBoundaryValue>3.34</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>91</SubTestId>
-    <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>0.00</MaxBoundaryValue>
+    <MinBoundaryValue>0</MinBoundaryValue>
+    <MaxBoundaryValue>0</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
     <UnitId>373</UnitId>
@@ -2873,9 +2873,9 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>184</SubTestId>
-    <MinBoundaryValue>5.00</MinBoundaryValue>
-    <MaxBoundaryValue>9.00</MaxBoundaryValue>
-    <MinNormalRange>1.00</MinNormalRange>
+    <MinBoundaryValue>5</MinBoundaryValue>
+    <MaxBoundaryValue>9</MaxBoundaryValue>
+    <MinNormalRange>1</MinNormalRange>
     <MaxNormalRange>1.03</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>

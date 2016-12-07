@@ -1345,7 +1345,7 @@ namespace IQCare.Web.Patient
             }
             return false;
         }
-        private void SectionHeading(String H2)
+        private void SectionHeading(string H2)
         {
           //  PnlDynamicElements.Controls.Add(new LiteralControl("<br>"));
            // PnlDynamicElements.Controls.Add(new LiteralControl("<h2 class='forms' align='left'>" + H2 + "</h2>"));

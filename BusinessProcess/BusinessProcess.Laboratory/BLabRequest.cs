@@ -199,7 +199,7 @@ namespace BusinessProcess.Laboratory
             }
             return order;
         }
-
+        decimal? nullDecimal = null;
         public List<LabTestParameterResult> GetLabTestParameterResult(int LabTestOrderId)
         {
             ClsObject obj = new ClsObject();
@@ -209,7 +209,7 @@ namespace BusinessProcess.Laboratory
             try
             {
                 DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetTestParameterResult", ClsUtility.ObjectEnum.DataTable);
-                Double? nullDouble = null;
+                
                 bool? nullBool = null;
                 int? nullInt = null;
                 // DateTime? nullDate = null;
@@ -223,7 +223,7 @@ namespace BusinessProcess.Laboratory
                                       Name = row["ParameterName"].ToString(),
                                       ReferenceId = row["ReferenceId"].ToString(),
                                       DataType = row["DataType"].ToString(),
-                                      Rank = Convert.ToDouble(row["OrdRank"]),
+                                      Rank = Convert.ToDecimal(row["OrdRank"]),
                                       LabTestId = row.Field<int>("LabTestId"),
                                       DeleteFlag = Convert.ToBoolean(row["ParamDeleteFlag"]),
                                       ResultConfig = null,
@@ -236,13 +236,13 @@ namespace BusinessProcess.Laboratory
                                   DeleteFlag = Convert.ToBoolean(row["DeleteFlag"]),
                                   CreateDate = Convert.ToDateTime(row["CreateDate"]),
                                   Undetectable = row["Undetectable"] == DBNull.Value ? nullBool : Convert.ToBoolean(row["Undetectable"]),
-                                  DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["DetectionLimit"]),
+                                  DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["DetectionLimit"]),
                                   ResultUnit = row["ResultUnitId"] == DBNull.Value ? null : (new ResultUnit()
                                   {
                                       Id = row.Field<int>("ResultUnitId"),
                                       Text = row["ResultUnit"].ToString()
                                   }),
-                                  ResultValue = row["ResultValue"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["ResultValue"]),
+                                  ResultValue = row["ResultValue"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["ResultValue"]),
                                   ResultText = row["ResultText"].ToString(),
                                   ResultOption = row["ResultOption"].ToString(),
                                   ResultOptionId = row["ResultOptionId"] == DBNull.Value ? nullInt : Convert.ToInt32(row["ResultOptionId"])
@@ -358,13 +358,13 @@ namespace BusinessProcess.Laboratory
             ClsUtility.AddParameters("@ResultNotes", SqlDbType.VarChar, ResultNotes);
             ClsUtility.AddExtendedParameters("@ResultBy", SqlDbType.Int, ResultBy);
             ClsUtility.AddExtendedParameters("@ResultDate", SqlDbType.DateTime, ResultDate);
-            double? nullDouble = null;
+         
             XDocument docX = new XDocument(
                 new XElement("root", (from result in results
                                       select new XElement("result",
                                            new XElement("id", result.Id),
                                            new XElement("parameterid", result.Parameter.Id),
-                                           new XElement("resultvalue", result.ResultValue == null ? nullDouble : result.ResultValue),
+                                           new XElement("resultvalue", result.ResultValue == null ? nullDecimal : result.ResultValue),
                                            new XElement("resulttext", result.ResultText),
                                            new XElement("resultoption", result.ResultOption),
                                            new XElement("resultoptionvalue", result.ResultOptionId),
@@ -373,7 +373,7 @@ namespace BusinessProcess.Laboratory
                                            new XElement("resultunit", result.ResultUnit == null ? null : result.ResultUnitName),
                                            new XElement("resultunitid", result.ResultUnit == null ? null : result.ResultUnitId.Value.ToString()),
                                            new XElement("undetectable", result.Undetectable),
-                                           new XElement("detectionlimit", result.DetectionLimit == null ? nullDouble : result.DetectionLimit),
+                                           new XElement("detectionlimit", result.DetectionLimit == null ? nullDecimal : result.DetectionLimit),
                                            new XElement("configid", result.ConfigId)
                                            )
                 )));
@@ -400,7 +400,7 @@ namespace BusinessProcess.Laboratory
             LabOrderRepository repo = new LabOrderRepository();
             LabOrder order = repo.Find(labOrderId);
             order.DeletedBy = userId;
-            order.DeleteReason = deleteReason;
+            order.DeleteReason = deleteReason;           
             repo.Delete(order);
         }
     }

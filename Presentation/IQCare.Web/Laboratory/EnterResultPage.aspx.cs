@@ -19,7 +19,7 @@ namespace IQCare.Web.Laboratory
         /// The redirect URL
         /// </summary>
          private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
-     
+        private decimal? nullDecimal = null;
         private string RedirectUrl {
             get
             {
@@ -391,13 +391,13 @@ namespace IQCare.Web.Laboratory
                 withResult += 1;
 
 
-                double? nullDouble = null;
+                
                 if (_dataType == "NUMERIC")
                 {
 
-                    thisParam.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDouble : Convert.ToDouble(txtResultValue.Text.Trim());
+                    thisParam.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
                     thisParam.Undetectable = cBox.Checked;
-                    thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDouble : Convert.ToDouble(txtLimit.Text.Trim());
+                    thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
                     try
                     {
                         thisParam.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
@@ -408,16 +408,16 @@ namespace IQCare.Web.Laboratory
                         string min_normal = item.Attributes["min_normal"].ToString();
                         string max_normal = item.Attributes["max_normal"].ToString();
                         string detection_limit = item.Attributes["detection_limit"].ToString();
-                        thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? Convert.ToDouble(detection_limit) : Convert.ToDouble(txtLimit.Text.Trim());
+                        thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? Convert.ToDecimal(detection_limit) : Convert.ToDecimal(txtLimit.Text.Trim());
                         string config_id = item.Attributes["config_id"].ToString();
                         thisParam.Config = new ParameterResultConfig()
                         {
                             Id = Convert.ToInt32(config_id),
-                            DetectionLimit = detection_limit == "" ? nullDouble : Convert.ToDouble(detection_limit),
-                            MinBoundary = min_value == "" ? nullDouble : Convert.ToDouble(min_value),
-                            MaxBoundary = max_value == "" ? nullDouble : Convert.ToDouble(max_value),
-                            MinNormalRange = min_normal == "" ? nullDouble : Convert.ToDouble(min_normal),
-                            MaxNormalRange = max_normal == "" ? nullDouble : Convert.ToDouble(max_normal)
+                            DetectionLimit = detection_limit == "" ? nullDecimal : Convert.ToDecimal(detection_limit),
+                            MinBoundary = min_value == "" ? nullDecimal : Convert.ToDecimal(min_value),
+                            MaxBoundary = max_value == "" ? nullDecimal : Convert.ToDecimal(max_value),
+                            MinNormalRange = min_normal == "" ? nullDecimal : Convert.ToDecimal(min_normal),
+                            MaxNormalRange = max_normal == "" ? nullDecimal : Convert.ToDecimal(max_normal)
                         };
                     }
                     catch { thisParam.ResultUnit = null; }
@@ -582,9 +582,9 @@ namespace IQCare.Web.Laboratory
             {
                 LabTestParameterResult rowView = (LabTestParameterResult)e.Item.DataItem;
                 string strDataType = rowView.ResultDataType;
-                double? strResultValue = rowView.ResultValue;
+                decimal? strResultValue = rowView.ResultValue;
                 string strResultText = rowView.ResultText;
-                double? strLimit = rowView.DetectionLimit;
+                decimal? strLimit = rowView.DetectionLimit;
                 int strParameterId = rowView.ParameterId;
 
                 bool hasResult = rowView.HasResult;

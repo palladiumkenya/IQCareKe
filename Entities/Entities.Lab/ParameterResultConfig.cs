@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Lab
 {
@@ -6,6 +7,7 @@ namespace Entities.Lab
     /// Parameter result unit configuration
     /// </summary>
     [Serializable]
+   [Table("dtl_LabTestParameterConfig")]
     public class ParameterResultConfig
     {
         /// <summary>
@@ -14,61 +16,63 @@ namespace Entities.Lab
         /// <value>
         /// The identifier.
         /// </value>
-        public int Id { get; set; }
+    public int Id { get; set; }
         /// <summary>
         /// Gets or sets the parameter identifier.
         /// </summary>
         /// <value>
         /// The parameter identifier.
         /// </value>
+         [Column("ParameterId")]
+        [ForeignKey("Parameter")]
         public int ParameterId { get; set; }
+        public virtual TestParameter Parameter { get; set; }
         /// <summary>
         /// Gets or sets the minimum boundary.
         /// </summary>
         /// <value>
         /// The minimum boundary.
         /// </value>
-        public Double? MinBoundary { get; set; }
+        public decimal? MinBoundary { get; set; }
         /// <summary>
         /// Gets or sets the maximum boundary.
         /// </summary>
         /// <value>
         /// The maximum boundary.
         /// </value>
-        public Double? MaxBoundary { get; set; }
+        public decimal? MaxBoundary { get; set; }
         /// <summary>
         /// Gets or sets the maximum normal range.
         /// </summary>
         /// <value>
         /// The maximum normal range.
         /// </value>
-        public Double? MaxNormalRange { get; set; }
+        public decimal? MaxNormalRange { get; set; }
         /// <summary>
         /// Gets or sets the minimum normal range.
         /// </summary>
         /// <value>
         /// The minimum normal range.
         /// </value>
-        public Double? MinNormalRange { get; set; }
+        public decimal? MinNormalRange { get; set; }
         /// <summary>
         /// Gets or sets the detection limit.
         /// </summary>
         /// <value>
         /// The detection limit.
         /// </value>
-        public Double? DetectionLimit { get; set; }
+        public decimal? DetectionLimit { get; set; }
         /// <summary>
         /// Gets the unit identifier.
         /// </summary>
         /// <value>
         /// The unit identifier.
         /// </value>
+        [ForeignKey("ResultUnit")]
         public int UnitId
         {
-            get
-            {
-                return (null == ResultUnit) ? -1 : ResultUnit.Id;
-            }
+            get;
+            set;
         }
         /// <summary>
         /// Gets the name of the unit.
@@ -97,6 +101,7 @@ namespace Entities.Lab
         /// <value>
         /// <c>true</c> if this instance is default; otherwise, <c>false</c>.
         /// </value>
+        [Column("DefaultUnit")]
         public bool IsDefault { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [delete flag].

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Entities.Lab
@@ -8,6 +9,7 @@ namespace Entities.Lab
     /// 
     /// </summary>
     [Serializable]
+    [Table("dtl_LabOrderTest")]
     public class LabOrderTest
     {
         /// <summary>
@@ -22,22 +24,25 @@ namespace Entities.Lab
         /// </summary>
         /// <value>
         /// The lab order identifier.
-        /// </value>
+        /// </value>       
+        [ForeignKey("Order")]
         public int LabOrderId { get; set; }
+
+        public virtual LabOrder Order { get; set; }
         /// <summary>
         /// Gets or sets the lab test identifier.
         /// </summary>
         /// <value>
         /// The lab test identifier.
         /// </value>
-        public LabTest Test { get; set; }
+        public virtual LabTest Test { get; set; }
+        [Column("LabTestId")]
+        [ForeignKey("Test")]
         public int TestId
         {
-            get
-            {
-                return Test.Id;
-            }
+            get;set;
         }
+        [NotMapped]
         public string TestName
         {
             get
@@ -75,9 +80,13 @@ namespace Entities.Lab
         /// The result date.
         /// </value>
         public DateTime? ResultDate { get; set; }
+        [NotMapped]
         public DateTime OrderDate { get; set; }
+        [NotMapped]
         public string OrderNumber { get; set; }
+        [NotMapped]
         public int OrderedBy { get; set; }
+        [NotMapped]
         public int ServiceAreaId { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [delete flag].
@@ -86,6 +95,7 @@ namespace Entities.Lab
         ///   <c>true</c> if [delete flag]; otherwise, <c>false</c>.
         /// </value>
         public bool DeleteFlag { get; set; }
+        [NotMapped]
         public bool IsGroup
         {
             get
@@ -99,6 +109,7 @@ namespace Entities.Lab
         /// <value>
         ///   <c>true</c> if this instance is parent; otherwise, <c>false</c>.
         /// </value>
+        [Column("ParentTestId")]
         public int? ParentLabTestId { get; set; }
 
         /// <summary>
@@ -107,11 +118,14 @@ namespace Entities.Lab
         /// <value>
         /// The parameter results.
         /// </value>
-        public List<LabTestParameterResult> ParameterResults
+        public virtual List<LabTestParameterResult> ParameterResults
         {
             get;
             set;
         }
+        [NotMapped]
+        public int? SpecimenId { get; set; }
+       [NotMapped]
         public virtual TestSpecimen Specimen { get; set; }
         /// <summary>
         /// Gets the test order status.
@@ -119,6 +133,7 @@ namespace Entities.Lab
         /// <value>
         /// The test order status.
         /// </value>
+        [NotMapped]
         public string TestOrderStatus
         {
             get

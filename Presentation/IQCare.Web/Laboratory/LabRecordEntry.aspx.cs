@@ -21,7 +21,7 @@ namespace IQCare.Web.Laboratory
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
         private ILabManager labMgr = (ILabManager)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabManager, BusinessProcess.Laboratory");
         private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-
+        decimal? nullDecimal = null;
         protected string sOption
         {
             get
@@ -201,13 +201,12 @@ namespace IQCare.Web.Laboratory
                     LabTestId = this.LabTestId,
                     DeleteFlag = false
                 };
-                Double? nullDouble = null;
                 if (_dataType == "NUMERIC")
                 {
 
-                    _result.ResultValue = String.IsNullOrEmpty(txtResultValue.Text) ? nullDouble : Convert.ToDouble(txtResultValue.Text.Trim());
+                    _result.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
                     _result.Undetectable = cBox.Checked;
-                    _result.DetectionLimit = String.IsNullOrEmpty(txtLimit.Text) ? nullDouble : Convert.ToDouble(txtLimit.Text.Trim());
+                    _result.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
                     _result.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
 
                     RadComboBoxItem item = ddlResultUnit.SelectedItem;
@@ -218,16 +217,16 @@ namespace IQCare.Web.Laboratory
                         string min_normal = item.Attributes["min_normal"].ToString();
                         string max_normal = item.Attributes["max_normal"].ToString();
                         string detection_limit = item.Attributes["detection_limit"].ToString();
-                        _result.DetectionLimit = String.IsNullOrEmpty(txtLimit.Text) ? Convert.ToDouble(detection_limit) : Convert.ToDouble(txtLimit.Text.Trim());
+                        _result.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? Convert.ToDecimal(detection_limit) : Convert.ToDecimal(txtLimit.Text.Trim());
                         string config_id = item.Attributes["config_id"].ToString();
                         _result.Config = new ParameterResultConfig()
                         {
                             Id = Convert.ToInt32(config_id),
-                            DetectionLimit = Convert.ToDouble(detection_limit),
-                            MinBoundary = Convert.ToDouble(min_value),
-                            MaxBoundary = Convert.ToDouble(max_value),
-                            MinNormalRange = Convert.ToDouble(min_normal),
-                            MaxNormalRange = Convert.ToDouble(max_normal)
+                            DetectionLimit = Convert.ToDecimal(detection_limit),
+                            MinBoundary = Convert.ToDecimal(min_value),
+                            MaxBoundary = Convert.ToDecimal(max_value),
+                            MinNormalRange = Convert.ToDecimal(min_normal),
+                            MaxNormalRange = Convert.ToDecimal(max_normal)
                         };
                         
                     }

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Application.Presentation;
 using Entities.FormBuilder;
 using Interface.Clinical;
-using Application.Presentation;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace IQCare.Web.UILogic
 {
-   public class CustomFormService
+    public class CustomFormService
     {
        public DataSet FormFieldLabels{private set; get;}
 

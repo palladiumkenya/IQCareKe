@@ -13,15 +13,6 @@ namespace IQCare.Web.Clinical {
     public partial class CustomForm_v2 {
         
         /// <summary>
-        /// DIVCustomForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVCustomForm;
-        
-        /// <summary>
         /// formDescription control.
         /// </summary>
         /// <remarks>
@@ -40,31 +31,13 @@ namespace IQCare.Web.Clinical {
         protected global::System.Web.UI.WebControls.Label lblFeatureName;
         
         /// <summary>
-        /// DivVisitDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivVisitDate;
-        
-        /// <summary>
-        /// tbl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tbl1;
-        
-        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label1;
         
         /// <summary>
         /// txtvisitDate control.
@@ -112,6 +85,15 @@ namespace IQCare.Web.Clinical {
         protected global::System.Web.UI.WebControls.HiddenField hdnBNI;
         
         /// <summary>
+        /// DIVCustomForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DIVCustomForm;
+        
+        /// <summary>
         /// PnlforTab control.
         /// </summary>
         /// <remarks>
@@ -127,7 +109,7 @@ namespace IQCare.Web.Clinical {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow TrSignatureAll;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TrSignatureAll;
         
         /// <summary>
         /// ddSignature control.

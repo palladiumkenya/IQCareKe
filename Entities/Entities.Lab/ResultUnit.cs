@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Lab
 {
@@ -6,6 +7,7 @@ namespace Entities.Lab
     /// 
     /// </summary>
     [Serializable]
+    [Table("vw_LabTestParameterUnits", Schema = "dbo")]
     public class ResultUnit
     {
         /// <summary>
@@ -14,6 +16,7 @@ namespace Entities.Lab
         /// <value>
         /// The identifier.
         /// </value>
+        [Column("UnitId")]
         public int Id { get; set; }
         /// <summary>
         /// Gets or sets the text.
@@ -21,6 +24,7 @@ namespace Entities.Lab
         /// <value>
         /// The text.
         /// </value>
+        [Column("UnitName")]
         public string Text { get; set; }
 
         /// <summary>

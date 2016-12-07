@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Lab
 {
@@ -6,6 +7,7 @@ namespace Entities.Lab
     ///  Parameter Result Options
     /// </summary>
     [Serializable]
+    [Table("dtl_LabTestParameterResultOption")]
     public class ParameterResultOption
     {
         /// <summary>
@@ -21,13 +23,17 @@ namespace Entities.Lab
         /// <value>
         /// The parameter identifier.
         /// </value>
+        [Column("ParameterId")]
+        [ForeignKey("Parameter")]
         public int ParameterId { get; set; }
+        public virtual TestParameter Parameter { get; set; }
         /// <summary>
         /// Gets or sets the text.
         /// </summary>
         /// <value>
         /// The text.
         /// </value>
+       [Column("Value")]
         public string Text { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [delete flag].

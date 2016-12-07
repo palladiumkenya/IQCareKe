@@ -191,7 +191,7 @@ namespace IQCare.Web.Laboratory.Reports
                   
             //DateTime? nulldate = null;
             bool? nullBit = null;
-            Double? nullDouble = null;
+            decimal? nullDecimal = null;
             XElement orderE = new XElement("Order",
                 new XElement("orderid",          this.thisLabOrder.Id),
                 new XElement("ordernumber",      this.thisLabOrder.OrderNumber),
@@ -238,7 +238,7 @@ namespace IQCare.Web.Laboratory.Reports
                         new XElement("resultby", orderedTest.ResultBy.HasValue ? this.GetUserFullName(orderedTest.ResultBy.Value) : ""),                         
                         new XElement("unit",  result.ResultUnitName),
                         new XElement("undetectable", result.Undetectable.HasValue ? result.Undetectable.Value : nullBit),
-                        new XElement("detectionlimit", result.DetectionLimit.HasValue ? result.DetectionLimit.Value : nullDouble),
+                        new XElement("detectionlimit", result.DetectionLimit.HasValue ? result.DetectionLimit.Value : nullDecimal),
                         new XElement("resultvalue", result.ResultDataType == "NUMERIC" ? (result.ResultValue.HasValue? result.ResultValue.Value.ToString(): "") : (result.ResultDataType == "SELECTLIST" ? result.ResultOption : result.ResultText))  ,
                         new XElement("maxboundary", (result.Config != null && result.Config.MaxBoundary.HasValue) ? result.Config.MaxBoundary.Value.ToString() : ""),
                         new XElement("minboundary", (result.Config != null && result.Config.MinBoundary.HasValue) ? result.Config.MinBoundary.Value.ToString() : ""),

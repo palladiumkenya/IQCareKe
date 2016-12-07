@@ -63,6 +63,36 @@ namespace DataAccess.Context
 
         public override void Delete(LabOrder entityToDelete)
         {
+            //using (var dbContextTransaction = labContext.Database.BeginTransaction())
+            //{
+            //    try
+            //    {
+            //        entityToDelete.DeletedBy = entityToDelete.DeletedBy;
+            //        entityToDelete.DeleteFlag = true;
+            //        var tests = labContext.LabOrderTests.Where(t => t.LabOrderId == entityToDelete.Id);
+            //        foreach (LabOrderTest t in tests)
+            //        {
+            //            t.DeleteFlag = true;
+            //        }
+            //        //tests.ForEach(t => t.DeleteFlag = true);
+
+            //        var results = labContext.ParameterResults.Where(p => p.LabOrderId == entityToDelete.Id);
+            //        foreach (LabTestParameterResult r in results)
+            //        {
+            //            r.DeleteFlag = true;
+            //        }
+            //        //results.ForEach(r => r.DeleteFlag = true);
+
+            //        //  entityToDelete.OrderedTest.ForEach(t => t.ParameterResults.ForEach(p => p.DeleteFlag = true));
+            //        labContext.SaveChanges();
+            //        dbContextTransaction.Commit();
+            //    }
+            //    catch
+            //    {
+            //        dbContextTransaction.Rollback();
+            //    }
+
+            //}
             labContext.Database.ExecuteSqlCommand("Exec Laboratory_DeleteLabOrder @LabOrderId ={0}, @DeletedBy = {1}, @DeleteReason = {2}", entityToDelete.Id, entityToDelete.DeletedBy,entityToDelete.DeleteReason);
         }
         protected virtual void Dispose(bool disposing)

@@ -64,7 +64,7 @@ namespace Entities.Lab
         /// </value>
         public string LoincCode { get; set; }
         [Column("OrdRank")]
-        public Double Rank { get; set; }
+        public decimal Rank { get; set; }
         /// <summary>
         /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>

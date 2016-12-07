@@ -102,7 +102,6 @@ namespace IQCare.Web.Laboratory.Admin
                 {
                     GridViewRow row = gridLabUnits.FooterRow;
                     DropDownList ddlNewUnitName = (DropDownList)row.FindControl("ddlNewUnitName");
-                    Double? nullDouble = null;
                     if (!validateDropDown(ddlNewUnitName))
                     {
                         ddlNewUnitName.BorderColor = System.Drawing.Color.Red;
@@ -145,11 +144,11 @@ namespace IQCare.Web.Laboratory.Admin
                     {
                         config.DeleteFlag = false;
                         config.IsDefault = defaultunit;
-                        config.DetectionLimit = txtNewDetectionLimit.Text == "" ? nullDouble : Convert.ToDouble(txtNewDetectionLimit.Text);
-                        config.MaxBoundary = txtNewMaxBoundaryValue.Text == "" ? nullDouble : Convert.ToDouble(txtNewMaxBoundaryValue.Text);
-                        config.MinBoundary = texMinBoundary.Text == "" ? nullDouble : Convert.ToDouble(texMinBoundary.Text);
-                        config.MaxNormalRange = txtNewMaxNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtNewMaxNormalRange.Text);
-                        config.MinNormalRange = txtNewMinNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtNewMinNormalRange.Text);
+                        config.DetectionLimit = txtNewDetectionLimit.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewDetectionLimit.Text);
+                        config.MaxBoundary = txtNewMaxBoundaryValue.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMaxBoundaryValue.Text);
+                        config.MinBoundary = texMinBoundary.Text == "" ? nullDecimal : Convert.ToDecimal(texMinBoundary.Text);
+                        config.MaxNormalRange = txtNewMaxNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMaxNormalRange.Text);
+                        config.MinNormalRange = txtNewMinNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMinNormalRange.Text);
                     }
                     else
                     {
@@ -159,11 +158,11 @@ namespace IQCare.Web.Laboratory.Admin
                             Id = -1,
                             DeleteFlag = false,
                             IsDefault = defaultunit,
-                            DetectionLimit = txtNewDetectionLimit.Text == "" ? nullDouble : Convert.ToDouble(txtNewDetectionLimit.Text),
-                            MinBoundary = texMinBoundary.Text == "" ? nullDouble : Convert.ToDouble(texMinBoundary.Text),
-                            MaxBoundary = txtNewMaxBoundaryValue.Text == "" ? nullDouble : Convert.ToDouble(txtNewMaxBoundaryValue.Text),
-                            MinNormalRange = txtNewMinNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtNewMinNormalRange.Text),
-                            MaxNormalRange = txtNewMaxNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtNewMaxNormalRange.Text),
+                            DetectionLimit = txtNewDetectionLimit.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewDetectionLimit.Text),
+                            MinBoundary = texMinBoundary.Text == "" ? nullDecimal : Convert.ToDecimal(texMinBoundary.Text),
+                            MaxBoundary = txtNewMaxBoundaryValue.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMaxBoundaryValue.Text),
+                            MinNormalRange = txtNewMinNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMinNormalRange.Text),
+                            MaxNormalRange = txtNewMaxNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtNewMaxNormalRange.Text),
                             ResultUnit = unit
                         };
                         _configs.Add(config);
@@ -326,7 +325,7 @@ namespace IQCare.Web.Laboratory.Admin
                     DeleteFlag = false,
                     DataType = ddlDataType.SelectedValue,
                     LoincCode = textLoincCode.Text,
-                    Rank = textRank.Text!=""? Convert.ToDouble(textRank.Text) : 0.00,
+                    Rank = textRank.Text!=""? Convert.ToDecimal(textRank.Text) : 0.00M,
                     Name = textParameterName.Text,
                     ReferenceId = textReference.Text,
                     ResultConfig = null,
@@ -643,7 +642,7 @@ namespace IQCare.Web.Laboratory.Admin
                 this.ShowErrorMessage(ref ex);
             }
         }
-       
+        decimal? nullDecimal = null;
         protected void gridLabUnits_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
@@ -683,9 +682,7 @@ namespace IQCare.Web.Laboratory.Admin
                 TextBox txtEditMaxNormalRange = rowView.FindControl("txtEditMaxNormalRange") as TextBox;
                 TextBox txtEditDetectionLimit = rowView.FindControl("txtEditDetectionLimit") as TextBox;
                 CheckBox ckbDefault = rowView.FindControl("ckbDefault") as CheckBox;
-
-                Double? nullDouble = null;
-
+                                
                 if (ckbDefault.Checked)
                 {
                     if (configs.Count > 0)
@@ -703,11 +700,11 @@ namespace IQCare.Web.Laboratory.Admin
                     ParameterId = this.ParameterId,
                     IsDefault = ckbDefault.Checked,
                     DeleteFlag = false,
-                    DetectionLimit = txtEditDetectionLimit.Text == "" ? nullDouble : Convert.ToDouble(txtEditDetectionLimit.Text),
-                    MinBoundary = txtEditMinBoundaryValue.Text == "" ? nullDouble : Convert.ToDouble(txtEditMinBoundaryValue.Text),
-                    MaxBoundary = txtEditMaxBoundaryValue.Text == "" ? nullDouble : Convert.ToDouble(txtEditMaxBoundaryValue.Text),
-                    MinNormalRange = txtEditMinNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtEditMinNormalRange.Text),
-                    MaxNormalRange = txtEditMaxNormalRange.Text == "" ? nullDouble : Convert.ToDouble(txtEditMaxNormalRange.Text),
+                    DetectionLimit = txtEditDetectionLimit.Text == "" ? nullDecimal : Convert.ToDecimal(txtEditDetectionLimit.Text),
+                    MinBoundary = txtEditMinBoundaryValue.Text == "" ? nullDecimal : Convert.ToDecimal(txtEditMinBoundaryValue.Text),
+                    MaxBoundary = txtEditMaxBoundaryValue.Text == "" ? nullDecimal : Convert.ToDecimal(txtEditMaxBoundaryValue.Text),
+                    MinNormalRange = txtEditMinNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtEditMinNormalRange.Text),
+                    MaxNormalRange = txtEditMaxNormalRange.Text == "" ? nullDecimal : Convert.ToDecimal(txtEditMaxNormalRange.Text),
                     ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddEditUnitName.SelectedValue), Text = ddEditUnitName.SelectedItem.Text }
                 });
                 this.UnitConfig = configs;

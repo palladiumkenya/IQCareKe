@@ -1,4 +1,13 @@
-﻿using System;
+﻿using AjaxControlToolkit;
+using Application.Common;
+using Application.Presentation;
+using Entities.Lab;
+using Interface.Clinical;
+using Interface.Laboratory;
+using Interface.Lookup;
+using IQCare.IQControl;
+using IQCare.Web.UILogic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -8,16 +17,6 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using AjaxControlToolkit;
-using Application.Common;
-using Application.Presentation;
-using Entities.Lab;
-using Interface.Clinical;
-using Interface.Laboratory;
-using Interface.Security;
-using IQCare.IQControl;
-using Interface.Lookup;
-using IQCare.Web.UILogic;
 
 namespace IQCare.Web.Clinical
 {
@@ -32,6 +31,13 @@ namespace IQCare.Web.Clinical
         /// The htcontrolstatus
         /// </summary>
         public static Hashtable htcontrolstatus = new Hashtable();
+        List<RequiredField> requiredField = new List<RequiredField>();
+        class RequiredField
+        {
+            public string FieldId { get; set; }
+            public string SectionId { get; set; }
+            public bool IsGrid { get; set; }
+        }
         /// <summary>
         /// The current reg dt
         /// </summary>
@@ -101,7 +107,7 @@ namespace IQCare.Web.Clinical
         /// <summary>
         /// The tabcontainer
         /// </summary>
-        private AjaxControlToolkit.TabContainer tabContainer = new TabContainer();
+        private TabContainer tabContainer = new TabContainer();
         /// <summary>
         /// The tb child panel
         /// </summary>
@@ -243,7 +249,7 @@ namespace IQCare.Web.Clinical
         /// <param name="theObj">The object.</param>
         public void HtmlCheckBoxSelect(object theObj)
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             container.ActiveTabIndex = Convert.ToInt32(hdnPrevTabIndex.Value);
             CheckBox theButton = ((CheckBox)theObj);
             string[] theControlId = theButton.ID.ToString().Split('-');
@@ -258,9 +264,9 @@ namespace IQCare.Web.Clinical
             {
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -436,7 +442,7 @@ namespace IQCare.Web.Clinical
         /// <param name="sender">The sender.</param>
         public void HtmlRadioButtonSelect(object sender)
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             container.ActiveTabIndex = Convert.ToInt32(hdnPrevTabIndex.Value);
             HtmlInputRadioButton theButton = ((HtmlInputRadioButton)sender);
             string[] theControlId = theButton.ID.Split('-');
@@ -455,9 +461,9 @@ namespace IQCare.Web.Clinical
             {
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -671,18 +677,18 @@ namespace IQCare.Web.Clinical
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void btnsave_Click(object sender, EventArgs e)
         {
-            int TabID = Convert.ToInt32(ID[1]);
+            int tabId = Convert.ToInt32(ID[1]);
             string PrevTabId = hdnPrevTabId.Value;
             hdnPrevTabId.Value = hdnCurrentTabId.Value;
             string SaveTabData = hdnSaveTabData.Value;
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             ConFieldEnableDisable(container);
             Page_PreRender(sender, e);
             ICustomForm MgrSaveUpdate = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
             DataSet theDS = new DataSet();
-            theDS.Tables.Add(ReadLabTable(container, TabID));
-            theDS.Tables.Add(ReadARVMedicationTable(container, TabID));
-            theDS.Tables.Add(ReadNonARVMedicationTable(container, TabID));
+            theDS.Tables.Add(ReadLabTable(container, tabId));
+            theDS.Tables.Add(ReadARVMedicationTable(container, tabId));
+            theDS.Tables.Add(ReadNonARVMedicationTable(container, tabId));
 
             if (FieldValidation() == false)
             { return; }
@@ -691,8 +697,8 @@ namespace IQCare.Web.Clinical
             {
                 //int PatientID = Convert.ToInt32(Session["PatientId"]);
                 ViewState["VisitDate"] = txtvisitDate.Text;
-                StringBuilder Insert = SaveCustomFormData(PatientId, theDS, 0, TabID);
-                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Insert.ToString(), theDS, TabID);
+                StringBuilder Insert = SaveCustomFormData(PatientId, theDS, 0, tabId);
+                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Insert.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 Session["ServiceLocationId"] = TempDS.Tables[0].Rows[0]["LocationID"].ToString();
                 SaveCancel();
@@ -709,8 +715,8 @@ namespace IQCare.Web.Clinical
               //  int PatientID = Convert.ToInt32(Session["PatientId"]);
                 int visitId = Convert.ToInt32(Session["PatientVisitId"]);
              //   int LocationID = Convert.ToInt32(Session["ServiceLocationId"]);
-                StringBuilder Update = UpdateCustomFormData(PatientId, featureId, visitId, LocationId, theDS, 0, TabID);
-                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Update.ToString(), theDS, TabID);
+                StringBuilder Update = UpdateCustomFormData(PatientId, featureId, visitId, LocationId, theDS, 0, tabId);
+                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Update.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 UpdateCancel();
             }
@@ -776,7 +782,7 @@ namespace IQCare.Web.Clinical
 
             DataTable dtviewstate = (DataTable)ViewState["GridCache_" + secid];
             dtviewstate.Rows.RemoveAt(e.RowIndex);
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             BindGridView(secid, container, (DataTable)ViewState["GridCache_" + secid]);
         }
 
@@ -991,7 +997,7 @@ namespace IQCare.Web.Clinical
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             /////HTML Controls PostBack//////
             ConFieldEnableDisable(container);
         }
@@ -1261,32 +1267,32 @@ namespace IQCare.Web.Clinical
         /// <summary>
         /// Authentications the right.
         /// </summary>
-        /// <param name="FeatureID">The feature identifier.</param>
-        /// <param name="Mode">The mode.</param>
-        private void AuthenticationRight(int FeatureID, string Mode)
+        /// <param name="featureId">The feature identifier.</param>
+        /// <param name="mode">The mode.</param>
+        private void AuthenticationRight(int featureId, string mode)
         {
             AuthenticationManager Authentication = new AuthenticationManager();
-            if (Authentication.HasFunctionRight(FeatureID, FunctionAccess.Print, (DataTable)Session["UserRight"]) == false)
+            if (Authentication.HasFunctionRight(featureId, FunctionAccess.Print, (DataTable)Session["UserRight"]) == false)
             {
                 btnPrint.Enabled = false;
             }
-            if (Mode == "Add")
+            if (mode == "Add")
             {
-                if (Authentication.HasFunctionRight(FeatureID, FunctionAccess.Add, (DataTable)Session["UserRight"]) == false)
+                if (Authentication.HasFunctionRight(featureId, FunctionAccess.Add, (DataTable)Session["UserRight"]) == false)
                 {
                     btnsave.Enabled = false;
                 }
             }
-            else if (Mode == "Edit")
+            else if (mode == "Edit")
             {
-                if (Authentication.HasFunctionRight(FeatureID, FunctionAccess.Update, (DataTable)Session["UserRight"]) == false)
+                if (Authentication.HasFunctionRight(featureId, FunctionAccess.Update, (DataTable)Session["UserRight"]) == false)
                 {
                     btnsave.Enabled = false;
                 }
             }
-            else if (Mode == "Delete")
+            else if (mode == "Delete")
             {
-                if (Authentication.HasFunctionRight(FeatureID, FunctionAccess.Delete, (DataTable)Session["UserRight"]) == false)
+                if (Authentication.HasFunctionRight(featureId, FunctionAccess.Delete, (DataTable)Session["UserRight"]) == false)
                 {
                     btnsave.Enabled = false;
                 }
@@ -1623,24 +1629,24 @@ namespace IQCare.Web.Clinical
         /// <summary>
         /// Binds the drug controls.
         /// </summary>
-        /// <param name="DrugId">The drug identifier.</param>
-        /// <param name="Generic">The generic.</param>
-        /// <param name="DrugType">Type of the drug.</param>
-        /// <param name="Flag">The flag.</param>
-        private void BindDrugControls(int DrugId, int Generic, int DrugType, int Flag)
+        /// <param name="drugId">The drug identifier.</param>
+        /// <param name="generic">The generic.</param>
+        /// <param name="drugType">Type of the drug.</param>
+        /// <param name="flag">The flag.</param>
+        private void BindDrugControls(int drugId, int generic, int drugType, int flag)
         {
             #region "ARV Drugs"
 
-            if ((DrugType == 37 || DrugType == 36) && Flag == 0) //// DrugType-36 OI Med,37 ARV Med////
+            if ((drugType == 37 || drugType == 36) && flag == 0) //// DrugType-36 OI Med,37 ARV Med////
             {
                 Panel thePnl = new Panel();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    thePnl.ID = "pnlDrugARV_" + DrugId;
+                    thePnl.ID = "pnlDrugARV_" + drugId;
                 }
                 else
                 {
-                    thePnl.ID = "pnlGenericARV_" + Generic;
+                    thePnl.ID = "pnlGenericARV_" + generic;
                 }
                 thePnl.Height = 20;
                 thePnl.Width = 840;
@@ -1648,40 +1654,40 @@ namespace IQCare.Web.Clinical
 
                 Label lblStSp = new Label();
                 lblStSp.Width = 5;
-                lblStSp.ID = "stSpace" + DrugId + "" + Generic;
+                lblStSp.ID = "stSpace" + drugId + "" + generic;
                 lblStSp.Text = "";
                 thePnl.Controls.Add(lblStSp);
 
                 DataView theDV;
                 DataSet theDS = (DataSet)Session["AllData"];
                 DataTable DT = new DataTable();
-                if (Generic == 0)
+                if (generic == 0)
                 {
                     theDV = new DataView(theDS.Tables[10]);
-                    if (DrugId.ToString().LastIndexOf("8888") > 0)
+                    if (drugId.ToString().LastIndexOf("8888") > 0)
                     {
-                        DrugId = Convert.ToInt32(DrugId.ToString().Substring(0, DrugId.ToString().Length - 4));
+                        drugId = Convert.ToInt32(drugId.ToString().Substring(0, drugId.ToString().Length - 4));
                     }
-                    theDV.RowFilter = "Drug_Pk = " + DrugId;
+                    theDV.RowFilter = "Drug_Pk = " + drugId;
                 }
                 else
                 {
                     theDV = new DataView(theDS.Tables[11]);
-                    if (DrugId.ToString().LastIndexOf("9999") > 0)
+                    if (drugId.ToString().LastIndexOf("9999") > 0)
                     {
-                        DrugId = Convert.ToInt32(DrugId.ToString().Substring(0, DrugId.ToString().Length - 4));
+                        drugId = Convert.ToInt32(drugId.ToString().Substring(0, drugId.ToString().Length - 4));
                     }
-                    theDV.RowFilter = "GenericId = " + Generic;
+                    theDV.RowFilter = "GenericId = " + generic;
                 }
 
                 Label theDrugNm = new Label();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theDrugNm.ID = "ARVdrgNm" + DrugId;
+                    theDrugNm.ID = "ARVdrgNm" + drugId;
                 }
                 else
                 {
-                    theDrugNm.ID = "ARVGenericNm" + Generic;
+                    theDrugNm.ID = "ARVGenericNm" + generic;
                 }
                 theDrugNm.Text = theDV[0][1].ToString();
                 theDrugNm.Width = 400;
@@ -1689,7 +1695,7 @@ namespace IQCare.Web.Clinical
 
                 /////// Space//////
                 Label theSpace = new Label();
-                theSpace.ID = "theSpace_" + DrugId + "" + Generic;
+                theSpace.ID = "theSpace_" + drugId + "" + generic;
                 theSpace.Width = 10;
                 theSpace.Text = "";
                 ////////////////////
@@ -1698,11 +1704,11 @@ namespace IQCare.Web.Clinical
 
                 BindFunctions theBindMgr = new BindFunctions();
                 DropDownList theDrugFrequency = new DropDownList();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theDrugFrequency.ID = "ARVdrgFrequency" + DrugId;
+                    theDrugFrequency.ID = "ARVdrgFrequency" + drugId;
                 }
-                else { theDrugFrequency.ID = "ARVGenericFrequency" + Generic; }
+                else { theDrugFrequency.ID = "ARVGenericFrequency" + generic; }
                 theDrugFrequency.Width = 80;
 
                 #region "BindCombo"
@@ -1723,20 +1729,20 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace2 = new Label();
-                theSpace2.ID = "theSpace2" + DrugId + "" + Generic;
+                theSpace2.ID = "theSpace2" + drugId + "" + generic;
                 theSpace2.Width = 15;
                 theSpace2.Text = "";
                 thePnl.Controls.Add(theSpace2);
                 ////////////////////////////////////////
 
                 TextBox theQtyPrescribed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyPrescribed.ID = "ARVdrgQtyPrescribed" + DrugId;
+                    theQtyPrescribed.ID = "ARVdrgQtyPrescribed" + drugId;
                 }
                 else
                 {
-                    theQtyPrescribed.ID = "ARVGenericQtyPrescribed" + Generic;
+                    theQtyPrescribed.ID = "ARVGenericQtyPrescribed" + generic;
                 }
                 theQtyPrescribed.Width = 100;
                 thePnl.Controls.Add(theQtyPrescribed);
@@ -1744,20 +1750,20 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace4 = new Label();
-                theSpace4.ID = "theSpace4" + DrugId + "" + Generic;
+                theSpace4.ID = "theSpace4" + drugId + "" + generic;
                 theSpace4.Width = 20;
                 theSpace4.Text = "";
                 thePnl.Controls.Add(theSpace4);
                 ////////////////////////////////////////
 
                 TextBox theQtyDispensed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyDispensed.ID = "ARVdrgQtyDispensed" + DrugId;
+                    theQtyDispensed.ID = "ARVdrgQtyDispensed" + drugId;
                 }
                 else
                 {
-                    theQtyDispensed.ID = "ARVGenericQtyDispensed" + Generic;
+                    theQtyDispensed.ID = "ARVGenericQtyDispensed" + generic;
                 }
                 theQtyDispensed.Width = 100;
                 if (Session["SCMModule"] != null)
@@ -1767,38 +1773,38 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace5 = new Label();
-                theSpace5.ID = "theSpace5" + DrugId + "" + Generic;
+                theSpace5.ID = "theSpace5" + drugId + "" + generic;
                 theSpace5.Width = 20;
                 theSpace5.Text = "";
                 thePnl.Controls.Add(theSpace5);
                 ////////////////////////////////////////
                 CheckBox theFinChk = new CheckBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theFinChk.ID = "ARVDrugFinChk-" + DrugId;
+                    theFinChk.ID = "ARVDrugFinChk-" + drugId;
                 }
-                else { theFinChk.ID = "ARVGenericFinChk-" + Generic; }
+                else { theFinChk.ID = "ARVGenericFinChk-" + generic; }
                 theFinChk.Width = 10;
                 theFinChk.Text = "";
                 thePnl.Controls.Add(theFinChk);
                 ////////////Space///////////////////////
                 Label theSpace6 = new Label();
-                theSpace6.ID = "theSpace6" + DrugId + "" + Generic;
+                theSpace6.ID = "theSpace6" + drugId + "" + generic;
                 theSpace6.Width = 20;
                 theSpace6.Text = "";
                 thePnl.Controls.Add(theSpace6);
                 DIVCustomItem.Controls.Add(thePnl);
             }
-            else if ((DrugType == 37 || DrugType == 36) && Flag == 1)
+            else if ((drugType == 37 || drugType == 36) && flag == 1)
             {
                 Panel thePnl = new Panel();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    thePnl.ID = "pnlDrugARV_" + DrugId;
+                    thePnl.ID = "pnlDrugARV_" + drugId;
                 }
                 else
                 {
-                    thePnl.ID = "pnlGenericARV_" + Generic;
+                    thePnl.ID = "pnlGenericARV_" + generic;
                 }
                 thePnl.Height = 20;
                 thePnl.Width = 840;
@@ -1806,40 +1812,40 @@ namespace IQCare.Web.Clinical
 
                 Label lblStSp = new Label();
                 lblStSp.Width = 5;
-                lblStSp.ID = "stSpace" + DrugId + "" + Generic;
+                lblStSp.ID = "stSpace" + drugId + "" + generic;
                 lblStSp.Text = "";
                 thePnl.Controls.Add(lblStSp);
 
                 DataView theDV;
                 DataSet theDS = (DataSet)Session["AllData"];
                 DataTable DT = new DataTable();
-                if (Generic == 0)
+                if (generic == 0)
                 {
                     theDV = new DataView(theDS.Tables[10]);
-                    if (DrugId.ToString().LastIndexOf("8888") > 0)
+                    if (drugId.ToString().LastIndexOf("8888") > 0)
                     {
-                        DrugId = Convert.ToInt32(DrugId.ToString().Substring(0, DrugId.ToString().Length - 4));
+                        drugId = Convert.ToInt32(drugId.ToString().Substring(0, drugId.ToString().Length - 4));
                     }
-                    theDV.RowFilter = "Drug_Pk = " + DrugId;
+                    theDV.RowFilter = "Drug_Pk = " + drugId;
                 }
                 else
                 {
                     theDV = new DataView(theDS.Tables[11]);
-                    if (DrugId.ToString().LastIndexOf("9999") > 0)
+                    if (drugId.ToString().LastIndexOf("9999") > 0)
                     {
-                        DrugId = Convert.ToInt32(DrugId.ToString().Substring(0, DrugId.ToString().Length - 4));
+                        drugId = Convert.ToInt32(drugId.ToString().Substring(0, drugId.ToString().Length - 4));
                     }
-                    theDV.RowFilter = "GenericId = " + Generic;
+                    theDV.RowFilter = "GenericId = " + generic;
                 }
 
                 Label theDrugNm = new Label();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theDrugNm.ID = "ARVdrgNm" + DrugId;
+                    theDrugNm.ID = "ARVdrgNm" + drugId;
                 }
                 else
                 {
-                    theDrugNm.ID = "ARVGenericNm" + Generic;
+                    theDrugNm.ID = "ARVGenericNm" + generic;
                 }
                 theDrugNm.Text = theDV[0][1].ToString();
                 theDrugNm.Width = 400;
@@ -1847,7 +1853,7 @@ namespace IQCare.Web.Clinical
 
                 /////// Space//////
                 Label theSpace = new Label();
-                theSpace.ID = "theSpace_" + DrugId + "" + Generic;
+                theSpace.ID = "theSpace_" + drugId + "" + generic;
                 theSpace.Width = 10;
                 theSpace.Text = "";
                 ////////////////////
@@ -1856,11 +1862,11 @@ namespace IQCare.Web.Clinical
 
                 BindFunctions theBindMgr = new BindFunctions();
                 DropDownList theDrugFrequency = new DropDownList();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theDrugFrequency.ID = "ARVdrgFrequency" + DrugId;
+                    theDrugFrequency.ID = "ARVdrgFrequency" + drugId;
                 }
-                else { theDrugFrequency.ID = "ARVGenericFrequency" + Generic; }
+                else { theDrugFrequency.ID = "ARVGenericFrequency" + generic; }
                 theDrugFrequency.Width = 80;
 
                 #region "BindCombo"
@@ -1882,19 +1888,19 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace2 = new Label();
-                theSpace2.ID = "theSpace2" + DrugId + "" + Generic; ;
+                theSpace2.ID = "theSpace2" + drugId + "" + generic; ;
                 theSpace2.Width = 15;
                 theSpace2.Text = "";
                 thePnl.Controls.Add(theSpace2);
                 ////////////////////////////////////////
                 TextBox theQtyPrescribed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyPrescribed.ID = "ARVdrgQtyPrescribed" + DrugId;
+                    theQtyPrescribed.ID = "ARVdrgQtyPrescribed" + drugId;
                 }
                 else
                 {
-                    theQtyPrescribed.ID = "ARVGenericQtyPrescribed" + Generic;
+                    theQtyPrescribed.ID = "ARVGenericQtyPrescribed" + generic;
                 }
                 theQtyPrescribed.Width = 100;
                 //theQtyPrescribed.Load += new EventHandler(Control_Load);
@@ -1903,20 +1909,20 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace4 = new Label();
-                theSpace4.ID = "theSpace4" + DrugId + "" + Generic;
+                theSpace4.ID = "theSpace4" + drugId + "" + generic;
                 theSpace4.Width = 20;
                 theSpace4.Text = "";
                 thePnl.Controls.Add(theSpace4);
                 ////////////////////////////////////////
 
                 TextBox theQtyDispensed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyDispensed.ID = "ARVdrgQtyDispensed" + DrugId;
+                    theQtyDispensed.ID = "ARVdrgQtyDispensed" + drugId;
                 }
                 else
                 {
-                    theQtyDispensed.ID = "ARVGenericQtyDispensed" + Generic;
+                    theQtyDispensed.ID = "ARVGenericQtyDispensed" + generic;
                 }
                 theQtyDispensed.Width = 100;
                 if (Session["SCMModule"] != null)
@@ -1926,23 +1932,23 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace5 = new Label();
-                theSpace5.ID = "theSpace5" + DrugId + "" + Generic;
+                theSpace5.ID = "theSpace5" + drugId + "" + generic;
                 theSpace5.Width = 20;
                 theSpace5.Text = "";
                 thePnl.Controls.Add(theSpace5);
                 ////////////////////////////////////////
                 CheckBox theFinChk = new CheckBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theFinChk.ID = "ARVDrugFinChk" + DrugId;
+                    theFinChk.ID = "ARVDrugFinChk" + drugId;
                 }
-                else { theFinChk.ID = "ARVGenericFinChk" + Generic; }
+                else { theFinChk.ID = "ARVGenericFinChk" + generic; }
                 theFinChk.Width = 10;
                 theFinChk.Text = "";
                 thePnl.Controls.Add(theFinChk);
                 ////////////Space///////////////////////
                 Label theSpace6 = new Label();
-                theSpace6.ID = "theSpace6" + DrugId + "" + Generic;
+                theSpace6.ID = "theSpace6" + drugId + "" + generic;
                 theSpace6.Width = 20;
                 theSpace6.Text = "";
                 thePnl.Controls.Add(theSpace6);
@@ -1957,13 +1963,13 @@ namespace IQCare.Web.Clinical
             {
                 Panel thePnl = new Panel();
                 thePnl.Controls.Clear();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    thePnl.ID = "pnlDrug" + DrugId;
+                    thePnl.ID = "pnlDrug" + drugId;
                 }
                 else
                 {
-                    thePnl.ID = "pnlGeneric" + Generic;
+                    thePnl.ID = "pnlGeneric" + generic;
                 }
                 thePnl.Height = 20;
                 thePnl.Width = 840;
@@ -1971,35 +1977,35 @@ namespace IQCare.Web.Clinical
 
                 Label lblStSp = new Label();
                 lblStSp.Width = 5;
-                lblStSp.ID = "stSpace" + DrugId + "^" + Generic;
+                lblStSp.ID = "stSpace" + drugId + "^" + generic;
                 lblStSp.Text = "";
                 thePnl.Controls.Add(lblStSp);
 
                 DataView theDV;
                 DataSet theDS = (DataSet)Session["AllData"];
-                if (Generic == 0)
+                if (generic == 0)
                 {
                     theDV = new DataView(theDS.Tables[10]);
-                    theDV.RowFilter = "Drug_Pk = " + DrugId;
+                    theDV.RowFilter = "Drug_Pk = " + drugId;
                 }
                 else
                 {
                     theDV = new DataView(theDS.Tables[11]);
-                    if (DrugId.ToString().LastIndexOf("9999") > 0)
+                    if (drugId.ToString().LastIndexOf("9999") > 0)
                     {
-                        DrugId = Convert.ToInt32(DrugId.ToString().Substring(0, DrugId.ToString().Length - 4));
+                        drugId = Convert.ToInt32(drugId.ToString().Substring(0, drugId.ToString().Length - 4));
                     }
-                    theDV.RowFilter = "GenericId = " + Generic;
+                    theDV.RowFilter = "GenericId = " + generic;
                 }
 
                 Label theDrugNm = new Label();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theDrugNm.ID = "DrugNm" + DrugId;
+                    theDrugNm.ID = "DrugNm" + drugId;
                 }
                 else
                 {
-                    theDrugNm.ID = "GenericNm" + Generic;
+                    theDrugNm.ID = "GenericNm" + generic;
                 }
 
                 theDrugNm.Text = theDV[0][1].ToString();
@@ -2008,7 +2014,7 @@ namespace IQCare.Web.Clinical
 
                 /////// Space//////
                 Label theSpace = new Label();
-                theSpace.ID = "theSpace" + DrugId + "^" + Generic;
+                theSpace.ID = "theSpace" + drugId + "^" + generic;
                 theSpace.Width = 20;
                 theSpace.Text = "";
                 thePnl.Controls.Add(theSpace);
@@ -2017,13 +2023,13 @@ namespace IQCare.Web.Clinical
                 BindFunctions theBindMgr = new BindFunctions();
 
                 DropDownList theFrequency = new DropDownList();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theFrequency.ID = "drugFrequency" + DrugId;
+                    theFrequency.ID = "drugFrequency" + drugId;
                 }
                 else
                 {
-                    theFrequency.ID = "GenericFrequency" + Generic;
+                    theFrequency.ID = "GenericFrequency" + generic;
                 }
                 theFrequency.Width = 80;
                 DataTable DTFreq = new DataTable();
@@ -2033,20 +2039,20 @@ namespace IQCare.Web.Clinical
 
                 /////// Space//////
                 Label theSpace3 = new Label();
-                theSpace3.ID = "theSpace3*" + DrugId + "^" + Generic;
+                theSpace3.ID = "theSpace3*" + drugId + "^" + generic;
                 theSpace3.Width = 10;
                 theSpace3.Text = "";
                 thePnl.Controls.Add(theSpace3);
                 ////////////////////
 
                 TextBox theQtyPrescribed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyPrescribed.ID = "drugQtyPrescribed" + DrugId;
+                    theQtyPrescribed.ID = "drugQtyPrescribed" + drugId;
                 }
                 else
                 {
-                    theQtyPrescribed.ID = "genericQtyPrescribed" + Generic;
+                    theQtyPrescribed.ID = "genericQtyPrescribed" + generic;
                 }
                 theQtyPrescribed.Width = 90;
                 theQtyPrescribed.Text = "";
@@ -2057,18 +2063,18 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace5 = new Label();
-                theSpace5.ID = "theSpace5*" + DrugId + "^" + Generic;
+                theSpace5.ID = "theSpace5*" + drugId + "^" + generic;
                 theSpace5.Width = 10;
                 theSpace5.Text = "";
                 thePnl.Controls.Add(theSpace5);
                 ////////////////////////////////////////
 
                 TextBox theQtyDispensed = new TextBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theQtyDispensed.ID = "drugQtyDispensed" + DrugId;
+                    theQtyDispensed.ID = "drugQtyDispensed" + drugId;
                 }
-                else { theQtyDispensed.ID = "genericQtyDispensed" + Generic; }
+                else { theQtyDispensed.ID = "genericQtyDispensed" + generic; }
                 theQtyDispensed.Width = 90;
                 theQtyDispensed.Text = "";
                 tabContainer.ID = "TAB";
@@ -2080,20 +2086,20 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace6 = new Label();
-                theSpace6.ID = "theSpace6*" + DrugId + "^" + Generic;
+                theSpace6.ID = "theSpace6*" + drugId + "^" + generic;
                 theSpace6.Width = 25;
                 theSpace6.Text = "";
                 thePnl.Controls.Add(theSpace6);
                 ////////////////////////////////////////
 
                 CheckBox theFinChk = new CheckBox();
-                if (Generic == 0)
+                if (generic == 0)
                 {
-                    theFinChk.ID = "FinChkDrug" + DrugId;
+                    theFinChk.ID = "FinChkDrug" + drugId;
                 }
                 else
                 {
-                    theFinChk.ID = "FinChkGeneric" + Generic;
+                    theFinChk.ID = "FinChkGeneric" + generic;
                 }
                 theFinChk.Width = 10;
                 theFinChk.Text = "";
@@ -2101,7 +2107,7 @@ namespace IQCare.Web.Clinical
 
                 ////////////Space////////////////////////
                 Label theSpace7 = new Label();
-                theSpace7.ID = "theSpace7*" + DrugId + "^" + Generic;
+                theSpace7.ID = "theSpace7*" + drugId + "^" + generic;
                 theSpace7.Width = 15;
                 theSpace7.Text = "";
                 thePnl.Controls.Add(theSpace7);
@@ -2122,9 +2128,9 @@ namespace IQCare.Web.Clinical
         {
             foreach (object obj in theControl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -2132,7 +2138,7 @@ namespace IQCare.Web.Clinical
                             Control c = (Control)ctrl;
                             foreach (object x in c.Controls)
                             {
-                                if (x.GetType() == typeof(System.Web.UI.WebControls.GridView))
+                                if (x.GetType() == typeof(GridView))
                                 {
                                     if (((GridView)x).ID.Contains("Dview_" + section))
                                     {
@@ -2152,25 +2158,25 @@ namespace IQCare.Web.Clinical
         /// <summary>
         /// Binds the time12 control value.
         /// </summary>
-        /// <param name="TimeMinute">The time minute.</param>
-        /// <param name="ID">The identifier.</param>
-        private void BindTime12ControlValue(string[] TimeMinute, string ID)
+        /// <param name="timeMinute">The time minute.</param>
+        /// <param name="id">The identifier.</param>
+        private void BindTime12ControlValue(string[] timeMinute, string id)
         {
             string[] AMPM = new string[1]; ;
-            if (TimeMinute[1].Contains("AM"))
+            if (timeMinute[1].Contains("AM"))
             {
-                AMPM = TimeMinute[1].Replace(' ', ':').Split(':');
+                AMPM = timeMinute[1].Replace(' ', ':').Split(':');
             }
-            if (TimeMinute[1].Contains("PM"))
+            if (timeMinute[1].Contains("PM"))
             {
-                AMPM = TimeMinute[1].Replace(' ', ':').Split(':');
+                AMPM = timeMinute[1].Replace(' ', ':').Split(':');
             }
 
             foreach (object obj in tabContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -2178,17 +2184,17 @@ namespace IQCare.Web.Clinical
                             Control c = (Control)ctrl;
                             foreach (object x in c.Controls)
                             {
-                                if (x.GetType() == typeof(System.Web.UI.WebControls.DropDownList))
+                                if (x.GetType() == typeof(DropDownList))
                                 {
-                                    if (((DropDownList)x).ID == ID && ((DropDownList)x).ID.Contains("AM"))
+                                    if (((DropDownList)x).ID == id && ((DropDownList)x).ID.Contains("AM"))
                                     {
                                         ((DropDownList)x).SelectedValue = Convert.ToString(AMPM[1]);
                                     }
-                                    else if (((DropDownList)x).ID == ID && ((DropDownList)x).ID.Contains("PM"))
+                                    else if (((DropDownList)x).ID == id && ((DropDownList)x).ID.Contains("PM"))
                                     {
                                         ((DropDownList)x).SelectedValue = Convert.ToString(AMPM[1]);
                                     }
-                                    else if (((DropDownList)x).ID == ID && ((DropDownList)x).ID.Contains("Min"))
+                                    else if (((DropDownList)x).ID == id && ((DropDownList)x).ID.Contains("Min"))
                                     {
                                         ((DropDownList)x).SelectedValue = Convert.ToString(AMPM[0]);
                                     }
@@ -2205,13 +2211,13 @@ namespace IQCare.Web.Clinical
         /// </summary>
         /// <param name="TimeMinute">The time minute.</param>
         /// <param name="ID">The identifier.</param>
-        private void BindTime24ControlValue(string[] TimeMinute, string ID)
+        private void BindTime24ControlValue(string[] timeMinute, string id)
         {
             foreach (object obj in tabContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -2219,11 +2225,11 @@ namespace IQCare.Web.Clinical
                             Control c = (Control)ctrl;
                             foreach (object x in c.Controls)
                             {
-                                if (x.GetType() == typeof(System.Web.UI.WebControls.DropDownList))
+                                if (x.GetType() == typeof(DropDownList))
                                 {
-                                    if (((DropDownList)x).ID == ID)
+                                    if (((DropDownList)x).ID == id)
                                     {
-                                        ((DropDownList)x).SelectedValue = Convert.ToString(TimeMinute[1]);
+                                        ((DropDownList)x).SelectedValue = Convert.ToString(timeMinute[1]);
                                     }
                                 }
                             }
@@ -2288,9 +2294,9 @@ namespace IQCare.Web.Clinical
             {
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -2298,7 +2304,7 @@ namespace IQCare.Web.Clinical
                                 Control c = (Control)ctrl;
                                 foreach (object x in c.Controls)
                                 {
-                                    if (x.GetType() == typeof(System.Web.UI.WebControls.CheckBox))
+                                    if (x.GetType() == typeof(CheckBox))
                                     {
                                         string[] remStr = ((CheckBox)x).ID.Split('-');
                                         string str = remStr[0] + "-" + remStr[1] + "-" + remStr[2];
@@ -2313,10 +2319,10 @@ namespace IQCare.Web.Clinical
                                         string str = remStr[0] + "-" + remStr[1] + "-" + remStr[2];
                                         if ("TXTDT-" + theDRICD10["Field"] + theDRICD10["CodeId"].ToString().Replace('%', '^') + "OnSetDate" + "-" + strTableName == str)//((TextBox)x).ID.Substring(0, ((TextBox)x).ID.LastIndexOf('-')))
                                         {
-                                            string strdateformat = String.Format("{0:dd-MMM-yyyy}", theDRICD10["DateOnSet"]);
+                                            string strdateformat = string.Format("{0:dd-MMM-yyyy}", theDRICD10["DateOnSet"]);
                                             if (strdateformat.Trim() != "01-Jan-1900")
                                             {
-                                                ((TextBox)x).Text = String.Format("{0:dd-MMM-yyyy}", theDRICD10["DateOnSet"]);
+                                                ((TextBox)x).Text = string.Format("{0:dd-MMM-yyyy}", theDRICD10["DateOnSet"]);
                                             }
                                         }
 
@@ -2608,18 +2614,18 @@ namespace IQCare.Web.Clinical
         /// <summary>
         /// Binds the value.
         /// </summary>
-        /// <param name="PatientID">The patient identifier.</param>
-        /// <param name="VisitID">The visit identifier.</param>
-        /// <param name="LocationID">The location identifier.</param>
+        /// <param name="patientId">The patient identifier.</param>
+        /// <param name="visitId">The visit identifier.</param>
+        /// <param name="locationId">The location identifier.</param>
         /// <param name="theControl">The control.</param>
         /// <param name="tabsTable">The tabs table.</param>
-        private void BindValue(int PatientID, int VisitID, int LocationID, Control theControl, DataTable tabsTable)
+        private void BindValue(int patientId, int visitId, int locationId, Control theControl, DataTable tabsTable)
         {
             ICustomForm MgrBindValue = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             DataTable theDT = SetControlIDs(container);
             DataTable TempDT = theDT.DefaultView.ToTable(true, "TableName").Copy();
-            string strQuery = "Select VisitDate, Signature,DataQuality from ord_visit where Ptn_Pk=" + PatientID + " and Visit_Id=" + VisitID + " and LocationID=" + LocationID + "";
+            string strQuery = "Select VisitDate, Signature,DataQuality from ord_visit where Ptn_Pk=" + patientId + " and Visit_Id=" + visitId + " and LocationID=" + locationId + "";
 
             DataSet dsVisitDetails = MgrBindValue.Common_GetSaveUpdate(strQuery);
             try
@@ -2651,14 +2657,14 @@ namespace IQCare.Web.Clinical
                         {
                             string GetValue = "";
                             string TableName = "DTL_CUSTOMFORM_" + TempDR["SectionName"].ToString() + "_" + TempDR["FeatureName"].ToString().Trim().Replace(' ', '_');
-                            GetValue = "Select * from [" + TableName + "] where FormID=" + TempDR["FeatureID"].ToString() + "and   SectionID=" + TempDR["SectionID"].ToString() + " and Ptn_pk=" + PatientID + " and Visit_Pk=" + VisitID + " and LocationId=" + LocationID + "";
+                            GetValue = "Select * from [" + TableName + "] where FormID=" + TempDR["FeatureID"].ToString() + "and   SectionID=" + TempDR["SectionID"].ToString() + " and Ptn_pk=" + patientId + " and Visit_Pk=" + visitId + " and LocationId=" + locationId + "";
                             DataSet TempDS = MgrBindValue.Common_GetSaveUpdate(GetValue);
 
                             foreach (object obj in container.Controls)
                             {
-                                if (obj is AjaxControlToolkit.TabPanel)
+                                if (obj is TabPanel)
                                 {
-                                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                                    TabPanel tabPanel = (TabPanel)obj;
                                     foreach (object ctrl in tabPanel.Controls)
                                     {
                                         if (ctrl is Control)
@@ -2858,14 +2864,14 @@ namespace IQCare.Web.Clinical
 
                 //Multiselect
                 DataTable theMultiDT = new DataTable();
-                theMultiDT.Columns.Add(new DataColumn("TableName", typeof(String)));
+                theMultiDT.Columns.Add(new DataColumn("TableName", typeof(string)));
                 DataSet TmpDSMulti = new DataSet();
                 StringBuilder SBGetValueMultiselect = new StringBuilder();
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -2911,7 +2917,7 @@ namespace IQCare.Web.Clinical
                 DataTable theLocalDT = theMultiDT.DefaultView.ToTable(true, "TableName").Copy();
                 for (int i = 0; i < theLocalDT.Rows.Count; i++)
                 {
-                    SBGetValueMultiselect.Append("Select * from " + theLocalDT.Rows[i]["TableName"].ToString() + " where Ptn_pk=" + PatientID + " and Visit_Pk=" + VisitID + " and LocationId=" + LocationID + ";");
+                    SBGetValueMultiselect.Append("Select * from " + theLocalDT.Rows[i]["TableName"].ToString() + " where Ptn_pk=" + patientId + " and Visit_Pk=" + visitId + " and LocationId=" + locationId + ";");
                 }
 
                 TmpDSMulti = MgrBindValue.Common_GetSaveUpdate(SBGetValueMultiselect.ToString());
@@ -2921,9 +2927,9 @@ namespace IQCare.Web.Clinical
                     {
                         foreach (object obj in container.Controls)
                         {
-                            if (obj is AjaxControlToolkit.TabPanel)
+                            if (obj is TabPanel)
                             {
-                                AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                                TabPanel tabPanel = (TabPanel)obj;
                                 foreach (object ctrl in tabPanel.Controls)
                                 {
                                     if (ctrl is Control)
@@ -3117,28 +3123,28 @@ namespace IQCare.Web.Clinical
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnDynDQ_Click(object sender, EventArgs e)
         {
-            string[] ID = ((Button)sender).ID.Split('-');
-            int TabID = Convert.ToInt32(ID[1]);
-            ViewState["TabId"] = TabID;
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            string[] id = ((Button)sender).ID.Split('-');
+            int tabId = Convert.ToInt32(id[1]);
+            ViewState["TabId"] = tabId;
+            TabContainer container = tabContainer;
             //ConFieldEnableDisable(container);
             //Page_PreRender(sender, e);
             ICustomForm MgrSaveUpdate = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
             DataSet theDS = new DataSet();
-            theDS.Tables.Add(ReadLabTable(container, TabID));
-            theDS.Tables.Add(ReadARVMedicationTable(container, TabID));
-            theDS.Tables.Add(ReadNonARVMedicationTable(container, TabID));
+            theDS.Tables.Add(ReadLabTable(container, tabId));
+            theDS.Tables.Add(ReadARVMedicationTable(container, tabId));
+            theDS.Tables.Add(ReadNonARVMedicationTable(container, tabId));
 
             if (FieldValidation() == false)
             {
-                hdnPrevTabId.Value = TabID.ToString();
+                hdnPrevTabId.Value = tabId.ToString();
                 container.ActiveTabIndex = Convert.ToInt32(hdnPrevTabIndex.Value);
                 return;
             }
-            string msg = ValidationMessage(theDS, TabID);
+            string msg = ValidationMessage(theDS, tabId);
             if (msg.Length > 51)
             {
-                hdnPrevTabId.Value = TabID.ToString();
+                hdnPrevTabId.Value = tabId.ToString();
                 container.ActiveTabIndex = Convert.ToInt32(hdnPrevTabIndex.Value);
                 MsgBuilder theBuilder1 = new MsgBuilder();
                 theBuilder1.DataElements["MessageText"] = msg;
@@ -3150,8 +3156,8 @@ namespace IQCare.Web.Clinical
             {
                 int PatientID = Convert.ToInt32(Session["PatientId"]);
                 ViewState["VisitDate"] = txtvisitDate.Text;
-                StringBuilder Insert = SaveCustomFormData(PatientID, theDS, 1, TabID);
-                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Insert.ToString(), theDS, TabID);
+                StringBuilder Insert = SaveCustomFormData(PatientID, theDS, 1, tabId);
+                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Insert.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 hdnVisitId.Value = Session["PatientVisitId"].ToString();
                 Session["ServiceLocationId"] = TempDS.Tables[0].Rows[0]["LocationID"].ToString();
@@ -3165,8 +3171,8 @@ namespace IQCare.Web.Clinical
                 int PatientID = Convert.ToInt32(Session["PatientId"]);
                 int VisitID = Convert.ToInt32(Session["PatientVisitId"]);
                 int LocationID = Convert.ToInt32(Session["ServiceLocationId"]);
-                StringBuilder Update = UpdateCustomFormData(PatientID, FeatureID, VisitID, LocationID, theDS, 1, TabID);
-                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Update.ToString(), theDS, TabID);
+                StringBuilder Update = UpdateCustomFormData(PatientID, FeatureID, VisitID, LocationID, theDS, 1, tabId);
+                DataSet TempDS = MgrSaveUpdate.SaveUpdate(Update.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 hdnVisitId.Value = Session["PatientVisitId"].ToString();
                 DQCheck(PatientID, Convert.ToInt32(Session["PatientVisitId"]), LocationID);
@@ -3189,7 +3195,7 @@ namespace IQCare.Web.Clinical
             string[] Id = ((Button)sender).ID.Split('-');
             int tabId = Convert.ToInt32(Id[1]);
             ViewState["TabId"] = tabId;
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             //ConFieldEnableDisable(container);
             //Page_PreRender(sender, e);
             ICustomForm MgrSaveUpdate = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
@@ -3217,9 +3223,9 @@ namespace IQCare.Web.Clinical
 
             if (Convert.ToInt32(Session["PatientVisitId"]) == 0)
             {
-                int PatientID = Convert.ToInt32(Session["PatientId"]);
+                int patientId = Convert.ToInt32(Session["PatientId"]);
                 ViewState["VisitDate"] = txtvisitDate.Text;
-                StringBuilder Insert = SaveCustomFormData(PatientID, theDS, 0, tabId);
+                StringBuilder Insert = SaveCustomFormData(patientId, theDS, 0, tabId);
                 DataSet TempDS = MgrSaveUpdate.SaveUpdate(Insert.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 Session["ServiceLocationId"] = TempDS.Tables[0].Rows[0]["LocationID"].ToString();
@@ -3229,11 +3235,11 @@ namespace IQCare.Web.Clinical
             }
             else if (Convert.ToInt32(Session["PatientVisitId"]) > 0)
             {
-                int FeatureID = Convert.ToInt32(Session["FeatureID"]);
-                int PatientID = Convert.ToInt32(Session["PatientId"]);
-                int VisitID = Convert.ToInt32(Session["PatientVisitId"]);
-                int LocationID = Convert.ToInt32(Session["ServiceLocationId"]);
-                StringBuilder Update = UpdateCustomFormData(PatientID, FeatureID, VisitID, LocationID, theDS, 0, tabId);
+                int featureId = Convert.ToInt32(Session["FeatureID"]);
+                int patientId = Convert.ToInt32(Session["PatientId"]);
+                int visitId = Convert.ToInt32(Session["PatientVisitId"]);
+                int locationId = Convert.ToInt32(Session["ServiceLocationId"]);
+                StringBuilder Update = UpdateCustomFormData(patientId, featureId, visitId, locationId, theDS, 0, tabId);
                 DataSet TempDS = MgrSaveUpdate.SaveUpdate(Update.ToString(), theDS, tabId);
                 Session["PatientVisitId"] = TempDS.Tables[0].Rows[0]["VisitID"].ToString();
                 hdnVisitId.Value = Session["PatientVisitId"].ToString();
@@ -3252,10 +3258,10 @@ namespace IQCare.Web.Clinical
         /// <param name="ID">The identifier.</param>
         /// <param name="Value">The value.</param>
         /// <returns></returns>
-        private bool CheckAbNormalStatus(string ID, string Value)
+        private bool CheckAbNormalStatus(string id, string Value)
         {
             bool status = false;
-            string ar = ID;
+            string ar = id;
             string[] arVal = ar.Split('-');
             DataTable theDTNew = (DataTable)ViewState["BusRule"];
             DataView FilterAbVal = theDTNew.DefaultView;
@@ -3325,9 +3331,9 @@ namespace IQCare.Web.Clinical
             //Calling for HTML check box Event
             foreach (object obj in theCntrl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -3357,9 +3363,9 @@ namespace IQCare.Web.Clinical
             //Calling for HTML Radio Button Event
             foreach (object obj in theCntrl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -3392,9 +3398,9 @@ namespace IQCare.Web.Clinical
         {
             foreach (object obj in theControl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -3520,17 +3526,17 @@ namespace IQCare.Web.Clinical
         /// Creates the date image.
         /// </summary>
         /// <param name="theControl">The control.</param>
-        /// <param name="ControlID">The control identifier.</param>
+        /// <param name="controlId">The control identifier.</param>
         /// <param name="theConField">if set to <c>true</c> [the con field].</param>
         /// <param name="MMMYYYY">if set to <c>true</c> [mmmyyyy].</param>
-        private void CreateDateImage(object theControl, string ControlID, bool theConField, bool MMMYYYY)
+        private void CreateDateImage(object theControl, string controlId, bool theConField, bool MMMYYYY)
         {
-            string[] Field = ((Control)theControl).ID.Split('-');
-            DataTable theDT = (DataTable)ViewState["BusRule"];
+            string[] field = ((Control)theControl).ID.Split('-');
+            DataTable dtBusinessRules = (DataTable)ViewState["BusRule"];
             TextBox theDateText = (TextBox)theControl;
-            foreach (DataRow DR in theDT.Rows)
+            foreach (DataRow rule in dtBusinessRules.Rows)
             {
-                if (Field[1] == Convert.ToString(DR["FieldName"]) && Convert.ToString(DR["BusRuleId"]) == "21" && MMMYYYY == false)
+                if (field[1] == Convert.ToString(rule["FieldName"]) && Convert.ToString(rule["BusRuleId"]) == "21" && MMMYYYY == false)
                 {
                     theDateText = (TextBox)theControl;
                     theDateText.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'4')");
@@ -3582,7 +3588,7 @@ namespace IQCare.Web.Clinical
         /// <param name="theDT">The dt.</param>
         private void CreateTab(DataTable theDT)
         {
-            tabContainer = new AjaxControlToolkit.TabContainer();
+            tabContainer = new TabContainer();
             tabContainer.CssClass = "ajax__tab_technorati-theme";
             //tabcontainer.Height = Unit.Pixel(200);
             foreach (DataRow theDR in theDT.Rows)
@@ -3716,7 +3722,7 @@ namespace IQCare.Web.Clinical
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ddlSelectList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             container.ActiveTabIndex = Convert.ToInt32(hdnPrevTabIndex.Value);
             DropDownList theDList = ((DropDownList)sender);
             DataSet theDS = (DataSet)Session["AllData"];
@@ -3726,9 +3732,9 @@ namespace IQCare.Web.Clinical
             {
                 foreach (object obj in tabContainer.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -4012,14 +4018,14 @@ namespace IQCare.Web.Clinical
         /// </summary>
         /// <param name="theDS">The ds.</param>
         /// <returns></returns>
-        private String DQMessage(DataSet theDS)
+        private string DQMessage(DataSet theDS)
         {
-            IIQCareSystem DQIQCareSecurity = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
-            DateTime theCurrentDate = DQIQCareSecurity.SystemDate();
+         
+            DateTime theCurrentDate = SystemSetting.SystemDate;
             string strmsg = "Following values are required to complete the data quality check:\\n\\n";
-            DataTable theDT = (DataTable)ViewState["BusRule"];
-            String Radio1 = "", Radio2 = "", MultiSelectName = "", MultiSelectLabel = "";
-            int TotCount = 0, FalseCount = 0;
+            DataTable dtBusinessRule = (DataTable)ViewState["BusRule"];
+            string radio1 = "", radio2 = "", multiSelectName = "", multiSelectLabel = "";
+            int TotCount = 0, falseCount = 0;
             try
             {
                 if (txtvisitDate.Text.Trim() == "")
@@ -4031,12 +4037,12 @@ namespace IQCare.Web.Clinical
                     strmsg += " Visit Date is Blank";
                     strmsg = strmsg + "\\n";
                 }
-                AjaxControlToolkit.TabContainer container = tabContainer;
+                TabContainer container = tabContainer;
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -4047,38 +4053,38 @@ namespace IQCare.Web.Clinical
                                 {
                                     if (x.GetType() == typeof(TextBox))
                                     {
-                                        string[] Field = ((TextBox)x).ID.Split('-');
+                                        string[] field = ((TextBox)x).ID.Split('-');
 
-                                        foreach (DataRow theDR in theDT.Rows)
+                                        foreach (DataRow rule in dtBusinessRule.Rows)
                                         {
                                             if ((((TextBox)x).ID.Contains("=") == true) && (((TextBox)x).Enabled == true))
                                             {
-                                                string[] Field10 = ((TextBox)x).ID.Replace('=', '-').Split('-');
-                                                if (Field10[1] == Convert.ToString(theDR["FieldName"]) && Field10[2] == Convert.ToString(theDR["TableName"]) && Field10[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
+                                                string[] field10 = ((TextBox)x).ID.Replace('=', '-').Split('-');
+                                                if (field10[1] == Convert.ToString(rule["FieldName"]) && field10[2] == Convert.ToString(rule["TableName"]) && field10[3] == Convert.ToString(rule["FieldId"]) && (Convert.ToString(rule["BusRuleId"]) == "13" || Convert.ToString(rule["BusRuleId"]) == "1"))
                                                 {
                                                     if (((TextBox)x).Text == "")
                                                     {
-                                                        string scriptblankmultitext = "<script language = 'javascript' defer ='defer' id = 'Color" + theDR["FieldLabel"] + theDR["FieldId"] + "'>\n";
-                                                        scriptblankmultitext += "To_Change_Color('lbl" + theDR["FieldLabel"] + "-" + theDR["FieldId"] + "');\n";
+                                                        string scriptblankmultitext = "<script language = 'javascript' defer ='defer' id = 'Color" + rule["FieldLabel"] + rule["FieldId"] + "'>\n";
+                                                        scriptblankmultitext += "To_Change_Color('lbl" + rule["FieldLabel"] + "-" + rule["FieldId"] + "');\n";
                                                         scriptblankmultitext += "</script>\n";
-                                                        ClientScript.RegisterStartupScript(this.GetType(), "Color" + theDR["FieldLabel"] + theDR["FieldId"], scriptblankmultitext);
-                                                        strmsg += theDR["FieldLabel"] + " is Blank";
+                                                        ClientScript.RegisterStartupScript(this.GetType(), "Color" + rule["FieldLabel"] + rule["FieldId"], scriptblankmultitext);
+                                                        strmsg += rule["FieldLabel"] + " is Blank";
                                                         strmsg = strmsg + "\\n";
                                                     }
                                                 }
                                             }
-                                            if (Field[1] == Convert.ToString(theDR["FieldName"]) && Field[2] == Convert.ToString(theDR["TableName"]) && Field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
+                                            if (field[1] == Convert.ToString(rule["FieldName"]) && field[2] == Convert.ToString(rule["TableName"]) && field[3] == Convert.ToString(rule["FieldId"]) && (Convert.ToString(rule["BusRuleId"]) == "13" || Convert.ToString(rule["BusRuleId"]) == "1"))
                                             {
                                                 if ((((TextBox)x).Text == "") && (((TextBox)x).Enabled == true))
                                                 {
                                                     //if (Convert.ToString(theDR["BusRuleId"]) != "1")
                                                     //{
-                                                    string scriptblanktext = "<script language = 'javascript' defer ='defer' id = 'Color" + theDR["FieldLabel"] + theDR["FieldId"] + "'>\n";
-                                                    scriptblanktext += "To_Change_Color('lbl" + theDR["FieldLabel"] + "-" + theDR["FieldId"] + "');\n";
+                                                    string scriptblanktext = "<script language = 'javascript' defer ='defer' id = 'Color" + rule["FieldLabel"] + rule["FieldId"] + "'>\n";
+                                                    scriptblanktext += "To_Change_Color('lbl" + rule["FieldLabel"] + "-" + rule["FieldId"] + "');\n";
                                                     scriptblanktext += "</script>\n";
-                                                    ClientScript.RegisterStartupScript(this.GetType(), "Color" + theDR["FieldLabel"] + theDR["FieldId"], scriptblanktext);
+                                                    ClientScript.RegisterStartupScript(this.GetType(), "Color" + rule["FieldLabel"] + rule["FieldId"], scriptblanktext);
                                                     //}
-                                                    strmsg += theDR["FieldLabel"] + " is Blank";
+                                                    strmsg += rule["FieldLabel"] + " is Blank";
                                                     strmsg = strmsg + "\\n";
                                                 }
                                             }
@@ -4088,21 +4094,21 @@ namespace IQCare.Web.Clinical
 
                                     if (x.GetType() == typeof(HtmlInputRadioButton))
                                     {
-                                        string[] Field = ((HtmlInputRadioButton)x).ID.Split('-');
-                                        if (Field[0] == "RADIO1" && ((HtmlInputRadioButton)x).Checked == false)
+                                        string[] field = ((HtmlInputRadioButton)x).ID.Split('-');
+                                        if (field[0] == "RADIO1" && ((HtmlInputRadioButton)x).Checked == false)
                                         {
-                                            Radio1 = Field[3];
+                                            radio1 = field[3];
                                         }
-                                        if (Field[0] == "RADIO2" && ((HtmlInputRadioButton)x).Checked == false)
+                                        if (field[0] == "RADIO2" && ((HtmlInputRadioButton)x).Checked == false)
                                         {
-                                            Radio2 = Field[3];
+                                            radio2 = field[3];
                                         }
 
-                                        foreach (DataRow theDR in theDT.Rows)
+                                        foreach (DataRow theDR in dtBusinessRule.Rows)
                                         {
-                                            if (Radio1 == Field[3] && Radio2 == Field[3])
+                                            if (radio1 == field[3] && radio2 == field[3])
                                             {
-                                                if (Field[1] == Convert.ToString(theDR["FieldName"]) && Field[2] == Convert.ToString(theDR["TableName"]) && Field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
+                                                if (field[1] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["TableName"]) && field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
                                                 {
                                                     //if (Convert.ToString(theDR["BusRuleId"]) != "1")
                                                     //{
@@ -4119,12 +4125,12 @@ namespace IQCare.Web.Clinical
                                     }
                                     if (x.GetType() == typeof(DropDownList))
                                     {
-                                        string[] Field = ((DropDownList)x).ID.Split('-');
-                                        foreach (DataRow theDR in theDT.Rows)
+                                        string[] field = ((DropDownList)x).ID.Split('-');
+                                        foreach (DataRow theDR in dtBusinessRule.Rows)
                                         {
-                                            if (Field[1] == Convert.ToString(theDR["FieldName"]) && Field[2] == Convert.ToString(theDR["TableName"]) && Field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
+                                            if (field[1] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["TableName"]) && field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
                                             {
-                                                if ((((DropDownList)x).SelectedValue == "0") && (Field[0].ToString() != "SELECTLISTAuto") && ((DropDownList)x).Enabled == true)
+                                                if ((((DropDownList)x).SelectedValue == "0") && (field[0].ToString() != "SELECTLISTAuto") && ((DropDownList)x).Enabled == true)
                                                 {
                                                     //if (Convert.ToString(theDR["BusRuleId"]) != "1")
                                                     //{
@@ -4144,7 +4150,7 @@ namespace IQCare.Web.Clinical
                                     if (x.GetType() == typeof(HtmlInputCheckBox))
                                     {
                                         string[] field = ((HtmlInputCheckBox)x).ID.Split('-');
-                                        foreach (DataRow theDR in theDT.Rows)
+                                        foreach (DataRow theDR in dtBusinessRule.Rows)
                                         {
                                             if (field[1] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["TableName"]) && field[3] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
                                             {
@@ -4170,9 +4176,9 @@ namespace IQCare.Web.Clinical
                                     if (x.GetType() == typeof(Panel) && ((Panel)x).ID.StartsWith("Pnl_") == true)
                                     {
                                         string[] field = ((Panel)x).ID.Split('_');
-                                        foreach (DataRow theDR in theDT.Rows)
+                                        foreach (DataRow rule in dtBusinessRule.Rows)
                                         {
-                                            if (field[1] == theDR["FieldId"].ToString() && ((Panel)x).ToolTip.ToString() == theDR["FieldLabel"].ToString() && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
+                                            if (field[1] == rule["FieldId"].ToString() && ((Panel)x).ToolTip.ToString() == rule["FieldLabel"].ToString() && (Convert.ToString(rule["BusRuleId"]) == "13" || Convert.ToString(rule["BusRuleId"]) == "1"))
                                             {
                                                 int noChecks = 0;
                                                 foreach (Control theCntrl in ((Panel)x).Controls)
@@ -4186,12 +4192,12 @@ namespace IQCare.Web.Clinical
 
                                                 if (noChecks == 0)
                                                 {
-                                                    string scriptMultiSelect = "<script language = 'javascript' defer ='defer' id = 'Color" + theDR["FieldLabel"] + theDR["FieldId"] + "'>\n";
-                                                    scriptMultiSelect += "To_Change_Color('lbl" + theDR["FieldLabel"] + "-" + theDR["FieldId"] + "');\n";
+                                                    string scriptMultiSelect = "<script language = 'javascript' defer ='defer' id = 'Color" + rule["FieldLabel"].ToString() + rule["FieldId"].ToString() + "'>\n";
+                                                    scriptMultiSelect += "To_Change_Color('lbl" + rule["FieldLabel"].ToString() + "-" + rule["FieldId"].ToString() + "');\n";
                                                     scriptMultiSelect += "</script>\n";
-                                                    ClientScript.RegisterStartupScript(this.GetType(), "Color" + theDR["FieldLabel"] + theDR["FieldId"], scriptMultiSelect);
+                                                    ClientScript.RegisterStartupScript(this.GetType(), "Color" + rule["FieldLabel"].ToString() + rule["FieldId"].ToString(), scriptMultiSelect);
                                                     //}
-                                                    strmsg += theDR["FieldLabel"] + " is not Selected ";
+                                                    strmsg += rule["FieldLabel"].ToString() + " is not Selected ";
                                                     strmsg = strmsg + "\\n";
                                                 }
                                             }
@@ -4204,7 +4210,7 @@ namespace IQCare.Web.Clinical
 
                                         if (field.Length == 4)
                                         {
-                                            foreach (DataRow theDR in theDT.Rows)
+                                            foreach (DataRow theDR in dtBusinessRule.Rows)
                                             {
                                                 if (field[3] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1"))
                                                 {
@@ -4227,30 +4233,30 @@ namespace IQCare.Web.Clinical
 
                                         if (field.Length == 5)
                                         {
-                                            foreach (DataRow theDR in theDT.Rows)
+                                            foreach (DataRow rule in dtBusinessRule.Rows)
                                             {
-                                                if (field[3] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["FieldId"]) && Convert.ToString(theDR["BusRuleId"]) == "13" && Convert.ToString(theDR["Value"]) == "37")
+                                                if (field[3] == Convert.ToString(rule["FieldName"]) && field[2] == Convert.ToString(rule["FieldId"]) && Convert.ToString(rule["BusRuleId"]) == "13" && Convert.ToString(rule["Value"]) == "37")
                                                 {
                                                     if (theDS.Tables[1].Rows.Count == 0)
                                                     {
-                                                        if (theDR["Value"].ToString() != "")
+                                                        if (rule["Value"].ToString() != "")
                                                         {
                                                             DataView theDV = new DataView((DataTable)Session["DrugTypeName"]);
-                                                            theDV.RowFilter = "DrugTypeID=" + Convert.ToInt32(theDR["Value"]).ToString();
+                                                            theDV.RowFilter = "DrugTypeID=" + Convert.ToInt32(rule["Value"]).ToString();
                                                             DataTable theDrugNameDT = theDV.ToTable();
                                                             strmsg += theDrugNameDT.Rows[0]["DrugTypeName"] + " is Required Field";
                                                             strmsg = strmsg + "\\n";
                                                         }
                                                     }
                                                 }
-                                                else if (field[3] == Convert.ToString(theDR["FieldName"]) && field[2] == Convert.ToString(theDR["FieldId"]) && (Convert.ToString(theDR["BusRuleId"]) == "13" || Convert.ToString(theDR["BusRuleId"]) == "1") && Convert.ToString(theDR["Value"]) != "37")
+                                                else if (field[3] == Convert.ToString(rule["FieldName"]) && field[2] == Convert.ToString(rule["FieldId"]) && (Convert.ToString(rule["BusRuleId"]) == "13" || Convert.ToString(rule["BusRuleId"]) == "1") && Convert.ToString(rule["Value"]) != "37")
                                                 {
                                                     if (theDS.Tables[2].Rows.Count == 0)
                                                     {
-                                                        if (theDR["Value"].ToString() != "")
+                                                        if (rule["Value"].ToString() != "")
                                                         {
                                                             DataView theDV = new DataView((DataTable)Session["DrugTypeName"]);
-                                                            theDV.RowFilter = "DrugTypeID=" + Convert.ToInt32(theDR["Value"].ToString()).ToString();
+                                                            theDV.RowFilter = "DrugTypeID=" + Convert.ToInt32(rule["Value"].ToString()).ToString();
                                                             DataTable theDrugNameDT = theDV.ToTable();
                                                             strmsg += theDrugNameDT.Rows[0]["DrugTypeName"] + " is Required Field";
                                                             strmsg = strmsg + "\\n";
@@ -4268,9 +4274,9 @@ namespace IQCare.Web.Clinical
                 //MultiSelect Validation
                 foreach (object obj in container.Controls)
                 {
-                    if (obj is AjaxControlToolkit.TabPanel)
+                    if (obj is TabPanel)
                     {
-                        AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                        TabPanel tabPanel = (TabPanel)obj;
                         foreach (object ctrl in tabPanel.Controls)
                         {
                             if (ctrl is Control)
@@ -4288,17 +4294,17 @@ namespace IQCare.Web.Clinical
                                                 TotCount++;
                                                 if (((CheckBox)z).Checked == false)
                                                 {
-                                                    FalseCount++;
+                                                    falseCount++;
                                                 }
                                             }
                                         }
-                                        foreach (DataRow theMultiDR in theDT.Rows)
+                                        foreach (DataRow theMultiDR in dtBusinessRule.Rows)
                                         {
                                             if (Convert.ToString(theMultiDR["ControlId"]) == "9" && field[2] == Convert.ToString(theMultiDR["FieldID"]) && (Convert.ToInt32(theMultiDR["BusRuleId"]) == 13 || Convert.ToInt32(theMultiDR["BusRuleId"]) == 1))
                                             {
-                                                MultiSelectName = Convert.ToString(theMultiDR["Name"]);
-                                                MultiSelectLabel = Convert.ToString(theMultiDR["FieldLabel"]);
-                                                if (TotCount == FalseCount)
+                                                multiSelectName = Convert.ToString(theMultiDR["Name"]);
+                                                multiSelectLabel = Convert.ToString(theMultiDR["FieldLabel"]);
+                                                if (TotCount == falseCount)
                                                 {
                                                     string scriptMultiSelect = "<script language = 'javascript' defer ='defer' id = 'Color" + theMultiDR["FieldLabel"] + theMultiDR["FieldId"] + "'>\n";
                                                     scriptMultiSelect += "To_Change_Color('lbl" + theMultiDR["FieldLabel"] + "-" + theMultiDR["FieldId"] + "');\n";
@@ -4306,14 +4312,14 @@ namespace IQCare.Web.Clinical
                                                     //ClientScript.RegisterStartupScript(this.GetType(),"Color" + theMultiDR["FieldLabel"] + theMultiDR["FieldId"], scriptMultiSelect);
 
                                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Color" + theMultiDR["FieldLabel"] + theMultiDR["FieldId"], scriptMultiSelect);
-                                                    strmsg += MultiSelectLabel + " is not Selected ";
+                                                    strmsg += multiSelectLabel + " is not Selected ";
                                                     strmsg = strmsg + "\\n";
                                                 }
                                             }
                                         }
 
-                                        TotCount = 0; FalseCount = 0;
-                                        MultiSelectName = ""; MultiSelectLabel = "";
+                                        TotCount = 0; falseCount = 0;
+                                        multiSelectName = ""; multiSelectLabel = "";
                                     }
                                 }
                             }
@@ -4339,7 +4345,7 @@ namespace IQCare.Web.Clinical
         /// <param name="drugTypeId">The drug type identifier.</param>
         private void DrugDataBinding(string BtnId, int drugTypeId)
         {
-            int VisitID = Convert.ToInt32(Session["PatientVisitId"]);
+            int visitId = Convert.ToInt32(Session["PatientVisitId"]);
             //int PatientID = Convert.ToInt32(Session["PatientId"]);
             DataSet theDSDrug = new DataSet();
             ICustomForm MgrBindValue = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
@@ -4351,7 +4357,7 @@ namespace IQCare.Web.Clinical
             StrDrug.Append(" from dbo.ord_PatientPharmacyOrder a inner join dbo.dtl_PatientPharmacyOrder b on a.ptn_pharmacy_pk = b.ptn_pharmacy_pk");
             StrDrug.Append(" Inner join Vw_Drug c on b.Drug_Pk = c.Drug_Pk");
             StrDrug.Append(" where a.ptn_pharmacy_pk =");
-            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + VisitID + "'");
+            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + visitId + "'");
             StrDrug.Append(" and Ptn_pk='" + PatientId + "')");
             StrDrug.Append(" UNION ");
             StrDrug.Append("Select a.ptn_pharmacy_pk, a.Ptn_pk, a.VisitID, a.LocationID, a.OrderedBy,");
@@ -4361,7 +4367,7 @@ namespace IQCare.Web.Clinical
             StrDrug.Append(" from dbo.ord_PatientPharmacyOrder a inner join dbo.dtl_PatientPharmacyOrder b on a.ptn_pharmacy_pk = b.ptn_pharmacy_pk");
             StrDrug.Append(" Inner join Vw_Generic c on b.GenericId = c.GenericId");
             StrDrug.Append(" where a.ptn_pharmacy_pk =");
-            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + VisitID + "'");
+            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + visitId + "'");
             StrDrug.Append(" and Ptn_pk='" + PatientId + "')");
             StrDrug.Append(" Select a.ptn_pharmacy_pk, a.Ptn_pk, a.VisitID, a.LocationID, a.OrderedBy,");
             StrDrug.Append(" a.OrderedByDate, a.DispensedBy, a.DispensedByDate, a.Signature, a.UserID,");
@@ -4370,7 +4376,7 @@ namespace IQCare.Web.Clinical
             StrDrug.Append(" from dbo.ord_PatientPharmacyOrder a inner join dbo.dtl_PatientPharmacyOrderNonARV b on a.ptn_pharmacy_pk = b.ptn_pharmacy_pk ");
             StrDrug.Append(" inner join lnk_drugtypegeneric c on c.GenericId=b.GenericId");
             StrDrug.Append(" where a.ptn_pharmacy_pk =");
-            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + VisitID + "'");
+            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + visitId + "'");
             StrDrug.Append(" and Ptn_pk='" + PatientId + "')");
             StrDrug.Append(" UNION ");
             StrDrug.Append("Select a.ptn_pharmacy_pk, a.Ptn_pk, a.VisitID, a.LocationID, a.OrderedBy,");
@@ -4380,7 +4386,7 @@ namespace IQCare.Web.Clinical
             StrDrug.Append(" from dbo.ord_PatientPharmacyOrder a inner join dbo.dtl_PatientPharmacyOrderNonARV b on a.ptn_pharmacy_pk = b.ptn_pharmacy_pk");
             StrDrug.Append(" inner join vw_drug c on b.Drug_Pk=c.Drug_pk");
             StrDrug.Append(" where a.ptn_pharmacy_pk =");
-            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + VisitID + "'");
+            StrDrug.Append(" (Select ptn_pharmacy_pk from ord_PatientPharmacyOrder where VisitID='" + visitId + "'");
             StrDrug.Append(" and Ptn_pk='" + PatientId + "')");
             theDSDrug = MgrBindValue.Common_GetSaveUpdate(StrDrug.ToString());
 
@@ -5059,9 +5065,9 @@ namespace IQCare.Web.Clinical
 
             foreach (object obj in theControl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -5309,12 +5315,12 @@ namespace IQCare.Web.Clinical
             //DataTable lnkSectionFieldName = ((DataTable)ViewState["LnkTable"]).DefaultView.ToTable(true, "FeatureID", "FieldName", "IsGridView", "SectionID","Fieldlabel").Copy();
             DataView dvSectionFieldName = new DataView(lnkSectionFieldName);
             dvSectionFieldName.RowFilter = "SectionId=" + sectionId + " and IsGridView = 1";
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             foreach (object obj in container.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -5433,12 +5439,12 @@ namespace IQCare.Web.Clinical
         private StringBuilder InsertMultiSelectList(int patientId, string fieldName, int featureId, string multi_SelectTable, int theControlId, int theFieldId, int tabId)
         {
             StringBuilder Insertcbl = new StringBuilder();
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             foreach (object obj in container.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     if (Convert.ToInt32(tabPanel.ID) == tabId)
                     {
                         foreach (object ctrl in tabPanel.Controls)
@@ -7855,7 +7861,7 @@ namespace IQCare.Web.Clinical
             {
                 // todo
                 this.IsSingleVisit = true;
-                Label1.Text = "First Encounter Date:";
+                Label1.InnerHtml = "First Encounter Date:";
                 if (mainDataset.Tables[15].Rows.Count > 0)
                 {
                     txtvisitDate.Text = string.Format("{0:dd-MMM-yyyy}", mainDataset.Tables[15].Rows[0]["VisitDate"]);
@@ -7924,7 +7930,7 @@ namespace IQCare.Web.Clinical
 
             foreach (DataRow theMDR in mainDataset.Tables[17].Rows)
             {
-                Int32 theFieldId = Convert.ToInt32(theMDR["FieldId"]);
+                int theFieldId = Convert.ToInt32(theMDR["FieldId"]);
                 bool theRecFnd = false;
                 foreach (DataRow theDR in theConditionalFields.Rows)
                 {
@@ -7949,6 +7955,8 @@ namespace IQCare.Web.Clinical
                 foreach (DataRow sectionRow in tableSection.Rows)
                 {
                     bool spanfieldflag = false;
+                    string sectionId = Convert.ToString(sectionRow["SectionID"]);
+                    bool isGridviewSection = (sectionRow["IsGridView"].ToString() == "1");
                     if (Convert.ToInt32(tabRow["TabId"]) == Convert.ToInt32(sectionRow["TabId"]))
                     {
                         tbChildPanel.ID = sectionRow["TabId"].ToString();
@@ -8020,7 +8028,15 @@ namespace IQCare.Web.Clinical
                                     Session["busRulChk"] = 0;
 
                                 #endregion "Check if Multi select has business rules 18 19 20"
-
+                                if (IsRequiredField(fieldId, fieldName))
+                                {
+                                    //requiredField.ContainsValue(fieldId)
+                                    if (!requiredField.Exists(rf => rf.FieldId == fieldId))
+                                    {
+                                        //requiredField.Add(Convert.ToInt32(sectionId), fieldId);
+                                        requiredField.Add(new RequiredField() { FieldId = fieldId, SectionId = sectionId, IsGrid = isGridviewSection });
+                                    }
+                                }
                                 if (td <= Numtds)
                                 {
                                     if (td == 1)
@@ -8119,7 +8135,15 @@ namespace IQCare.Web.Clinical
                                         string con_bindSource = theDVConditionalField[i]["BindSource"].ToString();
                                         string con_bindCategory = theDVConditionalField[i]["BindCategory"].ToString();
                                         string con_controlReferenceId = theDVConditionalField[i]["ReferenceId"].ToString();
-
+                                        if (IsRequiredField(con_fieldId, con_fieldName))
+                                        {
+                                            //requiredField.ContainsValue(fieldId)
+                                            if (!requiredField.Exists(rf => rf.FieldId == con_fieldId))
+                                            {
+                                                //requiredField.Add(Convert.ToInt32(sectionId), fieldId);
+                                                requiredField.Add(new RequiredField() { FieldId = con_fieldId, SectionId = sectionId, IsGrid = isGridviewSection });
+                                            }
+                                        }
                                         if (td <= Numtds)
                                         {
                                             theSecondLabelConditional = false;
@@ -8225,7 +8249,15 @@ namespace IQCare.Web.Clinical
                                                 string sec_con_bindSource = theDVSecondLabelConditionalField[j]["BindSource"].ToString();
                                                 string sec_con_bindCategory = theDVSecondLabelConditionalField[j]["BindCategory"].ToString();
                                                 string sec_con_controlReferenceId = theDVSecondLabelConditionalField[j]["ReferenceId"].ToString();
-
+                                                if (IsRequiredField(sec_con_fieldId, sec_con_fieldName))
+                                                {
+                                                    //requiredField.ContainsValue(fieldId)
+                                                    if (!requiredField.Exists(rf => rf.FieldId == sec_con_fieldId))
+                                                    {
+                                                        //requiredField.Add(Convert.ToInt32(sectionId), fieldId);
+                                                        requiredField.Add(new RequiredField() { FieldId = sec_con_fieldId, SectionId = sectionId, IsGrid = isGridviewSection });
+                                                    }
+                                                }
                                                 if (td <= Numtds)
                                                 {
                                                     if (td == 1)
@@ -8294,7 +8326,8 @@ namespace IQCare.Web.Clinical
 
                         #region "Grid Section"
 
-                        if (sectionRow["IsGridView"].ToString() == "1")
+                        //if (sectionRow["IsGridView"].ToString() == "1")
+                        if (isGridviewSection)
                         {
                             DataTable theDT = new DataTable();
 
@@ -8302,7 +8335,7 @@ namespace IQCare.Web.Clinical
                             DataTable thedtGridViewField = new DataTable();
                             thedtGridViewField = mainDataset.Tables[1].Copy();
                             DataView theDVGridView = new DataView(thedtGridViewField);
-                            theDVGridView.RowFilter = "SectionID =" + sectionRow["SectionID"].ToString();
+                            theDVGridView.RowFilter = "SectionID =" + sectionId;
                             if (!IsPostBack)
                             {
                                 if (gblDTGridViewControls.Rows.Count > 0)
@@ -8331,10 +8364,10 @@ namespace IQCare.Web.Clinical
 
                             GridView objdView = new GridView();
 
-                            objdView.ID = "Dview_" + sectionRow["SectionID"].ToString();
+                            objdView.ID = "Dview_" + sectionId;
                             objdView.AutoGenerateColumns = false;
 
-                            objdView.CssClass = "datatable";
+                            objdView.CssClass = "datatable  table-striped table-responsive";
                             objdView.SelectedIndexChanging += new GridViewSelectEventHandler(objdView_SelectedIndexChanging);
                             objdView.RowDeleting += new GridViewDeleteEventHandler(grdView_RowDeleted);
                             objdView.RowDataBound += new GridViewRowEventHandler(grdView_RowDataBound);
@@ -8342,14 +8375,14 @@ namespace IQCare.Web.Clinical
                             objdView.BorderWidth = 1;
                             objdView.GridLines = GridLines.None;
                             objdView.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
-                            objdView.RowStyle.CssClass = "gridrow table-striped table-responsive";
+                            objdView.RowStyle.CssClass = "gridrow";
                             objdView.Width = Unit.Percentage(100);
 
                             foreach (DataColumn c in theDT.Columns)
                             {
                                 if (c.DataType.ToString() == "System.Int32")
                                 {
-                                    c.DataType = System.Type.GetType("System.String");
+                                    c.DataType = Type.GetType("System.String");
                                 }
                                 objdView.Columns.Add(CreateBoundColumn(c));
                             }
@@ -8362,12 +8395,12 @@ namespace IQCare.Web.Clinical
 
                             Button theBtn = new Button();
                             theBtn.Width = 100;
-                            theBtn.ID = "BtnAdd-" + sectionRow["SectionID"].ToString();
+                            theBtn.ID = "BtnAdd-" + sectionId;
                             theBtn.Text = "Add";
                             theBtn.Enabled = true;
                             theBtn.Click += delegate(object sender, EventArgs e)
                             {
-                                AjaxControlToolkit.TabContainer container = tabContainer;
+                                TabContainer container = tabContainer;
                                 DataRow row = null;
                                 row = theDT.NewRow();
                                 string btnName = (sender as Button).ID;
@@ -8389,7 +8422,7 @@ namespace IQCare.Web.Clinical
                                     bool isRecord = false;
                                     for (int i = 0; i < theDT.Columns.Count; i++)
                                     {
-                                        string ctlvalue = GetGridViewControlValue(container, theDT.Columns[i].ColumnName, thedtGridViewField);
+                                        string ctlvalue = GetGridViewControlValue(container, theDT.Columns[i].ColumnName, theDVGridView.ToTable());// thedtGridViewField);
                                         if (ctlvalue == "")
                                         {
                                             row[i] = DBNull.Value;
@@ -8420,7 +8453,7 @@ namespace IQCare.Web.Clinical
                                     {
                                         Type typeofdata = typeof(string);
 
-                                        string ctlvalue = GetGridViewControlValue(container, theDT.Columns[i].ColumnName, thedtGridViewField);
+                                        string ctlvalue = GetGridViewControlValue(container, theDT.Columns[i].ColumnName, theDVGridView.ToTable());// thedtGridViewField);
                                         if (ctlvalue == "")
                                         {
                                             row[i] = DBNull.Value;
@@ -8526,16 +8559,20 @@ namespace IQCare.Web.Clinical
                 Button btnDynSave = new Button();
                 btnDynSave.ID = "btnSave-" + tabRow["TabId"];
                 btnDynSave.Text = "Save";
+                btnDynSave.CssClass = "btn btn-primary";
                 btnDynSave.Click += new EventHandler(btnDynSave_Click);
                 DIVCustomItem.Controls.Add(btnDynSave);
                 Button btnDynDQ = new Button();
                 btnDynDQ.ID = "btnDQ-" + tabRow["TabId"];
                 btnDynDQ.Click += new EventHandler(btnDynDQ_Click);
                 btnDynDQ.Text = "Data Quality Check";
+                btnDynDQ.CssClass = "btn btn-success";
                 DIVCustomItem.Controls.Add(btnDynDQ);
                 Button btnDynPrint = new Button();
                 btnDynPrint.ID = "btnPrint-" + tabRow["TabId"];
                 btnDynPrint.Text = "Print";
+                btnDynPrint.Font.Bold = true;
+                btnDynPrint.CssClass = "btn btn-default";
                 btnDynPrint.Attributes.Add("OnClick", "WindowPrint()");
                 DIVCustomItem.Controls.Add(btnDynPrint);
                 ///john 28th june 2013
@@ -8548,6 +8585,7 @@ namespace IQCare.Web.Clinical
                 PnlforTab.Controls.Add(tabContainer);
                 z = z + 1;
             }
+            Session["RequiredField"] = requiredField;
             if (SignatureFlag == 0) { TrSignatureAll.Visible = true; }
             //For Saving/Updating Controls in the form Except MultiSelect Items
             ViewState["NoMulti"] = mainDataset.Tables[3];
@@ -8774,9 +8812,9 @@ namespace IQCare.Web.Clinical
 
             foreach (object obj in theContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (Convert.ToInt32((((System.Web.UI.Control)(ctrl)).Parent).ID) == tabId)
@@ -8948,9 +8986,9 @@ namespace IQCare.Web.Clinical
 
             foreach (object obj in theContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (Convert.ToInt32((((System.Web.UI.Control)(ctrl)).Parent).ID) == tabId)
@@ -9070,9 +9108,9 @@ namespace IQCare.Web.Clinical
 
             foreach (object obj in theContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (Convert.ToInt32((((System.Web.UI.Control)(ctrl)).Parent).ID) == TabId)
@@ -9308,7 +9346,7 @@ namespace IQCare.Web.Clinical
         /// </summary>
         private void SaveCancel()
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             hdnPrevTabIndex.Value = hdnCurrenTabIndex.Value;
             container.ActiveTabIndex = Convert.ToInt32(hdnCurrenTabIndex.Value);
             //--- For Cancel event, on saving the form ---
@@ -9333,7 +9371,7 @@ namespace IQCare.Web.Clinical
         private StringBuilder SaveCustomFormData(int patientId, DataSet dataSet, int DQSaveChk, int tabId)
         {
             ICustomForm MgrSaveUpdate = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             DataTable theDT = SetControlIDs(container);
             DataView theViewDT = new DataView(theDT);
             theViewDT.RowFilter = "TabId=" + tabId + "";
@@ -10007,9 +10045,9 @@ namespace IQCare.Web.Clinical
             // string ret = string.Empty;
             foreach (object obj in theControl.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -10198,9 +10236,9 @@ namespace IQCare.Web.Clinical
             }
             foreach (object obj in tabContainer.Controls)
             {
-                if (obj is AjaxControlToolkit.TabPanel)
+                if (obj is TabPanel)
                 {
-                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    TabPanel tabPanel = (TabPanel)obj;
                     foreach (object ctrl in tabPanel.Controls)
                     {
                         if (ctrl is Control)
@@ -10251,7 +10289,7 @@ namespace IQCare.Web.Clinical
         /// </summary>
         private void UpdateCancel()
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             container.ActiveTabIndex = Convert.ToInt32(hdnCurrenTabIndex.Value);
             hdnPrevTabIndex.Value = hdnCurrenTabIndex.Value;
             //--- For Cancel event, on updating the form ---
@@ -10279,7 +10317,7 @@ namespace IQCare.Web.Clinical
         private StringBuilder UpdateCustomFormData(int patientId, int featureId, int visitId, int locationId, DataSet ds, int DQChk, int tabId)
         {
             ICustomForm MgrSaveUpdate = (ICustomForm)ObjectFactory.CreateInstance(objFactoryParameter);
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             DataTable theDT = SetControlIDs(container);
             DataView theViewDT = new DataView(theDT);
             theViewDT.RowFilter = "TabId=" + tabId + "";
@@ -10807,12 +10845,12 @@ namespace IQCare.Web.Clinical
                     else
                     {
                         Updatecbl.Append("Delete from [" + multiSelectTable + "] where [ptn_pk]=" + patientId + " and [Visit_Pk]=" + visitId + " and [LocationID]=" + locationId + "");
-                        AjaxControlToolkit.TabContainer container = tabContainer;
+                        TabContainer container = tabContainer;
                         foreach (object obj in container.Controls)
                         {
-                            if (obj is AjaxControlToolkit.TabPanel)
+                            if (obj is TabPanel)
                             {
-                                AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                                TabPanel tabPanel = (TabPanel)obj;
 
                                 if (Convert.ToInt32(tabPanel.ID) == tabId)
                                 {
@@ -11146,12 +11184,12 @@ namespace IQCare.Web.Clinical
             int TotCount = 0, FalseCount = 0, TextBoxDate1FalseCount = 0, TextBoxDate2FalseCount = 0, TextBoxNumericFalseCount = 0;
             try
             {
-                //AjaxControlToolkit.TabContainer container = (AjaxControlToolkit.TabContainer)tabcontainer;
+                //TabContainer container = (TabContainer)tabcontainer;
                 foreach (TabPanel tabPanel in this.tabContainer.Tabs)
                 {
-                    //if (obj is AjaxControlToolkit.TabPanel)
+                    //if (obj is TabPanel)
                     // {
-                    //  AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    //  TabPanel tabPanel = (TabPanel)obj;
                     foreach (Control ctrl in tabPanel.Controls)
                     {
                         // if (ctrl is Control)
@@ -11408,9 +11446,9 @@ namespace IQCare.Web.Clinical
                 int DrugsCount = 0;
                 foreach (TabPanel tabPanel in this.tabContainer.Tabs)
                 {
-                    //if (obj is AjaxControlToolkit.TabPanel)
+                    //if (obj is TabPanel)
                     //{
-                    //  AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                    //  TabPanel tabPanel = (TabPanel)obj;
                     foreach (Control ctrl in tabPanel.Controls)
                     {
                         //  if (ctrl is Control)
@@ -11577,7 +11615,7 @@ namespace IQCare.Web.Clinical
         /// <returns></returns>
         public DataSet GetRaiseEventValue(int PatientID, int VisitID, int LocationID, Control theControl)
         {
-            AjaxControlToolkit.TabContainer container = tabContainer;
+            TabContainer container = tabContainer;
             DataSet theDSAuto = new DataSet();
             DataTable theDTAuto = new DataTable("theDTAuto");
             theDTAuto.Columns.Add(new DataColumn("ID", typeof(String)));
@@ -11639,9 +11677,9 @@ namespace IQCare.Web.Clinical
                         {
                             foreach (object obj in container.Controls)
                             {
-                                if (obj is AjaxControlToolkit.TabPanel)
+                                if (obj is TabPanel)
                                 {
-                                    AjaxControlToolkit.TabPanel tabPanel = (AjaxControlToolkit.TabPanel)obj;
+                                    TabPanel tabPanel = (TabPanel)obj;
                                     foreach (object ctrl in tabPanel.Controls)
                                     {
                                         if (ctrl is Control)
