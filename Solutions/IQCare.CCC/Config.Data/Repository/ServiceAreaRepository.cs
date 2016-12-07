@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Common.Data;
 using Common.Data.Repository;
 using Config.Core.Interfaces;
@@ -9,6 +10,10 @@ namespace Config.Data.Repository
     public class ServiceAreaRepository:BaseRepository<ServiceArea>, IServiceAreaRepository
     {
         private readonly ConfigContext _context;
+
+        public ServiceAreaRepository() : this(new ConfigContext())
+        {            
+        }
 
         public ServiceAreaRepository(ConfigContext context) : base(context)
         {
