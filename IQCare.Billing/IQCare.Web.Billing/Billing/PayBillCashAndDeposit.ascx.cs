@@ -106,12 +106,12 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The net amount due.
         /// </value>
-        Double NetAmountToPay
+        decimal NetAmountToPay
         {
             get
             {
                 if (this.SelectedDiscountPlan != null)
-                    return this.AmountToPay * (1.0D - SelectedDiscountPlan.Rate);
+                    return this.AmountToPay * (1.00M - SelectedDiscountPlan.Rate);
                 else
                     return this.AmountToPay;
             }
@@ -127,11 +127,11 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The amount due.
         /// </value>
-        public Double AmountDue
+        public decimal AmountDue
         {
             get
             {
-                return Double.Parse(this.HDAmountDue.Value);
+                return decimal.Parse(this.HDAmountDue.Value);
             }
             set
             {
@@ -144,11 +144,11 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The amount to pay.
         /// </value>
-        public Double AmountToPay
+        public decimal AmountToPay
         {
             get
             {
-                return Double.Parse(this.HDAmountToPay.Value);
+                return decimal.Parse(this.HDAmountToPay.Value);
             }
             set
             {
@@ -161,11 +161,11 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The bill amount.
         /// </value>
-        public Double BillAmount
+        public decimal BillAmount
         {
             get
             {
-                return Double.Parse(this.HBillAmount.Value);
+                return decimal.Parse(this.HBillAmount.Value);
             }
             set
             {
@@ -417,7 +417,7 @@ namespace IQCare.Web.Billing
                 DataTable dtDeposit = bMrg.GetPatientDeposit(this.PatientId, this.BillLocationId);
                 if (dtDeposit.Rows.Count > 0 && Convert.ToDouble(dtDeposit.Rows[0]["AvailableAmount"]) > 0.0D)
                 {
-                    Double availableDeposit = Convert.ToDouble(dtDeposit.Rows[0]["AvailableAmount"]);
+                    decimal availableDeposit = Convert.ToDecimal(dtDeposit.Rows[0]["AvailableAmount"]);
                     this.ValidateDeposit(availableDeposit);
                     labelAmountTendered.InnerText = "Available Deposit";
                 }
@@ -461,18 +461,18 @@ namespace IQCare.Web.Billing
                 return;
             }
             //  DataTable itemsToPay = this.initializeItemsToPay();
-            Double _amountToPay = 0;
-            Double _amountTendered = 0;
-            Double _discount = 0;
+            decimal _amountToPay = 0;
+            decimal _amountTendered = 0;
+            decimal _discount = 0;
 
-            _amountToPay = Double.Parse(textAmountToPay.Text);
+            _amountToPay = decimal.Parse(textAmountToPay.Text);
             if (this.SelectedDiscountPlan != null)
             {
-                _discount = _amountToPay / (1.0D - this.SelectedDiscountPlan.Rate) - _amountToPay;
+                _discount = _amountToPay / (1.00M - this.SelectedDiscountPlan.Rate) - _amountToPay;
             }
 
             if (strPaymentMode == "Cash")
-                _amountTendered = Double.Parse(textTenderedAmount.Text);
+                _amountTendered = decimal.Parse(textTenderedAmount.Text);
 
             BillPaymentInfo payObject = new BillPaymentInfo()
             {
@@ -492,7 +492,7 @@ namespace IQCare.Web.Billing
 
             if (this.PaymentMethodName == "Deposit")
             {
-                this.computePaidAmount(Convert.ToDouble(labelAvailableDeposit.Text), _amountToPay);
+                this.computePaidAmount(Convert.ToDecimal(labelAvailableDeposit.Text), _amountToPay);
                 //theDR.SetField("IsDeposit", true);
             }
             else if (this.PaymentMethodName == "Cash")
@@ -675,17 +675,17 @@ namespace IQCare.Web.Billing
         {
 
             DataTable theDT = new DataTable();
-            theDT.Columns.Add("BillID", typeof(Int32));
-            theDT.Columns.Add("LocationID", typeof(Int32));
+            theDT.Columns.Add("BillID", typeof(int));
+            theDT.Columns.Add("LocationID", typeof(int));
             theDT.Columns["LocationID"].DefaultValue = this.BillLocationId;
-            theDT.Columns.Add("PaymentType", typeof(Int32));
-            theDT.Columns.Add("PaymentName", typeof(String));
-            theDT.Columns.Add("RefNo", typeof(String));
-            theDT.Columns.Add("Amount", typeof(Double));
-            theDT.Columns["Amount"].DefaultValue = 0;
-            theDT.Columns.Add("TenderedAmount", typeof(Double));
+            theDT.Columns.Add("PaymentType", typeof(int));
+            theDT.Columns.Add("PaymentName", typeof(string));
+            theDT.Columns.Add("RefNo", typeof(string));
+            theDT.Columns.Add("Amount", typeof(decimal));
+            theDT.Columns["Amount"].DefaultValue = 0.0M;
+            theDT.Columns.Add("TenderedAmount", typeof(decimal));
             theDT.Columns["TenderedAmount"].DefaultValue = 0;
-            theDT.Columns.Add("IsDeposit", typeof(Boolean));
+            theDT.Columns.Add("IsDeposit", typeof(bool));
             theDT.Columns["IsDeposit"].DefaultValue = false;
             theDT.Columns.Add("PrintReceipt", typeof(Boolean));
             theDT.Columns["PrintReceipt"].DefaultValue = true;
@@ -695,7 +695,7 @@ namespace IQCare.Web.Billing
         /// Computes the paid amount.
         /// </summary>
         /// <param name="tenderedAmount">The total paid.</param>
-        private void computePaidAmount(Double tenderedAmount, Double amountToPay)
+        private void computePaidAmount(decimal tenderedAmount, decimal amountToPay)
         {
 
             lblPaid.InnerText = tenderedAmount.ToString("F");
@@ -704,8 +704,8 @@ namespace IQCare.Web.Billing
 
             List<BillItem> itemsList = this._ItemsToPay;
 
-            Double _totalToPay = amountToPay;
-            Double _discount = 0.0D;
+            decimal _totalToPay = amountToPay;
+            decimal _discount = 0.0M;
 
 
             BillPaymentInfo paymentInfo = (BillPaymentInfo)Session["paymentInformation"];
@@ -734,7 +734,7 @@ namespace IQCare.Web.Billing
             //}
             if (this.AllowPartialPayment) _totalToPay = amountToPay;
 
-            Double _discountedToPay = paymentInfo.AmountPayable;
+            decimal _discountedToPay = paymentInfo.AmountPayable;
 
             //if (this.SelectedDiscountPlan != null)
             //{
@@ -753,7 +753,7 @@ namespace IQCare.Web.Billing
             else
             {
                // Decimal changeDue = tenderedAmount - amountToPay;
-                Double changeDue = tenderedAmount - _discountedToPay;
+                decimal changeDue = tenderedAmount - _discountedToPay;
                 if (this.PaymentMethodName != "Cash")//confirm that payment type is cash. change can only be given to cash payments
                     lblChange.InnerText = "0";
                 else
@@ -765,7 +765,7 @@ namespace IQCare.Web.Billing
                 panelCompute.Visible = false;
                 //amount of bill pending after this transaction
                 //Decimal amountAfterThisTransaction = this.AmountDue - amountToPay;
-                Double amountAfterThisTransaction = this.AmountDue - paymentInfo.Amount;
+                decimal amountAfterThisTransaction = this.AmountDue - paymentInfo.Amount;
                 labelAmountDue.InnerText = amountAfterThisTransaction.ToString("F");
 
             }
@@ -909,7 +909,7 @@ namespace IQCare.Web.Billing
         /// </summary>
         /// <param name="availableDeposit">The available deposit.</param>
         /// <returns></returns>
-        void ValidateDeposit(Double availableDeposit)
+        void ValidateDeposit(decimal availableDeposit)
         {
             panelDeposit.Visible = true;
             CompareValidator1.Enabled = false;

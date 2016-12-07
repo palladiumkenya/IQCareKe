@@ -95,12 +95,12 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The net amount due.
         /// </value>
-        Double NetAmountToPay
+        decimal NetAmountToPay
         {
             get
             {
                 if (this.SelectedDiscountPlan != null)
-                    return this.AmountToPay * (1.0D - SelectedDiscountPlan.Rate);
+                    return this.AmountToPay * (1.00M - SelectedDiscountPlan.Rate);
                 else
                     return this.AmountToPay;
             }
@@ -115,10 +115,7 @@ namespace IQCare.Web.Billing
         /// <param name="e">The <see cref="CommandEventArgs"/> instance containing the event data.</param>
         private void OnCancelCompute(object sender, CommandEventArgs e)
         {
-            if (this.CancelCompute != null)
-            {
-                this.CancelCompute(sender, e);
-            }
+            this.CancelCompute?.Invoke(sender, e);
         }
         /// <summary>
         /// Called when [pay execute].
@@ -127,10 +124,7 @@ namespace IQCare.Web.Billing
         /// <param name="e">The <see cref="CommandEventArgs"/> instance containing the event data.</param>
         private void OnPayExecute(object sender, CommandEventArgs e)
         {
-            if (this.ExecutePayment != null)
-            {
-                this.ExecutePayment(sender, e);
-            }
+            this.ExecutePayment?.Invoke(sender, e);
         }
         /// <summary>
         /// Called when [pay complete].
@@ -139,10 +133,7 @@ namespace IQCare.Web.Billing
         /// <param name="e">The <see cref="CommandEventArgs"/> instance containing the event data.</param>
         private void OnPayComplete(object sender, CommandEventArgs e)
         {
-            if (this.PayComplete != null)
-            {
-                this.PayComplete(sender, e);
-            }
+            this.PayComplete?.Invoke(sender, e);
         }
         /// <summary>
         /// Called when [notify required].
@@ -151,10 +142,7 @@ namespace IQCare.Web.Billing
         /// <param name="e">The <see cref="CommandEventArgs"/> instance containing the event data.</param>
         private void OnNotifyRequired(object sender, CommandEventArgs e)
         {
-            if (this.NotifyCommand != null)
-            {
-                this.NotifyCommand(sender, e);
-            }
+            this.NotifyCommand?.Invoke(sender, e);
         }
         /// <summary>
         /// Called when [error occured].
@@ -163,10 +151,7 @@ namespace IQCare.Web.Billing
         /// <param name="e">The <see cref="CommandEventArgs"/> instance containing the event data.</param>
         private void OnErrorOccured(object sender, CommandEventArgs e)
         {
-            if (this.ErrorOccurred != null)
-            {
-                this.ErrorOccurred(sender, e);
-            }
+            this.ErrorOccurred?.Invoke(sender, e);
         }
         #endregion
 
@@ -181,11 +166,11 @@ namespace IQCare.Web.Billing
         /// </value>
         /// <exception cref="System.NotImplementedException">
         /// </exception>
-        public Double AmountDue
+        public decimal AmountDue
         {
             get
             {
-                return Double.Parse(this.HDAmountDue.Value);
+                return decimal.Parse(this.HDAmountDue.Value);
             }
             set
             {
@@ -200,11 +185,11 @@ namespace IQCare.Web.Billing
         /// </value>
         /// <exception cref="System.NotImplementedException">
         /// </exception>
-        public Double AmountToPay
+        public decimal AmountToPay
         {
             get
             {
-                return Double.Parse(this.HDAmountToPay.Value);
+                return decimal.Parse(this.HDAmountToPay.Value);
             }
             set
             {
@@ -219,11 +204,11 @@ namespace IQCare.Web.Billing
         /// </value>
         /// <exception cref="System.NotImplementedException">
         /// </exception>
-        public Double BillAmount
+        public decimal BillAmount
         {
             get
             {
-                return Double.Parse(this.HBillAmount.Value);
+                return decimal.Parse(this.HBillAmount.Value);
             }
             set
             {
@@ -488,14 +473,14 @@ namespace IQCare.Web.Billing
                 return;
             }
             //  DataTable itemsToPay = this.initializeItemsToPay();
-            Double _amountToPay = 0;
-            Double _amountTendered = 0;
-            Double _discount = 0.0D;
-            _amountToPay = Double.Parse(textAmountToPay.Text);
+            decimal _amountToPay = 0;
+            decimal _amountTendered = 0;
+            decimal _discount = 0.0M;
+            _amountToPay = decimal.Parse(textAmountToPay.Text);
 
             if (this.SelectedDiscountPlan != null)
             {
-                _discount = _amountToPay / (1.0D - this.SelectedDiscountPlan.Rate) - _amountToPay;
+                _discount = _amountToPay / (1.00M - this.SelectedDiscountPlan.Rate) - _amountToPay;
             }
 
 
@@ -520,7 +505,7 @@ namespace IQCare.Web.Billing
 
                 List<BillItem> itemsList = this._ItemsToPay;
 
-                Double _totalToPay = _amountToPay;
+                decimal _totalToPay = _amountToPay;
                 
 
                 if (this.SelectedDiscountPlan != null)
@@ -546,7 +531,7 @@ namespace IQCare.Web.Billing
                 //    }
                 //}
                 if (this.AllowPartialPayment) _totalToPay = _amountToPay;
-                Double _discountedToPay = payObject.AmountPayable;
+                decimal _discountedToPay = payObject.AmountPayable;
 
                 base.Session["paymentInformation"] = payObject;
                 {
@@ -555,7 +540,7 @@ namespace IQCare.Web.Billing
                     btnFinish.Enabled = true;             
                     panelCompute.Visible = false;
                     //amount of bill pending after this transaction
-                    Double amountAfterThisTransaction = this.AmountDue - _amountToPay;
+                    decimal amountAfterThisTransaction = this.AmountDue - _amountToPay;
                     labelAmountDue.InnerText = amountAfterThisTransaction.ToString("F");
 
                 }
@@ -678,19 +663,19 @@ namespace IQCare.Web.Billing
         {
 
             DataTable theDT = new DataTable();
-            theDT.Columns.Add("BillID", typeof(Int32));
-            theDT.Columns.Add("LocationID", typeof(Int32));
+            theDT.Columns.Add("BillID", typeof(int));
+            theDT.Columns.Add("LocationID", typeof(int));
             theDT.Columns["LocationID"].DefaultValue = this.BillLocationId;
-            theDT.Columns.Add("PaymentType", typeof(Int32));
-            theDT.Columns.Add("PaymentName", typeof(String));
-            theDT.Columns.Add("RefNo", typeof(String));
-            theDT.Columns.Add("Amount", typeof(Double));
+            theDT.Columns.Add("PaymentType", typeof(int));
+            theDT.Columns.Add("PaymentName", typeof(string));
+            theDT.Columns.Add("RefNo", typeof(string));
+            theDT.Columns.Add("Amount", typeof(double));
             theDT.Columns["Amount"].DefaultValue = 0;
-            theDT.Columns.Add("TenderedAmount", typeof(Double));
+            theDT.Columns.Add("TenderedAmount", typeof(double));
             theDT.Columns["TenderedAmount"].DefaultValue = 0;
-            theDT.Columns.Add("IsDeposit", typeof(Boolean));
+            theDT.Columns.Add("IsDeposit", typeof(bool));
             theDT.Columns["IsDeposit"].DefaultValue = false;
-            theDT.Columns.Add("PrintReceipt", typeof(Boolean));
+            theDT.Columns.Add("PrintReceipt", typeof(bool));
             theDT.Columns["PrintReceipt"].DefaultValue = true;
             return theDT;
         }

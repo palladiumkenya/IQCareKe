@@ -292,7 +292,7 @@ namespace IQCare.Web.Billing
                         this.discountPopup.Show();
                         return;
                     }
-                    Double _rate = Double.Parse(textRate.Text.Trim()) / 100.0D;
+                    decimal _rate = decimal.Parse(textRate.Text.Trim()) / 100.0M;
                  /*   valid = ValidateDropDownList(ddlPaymentMode);
                     if (!valid)
                     {

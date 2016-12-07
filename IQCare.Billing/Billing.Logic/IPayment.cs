@@ -15,21 +15,21 @@ namespace IQCare.Billing.Logic
         /// <value>
         /// The amount due.
         /// </value>
-        Double AmountDue { get; set; }
+        decimal AmountDue { get; set; }
         /// <summary>
         /// Gets or sets the bill amount.
         /// </summary>
         /// <value>
         /// The bill amount.
         /// </value>
-        Double BillAmount { get; set; }
+        decimal BillAmount { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [allow partial payment].
         /// </summary>
         /// <value>
         ///   <c>true</c> if [allow partial payment]; otherwise, <c>false</c>.
         /// </value>
-        Double AmountToPay { get; set; }
+        decimal AmountToPay { get; set; }
         /// <summary>
         /// Gets or sets the patient identifier.
         /// </summary>

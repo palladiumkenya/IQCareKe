@@ -33,29 +33,29 @@ namespace Entities.Billing
         /// <summary>
         /// The amount
         /// </summary>
-        public double Amount;
+        public decimal Amount;
         /// <summary>
         /// The amount payable
         /// </summary>
-        public double AmountPayable
+        public decimal AmountPayable
         {
             get
             {
-                return Amount * (1.0D - CalculatedDiscount);
+                return Amount * (1.00M - CalculatedDiscount);
             }
         }
         /// <summary>
         /// The tendered amount
         /// </summary>
-        public double TenderedAmount;
+        public decimal TenderedAmount;
         /// <summary>
         /// The deposit
         /// </summary>
-        public Boolean Deposit;
+        public bool Deposit;
         /// <summary>
         /// The print receipt
         /// </summary>
-        public Boolean PrintReceipt = true;
+        public bool PrintReceipt = true;
         /// <summary>
         /// The items to pay
         /// </summary>
@@ -78,7 +78,7 @@ namespace Entities.Billing
         /// <value>
         /// The calculated discount.
         /// </value>
-        public double CalculatedDiscount
+        public decimal CalculatedDiscount
         {
             get
             {
@@ -92,7 +92,7 @@ namespace Entities.Billing
         /// <param name="PatientID">The patient identifier.</param>
         /// <param name="DiscountDate">The discount date.</param>
         /// <returns></returns>
-        protected override double CalculateDiscount(BillPaymentInfo t, int PatientId, DateTime DiscountDate)
+        protected override decimal CalculateDiscount(BillPaymentInfo t, int PatientId, DateTime DiscountDate)
         {
             if (t.ChosenDiscountPlan != null)
             {

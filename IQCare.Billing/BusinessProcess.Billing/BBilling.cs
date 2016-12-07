@@ -95,8 +95,8 @@ namespace BusinessProcess.Billing
                 DataTable theDt = (DataTable)BillManager.ReturnObject(ClsUtility.theParams, "pr_Billing_GetItemPriceOnDate", ClsUtility.ObjectEnum.DataTable);
                 if (theDt.Rows.Count > 0)
                 {
-                    double itemPrice = 0.0D;
-                    double.TryParse(theDt.Rows[0]["SellingPrice"].ToString(), out itemPrice);
+                    decimal itemPrice = 0.0M;
+                    decimal.TryParse(theDt.Rows[0]["SellingPrice"].ToString(), out itemPrice);
                     _priceOnDate = new Price()
                     {
                         IsCurrent = Convert.ToBoolean(theDt.Rows[0]["IsCurrentPrice"]),
@@ -180,7 +180,7 @@ namespace BusinessProcess.Billing
 
                     DateTime? emptyDate = null;
                     UInt64? emptyU64Int = null;
-                    double? emptyDouble = null;
+                    decimal? emptyDecimal = null;
                     bool? emptyBool = false;
 
                     DataTable dt = ds.Tables[0];
@@ -194,7 +194,7 @@ namespace BusinessProcess.Billing
                                           ItemTypeName = row["ItemTypeName"].ToString(),
                                           PriceDate = row["PriceDate"] != DBNull.Value ? Convert.ToDateTime(row["PriceDate"]) : emptyDate,
                                           PricedPerItem = row["PharmacyPriceType"] != DBNull.Value ? !Convert.ToBoolean(row["PharmacyPriceType"]) : emptyBool,
-                                          SellingPrice = row["SellingPrice"] != DBNull.Value ? Convert.ToDouble(row["SellingPrice"]) : emptyDouble,
+                                          SellingPrice = row["SellingPrice"] != DBNull.Value ? Convert.ToDecimal(row["SellingPrice"]) : emptyDecimal,
                                           Active = Convert.ToBoolean(row["Active"]),
                                           VersionStamp = row["VersionStamp"] != DBNull.Value ? Convert.ToUInt64(row["VersionStamp"]) : emptyU64Int
                                       }
@@ -1398,7 +1398,7 @@ namespace BusinessProcess.Billing
         /// <param name="userId">The user identifier.</param>
         /// <param name="amount">The amount.</param>
         /// <param name="transationType">Type of the transation.</param>
-        public Receipt ExecuteDepositTransaction(int patientId, int locationId, int userId, double amount, DepositTransactionType transactionType, object clsObject = null)
+        public Receipt ExecuteDepositTransaction(int patientId, int locationId, int userId, decimal amount, DepositTransactionType transactionType, object clsObject = null)
         {
             lock (this)
             {
@@ -1654,8 +1654,8 @@ namespace BusinessProcess.Billing
                                          IssuedByName = row["IssuedByName"].ToString(),
                                          IssuedById = Convert.ToInt32(row["UserID"]),
                                          IssuedQuantity = Convert.ToInt32(row["IssuedQuantity"]),
-                                         SellingPrice = Convert.ToDouble(row["SellingPrice"]),
-                                         BilledAmount = (row["BilledAmount"] == DBNull.Value) ? 0.0 : Convert.ToDouble(row["BilledAmount"]),
+                                         SellingPrice = Convert.ToDecimal(row["SellingPrice"]),
+                                         BilledAmount = (row["BilledAmount"] == DBNull.Value) ? 0.0M : Convert.ToDecimal(row["BilledAmount"]),
                                          Received = (row["ServiceStatus"] == DBNull.Value) ? false : Convert.ToBoolean(row["ServiceStatus"]),
                                          Paid = (row["PaymentStatus"] == DBNull.Value) ? false : Convert.ToBoolean(row["PaymentStatus"]),
                                          Billed = (row["BillID"] == DBNull.Value) ? false : true,
@@ -1901,7 +1901,7 @@ namespace BusinessProcess.Billing
                                          Name = row["DiscountName"].ToString(),
                                          //    DiscountedPayMethod = new PaymentMethod() { ID = Convert.ToInt32(row["PaymentTypeID"]), Name = row["PaymentName"].ToString() },
                                          Active = Convert.ToBoolean(row["Active"]),
-                                         Rate = Convert.ToDouble(row["Rate"]),
+                                         Rate = Convert.ToDecimal(row["Rate"]),
                                          StartDate = Convert.ToDateTime(row["StartDate"]),
                                          EndDate = row["EndDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(row["EndDate"])
                                      }

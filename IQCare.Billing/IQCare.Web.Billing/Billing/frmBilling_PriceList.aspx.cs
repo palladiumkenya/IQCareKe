@@ -355,8 +355,8 @@ namespace IQCare.Web.Billing
                             active = !chk.Checked;
                     }
 
-                    Double? newPrice;
-                    newPrice = Double.Parse(txtPrice.Text);
+                    decimal? newPrice;
+                    newPrice = decimal.Parse(txtPrice.Text);
                     DateTime? newPriceDate;
 
                     newPriceDate = txtPriceDate.Text.Trim() == "" ? DateTime.Now : DateTime.Parse(txtPriceDate.Text);

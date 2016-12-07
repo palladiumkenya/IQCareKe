@@ -304,6 +304,11 @@ Begin
   Alter table dbo.mst_bill Add Discount Decimal(18,2) Default 0
 End
 Go
+If Not Exists (Select * From sys.columns Where Name = N'PricePlanId' And Object_ID = Object_id(N'lnk_ItemCostConfiguration'))    
+Begin
+  Alter table dbo.lnk_ItemCostConfiguration Add PricePlanId int Null
+End
+Go
 If Not Exists (Select * From sys.columns Where Name = N'CanEnroll' And Object_ID = Object_id(N'mst_module'))    
 Begin
   Alter table dbo.mst_module Add CanEnroll bit Null

@@ -282,7 +282,7 @@ namespace Interface.Billing
         /// <param name="patientID">The patient identifier.</param>
         /// <param name="locationID">The location identifier.</param>
         /// <returns></returns>
-        DataTable GetPatientDepositTransactions(int patientID, int locationID);
+        DataTable GetPatientDepositTransactions(int patientId, int locationId);
 
         /// <summary>
         /// Executes the deposit transaction.
@@ -294,7 +294,7 @@ namespace Interface.Billing
         /// <param name="transactionType">Type of the transaction.</param>
         /// <param name="clsObject">The CLS object.</param>
         /// <returns></returns>
-        Receipt ExecuteDepositTransaction(int patientID, int locationID, int userID, double amount, DepositTransactionType transactionType, object clsObject=null);
+        Receipt ExecuteDepositTransaction(int patientId, int locationId, int userId, decimal amount, DepositTransactionType transactionType, object clsObject=null);
         #endregion
       //  DataSet getSalesSummary(DateTime fromDate, DateTime toDate, int locationID);
         /// <summary>

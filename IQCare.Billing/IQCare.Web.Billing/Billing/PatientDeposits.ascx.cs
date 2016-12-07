@@ -314,9 +314,9 @@ namespace IQCare.Web.Billing
         {
             try
             {
-                Double amount = 0.0D;
-                amount = Convert.ToDouble(textAmount.Text.Trim());
-                if (amount > 0.0D)
+                decimal amount = 0.0M;
+                amount = Convert.ToDecimal(textAmount.Text.Trim());
+                if (amount > 0.0M)
                 {
                     //DataTable dt
                       Receipt receipt  = this.BillingManager.ExecuteDepositTransaction(this.PatientId, this.LocationId, this.UserId, amount, DepositTransactionType.MakeDeposit);
@@ -366,10 +366,10 @@ namespace IQCare.Web.Billing
         {
             try
             {
-                Double amount = 0.0D;
+                decimal amount = 0.0M;
                 string strAmount = labelTotalAvailable.Text.Trim().Replace(",", "");
-                amount = Convert.ToDouble(strAmount);
-                if (amount > 0.0d)
+                amount = Convert.ToDecimal(strAmount);
+                if (amount > 0.0M)
                 {
                     //DataTable dt = 
                       Receipt receipt =  this.BillingManager.ExecuteDepositTransaction(this.PatientId, this.LocationId, this.UserId, amount, DepositTransactionType.ReturnDeposit);

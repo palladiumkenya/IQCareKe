@@ -1677,12 +1677,12 @@ namespace IQCare.Web.Billing
                 }
                 if (e.CommandName == "WriteOffBill")
                 {
-                    index = Int32.Parse(e.CommandArgument.ToString());
+                    index = int.Parse(e.CommandArgument.ToString());
                     gridPendingBills.SelectedIndex = index;
                     _billID = int.Parse(gridPendingBills.SelectedDataKey.Values["billID"].ToString());
                     int patientId = int.Parse(gridPendingBills.SelectedDataKey.Values["PatientID"].ToString());
                     GridViewRow row = (gridPendingBills.Rows[index]);
-                    Double outstanding = Double.Parse(row.Cells[4].Text.Trim());
+                    decimal outstanding = decimal.Parse(row.Cells[4].Text.Trim());
                     IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling, BusinessProcess.Billing");
                     List<PaymentMethod> pm = bMgr.GetPaymentMethods("WriteOff");
                     if (pm != null && pm.Count > 0)
@@ -1698,7 +1698,7 @@ namespace IQCare.Web.Billing
                             Deposit = false,
                             PaymentMode = writeOff,
                             PrintReceipt = false,
-                            TenderedAmount = 0.0D,
+                            TenderedAmount = 0.0M,
                             ReferenceNumber = ""
                         };
                         bMgr.SavePatientBillPayments(patientId, paymentInfo, this.UserId);
@@ -1754,7 +1754,7 @@ namespace IQCare.Web.Billing
                 if (removeButton != null)
                 {
                     HiddenField HDTran = (HiddenField)e.Row.Parent.Parent.Parent.FindControl("HdnTransaction");
-                    bool hasTransaction = Boolean.Parse(HDTran.Value.ToString());
+                    bool hasTransaction = bool.Parse(HDTran.Value.ToString());
                     string item = e.Row.Cells[1].Text;
                     removeButton.Attributes["onclick"] = "if(!confirm('Do you want to remove " + item + " from this bill?')){ return false; };";
                     removeButton.Enabled = !hasTransaction;
@@ -1778,7 +1778,7 @@ namespace IQCare.Web.Billing
             {
                 if (e.CommandName.Equals("RemoveItem"))
                 {
-                    int index = Int32.Parse(e.CommandArgument.ToString());
+                    int index = int.Parse(e.CommandArgument.ToString());
                     GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
                     GridView myGrid = (GridView)sender;
                     int _billID = int.Parse(myGrid.DataKeys[row.RowIndex].Values["BillID"].ToString());

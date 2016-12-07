@@ -59,6 +59,7 @@
     <Compile Include="PaymentMethod.cs" />
     <Compile Include="PaymentVoucher.cs" />
     <Compile Include="Price.cs" />
+    <Compile Include="PricePlan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receipt.cs" />
     <Compile Include="Report.cs" />

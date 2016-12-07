@@ -13,10 +13,10 @@ namespace Entities.Billing
         /// <param name="PatientID">The patient identifier.</param>
         /// <param name="DiscountDate">The discount date.</param>
         /// <returns></returns>
-        protected virtual double CalculateDiscount(T t, int PatientId, DateTime DiscountDate)
+        protected virtual decimal CalculateDiscount(T t, int PatientId, DateTime DiscountDate)
         {
 
-            return 0.00d;
+            return 0.00M;
         }
 
     }

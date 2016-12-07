@@ -48,7 +48,7 @@ namespace Entities.Billing
         /// <summary>
         /// The amount
         /// </summary>
-        public Double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// Gets or sets the added by.
@@ -63,7 +63,7 @@ namespace Entities.Billing
         /// <value>
         /// The discount.
         /// </value>
-        public double? Discount
+        public decimal? Discount
         {
             get;
             set;
@@ -74,7 +74,7 @@ namespace Entities.Billing
         /// <value>
         /// The calculated discount.
         /// </value>
-        public double CalculatedDiscount
+        public decimal CalculatedDiscount
         {
             get
             {
@@ -141,7 +141,7 @@ namespace Entities.Billing
         /// <param name="PatientID">The patient identifier.</param>
         /// <param name="DiscountDate">The discount date.</param>
         /// <returns></returns>
-        protected override double CalculateDiscount(BillItem t, int PatientId, DateTime DiscountDate)
+        protected override decimal CalculateDiscount(BillItem t, int PatientId, DateTime DiscountDate)
         {
 
             return base.CalculateDiscount(t, PatientId, DiscountDate);

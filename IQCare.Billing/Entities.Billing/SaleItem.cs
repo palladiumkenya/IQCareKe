@@ -16,7 +16,7 @@ namespace Entities.Billing
         /// <summary>
         /// The selling price
         /// </summary>
-        public double? SellingPrice { get; set; }
+        public decimal? SellingPrice { get; set; }
         /// <summary>
         /// The item name
         /// </summary>

@@ -18,7 +18,7 @@ namespace Entities.Billing
         /// <value>
         /// The rate.
         /// </value>
-        public double Rate { get; set; }
+        public decimal Rate { get; set; }
         /// <summary>
         /// Gets or sets the name.
         /// </summary>

@@ -309,12 +309,37 @@ From Mst_Decode D Inner Join Mst_Code C On C.CodeId=D.CodeID Where C.Name='Payme
 
 Update Mst_Code Set DeleteFlag=1 Where Name='PaymentType' 
 Go
+
+If Not Exists(Select 1 From mst_Code Where Name = 'Billing Price Plans') Begin
+    Insert Into Mst_Code(Name, DeleteFlag, UserId, CreateDate)
+	Values('Billing Price Plans',0,1,getdate());
+End
+Go
+declare @bppId int;
+Select @bppId =	  CodeId From Mst_Code Where     Name = 'Billing Price Plans';
+If Not Exists(Select 1 From Mst_Decode Where CodeId = @bppId and Name='Standard') Begin
+Insert into mst_decode (Name,CodeId,SRNO,DeleteFlag,UserId,CreateDate,SystemId,Code)
+values ('Standard',@bppId,1,0,1,GETDATE(),1,'STD')
+End
+Go
+declare @stdPlan int;
+Select @stdPlan = Id From Mst_Decode Where Name='Standard' And CodeId = (Select CodeId From Mst_Code Where Name = 'Billing Price Plans')
+
+If  Exists(Select 1 From lnk_ItemCostConfiguration Where PricePlanId Is Null )Begin
+	Update lnk_ItemCostConfiguration Set PricePlanId = @stdPlan Where PricePlanId Is Null
+End
+Go
+If  Exists (Select * From sys.columns Where Name = N'PricePlanId' And Object_ID = Object_id(N'lnk_ItemCostConfiguration'))    
+Begin
+  Alter table dbo.lnk_ItemCostConfiguration Alter Column PricePlanId int Not Null
+End
+Go
+
 If Not Exists(Select 1 From mst_Code Where Name = 'Form Category') Begin
     Insert Into Mst_Code(Name, DeleteFlag, UserId, CreateDate)
 	Values('Form Category',0,1,getdate());
 End
 Go
-
 
 Update Mst_Feature Set FeatureTypeId = Null Where FeatureName Like 'CareEnd_%'
 Go

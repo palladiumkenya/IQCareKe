@@ -18,7 +18,7 @@ namespace Entities.Billing
         /// <value>
         /// The amount.
         /// </value>
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         /// <summary>
         /// Gets or sets the effective date.
         /// </summary>
@@ -47,6 +47,8 @@ namespace Entities.Billing
         /// <c>true</c> if this instance is current; otherwise, <c>false</c>.
         /// </value>
         public bool IsCurrent { get; set; }
+        public int PricePLanId { get; set; }
+        public virtual PricePlan PricePlan { get; set; }
         /// <summary>
         /// Gets or sets the version stamp.
         /// </summary>

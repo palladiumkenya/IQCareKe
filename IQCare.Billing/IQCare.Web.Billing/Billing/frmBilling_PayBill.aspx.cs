@@ -105,12 +105,12 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The amount due.
         /// </value>
-        Double AmountDue
+        decimal AmountDue
         {
             get
             {
-                Double _amt = 0.0D;
-                Double.TryParse(this.HDAmountDue.Value, out _amt);
+                decimal _amt = 0.0M;
+                decimal.TryParse(this.HDAmountDue.Value, out _amt);
                 return _amt;
             }
             set
@@ -124,12 +124,12 @@ namespace IQCare.Web.Billing
         /// <value>
         /// The bill amount.
         /// </value>
-        Double BillAmount
+        decimal BillAmount
         {
             get
             {
-                Double _amt = 0.0D;
-                Double.TryParse(this.HDBillAmount.Value, out _amt);
+                decimal _amt = 0.0M;
+                decimal.TryParse(this.HDBillAmount.Value, out _amt);
                 return _amt;
 
             }
@@ -253,7 +253,7 @@ namespace IQCare.Web.Billing
                 payBillControl.UserId = this.UserId;
                 payBillControl.BillId = this.BillId;
                 payBillControl.PaymentMode = (PaymentMethod)ht["PaymentMode"];
-                payBillControl.AmountToPay = (Double)ht["AmountToPay"];
+                payBillControl.AmountToPay = (decimal)ht["AmountToPay"];
                 payBillControl.BillPayOption = this.BillPayOption;
                 payBillControl.HasTransaction = this.HasTransaction;
                 if (plan != null)
@@ -380,7 +380,7 @@ namespace IQCare.Web.Billing
                 {
                   //  base.Session["TransactionReceipt"] = receipt;
                     theUrl = string.Format("./frmBilling_Reciept.aspx?ReceiptTrxCode={0}&RePrint=false", transactionRef);
-                    String theOrdScript;
+                    string theOrdScript;
                     theOrdScript = "<script language='javascript' id='PrintReciept'>\n";
                     theOrdScript += "window.open('" + theUrl + "','Receipt','toolbars=no,location=no,directories=no,dependent=yes,top=100,left=30,maximize=no,resize=no,width=1000,height=800,scrollbars=yes');\n";
                     //  theOrdScript += "window.location.href = './frmBilling_ClientBill.aspx';\n";
@@ -586,7 +586,7 @@ namespace IQCare.Web.Billing
                 IBilling BManager = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling, BusinessProcess.Billing");
                 DataTable dtBill = BManager.GetBillDetails(this.BillId);
                 // lblTotalBill.InnerText = dtBill.Rows[0]["BillAmount"].ToString();
-                this.AmountDue = Convert.ToDouble(dtBill.Rows[0]["UnpaidAmount"].ToString());
+                this.AmountDue = Convert.ToDecimal(dtBill.Rows[0]["UnpaidAmount"].ToString());
 
                 bool hasTransaction = Convert.ToBoolean(dtBill.Rows[0]["HasTransaction"]);
                 this.HasTransaction = hasTransaction;
@@ -600,7 +600,7 @@ namespace IQCare.Web.Billing
                     //Response.Redirect(theUrl, false);
                 }
                 buttonProceed.Enabled = this.AmountDue > 0;
-                this.BillAmount = Convert.ToDouble(dtBill.Rows[0]["BillAmount"].ToString());
+                this.BillAmount = Convert.ToDecimal(dtBill.Rows[0]["BillAmount"].ToString());
                 // labelAmountOutstanding.Text = labelAmountDue.InnerText = textAmountToPay.Text = this.AmountDue.ToString();
                 labelAmountDue.Text = this.AmountDue.ToString();
                 // this.rgAmountToPay.MaximumValue = this.AmountDue.ToString();
@@ -687,7 +687,7 @@ namespace IQCare.Web.Billing
                        // {
                             int billItemId = int.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["billitemid"].ToString());
                             int itemId = int.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["ItemId"].ToString());
-                            Double amount = Double.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["amount"].ToString());
+                            decimal amount = decimal.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["amount"].ToString());
                             DateTime billItemDate = DateTime.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["billitemdate"].ToString());
                             string itemName = gridRow.Cells[1].Text.Trim();
                             BillItemsToPay.Add(new BillItem() { BillItemId = billItemId, Amount = amount, ItemId = itemId, ItemName = itemName });
@@ -706,17 +706,17 @@ namespace IQCare.Web.Billing
         {
 
             DataTable theDT = new DataTable();
-            theDT.Columns.Add("BillID", typeof(Int32));
-            theDT.Columns.Add("LocationID", typeof(Int32));
+            theDT.Columns.Add("BillID", typeof(int));
+            theDT.Columns.Add("LocationID", typeof(int));
             theDT.Columns["LocationID"].DefaultValue = this.BillLocationId;
-            theDT.Columns.Add("PaymentType", typeof(Int32));
-            theDT.Columns.Add("PaymentName", typeof(String));
-            theDT.Columns.Add("RefNo", typeof(String));
-            theDT.Columns.Add("Amount", typeof(Double));
+            theDT.Columns.Add("PaymentType", typeof(int));
+            theDT.Columns.Add("PaymentName", typeof(string));
+            theDT.Columns.Add("RefNo", typeof(string));
+            theDT.Columns.Add("Amount", typeof(decimal));
             theDT.Columns["Amount"].DefaultValue = 0;
-            theDT.Columns.Add("TenderedAmount", typeof(Double));
+            theDT.Columns.Add("TenderedAmount", typeof(decimal));
             theDT.Columns["TenderedAmount"].DefaultValue = 0;
-            theDT.Columns.Add("IsDeposit", typeof(Boolean));
+            theDT.Columns.Add("IsDeposit", typeof(bool));
             theDT.Columns["IsDeposit"].DefaultValue = false;
 
             return theDT;
@@ -909,7 +909,7 @@ namespace IQCare.Web.Billing
                 {
                     if (tranStatus == "Paid")
                     {
-                        string urlParam = String.Format("openReportPage('./frmBilling_Reciept.aspx?ReceiptTrxCode={0}&RePrint=false');return false;", _transactionID);
+                        string urlParam = string.Format("openReportPage('./frmBilling_Reciept.aspx?ReceiptTrxCode={0}&RePrint=false');return false;", _transactionID);
 
                         printButton.OnClientClick = urlParam;
                     }
@@ -1073,7 +1073,7 @@ namespace IQCare.Web.Billing
                 ListItem item = ddlDiscountPlan.SelectedItem;
                 string[] parts = SelectedPlan.Split(':');
 
-                Double rate = Double.Parse(parts[1]);
+                decimal rate = decimal.Parse(parts[1]);
                 int planId = int.Parse(parts[0]);
                 DateTime dtStart = DateTime.Parse(parts[2]);
                 DateTime? dtEnd =null;
@@ -1095,13 +1095,13 @@ namespace IQCare.Web.Billing
             }
 
 
-            Double SelectedAmountToPay = 0.0;
+            decimal SelectedAmountToPay = 0.0M;
             foreach (GridViewRow gridRow in this.grdPayItems.Rows)
             {
                 if (gridRow.RowType == DataControlRowType.DataRow)
                 {
                     CheckBox chk = gridRow.FindControl("chkBxItem") as CheckBox;
-                    Double amount = Double.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["amount"].ToString());
+                    decimal amount = decimal.Parse(grdPayItems.DataKeys[gridRow.RowIndex].Values["amount"].ToString());
                     if (chk != null && chk.Checked)
                     {
 

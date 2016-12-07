@@ -112,7 +112,7 @@ namespace Entities.Billing
         /// <param name="PatientID">The patient identifier.</param>
         /// <param name="DiscountDate">The discount date.</param>
         /// <returns></returns>
-        protected override double CalculateDiscount(SaleItem t, int PatientId, DateTime DiscountDate)
+        protected override decimal CalculateDiscount(SaleItem t, int PatientId, DateTime DiscountDate)
         {
             return base.CalculateDiscount(t, PatientId, DiscountDate);
         }
@@ -123,13 +123,13 @@ namespace Entities.Billing
         /// <value>
         /// The amount.
         /// </value>
-        public double IssuedAmount
+        public decimal IssuedAmount
         {
             get
             {
-                double sp = 0;
-                if (SellingPrice.HasValue) sp = ((double)SellingPrice.Value);
-                return (sp * IssuedQuantity) - (double)ItemDiscount;
+                decimal sp = 0.0M;
+                if (SellingPrice.HasValue) sp = SellingPrice.Value;
+                return (sp * IssuedQuantity) - ItemDiscount;
             }
         }
         /// <summary>
@@ -138,7 +138,7 @@ namespace Entities.Billing
         /// <value>
         /// The billed amount.
         /// </value>
-        public double BilledAmount
+        public decimal BilledAmount
         {
             get;
             set;
@@ -149,7 +149,7 @@ namespace Entities.Billing
         /// <value>
         /// The item discount.
         /// </value>
-        public double ItemDiscount
+        public decimal ItemDiscount
         {
             get
             {
