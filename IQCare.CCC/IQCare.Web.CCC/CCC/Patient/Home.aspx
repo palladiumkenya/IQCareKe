@@ -748,9 +748,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
            
-            $("#DoB").datepicker();
-            $("#SearchDoB").datepicker();
-            $("#RegDate").datepicker();
+           // $("#DoB").datepicker();
+            //$("#SearchDoB").datepicker();
+            //$("#RegDate").datepicker();
 
             //$('#PatientData').DataTable();
            // $('#example').DataTable();
