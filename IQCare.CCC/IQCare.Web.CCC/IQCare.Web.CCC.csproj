@@ -53,44 +53,11 @@
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
+    <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
-    <Content Include="Content\css\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\daterangepicker.css" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\parsley.css" />
-    <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
-    <Content Include="Content\datatables\css\dataTables.jqueryui.min.css" />
-    <Content Include="Content\datatables\css\dataTables.material.css" />
-    <Content Include="Content\datatables\css\dataTables.material.min.css" />
-    <Content Include="Content\datatables\css\dataTables.semanticui.css" />
-    <Content Include="Content\datatables\css\dataTables.semanticui.min.css" />
-    <Content Include="Content\datatables\css\dataTables.uikit.css" />
-    <Content Include="Content\datatables\css\dataTables.uikit.min.css" />
-    <Content Include="Content\datatables\css\jquery.dataTables.css" />
-    <Content Include="Content\datatables\images\favicon.ico" />
-    <Content Include="Content\datatables\images\sort_asc.png" />
-    <Content Include="Content\datatables\images\sort_asc_disabled.png" />
-    <Content Include="Content\datatables\images\sort_both.png" />
-    <Content Include="Content\datatables\images\sort_desc.png" />
-    <Content Include="Content\datatables\images\sort_desc_disabled.png" />
-    <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
-    <Content Include="Content\datatables\js\jquery.dataTables.js" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\fuelux\css\fuelux.css" />
-    <Content Include="Content\fuelux\css\fuelux.min.css" />
-    <Content Include="Content\fuelux\fonts\fuelux.svg" />
-    <Content Include="Content\fuelux\js\fuelux.js" />
-    <Content Include="Content\fuelux\js\fuelux.min.js" />
-    <Content Include="Content\fuelux\js\npm.js" />
-    <Content Include="Content\img\iqSolutions.png" />
-    <Content Include="Content\js\bootstrap.js" />
-    <Content Include="Content\js\moment.js" />
-    <Content Include="Content\js\parsley.js" />
     <Content Include="CCC\Patient\Home.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="fuelux\css\fuelux.css" />
@@ -178,22 +145,6 @@
     </Content>
     <Content Include="MasterPage\IQCare.master" />
     <Content Include="MasterPage\Module.Master" />
-    <Content Include="Content\css\bootstrap-theme.css.map" />
-    <Content Include="Content\css\bootstrap.css.map" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\datatables\images\Sorting icons.psd" />
-    <Content Include="Content\fuelux\css\fuelux.css.map" />
-    <Content Include="Content\fuelux\fonts\fuelux.eot" />
-    <Content Include="Content\fuelux\fonts\fuelux.ttf" />
-    <Content Include="Content\fuelux\fonts\fuelux.woff" />
     <Content Include="fuelux\css\fuelux.css.map" />
     <Content Include="fuelux\fonts\fuelux.eot" />
     <Content Include="fuelux\fonts\fuelux.ttf" />
@@ -219,6 +170,13 @@
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.designer.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>

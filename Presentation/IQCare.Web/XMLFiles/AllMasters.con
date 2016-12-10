@@ -4,30 +4,6 @@
     <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="Mst_CouncellingType">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="Id" type="xs:int" minOccurs="0" />
-                <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
-                <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
-                <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
-                <xs:element name="SystemID" type="xs:int" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="Mst_CouncellingTopic">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="Id" type="xs:int" minOccurs="0" />
-                <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
-                <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
-                <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
-                <xs:element name="SystemID" type="xs:int" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
           <xs:element name="Mst_Provider">
             <xs:complexType>
               <xs:sequence>
@@ -40,7 +16,7 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="Mst_Division">
+          <xs:element name="Mst_Ward">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
@@ -52,7 +28,7 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="Mst_Ward">
+          <xs:element name="Mst_Division">
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
@@ -404,6 +380,42 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
+          <xs:element name="Mst_CouncellingType">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="Name" type="xs:string" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
+                <xs:element name="SystemID" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Mst_CouncellingTopic">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="Name" type="xs:string" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
+                <xs:element name="SystemID" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="mst_ReferredFrom">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" minOccurs="0" />
+                <xs:element name="Name" type="xs:string" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
+                <xs:element name="SystemID" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="Mst_PMTCTDecode">
             <xs:complexType>
               <xs:sequence>
@@ -564,284 +576,6 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <Mst_CouncellingType>
-    <Id>2</Id>
-    <Name>Progression, Rx</Name>
-    <SRNo>2</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingType>
-  <Mst_CouncellingType>
-    <Id>1</Id>
-    <Name>Education on basic, prevention, disclosure</Name>
-    <SRNo>3</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingType>
-  <Mst_CouncellingType>
-    <Id>3</Id>
-    <Name>ARV preparation, initiation, support, monitor</Name>
-    <SRNo>4</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingType>
-  <Mst_CouncellingType>
-    <Id>4</Id>
-    <Name>Home-based care, support</Name>
-    <SRNo>5</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingType>
-  <Mst_CouncellingType>
-    <Id>5</Id>
-    <Name>Other</Name>
-    <SRNo>7</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingType>
-  <Mst_CouncellingTopic>
-    <Id>7</Id>
-    <Name>Disclosure</Name>
-    <Deleteflag>1</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>28</Id>
-    <Name>ARV support-group</Name>
-    <Deleteflag>1</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>2</Id>
-    <Name>Prevention:abstinence,safer sex, condoms</Name>
-    <SRNo>3</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>3</Id>
-    <Name>Prevention:household precations,what is safe</Name>
-    <SRNo>4</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>4</Id>
-    <Name>Post-test counselling:implications of results</Name>
-    <SRNo>5</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>5</Id>
-    <Name>Positive living</Name>
-    <SRNo>7</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>6</Id>
-    <Name>Testing partners</Name>
-    <SRNo>8</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>8</Id>
-    <Name>To whom disclosed</Name>
-    <SRNo>9</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>9</Id>
-    <Name>Family/living situation</Name>
-    <SRNo>10</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>10</Id>
-    <Name>Shared confidentiality</Name>
-    <SRNo>12</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>11</Id>
-    <Name>Reproduction choices, prevention MTCT</Name>
-    <SRNo>13</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>13</Id>
-    <Name>Progression of disease</Name>
-    <SRNo>14</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>12</Id>
-    <Name>Child's blood test</Name>
-    <SRNo>15</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>14</Id>
-    <Name>Available treatment/prophylaxis</Name>
-    <SRNo>16</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>15</Id>
-    <Name>Follow-up appointments, care and treatment</Name>
-    <SRNo>17</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>16</Id>
-    <Name>CTX, INH prophylaxis</Name>
-    <SRNo>18</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>17</Id>
-    <Name>ART- educate on essentials(locally adapted)</Name>
-    <SRNo>19</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>18</Id>
-    <Name>Why complete adherence needed</Name>
-    <SRNo>20</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>19</Id>
-    <Name>Adherence preparation, indicate visits</Name>
-    <SRNo>21</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>20</Id>
-    <Name>Indicate when READY for ART</Name>
-    <SRNo>22</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>21</Id>
-    <Name>Explain dose, when to take</Name>
-    <SRNo>23</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>22</Id>
-    <Name>what can occure, how to manage side effects</Name>
-    <SRNo>24</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>23</Id>
-    <Name>What to do if one forgwts dose</Name>
-    <SRNo>25</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>24</Id>
-    <Name>What to do when travelling</Name>
-    <SRNo>26</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>25</Id>
-    <Name>Adherence plan (Schedule, aids, explain diary)</Name>
-    <SRNo>27</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>26</Id>
-    <Name>Treatment-supporter preparation</Name>
-    <SRNo>28</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>27</Id>
-    <Name>Which doses, why missed</Name>
-    <SRNo>29</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>29</Id>
-    <Name>How to contact clinic, dedc</Name>
-    <SRNo>30</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>30</Id>
-    <Name>Symptom management/palliative care at home</Name>
-    <SRNo>31</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>31</Id>
-    <Name>Caregiver booklet</Name>
-    <SRNo>32</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>1</Id>
-    <Name>Basic HIV education</Name>
-    <SRNo>34</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>32</Id>
-    <Name>Home-based care- specify</Name>
-    <SRNo>35</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>33</Id>
-    <Name>Support groups</Name>
-    <SRNo>36</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>34</Id>
-    <Name>Community support</Name>
-    <SRNo>37</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
-  <Mst_CouncellingTopic>
-    <Id>35</Id>
-    <Name>Other Counselling Topic</Name>
-    <SRNo>38</SRNo>
-    <Deleteflag>0</Deleteflag>
-    <SystemID>1</SystemID>
-  </Mst_CouncellingTopic>
   <Mst_Provider>
     <Id>1</Id>
     <Name>Government</Name>
@@ -116632,6 +116366,284 @@
     <SRNo>21</SRNo>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Regimen>
+  <Mst_CouncellingType>
+    <Id>2</Id>
+    <Name>Progression, Rx</Name>
+    <SRNo>2</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingType>
+  <Mst_CouncellingType>
+    <Id>1</Id>
+    <Name>Education on basic, prevention, disclosure</Name>
+    <SRNo>3</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingType>
+  <Mst_CouncellingType>
+    <Id>3</Id>
+    <Name>ARV preparation, initiation, support, monitor</Name>
+    <SRNo>4</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingType>
+  <Mst_CouncellingType>
+    <Id>4</Id>
+    <Name>Home-based care, support</Name>
+    <SRNo>5</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingType>
+  <Mst_CouncellingType>
+    <Id>5</Id>
+    <Name>Other</Name>
+    <SRNo>7</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingType>
+  <Mst_CouncellingTopic>
+    <Id>7</Id>
+    <Name>Disclosure</Name>
+    <Deleteflag>1</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>28</Id>
+    <Name>ARV support-group</Name>
+    <Deleteflag>1</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>2</Id>
+    <Name>Prevention:abstinence,safer sex, condoms</Name>
+    <SRNo>3</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>3</Id>
+    <Name>Prevention:household precations,what is safe</Name>
+    <SRNo>4</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>4</Id>
+    <Name>Post-test counselling:implications of results</Name>
+    <SRNo>5</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>5</Id>
+    <Name>Positive living</Name>
+    <SRNo>7</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>6</Id>
+    <Name>Testing partners</Name>
+    <SRNo>8</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>8</Id>
+    <Name>To whom disclosed</Name>
+    <SRNo>9</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>9</Id>
+    <Name>Family/living situation</Name>
+    <SRNo>10</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>10</Id>
+    <Name>Shared confidentiality</Name>
+    <SRNo>12</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>11</Id>
+    <Name>Reproduction choices, prevention MTCT</Name>
+    <SRNo>13</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>13</Id>
+    <Name>Progression of disease</Name>
+    <SRNo>14</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>12</Id>
+    <Name>Child's blood test</Name>
+    <SRNo>15</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>14</Id>
+    <Name>Available treatment/prophylaxis</Name>
+    <SRNo>16</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>15</Id>
+    <Name>Follow-up appointments, care and treatment</Name>
+    <SRNo>17</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>16</Id>
+    <Name>CTX, INH prophylaxis</Name>
+    <SRNo>18</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>17</Id>
+    <Name>ART- educate on essentials(locally adapted)</Name>
+    <SRNo>19</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>18</Id>
+    <Name>Why complete adherence needed</Name>
+    <SRNo>20</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>19</Id>
+    <Name>Adherence preparation, indicate visits</Name>
+    <SRNo>21</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>20</Id>
+    <Name>Indicate when READY for ART</Name>
+    <SRNo>22</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>21</Id>
+    <Name>Explain dose, when to take</Name>
+    <SRNo>23</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>22</Id>
+    <Name>what can occure, how to manage side effects</Name>
+    <SRNo>24</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>23</Id>
+    <Name>What to do if one forgwts dose</Name>
+    <SRNo>25</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>24</Id>
+    <Name>What to do when travelling</Name>
+    <SRNo>26</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>25</Id>
+    <Name>Adherence plan (Schedule, aids, explain diary)</Name>
+    <SRNo>27</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>26</Id>
+    <Name>Treatment-supporter preparation</Name>
+    <SRNo>28</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>27</Id>
+    <Name>Which doses, why missed</Name>
+    <SRNo>29</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>29</Id>
+    <Name>How to contact clinic, dedc</Name>
+    <SRNo>30</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>30</Id>
+    <Name>Symptom management/palliative care at home</Name>
+    <SRNo>31</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>31</Id>
+    <Name>Caregiver booklet</Name>
+    <SRNo>32</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>1</Id>
+    <Name>Basic HIV education</Name>
+    <SRNo>34</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>32</Id>
+    <Name>Home-based care- specify</Name>
+    <SRNo>35</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>33</Id>
+    <Name>Support groups</Name>
+    <SRNo>36</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>34</Id>
+    <Name>Community support</Name>
+    <SRNo>37</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
+  <Mst_CouncellingTopic>
+    <Id>35</Id>
+    <Name>Other Counselling Topic</Name>
+    <SRNo>38</SRNo>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_CouncellingTopic>
   <Mst_PMTCTDecode>
     <Id>1</Id>
     <Name>Exclusive breast feeding - (EBF)</Name>
