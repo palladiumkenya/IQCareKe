@@ -3,21 +3,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
-using Interface.Security;
 using IQCare.Web.UILogic;
+
 namespace IQCare.Web.MasterPage
 {
-    public partial class MainMaster : System.Web.UI.MasterPage
+    public partial class Module : System.Web.UI.MasterPage
     {
         private String strPathAndQuery;
         private String strUrl;
-
-        /// <summary>
-        /// Gets the page script manager.
-        /// </summary>
-        /// <value>
-        /// The page script manager.
-        /// </value>
         public ScriptManager PageScriptManager
         {
             get
@@ -35,7 +28,18 @@ namespace IQCare.Web.MasterPage
         {
             get { return 60; }
         }
+        public string CurrentModuleName
+        {
 
+            set
+            {
+                levelOneNavigationUserControl1.CurrentModule = value;
+            }
+            get
+            {
+                return levelOneNavigationUserControl1.CurrentModule;
+            }
+        }
         protected void lnkLogOut_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/frmLogOff.aspx");
@@ -52,27 +56,16 @@ namespace IQCare.Web.MasterPage
             //string path = HttpContext.Current.Request.Url.AbsolutePath;
             strPathAndQuery = HttpContext.Current.Request.Url.PathAndQuery;
             strUrl = HttpContext.Current.Request.Url.AbsoluteUri.Replace(strPathAndQuery, "/");
-            this.pageHead.Controls.Add(new LiteralControl(String.Format("<meta http-equiv='refresh' content='{0};url={1}'>", SessionLengthMinutes * 60, SessionExpireDestinationUrl)));
+            this.pageHead.Controls.Add(new LiteralControl(String.Format("<meta http-equiv='refresh' content='{0};url={1}' />", SessionLengthMinutes * 60, SessionExpireDestinationUrl)));
         }
-        public bool ExecutePatientLevel
+        protected string ShowPatientInfo
         {
+            get
+            {
+                return CurrentSession.Current.CurrentPatient != null ? "" : "none";
+            }
+        }
 
-            set
-            {
-                levelTwoNavigationUserControl1.CanExecute = value;                
-            }
-            get
-            {
-                return levelTwoNavigationUserControl1.CanExecute;
-            }
-        }
-        protected string show2ndLevel
-        {
-            get
-            {
-                return this.ExecutePatientLevel ? "" : "none";
-            }
-        }
         /// <summary>
         /// Handles the Load event of the Page control.
         /// </summary>
@@ -82,11 +75,6 @@ namespace IQCare.Web.MasterPage
         {
             Page.Header.DataBind();
             if (Session["AppLocation"] == null)
-            {
-                IQCareMsgBox.Show("SessionExpired", this);
-                Response.Redirect("~/frmLogOff.aspx");
-            }
-            if (Session.Count == 0)
             {
                 IQCareMsgBox.Show("SessionExpired", this);
                 Response.Redirect("~/frmLogOff.aspx");
@@ -117,87 +105,63 @@ namespace IQCare.Web.MasterPage
                         facilityStats.Text = "<i class='fa fa-cubes fa-1x text-muted' aria-hidden='true'></i> <span class='fa-1x text-muted'><strong>Select Service</strong></span>";
                         facilityStats.NavigateUrl = "~/frmFacilityHome.aspx";
                     }
-                    //if (pageName.Equals("frmFamilyInformation.aspx"))
-                    //{
-                    //    (levelTwoNavigationUserControl1.FindControl("PanelPatiInfo") as Panel).Visible = false;
-                    //}
-
-                    if (pageName.Equals("frmPatient_Home.aspx")
-                        || pageName.ToLower().Equals("frmscheduler_appointmentnewhistory.aspx")
-
-                        )
-                    {
-
-                        level2Navigation.Style.Add("display", "inline");
-                        levelTwoNavigationUserControl1.CanExecute = true;
-                    }
-                    //else if (pageName.Equals("AddTechnicalArea.aspx"))
-                    //{
-
-                    //    level2Navigation.Style.Add("display", "none");
-                    //    levelTwoNavigationUserControl1.CanExecute = false;
-                    //}
-                    //else if (pageName.Equals("frmAdmin_DeletePatient.aspx"))
-                    //{
-
-                    //    level2Navigation.Style.Add("display", "none");
-                    //    levelTwoNavigationUserControl1.CanExecute = false;
-                    //}
-                    //else if (pageName.Equals("frmPatientCustomRegistration.aspx"))
-                    //{
-
-                    //    level2Navigation.Style.Add("display", "none");
-                    //    levelTwoNavigationUserControl1.CanExecute = false;
-                    //}
-                    //else
-                    //{
-
-                    //    level2Navigation.Style.Add("display", "inline");
-                    //    level2Navigation.Attributes["class"] = "";
-                    //    levelTwoNavigationUserControl1.CanExecute = true;
-
-                    //}
+                    
                 }
                 else
                 {
-                    level2Navigation.Style.Add("display", "none");
-                    levelTwoNavigationUserControl1.CanExecute = false;
-                    //VY added 2014-10-14 for changing level one navigation Menu depending on whether patient has been selected or not
+                   
                     MenuItem facilityHome = (levelOneNavigationUserControl1.FindControl("mainMenu") as Menu).FindItem("Facility Home");
                     facilityHome.Text = "<i class='fa fa-cubes fa-1x text-muted' aria-hidden='true'></i> <span class='fa-1x text-muted'><strong>Select Service</strong></span>";
                     facilityHome.NavigateUrl = "~/frmFacilityHome.aspx";
                     MenuItem facilityStats = (levelOneNavigationUserControl1.FindControl("mainMenu") as Menu).FindItem("Facility Statistics");
                     facilityStats.Text = "<i class='fa fa-line-chart fa-1x text-muted' aria-hidden='true'></i> <span class='fa-1x text-muted'><strong>Facility Statistics</strong></span>";
-                    facilityStats.NavigateUrl = "~/Statistics/Facility.aspx";
+                    facilityStats.NavigateUrl = "~/frmFacilityStatistics.aspx";
                 }
             }
-            else
-            {
-                level2Navigation.Style.Add("display", "none");
-                levelTwoNavigationUserControl1.CanExecute = false;
-            }
+            
 
             if (Session["AppUserName"] != null)
             {
                 lblUserName.Text = Session["AppUserName"].ToString();
             }
-            if (Session["AppLocation"] != null)
-            {
-                lblLocation.Text = Session["AppLocation"].ToString();
-            }
-            IIQCareSystem AdminManager;
-            AdminManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
+            CurrentSession session = CurrentSession.Current;
+            //if (Session["AppLocation"] != null)
+            //{
+                lblLocation.Text = session.Facility.Name.ToString();
+           // }
+            //CurrentSession session = CurrentSession.Current;
 
-            if (Session["AppDateFormat"].ToString() != "")
+            this.CurrentModuleName = session.CurrentServiceArea.Name;
+
+            if (session.CurrentPatient != null)
             {
-                
-                    lblDate.Text = AdminManager.SystemDate().ToString(Session["AppDateFormat"].ToString());
+                lblpatientname.Text = session.CurrentPatient.FullName;
+                lblSex.Text = session.CurrentPatient.Sex;
+                lblAge.Text = session.CurrentPatient.Age.ToString() + " Years";
+                lblDOB.Text = session.CurrentPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                lblIQnumber.Text = session.CurrentPatient.UniqueFacilityId;
+            }
+
+            DateTime sysDate=SystemSetting.SystemDate;
+            if (session.Facility.DateFormat.ToString() != "")
+            {
+                lblDate.Text = sysDate.ToString(session.Facility.DateFormat);
+                    
             }
             else
             {
-                lblDate.Text = AdminManager.SystemDate().ToString("dd-MMM-yyyy");
+                lblDate.Text = sysDate.ToString("dd-MMM-yyyy");
             }
-            
+            if (Session.Count == 0)
+            {
+                IQCareMsgBox.Show("SessionExpired", this);
+                Response.Redirect("~/frmLogOff.aspx");
+            }
+            if (Session["AppUserID"].ToString() == "")
+            {
+                IQCareMsgBox.Show("SessionExpired", this);
+                Response.Redirect("~/frmLogOff.aspx");
+            }
 
             lblversion.Text = GblIQCare.VersionName;// AuthenticationManager.AppVersion;
             lblrelDate.Text = GblIQCare.ReleaseDate;//AuthenticationManager.ReleaseDate;
@@ -205,16 +169,6 @@ namespace IQCare.Web.MasterPage
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (this.ExecutePatientLevel)
-            {
-                level2Navigation.Style.Add("display", "inline");
-                level2Navigation.Attributes["class"] = "";
-            }
-            else
-            {
-                level2Navigation.Style.Add("display", "none");
-
-            }
         }
     }
 }

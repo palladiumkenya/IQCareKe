@@ -7,225 +7,279 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC {
+namespace IQCare.Web.MasterPage {
     
     
-    public partial class Home {
+    public partial class MainMaster {
         
         /// <summary>
-        /// IdentificationNumber control.
+        /// pageHead control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText IdentificationNumber;
+        protected global::System.Web.UI.HtmlControls.HtmlHead pageHead;
         
         /// <summary>
-        /// PatientNames control.
+        /// lblTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText PatientNames;
+        protected global::System.Web.UI.HtmlControls.HtmlTitle lblTitle;
         
         /// <summary>
-        /// Gender control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Gender;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// facilityId control.
+        /// masterScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect facilityId;
+        protected global::System.Web.UI.ScriptManager masterScriptManager;
         
         /// <summary>
-        /// fname control.
+        /// facilityName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText fname;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl facilityName;
         
         /// <summary>
-        /// mname control.
+        /// lblLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText mname;
+        protected global::System.Web.UI.WebControls.Label lblLocation;
         
         /// <summary>
-        /// lname control.
+        /// lblUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lname;
+        protected global::System.Web.UI.WebControls.Label lblUserName;
         
         /// <summary>
-        /// Age control.
+        /// lblDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Age;
+        protected global::System.Web.UI.WebControls.Label lblDate;
         
         /// <summary>
-        /// GurdianFname control.
+        /// lnkPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText GurdianFname;
+        protected global::System.Web.UI.WebControls.LinkButton lnkPassword;
         
         /// <summary>
-        /// GurdianOname control.
+        /// lnkReportDefect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText GurdianOname;
+        protected global::System.Web.UI.WebControls.LinkButton lnkReportDefect;
         
         /// <summary>
-        /// IdNumber control.
+        /// lnkLogOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText IdNumber;
+        protected global::System.Web.UI.WebControls.LinkButton lnkLogOut;
         
         /// <summary>
-        /// county control.
+        /// levelOneNavigationUserControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect county;
+        protected global::IQCare.Web.MasterPage.levelOneNavigationUserControl levelOneNavigationUserControl1;
         
         /// <summary>
-        /// subcounty control.
+        /// level2Navigation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect subcounty;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl level2Navigation;
         
         /// <summary>
-        /// ward control.
+        /// levelTwoNavigationUserControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ward;
+        protected global::IQCare.Web.MasterPage.levelTwoNavigationUserControl levelTwoNavigationUserControl1;
         
         /// <summary>
-        /// localcouncil control.
+        /// IQCareContentPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect localcouncil;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder IQCareContentPlaceHolder;
         
         /// <summary>
-        /// location control.
+        /// ProgressControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect location;
+        protected global::IQCare.Web.ProgressControl ProgressControl1;
         
         /// <summary>
-        /// sublocation control.
+        /// notificationPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText sublocation;
+        protected global::System.Web.UI.UpdatePanel notificationPanel;
         
         /// <summary>
-        /// landmark control.
+        /// panelNotify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText landmark;
+        protected global::System.Web.UI.WebControls.Panel panelNotify;
         
         /// <summary>
-        /// healthcentre control.
+        /// panelPopup_Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect healthcentre;
+        protected global::System.Web.UI.WebControls.Panel panelPopup_Title;
         
         /// <summary>
-        /// PostalAddress control.
+        /// lblNotice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText PostalAddress;
+        protected global::System.Web.UI.WebControls.Label lblNotice;
         
         /// <summary>
-        /// MobileNo control.
+        /// imgNotice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl MobileNo;
+        protected global::System.Web.UI.WebControls.Image imgNotice;
         
         /// <summary>
-        /// MobileNoAlt control.
+        /// lblNoticeInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl MobileNoAlt;
+        protected global::System.Web.UI.WebControls.Label lblNoticeInfo;
         
         /// <summary>
-        /// emailaddress control.
+        /// btnOkAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl emailaddress;
+        protected global::System.Web.UI.WebControls.Button btnOkAction;
         
         /// <summary>
-        /// KeyPopulationChoose control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect KeyPopulationChoose;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn;
+        
+        /// <summary>
+        /// notifyPopupExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender notifyPopupExtender;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// lblrelDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblrelDate;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// lblversion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblversion;
     }
 }

@@ -251,13 +251,6 @@
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
     <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
-    <Content Include="Content\datatables\css\dataTables.jqueryui.min.css" />
-    <Content Include="Content\datatables\css\dataTables.material.css" />
-    <Content Include="Content\datatables\css\dataTables.material.min.css" />
-    <Content Include="Content\datatables\css\dataTables.semanticui.css" />
-    <Content Include="Content\datatables\css\dataTables.semanticui.min.css" />
-    <Content Include="Content\datatables\css\dataTables.uikit.css" />
-    <Content Include="Content\datatables\css\dataTables.uikit.min.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
     <Content Include="Content\datatables\images\favicon.ico" />
     <Content Include="Content\datatables\images\sort_asc.png" />

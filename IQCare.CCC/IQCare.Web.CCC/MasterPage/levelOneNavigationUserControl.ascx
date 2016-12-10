@@ -83,7 +83,8 @@
 <!-- .navbar -->
 <!-- Breadcrumbs/sitemap -->
 <div class="row" style="height: 25px">
-    <%--<div class="col-md-1"></div>--%>
+   <div class="col-md-3 pull-left" style="margin-left:20px"><asp:Label ID="labelModule" CssClass="control-label pull-left" runat="server" Text=""></asp:Label></div>
+   <div class="col-md-6"></div>
     <div class="col-md-3 pull-right ">
         <a class="text-muted">
             <asp:Label ID="lblRoot" CssClass="" runat="server" Text=""></asp:Label>

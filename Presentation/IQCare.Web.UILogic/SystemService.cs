@@ -126,7 +126,7 @@ namespace IQCare.Web.UILogic
         {
             string xmlPath = GblIQCare.GetXMLPath();
             IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
-            as  rd-md-MDateTime theDTime = DateManager.SystemDate();
+            DateTime theDTime = DateManager.SystemDate();
             System.IO.FileInfo theFileInfo1 = new System.IO.FileInfo(xmlPath + "\\AllMasters.con");
             System.IO.FileInfo theFileInfo2 = new System.IO.FileInfo(xmlPath + "\\DrugMasters.con");
             System.IO.FileInfo theFileInfo3 = new System.IO.FileInfo(xmlPath + "\\LabMasters.con");

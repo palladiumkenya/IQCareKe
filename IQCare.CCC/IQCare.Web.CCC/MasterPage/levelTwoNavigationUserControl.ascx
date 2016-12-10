@@ -157,7 +157,10 @@
                 DynamicMenuStyle-CssClass="dropdown-menu">
                 <Items>
                     <asp:MenuItem Text="<i class='fa fa-pencil-square-o fa-lg text-muted' aria-hidden='true'></i> <span class='text-muted'>Registration</span>"
-                        Selectable="True" Value="mnuRegistration" NavigateUrl="~/Patient/Registration.aspx"></asp:MenuItem>
+                        Selectable="false" Value="mnuRegistrationMain" >
+                         <asp:MenuItem Text="Registration" Value="mnuRegistration" NavigateUrl="~/Patient/Registration.aspx"/>
+                        <asp:MenuItem Text="Enrollment" Value="mnuEnrollment" NavigateUrl="~/Patient/AddTechnicalArea.aspx"/>
+                    </asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-exchange text-muted fa-lg' aria-hidden='true'></i><span class='text-muted'>Transfer</span>"
                         Value="mnuPatientTransfer"></asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-exchange text-muted fa-lg' aria-hidden='true'></i><span class='text-muted'>Additional Forms</span>"
