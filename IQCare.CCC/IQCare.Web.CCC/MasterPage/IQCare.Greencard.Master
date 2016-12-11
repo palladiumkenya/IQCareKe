@@ -22,8 +22,7 @@
     <link href="<%# ResolveUrl("~/Content/css/iqcare.ke-font.css") %>" rel="stylesheet"type="text/css" />
     <link href="<%# ResolveUrl("~/Style/StyleSheet.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Content/fuelux/css/fuelux.css")  %>" rel="stylesheet" type="text/css" />
-
-
+    
 </head>
 <body style="padding-bottom: 60px" class="fuelux">
     

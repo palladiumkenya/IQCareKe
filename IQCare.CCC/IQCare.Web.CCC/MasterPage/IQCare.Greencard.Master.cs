@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Interface.Security;
 using IQCare.Web.UILogic;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+
 
 namespace IQCare.Web.MasterPage
 {
