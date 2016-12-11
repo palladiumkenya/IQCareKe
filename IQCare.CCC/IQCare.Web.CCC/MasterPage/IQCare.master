@@ -91,7 +91,7 @@
         }
     </style>
 </head>
-<body style="padding-bottom: 60px">
+<body style="padding-bottom: 60px" class="fuelux">
     <div class="container-fluid">
         <form id="form1" class="form" runat="server" enctype="multipart/form-data">
         <asp:ScriptManager ID="masterScriptManager" runat="server" EnablePageMethods="true"
