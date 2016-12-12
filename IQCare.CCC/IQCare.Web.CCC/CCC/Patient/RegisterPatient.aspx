@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.Greencard.master" AutoEventWireup="true" CodeBehind="RegisterPatient.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="RegisterPatient.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -21,7 +21,6 @@
         $(document).ready(function () {
              
             $('#myWizard').wizard();
-        })
-        ;
+        });
     </script>
 </asp:Content>

@@ -150,7 +150,7 @@
     <Content Include="fuelux\fonts\fuelux.eot" />
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
-    <Content Include="MasterPage\IQCare.Greencard.Master" />
+    <Content Include="MasterPage\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -250,12 +250,12 @@
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterPage\IQCare.Greencard.Master.cs">
-      <DependentUpon>IQCare.Greencard.Master</DependentUpon>
+    <Compile Include="MasterPage\Greencard.Master.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MasterPage\IQCare.Greencard.Master.designer.cs">
-      <DependentUpon>IQCare.Greencard.Master</DependentUpon>
+    <Compile Include="MasterPage\Greencard.Master.designer.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -278,6 +278,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.dll</HintPath>

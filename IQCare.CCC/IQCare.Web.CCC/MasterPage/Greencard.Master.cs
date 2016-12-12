@@ -10,7 +10,7 @@ using System.Web.UI;
 
 namespace IQCare.Web.MasterPage
 {
-    public partial class GreenCard : System.Web.UI.MasterPage
+    public partial class Greencard : System.Web.UI.MasterPage
     {
         private String strPathAndQuery;
         private String strUrl;

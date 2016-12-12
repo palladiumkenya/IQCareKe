@@ -10,7 +10,7 @@
 namespace IQCare.Web.MasterPage {
     
     
-    public partial class GreenCard {
+    public partial class Greencard {
         
         /// <summary>
         /// pageHead control.
