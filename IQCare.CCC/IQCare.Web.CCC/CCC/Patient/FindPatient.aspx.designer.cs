@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC {
+namespace IQCare.Web.CCC.Patient {
     
     
-    public partial class Home {
+    public partial class FindPatient {
         
         /// <summary>
         /// IdentificationNumber control.

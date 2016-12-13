@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="FindPatient.aspx.cs" Inherits="IQCare.Web.CCC.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="FindPatient.aspx.cs" Inherits="IQCare.Web.CCC.Patient.FindPatient" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
     <div class="col-md-12">

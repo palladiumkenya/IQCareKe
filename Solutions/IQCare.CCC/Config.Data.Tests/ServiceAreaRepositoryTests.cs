@@ -9,6 +9,7 @@ using Config.Data.Repository;
 using NUnit.Core;
 using NUnit.Framework;
 
+
 namespace Config.Data.Tests
 {
     [TestFixture]
@@ -16,6 +17,7 @@ namespace Config.Data.Tests
     {
         private IServiceAreaRepository _serviceAreaRepository;
         private ConfigContext _context;
+
 
         [SetUp]
         public void SetUp()
