@@ -8,6 +8,8 @@ using Config.Core.Interfaces;
 using Config.Data.Repository;
 using NUnit.Core;
 using NUnit.Framework;
+using Unitofwork.Core.Interface;
+using Unitofwork.data.Repository;
 
 
 namespace Config.Data.Tests
@@ -15,8 +17,8 @@ namespace Config.Data.Tests
     [TestFixture]
     public  class ServiceAreaRepositoryTests
     {
-        private IServiceAreaRepository _serviceAreaRepository;
         private ConfigContext _context;
+        private IUnitOfWork _unitOfWork;
 
 
         [SetUp]
@@ -24,13 +26,14 @@ namespace Config.Data.Tests
         {
             //set up my test
             _context = new ConfigContext("name=IQCareDatabase");
-            _serviceAreaRepository = new ServiceAreaRepository(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
         [Test]
         public void should_GetById()
         {
-            var service = _serviceAreaRepository.GetById(1);
+            
+var service = _unitOfWork.ServiceAreaRepository.GetById(1);
             Assert.NotNull(service);
             Debug.Print(service.ToString());
         }
@@ -38,7 +41,7 @@ namespace Config.Data.Tests
         [Test]
         public void should_GetAll()
         {
-            var services = _serviceAreaRepository.GetAll();
+            var services = _unitOfWork.ServiceAreaRepository.GetAll();
            Assert.That(services,Is.Not.Empty);
             foreach (var service in services)
             {
@@ -49,7 +52,7 @@ namespace Config.Data.Tests
         [Test]
         public void should_GetByCode()
         {
-            var service = _serviceAreaRepository.GetByCode("CCC");
+            var service = _unitOfWork.ServiceAreaRepository.GetByCode("CCC");
             Assert.NotNull(service);
             Debug.Print(service.ToString());
         }

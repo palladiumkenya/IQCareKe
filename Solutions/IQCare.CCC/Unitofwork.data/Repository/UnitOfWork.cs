@@ -11,9 +11,7 @@ using PatientManagement.Data.Repository;
 
 namespace Unitofwork.data.Repository
 {
-
-    
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         
         private readonly BaseContext _context;

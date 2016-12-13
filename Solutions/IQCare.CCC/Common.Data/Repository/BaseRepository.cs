@@ -11,14 +11,10 @@ namespace Common.Data.Repository
         protected internal BaseContext Context;
         internal IDbSet<T> Dbset;
 
-        public BaseRepository()
-        {
-            Dbset = Context.Set<T>();
-        }
 
-        public BaseRepository(BaseContext context):this()
+        public BaseRepository(BaseContext context)
         {
-            Context = context;
+            Context = context; Dbset = Context.Set<T>();
         }
 
         public virtual T GetById(int id)

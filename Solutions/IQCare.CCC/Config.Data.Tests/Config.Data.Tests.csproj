@@ -107,6 +107,14 @@
       <Project>{FBE1355F-E166-4505-A6D7-F9D7BBA35D36}</Project>
       <Name>Config.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Unitofwork.Core\Unitofwork.Core.csproj">
+      <Project>{62E5E5B9-E17E-48F8-9768-A9B64323805C}</Project>
+      <Name>Unitofwork.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Unitofwork.data\Unitofwork.data.csproj">
+      <Project>{51B6E3C8-A974-4D05-963F-5EBFC8F85DE4}</Project>
+      <Name>Unitofwork.data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
