@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [Table(Name ="Patient")]
+    [System.Data.Linq.Mapping.Table(Name ="Patient")]
 
     public class Patient : BaseEntity
     {
@@ -19,5 +20,5 @@ namespace PatientManagement.Core.Model
         public string IdentificationNo { get; set; }
         public bool Status { get; set; }
     }
-
+   
 }

@@ -4,8 +4,8 @@
         <select id="serviceA" class="form-control input-sm">
             <option value="0">select</option>
         </select>
-        <
-        <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+        
+        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
     </div>
 </asp:Content>

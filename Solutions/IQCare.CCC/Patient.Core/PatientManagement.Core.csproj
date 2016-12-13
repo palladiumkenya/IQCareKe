@@ -31,7 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.EnterpriseServices" />
@@ -45,6 +54,14 @@
   <ItemGroup>
     <Compile Include="Interfaces\IPatientRepository.cs" />
     <Compile Include="Model\Patient.cs" />
+    <Compile Include="Model\PatientContact.cs" />
+    <Compile Include="Model\PatientEnrollment.cs" />
+    <Compile Include="Model\PatientLocation.cs" />
+    <Compile Include="Model\PatientMaritalStatus.cs" />
+    <Compile Include="Model\PatientOVCStatus.cs" />
+    <Compile Include="Model\PatientPopulation.cs" />
+    <Compile Include="Model\PatientRelationship.cs" />
+    <Compile Include="Model\PatientTreatmentSupporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +73,10 @@
       <Project>{1caa9075-c252-468d-ae8c-c692ba8beed9}</Project>
       <Name>Common.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

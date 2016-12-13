@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Patient
 {
-    public partial class PatientRegistration : System.Web.UI.Page
+    public partial class PatientTest : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

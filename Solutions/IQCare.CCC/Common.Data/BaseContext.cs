@@ -8,7 +8,7 @@ namespace Common.Data
 {
     public abstract class BaseContext : DbContext
     {
-        public BaseContext() : base(ConnectionManager.GetConnection())
+        public BaseContext() : base("name=IQCareDatabase")
         {
         }
         public BaseContext(string connection) : base(connection)
