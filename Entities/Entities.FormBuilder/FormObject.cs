@@ -42,7 +42,7 @@ namespace Entities.FormBuilder
         /// The module identifier.
         /// </value>
         public int ModuleId { get; set; }
-        public Boolean Custom { get; set; }
+        public bool Custom { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [multi visit].
         /// </summary>
