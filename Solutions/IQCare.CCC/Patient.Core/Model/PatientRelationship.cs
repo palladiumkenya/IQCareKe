@@ -2,7 +2,7 @@
 
 namespace PatientManagement.Core.Model
 {
-    class PatientRelationship :BaseEntity
+   public class PatientRelationship :BaseEntity
     {
 
     }

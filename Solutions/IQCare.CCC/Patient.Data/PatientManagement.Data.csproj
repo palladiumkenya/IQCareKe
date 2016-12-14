@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="PatientContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\PatientContactRepository.cs" />
+    <Compile Include="Repository\PatientEnrollmentRepository.cs" />
+    <Compile Include="Repository\PatientLocationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
   </ItemGroup>
   <ItemGroup>

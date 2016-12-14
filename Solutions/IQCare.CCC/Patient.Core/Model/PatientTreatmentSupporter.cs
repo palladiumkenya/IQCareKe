@@ -5,7 +5,7 @@ namespace PatientManagement.Core.Model
 {
     [System.Data.Linq.Mapping.Table(Name = "PatientTreatmentSupporter")]
 
-    class PatientTreatmentSupporter :BaseEntity
+    public class PatientTreatmentSupporter :BaseEntity
     {
         
         public int PatientId { get; set; }
