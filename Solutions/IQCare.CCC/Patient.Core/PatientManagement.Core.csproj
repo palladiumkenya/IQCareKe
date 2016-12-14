@@ -56,6 +56,7 @@
     <Compile Include="Interfaces\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interfaces\IPatientLocationRepository.cs" />
     <Compile Include="Interfaces\IPatientMaritalStatusRepository.cs" />
+    <Compile Include="Interfaces\IPatientOVCStatusRepository.cs" />
     <Compile Include="Interfaces\IPatientPopulationRepository.cs" />
     <Compile Include="Interfaces\IPatientRepository.cs" />
     <Compile Include="Interfaces\IPatientRelationshipRepository.cs" />

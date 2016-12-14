@@ -49,7 +49,11 @@
     <Compile Include="Repository\PatientContactRepository.cs" />
     <Compile Include="Repository\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\PatientLocationRepository.cs" />
+    <Compile Include="Repository\PatientMaritalStatusRepository.cs" />
+    <Compile Include="Repository\PatientOVCStatusRepository.cs" />
+    <Compile Include="Repository\PatientPopulationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\PatientTreatmentSupporterRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Core\Common.Core.csproj">

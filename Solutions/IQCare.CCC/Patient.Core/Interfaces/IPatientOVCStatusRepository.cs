@@ -3,7 +3,7 @@ using PatientManagement.Core.Model;
 
 namespace PatientManagement.Core.Interfaces
 {
-    public  interface IPatientPopulationRepository:IRepository<PatientPopulation>
+    public interface IPatientOVCStatusRepository :IRepository<PatientOVCStatus>
     {
 
     }

@@ -7,10 +7,16 @@ namespace PatientManagement.Data.Repository
 {
     public class PatientLocationRepository :BaseRepository<PatientLocation>,IPatientLocationRepository
     {
-        private PatientContext _context;
-        public PatientLocationRepository(BaseContext context) : base(context)
+        private readonly PatientContext _context;
+
+        public PatientLocationRepository() : this(new PatientContext())
         {
 
+        }
+
+        public PatientLocationRepository(PatientContext context) : base(context)
+        {
+            _context = context;
         }
     }
 }

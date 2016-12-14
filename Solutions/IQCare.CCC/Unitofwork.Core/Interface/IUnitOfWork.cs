@@ -8,7 +8,17 @@ namespace Unitofwork.Core.Interface
     public interface IUnitOfWork : IDisposable
     {
         int Complete();
-        IPatientRepository PatientRepository { get; }
+        
         IServiceAreaRepository ServiceAreaRepository { get; }
+
+        //Patient Context Interfaces
+        IPatientRepository PatientRepository { get; }
+        IPatientContactRepository PatientContactRepository { get; }
+        IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
+        IPatientLocationRepository PatientLocationRepository { get; }
+        IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
+        IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
+        IPatientPopulationRepository PatientPopulationRepository { get; }
+        IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
     }
 }

@@ -5,7 +5,7 @@ namespace PatientManagement.Core.Model
 {
     [System.Data.Linq.Mapping.Table(Name = "PatientOVCStatus")]
 
-    class PatientOVCStatus :BaseEntity
+    public class PatientOVCStatus :BaseEntity
     {
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
