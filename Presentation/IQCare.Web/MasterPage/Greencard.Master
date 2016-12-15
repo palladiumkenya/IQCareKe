@@ -107,7 +107,7 @@
                                     <span class=""></span> Green Card Portal <span class="badge"></span>
                                 </a>
 
-                                <a href="#" class="list-group-item">
+                                <a href="~PatientFinder.aspx" class="list-group-item">
                                     <span class="fa fa-search fa-2x pull-left"></span> Find Patients <span class="badge">145</span>
                                 </a>
 

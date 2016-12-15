@@ -49,13 +49,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblRegimen;
         
         /// <summary>
-        /// TIRegimen control.
+        /// TransferRegimen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TIRegimen;
+        protected global::System.Web.UI.WebControls.TextBox TransferRegimen;
         
         /// <summary>
         /// lblfacility control.
@@ -67,6 +67,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblfacility;
         
         /// <summary>
+        /// TransferFromFacility control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TransferFromFacility;
+        
+        /// <summary>
         /// lblmflcode control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblmflcode;
         
         /// <summary>
+        /// FacilityMFLCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FacilityMFLCode;
+        
+        /// <summary>
         /// lblcounty control.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblcounty;
+        
+        /// <summary>
+        /// TransferFromCounty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TransferFromCounty;
         
         /// <summary>
         /// lblDateOfHIVDiagnosis control.
@@ -112,6 +139,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblwhostage;
         
         /// <summary>
+        /// WHOStageAtEnrollment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList WHOStageAtEnrollment;
+        
+        /// <summary>
         /// lblDateOfARTInitiation control.
         /// </summary>
         /// <remarks>
@@ -128,6 +164,42 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblARTUse;
+        
+        /// <summary>
+        /// PMTCT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox PMTCT;
+        
+        /// <summary>
+        /// NONE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox NONE;
+        
+        /// <summary>
+        /// RegimenPurpose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList RegimenPurpose;
+        
+        /// <summary>
+        /// HistoryRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HistoryRegimen;
         
         /// <summary>
         /// AddPriorHistory control.
@@ -148,6 +220,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblMUAC;
         
         /// <summary>
+        /// BaselineMUAC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox BaselineMUAC;
+        
+        /// <summary>
         /// lblWeight control.
         /// </summary>
         /// <remarks>
@@ -155,6 +236,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblWeight;
+        
+        /// <summary>
+        /// BaselineWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox BaselineWeight;
         
         /// <summary>
         /// lblheight control.
@@ -166,6 +256,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblheight;
         
         /// <summary>
+        /// BaselineHeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox BaselineHeight;
+        
+        /// <summary>
         /// lblBMI control.
         /// </summary>
         /// <remarks>
@@ -175,31 +274,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblBMI;
         
         /// <summary>
-        /// lblDateStartedOn1stLine control.
+        /// BaselineBMI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDateStartedOn1stLine;
-        
-        /// <summary>
-        /// DateStartedOn1stLine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText DateStartedOn1stLine;
-        
-        /// <summary>
-        /// lblARTCohort control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblARTCohort;
+        protected global::System.Web.UI.WebControls.TextBox BaselineBMI;
         
         /// <summary>
         /// ARTCohort control.
@@ -208,69 +289,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ARTCohort;
+        protected global::System.Web.UI.WebControls.TextBox ARTCohort;
         
         /// <summary>
-        /// lblBaselineViralLoad control.
+        /// BaselineViralload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBaselineViralLoad;
-        
-        /// <summary>
-        /// BVL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText BVL;
-        
-        /// <summary>
-        /// lblBaselineVLDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBaselineVLDate;
-        
-        /// <summary>
-        /// BVLDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText BVLDate;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSave;
-        
-        /// <summary>
-        /// btnClose control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnClose;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        protected global::System.Web.UI.WebControls.TextBox BaselineViralload;
     }
 }

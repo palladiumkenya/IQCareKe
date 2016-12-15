@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="true" CodeBehind="OneTimeEventsTracker.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEventsTracker" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.Master" AutoEventWireup="true" CodeBehind="OneTimeEventsTracker.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEventsTracker" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
