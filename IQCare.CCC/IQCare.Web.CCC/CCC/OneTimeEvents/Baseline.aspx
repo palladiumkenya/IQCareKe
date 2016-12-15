@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="Baseline.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.Baseline" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
+    <div class="col-md-12">
+        <uc:PatientDetails ID="PatientSummary" runat="server" />
+    </div>
     <div class="col-md-12">
 <%--         <div class="col-md-12"><small class="pull-left fa fa-arrow-circle-o-right fa-2x"> Baseline Assessment & Treatment Inititiation</small></div>
               <div class="col-md-12"><hr /></div>--%>

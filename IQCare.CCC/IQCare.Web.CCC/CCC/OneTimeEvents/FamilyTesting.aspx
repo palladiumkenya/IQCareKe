@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
-        <div class="row">
+        <div class="col-md-12">
                 <div class="col-md-12">
                     <uc:PatientDetails ID="PatientSummary" runat="server" />
                 </div>
