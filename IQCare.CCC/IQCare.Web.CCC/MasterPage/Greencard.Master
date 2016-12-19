@@ -3,6 +3,8 @@
 <%@ Register Src="levelOneNavigationUserControl.ascx" TagName="levelOneNavigationUserControl"
     TagPrefix="uc1" %>
 
+<%@ Register src="../CCC/UC/ucPatientTriage.ascx" TagName="Triage" TagPrefix="uc2" %>
+
 <%@ Register Assembly="AjaxControlToolkit" TagPrefix="cc1" Namespace="AjaxControlToolkit" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +94,39 @@
                           <uc1:levelOneNavigationUserControl ID="levelOneNavigationUserControl1" runat="server" />
                       </div>
                  </div>
-
+                
+              <div class="row">
+                  <div class="col-md-12">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <!-- Modal -->
+                            <asp:Label ID="Label3" runat="server" Text=""></asp:Label><br />
+                            <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Capture Patient Vitals</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <uc2:Triage ID="PatientVitals" runat="server" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+                                                Dismis</button>
+                                            <%--<button type="button"  class="btn btn-primary">
+                                                Save changes</button>--%>
+                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+              </div>
+                   </div>
                  <div class="row" >
                      <div class="col-md-10">
                           <div class="col-md-12">
@@ -104,31 +138,53 @@
                           <div class="list-group">
 
                                 <a href="#" class="list-group-item disabled">
-                                    <span class=""></span> Green Card Portal <span class="badge"></span>
+                                    <span class=""></span> Find /Add Patients <span class="badge"></span>
+                                </a>
+
+                                <a href="../Patient/PatientFinder.aspx" class="list-group-item">
+                                    <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">0</span>
+                                </a>
+                                
+                                <a  href="../Patient/PatientReg.aspx" class="list-group-item">
+                                    <span class="fa fa-user-plus fa-1x pull-left"></span> Register Patient 
+                                </a>
+
+                                <a href="#" class="list-group-item active">
+                                    <span class=""></span> Patient Baseline<span class="badge"></span>
+                                </a>
+
+                              <a href="../OneTimeEvents/Baseline.aspx" class="list-group-item">
+                                    <span class="fa fa-bar-chart fa-1x pull-left"></span> Treatment Baseline
+                                </a>
+                              <a href="../OneTimeEvents/FamilyTesting.aspx" class="list-group-item">
+                                    <span class="fa fa-users fa-1x pull-left"></span> Family Testing <span class="badge">0</span>
+                                </a>
+                              <a href="../OneTimeEvents/OneTimeEventsTracker.aspx" class="list-group-item">
+                                    <span class="fa fa-history fa-1x pull-left"></span> One Time Events Tracker 
+                              </a>
+
+                              <a href="#" class="list-group-item active">
+                                   <span class=""></span> Patient Encounters<span class="badge"></span>
+                              </a> 
+
+                                <a href="#" class="list-group-item ">
+                                    <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
                                 </a>
 
                                 <a href="#" class="list-group-item">
-                                    <span class="fa fa-search fa-2x pull-left"></span> Find Patients <span class="badge">145</span>
+                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointment <span class="badge">8</span>
+                                </a>
+
+                                <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">
+                                    <span class="fa fa-heartbeat fa-1x pull-left"></span> Capture Vitals <span class="badge">8</span>
+                                </a>
+
+                                <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item">
+                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
                                 </a>
 
                                 <a href="#" class="list-group-item">
-                                    <span class="fa fa-eye fa-2x pull-left"></span> Active Visit(s) <span class="badge">50</span>
-                                </a>
-
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-calendar-check-o fa-2x pull-left"></span> Today's Appointment <span class="badge">8</span>
-                                </a>
-
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-heartbeat fa-2x pull-left"></span> Capture Vitals <span class="badge">8</span>
-                                </a>
-
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-arrow-circle-o-right fa-2x pull-left"></span>Start Encounter  <span class="badge">8</span>
-                                </a>
-
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-calendar fa-2x pull-left"></span>Schedule Appointment <span class="badge">8</span>
+                                    <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>
                                 </a>
 
                           </div>

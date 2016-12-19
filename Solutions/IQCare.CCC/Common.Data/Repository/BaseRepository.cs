@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using Common.Core.Interfaces;
 using Common.Core.Model;
@@ -10,14 +11,10 @@ namespace Common.Data.Repository
         protected internal BaseContext Context;
         internal IDbSet<T> Dbset;
 
-        public BaseRepository()
-        {
-            Dbset = Context.Set<T>();
-        }
 
-        public BaseRepository(BaseContext context):this()
+        public BaseRepository(BaseContext context)
         {
-            Context = context;
+            Context = context; Dbset = Context.Set<T>();
         }
 
         public virtual T GetById(int id)
@@ -28,6 +25,26 @@ namespace Common.Data.Repository
         public virtual IEnumerable<T> GetAll()
         {
             return Dbset;
+        }
+
+        public void Add(T entity)
+        {
+             Dbset.Add(entity);
+        }
+
+        public T AddRange(IEnumerable<T> entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(T entity)
+        {
+            Dbset.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

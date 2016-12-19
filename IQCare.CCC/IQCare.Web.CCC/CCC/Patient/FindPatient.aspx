@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="FindPatient.aspx.cs" Inherits="IQCare.Web.CCC.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.master" AutoEventWireup="true" CodeBehind="FindPatient.aspx.cs" Inherits="IQCare.Web.CCC.Patient.FindPatient" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
     <div class="col-md-12">
@@ -15,6 +16,7 @@
                         <div class="tab-content">
                  
                             <div id="Find" class="tab-pane fade in active">
+                                
                                 <div class="col-md-2" style="padding-top:2%">
                                     <div class="col-md-12"><i class="fa fa-search fa-5x pull-left text-danger" aria-hidden="true"></i></div>
                                      <div class="col-md-12"><label class="control-label pull-left text-primary">Patient Search</label>  </div>

@@ -11,7 +11,7 @@ namespace IQCare.Web.CCC.Patient
 {
 
 
-    public partial class PatientRegistration
+    public partial class PatientTest
     {
     }
 }

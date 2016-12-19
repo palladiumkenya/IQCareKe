@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E6001FC0-D3BD-4E2B-BF61-16D2D25312BF}</ProjectGuid>
+    <ProjectGuid>{62E5E5B9-E17E-48F8-9768-A9B64323805C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Patient.Data</RootNamespace>
-    <AssemblyName>Patient.Data</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Unitofwork.Core</RootNamespace>
+    <AssemblyName>Unitofwork.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,10 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\" />
+    <ProjectReference Include="..\Common.Core\Common.Core.csproj">
+      <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
+      <Name>Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Config.Core\Config.Core.csproj">
+      <Project>{646960B7-1498-434C-B385-DA1C344B9919}</Project>
+      <Name>Config.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Patient.Core\PatientManagement.Core.csproj">
+      <Project>{E734FAE0-DBF0-4B89-8681-AC53ACAD3B4D}</Project>
+      <Name>PatientManagement.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

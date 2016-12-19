@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.Web</RootNamespace>
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -54,7 +54,9 @@
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
     <Content Include="CCC\Patient\EnrollPatient.aspx" />
-    <Content Include="CCC\Patient\RegisterPatient.aspx" />
+    <Content Include="CCC\Patient\PatientFinder.aspx" />
+    <Content Include="CCC\Patient\PatientReg.aspx" />
+    <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
@@ -151,6 +153,9 @@
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
     <Content Include="MasterPage\Greencard.Master" />
+    <Content Include="database.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -180,12 +185,26 @@
     <Compile Include="CCC\Patient\EnrollPatient.aspx.designer.cs">
       <DependentUpon>EnrollPatient.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Patient\RegisterPatient.aspx.cs">
-      <DependentUpon>RegisterPatient.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Patient\RegisterPatient.aspx.designer.cs">
-      <DependentUpon>RegisterPatient.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientReg.aspx.cs">
+      <DependentUpon>PatientReg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientReg.aspx.designer.cs">
+      <DependentUpon>PatientReg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.designer.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>
@@ -249,13 +268,6 @@
     </Compile>
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MasterPage\Greencard.Master.cs">
-      <DependentUpon>Greencard.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPage\Greencard.Master.designer.cs">
-      <DependentUpon>Greencard.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
