@@ -84,7 +84,7 @@ namespace BusinessProcess.Laboratory
                     ReferenceId = row["ReferenceId"].ToString(),
                     LabTestId = Convert.ToInt32(row["LabTestId"]),
                     DataType = row["DataType"].ToString(),
-                    Rank = Convert.ToDouble(row["OrdRank"]),
+                    Rank = Convert.ToDecimal(row["OrdRank"]),
                     LoincCode = row["LoincCode"].ToString(),
                     ResultConfig = null,
                     DeleteFlag = Convert.ToBoolean(row["DeleteFlag"]),
@@ -106,7 +106,7 @@ namespace BusinessProcess.Laboratory
                               ReferenceId = row["ReferenceId"].ToString(),
                               LabTestId = Convert.ToInt32(row["LabTestId"]),
                               DataType = row["DataType"].ToString(),
-                              Rank = Convert.ToDouble(row["OrdRank"]),
+                              Rank = Convert.ToDecimal(row["OrdRank"]),
                               LoincCode = row["LoincCode"].ToString(),
                               ResultConfig = null,
                               DeleteFlag = Convert.ToBoolean(row["DeleteFlag"]),
@@ -146,17 +146,17 @@ namespace BusinessProcess.Laboratory
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetParameterResultConfig", ClsUtility.ObjectEnum.DataTable);
 
-            Double? nullDouble = null;
+            
             var result = (from row in dt.AsEnumerable()
                           select new ParameterResultConfig()
                           {
                               Id = Convert.ToInt32(row["Id"]),
                               ParameterId = Convert.ToInt32(row["ParameterId"]),
-                              MinBoundary = row["MinBoundary"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MinBoundary"]),
-                              MaxBoundary = row["MaxBoundary"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MaxBoundary"]),
-                              MinNormalRange = row["MinNormalRange"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MinNormalRange"]),
-                              MaxNormalRange = row["MaxNormalRange"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MaxNormalRange"]),
-                              DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["DetectionLimit"]),
+                              MinBoundary = row["MinBoundary"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MinBoundary"]),
+                              MaxBoundary = row["MaxBoundary"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MaxBoundary"]),
+                              MinNormalRange = row["MinNormalRange"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MinNormalRange"]),
+                              MaxNormalRange = row["MaxNormalRange"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MaxNormalRange"]),
+                              DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["DetectionLimit"]),
                               IsDefault = Convert.ToBoolean(row["DefaultUnit"]),
                               ResultUnit = new ResultUnit() { Id = Convert.ToInt32(row["UnitId"]), Text = row["UnitName"].ToString() },
                               DeleteFlag = false
@@ -197,7 +197,7 @@ namespace BusinessProcess.Laboratory
              );
             return result.ToList();
         }
-
+        decimal? nullDecimal = null;
         public LabTest SaveLabTest(LabTest labTest, int userId)
         {
             ClsObject obj = new ClsObject();
@@ -291,7 +291,7 @@ namespace BusinessProcess.Laboratory
                     DeleteFlag = Convert.ToBoolean(dt.Rows[0]["DeleteFlag"]),
                     DataType = dt.Rows[0]["DataType"].ToString(),
                     LabTestId = Convert.ToInt32(dt.Rows[0]["LabTestId"]),
-                    Rank = Convert.ToDouble(dt.Rows[0]["OrdRank"]),
+                    Rank = Convert.ToDecimal(dt.Rows[0]["OrdRank"]),
                     LoincCode = dt.Rows[0]["LoincCode"].ToString(),
                     Name = dt.Rows[0]["ParameterName"].ToString(),
                     ReferenceId = dt.Rows[0]["ReferenceId"].ToString(),
@@ -300,17 +300,17 @@ namespace BusinessProcess.Laboratory
                 };
                 if (ds.Tables[1].Rows.Count > 0)
                 {
-                    Double? nullDouble = null;
+                    
                     var config = (from row in ds.Tables[1].AsEnumerable()
                                   select new ParameterResultConfig()
                                   {
                                       Id = Convert.ToInt32(row["Id"]),
                                       ParameterId = Convert.ToInt32(row["ParameterId"]),
-                                      MinBoundary = row["MinBoundary"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MinBoundary"]),
-                                      MaxBoundary = row["MaxBoundary"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MaxBoundary"]),
-                                      MinNormalRange = row["MinNormalRange"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MinNormalRange"]),
-                                      MaxNormalRange = row["MaxNormalRange"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["MaxNormalRange"]),
-                                      DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDouble : Convert.ToDouble(row["DetectionLimit"]),
+                                      MinBoundary = row["MinBoundary"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MinBoundary"]),
+                                      MaxBoundary = row["MaxBoundary"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MaxBoundary"]),
+                                      MinNormalRange = row["MinNormalRange"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MinNormalRange"]),
+                                      MaxNormalRange = row["MaxNormalRange"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["MaxNormalRange"]),
+                                      DetectionLimit = row["DetectionLimit"] == DBNull.Value ? nullDecimal : Convert.ToDecimal(row["DetectionLimit"]),
                                       DeleteFlag = Convert.ToBoolean(row["DeleteFlag"]),
                                       IsDefault = Convert.ToBoolean(row["DefaultUnit"]),
                                       ResultUnit = new ResultUnit() { Id = Convert.ToInt32(row["UnitId"]), Text = row["UnitName"].ToString() }
