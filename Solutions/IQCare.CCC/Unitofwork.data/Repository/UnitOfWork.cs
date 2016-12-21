@@ -8,6 +8,9 @@ using Unitofwork.Core.Interface;
 using PatientManagement.Core.Interfaces;
 using PatientManagement.Data;
 using PatientManagement.Data.Repository;
+using VisitManagement.Core.Interfaces;
+using VisitManagement.Data;
+using VisitManagement.Data.Repository;
 
 namespace Unitofwork.data.Repository
 {
@@ -23,6 +26,9 @@ namespace Unitofwork.data.Repository
         private IPatientOVCStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
+
+        private IPatientMasterVisitRepository _patientMasterVisitRepository;
+        private IPatientEncounterRepository _patientEncounterRepository;
 
         private IServiceAreaRepository _serviceAreaRepository;
 
@@ -88,6 +94,21 @@ namespace Unitofwork.data.Repository
 
         }
 
+        public IPatientMasterVisitRepository PatientmasterVisitRepository
+    {
+            get
+            {
+                return _patientMasterVisitRepository ?? (_patientMasterVisitRepository = new PatientMasterVisitRepository((VisitContext) _context));
+            }
+        }
+
+        public IPatientEncounterRepository PatientEncounterRepository
+        {
+            get
+            {
+                return _patientEncounterRepository ?? (_patientEncounterRepository = new PatientEncounterRepository((VisitContext) _context));
+            }
+        }
 
         public void Dispose()
         {

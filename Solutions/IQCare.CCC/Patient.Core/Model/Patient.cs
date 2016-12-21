@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using Common.Core.Model;
 
 namespace PatientManagement.Core.Model

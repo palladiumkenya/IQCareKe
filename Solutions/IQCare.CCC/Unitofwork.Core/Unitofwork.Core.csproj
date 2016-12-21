@@ -57,6 +57,10 @@
       <Project>{E734FAE0-DBF0-4B89-8681-AC53ACAD3B4D}</Project>
       <Name>PatientManagement.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VisitManagement.Core\VisitManagement.Core.csproj">
+      <Project>{F977715A-90F9-4628-A90A-44F496B2786B}</Project>
+      <Name>VisitManagement.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

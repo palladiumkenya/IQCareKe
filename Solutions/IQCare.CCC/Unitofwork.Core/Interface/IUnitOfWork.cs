@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Config.Core.Interfaces;
 using PatientManagement.Core.Interfaces;
+using VisitManagement.Core.Interfaces;
 
 
 namespace Unitofwork.Core.Interface
@@ -20,5 +22,9 @@ namespace Unitofwork.Core.Interface
         IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
         IPatientPopulationRepository PatientPopulationRepository { get; }
         IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
+
+        //Visitcontext
+        IPatientMasterVisitRepository PatientmasterVisitRepository { get; }
+        IPatientEncounterRepository PatientEncounterRepository { get; }
     }
 }

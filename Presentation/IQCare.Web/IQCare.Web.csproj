@@ -268,6 +268,8 @@
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\pace\css\pace.css" />
+    <Content Include="Content\pace\js\pace.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
