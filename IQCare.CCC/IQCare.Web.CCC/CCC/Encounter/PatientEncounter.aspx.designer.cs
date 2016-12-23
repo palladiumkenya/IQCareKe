@@ -22,40 +22,67 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
         
         /// <summary>
+        /// complaints control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea complaints;
+        
+        /// <summary>
+        /// tbscreeningstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList tbscreeningstatus;
+        
+        /// <summary>
+        /// nutritionscreeningstatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList nutritionscreeningstatus;
+        
+        /// <summary>
         /// adverseEvent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText adverseEvent;
+        protected global::System.Web.UI.WebControls.TextBox adverseEvent;
         
         /// <summary>
-        /// medicineCauseingae control.
+        /// AdverseEventCause control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText medicineCauseingae;
+        protected global::System.Web.UI.WebControls.TextBox AdverseEventCause;
         
         /// <summary>
-        /// severity control.
+        /// AdverseEventSeverity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText severity;
+        protected global::System.Web.UI.WebControls.TextBox AdverseEventSeverity;
         
         /// <summary>
-        /// adverseAction control.
+        /// AdverseEventAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText adverseAction;
+        protected global::System.Web.UI.WebControls.TextBox AdverseEventAction;
         
         /// <summary>
         /// btnAdverseEventsAdd control.
@@ -67,67 +94,103 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.LinkButton btnAdverseEventsAdd;
         
         /// <summary>
-        /// pregnancyStatus control.
+        /// examinationPregnancyStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect pregnancyStatus;
+        protected global::System.Web.UI.WebControls.DropDownList examinationPregnancyStatus;
         
         /// <summary>
-        /// AntigenToday control.
+        /// anpncprofile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect AntigenToday;
+        protected global::System.Web.UI.WebControls.DropDownList anpncprofile;
         
         /// <summary>
-        /// antigenDuration control.
+        /// onFamilyPlanning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect antigenDuration;
+        protected global::System.Web.UI.WebControls.DropDownList onFamilyPlanning;
         
         /// <summary>
-        /// btnAmtigenAdd control.
+        /// fpMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAmtigenAdd;
+        protected global::System.Web.UI.WebControls.DropDownList fpMethod;
         
         /// <summary>
-        /// ChronicIllness control.
+        /// cacxscreening control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ChronicIllness;
+        protected global::System.Web.UI.WebControls.DropDownList cacxscreening;
         
         /// <summary>
-        /// ChronicIllnessTreatment control.
+        /// stiScreening control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ChronicIllnessTreatment;
+        protected global::System.Web.UI.WebControls.DropDownList stiScreening;
         
         /// <summary>
-        /// ChronicIllnessDose control.
+        /// stiPartnerNotification control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect ChronicIllnessDose;
+        protected global::System.Web.UI.WebControls.DropDownList stiPartnerNotification;
+        
+        /// <summary>
+        /// ChronicIllnessName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ChronicIllnessName;
+        
+        /// <summary>
+        /// illnessTreatment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox illnessTreatment;
+        
+        /// <summary>
+        /// treatmentDose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox treatmentDose;
+        
+        /// <summary>
+        /// treatmentDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox treatmentDuration;
         
         /// <summary>
         /// LinkButton1 control.
