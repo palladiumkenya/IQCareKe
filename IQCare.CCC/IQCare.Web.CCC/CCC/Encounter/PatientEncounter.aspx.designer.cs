@@ -238,6 +238,24 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.LinkButton btnAddDiagnosis;
         
         /// <summary>
+        /// arvAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
+        
+        /// <summary>
+        /// ctxAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
+        
+        /// <summary>
         /// ReferredFor control.
         /// </summary>
         /// <remarks>
@@ -256,22 +274,31 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlSelect PrescribedBy;
         
         /// <summary>
-        /// RegimenLine control.
+        /// PrescriptionOption control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect RegimenLine;
+        protected global::System.Web.UI.WebControls.DropDownList PrescriptionOption;
         
         /// <summary>
-        /// substitution control.
+        /// drugCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect substitution;
+        protected global::System.Web.UI.WebControls.DropDownList drugCategory;
+        
+        /// <summary>
+        /// regimLine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList regimLine;
         
         /// <summary>
         /// Dose control.

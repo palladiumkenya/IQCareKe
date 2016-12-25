@@ -631,12 +631,12 @@
                                         
                                         <div class="step-pane sample-pane" data-step="4">
                                              <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT MANAGEMENT</strong></small></div> <div class="col-md-12"><hr /> </div>  
-                                             <div class="row">
-                                                  <div class="col-md-1">
-                                                      <h4 class="pull-left text-danger"><i class="fa fa-bed fa-5x" aria-hidden="true"></i></h4>
-                                                 </div>
-
-                                                  <div class="col-md-11">
+                                             
+                                            <div class="col-md-1">
+                                                <h4 class="pull-left text-danger"><i class="fa fa-bed fa-5x" aria-hidden="true"></i></h4>
+                                            </div> 
+                                            <div class="col-md-11">
+                                                <div class="col-md-12">
                                                   
                                                        <div class="col-md-4">
                                                        <h1 class="col-md-12"><small class="pull-left">Positive Health,Dignity & Prevention (PHDP)</small></h1>
@@ -719,63 +719,23 @@
                                                  </div>
                                                    
                                                   </div><%-- .col-md-11--%>
-                                                    
-                                             </div>
-                                             
-                                             <div class="row">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-11">
-                                                     <div class="col-md-4">
+                                                
+                                                <div class="col-md-12">
+                                                     
+                                                    <div class="col-md-4">
                                                           <div class="col-md-12"><hr /></div>
-                                                          <div class="col-md-12">
-
-                                                               <div class="col-md-8">
-                                                                  <div class="col-md-12"><label class="control-label pull-left">ARV Adherence</label></div>
-                                                              </div>
-
-                                                               <div class="col-md-4">
-                                                                  <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblGood">
-                                                                         <input class="sr-only" type="checkbox" id="ARVGood" value="option1"> <span class="checkbox-label"><strong> Good </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                                  <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblFair">
-                                                                         <input class="sr-only" type="checkbox" id="ARVFair" value="option1"> <span class="checkbox-label"><strong> Fair </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                                  <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPoor">
-                                                                         <input class="sr-only" type="checkbox" id="ARVPoor" value="option1"> <span class="checkbox-label"><strong> Poor </strong></span>
-                                                                     </label>
-                                                                  </div>
+                                                          <div class="col-md-12 form-group">
+                                                              <div class="col-md-6"><label class="control-label pull-left">ARV Adherence</label></div>
+                                                               <div class="col-md-6">
+                                                                    <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                                               </div>
                                                           </div><%-- .col-md-12--%>
-                                                          <div class="col-md-12">
-                                                             <div class="col-md-8">
-                                                                  <div class="col-md-12"><label class="control-label pull-left">CTX/Dapsone Adherence</label></div>
+
+                                                          <div class="col-md-12 form-group">
+                                                              <div class="col-md-6"><label class="control-label pull-left">CTX/Dapsone Adherence</label></div>
+                                                              <div class="col-md-6">
+                                                                  <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static"/>
                                                               </div>
-                                                             <div class="col-md-4">
-                                                                  <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblCTXGood">
-                                                                         <input class="sr-only" type="checkbox" id="CTXGood" value="option1"> <span class="checkbox-label"><strong> Good </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                                  <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblCTXFair">
-                                                                         <input class="sr-only" type="checkbox" id="CTXFair" value="option1"> <span class="checkbox-label"><strong> Fair </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                                  <div class="form-group col-md-12">
-                                                                         <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblCTXPoor">
-                                                                             <input class="sr-only" type="checkbox" id="CTXPoor" value="option1"> <span class="checkbox-label"><strong> Poor </strong></span>
-                                                                         </label>
-                                                                      </div>
-                                                             </div>
                                                          </div>
 
                                                           <div class="col-md-12">
@@ -880,90 +840,11 @@
                                                               </div>
                                                           </div>
                                                      </div><%-- .col-md-4--%>
-                                                     <div class="col-md-8">
-                                                         <div class="col-md-12"><hr /></div>
-                                                         <div class="col-md-12">
-                                                              <div class="form-group col-md-4">
-                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblART">
-                                                                          <input class="sr-only" type="checkbox" id="DrugsART" value="option1"> <span class="checkbox-label"><strong> ART </strong></span>
-                                                                   </label>
-                                                              </div>
-                                                                   
-                                                              <div class="form-group col-md-4">
-                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblNonART">
-                                                                           <input class="sr-only" type="checkbox" id="DrugsARV" value="option1"> <span class="checkbox-label"><strong> Non-ART </strong></span>
-                                                                   </label>
-                                                              </div>
-
-                                                               <div class="form-group col-md-4">
-                                                                    <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblProphylaxis">
-                                                                           <input class="sr-only" type="checkbox" id="Prophylaxis" value="option1"> <span class="checkbox-label"><strong> Prophylaxis </strong></span>
-                                                                     </label>
-                                                               </div>
-                                                         </div> <%--.col-md-12--%>
-
-                                                         <div class="col-md-12">
-                                                             <hr />
-                                                              <div class="col-md-4 form-group"><label class="control-label pull-left">Regimen Line </label></div>     
-                                                              <div class="col-md-4 form-group">
-                                                                   <select id="RegimenLine" runat="server" class="form-control input-sm" ></select>
-                                                              </div>
-                                                              <div class="col-md-4 form-group"></div>
-                                                         </div>  
-                                                         <div class="col-md-12">  
-                                                              <div class="col-md-4 form-group"><label class="control-label pull-left">Subsitututions/Switches/Interuptions </label></div>
-                                                              <div class="col-md-4 form-group">
-                                                                   <select id="substitution" runat="server" class="form-control input-sm" ></select>
-                                                              </div>
-                                                              <div class="col-md-4"></div>
-
-                                                         </div>
-                                                             
-                                                         <div class="col-md-12">
-                                                              <div class="panel panel-default">
-                                                          <div class="panel-heading">Drug Prescription </div>
-                                                          <div class="panel-body">
-                                                               <div class="row">
-                                                                    <div class="col-md-12">
-                                                                         <div class="col-md-10">
-                                                                         <div class="col-md-12"><label class="control-label pull-left">Select Drug (s) </label></div>
-                                                                         <div class="col-md-12">
-                                                                              <input type="text" class="form-control input-sm" placeholder="type to search...." runat="server" />
-                                                                         </div>
-                                                                     </div>
-                                                                                   
-                                                                         <div class="col-md-2">
-                                                                          <div class="col-md-12"><label class="control-lable pull-left">*</label></div>
-                                                                          <div class="col-md-12">
-                                                                               <asp:LinkButton runat="server" CssClass="btn btn-info btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton> 
-                                                                          </div>
-                                                                    </div>
-                                                                    </div>
-                                                                    <div class="col-md-12"><hr /></div>
-                                                                    <div class="col-md-12">
-                                                                         <div class="col-md-4 pull-left"><label class="control-label pull-left"> Drug</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Dose</label></div>
-                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">  Frequency</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Quantity</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Duration</label></div>
-                                                                    </div>  
-                                                                    <div class="col-md-12">
-                                                                       <div class="col-md-4"><label class="control-label pull-left text-primary">--Selected drug--</label></div>
-                                                                        <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Dose" /> </div>
-                                                                        <div class="col-md-2"><select class="form-control input-sm" id="Frequency" runat="server"></select></div>
-                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Quantity" /> </div>
-                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Duration" /> </div>
-                                                                    </div>
-                                                                 </div>
-                                                           </div>
-                                                     </div>
-                                                         </div>            
-                                                     </div>
-                                                 </div>
-                                               
-                                            </div> <%--.row--%>
-
- 
+                                                     <div class="col-md-8"></div>
+                                                 
+                                                </div> <%--.col-md-12--%>
+                                            </div> <%--.col-md-11--%>
+                                            
                                         </div><%-- .data-step-4--%>
 
 
@@ -974,7 +855,107 @@
                     </div>
                       <div  role="tabpanel"     class="tab-pane fade"      id="vlTracker">...</div><!-- .viraload tracker-->
                       <div  role="tabpanel"     class="tab-pane fade"      id="Laboratory">...</div><!-- .laboratory-->
-                      <div  role="tabpanel"     class="tab-pane fade"      id="Pharmacy">...</div><!-- .pharmacy-->
+                      <div  role="tabpanel"     class="tab-pane fade"      id="Pharmacy">
+                          <div class="col-md-12" style="padding-top: 3%">
+                              <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
+                          </div>
+                          <div class ="col-md-12"><hr /></div>
+                          <div class="col-md-12">
+                                <div class="panel panel-info">
+
+                                    <div class="panel-body">
+                                         <div class="col-md-12">
+                                              <div class="col-md-4">
+                                                  <div class="col-md-12"><label class="control-label pull-left"> Last Drug Prescription</label></div>
+                                                  <div class="col-md-12"><hr/></div>
+                                              </div>
+                                              <div class="col-md-8">
+                                                  <div class="col-md-12">
+                                                         <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
+                                                         <div class="col-md-12"><hr /></div>
+                                                         <div class="col-md-12 form-group">  
+                                                              <div class="col-md-4"><label class="control-label pull-left">Subsitututions/Switches/Interuptions </label></div>
+                                                              <div class="col-md-6 ">
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm pull-right" id="PrescriptionOption" ClientIDMode="Static"/>
+                                                               </div>
+                                                              <div class="col-md-2"></div>
+                                                         </div>   
+                                                         <div class="col-md-12 form-group">
+                                                           <div class="col-md-4"><label class="control-label pull-left">Drug Classification </label></div>
+                                                           <div class="col-md-6">
+                                                               <asp:DropDownList runat="server" id="drugCategory" CssClass="form-control input-sm pull-right" ClientIDMode="Static"/>
+                                                           </div>
+                                                           <div class="col-md-2"></div>
+                                                         </div> <%--.col-md-12--%>
+
+                                                         <div class="col-md-12 form-group">
+                                                             
+                                                              <div class="col-md-4"><label class="control-label pull-left">Regimen Line </label></div>     
+                                                              <div class="col-md-6">
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm pull-right" ID="regimLine" ClientIDMode="Static"/>
+                                                              </div>
+                                                              <div class="col-md-2 "></div>
+                                                         </div>  
+                                                        
+                                                      <div id="callout-labels-inline-block" class="bs-callout bs-callout-info">
+                                                          <h4>testing callout</h4>
+                                                      </div>
+                                                             
+                                                         <div class="col-md-12">
+                                                              <div class="panel panel-warning">
+                                                                   <div class="panel-heading">Drug Prescription </div>
+                                                                   <div class="panel-body">
+                                                               <div class="row">
+                                                                    <div class="col-md-12">
+                                                                         
+                                                                              <div class="col-md-3"><label class="control-label pull-left">Select Drug (s) </label></div>
+                                                                              <div class="col-md-7">
+                                                                                  <input type="text" class="form-control input-sm" placeholder="type to search...." runat="server" />
+                                                                              </div>
+                                                                             <div class="col-md-2">
+                                                                               <asp:LinkButton runat="server" CssClass="btn btn-warning btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton> 
+                                                                          </div>
+                                                                         
+                                                                    </div>
+                                                                    <div class="col-md-12"><hr /></div>
+                                                                    <div class="col-md-12">
+                                                                         <div class="col-md-4 pull-left"><label class="control-label pull-left"> Drug</label></div>
+                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Dose</label></div>
+                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">  Frequency</label></div>
+                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Quantity</label></div>
+                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Duration</label></div>
+                                                                    </div>  
+                                                                    <div class="col-md-12">
+                                                                       <div class="col-md-4"><label class="control-label pull-left text-warning">--Selected drug--</label></div>
+                                                                        <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Dose" /> </div>
+                                                                        <div class="col-md-2"><select class="form-control input-sm" id="Frequency" runat="server"></select></div>
+                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Quantity" /> </div>
+                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Duration" /> </div>
+                                                                    </div>
+                                                                 </div>
+                                                           </div>
+                                                              </div>
+                                                         </div>            
+                                                     </div>
+
+                                              </div>
+                                         </div>
+                                         
+                                        <div class="col-md-12">
+                                              <div class="col-md-12"><hr/></div>
+                                              <div class="col-md-7"></div>
+                                             <div class="col-md-5">
+                                                <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle"> Save Prescription</asp:LinkButton></div>
+                                                 <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                                                <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
+                                             </div>
+                                        </div>
+                                    </div><%-- .panel-body--%>
+
+                                </div><%-- .panel--%>
+
+                          </div><%-- .col-md-12--%>
+                      </div><!-- .pharmacy-->
                        <div  role="tabpanel"    class="tab-pane fade"      id="history">...</div><!-- .history-->
                  </div><!-- .tab-content-->
             </div><!-- .col-md-12 -->
@@ -993,4 +974,10 @@
 
     </script>
 </asp:Content>
+
+
+
+
+
+
 
