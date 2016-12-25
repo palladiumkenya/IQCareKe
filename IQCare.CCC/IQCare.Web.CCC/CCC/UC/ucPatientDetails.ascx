@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientDetails.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucTriage" %>
 
-        <div class="col-md-12 well well-sm" style="padding-bottom:2%">
+        <div id="callout-labels-inline-block" class="col-md-12 well well-sm bs-callout bs-callout-primary" style="padding-bottom:1%">
              <div class="col-md-12">
                   <small class="pull-left text-primary">Patient Detail(s)</small>
             </div>

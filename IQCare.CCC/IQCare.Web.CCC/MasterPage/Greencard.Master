@@ -15,7 +15,7 @@
     
     <link href="<%# ResolveUrl("~/Content/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Content/css/bootstrap-theme.css") %>" rel="stylesheet"  type="text/css" />
-    <link href="<%# ResolveUrl("~/Content/css/bootstrap.vertical-tabs.css")%>" rel="stylesheet" />
+  <link href="<%# ResolveUrl("~/Content/css/bootstrap-callout.css")%>" rel="stylesheet" />
     <link href="<%# ResolveUrl("~/Content/css/font-awesome.css") %>" rel="stylesheet"type="text/css" />
     <link href="<%# ResolveUrl("~/Content/css/parsley.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Style/styles.css") %>" id="main" rel="stylesheet" type="text/css" />

@@ -22,6 +22,42 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
         
         /// <summary>
+        /// vitalHeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label vitalHeight;
+        
+        /// <summary>
+        /// vitalsWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label vitalsWeight;
+        
+        /// <summary>
+        /// vitalsCircumference control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label vitalsCircumference;
+        
+        /// <summary>
+        /// vitalsMUAC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label vitalsMUAC;
+        
+        /// <summary>
         /// complaints control.
         /// </summary>
         /// <remarks>

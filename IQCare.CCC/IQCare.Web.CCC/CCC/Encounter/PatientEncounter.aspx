@@ -26,8 +26,65 @@
 
                  <div class="tab-content">
                            
-                      <div  role="tabpanel"     class="tab-pane active"    id="home">
-                          <p>am home</p>
+                      <div role="tabpanel" class="tab-pane active" id="home">
+                           <div class="col-md-12" style="padding-top: 3%">
+                              <label class="control-label pull-left"> <i class="fa fa-user-md fa-lg" aria-hidden="true"></i> Patient Home </label>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="col-md-12"><label class="control-label pull-left">Pharmacy Summary</label></div>
+                              <div class="col-md-12 bs-callout bs-callout-info">
+                                  
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="col-md-12"><label class="control-label pull-left">Laboratory Summary</label></div>
+                              <div class="col-md-12 bs-callout bs-callout-default">
+                                  
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="col-md-12"><label class="control-label pull-left">Diagnosis Summary</label></div>
+                              <div class="col-md-12 bs-callout bs-callout-success">
+                                  
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                              <div class="col-md-4">
+                                  
+                                  <div class="col-md-12 bs-callout bs-callout-success">
+                                      <div class="col-md-12"><label class="control-label pull-left text-success">Today's Vital Signs</label></div>
+                                      <div class="col-md-12">
+                                           <div class="col-md-8"><label class="control-label pull-left">Height (cm)</label></div>
+                                           <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalHeight" CssClass="control-label">0 cms</asp:Label>
+                                           </div>
+                                      </div> 
+                                      <div class="col-md-12">
+                                          <div class="col-md-8"><label class="control-label pull-left">Weight (kg)</label></div>
+                                          <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalsWeight" CssClass="control-label">0 Kgs</asp:Label>
+                                           </div>
+                                      </div> 
+                                      <div class="col-md-12">
+                                          <div class="col-md-8"><label class="control-label pull-left">Head Circumference (cm)</label></div>
+                                          <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label">0 cms</asp:Label>
+                                           </div>
+                                      </div> 
+                                      <div class="col-md-12">
+                                          <div class="col-md-8"><label class="control-label pull-left">MUAC (cm)</label></div>
+                                          <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label">0 cms</asp:Label>
+                                           </div>
+                                      </div> 
+                                      <div class="col-md-12"></div> 
+                                  </div>
+
+                              </div>
+                              <div class="col-md-4"></div>
+                              <div class="col-md-4"></div>
+                          </div>
+                          <div class="col-md-12"><hr/></div>
                       </div><!-- .home-->
 
                     
@@ -870,20 +927,20 @@
                                                   <div class="col-md-12"><hr/></div>
                                               </div>
                                               <div class="col-md-8">
-                                                  <div class="col-md-12">
-                                                         <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
-                                                         <div class="col-md-12"><hr /></div>
+                                                  <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
+                                                  <div class="col-md-12"><hr /></div>
+
                                                          <div class="col-md-12 form-group">  
                                                               <div class="col-md-4"><label class="control-label pull-left">Subsitututions/Switches/Interuptions </label></div>
-                                                              <div class="col-md-6 ">
-                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm pull-right" id="PrescriptionOption" ClientIDMode="Static"/>
+                                                              <div class="col-md-6 pull-right">
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm " id="PrescriptionOption" ClientIDMode="Static"/>
                                                                </div>
                                                               <div class="col-md-2"></div>
                                                          </div>   
                                                          <div class="col-md-12 form-group">
                                                            <div class="col-md-4"><label class="control-label pull-left">Drug Classification </label></div>
-                                                           <div class="col-md-6">
-                                                               <asp:DropDownList runat="server" id="drugCategory" CssClass="form-control input-sm pull-right" ClientIDMode="Static"/>
+                                                           <div class="col-md-6  pull-right">
+                                                               <asp:DropDownList runat="server" id="drugCategory" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                                            </div>
                                                            <div class="col-md-2"></div>
                                                          </div> <%--.col-md-12--%>
@@ -891,16 +948,12 @@
                                                          <div class="col-md-12 form-group">
                                                              
                                                               <div class="col-md-4"><label class="control-label pull-left">Regimen Line </label></div>     
-                                                              <div class="col-md-6">
-                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm pull-right" ID="regimLine" ClientIDMode="Static"/>
+                                                              <div class="col-md-6  pull-right">
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimLine" ClientIDMode="Static"/>
                                                               </div>
                                                               <div class="col-md-2 "></div>
                                                          </div>  
                                                         
-                                                      <div id="callout-labels-inline-block" class="bs-callout bs-callout-info">
-                                                          <h4>testing callout</h4>
-                                                      </div>
-                                                             
                                                          <div class="col-md-12">
                                                               <div class="panel panel-warning">
                                                                    <div class="panel-heading">Drug Prescription </div>
@@ -936,7 +989,7 @@
                                                            </div>
                                                               </div>
                                                          </div>            
-                                                     </div>
+                                                     
 
                                               </div>
                                          </div>
