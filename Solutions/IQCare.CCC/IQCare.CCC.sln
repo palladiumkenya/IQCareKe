@@ -43,6 +43,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriageManagement.Core", "Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriageManagement.Data", "TriageManagement.Data\TriageManagement.Data.csproj", "{980B4C5D-2873-4F33-A3BB-00FE4FD84210}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonManagement", "PersonManagement", "{455F16B1-FED6-482A-B04E-6CAF6A9F87AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonManagement.Core", "PersonManagement.Core\PersonManagement.Core.csproj", "{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonManagement.Data", "PersonManagement.Data\PersonManagement.Data.csproj", "{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +111,14 @@ Global
 		{980B4C5D-2873-4F33-A3BB-00FE4FD84210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{980B4C5D-2873-4F33-A3BB-00FE4FD84210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{980B4C5D-2873-4F33-A3BB-00FE4FD84210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,5 +137,7 @@ Global
 		{E5E305FC-D2AA-4EC5-B427-E47F24938008} = {9D114E8A-9341-491D-94BD-DC1158EA627F}
 		{FA6042A6-4582-42C0-A3C6-A1E9464D1A88} = {B042A84C-10B1-4393-ABAC-65119831D080}
 		{980B4C5D-2873-4F33-A3BB-00FE4FD84210} = {B042A84C-10B1-4393-ABAC-65119831D080}
+		{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33} = {455F16B1-FED6-482A-B04E-6CAF6A9F87AF}
+		{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B} = {455F16B1-FED6-482A-B04E-6CAF6A9F87AF}
 	EndGlobalSection
 EndGlobal

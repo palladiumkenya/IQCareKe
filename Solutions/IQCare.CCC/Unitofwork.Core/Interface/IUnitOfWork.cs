@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Config.Core.Interfaces;
 using PatientManagement.Core.Interfaces;
+using PersonManagement.Core.Interfaces;
 using VisitManagement.Core.Interfaces;
-
 
 namespace Unitofwork.Core.Interface
 {
@@ -13,11 +12,15 @@ namespace Unitofwork.Core.Interface
         
         IServiceAreaRepository ServiceAreaRepository { get; }
 
+        //Person Context Interface
+        IPersonRepository PersonRepository { get; }
+        IPersonLocationRepository PersonLocationRepository { get; }
+        IPersonContactRepository PersonContactRepository { get; }
+        IPersonRelationshipRepository PersonRelationshipRepository { get; }
+
         //Patient Context Interfaces
         IPatientRepository PatientRepository { get; }
-        IPatientContactRepository PatientContactRepository { get; }
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
-        IPatientLocationRepository PatientLocationRepository { get; }
         IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
         IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
         IPatientPopulationRepository PatientPopulationRepository { get; }

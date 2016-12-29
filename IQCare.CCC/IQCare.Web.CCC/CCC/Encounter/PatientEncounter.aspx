@@ -13,7 +13,7 @@
             <div class="col-md-12 col-xs-12">
 
                  <ul class="nav nav-tabs" role="tablist">
-                     <li role="presentation" class="active"><a href="#home"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Home</a></li>
+                     <li role="presentation" class="active"><a href="#home" aria-controls="home"  role="tab" data-toggle="tab"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Home</a></li>
                      <li role="presentation"> <a href="#encounter"    aria-controls="encounter"   role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
                      <li role="presentation"> <a href="#vlTracker"    aria-controls="vlTracker"   role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
                      <li role="presentation"> <a href="#Laboratory"   aria-controls="Laboratory"  role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory</a></li>
@@ -27,25 +27,54 @@
                  <div class="tab-content">
                            
                       <div role="tabpanel" class="tab-pane active" id="home">
-                           <div class="col-md-12" style="padding-top: 3%">
-                              <label class="control-label pull-left"> <i class="fa fa-user-md fa-lg" aria-hidden="true"></i> Patient Home </label>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="col-md-12"><label class="control-label pull-left">Pharmacy Summary</label></div>
-                              <div class="col-md-12 bs-callout bs-callout-info">
+                          <div class="col-md-12">
+                              <div class="col-md-4" style="padding-top: 1%">
+                              
+                                  <div class="col-md-12 bs-callout bs-callout-info">
+                                      <div class="col-md-12"><label class="control-label pull-left text-info">Pharmacy Summary</label></div>
+                                      <div class="col-md-12"><hr/></div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4" style="padding-top: 1%">
+                             
+                                  <div class="col-md-12 bs-callout bs-callout-default">
+                                       <div class="col-md-12"><label class="control-label pull-left text-default">Laboratory Summary</label></div>
+                                      <div class="col-md-12"><hr/></div>
+                                      
+                                           <div class="col-md-12">
+                                               <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4</label></div>
+                                               <div class="col-md-4">
+                                                   <asp:Label runat="server" ID="EnrollmentCD4" CssClass="control-label" ClientIDMode="Static">0</asp:Label>
+                                               </div>
+                                           </div>
+                                          <div class="col-md-12">
+                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4 Date</label></div>
+                                               <div class="col-md-4">
+                                                   <asp:Label runat="server" ID="EnrollmentCD4Date" CssClass="control-label" ClientIDMode="Static">00-00-0000</asp:Label>
+                                               </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viral Load</label></div>
+                                               <div class="col-md-4">
+                                                   <asp:Label runat="server" ID="enrollmentViralload" CssClass="control-label" ClientIDMode="Static">0</asp:Label>
+                                               </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viralload Date</label></div>
+                                               <div class="col-md-4">
+                                                   <asp:Label runat="server" ID="enrollmentviralloaddate" CssClass="control-label" ClientIDMode="Static">00-00-000</asp:Label>
+                                               </div>
+                                          </div>
+                                     
+                                  </div>
                                   
                               </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="col-md-12"><label class="control-label pull-left">Laboratory Summary</label></div>
-                              <div class="col-md-12 bs-callout bs-callout-default">
-                                  
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="col-md-12"><label class="control-label pull-left">Diagnosis Summary</label></div>
-                              <div class="col-md-12 bs-callout bs-callout-success">
-                                  
+                              <div class="col-md-4" style="padding-top: 1%">
+                             
+                                  <div class="col-md-12 bs-callout bs-callout-success">
+                                       <div class="col-md-12"><label class="control-label pull-left text-success">Diagnosis Summary</label></div>
+                                      <div class="col-md-12"><hr/></div>
+                                  </div>
                               </div>
                           </div>
                           <div class="col-md-12">
@@ -53,31 +82,55 @@
                                   
                                   <div class="col-md-12 bs-callout bs-callout-success">
                                       <div class="col-md-12"><label class="control-label pull-left text-success">Today's Vital Signs</label></div>
+                                      <div class="col-md-12"><hr/></div>
                                       <div class="col-md-12">
                                            <div class="col-md-8"><label class="control-label pull-left">Height (cm)</label></div>
                                            <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalHeight" CssClass="control-label">0 cms</asp:Label>
+                                               <asp:Label runat="server" ID="vitalHeight" CssClass="control-label text-success">0 cms</asp:Label>
                                            </div>
                                       </div> 
                                       <div class="col-md-12">
                                           <div class="col-md-8"><label class="control-label pull-left">Weight (kg)</label></div>
                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsWeight" CssClass="control-label">0 Kgs</asp:Label>
+                                               <asp:Label runat="server" ID="vitalsWeight" CssClass="control-label text-success">0 Kgs</asp:Label>
                                            </div>
                                       </div> 
                                       <div class="col-md-12">
                                           <div class="col-md-8"><label class="control-label pull-left">Head Circumference (cm)</label></div>
                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label">0 cms</asp:Label>
+                                               <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label text-success">0 cms</asp:Label>
                                            </div>
                                       </div> 
                                       <div class="col-md-12">
                                           <div class="col-md-8"><label class="control-label pull-left">MUAC (cm)</label></div>
                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label">0 cms</asp:Label>
+                                               <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label text-success">0 cms</asp:Label>
                                            </div>
                                       </div> 
-                                      <div class="col-md-12"></div> 
+                                      <div class="col-md-12">
+                                          <div class="col-md-8"><label class="control-label pull-left">Blood Pressure </label></div>
+                                          <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalBloodPressure" CssClass="control-label text-success">0 </asp:Label>
+                                           </div>
+                                      </div> 
+                                       <div class="col-md-12">
+                                           <div class="col-md-8"><label class="control-label pull-left">Temperature (0C)</label></div>
+                                           <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalTemperature" CssClass="control-label text-success">0 0C</asp:Label>
+                                           </div>
+                                       </div> 
+                                       <div class="col-md-12">
+                                           <div class="col-md-8"><label class="control-label pull-left">Respiratory Rate</label></div>
+                                           <div class="col-md-4">
+                                               <asp:Label runat="server" ID="vitalRespiratoryRate" CssClass="control-label text-success">0 </asp:Label>
+                                           </div>
+                                       </div> 
+                                       <div class="col-md-12">
+                                           <div class="col-md-8"><label class="control-label pull-left">Blood Oxygen Saturation</label></div>
+                                           <div class="col-md-4">
+                                               <asp:Label runat="server" ID="lblOxygenSaturation" CssClass="control-label text-success">0 %</asp:Label>
+                                           </div>
+                                       </div> 
                                   </div>
 
                               </div>
@@ -89,8 +142,15 @@
 
                     
                       <div  role="tabpanel" class="tab-pane fade" id="encounter">
-                         <div class="row">
-                             <div class="col-md-12"><h5 class="pull-left"><i class="fa fa-crosshairs fa-2x" aria-hidden="true"> Patient Encounter </i></h5></div>
+                         <div class="col-md-12">
+                             <div class="col-md-12">
+                                 <div class="col-md-12  bs-callout bs-callout-info">
+                                      <div class="col-md-12">
+                                          
+                                      </div>
+                                 </div>
+                             </div>
+                             
                              <div class="col-md-12">
                                  <div class="wizard" data-initialize="wizard" id="myWizard">
                                     <div class="steps-container">
@@ -910,13 +970,96 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>
-                      <div  role="tabpanel"     class="tab-pane fade"      id="vlTracker">...</div><!-- .viraload tracker-->
-                      <div  role="tabpanel"     class="tab-pane fade"      id="Laboratory">...</div><!-- .laboratory-->
-                      <div  role="tabpanel"     class="tab-pane fade"      id="Pharmacy">
-                          <div class="col-md-12" style="padding-top: 3%">
+                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">...</div><!-- .viraload tracker-->
+
+                      <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
+                            <div class="col-md-12" style="padding-top: 1%">
+                              <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
+                            </div>
+                            
+                            <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Labs</strong> </h4>
+                            </div>
+                            
+                            <div class="col-md-12 bs-callout bs-callout-info">
+                                <div class="col-md-4">
+                                    <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
+                                    <div class="col-md-12"><hr/></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                              <div class="panel-heading"></div>
+                                              <div class="panel-body">
+                                                  <div class="col-md-12 form-group">
+                                                      <div class="col-md-3"><label class="control-label pull-left">Select Lab(s)</label></div>
+                                                      <div class="col-md-9">
+                                                           <asp:TextBox runat="server" ID="OrderedLab" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-12 form-group">
+                                                       <div class="col-md-3"><label class="control-label pull-left"> Lab Order Reason</label></div>
+                                                      <div class="col-md-9">
+                                                          <asp:DropDownList runat="server" ID="labOrderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                      </div>
+                                                  </div>
+                                                  
+                                                  <div class="col-md-12 form-group">
+                                                       <div class="col-md-3"><label class="control-label pull-left"> Lab Order Notes</label></div>
+                                                      <div class="col-md-9">
+                                                         
+                                                          <asp:TextBox runat="server" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-12">
+                                                      <div class="col-md-10"></div>
+                                                      <div class="col-md-2 pull-right">
+                                                          <asp:LinkButton runat="server" CssClass="btn btn-warning fa fa-plus-circle"> Add Lab</asp:LinkButton>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-12">
+                                                      <div class="col-md-12"><hr/></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count.#</label></div>
+                                                      <div class="col-md-4"><label class="control-label text-warning pull-left">Ordered Lab Test</label></div>
+                                                      <div class="col-md-4"><label class="control-label text-warning pull-left">Lab Order Reason</label></div>
+                                                  </div>
+                                              </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="col-md-12">
+                                        <div class="col-md-12"><hr/></div>
+                                        <div class="col-md-7"></div>
+                                         <div class="col-md-5">
+                                             <div class="col-md-3">
+                                                 <asp:LinkButton runat="server" ID="btnSaveLab" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <asp:LinkButton runat="server" ID="btnPrintOrder" CssClass="btn btn-primary fa fa-print" ClientIDMode="Static"> Print Order</asp:LinkButton>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <asp:LinkButton runat="server" ID="btnResetOrder" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
+                                             </div>
+                                             <div class="col-md-3">
+                                                 <asp:LinkButton runat="server" ID="btnCancelOrder" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
+                                             </div>
+                                         </div>
+                                    </div>
+                            </div>
+                            
+
+                      </div><!-- .laboratory-->
+
+                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                          <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
                           </div>
-                          <div class ="col-md-12"><hr /></div>
+                          <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Dispensing </strong></h4>
+                            </div>
                           <div class="col-md-12">
                                 <div class="panel panel-info">
 
@@ -996,11 +1139,12 @@
                                          
                                         <div class="col-md-12">
                                               <div class="col-md-12"><hr/></div>
-                                              <div class="col-md-7"></div>
-                                             <div class="col-md-5">
-                                                <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle"> Save Prescription</asp:LinkButton></div>
-                                                 <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
-                                                <div class="col-md-4"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
+                                              <div class="col-md-6"></div>
+                                             <div class="col-md-6">
+                                                <div class="col-md-3"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle"> Save Prescription</asp:LinkButton></div>
+                                                 <div class="col-md-3"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
+                                                 <div class="col-md-3"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                                                <div class="col-md-3"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
                                              </div>
                                         </div>
                                     </div><%-- .panel-body--%>
@@ -1027,6 +1171,126 @@
 
     </script>
 </asp:Content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
