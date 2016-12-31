@@ -10,7 +10,7 @@
 namespace IQCare.Web.CCC.Patient {
     
     
-    public partial class AerviceArea {
+    public partial class ServiceArea {
         
         /// <summary>
         /// DropDownList1 control.

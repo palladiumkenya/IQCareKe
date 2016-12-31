@@ -272,27 +272,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Common.Core\Common.Core.csproj">
-      <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
-      <Name>Common.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Common.Data\Common.Data.csproj">
-      <Project>{1CAA9075-C252-468D-AE8C-C692BA8BEED9}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Config.Core\Config.Core.csproj">
-      <Project>{646960b7-1498-434c-b385-da1c344b9919}</Project>
-      <Name>Config.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Solutions\IQCare.CCC\Config.Data\Config.Data.csproj">
-      <Project>{fbe1355f-e166-4505-a6d7-f9d7bba35d36}</Project>
-      <Name>Config.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Administration">
+      <HintPath>..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Entities.Administration;
 using System.Collections.Generic;
+using Entities.Common;
 
 namespace Entities.PatientCore
 {
@@ -8,7 +9,7 @@ namespace Entities.PatientCore
     /// 
     /// </summary>
     [Serializable]
-    public class PatientEnrollment
+    public class PatientEnrollment:IAuditEntity
     {
         /// <summary>
         /// Gets or sets the patient identifier.
@@ -52,6 +53,8 @@ namespace Entities.PatientCore
         /// The exit reason.
         /// </value>
         public string ExitReason { get; set; }
+        public DateTime OutcomeDate { get; set; }
+        public string OutCome { get; set; }
         /// <summary>
         /// Gets or sets the identifiers.
         /// </summary>
@@ -59,5 +62,25 @@ namespace Entities.PatientCore
         /// The identifiers.
         /// </value>
         public virtual List<PatientIdentifier> Identifiers {get;set;}
+
+        public int CreatedBy
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public bool DeleteFlag
+        {
+            get; set;
+        }
+
+        public string AuditData
+        {
+            get; set;
+        }
     }
 }

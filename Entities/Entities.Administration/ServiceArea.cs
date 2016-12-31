@@ -53,6 +53,7 @@ namespace Entities.Administration
                 DisplayName = value;
             }
         }
+        public string Code { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [publish flag].
         /// </summary>
@@ -99,6 +100,10 @@ namespace Entities.Administration
         {
             get;
             set;
+        }
+        public override string ToString()
+        {
+            return $"{Code} - {Name}";
         }
 
     }

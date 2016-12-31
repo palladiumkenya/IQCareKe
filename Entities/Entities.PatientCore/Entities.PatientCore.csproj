@@ -53,14 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Guardian.cs" />
     <Compile Include="HomePageConfig.cs" />
+    <Compile Include="PatientLocation.cs" />
+    <Compile Include="PatientMaritalStatus.cs" />
+    <Compile Include="PatientOVCStatus.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="PatientAlert.cs" />
+    <Compile Include="PatientContact.cs" />
     <Compile Include="PatientEnrollment.cs" />
     <Compile Include="HomePageSection.cs" />
     <Compile Include="PatientIdentifier.cs" />
+    <Compile Include="PatientConsent.cs" />
+    <Compile Include="PatientRelationship.cs" />
     <Compile Include="PatientVisit.cs" />
+    <Compile Include="PatientPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PatientTreatmentSupporter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
