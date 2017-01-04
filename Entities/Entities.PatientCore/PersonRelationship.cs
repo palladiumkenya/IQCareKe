@@ -5,12 +5,14 @@ using System;
 namespace Entities.PatientCore
 {
     [Serializable]
-    public class PatientRelationship : IAuditEntity
+    public class PersonRelationship : IAuditEntity
     {
         public int Id { get; set; }
-        public Patient Patient { get; set; }
-        public int PatientId { get; set; }
+       
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
         public Relationship Relationship { get; set; }
+        public Person Relative { get; set; }
         public string AuditData
         {
             get; set;

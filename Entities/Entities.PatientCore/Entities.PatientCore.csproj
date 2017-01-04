@@ -65,7 +65,7 @@
     <Compile Include="HomePageSection.cs" />
     <Compile Include="PatientIdentifier.cs" />
     <Compile Include="PatientConsent.cs" />
-    <Compile Include="PatientRelationship.cs" />
+    <Compile Include="PersonRelationship.cs" />
     <Compile Include="PatientVisit.cs" />
     <Compile Include="PatientPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
