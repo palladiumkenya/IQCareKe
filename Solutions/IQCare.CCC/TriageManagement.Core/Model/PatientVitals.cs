@@ -1,25 +1,27 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Common.Core.Model;
+using Microsoft.Build.Framework;
 
 namespace TriageManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientVitals")]
+    [Table( "PatientVitals")]
     public class PatientVitals :BaseEntity
     {
+        [Required]
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+        [Required]
         public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
+        [Required]
         public decimal Temperature { get; set; }
-        public decimal RR { get; set; }
-        public decimal HR { get; set; }
-        public decimal BPDiastolic { get; set; }
-        public decimal BPSystolic { get; set; }
+        public decimal RespiratoryRate { get; set; }
+        public decimal HeartRate { get; set; }
+        public decimal BpDiastolic { get; set; }
+        public decimal BpSystolic { get; set; }
         public decimal Height { get; set; }
         public decimal Weight { get; set; }
-        public int Pain { get; set; }
-        public int TLC { get; set; }
-        public decimal TLCPercent { get; set; }
-        public int Oedema { get; set; }
         public decimal Muac { get; set; }
-        public decimal SPO2 { get; set; }
-        public DateTime LMP { get; set; }
+        public decimal Spo2 { get; set; }
     }
 }

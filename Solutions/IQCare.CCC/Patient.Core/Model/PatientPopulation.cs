@@ -8,8 +8,7 @@ namespace PatientManagement.Core.Model
     {
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public int PopulationType { get; set; }
-        public int Population { get; set; }
+        public int PopulationId { get; set; }
 
     }
 }

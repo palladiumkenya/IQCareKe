@@ -1,15 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Common.Core.Model;
 
 namespace TriageManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientAllergies")]
+    [Table("PatientAllergy")]
     public class PatientAllergies :BaseEntity
     {
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
         public int PatientMasterVisitId { get; set; }
-        public int AllergyType { get; set; }
-        public string Allagen { get; set; }
-        public string Description { get; set; }
-        public DateTime OnsetDate { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
+        public string Allergen { get; set; }
+        public string AllergyResponse { get; set; }
+        public string AuditData { get; set; }
     }
 }

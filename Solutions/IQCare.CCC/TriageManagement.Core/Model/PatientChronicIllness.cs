@@ -1,12 +1,15 @@
-﻿using Common.Core.Model;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Common.Core.Model;
 
 namespace TriageManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientChronicIllness")]
-
-    public class PatientChronicIllness :BaseEntity
+    [Table("PatientChronicIllness")]
+    public class PatientChronicIllness : BaseEntity
     {
-       public int PatientMasterVisitId { get; set; }
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public int ChronicIllness { get; set; }
         public string Treatment { get; set; }
         public int Dose { get; set; }

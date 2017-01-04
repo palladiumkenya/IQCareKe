@@ -3,14 +3,14 @@ using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientOVCStatus")]
+    [Table( "PatientOVCStatus")]
 
     public class PatientOVCStatus :BaseEntity
     {
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public string GuardianNames { get; set; }
-        public int GuardianIdentificationNo { get; set; }
+        public int GuardianId { get; set; }
+        [ForeignKey("GuardianId")]
         public string Orphan { get; set; }
         public string InSchool { get; set; }
         public int Active { get; set; }

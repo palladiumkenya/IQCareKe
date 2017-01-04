@@ -3,12 +3,15 @@ using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientLocation")]
+    [Table( "PatientLocation")]
 
     public class PatientMaritalStatus:BaseEntity
     {
+        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public int MaritalStatus { get; set; }
+        public int MaritalStatusId { get; set; }
+        public bool Active { get; set; }
     }
 }

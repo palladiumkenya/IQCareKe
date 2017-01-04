@@ -4,16 +4,15 @@ using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientEnrollment")]
+    [Table("PatientEnrollment")]
 
     public class PatientEnrollment :BaseEntity
     {
-        public int PatientId { get; set; }
-        [ForeignKey("PatientId")]
-        public int ModuleId { get; set; }
+
+        public int ServiceAreaId { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public string EnrollmentStatus { get; set; }
-        public DateTime OutcomeDate { get; set; }
-        public string OutCome { get; set; }
+        public string EnrollmentStatusId { get; set; }
+        public bool TransferIn { get; set; }
+        public bool CareEnded { get; set; }
     }
 }
