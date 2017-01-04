@@ -75,7 +75,7 @@
     <Compile Include="Interfaces\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interfaces\IPatientOVCStatusRepository.cs" />
     <Compile Include="Interfaces\IPatientPopulationRepository.cs" />
-    <Compile Include="Interfaces\IPatientRelationshipRepository.cs" />
+    <Compile Include="Interfaces\IPersonRelationshipRepository.cs" />
     <Compile Include="Interfaces\IPatientRepository.cs" />
     <Compile Include="Interfaces\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />

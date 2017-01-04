@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.Web</RootNamespace>
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -62,7 +62,6 @@
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
-    <Content Include="Dashboard.aspx" />
     <Content Include="fuelux\css\fuelux.css" />
     <Content Include="fuelux\css\fuelux.min.css" />
     <Content Include="fuelux\fonts\fuelux.svg" />
@@ -152,9 +151,6 @@
     <Content Include="fuelux\fonts\fuelux.eot" />
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
-    <Content Include="database.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="CCC\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -181,6 +177,9 @@
     <Compile Include="CCC\Greencard.Master.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.designer.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\EnrollPatient.aspx.cs">
       <DependentUpon>EnrollPatient.aspx</DependentUpon>
@@ -265,13 +264,6 @@
     </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

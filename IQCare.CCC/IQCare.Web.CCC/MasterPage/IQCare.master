@@ -10,7 +10,7 @@
 <html lang="en">
 <head runat="server" id="pageHead">
     <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
-    <title id="lblTitle" runat="server">International Quality Care Patient Management andMonitoring System</title>
+    <title id="lblTitle" runat="server">International Quality Care Patient Management and Monitoring System</title>
     
     <link href="<%# ResolveUrl("~/Content/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Content/css/bootstrap-theme.css") %>" rel="stylesheet"  type="text/css" />
