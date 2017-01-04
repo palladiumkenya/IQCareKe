@@ -1,8 +1,6 @@
-﻿
-using Entities.Common;
-using System;
+﻿using System;
 
-namespace Entities.PatientCore
+namespace Entities.Common
 {
     [Serializable]
     public class PersonRelationship : IAuditEntity

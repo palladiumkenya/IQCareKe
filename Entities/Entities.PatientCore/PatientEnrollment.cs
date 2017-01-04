@@ -38,7 +38,7 @@ namespace Entities.PatientCore
         /// <value>
         /// The service area.
         /// </value>
-        public ServiceArea ServiceArea { get; set; }
+        public virtual ServiceArea ServiceArea { get; set; }
         /// <summary>
         /// Gets or sets the care status.
         /// </summary>

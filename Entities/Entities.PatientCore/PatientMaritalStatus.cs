@@ -7,9 +7,11 @@ namespace Entities.PatientCore
    public class PatientMaritalStatus:IAuditEntity
     {
         public virtual int PatientId { get; set; }
+
+        public virtual int PatientMasterVisitId { get; set; }
         public virtual Patient Patient { get; set; }
 
-        public int MaritalStatus { get; set; }
+        public int MaritalStatusId { get; set; }
 
         public bool Active { get; set; }
         public int CreatedBy { get; set; }

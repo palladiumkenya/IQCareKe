@@ -152,10 +152,10 @@
     <Content Include="fuelux\fonts\fuelux.eot" />
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
-    <Content Include="MasterPage\Greencard.Master" />
     <Content Include="database.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CCC\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -177,6 +177,10 @@
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Patient\EnrollPatient.aspx.cs">
       <DependentUpon>EnrollPatient.aspx</DependentUpon>

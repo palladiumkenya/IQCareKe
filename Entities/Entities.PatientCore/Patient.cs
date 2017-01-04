@@ -99,8 +99,7 @@ namespace Entities.PatientCore
         }
         
         public List<PatientConsent> Consent { get; set; }
-        public int IdentificationType { get; set; }
-        public string IdentificationNo { get; set; }
+       
         [NotMapped]
         public double Age
         {
@@ -132,7 +131,6 @@ namespace Entities.PatientCore
             }
         }
         public virtual List<PatientVisit> PatientVisit { get; set; }
-
         public int CreatedBy
         {
             get; set;

@@ -53,8 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Guardian.cs" />
     <Compile Include="HomePageConfig.cs" />
+    <Compile Include="PatientAllergy.cs" />
     <Compile Include="PatientLocation.cs" />
     <Compile Include="PatientMaritalStatus.cs" />
     <Compile Include="PatientOVCStatus.cs" />
@@ -65,7 +65,6 @@
     <Compile Include="HomePageSection.cs" />
     <Compile Include="PatientIdentifier.cs" />
     <Compile Include="PatientConsent.cs" />
-    <Compile Include="PersonRelationship.cs" />
     <Compile Include="PatientVisit.cs" />
     <Compile Include="PatientPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -58,6 +58,7 @@
     <Compile Include="IAuditEntity.cs" />
     <Compile Include="Pager.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="PersonRelationship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryCategory.cs" />
     <Compile Include="QueryDefinition.cs" />

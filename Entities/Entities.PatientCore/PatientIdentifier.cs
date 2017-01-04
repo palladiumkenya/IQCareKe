@@ -18,13 +18,14 @@ namespace Entities.PatientCore
         /// The patient identifier.
         /// </value>
          public virtual int PatientId { get; set; }
-         /// <summary>
-         /// Gets or sets the patient.
-         /// </summary>
-         /// <value>
-         /// The patient.
-         /// </value>
-         public virtual Patient Patient { get; set; }
+        public virtual int PatientEnrollmentId { get; set; }
+        /// <summary>
+        /// Gets or sets the patient.
+        /// </summary>
+        /// <value>
+        /// The patient.
+        /// </value>
+        public virtual Patient Patient { get; set; }
          /// <summary>
          /// Gets or sets the identifier.
          /// </summary>

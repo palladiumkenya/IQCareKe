@@ -46,5 +46,7 @@ namespace Entities.Common
         {
             get { return FirstName + ", "+ MidName +" " + LastName; }
         }
+        public int IdentificationType { get; set; }
+        public string IdentificationNo { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Common.Core.Model
 {
-    public abstract class BaseEntity 
+    public abstract class BaseEntity  // moved to entities.Common.BaseObject
     {
         public virtual int Id { get; set; }
         public virtual bool Void { get; set; }
