@@ -42,8 +42,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest.CCC", "..\..\IQCar
 		{8CC162FB-01FB-42AE-B63F-47E007E469E6} = {8CC162FB-01FB-42AE-B63F-47E007E469E6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Config.Data.Tests", "Config.Data.Tests\Config.Data.Tests.csproj", "{F08EF5A7-F0F0-4CA5-9BD7-3ABF5A04BF23}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,10 +76,6 @@ Global
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C406BAD-48AE-4164-A6CD-E569E937123C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F08EF5A7-F0F0-4CA5-9BD7-3ABF5A04BF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F08EF5A7-F0F0-4CA5-9BD7-3ABF5A04BF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F08EF5A7-F0F0-4CA5-9BD7-3ABF5A04BF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F08EF5A7-F0F0-4CA5-9BD7-3ABF5A04BF23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
