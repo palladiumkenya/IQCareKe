@@ -75,16 +75,16 @@
     <Compile Include="Context\ScreeningContext.cs" />
     <Compile Include="Context\TriageContext.cs" />
     <Compile Include="Context\VisitContext.cs" />
-    <Compile Include="Interfaces\Patient\IPatientContactRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientEnrollmentRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientLocationRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientMaritalStatusRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientOVCStatusRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientPopulationRepository.cs" />
-    <Compile Include="Interfaces\IPersonRelationshipRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientRepository.cs" />
-    <Compile Include="Interfaces\Patient\IPatientTreatmentSupporterRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interface\Patient\IContactRepository.cs" />
+    <Compile Include="Interface\Patient\IEnrollmentRepository.cs" />
+    <Compile Include="Interface\Patient\ILocationRepository.cs" />
+    <Compile Include="Interface\Patient\IMaritalStatusRepository.cs" />
+    <Compile Include="Interface\Patient\IOVCStatusRepository.cs" />
+    <Compile Include="Interface\Patient\IPopulationRepository.cs" />
+    <Compile Include="Interface\IPersonRelationshipRepository.cs" />
+    <Compile Include="Interface\IPatientRepository.cs" />
+    <Compile Include="Interface\Patient\ITreatmentSupporterRepository.cs" />
+    <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Patient\PatientContactRepository.cs" />
@@ -98,7 +98,6 @@
     <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\Person\" />
     <Folder Include="Repository\Baseline\" />
     <Folder Include="Repository\Encounter\" />
     <Folder Include="Repository\Enrollment\" />

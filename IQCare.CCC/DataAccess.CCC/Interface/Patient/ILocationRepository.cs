@@ -1,9 +1,9 @@
 ﻿using DataAccess.Context;
 using Entities.PatientCore;
 
-namespace DataAccess.CCC.Interfaces
+namespace DataAccess.CCC.Interface.Patient
 {
-   public interface IPatientLocationRepository:IRepository<PatientLocation>
+   public interface ILocationRepository:IRepository<PatientLocation>
     {
 
     }

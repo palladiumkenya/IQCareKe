@@ -2,9 +2,9 @@
 using DataAccess.Context;
 using Entities.PatientCore;
 
-namespace DataAccess.CCC.Interfaces
+namespace DataAccess.CCC.Interface.Patient
 {
-    public interface IPatientEnrollmentRepository:IRepository<PatientEnrollment>
+    public interface IEnrollmentRepository:IRepository<PatientEnrollment>
     {
 
     }

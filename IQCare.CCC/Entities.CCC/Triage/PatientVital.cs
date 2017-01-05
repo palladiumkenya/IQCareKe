@@ -12,9 +12,9 @@ namespace Entities.CCC.Triage
         [ForeignKey("PatientId")] 
         public virtual int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientmasterVisitId")]
-        public Decimal Temperature { get; set; }
-        public Decimal RespiratoryRate { get; set; }
-        public Decimal HeartRate { get; set; }
+        public decimal Temperature { get; set; }
+        public decimal RespiratoryRate { get; set; }
+        public decimal HeartRate { get; set; }
         public int Bpdiastolic { get; set; }
         public int BpSystolic { get; set; }
         public decimal Height { get; set; }

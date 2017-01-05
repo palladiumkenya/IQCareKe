@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Triage
+namespace Entities.CCC.Screening
 {
     [Serializable]
     [Table("PatientPHDP")]
