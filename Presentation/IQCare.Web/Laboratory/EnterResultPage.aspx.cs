@@ -19,7 +19,7 @@ namespace IQCare.Web.Laboratory
         /// The redirect URL
         /// </summary>
          private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
-        private decimal? nullDecimal = null;
+     
         private string RedirectUrl {
             get
             {
@@ -328,6 +328,7 @@ namespace IQCare.Web.Laboratory
 
             return true;
         }
+        decimal? nullDecimal = null;
         protected void SaveResults(object sender, EventArgs e)
         {
             
@@ -389,9 +390,6 @@ namespace IQCare.Web.Laboratory
 
                 }
                 withResult += 1;
-
-
-                
                 if (_dataType == "NUMERIC")
                 {
 
@@ -421,15 +419,6 @@ namespace IQCare.Web.Laboratory
                         };
                     }
                     catch { thisParam.ResultUnit = null; }
-
-                    
-                    //try
-                    //{
-                        
-
-                    //}
-                    //catch { }
-
                 }
                 else if (_dataType == "TEXT")
                 {

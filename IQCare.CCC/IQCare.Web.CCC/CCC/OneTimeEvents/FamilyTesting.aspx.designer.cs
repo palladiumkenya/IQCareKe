@@ -40,13 +40,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.HtmlControls.HtmlSelect BaselineHIVStatus;
         
         /// <summary>
-        /// HIVTestingResults control.
+        /// hivtestingresult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect HIVTestingResults;
+        protected global::System.Web.UI.WebControls.DropDownList hivtestingresult;
         
         /// <summary>
         /// btnAddFamilyTesting control.

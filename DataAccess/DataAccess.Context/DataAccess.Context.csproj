@@ -41,7 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
@@ -69,8 +72,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseContext.cs" />
+    <Compile Include="BaseRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="LabContext.cs" />
     <Compile Include="LabOrderRepository.cs" />
+    <Compile Include="ModuleContext.cs" />
+    <Compile Include="ModuleMaster\IModuleRepository.cs" />
+    <Compile Include="ModuleMaster\ModuleRepository.cs" />
     <Compile Include="PatientContext.cs" />
     <Compile Include="PatientRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

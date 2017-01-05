@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using Entities.Common;
 
 namespace Entities.PatientCore
 {
     [Serializable]
     [Table("PatientView")]
-    public class Patient
+    public class Patient: IAuditEntity
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -96,6 +97,9 @@ namespace Entities.PatientCore
                return string.Format("{0} {1} {2}", FirstName, MiddleName, LastName);
             }
         }
+        
+        public List<PatientConsent> Consent { get; set; }
+       
         [NotMapped]
         public double Age
         {
@@ -127,5 +131,19 @@ namespace Entities.PatientCore
             }
         }
         public virtual List<PatientVisit> PatientVisit { get; set; }
+        public int CreatedBy
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public string AuditData
+        {
+            get; set;
+        }
     }
 }

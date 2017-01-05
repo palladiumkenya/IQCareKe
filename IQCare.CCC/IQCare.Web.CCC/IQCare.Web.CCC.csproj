@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IQCare.Web</RootNamespace>
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,59 +45,38 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
+    <Content Include="CCC\Encounter\StartEncounter.aspx" />
+    <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
+    <Content Include="CCC\Patient\PatientFinder.aspx" />
+    <Content Include="CCC\Patient\PatientReg.aspx" />
+    <Content Include="CCC\Patient\PatientTest.aspx" />
+    <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
-    <Content Include="Content\css\bootstrap-theme.css" />
-    <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\daterangepicker.css" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\parsley.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\fuelux\css\fuelux.css" />
-    <Content Include="Content\fuelux\css\fuelux.min.css" />
-    <Content Include="Content\fuelux\fonts\fuelux.svg" />
-    <Content Include="Content\fuelux\js\fuelux.js" />
-    <Content Include="Content\fuelux\js\fuelux.min.js" />
-    <Content Include="Content\fuelux\js\npm.js" />
-    <Content Include="Content\img\iqSolutions.png" />
-    <Content Include="Content\js\bootstrap.js" />
-    <Content Include="Content\js\moment.js" />
-    <Content Include="Content\js\parsley.js" />
-    <Content Include="CCC\Home.aspx" />
-    <Content Include="Dashboard.aspx" />
-    <Content Include="MasterPage\levelOneNavigationUserControl.ascx" />
-    <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
-    <Content Include="MasterPage\Menu.css" />
+    <Content Include="CCC\Patient\FindPatient.aspx" />
+    <Content Include="fuelux\css\fuelux.css" />
+    <Content Include="fuelux\css\fuelux.min.css" />
+    <Content Include="fuelux\fonts\fuelux.svg" />
+    <Content Include="fuelux\js\fuelux.js" />
+    <Content Include="fuelux\js\fuelux.min.js" />
+    <Content Include="fuelux\js\npm.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MasterPage\IQCare.master" />
-    <Content Include="MasterPage\Module.Master" />
-    <Content Include="Content\css\bootstrap-theme.css.map" />
-    <Content Include="Content\css\bootstrap.css.map" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="MasterPage\GreenCard.Master" />
-    <Content Include="Content\fuelux\css\fuelux.css.map" />
-    <Content Include="Content\fuelux\fonts\fuelux.eot" />
-    <Content Include="Content\fuelux\fonts\fuelux.ttf" />
-    <Content Include="Content\fuelux\fonts\fuelux.woff" />
+    <Content Include="fuelux\css\fuelux.css.map" />
+    <Content Include="fuelux\fonts\fuelux.eot" />
+    <Content Include="fuelux\fonts\fuelux.ttf" />
+    <Content Include="fuelux\fonts\fuelux.woff" />
+    <Content Include="CCC\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,12 +99,61 @@
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.designer.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.designer.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.designer.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientReg.aspx.cs">
+      <DependentUpon>PatientReg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientReg.aspx.designer.cs">
+      <DependentUpon>PatientReg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.designer.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\ServiceArea.aspx.designer.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\FindPatient.aspx.cs">
+      <DependentUpon>FindPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\FindPatient.aspx.designer.cs">
+      <DependentUpon>FindPatient.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">
       <DependentUpon>Baseline.aspx</DependentUpon>
@@ -168,17 +197,26 @@
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Administration">
+      <HintPath>..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.dll</HintPath>
@@ -192,6 +230,8 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />

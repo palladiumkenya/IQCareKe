@@ -94,6 +94,10 @@ namespace IQCare.Web.Home
                 {
                     row["IconFont"] = "fa fa-bed";
                 }
+                else if (landScape.ServiceAreaName == "Green card")
+                {
+                    row["IconFont"] = "iq iq-awareness-ribbon";
+                }
                 else row["IconFont"] ="iq iq-default";
 
                 if (landScape.ClickAction == RedirectAction.FindAddPatient)

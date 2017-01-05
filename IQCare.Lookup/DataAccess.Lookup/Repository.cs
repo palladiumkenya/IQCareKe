@@ -44,6 +44,6 @@ namespace DataAccess.Lookup
         /// </summary>
         /// <returns></returns>
         public abstract IEnumerable<TEntity> GetAll(string lookname, string lookcategory);
-      
+        public abstract IEnumerable<TEntity> GetAll(string lookname);
     }
 }

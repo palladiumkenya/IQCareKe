@@ -172,7 +172,7 @@
             </ajaxToolkit:TabPanel>
             <ajaxToolkit:TabPanel ID="tabKO" runat="server" HeaderText="Knock Off">
                 <ContentTemplate>
-                    <asp:UpdatePanel ID="upKO" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="upKO" runat="server">
                         <ContentTemplate>
                             <div class="row">
                                 <div class="col-md-12 label label-primary">
@@ -190,8 +190,8 @@
                                                     <label class="control-label pull-left" for="ddlKOVoucher">
                                                         Select Voucher:</label></div>
                                                 <div class="form-group col-md-6">
-                                                    <asp:DropDownList CssClass="form-control input-sm col-md-6" ID="ddlKOVoucher" Name="ddlKOVoucher"
-                                                        required="true" runat="server" data-parsley-group="KO" AppendDataBoundItems="false">
+                                                    <asp:DropDownList CssClass="form-control input-sm col-md-6" ID="ddlKOVoucher" 
+                                                         runat="server"  AppendDataBoundItems="false">
                                                     </asp:DropDownList>
                                                     <asp:HiddenField ID="hdVoucher" Value="0" runat="server" />
                                                 </div>
@@ -206,8 +206,8 @@
                                                 </div>
                                                 <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
                                                     <asp:TextBox ID="txtKOFrom" Name="txtFrom" CssClass="form-control input-sm col-md-4"
-                                                        runat="server" required="true" placeholder="Start Date (From)" AutoComplete="Off"
-                                                        data-parsley-group="KO"></asp:TextBox>
+                                                        runat="server"  placeholder="Start Date (From)" AutoComplete="Off"
+                                                     ></asp:TextBox>
                                                     <asp:ImageButton runat="Server" ID="imFrom" Height="22" Style="width: 22; height: 22;
                                                         z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
                                                         AlternateText="Click to show calendar" />
@@ -232,17 +232,17 @@
                                                     <label class="control-label pull-left" for="ddlPTKO">
                                                         Select Payment Type:</label></div>
                                                 <div class="form-group col-md-6">
-                                                    <asp:DropDownList CssClass="form-control" ID="ddlPTKO" Name="ddlPTKO" required="true"
-                                                        data-parsley-group="KO" runat="server" AppendDataBoundItems="false">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlPTKO" 
+                                                         runat="server" AppendDataBoundItems="false">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-4" style="text-align: left; vertical-align: middle;
                                             margin-top: 10px">
-                                            <asp:Button CssClass="btn btn-primary btn-lg col-md-4" ID="btnKOView" type="button"
+                                            <asp:Button CssClass="btn btn-primary btn-lg col-md-4" ID="btnKOView" 
                                                 runat="server" Text=" Find  " Style="margin-right: 5px; vertical-align: middle"
-                                                OnClick="FindKnockOff" UseSubmitBehavior="false" CausesValidation="false" />
+                                                OnClick="FindKnockOff" />
                                         </div>
                                     </div>
                                 </div>

@@ -175,6 +175,7 @@ namespace IQCare.Web.Laboratory.Reports
             }
             return "";
         }
+        decimal? nullDecimal = null;
         /// <summary>
         /// Generates the report.
         /// </summary>
@@ -191,7 +192,7 @@ namespace IQCare.Web.Laboratory.Reports
                   
             //DateTime? nulldate = null;
             bool? nullBit = null;
-            decimal? nullDecimal = null;
+            
             XElement orderE = new XElement("Order",
                 new XElement("orderid",          this.thisLabOrder.Id),
                 new XElement("ordernumber",      this.thisLabOrder.OrderNumber),

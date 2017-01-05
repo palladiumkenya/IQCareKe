@@ -166,12 +166,12 @@
                 <!-- .col-md-2-->
             </div>
         </div>
-       <%-- <div class="row">
+        <%-- <div class="row">
             <div class="col-md-5">
                 <asp:Label ID="labelModule" CssClass="control-label pull-left" runat="server" Text=""></asp:Label>
                
             </div>
-        </div>
+        </div>--%>
         <!-- .panel-body -->
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

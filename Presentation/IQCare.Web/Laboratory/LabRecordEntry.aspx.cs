@@ -21,7 +21,7 @@ namespace IQCare.Web.Laboratory
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
         private ILabManager labMgr = (ILabManager)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabManager, BusinessProcess.Laboratory");
         private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-        decimal? nullDecimal = null;
+
         protected string sOption
         {
             get
@@ -125,7 +125,7 @@ namespace IQCare.Web.Laboratory
             divError.Visible = isError;
             
         }
-
+        decimal? nullDecimal = null;
         protected void AddLabRecord(object sender, EventArgs e)
         {
             LabOrderTest thisTest = null;
@@ -201,7 +201,7 @@ namespace IQCare.Web.Laboratory
                     LabTestId = this.LabTestId,
                     DeleteFlag = false
                 };
-                if (_dataType == "NUMERIC")
+                                if (_dataType == "NUMERIC")
                 {
 
                     _result.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
@@ -260,26 +260,10 @@ namespace IQCare.Web.Laboratory
             //base.Session["LAB_REQTEST"] = null;
             //base.Session["OrderedLabs"] = null;
             this.BindLabTest();
-        }
-        //private void NotifyAction(string strMessage, string strTitle, bool errorFlag, string onOkScript = "")
-        //{
-        //    lblNoticeInfo.Text = strMessage;
-        //    lblNotice.Text = strTitle;
-        //    lblNoticeInfo.ForeColor = (errorFlag) ? System.Drawing.Color.DarkRed : System.Drawing.Color.DarkGreen;
-        //    lblNoticeInfo.Font.Bold = true;
-        //    imgNotice.ImageUrl = (errorFlag) ? "~/images/mb_hand.gif" : "~/images/mb_information.gif";
-        //    btnOkAction.OnClientClick = "";
-        //    if (onOkScript != "")
-        //    {
-        //        btnOkAction.OnClientClick = onOkScript;
-        //    }
-        //    this.notifyPopupExtender.Show();
-        //}
-        private Boolean FieldValidation(string labtobedone, string orderbydate, string orderby, string appcurrentdate,string resultdate, string resultBy)
-        {
-
-            IIQCareSystem _iqcareSecurity = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
-            DateTime _theCurrentDate = (DateTime)_iqcareSecurity.SystemDate();
+        }        
+        private bool FieldValidation(string labtobedone, string orderbydate, string orderby, string appcurrentdate,string resultdate, string resultBy)
+        {          
+            DateTime _theCurrentDate = SystemSetting.SystemDate;           
             IQCareUtils theUtils = new IQCareUtils();
 
             Page page = HttpContext.Current.Handler as Page;

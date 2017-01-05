@@ -1,45 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="true" CodeBehind="FamilyTesting.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.FamilyTesting" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="FamilyTesting.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.FamilyTesting" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
-        <div class="row">
-                <div class="col-md-12">
+        
+               
                     <uc:PatientDetails ID="PatientSummary" runat="server" />
-                </div>
-        </div>
+               
+       
 
-        <div class="row">
-            <div class="col-md-12"><h5 class="pull-left"><i class="fa fa-users fa-2x" aria-hidden="true"> Family Member(s) Information</i> </h5></div> 
-            
-                 <div class="col-md-12">
-                     <div class="panel panel-default">
-                            <div class="panel-body">
-                               
-                                 <div class="col-md-12">
-
-                                     <div class="col-md-6">
-                                         <div class="col-md-12"><small class="pull-left">Enter Family Testing information</small><hr /></div>
-                                         <div class="col-md-12 form-group">
+    
+             <div class="col-md-12 bs-callout bs-callout-info">
+                    <div class="col-md-12">
+                                  <div class="col-md-6">
+                                       <div class="col-md-12"><small class="pull-left">Enter Family Testing information</small><hr /></div>
+                                           <div class="col-md-12 form-group">
                                               <div class="col-md-3"><label class="control-label pull-left">Name(s)</label></div>
-                                             <div class="col-md-9"><input class="form-control input-sm" type="text" runat="server" placeholder="Family Names" /></div>
-                                         </div>
+                                           <div class="col-md-9"><input class="form-control input-sm" type="text" runat="server" placeholder="Family Names" /></div>
+                                       </div>
 
                                          <div class="col-md-12 form-group">
-                                              <div class="col-md-3"><label class="control-label pull-left">Relationship</label></div>
-                                              <div class="col-md-4">
+                                              <div class="col-md-5"><label class="control-label pull-left">Relationship</label></div>
+                                              <div class="col-md-7">
                                                     <select runat="server" id="relationship" class="form-control input-sm"></select>
                                               </div>
                                          </div>
 
                                          <div class="col-md-12 form-group">
-                                              <div class="col-md-3"><label class="control-label pull-left">Baseline HIV Status</label></div>
-                                             <div class="col-md-4">
+                                              <div class="col-md-5"><label class="control-label pull-left">Baseline HIV Status</label></div>
+                                             <div class="col-md-7">
                                                  <select runat="server" id="BaselineHIVStatus" class="form-control input-sm"></select>
                                              </div>
-                                             <div class="col-md-1"><label class="control-label pull-left">Date</label></div>
-                                             <div class="col-md-4">
+                                         </div>
+                                         
+                                         <div class="col-md-12 form-group">
+                                             <div class="col-md-5"><label class="control-label pull-left">Baseline HIV Status Date</label></div>
+                                             <div class="col-md-7">
                                                   <div class="datepicker fuelux form-group" id="BaselineHIVStatusD">
-                                           <div class="input-group">
+                                                       <div class="input-group">
                                                                               <input class="form-control input-sm" id="BaselineHIVStatusDate" type="text" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -116,13 +113,22 @@
                                                                               </div>
                                                                             </div>
                                                                           </div>
-                                       </div>
+                                                   </div>
                                              </div>
                                          </div>
 
+
+
                                          <div class="col-md-12 form-group">
-                                              <div class="col-md-3"><label class="control-label pull-left"> HIV Testing Date</label></div>
-                                             <div class="col-md-4">
+                                              <div class="col-md-5"><label class="control-label pull-left">HIV Testing Results</label></div>
+                                              <div class="col-md-7">
+                                                  <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm"/> 
+                                              </div>
+                                          </div>
+
+                                         <div class="col-md-12 form-group">
+                                              <div class="col-md-5"><label class="control-label pull-left"> HIV Testing Date</label></div>
+                                             <div class="col-md-7">
                                                   <div class="datepicker fuelux form-group" id="TestingDate">
                                            <div class="input-group">
                                                                               <input class="form-control input-sm" id="HIVTestingDate" type="text" />
@@ -202,49 +208,42 @@
                                                                             </div>
                                                                           </div>
                                        </div>
-                                             </div>
-                                             <div class="col-md-1"><label class="control-label pull-left">Results</label></div>
-                                             <div class="col-md-4">
-                                                 <select runat="server" id="HIVTestingResults" class="form-control input-sm"></select>
-                                             </div>
-                                             
+                                             </div>                                            
                                          </div>
-
+                                         
                                          <div class="col-md-12">
                                              <div class="col-md-12"><hr /></div>
-                                             <div class="col-md-9"></div>
-                                              <div class="col-md-1">
-                                                 <asp:LinkButton runat="server" ID="btnAddFamilyTesting" CssClass=" btn btn-info btn-lg fa fa-plus-circle" >Add Family Member</asp:LinkButton>
+                                             
+                                              <div class="col-md-2">
+                                                 <div class="col-md-12"><asp:LinkButton runat="server" ID="btnAddFamilyTesting" CssClass=" btn btn-info btn-lg fa fa-plus-circle" > Add Member</asp:LinkButton></div>
                                               </div>
-                                             <div class="col-md-1"></div>
+                                             <div class="col-md-10"></div>
                                          </div>
                                      </div>
-                                     <div class="col-md-6">
+                              
+                                  <div class="col-md-6">
                                          <div class="col-md-12"><small class="pull-left">Enter Family Testing Grid</small><hr /></div>
                                          
-                                     </div>
-                                 </div>
+                                   </div>
+                             </div>
 
-                                 <div class="col-md-12">
+                       <div class="col-md-12">
                                      <hr />
-                                     <div class="col-md-8"></div>
+                                     <div class="col-md-7"></div>
                                      
-                                     <div class="col-md-4 pull-right">
-                                          <asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-primary btn-lg fa fa-arrow-circle-o-right" > Save Family Testing</asp:LinkButton>
-                                          <asp:LinkButton runat="server" ID="btnReloadHistory" CssClass=" btn btn-warning fa fa-refresh btn-lg" > Reload Members</asp:LinkButton>
-                                          <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close Family Testing</asp:LinkButton>
+                                     <div class="col-md-5">
+                                        
+                                         <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" > Save Family Testing</asp:LinkButton> </div> 
+                                         <div class="col-md-4"> <asp:LinkButton runat="server" ID="btnReloadHistory" CssClass=" btn btn-warning fa fa-refresh btn-lg" > Reset Family Form</asp:LinkButton> </div> 
+                                         <div class="col-md-4"> <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close Family Form</asp:LinkButton> </div> 
           
                                                                                                                           
                                      </div>
                                  </div>
 
-                            </div> <%--.panel-body--%>
-                        </div>
-                    </div><%-- .col-md-12--%>
 
-                 
-            
-        </div>
+             </div><%-- .col-md-12--%>
+      
     </div> <%--.container-fluid--%>
 
    <script type="text/javascript">

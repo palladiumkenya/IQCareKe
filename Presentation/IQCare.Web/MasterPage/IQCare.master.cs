@@ -190,7 +190,8 @@ namespace IQCare.Web.MasterPage
 
             if (Session["AppDateFormat"].ToString() != "")
             {
-                lblDate.Text = AdminManager.SystemDate().ToString(Session["AppDateFormat"].ToString());
+                
+                    lblDate.Text = AdminManager.SystemDate().ToString(Session["AppDateFormat"].ToString());
             }
             else
             {

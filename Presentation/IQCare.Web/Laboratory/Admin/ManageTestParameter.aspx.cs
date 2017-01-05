@@ -101,7 +101,7 @@ namespace IQCare.Web.Laboratory.Admin
                 if (e.CommandName == "AddItem")
                 {
                     GridViewRow row = gridLabUnits.FooterRow;
-                    DropDownList ddlNewUnitName = (DropDownList)row.FindControl("ddlNewUnitName");
+                    DropDownList ddlNewUnitName = (DropDownList)row.FindControl("ddlNewUnitName");                   
                     if (!validateDropDown(ddlNewUnitName))
                     {
                         ddlNewUnitName.BorderColor = System.Drawing.Color.Red;
@@ -682,7 +682,6 @@ namespace IQCare.Web.Laboratory.Admin
                 TextBox txtEditMaxNormalRange = rowView.FindControl("txtEditMaxNormalRange") as TextBox;
                 TextBox txtEditDetectionLimit = rowView.FindControl("txtEditDetectionLimit") as TextBox;
                 CheckBox ckbDefault = rowView.FindControl("ckbDefault") as CheckBox;
-                                
                 if (ckbDefault.Checked)
                 {
                     if (configs.Count > 0)

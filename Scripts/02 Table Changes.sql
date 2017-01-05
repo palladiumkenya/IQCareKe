@@ -932,3 +932,71 @@ Inner Join md On md.ModuleId = m.ModuleID
 Where RI > 1
 And M.DeleteFlag = 1
 Go
+
+Set Nocount On;
+Go
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+IF OBJECT_ID('tempdb..#SrNo') IS NOT NULL Drop Table #SrNo
+Go
+Create Table #SrNo(	
+	tablename varchar(50),
+	ColumnName varchar(10)
+);
+Go
+Insert Into #SrNo
+SELECT  t.name AS table_name,
+--SCHEMA_NAME(schema_id) AS schema_name,
+c.name AS column_name
+FROM sys.tables AS t
+INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
+WHERE c.name LIKE 'SRNo' And system_type_id=TYPE_ID('int');
+Go
+Select * From #SrNo
+
+Declare @Query varchar(250)
+		, @command varchar(400)
+		,@tablename varchar(50)
+		,@update varchar(250);
+While Exists(Select 1 From #SrNo) Begin
+	Select top 1 @tablename= tableName from #SrNo
+	If Exists(Select 1      from sys.all_columns c
+      join sys.tables t on t.object_id = c.object_id
+      join sys.schemas s on s.schema_id = t.schema_id
+      join sys.default_constraints d on c.default_object_id = d.object_id
+		where t.name = @tablename      And c.name = 'SrNo')  Begin
+	select @Command = 'ALTER TABLE dbo.' + @tablename + ' drop constraint ' + d.name
+	 from sys.tables t	  join    sys.default_constraints d	   on d.parent_object_id = t.object_id
+	  join    sys.columns c	   on c.object_id = t.object_id		and c.column_id = d.parent_column_id
+	 where t.name = @tablename
+	  and t.schema_id = schema_id('dbo')
+	  and c.name = 'SRNo'
+	  exec (@command)
+	  End
+		Select @Query = 'Alter table ['+@tablename + '] Alter Column SrNo decimal(5,2) ';	
+		Exec (@Query);
+	Select @Query = 'Alter table ['+@tablename + '] ADD CONSTRAINT DF_'+replace(@tablename,' ','')+'_SRNo'+' DEFAULT 0.00 FOR SRNo; ';
+	
+	If Not Exists (Select 1      from sys.all_columns c
+      join sys.tables t on t.object_id = c.object_id
+      join sys.schemas s on s.schema_id = t.schema_id
+      join sys.default_constraints d on c.default_object_id = d.object_id
+		where t.name = @tablename      And c.name = 'SrNo')
+      Begin
+		--Print @Query		
+		Exec(@Query)
+	 End
+	
+	
+	Delete From #SrNo where tablename = @tablename
+	
+End
+GO
+SET ANSI_PADDING OFF
+GO

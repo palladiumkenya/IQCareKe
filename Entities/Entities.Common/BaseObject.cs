@@ -2,11 +2,24 @@
 
 namespace Entities.Common
 {
-    public interface IBaseObject 
+    public interface INamedEntity
+    {
+        int Id { get; set; }
+        string Name { get; set; }
+        bool Active { get; set; }
+        string Description { get; set; }
+    }
+    public interface IBaseObject
     {
         int Id { get; set; }
         string Name { get; set; }
         bool DeleteFlag { get; set; }
+        int? DeletedBy { get; set; }
+        DateTime? DeleteDate { get; set; }
+        int CreatedBy
+        {
+            get; set;
+        }
         bool Active { get; set; }
         string Description { get; set; }
         DateTime CreateDate { get; set; }
@@ -15,8 +28,14 @@ namespace Entities.Common
     /// 
     /// </summary>
     [Serializable]
-    public abstract class BaseObject:IBaseObject
+    public abstract class BaseObject : INamedEntity, IAuditEntity
     {
+        protected BaseObject()
+        {
+            CreatedBy = 1;
+            CreateDate = DateTime.Now;
+
+        }
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -30,7 +49,7 @@ namespace Entities.Common
         /// <value>
         /// The name.
         /// </value>
-        public virtual  string Name { get; set; }
+        public virtual string Name { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [delete flag].
         /// </summary>
@@ -51,21 +70,36 @@ namespace Entities.Common
         /// <value>
         /// The description.
         /// </value>
-        public virtual  string  Description { get; set; }
+        public virtual string Description { get; set; }
         /// <summary>
         /// Gets or sets the create date.
         /// </summary>
         /// <value>
         /// The create date.
         /// </value>
-        public  DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
+        //public virtual int? DeletedBy
+        //{
+        //    get; set;
+        //}
 
+        //public virtual DateTime? DeleteDate
+        //{
+        //    get; set;
+        //}
+
+        public virtual int CreatedBy
+        {
+            get; set;
+        }
+
+        public string AuditData
+        {
+            get; set;
+        }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <seealso cref="Entities.Common.BaseObject" />
-   
+  
+
 }

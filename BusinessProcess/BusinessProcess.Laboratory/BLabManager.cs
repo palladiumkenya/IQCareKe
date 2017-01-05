@@ -136,7 +136,7 @@ namespace BusinessProcess.Laboratory
                             );
             return result.ToList(); ;
         }
-        decimal? nullDecimal = null;
+
         public List<ParameterResultConfig> GetParameterConfig(int parameterId)
         {
             ClsObject obj = new ClsObject();
@@ -146,7 +146,7 @@ namespace BusinessProcess.Laboratory
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetParameterResultConfig", ClsUtility.ObjectEnum.DataTable);
 
-          
+            
             var result = (from row in dt.AsEnumerable()
                           select new ParameterResultConfig()
                           {
@@ -197,7 +197,7 @@ namespace BusinessProcess.Laboratory
              );
             return result.ToList();
         }
-
+        decimal? nullDecimal = null;
         public LabTest SaveLabTest(LabTest labTest, int userId)
         {
             ClsObject obj = new ClsObject();
@@ -300,6 +300,7 @@ namespace BusinessProcess.Laboratory
                 };
                 if (ds.Tables[1].Rows.Count > 0)
                 {
+                    
                     var config = (from row in ds.Tables[1].AsEnumerable()
                                   select new ParameterResultConfig()
                                   {

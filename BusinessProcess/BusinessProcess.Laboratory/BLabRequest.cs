@@ -358,7 +358,7 @@ namespace BusinessProcess.Laboratory
             ClsUtility.AddParameters("@ResultNotes", SqlDbType.VarChar, ResultNotes);
             ClsUtility.AddExtendedParameters("@ResultBy", SqlDbType.Int, ResultBy);
             ClsUtility.AddExtendedParameters("@ResultDate", SqlDbType.DateTime, ResultDate);
-         
+            
             XDocument docX = new XDocument(
                 new XElement("root", (from result in results
                                       select new XElement("result",
@@ -400,7 +400,7 @@ namespace BusinessProcess.Laboratory
             LabOrderRepository repo = new LabOrderRepository();
             LabOrder order = repo.Find(labOrderId);
             order.DeletedBy = userId;
-            order.DeleteReason = deleteReason;           
+            order.DeleteReason = deleteReason;
             repo.Delete(order);
         }
     }

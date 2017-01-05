@@ -1,5 +1,6 @@
 ﻿using System;
 using Entities.Administration;
+using Entities.Common;
 
 namespace Entities.PatientCore
 {
@@ -7,22 +8,24 @@ namespace Entities.PatientCore
     /// 
     /// </summary>
      [Serializable]
-    public class PatientIdentifier
+    public class PatientIdentifier:IAuditEntity
     {
+        public int Id { get; set; }
         /// <summary>
         /// Gets or sets the patient identifier.
         /// </summary>
         /// <value>
         /// The patient identifier.
         /// </value>
-         public int PatientId { get; set; }
-         /// <summary>
-         /// Gets or sets the patient.
-         /// </summary>
-         /// <value>
-         /// The patient.
-         /// </value>
-         public Patient Patient { get; set; }
+         public virtual int PatientId { get; set; }
+        public virtual int PatientEnrollmentId { get; set; }
+        /// <summary>
+        /// Gets or sets the patient.
+        /// </summary>
+        /// <value>
+        /// The patient.
+        /// </value>
+        public virtual Patient Patient { get; set; }
          /// <summary>
          /// Gets or sets the identifier.
          /// </summary>
@@ -37,5 +40,25 @@ namespace Entities.PatientCore
          /// The value.
          /// </value>
          public string Value { get; set; }
+
+        public int CreatedBy
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public bool DeleteFlag
+        {
+            get; set;
+        }
+
+        public string AuditData
+        {
+            get; set;
+        }
     }
 }

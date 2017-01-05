@@ -248,8 +248,21 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\datatables\css\datatables.css" />
+    <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\datatables\images\favicon.ico" />
+    <Content Include="Content\datatables\images\sort_asc.png" />
+    <Content Include="Content\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\datatables\images\sort_both.png" />
+    <Content Include="Content\datatables\images\sort_desc.png" />
+    <Content Include="Content\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatables\js\datatables.js" />
+    <Content Include="Content\datatables\js\jquery.dataTables.js" />
     <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\fuelux\css\fuelux.css" />
     <Content Include="Content\fuelux\css\fuelux.min.css" />
@@ -258,6 +271,8 @@
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\pace\css\pace.css" />
+    <Content Include="Content\pace\js\pace.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
@@ -2192,13 +2207,6 @@
     <Compile Include="Laboratory\XRayOrderForm.aspx.designer.cs">
       <DependentUpon>XRayOrderForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterPage\GreenCard.Master.cs">
-      <DependentUpon>GreenCard.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPage\GreenCard.Master.designer.cs">
-      <DependentUpon>GreenCard.Master</DependentUpon>
-    </Compile>
     <Compile Include="MasterPage\IQCare.master.designer.cs">
       <DependentUpon>IQCare.master</DependentUpon>
     </Compile>
@@ -2926,6 +2934,7 @@
     <Content Include="Content\fuelux\fonts\fuelux.eot" />
     <Content Include="Content\fuelux\fonts\fuelux.ttf" />
     <Content Include="Content\fuelux\fonts\fuelux.woff" />
+    <Content Include="Content\datatables\images\Sorting icons.psd" />
     <None Include="ExcelFiles\ActiveNonARTPatients.xls" />
     <None Include="ExcelFiles\ActivePatients.xls" />
     <None Include="ExcelFiles\AllPatientARVPickup.xls" />
@@ -2994,7 +3003,6 @@
     <Content Include="MasterPage\IQCare.master" />
     <Content Include="Incl\jquery-1.9.1.min.map" />
     <Content Include="MasterPage\Module.Master" />
-    <Content Include="MasterPage\GreenCard.Master" />
     <None Include="regiis.cmd" />
     <None Include="Reports\CDCReport.rpt" />
     <None Include="Reports\dsCDCReports.xsd" />
