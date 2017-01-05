@@ -53,10 +53,6 @@
       <Project>{646960B7-1498-434C-B385-DA1C344B9919}</Project>
       <Name>Config.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Patient.Core\PatientManagement.Core.csproj">
-      <Project>{E734FAE0-DBF0-4B89-8681-AC53ACAD3B4D}</Project>
-      <Name>PatientManagement.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

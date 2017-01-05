@@ -50,10 +50,11 @@
   <ItemGroup>
     <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
+    <Content Include="CCC\Encounter\StartEncounter.aspx" />
+    <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
-    <Content Include="CCC\Patient\EnrollPatient.aspx" />
     <Content Include="CCC\Patient\PatientFinder.aspx" />
     <Content Include="CCC\Patient\PatientReg.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
@@ -152,6 +153,7 @@
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
     <Content Include="CCC\Greencard.Master" />
+    <Content Include="MasterPage\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,19 +176,25 @@
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.designer.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.designer.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Greencard.Master.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Greencard.Master.designer.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
-    </Compile>
-    <Compile Include="CCC\Patient\EnrollPatient.aspx.cs">
-      <DependentUpon>EnrollPatient.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CCC\Patient\EnrollPatient.aspx.designer.cs">
-      <DependentUpon>EnrollPatient.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>

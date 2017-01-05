@@ -44,8 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Baseline\" />
+    <Folder Include="Encounter\" />
+    <Folder Include="Enrollment\" />
+    <Folder Include="Lookup\" />
+    <Folder Include="OneTimeEvent\" />
+    <Folder Include="Visit\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

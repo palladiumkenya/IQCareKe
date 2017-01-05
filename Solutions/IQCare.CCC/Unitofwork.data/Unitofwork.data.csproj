@@ -64,10 +64,6 @@
       <Project>{FBE1355F-E166-4505-A6D7-F9D7BBA35D36}</Project>
       <Name>Config.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Patient.Core\PatientManagement.Core.csproj">
-      <Project>{E734FAE0-DBF0-4B89-8681-AC53ACAD3B4D}</Project>
-      <Name>PatientManagement.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Patient.Data\PatientManagement.Data.csproj">
       <Project>{E6001FC0-D3BD-4E2B-BF61-16D2D25312BF}</Project>
       <Name>PatientManagement.Data</Name>

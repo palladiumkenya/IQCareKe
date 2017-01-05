@@ -91,16 +91,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Unitofwork.Core\Unitofwork.Core.csproj">
-      <Project>{62E5E5B9-E17E-48F8-9768-A9B64323805C}</Project>
-      <Name>Unitofwork.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Unitofwork.data\Unitofwork.data.csproj">
-      <Project>{51B6E3C8-A974-4D05-963F-5EBFC8F85DE4}</Project>
-      <Name>Unitofwork.data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
