@@ -1,7 +1,9 @@
 ﻿using System;
-using DataAccess.CCC.Interfaces;
+
 using DataAccess.Context;
 using DataAccess.Context.ModuleMaster;
+using DataAccess.CCC.Interface;
+using DataAccess.CCC.Repository.Patient;
 
 namespace DataAccess.CCC.Repository
 {
@@ -9,7 +11,7 @@ namespace DataAccess.CCC.Repository
     {
         
         private readonly BaseContext _context;
-        private IPatientRepository _patientRepository;
+        private ICCCPatientRepository _cccPatientRepository;
         private IPatientContactRepository _patientContactRepository;
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
         private IPatientLocationRepository _patientLocationRepository;
@@ -35,9 +37,9 @@ namespace DataAccess.CCC.Repository
            return  _context.SaveChanges();
         }
 
-        public IPatientRepository PatientRepository
+        public ICCCPatientRepository CCCPatientRepository
         {
-            get { return _patientRepository ?? (_patientRepository = new PatientRepository((GreencardContext) _context)); }
+            get { return _cccPatientRepository ?? (_cccPatientRepository = new CCCPatientRepository((GreencardContext) _context)); }
 
         }
 

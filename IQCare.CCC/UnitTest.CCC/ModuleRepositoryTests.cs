@@ -2,9 +2,10 @@
 using NUnit.Core;
 using NUnit.Framework;
 using System.Diagnostics;
-using DataAccess.CCC.Interfaces;
+
 using DataAccess.CCC;
 using DataAccess.CCC.Repository;
+using DataAccess.CCC.Interface;
 
 namespace UnitTest.CCC
 {

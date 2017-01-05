@@ -69,91 +69,14 @@
     <Content Include="fuelux\js\fuelux.js" />
     <Content Include="fuelux\js\fuelux.min.js" />
     <Content Include="fuelux\js\npm.js" />
-    <Content Include="Images\15px-Yes_check.svg.png" />
-    <Content Include="Images\arrow.gif" />
-    <Content Include="Images\arrow_left.gif" />
-    <Content Include="Images\arrow_right.gif" />
-    <Content Include="Images\btnDown.Image.gif" />
-    <Content Include="Images\btnUp.Image.gif" />
-    <Content Include="Images\cal_icon.gif" />
-    <Content Include="Images\cal_icon1.gif" />
-    <Content Include="Images\caution.png" />
-    <Content Include="Images\cd4.gif" />
-    <Content Include="Images\CD4VL.GIF" />
-    <Content Include="Images\checkmrk.ico" />
-    <Content Include="Images\close.gif" />
-    <Content Include="Images\cmbbackgroud.JPG" />
-    <Content Include="Images\collage.jpg" />
-    <Content Include="Images\collage_admin.jpg" />
-    <Content Include="Images\collage_admin2_mut.jpg" />
-    <Content Include="Images\collage_patient.jpg" />
-    <Content Include="Images\combo.jpg" />
-    <Content Include="Images\CreativeCommon.jpg" />
-    <Content Include="Images\del.gif" />
-    <Content Include="Images\down.gif" />
-    <Content Include="Images\Edit.gif" />
-    <Content Include="Images\facilityLevelBanner.png" />
-    <Content Include="Images\FGI.bmp" />
-    <Content Include="Images\FGI.jpg" />
-    <Content Include="Images\file.gif" />
-    <Content Include="Images\folder.gif" />
-    <Content Include="Images\Futures-Logo-RGB-Sm72.jpg" />
-    <Content Include="Images\Go.gif" />
-    <Content Include="Images\Gurgaon Facility.jpg" />
-    <Content Include="Images\icono096.gif" />
-    <Content Include="Images\iq_logo.gif" />
-    <Content Include="Images\iq_logo.JPG" />
-    <Content Include="Images\iq_logo1.jpg" />
-    <Content Include="Images\kenyaarms.png" />
-    <Content Include="Images\loading.gif" />
-    <Content Include="Images\lock.jpg" />
-    <Content Include="Images\Login.jpg" />
-    <Content Include="Images\logo.png" />
-    <Content Include="Images\mb_hand.gif" />
-    <Content Include="Images\mb_information.gif" />
-    <Content Include="Images\mb_question.gif" />
-    <Content Include="Images\menu_end.png" />
-    <Content Include="Images\menu_end_flip.png" />
-    <Content Include="Images\Meru Teaching &amp; Referral Hospital.jpg" />
-    <Content Include="Images\mid.jpg" />
-    <Content Include="Images\minus.png" />
-    <Content Include="Images\misc27.ico" />
-    <Content Include="Images\No_16x.ico" />
-    <Content Include="Images\ok.jpg" />
-    <Content Include="Images\patientLevelBanner.png" />
-    <Content Include="Images\Piechart.GIF" />
-    <Content Include="Images\Piechart1.GIF" />
-    <Content Include="Images\Piechart2.GIF" />
-    <Content Include="Images\piyush_facility.jpg" />
-    <Content Include="Images\plus.png" />
-    <Content Include="Images\pmms.gif" />
-    <Content Include="Images\ribbon.gif" />
-    <Content Include="Images\signin.jpg" />
-    <Content Include="Images\tab_facility.gif" />
-    <Content Include="Images\tab_right.gif" />
-    <Content Include="Images\tab_right_over.gif" />
-    <Content Include="Images\Test.bmp" />
-    <Content Include="Images\uc2_anim05.gif" />
-    <Content Include="Images\uc2_anim06.gif" />
-    <Content Include="Images\up.gif" />
-    <Content Include="Images\uponeLevel.gif" />
-    <Content Include="Images\washer.jpg" />
-    <Content Include="Images\weight.bmp" />
-    <Content Include="Images\WeightBMI.GIF" />
-    <Content Include="MasterPage\levelOneNavigationUserControl.ascx" />
-    <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
-    <Content Include="MasterPage\Menu.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MasterPage\IQCare.master" />
-    <Content Include="MasterPage\Module.Master" />
     <Content Include="fuelux\css\fuelux.css.map" />
     <Content Include="fuelux\fonts\fuelux.eot" />
     <Content Include="fuelux\fonts\fuelux.ttf" />
     <Content Include="fuelux\fonts\fuelux.woff" />
     <Content Include="CCC\Greencard.Master" />
-    <Content Include="MasterPage\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -192,6 +115,7 @@
     </Compile>
     <Compile Include="CCC\Greencard.Master.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Greencard.Master.designer.cs">
       <DependentUpon>Greencard.Master</DependentUpon>

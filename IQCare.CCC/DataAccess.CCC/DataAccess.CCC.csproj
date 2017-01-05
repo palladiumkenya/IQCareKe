@@ -75,15 +75,15 @@
     <Compile Include="Context\ScreeningContext.cs" />
     <Compile Include="Context\TriageContext.cs" />
     <Compile Include="Context\VisitContext.cs" />
-    <Compile Include="Interface\Patient\IContactRepository.cs" />
-    <Compile Include="Interface\Patient\IEnrollmentRepository.cs" />
-    <Compile Include="Interface\Patient\ILocationRepository.cs" />
-    <Compile Include="Interface\Patient\IMaritalStatusRepository.cs" />
-    <Compile Include="Interface\Patient\IOVCStatusRepository.cs" />
-    <Compile Include="Interface\Patient\IPopulationRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientContactRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientEnrollmentRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientMaritalStatusRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientOVCStatusRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientPopulationRepository.cs" />
     <Compile Include="Interface\IPersonRelationshipRepository.cs" />
-    <Compile Include="Interface\IPatientRepository.cs" />
-    <Compile Include="Interface\Patient\ITreatmentSupporterRepository.cs" />
+    <Compile Include="Repository\ICCCPatientRepository.cs" />
+    <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Repository\Patient\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\Patient\PatientOVCStatusRepository.cs" />
     <Compile Include="Repository\Patient\PatientPopulationRepository.cs" />
-    <Compile Include="Repository\Patient\PatientRepository.cs" />
+    <Compile Include="Repository\CCCPatientRepository.cs" />
     <Compile Include="Repository\Patient\PatientTreatmentSupporterRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
@@ -103,7 +103,6 @@
     <Folder Include="Repository\Enrollment\" />
     <Folder Include="Repository\Lookup\" />
     <Folder Include="Repository\OneTimeEvent\" />
-    <Folder Include="Repository\Person\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
