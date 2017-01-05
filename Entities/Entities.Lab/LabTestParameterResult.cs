@@ -58,7 +58,7 @@ namespace Entities.Lab
         /// <value>
         /// The result value.
         /// </value>
-        public Double? ResultValue { get; set; }
+        public decimal? ResultValue { get; set; }
         /// <summary>
         /// Gets or sets the result by.
         /// </summary>
@@ -79,7 +79,7 @@ namespace Entities.Lab
         /// <value>
         /// The detection limit.
         /// </value>
-        public Double? DetectionLimit { get; set; }
+        public decimal? DetectionLimit { get; set; }
         /// <summary>
         /// Gets or sets the result text.
         /// </summary>

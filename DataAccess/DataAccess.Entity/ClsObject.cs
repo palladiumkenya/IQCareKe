@@ -59,6 +59,13 @@ namespace DataAccess.Entity
                 cmdpara = Params[i].ToString();
                 cmddbtype = Params[i + 1].ToString();
                 cmdvalue = Params[i + 2].ToString();
+                System.Data.Common.DbParameter p = theCmd.CreateParameter();
+                p.ParameterName = cmdpara;
+                p.Value = cmdvalue;
+
+
+
+
                 theCmd.Parameters.Add(cmdpara, cmddbtype).Value = cmdvalue;
                 i = i + 3;
             }

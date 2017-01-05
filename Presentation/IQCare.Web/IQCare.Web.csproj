@@ -2207,13 +2207,6 @@
     <Compile Include="Laboratory\XRayOrderForm.aspx.designer.cs">
       <DependentUpon>XRayOrderForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterPage\Greencard.Master.cs">
-      <DependentUpon>Greencard.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPage\Greencard.Master.designer.cs">
-      <DependentUpon>Greencard.Master</DependentUpon>
-    </Compile>
     <Compile Include="MasterPage\IQCare.master.designer.cs">
       <DependentUpon>IQCare.master</DependentUpon>
     </Compile>
@@ -3010,7 +3003,6 @@
     <Content Include="MasterPage\IQCare.master" />
     <Content Include="Incl\jquery-1.9.1.min.map" />
     <Content Include="MasterPage\Module.Master" />
-    <Content Include="MasterPage\Greencard.Master" />
     <None Include="regiis.cmd" />
     <None Include="Reports\CDCReport.rpt" />
     <None Include="Reports\dsCDCReports.xsd" />

@@ -3,7 +3,7 @@ using Microsoft.Build.Framework;
 
 namespace Common.Core.Model
 {
-    public abstract class BaseEntity 
+    public abstract class BaseEntity  // moved to entities.Common.BaseObject
     {
         [Required]
         public virtual int Id { get; set; }

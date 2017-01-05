@@ -1025,6 +1025,12 @@ If Not Exists(Select 1 From mst_control where ReferenceId='SELECTLIST_TEXTBOX' O
 	Values('Select List TextBox','int',0,1,getdate(),null,'SELECTLIST_TEXTBOX','Mst_ModDecode')
 End
 Go
+If Not Exists(Select 1 From mst_control where ReferenceId='ENCRYPT_FIELD' Or Name='Encrypted Field') Begin
+
+	Insert Into mst_control(Name,DataType,DeleteFlag,UserId,CreateDate,UpdateDate,ReferenceId, LookupTable  )
+	Values('Encrypted Field','varbinary(max)',0,1,getdate(),null,'ENCRYPT_FIELD',null)
+End
+Go
 SET IDENTITY_INSERT mst_control OFF
 GO
 If Not Exists(Select 1 From Mst_PreDefinedFields where PDFName='SYS_ClinicalNotes') Begin

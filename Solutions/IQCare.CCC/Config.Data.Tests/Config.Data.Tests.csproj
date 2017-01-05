@@ -91,22 +91,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Core\Common.Core.csproj">
-      <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
-      <Name>Common.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
-      <Project>{1CAA9075-C252-468D-AE8C-C692BA8BEED9}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Config.Core\Config.Core.csproj">
-      <Project>{646960B7-1498-434C-B385-DA1C344B9919}</Project>
-      <Name>Config.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Config.Data\Config.Data.csproj">
-      <Project>{FBE1355F-E166-4505-A6D7-F9D7BBA35D36}</Project>
-      <Name>Config.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Unitofwork.Core\Unitofwork.Core.csproj">
       <Project>{62E5E5B9-E17E-48F8-9768-A9B64323805C}</Project>
       <Name>Unitofwork.Core</Name>
@@ -115,6 +99,9 @@
       <Project>{51B6E3C8-A974-4D05-963F-5EBFC8F85DE4}</Project>
       <Name>Unitofwork.data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

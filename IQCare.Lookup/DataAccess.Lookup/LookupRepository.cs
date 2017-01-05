@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Entities.Lookup;
 namespace DataAccess.Lookup
@@ -32,24 +33,30 @@ namespace DataAccess.Lookup
                 .FirstOrDefault();
         }
 
-       /// <summary>
-       /// Gets all.
-       /// </summary>
-       /// <param name="lookname"></param>
-       /// <param name="lookcategory"></param>
-       /// <returns></returns>
-       public override IEnumerable<Item> GetAll(string lookname, string lookcategory)
+        public override IEnumerable<Item> GetAll(string lookcategory)
+        {
+            return Filter(lk => lk.LookupName.ToLower() == lookcategory.ToLower());
+        }
+
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="lookname"></param>
+        /// <param name="lookcategory"></param>
+        /// <returns></returns>
+        public override IEnumerable<Item> GetAll(string lookname, string lookcategory)
        {
            return Filter(lk => lk.LookupName == lookname && lk.Category == lookcategory);
        }
-       /// <summary>
-       /// Gets the filtered.
-       /// </summary>
-       /// <param name="itemname">The itemname.</param>
-       /// <param name="lookname">The lookname.</param>
-       /// <param name="lookcategory">The lookcategory.</param>
-       /// <returns></returns>
-       public List<Item> GetFiltered(string itemname,string lookname, string lookcategory)
+      
+        /// <summary>
+        /// Gets the filtered.
+        /// </summary>
+        /// <param name="itemname">The itemname.</param>
+        /// <param name="lookname">The lookname.</param>
+        /// <param name="lookcategory">The lookcategory.</param>
+        /// <returns></returns>
+        public List<Item> GetFiltered(string itemname,string lookname, string lookcategory)
        {
            var items = Filter(lk => lk.LookupName == lookname && lk.Category == lookcategory && lk.Name.ToLower().Contains(itemname.ToLower()));
           // var items = this.GetAll(lookname, lookcategory);

@@ -49,10 +49,6 @@
       <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
       <Name>Common.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
-      <Project>{1CAA9075-C252-468D-AE8C-C692BA8BEED9}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Config.Core\Config.Core.csproj">
       <Project>{646960B7-1498-434C-B385-DA1C344B9919}</Project>
       <Name>Config.Core</Name>
@@ -60,18 +56,6 @@
     <ProjectReference Include="..\Patient.Core\PatientManagement.Core.csproj">
       <Project>{E734FAE0-DBF0-4B89-8681-AC53ACAD3B4D}</Project>
       <Name>PatientManagement.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersonManagement.Core\PersonManagement.Core.csproj">
-      <Project>{A1F2DEC1-EFD5-48A8-9768-364A58AC8B33}</Project>
-      <Name>PersonManagement.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersonManagement.Data\PersonManagement.Data.csproj">
-      <Project>{ED6F21E1-1A5E-48E1-97E8-42080BE27B2B}</Project>
-      <Name>PersonManagement.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisitManagement.Core\VisitManagement.Core.csproj">
-      <Project>{F977715A-90F9-4628-A90A-44F496B2786B}</Project>
-      <Name>VisitManagement.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

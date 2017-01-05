@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using Application.Common;
-using Interface.FormBuilder;
+﻿using Application.Common;
 using Application.Presentation;
 using Interface.Security;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 
 namespace IQCare.Management
-    {
-        /// <summary>
-        /// Login form
-        /// </summary>
+{
+    /// <summary>
+    /// Login form
+    /// </summary>
     public partial class frmLogin : Form
     {
         /// <summary>

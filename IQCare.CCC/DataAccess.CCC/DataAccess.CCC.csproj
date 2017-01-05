@@ -35,17 +35,61 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IPatientContactRepository.cs" />
+    <Compile Include="Interfaces\IPatientEnrollmentRepository.cs" />
+    <Compile Include="Interfaces\IPatientLocationRepository.cs" />
+    <Compile Include="Interfaces\IPatientMaritalStatusRepository.cs" />
+    <Compile Include="Interfaces\IPatientOVCStatusRepository.cs" />
+    <Compile Include="Interfaces\IPatientPopulationRepository.cs" />
+    <Compile Include="Interfaces\IPersonRelationshipRepository.cs" />
+    <Compile Include="Interfaces\IPatientRepository.cs" />
+    <Compile Include="Interfaces\IPatientTreatmentSupporterRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\PatientContactRepository.cs" />
+    <Compile Include="Repository\PatientEnrollmentRepository.cs" />
+    <Compile Include="Repository\PatientLocationRepository.cs" />
+    <Compile Include="Repository\PatientMaritalStatusRepository.cs" />
+    <Compile Include="Repository\PatientOVCStatusRepository.cs" />
+    <Compile Include="Repository\PatientPopulationRepository.cs" />
+    <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\PatientTreatmentSupporterRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

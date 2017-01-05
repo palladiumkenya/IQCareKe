@@ -53,20 +53,6 @@
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PatientTreatmentSupporterRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Core\Common.Core.csproj">
-      <Project>{a786609e-42d6-42f3-949d-cdab4fc5d15c}</Project>
-      <Name>Common.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
-      <Project>{1caa9075-c252-468d-ae8c-c692ba8beed9}</Project>
-      <Name>Common.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Patient.Core\PatientManagement.Core.csproj">
-      <Project>{e734fae0-dbf0-4b89-8681-ac53acad3b4d}</Project>
-      <Name>PatientManagement.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

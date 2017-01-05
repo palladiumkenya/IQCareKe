@@ -72,14 +72,6 @@
       <Project>{E6001FC0-D3BD-4E2B-BF61-16D2D25312BF}</Project>
       <Name>PatientManagement.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PersonManagement.Core\PersonManagement.Core.csproj">
-      <Project>{a1f2dec1-efd5-48a8-9768-364a58ac8b33}</Project>
-      <Name>PersonManagement.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersonManagement.Data\PersonManagement.Data.csproj">
-      <Project>{ed6f21e1-1a5e-48e1-97e8-42080be27b2b}</Project>
-      <Name>PersonManagement.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Unitofwork.Core\Unitofwork.Core.csproj">
       <Project>{62e5e5b9-e17e-48f8-9768-a9b64323805c}</Project>
       <Name>Unitofwork.Core</Name>

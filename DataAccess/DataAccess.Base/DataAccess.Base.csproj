@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.cs" />
     <Compile Include="DataMgr.cs" />
     <Compile Include="ProcessBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
