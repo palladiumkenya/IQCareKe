@@ -50,6 +50,7 @@
   <ItemGroup>
     <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
+    <Content Include="CCC\Encounter\StartEncounter.aspx" />
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
@@ -177,6 +178,13 @@
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.designer.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\EnrollPatient.aspx.cs">
       <DependentUpon>EnrollPatient.aspx</DependentUpon>

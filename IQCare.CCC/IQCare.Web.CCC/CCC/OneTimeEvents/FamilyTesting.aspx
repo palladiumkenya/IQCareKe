@@ -2,18 +2,15 @@
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
-        <div class="col-md-12">
-                <div class="col-md-12">
+        
+               
                     <uc:PatientDetails ID="PatientSummary" runat="server" />
-                </div>
-        </div>
+               
+       
 
-        <div class="col-md-12"> 
-             <div class="col-md-12">
-                  <div class="panel panel-default">
-                       <div class="panel-body">
-                               
-                             <div class="col-md-12">
+    
+             <div class="col-md-12 bs-callout bs-callout-info">
+                    <div class="col-md-12">
                                   <div class="col-md-6">
                                        <div class="col-md-12"><small class="pull-left">Enter Family Testing information</small><hr /></div>
                                            <div class="col-md-12 form-group">
@@ -230,7 +227,7 @@
                                    </div>
                              </div>
 
-                             <div class="col-md-12">
+                       <div class="col-md-12">
                                      <hr />
                                      <div class="col-md-7"></div>
                                      
@@ -244,10 +241,9 @@
                                      </div>
                                  </div>
 
-                       </div> <%--.panel-body--%>
-                  </div>
+
              </div><%-- .col-md-12--%>
-        </div>
+      
     </div> <%--.container-fluid--%>
 
    <script type="text/javascript">

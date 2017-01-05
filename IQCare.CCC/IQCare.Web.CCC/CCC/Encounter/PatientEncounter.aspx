@@ -3,9 +3,7 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-  
-        <div class="container-fluid">
-        
+          
         <div class="row">
             <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
@@ -1097,11 +1095,8 @@
                                                               <div class="col-md-2 "></div>
                                                          </div>  
                                                         
-                                                         <div class="col-md-12">
-                                                              <div class="panel panel-warning">
-                                                                   <div class="panel-heading">Drug Prescription </div>
-                                                                   <div class="panel-body">
-                                                               <div class="row">
+                                                         <div class="col-md-12 bs-callout bs-callout-info">
+                                                              <div class="row">
                                                                     <div class="col-md-12">
                                                                          
                                                                               <div class="col-md-3"><label class="control-label pull-left">Select Drug (s) </label></div>
@@ -1129,8 +1124,6 @@
                                                                        <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Duration" /> </div>
                                                                     </div>
                                                                  </div>
-                                                           </div>
-                                                              </div>
                                                          </div>            
                                                      
 
@@ -1157,7 +1150,7 @@
                  </div><!-- .tab-content-->
             </div><!-- .col-md-12 -->
         </div><!-- .row -->
-    </div><!-- .container-fluid -->
+
     <script type="text/javascript">
         $(document).ready(function () {
 

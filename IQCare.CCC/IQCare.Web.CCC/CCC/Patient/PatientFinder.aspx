@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientFinder.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientFinder" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                     <div class="panel-body">
+            <div class="col-md-12 bs-callout bs-callout-info">
+                
+                        <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
+                        <div class="col-md-12"><hr/></div>
                           <div class="col-md-12">
                                           <div class="col-md-3 form-group">
                                                <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
@@ -208,21 +209,71 @@
                                                  </div>
                                                  
                                              </div>
+                
+                           <div class="col-md-12"><hr/></div>
                           
                           <div class="col-md-12">
                               <div class="col-md-4"></div>
                               <div class="col-md-4"></div> 
-                              <div class="col-md-2">
-                                    <asp:LinkButton runat="server" ID="btnFindPatient" ClientIDMode="Static" CssClass="btn btn-primary btn-lg fa fa-search"> Find Patient</asp:LinkButton>
-                                </div>
-                              <div class="col-md-2">
-                                  <asp:LinkButton runat="server" ClientIDMode="Static" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times pull-right"> Close </asp:LinkButton>
-                              </div>
-                              
+                              <div class="col-md-4">
+                                   <div class="col-md-4">
+                                        <asp:LinkButton runat="server" ID="btnFindPatient" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
+                                    </div>
+                                   <div class="col-md-4">
+                                        <asp:LinkButton runat="server" ID="btnReset" ClientIDMode="Static" CssClass="btn btn-warning btn-lg fa fa-refresh"> Reset Find</asp:LinkButton>
+
+                                  </div>
+                                   <div class="col-md-4">
+                                        <asp:LinkButton runat="server" ClientIDMode="Static" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times"> Close Find </asp:LinkButton>
+                                   </div>
+
+                                  
+                              </div> 
                           </div>
-                          <div class="col-md-12"><hr/></div>
-                     </div><%--.panel-body--%>
-                </div><%-- .panel--%>
+                
+                <div class="col-md-12" style="padding-top: 5%">
+                    <table id="tblFindPatient">
+                        <thead>
+                          <tr>
+      	                    <th>Enrollment No.#</th>
+                            <th>Patient Index</th>
+      	                    <th>First Name</th>
+      	                    <th>Middle Name</th>
+      	                    <th>Last Name</th>
+      	                    <th>Date of Birth</th>
+      	                    <th>Sex</th>
+      	                    <th>Registration Date</th>
+                            <th>Patient Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>mm/dd/yyy</td>
+      	                    <td>demo</td>
+      	                    <td>mm/dd/yyy</td>
+      	                    <td>demo</td>
+                              <td>demo</td>
+                          </tr>
+                          <tr>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>demo</td>
+      	                    <td>mm/dd/yyy</td>
+      	                    <td>demo</td>
+      	                    <td>mm/dd/yyy</td>
+      	                    <td>demo</td>
+                              <td>demo</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                          
+
             </div>
     </div><%--.col-md-12--%>
     
@@ -231,6 +282,8 @@
             
             $("#SearchDoB").datepicker();
             $("#RegDate").datepicker();
+
+            $("#tblFindPatient").dataTable();
         })
     </script>
 </asp:Content>

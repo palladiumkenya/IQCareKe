@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
@@ -7,8 +8,14 @@ namespace PatientManagement.Core.Model
 
     public class PatientTreatmentSupporter :BaseEntity
     {
-        
+        [Required]
         public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+
+        [Required]
         public int SupporterId { get; set; }
+        [ForeignKey("SupporterId")]
+
+        public string AuditData { get; set; }
     }
 }

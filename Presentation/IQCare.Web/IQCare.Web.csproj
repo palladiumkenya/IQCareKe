@@ -251,6 +251,7 @@
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\datatables\css\datatables.css" />
     <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
     <Content Include="Content\datatables\images\favicon.ico" />
@@ -260,6 +261,7 @@
     <Content Include="Content\datatables\images\sort_desc.png" />
     <Content Include="Content\datatables\images\sort_desc_disabled.png" />
     <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatables\js\datatables.js" />
     <Content Include="Content\datatables\js\jquery.dataTables.js" />
     <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\fuelux\css\fuelux.css" />

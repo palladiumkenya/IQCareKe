@@ -1,10 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientTriage.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientTriage" %>
 
-<div class="col-md-12">
+<div class="col-md-12 bs-callout bs-callout-primary">
     
-    <div class="panel panel-info">
 
-    <div class="panel-body">
         
         <div class="col-md-12"><small class="muted pull-left"><strong><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i> PATIENT TRIAGE </strong></small></div>                                                  
         <div class="col-md-12"><hr /></div>
@@ -103,8 +101,6 @@
                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Triage </asp:LinkButton></div>
             </div>
         </div>
-    </div>
 
-</div>
 
 </div>
