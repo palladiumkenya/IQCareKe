@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
+    <Compile Include="Baseline\PatientArtUseHistory.cs" />
+    <Compile Include="Baseline\PatientDiagnosis.cs" />
     <Compile Include="Enrollment\PatientEnrollment.cs" />
     <Compile Include="Enrollment\PatientIdentifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +72,6 @@
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Baseline\" />
     <Folder Include="Encounter\" />
     <Folder Include="Lookup\" />
     <Folder Include="obj\Debug\TempPE\" />
