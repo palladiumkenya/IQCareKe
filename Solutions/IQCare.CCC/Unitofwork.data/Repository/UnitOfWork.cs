@@ -8,6 +8,12 @@ using Unitofwork.Core.Interface;
 using PatientManagement.Core.Interfaces;
 using PatientManagement.Data;
 using PatientManagement.Data.Repository;
+using VisitManagement.Core.Interfaces;
+using VisitManagement.Data;
+using VisitManagement.Data.Repository;
+using PersonManagement.Core.Interfaces;
+using PersonManagement.Data;
+using PersonManagement.Data.Repository;
 
 namespace Unitofwork.data.Repository
 {
@@ -15,14 +21,20 @@ namespace Unitofwork.data.Repository
     {
         
         private readonly BaseContext _context;
+
+        private IPersonRepository _personRepository;
+        private IPersonContactRepository _personContactRepository;
+        private IPersonLocationRepository _personLocationRepository;
+        private IPersonRelationshipRepository _personRelationshipRepository;
+
         private IPatientRepository _patientRepository;
-        private IPatientContactRepository _patientContactRepository;
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
-        private IPatientLocationRepository _patientLocationRepository;
         private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
         private IPatientOVCStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
+        private IPatientMasterVisitRepository _patientMasterVisitRepository;
+        private IPatientEncounterRepository _patientEncounterRepository;
 
         private IServiceAreaRepository _serviceAreaRepository;
 
@@ -41,53 +53,120 @@ namespace Unitofwork.data.Repository
            return  _context.SaveChanges();
         }
 
-        public IPatientRepository PatientRepository
+        public IPersonRepository PersonRepository
         {
-            get { return _patientRepository ?? (_patientRepository = new PatientRepository((PatientContext) _context)); }
-
+            get { return _personRepository ?? (_personRepository = new PersonRepository((PersonContext) _context)); }
         }
 
-        public IPatientContactRepository PatientContactRepository
+      
+
+        public IPersonLocationRepository PersonLocationRepository
         {
-            get { return _patientContactRepository ?? (_patientContactRepository = new PatientContactRepository((PatientContext) _context));}
+            get
+            {
+                return _personLocationRepository ??
+                       (_personLocationRepository = new PersonLocationRepository((PersonContext) _context));
+            }
+        }
+
+        public IPersonContactRepository PersonContactRepository {
+            get
+            {
+                return _personContactRepository ??
+                       (_personContactRepository = new PersonContactRepository((PersonContext) _context));
+            } 
+        }
+
+        public IPersonRelationshipRepository PersonRelationshipRepository
+        {
+            get
+            {
+                return _personRelationshipRepository ??
+                       (_personRelationshipRepository = new PersonRelationshipRepository((PersonContext) _context));
+            }
+        }
+
+
+        public IPatientRepository PatientRepository
+        {
+            get
+            {
+                return _patientRepository ?? (_patientRepository = new PatientRepository((PatientContext) _context));
+            }
         }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {
-            get {return _patientEnrollmentRepository ??(_patientEnrollmentRepository=new PatientEnrollmentRepository((PatientContext) _context));}
+            get
+            {
+                return _patientEnrollmentRepository ??
+                       (_patientEnrollmentRepository = new PatientEnrollmentRepository((PatientContext) _context));
+            }
         }
 
-        public IPatientLocationRepository PatientLocationRepository
-        {
-            get { return _patientLocationRepository ?? (_patientLocationRepository = new PatientLocationRepository((PatientContext)_context)); }
-        }
 
         public IPatientMaritalStatusRepository PatientMaritalStatusRepository
         {
-            get { return _patientMaritalStatusRepository ?? (_patientMaritalStatusRepository = new PatientMaritalStatusRepository((PatientContext)_context)); }
+            get
+            {
+                return _patientMaritalStatusRepository ??
+                       (_patientMaritalStatusRepository = new PatientMaritalStatusRepository((PatientContext) _context));
+            }
         }
 
         public IPatientOVCStatusRepository PatientOvcStatusRepository
         {
-            get { return _patientOvcStatusRepository ?? (_patientOvcStatusRepository = new PatientOVCStatusRepository((PatientContext)_context)); }
+            get
+            {
+                return _patientOvcStatusRepository ??
+                       (_patientOvcStatusRepository = new PatientOVCStatusRepository((PatientContext) _context));
+            }
         }
 
         public IPatientPopulationRepository PatientPopulationRepository
         {
-            get { return _patientPopulationRepository ?? (_patientPopulationRepository = new PatientPopulationRepository((PatientContext)_context)); }
+            get
+            {
+                return _patientPopulationRepository ??
+                       (_patientPopulationRepository = new PatientPopulationRepository((PatientContext) _context));
+            }
         }
 
         public IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository
         {
-            get { return _patientTreatmentSupporterRepository ?? (_patientTreatmentSupporterRepository = new PatientTreatmentSupporterRepository((PatientContext)_context)); }
+            get
+            {
+                return _patientTreatmentSupporterRepository ??
+                       (_patientTreatmentSupporterRepository =
+                           new PatientTreatmentSupporterRepository((PatientContext) _context));
+            }
         }
 
         public IServiceAreaRepository ServiceAreaRepository
         {
-            get { return _serviceAreaRepository ?? (_serviceAreaRepository = new ServiceAreaRepository((ConfigContext)_context)); }
-
+            get
+            {
+                return _serviceAreaRepository ??
+                       (_serviceAreaRepository = new ServiceAreaRepository((ConfigContext) _context));
+            }
         }
 
+        public IPatientMasterVisitRepository PatientmasterVisitRepository
+        {
+            get
+            {
+                return _patientMasterVisitRepository ??
+                       (_patientMasterVisitRepository = new PatientMasterVisitRepository((VisitContext) _context));
+            }
+        }
+
+        public IPatientEncounterRepository PatientEncounterRepository
+        {
+            get
+            {
+                return _patientEncounterRepository ?? (_patientEncounterRepository = new PatientEncounterRepository((VisitContext) _context));
+            }
+        }
 
         public void Dispose()
         {

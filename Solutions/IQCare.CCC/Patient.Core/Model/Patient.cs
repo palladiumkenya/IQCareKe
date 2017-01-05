@@ -1,24 +1,35 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name ="Patient")]
+    [Table("Patient")]
 
     public class Patient : BaseEntity
     {
-        public int ptn_pk { get; set;}
-        public System.Guid UGuid { get; set;}
-        public string FName {get;set;}
-        public string MName { get; set; }
-        public string LName { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public int Gender { get; set; }
+        [Required]
+        public int Ptn_Pk { get; set;}
+
+        [Required]
+        public int PersonId {get; set; }
+        [ForeignKey("PersonId")]
+
+        [Required]
+        public int FacilityId { get; set; }
+
+        [Required]
+        public string PatientIndex { get; set; }
+
+        [Required]
         public int IdentificationType { get;set;}
+
+        [Required]
         public string IdentificationNo { get; set; }
-        public bool Status { get; set; }
+
+        [Required]
+        public bool Active { get; set; }
     }
    
 }

@@ -52,25 +52,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IPatientContactRepository.cs" />
     <Compile Include="Interfaces\IPatientEnrollmentRepository.cs" />
-    <Compile Include="Interfaces\IPatientLocationRepository.cs" />
     <Compile Include="Interfaces\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interfaces\IPatientOVCStatusRepository.cs" />
     <Compile Include="Interfaces\IPatientPopulationRepository.cs" />
     <Compile Include="Interfaces\IPatientRepository.cs" />
-    <Compile Include="Interfaces\IPatientRelationshipRepository.cs" />
     <Compile Include="Interfaces\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Model\Patient.cs" />
-    <Compile Include="Model\PatientContact.cs" />
     <Compile Include="Model\PatientEnrollment.cs" />
-    <Compile Include="Model\PatientLocation.cs" />
     <Compile Include="Model\PatientMaritalStatus.cs" />
     <Compile Include="Model\PatientOVCStatus.cs" />
     <Compile Include="Model\PatientPopulation.cs" />
-    <Compile Include="Model\PatientRelationship.cs" />
     <Compile Include="Model\PatientTreatmentSupporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Core\Common.Core.csproj">
+      <Project>{a786609e-42d6-42f3-949d-cdab4fc5d15c}</Project>
+      <Name>Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
+      <Project>{1caa9075-c252-468d-ae8c-c692ba8beed9}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

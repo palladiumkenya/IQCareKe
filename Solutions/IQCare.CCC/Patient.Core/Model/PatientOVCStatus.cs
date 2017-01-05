@@ -1,18 +1,27 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Common.Core.Model;
 
 namespace PatientManagement.Core.Model
 {
-    [System.Data.Linq.Mapping.Table(Name = "PatientOVCStatus")]
+    [Table( "PatientOVCStatus")]
 
     public class PatientOVCStatus :BaseEntity
     {
+        [Required]
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public string GuardianNames { get; set; }
-        public int GuardianIdentificationNo { get; set; }
+
+        [Required]
+        public int GuardianId { get; set; }
+        [ForeignKey("GuardianId")]
+
+        [Required]
         public string Orphan { get; set; }
+
+        [Required]
         public string InSchool { get; set; }
+
         public int Active { get; set; }
     }
 }

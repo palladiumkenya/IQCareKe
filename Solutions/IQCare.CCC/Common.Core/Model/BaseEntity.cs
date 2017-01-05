@@ -1,14 +1,17 @@
 ﻿using System;
+using Microsoft.Build.Framework;
 
 namespace Common.Core.Model
 {
     public abstract class BaseEntity  // moved to entities.Common.BaseObject
     {
+        [Required]
         public virtual int Id { get; set; }
-        public virtual bool Void { get; set; }
-        public virtual int? VoidBy { get; set; } 
-        public virtual DateTime? VoidDate { get; set; }
+        [Required]
+        public virtual bool DeleteFlag { get; set; }
+        [Required]
         public virtual int CreateBy { get; set; }
+        [Required]
         public virtual DateTime CreateDate { get; set; }
 
         protected BaseEntity()

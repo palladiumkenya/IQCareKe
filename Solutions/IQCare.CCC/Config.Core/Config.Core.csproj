@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IServiceAreaRepository.cs" />
+    <Compile Include="Model\LookUpItem.cs" />
+    <Compile Include="Model\LookUpItemMaster.cs" />
+    <Compile Include="Model\LookUpMaster.cs" />
+    <Compile Include="Model\ModuleMaster.cs" />
     <Compile Include="Model\ServiceArea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

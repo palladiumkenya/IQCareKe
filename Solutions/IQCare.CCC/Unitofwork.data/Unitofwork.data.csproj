@@ -48,9 +48,37 @@
     <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Core\Common.Core.csproj">
+      <Project>{A786609E-42D6-42F3-949D-CDAB4FC5D15C}</Project>
+      <Name>Common.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
+      <Project>{1CAA9075-C252-468D-AE8C-C692BA8BEED9}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Config.Core\Config.Core.csproj">
+      <Project>{646960B7-1498-434C-B385-DA1C344B9919}</Project>
+      <Name>Config.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Config.Data\Config.Data.csproj">
+      <Project>{FBE1355F-E166-4505-A6D7-F9D7BBA35D36}</Project>
+      <Name>Config.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Patient.Data\PatientManagement.Data.csproj">
+      <Project>{E6001FC0-D3BD-4E2B-BF61-16D2D25312BF}</Project>
+      <Name>PatientManagement.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Unitofwork.Core\Unitofwork.Core.csproj">
       <Project>{62e5e5b9-e17e-48f8-9768-a9b64323805c}</Project>
       <Name>Unitofwork.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisitManagement.Core\VisitManagement.Core.csproj">
+      <Project>{f977715a-90f9-4628-a90a-44f496b2786b}</Project>
+      <Name>VisitManagement.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisitManagement.Data\VisitManagement.Data.csproj">
+      <Project>{e5e305fc-d2aa-4ec5-b427-e47f24938008}</Project>
+      <Name>VisitManagement.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

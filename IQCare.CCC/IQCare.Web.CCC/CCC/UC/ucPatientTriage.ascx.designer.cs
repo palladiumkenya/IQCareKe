@@ -13,129 +13,111 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucPatientTriage {
         
         /// <summary>
-        /// Theight control.
+        /// Heights control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Theight;
+        protected global::System.Web.UI.WebControls.TextBox Heights;
         
         /// <summary>
-        /// Tweight control.
+        /// weights control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Tweight;
+        protected global::System.Web.UI.WebControls.TextBox weights;
         
         /// <summary>
-        /// TBMI control.
+        /// circumference control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TBMI;
+        protected global::System.Web.UI.WebControls.TextBox circumference;
         
         /// <summary>
-        /// THeadCircumference control.
+        /// muacs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText THeadCircumference;
+        protected global::System.Web.UI.WebControls.TextBox muacs;
         
         /// <summary>
-        /// TMUAC control.
+        /// distolic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TMUAC;
+        protected global::System.Web.UI.WebControls.TextBox distolic;
         
         /// <summary>
-        /// Tzscore control.
+        /// systolic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Tzscore;
+        protected global::System.Web.UI.WebControls.TextBox systolic;
         
         /// <summary>
-        /// Tmm control.
+        /// TextBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Tmm;
+        protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
-        /// THg control.
+        /// TextBox3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText THg;
+        protected global::System.Web.UI.WebControls.TextBox TextBox3;
         
         /// <summary>
-        /// temp control.
+        /// bosaturation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText temp;
+        protected global::System.Web.UI.WebControls.TextBox bosaturation;
         
         /// <summary>
-        /// Trr control.
+        /// btnSaveTriage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Trr;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveTriage;
         
         /// <summary>
-        /// THeartRate control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText THeartRate;
+        protected global::System.Web.UI.WebControls.LinkButton btnReset;
         
         /// <summary>
-        /// TSPO2 control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText TSPO2;
-        
-        /// <summary>
-        /// btnAddAllergy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddAllergy;
-        
-        /// <summary>
-        /// NurseNotes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea NurseNotes;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }

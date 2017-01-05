@@ -248,8 +248,10 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\datatables\css\datatables.css" />
     <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
     <Content Include="Content\datatables\images\favicon.ico" />
@@ -259,6 +261,7 @@
     <Content Include="Content\datatables\images\sort_desc.png" />
     <Content Include="Content\datatables\images\sort_desc_disabled.png" />
     <Content Include="Content\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatables\js\datatables.js" />
     <Content Include="Content\datatables\js\jquery.dataTables.js" />
     <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\fuelux\css\fuelux.css" />
@@ -268,6 +271,8 @@
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\pace\css\pace.css" />
+    <Content Include="Content\pace\js\pace.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
