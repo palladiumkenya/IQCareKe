@@ -35,9 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\EntityFramework.dll</HintPath>
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\Library\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,8 +59,18 @@
     <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\PatientArtUseHistory.cs" />
     <Compile Include="Baseline\PatientDiagnosis.cs" />
-    <Compile Include="Baseline\Test.cs" />
+    <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
+    <Compile Include="Baseline\PatientTransferIn.cs" />
+    <Compile Include="Encounter\ComplaintsHistory.cs" />
+    <Compile Include="Encounter\PatientFamilyPlanning.cs" />
+    <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Encounter\PatientProphylaxis.cs" />
+    <Compile Include="Encounter\PatientReferral.cs" />
+    <Compile Include="Encounter\PhysicalExamination.cs" />
+    <Compile Include="Encounter\Pregnancy.cs" />
+    <Compile Include="Encounter\PregnancyIndicator.cs" />
     <Compile Include="Enrollment\PatientEnrollment.cs" />
+    <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Enrollment\PatientIdentifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
@@ -73,7 +86,6 @@
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Encounter\" />
     <Folder Include="Lookup\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
