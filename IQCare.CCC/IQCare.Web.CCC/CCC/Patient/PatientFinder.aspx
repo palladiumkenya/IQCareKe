@@ -135,7 +135,7 @@
                               
                               <div class="col-md-3">
                                   <div class="col-md-12"><label class="control-label pull-left">Registration Date</label></div>
-                                  <div class="datepicker fuelux form-group" id="RegDate">
+                                  <div class="col-md-12 datepicker fuelux form-group" id="RegDate">
                                                                  <div class="input-group">
                                                                               <input class="form-control input-sm" id="RegistrationDate" type="text" />
                                                                               <div class="input-group-btn">
