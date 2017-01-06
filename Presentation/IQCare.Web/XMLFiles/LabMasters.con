@@ -77,11 +77,35 @@
     </xs:element>
   </xs:schema>
   <Mst_LabTest>
+    <LabTestId>161</LabTestId>
+    <LabName>A.N.C profile</LabName>
+    <LabDepartmentId>11</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>1</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>154</LabTestId>
+    <LabName>ALBUMIN</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>2</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
     <LabTestId>58</LabTestId>
     <LabName>Albumin (mg/dL)</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>1</Sequence>
+    <Sequence>3</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>118</LabTestId>
+    <LabName>ALKALINE PHOSPHATE</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>4</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -89,7 +113,7 @@
     <LabName>ALT/SGPT</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>2</Sequence>
+    <Sequence>5</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -97,7 +121,22 @@
     <LabName>Amylase</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>3</Sequence>
+    <Sequence>6</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>134</LabTestId>
+    <LabName>ANC Profile</LabName>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>7</Sequence>
+    <DeleteFlag>true</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>131</LabTestId>
+    <LabName>Asot</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>8</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -105,7 +144,79 @@
     <LabName>AST/SGOT</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>4</Sequence>
+    <Sequence>9</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>162</LabTestId>
+    <LabName>BILIRUBIN</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>10</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>114</LabTestId>
+    <LabName>Bilirubun (toal &amp; direct)</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>11</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>130</LabTestId>
+    <LabName>Blood for HDL + Cholesteral</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>12</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>105</LabTestId>
+    <LabName>Blood Group  - Rh Factor</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>13</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>106</LabTestId>
+    <LabName>Blood Sugar </LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>14</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>98</LabTestId>
+    <LabName>Blood test- Cholesterol</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>15</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>102</LabTestId>
+    <LabName>Brucella test </LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>16</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>101</LabTestId>
+    <LabName>BS For MPS</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>17</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>115</LabTestId>
+    <LabName>Calcium </LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>18</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -113,7 +224,7 @@
     <LabName>CD4</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>5</Sequence>
+    <Sequence>19</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -121,7 +232,7 @@
     <LabName>CD4 Percent</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>6</Sequence>
+    <Sequence>20</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -129,7 +240,7 @@
     <LabName>Cell Count Lymphocytes</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>7</Sequence>
+    <Sequence>21</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -137,7 +248,15 @@
     <LabName>Cell Count Neutrophils</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>8</Sequence>
+    <Sequence>22</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>96</LabTestId>
+    <LabName>Cervical Screening</LabName>
+    <LabDepartmentId>1</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>23</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -145,7 +264,15 @@
     <LabName>Chlamydia</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>9</Sequence>
+    <Sequence>24</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>125</LabTestId>
+    <LabName>CHLORIDE</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>25</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -153,7 +280,7 @@
     <LabName>Colposcopy (Cervical CA – female only)</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>10</Sequence>
+    <Sequence>26</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -161,7 +288,7 @@
     <LabName>Creatinine</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>11</Sequence>
+    <Sequence>27</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -169,7 +296,7 @@
     <LabName>CSF Biochemistry</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>12</Sequence>
+    <Sequence>28</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -177,7 +304,7 @@
     <LabName>CSF cryptococcal Ag</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>13</Sequence>
+    <Sequence>29</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -185,7 +312,7 @@
     <LabName>CSF Culture</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>14</Sequence>
+    <Sequence>30</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -193,7 +320,7 @@
     <LabName>CSF Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>15</Sequence>
+    <Sequence>31</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -201,7 +328,15 @@
     <LabName>CSF India Ink</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>16</Sequence>
+    <Sequence>32</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>112</LabTestId>
+    <LabName>Culture/Sensitivity</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>33</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -209,7 +344,15 @@
     <LabName>Cytomegalovirus (CMV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>17</Sequence>
+    <Sequence>34</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>156</LabTestId>
+    <LabName>DIRECT BILIRUBIN</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>35</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -217,7 +360,7 @@
     <LabName>Epstein Barr Virus (EBV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>18</Sequence>
+    <Sequence>36</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -225,7 +368,23 @@
     <LabName>ESR</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>19</Sequence>
+    <Sequence>37</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>109</LabTestId>
+    <LabName>Full Haemogram (F.H.G)</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>38</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>117</LabTestId>
+    <LabName>GGT</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>39</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -233,7 +392,7 @@
     <LabName>Glucose</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>20</Sequence>
+    <Sequence>40</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -241,7 +400,63 @@
     <LabName>Gonorrhea</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>21</Sequence>
+    <Sequence>41</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>126</LabTestId>
+    <LabName>Gram Stain </LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>42</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>132</LabTestId>
+    <LabName>Gram stain and Urinalysis</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>43</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>138</LabTestId>
+    <LabName>Gran#</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>44</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>141</LabTestId>
+    <LabName>Gran%</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>45</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>104</LabTestId>
+    <LabName>H/Pylori</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>46</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>100</LabTestId>
+    <LabName>HB</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>47</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>143</LabTestId>
+    <LabName>HCT</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>48</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -249,7 +464,7 @@
     <LabName>HCT/Hb</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>22</Sequence>
+    <Sequence>49</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -257,7 +472,15 @@
     <LabName>HCT/Hb percent</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>23</Sequence>
+    <Sequence>50</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>159</LabTestId>
+    <LabName>HDL </LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>51</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -265,7 +488,15 @@
     <LabName>HDL (mg/dL)</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>24</Sequence>
+    <Sequence>52</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>119</LabTestId>
+    <LabName>HDL CHOLESTEROL (mmol/l)</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>53</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -273,7 +504,7 @@
     <LabName>Hepatitis A Ab-IgM</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>25</Sequence>
+    <Sequence>54</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -281,7 +512,7 @@
     <LabName>Hepatitis A Ab-Total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>26</Sequence>
+    <Sequence>55</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -289,7 +520,7 @@
     <LabName>Hepatitis B core - antibody IgM (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>27</Sequence>
+    <Sequence>56</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -297,7 +528,7 @@
     <LabName>Hepatitis B core – antibody, total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>28</Sequence>
+    <Sequence>57</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -305,7 +536,7 @@
     <LabName>Hepatitis B surface – antibody (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>29</Sequence>
+    <Sequence>58</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -313,7 +544,7 @@
     <LabName>Hepatitis B surface – antigen (HBsAg)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>30</Sequence>
+    <Sequence>59</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -321,7 +552,15 @@
     <LabName>Hepatitis C antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>31</Sequence>
+    <Sequence>60</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>142</LabTestId>
+    <LabName>HGB</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>61</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -329,7 +568,7 @@
     <LabName>HIV Confirm</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>32</Sequence>
+    <Sequence>62</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -337,7 +576,39 @@
     <LabName>HIV Rapid Test</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>33</Sequence>
+    <Sequence>63</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>108</LabTestId>
+    <LabName>HIV Test (couple)</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>64</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>135</LabTestId>
+    <LabName>hpylori</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>65</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>127</LabTestId>
+    <LabName>K.O.H Preparation</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>66</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>160</LabTestId>
+    <LabName>LDL</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>67</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -345,7 +616,39 @@
     <LabName>LDL (Mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>34</Sequence>
+    <Sequence>68</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>121</LabTestId>
+    <LabName>LIPID PROFILE</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>69</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>95</LabTestId>
+    <LabName>Liver Function Tests ( LFTS )</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>70</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>136</LabTestId>
+    <LabName>Lymph#</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>71</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>139</LabTestId>
+    <LabName>Lymph%</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>72</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -353,7 +656,55 @@
     <LabName>Malaria parasite</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>35</Sequence>
+    <Sequence>73</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>145</LabTestId>
+    <LabName>MCH</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>74</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>146</LabTestId>
+    <LabName>MCHC</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>75</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>144</LabTestId>
+    <LabName>MCV</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>76</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>137</LabTestId>
+    <LabName>Mid#</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>77</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>140</LabTestId>
+    <LabName>Mid%</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>78</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>150</LabTestId>
+    <LabName>MPV</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>79</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -361,7 +712,7 @@
     <LabName>Pap Smear (Cervical CA – female only)</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>36</Sequence>
+    <Sequence>80</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -369,7 +720,31 @@
     <LabName>PCR</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>37</Sequence>
+    <Sequence>81</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>152</LabTestId>
+    <LabName>PCT</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>82</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>151</LabTestId>
+    <LabName>PDW</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>83</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>113</LabTestId>
+    <LabName>Phospherus</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>84</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -377,7 +752,23 @@
     <LabName>Platelets</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>38</Sequence>
+    <Sequence>85</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>149</LabTestId>
+    <LabName>PLT</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>86</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>124</LabTestId>
+    <LabName>POTASSIUM</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>87</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -385,15 +776,31 @@
     <LabName>Pregnancy</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>39</Sequence>
+    <Sequence>88</Sequence>
     <DeleteFlag>true</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>133</LabTestId>
+    <LabName>Pregnancy test </LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>89</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>164</LabTestId>
+    <LabName>prostrate specific Antigen test</LabName>
+    <LabDepartmentId>1</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>90</Sequence>
+    <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>32</LabTestId>
     <LabName>Protein</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>40</Sequence>
+    <Sequence>91</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -401,7 +808,23 @@
     <LabName>RBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>41</Sequence>
+    <Sequence>92</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>147</LabTestId>
+    <LabName>RDW-CV</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>93</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>148</LabTestId>
+    <LabName>RDW-SD</LabName>
+    <LabDepartmentId>7</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>94</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -409,7 +832,23 @@
     <LabName>Rectal Pap Smear</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>42</Sequence>
+    <Sequence>95</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>163</LabTestId>
+    <LabName>Rheumatoid factor</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>96</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>97</LabTestId>
+    <LabName>Salmonella antigen test</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>97</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -417,7 +856,15 @@
     <LabName>Serum Crypto Ag</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>43</Sequence>
+    <Sequence>98</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>123</LabTestId>
+    <LabName>SODIUM</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>99</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -425,7 +872,7 @@
     <LabName>Sputum AFB 1</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>44</Sequence>
+    <Sequence>100</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -433,7 +880,7 @@
     <LabName>Sputum AFB 2</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>45</Sequence>
+    <Sequence>101</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -441,7 +888,7 @@
     <LabName>Sputum AFB 3</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>46</Sequence>
+    <Sequence>102</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -449,7 +896,15 @@
     <LabName>Sputum Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>47</Sequence>
+    <Sequence>103</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>107</LabTestId>
+    <LabName>Stool O/C</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>104</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -457,7 +912,7 @@
     <LabName>Stool O/P</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>48</Sequence>
+    <Sequence>105</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -465,7 +920,15 @@
     <LabName>Store Plasma</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>49</Sequence>
+    <Sequence>106</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>111</LabTestId>
+    <LabName>SWABWET PREP/GRAM STAIN/WET PREP</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>107</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -473,7 +936,7 @@
     <LabName>Syphilis (FTA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>50</Sequence>
+    <Sequence>108</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -481,7 +944,15 @@
     <LabName>Syphilis (RPR)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>51</Sequence>
+    <Sequence>109</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>155</LabTestId>
+    <LabName>TOTAL BILIRUBIN</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>110</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -489,7 +960,23 @@
     <LabName>Total Cholesterol (mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>52</Sequence>
+    <Sequence>111</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>158</LabTestId>
+    <LabName>TOTAL CHOLESTROL</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>112</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>153</LabTestId>
+    <LabName>TOTAL PROTEIN</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>113</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -497,15 +984,55 @@
     <LabName>Toxoplasma IgG Antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>53</Sequence>
+    <Sequence>114</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>120</LabTestId>
+    <LabName>TRIGLEYCERIDES</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>115</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>78</LabTestId>
-    <LabName>Triglycerides (mg/dL)</LabName>
+    <LabName>Triglycerides (mmol/l)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>54</Sequence>
+    <Sequence>116</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>157</LabTestId>
+    <LabName>U/E/Cr</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>117</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>122</LabTestId>
+    <LabName>UREA</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>118</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>128</LabTestId>
+    <LabName>Urea and electrolytes (e/e/c0</LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>119</Sequence>
+    <DeleteFlag>true</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>116</LabTestId>
+    <LabName>URIC Acid </LabName>
+    <LabDepartmentId>2</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>120</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -513,7 +1040,15 @@
     <LabName>Urinalysis</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>55</Sequence>
+    <Sequence>121</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>129</LabTestId>
+    <LabName>Urinalysis C/S</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>122</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -521,7 +1056,7 @@
     <LabName>Urine Culture/Sensitivity</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>56</Sequence>
+    <Sequence>123</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -529,7 +1064,7 @@
     <LabName>Vaginal Inspection with Acetic Acid (VIA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>57</Sequence>
+    <Sequence>124</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -537,7 +1072,15 @@
     <LabName>Varicella (Chicken Pox)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>58</Sequence>
+    <Sequence>125</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>103</LabTestId>
+    <LabName>VDRL</LabName>
+    <LabDepartmentId>4</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>126</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -545,7 +1088,7 @@
     <LabName>Viral Load</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>59</Sequence>
+    <Sequence>127</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -553,7 +1096,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>60</Sequence>
+    <Sequence>128</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -561,7 +1104,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>61</Sequence>
+    <Sequence>129</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -569,7 +1112,23 @@
     <LabName>WBC Diff</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>62</Sequence>
+    <Sequence>130</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>110</LabTestId>
+    <LabName>WET PREP - SWAB</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>131</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>99</LabTestId>
+    <LabName>WIDAL</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>132</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Lnk_TestParameter>
@@ -916,7 +1475,7 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>78</SubTestId>
-    <SubTestName>Triglycerides (mg/dL)</SubTestName>
+    <SubTestName>Triglycerides (mmol/l)</SubTestName>
     <TestId>78</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
@@ -1112,6 +1671,444 @@
     <TestId>94</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>115</SubTestId>
+    <SubTestName>Liver Function Tests ( LFTS )</SubTestName>
+    <TestId>95</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>116</SubTestId>
+    <SubTestName>Cervical Screening</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Salmonella antigen test</SubTestName>
+    <TestId>97</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>118</SubTestId>
+    <SubTestName>Blood test- Cholesterol</SubTestName>
+    <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>119</SubTestId>
+    <SubTestName>WIDAL</SubTestName>
+    <TestId>99</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>120</SubTestId>
+    <SubTestName>HB</SubTestName>
+    <TestId>100</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>121</SubTestId>
+    <SubTestName>BS For MPS</SubTestName>
+    <TestId>101</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>122</SubTestId>
+    <SubTestName>Brucella test </SubTestName>
+    <TestId>102</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>123</SubTestId>
+    <SubTestName>VDRL</SubTestName>
+    <TestId>103</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>124</SubTestId>
+    <SubTestName>H/Pylori</SubTestName>
+    <TestId>104</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>125</SubTestId>
+    <SubTestName>Blood Group  - Rh Factor</SubTestName>
+    <TestId>105</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>126</SubTestId>
+    <SubTestName>Blood Sugar </SubTestName>
+    <TestId>106</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>127</SubTestId>
+    <SubTestName>Stool O/C</SubTestName>
+    <TestId>107</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>128</SubTestId>
+    <SubTestName>HIV Test (couple)</SubTestName>
+    <TestId>108</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>129</SubTestId>
+    <SubTestName>Full Haemogram (F.H.G)</SubTestName>
+    <TestId>109</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>130</SubTestId>
+    <SubTestName>WET PREP - SWAB</SubTestName>
+    <TestId>110</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>131</SubTestId>
+    <SubTestName>SWABWET PREP/GRAM STAIN/WET PREP</SubTestName>
+    <TestId>111</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>132</SubTestId>
+    <SubTestName>Culture/Sensitivity</SubTestName>
+    <TestId>112</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>133</SubTestId>
+    <SubTestName>Phospherus</SubTestName>
+    <TestId>113</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>134</SubTestId>
+    <SubTestName>Bilirubun (toal &amp; direct)</SubTestName>
+    <TestId>114</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>135</SubTestId>
+    <SubTestName>Calcium </SubTestName>
+    <TestId>115</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>136</SubTestId>
+    <SubTestName>URIC Acid </SubTestName>
+    <TestId>116</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>137</SubTestId>
+    <SubTestName>GGT</SubTestName>
+    <TestId>117</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>138</SubTestId>
+    <SubTestName>ALKALINE PHOSPHATE</SubTestName>
+    <TestId>118</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>139</SubTestId>
+    <SubTestName>HDL CHOLESTEROL (mmol/l)</SubTestName>
+    <TestId>119</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>140</SubTestId>
+    <SubTestName>TRIGLEYCERIDES</SubTestName>
+    <TestId>120</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>141</SubTestId>
+    <SubTestName>LIPID PROFILE</SubTestName>
+    <TestId>121</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>142</SubTestId>
+    <SubTestName>UREA</SubTestName>
+    <TestId>122</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>143</SubTestId>
+    <SubTestName>SODIUM</SubTestName>
+    <TestId>123</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>144</SubTestId>
+    <SubTestName>POTASSIUM</SubTestName>
+    <TestId>124</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>145</SubTestId>
+    <SubTestName>CHLORIDE</SubTestName>
+    <TestId>125</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>146</SubTestId>
+    <SubTestName>Gram Stain </SubTestName>
+    <TestId>126</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>147</SubTestId>
+    <SubTestName>K.O.H Preparation</SubTestName>
+    <TestId>127</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>148</SubTestId>
+    <SubTestName>Urea and electrolytes (e/e/c0</SubTestName>
+    <TestId>128</TestId>
+    <DeleteFlag>true</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>149</SubTestId>
+    <SubTestName>Urinalysis C/S</SubTestName>
+    <TestId>129</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>150</SubTestId>
+    <SubTestName>Blood for HDL + Cholesteral</SubTestName>
+    <TestId>130</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>151</SubTestId>
+    <SubTestName>Asot</SubTestName>
+    <TestId>131</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>152</SubTestId>
+    <SubTestName>Gram stain and Urinalysis</SubTestName>
+    <TestId>132</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>153</SubTestId>
+    <SubTestName>Pregnancy test </SubTestName>
+    <TestId>133</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>154</SubTestId>
+    <SubTestName>ANC Profile</SubTestName>
+    <TestId>134</TestId>
+    <DeleteFlag>true</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>155</SubTestId>
+    <SubTestName>hpylori</SubTestName>
+    <TestId>135</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>156</SubTestId>
+    <SubTestName>Lymph#</SubTestName>
+    <TestId>136</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>157</SubTestId>
+    <SubTestName>Mid#</SubTestName>
+    <TestId>137</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>158</SubTestId>
+    <SubTestName>Gran#</SubTestName>
+    <TestId>138</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>159</SubTestId>
+    <SubTestName>Lymph%</SubTestName>
+    <TestId>139</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>160</SubTestId>
+    <SubTestName>Mid%</SubTestName>
+    <TestId>140</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>161</SubTestId>
+    <SubTestName>Gran%</SubTestName>
+    <TestId>141</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>162</SubTestId>
+    <SubTestName>HGB</SubTestName>
+    <TestId>142</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>163</SubTestId>
+    <SubTestName>HCT</SubTestName>
+    <TestId>143</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>164</SubTestId>
+    <SubTestName>MCV</SubTestName>
+    <TestId>144</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>165</SubTestId>
+    <SubTestName>MCH</SubTestName>
+    <TestId>145</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>166</SubTestId>
+    <SubTestName>MCHC</SubTestName>
+    <TestId>146</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>167</SubTestId>
+    <SubTestName>RDW-CV</SubTestName>
+    <TestId>147</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>168</SubTestId>
+    <SubTestName>RDW-SD</SubTestName>
+    <TestId>148</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>169</SubTestId>
+    <SubTestName>PLT</SubTestName>
+    <TestId>149</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>170</SubTestId>
+    <SubTestName>MPV</SubTestName>
+    <TestId>150</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>171</SubTestId>
+    <SubTestName>PDW</SubTestName>
+    <TestId>151</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>172</SubTestId>
+    <SubTestName>PCT</SubTestName>
+    <TestId>152</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>173</SubTestId>
+    <SubTestName>TOTAL PROTEIN</SubTestName>
+    <TestId>153</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>174</SubTestId>
+    <SubTestName>ALBUMIN</SubTestName>
+    <TestId>154</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>175</SubTestId>
+    <SubTestName>TOTAL BILIRUBIN</SubTestName>
+    <TestId>155</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>176</SubTestId>
+    <SubTestName>DIRECT BILIRUBIN</SubTestName>
+    <TestId>156</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>177</SubTestId>
+    <SubTestName>U/E/Cr</SubTestName>
+    <TestId>157</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>178</SubTestId>
+    <SubTestName>TOTAL CHOLESTROL</SubTestName>
+    <TestId>158</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>179</SubTestId>
+    <SubTestName>HDL </SubTestName>
+    <TestId>159</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>180</SubTestId>
+    <SubTestName>LDL</SubTestName>
+    <TestId>160</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>181</SubTestId>
+    <SubTestName>A.N.C profile</SubTestName>
+    <TestId>161</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>182</SubTestId>
+    <SubTestName>BILIRUBIN</SubTestName>
+    <TestId>162</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>183</SubTestId>
+    <SubTestName>Urinalysis - Bilirubin</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>184</SubTestId>
+    <SubTestName>Urinalysis - PH</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>185</SubTestId>
+    <SubTestName>Urinalysis - Urobilinogen</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>186</SubTestId>
+    <SubTestName>Rheumatoid factor</SubTestName>
+    <TestId>163</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>187</SubTestId>
+    <SubTestName>prostrate specific Antigen test</SubTestName>
+    <TestId>164</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
   <Lnk_LabValue>
     <SubTestId>1</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
@@ -1203,7 +2200,7 @@
   <Lnk_LabValue>
     <SubTestId>11</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>3000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>34.00</MaxBoundaryValue>
     <MinNormalRange>0.00</MinNormalRange>
     <MaxNormalRange>35.00</MaxNormalRange>
     <TextNormalRange />
@@ -1504,7 +2501,7 @@
   <Lnk_LabValue>
     <SubTestId>78</SubTestId>
     <MinBoundaryValue>0.00</MinBoundaryValue>
-    <MaxBoundaryValue>1000.00</MaxBoundaryValue>
+    <MaxBoundaryValue>1.70</MaxBoundaryValue>
     <TextNormalRange />
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
@@ -1688,6 +2685,203 @@
     <UnitId>134</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>156</SubTestId>
+    <MinBoundaryValue>0.80</MinBoundaryValue>
+    <MaxBoundaryValue>7.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>157</SubTestId>
+    <MinBoundaryValue>0.10</MinBoundaryValue>
+    <MaxBoundaryValue>1.20</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>158</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>100.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>159</SubTestId>
+    <MinBoundaryValue>20.00</MinBoundaryValue>
+    <MaxBoundaryValue>60.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>160</SubTestId>
+    <MinBoundaryValue>3.00</MinBoundaryValue>
+    <MaxBoundaryValue>14.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>161</SubTestId>
+    <MinBoundaryValue>50.00</MinBoundaryValue>
+    <MaxBoundaryValue>70.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>162</SubTestId>
+    <MinBoundaryValue>12.00</MinBoundaryValue>
+    <MaxBoundaryValue>16.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>163</SubTestId>
+    <MinBoundaryValue>35.00</MinBoundaryValue>
+    <MaxBoundaryValue>49.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>164</SubTestId>
+    <MinBoundaryValue>80.00</MinBoundaryValue>
+    <MaxBoundaryValue>100.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>165</SubTestId>
+    <MinBoundaryValue>27.00</MinBoundaryValue>
+    <MaxBoundaryValue>34.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>166</SubTestId>
+    <MinBoundaryValue>31.00</MinBoundaryValue>
+    <MaxBoundaryValue>37.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>167</SubTestId>
+    <MinBoundaryValue>11.00</MinBoundaryValue>
+    <MaxBoundaryValue>16.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>168</SubTestId>
+    <MinBoundaryValue>35.00</MinBoundaryValue>
+    <MaxBoundaryValue>56.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>169</SubTestId>
+    <MinBoundaryValue>100.00</MinBoundaryValue>
+    <MaxBoundaryValue>300.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>170</SubTestId>
+    <MinBoundaryValue>6.50</MinBoundaryValue>
+    <MaxBoundaryValue>12.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>171</SubTestId>
+    <MinBoundaryValue>9.00</MinBoundaryValue>
+    <MaxBoundaryValue>17.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>172</SubTestId>
+    <MinBoundaryValue>0.11</MinBoundaryValue>
+    <MaxBoundaryValue>0.28</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>173</SubTestId>
+    <MinBoundaryValue>60.00</MinBoundaryValue>
+    <MaxBoundaryValue>83.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>174</SubTestId>
+    <MinBoundaryValue>28.00</MinBoundaryValue>
+    <MaxBoundaryValue>54.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>175</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>17.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>176</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>3.40</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>32</SubTestId>
+    <MinBoundaryValue>60.00</MinBoundaryValue>
+    <MaxBoundaryValue>83.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DefaultUnit>true</DefaultUnit>
+    <UnitId>131</UnitId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>178</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>5.20</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>179</SubTestId>
+    <MinBoundaryValue>0.91</MinBoundaryValue>
+    <MaxBoundaryValue>1.56</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>180</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>3.34</MaxBoundaryValue>
+    <TextNormalRange />
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>91</SubTestId>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>0.00</MaxBoundaryValue>
+    <TextNormalRange />
+    <DefaultUnit>false</DefaultUnit>
+    <UnitId>373</UnitId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
+  <Lnk_LabValue>
+    <SubTestId>184</SubTestId>
+    <MinBoundaryValue>5.00</MinBoundaryValue>
+    <MaxBoundaryValue>9.00</MaxBoundaryValue>
+    <MinNormalRange>1.00</MinNormalRange>
+    <MaxNormalRange>1.03</MaxNormalRange>
+    <TextNormalRange />
+    <DefaultUnit>true</DefaultUnit>
+    <UnitId>136</UnitId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_LabValue>
   <Lnk_ParameterResult>
     <ResultId>3</ResultId>
     <ParameterId>53</ParameterId>
@@ -1702,6 +2896,186 @@
     <ResultId>1</ResultId>
     <ParameterId>53</ParameterId>
     <Result>Postive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>30</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>31</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>32</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>33</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>35</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>34</ResultId>
+    <ParameterId>91</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>36</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>37</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>38</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>39</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>41</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>40</ResultId>
+    <ParameterId>92</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>42</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>43</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>44</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>45</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>47</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>46</ResultId>
+    <ParameterId>93</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>48</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>49</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>50</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>51</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>53</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>52</ResultId>
+    <ParameterId>94</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>54</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>55</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>56</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>57</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>59</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>58</ResultId>
+    <ParameterId>95</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>60</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>61</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>62</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>63</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>65</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>64</ResultId>
+    <ParameterId>96</ParameterId>
+    <Result>Trace</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>4</ResultId>
@@ -1802,6 +3176,66 @@
     <ResultId>22</ResultId>
     <ParameterId>100</ParameterId>
     <Result>WBC</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>66</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>67</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>68</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>69</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>71</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>70</ResultId>
+    <ParameterId>183</ParameterId>
+    <Result>Trace</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>78</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>+</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>79</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>80</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>+++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>81</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>++++</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>83</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>Nil</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>82</ResultId>
+    <ParameterId>185</ParameterId>
+    <Result>Trace</Result>
   </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
@@ -2135,7 +3569,7 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>78</SubTestId>
-    <SubTestName>Triglycerides (mg/dL)</SubTestName>
+    <SubTestName>Triglycerides (mmol/l)</SubTestName>
     <TestId>78</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
@@ -2323,6 +3757,432 @@
     <SubTestId>114</SubTestId>
     <SubTestName>PCR</SubTestName>
     <TestId>94</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>115</SubTestId>
+    <SubTestName>Liver Function Tests ( LFTS )</SubTestName>
+    <TestId>95</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>116</SubTestId>
+    <SubTestName>Cervical Screening</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Salmonella antigen test</SubTestName>
+    <TestId>97</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>118</SubTestId>
+    <SubTestName>Blood test- Cholesterol</SubTestName>
+    <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>119</SubTestId>
+    <SubTestName>WIDAL</SubTestName>
+    <TestId>99</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>120</SubTestId>
+    <SubTestName>HB</SubTestName>
+    <TestId>100</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>121</SubTestId>
+    <SubTestName>BS For MPS</SubTestName>
+    <TestId>101</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>122</SubTestId>
+    <SubTestName>Brucella test </SubTestName>
+    <TestId>102</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>123</SubTestId>
+    <SubTestName>VDRL</SubTestName>
+    <TestId>103</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>124</SubTestId>
+    <SubTestName>H/Pylori</SubTestName>
+    <TestId>104</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>125</SubTestId>
+    <SubTestName>Blood Group  - Rh Factor</SubTestName>
+    <TestId>105</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>126</SubTestId>
+    <SubTestName>Blood Sugar </SubTestName>
+    <TestId>106</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>127</SubTestId>
+    <SubTestName>Stool O/C</SubTestName>
+    <TestId>107</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>128</SubTestId>
+    <SubTestName>HIV Test (couple)</SubTestName>
+    <TestId>108</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>129</SubTestId>
+    <SubTestName>Full Haemogram (F.H.G)</SubTestName>
+    <TestId>109</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>130</SubTestId>
+    <SubTestName>WET PREP - SWAB</SubTestName>
+    <TestId>110</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>131</SubTestId>
+    <SubTestName>SWABWET PREP/GRAM STAIN/WET PREP</SubTestName>
+    <TestId>111</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>132</SubTestId>
+    <SubTestName>Culture/Sensitivity</SubTestName>
+    <TestId>112</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>133</SubTestId>
+    <SubTestName>Phospherus</SubTestName>
+    <TestId>113</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>134</SubTestId>
+    <SubTestName>Bilirubun (toal &amp; direct)</SubTestName>
+    <TestId>114</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>135</SubTestId>
+    <SubTestName>Calcium </SubTestName>
+    <TestId>115</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>136</SubTestId>
+    <SubTestName>URIC Acid </SubTestName>
+    <TestId>116</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>137</SubTestId>
+    <SubTestName>GGT</SubTestName>
+    <TestId>117</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>138</SubTestId>
+    <SubTestName>ALKALINE PHOSPHATE</SubTestName>
+    <TestId>118</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>139</SubTestId>
+    <SubTestName>HDL CHOLESTEROL (mmol/l)</SubTestName>
+    <TestId>119</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>140</SubTestId>
+    <SubTestName>TRIGLEYCERIDES</SubTestName>
+    <TestId>120</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>141</SubTestId>
+    <SubTestName>LIPID PROFILE</SubTestName>
+    <TestId>121</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>142</SubTestId>
+    <SubTestName>UREA</SubTestName>
+    <TestId>122</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>143</SubTestId>
+    <SubTestName>SODIUM</SubTestName>
+    <TestId>123</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>144</SubTestId>
+    <SubTestName>POTASSIUM</SubTestName>
+    <TestId>124</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>145</SubTestId>
+    <SubTestName>CHLORIDE</SubTestName>
+    <TestId>125</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>146</SubTestId>
+    <SubTestName>Gram Stain </SubTestName>
+    <TestId>126</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>147</SubTestId>
+    <SubTestName>K.O.H Preparation</SubTestName>
+    <TestId>127</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>149</SubTestId>
+    <SubTestName>Urinalysis C/S</SubTestName>
+    <TestId>129</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>150</SubTestId>
+    <SubTestName>Blood for HDL + Cholesteral</SubTestName>
+    <TestId>130</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>151</SubTestId>
+    <SubTestName>Asot</SubTestName>
+    <TestId>131</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>152</SubTestId>
+    <SubTestName>Gram stain and Urinalysis</SubTestName>
+    <TestId>132</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>153</SubTestId>
+    <SubTestName>Pregnancy test </SubTestName>
+    <TestId>133</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>155</SubTestId>
+    <SubTestName>hpylori</SubTestName>
+    <TestId>135</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>156</SubTestId>
+    <SubTestName>Lymph#</SubTestName>
+    <TestId>136</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>157</SubTestId>
+    <SubTestName>Mid#</SubTestName>
+    <TestId>137</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>158</SubTestId>
+    <SubTestName>Gran#</SubTestName>
+    <TestId>138</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>159</SubTestId>
+    <SubTestName>Lymph%</SubTestName>
+    <TestId>139</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>160</SubTestId>
+    <SubTestName>Mid%</SubTestName>
+    <TestId>140</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>161</SubTestId>
+    <SubTestName>Gran%</SubTestName>
+    <TestId>141</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>162</SubTestId>
+    <SubTestName>HGB</SubTestName>
+    <TestId>142</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>163</SubTestId>
+    <SubTestName>HCT</SubTestName>
+    <TestId>143</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>164</SubTestId>
+    <SubTestName>MCV</SubTestName>
+    <TestId>144</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>165</SubTestId>
+    <SubTestName>MCH</SubTestName>
+    <TestId>145</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>166</SubTestId>
+    <SubTestName>MCHC</SubTestName>
+    <TestId>146</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>167</SubTestId>
+    <SubTestName>RDW-CV</SubTestName>
+    <TestId>147</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>168</SubTestId>
+    <SubTestName>RDW-SD</SubTestName>
+    <TestId>148</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>169</SubTestId>
+    <SubTestName>PLT</SubTestName>
+    <TestId>149</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>170</SubTestId>
+    <SubTestName>MPV</SubTestName>
+    <TestId>150</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>171</SubTestId>
+    <SubTestName>PDW</SubTestName>
+    <TestId>151</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>172</SubTestId>
+    <SubTestName>PCT</SubTestName>
+    <TestId>152</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>173</SubTestId>
+    <SubTestName>TOTAL PROTEIN</SubTestName>
+    <TestId>153</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>174</SubTestId>
+    <SubTestName>ALBUMIN</SubTestName>
+    <TestId>154</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>175</SubTestId>
+    <SubTestName>TOTAL BILIRUBIN</SubTestName>
+    <TestId>155</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>176</SubTestId>
+    <SubTestName>DIRECT BILIRUBIN</SubTestName>
+    <TestId>156</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>177</SubTestId>
+    <SubTestName>U/E/Cr</SubTestName>
+    <TestId>157</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>178</SubTestId>
+    <SubTestName>TOTAL CHOLESTROL</SubTestName>
+    <TestId>158</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>179</SubTestId>
+    <SubTestName>HDL </SubTestName>
+    <TestId>159</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>180</SubTestId>
+    <SubTestName>LDL</SubTestName>
+    <TestId>160</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>181</SubTestId>
+    <SubTestName>A.N.C profile</SubTestName>
+    <TestId>161</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>182</SubTestId>
+    <SubTestName>BILIRUBIN</SubTestName>
+    <TestId>162</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>183</SubTestId>
+    <SubTestName>Urinalysis - Bilirubin</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>184</SubTestId>
+    <SubTestName>Urinalysis - PH</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>185</SubTestId>
+    <SubTestName>Urinalysis - Urobilinogen</SubTestName>
+    <TestId>21</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>186</SubTestId>
+    <SubTestName>Rheumatoid factor</SubTestName>
+    <TestId>163</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>187</SubTestId>
+    <SubTestName>prostrate specific Antigen test</SubTestName>
+    <TestId>164</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <Mst_PatientLabPeriod>

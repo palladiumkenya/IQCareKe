@@ -265,6 +265,7 @@ namespace IQCare.Web.UILogic
             {
                 if (this.HasModuleRight(s.Id, s.Clinical))
                 {
+
                     result.Add(new HomePageLandScape()
                     {
                         MenuName = s.DisplayName,
