@@ -217,5 +217,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/RemServer
-/XMLFiles/*.con
+DataAccess/RemServer
+*/XMLFiles/*.con
