@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Context
 {
@@ -33,6 +35,14 @@ namespace DataAccess.Context
         public virtual IEnumerable<T> GetAll()
         {
             return _dbSet;
+        }
+
+        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            IEnumerable<T> results = _dbSet
+                .Where(predicate).ToList();
+
+            return results;
         }
 
         public void Add(T entity)

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Common;
 
 namespace Entities.CCC.Visit
 {
     [Serializable]
     [Table("PatientMasterVisit")]
-    public class PatientMasterVisit
+
+    public class PatientMasterVisit :BaseObject
     {
         [Column]
 

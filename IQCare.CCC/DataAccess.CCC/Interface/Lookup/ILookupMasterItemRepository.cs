@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataAccess.Context
+namespace DataAccess.CCC.Interface.Lookup
 {
-    public class ModuleContext //: BaseContext
+    interface ILookupMasterItemRepository
     {
     }
 }

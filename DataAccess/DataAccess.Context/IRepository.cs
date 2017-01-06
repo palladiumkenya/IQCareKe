@@ -1,5 +1,7 @@
-﻿using Entities.Common;
+﻿using System;
+using Entities.Common;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace DataAccess.Context
 {
@@ -11,5 +13,6 @@ namespace DataAccess.Context
         void RemoveRange(IEnumerable<T> entity);
         T GetById(int id);
         IEnumerable<T> GetAll();
+        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
     }
 }

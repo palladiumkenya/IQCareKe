@@ -1,19 +1,21 @@
-﻿using DataAccess.Context;
+﻿using DataAccess.Base;
+using DataAccess.Context;
 using Entities.Common;
 using Entities.PatientCore;
+using System.Data.Common;
 using System.Data.Entity;
 
 
 namespace DataAccess.CCC
 {
-   public class GreencardContext:BaseContext
+   public class GreencardContext:DbContext
     {
-        public GreencardContext() : base() {
+        public GreencardContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
         }
-        public GreencardContext(string connection) : base(connection)
-        {
+        //public GreencardContext(string connection) : base(connection)
+        //{
 
-        }
+        //}
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientContact> PatientContacts { get; set; }
         public DbSet<PatientEnrollment> PatientEnrollments { get; set; }

@@ -1,27 +1,43 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientFinder.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientFinder" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
-            <div class="col-md-12 bs-callout bs-callout-info">
-                
-                        <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
-                        <div class="col-md-12"><hr/></div>
-                          <div class="col-md-12">
-                                          <div class="col-md-3 form-group">
-                                               <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
-                                               <div class="col-md-12">
-                                                    <input type="text" runat="server" id="IdentificationNumber" name="IdentificationNumber" class="form-control input-sm" placeholder="patient number.." />
-                                               </div>
-                                          </div>
-                                         <div class="col-md-5">
-                                             <div class="col-md-12"><label class="control-label pull-left">Patient Name(s)</label></div>
-                                              <div class="col-md-12">
-                                                    <input type="text" runat="server" id="PatientNames" name="PatientNames" class="form-control input-sm" placeholder="firstname/middlename/lastname ..." />
-                                              </div>
-                                         </div>
-                                         <div class="col-md-2">
-                                             <div class="col-md-12"><label class="control-label pull-left">DoB</label></div>
-                                             <div class="col-md-12">
-                                                 <div class="datepicker fuelux form-group" id="SearchDoB">
+         <div class="col-md-12 bs-callout bs-callout-info">
+              <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
+              <div class="col-md-12"><hr/></div>
+              <div class="col-md-12">
+                             <div class="col-md-3 form-group">
+                                    <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="patient number.." ClientIDMode="Static"></asp:TextBox>           
+                                    </div>
+                                </div>
+                              
+                             <div class="col-md-3">
+                                     <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                     <div class="col-md-12">
+                                          <asp:TextBox runat="server" ID="FirstName" CssClass="form-control input-sm" placeholder="first name.." ClientIDMode="Static"></asp:TextBox>
+                                     </div>
+                                 </div>
+                               
+                             <div class="col-md-3">
+                                      <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                                      <div class="col-md-12">
+                                           <asp:TextBox runat="server" ID="MiddleName" CssClass="form-control input-sm" placeholder="middle name.." ClientIDMode="Static"></asp:TextBox>
+                                      </div>
+                                 </div>
+                                 
+                              <div class="col-md-3">
+                                      <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                      <div class="col-md-12">
+                                           <asp:TextBox runat="server" ID="LastName" CssClass="form-control input-sm" placeholder="Last name.." ClientIDMode="Static"></asp:TextBox>
+                                      </div>
+                                 </div>
+                        </div><%-- .col-md-12--%>
+              <div class="col-md-12">
+                              <div class="col-md-3">
+                                   <div class="col-md-12"><label class="control-label pull-left">DoB</label></div>
+                                   <div class="col-md-12">
+                                        <div class="datepicker fuelux form-group" id="SearchDoB">
                                                                  <div class="input-group">
                                                                               <input class="form-control input-sm" id="SearchDateOfBirth" type="text" />
                                                                               <div class="input-group-btn">
@@ -100,33 +116,26 @@
                                                                             </div>
                                                                           </div>
                                        </div>
-                                             </div>
-
-                                            
-                                         </div>
+                                   </div>
+                              </div>
                                          
-                                         <div class="col-md-2">
-                                             <div class="col-md-12"><label class="control-label pull-left">Gender</label></div>
-                                             <div class="col-md-12">
-                                                  <select runat="server" class="form-control input-sm" id="Gender" name="Gender"></select>
-                                             </div>
-                                         </div>
-                                     </div>
-                         
-                          <div class="col-md-12">
-                                                 <div class="col-md-3">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
-                                                     <div class="col-md-12">
-                                                          <select runat="server" class="form-control input-sm" id="facilityId" name="FacilityId"></select>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-5">
-
-                                                 </div>
-                                                 <div class="col-md-4">
-                                                     <div class="col-md-12"><label class="control-label pull-left">Registration Date</label></div>
-                                                     <div class="col-md-12">
-                                                         <div class="datepicker fuelux form-group" id="RegDate">
+                              <div class="col-md-3">
+                                   <div class="col-md-12"><label class="control-label pull-left">Gender</label></div>
+                                   <div class="col-md-12">
+                                        <asp:DropDownList runat="server" ID="Sex" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                   </div>
+                             </div>
+                             
+                              <div class="col-md-3">
+                                   <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
+                                   <div class="col-md-12">
+                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control input-sm"/>                
+                                   </div>
+                             </div>
+                              
+                              <div class="col-md-3">
+                                  <div class="col-md-12"><label class="control-label pull-left">Registration Date</label></div>
+                                  <div class="datepicker fuelux form-group" id="RegDate">
                                                                  <div class="input-group">
                                                                               <input class="form-control input-sm" id="RegistrationDate" type="text" />
                                                                               <div class="input-group-btn">
@@ -205,14 +214,11 @@
                                                                             </div>
                                                                           </div>
                                        </div>
-                                                     </div>
-                                                 </div>
-                                                 
-                                             </div>
-                
-                           <div class="col-md-12"><hr/></div>
-                          
-                          <div class="col-md-12">
+                              </div>
+
+                         </div><%-- .col-md-12--%>
+              <div class="col-md-12"><hr/></div>
+              <div class="col-md-12">
                               <div class="col-md-4"></div>
                               <div class="col-md-4"></div> 
                               <div class="col-md-4">
@@ -230,8 +236,8 @@
                                   
                               </div> 
                           </div>
-                
-                <div class="col-md-12" style="padding-top: 5%">
+         </div> 
+         <div class="col-md-12 form-group">
                     <table id="tblFindPatient">
                         <thead>
                           <tr>
@@ -272,9 +278,7 @@
                         </tbody>
                     </table>
                 </div>
-                          
-
-            </div>
+            
     </div><%--.col-md-12--%>
     
     <script type="text/javascript">

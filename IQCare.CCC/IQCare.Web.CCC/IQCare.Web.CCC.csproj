@@ -213,6 +213,9 @@
     <Reference Include="Entities.Common">
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.CCC">
+      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
@@ -245,6 +248,16 @@
     <Reference Include="Telerik.Web.UI.Skins">
       <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
+      <Name>DataAccess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
+      <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
+      <Name>Entities.CCC</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

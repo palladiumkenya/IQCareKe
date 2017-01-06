@@ -59,25 +59,39 @@
     <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\PatientArtUseHistory.cs" />
     <Compile Include="Baseline\PatientDiagnosis.cs" />
+    <Compile Include="Baseline\PatientDisclosure.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
+    <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
+    <Compile Include="Encounter\PatientCareEnding.cs" />
+    <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
+    <Compile Include="Encounter\PatientClinicalNotes.cs" />
+    <Compile Include="Encounter\PatientDiagnosis.cs" />
     <Compile Include="Encounter\PatientFamilyPlanning.cs" />
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Baseline\PatientHivTesting.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
+    <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />
+    <Compile Include="Encounter\PatientTreatmentEventTracker.cs" />
+    <Compile Include="Encounter\PatientVaccination.cs" />
     <Compile Include="Encounter\PhysicalExamination.cs" />
     <Compile Include="Encounter\Pregnancy.cs" />
     <Compile Include="Encounter\PregnancyIndicator.cs" />
     <Compile Include="Enrollment\PatientEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Enrollment\PatientIdentifier.cs" />
+    <Compile Include="Lookup\LookupItemView.cs" />
+    <Compile Include="Lookup\LookupItem.cs" />
+    <Compile Include="Lookup\LookupMaster.cs" />
+    <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Triage\PatientAdverseEvent.cs" />
     <Compile Include="Triage\PatientAllergy.cs" />
     <Compile Include="Triage\PatientChronicIllness.cs" />
-    <Compile Include="Screening\PatientPhdp.cs" />
+    <Compile Include="Encounter\PatientPhdp.cs" />
     <Compile Include="Triage\PatientVital.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
@@ -86,7 +100,6 @@
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Lookup\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

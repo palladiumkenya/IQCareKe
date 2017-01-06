@@ -2,6 +2,7 @@
 using DataAccess.CCC.Repository.Patient;
 using DataAccess.Context.ModuleMaster;
 using System;
+using DataAccess.CCC.Interface.Lookup;
 
 namespace DataAccess.CCC.Interface
 {
@@ -20,5 +21,9 @@ namespace DataAccess.CCC.Interface
         IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
         IPatientPopulationRepository PatientPopulationRepository { get; }
         IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
+
+        //LookupContext
+        ILookupRepository LookupRepository { get; }
+        ILookupMasterRepository LookupMasterRepository { get; }
     }
 }
