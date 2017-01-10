@@ -25,6 +25,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+aspnet_client/
 
 #logs
 [Ll]ogs/
