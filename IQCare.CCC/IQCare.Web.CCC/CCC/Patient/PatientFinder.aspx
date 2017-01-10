@@ -238,7 +238,8 @@
                           </div>
          </div> 
          <div class="col-md-12 form-group">
-                    <table id="tblFindPatient">
+             <h3 class="bg-primary">Search List</h3>       
+             <table id="tblFindPatient">
                         <thead>
                           <tr>
       	                    <th>Enrollment No.#</th>
@@ -284,8 +285,8 @@
     <script type="text/javascript">
         $(document).ready(function() {
             
-            $("#SearchDoB").datepicker();
-            $("#RegDate").datepicker();
+            $("#SearchDoB").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY'} });
+            $("#RegDate").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY'} });
 
             $("#tblFindPatient").dataTable();
         })

@@ -10,5 +10,10 @@ namespace Interface.CCC.Lookup
    {
        List<LookupItemView> GetGenderOptions();
        List<LookupItemView> GetLookItemByGroup(string groupname);
+
+       List<LookupCounty> GetLookupCounties();
+       List<LookupCounty> GetLookupSubcounty(string county);
+       List<LookupCounty> GetLookupWards(string subcounty);
+
    }
 }

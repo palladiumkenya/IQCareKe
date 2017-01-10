@@ -82,10 +82,12 @@
     <Compile Include="Context\ScreeningContext.cs" />
     <Compile Include="Context\TriageContext.cs" />
     <Compile Include="Context\VisitContext.cs" />
+    <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupItemRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupCountyRepository.cs" />
     <Compile Include="Repository\Lookup\LookupMasterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupRepository.cs" />
     <Compile Include="Repository\Patient\IPatientContactRepository.cs" />

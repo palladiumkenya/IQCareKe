@@ -22,16 +22,6 @@ namespace DataAccess.CCC.Repository.Lookup
             _context = context;
         }
 
-        public void GetDropdownValue(DropDownList ddl,string listGroup)
-        {
-            ILookupRepository x=new LookupRepository();
-            List<Entities.CCC.Lookup.LookupItemView> myList = x.FindBy(g => g.MasterName == listGroup.ToString()).ToList();
-            ddl.DataSource = myList;
-            ddl.DataTextField = "ItemName";
-            ddl.DataValueField = "ItemId";
-            ddl.DataBind();
-        }
-
         public List<LookupItemView> GetLookupItemViews(string listGroup)
         {
             ILookupRepository x = new LookupRepository();
