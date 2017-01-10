@@ -6,7 +6,7 @@ namespace Entities.Common
     /// 
     /// </summary>
     [Serializable]
-    public abstract class Person
+    public  class Person
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -14,7 +14,7 @@ namespace Entities.Common
         /// <value>
         /// The identifier.
         /// </value>
-        public virtual int Id { get; set; }
+        public  int Id { get; set; }
         /// <summary>
         /// Gets or sets the last name.
         /// </summary>

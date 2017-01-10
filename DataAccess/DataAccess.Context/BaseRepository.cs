@@ -1,13 +1,13 @@
-﻿using Application.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Context
 {
 
-    public abstract class BaseRepository<T> : IRepository<T> where T : class
+    public abstract class BaseRepository<T> : MarshalByRefObject, IRepository<T> where T : class
     {
         protected internal BaseContext _baseContext;
         internal IDbSet<T> _dbSet;
@@ -16,44 +16,44 @@ namespace DataAccess.Context
             _baseContext = context;
             _dbSet = _baseContext.Set<T>();
         }
-        internal void CloseDecryptedSession()
+        public BaseRepository() 
         {
-            _baseContext.Database.ExecuteSqlCommand("pr_CloseDecryptedSession");
-        }
-        internal void OpenDecryptedSession()
-        {
-            _baseContext.Database.ExecuteSqlCommand("pr_OpenDecryptedSession @Password",
-                new SqlParameter("Password", ApplicationAccess.DBSecurity));
+            _baseContext = new BaseContext();
+            _dbSet = _baseContext.Set<T>();
         }
         public virtual T GetById(int id)
         {
             return _dbSet.Find(id);
         }
-
+        public virtual IQueryable<T> Filter(Expression<Func<T, bool>> filter) {         
+            return _baseContext.Set<T>().Where(filter);
+        }
         public virtual IEnumerable<T> GetAll()
         {
             return _dbSet;
         }
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             _dbSet.Add(entity);
         }
 
-        public T AddRange(IEnumerable<T> entity)
+        public virtual int AddRange(IEnumerable<T> entity)
         {
-            throw new NotImplementedException();
+            return entity.Count();
         }
 
-        public void Remove(T entity)
+        public virtual void Remove(T entity)
         {
             _dbSet.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<T> entity)
+        public virtual void RemoveRange(IEnumerable<T> entity)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }
 

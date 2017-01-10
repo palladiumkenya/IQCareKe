@@ -5,7 +5,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DataAccess.Context
 {
-    public abstract class BaseContext : DbContext
+    public  class BaseContext : DbContext
     {
         public BaseContext() :  base((DbConnection)DataMgr.GetConnection(), true)
         {

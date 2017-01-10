@@ -67,6 +67,7 @@ namespace IQCare.Web.Billing
                 ddlPTKO.Items.Insert(0, new ListItem("Select..", ""));
 
                 gridKO.DataBind();
+                this.DataBind();
                 return;
             }
             if (tabIndex == 2)
@@ -94,6 +95,7 @@ namespace IQCare.Web.Billing
             try
             {
                 if (ddlKOVoucher.SelectedValue == "0") throw new Exception("Select the voucher to knock off against");
+                string vs = Convert.ToString(Request.Form[ddlKOVoucher.ClientID]);
                 if (txtKOFrom.Text == "" || txtKOTo.Text == "") throw new Exception("Specify the date range");
                 if (ddlPTKO.SelectedValue == "0") throw new Exception("Select the payment method");
 

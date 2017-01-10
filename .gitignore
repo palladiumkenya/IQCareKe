@@ -218,3 +218,4 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 DataAccess/RemServer/app.config
+/*.con

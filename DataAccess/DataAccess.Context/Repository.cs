@@ -1,9 +1,7 @@
-﻿using Application.Common;
-using Entities.Common;
+﻿using Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -15,23 +13,10 @@ namespace DataAccess.Context
         internal DbSet<TEntity> dbSet;
         protected Repository()
         {
-         
+
             labContext = new LabContext();
             dbSet = labContext.Set<TEntity>();
-        }
-        /// <summary>
-        /// Closes the decrypted session.
-        /// </summary>
-        internal void CloseDecryptedSession()
-        {
-            labContext.Database.ExecuteSqlCommand("pr_CloseDecryptedSession");
-        }
-        
-        internal void OpenDecryptedSession()
-        {
-            labContext.Database.ExecuteSqlCommand("pr_OpenDecryptedSession @Password",
-                new SqlParameter("Password", ApplicationAccess.DBSecurity));
-        }
+        }        
         /// <summary>
         /// Gets the total records.
         /// </summary>

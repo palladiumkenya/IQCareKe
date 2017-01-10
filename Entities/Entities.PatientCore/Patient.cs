@@ -12,6 +12,7 @@ namespace Entities.PatientCore
         [NotMapped]
         public int PersonId { get; set; }
 
+      [NotMapped]
         public virtual Person Person { get; set; }
         /// <summary>
         /// Gets or sets the identifier.
