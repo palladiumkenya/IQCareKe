@@ -204,6 +204,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Context">
       <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
     </Reference>
