@@ -74,26 +74,9 @@
                                                     </div>
                                                </div>
                                                 <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label class="control-label pull-left">Gender</label></div>
-                                                             <div class="col-md-12">
-                                                                  <div class="col-md-6">
-                                                                     <div class="radio pull-left">
-                                                                          <label class="radio-custom highlight" data-initialize="radio" id="GenderMale">
-                                                                            <input class="sr-only" name="Gender" id="rdbGenderMale" type="radio" value="option1">
-                                                                            Male
-                                                                          </label>
-                                                                        </div>
-                                                                  </div> 
-                                                                  <div class="col-md-6">
-                                                                     <div class="radio checked pull-left">
-                                                                          <label class="radio-custom highlight" data-initialize="radio" id="GenderFemale">
-                                                                            <input class="sr-only" checked="checked" name="Gender" id="rdbGenderFemale" type="radio" value="option2">
-                                                                            Female
-                                                                          </label>
-                                                                        </div>
-                                                                 </div> 
-                                                            </div>
+                                                   <div class="col-md-12"><label class="control-label pull-left">Gender</label></div>
+                                                    <div class="col-md-12">
+                                                        <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                                     </div>
                                                 </div>
 		                                   </div><%--.col-md-12  --%>    
@@ -106,9 +89,9 @@
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label class="control-label pull-left">Date of Birth</label></div>
                                                        <div class="col-md-12">
-                                                            <div class="datepicker fuelux form-group" id="DoB">
+                                                            <div class="datepicker fuelux form-group" id="MyDateOfBirth">
                                                                  <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfBirth" type="text" />
+                                                                              <input class="form-control input-sm" runat="server" id="DateOfBirth" type="text" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -199,7 +182,7 @@
                                                     </div>
                                                    <div class="col-md-7">
                                                        <div class="form-group">
-                                                            <div class="col-md-12"><label class="control-label"> (<18yr) Orphan ?</label></div>
+                                                            <div class="col-md-12"><label class="control-label"> (<18yr) Orphan</label></div>
                                                            <div class="col-md-12">
                                                                 <div class="col-md-6">
                                                                     <div class="radio">
@@ -244,54 +227,63 @@
                                                
                                            </div><%-- .col-md-12--%>
 
-                                    <div class="col-md-12" style="padding-top:2%">
-                                                <div class="col-md-6">
-                                                    <div class="col-md-12"><hr /></div>
-                                                    <div class="col-md-12"><label class="control-label pull-left text-primary"><strong>Child:</strong> Parent / Gurdian Name</label></div>
-                                                </div>
+                                    <div class="col-md-12 form-group">
+                                         <div class="col-md-12"><label class="control-label pull-left text-primary">Adult : (<i>provide ID number and marital status</i>)</label></div>    
+                                        <div class="col-md-12"><hr style="margin-bottom: 1%;margin-top: 1%" /></div>  
+                                    </div>
 
-                                               <div class="col-md-6">
-                                                   <div class="col-md-12"><hr /></div>
-                                                   <div class="col-md-12"><label class="control-label pull-left text-primary">Adult (<i>provide ID number and marital status</i>)</label></div>
+                                    <div class="col-md-12 form-group">
+                                         <div class="col-md-3">
+                                              <div class="col-md-12"><label class="control-label pull-left">ID Number</label></div>
+                                              <div class="col-md-12">
+                                                   <asp:TextBox type="text" runat="server" id="NationalId" name="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" />
                                                </div>
-                                           </div>
+                                         </div>
+                                         
+                                         <div class="col-md-3">
+                                             <div class="col-md-12"><label class="control-label pull-left">Marital Status </label></div>
+                                             <div class="col-md-12">
+                                                  <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                             </div>
+                                         </div> 
+                                         <div class="col-md-3"></div>
+                                         <div class="col-md-3"></div>  
+                                      </div> 
 
-                                    <div class="col-md-12" style="padding-top:2%;padding-bottom:3%">
-                                                
-                                               <div class="col-md-3">
-                                                    <div class="form-group">
-                                                         <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
-                                                        <div class="col-md-12">
-                                                             <input runat="server" type="text" id="GurdianFname" name="GurdianFname" class="form-control input-sm" placeholder="gurdian first name.." />
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="form-group">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Other Names</label></div>
-                                                        <div class="col-md-12">
-                                                             <input runat="server" type="text" id="GurdianOname" name="GurdianOname" class="form-control input-sm" placeholder="gurdian Other names.." />
-                                                        </div>
-                                                    </div>
-                                               </div>
+                                   <div class="col-md-12 form-group">  
+                                        <div class="col-md-12"><hr /></div> 
+                                        <div class="col-md-12"><label class="control-label pull-left text-primary"><strong>Child :</strong> Parent / Gurdian Name</label></div>  
+                                   </div>
+                                   <div class="col-md-12 form-group">   
+                                        <div class="col-md-3">
+                                             <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                             <div class="col-md-12">
+                                                  <asp:TextBox runat="server" type="text" id="GurdianFNames" name="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" />
+                                             </div>
+                                        </div>
+                                              
+                                        <div class="col-md-3">
+                                              <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                                              <div class="col-md-12">
+                                                    <asp:TextBox runat="server" type="text" id="GurdianMName" name="GurdianMName" class="form-control input-sm" placeholder="guardian Middle name" ClientIDMode="Static" />
+                                              </div>
+                                        </div>
                                                
-                                               <div class="col-md-3">
-                                                    <div class="form-group">
-                                                         <div class="col-md-12"><label class="control-label pull-left">ID Number</label></div>
-                                                         <div class="col-md-12">
-                                                              <input type="text" runat="server" id="IdNumber" name="IdNumber" class="form-control input-sm" placeholder="national id no.." />
-                                                         </div>
-                                                    </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                    <div class="form-group">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Marital Status </label></div>
-                                                        <div class="col-md-12">
-                                                             <select runat="server" class="form-control input-sm"></select>
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                           </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                            <div class="col-md-12">
+                                                <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12"><label class="control-label pull-left">Guradian Gender</label></div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                            </div>
+                                        </div>
+                                     </div>           
+
+                                           
 	                            </div><%-- .step-pane--%>
 
 	                            <div class="step-pane sample-pane " data-step="2">      
@@ -305,7 +297,7 @@
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label class="control-label pull-left">County</label></div>
                                                        <div class="col-md-12">
-                                                            <select runat="server" id="county" name="county" class="form-control input-sm"></select>
+                                                           <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" OnSelectedIndexChanged="countyId_SelectedIndexChanged" AutoPostBack="True"/>
                                                        </div>
                                                    </div>
                                                </div>
@@ -313,7 +305,7 @@
                                                    <div class="form-group">
                                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
                                                        <div class="col-md-12">
-                                                           <select runat="server" id="subcounty" name="subcounty" class="form-control input-sm"></select>
+                                                           <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" OnSelectedIndexChanged="SubcountyId_SelectedIndexChanged" AutoPostBack="True"/>
                                                        </div>
                                                    </div>
                                                </div>
@@ -321,7 +313,7 @@
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
                                                       <div class="col-md-12">
-                                                          <select runat="server" id="ward" name="ward" class="form-control input-sm"></select>
+                                                          <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" AutoPostBack="True" OnSelectedIndexChanged="WardId_SelectedIndexChanged"/>
                                                       </div>
                                                   </div>
                                               </div>
@@ -329,7 +321,7 @@
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Local Council</label></div>
                                                       <div class="col-md-12">
-                                                          <select runat="server" id="localcouncil" name="localcouncil" class="form-control input-sm"></select>
+                                                          <asp:TextBox runat="server" ID="LocalCouncils" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="local council.." ></asp:TextBox>
                                                       </div>
                                                   </div>
                                                </div>
@@ -340,7 +332,7 @@
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label class="control-label pull-left">Location</label></div>
                                                        <div class="col-md-12">
-                                                           <select runat="server" id="location" name="location" class="form-control input-sm"></select>
+                                                           <asp:TextBox runat="server" ID="PatientLocation" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="location .."></asp:TextBox>
                                                        </div>
                                                    </div>
                                                </div>
@@ -364,7 +356,7 @@
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Nearest Health Centre</label></div>
                                                       <div class="col-md-12">
-                                                           <select runat="server" id="healthcentre" name="healthcentre" class="form-control input-sm"></select>
+                                                           <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" ></asp:TextBox>
                                                       </div>
                                                   </div>
                                               </div>
@@ -413,27 +405,53 @@
                                               </div>
                                           </div>
                                     
-                                    <div class="col-md-12"><hr/></div>
+                                   
                                     <div class="col-md-12"><label class=" control-label text-primary  pull-left">Treatment Supporter Information</label></div>
-                                    <div class="col-md-12" style="padding-top:3%">
-                                         <div class="col-md-4">
-                                             <div class="form-group">
-                                                 <div class="col-md-12"><label class="control-label pull-left">Treatment Supporter Name(s)</label></div>
-                                                 <div class="=col-md-12">
-                                                      <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="Names..." ID="TSNames"></asp:TextBox>
-                                                 </div>
+                                     <div class="col-md-12"><hr/></div>
+                                    <div class="col-md-12 form-group">
+                                         <div class="col-md-3">
+                                              <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                              <div class="col-md-12">
+                                                   <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static"></asp:TextBox>
+                                               </div>
+                                         </div>
+
+                                         <div class="col-md-3">
+                                             <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                                             <div class="col-md-12">
+                                                  <asp:DropDownList runat="server" ID="tsMiddleName" ClientIDMode="Static" CssClass="form-control input-sm"/>
                                              </div>
                                          </div>
-                                         <div class="col-md-2">
+
+                                         <div class="col-md-3">
+                                              <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                              <div class="col-md-12">
+                                                   <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                                              </div>
+                                         </div>
+
+                                         <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <div class="col-md-12"><label class="control-label pull-left">Gender </label></div>
+                                                  <div class="col-md-12">
+                                                      <asp:DropDownList runat="server" ID="tsGender" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                                  </div>
+                                              </div>
+                                         </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 form-group">
+                                         <div class="col-md-3">
                                               <div class="form-group">
                                                   <div class="col-md-12"><label class="control-label pull-left">Mobile Contact </label></div>
                                                   <div class="col-md-12">
                                                       <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContacts" placeholder="mobile no.."></asp:TextBox>
                                                   </div>
                                               </div>
-                                         </div>
-                                         <div class="col-md-2"></div>
-                                         <div class="col-md-4"></div>
+                                         </div> 
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3"></div>
                                     </div>
 	                            </div><%-- .step-pane-3--%>
 
@@ -491,8 +509,17 @@
     <script type="text/javascript">
         $(document)
             .ready(function() {
+                
+                $('#MyDateOfBirth').datepicker({
+                    allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }, restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+                });
 
-                $("#DoB").datepicker();
+                $('#<%=countyId.ClientID%>')
+                    .change(function() {
+                        var county = $('#<%=countyId.ClientID%>').Text();
+                        
+                    });
+
             });
     </script>
 </asp:Content>
