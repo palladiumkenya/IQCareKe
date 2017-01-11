@@ -270,6 +270,8 @@
     <Content Include="Content\fuelux\js\fuelux.js" />
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
+    <Content Include="Content\css\jquery.validate.css" />
+    <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\pace\css\pace.css" />
     <Content Include="Content\pace\js\pace.js" />
@@ -2909,6 +2911,7 @@
   <ItemGroup>
     <Folder Include="App_Browsers\" />
     <Folder Include="ClientBin\" />
+    <Folder Include="Content\NewFolder1\" />
     <Folder Include="PatientImages\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>

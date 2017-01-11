@@ -40,6 +40,16 @@ namespace IQCare.Web.CCC.Patient
                 }
             }
 
+            List<LookupItemView> lookItemByGroup = mgr.GetLookItemByGroup("YesNo");
+            if (lookItemByGroup != null && lookItemByGroup.Count > 0)
+            {
+                foreach (var k in lookItemByGroup)
+                {
+                    Inschool.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    ChildOrphan.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                }
+            }
+
             List<LookupCounty> ct = mgr.GetLookupCounties();
             
             if (ct != null && ct.Count > 0)

@@ -13,31 +13,31 @@ namespace IQCare.Web.CCC.Patient {
     public partial class PatientReg {
         
         /// <summary>
-        /// fname control.
+        /// personFname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText fname;
+        protected global::System.Web.UI.WebControls.TextBox personFname;
         
         /// <summary>
-        /// mname control.
+        /// personMName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText mname;
+        protected global::System.Web.UI.WebControls.TextBox personMName;
         
         /// <summary>
-        /// lname control.
+        /// personLName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lname;
+        protected global::System.Web.UI.WebControls.TextBox personLName;
         
         /// <summary>
         /// Gender control.
@@ -49,22 +49,40 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.DropDownList Gender;
         
         /// <summary>
-        /// DateOfBirth control.
+        /// PersonDoB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText DateOfBirth;
+        protected global::System.Web.UI.WebControls.TextBox PersonDoB;
         
         /// <summary>
-        /// Age control.
+        /// personAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Age;
+        protected global::System.Web.UI.WebControls.TextBox personAge;
+        
+        /// <summary>
+        /// ChildOrphan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ChildOrphan;
+        
+        /// <summary>
+        /// Inschool control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Inschool;
         
         /// <summary>
         /// NationalId control.
@@ -175,13 +193,13 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.HtmlControls.HtmlInputText sublocation;
         
         /// <summary>
-        /// landmark control.
+        /// PatientLandmark control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText landmark;
+        protected global::System.Web.UI.WebControls.TextBox PatientLandmark;
         
         /// <summary>
         /// NearestHealthCentre control.
@@ -193,40 +211,40 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.TextBox NearestHealthCentre;
         
         /// <summary>
-        /// PostalAddress control.
+        /// PatientPostalAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText PostalAddress;
+        protected global::System.Web.UI.WebControls.TextBox PatientPostalAddress;
         
         /// <summary>
-        /// MobileNo control.
+        /// PatientMobileNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl MobileNo;
+        protected global::System.Web.UI.WebControls.TextBox PatientMobileNo;
         
         /// <summary>
-        /// MobileNoAlt control.
+        /// PatientAlternativeMobile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl MobileNoAlt;
+        protected global::System.Web.UI.WebControls.TextBox PatientAlternativeMobile;
         
         /// <summary>
-        /// emailaddress control.
+        /// PatientEmailAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl emailaddress;
+        protected global::System.Web.UI.WebControls.TextBox PatientEmailAddress;
         
         /// <summary>
         /// tsFname control.
