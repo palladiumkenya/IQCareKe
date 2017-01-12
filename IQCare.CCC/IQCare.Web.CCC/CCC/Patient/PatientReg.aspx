@@ -1,68 +1,74 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientReg.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientReg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <style type="text/css">
-        label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
-     </style>
+
     <div class="=col-md-12">
-         <div id="errors"></div>
-<%--     
-        <div class="panel panel-default">
-             <div class="panel-body">--%>
-                 <%--<div class="col-md-12 label label-success"><label class="Control-label pull-left">1.PatientRegistration</label></div>--%>
-                <%-- <div class="col-md-12"><hr/></div>--%>
-                 <div class="col-md-12">
-                      <div class="wizard" data-initialize="wizard" id="myWizard">
-                           <div class="steps-container">
-	                            <ul class="steps">
-		                            <li data-step="1" data-name="profile" class="active">
-			                            <span class="badge">1</span>Patient Profile
-			                            <span class="chevron"></span>
-		                           </li>
+        
+        <div class="col-md-12">
+             <div class="bs-callout bs-callout-danger hidden">
+                 <h4 class="fa fa-exclamation-circle"> VALIDATION ERROR(S)</h4>
+                 <p>This form seems to be invalid :(</p>
+             </div>
+        </div> 
 
-		                          <li data-step="2" data-name="location">
-			                          <span class="badge">2</span>Patient Location
-			                           <span class="chevron"></span>
-		                          </li>
+        <div class="col-md-12">
+            <div class="bs-callout bs-callout-info hidden">
+                  <h4 class="fa fa-check-square-o"> All SECTION VALIDATION PASSED</h4>
+                  <p>Everything seems to be ok :)</p>
+             </div>
+        </div>
+        
 
-                                   <li data-step="3" data-name="contacts">
-			                           <span class="badge">3</span>Patient Contacts
-			                           <span class="chevron"></span>
-		                            </li>
-
-		                            <li data-step="4" data-name="socialstatus">
-			                            <span class="badge">4</span>Patient Population
-			                            <span class="chevron"></span>
-		                            </li>
-	                            </ul>
-                           </div><%-- .steps-container--%>
+        <div class="col-md-12">
                       
-                           <div class="actions">
-	                            <button type="button" class="btn btn-default btn-prev">
-		                               <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-	                            <button type="button" class="btn btn-primary btn-next" id="next" data-last="Complete">Next
-		                              <span class="glyphicon glyphicon-arrow-right"></span>
-	                           </button>
-                           </div>
+            <div class="wizard" data-initialize="wizard" id="myWizard">
+                 <div class="steps-container">
+	                  <ul class="steps">
+		                  <li data-step="1" data-name="profile" class="active">
+			                  <span class="badge">1</span>Patient Profile
+			                  <span class="chevron"></span>
+		                  </li>
 
-                           <div class="step-content">
-	                            
-                               <div class="step-pane active sample-pane" id="datastep1" role="form" data-step="1">
-                            
-                                    <div class="col-md-12">
-                                               <small class="pull-left text-primary">1.Patient Basic Details</small>
-                                               <hr />
-                                           </div>
+		                  <li data-step="2" data-name="location">
+			                  <span class="badge">2</span>Patient Location
+			                  <span class="chevron"></span>
+		                  </li>
 
-		                            <div class="col-md-12">
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
-                                                        <div class="col-md-12">
-                                                             <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" required="true"></asp:TextBox>
+                          <li data-step="3" data-name="contacts">
+			                  <span class="badge">3</span>Patient Contacts
+			                  <span class="chevron"></span>
+		                  </li>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
+		                  <li data-step="4" data-name="socialstatus">
+			                  <span class="badge">4</span>Patient Population
+			                  <span class="chevron"></span>
+		                  </li>
+	                 </ul>
+                 </div><%-- .steps-container--%>
+                      
+                 <div class="actions form-navigation">
+	                  <button type="button" class="btn btn-default btn-prev">
+		                  <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+	                  <button type="button" class="btn btn-primary btn-next" id="next" data-last="Complete">Next
+		                   <span class="glyphicon glyphicon-arrow-right"></span>
+	                  </button>
+                 </div>
+
+                 <div class="step-content">
+	                  <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
+                            <div class="col-md-12">
+                                 <small class="pull-left text-primary">1.Patient Basic Details</small>
+                                 <hr />
+                             </div>
+
+		                     <div class="col-md-12">
+                                  <div class="col-md-3">
+                                       <div class="form-group">
+                                            <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
+                                            <div class="col-md-12">
+                                                 <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text"></asp:TextBox>
+                                            </div>
+                                       </div>
+                                  </div>
                                                 <div class="col-md-3">
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label for="personMName" class="control-label pull-left">Middle Name</label></div>
@@ -75,7 +81,7 @@
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
                                                         <div class="col-md-12">
-                                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" required="true"></asp:TextBox>
+                                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" ></asp:TextBox>
                                                         </div>
                                                     </div>
                                                </div>
@@ -183,7 +189,7 @@
                                                          <div class="form-group">
                                                               <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                                              <div class="col-md-12">
-                                                                  <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true"></asp:TextBox>
+                                                                  <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
                                                              </div>
                                                          </div>
                                                     </div>
@@ -238,27 +244,27 @@
                                         <div class="col-md-3">
                                              <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
                                              <div class="col-md-12">
-                                                  <asp:TextBox runat="server" type="text" id="GurdianFNames" name="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" required="true" />
+                                                  <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" />
                                              </div>
                                         </div>
                                               
                                         <div class="col-md-3">
                                               <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
                                               <div class="col-md-12">
-                                                    <asp:TextBox runat="server" type="text" id="GurdianMName" name="GurdianMName" class="form-control input-sm" placeholder="guardian Middle name" ClientIDMode="Static"  />
+                                                    <asp:TextBox runat="server" type="text" id="GurdianMName" name="GurdianMName" class="form-control input-sm" placeholder="guardian Middle name" ClientIDMode="Static" />
                                               </div>
                                         </div>
                                                
                                         <div class="col-md-3">
                                             <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
                                             <div class="col-md-12">
-                                                <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name" required="true"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="col-md-12"><label class="control-label pull-left">Guradian Gender</label></div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" required="true"/>
+                                                <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" />
                                             </div>
                                         </div>
                                      </div>           
@@ -266,7 +272,7 @@
                                            
 	                            </div><%-- .step-pane--%>
 
-	                            <div class="step-pane sample-pane " data-step="2">      
+	                            <div class="step-pane sample-pane" data-parsley-validate="true" data-step="2">      
                                      <div class="col-md-12">
                                                <small class="pull-left text-primary">2.Patient Location Details</small>
                                               <hr />
@@ -343,7 +349,7 @@
                                           </div>                                                
                                 </div><%-- .step-pane-2--%>
 
-	                            <div class="step-pane sample-pane " data-step="3">
+	                            <div class="step-pane sample-pane" data-parsley-validate="true" data-step="3">
                                      <div class="col-md-12">
                                                 <small class="text-primary pull-left"> 3. Patient Conatcts </small>
                                                <hr />
@@ -435,7 +441,7 @@
                                     </div>
 	                            </div><%-- .step-pane-3--%>
 
-                                <div class="step-pane sample-pane " data-step="4">
+                                <div class="step-pane sample-pane" data-parsley-validate="true" data-step="4">
                                      
                                      <div class="col-md-12">
                                                 <small class="pull-left text-primary"> 4. Patient population categorization</small>
@@ -480,8 +486,10 @@
 	                            </div><%-- .step-content-4--%>
 
                            </div><%-- .step-content--%>
-                       </div><%-- .wizard--%>
-                 </div><%-- .col-md-12--%>
+
+            </div><%-- .wizard--%>
+        </div><%-- .col-md-12--%>
+
     </div><%--.col-md-12--%>
     
     <script type="text/javascript">
@@ -518,6 +526,11 @@
                             $("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
                             $("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
                             $("#<%=GuardianGender.ClientID%>").attr('disabled', 'disbaled');
+
+                            $('#<%=GurdianFNames.ClientID%>').parsley('removeConstraint', 'required');
+                            $("#<%=GurdianLName.ClientID%>").parsley('removeConstraint', 'required');   
+                            $("#<%=NationalId.ClientID%>").parsley('removeConstraint', 'required'); 
+
                         } else {
                             $("#<%=ChildOrphan.ClientID%>").removeAttr('disabled');
                             $("#<%=Inschool.ClientID%>").removeAttr('disabled');
@@ -525,10 +538,13 @@
                             $("#<%=GurdianMName.ClientID%>").removeAttr('disabled', 'disbaled');
                             $("#<%=GurdianLName.ClientID%>").removeAttr('disabled', 'disbaled');
                             $("#<%=GuardianGender.ClientID%>").removeAttr('disabled', 'disbaled');
+
+                            $('#<%=GurdianFNames.ClientID%>').attr('data-parsley-required');
+                            $("#<%=GurdianLName.ClientID%>").parsley('addConstraint', { required: true });
+                            $("#<%=NationalId.ClientID%>").parsley('addConstraint', { required:true });
                         }
                     });
                 
-
                 /* make readonly by default */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=Inschool.ClientID%>").attr('disabled', 'disbaled');
@@ -559,17 +575,33 @@
                             else
                                previousStep=nextStep -= 1;
                             if (data.step === 1) {
-                                var validator = $("#form1").validate();
-                                validator.element("#datastep1");
 
-                                //var fields =$("#form1").find("#step-content").find("#datastep1").find(".form-control");
-                                var isValid = validator.valid();
-                                
-                                if (isValid) {
+                                /* add constraints based on age*/
+                                          
+                                if ($('#datastep1').parsley().validate()) {
+                                    
+                                    var ok = $('.parsley-error').length === 0;
+                                    $('.bs-callout-info').toggleClass('hidden', !ok);
                                     $("#myWizard").wizard('next');
                                 } else {
+                                    var f = $('.parsley-error').length === 0;
+                                    $('.bs-callout-danger').toggleClass('hidden', f);
                                     evt.preventDefault();
                                 }
+                                
+                                //var isvalid = $("#form1").isValid();
+                                //if (isvalid) { $("#myWizard").wizard('next'); }else {return false}
+                                //var validator = $("#form1").validate();
+                                //validator.element("#datastep1");
+
+                                //var fields =$("#form1").find("#step-content").find("#datastep1").find(".form-control");
+                                //var isValid = validator.valid();
+
+                                //if (isValid) {
+                                //    $("#myWizard").wizard('next');
+                                //} else {
+                                //    evt.preventDefault();
+                                //}
                             }
                             else if (data.step === 2) {
                                 
@@ -623,163 +655,163 @@
                 //    return this.optional(element) || /^[a-z]+$/i.test(value);
                 //}, "Letters only please");
 
-                $.validator.addMethod("CheckDropDownList", function (value, element, param) {  
-                    if (value === '0')  
-                        return false;  
-                    else  
-                        return true;  
-                },"Please select a Department."); 
+                //$.validator.addMethod("CheckDropDownList", function (value, element, param) {  
+                //    if (value === '0')  
+                //        return false;  
+                //    else  
+                //        return true;  
+                //},"Please select a Department."); 
 
-                $.validator.methods.email = function( value, element ) {
-                    return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
-                }
+                //$.validator.methods.email = function( value, element ) {
+                //    return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
+                //}
 
 
-                $("#form1")
-                    .validate({
-                        errorElement: 'div',
-                        errorClass:'error',
-                        focusInvalid:false,
-                        ignore:"",
-                        rules: {
-                            personFname: {
-                                requred: true,
-                                minLength: 4
-                            },
-                            personLName: {
-                                required: true,
-                                minLength: 4
-                            },
-                            Gender: {
-                                require:true,
-                                CheckDropDownList:true
-                            },
-                            personAge: {
-                                required: true,
-                                digits:true
-                            },
-                            NationalId: {
-                                required:true,
-                                maxLength:8
-                            },
-                            MaritalStatusId: {
-                                required: true,
-                                CheckDropDownList:true
-                            },
-                            tsFname: {
-                                required:{
-                                      depends:function() {
-                                          if (personAge >= 18) {
-                                              return false;
-                                          } else {
-                                              return true;
-                                          }
-                                      } 
-                            },
-                                lettersonly:true
-                            },
-                            tsLastName: {
-                                required: {
-                                    depends:function () {
-                                        if (personAge >= 18) {
-                                            return false;
-                                        } else {
-                                            return true;
-                                        }
-                                    }
-                                },
-                                lettersonly:true
-                            },
-                            GuardianGender: {
-                                required: {
-                                    depends:function() {
-                                        if (personAge >= 18) {
-                                            return false;
-                                        } else {
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        messages: {
-                            personFname: {
-                                requred: "First name Required!",
-                                minLength: "Minimum length is 4"
-                            },
-                             personLName: {
-                                required: "Last name Required!",
-                                minLength: "minimum length is 4",
-                                lettersonly:"invalid characters"
-                            },
-                            Gender: {
-                                require:"Gender Required!",
-                                CheckDropDownList:"Select Gender"
-                            },
-                            personAge: {
-                                required: "Age Required",
-                                digits:"Invalid characters in Age"
-                            },
-                            NationalId: {
-                                required:"National Id Required!",
-                                maxLength:"Id should not be more than 8"
-                            },
-                            MaritalStatusId: {
-                                required: "Marital Status Required",
-                                CheckDropDownList:"Select marital Status"
-                            },
-                            tsFname: {
-                                required: "Treatment support first name required!",
-                                lettersonly:"invalid character(s)"
-                            },
-                            tsLastName: {
-                                required: "Treatment support last name required!",
-                                lettersonly:"Invalid characters"
-                            },
-                            GuardianGender: {
-                                required: "Guardian gender Required!"                              
-                            }
-                        },
-                        highlight: function (e) {
-                            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-                        },
+                //$("#form1")
+                //    .validate({
+                //        errorElement: 'div',
+                //        errorClass:'error',
+                //        focusInvalid:false,
+                //        ignore:"",
+                //        rules: {
+                //            personFname: {
+                //                requred: true,
+                //                minLength: 4
+                //            },
+                //            personLName: {
+                //                required: true,
+                //                minLength: 4
+                //            },
+                //            Gender: {
+                //                require:true,
+                //                CheckDropDownList:true
+                //            },
+                //            personAge: {
+                //                required: true,
+                //                digits:true
+                //            },
+                //            NationalId: {
+                //                required:true,
+                //                maxLength:8
+                //            },
+                //            MaritalStatusId: {
+                //                required: true,
+                //                CheckDropDownList:true
+                //            },
+                //            tsFname: {
+                //                required:{
+                //                      depends:function() {
+                //                          if (personAge >= 18) {
+                //                              return false;
+                //                          } else {
+                //                              return true;
+                //                          }
+                //                      } 
+                //            },
+                //                lettersonly:true
+                //            },
+                //            tsLastName: {
+                //                required: {
+                //                    depends:function () {
+                //                        if (personAge >= 18) {
+                //                            return false;
+                //                        } else {
+                //                            return true;
+                //                        }
+                //                    }
+                //                },
+                //                lettersonly:true
+                //            },
+                //            GuardianGender: {
+                //                required: {
+                //                    depends:function() {
+                //                        if (personAge >= 18) {
+                //                            return false;
+                //                        } else {
+                //                            return true;
+                //                        }
+                //                    }
+                //                }
+                //            }
+                //        },
+                //        messages: {
+                //            personFname: {
+                //                requred: "First name Required!",
+                //                minLength: "Minimum length is 4"
+                //            },
+                //             personLName: {
+                //                required: "Last name Required!",
+                //                minLength: "minimum length is 4",
+                //                lettersonly:"invalid characters"
+                //            },
+                //            Gender: {
+                //                require:"Gender Required!",
+                //                CheckDropDownList:"Select Gender"
+                //            },
+                //            personAge: {
+                //                required: "Age Required",
+                //                digits:"Invalid characters in Age"
+                //            },
+                //            NationalId: {
+                //                required:"National Id Required!",
+                //                maxLength:"Id should not be more than 8"
+                //            },
+                //            MaritalStatusId: {
+                //                required: "Marital Status Required",
+                //                CheckDropDownList:"Select marital Status"
+                //            },
+                //            tsFname: {
+                //                required: "Treatment support first name required!",
+                //                lettersonly:"invalid character(s)"
+                //            },
+                //            tsLastName: {
+                //                required: "Treatment support last name required!",
+                //                lettersonly:"Invalid characters"
+                //            },
+                //            GuardianGender: {
+                //                required: "Guardian gender Required!"                              
+                //            }
+                //        },
+                //        highlight: function (e) {
+                //            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+                //        },
                         
-                        success: function (e) {
-                            $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-                            $(e).remove();
-                        },
+                //        success: function (e) {
+                //            $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+                //            $(e).remove();
+                //        },
 
-                        errorPlacement: function (error, element) {
-                            if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-                                var controls = element.closest('div[class*="col-"]');
-                                if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-                            }
-                            else if(element.is('.select2')) {
-                                error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-                            }
-                            else if(element.is('.chosen-select')) {
-                                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-                            }
-                            else error.insertAfter(element.parent());
-                        },
-                        invalidHandler:function(event, validator) {
-                            var errors = validator.numberOfInvalids();
-                            if (errors) {
-                                var message = errors === 1
-                                    ? 'You Missed 1 field.It hasbeen highlighted'
-                                    : 'You missed ' + errors + 'fields.They have been highligted';
-                                $("div.error span").html(message).addClass("has-error");
-                                //$(this).defaultShowErrors();
-                                $("div.error").show();
-                            } else {
-                                $("div.error").hide();
-                            }
-                        },
-                        submitHandler:function(form) {
-                            /*submit form here */
-                        }
-                    });
+                //        errorPlacement: function (error, element) {
+                //            if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+                //                var controls = element.closest('div[class*="col-"]');
+                //                if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+                //                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+                //            }
+                //            else if(element.is('.select2')) {
+                //                error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+                //            }
+                //            else if(element.is('.chosen-select')) {
+                //                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+                //            }
+                //            else error.insertAfter(element.parent());
+                //        },
+                //        invalidHandler:function(event, validator) {
+                //            var errors = validator.numberOfInvalids();
+                //            if (errors) {
+                //                var message = errors === 1
+                //                    ? 'You Missed 1 field.It hasbeen highlighted'
+                //                    : 'You missed ' + errors + 'fields.They have been highligted';
+                //                $("div.error span").html(message).addClass("has-error");
+                //                //$(this).defaultShowErrors();
+                //                $("div.error").show();
+                //            } else {
+                //                $("div.error").hide();
+                //            }
+                //        },
+                //        submitHandler:function(form) {
+                //            /*submit form here */
+                //        }
+                //    });
 
                 /* calculate Person Age */
                 function getAge(dateString) 
