@@ -2911,7 +2911,6 @@
   <ItemGroup>
     <Folder Include="App_Browsers\" />
     <Folder Include="ClientBin\" />
-    <Folder Include="Content\NewFolder1\" />
     <Folder Include="PatientImages\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
