@@ -11,7 +11,7 @@ namespace Interface.Lookup
         /// <param name="lookupName">Name of the lookup.</param>
         /// <param name="lookupcategory">The lookupcategory.</param>
         /// <returns></returns>
-        List<Item> GetLookupItems(string prefix, string lookupName, string lookupcategory);
+        List<LookupItem> GetLookupItems(string prefix, string lookupName, string lookupcategory);
         /// <summary>
         /// Gets the look up item.
         /// </summary>
@@ -19,6 +19,6 @@ namespace Interface.Lookup
         /// <param name="lookupName">Name of the lookup.</param>
         /// <param name="lookupcategory">The lookupcategory.</param>
         /// <returns></returns>
-        Item GetLookUpItem(int id, string lookupName, string lookupcategory);
+        LookupItem GetLookUpItem(int id, string lookupName, string lookupcategory);
     }
 }

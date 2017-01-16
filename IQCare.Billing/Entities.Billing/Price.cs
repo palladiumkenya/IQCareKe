@@ -47,7 +47,7 @@ namespace Entities.Billing
         /// <c>true</c> if this instance is current; otherwise, <c>false</c>.
         /// </value>
         public bool IsCurrent { get; set; }
-        public int PricePLanId { get; set; }
+        public int PricePlanId { get; set; }
         public virtual PricePlan PricePlan { get; set; }
         /// <summary>
         /// Gets or sets the version stamp.

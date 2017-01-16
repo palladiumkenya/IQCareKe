@@ -7,28 +7,39 @@ using System.Linq.Expressions;
 
 namespace DataAccess.Lookup
 {
-    public class LookupRepository : BaseRepository<Item>
+    public class LookupRepository : BaseRepository<LookupItem>
     {
+
+        private readonly BaseContext _lookupContext;
+
         public LookupRepository() : base()
         {
         }
-        public override IQueryable<Item> Filter(Expression<Func<Item, bool>> filter)
+        //public LookupRepository(): this(new LookupContext())
+        //{
+        //    _lookupContext = new LookupContext();
+        //}
+        public LookupRepository(BaseContext context) : base(context)
+        {
+            _lookupContext = context;
+        }
+        public override IQueryable<LookupItem> Filter(Expression<Func<LookupItem, bool>> filter)
         {
             return base.Filter(filter);
         }
-        public override IEnumerable<Item> GetAll()
+        public override IEnumerable<LookupItem> GetAll()
         {
             return base.GetAll();
         }
-        public override void Add(Item entity)
+        public override void Add(LookupItem entity)
         {
             base.Add(entity);
         }
-        public IEnumerable<Item> GetAll(string lookname, string lookcategory)
+        public IEnumerable<LookupItem> GetAll(string lookname, string lookcategory)
         {
             return Filter(lk => lk.LookupName == lookname && lk.Category == lookcategory);
         }
-        public  Item Find(int id, string lookupname, string lookupcategory)
+        public LookupItem Find(int id, string lookupname, string lookupcategory)
         {
 
             return this.Filter(lk => lk.Id == id
@@ -36,7 +47,7 @@ namespace DataAccess.Lookup
                && lk.Category.ToLower() == lookupcategory.ToLower())
                 .FirstOrDefault();
         }
-        public List<Item> GetFiltered(string itemname, string lookname, string lookcategory)
+        public List<LookupItem> GetFiltered(string itemname, string lookname, string lookcategory)
         {
             var items = Filter(lk => lk.LookupName == lookname && lk.Category == lookcategory && lk.Name.ToLower().Contains(itemname.ToLower()));
             return items.ToList();

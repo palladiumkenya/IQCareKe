@@ -1,20 +1,17 @@
 ﻿using Entities.Common;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 
 namespace Entities.PatientCore
 {
     [Serializable]
-    public class PatientContact : IAuditEntity
+    public class PersonContact : IAuditEntity
     {
         public int Id { get; set; }
-        [ForeignKey("Patient")]
-        public virtual int PatientId { get; set; }
+        [ForeignKey("Person")]
+        public virtual int PersonId { get; set; }
    
-        public virtual Patient Patient { get; set; }
+        public virtual Person Person { get; set; }
         public string PostalAddress { get; set; }
         public string MobileNo { get; set; }
 

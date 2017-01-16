@@ -10,12 +10,12 @@ namespace Entities.Lookup
     /// </summary>
     [Serializable]
     [Table("LookupView")]
-    public class Item
+    public class LookupItem
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Item" /> class.
         /// </summary>
-        public Item()
+        public LookupItem()
         {
             //
             // TODO: Add constructor logic here
@@ -69,6 +69,8 @@ namespace Entities.Lookup
         /// <value>
         ///   <c>true</c> if deleted; otherwise, <c>false</c>.
         /// </value>
-        public bool Deleted { get { return _deleted; } set { _deleted = value; } }
+        public bool Deleted { get { return _deleted; } set { _deleted = value; } }   
+            [NotMapped]
+        public decimal OrdRank { get; set; }
     }
 }

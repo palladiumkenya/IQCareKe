@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Entities.Billing
 {
     /// <summary>
@@ -30,7 +32,7 @@ namespace Entities.Billing
         /// <value>
         /// The amount.
         /// </value>
-        public Double Amount { get; set; }
+        public double Amount { get; set; }
         /// <summary>
         /// Gets or sets the type of the voucher.
         /// </summary>
@@ -114,6 +116,13 @@ namespace Entities.Billing
             }
             
         }
-       
+        public  string DisplayName
+        {
+          get { return string.Format("{0} {1} {2} ({3})", VoucherType, ReferenceId, VoucherDate.ToString("dd-MMM-yyyy"), AmountAvailable); }
+        }
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2} ({3})", VoucherType, ReferenceId, VoucherDate.ToString("dd-MMM-yyyy"), AmountAvailable);
+        }
     }
 }

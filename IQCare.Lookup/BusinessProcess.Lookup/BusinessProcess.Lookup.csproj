@@ -39,6 +39,10 @@
   <ItemGroup>
     <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Lookup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Entities.Lookup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Interface.Lookup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
