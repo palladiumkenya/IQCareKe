@@ -9,6 +9,11 @@ namespace Entities.PatientCore
     [Table("PatientView")]
     public class Patient: IAuditEntity
     {
+        [NotMapped]
+        public int PersonId { get; set; }
+
+      [NotMapped]
+        public virtual Person Person { get; set; }
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -131,17 +136,18 @@ namespace Entities.PatientCore
             }
         }
         public virtual List<PatientVisit> PatientVisit { get; set; }
+       [NotMapped]
         public int CreatedBy
         {
             get; set;
         }
 
-        public DateTime CreateDate
+      [NotMapped]  public DateTime CreateDate
         {
             get; set;
         }
 
-        public string AuditData
+       [NotMapped] public string AuditData
         {
             get; set;
         }

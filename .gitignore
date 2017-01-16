@@ -25,6 +25,10 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+aspnet_client/
+
+#logs
+[Ll]ogs/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -214,4 +218,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-DataAccess/RemServer/*.*
+DataAccess/RemServer/app.config
+/*.con

@@ -9,7 +9,8 @@ using IQCare.Billing.Logic;
 using IQCare.Web.UILogic;
 using Entities.Billing;
 using System.Data;
-
+using System.Collections.Specialized;
+using AjaxControlToolkit;
 namespace IQCare.Web.Billing
 {
     public partial class BillKnockOff : System.Web.UI.Page
@@ -20,6 +21,7 @@ namespace IQCare.Web.Billing
             {
                 TabContainer1.ActiveTabIndex = 0;
             }
+            else return;
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
@@ -41,6 +43,7 @@ namespace IQCare.Web.Billing
             }
             if (tabIndex == 1)
             {
+               
                 txtKOFrom.Text = DateTime.Now.AddMonths(-1).Date.ToString("dd-MMM-yyyy");
                 txtKOTo.Text = DateTime.Today.ToString("dd-MMM-yyyy");
                 KnockOffServices KOServices = new KnockOffServices();
@@ -48,14 +51,18 @@ namespace IQCare.Web.Billing
                 ddlKOVoucher.SelectedIndex = ddlPTKO.SelectedIndex = -1;
                 ddlKOVoucher.Items.Clear();
                 ddlPTKO.Items.Clear();
+                ddlKOVoucher.DataSource = voucher;
+                ddlKOVoucher.DataValueField = "Id";
+                ddlKOVoucher.DataTextField = "DisplayName";
+                ddlKOVoucher.DataBind();
                 ddlKOVoucher.Items.Insert(0, new ListItem("Select..", ""));
-                voucher.Where(v => v.AmountAvailable > 0.0D).ToList().ForEach(pv =>
-                {
-                    ListItem item = new ListItem(string.Format("{0} {1} {2} ({3})", pv.VoucherType, pv.ReferenceId, pv.VoucherDate.ToString("dd-MMM-yyyy"), pv.AmountAvailable), pv.Id.ToString());
-                    item.Attributes.Add("amt", pv.AmountUsed.ToString());
-                    ddlKOVoucher.Items.Add(item);
-                });
-
+                //voucher.Where(v => v.AmountAvailable > 0.0D).ToList().ForEach(pv =>
+                //{
+                //    ListItem item = new ListItem(string.Format("{0} {1} {2} ({3})", pv.VoucherType, pv.ReferenceId, pv.VoucherDate.ToString("dd-MMM-yyyy"), pv.AmountAvailable), pv.Id.ToString());
+                //    item.Attributes.Add("amt", pv.AmountUsed.ToString());
+                //    ddlKOVoucher.Items.Add(item);
+                //});
+              
                 PaymentServices pyService = new PaymentServices();
                 List<PaymentMethod> payMethods = pyService.GetCreditPaymentMethod(session);
 
@@ -67,6 +74,7 @@ namespace IQCare.Web.Billing
                 ddlPTKO.Items.Insert(0, new ListItem("Select..", ""));
 
                 gridKO.DataBind();
+               this.DataBind();
                 return;
             }
             if (tabIndex == 2)
@@ -87,15 +95,15 @@ namespace IQCare.Web.Billing
 
 
         }
-
         protected void FindKnockOff(object sender, EventArgs e)
         {
             
             try
-            {
-                if (ddlKOVoucher.SelectedValue == "0") throw new Exception("Select the voucher to knock off against");
+            {            
+                string vs = Convert.ToString(Request.Form[ddlKOVoucher.UniqueID]);
+                if (ddlKOVoucher.SelectedValue == "") throw new Exception("Select the voucher to knock off against");
                 if (txtKOFrom.Text == "" || txtKOTo.Text == "") throw new Exception("Specify the date range");
-                if (ddlPTKO.SelectedValue == "0") throw new Exception("Select the payment method");
+                if (ddlPTKO.SelectedValue == "") throw new Exception("Select the payment method");
 
                 KnockOffServices KOServices = new KnockOffServices();
                 DateRange range = new DateRange(Convert.ToDateTime(txtKOFrom.Text.Trim()), Convert.ToDateTime(txtKOTo.Text.Trim()));
@@ -250,5 +258,7 @@ namespace IQCare.Web.Billing
         {
 
         }
+
+       
     }
 }

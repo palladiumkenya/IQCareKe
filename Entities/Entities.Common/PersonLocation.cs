@@ -2,16 +2,15 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.PatientCore
+namespace Entities.Common
 {
     [Serializable]
-    public  class PatientLocation:IAuditEntity
+    public  class PersonLocation:IAuditEntity
     {
         public int Id { get; set; }
-        [ForeignKey("Patient")]
-        public int PatientId { get; set; }
-       
-        public virtual Patient Patient { get; set; }
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+        public virtual Person Person { get; set; }
         public int County { get; set; }
         public int? SubCounty { get; set; }
         public int? Ward { get; set; }

@@ -38,6 +38,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.Lookup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Entities.Lookup\obj\Release\Entities.Lookup.dll</HintPath>
     </Reference>

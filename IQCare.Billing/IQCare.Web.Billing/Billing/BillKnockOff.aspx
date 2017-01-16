@@ -1,55 +1,62 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Module.master" AutoEventWireup="true"
-    CodeBehind="BillKnockOff.aspx.cs" Inherits="IQCare.Web.Billing.BillKnockOff" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/Module.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true"
+    CodeBehind="BillKnockOff.aspx.cs" Inherits="IQCare.Web.Billing.BillKnockOff" EnableEventValidation="false" %>
 
 <%@ MasterType VirtualPath="~/MasterPage/Module.Master" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="ctMain" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <%--<script language="javascript" type="text/javascript">
-        var allCheckBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxHeader"]:checkbox';
-        var checkBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxItem"]:checkbox:not(:disabled)';
-        function ToggleCheckUncheckAllOptionAsNeeded() {
-            var totalCheckboxes = $(checkBoxSelector),
-            checkedCheckboxes = totalCheckboxes.filter(":checked");
-           
-            noCheckboxesAreChecked = (checkedCheckboxes.length === 0),
-            allCheckboxesAreChecked = (totalCheckboxes.length === checkedCheckboxes.length);
-           
-            $(allCheckBoxSelector).attr('checked', allCheckboxesAreChecked);
-            if (noCheckboxesAreChecked) {               
-                $("#<%= btnKnockOff.ClientID %>").prop("disabled", "disabled");   
-            }
-            else {
-                $("#<%= btnKnockOff.ClientID %>").removeProp("disabled");                    
-            } 
-        }
-        $(document).ready(function () {
-            $(allCheckBoxSelector).on("click", "", function () {
-                $(checkBoxSelector).prop('checked', $(this).is(':checked'));
-                ToggleCheckUncheckAllOptionAsNeeded();
-
-            });
-
-            $(checkBoxSelector).on('click', "", ToggleCheckUncheckAllOptionAsNeeded);
-            ToggleCheckUncheckAllOptionAsNeeded();
-
-        });
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-        prm.add_pageLoaded(ToggleCheckUncheckAllOptionAsNeeded);
-    </script>--%>
     <style type="text/css">
-        .ajax__calendar_container
-        {
+        .ajax__calendar_container {
             z-index: 8000;
             width: 180px;
         }
-        .RadComboBox .rcbInput
-        {
+
+        .RadComboBox .rcbInput {
             margin: 0;
         }
     </style>
+    <script lang="javascript" type="text/javascript">
+        var allCheckBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxHeader"]:checkbox';
+        var checkBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxItem"]:checkbox:not(:disabled)';
+        var textBoxSelector = '#<%=gridKO.ClientID%> input[id*="txtKOAmt"]:text';
+        function ToggleCheckUncheckAllOptionAsNeeded() {
+            var totalCheckboxes = $(checkBoxSelector),
+            checkedCheckboxes = totalCheckboxes.filter(":checked");
+            noCheckboxesAreChecked = (checkedCheckboxes.length === 0),
+            allCheckboxesAreChecked = (totalCheckboxes.length === checkedCheckboxes.length);
+            $(allCheckBoxSelector).prop('checked', allCheckboxesAreChecked);
+            if (noCheckboxesAreChecked) { $('#<%=labeltotal.ClientID%>').html("Nothing selected"); }       
+
+         }
+                $(document).ready(function () {
+                    $(allCheckBoxSelector).on("click", "", function () {
+                        $(checkBoxSelector).prop('checked', $(this).is(':checked'));
+                        ToggleCheckUncheckAllOptionAsNeeded();
+
+                    });
+
+                    $(checkBoxSelector).on('click', "", ToggleCheckUncheckAllOptionAsNeeded);
+                    ToggleCheckUncheckAllOptionAsNeeded();
+
+                });
+                var prm = Sys.WebForms.PageRequestManager.getInstance();
+                if (pm != null) {
+                    pm.add_endRequest(function (sender, e) {
+                        $(allCheckBoxSelector).on("click", "", function () {
+                            $(checkBoxSelector).prop('checked', $(this).is(':checked'));
+                            ToggleCheckUncheckAllOptionAsNeeded();
+
+                        });
+
+                        $(checkBoxSelector).on('click', "", ToggleCheckUncheckAllOptionAsNeeded);
+                        ToggleCheckUncheckAllOptionAsNeeded();
+
+                    });
+                }
+                prm.add_pageLoaded(ToggleCheckUncheckAllOptionAsNeeded);
+    </script>
     <div class="container-fluid">
-        <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" Width="100%" ActiveTabIndex="1"
-            ondemand="true" AutoPostBack="true" OnActiveTabChanged="TabContainer1_ActiveTabChanged">
+        <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" Width="100%" ondemand="true"
+            AutoPostBack="true" OnActiveTabChanged="TabContainer1_ActiveTabChanged">
             <ajaxToolkit:TabPanel ID="tabPay" runat="server" HeaderText="Capture Debt Payment">
                 <ContentTemplate>
                     <asp:UpdatePanel ID="upDB" runat="server" UpdateMode="Conditional">
@@ -62,20 +69,20 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
-                                <div class="col-md-6" id="divForm" data-parsley-validate="off">
+                                <div class="col-md-6" id="divForm">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="control-label pull-left" for="txtuname">
-                                                Voucher Date:</label></div>
+                                                Voucher Date:</label>
+                                        </div>
                                         <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
                                             <asp:TextBox ID="txtDate" Name="txtDate" CssClass="form-control input-sm col-md-3"
-                                                runat="server" placeholder="date of payment" required="true" AutoComplete="Off"
-                                                data-parsley-group="PV"></asp:TextBox>
-                                            <asp:ImageButton runat="Server" ID="Image1" Height="22" Style="width: 22; height: 22;
-                                                z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
+                                                runat="server" placeholder="date of payment" AutoComplete="Off"></asp:TextBox>
+                                            <asp:ImageButton runat="Server" ID="Image1" Height="22" Style="width: 22; height: 22; z-index: auto; padding-left: 5px"
+                                                ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
                                                 AlternateText="Click to show calendar" />
                                             <ajaxToolkit:CalendarExtender ID="calendarButtonExtender" runat="server" TargetControlID="txtDate"
-                                                PopupButtonID="Image1" EnabledOnClient="True" Format="dd-MMM-yyyy" />
+                                                PopupButtonID="Image1" Format="dd-MMM-yyyy" />
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtDate"
                                                 ErrorMessage="*" Display="None" ValidationExpression="^(0?[1-9]|[12][0-9]|3[01])-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(19|20)\d\d$"></asp:RegularExpressionValidator><br />
                                             <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender3" runat="server" TargetControlID="txtDate"
@@ -93,8 +100,7 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <asp:TextBox ID="txtAmount" CssClass="form-control input-sm col-md-3" Name="txtAmount"
-                                                placeholder="amount of payment" runat="server" AutoComplete="Off" MaxLength="13"
-                                                required="true" data-parsley-type="digits" data-parsley-group="PV"></asp:TextBox>
+                                                placeholder="amount of payment" runat="server" AutoComplete="Off" MaxLength="13"></asp:TextBox>
                                             <ajaxToolkit:FilteredTextBoxExtender ID="fteAmountToPay" runat="server" TargetControlID="txtAmount"
                                                 FilterType="Numbers, Custom" ValidChars="." />
                                         </div>
@@ -107,8 +113,8 @@
                                                 Voucher Type:</label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <asp:DropDownList required="true" CssClass="form-control" ID="ddlVoucherType" Name="ddlVoucherType"
-                                                runat="server" AutoPostBack="false" data-parsley-group="PV">
+                                            <asp:DropDownList CssClass="form-control" ID="ddlVoucherType" Name="ddlVoucherType"
+                                                runat="server" AutoPostBack="false">
                                                 <asp:ListItem Value="" Text="Select"></asp:ListItem>
                                                 <asp:ListItem Value="Cheque" Text="Cheque"></asp:ListItem>
                                                 <asp:ListItem Value="Direct Deposit">Direct Deposit</asp:ListItem>
@@ -126,9 +132,9 @@
                                                 Reference Number:</label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <asp:TextBox ID="txtReference" required="true" CssClass="form-control input-sm col-md-3"
+                                            <asp:TextBox ID="txtReference" CssClass="form-control input-sm col-md-3"
                                                 Name="txtReference" placeholder="E.g Cheque Number, Transaction Number" runat="server"
-                                                AutoComplete="Off" MaxLength="50" data-parsley-group="PV"></asp:TextBox>
+                                                AutoComplete="Off" MaxLength="50"></asp:TextBox>
                                             <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
                                                 TargetControlID="txtAmount" FilterType="Numbers, Custom" ValidChars=".-/\_)(" />
                                         </div>
@@ -152,9 +158,9 @@
                                         </div>
                                         <div class="form-group col-md-8">
                                             <asp:Button CssClass="btn btn-info fa fa-user col-md-4" ID="btnSave" runat="server"
-                                                Text=" Save" Style="margin-right: 5px" OnClick="SaveVoucher"  UseSubmitBehavior="false" type="button" CausesValidation="false"  />
+                                                Text=" Save" Style="margin-right: 5px" OnClick="SaveVoucher" UseSubmitBehavior="false" type="button" CausesValidation="false" />
                                             <asp:Button ID="btnCancel" CssClass="btn btn-danger col-md-4" runat="server" OnClick="CancelSaveVoucher"
-                                                Text=" Cancel" CausesValidation="false"  UseSubmitBehavior="false" />
+                                                Text=" Cancel" CausesValidation="false" UseSubmitBehavior="false" />
                                         </div>
                                         <div class="col-md-2">
                                         </div>
@@ -172,7 +178,7 @@
             </ajaxToolkit:TabPanel>
             <ajaxToolkit:TabPanel ID="tabKO" runat="server" HeaderText="Knock Off">
                 <ContentTemplate>
-                    <asp:UpdatePanel ID="upKO" runat="server">
+                    <asp:UpdatePanel ID="upKO" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="row">
                                 <div class="col-md-12 label label-primary">
@@ -188,10 +194,11 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label class="control-label pull-left" for="ddlKOVoucher">
-                                                        Select Voucher:</label></div>
+                                                        Select Voucher:</label>
+                                                </div>
                                                 <div class="form-group col-md-6">
-                                                    <asp:DropDownList CssClass="form-control input-sm col-md-6" ID="ddlKOVoucher" 
-                                                         runat="server"  AppendDataBoundItems="false">
+                                                    <asp:DropDownList CssClass="form-control input-sm col-md-6" ID="ddlKOVoucher"
+                                                        runat="server" AppendDataBoundItems="false">
                                                     </asp:DropDownList>
                                                     <asp:HiddenField ID="hdVoucher" Value="0" runat="server" />
                                                 </div>
@@ -205,24 +212,27 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
-                                                    <asp:TextBox ID="txtKOFrom" Name="txtFrom" CssClass="form-control input-sm col-md-4"
-                                                        runat="server"  placeholder="Start Date (From)" AutoComplete="Off"
-                                                     ></asp:TextBox>
-                                                    <asp:ImageButton runat="Server" ID="imFrom" Height="22" Style="width: 22; height: 22;
-                                                        z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
+                                                    <asp:TextBox ID="txtKOFrom" Name="txtKOFrom" CssClass="form-control input-sm col-md-4"
+                                                        runat="server" placeholder="Start Date (From)" AutoComplete="Off"></asp:TextBox>
+                                                    <img id="img5" onclick="w_displayDatePicker('<%=txtKOFrom.ClientID%>');" height="22"
+                                                        alt="Click to show calendar" hspace="3" src="../images/cal_icon.gif" width="22" border="0" />
+
+                                                    <%--  <asp:ImageButton runat="Server" ID="imFrom" Height="22" Style="width: 22; height: 22; z-index: auto; padding-left: 5px"
+                                                        ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
                                                         AlternateText="Click to show calendar" />
                                                     <ajaxToolkit:CalendarExtender ID="calFrom" runat="server" TargetControlID="txtKOFrom"
-                                                        PopupButtonID="imFrom" EnabledOnClient="True" Format="dd-MMM-yyyy" />
+                                                        PopupButtonID="imFrom" Format="dd-MMM-yyyy"  />--%>
                                                 </div>
                                                 <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
-                                                    <asp:TextBox ID="txtKOTo" Name="txtTo" CssClass="form-control input-sm col-md-4"
-                                                        runat="server" required="true" placeholder="End Date (To)" AutoComplete="Off"
-                                                        data-parsley-group="KO"></asp:TextBox>
-                                                    <asp:ImageButton runat="Server" ID="imTo" Height="22" Style="width: 22; height: 22;
-                                                        z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
-                                                        AlternateText="Click to show calendar" />
+                                                    <asp:TextBox ID="txtKOTo" Name="txtKOTo" CssClass="form-control input-sm col-md-4"
+                                                        runat="server" placeholder="End Date (To)" AutoComplete="Off"></asp:TextBox>
+                                                    <img id="img4" onclick="w_displayDatePicker('<%=txtKOTo.ClientID%>');" height="22"
+                                                        alt="Click to show calendar" hspace="3" src="../images/cal_icon.gif" width="22" border="0" />
+                                                    <%-- <asp:ImageButton runat="Server" ID="imTo" Height="22" Style="width: 22; height: 22; z-index: auto; padding-left: 5px"
+                                                        ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
+                                                        AlternateText="Click to show calendar" OnClientClick="return false;" />
                                                     <ajaxToolkit:CalendarExtender ID="calTo" runat="server" TargetControlID="txtKOTo"
-                                                        PopupButtonID="imTo" EnabledOnClient="True" Format="dd-MMM-yyyy" />
+                                                        PopupButtonID="imTo" Format="dd-MMM-yyyy" />--%>
                                                 </div>
                                                 <div class="col-md-2">
                                                 </div>
@@ -230,19 +240,19 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label class="control-label pull-left" for="ddlPTKO">
-                                                        Select Payment Type:</label></div>
+                                                        Select Payment Type:</label>
+                                                </div>
                                                 <div class="form-group col-md-6">
-                                                    <asp:DropDownList CssClass="form-control" ID="ddlPTKO" 
-                                                         runat="server" AppendDataBoundItems="false">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlPTKO"
+                                                        runat="server" AppendDataBoundItems="false">
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-4" style="text-align: left; vertical-align: middle;
-                                            margin-top: 10px">
-                                            <asp:Button CssClass="btn btn-primary btn-lg col-md-4" ID="btnKOView" 
+                                        <div class="form-group col-md-4" style="text-align: left; vertical-align: middle; margin-top: 10px">
+                                            <asp:Button CssClass="btn btn-primary btn-lg col-md-4" ID="btnKOView"
                                                 runat="server" Text=" Find  " Style="margin-right: 5px; vertical-align: middle"
-                                                OnClick="FindKnockOff" />
+                                                OnClick="FindKnockOff" CausesValidation="false" />
                                         </div>
                                     </div>
                                 </div>
@@ -251,9 +261,17 @@
                                 <div class="col-md-4" style="text-align: left">
                                 </div>
                             </div>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="TabContainer1" EventName="ActiveTabChanged" />
+                            <asp:AsyncPostBackTrigger ControlID="btnKOView" />
+                            <asp:AsyncPostBackTrigger ControlID="btnKnockOff" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="upKT" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
                             <div class="row">
-                                <div class="col-md-12 label label-primary pull-left" style="margin-left: 10px; margin-right: 10px;
-                                    text-align: left">
+                                <div class="col-md-12 label label-primary pull-left" style="margin-left: 10px; margin-right: 10px; text-align: left">
                                     <span class="bold h5">Knock Transactions</span>
                                 </div>
                             </div>
@@ -271,16 +289,19 @@
                                                                 OnRowCommand="gridKO_RowCommand" OnRowDataBound="gridKO_RowDataBound" DataKeyNames="TransactionId,PaymentTypeId"
                                                                 ShowFooter="True" ShowHeaderWhenEmpty="True">
                                                                 <EmptyDataTemplate>
-                                                                    No Credit Transctions to knock off against the selected voucher</EmptyDataTemplate>
+                                                                    No Credit Transctions to knock off against the selected voucher
+                                                                </EmptyDataTemplate>
                                                                 <HeaderStyle CssClass="searchresultfixedheader" Height="20px" VerticalAlign="Middle"
                                                                     HorizontalAlign="Left"></HeaderStyle>
                                                                 <RowStyle CssClass="gridrow" Height="20px" VerticalAlign="Middle" />
                                                                 <Columns>
                                                                     <asp:TemplateField>
                                                                         <HeaderTemplate>
-                                                                            <asp:CheckBox ID="chkBxHeader" runat="server" AutoPostBack="false" /></HeaderTemplate>
+                                                                            <asp:CheckBox ID="chkBxHeader" runat="server" AutoPostBack="false" />
+                                                                        </HeaderTemplate>
                                                                         <ItemTemplate>
-                                                                            <asp:CheckBox ID="chkBxItem" runat="server" AutoPostBack="false"></asp:CheckBox></ItemTemplate>
+                                                                            <asp:CheckBox ID="chkBxItem" runat="server" AutoPostBack="false"></asp:CheckBox>
+                                                                        </ItemTemplate>
                                                                         <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="25px" Wrap="False" />
                                                                         <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="25px" Wrap="False" />
                                                                     </asp:TemplateField>
@@ -288,8 +309,10 @@
                                                                     <asp:BoundField DataField="PatientFacilityId" HeaderText="Facility ID" />
                                                                     <asp:BoundField DataField="TransactionDate" HeaderText="Tran Date" DataFormatString="{0:dd-MMM-yyyy hh:mm:ss}" />
                                                                     <asp:BoundField DataField="ReceiptNumber" HeaderText="Receipt #" />
-                                                                    <asp:TemplateField  HeaderText="Total Amount">
-                                                                        <ItemTemplate><asp:Label runat="server" ID="labeltranTotal" Text='<%# Bind("Amount") %>'></asp:Label></ItemTemplate>
+                                                                    <asp:TemplateField HeaderText="Total Amount">
+                                                                        <ItemTemplate>
+                                                                            <asp:Label runat="server" ID="labeltranTotal" Text='<%# Bind("Amount") %>'></asp:Label>
+                                                                        </ItemTemplate>
                                                                     </asp:TemplateField>
                                                                     <asp:BoundField DataField="PendingAmount" HeaderText="Pending Amt" />
                                                                     <asp:TemplateField HeaderText="Amt to Knock Off">
@@ -302,7 +325,7 @@
                                                                                 <div class="col-mod-9" style="white-space: nowrap; text-align: left">
                                                                                     <asp:RangeValidator ID="rgKOAmount" runat="server" ControlToValidate="txtKOAmt" Type="Double"
                                                                                         MinimumValue="0" MaximumValue="100" ErrorMessage="The value should be between 0 and  the outstanding amount"
-                                                                                        Display="Dynamic" Enabled="True" CssClass="control-label pull-left"  SetFocusOnError="true" ValidationGroup="KOGrid" />
+                                                                                        Display="Dynamic" Enabled="True" CssClass="control-label pull-left" SetFocusOnError="true" ValidationGroup="KOGrid" />
                                                                                 </div>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
@@ -319,7 +342,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" style="display:none">
+                                        <div class="row" style="display: none">
                                             <div class="col-md-6">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -332,11 +355,13 @@
                                             <div class="form-group col-md-6">
                                             </div>
                                             <div class="form-group col-md-6" style="text-align: left">
-                                                <asp:Button CssClass="btn btn-info fa fa-user col-md-6" ID="btnKnockOff" runat="server"  CausesValidation="true" UseSubmitBehavior="false"
+                                                <asp:Button CssClass="btn btn-info fa fa-user col-md-6" ID="btnKnockOff" runat="server" CausesValidation="true" UseSubmitBehavior="false"
                                                     Text=" Knock Off Selected Transactions" Style="margin-right: 5px" OnClick="KnockOffTransaction" ValidationGroup="KOGrid" />
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="TabContainer1" EventName="ActiveTabChanged" />
@@ -358,7 +383,7 @@
                                 </div>
                             </div>
                             <div class="row" style="margin-top: 10px">
-                                <div class="col-md-12" data-parsley-validate="off" id="divHist">
+                                <div class="col-md-12" id="divHist">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="row">
@@ -368,18 +393,18 @@
                                                 </div>
                                                 <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
                                                     <asp:TextBox ID="txtHistFrom" Name="txtHistFrom" CssClass="form-control input-sm col-md-4"
-                                                        runat="server" required="true" placeholder="Start Date (From)" AutoComplete="Off"></asp:TextBox>
-                                                    <asp:ImageButton runat="Server" ID="imHistFrom" Height="22" Style="width: 22; height: 22;
-                                                        z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
+                                                        runat="server" placeholder="Start Date (From)" AutoComplete="Off"></asp:TextBox>
+                                                    <asp:ImageButton runat="Server" ID="imHistFrom" Height="22" Style="width: 22; height: 22; z-index: auto; padding-left: 5px"
+                                                        ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
                                                         AlternateText="Click to show calendar" />
                                                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtHistFrom"
                                                         PopupButtonID="imHistFrom" EnabledOnClient="True" Format="dd-MMM-yyyy" />
                                                 </div>
                                                 <div class="form-group  col-md-3" style="white-space: nowrap; position: relative">
                                                     <asp:TextBox ID="txtHistTo" Name="txtHistTo" CssClass="form-control input-sm col-md-4"
-                                                        runat="server" required="true" placeholder="End Date (To)" AutoComplete="Off"></asp:TextBox>
-                                                    <asp:ImageButton runat="Server" ID="ImageButton2" Height="22" Style="width: 22; height: 22;
-                                                        z-index: auto; padding-left: 5px" ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
+                                                        runat="server" placeholder="End Date (To)" AutoComplete="Off"></asp:TextBox>
+                                                    <asp:ImageButton runat="Server" ID="ImageButton2" Height="22" Style="width: 22; height: 22; z-index: auto; padding-left: 5px"
+                                                        ImageUrl="~/Images/cal_icon.gif" ImageAlign=" Bottom"
                                                         AlternateText="Click to show calendar" />
                                                     <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtHistTo"
                                                         PopupButtonID="ImageButton2" EnabledOnClient="True" Format="dd-MMM-yyyy" />
@@ -390,9 +415,10 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label class="control-label pull-left" for="ddlHistVTKO">
-                                                        Voucher Type:</label></div>
+                                                        Voucher Type:</label>
+                                                </div>
                                                 <div class="form-group col-md-6">
-                                                    <asp:DropDownList CssClass="form-control" ID="ddlHistVTKO" Name="ddlHistVTKO" required="true"
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlHistVTKO" Name="ddlHistVTKO"
                                                         runat="server">
                                                     </asp:DropDownList>
                                                 </div>
@@ -407,8 +433,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 label label-primary pull-left" style="margin-left: 10px; margin-right: 10px;
-                                    text-align: left">
+                                <div class="col-md-12 label label-primary pull-left" style="margin-left: 10px; margin-right: 10px; text-align: left">
                                     <span class="bold h5">Vouchers</span>
                                 </div>
                             </div>
@@ -437,8 +462,8 @@
                                 </div>
                             </div>
                         </ContentTemplate>
-                         <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="TabContainer1" EventName="ActiveTabChanged" />                              
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="TabContainer1" EventName="ActiveTabChanged" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </ContentTemplate>

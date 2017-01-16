@@ -102,11 +102,11 @@ namespace IQCare.Web.Home
 
                 if (landScape.ClickAction == RedirectAction.FindAddPatient)
                 {
-                    row["ResourceUrl"] = String.Format("../Patient/FindAdd.aspx?srvNm={0}&mod={1}", landScape.MenuName, landScape.MenuId);
+                    row["ResourceUrl"] = string.Format("../Patient/FindAdd.aspx?srvNm={0}&mod={1}", landScape.MenuName, landScape.MenuId);
                 }
                 else if (landScape.ClickAction == RedirectAction.ModuleAction)
                 {
-                    string folderName = landScape.ServiceAreaName.Replace(" ", String.Empty);
+                    string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty);
                     //if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
                     //{
                         Guid g = Guid.NewGuid();
