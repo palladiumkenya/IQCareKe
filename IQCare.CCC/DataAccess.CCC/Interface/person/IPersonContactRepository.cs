@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.CCC.Interface.person
 {
-    public interface IPersonContact<>
+    public interface IPersonContact
     {
 
     }
