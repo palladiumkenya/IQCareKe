@@ -33,7 +33,8 @@ namespace IQCare.CCC.UILogic
         {
             string jsonObject;
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupCounty> lookupwardsList = lookupManager.GetLookupWards(subcounty);
+           List<LookupCounty> lookupwardsList = lookupManager.GetLookupWards(subcounty);
+
             if (lookupwardsList != null && lookupwardsList.Count > 0)
             {
                 jsonObject = new JavaScriptSerializer().Serialize(lookupwardsList);
