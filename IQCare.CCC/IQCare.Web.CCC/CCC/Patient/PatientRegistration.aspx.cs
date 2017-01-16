@@ -82,15 +82,15 @@ namespace IQCare.Web.CCC.Patient
 
         protected void SubcountyId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupCounty> lookupCounties = lookupManager.GetLookupWards(SubcountyId.SelectedItem.Text);
-            if (lookupCounties != null && lookupCounties.Count > 0)
-            {
-                foreach (var items in lookupCounties)
-                {
-                    WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
-                }
-            }
+            //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            //List<LookupCounty> lookupCounties = lookupManager.GetLookupWards(SubcountyId.SelectedItem.Text);
+            //if (lookupCounties != null && lookupCounties.Count > 0)
+            //{
+            //    foreach (var items in lookupCounties)
+            //    {
+            //        WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
+            //    }
+            //}
         }
     }
 }

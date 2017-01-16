@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientReg.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientReg" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientReg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
 
     <div class="=col-md-12">
@@ -292,7 +292,7 @@
                                                    <div class="form-group">
                                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
                                                        <div class="col-md-12">
-                                                           <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" OnSelectedIndexChanged="SubcountyId_SelectedIndexChanged" AutoPostBack="True" required="true"/>
+                                                           <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true"/>
                                                        </div>
                                                    </div>
                                                </div>
@@ -301,7 +301,7 @@
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
                                                       <div class="col-md-12">
-                                                          <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" AutoPostBack="True" OnSelectedIndexChanged="WardId_SelectedIndexChanged" required="true"/>
+                                                          <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" required="true"/>
                                                       </div>
                                                   </div>
                                               </div>
@@ -483,79 +483,56 @@
         $(document)
             .ready(function() {
 
-                $('#MyDateOfBirth')
-                    .datepicker({
-                        allowPastDates: true,
-                        momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-                        restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-                    });
-
-                $('#MyDateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
-                    var x = $('#MyDateOfBirth').datepicker('getDate');
-
-                    $('#<%=personAge.ClientID%>').val(getAge(x));
-                });
-
-                $('#<%=countyId.ClientID%>')
-                    .on("change",
-                        function() {
-                            var countyName = $(this).find(":selected").text();
-                            // alert(countyName);
-                            getSubcountyList();
-                        });
                 var personAge = 0;
 
-                /* Business Rules setup */
-                $('#<%=personAge.ClientID%>')
-                    .on("blur",function() {
-                        personAge = $(this).val();
-                        
-                        if (personAge >= 18) {
-                            
-                            <%--
-                            $("#<%=NationalId.ClientID%>").removeAttr('disabled');
-                            $("#<%=MaritalStatusId.ClientID%>").removeAttr('disabled');
-                             --%>
-                            $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
-                            $("#<%=Inschool.ClientID%>").prop('disabled', true);
-                            $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
-                            $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
-                            $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
-                            $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
-
-                            <%-- $('#<%=GurdianFNames.ClientID%>').parsley('removeConstraint', 'required');
-                            $("#<%=GurdianLName.ClientID%>").parsley('removeConstraint', 'required');   
-                            $("#<%=NationalId.ClientID%>").parsley('removeConstraint', 'required'); --%>
-
-                        } else {
-                            $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
-                            $("#<%=Inschool.ClientID%>").prop('disabled',false);
-                            $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
-                            $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
-                            $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
-                            $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
-
-                            <%--                            $('#<%=GurdianFNames.ClientID%>').attr('data-parsley-required');
-                            $("#<%=GurdianLName.ClientID%>").parsley('addConstraint', { required: true });
-                            $("#<%=NationalId.ClientID%>").parsley('addConstraint', { required:true });--%>
-                        }
-                    });
-                
-                /* make readonly by default */
+                /*----- make readonly by default ----- */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=Inschool.ClientID%>").attr('disabled', 'disbaled');
-                <%--            $("#<%=NationalId.ClientID%>").attr('disabled', 'disbaled');
-                $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disbaled');--%>
                 $("#<%=GurdianFNames.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=GuardianGender.ClientID%>").attr('disabled', 'disbaled');
-                <%--$("#<%=.ClientID%>").atr('disabled', 'disbaled');--%>
 
-                $('#<%=countyId.ClientID%>')
-                    .change(function() {
-                        var county = $('#<%=countyId.ClientID%>').Text();
-                    });
+                $('#MyDateOfBirth').datepicker({
+                        allowPastDates: true,
+                        momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+                        restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+                });
+
+                $('#MyDateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+                    var x = $('#MyDateOfBirth').datepicker('getDate');
+                    $('#<%=personAge.ClientID%>').val(getAge(x));
+                });
+
+                $('#<%=countyId.ClientID%>').on("change", function() {
+                     getSubcountyList(); /*call AJAX function */
+                });
+
+                $("#<%=SubcountyId.ClientID%>").on("change", function() {
+                    getWardList();
+                });
+                
+                /* Business Rules setup */
+                $('#<%=personAge.ClientID%>').on("blur", function ()
+                {
+                    personAge = $(this).val();      
+                    if (personAge >= 18)
+                    {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                        $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                    } else {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                        $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
+                    }
+                });
 
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
@@ -576,6 +553,7 @@
                             /* add constraints based on age*/
                                           
                             if ($('#datastep1').parsley().validate()) {
+
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -628,193 +606,6 @@
 
                         });
 
-                //$("#myWizard").on('actionclicked.fu.wizard', function(evt,data) {
-                //    var step = data.step;
-                   
-                //    if (data.direction === 'next')
-                //        step += 1;
-                //    else
-                //        step -= 1;
-                //    alert(step);
-
-
-                //});
-
-                
-
-                //$('[id^=next]').on('click', function () {
-                //    var curstep = $('#myWizard').wizard('selectedItem');
-                //    var form = $("form[name='Form1']");
-                //    var fields = form.find('#step-' + curstep.step).find(":input");
-                //    if (fields.valid()) {
-                //        $('#myWizard').wizard('next');
-                //    } else {
-                //        alert("invalid");
-                //    }
-                //});
-
-                //$.validator.addMethod("lettersonly", function (value, element) {
-                //    return this.optional(element) || /^[a-z]+$/i.test(value);
-                //}, "Letters only please");
-
-                //$.validator.addMethod("CheckDropDownList", function (value, element, param) {  
-                //    if (value === '0')  
-                //        return false;  
-                //    else  
-                //        return true;  
-                //},"Please select a Department."); 
-
-                //$.validator.methods.email = function( value, element ) {
-                //    return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
-                //}
-
-
-                //$("#form1")
-                //    .validate({
-                //        errorElement: 'div',
-                //        errorClass:'error',
-                //        focusInvalid:false,
-                //        ignore:"",
-                //        rules: {
-                //            personFname: {
-                //                requred: true,
-                //                minLength: 4
-                //            },
-                //            personLName: {
-                //                required: true,
-                //                minLength: 4
-                //            },
-                //            Gender: {
-                //                require:true,
-                //                CheckDropDownList:true
-                //            },
-                //            personAge: {
-                //                required: true,
-                //                digits:true
-                //            },
-                //            NationalId: {
-                //                required:true,
-                //                maxLength:8
-                //            },
-                //            MaritalStatusId: {
-                //                required: true,
-                //                CheckDropDownList:true
-                //            },
-                //            tsFname: {
-                //                required:{
-                //                      depends:function() {
-                //                          if (personAge >= 18) {
-                //                              return false;
-                //                          } else {
-                //                              return true;
-                //                          }
-                //                      } 
-                //            },
-                //                lettersonly:true
-                //            },
-                //            tsLastName: {
-                //                required: {
-                //                    depends:function () {
-                //                        if (personAge >= 18) {
-                //                            return false;
-                //                        } else {
-                //                            return true;
-                //                        }
-                //                    }
-                //                },
-                //                lettersonly:true
-                //            },
-                //            GuardianGender: {
-                //                required: {
-                //                    depends:function() {
-                //                        if (personAge >= 18) {
-                //                            return false;
-                //                        } else {
-                //                            return true;
-                //                        }
-                //                    }
-                //                }
-                //            }
-                //        },
-                //        messages: {
-                //            personFname: {
-                //                requred: "First name Required!",
-                //                minLength: "Minimum length is 4"
-                //            },
-                //             personLName: {
-                //                required: "Last name Required!",
-                //                minLength: "minimum length is 4",
-                //                lettersonly:"invalid characters"
-                //            },
-                //            Gender: {
-                //                require:"Gender Required!",
-                //                CheckDropDownList:"Select Gender"
-                //            },
-                //            personAge: {
-                //                required: "Age Required",
-                //                digits:"Invalid characters in Age"
-                //            },
-                //            NationalId: {
-                //                required:"National Id Required!",
-                //                maxLength:"Id should not be more than 8"
-                //            },
-                //            MaritalStatusId: {
-                //                required: "Marital Status Required",
-                //                CheckDropDownList:"Select marital Status"
-                //            },
-                //            tsFname: {
-                //                required: "Treatment support first name required!",
-                //                lettersonly:"invalid character(s)"
-                //            },
-                //            tsLastName: {
-                //                required: "Treatment support last name required!",
-                //                lettersonly:"Invalid characters"
-                //            },
-                //            GuardianGender: {
-                //                required: "Guardian gender Required!"                              
-                //            }
-                //        },
-                //        highlight: function (e) {
-                //            $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-                //        },
-                        
-                //        success: function (e) {
-                //            $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
-                //            $(e).remove();
-                //        },
-
-                //        errorPlacement: function (error, element) {
-                //            if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-                //                var controls = element.closest('div[class*="col-"]');
-                //                if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                //                else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-                //            }
-                //            else if(element.is('.select2')) {
-                //                error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-                //            }
-                //            else if(element.is('.chosen-select')) {
-                //                error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-                //            }
-                //            else error.insertAfter(element.parent());
-                //        },
-                //        invalidHandler:function(event, validator) {
-                //            var errors = validator.numberOfInvalids();
-                //            if (errors) {
-                //                var message = errors === 1
-                //                    ? 'You Missed 1 field.It hasbeen highlighted'
-                //                    : 'You missed ' + errors + 'fields.They have been highligted';
-                //                $("div.error span").html(message).addClass("has-error");
-                //                //$(this).defaultShowErrors();
-                //                $("div.error").show();
-                //            } else {
-                //                $("div.error").hide();
-                //            }
-                //        },
-                //        submitHandler:function(form) {
-                //            /*submit form here */
-                //        }
-                //    });
-
                 /* calculate Person Age */
                 function getAge(dateString) 
                 {
@@ -829,8 +620,8 @@
                     return age;
                 }
 
-                function getSubcountyList() {
-                    
+                function getSubcountyList()
+                {
                     var countyId = $("#<%=countyId.ClientID%>").find(":selected").text();
                     $.ajax({
                         type: "POST",
@@ -840,6 +631,7 @@
                         dataType: "json",
                         success: function (response) {
                             var itemList = JSON.parse(response.d);
+                            $("#<%=SubcountyId.ClientID%>").find('option').remove().end();
                             $("#<%=SubcountyId.ClientID%>").append('<option value="0">Select</option>');
                             $.each(itemList, function (index, itemList) {
                                 $("#<%=SubcountyId.ClientID%>").append('<option value="' + itemList.subcountyId + '">' + itemList.SubcountyName + '</option>');
@@ -849,6 +641,31 @@
                             alert(msg);
                         }
                     });
+                }
+
+                function getWardList()
+                {
+                    var subcountyName = $("#<%=SubcountyId.ClientID%>").find(":selected").text();
+                    alert(subcountyName);
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/LookupService.asmx/GetLookupWardList",
+                        data: "{'subcounty':'" + subcountyName + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var itemList = JSON.parse(response.d);
+                            $("#<%=WardId.ClientID%>").find('option').remove().end();
+
+                            $("#<%=WardId.ClientID%>").append('<option value="0">Select</option>');
+                            $.each(itemList, function (index, itemList) {
+                                $("#<%=WardId.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
+                            }); 
+                        },
+                        failure: function (msg) {
+                            alert(msg);
+                        }
+                    });     
                 }
 
             });

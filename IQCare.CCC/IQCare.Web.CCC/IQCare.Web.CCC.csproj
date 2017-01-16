@@ -56,7 +56,7 @@
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
     <Content Include="CCC\Patient\PatientFinder.aspx" />
-    <Content Include="CCC\Patient\PatientReg.aspx" />
+    <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -128,12 +128,12 @@
     <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Patient\PatientReg.aspx.cs">
-      <DependentUpon>PatientReg.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Patient\PatientReg.aspx.designer.cs">
-      <DependentUpon>PatientReg.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.designer.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientTest.aspx.cs">
       <DependentUpon>PatientTest.aspx</DependentUpon>
