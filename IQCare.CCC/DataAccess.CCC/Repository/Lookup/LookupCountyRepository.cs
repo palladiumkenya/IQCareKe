@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Net.Sockets;
-using System.Text;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.Context;
@@ -10,7 +10,7 @@ using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {
-    public class LookupCountyRepository:BaseRepository<LookupCounty>,ILookupCounty
+    public class LookupCountyRepository:BaseRepository<LookupCounty>, ILookupCounty
     {
         private readonly LookupContext _context;
 
@@ -18,9 +18,17 @@ namespace DataAccess.CCC.Repository.Lookup
         {
         }
 
-        public LookupCountyRepository(LookupContext context) : base(context)
+       public LookupCountyRepository(LookupContext context) : base(context)
        {
             _context = context;
+        }
+
+        public List<LookupCounty> FindBy(Func<LookupCounty, bool> p)
+        {
+           var results = _context.LookupCounties.Where(p);
+              //  .Where(p).ToList<LookupCounty>();
+
+            return results.ToList();
         }
 
         public List<LookupCounty> GetCounties()

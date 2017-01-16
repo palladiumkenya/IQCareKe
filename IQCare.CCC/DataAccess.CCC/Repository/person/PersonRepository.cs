@@ -6,14 +6,14 @@ namespace DataAccess.CCC.Repository.person
 {
    public class PersonRepository:BaseRepository<Person>,IPersonRepository
     {
-        private readonly personContext _context;
+        private readonly PersonContext _context;
 
-        public PersonRepository() : this(new PatientContext())
+        public PersonRepository() : this(new PersonContext())
         {
 
         }
 
-        public PersonRepository(personContext context) : base(context)
+        public PersonRepository(PersonContext context) : base(context)
         {
             _context = context;
         }

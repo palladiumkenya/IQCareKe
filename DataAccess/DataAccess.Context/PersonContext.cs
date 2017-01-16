@@ -6,8 +6,6 @@ using Entities.Common;
 namespace DataAccess.Context
 {
 
-
-
     public class PersonContext :BaseContext
     {
         public PersonContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
@@ -15,9 +13,12 @@ namespace DataAccess.Context
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
             // Configuration.LazyLoadingEnabled = true;
-            Database.SetInitializer<PersonContext>(null);
+           // Database.SetInitializer<PersonContact>(null);
         }
 
         public DbSet<Person> Persons  { get; set; }
+        public DbSet<PersonContact> PersonContacts { get; set; }
+        public DbSet<PersonRelationship> PersonRelationships { get; set; }
+        public DbSet<PersonLocation> PersonLocations { get; set; }
     }
 }

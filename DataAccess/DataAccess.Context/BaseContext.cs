@@ -10,9 +10,13 @@ namespace DataAccess.Context
         public BaseContext(DbConnection connection,bool flag) :  base(connection, flag)
         {
         }
-        //public BaseContext(string connection) : base(connection)
-        //{
-        //}
+        public BaseContext(string connection) : base(connection)
+        {
+        }
+
+        public BaseContext()
+        {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

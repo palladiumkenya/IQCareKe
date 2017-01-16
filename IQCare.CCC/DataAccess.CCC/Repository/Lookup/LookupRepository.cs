@@ -22,6 +22,14 @@ namespace DataAccess.CCC.Repository.Lookup
             _context = context;
         }
 
+        public List<LookupItemView> FindBy(Func<LookupItemView, bool> p)
+        {
+            var results = _context.Lookups.Where(p);
+            //  .Where(p).ToList<LookupCounty>();
+
+            return results.ToList();
+        }
+
         public List<LookupItemView> GetLookupItemViews(string listGroup)
         {
             ILookupRepository x = new LookupRepository();

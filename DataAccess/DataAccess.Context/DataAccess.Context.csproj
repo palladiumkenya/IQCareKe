@@ -82,6 +82,7 @@
     <Compile Include="ModuleMaster\ModuleRepository.cs" />
     <Compile Include="PatientContext.cs" />
     <Compile Include="PatientRepository.cs" />
+    <Compile Include="PersonContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

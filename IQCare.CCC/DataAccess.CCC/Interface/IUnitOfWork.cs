@@ -6,7 +6,7 @@ using DataAccess.CCC.Interface.Lookup;
 
 namespace DataAccess.CCC.Interface
 {
-    public interface IUnitOfWork : IDisposable
+    public interface UnitOfWork : IDisposable
     {
         int Complete();
         
