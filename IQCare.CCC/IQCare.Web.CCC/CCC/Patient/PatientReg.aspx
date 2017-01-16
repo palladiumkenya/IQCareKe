@@ -65,7 +65,7 @@
                                        <div class="form-group">
                                             <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
                                             <div class="col-md-12">
-                                                 <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text"></asp:TextBox>
+                                                 <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                             </div>
                                        </div>
                                   </div>
@@ -81,7 +81,7 @@
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
                                                         <div class="col-md-12">
-                                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" ></asp:TextBox>
+                                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" data-parsley-length="[2,25]"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                </div>
@@ -222,14 +222,14 @@
                                          <div class="col-md-3">
                                               <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
                                               <div class="col-md-12">
-                                                   <asp:TextBox type="text" runat="server" id="NationalId" name="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" />
+                                                   <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[8,8]"  />
                                                </div>
                                          </div>
                                          
                                          <div class="col-md-3">
                                              <div class="col-md-12"><label for="MaritalStatusId" class="control-label pull-left">Marital Status </label></div>
                                              <div class="col-md-12">
-                                                  <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" required="true"></asp:DropDownList>
+                                                  <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
                                              </div>
                                          </div> 
                                          <div class="col-md-3"></div>
@@ -272,22 +272,23 @@
                                            
 	                            </div><%-- .step-pane--%>
 
-	                            <div class="step-pane sample-pane" data-parsley-validate="true" data-step="2">      
-                                     <div class="col-md-12">
-                                               <small class="pull-left text-primary">2.Patient Location Details</small>
-                                              <hr />
-                                          </div><%-- .col-md-12--%>
+	                  <div class="step-pane sample-pane" id="datastep2" data-parsley-validate="true" data-step="2">      
+                           <div class="col-md-12">
+                                <small class="pull-left text-primary">2.Patient Location Details</small>
+                                <hr />
+                           </div><%-- .col-md-12--%>
                                          
-                                     <div class="col-md-12">
-                                               <div class="col-md-3">
+                           <div class="col-md-12">
+                                <div class="col-md-3">
                                                    <div class="form-group">
                                                         <div class="col-md-12"><label class="control-label pull-left">County</label></div>
                                                        <div class="col-md-12">
-                                                           <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" OnSelectedIndexChanged="countyId_SelectedIndexChanged" AutoPostBack="True" required="true"/>
+                                                           <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true"/>
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div class="col-md-3">
+
+                                <div class="col-md-3">
                                                    <div class="form-group">
                                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
                                                        <div class="col-md-12">
@@ -295,7 +296,8 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div class="col-md-3">
+
+                                <div class="col-md-3">
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
                                                       <div class="col-md-12">
@@ -303,7 +305,8 @@
                                                       </div>
                                                   </div>
                                               </div>
-                                               <div class="col-md-3">
+
+                                <div class="col-md-3">
                                                   <div class="form-group">
                                                       <div class="col-md-12"><label class="control-label pull-left">Local Council</label></div>
                                                       <div class="col-md-12">
@@ -311,112 +314,101 @@
                                                       </div>
                                                   </div>
                                                </div>
-                                            </div>
+                           </div>
 
-                                     <div class="col-md-12" style="padding-top:2%;padding-bottom:3%">
-                                               <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label class="control-label pull-left">Location</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:TextBox runat="server" ID="PatientLocation" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="location .."></asp:TextBox>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="form-group">
-                                                       <div class="col-md-12"><label class="control-label pull-left">Sub Location</label></div>
-                                                       <div class="col-md-12">
-                                                           <input type="text" runat="server" class="form-control input-sm" placeholder="sub location.." id="sublocation" name="sublocation" />
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                  <div class="form-group">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Landmark</label></div>
-                                                      <div class="col-md-12">
-                                                          <asp:TextBox runat="server" class="form-control input-sm" placeholder="landmark.." id="PatientLandmark" name="landmark" required="true" />
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                               <div class="col-md-3">
-                                                  <div class="form-group">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Nearest Health Centre</label></div>
-                                                      <div class="col-md-12">
-                                                           <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" required="true" ></asp:TextBox>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>                                                
-                                </div><%-- .step-pane-2--%>
+                           <div class="col-md-12 form-group">
+                                <div class="col-md-3">
+                                      <div class="col-md-12"><label class="control-label pull-left">Location</label></div>
+                                      <div class="col-md-12">
+                                           <asp:TextBox runat="server" ID="PatientLocation" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="location .."></asp:TextBox>
+                                      </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Sub Location</label></div>
+                                    <div class="col-md-12">
+                                         <input type="text" runat="server" class="form-control input-sm" placeholder="sub location.." id="sublocation" name="sublocation" />
+                                    </div>     
+                               </div>
 
-	                            <div class="step-pane sample-pane" data-parsley-validate="true" data-step="3">
+                               <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Landmark</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox runat="server" class="form-control input-sm" placeholder="landmark.." id="PatientLandmark" data-parsley-required="true" data-parsley-length="[2,100]" />
+                                    </div>
+                               </div>
+                               
+                               <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Nearest Health Centre</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
+                                    </div>
+                               </div>
+                           </div>                                                
+                      </div><%-- .step-pane-2--%>
+
+	                  <div class="step-pane sample-pane" id="datastep3" data-parsley-validate="true" data-step="3">
+                           <div class="col-md-12">
+                                <small class="text-primary pull-left"> 3. Patient Conatcts </small>
+                                <hr />
+                           </div>
+
+                           <div class="col-md-12 form-group">
+                                <div class="col-md-4">
+                                     <div class="col-md-12"><label class="control-label pull-left">Postal Address</label></div>
                                      <div class="col-md-12">
-                                                <small class="text-primary pull-left"> 3. Patient Conatcts </small>
-                                               <hr />
-                                           </div>
+                                          <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-required="true" data-parsley-length="[8,100]" ClientIDMode="Static"/>
+                                     </div>     
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox  runat="server" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[10,14]" />
+                                    </div>         
+                               </div>
+                               
+                                <div class="col-md-2">
+                                    <div class="col-md-12"><label class="control-label pull-left">Alt. Mobile No.</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox runat="server" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" placeholder="alternative mobile no..." ClientIDMode="Static"  />
+                                    </div>       
+                              </div>
 
-                                     <div class="col-md-12" style="padding-bottom:3%">
-                                               <div class="col-md-4">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label class="control-label pull-left">Postal Address</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" required="true" ClientIDMode="Static"/>
-                                                      </div>
-                                                   </div>
-                                               </div>
-                                              <div class="col-md-2">
-                                                   <div class="form-group">
-                                                       <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:TextBox  runat="server" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" required="true" />
-                                                      </div>
-                                                   </div>
-                                              </div>
-                                              <div class="col-md-2">
-                                                   <div class="form-group">
-                                                       <div class="col-md-12"><label class="control-label pull-left">Alt. Mobile No.</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:TextBox runat="server" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" placeholder="alternative mobile no..." ClientIDMode="Static"  />
-                                                      </div>
-                                                   </div>
-                                              </div>
-
-                                              <div class="col-md-4">
-                                                  <div class="form-group">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Email Address</label></div>
-                                                      <div class="col-md-12">
-                                                           <asp:TextBox runat="server" id="PatientEmailAddress" name="PatientEmailAddress" class="form-control input-sm" placeholder="email address" ClientIDMode="Static" />
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                    
+                                <div class="col-md-4">
+                                   <div class="col-md-12"><label class="control-label pull-left">Email Address</label></div>
+                                   <div class="col-md-12">
+                                        <asp:TextBox runat="server" id="PatientEmailAddress" name="PatientEmailAddress" class="form-control input-sm" placeholder="email address" ClientIDMode="Static" data-parsley-type="email" />
+                                   </div>    
+                              </div>
+                            </div> 
                                    
-                                    <div class="col-md-12"><label class=" control-label text-primary  pull-left">Treatment Supporter Information</label></div>
-                                     <div class="col-md-12"><hr/></div>
-                                    <div class="col-md-12 form-group">
-                                         <div class="col-md-3">
+                           <div class="col-md-12"><label class=" control-label text-primary  pull-left">Treatment Supporter Information</label></div>
+                           <div class="col-md-12"><hr/></div>
+                            
+                           <div class="col-md-12 form-group">
+                                <div class="col-md-3">
                                               <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
                                               <div class="col-md-12">
-                                                   <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" required="true"></asp:TextBox>
+                                                   <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                                </div>
                                          </div>
 
-                                         <div class="col-md-3">
+                                <div class="col-md-3">
                                              <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
                                              <div class="col-md-12">
                                                   <asp:DropDownList runat="server" ID="tsMiddleName" ClientIDMode="Static" CssClass="form-control input-sm"/>
                                              </div>
                                          </div>
 
-                                         <div class="col-md-3">
+                                <div class="col-md-3">
                                               <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
                                               <div class="col-md-12">
-                                                   <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" required="true"></asp:TextBox>
+                                                   <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                               </div>
                                          </div>
 
-                                         <div class="col-md-3">
+                                <div class="col-md-3">
                                               <div class="form-group">
                                                   <div class="col-md-12"><label class="control-label pull-left">Gender </label></div>
                                                   <div class="col-md-12">
@@ -424,68 +416,63 @@
                                                   </div>
                                               </div>
                                          </div>
-                                    </div>
-                                    
-                                    <div class="col-md-12 form-group">
-                                         <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <div class="col-md-12"><label class="control-label pull-left">Mobile Contact </label></div>
-                                                  <div class="col-md-12">
-                                                      <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContacts" placeholder="mobile no.." required="true"></asp:TextBox>
-                                                  </div>
-                                              </div>
-                                         </div> 
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-3"></div>
-                                    </div>
-	                            </div><%-- .step-pane-3--%>
+                            </div>
+                                   
+                           <div class="col-md-12 form-group">
+                                 <div class="col-md-3">
+                                      <div class="col-md-12"><label class="control-label pull-left">Mobile Contact </label></div>
+                                      <div class="col-md-12">
+                                           <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContacts" placeholder="mobile no.." data-parsley-required="true" data-parsley-length="[8,14]"></asp:TextBox>
+                                      </div>
+                                 </div> 
+                                 <div class="col-md-3"></div>
+                                 <div class="col-md-3"></div>
+                                 <div class="col-md-3"></div>
+                            </div>
+	                  </div><%-- .step-pane-3--%>
 
-                                <div class="step-pane sample-pane" data-parsley-validate="true" data-step="4">
+                      <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-step="4">
+                           <div class="col-md-12">
+                               <small class="pull-left text-primary"> 4. Patient population categorization</small>
+                               <hr />
+                           </div>
+
+                           <div class="col-md-12 form-group">
+                                <div class="col-md-3">
+                                     <div class="form-group"><label class="control-label pull-left text-primary">Population type</label></div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                                    
+                                     <div class="form-group"><div class="col-md-12"><label class="control-label pull-left">Select Population type</label></div></div>
+                                                        
+                                     <div class="col-md-12 radio">
+                                          <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
+                                          <input class="sr-only" id="rdbGenPopulation" name="Population" type="radio" value="option1">
+                                              Genenal Population
+                                          </label>
+                                     </div>
                                      
-                                     <div class="col-md-12">
-                                                <small class="pull-left text-primary"> 4. Patient population categorization</small>
-                                               <hr />
-                                           </div>
-
-                                     <div class="col-md-12" style="padding-top:2%;padding-bottom:3%">
-                                               <div class="col-md-3">
-                                                    <div class="form-group"><label class="control-label pull-left text-primary">Population type</label></div>
-                                               </div>
-                                               <div class="col-md-4">
-                                                    <div class="form-group">
-                                                         <div class="form-group"><div class="col-md-12"><label class="control-label pull-left">Select Population type</label></div></div>
-                                                        
-                                                             <div class="col-md-12 radio">
-                                                                  <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
-                                                                    <input class="sr-only" id="rdbGenPopulation" name="Population" type="radio" value="option1">
-                                                                    Genenal Population
-                                                                  </label>
-                                                                </div>
-
-                                                                <div class="col-md-12 radio checked">
-                                                                  <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
-                                                                    <input class="sr-only" checked="checked" id="rdbKeyPopulation" name="Population" type="radio" value="option2">
-                                                                    Key population
-                                                                  </label>
-                                                                </div>
-                                                        
-                                                    </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                    <div class="form-group">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Select if Key.Pop</label></div>
-                                                        <div class="col-md-12">
-                                                             <select runat="server" class="form-control" id="KeyPopulationChoose" name="KeyPopulationChoose"></select>
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                               <div class="col-md-2"></div>
-                                           </div>
+                                     <div class="col-md-12 radio checked">
+                                          <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
+                                          <input class="sr-only" checked="checked" id="rdbKeyPopulation" name="Population" type="radio" value="option2">
+                                                Key population
+                                          </label>
+                                     </div>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Select if Key.Pop</label></div>
+                                    <div class="col-md-12">
+                                         <select runat="server" class="form-control" id="KeyPopulationChoose" name="KeyPopulationChoose"></select>
+                                    </div>        
+                               </div>
+                                <div class="col-md-2"></div>
+                           </div>
                                           
-	                            </div><%-- .step-content-4--%>
+	                  </div><%-- .step-content-4--%>
 
-                           </div><%-- .step-content--%>
+                 </div><%-- .step-content--%>
 
             </div><%-- .wizard--%>
         </div><%-- .col-md-12--%>
@@ -509,47 +496,56 @@
                     $('#<%=personAge.ClientID%>').val(getAge(x));
                 });
 
+                $('#<%=countyId.ClientID%>')
+                    .on("change",
+                        function() {
+                            var countyName = $(this).find(":selected").text();
+                            // alert(countyName);
+                            getSubcountyList();
+                        });
                 var personAge = 0;
 
                 /* Business Rules setup */
                 $('#<%=personAge.ClientID%>')
-                    .on("change",function() {
+                    .on("blur",function() {
                         personAge = $(this).val();
+                        
                         if (personAge >= 18) {
                             
+                            <%--
                             $("#<%=NationalId.ClientID%>").removeAttr('disabled');
                             $("#<%=MaritalStatusId.ClientID%>").removeAttr('disabled');
-                             
-                            $("#<%=ChildOrphan.ClientID%>").Attr('disabled','disabled');
-                            $("#<%=Inschool.ClientID%>").Attr('disabled','disabled');
-                            $("#<%=GurdianFNames.ClientID%>").attr('disabled', 'disbaled');
-                            $("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
-                            $("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
-                            $("#<%=GuardianGender.ClientID%>").attr('disabled', 'disbaled');
+                             --%>
+                            $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                            $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                            $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                            $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                            $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                            $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
 
-                            $('#<%=GurdianFNames.ClientID%>').parsley('removeConstraint', 'required');
+                            <%-- $('#<%=GurdianFNames.ClientID%>').parsley('removeConstraint', 'required');
                             $("#<%=GurdianLName.ClientID%>").parsley('removeConstraint', 'required');   
-                            $("#<%=NationalId.ClientID%>").parsley('removeConstraint', 'required'); 
+                            $("#<%=NationalId.ClientID%>").parsley('removeConstraint', 'required'); --%>
 
                         } else {
-                            $("#<%=ChildOrphan.ClientID%>").removeAttr('disabled');
-                            $("#<%=Inschool.ClientID%>").removeAttr('disabled');
-                            $("#<%=GurdianFNames.ClientID%>").removeAttr('disabled', 'disbaled');
-                            $("#<%=GurdianMName.ClientID%>").removeAttr('disabled', 'disbaled');
-                            $("#<%=GurdianLName.ClientID%>").removeAttr('disabled', 'disbaled');
-                            $("#<%=GuardianGender.ClientID%>").removeAttr('disabled', 'disbaled');
+                            $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                            $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                            $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                            $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                            $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                            $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
 
-                            $('#<%=GurdianFNames.ClientID%>').attr('data-parsley-required');
+                            <%--                            $('#<%=GurdianFNames.ClientID%>').attr('data-parsley-required');
                             $("#<%=GurdianLName.ClientID%>").parsley('addConstraint', { required: true });
-                            $("#<%=NationalId.ClientID%>").parsley('addConstraint', { required:true });
+                            $("#<%=NationalId.ClientID%>").parsley('addConstraint', { required:true });--%>
                         }
                     });
                 
                 /* make readonly by default */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=Inschool.ClientID%>").attr('disabled', 'disbaled');
-                $("#<%=NationalId.ClientID%>").attr('disabled', 'disbaled');
-                $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disbaled');
+                <%--            $("#<%=NationalId.ClientID%>").attr('disabled', 'disbaled');
+                $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disbaled');--%>
                 $("#<%=GurdianFNames.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
                 $("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
@@ -559,60 +555,66 @@
                 $('#<%=countyId.ClientID%>')
                     .change(function() {
                         var county = $('#<%=countyId.ClientID%>').Text();
-
                     });
 
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
-                            var currentStep = data.step;
-                            var nextStep = 0;
-                            var previousStep = 0;
-                            /*var form = $("form[name='form1']");*/
+                        var currentStep = data.step;
+                        var nextStep = 0;
+                        var previousStep = 0;
+                        var totalError = 0;
+                        var stepError = 0;
+                        /*var form = $("form[name='form1']");*/
                            
 
-                            if (data.direction === 'next')
-                               nextStep=currentStep += 1;
-                            else
-                               previousStep=nextStep -= 1;
-                            if (data.step === 1) {
+                        if (data.direction === 'next')
+                            nextStep=currentStep += 1;
+                        else
+                            previousStep=nextStep -= 1;
+                        if (data.step === 1) {
 
-                                /* add constraints based on age*/
+                            /* add constraints based on age*/
                                           
-                                if ($('#datastep1').parsley().validate()) {
-                                    
-                                    var ok = $('.parsley-error').length === 0;
-                                    $('.bs-callout-info').toggleClass('hidden', !ok);
-                                    $("#myWizard").wizard('next');
-                                } else {
-                                    var f = $('.parsley-error').length === 0;
+                            if ($('#datastep1').parsley().validate()) {
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        else if (data.step === 2) {
+                            if ($("#datastep2").parsley().validate()) {
+
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        else if (data.step === 3) {
+                            if ($("#datastep3").parsley().validate()) {
+
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        else if (data.step===4) {
+                            if ($("#datastep2").parsley().validate()) {
+
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                if (totalError > 0) {
                                     $('.bs-callout-danger').toggleClass('hidden', f);
-                                    evt.preventDefault();
                                 }
-                                
-                                //var isvalid = $("#form1").isValid();
-                                //if (isvalid) { $("#myWizard").wizard('next'); }else {return false}
-                                //var validator = $("#form1").validate();
-                                //validator.element("#datastep1");
-
-                                //var fields =$("#form1").find("#step-content").find("#datastep1").find(".form-control");
-                                //var isValid = validator.valid();
-
-                                //if (isValid) {
-                                //    $("#myWizard").wizard('next');
-                                //} else {
-                                //    evt.preventDefault();
-                                //}
+                                evt.preventDefault();
                             }
-                            else if (data.step === 2) {
-                                
-                            }
-                            else if (data.step === 3) {
-                                
-                            }
-                            else if (data.step===4) {
-                                
-                             }
-                        })
+                            //var ok4 = $('.parsley-error').length === 0;
+                            //$('.bs-callout-info').toggleClass('hidden', !ok4);
+                        }
+                    })
                     .on("changed.fu.wizard",
                         function() {
 
@@ -827,7 +829,29 @@
                     return age;
                 }
 
+                function getSubcountyList() {
+                    
+                    var countyId = $("#<%=countyId.ClientID%>").find(":selected").text();
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/LookupService.asmx/GetLookupSubcountyList",
+                        data: "{'county':'" + countyId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var itemList = JSON.parse(response.d);
+                            $("#<%=SubcountyId.ClientID%>").append('<option value="0">Select</option>');
+                            $.each(itemList, function (index, itemList) {
+                                $("#<%=SubcountyId.ClientID%>").append('<option value="' + itemList.subcountyId + '">' + itemList.SubcountyName + '</option>');
+                            }); 
+                        },
+                        failure: function (msg) {
+                            alert(msg);
+                        }
+                    });
+                }
 
             });
+
     </script>
 </asp:Content>

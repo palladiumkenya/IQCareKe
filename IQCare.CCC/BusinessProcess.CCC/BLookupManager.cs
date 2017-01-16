@@ -42,5 +42,7 @@ namespace BusinessProcess.CCC
             LookupCountyRepository lookupCountyRepository= new LookupCountyRepository();
             return lookupCountyRepository.GetWardsList(subcounty);
         }
+
+
     }
 }
