@@ -1,9 +1,11 @@
 ﻿using System;
-
+using DataAccess.CCC.Context;
 using DataAccess.Context;
 using DataAccess.Context.ModuleMaster;
 using DataAccess.CCC.Interface;
 using DataAccess.CCC.Repository.Patient;
+using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Repository.Lookup;
 
 namespace DataAccess.CCC.Repository
 {
@@ -19,8 +21,11 @@ namespace DataAccess.CCC.Repository
         private IPatientOVCStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
-
         private IModuleRepository _moduleRepository;
+
+        //lookupContext
+        private ILookupRepository _lookupRepository;
+        private ILookupMasterRepository _lookupMasterRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -85,6 +90,20 @@ namespace DataAccess.CCC.Repository
                 return _moduleRepository ?? (_moduleRepository = new ModuleRepository((GreencardContext)_context));
             }
         }
+
+        public ILookupRepository LookupRepository
+        {
+            get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext) _context)); }
+        }
+
+        public ILookupMasterRepository LookupMasterRepository
+        {
+            get
+            {
+                return _lookupMasterRepository ?? (_lookupMasterRepository = new LookupMasterRepository((LookupContext)_context));
+            }
+        }
+
         public  void  Dispose()
         {
             _context.Dispose();

@@ -54,5 +54,20 @@
 .bs-callout-info h4 {
     color: #5bc0de;
 }
+.error{
+ border-color: #f2a696;
+}
+.form-group.has-success .input-group .input-group-addon {
+  border-color: #9cc573;
+}
+.form-group.has-error .input-group .input-group-addon {
+  border-color: #f2a696;
+}
+.form-group.has-warning .input-group .input-group-addon {
+  border-color: #e3c94c;
+}
+.form-group.has-info .input-group .input-group-addon {
+  border-color: #72aec2;
+}
 
 

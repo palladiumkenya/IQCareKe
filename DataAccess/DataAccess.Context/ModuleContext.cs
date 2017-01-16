@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Context
 {
-    public class ModuleContext : BaseContext
+    public class ModuleContext //: BaseContext
     {
     }
 }

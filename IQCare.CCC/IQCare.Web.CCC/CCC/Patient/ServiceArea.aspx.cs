@@ -10,12 +10,12 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            IModuleRepository mr = new ModuleRepository();
-            List<Entities.Administration.ServiceArea> _serviceList = mr.GetModuleServiceArea((mr.GetById(1)).Id);
-            DropDownList1.DataSource = _serviceList;
-            DropDownList1.DataTextField = "DisplayName";
-            DropDownList1.DataValueField = "Id";
-            DropDownList1.DataBind();
+            //IModuleRepository mr = new ModuleRepository();
+            //List<Entities.Administration.ServiceArea> _serviceList = mr.GetModuleServiceArea((mr.GetById(1)).Id);
+            //DropDownList1.DataSource = _serviceList;
+            //DropDownList1.DataTextField = "DisplayName";
+            //DropDownList1.DataValueField = "Id";
+            //DropDownList1.DataBind();
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)

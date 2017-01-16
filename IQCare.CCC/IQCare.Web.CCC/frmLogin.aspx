@@ -341,9 +341,9 @@ window.open('http://creativecommons.org/licenses/by-nc-sa/3.0/'); return false;"
         </div><!-- .col-md-12-->
      </div><!-- .container-->
 
-  
-    <script src="Content/js/bootstrap.js" type="text/javascript"></script>
-    <script src="Content/js/parsley.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./Incl/jquery-1.9.1.js">  </script>
+    <script src="./Content/js/bootstrap.js" type="text/javascript"></script>
+    <script src="./Content/js/parsley.js" type="text/javascript"></script>
     
     <script language="javascript" type="text/javascript">
 

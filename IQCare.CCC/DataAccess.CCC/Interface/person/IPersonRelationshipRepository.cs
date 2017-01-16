@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Entities.CCC.Baseline
+namespace DataAccess.CCC.Interface.person
 {
-    class Test
+    class IPersonRelationshipRepository
     {
     }
 }

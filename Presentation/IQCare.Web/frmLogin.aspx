@@ -155,8 +155,8 @@
     <!-- .col-md-12-->
      <!-- .container-->
     <script type="text/javascript" src="./Incl/jquery-1.9.1.js">  </script>
-    <script src="Content/js/bootstrap.js" type="text/javascript"></script>
-    <script src="Content/js/parsley.js" type="text/javascript"></script>
+    <script src="./Content/js/bootstrap.js" type="text/javascript"></script>
+    <script src="./Content/js/parsley.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript">
 
         function pageLoad() {
