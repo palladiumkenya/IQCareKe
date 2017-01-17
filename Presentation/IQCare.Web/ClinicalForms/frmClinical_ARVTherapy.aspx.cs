@@ -1365,7 +1365,7 @@ namespace IQCare.Web.Clinical
         /// Validate_s the data_ quality.
         /// </summary>
         /// <returns></returns>
-        private Boolean Validate_Data_Quality()
+        private bool Validate_Data_Quality()
         {
             if (txtanotherwght.Value != "")
             {
