@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
     public class LookupLogic
     {
 
-        public static string GeSubCountyListJSON(string county)
+        public static string GeSubCountyListJson(string county)
         {
             string jsonObject = "[]";
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -29,7 +29,7 @@ namespace IQCare.CCC.UILogic
             return jsonObject;
         }
 
-        public static string GetLookupWardListJSON(string subcounty)
+        public static string GetLookupWardListJson(string subcounty)
         {
             string jsonObject;
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.CCC.dll</HintPath>
@@ -69,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLookupManager.cs" />
-    <Compile Include="BPatient.cs" />
+    <Compile Include="BPersonManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

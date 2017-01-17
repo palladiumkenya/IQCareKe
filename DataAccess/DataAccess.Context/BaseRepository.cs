@@ -11,6 +11,7 @@ namespace DataAccess.Context
     {
         protected internal BaseContext _baseContext;
         internal IDbSet<T> _dbSet;
+
         public BaseRepository(BaseContext context)
         {
             _baseContext = context;

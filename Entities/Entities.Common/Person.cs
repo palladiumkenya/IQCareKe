@@ -6,7 +6,7 @@ namespace Entities.Common
     /// 
     /// </summary>
     [Serializable]
-    public  class Person
+    public  class Person:BaseObject
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -46,7 +46,8 @@ namespace Entities.Common
         {
             get { return FirstName + ", "+ MidName +" " + LastName; }
         }
-      //  public int IdentificationType { get; set; }
+        //  public int IdentificationType { get; set; }
+        public int Sex { get; set; }
         public string NationalId { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace DataAccess.Context
             labContext.Set<TEntity>().Remove(entityToDelete);
             labContext.SaveChanges();
         }
+
         public virtual void Delete(TEntity entityToDelete)
         {
             if(labContext.Entry(entityToDelete).State == EntityState.Detached)

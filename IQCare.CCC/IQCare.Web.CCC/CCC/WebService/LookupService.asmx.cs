@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookupSubcountyList(string county)
         {
-          string jsonObject=  LookupLogic.GeSubCountyListJSON(county);
+          string jsonObject=  LookupLogic.GeSubCountyListJson(county);
             //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(county);
             //if (lookupCounties != null && lookupCounties.Count > 0)
@@ -53,7 +53,7 @@ namespace IQCare.Web.CCC.WebService
             //}
             //return jsonObject;
 
-            string jsonObject = LookupLogic.GetLookupWardListJSON(subcounty);
+            string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);
             return jsonObject;
         }
     }

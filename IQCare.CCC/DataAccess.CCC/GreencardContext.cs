@@ -10,7 +10,8 @@ namespace DataAccess.CCC
 {
    public class GreencardContext:DbContext
     {
-        public GreencardContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
+        public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
+        {
         }
         //public GreencardContext(string connection) : base(connection)
         //{

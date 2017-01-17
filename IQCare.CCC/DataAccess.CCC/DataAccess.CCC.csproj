@@ -91,6 +91,7 @@
     <Compile Include="Interface\person\IPersonLocationRepository.cs" />
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Repository\person\PersonContactRepository.cs" />
     <Compile Include="Repository\person\PersonLocationRepository.cs" />
     <Compile Include="Repository\person\PersonRelationshipRepository.cs" />
     <Compile Include="Repository\person\PersonRepository.cs" />
