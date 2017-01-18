@@ -31,7 +31,7 @@ namespace DataAccess.Context
         }
         public virtual IEnumerable<T> GetAll()
         {
-            return _dbSet;
+            return _dbSet.ToList();
         }
 
         public virtual void Add(T entity)

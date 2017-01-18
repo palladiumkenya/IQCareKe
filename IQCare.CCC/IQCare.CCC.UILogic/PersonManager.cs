@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
             
         }
 
-        public int AddPerson(string fname, string mname, string lname,int gender,string natId)
+        public int AddPersonUiLogic(string fname, string mname, string lname,int gender,string natId)
         {
             int retval = 0;
 

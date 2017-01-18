@@ -30,7 +30,14 @@ namespace BusinessProcess.CCC
         {
             Person personInfo = _unitOfWork.PersonRepository.GetById(id);
             _unitOfWork.PersonRepository.Remove(personInfo);
+            _unitOfWork.Complete();
 
+        }
+
+        public void UpdatePerson(Person p)
+        {
+            _unitOfWork.PersonRepository.Update(p);
+            _unitOfWork.Complete();
         }
        
    }

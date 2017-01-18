@@ -63,6 +63,7 @@
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
+    <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="fuelux\css\fuelux.css" />
     <Content Include="fuelux\css\fuelux.min.css" />
     <Content Include="fuelux\fonts\fuelux.svg" />
@@ -202,9 +203,17 @@
       <DependentUpon>LookupService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PersonService.asmx.cs">
+      <DependentUpon>PersonService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>

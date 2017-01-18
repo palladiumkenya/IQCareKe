@@ -11,6 +11,7 @@ namespace Interface.CCC
         int AddPerson(Person p);
         Person GetPerson(int id);
         void DeletePerson(int id);
+        void UpdatePerson(Person p);
         //string VoidPerson(int id);
         //string DeletePerson(int id);
     }
