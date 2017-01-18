@@ -87,6 +87,14 @@
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupItemRepository.cs" />
+    <Compile Include="Interface\person\IPersonContactRepository.cs" />
+    <Compile Include="Interface\person\IPersonLocationRepository.cs" />
+    <Compile Include="Interface\person\IPersonRepository.cs" />
+    <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Repository\person\PersonContactRepository.cs" />
+    <Compile Include="Repository\person\PersonLocationRepository.cs" />
+    <Compile Include="Repository\person\PersonRelationshipRepository.cs" />
+    <Compile Include="Repository\person\PersonRepository.cs" />
     <Compile Include="Repository\Lookup\LookupCountyRepository.cs" />
     <Compile Include="Repository\Lookup\LookupMasterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupRepository.cs" />
@@ -96,13 +104,13 @@
     <Compile Include="Repository\Patient\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\Patient\IPatientOVCStatusRepository.cs" />
     <Compile Include="Repository\Patient\IPatientPopulationRepository.cs" />
-    <Compile Include="Interface\IPersonRelationshipRepository.cs" />
     <Compile Include="Repository\ICCCPatientRepository.cs" />
     <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CCCPatientRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\Baseline\" />

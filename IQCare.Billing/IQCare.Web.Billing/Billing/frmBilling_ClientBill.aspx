@@ -139,47 +139,7 @@
         <h2 class="forms" align="left">
             Patient Bill</h2>
     </div>
-    <%--<table cellspacing="6" cellpadding="0" width="100%" border="0">
-        <tbody>
-            <tr>
-                <td class="form">
-                    <div class="grid" style="width: 100%;">
-                        <div class="rounded">
-                            <div class="mid-outer">
-                                <div class="mid-inner">
-                                    <div class="mid">
-                                        <label>
-                                            Patient Name:
-                                            <asp:Label ID="lblname" runat="server"></asp:Label>
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            Sex:
-                                            <asp:Label ID="lblsex" runat="server"></asp:Label>
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            DOB:
-                                            <asp:Label ID="lbldob" runat="server"></asp:Label>
-                                        </label>
-                                        &nbsp;&nbsp;<label>
-                                            Facility ID:
-                                            <asp:Label ID="lblFacilityID" runat="server"></asp:Label>
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            IQCare Reference Number:
-                                            <asp:Label ID="lblIQno" runat="server"></asp:Label>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>--%>
+ 
     <div class="container-fluid">
         <asp:UpdatePanel ID="upError" runat="server">
             <ContentTemplate>

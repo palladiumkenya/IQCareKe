@@ -1192,7 +1192,7 @@ namespace IQCare.Web.Pharmacy
                 }
 
                 txtWeight.Attributes.Add("onkeyup", "chkDecimal('" + txtWeight.ClientID + "')");
-                txtHeight.Attributes.Add("onkeyup", "chkNumeric('" + txtHeight.ClientID + "')");
+                txtHeight.Attributes.Add("onkeyup", "chkDecimal('" + txtHeight.ClientID + "')");
                 txtBSA.Attributes.Add("onkeyup", "chkNumeric('" + txtBSA.ClientID + "')");
 
                 txtpharmAppntDate.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");

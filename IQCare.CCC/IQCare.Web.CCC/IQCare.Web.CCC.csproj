@@ -56,7 +56,7 @@
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
     <Content Include="CCC\Patient\PatientFinder.aspx" />
-    <Content Include="CCC\Patient\PatientReg.aspx" />
+    <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -69,6 +69,7 @@
     <Content Include="fuelux\js\fuelux.js" />
     <Content Include="fuelux\js\fuelux.min.js" />
     <Content Include="fuelux\js\npm.js" />
+    <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -127,12 +128,12 @@
     <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Patient\PatientReg.aspx.cs">
-      <DependentUpon>PatientReg.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Patient\PatientReg.aspx.designer.cs">
-      <DependentUpon>PatientReg.aspx</DependentUpon>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.designer.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientTest.aspx.cs">
       <DependentUpon>PatientTest.aspx</DependentUpon>
@@ -197,6 +198,10 @@
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\LookupService.asmx.cs">
+      <DependentUpon>LookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +228,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
+    <Reference Include="IQCare.CCC.UILogic">
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.dll</HintPath>
@@ -240,6 +248,7 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.Design">

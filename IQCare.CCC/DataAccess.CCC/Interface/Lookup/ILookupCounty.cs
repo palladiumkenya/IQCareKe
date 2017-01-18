@@ -12,5 +12,6 @@ namespace DataAccess.CCC.Interface.Lookup
        List<LookupCounty> GetCounties();
        List<LookupCounty> GetSubCounties(string county);
        List<LookupCounty> GetWardsList(string subcounty);
-   }
+       List<LookupCounty> FindBy(Func<LookupCounty, bool> p);
+    }
 }

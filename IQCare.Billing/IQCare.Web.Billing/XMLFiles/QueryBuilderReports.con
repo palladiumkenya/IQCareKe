@@ -30,6 +30,13 @@
     <CategoryId>1</CategoryId>
     <CategoryName>Billing</CategoryName>
     <ReportId>2</ReportId>
+    <ReportName>Summary Collections for Type</ReportName>
+    <ReportDescription>Summary Collections for Type</ReportDescription>
+  </QueryBuilderReports>
+  <QueryBuilderReports>
+    <CategoryId>1</CategoryId>
+    <CategoryName>Billing</CategoryName>
+    <ReportId>3</ReportId>
     <ReportName>Receipt Analysis</ReportName>
     <ReportDescription>Receipt Analysis</ReportDescription>
   </QueryBuilderReports>

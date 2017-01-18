@@ -40,6 +40,16 @@ namespace IQCare.Web.CCC.Patient
                 }
             }
 
+            List<LookupItemView> lookItemByGroup = mgr.GetLookItemByGroup("YesNo");
+            if (lookItemByGroup != null && lookItemByGroup.Count > 0)
+            {
+                foreach (var k in lookItemByGroup)
+                {
+                    Inschool.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    ChildOrphan.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                }
+            }
+
             List<LookupCounty> ct = mgr.GetLookupCounties();
             
             if (ct != null && ct.Count > 0)
@@ -54,15 +64,15 @@ namespace IQCare.Web.CCC.Patient
 
         protected void countyId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(countyId.SelectedItem.Text);
-            if (lookupCounties != null && lookupCounties.Count > 0)
-            {
-                foreach (var items in lookupCounties)
-                {
-                    SubcountyId.Items.Add(new ListItem(items.SubcountyName, items.SubcountyId.ToString()));
-                }
-            }
+            //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            //List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(countyId.SelectedItem.Text);
+            //if (lookupCounties != null && lookupCounties.Count > 0)
+            //{
+            //    foreach (var items in lookupCounties)
+            //    {
+            //        SubcountyId.Items.Add(new ListItem(items.SubcountyName, items.SubcountyId.ToString()));
+            //    }
+            //}
         }
 
         protected void WardId_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,15 +82,15 @@ namespace IQCare.Web.CCC.Patient
 
         protected void SubcountyId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupCounty> lookupCounties = lookupManager.GetLookupWards(SubcountyId.SelectedItem.Text);
-            if (lookupCounties != null && lookupCounties.Count > 0)
-            {
-                foreach (var items in lookupCounties)
-                {
-                    WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
-                }
-            }
+            //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            //List<LookupCounty> lookupCounties = lookupManager.GetLookupWards(SubcountyId.SelectedItem.Text);
+            //if (lookupCounties != null && lookupCounties.Count > 0)
+            //{
+            //    foreach (var items in lookupCounties)
+            //    {
+            //        WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
+            //    }
+            //}
         }
     }
 }

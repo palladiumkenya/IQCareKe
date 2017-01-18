@@ -11,5 +11,7 @@ namespace DataAccess.CCC.Interface.Lookup
     public interface ILookupRepository:IRepository<LookupItemView>
     {
         List<LookupItemView> GetLookupItemViews(string listGroup);
+        List<LookupItemView> FindBy(Func<LookupItemView, bool> p);
+
     }
 }

@@ -5,14 +5,18 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DataAccess.Context
 {
-    public abstract class BaseContext : DbContext
+    public  class BaseContext : DbContext
     {
         public BaseContext(DbConnection connection,bool flag) :  base(connection, flag)
         {
         }
-        //public BaseContext(string connection) : base(connection)
-        //{
-        //}
+        public BaseContext(string connection) : base(connection)
+        {
+        }
+
+        public BaseContext()
+        {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

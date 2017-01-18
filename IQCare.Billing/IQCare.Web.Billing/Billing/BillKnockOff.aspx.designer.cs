@@ -202,24 +202,6 @@ namespace IQCare.Web.Billing {
         protected global::System.Web.UI.WebControls.TextBox txtKOFrom;
         
         /// <summary>
-        /// imFrom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imFrom;
-        
-        /// <summary>
-        /// calFrom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender calFrom;
-        
-        /// <summary>
         /// txtKOTo control.
         /// </summary>
         /// <remarks>
@@ -227,24 +209,6 @@ namespace IQCare.Web.Billing {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtKOTo;
-        
-        /// <summary>
-        /// imTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imTo;
-        
-        /// <summary>
-        /// calTo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender calTo;
         
         /// <summary>
         /// ddlPTKO control.
@@ -263,6 +227,15 @@ namespace IQCare.Web.Billing {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnKOView;
+        
+        /// <summary>
+        /// upKT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upKT;
         
         /// <summary>
         /// gridKO control.

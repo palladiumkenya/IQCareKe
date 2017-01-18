@@ -2,6 +2,7 @@
 using Application.Common;
 using Application.Presentation;
 using Entities.Lab;
+using Entities.Lookup;
 using Interface.Clinical;
 using Interface.Laboratory;
 using Interface.Lookup;
@@ -2596,7 +2597,7 @@ namespace IQCare.Web.Clinical
                 {
                     iqTextBox.SelectedValue = Convert.ToString(valuesDataset.Tables[tableCount].Rows[0][columnCount]);
                     ILookupService lkMgr = (ILookupService)ObjectFactory.CreateInstance("BusinessProcess.Lookup.BLookup, BusinessProcess.Lookup");
-                    Entities.Lookup.Item item = lkMgr.GetLookUpItem(Convert.ToInt32(iqTextBox.SelectedValue), iqTextBox.LookupName, iqTextBox.LookupCategory);
+                    LookupItem item = lkMgr.GetLookUpItem(Convert.ToInt32(iqTextBox.SelectedValue), iqTextBox.LookupName, iqTextBox.LookupCategory);
                     iqTextBox.ValueText = item.Name;
 
 

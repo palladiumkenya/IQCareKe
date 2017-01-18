@@ -10,16 +10,17 @@ namespace DataAccess.CCC
 {
    public class GreencardContext:DbContext
     {
-        public GreencardContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
+        public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
+        {
         }
         //public GreencardContext(string connection) : base(connection)
         //{
 
         //}
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientContact> PatientContacts { get; set; }
+        public DbSet<PersonContact> PatientContacts { get; set; }
         public DbSet<PatientEnrollment> PatientEnrollments { get; set; }
-        public DbSet<PatientLocation> PatientLocations { get; set; }
+        public DbSet<PersonLocation> PatientLocations { get; set; }
        // public DbSet<PatientMaritalStatus> PatientMaritalStatuses { get; set; }
         public DbSet<PatientOVCStatus> PatientOvcStatuses { get; set; }
         public DbSet<PatientPopulation> PatientPopulations { get; set; }

@@ -395,6 +395,12 @@ namespace BusinessProcess.Laboratory
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="labOrderId"></param>
+        /// <param name="userId"></param>
+        /// <param name="deleteReason"></param>
         public void DeleteLabOrder(int labOrderId, int userId, string deleteReason)
         {
             LabOrderRepository repo = new LabOrderRepository();
