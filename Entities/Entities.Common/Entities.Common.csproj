@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="Consent.cs" />
     <Compile Include="FieldControlType.cs" />
     <Compile Include="Filter.cs" />

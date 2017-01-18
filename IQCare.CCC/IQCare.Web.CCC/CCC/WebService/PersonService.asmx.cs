@@ -12,22 +12,24 @@ namespace IQCare.Web.CCC.WebService
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class PersonSeervice : System.Web.Services.WebService
     {
         private int _personId;
-        private string msg;
+        private string _msg;
 
         [WebMethod]
-        public void AddPerson(string fname, string mname, string lname, int gender, string natId)
+        public string AddPerson(string fname, string mname, string lname, int gender, int natId)
         {
            var  personLogic=new PersonManager();
 
             _personId = personLogic.AddPersonUiLogic(fname, mname, lname, gender, natId);
             if (_personId > 0)
             {
-                msg = "New Person Added Successfully!";
+                _msg = "New Person Added Successfully!";
             }
+
+            return _msg;
         }
 
         [WebMethod]

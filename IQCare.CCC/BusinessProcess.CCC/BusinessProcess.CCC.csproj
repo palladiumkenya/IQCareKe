@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPersonManager.cs" />
+    <Compile Include="PersonContactManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

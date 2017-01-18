@@ -116,7 +116,7 @@
                                     <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">0</span>
                                 </a>
                                 
-                                <a  href="../Patient/PatientReg.aspx" class="list-group-item">
+                                <a  href="../Patient/PatientRegistration.aspx" class="list-group-item">
                                     <span class="fa fa-user-plus fa-1x pull-left"></span> Register Patient 
                                 </a>
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Common
 {
@@ -9,6 +10,7 @@ namespace Entities.Common
         bool Active { get; set; }
         string Description { get; set; }
     }
+
     public interface IBaseObject
     {
         int Id { get; set; }
@@ -49,6 +51,7 @@ namespace Entities.Common
         /// <value>
         /// The name.
         /// </value>
+        [NotMapped]
         public virtual string Name { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether [delete flag].
@@ -70,6 +73,8 @@ namespace Entities.Common
         /// <value>
         /// The description.
         /// </value>
+        ///
+        [NotMapped]
         public virtual string Description { get; set; }
         /// <summary>
         /// Gets or sets the create date.
@@ -94,7 +99,8 @@ namespace Entities.Common
             get; set;
         }
 
-        public string AuditData
+        [NotMapped]
+        public virtual string AuditData
         {
             get; set;
         }

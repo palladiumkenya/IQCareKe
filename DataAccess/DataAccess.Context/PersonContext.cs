@@ -13,7 +13,7 @@ namespace DataAccess.Context
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
             Configuration.LazyLoadingEnabled = true;
-            Database.SetInitializer<ModuleContext>(null);
+            Database.SetInitializer<PersonContext>(null);
         }
 
         public DbSet<Person> Persons  { get; set; }

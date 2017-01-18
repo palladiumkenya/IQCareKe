@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Common
 {
@@ -6,7 +7,7 @@ namespace Entities.Common
     /// 
     /// </summary>
     [Serializable]
-    public  class Person:BaseObject
+    public  class Person:BaseEntity
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -48,6 +49,7 @@ namespace Entities.Common
         }
         //  public int IdentificationType { get; set; }
         public int Sex { get; set; }
-        public string NationalId { get; set; }
+        public int NationalId { get; set; }
+
     }
 }

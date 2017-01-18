@@ -553,7 +553,7 @@
                             /* add constraints based on age*/
                                           
                             if ($('#datastep1').parsley().validate()) {
-
+                                addPerson();
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -646,7 +646,6 @@
                 function getWardList()
                 {
                     var subcountyName = $("#<%=SubcountyId.ClientID%>").find(":selected").text();
-                    alert(subcountyName);
                     $.ajax({
                         type: "POST",
                         url: "../WebService/LookupService.asmx/GetLookupWardList",
@@ -666,6 +665,28 @@
                             alert(msg);
                         }
                     });     
+                }
+
+                function addPerson() {
+
+                    var fname = $("#<%=personFname.ClientID%>").val();
+                    var mname =  $("#<%=personMName.ClientID%>").val();
+                    var lname =  $("#<%=personLName.ClientID%>").val();
+                    var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
+                    var natId = $("#<%=NationalId.ClientID%>").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPerson",
+                        data: "{'fname':'" + fname + "','mname':'" + mname + "','lname':'" + lname + "','gender':" + sex + ",'natId':'" + natId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response.d);
+                        },
+                        failure: function (msg) {
+                            alert(msg);
+                        }
+                    });
                 }
 
             });
