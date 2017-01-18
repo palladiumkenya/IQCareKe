@@ -33,8 +33,7 @@ namespace BusinessProcess.CCC
 
         public void UpdatePersonContact(PersonContact p,int id)
         {
-            PersonContact personContact = _unitOfWork.PersonContactRepository.GetById(id);
-            _unitOfWork.PersonContactRepository.
+            
         }
 
         public void VoidPersonContact(int personId, int id)
