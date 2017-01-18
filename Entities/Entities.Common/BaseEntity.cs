@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace Entities.Common
 {
@@ -16,7 +17,8 @@ namespace Entities.Common
         protected BaseEntity()
         {
             CreateDate = Convert.ToDateTime(DateTime.Now.ToString("u"));
-            CreatedBy = 1;
+            //CreatedBy = HttpContext.Current.Session["AppUserId"];
+            //Session["AppUserId"];
         }
         
     }
