@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Interface.person;
+﻿using System;
+using DataAccess.CCC.Interface.person;
 using DataAccess.Context;
 using Entities.Common;
 
@@ -16,6 +17,11 @@ namespace DataAccess.CCC.Repository.person
         public PersonRepository(PersonContext context) : base(context)
         {
             _context = context;
+        }
+
+        public void Update(Person p)
+        {
+            _context.Entry(p).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }
