@@ -34,12 +34,12 @@ namespace DataAccess.Context
 
         public virtual IEnumerable<T> GetAll()
         {
-            return _dbSet;
+            return _dbSet.ToList();
         }
 
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
-            IEnumerable<T> results = _dbSet
+            IEnumerable<T> results = _dbSet.AsNoTracking()
                 .Where(predicate).ToList();
 
             return results;
