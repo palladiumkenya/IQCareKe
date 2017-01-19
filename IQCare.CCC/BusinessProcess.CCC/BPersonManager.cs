@@ -1,4 +1,5 @@
-﻿using DataAccess.Base;
+﻿using System.Collections.Generic;
+using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.Common;
@@ -13,7 +14,6 @@ namespace BusinessProcess.CCC
 
        public int AddPerson(Person person)
        {
-           // person.FirstName = Utils.
            _unitOfWork.PersonRepository.Add(person);
            _unitOfWork.Complete();
 
@@ -26,19 +26,24 @@ namespace BusinessProcess.CCC
            return personInfo;
         }
 
-        public void DeletePerson(int id)
+        public List<Person> GetPersonAll()
         {
-            Person personInfo = _unitOfWork.PersonRepository.GetById(id);
-            _unitOfWork.PersonRepository.Remove(personInfo);
-            _unitOfWork.Complete();
-
+           var mylist= _unitOfWork.PersonRepository.GetAll();
+            return mylist.ToList();
         }
+
 
         public void UpdatePerson(Person p)
         {
             _unitOfWork.PersonRepository.Update(p);
             _unitOfWork.Complete();
         }
-       
-   }
+
+        public void DeletePerson(int id)
+        {
+            Person personInfo = _unitOfWork.PersonRepository.GetById(id);
+            _unitOfWork.PersonRepository.Remove(personInfo);
+            _unitOfWork.Complete();
+        }
+    }
 }

@@ -8,6 +8,7 @@ using Entities.Common;
 namespace DataAccess.CCC.Interface.person
 {
    public interface IPersonLocationRepository :IRepository<PersonLocation>
-    {
-    }
+   {
+       List<PersonLocation> GetPersonCurrentLocation(int personId);
+   }
 }

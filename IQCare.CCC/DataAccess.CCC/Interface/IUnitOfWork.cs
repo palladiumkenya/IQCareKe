@@ -3,6 +3,7 @@ using DataAccess.CCC.Repository.Patient;
 using DataAccess.Context.ModuleMaster;
 using System;
 using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Interface.person;
 
 namespace DataAccess.CCC.Interface
 {
@@ -25,5 +26,11 @@ namespace DataAccess.CCC.Interface
         //LookupContext
         ILookupRepository LookupRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
+
+        // person and patient
+        IPersonRepository PersonRepository { get; }
+        IPersonLocationRepository PersonLocationRepository { get; }
+        IPersonContactRepository PersonContactRepository { get; }
+        IPersonRelationshipRepository PersonRelationshipRepository { get; }
     }
 }

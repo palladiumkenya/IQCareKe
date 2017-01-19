@@ -19,9 +19,5 @@ namespace DataAccess.CCC.Repository.person
             _context = context;
         }
 
-        public void Update(Person p)
-        {
-            _context.Entry(p).State = System.Data.Entity.EntityState.Modified;
-        }
     }
 }

@@ -17,28 +17,24 @@ namespace IQCare.CCC.UILogic
 
             Person p = new Person()
             {
-               
                 FirstName = x.Encrypt(fname),
                 MidName = x.Encrypt(mname),
                 LastName = x.Encrypt(lname),
                 Sex = gender,
                 NationalId = natId
-        };
+            };
 
-            IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
-           retval= mgr.AddPerson(p);
+            IPersonManager mgr =
+                (IPersonManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
+            retval = mgr.AddPerson(p);
 
             return retval;
         }
 
-        public string VoidPerson(int id)
+        public void UpdatePerson(Person p)
         {
-            string msg;
             IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
-            var personInfo = mgr.GetPerson(id);
-            personInfo.DeleteFlag = false;
-            msg = mgr.AddPerson(personInfo).ToString();
-            return msg;
+            mgr.UpdatePerson(p);
         }
 
         public void DeletePerson(int id)

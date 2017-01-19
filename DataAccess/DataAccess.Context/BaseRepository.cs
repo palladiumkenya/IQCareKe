@@ -54,7 +54,18 @@ namespace DataAccess.Context
             throw new NotImplementedException();
         }
 
-        
+        public virtual void Update(T entity)
+        {
+                _dbSet.Attach(entity);
+                _baseContext.Entry(entity).State = EntityState.Modified;            
+        }
+
+        public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            IEnumerable<T> results = _dbSet.AsNoTracking()
+               .Where(predicate).ToList();
+            return results;
+        }
     }
 }
 

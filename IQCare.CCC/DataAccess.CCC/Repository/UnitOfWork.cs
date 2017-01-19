@@ -16,8 +16,8 @@ namespace DataAccess.CCC.Repository
 
         //Person Interface
         private IPersonRepository _personRepository;
-        private IPersonContactRepository _personContactRepository;
         private IPersonLocationRepository _personLocationRepository;
+        private IPersonContactRepository _personContactRepository;
         private IPersonRelationshipRepository _personRelationshipRepository;
 
         //private ICCCPatientRepository _cccPatientRepository;

@@ -9,10 +9,12 @@ namespace DataAccess.Context
     {
         void Add(T entity);
         int AddRange(IEnumerable<T> entity);
+        void Update(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
         T GetById(int id);
         IEnumerable<T> GetAll();
         IQueryable<T> Filter(Expression<Func<T, bool>> filter);
+        IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
     }
 }

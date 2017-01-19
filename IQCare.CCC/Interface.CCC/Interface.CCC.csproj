@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPersonContactManager.cs" />
+    <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
