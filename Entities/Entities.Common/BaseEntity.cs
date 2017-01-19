@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 
 namespace Entities.Common
@@ -17,7 +14,7 @@ namespace Entities.Common
         protected BaseEntity()
         {
             CreateDate = Convert.ToDateTime(DateTime.Now.ToString("u"));
-            //CreatedBy = HttpContext.Current.Session["AppUserId"];
+            CreatedBy =Convert.ToInt16(HttpContext.Current.Session["AppUserId"].ToString());
             //Session["AppUserId"];
         }
         
