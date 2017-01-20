@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Common
@@ -15,6 +16,7 @@ namespace Entities.Common
         /// <value>
         /// The identifier.
         /// </value>
+        [Key]
         public  int Id { get; set; }
         /// <summary>
         /// Gets or sets the last name.
@@ -49,7 +51,7 @@ namespace Entities.Common
         }
         //  public int IdentificationType { get; set; }
         public int Sex { get; set; }
-        public int NationalId { get; set; }
+        public string NationalId { get; set; }
 
     }
 }

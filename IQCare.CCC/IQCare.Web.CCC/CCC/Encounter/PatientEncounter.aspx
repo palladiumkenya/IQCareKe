@@ -154,21 +154,21 @@
                                     <div class="steps-container">
 	                                    <ul class="steps">
 		                                   
-                                            <li data-step="1" data-name="template">
+                                            <li data-step="1" id="dsPresentingComplaints" data-name="template" class="active">
 			                                    <span class="badge">1</span>Presenting Complaints
 			                                    <span class="chevron"></span>
 		                                    </li>
                                             
-                                            <li data-step="2">
-			                                    <span class="badge">3</span>Patient Chronic Illness
+                                            <li data-step="2" id="dsPatientChronicIllness" data-name="">
+			                                    <span class="badge">2</span>Patient Chronic Illness
 			                                    <span class="chevron"></span>
 		                                    </li>
-		                                    <li data-step="3">
+		                                    <li data-step="3" id="dsPatientExamination" data-name="">
 			                                    <span class="badge">3</span>Patient Examination
 			                                    <span class="chevron"></span>
 		                                    </li>
                                             
-		                                    <li data-step="4" data-name="">
+		                                    <li data-step="4" id="dsPatientManagement" data-name="">
 			                                    <span class="badge">4</span>Patient Management
 			                                    <span class="chevron"></span>
 		                                    </li>

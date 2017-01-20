@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Entities.CCC.Baseline
+namespace IQCare.CCC.UILogic
 {
-    public class PatientArtInitiationBaseline
+    public class PersonRelationshipManager
     {
-
     }
 }

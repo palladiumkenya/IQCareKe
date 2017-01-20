@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,12 +13,12 @@ namespace DataAccess.Context
         protected internal BaseContext _baseContext;
         internal IDbSet<T> _dbSet;
 
-        public BaseRepository(BaseContext context)
+        protected BaseRepository(BaseContext context)
         {
             _baseContext = context;
             _dbSet = _baseContext.Set<T>();
         }
-        public BaseRepository() 
+        protected BaseRepository() 
         {
             _baseContext = new BaseContext();
             _dbSet = _baseContext.Set<T>();
@@ -65,6 +66,12 @@ namespace DataAccess.Context
             IEnumerable<T> results = _dbSet.AsNoTracking()
                .Where(predicate).ToList();
             return results;
+        }
+
+        public  void ExecuteProcedure(string procedureName, params DbParameter[] parameter)
+        {
+            
+            _baseContext.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, procedureName, parameter);
         }
     }
 }

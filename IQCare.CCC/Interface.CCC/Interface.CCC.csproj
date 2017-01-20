@@ -51,6 +51,7 @@
     <Compile Include="IPersonContactManager.cs" />
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
+    <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,9 @@
       <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
       <Name>Entities.CCC</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

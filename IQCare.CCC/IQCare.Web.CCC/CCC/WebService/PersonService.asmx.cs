@@ -19,11 +19,11 @@ namespace IQCare.Web.CCC.WebService
         private string _msg;
 
         [WebMethod]
-        public string AddPerson(string fname, string mname, string lname, int gender, int natId)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
         {
            var  personLogic=new PersonManager();
 
-            _personId = personLogic.AddPersonUiLogic(fname, mname, lname, gender, natId);
+            _personId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId,userId);
             if (_personId > 0)
             {
                 _msg = "New Person Added Successfully!";

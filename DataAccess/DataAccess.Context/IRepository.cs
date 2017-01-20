@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -12,6 +13,7 @@ namespace DataAccess.Context
         void Update(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entity);
+        void ExecuteProcedure(string procedureName, params DbParameter[] parameter);
         T GetById(int id);
         IEnumerable<T> GetAll();
         IQueryable<T> Filter(Expression<Func<T, bool>> filter);

@@ -75,13 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\BaselineContext.cs" />
-    <Compile Include="Context\EncounterContext.cs" />
-    <Compile Include="Context\EnrollmentContext.cs" />
     <Compile Include="Context\LookupContext.cs" />
-    <Compile Include="Context\ScreeningContext.cs" />
-    <Compile Include="Context\TriageContext.cs" />
-    <Compile Include="Context\VisitContext.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
@@ -107,7 +101,7 @@
     <Compile Include="Repository\ICCCPatientRepository.cs" />
     <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
-    <Compile Include="GreencardContext.cs" />
+    <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CCCPatientRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />

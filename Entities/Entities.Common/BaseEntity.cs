@@ -14,7 +14,7 @@ namespace Entities.Common
         protected BaseEntity()
         {
             CreateDate = Convert.ToDateTime(DateTime.Now.ToString("u"));
-            CreatedBy =Convert.ToInt16(HttpContext.Current.Session["AppUserId"].ToString());
+            //CreatedBy =Convert.ToInt16(HttpContext.Current.Session["AppUserId"].ToString());
             //Session["AppUserId"];
         }
         

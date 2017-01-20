@@ -10,7 +10,7 @@
 namespace IQCare.Web.CCC.Patient {
     
     
-    public partial class PatientReg {
+    public partial class PatientRegistration {
         
         /// <summary>
         /// personFname control.

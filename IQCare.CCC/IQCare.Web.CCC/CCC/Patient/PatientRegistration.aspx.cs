@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-using Telerik.Web.UI.PivotGrid.Core.Groups;
 
 namespace IQCare.Web.CCC.Patient
 {
-    public partial class PatientReg : System.Web.UI.Page
+    public partial class PatientRegistration : System.Web.UI.Page
     {
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

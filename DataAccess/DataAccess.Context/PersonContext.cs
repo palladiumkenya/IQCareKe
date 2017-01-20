@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using DataAccess.Base;
 using Entities.Common;
+using Entities.PatientCore;
 
 namespace DataAccess.Context
 {
@@ -12,7 +13,7 @@ namespace DataAccess.Context
         {
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
-            Configuration.LazyLoadingEnabled = true;
+            Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer<PersonContext>(null);
         }
 
@@ -20,5 +21,6 @@ namespace DataAccess.Context
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<PersonRelationship> PersonRelationships { get; set; }
         public DbSet<PersonLocation> PersonLocations { get; set; }
+        public DbSet<Patient> Patients { get; set; }
     }
 }

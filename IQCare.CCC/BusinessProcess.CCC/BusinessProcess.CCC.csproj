@@ -75,7 +75,8 @@
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPersonLocationmanager.cs" />
     <Compile Include="BPersonManager.cs" />
-    <Compile Include="PersonContactManager.cs" />
+    <Compile Include="BPersonContactManager.cs" />
+    <Compile Include="BPersonRelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

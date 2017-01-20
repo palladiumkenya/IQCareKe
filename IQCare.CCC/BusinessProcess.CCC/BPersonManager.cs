@@ -5,6 +5,7 @@ using DataAccess.Context;
 using Entities.Common;
 using Interface.CCC;
 using System.Linq;
+using DataAccess.CCC.Repository.person;
 
 namespace BusinessProcess.CCC
 {
@@ -14,10 +15,10 @@ namespace BusinessProcess.CCC
 
        public int AddPerson(Person person)
        {
-           _unitOfWork.PersonRepository.Add(person);
-           _unitOfWork.Complete();
+            _unitOfWork.PersonRepository.Add(person);
+           // p.Add(person);
 
-           return person.Id;
+           return 1;//person.Id;
        }
 
         public Person GetPerson(int id)

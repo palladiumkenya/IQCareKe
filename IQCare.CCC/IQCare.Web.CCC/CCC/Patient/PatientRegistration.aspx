@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientReg" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
 
     <div class="=col-md-12">
@@ -17,7 +17,6 @@
              </div>
         </div>
         
-
         <div class="col-md-12">
                       
             <div class="wizard" data-initialize="wizard" id="myWizard">
@@ -674,10 +673,12 @@
                     var lname =  $("#<%=personLName.ClientID%>").val();
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
                     var natId = $("#<%=NationalId.ClientID%>").val();
+                    var userId = <%=UserId%>;
+
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'fname':'" + fname + "','mname':'" + mname + "','lname':'" + lname + "','gender':" + sex + ",'natId':'" + natId + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -699,7 +700,7 @@
                         dismissQueue: true,
                         progressBar: true,
                         timeout: 5000,
-                        layout: 'topLeft',
+                        layout: 'top',
                         closeWith: ['click'],
                         theme: 'relax',
                         maxVisible: 10,

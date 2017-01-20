@@ -69,7 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LookupLogic.cs" />
+    <Compile Include="PersonContactManager.cs" />
+    <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonManager.cs" />
+    <Compile Include="PersonRelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
