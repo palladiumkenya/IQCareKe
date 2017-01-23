@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Web;
-using System.Web.ModelBinding;
 using Entities.Common;
 using Interface.CCC;
 using Application.Presentation;
@@ -35,7 +33,7 @@ namespace IQCare.CCC.UILogic
                 IPersonManager mgr =
                     (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
                 retval = mgr.AddPerson(p);
-                HttpContext.Current.Session["PersonId"] = p.Id;
+                //HttpContext.Current.Session["PersonId"] = p.Id;
             }
             catch (Exception exception)
             {

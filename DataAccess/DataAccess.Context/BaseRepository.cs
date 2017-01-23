@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
-using Entities.Common;
 
 namespace DataAccess.Context
 {
@@ -70,11 +68,11 @@ namespace DataAccess.Context
             return results;
         }
 
-        public  void ExecuteProcedure(string procedureName, params SqlParameter[] parameter)
+        public void  ExecuteProcedure(string procedureName, params SqlParameter[] parameter)
         {
+            
+             _baseContext.Database.ExecuteSqlCommand(procedureName,parameter);
 
-            _baseContext.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, procedureName, parameter);
-            //_baseContext.Database.SqlQuery<Person>(procedureName, parameter);
         }
     }
 }

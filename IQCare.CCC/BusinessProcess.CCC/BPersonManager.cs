@@ -5,7 +5,10 @@ using DataAccess.Context;
 using Entities.Common;
 using Interface.CCC;
 using System.Linq;
-using DataAccess.CCC.Repository.person;
+using System.Data;
+using DataAccess.Common;
+using DataAccess.Entity;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -15,10 +18,26 @@ namespace BusinessProcess.CCC
 
        public int AddPerson(Person person)
        {
-            _unitOfWork.PersonRepository.Add(person);
-           // p.Add(person);
+            //  _unitOfWork.PersonRepository.Add(person);
 
-           return 1;//person.Id;
+           int personId = -1;
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@FirstName", SqlDbType.VarChar, person.FirstName);
+            ClsUtility.AddExtendedParameters("@MidName", SqlDbType.VarChar, person.MidName);
+            ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, person.LastName);
+            ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, person.Sex);
+            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, person.NationalId);
+            ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, person.CreatedBy);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Person_Insert", ClsUtility.ObjectEnum.DataTable);
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               personId = Convert.ToInt32(dt.Rows[0]["PersonId"]);
+           }
+            // p.Add(person);
+           obj = null;
+           return personId;
        }
 
         public Person GetPerson(int id)

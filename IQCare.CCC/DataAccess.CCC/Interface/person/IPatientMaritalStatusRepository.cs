@@ -1,7 +1,7 @@
 ﻿using DataAccess.Context;
 using Entities.PatientCore;
 
-namespace DataAccess.CCC.Repository.Patient
+namespace DataAccess.CCC.Interface.person
 {
     public interface IPatientMaritalStatusRepository :IRepository<PatientMaritalStatus>
     {

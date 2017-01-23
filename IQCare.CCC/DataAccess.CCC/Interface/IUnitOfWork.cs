@@ -1,6 +1,4 @@
-﻿using DataAccess.CCC.Repository;
-using DataAccess.CCC.Repository.Patient;
-using DataAccess.Context.ModuleMaster;
+﻿using DataAccess.Context.ModuleMaster;
 using System;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
@@ -13,16 +11,6 @@ namespace DataAccess.CCC.Interface
         
         IModuleRepository ModuleRepository { get; }
 
-        //Patient Context Interfaces
-        //ICCCPatientRepository CCCPatientRepository { get; }
-        //IPatientContactRepository PatientContactRepository { get; }
-        //IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
-        //IPatientLocationRepository PatientLocationRepository { get; }
-        //IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
-        //IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
-        //IPatientPopulationRepository PatientPopulationRepository { get; }
-        //IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
-
         //LookupContext
         ILookupRepository LookupRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
@@ -32,5 +20,7 @@ namespace DataAccess.CCC.Interface
         IPersonLocationRepository PersonLocationRepository { get; }
         IPersonContactRepository PersonContactRepository { get; }
         IPersonRelationshipRepository PersonRelationshipRepository { get; }
+        IPatientOvcStatusRepository PatientOvcStatusRepository { get; }
+        IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
     }
 }

@@ -1,26 +1,21 @@
-﻿using Entities.Common;
+﻿using Entities.CCC.Visit;
+using Entities.Common;
+
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.PatientCore
 {
     [Serializable]
-   public class PatientMaritalStatus:IAuditEntity
+   public class PatientMaritalStatus:BaseEntity
     {
-        public virtual int PatientId { get; set; }
-
+        [ForeignKey("PersonId")]
+        public virtual int PersonId { get; set; }
+        public virtual Person person { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public virtual int PatientMasterVisitId { get; set; }
-        public virtual Patient Patient { get; set; }
-
+        public virtual PatientMasterVisit PatientmasterVisit { get; set; }
         public int MaritalStatusId { get; set; }
-
         public bool Active { get; set; }
-        public int CreatedBy { get; set; }
-
-        public DateTime CreateDate { get; set; }
-
-        public bool DeleteFlag { get; set; }
-
-
-        public string AuditData { get; set; }
     }
 }

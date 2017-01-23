@@ -19,15 +19,10 @@ namespace DataAccess.CCC.Repository
         private IPersonLocationRepository _personLocationRepository;
         private IPersonContactRepository _personContactRepository;
         private IPersonRelationshipRepository _personRelationshipRepository;
+        private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
+        private IPatientOvcStatusRepository _patientOvcStatusRepository;
 
-        //private ICCCPatientRepository _cccPatientRepository;
-        //private IPatientContactRepository _patientContactRepository;
-        //private IPatientEnrollmentRepository _patientEnrollmentRepository;
-        //private IPatientLocationRepository _patientLocationRepository;
-        //private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
-        //private IPatientOVCStatusRepository _patientOvcStatusRepository;
-        //private IPatientPopulationRepository _patientPopulationRepository;
-        //private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
+        // Modules
         private IModuleRepository _moduleRepository;
 
         //lookupContext
@@ -42,48 +37,6 @@ namespace DataAccess.CCC.Repository
             }
             _context = context;   
         }
-
-
-        //public ICCCPatientRepository CCCPatientRepository
-        //{
-        //    get { return _cccPatientRepository ?? (_cccPatientRepository = new CCCPatientRepository((GreencardContext) _context)); }
-
-        //}
-
-        //public IPatientContactRepository PatientContactRepository
-        //{
-        //    get { return _patientContactRepository ?? (_patientContactRepository = new PatientContactRepository((GreencardContext) _context));}
-        //}
-
-        //public IPatientEnrollmentRepository PatientEnrollmentRepository
-        //{
-        //    get {return _patientEnrollmentRepository ??(_patientEnrollmentRepository=new PatientEnrollmentRepository((GreencardContext) _context));}
-        //}
-
-        //public IPatientLocationRepository PatientLocationRepository
-        //{
-        //    get { return _patientLocationRepository ?? (_patientLocationRepository = new PatientLocationRepository((GreencardContext)_context)); }
-        //}
-
-        //public IPatientMaritalStatusRepository PatientMaritalStatusRepository
-        //{
-        //    get { return _patientMaritalStatusRepository ?? (_patientMaritalStatusRepository = new PatientMaritalStatusRepository((GreencardContext)_context)); }
-        //}
-
-        //public IPatientOVCStatusRepository PatientOvcStatusRepository
-        //{
-        //    get { return _patientOvcStatusRepository ?? (_patientOvcStatusRepository = new PatientOVCStatusRepository((GreencardContext)_context)); }
-        //}
-
-        //public IPatientPopulationRepository PatientPopulationRepository
-        //{
-        //    get { return _patientPopulationRepository ?? (_patientPopulationRepository = new PatientPopulationRepository((GreencardContext)_context)); }
-        //}
-
-        //public IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository
-        //{
-        //    get { return _patientTreatmentSupporterRepository ?? (_patientTreatmentSupporterRepository = new PatientTreatmentSupporterRepository((GreencardContext)_context)); }
-        //}
 
         public IModuleRepository ModuleRepository
         {
@@ -132,6 +85,16 @@ namespace DataAccess.CCC.Repository
         public IPersonRelationshipRepository PersonRelationshipRepository
         {
             get { return _personRelationshipRepository??(_personRelationshipRepository=new PersonRelationshipRepository((PersonContext)_context));}
+        }
+
+        public IPatientOvcStatusRepository PatientOvcStatusRepository
+        {
+            get {  return _patientOvcStatusRepository??(_patientOvcStatusRepository=new PatientOVCStatusRepository((PersonContext)_context));  }
+        }
+
+        public IPatientMaritalStatusRepository PatientMaritalStatusRepository
+        {
+            get { return _patientMaritalStatusRepository??(_patientMaritalStatusRepository=new PatientMaritalStatusRepository((PersonContext)_context));}
         }
 
         public int Complete()

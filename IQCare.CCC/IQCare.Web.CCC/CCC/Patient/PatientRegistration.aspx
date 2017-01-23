@@ -685,9 +685,9 @@
                             // alert(response.d);
                             generate('success', response.d);
                         },
-                        failure: function (msg) {
+                        failure: function (response) {
                             // alert(msg);
-                            generate('error', msg);
+                            generate('error', response.Message);
                         }
                     });
                 }
@@ -700,7 +700,7 @@
                         dismissQueue: true,
                         progressBar: true,
                         timeout: 5000,
-                        layout: 'top',
+                        layout: 'topRight',
                         closeWith: ['click'],
                         theme: 'relax',
                         maxVisible: 10,
