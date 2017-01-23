@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using DataAccess.CCC.Interface.person;
 using DataAccess.Context;
 using Entities.Common;
@@ -19,27 +19,53 @@ namespace DataAccess.CCC.Repository.person
 
         public override void Add(Person entity)
         {
-           DbParameter pFirstName = new EntityParameter("FirstName",DbType.String);
-            pFirstName.Value = entity.FirstName;
 
-            DbParameter pLastName = new EntityParameter("LastName", DbType.String);
-            pLastName.Value = entity.LastName;
+            SqlParameter firstName = new SqlParameter("FirstName", DbType.String)
+            {
+                Value = entity.FirstName ?? (object) DBNull.Value
+            };
 
-            DbParameter pMidName = new EntityParameter("MidName", DbType.String);
-            pMidName.Value = entity.MidName;
+            SqlParameter pMiddleName = new SqlParameter("@MidName", DbType.String)
+            {
+                Value = entity.MidName ?? (object) DBNull.Value
+            };
 
-            DbParameter pSex = new EntityParameter("Sex", DbType.Int32);
-            pSex.Value = entity.Sex;
+            SqlParameter pLastName = new SqlParameter("@LastName", DbType.String)
+            {
+                Value = entity.LastName ?? (object) DBNull.Value
+            };
 
-            DbParameter pNational = new EntityParameter("NationalId", DbType.String);
-            pNational.Value = entity.NationalId;
+            SqlParameter pSex = new SqlParameter("@Sex", DbType.String) {Value = entity.Sex};
 
-            DbParameter pUserId = new EntityParameter("UserId", DbType.Int32);
-            pUserId.Value = entity.CreatedBy;
+            SqlParameter pNationalId = new SqlParameter("@NationalId", DbType.String)
+            {
+                Value = entity.NationalId ?? (object) DBNull.Value
+            };
+
+            SqlParameter pUserId = new SqlParameter("@UserId", DbType.String) {Value = entity.CreatedBy};
+
+
+
+            //DbParameter pFirstName = new EntityParameter("FirstName", DbType.String);
+            //pFirstName.Value = entity.FirstName;
+
+            //DbParameter pLastName = new EntityParameter("LastName", DbType.String);
+            //pLastName.Value = entity.LastName;
+
+            //DbParameter pMidName = new EntityParameter("MidName", DbType.String);
+            //pMidName.Value = entity.MidName;
+
+            //DbParameter pSex = new EntityParameter("Sex", DbType.Int32);
+            //pSex.Value = entity.Sex;
+
+            //DbParameter pNational = new EntityParameter("NationalId", DbType.String);
+            //pNational.Value = entity.NationalId;
+
+            //DbParameter pUserId = new EntityParameter("UserId", DbType.Int32);
+            //pUserId.Value = entity.CreatedBy;
 
             //add more parameter
-
-            base.ExecuteProcedure("Patient_Insert",pFirstName,pLastName,pMidName,pSex,pNational,pUserId);
+           base.ExecuteProcedure("exec Person_Insert @FirstName,@MidName,@LastName,@Sex,@NationalId,@UserId", firstName,pMiddleName,pLastName,pSex,pNationalId,pUserId);
         
         }
 

@@ -1,4 +1,8 @@
-﻿using Entities.Common;
+﻿using System;
+using System.Globalization;
+using System.Web;
+using System.Web.ModelBinding;
+using Entities.Common;
 using Interface.CCC;
 using Application.Presentation;
 using Application.Common;
@@ -8,25 +12,36 @@ namespace IQCare.CCC.UILogic
     public class PersonManager
     {
         Utility util = new Utility();
+        readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
-        public int AddPersonUiLogic(string firstName, string midName, string lastName,int gender,string nationalId, int userId)
+        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, string nationalId,
+            int userId)
         {
             int retval;
 
-           Person p = new Person()
+            try
             {
-                FirstName = util.Encrypt(firstName),
-                MidName = util.Encrypt(midName),
-                LastName = util.Encrypt(lastName),
-                Sex = gender,
-                NationalId = util.Encrypt(nationalId),
-                CreatedBy = userId
+                Person p = new Person()
+                {
+                    FirstName = util.Encrypt(_textInfo.ToTitleCase(firstName)),
+                    MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
+                    LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
+                    Sex = gender,
+                    NationalId = util.Encrypt(nationalId),
+                    CreatedBy = userId
 
-            };
+                };
 
-            IPersonManager mgr =
-                (IPersonManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
-            retval = mgr.AddPerson(p);
+                IPersonManager mgr =
+                    (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
+                retval = mgr.AddPerson(p);
+                HttpContext.Current.Session["PersonId"] = p.Id;
+            }
+            catch (Exception exception)
+            {
+                    
+               throw new Exception(exception.Message);
+            }
 
             return retval;
         }

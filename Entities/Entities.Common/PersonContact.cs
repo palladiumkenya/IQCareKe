@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Common
@@ -7,11 +8,13 @@ namespace Entities.Common
     [Table("PersonContact")]
     public class PersonContact : BaseEntity
     {
+        [Key]
         public int Id { get; set; }
-        [ForeignKey("PersonId")]
-        public virtual int PersonId { get; set; }
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+        public virtual Person Person { get; set; }
        // public virtual Person Person { get; set; }
         public string PhysicalAddress { get; set; }
-        public string MobileNo { get; set; }
+        public string MobileNumber { get; set; }
     }
 }

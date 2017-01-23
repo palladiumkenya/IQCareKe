@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 
 namespace Entities.Common
 {
@@ -52,6 +53,15 @@ namespace Entities.Common
         //  public int IdentificationType { get; set; }
         public int Sex { get; set; }
         public string NationalId { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Person>().MapToStoredProcedures
+        //    (
+        //        s=>s.Insert(i=>i.HasName("[dbo].[Person_Insert]"));
+        //    );
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
     }
 }

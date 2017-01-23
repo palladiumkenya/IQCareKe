@@ -22,7 +22,7 @@ namespace IQCare.CCC.UILogic
                 {
                     PersonId = personId,
                     PhysicalAddress = x.Encrypt(physicalAddress),
-                    MobileNo = x.Encrypt(mobileNumber)
+                    MobileNumber = x.Encrypt(mobileNumber)
                 };
 
                 IPersonContactManager mgr =

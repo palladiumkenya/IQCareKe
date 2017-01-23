@@ -59,25 +59,16 @@
     <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
+    <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
-    <Content Include="fuelux\css\fuelux.css" />
-    <Content Include="fuelux\css\fuelux.min.css" />
-    <Content Include="fuelux\fonts\fuelux.svg" />
-    <Content Include="fuelux\js\fuelux.js" />
-    <Content Include="fuelux\js\fuelux.min.js" />
-    <Content Include="fuelux\js\npm.js" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="fuelux\css\fuelux.css.map" />
-    <Content Include="fuelux\fonts\fuelux.eot" />
-    <Content Include="fuelux\fonts\fuelux.ttf" />
-    <Content Include="fuelux\fonts\fuelux.woff" />
     <Content Include="CCC\Greencard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -280,6 +271,7 @@
       <Name>Entities.CCC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

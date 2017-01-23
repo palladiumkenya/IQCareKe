@@ -13,8 +13,13 @@ namespace IQCare.Web.CCC.Patient
         {
             get { return Convert.ToInt32(Session["AppUserId"]); }
         }
+
+        public int PersonId { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["PersonId"] = 0;
+
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> vw = mgr.GetGenderOptions();
             if (vw != null && vw.Count > 0)
