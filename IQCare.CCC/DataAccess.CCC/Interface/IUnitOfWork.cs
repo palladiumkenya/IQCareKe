@@ -2,6 +2,7 @@
 using System;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Repository.Patient;
 
 namespace DataAccess.CCC.Interface
 {
@@ -22,5 +23,6 @@ namespace DataAccess.CCC.Interface
         IPersonRelationshipRepository PersonRelationshipRepository { get; }
         IPatientOvcStatusRepository PatientOvcStatusRepository { get; }
         IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
+        IPatientPopulationRepository PatientPopulationRepository { get;}
     }
 }

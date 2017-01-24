@@ -7,6 +7,7 @@ using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
+using DataAccess.CCC.Repository.Patient;
 
 namespace DataAccess.CCC.Repository
 {
@@ -21,6 +22,7 @@ namespace DataAccess.CCC.Repository
         private IPersonRelationshipRepository _personRelationshipRepository;
         private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
+        private IPatientPopulationRepository _patientPopulationRepository;
 
         // Modules
         private IModuleRepository _moduleRepository;
@@ -97,6 +99,10 @@ namespace DataAccess.CCC.Repository
             get { return _patientMaritalStatusRepository??(_patientMaritalStatusRepository=new PatientMaritalStatusRepository((PersonContext)_context));}
         }
 
+        public IPatientPopulationRepository PatientPopulationRepository
+        {
+            get { return _patientPopulationRepository??(_patientPopulationRepository=new PatientPopulationRepository((PersonContext)_context));}
+        }
         public int Complete()
         {
             return _context.SaveChanges();

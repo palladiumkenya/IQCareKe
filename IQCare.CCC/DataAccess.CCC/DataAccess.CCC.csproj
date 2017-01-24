@@ -87,6 +87,7 @@
     <Compile Include="Interface\person\IPersonLocationRepository.cs" />
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\person\PatientOVCStatusRepository.cs" />
     <Compile Include="Repository\person\PersonContactRepository.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Repository\Patient\IPatientContactRepository.cs" />
     <Compile Include="Repository\Patient\IPatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
-    <Compile Include="Repository\Patient\IPatientPopulationRepository.cs" />
+    <Compile Include="Interface\person\IPatientPopulationRepository.cs" />
     <Compile Include="Repository\ICCCPatientRepository.cs" />
     <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />

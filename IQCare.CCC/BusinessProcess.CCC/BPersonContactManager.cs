@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.Common;
@@ -9,18 +11,29 @@ namespace BusinessProcess.CCC
     public class BPersonContactManager : IPersonContactManager
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int _result;
 
-        public void AddPersonContact(PersonContact p)
+        public int AddPersonContact(PersonContact personContact)
         {
-            _unitOfWork.PersonContactRepository.Add(p);
-            _unitOfWork.Complete();
+            SqlParameter personIdParameter =new SqlParameter("personIdParameter",SqlDbType.Int);
+            personIdParameter.Value = personContact.PersonId;
+
+            SqlParameter physicalAdressParameter =new SqlParameter("physicalAddressParameter",SqlDbType.VarBinary);
+            physicalAdressParameter.Value = personContact.PhysicalAddress;
+
+            SqlParameter mobileNumberParameter =new SqlParameter("mobileNumberParameter",SqlDbType.VarBinary);
+            mobileNumberParameter.Value = personContact.MobileNumber;
+
+            _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Insert @personId,@physicalAddress,@mobileNumber",personIdParameter, physicalAdressParameter, mobileNumberParameter);
+            //_unitOfWork.PersonContactRepository.Add(p);
+            return _result = _unitOfWork.Complete();
         }
 
-        public void DeletePersonContact(int id)
+        public int DeletePersonContact(int id)
         {
-           PersonContact personContact= _unitOfWork.PersonContactRepository.GetById(id);
+            PersonContact personContact = _unitOfWork.PersonContactRepository.GetById(id);
             _unitOfWork.PersonContactRepository.Remove(personContact);
-            _unitOfWork.Complete();
+            return _result = _unitOfWork.Complete();
         }
 
         public List<PersonContact> GetAllPersonContact(int personId)
@@ -34,9 +47,10 @@ namespace BusinessProcess.CCC
             return myList;
         }
 
-        public void UpdatePersonContact(PersonContact p)
+        public int UpdatePersonContact(PersonContact p)
         {
             _unitOfWork.PersonContactRepository.Update(p);
+            return _result = _unitOfWork.Complete();
         }
     }
 }

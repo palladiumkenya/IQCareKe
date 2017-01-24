@@ -4,31 +4,16 @@ using System;
 namespace Entities.PatientCore
 {
     [Serializable]
-    public class PatientPopulation: IAuditEntity
+    public class PatientPopulation: BaseEntity
     {
         public int Id { get; set; }
         public virtual bool Active { get; set; }
         public int PatientId { get; set; }
-        public virtual PopulationType PopulationType { get; set; }
+        //public virtual PopulationType PopulationType { get; set; }
         public virtual int PopulationTypeId { get; set; }
-        public int CreatedBy
-        {
-            get; set;
-        }
-        public DateTime CreateDate
-        {
-            get; set;
-        }
-
-        public bool DeleteFlag
-        {
-            get; set;
-        }
-        public string AuditData
-        {
-            get; set;
-        }
+        public int PopulationCategory { get; set; }
     }
+
     [Serializable]
     public enum PopulationCategory
     {

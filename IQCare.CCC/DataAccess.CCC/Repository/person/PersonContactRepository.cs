@@ -15,6 +15,16 @@ namespace DataAccess.CCC.Repository.person
             
         }
 
+        public override void Add(PersonContact entity)
+        {
+            //do nothing
+        }
+
+        public override void Update(PersonContact entity)
+        {
+            //do nothing
+        }
+
         public PersonContactRepository(PersonContext context ) : base(context)
         {
             _context = context;

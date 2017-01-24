@@ -9,9 +9,9 @@ namespace Interface.CCC
 {
     public interface IPersonContactManager
     {
-         void AddPersonContact(PersonContact p);
-         void UpdatePersonContact(PersonContact p);
-         void DeletePersonContact(int id);
+         int AddPersonContact(PersonContact p);
+         int UpdatePersonContact(PersonContact p);
+         int DeletePersonContact(int id);
          List<PersonContact> GetCurrentPersonContacts(int persoId);
          List<PersonContact> GetAllPersonContact(int personId);
     }

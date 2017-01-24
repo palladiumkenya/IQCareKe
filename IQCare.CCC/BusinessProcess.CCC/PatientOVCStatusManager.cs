@@ -10,19 +10,20 @@ namespace BusinessProcess.CCC
     public class PatientOvcStatusManager : IPatientOvcStatusmanager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int _result;
 
-        public void AddPatientOvcStatus(PatientOVCStatus ovc)
+        public int AddPatientOvcStatus(PatientOVCStatus ovc)
         {
-
+            
            _unitOfWork.PatientOvcStatusRepository.Add(ovc);
-            _unitOfWork.Complete();
+          return _result= _unitOfWork.Complete();
         }
 
-        public void DeletePatientOvcStatus(int id)
+        public int DeletePatientOvcStatus(int id)
         {
           var personovcstatus= _unitOfWork.PatientOvcStatusRepository.GetById(id);
             _unitOfWork.PatientOvcStatusRepository.Remove(personovcstatus);
-            _unitOfWork.Complete();
+           return _result=  _unitOfWork.Complete();
         }
 
         public List<PatientOVCStatus> GetPatientOvcStatus(int id)
@@ -32,10 +33,10 @@ namespace BusinessProcess.CCC
             return myList;
         }
 
-        public void UpdatePatientOvcStatus(PatientOVCStatus ovc)
+        public int UpdatePatientOvcStatus(PatientOVCStatus ovc)
         {
             _unitOfWork.PatientOvcStatusRepository.Update(ovc);
-            _unitOfWork.Complete();
+          return _result= _unitOfWork.Complete();
         }
     }
 }

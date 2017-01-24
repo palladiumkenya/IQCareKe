@@ -10,18 +10,19 @@ namespace BusinessProcess.CCC
     public class BPersonRelationshipManager :IPersonRelationshipManager
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int _result;
 
-        public void AddPersonRelationship(PersonRelationship personRelationship)
+        public int AddPersonRelationship(PersonRelationship personRelationship)
         {
            _unitOfWork.PersonRelationshipRepository.Add(personRelationship);
-            _unitOfWork.Complete();
+           return _result= _unitOfWork.Complete();
         }
 
-        public void DeletePersonRelationship(int id)
+        public int DeletePersonRelationship(int id)
         {
-          var personRelation=  _unitOfWork.PersonRelationshipRepository.GetById(id);
+            var personRelation = _unitOfWork.PersonRelationshipRepository.GetById(id);
             _unitOfWork.PersonRelationshipRepository.Remove(personRelation);
-            _unitOfWork.Complete();
+            return _result = _unitOfWork.Complete();
         }
 
         public List<PersonRelationship> GetAllPersonRelationship(int personId)
@@ -32,10 +33,10 @@ namespace BusinessProcess.CCC
             return myList.ToList();
         }
 
-        public void UpdatePersonRelationship(PersonRelationship personRelationship)
+        public int UpdatePersonRelationship(PersonRelationship personRelationship)
         {
             _unitOfWork.PersonRelationshipRepository.Update(personRelationship);
-            _unitOfWork.Complete();
+            return _result=_unitOfWork.Complete();
         }
     }
 }

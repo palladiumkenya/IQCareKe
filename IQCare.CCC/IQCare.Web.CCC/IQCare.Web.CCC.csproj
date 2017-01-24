@@ -221,6 +221,10 @@
     <Reference Include="Entities.Common">
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.CCC">
       <HintPath>..\..\References\Interface.CCC.dll</HintPath>
     </Reference>

@@ -8,9 +8,9 @@ namespace Interface.CCC
 {
     public interface IPersonRelationshipManager
     {
-        void AddPersonRelationship(PersonRelationship personRelationship);
-        void UpdatePersonRelationship(PersonRelationship personRelationship);
-        void DeletePersonRelationship(int id);
+        int AddPersonRelationship(PersonRelationship personRelationship);
+        int UpdatePersonRelationship(PersonRelationship personRelationship);
+        int DeletePersonRelationship(int id);
         List<PersonRelationship> GetAllPersonRelationship(int personId);
 
     }

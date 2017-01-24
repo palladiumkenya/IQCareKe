@@ -9,9 +9,9 @@ namespace Interface.CCC
 {
    public interface IPersonLocationManager
    {
-       void AddPersonLocation(PersonLocation location);
-       void UpdatePersonLocation(PersonLocation location);
-       void DeletePersonLocation(int id);
+       int AddPersonLocation(PersonLocation location);
+       int UpdatePersonLocation(PersonLocation location);
+       int DeletePersonLocation(int id);
        List<PersonLocation> GetCurrentPersonLocation(int persoId);
        List<PersonLocation> GetPersonLocationAll(int personId);
    }

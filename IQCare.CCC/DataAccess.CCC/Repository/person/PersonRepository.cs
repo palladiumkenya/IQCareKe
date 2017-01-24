@@ -34,5 +34,9 @@ namespace DataAccess.CCC.Repository.person
             _context = context;
         }
 
+        public override void Update(Person entity)
+        {
+           //do nothing
+        }
     }
 }

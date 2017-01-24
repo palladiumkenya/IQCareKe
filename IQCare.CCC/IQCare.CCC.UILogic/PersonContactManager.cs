@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using Application.Common;
 using Application.Presentation;
 using Entities.Common;
@@ -10,68 +9,33 @@ namespace IQCare.CCC.UILogic
 {
     public class PersonContactManager
     {
-        private string _jsonMessage;
+        private int _result;
+        IPersonContactManager _mgr =  (IPersonContactManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
 
-        public string AddPersonContactUi(int personId, string physicalAddress, string mobileNumber)
+        public int AddPersonContact(int personId, string physicalAddress, string mobileNumber)
         {
-            try
+            Utility x = new Utility();
+
+            PersonContact personContact = new PersonContact
             {
-                Utility x = new Utility();
+                PersonId = personId,
+                PhysicalAddress = x.Encrypt(physicalAddress),
+                MobileNumber = x.Encrypt(mobileNumber)
+            };
 
-                PersonContact personContact = new PersonContact
-                {
-                    PersonId = personId,
-                    PhysicalAddress = x.Encrypt(physicalAddress),
-                    MobileNumber = x.Encrypt(mobileNumber)
-                };
+            _result = _mgr.AddPersonContact(personContact);
 
-                IPersonContactManager mgr =
-                    (IPersonContactManager)
-                    ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
-                mgr.AddPersonContact(personContact);
-                _jsonMessage = "New Person Contact Added Successfully!";
-            }
-            catch (Exception exception)
-            {
-                _jsonMessage = exception.Message.ToString();
-            }
-
-            return _jsonMessage;
+            return _result;
         }
 
-        public string DeletePersonContact(int id)
+        public int DeletePersonContact(int id)
         {
-            try
-            {
-                IPersonContactManager mgr =
-                    (IPersonContactManager)
-                    ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
-                mgr.DeletePersonContact(id);
-                _jsonMessage = "Person Contact Delete Successfully!";
-            }
-            catch (Exception exception)
-            {
-
-                _jsonMessage = exception.Message.ToString();
-            }
-
-            return _jsonMessage;
+            return _result = _mgr.DeletePersonContact(id);
         }
 
-        public string UpdatePatientContact(PersonContact personContact)
+        public int UpdatePatientContact(PersonContact personContact)
         {
-            try
-            {
-                IPersonContactManager mgr =(IPersonContactManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
-                mgr.UpdatePersonContact(personContact);
-                _jsonMessage = "Person Contact Updated Successfuly!";
-            }
-            catch (Exception exception)
-            {
-                _jsonMessage = exception.Message.ToString();
-            }
-
-            return _jsonMessage;
+           return  _result= _mgr.UpdatePersonContact(personContact);
         }
 
         public List<PersonContact> GetPersonContactList(int personId)
@@ -79,8 +43,7 @@ namespace IQCare.CCC.UILogic
             List<PersonContact> myList=new List<PersonContact>();
             try
             {
-                IPersonContactManager mgr = (IPersonContactManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
-                myList = mgr.GetAllPersonContact(personId);
+                myList = _mgr.GetAllPersonContact(personId);
             }
             catch (Exception)
             {

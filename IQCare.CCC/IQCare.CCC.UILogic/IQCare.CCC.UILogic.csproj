@@ -48,6 +48,10 @@
       <HintPath>..\..\References\Entities.CCC.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
@@ -69,9 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LookupLogic.cs" />
+    <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonManager.cs" />
+    <Compile Include="PersonMaritalStatusManager.cs" />
+    <Compile Include="PersonOvcStatusManager.cs" />
     <Compile Include="PersonRelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -11,19 +11,22 @@ namespace BusinessProcess.CCC
     public class BPersonLocationmanager : ProcessBase,IPersonLocationManager
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int _result;
 
-        public void AddPersonLocation(PersonLocation location)
+        public int AddPersonLocation(PersonLocation location)
         {
             _unitOfWork.PersonLocationRepository.Add(location);
-            _unitOfWork.Complete();
-           // return location.Id;
+           _result= _unitOfWork.Complete();
+            return _result;
+            // return location.Id;
         }
 
-        public void DeletePersonLocation(int id)
+        public int DeletePersonLocation(int id)
         {
           PersonLocation location=  _unitOfWork.PersonLocationRepository.GetById(id);
           _unitOfWork.PersonLocationRepository.Remove(location);
-            _unitOfWork.Complete();
+          _result=  _unitOfWork.Complete();
+            return _result;
         }
 
         public List<PersonLocation> GetCurrentPersonLocation(int persoId)
@@ -38,10 +41,11 @@ namespace BusinessProcess.CCC
             return mylist.ToList();
         }
 
-        public void UpdatePersonLocation(PersonLocation location)
+        public  int UpdatePersonLocation(PersonLocation location)
         {
            _unitOfWork.PersonLocationRepository.Update(location);
-            _unitOfWork.Complete();
+           _result= _unitOfWork.Complete();
+            return _result;
         }
     }
 }

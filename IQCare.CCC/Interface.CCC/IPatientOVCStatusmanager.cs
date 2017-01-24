@@ -8,9 +8,9 @@ namespace Interface.CCC
 {
     public interface IPatientOvcStatusmanager
     {
-        void AddPatientOvcStatus(PatientOVCStatus ovc);
-        void UpdatePatientOvcStatus(PatientOVCStatus ovc);
+        int AddPatientOvcStatus(PatientOVCStatus ovc);
+        int UpdatePatientOvcStatus(PatientOVCStatus ovc);
         List<PatientOVCStatus> GetPatientOvcStatus(int id);
-        void DeletePatientOvcStatus(int id);
+        int DeletePatientOvcStatus(int id);
     }
 }

@@ -8,6 +8,5 @@ namespace DataAccess.CCC.Interface.person
     {
        List<PersonContact> GetCurrentPersonContact(int persoId);
        List<PersonContact> GetAllPersonContact(int personId);
-        
     }
 }
