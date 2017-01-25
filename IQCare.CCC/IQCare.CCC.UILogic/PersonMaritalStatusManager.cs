@@ -8,32 +8,32 @@ namespace IQCare.CCC.UILogic
     public class PersonMaritalStatusManager
     {
         private IPatientMaritalStatusManager _mgr = (IPatientMaritalStatusManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
+        private int result;
 
-        public void AddPatientMaritalStatus(int patientMasteVisitId,int personId,int maritalStatusId)
+        public int AddPatientMaritalStatus(int personId,int maritalStatusId,int userId)
         {
             PatientMaritalStatus patientMaritalStatus=new PatientMaritalStatus()
             {
-                PatientMasterVisitId = patientMasteVisitId,
                 PersonId = personId,
                 MaritalStatusId = maritalStatusId,
                 Active = true  
             };
-            _mgr.AddPatientMaritalStatus(patientMaritalStatus);
+          return result=  _mgr.AddPatientMaritalStatus(patientMaritalStatus);
         }
 
-        void UpdatePatientMaritalStatus(int maritalstatusId)
+       public int UpdatePatientMaritalStatus(int maritalstatusId)
         {
             PatientMaritalStatus patientMaritalStatus=new PatientMaritalStatus()
             {
                 MaritalStatusId = maritalstatusId
             };
 
-            _mgr.UpdatePatientMaritalStatus(patientMaritalStatus);
+           return result= _mgr.UpdatePatientMaritalStatus(patientMaritalStatus);
         }
 
-        void DeletePatientMaritalStatus(int id)
+        public int DeletePatientMaritalStatus(int id)
         {
-            _mgr.DeletePatientMaritalStatus(id);
+          return result=  _mgr.DeletePatientMaritalStatus(id);
         }
 
         List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)

@@ -1,9 +1,9 @@
 ﻿using DataAccess.Context.ModuleMaster;
 using System;
+using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.visit;
-using DataAccess.CCC.Repository.Patient;
 
 namespace DataAccess.CCC.Interface
 {
@@ -29,5 +29,10 @@ namespace DataAccess.CCC.Interface
         /* patient visit */
         IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
         IPatientEncounterRepository PatientEncounterRepository { get; }
+
+        /* Enrollment */
+        IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
+        IPatientEntryPointRepository PatientEntryPointRepository { get; }
+        IPatientIdentifierRepository PatientIdentifierRepository { get; }
     }
 }

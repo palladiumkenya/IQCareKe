@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
+    <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
+    <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
+    <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
@@ -89,6 +92,8 @@
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
+    <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
+    <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\person\PatientOVCStatusRepository.cs" />
@@ -100,7 +105,6 @@
     <Compile Include="Repository\Lookup\LookupMasterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupRepository.cs" />
     <Compile Include="Repository\Patient\IPatientContactRepository.cs" />
-    <Compile Include="Repository\Patient\IPatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
     <Compile Include="Interface\person\IPatientPopulationRepository.cs" />
     <Compile Include="Repository\ICCCPatientRepository.cs" />
@@ -111,12 +115,12 @@
     <Compile Include="Repository\CCCPatientRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
+    <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\Baseline\" />
     <Folder Include="Repository\Encounter\" />
-    <Folder Include="Repository\Enrollment\" />
     <Folder Include="Repository\OneTimeEvent\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

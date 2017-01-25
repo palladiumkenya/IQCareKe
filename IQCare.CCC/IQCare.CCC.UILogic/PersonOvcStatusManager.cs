@@ -10,15 +10,16 @@ namespace IQCare.CCC.UILogic
         private IPatientOvcStatusmanager _mgr = (IPatientOvcStatusmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientOvcStatusManager, BusinessProcess.CCC");
         private int _result;
 
-        public int AddPatientOvcStatus(int personId,int guardianId, bool orphan,bool inschool)
+        public int AddPatientOvcStatus(PatientOVCStatus patientOvc)
         {
             PatientOVCStatus patientOvcStatus = new PatientOVCStatus()
             {
-                PersonId = personId,
-                GuardianId = guardianId,
-                Orphan = orphan,
-                InSchool = inschool,
-                Active = true
+                PersonId = patientOvc.PersonId,
+                GuardianId = patientOvc.GuardianId,
+                Orphan = patientOvc.Orphan,
+                InSchool = patientOvc.InSchool,
+                Active = true,
+                CreatedBy = patientOvc.CreatedBy
             };
             return _result=  _mgr.AddPatientOvcStatus(patientOvcStatus);
         }

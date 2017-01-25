@@ -8,20 +8,21 @@ namespace IQCare.CCC.UILogic
     public class PatientPopulationManager
     {
         private IPatientPopuationManager _mgr = (IPatientPopuationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
-
-        public void AddPatientPopulation(int patientId, int populationTypeId, int populationcategory)
+        private int _result;
+        public int AddPatientPopulation(PatientPopulation population)
         {
             PatientPopulation patientPopulation=new PatientPopulation()
             {
-                PatientId = patientId,
-                PopulationTypeId = populationTypeId,
-                PopulationCategory = populationTypeId
+                PatientId =population.PatientId,
+                PopulationTypeId = population.PopulationTypeId,
+                PopulationCategory = population.PopulationCategory,
+                CreatedBy = population.CreatedBy
             };
 
-            _mgr.AddPatientPopulation(patientPopulation);
+           return _result= _mgr.AddPatientPopulation(patientPopulation);
         }
 
-        public void UpdatePatientPopulation(int populationTypeId, int populationcategory)
+        public int UpdatePatientPopulation(int populationTypeId, int populationcategory)
         {
             PatientPopulation patientPopulation = new PatientPopulation()
             {
@@ -29,12 +30,12 @@ namespace IQCare.CCC.UILogic
                 PopulationCategory = populationTypeId
             };
 
-            _mgr.UpdatePatientPopulation(patientPopulation);
+            return _result = _mgr.UpdatePatientPopulation(patientPopulation);
         }
 
-        public void DeletePatientPopulation(int id)
+        public int DeletePatientPopulation(int id)
         {
-            _mgr.DeletePatientPopulation(id);
+            return _result = _mgr.DeletePatientPopulation(id);
         }
 
         public List<PatientPopulation> GetAllPatientPopulations(int patientId)

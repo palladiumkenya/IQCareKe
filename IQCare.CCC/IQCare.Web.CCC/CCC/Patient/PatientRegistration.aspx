@@ -349,7 +349,7 @@
 
 	                  <div class="step-pane sample-pane" id="datastep3" data-parsley-validate="true" data-step="3">
                            <div class="col-md-12">
-                                <small class="text-primary pull-left"> 3. Patient Conatcts </small>
+                                <small class="text-primary pull-left"> 3. Patient Contacts </small>
                                 <hr />
                            </div>
 
@@ -484,6 +484,7 @@
             .ready(function() {
 
                 var personAge = 0;
+                var userId=<%=UserId%>;
 
                 /*----- make readonly by default ----- */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -554,6 +555,11 @@
                                           
                             if ($('#datastep1').parsley().validate()) {
                                 addPerson();
+                                addPersonMaritalStatus();
+                                if (personAge > 18) {
+                                    addPersonGaurdian();
+                                    addPersonOvcStatus();
+                                }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -562,7 +568,7 @@
                         }
                         else if (data.step === 2) {
                             if ($("#datastep2").parsley().validate()) {
-
+                                addPersonLocation();
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -571,7 +577,7 @@
                         }
                         else if (data.step === 3) {
                             if ($("#datastep3").parsley().validate()) {
-
+                                addPatientContact();
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -691,6 +697,154 @@
                             generate('error', response.Message);
                         }
                     });
+                }
+
+                function addPersonGaurdian() {
+
+                    var gfname = $("#<%=GurdianFNames.ClientID%>").val();
+                    var gmname = $("#<%=GurdianMName.ClientID%>").val();
+                    var glname = $("#<%=GurdianLName.ClientID%>").val();
+                    var gsex = $("#<%=GuardianGender%>").val();
+                    var natId = 999999;
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPerson",
+                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender':" + gsex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+                }
+
+               function addPersonTreatmentSupporter() {
+
+                    var tFname = $("#<%=tsFname.ClientID%>").val();
+                    var tMname = $("#<%=tsMiddleName.ClientID%>").val();
+                    var tLname = $("#<%=tsLastName.ClientID%>").val();
+                    var tSex = $("#<%=tsGender%>").val();
+                    var natId = 999999;
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
+                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+               }
+
+                function addPersonMaritalStatus() {
+
+                    var personId = 0;
+                    var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonMaritalStatus",
+                        data: "{'personId':'" + personId + "','maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+                }
+
+                function addPersonOvcStatus() {
+                    var personId = 0;
+                    var guardianId=0
+                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").val();
+                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonOvcStatus",
+                        data: "{'personId':'" + personId + "','GuardianId':'" + guardianId + "','orphan':'" + orphan + "','inSchool':" + inSchool + ",'userId':'" + userId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+                }
+
+                function addPersonLocation() {
+                    var personId = 0;
+                    var county = $("#<%=countyId.ClientID%>").find(":selected").val();
+                    var subcounty = $("#<%=SubcountyId.ClientID%>").find(":selected").val();
+                    var ward = $("#<%=WardId.ClientID%>").find(":selected").val();
+                    var localCouncil = $("#<%=LocalCouncils.ClientID%>").val();
+                    var location = $("#<%=PatientLocation.ClientID%>").val();
+                    var subLocation = $("#<%=sublocation.ClientID%>").val();
+                    var landmark = $("#<%=PatientLandmark.ClientID%>").val();
+                    var nearestHc = $("#<%=NearestHealthCentre.ClientID%>").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonLocation",
+                        data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':" + ward + ",'location':'" + location + "','estate':'" + subLocation + "','landmark':'" + landmark + "','nearestHealthCentre':'" + nearestHc + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+                }
+
+                function addPatientContact() {
+
+                    var personId = 0;
+                    var postalAddress =$("#<%=PatientPostalAddress.ClientID%>").val() ;
+                    var mobileNumber = $("#<%=PatientMobileNo.ClientID%>").val();
+                    var altMobile =$("#<%=PatientAlternativeMobile.ClientID%>").val() ;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonContact",
+                        data: "{'personId':'" + personId + "','physicalAddress':'" + postalAddress + "','mobileNumber':'" + mobileNumber + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            // alert(response.d);
+                            generate('success', '<p>,</p>'+response.d);
+                        },
+                        failure: function (response) {
+                            // alert(msg);
+                            generate('error', response.Message);
+                        }
+                    });
+                }
+
+                function addPersonPopulation() {
+
+                    var personId = 0;
                 }
 
                 function generate(type, text) {

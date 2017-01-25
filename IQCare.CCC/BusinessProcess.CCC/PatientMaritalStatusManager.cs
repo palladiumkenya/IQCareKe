@@ -10,18 +10,19 @@ namespace BusinessProcess.CCC
     public class PatientMaritalStatusManager : IPatientMaritalStatusManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int result;
 
-        public void AddPatientMaritalStatus(PatientMaritalStatus patientMarital)
+        public int AddPatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
             _unitOfWork.PatientMaritalStatusRepository.Add(patientMarital);
-            _unitOfWork.Complete();
+          return result= _unitOfWork.Complete();
         }
 
-        public void DeletePatientMaritalStatus(int id)
+        public int DeletePatientMaritalStatus(int id)
         {
             var patientmaritalstatus = _unitOfWork.PatientMaritalStatusRepository.GetById(id);
             _unitOfWork.PatientMaritalStatusRepository.Remove(patientmaritalstatus);
-            _unitOfWork.Complete();
+          return result= _unitOfWork.Complete();
         }
 
         public List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)
@@ -33,10 +34,10 @@ namespace BusinessProcess.CCC
             return myList;
         }
 
-        public void UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital)
+        public int UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
            _unitOfWork.PatientMaritalStatusRepository.Update(patientMarital);
-            _unitOfWork.Complete();
+          return result=  _unitOfWork.Complete();
         }
     }
 }

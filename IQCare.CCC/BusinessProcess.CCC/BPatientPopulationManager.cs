@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.PatientCore;
@@ -11,24 +9,25 @@ namespace BusinessProcess.CCC
 {
     public class BPatientPopulationManager:IPatientPopuationManager
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
-        public void AddPatientPopulation(PatientPopulation patientPopulation)
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private int _result;
+        public int AddPatientPopulation(PatientPopulation patientPopulation)
         {
            _unitOfWork.PatientPopulationRepository.Add(patientPopulation);
-            _unitOfWork.Complete();
+          return _result= _unitOfWork.Complete();
         }
 
-        public void UpdatePatientPopulation(PatientPopulation patientPopulation)
+        public int UpdatePatientPopulation(PatientPopulation patientPopulation)
         {
             _unitOfWork.PatientPopulationRepository.Update(patientPopulation);
-            _unitOfWork.Complete();
+           return _result= _unitOfWork.Complete();
         }
 
-        public void DeletePatientPopulation(int id)
+        public int DeletePatientPopulation(int id)
         {
           PatientPopulation patientPopulation=  _unitOfWork.PatientPopulationRepository.GetById(id);
             _unitOfWork.PatientPopulationRepository.Remove(patientPopulation);
-            _unitOfWork.Complete();
+          return _result=  _unitOfWork.Complete();
         }
 
         public List<PatientPopulation> GetAllPatientPopulations(int patientId)

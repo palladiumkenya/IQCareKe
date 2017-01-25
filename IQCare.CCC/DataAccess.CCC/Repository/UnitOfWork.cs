@@ -3,6 +3,7 @@ using DataAccess.CCC.Context;
 using DataAccess.Context;
 using DataAccess.Context.ModuleMaster;
 using DataAccess.CCC.Interface;
+using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.visit;
@@ -10,6 +11,7 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
 using DataAccess.CCC.Repository.visit;
+using DataAccess.CCC.Repository.Enrollment;
 
 namespace DataAccess.CCC.Repository
 {
@@ -36,6 +38,11 @@ namespace DataAccess.CCC.Repository
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
+
+        /* Enrollment */
+        private IPatientEnrollmentRepository _patientEnrollmentRepository;
+        private IPatientEntryPointRepository _patientEntryPointRepository;
+        private IPatientIdentifierRepository _patientIdentifierRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -121,6 +128,21 @@ namespace DataAccess.CCC.Repository
         public IPatientEncounterRepository PatientEncounterRepository
         {
             get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
+        }
+
+        public IPatientEnrollmentRepository PatientEnrollmentRepository
+        {
+            get { return _patientEnrollmentRepository??(_patientEnrollmentRepository=new PatientEnrollmentRepository((GreencardContext)_context));}
+        }
+
+        public IPatientIdentifierRepository PatientIdentifierRepository
+        {
+            get { return _patientIdentifierRepository ?? (_patientIdentifierRepository = new PatientIdentifierRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientEntryPointRepository PatientEntryPointRepository
+        {
+            get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
         }
 
         public int Complete()

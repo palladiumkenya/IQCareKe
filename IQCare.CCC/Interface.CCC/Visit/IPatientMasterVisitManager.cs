@@ -13,5 +13,6 @@ namespace Interface.CCC.Visit
        int DeletePatientVisit(int id);
        List<PatientMasterVisit> GetPatientVisits(int patientId);
        List<PatientMasterVisit> GetPatientCurrentVisit(int patientId, DateTime visitDate);
+       
    }
 }

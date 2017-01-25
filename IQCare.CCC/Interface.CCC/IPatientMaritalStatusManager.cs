@@ -8,9 +8,9 @@ namespace Interface.CCC
 {
    public interface IPatientMaritalStatusManager
    {
-       void AddPatientMaritalStatus(PatientMaritalStatus patientMarital);
-       void UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital);
-       void DeletePatientMaritalStatus(int id);
+       int AddPatientMaritalStatus(PatientMaritalStatus patientMarital);
+       int UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital);
+       int DeletePatientMaritalStatus(int id);
        List<PatientMaritalStatus> GetAllMaritalStatuses(int personId);
    }
 }

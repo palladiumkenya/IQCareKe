@@ -8,9 +8,9 @@ namespace Interface.CCC
 {
     public interface IPatientPopuationManager
     {
-        void AddPatientPopulation(PatientPopulation patientPopulation);
-        void UpdatePatientPopulation(PatientPopulation patientPopulation);
-        void DeletePatientPopulation(int id);
+        int AddPatientPopulation(PatientPopulation patientPopulation);
+        int UpdatePatientPopulation(PatientPopulation patientPopulation);
+        int DeletePatientPopulation(int id);
         List<PatientPopulation> GetAllPatientPopulations(int patientId);
         List<PatientPopulation> GetCurrentPatientPopulations(int patientId);
 
