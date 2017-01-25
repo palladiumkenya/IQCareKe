@@ -5,9 +5,11 @@ using DataAccess.Context.ModuleMaster;
 using DataAccess.CCC.Interface;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
+using DataAccess.CCC.Repository.visit;
 
 namespace DataAccess.CCC.Repository
 {
@@ -15,7 +17,7 @@ namespace DataAccess.CCC.Repository
     {  
         private readonly BaseContext _context;
 
-        //Person Interface
+        /* Person Interface */
         private IPersonRepository _personRepository;
         private IPersonLocationRepository _personLocationRepository;
         private IPersonContactRepository _personContactRepository;
@@ -24,12 +26,16 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
 
-        // Modules
+        /* Modules */
         private IModuleRepository _moduleRepository;
 
-        //lookupContext
+        /* lookupContext */
         private ILookupRepository _lookupRepository;
         private ILookupMasterRepository _lookupMasterRepository;
+
+        /* visit */
+        private IPatientMasterVisitRepository _patientMasterVisitRepository;
+        private IPatientEncounterRepository _patientEncounterRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -103,6 +109,20 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientPopulationRepository??(_patientPopulationRepository=new PatientPopulationRepository((PersonContext)_context));}
         }
+
+        public IPatientMasterVisitRepository PatientMasterVisitRepository
+        {
+            get
+            {
+                return _patientMasterVisitRepository ?? (_patientMasterVisitRepository = new PatientMasterVisitRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientEncounterRepository PatientEncounterRepository
+        {
+            get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
+        }
+
         public int Complete()
         {
             return _context.SaveChanges();

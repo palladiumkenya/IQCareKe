@@ -2,6 +2,7 @@
 using System;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Repository.Patient;
 
 namespace DataAccess.CCC.Interface
@@ -12,11 +13,11 @@ namespace DataAccess.CCC.Interface
         
         IModuleRepository ModuleRepository { get; }
 
-        //LookupContext
+        /* LookupContext */
         ILookupRepository LookupRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
 
-        // person and patient
+        /* person and patient */
         IPersonRepository PersonRepository { get; }
         IPersonLocationRepository PersonLocationRepository { get; }
         IPersonContactRepository PersonContactRepository { get; }
@@ -24,5 +25,9 @@ namespace DataAccess.CCC.Interface
         IPatientOvcStatusRepository PatientOvcStatusRepository { get; }
         IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
         IPatientPopulationRepository PatientPopulationRepository { get;}
+
+        /* patient visit */
+        IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
+        IPatientEncounterRepository PatientEncounterRepository { get; }
     }
 }

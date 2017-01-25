@@ -81,12 +81,14 @@
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupItemRepository.cs" />
+    <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
     <Compile Include="Interface\person\IPersonContactRepository.cs" />
     <Compile Include="Interface\person\IPersonLocationRepository.cs" />
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\person\PatientOVCStatusRepository.cs" />
@@ -108,6 +110,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CCCPatientRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
+    <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
+    <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\Baseline\" />

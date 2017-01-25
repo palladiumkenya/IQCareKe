@@ -11,15 +11,23 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using PatientDiagnosis = Entities.CCC.Encounter.PatientDiagnosis;
 using PatientEnrollment = Entities.PatientCore.PatientEnrollment;
-
+using DataAccess.Context;
 
 namespace DataAccess.CCC.Context
 {
-    public class GreencardContext : DbContext
+    public class GreencardContext : BaseContext
     {
         public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
         {
+            Configuration.ProxyCreationEnabled = false;
+            // DataMgr.OpenDecryptedSession(base.Database.Connection);
+            Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer<GreencardContext>(null);
         }
+
+        //public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
+        //{
+        //}
 
         //public GreencardContext(string connection) : base(connection)
         //{
