@@ -858,6 +858,12 @@ Update Mst_Store Set LocationId = (Select Top 1 F.FacilityId From mst_Facility F
 Go
 Alter table dbo.mst_Store Alter Column LocationId  int Not Null
 Go
+If  Exists (Select * From sys.columns Where Name = N'Comments' And Object_ID = Object_id(N'dtl_FollowupEducation')) Begin
+  Alter table dbo.dtl_FollowupEducation Alter Column Comments varchar(255) Null
+End
+If   Exists (Select * From sys.columns Where Name = N'OtherDetail' And Object_ID = Object_id(N'dtl_FollowupEducation'))  Begin
+  Alter table dbo.dtl_FollowupEducation Alter Column OtherDetail varchar(255) Null
+End
 If not Exists (Select * From sys.columns Where Name = N'Comments' And Object_ID = Object_id(N'dtl_FollowupEducation')) Begin
   Alter table dbo.dtl_FollowupEducation Add Comments varchar(255) Null
 End

@@ -25,7 +25,8 @@ namespace DataAccess.Context
         {
             return _dbSet.Find(id);
         }
-        public virtual IQueryable<T> Filter(Expression<Func<T, bool>> filter) {         
+        public virtual IQueryable<T> Filter(Expression<Func<T, bool>> filter) {
+            _dbSet = _baseContext.Set<T>();
             return _baseContext.Set<T>().Where(filter);
         }
         public virtual IEnumerable<T> GetAll()
