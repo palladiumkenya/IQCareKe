@@ -9,14 +9,14 @@ namespace IQCare.CCC.UILogic
     {
         private IPatientPopuationManager _mgr = (IPatientPopuationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
         private int _result;
-        public int AddPatientPopulation(PatientPopulation population)
+        public int AddPatientPopulation(int patientId, int populationtypeId, int populationCategory, int userId)
         {
             PatientPopulation patientPopulation=new PatientPopulation()
             {
-                PatientId =population.PatientId,
-                PopulationTypeId = population.PopulationTypeId,
-                PopulationCategory = population.PopulationCategory,
-                CreatedBy = population.CreatedBy
+                PatientId =patientId,
+                PopulationTypeId = populationtypeId,
+                PopulationCategory = populationCategory,
+                CreatedBy = userId
             };
 
            return _result= _mgr.AddPatientPopulation(patientPopulation);

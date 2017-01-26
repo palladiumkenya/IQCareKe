@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity.Core.Objects;
-using System.Data.SqlClient;
-using System.Web;
+﻿using System.Collections.Generic;
 using DataAccess.CCC.Interface.person;
 using DataAccess.Context;
 using Entities.Common;

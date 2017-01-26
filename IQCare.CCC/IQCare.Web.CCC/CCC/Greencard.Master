@@ -138,6 +138,10 @@
                               <a href="#" class="list-group-item active">
                                    <span class=""></span> Patient Encounters<span class="badge"></span>
                               </a> 
+                              
+                              <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item">
+                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
+                                </a>
 
                                 <a href="#" class="list-group-item ">
                                     <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
@@ -151,8 +155,8 @@
                                     <span class="fa fa-heartbeat fa-1x pull-left"></span> Capture Vitals <span class="badge">8</span>
                                 </a>
 
-                                <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item">
-                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
+                                <a  href="../Enrollment/ServiceEnrollment.aspx" class="list-group-item">
+                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>
 
                                 <a href="#" class="list-group-item">

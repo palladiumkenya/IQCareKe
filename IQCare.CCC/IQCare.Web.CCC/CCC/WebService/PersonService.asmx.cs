@@ -14,7 +14,7 @@ namespace IQCare.Web.CCC.WebService
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-    public class PersonSeervice : System.Web.Services.WebService
+    public class PersonService : System.Web.Services.WebService
     {
         private int _personId;
         private int _personGuardianId;
@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
 
                 if (_personId > 0)
                 {
-                    _msg = "New Person Added Successfully!";
+                    _msg = "New Person Added Successfully-personId=>! "+ _personId +"";
                 }
             }
             catch (Exception e)
@@ -45,12 +45,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPersonMaritalStatus(int patientId,int maritalStatusId,int userId)
+        public string AddPersonMaritalStatus(int personId,int maritalStatusId,int userId)
         {
             try
             {
                 var maritalStatus = new PersonMaritalStatusManager();
-                _result = maritalStatus.AddPatientMaritalStatus(_personId, maritalStatusId,userId);
+                _result = maritalStatus.AddPatientMaritalStatus(this._personId, maritalStatusId,userId);
                 if (_result > 0)
                 {
                     _msg = "Person Marital Status Added Successfully!";
@@ -83,16 +83,17 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPersonOvcStatus(int personid,int guardianId,Boolean orphan,Boolean inSchool,int userId)
+        public string AddPersonOvcStatus(int personId,int guardianId,string orphan,string inSchool,int userId)
         {
-            PatientOVCStatus patientOvcStatus=new PatientOVCStatus()
-            {
-               
-            };
+            bool _orphan;
+            bool _inSchool;
+
+            if (orphan == "yes") { _orphan = true; } else { _orphan = false; }
+            if (inSchool == "yes") { _inSchool = true; } else { _inSchool = false; }
             try
             {
                 var ovcStatus = new PersonOvcStatusManager();
-                _result = ovcStatus.AddPatientOvcStatus(_personId, _personGuardianId, orphan, inSchool, userId);
+                _result = ovcStatus.AddPatientOvcStatus(_personId, _personGuardianId, _orphan, _inSchool, userId);
 
             }
             catch (Exception e)
@@ -178,12 +179,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPersonPopulation(PatientPopulation patientPopulation)
+        public string AddPersonPopulation(int patientId,int populationtypeId,int populationCategory,int userId)
         {
             try
             {
-                var personOvcStatus = new PersonOvcStatusManager();
-                _result = personOvcStatus.AddPatientOvcStatus(_personId, patientPopulation.PopulationTypeId, patientPopulation.PopulationCategory, patientPopulation.CreatedBy);
+                var personPoulation = new PatientPopulationManager();
+                _result = personPoulation.AddPatientPopulation(patientId, populationtypeId, populationCategory, userId);
                 if (_result > 0)
                 {
                     _msg = "Person OVC Status Recorded Successfully!";
