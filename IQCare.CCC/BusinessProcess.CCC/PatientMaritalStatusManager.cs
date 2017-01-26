@@ -1,15 +1,14 @@
-﻿using System;
-using Interface.CCC;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.PatientCore;
+using Interface.CCC;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace BusinessProcess.CCC 
+namespace BusinessProcess.CCC
 {
-    [Serializable]
-    public class PatientMaritalStatusManager : IPatientMaritalStatusManager
+    public class PatientMaritalStatusManager : ProcessBase, IPatientMaritalStatusManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int result;
@@ -31,7 +30,7 @@ namespace BusinessProcess.CCC
         {
             List<PatientMaritalStatus> myList;
            myList= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag)
-                .OrderBy(x => x.Id)
+                .OrderBy(x => x.PatientMasterVisitId)
                 .ToList();
             return myList;
         }
