@@ -14,7 +14,7 @@ namespace IQCare.Web.CCC.WebService
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-    public class PersonSeervice : System.Web.Services.WebService
+    public class PersonService : System.Web.Services.WebService
     {
         private int _personId;
         private int _personGuardianId;

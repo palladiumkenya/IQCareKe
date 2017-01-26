@@ -1,13 +1,14 @@
-﻿using Interface.CCC;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.PatientCore;
+using Interface.CCC;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace BusinessProcess.CCC 
+namespace BusinessProcess.CCC
 {
-    public class PatientMaritalStatusManager : IPatientMaritalStatusManager
+    public class PatientMaritalStatusManager : ProcessBase, IPatientMaritalStatusManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int result;
