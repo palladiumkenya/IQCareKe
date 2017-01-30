@@ -59,6 +59,7 @@
     <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
+    <Content Include="CCC\Scripts\js\Greencard.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />

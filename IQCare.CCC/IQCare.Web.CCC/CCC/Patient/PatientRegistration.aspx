@@ -554,11 +554,11 @@
                             /* add constraints based on age*/
                                           
                             if ($('#datastep1').parsley().validate()) {   
-                               // addPerson();
+                                addPerson();
                                 addPersonMaritalStatus();
                                 if (personAge <18) {
-                                   // addPersonGaurdian();
-                                   // addPersonOvcStatus();
+                                    addPersonGaurdian();
+                                    addPersonOvcStatus();
                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;

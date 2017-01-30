@@ -11,9 +11,9 @@ namespace Entities.PatientCore
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("PersonId")]
-        public virtual int PersonId { get; set; }
-        public virtual Person person { get; set; }
+        [ForeignKey("Person")]
+        public int? PersonId { get; set; }
+        public virtual Person Person { get; set; }
         public int MaritalStatusId { get; set; }
         public bool Active { get; set; }
     }
