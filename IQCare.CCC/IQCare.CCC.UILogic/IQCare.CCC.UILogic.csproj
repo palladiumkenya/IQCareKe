@@ -38,7 +38,9 @@
     <Reference Include="Application.Presentation">
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
@@ -47,7 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.CCC.dll</HintPath>
     </Reference>
-    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
@@ -83,10 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
-      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
-      <Name>BusinessProcess.CCC</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
       <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
       <Name>DataAccess.CCC</Name>
