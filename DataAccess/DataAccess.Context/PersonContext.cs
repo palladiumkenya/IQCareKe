@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using DataAccess.Base;
 using Entities.Common;
@@ -6,8 +7,10 @@ using Entities.PatientCore;
 
 namespace DataAccess.Context
 {
+
     public class PersonContext :BaseContext
     {
+        
         public PersonContext() : base((DbConnection) DataMgr.GetConnection(), true)
         {
             Configuration.ProxyCreationEnabled = false;

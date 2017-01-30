@@ -29,15 +29,14 @@ namespace IQCare.CCC.UILogic
                     Sex = gender,
                     NationalId = util.Encrypt(nationalId),
                     CreatedBy = userId
-
                 };
                 retval = _mgr.AddPerson(p);
                 //HttpContext.Current.Session["PersonId"] = p.Id;
             }
             catch (Exception exception)
             {
-                    
-               throw new Exception(exception.Message);
+
+               throw new Exception(exception .Message);
             }
 
             return retval;
@@ -58,7 +57,11 @@ namespace IQCare.CCC.UILogic
         {
             IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
             Person p = mgr.GetPerson(id);
+            p.Id = p.Id;
             p.FirstName = util.Decrypt(p.FirstName);
+            p.MidName = util.Decrypt(p.MidName);
+            p.LastName = util.Decrypt(p.LastName);
+            p.NationalId = util.Decrypt(p.NationalId);
             return p;
         }
     }

@@ -553,12 +553,12 @@
 
                             /* add constraints based on age*/
                                           
-                            if ($('#datastep1').parsley().validate()) {
-                                addPerson();
+                            if ($('#datastep1').parsley().validate()) {   
+                               // addPerson();
                                 addPersonMaritalStatus();
-                                if (personAge > 18) {
-                                    addPersonGaurdian();
-                                    addPersonOvcStatus();
+                                if (personAge <18) {
+                                   // addPersonGaurdian();
+                                   // addPersonOvcStatus();
                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
@@ -643,7 +643,7 @@
                                 $("#<%=SubcountyId.ClientID%>").append('<option value="' + itemList.subcountyId + '">' + itemList.SubcountyName + '</option>');
                             }); 
                         },
-                        failure: function (msg) {
+                        error: function (msg) {
                             alert(msg);
                         }
                     });
@@ -667,7 +667,7 @@
                                 $("#<%=WardId.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
                             }); 
                         },
-                        failure: function (msg) {
+                        error: function (msg) {
                             alert(msg);
                         }
                     });     
@@ -692,7 +692,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -704,11 +704,11 @@
                     var gfname = $("#<%=GurdianFNames.ClientID%>").val();
                     var gmname = $("#<%=GurdianMName.ClientID%>").val();
                     var glname = $("#<%=GurdianLName.ClientID%>").val();
-                    var gsex = $("#<%=GuardianGender%>").val();
+                    var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPerson",
+                        url: "../WebService/PersonService.asmx/AddPersonGuardian",
                         data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender':" + gsex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -716,7 +716,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -740,7 +740,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -749,7 +749,7 @@
 
                 function addPersonMaritalStatus() {
 
-                    var personId = 0;
+                    var personId = 31;
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
                     $.ajax({
                         type: "POST",
@@ -761,7 +761,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -770,20 +770,20 @@
 
                 function addPersonOvcStatus() {
                     var personId = 0;
-                    var guardianId=0
-                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").val();
-                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").val();
+                    var guardianId = 0;
+                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
+                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonOvcStatus",
-                        data: "{'personId':'" + personId + "','GuardianId':'" + guardianId + "','orphan':'" + orphan + "','inSchool':" + inSchool + ",'userId':'" + userId + "'}",
+                        data: "{'personId':'" + personId + "','guardianId':'" + guardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -811,7 +811,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }
@@ -835,7 +835,7 @@
                             // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
-                        failure: function (response) {
+                        error: function (response) {
                             // alert(msg);
                             generate('error', response.Message);
                         }

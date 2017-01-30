@@ -12,9 +12,10 @@ using System;
 
 namespace BusinessProcess.CCC
 {
+
     public class BPersonManager:ProcessBase, IPersonManager
     {
-        private  UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
+        private readonly UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
 
        public int AddPerson(Person person)
        {
