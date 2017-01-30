@@ -16,11 +16,11 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PersonService : System.Web.Services.WebService
     {
-        private int _personId;
-        private int _personGuardianId;
-        private int _personTreatmentSupporterId;
-        private string _msg;
-        private int _result;
+        private int _personId { get; set; }
+        private int _personGuardianId { get; set; }
+        private int _personTreatmentSupporterId { get; set; }
+        private string _msg { get; set; }
+        private int _result { get; set; }
 
         [WebMethod]
         public string AddPerson(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
 
                 if (_personId > 0)
                 {
-                    _msg = "New Person Added Successfully-personId=>! "+ _personId +"";
+                    _msg = ""+ _personId +"";
                 }
             }
             catch (Exception e)
@@ -50,7 +50,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var maritalStatus = new PersonMaritalStatusManager();
-                _result = maritalStatus.AddPatientMaritalStatus(this._personId, maritalStatusId,userId);
+                _result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId,userId);
                 if (_result > 0)
                 {
                     _msg = "Person Marital Status Added Successfully!";
@@ -72,7 +72,7 @@ namespace IQCare.Web.CCC.WebService
                 _personGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId, userId);
                 if (_personGuardianId > 0)
                 {
-                    _msg = "New Guardian Person Added Successfully!";
+                    _msg= _personGuardianId.ToString();
                 }
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var ovcStatus = new PersonOvcStatusManager();
-                _result = ovcStatus.AddPatientOvcStatus(_personId, _personGuardianId, _orphan, _inSchool, userId);
+                _result = ovcStatus.AddPatientOvcStatus(personId, guardianId, _orphan, _inSchool, userId);
 
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var personLocation = new PersonLocationManager();
-               _result= personLocation.AddPersonLocation(_personId,county,subCounty,ward,village,estate,landmark,nearestHealthCentre);
+               _result= personLocation.AddPersonLocation(personId, county,subCounty,ward,village,estate,landmark,nearestHealthCentre);
                if(_result>0) { _msg = "Person Location Addedd successfully!";}
             }
             catch (Exception e)
@@ -124,7 +124,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var personContact = new PersonContactManager();
-                _result = personContact.AddPersonContact(_personId, physicalAddress, mobileNumber);
+                _result = personContact.AddPersonContact(personId, physicalAddress, mobileNumber);
                 if (_result > 0)
                 {
                     _msg = "Person Contact Addedd successuly!";
