@@ -12,6 +12,8 @@ using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
 using DataAccess.CCC.Repository.visit;
 using DataAccess.CCC.Repository.Enrollment;
+using DataAccess.CCC.Interface.Baseline;
+using DataAccess.CCC.Repository.Baseline;
 
 namespace DataAccess.CCC.Repository
 {
@@ -43,6 +45,8 @@ namespace DataAccess.CCC.Repository
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
         private IPatientEntryPointRepository _patientEntryPointRepository;
         private IPatientIdentifierRepository _patientIdentifierRepository;
+        /*Baseline*/
+        private IPatientDisclosureRepository _patientDisclosureRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -143,6 +147,11 @@ namespace DataAccess.CCC.Repository
         public IPatientEntryPointRepository PatientEntryPointRepository
         {
             get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientDisclosureRepository PatientDisclosureRepository
+        {
+            get { return _patientDisclosureRepository ?? (_patientDisclosureRepository = new PatientDisclosureRepository((GreencardContext)_context)); }
         }
 
         public int Complete()

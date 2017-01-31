@@ -9,7 +9,7 @@
         <div class="col-md-12">
 
              <div class="panel panel-default">
-                  <div class="panel-body">
+                  <div class="panel-body" id="onetimeeventstracker" data-parsley-validate="true" data-show-errors="true">
                         
                        <div class="col-md-12">
                             <div class="col-md-12"><label class="control-label pull-left">Patient one time events tracker</label></div> 
@@ -25,7 +25,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage1">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="Stage1Date" type="text" />
+                                                    <input class="form-control input-sm" id="Stage1Date" type="text" data-parsley-required="true" runat="server" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -110,7 +110,7 @@
                                        <div class="col-md-7">
                                             <div class="datepicker fuelux form-group" id="Stage2">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" />
+                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" runat="server"  />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -195,7 +195,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage3">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" />
+                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" runat="server"  />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -280,7 +280,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="SexPartner">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" />
+                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" runat="server"  />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -378,7 +378,8 @@
                                       <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="StartDate">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="INHStartDate" type="text" />
+                                                                                  <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
+                                                                                    <asp:TextBox runat="server" ID="INHStartDate" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" type="text"></asp:TextBox>
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -461,12 +462,12 @@
                                  <div class="col-md-12 form-group">
                                       <div class="col-md-5"><label class="control-label pull-left"> INH Completion ? </label></div>
                                       <div class="col-md-7">
-                                           <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblCompletionYes">
-                                               <input class="sr-only" type="checkbox" id="CompletionYes" value="option1"> <span class="checkbox-label"><strong> Yes </strong></span>
+                                           <label class="radio-custom radio-inline pull-left" data-initialize="radio"  id="lblCompletionYes">
+                                               <input class="sr-only" type="radio" id="CompletionYes" value="option1" name="INH"> <span class="checkbox-label"><strong> Yes </strong></span>
                                            </label>
 
-                                           <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblCompletionNo">
-                                             <input class="sr-only" type="checkbox" id="CompletionNo" value="option1"> <span class="checkbox-label"><strong> No </strong></span>
+                                           <label class="radio-custom radio-inline pull-left" data-initialize="radio"  id="lblCompletionNo">
+                                             <input class="sr-only" type="radio" id="CompletionNo" value="option1" name="INH"> <span class="checkbox-label"><strong> No </strong></span>
                                            </label>
                                       </div>
                                  </div>
@@ -581,7 +582,7 @@
                             <div class="col-md-6"></div>
 
                             <div class="col-md-6">
-                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" > Save One Time Event</asp:LinkButton></div>
+                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right"> Save One Time Event</asp:LinkButton></div>
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="LinkButton1" CssClass=" btn btn-warning btn-lg fa fa-refresh" > Reset One Time Event</asp:LinkButton></div> 
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close One Time Event</asp:LinkButton></div>
                             </div>
@@ -594,11 +595,43 @@
     </div><%-- .container-fluid--%>
         <script type="text/javascript">
         $(document).ready(function () {
-            $('#Stage1').datepicker();
+            /*$('#Stage1').datepicker();
             $('#Stage2').datepicker();
             $('#Stage3').datepicker();
-            $('#SexPartner').datepicker(); 
+            $('#SexPartner').datepicker();*/
 
+        });
+
+        $('#Stage1').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $('#Stage2').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $('#Stage3').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $('#SexPartner').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $("#ctl00_IQCareContentPlaceHolder_btnOneTimeEventsTracker").click(function () {
+            if ($("#onetimeeventstracker").parsley().validate()) {
+                return true;
+            } else {
+                return false;
+            }
         });
 
     </script>

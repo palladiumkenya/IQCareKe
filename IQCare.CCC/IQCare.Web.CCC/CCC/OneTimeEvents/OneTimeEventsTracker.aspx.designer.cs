@@ -22,6 +22,51 @@ namespace IQCare.Web.CCC {
         protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
         
         /// <summary>
+        /// Stage1Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage1Date;
+        
+        /// <summary>
+        /// Stage2Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage2Date;
+        
+        /// <summary>
+        /// Stage3Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Stage3Date;
+        
+        /// <summary>
+        /// SexPartnerDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText SexPartnerDate;
+        
+        /// <summary>
+        /// INHStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox INHStartDate;
+        
+        /// <summary>
         /// vaccinationotheradult control.
         /// </summary>
         /// <remarks>
