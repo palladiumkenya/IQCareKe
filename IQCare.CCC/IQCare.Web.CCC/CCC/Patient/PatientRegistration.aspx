@@ -485,9 +485,7 @@
 
                 var personAge = 0;
                 var userId=<%=UserId%>;
-                var personId = 0;
-                var personGuardianId = 0;
-				var x;
+                var personId=0;
 
                 /*----- make readonly by default ----- */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -557,12 +555,13 @@
                             /* add constraints based on age*/
                                           
                             if ($('#datastep1').parsley().validate()) {   
-                              var x=addPerson();
-                               alert("when calling paerson"+x);if(x>0){addPersonMaritalStatus();}
-                                
-                               /* if (personAge <18) {
-                                    addPersonGaurdian();if(personGuardianId>0){addPersonOvcStatus();}             
-                                }*/
+                                addPerson();
+                                addPersonMaritalStatus();
+
+                                if (personAge <18) {
+                                    addPersonGaurdian();
+                                    addPersonOvcStatus();           
+                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -692,12 +691,9 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            return(response);
-                            generate('success', 'New Person Added Successfully-personId=>! '+response.d);
+                            generate('success', ''+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
                             generate('error', response.d);
                         }
                     });
@@ -717,16 +713,12 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            returnValue = response.d;
-                            generate('success', 'Person Guardian Addedd succesfully'+response.d);
+                            generate('success', ''+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
                             generate('error', response.d);
                         }
                     });
-					return returnValue;
                 }
 
                function addPersonTreatmentSupporter() {
@@ -774,6 +766,7 @@
                 }
 
                 function addPersonOvcStatus() {
+                    var personGuardianId = 0;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
                     var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
                     $.ajax({
@@ -783,11 +776,9 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
                             generate('error', response.d);
                         }
                     });
@@ -810,11 +801,9 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
                             generate('error', response.d);
                         }
                     });
@@ -832,11 +821,9 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
                             generate('error', response.d);
                         }
                     });
