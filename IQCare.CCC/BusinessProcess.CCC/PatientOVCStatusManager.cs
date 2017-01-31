@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Interface.CCC;
@@ -7,7 +8,7 @@ using Entities.PatientCore;
 
 namespace BusinessProcess.CCC
 {
-    public class PatientOvcStatusManager : IPatientOvcStatusmanager
+    public class PatientOvcStatusManager :ProcessBase, IPatientOvcStatusmanager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;

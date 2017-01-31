@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.Common;
@@ -7,9 +8,9 @@ using Interface.CCC;
 
 namespace BusinessProcess.CCC
 {
-    public class BPersonRelationshipManager :IPersonRelationshipManager
+    public class BPersonRelationshipManager :ProcessBase,IPersonRelationshipManager
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
 
         public int AddPersonRelationship(PersonRelationship personRelationship)

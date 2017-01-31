@@ -485,6 +485,7 @@
 
                 var personAge = 0;
                 var userId=<%=UserId%>;
+                var personId=0;
 
                 /*----- make readonly by default ----- */
                 $("#<%=ChildOrphan.ClientID%>").attr('disabled', 'disbaled');
@@ -554,12 +555,13 @@
                             /* add constraints based on age*/
                                           
                             if ($('#datastep1').parsley().validate()) {   
-                               // addPerson();
+                                addPerson();
                                 addPersonMaritalStatus();
+
                                 if (personAge <18) {
-                                   // addPersonGaurdian();
-                                   // addPersonOvcStatus();
-                                }
+                                    addPersonGaurdian();
+                                    addPersonOvcStatus();           
+                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -689,18 +691,16 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            generate('success', '<p>,</p>'+response.d);
+                            generate('success', ''+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
 
                 function addPersonGaurdian() {
-
+					var returnValue=0;
                     var gfname = $("#<%=GurdianFNames.ClientID%>").val();
                     var gmname = $("#<%=GurdianMName.ClientID%>").val();
                     var glname = $("#<%=GurdianLName.ClientID%>").val();
@@ -713,12 +713,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            generate('success', '<p>,</p>'+response.d);
+                            generate('success', ''+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
@@ -742,14 +740,13 @@
                         },
                         error: function (response) {
                             // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                }
 
                 function addPersonMaritalStatus() {
 
-                    var personId = 31;
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
                     $.ajax({
                         type: "POST",
@@ -763,35 +760,31 @@
                         },
                         error: function (response) {
                             // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
 
                 function addPersonOvcStatus() {
-                    var personId = 0;
-                    var guardianId = 0;
+                    var personGuardianId = 0;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
                     var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonOvcStatus",
-                        data: "{'personId':'" + personId + "','guardianId':'" + guardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
+                        data: "{'personId':'" +personId  + "','guardianId':'" + personGuardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
 
                 function addPersonLocation() {
-                    var personId = 0;
                     var county = $("#<%=countyId.ClientID%>").find(":selected").val();
                     var subcounty = $("#<%=SubcountyId.ClientID%>").find(":selected").val();
                     var ward = $("#<%=WardId.ClientID%>").find(":selected").val();
@@ -808,19 +801,15 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
 
                 function addPatientContact() {
-
-                    var personId = 0;
                     var postalAddress =$("#<%=PatientPostalAddress.ClientID%>").val() ;
                     var mobileNumber = $("#<%=PatientMobileNo.ClientID%>").val();
                     var altMobile =$("#<%=PatientAlternativeMobile.ClientID%>").val() ;
@@ -832,19 +821,17 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
                             generate('success', '<p>,</p>'+response.d);
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.Message);
+                            generate('error', response.d);
                         }
                     });
                 }
 
                 function addPersonPopulation() {
 
-                    var personId = 0;
+                    //var personId = 0;
                 }
 
                 function generate(type, text) {

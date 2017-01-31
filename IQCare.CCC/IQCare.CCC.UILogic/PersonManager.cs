@@ -3,7 +3,6 @@ using System.Globalization;
 using Entities.Common;
 using Application.Presentation;
 using Application.Common;
-using BusinessProcess.CCC;
 using Interface.CCC;
 
 namespace IQCare.CCC.UILogic
