@@ -76,9 +76,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baseline\BPatientDisclosure.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
-    <Compile Include="BPatientTreatmentSupporterManager.cs" />
+    <Compile Include="BPatientVitals.cs" />
     <Compile Include="BPersonLocationmanager.cs" />
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
@@ -96,6 +97,7 @@
       <Name>DataAccess.CCC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

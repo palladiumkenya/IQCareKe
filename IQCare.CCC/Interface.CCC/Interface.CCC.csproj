@@ -52,10 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baseline\IPatientDisclosureManager.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
-    <Compile Include="IPatientTreatmeantSupporterManager.cs" />
+    <Compile Include="IPatientVitals.cs" />
     <Compile Include="IPersonContactManager.cs" />
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Baseline\" />
     <Folder Include="Encounter\" />
     <Folder Include="Enrollment\" />
     <Folder Include="OneTimeEvent\" />

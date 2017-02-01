@@ -153,14 +153,15 @@ namespace DataAccess.CCC.Repository
             get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
         }
 
-        public IPatientDisclosureRepository PatientDisclosureRepository
-        {
-            get { return _patientDisclosureRepository ?? (_patientDisclosureRepository = new PatientDisclosureRepository((GreencardContext)_context)); }
-        }
-
+<<<<<<< HEAD
         public IPatientVitalsRepository PatientVitalsRepository
         {
             get {return _patientVitalsRepository ?? (_patientVitalsRepository = new PatientVitalsRepository((GreencardContext)_context)); }
+=======
+        public IPatientDisclosureRepository PatientDisclosureRepository
+        {
+            get { return _patientDisclosureRepository ?? (_patientDisclosureRepository = new PatientDisclosureRepository((GreencardContext)_context)); }
+>>>>>>> 81720730d2a1fc95c0502bc53595355d92561421
         }
 
         public int Complete()

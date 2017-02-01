@@ -31,6 +31,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox weights;
         
         /// <summary>
+        /// bmivalue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bmivalue;
+        
+        /// <summary>
         /// circumference control.
         /// </summary>
         /// <remarks>
@@ -67,22 +76,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox systolic;
         
         /// <summary>
-        /// TextBox2 control.
+        /// Tempreture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox Tempreture;
         
         /// <summary>
-        /// TextBox3 control.
+        /// RespiratoryRate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox RespiratoryRate;
         
         /// <summary>
         /// bosaturation control.

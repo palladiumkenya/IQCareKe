@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Common;
+using Entities.PatientCore;
 
 namespace Entities.CCC.Baseline
 {
@@ -10,7 +11,8 @@ namespace Entities.CCC.Baseline
     public class PatientDisclosure :BaseObject
     {
         public int PatientId { get; set; }
-        [ForeignKey("PatientId")]
+        [ForeignKey("Patient")]
+        public virtual Patient Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         public string Category { get; set; }
         public string DisclosureStage { get; set; }

@@ -3,6 +3,7 @@ using System;
 using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Repository.Patient;
 using DataAccess.CCC.Repository.visit;
@@ -37,5 +38,8 @@ namespace DataAccess.CCC.Interface
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
         IPatientEntryPointRepository PatientEntryPointRepository { get; }
         IPatientIdentifierRepository PatientIdentifierRepository { get; }
+
+        /*Triage*/
+        IPatientVitalsRepository PatientVitalsRepository { get; }
     }
 }

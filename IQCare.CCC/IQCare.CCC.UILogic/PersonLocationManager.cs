@@ -44,7 +44,7 @@ namespace IQCare.CCC.UILogic
                 NearestHealthCentre = nearesthealthcentre,
                 CreatedBy = userId
             };
-            return _result= _mgr.AddPersonLocation(personLocation);
+            return _result= _mgr.UpdatePersonLocation(personLocation);
 
         }
 
