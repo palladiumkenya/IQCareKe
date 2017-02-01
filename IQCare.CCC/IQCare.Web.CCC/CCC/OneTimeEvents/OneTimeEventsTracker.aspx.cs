@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using IQCare.CCC.UILogic;
+using System;
 
 namespace IQCare.Web.CCC
 {
@@ -11,7 +7,20 @@ namespace IQCare.Web.CCC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                PatientDisclosureManager disclosure = new PatientDisclosureManager();
 
+                string Stage1DateValue = Stage1Date.Value;
+                string Stage2DateValue = Stage2Date.Value;
+                string Stage3DateValue = Stage3Date.Value;
+                string SexPartnerDateValue = SexPartnerDate.Value;
+                string INHStartDateValue = INHStartDate.Text;
+
+                int patientid =  (Int32)Session["PatientID"];
+                //disclosure.AddPatientDisclosure(patientid, 0, null, null, DateTime.Parse(Stage1DateValue));
+
+            }
         }
     }
 }
