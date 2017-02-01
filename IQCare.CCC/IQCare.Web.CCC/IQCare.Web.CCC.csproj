@@ -15,7 +15,7 @@
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-	 <TrunkDir>..\..\</TrunkDir>
+    <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
     <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
     <IISExpressSSLPort />
@@ -68,6 +68,7 @@
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
+    <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="Web.config">
@@ -198,6 +199,10 @@
       <DependentUpon>LookupService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PatientService.asmx.cs">
+      <DependentUpon>PatientService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -308,12 +313,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-    <Target Name="AfterBuild">
+  <Target Name="AfterBuild">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
-	<Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
-	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />	
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

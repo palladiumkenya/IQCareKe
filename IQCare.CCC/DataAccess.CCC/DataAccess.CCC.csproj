@@ -94,6 +94,8 @@
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
+    <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
+    <Compile Include="Repository\Patient\PatientVitalsRepository.cs" />
     <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\person\PatientOVCStatusRepository.cs" />

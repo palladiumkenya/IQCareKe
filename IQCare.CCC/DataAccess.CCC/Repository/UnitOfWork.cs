@@ -6,6 +6,7 @@ using DataAccess.CCC.Interface;
 using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
@@ -27,6 +28,9 @@ namespace DataAccess.CCC.Repository
         private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
+
+        /* Patient Interface */
+        private IPatientVitalsRepository _patientVitalsRepository;
 
         /* Modules */
         private IModuleRepository _moduleRepository;
@@ -143,6 +147,11 @@ namespace DataAccess.CCC.Repository
         public IPatientEntryPointRepository PatientEntryPointRepository
         {
             get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientVitalsRepository PatientVitalsRepository
+        {
+            get {return _patientVitalsRepository ?? (_patientVitalsRepository = new PatientVitalsRepository((GreencardContext)_context)); }
         }
 
         public int Complete()

@@ -43,7 +43,7 @@ namespace IQCare.CCC.UILogic
                 LandMark = landmark,
                 NearestHealthCentre = nearesthealthcentre
             };
-            return _result= _mgr.AddPersonLocation(personLocation);
+            return _result= _mgr.UpdatePersonLocation(personLocation);
 
         }
 

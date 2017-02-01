@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="LookupLogic.cs" />
     <Compile Include="PatientPopulationManager.cs" />
+    <Compile Include="PatientVitalsLogic.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonManager.cs" />
