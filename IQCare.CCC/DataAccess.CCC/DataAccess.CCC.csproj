@@ -84,6 +84,7 @@
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupItemRepository.cs" />
+    <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />
     <Compile Include="Repository\person\PatientOVCStatusRepository.cs" />
+    <Compile Include="Repository\person\PatientTreatmentSupporterRepository.cs" />
     <Compile Include="Repository\person\PersonContactRepository.cs" />
     <Compile Include="Repository\person\PersonLocationRepository.cs" />
     <Compile Include="Repository\person\PersonRelationshipRepository.cs" />
@@ -108,7 +110,6 @@
     <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
     <Compile Include="Interface\person\IPatientPopulationRepository.cs" />
     <Compile Include="Repository\ICCCPatientRepository.cs" />
-    <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

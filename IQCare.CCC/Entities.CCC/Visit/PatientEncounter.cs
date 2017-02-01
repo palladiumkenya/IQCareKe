@@ -15,12 +15,12 @@ namespace Entities.CCC.Visit
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("patientId")]
-        public int PatientId { get; set; }
+        [ForeignKey("patient")]
+        public int? PatientId { get; set; }
         public virtual Patient Patient { get; set; }
         public int EncounterTypeId { get; set; }
-        [ForeignKey("PatientmasterVisitId")]
-        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientmasterVisit")]
+        public int? PatientMasterVisitId { get; set; }
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public DateTime EncounterStartTime { get; set; }
         public DateTime EncounterEndTime { get; set; }

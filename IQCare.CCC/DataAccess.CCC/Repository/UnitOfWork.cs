@@ -27,6 +27,7 @@ namespace DataAccess.CCC.Repository
         private IPatientMaritalStatusRepository _patientMaritalStatusRepository;
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
+        private PatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
 
         /* Modules */
         private IModuleRepository _moduleRepository;
@@ -143,6 +144,11 @@ namespace DataAccess.CCC.Repository
         public IPatientEntryPointRepository PatientEntryPointRepository
         {
             get { return _patientEntryPointRepository ?? (_patientEntryPointRepository = new PatientEntrypointRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository
+        {
+            get { return _patientTreatmentSupporterRepository ?? (_patientTreatmentSupporterRepository = new PatientTreatmentSupporterRepository((PersonContext)_context)); }
         }
 
         public int Complete()
