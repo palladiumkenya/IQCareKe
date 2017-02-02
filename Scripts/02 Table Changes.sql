@@ -884,6 +884,13 @@ IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_ob
 	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 
 GO
+GO
+IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'HeadCircumference' AND object_id = OBJECT_ID('dbo.PatientVitals'))
+    ALTER TABLE PatientVitals ADD HeadCircumference DECIMAL(8,2);
+GO 
+IF Not Exists (SELECT * FROM sys.columns WHERE Name = 'BMI' AND object_id = OBJECT_ID('dbo.PatientVitals'))
+    ALTER TABLE PatientVitals ADD BMI DECIMAL(8,2);
+GO
 --Update mst_facility Set Billing = 1, Wards=1 Where DeleteFlag = 0;
 --Go
 
