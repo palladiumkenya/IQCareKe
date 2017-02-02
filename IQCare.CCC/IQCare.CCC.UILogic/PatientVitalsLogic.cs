@@ -22,6 +22,8 @@ namespace IQCare.CCC.UILogic
                 SpO2 = p.SpO2,
                 Temperature = p.Temperature,
                 Weight = p.Weight,
+                BMI = p.BMI,
+                HeadCircumference = p.HeadCircumference
             };
             return _vitals.AddPatientVitals(patientVital);
         }
@@ -52,6 +54,8 @@ namespace IQCare.CCC.UILogic
                 SpO2 = p.SpO2,
                 Temperature = p.Temperature,
                 Weight = p.Weight,
+                BMI = p.BMI,
+                HeadCircumference = p.HeadCircumference
             };
             return _vitals.UpdatePatientVitals(patientVital);
         }

@@ -21,5 +21,7 @@ namespace Entities.CCC.Triage
         public decimal Weight { get; set; }
         public decimal  Muac { get; set; }
         public decimal SpO2 { get; set; }
+        public decimal BMI { get; set; }
+        public decimal HeadCircumference { get; set; }
      }
 }
