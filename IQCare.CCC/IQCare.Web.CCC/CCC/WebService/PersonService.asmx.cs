@@ -24,14 +24,14 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, int userId)
         {
             try
             {
                 
                 var personLogic = new PersonManager();
 
-                PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId, userId);
+                PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth, nationalId, userId);
                 Session["PersonId"] = PersonId;
                 if (PersonId > 0)
                 {
@@ -67,12 +67,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
+        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, int userId)
         {
             try
             {
                 var personLogic = new PersonManager();
-                PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId, userId);
+                PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth, nationalId, userId);
                 Session["PersonGuardianId"] = PersonGuardianId;
                 if (PersonGuardianId > 0)
                 {
@@ -150,14 +150,14 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender,string nationalId,int userId)
+        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth ,string nationalId,int userId)
         {
             try
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
                
                 var personLogic = new PersonManager();
-                PersonTreatmentSupporterId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,nationalId, userId);
+                PersonTreatmentSupporterId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth ,nationalId, userId);
                 Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
 
                 if (PersonTreatmentSupporterId > 0)

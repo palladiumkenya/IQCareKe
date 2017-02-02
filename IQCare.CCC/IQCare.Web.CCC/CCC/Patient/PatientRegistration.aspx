@@ -692,11 +692,12 @@
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
                     var natId = $("#<%=NationalId.ClientID%>").val();
                     var userId = <%=UserId%>;
+                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');;
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':" + moment(dateOfBirth).format('DD-MMM-YYYY')  + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
