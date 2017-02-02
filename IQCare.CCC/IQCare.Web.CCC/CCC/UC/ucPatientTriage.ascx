@@ -108,6 +108,14 @@
                     <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." ></asp:TextBox>
                 </div>
             </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-6">
+                    <label class="control-label pull-left"><small class="text-danger"></small>Heart Rate</label>
+                </div>
+                <div class="col-md-6">
+                    <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." ></asp:TextBox>
+                </div>
+            </div>
         </div>
     </div>
     <%-- .col-md-11--%>
@@ -119,7 +127,7 @@
         <div class="col-md-8"></div>
         <div class="col-md-4">
             <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnSaveTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static"> Save Triage </asp:LinkButton></div>
+                <asp:LinkButton runat="server" ID="btnSaveTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Triage </asp:LinkButton></div>
             <div class="col-md-4">
                 <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Entry  </asp:LinkButton></div>
             <div class="col-md-4">
@@ -132,7 +140,7 @@
     $(document).ready(function () {
             $("#btnSaveTriage").click(function() {
                 if ($('#vitalsform').parsley().validate()) {
-                    return true;
+                    addPatientVitals();
                 } else {
                     return false;
                 }
@@ -155,7 +163,6 @@
     }
 
     function addPatientVitals() {
-
             var height = $("#<%=Heights.ClientID%>").val();
             var weight =  $("#<%=weights.ClientID%>").val();
             var bmi =  $("#<%=bmivalue.ClientID%>").val();//todo Mwasi: add bmi and headcircumference to database model
@@ -165,19 +172,21 @@
             var systolic = $("#<%=systolic.ClientID%>").val();
             var tempreture = $("#<%=Tempreture.ClientID%>").val();
             var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
-            var boSaturation =  $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
-
+            var patientId = 0;
+            var patientMasterVisitId = 0;
+            var heartRate = $("#<%=HeartRate.ClientID%>").val();
+            var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddpatientVitals",
-                data: "{'PatientVitals': {'PatientId': '" + + "','BpSystolic': '" + systolic + "','Bpdiastolic': '" + diastolic + "','HeartRate': '" +  + "','Height': '" + height + "','Muac': '" + muacs + "','PatientMasterVisitId': '" +  + "','RespiratoryRate': '" + respiratoryRate + "','SpO2': '" + boSaturation + "','Temperature': '" + tempreture + "','Weight': '" + weight + "'}}",//todo Mwasi: add patient id and patientvistId
+                data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "'}", //todo Mwasi: add patient id and patientvistId
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    generate('success', ''+response.d);
+                   generate('success', ''+response.d);
                 },
                 error: function (response) {
-                    generate('error', response.d);
+                   generate('error', response.d);
                 }
             });
         }
