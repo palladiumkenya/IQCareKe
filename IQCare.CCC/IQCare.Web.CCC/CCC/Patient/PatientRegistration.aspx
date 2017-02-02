@@ -558,39 +558,39 @@
                                 $('#datastep1').parsley({
                                     excluded:
                                         "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"});
-                            
+                                
                             /* add constraints based on age*/                                         
-                            //if ($('#datastep1').parsley().validate()) {
-                            //    if (personAge >= 18) {
-                            //        $.when(addPerson()).then(addPersonMaritalStatus());                                   
-                            //    } else {
-                            //        $.when(addPerson()).then(addPersonGaurdian());                                
-                            //        $.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
-                            //    }
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
+                            if ($('#datastep1').parsley().validate()) {
+                                if (personAge >= 18) {
+                                    $.when(addPerson()).then(addPersonMaritalStatus());                                   
+                                } else {
+                                    $.when(addPerson()).then(addPersonGaurdian());                                
+                                    $.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
+                                }
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
                         }
                         else if (data.step === 2) {
-                            //if ($("#datastep2").parsley().validate()) {
-                            //    addPersonLocation();
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
+                            if ($("#datastep2").parsley().validate()) {
+                                addPersonLocation();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
                         }
                         else if (data.step === 3) {
-                            //if ($("#datastep3").parsley().validate()) {
-                            //    $.when(addPatientContact()).then(addPersonTreatmentSupporter());
-                            //    addTreatmentSupporter();
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
+                            if ($("#datastep3").parsley().validate()) {
+                                $.when(addPatientContact()).then(addPersonTreatmentSupporter());
+                                addTreatmentSupporter();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
                         }
                         else if (data.step===4) {
                             
@@ -655,7 +655,7 @@
                             }); 
                         },
                         error: function (response) {
-                            generate("error", response.d);
+                            toastr.error("Error in selecting the SubcountyList to Load "+ response.d, "Fetching subcounty List");
                         }
                     });
                 }
@@ -678,8 +678,8 @@
                                 $("#<%=WardId.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
                             }); 
                         },
-                        error: function (msg) {
-                            alert(msg);
+                        error: function (response) {
+                            toastr.error("Error in Fetching Ward list " + response.d, "Fetching Ward List");
                         }
                     });     
                 }
@@ -700,10 +700,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', ''+response.d);
+                            toastr.success(response.d, "Person Profile");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.error(response.d, "Person Profile Error");
                         }
                     });
                 }
@@ -722,10 +722,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', ''+response.d);
+                                toastr.success(response.d, "Person Guardian");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.error(response.d,"Person Guardian Error");
                         }
                     });
                 }
@@ -744,12 +744,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Treatment Supporter");
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.d);
+                            toastr.error(response.d, "Person Treatment Supporter Error");
                         }
                     });
                }
@@ -764,12 +762,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Treatment Supporter");
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.d);
+                            toastr.success(response.d, "Person Treatment Supporter");
                         }
                     });
                 }
@@ -784,12 +780,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            // alert(response.d);
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Marital Status");
                         },
                         error: function (response) {
-                            // alert(msg);
-                            generate('error', response.d);
+                            toastr.error(response.d, "Person Marital Status Error");
                         }
                     });
                 }
@@ -805,10 +799,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person OVC Status");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.error(response.d, "--- Person OVC Status Error ---");
                         }
                     });
                 }
@@ -830,10 +824,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Location");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.error(response.d, "Person Location Error");
                         }
                     });
                 }
@@ -851,10 +845,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Contact Information");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.success(response.d, "Person Contact Information Error");
                         }
                     });
                 }
@@ -870,10 +864,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            generate('success', '<p>,</p>'+response.d);
+                            toastr.success(response.d, "Person Popuation");
                         },
                         error: function (response) {
-                            generate('error', response.d);
+                            toastr.error(response.d, "Person Population Error");
                         }
                     });
                     //var personId = 0;
@@ -910,30 +904,46 @@
 
                     });
 
+               
+                //toastr.options = {
+                //    "closeButton": true,
+                //    "debug": false,
+                //    "newestOnTop": true,
+                //    "progressBar": true,
+                //    "positionClass": "toast-top-right",
+                //    "preventDuplicates": false,
+                //    "showDuration": "300",
+                //    "hideDuration": "1000",
+                //    "timeOut": "5000",
+                //    "extendedTimeOut": "1000",
+                //    "showEasing": "swing",
+                //    "hideEasing": "linear",
+                //    "showMethod": "fadeIn",
+                //    "hideMethod": "fadeOut"
+                //}
 
+                //function generate(type, text) {
 
-                function generate(type, text) {
-
-                    var n = noty({
-                        text: text,
-                        type: type,
-                        dismissQueue: true,
-                        progressBar: true,
-                        timeout: 5000,
-                        layout: 'topRight',
-                        closeWith: ['click'],
-                        theme: 'relax',
-                        maxVisible: 10,
-                        animation: {
-                            open: 'animated bounceInLeft',
-                            close: 'animated bounceOutLeft',
-                            easing: 'swing',
-                            speed: 500
-                        }
-                    });
-                    console.log('html: ' + n.options.id);
-                    return n;
-                }
+                //    var n = noty({
+                //        text: text,
+                //        type: type,
+                //        dismissQueue: true,
+                //        progressBar: true,
+                //        timeout: 5000,
+                //        layout: 'topRight',
+                //        closeWith: ['click'],
+                //        theme: 'relax',
+                //        maxVisible: 10,
+                //        animation: {
+                //            open: 'animated bounceInLeft',
+                //            close: 'animated bounceOutLeft',
+                //            easing: 'swing',
+                //            speed: 500
+                //        }
+                //    });
+                //    console.log('html: ' + n.options.id);
+                //    return n;
+                //}
 
 
             });

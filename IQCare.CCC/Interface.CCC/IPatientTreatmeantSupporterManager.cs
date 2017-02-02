@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Entities.PatientCore;
 
 namespace Interface.CCC
 {
-   public interface IPatientTreatmeantSupporterManager
+    public interface IPatientTreatmeantSupporterManager
    {
        int AddPatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter);
        int UpdatePatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter);
