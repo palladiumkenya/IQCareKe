@@ -2,7 +2,6 @@
 using System.Web.Services;
 using Entities.Common;
 using IQCare.CCC.UILogic;
-using Entities.PatientCore;
 
 namespace IQCare.Web.CCC.WebService
 {

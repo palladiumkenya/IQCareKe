@@ -1,4 +1,5 @@
-﻿using Entities.Common;
+﻿using Entities.CCC.Enrollment;
+using Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,6 +15,7 @@ namespace Entities.CCC.Baseline
     {
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
         public int ServiceAreaId { get; set; }
         public DateTime TransferInDate { get; set; }
         public DateTime TreatmentStartDate { get; set; }

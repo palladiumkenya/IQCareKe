@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using Entities.Common;
+using Entities.CCC.Enrollment;
+using Entities.CCC.Visit;
 
 namespace Entities.CCC.Encounter
 {
@@ -13,8 +15,10 @@ namespace Entities.CCC.Encounter
     {
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int PatientEnrollmentId { get; set; }
         public int ExitReason { get; set; }
         public DateTime ExitDate { get; set; }

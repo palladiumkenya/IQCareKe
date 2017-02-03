@@ -15,8 +15,8 @@ namespace Entities.CCC.Encounter
 
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
+        public virtual Entities.CCC.Enrollment.PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         public string PresentingComplaint { get; set; }
-
     }
 }

@@ -2,25 +2,23 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Common;
-using Entities.PatientCore;
+using Entities.CCC.Enrollment;
 
 namespace Entities.CCC.Visit
 {
     [Serializable]
     [Table("PatientMasterVisit")]
 
-    public class PatientMasterVisit :BaseEntity
+    public class PatientMasterVisit : BaseEntity
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("PatientId")]
         public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
-        public int FacilityId { get; set; }
-        public DateTime VisitDate { get; set; }
-        public bool Schedule { get; set; }
-        public DateTime StarTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int ServiceAreaId { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
+        public int ServiceId { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public bool Active { get; set; }
     }
 }

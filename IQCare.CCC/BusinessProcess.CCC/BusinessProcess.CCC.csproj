@@ -83,8 +83,12 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="Enrollment\BPatientEntryPoint.cs" />
+    <Compile Include="Enrollment\BPatientIdentifier.cs" />
+    <Compile Include="Enrollment\BPatientEnrollment.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
+    <Compile Include="Patient\BPatient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="visit\BPatientEncounterManager.cs" />
     <Compile Include="visit\BPatientIdentifierManager.cs" />
