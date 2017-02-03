@@ -1,6 +1,5 @@
 ﻿using DataAccess.Base;
 using Entities.Common;
-using Entities.PatientCore;
 using System.Data.Common;
 using System.Data.Entity;
 using Entities.CCC.Baseline;
@@ -12,6 +11,7 @@ using Entities.CCC.Visit;
 using PatientDiagnosis = Entities.CCC.Encounter.PatientDiagnosis;
 using PatientEnrollment = Entities.PatientCore.PatientEnrollment;
 using DataAccess.Context;
+using Entities.PatientCore;
 
 namespace DataAccess.CCC.Context
 {
@@ -34,7 +34,7 @@ namespace DataAccess.CCC.Context
 
         //}
 
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Entities.CCC.Enrollment.PatientEntity> Patients { get; set; }
 
         public DbSet<PersonContact> PatientContacts { get; set; }
         // public DbSet<PersonLocation> PatientLocations { get; set; }
@@ -43,9 +43,9 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientPopulation> PatientPopulations { get; set; }
 
         //Enrollment
-        public DbSet<PatientEnrollment> PatientEnrollments { get; set; }
+        //public DbSet<PatientEnrollment> PatientEnrollments { get; set; }
         public DbSet<PatientEntryPoint> PatientEntryPoint { get; set; }
-        public DbSet<Entities.CCC.Enrollment.PatientIdentifier> PatientIdentifiers { get; set; }
+        public DbSet<Entities.CCC.Enrollment.PatientEntityIdentifier> PatientIdentifiers { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
@@ -65,8 +65,8 @@ namespace DataAccess.CCC.Context
 
         //Baseline Entities
         public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
-        public DbSet<PatientArtInitiationBaseline> PatientArtInitiationBaselines { get; set; }
-        public DbSet<PatientDiagnosis> PatientDiagnoses { get; set; }
+        //public DbSet<PatientArtInitiationBaseline> PatientArtInitiationBaselines { get; set; }
+        //public DbSet<PatientDiagnosis> PatientDiagnoses { get; set; }
         public DbSet<PatientDisclosure> PatientDisclosures { get; set; }
         public DbSet<PatientHivEnrollmentBaseline> PatientHivEnrollmentBaselines { get; set; }
         public DbSet<PatientHivTesting> PatientHivTestings { get; set; }

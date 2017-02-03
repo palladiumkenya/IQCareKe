@@ -7,7 +7,7 @@ using Entities.CCC.Enrollment;
 
 namespace DataAccess.CCC.Interface.enrollment
 {
-    public interface IPatientIdentifierRepository:IRepository<PatientIdentifier>
+    public interface IPatientIdentifierRepository:IRepository<PatientEntityIdentifier>
     {
 
     }

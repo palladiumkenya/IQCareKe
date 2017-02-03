@@ -1,11 +1,11 @@
-﻿using Entities.PatientCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using Entities.Common;
+using Entities.CCC.Enrollment;
 
 namespace Entities.CCC.Visit
 {
@@ -15,12 +15,12 @@ namespace Entities.CCC.Visit
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("patient")]
-        public int? PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
         public int EncounterTypeId { get; set; }
-        [ForeignKey("PatientmasterVisit")]
-        public int? PatientMasterVisitId { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public DateTime EncounterStartTime { get; set; }
         public DateTime EncounterEndTime { get; set; }

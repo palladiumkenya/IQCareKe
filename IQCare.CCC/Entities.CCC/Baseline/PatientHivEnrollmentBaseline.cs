@@ -1,4 +1,6 @@
-﻿using Entities.Common;
+﻿using Entities.CCC.Enrollment;
+using Entities.CCC.Visit;
+using Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,11 +15,12 @@ namespace Entities.CCC.Baseline
     public class PatientHivEnrollmentBaseline:BaseObject
     {
         [Column]
-
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public DateTime HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentWhoStage { get; set; }
@@ -25,6 +28,5 @@ namespace Entities.CCC.Baseline
         public bool ArtHistoryUse { get; set; }
         public bool HivRetest { get; set; }
         public string ReasonForNoRetest { get; set; }
-
     }
 }

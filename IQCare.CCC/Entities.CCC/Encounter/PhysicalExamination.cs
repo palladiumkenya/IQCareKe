@@ -1,4 +1,6 @@
-﻿using Entities.Common;
+﻿using Entities.CCC.Enrollment;
+using Entities.CCC.Visit;
+using Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,12 +13,13 @@ namespace Entities.CCC.Encounter
     [Table("PhysicalExamination")]
    public class PhysicalExamination :BaseObject
     {
-        [Column]
-
+       [Column]
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int ExaminationTypeId { get; set; }
         public int ExamId { get; set; }
         public string Finding { get; set; }

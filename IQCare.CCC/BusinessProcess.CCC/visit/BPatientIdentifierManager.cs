@@ -12,12 +12,12 @@ namespace BusinessProcess.CCC.visit
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
     
 
-        public int AddPatientIdentifier(PatientIdentifier patientIdentifier)
+        public int AddPatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
             throw new NotImplementedException();
         }
 
-        public int UpdatePatientIdentifier(PatientIdentifier patientIdentifier)
+        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
             throw new NotImplementedException();
         }
@@ -27,12 +27,12 @@ namespace BusinessProcess.CCC.visit
             throw new NotImplementedException();
         }
 
-        public List<PatientIdentifier> GetPatientIdentifiers(int patientId)
+        public List<PatientEntityIdentifier> GetPatientIdentifiers(int patientId)
         {
             throw new NotImplementedException();
         }
 
-        public List<PatientIdentifier> GetPatientServicePatientIdentifiers(int serviceId, int personId)
+        public List<PatientEntityIdentifier> GetPatientServicePatientIdentifiers(int serviceId, int personId)
         {
             throw new NotImplementedException();
         }

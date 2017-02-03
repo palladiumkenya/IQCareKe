@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities.CCC.Visit;
+using Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,13 +10,14 @@ namespace Entities.CCC.Screening
 {
     [Serializable]
     [Table("PatientScreening")]
-    public class PatientScreening
+    public class PatientScreening : BaseObject
     {
         [Column]
 
-        public virtual int PatientId { get; set; }
-        public virtual int PatientMasterVisitId { get; set; }
+        public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int ScreeningTypeId { get; set; }
         public int ScreeningDone { get; set; }
         public DateTime ScreeningDate { get; set; }

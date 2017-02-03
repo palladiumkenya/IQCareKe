@@ -69,6 +69,7 @@
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
+    <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="Web.config">
@@ -195,6 +196,9 @@
     <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\EnrollmentService.asmx.cs">
+      <DependentUpon>EnrollmentService.asmx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -245,7 +249,7 @@
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+      <HintPath>..\IQCare.CCC.UILogic\obj\Debug\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -254,6 +258,10 @@
     <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -265,6 +273,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.Design">
