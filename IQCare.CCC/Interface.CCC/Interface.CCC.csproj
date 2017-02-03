@@ -59,6 +59,8 @@
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
+    <Compile Include="IPatientTreatmeantSupporterManager.cs" />
+    <Compile Include="IPatientVitals.cs" />
     <Compile Include="IPersonContactManager.cs" />
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />

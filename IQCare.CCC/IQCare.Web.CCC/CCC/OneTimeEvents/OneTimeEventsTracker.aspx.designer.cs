@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC {
+namespace IQCare.Web.CCC.OneTimeEvents {
     
     
     public partial class OneTimeEventsTracker {

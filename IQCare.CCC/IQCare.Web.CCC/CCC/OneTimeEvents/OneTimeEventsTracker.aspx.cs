@@ -1,7 +1,7 @@
-﻿using IQCare.CCC.UILogic;
-using System;
+﻿using System;
+using IQCare.CCC.UILogic;
 
-namespace IQCare.Web.CCC
+namespace IQCare.Web.CCC.OneTimeEvents
 {
     public partial class OneTimeEventsTracker : System.Web.UI.Page
     {

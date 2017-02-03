@@ -271,7 +271,7 @@ namespace IQCare.Web.CCC.Patient {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList tsMiddleName;
+        protected global::System.Web.UI.WebControls.TextBox tsMiddleName;
         
         /// <summary>
         /// tsLastName control.
@@ -301,12 +301,12 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.TextBox TSContacts;
         
         /// <summary>
-        /// KeyPopulationChoose control.
+        /// KeyPopulationCategoryId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect KeyPopulationChoose;
+        protected global::System.Web.UI.WebControls.DropDownList KeyPopulationCategoryId;
     }
 }

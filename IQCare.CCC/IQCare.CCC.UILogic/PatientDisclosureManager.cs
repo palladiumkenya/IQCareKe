@@ -13,20 +13,20 @@ namespace IQCare.CCC.UILogic
     public class PatientDisclosureManager
     {
         private IPatientDisclosureManager _mgr = (IPatientDisclosureManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientDisclosure, BusinessProcess.CCC");
-        private int retval;
+        private int _retval;
 
-        public int AddPatientDisclosure(int PatientId, int PatientMasterVisitId, string Category, string DisclosureStage, DateTime DisclosureDate)
+        public int AddPatientDisclosure(int patientId, int patientMasterVisitId, string category, string disclosureStage, DateTime disclosureDate)
         {
             PatientDisclosure patientDisclosure = new PatientDisclosure
             {
-                PatientId = PatientId,
-                PatientMasterVisitId = PatientMasterVisitId,
-                Category = Category,
-                DisclosureStage = DisclosureStage,
-                DisclosureDate = DisclosureDate
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                Category = category,
+                DisclosureStage = disclosureStage,
+                DisclosureDate = disclosureDate
             };
 
-            return retval = _mgr.AddPatientDisclosure(patientDisclosure);
+            return _retval = _mgr.AddPatientDisclosure(patientDisclosure);
         }
     }
 }

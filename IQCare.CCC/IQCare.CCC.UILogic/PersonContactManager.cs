@@ -12,19 +12,29 @@ namespace IQCare.CCC.UILogic
         private int _result;
         IPersonContactManager _mgr =  (IPersonContactManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
 
-        public int AddPersonContact(int personId, string physicalAddress, string mobileNumber)
+        public int AddPersonContact(int personId, string physicalAddress, string mobileNumber,string alternativeNumber,string emailAddress,int userId)
         {
             Utility x = new Utility();
+
+            if (alternativeNumber != null)
+            {
+                alternativeNumber = x.Encrypt(alternativeNumber);
+            }
+            if (emailAddress != null)
+            {
+                emailAddress = x.Encrypt(emailAddress);
+            }
 
             PersonContact personContact = new PersonContact
             {
                 PersonId = personId,
                 PhysicalAddress = x.Encrypt(physicalAddress),
-                MobileNumber = x.Encrypt(mobileNumber)
+                MobileNumber = x.Encrypt(mobileNumber),
+                AlternativeNumber = alternativeNumber,
+                EmailAddress = emailAddress,
+                CreatedBy = userId
             };
-
             _result = _mgr.AddPersonContact(personContact);
-
             return _result;
         }
 
@@ -33,9 +43,30 @@ namespace IQCare.CCC.UILogic
             return _result = _mgr.DeletePersonContact(id);
         }
 
-        public int UpdatePatientContact(PersonContact personContact)
+        public int UpdatePatientContact(int personId, string physicalAddress, string mobileNumber, string alternativeNumber, string emailAddress, int userId)
         {
-           return  _result= _mgr.UpdatePersonContact(personContact);
+            Utility x = new Utility();
+            if (alternativeNumber != null)
+            {
+                alternativeNumber = x.Encrypt(alternativeNumber);
+            }
+            if (emailAddress != null)
+            {
+                emailAddress = x.Encrypt(emailAddress);}
+
+            PersonContact personContact = new PersonContact
+            {
+               
+                PersonId = personId,
+                PhysicalAddress = x.Encrypt(physicalAddress),
+                MobileNumber = x.Encrypt(mobileNumber),
+                AlternativeNumber =alternativeNumber,
+                EmailAddress = emailAddress,
+                CreatedBy = userId
+
+            };
+
+            return _result = _mgr.UpdatePersonContact(personContact);
         }
 
         public List<PersonContact> GetPersonContactList(int personId)

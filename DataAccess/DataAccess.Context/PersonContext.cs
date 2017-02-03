@@ -26,5 +26,6 @@ namespace DataAccess.Context
         public DbSet<PatientOVCStatus> PatientOvcStatus { get; set; }
         public DbSet<PatientMaritalStatus> PatientMaritalStatuses { get; set; }
         public DbSet<PatientPopulation> PatientPopulations { get; set; }
+        public DbSet<PatientTreatmentSupporter> PatientTreatmentSupporters { get; set; }
     }
 }

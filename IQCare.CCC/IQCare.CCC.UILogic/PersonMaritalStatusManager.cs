@@ -16,6 +16,7 @@ namespace IQCare.CCC.UILogic
             {
                 PersonId = personId,
                 MaritalStatusId = maritalStatusId,
+                CreatedBy = userId,
                 Active = true  
             };
           return result=  _mgr.AddPatientMaritalStatus(patientMaritalStatus);
