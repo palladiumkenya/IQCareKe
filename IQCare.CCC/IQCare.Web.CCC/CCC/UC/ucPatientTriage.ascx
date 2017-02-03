@@ -19,7 +19,7 @@
                     <label class="control-label pull-left"><small class="text-danger">*</small> Height </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
                     <label class="control-label pull-left"><small class="text-danger">*</small> Weight </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" ></asp:TextBox>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-6">
                     <%--<asp:Label runat="server"  ID ="bmi" Value = "" CssClass="control-label text-warning pull-left"></asp:Label>--%>
-                    <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi" Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Head Circumference (cm) </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>MUAC (cms) </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -72,13 +72,13 @@
                 <div class="col-md-6 clearfix">
                     <label class="control-label pull-left"><small class="text-danger"></small>Blood Pressure </label>
                 </div>
-                <div class="col-md-2">
-                    <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="sys.." ></asp:TextBox>
+                <div class="col-md-3">
+                    <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="sys.." Type="Number"></asp:TextBox>
                 </div>
-                <div class="col-md-2 clearfix">
-                    <label class="control-label">/</label></div>
-                <div class="col-md-2 clearfix">
-                    <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="di.." ></asp:TextBox>
+                <%--<div class="col-md-2 clearfix">
+                    <label class="control-label">/</label></div>--%>
+                <div class="col-md-3 clearfix">
+                    <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="di.." Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Temperature </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Respiratory Rate </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Blood Oxygen Saturation </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." Type="Number"></asp:TextBox>
                 </div>
             </div>
             <div class="col-md-12 form-group">
@@ -113,7 +113,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Heart Rate</label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
     {
         var weight = document.getElementById('weights').value;
         var height = document.getElementById('Heights').value/100;
-        var bmi = weight / (height * height); //BMI fomula
+        var bmi = (weight / (height * height)).toFixed(1); //BMI fomula
         return bmi;
     }
 
@@ -175,7 +175,8 @@
             var patientId = 0;
             var patientMasterVisitId = 0;
             var heartRate = $("#<%=HeartRate.ClientID%>").val();
-            var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
+        var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
+        debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddpatientVitals",
@@ -183,10 +184,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                   generate('success', ''+response.d);
+                   //generate('success', ''+response.d);
                 },
                 error: function (response) {
-                   generate('error', response.d);
+                   //generate('error', response.d);
                 }
             });
         }
