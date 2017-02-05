@@ -214,7 +214,8 @@
                 var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
 
                 if (moment(''+enrollmentDate+'').isAfter()) {
-                    generate("error","Future dates not allowed during the patient enrollment process.");
+                    
+                    toastr.warning("Future dates not allowed during the patient enrollment process." + response.d, "Patient Enrollment");
                     return false;
                 }
 
