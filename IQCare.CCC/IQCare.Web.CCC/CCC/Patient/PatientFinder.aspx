@@ -308,6 +308,12 @@
                 "stateSave": true,
                 "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
           });
+
+            //row selection
+          $('#myTable').on('click', 'tbody tr', function () {
+              window.location.href = $(this).attr('href');
+          });
+
             // Apply the search
           table.columns().every(function () {
               var that = this;

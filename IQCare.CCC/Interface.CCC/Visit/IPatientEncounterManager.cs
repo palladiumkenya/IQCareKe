@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Entities.CCC.Visit;
-using Entities.PatientCore;
 
 namespace Interface.CCC.Visit
 {
-   public interface IPatientEncounterManager
+    public interface IPatientEncounterManager
    {
        int AddpatientEncounter(PatientEncounter patientEncounter);
        int UpdatePatientEncounter(PatientEncounter patientEncounter);
