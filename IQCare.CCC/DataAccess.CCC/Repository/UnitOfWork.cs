@@ -15,7 +15,6 @@ using DataAccess.CCC.Repository.visit;
 using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
-using DataAccess.CCC.Interface.Patient;
 
 namespace DataAccess.CCC.Repository
 {
@@ -53,8 +52,16 @@ namespace DataAccess.CCC.Repository
         private IPatientIdentifierRepository _patientIdentifierRepository;
         /* Patient */
         private IPatientRepository _patientRepository;
+
         /*Baseline*/
+       // private IPatientDisclosureRepository _patientDisclosureRepository;
+        private IPatientArvHistoryRepository _patientArvHistoryRepository;
+        private IPatientDiagnosisHivHistoryRepository _patientDiagnosisHivHistoryRepository;
         private IPatientDisclosureRepository _patientDisclosureRepository;
+        private IPatientHivEnrollmentBaselineRepository _patientHivEnrollmentBaselineRepository;
+        private IPatientTransferInRepository _patientTransferInRepository;
+        private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
+
 
         public UnitOfWork(BaseContext context)
         {
@@ -133,9 +140,7 @@ namespace DataAccess.CCC.Repository
         {
             get
             {
-                return _patientTreatmentSupporterRepository ??
-                       (_patientTreatmentSupporterRepository =
-                           new PatientTreatmentSupporterRepository((PersonContext) _context));
+                return _patientTreatmentSupporterRepository ??(_patientTreatmentSupporterRepository = new PatientTreatmentSupporterRepository((PersonContext) _context));
             }
         }
         public IPatientMasterVisitRepository PatientMasterVisitRepository
@@ -179,6 +184,37 @@ namespace DataAccess.CCC.Repository
         public IPatientVitalsRepository PatientVitalsRepository
         {
             get {return _patientVitalsRepository ?? (_patientVitalsRepository = new PatientVitalsRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientArvHistoryRepository PatientArvHistoryRepository
+        {
+            get { return  _patientArvHistoryRepository ?? (_patientArvHistoryRepository=new PatientArvHistoryRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientDiagnosisHivHistoryRepository PatientDiagnosisHivHistoryRepository
+        {
+            get
+            {
+                return _patientDiagnosisHivHistoryRepository ??  (_patientDiagnosisHivHistoryRepository = new PatientDiagnosisHivHistoryRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository
+        {
+            get
+            {
+                return _patientHivEnrollmentBaselineRepository ?? (_patientHivEnrollmentBaselineRepository =  new PatientHivEnrollmentBaselineRepository((GreencardContext) _context));
+            }
+        }
+
+        public IPatientTransferInRepository PatientTransferInRepository
+        {
+            get { return _patientTransferInRepository??(_patientTransferInRepository=new PatientTransferInRepository((GreencardContext)_context));}
+        }
+
+        public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository
+        {
+            get {  return _patientTreatmentInitiationRepository??(_patientTreatmentInitiationRepository=new PatientTreatmentInitiationRepository((GreencardContext)_context));}
         }
 
         public int Complete()

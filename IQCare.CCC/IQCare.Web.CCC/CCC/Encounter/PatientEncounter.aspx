@@ -4,6 +4,61 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
           
+    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+    <script src="../Scripts/css/jquery-ui.css"></script>
+
+    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />  
+    <!--  .end auto complete   -->
+       <!-- line graph for viral tracker  -->  
+  	
+		<style type="text/css">
+		</style>
+		<script type="text/javascript">
+		    $(function () {
+		        $('#container').highcharts({
+		            title: {
+		                text: 'Viral Load Trend',
+		                x: -20 //center
+		            },
+		            subtitle: {
+		                text: 'VL cp/ml',
+		                x: -20
+		            },
+		            xAxis: {
+		                categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+		            },
+		            yAxis: {
+		                title: {
+		                    text: 'Viral Load cp/ml'
+		                },
+		                plotLines: [{
+		                    value: 0,
+		                    width: 1,
+		                    color: '#808080'
+		                }]
+		            },
+		            tooltip: {
+		                valueSuffix: 'cp/ml'
+		            },
+		            legend: {
+		                layout: 'vertical',
+		                align: 'right',
+		                verticalAlign: 'middle',
+		                borderWidth: 0
+		            },
+		            series: [{
+		                name: 'Patrick',
+		                data: [200, 300, 500, 1000, 750, 500, 400]
+		            }, {
+		                name: 'Threshold',
+		                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+		            }]
+		        });
+		    });
+		  		
+		</script>
+
+
         <div class="row">
             <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
@@ -968,7 +1023,32 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>
-                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">...</div><!-- .viraload tracker-->
+                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
+                            <!-- pw implementation of viral load tracker here-->
+                            <div class="col-md-6">
+                                    <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
+                                   
+                                    <!--pw implementation of laboratory module here-->
+                                                 <div class="col-md-12">
+                                                      <div class="col-md-12"><hr/></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
+                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
+                                                  </div>
+
+                                <!--pw .implementation of  laboratory module here-->
+                             
+                                </div>
+                                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                    <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
+                                                            
+
+                      <!-- pw .implementation of viral load tracker here-->
+                      </div><!-- .viraload tracker-->
 
                       <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
                             <div class="col-md-12" style="padding-top: 1%">

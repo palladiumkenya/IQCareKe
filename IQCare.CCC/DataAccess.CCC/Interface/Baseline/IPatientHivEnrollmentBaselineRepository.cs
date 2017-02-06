@@ -3,7 +3,8 @@ using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Interface.Baseline
 {
-    public interface IPatientDisclosureRepository : IRepository<PatientDisclosure>
+    public interface IPatientHivEnrollmentBaselineRepository:IRepository<PatientHivEnrollmentBaseline>
     {
+
     }
 }
