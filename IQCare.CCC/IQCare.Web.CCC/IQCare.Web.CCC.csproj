@@ -51,7 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="CCC\Dashboard.aspx" />
+    <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
     <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
@@ -84,12 +84,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CCC\Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
+    <Compile Include="CCC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
+    <Compile Include="CCC\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
