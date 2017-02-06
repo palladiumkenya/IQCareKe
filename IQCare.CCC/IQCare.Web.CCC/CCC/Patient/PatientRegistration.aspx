@@ -498,8 +498,8 @@
 
                 $('#MyDateOfBirth').datepicker({
                         allowPastDates: true,
-                        momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-                        restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+                        momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                        //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
                 });
 
                 $('#MyDateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {

@@ -163,20 +163,28 @@
     }
 
     function addPatientVitals() {
-            var height = $("#<%=Heights.ClientID%>").val();
-            var weight =  $("#<%=weights.ClientID%>").val();
-            var bmi =  $("#<%=bmivalue.ClientID%>").val();//todo Mwasi: add bmi and headcircumference to database model
-            var headCircumference =  $("#<%=circumference.ClientID%>").val();
-            var muacs = $("#<%=muacs.ClientID%>").val();
-            var diastolic = $("#<%=distolic.ClientID%>").val();
-            var systolic = $("#<%=systolic.ClientID%>").val();
-            var tempreture = $("#<%=Tempreture.ClientID%>").val();
-            var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
-            var patientId = 0;
-            var patientMasterVisitId = 0;
-            var heartRate = $("#<%=HeartRate.ClientID%>").val();
+        var height = $("#<%=Heights.ClientID%>").val();
+        var weight = $("#<%=weights.ClientID%>").val();
+        var bmi = $("#<%=bmivalue.ClientID%>").val();//todo Mwasi: add bmi and headcircumference to database model
+        if (bmi === '') { bmi = 0 }
+        var headCircumference = $("#<%=circumference.ClientID%>").val();
+        if (headCircumference === '') { headCircumference = 0 }
+        var muacs = $("#<%=muacs.ClientID%>").val();
+        if (muacs === '') { muacs = 0 }
+        var diastolic = $("#<%=distolic.ClientID%>").val();
+        if (diastolic === '') { diastolic = 0 }
+        var systolic = $("#<%=systolic.ClientID%>").val();
+        if (systolic === '') { systolic = 0 }
+        var tempreture = $("#<%=Tempreture.ClientID%>").val();
+        if (tempreture === '') { tempreture = 0 }
+        var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
+        if (respiratoryRate === '') { respiratoryRate = 0 }
+        var patientId = 0;
+        var patientMasterVisitId = 0;
+        var heartRate = $("#<%=HeartRate.ClientID%>").val();
+        if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
-        debugger;
+        if (boSaturation === '') { boSaturation = 0 }
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddpatientVitals",
@@ -184,10 +192,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                   //generate('success', ''+response.d);
+                   generate('success', ''+response.d);
                 },
                 error: function (response) {
-                   //generate('error', response.d);
+                   generate('error', response.d);
                 }
             });
         }

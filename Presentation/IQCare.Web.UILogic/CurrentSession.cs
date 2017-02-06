@@ -260,6 +260,14 @@ namespace IQCare.Web.UILogic
                     });
                 }
             }
+            //Manually add greencard menu
+            result.Add(new HomePageLandScape()
+            {
+                MenuName = "Green Card (2016)",
+                MenuId = -1,
+                ClickAction = RedirectAction.ModuleAction,
+                ServiceAreaName = "CCC"
+            });
             Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(o => o.Clinical).ThenBy(n => n.Name).ToList().ForEach(
             s =>
             {

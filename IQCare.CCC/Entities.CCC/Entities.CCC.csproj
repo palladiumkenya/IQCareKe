@@ -63,7 +63,7 @@
     <Compile Include="Baseline\INHProphylaxis.cs" />
     <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\PatientArtUseHistory.cs" />
-    <Compile Include="Baseline\PatientDiagnosis.cs" />
+    <Compile Include="Baseline\DiagnosisArvHistory.cs" />
     <Compile Include="Baseline\PatientDisclosure.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />

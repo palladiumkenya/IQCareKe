@@ -98,6 +98,10 @@ namespace IQCare.Web.Home
                 {
                     row["IconFont"] = "iq iq-awareness-ribbon";
                 }
+                else if (landScape.ServiceAreaName == "CCC")
+                {
+                    row["IconFont"] = "iq iq-awareness-ribbon";
+                }
                 else row["IconFont"] ="iq iq-default";
 
                 if (landScape.ClickAction == RedirectAction.FindAddPatient)

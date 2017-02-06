@@ -1,12 +1,11 @@
 ﻿using DataAccess.Context.ModuleMaster;
 using System;
+using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.visit;
-using DataAccess.CCC.Repository.Patient;
-using DataAccess.CCC.Repository.visit;
 
 namespace DataAccess.CCC.Interface
 {
@@ -41,5 +40,13 @@ namespace DataAccess.CCC.Interface
 
         /*Triage*/
         IPatientVitalsRepository PatientVitalsRepository { get; }
+
+        /* Baseline */
+        IPatientArvHistoryRepository PatientArvHistoryRepository { get;  }
+        IPatientDiagnosisHivHistoryRepository PatientDiagnosisHivHistoryRepository { get; }
+        IPatientDisclosureRepository PatientDisclosureRepository { get; }
+        IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository { get; }
+        IPatientTransferInRepository PatientTransferInRepository { get; }
+        IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get; }
     }
 }

@@ -77,7 +77,12 @@
   <ItemGroup>
     <Compile Include="Context\LookupContext.cs" />
     <Compile Include="Interface\Baseline\IINHProphylaxisRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientArvHistoryRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientDiagnosisHivHistoryRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientDisclosureRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientTransferInRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
@@ -97,7 +102,12 @@
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientDiagnosisHivHistoryRepository.cs" />
     <Compile Include="Repository\Baseline\PatientDisclosureRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientTransferInRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Patient\PatientRepository.cs" />
