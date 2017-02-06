@@ -66,6 +66,7 @@
     <Compile Include="IPersonManager.cs" />
     <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
+    <Compile Include="Lookup\IPatientLookupmanager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />

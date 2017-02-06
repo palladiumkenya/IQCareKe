@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
@@ -78,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Baseline\BPatientDisclosure.cs" />
     <Compile Include="BLookupManager.cs" />
+    <Compile Include="BPatientLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientVitals.cs" />
     <Compile Include="BPersonLocationmanager.cs" />
