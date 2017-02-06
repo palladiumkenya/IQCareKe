@@ -1,4 +1,5 @@
 ﻿using Application.Presentation;
+using Entities.CCC.Enrollment;
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,11 @@ namespace IQCare.CCC.UILogic
             {
                 throw ex;
             }
+        }
+
+        public List<PatientEntity> CheckPersonEnrolled(int personId)
+        {
+            return _mgr.CheckPersonEnrolled(personId);
         }
 
     }

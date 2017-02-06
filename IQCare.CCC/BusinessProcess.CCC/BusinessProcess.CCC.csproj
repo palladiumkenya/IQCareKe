@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />

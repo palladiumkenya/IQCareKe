@@ -7,6 +7,7 @@ using System.Text;
 using Entities.PatientCore;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using Entities.CCC.Enrollment;
 
 namespace BusinessProcess.CCC.Patient
 {
@@ -15,7 +16,7 @@ namespace BusinessProcess.CCC.Patient
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
-        public int AddPatient(Entities.CCC.Enrollment.PatientEntity patient)
+        public int AddPatient(PatientEntity patient)
         {
             _unitOfWork.PatientRepository.Add(patient);
             Result = _unitOfWork.Complete();
@@ -27,14 +28,20 @@ namespace BusinessProcess.CCC.Patient
             throw new NotImplementedException();
         }
 
-        public Entities.CCC.Enrollment.PatientEntity GetPatient(int id)
+        public PatientEntity GetPatient(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int UpdatePatient(Entities.CCC.Enrollment.PatientEntity patient)
+        public int UpdatePatient(PatientEntity patient)
         {
             throw new NotImplementedException();
+        }
+
+        public List<PatientEntity> CheckPersonEnrolled(int persionId)
+        {
+            List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
+            return person;
         }
     }
 }

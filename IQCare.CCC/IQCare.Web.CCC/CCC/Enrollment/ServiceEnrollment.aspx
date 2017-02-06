@@ -347,10 +347,12 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        generate('success', '<p>,</p>' + response.d);
+                        //generate('success', '<p>,</p>' + response.d);
+                        toastr.success(response.d, "Patient Enrollment");
                     },
                     error: function (response) {
-                        generate('error', response.d);
+                        //generate('error', response.d);
+                        toastr.error(response.d, "Patient Enrollment");
                     }
                 });
             }
