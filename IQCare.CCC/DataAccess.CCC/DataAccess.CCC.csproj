@@ -91,6 +91,7 @@
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupItemRepository.cs" />
+    <Compile Include="Interface\Lookup\IPatientLookupRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
+    <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\Patient\PatientRepository.cs" />
     <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
     <Compile Include="Repository\Patient\PatientVitalsRepository.cs" />

@@ -93,6 +93,7 @@
     <Compile Include="Lookup\LookupMaster.cs" />
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
+    <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Triage\PatientAdverseEvent.cs" />
