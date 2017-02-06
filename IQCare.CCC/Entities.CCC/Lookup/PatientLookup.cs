@@ -16,6 +16,7 @@ namespace Entities.CCC.Lookup
         public string PatientIndex { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public int Sex { get; set; }
         public bool Active { get; set; }
         public DateTime RegistrationDate { get; set; }
