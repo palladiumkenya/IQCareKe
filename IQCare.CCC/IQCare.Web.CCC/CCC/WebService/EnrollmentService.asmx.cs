@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using Newtonsoft.Json.Linq;
 using System.Web.Script.Serialization;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;

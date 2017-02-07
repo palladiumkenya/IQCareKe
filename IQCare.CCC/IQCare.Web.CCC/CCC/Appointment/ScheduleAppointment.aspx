@@ -141,18 +141,11 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <label class="control-label pull-left">Action</label>
-                    </div>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary btn-add pull-left" id="add" data-last="Complete">
-                            Add Details
-                        <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                <div class="col-md-12"><label class="control-label">Action</label></div>      
+                <div class="col-md-12 pull-right">
+                          <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Detail</asp:LinkButton>
+                      </div>
+                 </div>
         </div>
         <div class="col-md-12 form-group">
             <div class="col-md-12 bg-primary"><span class="pull-left"></span>Appointment Details </div>
