@@ -82,6 +82,7 @@
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />

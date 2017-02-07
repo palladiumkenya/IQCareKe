@@ -12,5 +12,7 @@ namespace Interface.CCC.Lookup
        List<LookupCounty> GetLookupSubcounty(string county);
        List<LookupCounty> GetLookupWards(string subcounty);
 
+       string GetLookupNameFromId(int id);
+
    }
 }

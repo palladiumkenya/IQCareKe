@@ -1,6 +1,7 @@
 ﻿using DataAccess.Base;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
+using System.Linq;
 using Entities.CCC.Lookup;
 using DataAccess.CCC.Repository.Lookup;
 
@@ -39,6 +40,12 @@ namespace BusinessProcess.CCC
             return lookupCountyRepository.GetWardsList(subcounty);
         }
 
+        public string GetLookupNameFromId(int id)
+        {
+            LookupRepository lookupRepository=new LookupRepository();
+            var lookupName = lookupRepository.FindBy(x => x.ItemId == id).Single();
+            return lookupName.ItemName;
 
+        }
     }
 }
