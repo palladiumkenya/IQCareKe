@@ -81,7 +81,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\BINHProphylaxis.cs" />
+    <Compile Include="Baseline\BPatientArtInitiationBaseline.cs" />
+    <Compile Include="Baseline\BPatientArtUseHistoryManager.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
+    <Compile Include="Baseline\BPatientFamilyTestingManager.cs" />
+    <Compile Include="Baseline\BPatientHivEnrollmentBaselineManager.cs" />
+    <Compile Include="Baseline\BPatientTransferInManager.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
