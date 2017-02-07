@@ -5,7 +5,7 @@ using Entities.CCC.Enrollment;
 
 namespace DataAccess.CCC.Repository.Enrollment
 {
-    public class PatientEnrollmentRepository:BaseRepository<PatientEnrollment>,IPatientEnrollmentRepository
+    public class PatientEnrollmentRepository:BaseRepository<PatientEntityEnrollment>,IPatientEnrollmentRepository
     {
         private readonly GreencardContext _context;
 

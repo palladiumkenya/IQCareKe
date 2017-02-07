@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.PatientCore;
@@ -7,7 +8,7 @@ using Interface.CCC;
 
 namespace BusinessProcess.CCC
 {
-    public class BPatientPopulationManager:IPatientPopuationManager
+    public class BPatientPopulationManager:ProcessBase,IPatientPopuationManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
@@ -42,7 +43,7 @@ namespace BusinessProcess.CCC
         {
            List<PatientPopulation> patientPopulations =
                     _unitOfWork.PatientPopulationRepository.FindBy(
-                            x => x.PatientId == patientId & x.DeleteFlag == false & x.Active)
+                            x => x.PatientId == patientId & x.Active & !x.DeleteFlag)
                             .OrderByDescending(x=>x.Id)
                             .Take(1)
                         .ToList();

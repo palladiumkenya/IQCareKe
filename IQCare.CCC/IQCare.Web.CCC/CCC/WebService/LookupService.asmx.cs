@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using System.Xml;
@@ -17,6 +18,7 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class LookupService : System.Web.Services.WebService
     {
+        private string _jsonObject;
 
         [WebMethod]
         public string HelloWorld()
@@ -27,7 +29,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookupSubcountyList(string county)
         {
-          string jsonObject=  LookupLogic.GeSubCountyListJson(county);
+           _jsonObject=  LookupLogic.GeSubCountyListJson(county);
             //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(county);
             //if (lookupCounties != null && lookupCounties.Count > 0)
@@ -38,7 +40,7 @@ namespace IQCare.Web.CCC.WebService
             //{
             //    jsonObject = "[]";
             //}
-            return jsonObject;
+            return _jsonObject;
         }
         
         [WebMethod]
@@ -59,6 +61,22 @@ namespace IQCare.Web.CCC.WebService
 
             string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);  
             return jsonObject;
+            _jsonObject = LookupLogic.GetLookupWardListJson(subcounty);
+            return _jsonObject;
+        }
+
+        [WebMethod]
+        public string GetLookUpItemByName(string itemName)
+        {
+            try
+            {
+                _jsonObject =LookupLogic.GetLookupItemByName(itemName);    
+            }
+            catch (Exception e)
+            {
+                _jsonObject = e.Message;
+            }
+            return _jsonObject;
         }
 
         // pw lookup lablist

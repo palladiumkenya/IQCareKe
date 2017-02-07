@@ -1,6 +1,5 @@
 ﻿using DataAccess.Base;
 using Entities.Common;
-using Entities.PatientCore;
 using System.Data.Common;
 using System.Data.Entity;
 using Entities.CCC.Baseline;
@@ -9,9 +8,8 @@ using Entities.CCC.Enrollment;
 using Entities.CCC.Screening;
 using Entities.CCC.Triage;
 using Entities.CCC.Visit;
-using PatientDiagnosis = Entities.CCC.Encounter.PatientDiagnosis;
-using PatientEnrollment = Entities.PatientCore.PatientEnrollment;
 using DataAccess.Context;
+using Entities.PatientCore;
 
 namespace DataAccess.CCC.Context
 {
@@ -25,27 +23,15 @@ namespace DataAccess.CCC.Context
             Database.SetInitializer<GreencardContext>(null);
         }
 
-        //public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
-        //{
-        //}
 
-        //public GreencardContext(string connection) : base(connection)
-        //{
-
-        //}
-
-        public DbSet<Patient> Patients { get; set; }
-
+        public DbSet<PatientEntity> Patients { get; set; }
         public DbSet<PersonContact> PatientContacts { get; set; }
-        // public DbSet<PersonLocation> PatientLocations { get; set; }
-        // public DbSet<PatientMaritalStatus> PatientMaritalStatuses { get; set; }
         public DbSet<PatientOVCStatus> PatientOvcStatuses { get; set; }
         public DbSet<PatientPopulation> PatientPopulations { get; set; }
 
         //Enrollment
-        public DbSet<PatientEnrollment> PatientEnrollments { get; set; }
         public DbSet<PatientEntryPoint> PatientEntryPoint { get; set; }
-        public DbSet<Entities.CCC.Enrollment.PatientIdentifier> PatientIdentifiers { get; set; }
+        public DbSet<PatientEntityIdentifier> PatientIdentifiers { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
@@ -60,17 +46,17 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
         public DbSet<PatientEncounter> PatientEncounters { get; set; }
 
-        // public DbSet<PersonRelationship> PersonRelationship { get; set; }
-        // public DbSet<PatientTreatmentSupporter> PatientTreatmentSupporters { get; set; }
 
         //Baseline Entities
         public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
-        public DbSet<PatientArtInitiationBaseline> PatientArtInitiationBaselines { get; set; }
-        public DbSet<PatientDiagnosis> PatientDiagnoses { get; set; }
         public DbSet<PatientDisclosure> PatientDisclosures { get; set; }
         public DbSet<PatientHivEnrollmentBaseline> PatientHivEnrollmentBaselines { get; set; }
         public DbSet<PatientHivTesting> PatientHivTestings { get; set; }
         public DbSet<PatientTransferIn> PatientTransferIns { get; set; }
+        public DbSet<DiagnosisArvHistory> DiagnosisArvHistory { get; set; }
+        public DbSet<PatientArtInitiationBaseline> PatientArtInitiation { get; set; }
+        public DbSet<PatientArtUseHistory> PatientArtUseHistory { get; set; }
+
 
         //Encounter
         public DbSet<ComplaintsHistory> ComplaintsHistory { get; set; }
@@ -89,5 +75,6 @@ namespace DataAccess.CCC.Context
         public DbSet<PhysicalExamination> PhysicalExamination { get; set; }
         public DbSet<Pregnancy> Pregnancies { get; set; }
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using DataAccess.Base;
 using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Entities.Common;
@@ -8,9 +9,9 @@ using Interface.CCC;
 
 namespace BusinessProcess.CCC
 {
-    public class BPersonContactManager : IPersonContactManager
+    public class BPersonContactManager :ProcessBase ,IPersonContactManager
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
 
         public int AddPersonContact(PersonContact personContact)
@@ -18,13 +19,19 @@ namespace BusinessProcess.CCC
             SqlParameter personIdParameter =new SqlParameter("personIdParameter",SqlDbType.Int);
             personIdParameter.Value = personContact.PersonId;
 
-            SqlParameter physicalAdressParameter =new SqlParameter("physicalAddressParameter",SqlDbType.VarBinary);
+            SqlParameter physicalAdressParameter =new SqlParameter("physicalAddressParameter",SqlDbType.VarChar);
             physicalAdressParameter.Value = personContact.PhysicalAddress;
 
-            SqlParameter mobileNumberParameter =new SqlParameter("mobileNumberParameter",SqlDbType.VarBinary);
+            SqlParameter mobileNumberParameter =new SqlParameter("mobileNumberParameter",SqlDbType.VarChar);
             mobileNumberParameter.Value = personContact.MobileNumber;
 
-            _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Insert @personId,@physicalAddress,@mobileNumber",personIdParameter, physicalAdressParameter, mobileNumberParameter);
+            SqlParameter alternativeNumberParameter = new SqlParameter("alternativeNumberParameter", SqlDbType.VarChar);
+            alternativeNumberParameter.Value = personContact.AlternativeNumber;
+
+            SqlParameter emailAddressParameter = new SqlParameter("emailAddressParameter", SqlDbType.VarChar);
+            emailAddressParameter.Value = personContact.EmailAddress;
+
+            _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Insert @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter", personIdParameter, physicalAdressParameter, mobileNumberParameter,alternativeNumberParameter,emailAddressParameter);
             //_unitOfWork.PersonContactRepository.Add(p);
             return _result = _unitOfWork.Complete();
         }

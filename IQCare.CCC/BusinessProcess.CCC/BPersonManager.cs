@@ -12,9 +12,10 @@ using System;
 
 namespace BusinessProcess.CCC
 {
+
     public class BPersonManager:ProcessBase, IPersonManager
     {
-        private  UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
+        private readonly UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
 
        public int AddPerson(Person person)
        {
@@ -27,6 +28,7 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@MidName", SqlDbType.VarChar, person.MidName);
             ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, person.LastName);
             ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, person.Sex);
+            ClsUtility.AddExtendedParameters("@DateOfBirth",SqlDbType.DateTime,person.DateOfBirth);
             ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, person.NationalId);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, person.CreatedBy);
 

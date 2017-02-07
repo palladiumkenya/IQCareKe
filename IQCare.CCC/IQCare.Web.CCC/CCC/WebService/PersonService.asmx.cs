@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Services;
 using Entities.Common;
-using IQCare.CCC.UILogic;
 using Entities.PatientCore;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -16,184 +16,219 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PersonService : System.Web.Services.WebService
     {
-        private int _personId;
-        private int _personGuardianId;
-        private int _personTreatmentSupporterId;
-        private string _msg;
-        private int _result;
+        
+        private int PersonId { get; set; }
+        private int PersonGuardianId { get; set; }
+        private int PersonTreatmentSupporterId { get; set; }
+        private string Msg { get; set; }
+        private int Result { get; set; }
 
-        [WebMethod]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPerson(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, int userId)
         {
             try
             {
+                
                 var personLogic = new PersonManager();
 
-                _personId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId, userId);
-
-                if (_personId > 0)
+                PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth, nationalId, userId);
+                Session["PersonId"] = PersonId;
+                if (PersonId > 0)
                 {
-                    _msg = "New Person Added Successfully!";
+                    Msg = "New Person Added successfully : PersonId=> "+PersonId;
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message+' '+ e.InnerException;
             }
             
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
-        public string AddPersonMaritalStatus(int patientId,int maritalStatusId,int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPersonMaritalStatus(int personId,int maritalStatusId,int userId)
         {
             try
             {
+                PersonId =Convert.ToInt32(Session["personId"]);
                 var maritalStatus = new PersonMaritalStatusManager();
-                _result = maritalStatus.AddPatientMaritalStatus(_personId, maritalStatusId,userId);
-                if (_result > 0)
+                Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId,userId);
+                if (Result > 0)
                 {
-                    _msg = "Person Marital Status Added Successfully!";
+                    Msg = "Person Marital Status Added Successfully!";
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message+' '+ e.InnerException;
             }
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
-        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender, string nationalId, int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, int userId)
         {
             try
             {
                 var personLogic = new PersonManager();
-                _personGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, nationalId, userId);
-                if (_personGuardianId > 0)
+                PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth, nationalId, userId);
+                Session["PersonGuardianId"] = PersonGuardianId;
+                if (PersonGuardianId > 0)
                 {
-                    _msg = "New Guardian Person Added Successfully!";
+                    Msg = "New Guardian Person Added successfully : GuardianId=>"+PersonGuardianId;
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message;
             }
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
-        public string AddPersonOvcStatus(int personid,int guardianId,Boolean orphan,Boolean inSchool,int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPersonOvcStatus(int personId,int guardianId,string orphan,string inSchool,int userId)
         {
-            PatientOVCStatus patientOvcStatus=new PatientOVCStatus()
-            {
-               
-            };
+            bool _orphan;
+            bool _inSchool;
+
+            if (orphan == "yes") { _orphan = true; } else { _orphan = false; }
+            if (inSchool == "yes") { _inSchool = true; } else { _inSchool = false; }
             try
             {
+                PersonGuardianId = Convert.ToInt32(Session["PersonGuardianId"]); 
+                PersonId = Convert.ToInt32(Session["PersonId"]);
                 var ovcStatus = new PersonOvcStatusManager();
-                _result = ovcStatus.AddPatientOvcStatus(_personId, _personGuardianId, orphan, inSchool, userId);
-
-            }
-            catch (Exception e)
-            {
-                this._msg = e.Message;
-            }
-            return _msg; 
-        }
-        [WebMethod]
-        public string AddPersonLocation(int personId,int county,int subCounty,int ward,string village,string estate,string landmark,string nearestHealthCentre)
-        {
-            try
-            {
-                var personLocation = new PersonLocationManager();
-               _result= personLocation.AddPersonLocation(_personId,county,subCounty,ward,village,estate,landmark,nearestHealthCentre);
-               if(_result>0) { _msg = "Person Location Addedd successfully!";}
-            }
-            catch (Exception e)
-            {
-                _msg = e.Message;
-            }
-            return _msg;
-        }
-
-        [WebMethod]
-        public string AddPersonContact(int personId,string physicalAddress,string mobileNumber)
-        {
-            try
-            {
-                var personContact = new PersonContactManager();
-                _result = personContact.AddPersonContact(_personId, physicalAddress, mobileNumber);
-                if (_result > 0)
+                Result = ovcStatus.AddPatientOvcStatus(PersonId, PersonGuardianId, _orphan, _inSchool, userId);
+                if (Result > 0)
                 {
-                    _msg = "Person Contact Addedd successuly!";
+                    Msg = "Person Child OVC Status Recorded Successfully .";
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = "Error Message: " + e.Message+' '+" Exception: "+e.InnerException;
+            }
+            return Msg; 
+        }
+        [WebMethod(EnableSession = true)]
+        public string AddPersonLocation(int personId, int county, int subcounty, int ward, string village, string location, string sublocation, string landmark, string nearesthealthcentre,int userId)
+        {
+            try
+            {
+                PersonId = Convert.ToInt32(Session["PersonId"]);
+                var personLocation = new PersonLocationManager();
+               Result= personLocation.AddPersonLocation(PersonId, county,subcounty,ward,village,location,sublocation,landmark, nearesthealthcentre,userId);
+               if(Result>0) { Msg = "Current Person Location Addedd successfully during !";}
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message+ ' ' + e.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPersonContact(int personId,string physicalAddress,string mobileNumber,string alternativeNumber,string emailAddress,int userId)
+        {
+            try
+            {
+                PersonId = Convert.ToInt32(Session["PersonId"]);
+                var personContact = new PersonContactManager();
+                Result = personContact.AddPersonContact(PersonId, physicalAddress, mobileNumber,alternativeNumber,emailAddress,userId);
+                if (Result > 0)
+                {
+                    Msg = "Person Contact Addedd successuly!";
                 }
             }
             catch (Exception exception)
             {
-                _msg = exception.Message;
+                Msg = exception.Message;
             }
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
-        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender,string nationalId,int userId)
+        [WebMethod(EnableSession = true)]
+        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth ,string nationalId,int userId)
         {
             try
             {
+                PersonId = Convert.ToInt32(Session["PersonId"]);
+               
                 var personLogic = new PersonManager();
-                _personTreatmentSupporterId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,nationalId, userId);
-                if (_personTreatmentSupporterId > 0)
+                PersonTreatmentSupporterId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth ,nationalId, userId);
+                Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+
+                if (PersonTreatmentSupporterId > 0)
                 {
-                    _msg = "New Treatment Supporter Person Added Successfully!";
+                    Msg = "New Treatment Supporter Person Added Successfully!";
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message + ' ' +e.InnerException;
             }
-
-
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
+        public string AddTreatmentSupporter(int personId,int supporterId,int mobileContact,int userId)
+        {
+            try
+            {
+                PersonId = Convert.ToInt32(Session["PersonId"]);
+                var treatmentSupporter=new PatientTreatmentSupporterManager();
+                Result = treatmentSupporter.AddPatientTreatmentSupporter(PersonId, supporterId, mobileContact, userId);
+                if (Result > 0)
+                {
+                    Msg = "Person Treatement Supported Addedded successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message + ' ' + e.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPersonRelationship(PersonRelationship relationship)
         {
             try
             {
                 var personRelationship=new PersonRelationshipManager();
-                _result = personRelationship.AddPersonRelationship(_personId, relationship.RelatedTo,
-                    relationship.RelationshipTypeId);
-                if (_result > 0)
+                Result = personRelationship.AddPersonRelationship(PersonId, relationship.RelatedTo, relationship.RelationshipTypeId);
+                if (Result > 0)
                 {
-                    _msg = "PersonRelationship Added successfully!";
+                    Msg = "PersonRelationship Added successfully!";
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message;
             }
-            return _msg;
+            return Msg;
         }
 
-        [WebMethod]
-        public string AddPersonPopulation(int _personId, int PopulationTypeId, int PopulationCategory, int CreatedBy)
+        [WebMethod(EnableSession = true )]
+        public string AddPersonPopulation(int patientId,string populationtypeId,int populationCategory,int userId)
         {
             try
             {
-                var personOvcStatus = new PatientPopulationManager();
-                _result = personOvcStatus.AddPatientPopulation(_personId, PopulationTypeId, PopulationCategory, CreatedBy);
-                if (_result > 0)
+                PersonId = Convert.ToInt32(Session["PersonId"]);
+                var personPoulation = new PatientPopulationManager();
+                Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, populationCategory, userId);
+                if (Result > 0)
                 {
-                    _msg = "Person OVC Status Recorded Successfully!";
+                    Msg = "Person OVC Status Recorded Successfully!";
                 }
             }
             catch (Exception e)
             {
-                _msg = e.Message;
+                Msg = e.Message+' '+ e.InnerException;
             }
-            return _msg;
+            return Msg;
         }
 
     }

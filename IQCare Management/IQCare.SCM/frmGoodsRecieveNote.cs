@@ -21,7 +21,7 @@ namespace IQCare.SCM
         TextBox txtBatchName;
         DataTable theDTBatch = new DataTable();
         int GrnId = 0;
-        AutoCompletestringCollection BatchCollection = new AutoCompletestringCollection();
+        AutoCompleteStringCollection BatchCollection = new AutoCompleteStringCollection();
         /* No used 
         /////// <summary>
         /////// if IsPO = 2 then No interstore transfer and no Purchase Order  Selected

@@ -6,10 +6,11 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using DataAccess.Base;
 
 namespace BusinessProcess.CCC.visit
 {
-    public class BPatientmasterVisit : IPatientMasterVisitManager
+    public class BPatientmasterVisit : ProcessBase, IPatientMasterVisitManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
@@ -17,7 +18,8 @@ namespace BusinessProcess.CCC.visit
         public int AddPatientmasterVisit(PatientMasterVisit patientMasterVisit)
         {
             _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
-            return Result = _unitOfWork.Complete();
+            Result = _unitOfWork.Complete();
+            return patientMasterVisit.Id;
         }
 
         public int DeletePatientVisit(int id)
@@ -33,7 +35,7 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
                         x =>
                             x.PatientId == patientId &
-                            DbFunctions.TruncateTime(x.VisitDate) == DbFunctions.TruncateTime(visitDate) & x.DeleteFlag)
+                            DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) & x.DeleteFlag)
                     .OrderByDescending(x => x.Id).Take(1).ToList();
             return patientMasterVisitList;
         }
