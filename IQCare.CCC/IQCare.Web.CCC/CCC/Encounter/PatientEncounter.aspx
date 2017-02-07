@@ -92,7 +92,7 @@
                                     <div class="steps-container">
 	                                    <ul class="steps">
 		                                   
-                                            <li data-step="1" data-name="template">
+                                            <li data-step="1" data-name="template" class="active">
 			                                    <span class="badge">1</span>Presenting Complaints
 			                                    <span class="chevron"></span>
 		                                    </li>
