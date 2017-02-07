@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -8,25 +10,18 @@ using DataAccess.CCC.Context;
 
 namespace BusinessProcess.CCC
 {
-    public class BPatientLookupManager:IPatientLookupmanager
+    public class BPatientLookupManager : IPatientLookupmanager
     {
-        private readonly UnitOfWork _unitOfWork=new UnitOfWork(new LookupContext());
-        private Utility _utility=new Utility();
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+        private readonly Utility _utility = new Utility();
 
         public List<PatientLookup> GetPatientDetailsLookup(int id)
         {
-            
-            //IEnumerable<PatientLookup> patientDetails = _unitOfWork.PatientLookupRepository
-            //    .FindBy(x => x.Id == id || x.PtnPk == id || !x.DeleteFlag)
-            //    .Select(p=>  
-            //    {
-            //        //p.Id,(p.FirstName
-            //    })
+            var patientDetails = _unitOfWork.PatientLookupRepository
+                .FindBy(x => x.Id == id || x.PtnPk == id & !x.DeleteFlag)
+                .Take(1).ToList();
 
-            //return (List<PatientLookup>) patientDetails;
-
-            throw new NotImplementedException();
-
+            return patientDetails;
         }
 
         public List<PatientLookup> SearchPatient()
