@@ -56,6 +56,9 @@
     <Reference Include="BusinessProcess.Billing">
       <HintPath>..\..\References\BusinessProcess.Billing.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessProcess.CCC">
+      <HintPath>..\..\References\BusinessProcess.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="BusinessProcess.Clinical">
       <HintPath>..\..\References\BusinessProcess.Clinical.dll</HintPath>
     </Reference>
@@ -95,6 +98,9 @@
     <Reference Include="DataAccess.Base">
       <HintPath>..\..\References\DataAccess.Base.dll</HintPath>
     </Reference>
+    <Reference Include="DataAccess.CCC">
+      <HintPath>..\..\References\DataAccess.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="DataAccess.Common">
       <HintPath>..\..\References\DataAccess.Common.dll</HintPath>
     </Reference>
@@ -113,6 +119,9 @@
     <Reference Include="DataAccess.Report">
       <HintPath>..\..\References\DataAccess.Report.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.CCC">
+      <HintPath>..\..\References\Entities.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
@@ -124,6 +133,9 @@
     </Reference>
     <Reference Include="Interface.Billing">
       <HintPath>..\..\References\Interface.Billing.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.CCC">
+      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Clinical">
       <HintPath>..\..\References\Interface.Clinical.dll</HintPath>
@@ -160,6 +172,12 @@
     </Reference>
     <Reference Include="Interface.Service">
       <HintPath>..\..\References\Interface.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.CCC.UILogic">
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.CCC">
+      <HintPath>..\..\References\IQCare.Web.CCC.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web.WebService">
       <HintPath>..\..\References\IQCare.Web.WebService.dll</HintPath>

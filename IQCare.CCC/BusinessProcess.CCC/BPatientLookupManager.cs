@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -10,7 +8,7 @@ using DataAccess.CCC.Context;
 
 namespace BusinessProcess.CCC
 {
-   public class BPatientLookupManager:IPatientLookupmanager
+    public class BPatientLookupManager:IPatientLookupmanager
     {
         private readonly UnitOfWork _unitOfWork=new UnitOfWork(new LookupContext());
         private Utility _utility=new Utility();
