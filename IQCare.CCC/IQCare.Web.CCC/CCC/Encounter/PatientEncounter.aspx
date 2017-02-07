@@ -1063,7 +1063,32 @@
                                 <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
                                     <div class="col-md-12"><hr/>
-                      <!--pw implementation of pending labs laboratory module here-->
+                      <!--pw implementation of previous labs laboratory module here  porders-->
+                                        <div class="col-md-12 form-group">
+            
+                                                             <table id="previouslab_orders" >
+                                                                        <thead>
+                                                                          <tr>
+      	                                                                    <th>Count.# </th> 
+                                                                            <th>Lab Test </th> 
+      	                                                                    <th>Order Reason </th> 
+      	                                                                    <th>Order Date </th> 
+      	                                                                    <th>Order Status </th> 
+      	                                                                  </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+      	                                                                    <td>demo</td> 
+      	                                                                    <td>"txttName</td>
+      	                                                                    <td>demo</td> 
+      	                                                                    <td>mm/dd/yyy</td> 
+      	                                                                    <td>demo</td>                  
+                                                                          </tr>
+                         
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                            <!--
                                                  <div class="col-md-12">
                                                       <div class="col-md-12"><hr/></div>
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
@@ -1073,8 +1098,8 @@
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
                                                       <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
                                                   </div>
-
-                    <!--pw implementation of pending laboratory module here-->
+                                        !>
+                    <!--pw implementation of previous laboratory module here-->
                                </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1322,8 +1347,11 @@
 
                      }
             });
+
+           //pw .autocomplete
+         
        });		  
-       //pw .autocomplete 
+      
     </script>
     
     
