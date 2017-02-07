@@ -87,7 +87,6 @@
     <Compile Include="Encounter\PregnancyIndicator.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
-    <Compile Include="Enrollment\PatientIdentifier.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Enrollment\PatientEntityIdentifier.cs" />
