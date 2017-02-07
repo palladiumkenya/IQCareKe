@@ -51,6 +51,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
@@ -84,6 +85,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.designer.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
