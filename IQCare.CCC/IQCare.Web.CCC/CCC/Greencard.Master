@@ -42,9 +42,20 @@
     <script src="<%# ResolveUrl("~/Content/toast/js/toastr.js")%>" type="text/javascript"></script>
 
 </head>
+   <%-- <script src="<%# ResolveUrl("~/Content/js/jquery.validate.js")%>" type="text/javascript"></script>--%>
 
-<body style="padding-bottom: 60px" class="fuelux">
     
+</head>
+<body style="padding-bottom: 60px" class="fuelux">
+    <input type="hidden" id="isNewEncounter" runat="server" value="" />
+    <script type="text/javascript">
+        function IsNewEncounter()
+        {
+            '<%Session["PatientMasterVisitID"] = "0"; %>';
+        }
+    </script>
+    
+
      <div class="container-fluid">
           <form id="form1" class="form" runat="server" clientidmode="Static" enctype="multipart/form-data">
         
@@ -138,17 +149,13 @@
                               <a href="#" class="list-group-item active">
                                    <span class=""></span> Patient Encounters<span class="badge"></span>
                               </a> 
-                              
-                              <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item">
-                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
+
+                                <a href="../Patient/PatientHome.aspx" class="list-group-item ">
+                                    <span class="fa fa-home fa-1x pull-left"></span> <span class="align-left">Patient Home        </span>
                                 </a>
 
-                                <a href="#" class="list-group-item ">
-                                    <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
-                                </a>
-
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointment <span class="badge">8</span>
+                                <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item" onclick="IsNewEncounter();">
+                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter
                                 </a>
 
                                 <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">
@@ -157,9 +164,15 @@
 
                                 <a  href="../Enrollment/ServiceEnrollment.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
+                                <a href="#" class="list-group-item">
+                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointment <span class="badge">8</span>
                                 </a>
+<<<<<<< HEAD
 
                                 <a href="../Appointment/ScheduleAppointment.aspx" class="list-group-item">
+=======
+                                <a href="#" class="list-group-item">
+>>>>>>> d4b8661b324a17ecd6b5fda560d2668fc04a5ae7
                                     <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>
                                 </a>
 
@@ -203,6 +216,6 @@
          </div> <!-- .conatiner-fluid-->
     </nav>
 
-
+    
 </body>
 </html>

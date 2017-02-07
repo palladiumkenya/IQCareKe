@@ -40,7 +40,7 @@ namespace Entities.Lab
         /// <value>
         /// The name.
         /// </value>
-        [Column("ParameterName")]
+        [Column("ParameterName")]        //use this for lab test listing
         public string Name { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="TestParameter" /> is active.

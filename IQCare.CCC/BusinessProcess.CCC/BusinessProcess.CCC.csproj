@@ -83,6 +83,7 @@
     <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
     <Compile Include="BLookupManager.cs" />
+    <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientVitals.cs" />
