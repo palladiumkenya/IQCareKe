@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPatientEncounter.cs" />
     <Compile Include="IPersonContactManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />

@@ -48,6 +48,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CCCScripts\PatientEncounter.js" />
     <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
@@ -56,6 +57,7 @@
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
     <Content Include="CCC\Patient\PatientFinder.aspx" />
+    <Content Include="CCC\Patient\PatientHome.aspx" />
     <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
@@ -63,6 +65,7 @@
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
+    <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="fuelux\css\fuelux.css" />
     <Content Include="fuelux\css\fuelux.min.css" />
@@ -128,6 +131,13 @@
     </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientHome.aspx.cs">
+      <DependentUpon>PatientHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientHome.aspx.designer.cs">
+      <DependentUpon>PatientHome.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
       <DependentUpon>PatientRegistration.aspx</DependentUpon>
@@ -201,6 +211,10 @@
     </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
+      <DependentUpon>PatientEncounterService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">

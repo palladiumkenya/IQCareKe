@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
+
 namespace IQCare.CCC.UILogic
 {
     public class LookupLogic
     {
-
         public static string GeSubCountyListJson(string county)
         {
             string jsonObject = "[]";
@@ -44,6 +45,20 @@ namespace IQCare.CCC.UILogic
                 jsonObject = "[]";
             }
             return jsonObject;
+        }
+
+        public void populateDDL(DropDownList ddl, string groupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    ddl.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
         }
     }
 }

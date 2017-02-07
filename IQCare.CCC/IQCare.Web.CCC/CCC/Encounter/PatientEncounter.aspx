@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-          
+    <script src="../../CCCScripts/PatientEncounter.js"></script>
         <div class="row">
             <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
@@ -11,8 +11,7 @@
             <div class="col-md-12 col-xs-12">
 
                  <ul class="nav nav-tabs" role="tablist">
-                     <li role="presentation" class="active"><a href="#home" aria-controls="home"  role="tab" data-toggle="tab"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Home</a></li>
-                     <li role="presentation"> <a href="#encounter"    aria-controls="encounter"   role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
+                     <li role="presentation" class="active"> <a href="#encounter"    aria-controls="encounter"   role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
                      <li role="presentation"> <a href="#vlTracker"    aria-controls="vlTracker"   role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
                      <li role="presentation"> <a href="#Laboratory"   aria-controls="Laboratory"  role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory</a></li>
                      <li role="presentation"> <a href="#Pharmacy"     aria-controls="Pharmacy"    role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i> Pharmacy</a></li>
@@ -23,144 +22,27 @@
             <div class="col-md-12 col-xs-12">
 
                  <div class="tab-content">
-                           
-                      <div role="tabpanel" class="tab-pane active" id="home">
-                          <div class="col-md-12">
-                              <div class="col-md-4" style="padding-top: 1%">
-                              
-                                  <div class="col-md-12 bs-callout bs-callout-info">
-                                      <div class="col-md-12"><label class="control-label pull-left text-info">Pharmacy Summary</label></div>
-                                      <div class="col-md-12"><hr/></div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4" style="padding-top: 1%">
-                             
-                                  <div class="col-md-12 bs-callout bs-callout-default">
-                                       <div class="col-md-12"><label class="control-label pull-left text-default">Laboratory Summary</label></div>
-                                      <div class="col-md-12"><hr/></div>
-                                      
-                                           <div class="col-md-12">
-                                               <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4</label></div>
-                                               <div class="col-md-4">
-                                                   <asp:Label runat="server" ID="EnrollmentCD4" CssClass="control-label" ClientIDMode="Static">0</asp:Label>
-                                               </div>
-                                           </div>
-                                          <div class="col-md-12">
-                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4 Date</label></div>
-                                               <div class="col-md-4">
-                                                   <asp:Label runat="server" ID="EnrollmentCD4Date" CssClass="control-label" ClientIDMode="Static">00-00-0000</asp:Label>
-                                               </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viral Load</label></div>
-                                               <div class="col-md-4">
-                                                   <asp:Label runat="server" ID="enrollmentViralload" CssClass="control-label" ClientIDMode="Static">0</asp:Label>
-                                               </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                              <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viralload Date</label></div>
-                                               <div class="col-md-4">
-                                                   <asp:Label runat="server" ID="enrollmentviralloaddate" CssClass="control-label" ClientIDMode="Static">00-00-000</asp:Label>
-                                               </div>
-                                          </div>
-                                     
-                                  </div>
-                                  
-                              </div>
-                              <div class="col-md-4" style="padding-top: 1%">
-                             
-                                  <div class="col-md-12 bs-callout bs-callout-success">
-                                       <div class="col-md-12"><label class="control-label pull-left text-success">Diagnosis Summary</label></div>
-                                      <div class="col-md-12"><hr/></div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-md-12">
-                              <div class="col-md-4">
-                                  
-                                  <div class="col-md-12 bs-callout bs-callout-success">
-                                      <div class="col-md-12"><label class="control-label pull-left text-success">Today's Vital Signs</label></div>
-                                      <div class="col-md-12"><hr/></div>
-                                      <div class="col-md-12">
-                                           <div class="col-md-8"><label class="control-label pull-left">Height (cm)</label></div>
-                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalHeight" CssClass="control-label text-success">0 cms</asp:Label>
-                                           </div>
-                                      </div> 
-                                      <div class="col-md-12">
-                                          <div class="col-md-8"><label class="control-label pull-left">Weight (kg)</label></div>
-                                          <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsWeight" CssClass="control-label text-success">0 Kgs</asp:Label>
-                                           </div>
-                                      </div> 
-                                      <div class="col-md-12">
-                                          <div class="col-md-8"><label class="control-label pull-left">Head Circumference (cm)</label></div>
-                                          <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label text-success">0 cms</asp:Label>
-                                           </div>
-                                      </div> 
-                                      <div class="col-md-12">
-                                          <div class="col-md-8"><label class="control-label pull-left">MUAC (cm)</label></div>
-                                          <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label text-success">0 cms</asp:Label>
-                                           </div>
-                                      </div> 
-                                      <div class="col-md-12">
-                                          <div class="col-md-8"><label class="control-label pull-left">Blood Pressure </label></div>
-                                          <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalBloodPressure" CssClass="control-label text-success">0 </asp:Label>
-                                           </div>
-                                      </div> 
-                                       <div class="col-md-12">
-                                           <div class="col-md-8"><label class="control-label pull-left">Temperature (0C)</label></div>
-                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalTemperature" CssClass="control-label text-success">0 0C</asp:Label>
-                                           </div>
-                                       </div> 
-                                       <div class="col-md-12">
-                                           <div class="col-md-8"><label class="control-label pull-left">Respiratory Rate</label></div>
-                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="vitalRespiratoryRate" CssClass="control-label text-success">0 </asp:Label>
-                                           </div>
-                                       </div> 
-                                       <div class="col-md-12">
-                                           <div class="col-md-8"><label class="control-label pull-left">Blood Oxygen Saturation</label></div>
-                                           <div class="col-md-4">
-                                               <asp:Label runat="server" ID="lblOxygenSaturation" CssClass="control-label text-success">0 %</asp:Label>
-                                           </div>
-                                       </div> 
-                                  </div>
-
-                              </div>
-                              <div class="col-md-4"></div>
-                              <div class="col-md-4"></div>
-                          </div>
-                          <div class="col-md-12"><hr/></div>
-                      </div><!-- .home-->
-
-                    
-                      <div  role="tabpanel" class="tab-pane fade" id="encounter">
-                         <div class="col-md-12">
-                             <div class="col-md-12">
+                 
+                      <div  role="tabpanel" class="tab-pane active" id="encounter">
+                         <div class="col-md-12" style="padding-top:20px">
+                            <%-- <div class="col-md-12">
                                  <div class="col-md-12  bs-callout bs-callout-info">
-                                      <div class="col-md-12">
-                                          
-                                      </div>
+                                     
                                  </div>
-                             </div>
+                             </div>--%>
                              
                              <div class="col-md-12">
                                  <div class="wizard" data-initialize="wizard" id="myWizard">
                                     <div class="steps-container">
 	                                    <ul class="steps">
 		                                   
-                                            <li data-step="1" data-name="template">
+                                            <li data-step="1" data-name="template" class="active">
 			                                    <span class="badge">1</span>Presenting Complaints
 			                                    <span class="chevron"></span>
 		                                    </li>
                                             
                                             <li data-step="2">
-			                                    <span class="badge">3</span>Patient Chronic Illness
+			                                    <span class="badge">2</span>Patient Chronic Illness
 			                                    <span class="chevron"></span>
 		                                    </li>
 		                                    <li data-step="3">
@@ -185,49 +67,164 @@
 
                                     <div class="step-content">
 	                                    
-	                                    <div class="step-pane active sample-pane" data-step="1">
-		                                    <div class="col-md-12"><small class="muted pull-left"><strong>Presenting Complaints </strong></small></div> <div class="col-md-12"><hr /> </div>  
+	                                    <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
+		                                    <%--<div class="col-md-12"><small class="muted pull-left"><strong>Presenting Complaints </strong></small></div> <div class="col-md-12"><hr /> </div>--%>  
+
+                                            <%--here--%>
+
+                                             <div class="col-md-12">
+                                          <div class="col-md-4">
+	                                            <div class="col-md-12 form-group">
+	                                              <div class="col-md-12"><label class="control-label  pull-left">Visit Date</label></div>
+	                                              <div class="col-md-12">
+		                                              <div class="datepicker fuelux" id="DateOfVisit">
+		                                              <div class="input-group">
+
+			                                              <input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />
+			                                              <div class="input-group-btn">
+				                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+				                                            <span class="glyphicon glyphicon-calendar"></span>
+				                                            <span class="sr-only">Toggle Calendar</span>
+			                                              </button>
+			                                              <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+				                                            <div class="datepicker-calendar">
+				                                              <div class="datepicker-calendar-header">
+					                                               <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+					                                               <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+					                                               <button type="button" class="title" data-month="11" data-year="2014">
+							                                            <span class="month">
+							                                              <span data-month="0">January</span>
+							                                              <span data-month="1">February</span>
+							                                              <span data-month="2">March</span>
+							                                              <span data-month="3">April</span>
+							                                              <span data-month="4">May</span>
+							                                              <span data-month="5">June</span>
+							                                              <span data-month="6">July</span>
+							                                              <span data-month="7">August</span>
+							                                              <span data-month="8">September</span>
+							                                              <span data-month="9">October</span>
+							                                              <span data-month="10">November</span>
+							                                              <span data-month="11" class="current">December</span>
+							                                            </span> <span class="year">2014</span>
+					                                               </button>
+				                                              </div>
+				                                              <table class="datepicker-calendar-days">
+					                                            <thead>
+					                                            <tr>
+					                                              <th>Su</th>
+					                                              <th>Mo</th>
+					                                              <th>Tu</th>
+					                                              <th>We</th>
+					                                              <th>Th</th>
+					                                              <th>Fr</th>
+					                                              <th>Sa</th>
+					                                            </tr>
+					                                            </thead>
+					                                            <tbody></tbody>
+				                                              </table>
+				                                              <div class="datepicker-calendar-footer">
+					                                            <button type="button" class="datepicker-today">Today</button>
+				                                              </div>
+				                                            </div>
+				                                            <div class="datepicker-wheels" aria-hidden="true">
+				                                              <div class="datepicker-wheels-month">
+					                                            <h2 class="header">Month</h2>
+					                                            <ul>
+					                                              <li data-month="0"><button type="button">Jan</button></li>
+					                                              <li data-month="1"><button type="button">Feb</button></li>
+					                                              <li data-month="2"><button type="button">Mar</button></li>
+					                                              <li data-month="3"><button type="button">Apr</button></li>
+					                                              <li data-month="4"><button type="button">May</button></li>
+					                                              <li data-month="5"><button type="button">Jun</button></li>
+					                                              <li data-month="6"><button type="button">Jul</button></li>
+					                                              <li data-month="7"><button type="button">Aug</button></li>
+					                                              <li data-month="8"><button type="button">Sep</button></li>
+					                                              <li data-month="9"><button type="button">Oct</button></li>
+					                                              <li data-month="10"><button type="button">Nov</button></li>
+					                                              <li data-month="11"><button type="button">Dec</button></li>
+					                                            </ul>
+				                                              </div>
+				                                              <div class="datepicker-wheels-year">
+					                                            <h2 class="header">Year</h2>
+					                                            <ul></ul>
+				                                              </div>
+				                                              <div class="datepicker-wheels-footer clearfix">
+					                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+					                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+				                                              </div>
+				                                            </div>
+			                                              </div>
+			                                            </div>
+		                                              </div>
+	                                            </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                              <div class="col-md-12 form-group">
+	                                               <div class="col-md-12"><label class="control-label  pull-left">Visit Scheduled?</label></div>
+	                                               <div class="col-md-12">
+		                                              <label class="radio-custom radio-inline pull-left" data-initialize="radio">
+			                                              <input class="sr-only" name="Scheduled" type="radio" value="1"> Yes
+		                                              </label>
+		                                              <label class="radio-custom radio-inline pull-left" data-initialize="radio">
+			                                              <input class="sr-only" name="Scheduled" type="radio" data-parsley-required="true" value="0"> No
+		                                              </label>
+	                                              </div>
+                                              </div>
+                                            </div>
+
+                                          <div class="col-md-4">
+	                                         <div class="col-md-12 form-group">
+		                                          <div class="col-md-12"><label class="control-label  pull-left">Visit By</label></div>
+		                                          <div class="col-md-12">
+			                                          <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" />
+		                                          </div>
+	                                         </div>
+                                        </div>
+                                      </div>
+                                            <div class="col-md-12"><hr /> </div>
+                                            <%--to here--%>
+
 
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-1">
+                                                <%--<div class="col-md-1">
                                                     <h4 class="pull-left text-danger"><i class="fa fa-user-md fa-5x" aria-hidden="true"></i></h4>
-                                                </div>
-                                                <div class="col-md-11">
-                                                     <div class="col-md-6">
-                                                         <div class="col-md-12"><h1 class="text-primary pull-left"><small>Complaints & History of Complaints</small></h1></div>
-                                                         <div class="col-md-12"><hr /></div>
+                                                </div>--%>
+                                                <div class="col-md-12">
+                                                     <div class="col-md-7">
+                                                         <%--<div class="col-md-12"><h1 class="text-primary pull-left"><small>Complaints & History of Complaints</small></h1></div>
+                                                         <div class="col-md-12"><hr /></div>--%>
                                                         
                                                           <label class="control-label pull-left" for="complaints">Complaints Today</label>
-                                                          
-                                                               <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4"></textarea>
-                                                          
-                                                       
+                                                               <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4"></textarea> 
                                                     </div>
 
-                                                      <div class="col-md-6">
-                                                            <div class="col-md-12"><small class="muted pull-left"><strong>TB Screening and Nutrition Status</strong></small></div><div class="col-md-12"><hr /> </div> 
+                                                      <div class="col-md-5">
+                                                            <%--<div class="col-md-12"><small class="muted pull-left"><strong>TB Screening and Nutrition Status</strong></small></div><div class="col-md-12"><hr /> </div> --%>
                                                             <div class="col-md-12  form-group">
-                                                                         <div class="col-md-6"><label class="control-label pull-left input-sm" for="tbscreeningstatus">TB Screening</label></div>
-                                                                         <div class="col-md-6">
-                                                                             <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static"/>
-                                                                         </div>
-                                                                     </div>
+                                                                <div class="col-md-6"><label class="control-label pull-left input-sm" for="tbscreeningstatus">TB Screening</label></div>
+                                                                <div class="col-md-6">
+                                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static"/>
+                                                                </div>
+                                                            </div>
 
                                                             <div class="col-md-12 form-group">
-                                                                         <div class="col-md-6"><label class="control-label pull-left input-sm" for="nutritionscreeningstatus">Nutrition Status</label></div>
-                                                                         <div class="col-md-6">
-                                                                             <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static"  />
+                                                                <div class="col-md-6"><label class="control-label pull-left input-sm" for="nutritionscreeningstatus">Nutrition Status</label></div>
+                                                                <div class="col-md-6">
+                                                                    <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static"  />
                                                                      
-                                                                         </div>
-                                                                     </div>
+                                                                </div>
+                                                            </div>
                          
                                                      </div>
                                                 </div>
                                             </div>
                                           
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-11">
+                                                <%--<div class="col-md-1"></div>--%>
+                                                <div class="col-md-12">
                                                    <div class="col-md-12">
                                                         <div class="panel panel-info">
 
@@ -250,37 +247,69 @@
                                                                  <div class="col-md-3">
                                                                      <div class="col-md-12"><label class="control-label pull-left" >Severity</label></div>
                                                                      <div class="col-md-12">
-                                                                         <asp:TextBox runat="server" ID="AdverseEventSeverity" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="severity..."></asp:TextBox>
+                                                                         <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static"  />
                                                                      </div>
                                                                  </div>
-                                                                 <div class="col-md-3">
+                                                                 <div class="col-md-2">
                                                                      <div class="col-md-12"><label class="control-label pull-left" >Action</label></div>
                                                                      <div class="col-md-12">
                                                                          <asp:TextBox runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="action.."></asp:TextBox>
                                                                      </div>
                                                                  </div>
+                                                                <div class="col-md-1">
+                                                                     <div class="col-md-12"><label class="control-label pull-left" ></label></div>
+                                                                     <div class="col-md-12">
+                                                                         <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
+                                                                     </div>
+                                                                 </div>
                                                              </div>
 
-                                                             <div class="col-md-12 form-group">
+                                                             <%--<div class="col-md-12 form-group">
                                                                 <div class="col-md-3"></div>
                                                                   <div class="col-md-3"></div>
                                                                  <div class="col-md-3"></div>
                                                                   <div class="col-md-3">
-                                                             <div class="col-md-12">
-                                                                 <asp:LinkButton runat="server" ID="btnAdverseEventsAdd" CssClass="btn btn-info btn-lg fa fa-plus-circle">Add Adverse Event</asp:LinkButton>
+                                                             <div class="col-md-12">--%>
+                                                                 <%--<asp:LinkButton ID="btnAdverseEventsAdd" CssClass="btn btn-info btn-lg fa fa-plus-circle" onclick="AddAdverseReaction();">Add Adverse Event</asp:LinkButton>--%>
+                                                                <%-- <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 50px;"
+                                        id="btnAddMilestones" onclick="AddAdverseReaction();">
+                                        Add</button>
                                                              </div>
                                                          </div>
-                                                             </div>
+                                                             </div>--%>
                                                         </div> <%--.panel-body--%>
 
+                                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                        <table id="dtlAdverseEvents" class="table table-bordered table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 50px;">
+                                                                        Adverse Event
+                                                                    </th>
+                                                                    <th style="width: 50px;">
+                                                                        Medicine Causing A/E
+                                                                    </th>
+                                                                    <th style="width: 30px;">
+                                                                        Severity
+                                                                    </th>
+                                                                    <th style="width: 50px;">
+                                                                        Action
+                                                                    </th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                            <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 80px;" id="btnRemoveAdvEvent">Remove</button>
+                                                    </div>
+                                                    
                                                     </div> <%--.panel--%>
                                                    </div>
                                                 </div><%--col-md-11--%>
                                             </div>
 
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-11">
+                                                <%--<div class="col-md-1"></div>--%>
+                                                <div class="col-md-12">
                                                    <div class="col-md-12">
                                                      <div class="panel panel-info">
 
@@ -294,7 +323,7 @@
                                                                       <div class="col-md-12">
                                                                           <div class="datepicker fuelux" id="FemaleLMP">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="lmp" type="text" />
+                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -380,11 +409,11 @@
                                                                      </div>
                                                                  </div>
                                                                  <div class="col-md-12 form-group">
-                                                                     <div class="col-md-12"><label class="control-label  pull-left">EDCD</label></div>
+                                                                     <div class="col-md-12"><label class="control-label  pull-left">EDD</label></div>
                                                                      <div class="col-md-12">
                                                                          <div class="datepicker fuelux" id="EDCD">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" />
+                                                                              <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -468,19 +497,30 @@
                                                                   <div class="col-md-12 form-group">
                                                                        <div class="col-md-12"><label class="control-label  pull-left">ANC/PNC Profile</label></div>
                                                                        <div class="col-md-12">
-                                                                          <asp:DropDownList runat="server" ID="anpncprofile" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                          <label class="radio-custom radio-inline pull-left" data-initialize="radio">
+                                                                              <input class="sr-only" name="ANCProfile" type="radio" value="1"> Yes
+                                                                          </label>
+                                                                          <label class="radio-custom radio-inline pull-left" data-initialize="radio">
+                                                                              <input class="sr-only" name="ANCProfile" type="radio" value="0"> No
+                                                                          </label>
                                                                       </div>
                                                                   </div>
                                                                  <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">On Family Planning</label></div>
                                                                       <div class="col-md-12">
-                                                                          <asp:DropDownList runat="server" ID="onFamilyPlanning" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                          <asp:DropDownList runat="server" ID="onFP" ClientIDMode="Static" CssClass="form-control input-sm" onChange="showHideFPControls();" />
                                                                       </div>
                                                                  </div>
-                                                                 <div class="col-md-12 form-group">
+                                                                 <div class="col-md-12 form-group" id="divOnFP">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">FP Method</label></div>
                                                                       <div class="col-md-12">
                                                                           <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                                                      </div>
+                                                                 </div>
+                                                                 <div class="col-md-12 form-group" id="divNoFP" style="display:none">
+                                                                     <div class="col-md-12"><label class="control-label  pull-left">Reason not on FP</label></div>
+                                                                      <div class="col-md-12">
+                                                                          <asp:DropDownList runat="server" ID="ddlNoFP" ClientIDMode="Static" CssClass="form-control input-sm"/>
                                                                       </div>
                                                                  </div>
                                                                  
@@ -489,13 +529,13 @@
                                                                  <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">CaCX Screeing</label></div>
                                                                       <div class="col-md-12">
-                                                                          <asp:DropDownList runat="server" ID="cacxscreening" CssClass="form-control input0-sm" ClientIDMode="Static"/>
+                                                                          <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" />
                                                                       </div>
                                                                  </div>
                                                                  <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">STI Screeing</label></div>
                                                                       <div class="col-md-12">
-                                                                          <asp:DropDownList runat="server" ID="stiScreening" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                          <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" />
                                                                       </div>
                                                                  </div>
                                                                  <div class="col-md-12 form-group">
@@ -516,18 +556,20 @@
                                         </div><%-- .data-step-1--%>
                                         
                                         <div class="step-pane sample-pane" data-step="2">
-                                            <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Chronic Illness </strong></small></div> <div class="col-md-12"><hr /> </div>  
+                                            <%--<div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Chronic Illness </strong></small></div> <div class="col-md-12"><hr /> </div>--%>  
                                             <div class="col-md-12">
-                                                 <div class="col-md-1">
+                                                 <%--<div class="col-md-1">
                                                      <h4 class="pull-left text-warning"><i class="fa fa-user-md fa-5x" aria-hidden="true"></i></h4>
-                                                 </div>
-                                                 <div class="col-md-11">
-                                                     <div class="col-md-12"><hr /></div> 
+                                                 </div>--%>
+                                                 <div class="col-md-12">
+                                                     <%--<div class="col-md-12"><hr /></div>--%> 
+                                                     <div class="panel panel-info">
+                                                     <div class="panel-body">
                                                      <div class="col-md-12 form-group"><label class="control-label pull-left">Chronic Illnesses & Comorbidities</label></div>
                                                     
                                                       <div class="col-md-12 form-group">
                                                               <div class="col-md-4 form-group">
-                                                                   <div class="col-md-12"><label for="ChronicIllnessName" class="control-label pull-left">Illness</label></div>
+                                                                  <div class="col-md-12"><label for="ChronicIllnessName" class="control-label pull-left">Illness</label></div>
                                                                   <div class="col-md-12">
                                                                       <asp:DropDownList runat="server" ID="ChronicIllnessName" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                                                   </div>
@@ -556,135 +598,181 @@
                                                              <div class="col-md-1">
                                                                  <div class="col-md-12"><label class="control-label pull-left"><span class="fa fa-cog">Action</span></label></div>
                                                                  <div class="col-md-4">
-                                                                     <asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn btn-info btn-lg fa fa-plus-circle">Add</asp:LinkButton>
+                                                                     <%--<asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn btn-info btn-lg fa fa-plus-circle">Add</asp:LinkButton>--%>
+                                                                     <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddChronicIllness" onclick="AddChronicIllness();">Add</button>
                                                                  </div>
                                                              </div>
                                                          </div>
-                                                     
-                                                      <div class="col-md-12 form-group">
+
+                                                     <div class="col-md-12 form-group">
+                                                            <div class="panel panel-info">
+                                                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                    <table id="dtlChronicIllness" class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="width: 50px;">
+                                                                                    Illness
+                                                                                </th>
+                                                                                <th style="width: 50px;">
+                                                                                    Current Treatment
+                                                                                </th>
+                                                                                <th style="width: 30px;">
+                                                                                    Dose
+                                                                                </th>
+                                                                                <th style="width: 50px;">
+                                                                                    Duration
+                                                                                </th>
+                                                                    
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                        <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 150px" id="btnRemoveChronicIllness">Remove Selected Row</button>
+                                                                </div>
+                                                             </div>
+                                                         </div>
+
+                                                     </div>
+                                                     </div>
+                                                     <%--<div class="col-md-12"><hr /></div>--%>
+                                                      <%--<div class="col-md-12 form-group">--%>
                                                             <div class="panel panel-info">
 
                                                                 <div class="panel-body">
                                                                      <div class="col-md-12 form-group"><label class="control-label pull-left">Antigen Today</label></div>
-                                                                     <div class="col-md-12"><hr/></div>
+                                                                     <%--<div class="col-md-12"><hr/></div>--%>
 
                                                                     <div class="col-md-12 form-group ">
-                                                                        <div class="col-md-4"><label class="control-label pull-left">BCG vaccine </label></div>
-                                                                         <div class="col-md-8">
-                                                                             <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                 <input class="sr-only" type="checkbox" id="BCG" value="option1"> <span class="checkbox-label"></span>
-                                                                             </label>
-                                                                         </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-md-12 form-group">
-                                                                         <div class="col-md-4"><label class="control-label pull-left">Polio Vaccine (pv)</label></div>
-                                                                         <div class="col-md-8">
-                                                                              <div class="col-md-3">
-                                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="PolioVaccine1" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="PolioVaccine2" value="option1"> <span class="checkbox-label"> </span>
-                                                                                  </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="PolioVaccine3" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="PolioVaccine4" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                         </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="col-md-12"><label class="control-label pull-left">Vaccine</label></div>
+                                                                            <div class="col-md-12">
+                                                                                <asp:DropDownList ID="ddlVaccine" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ></asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="col-md-12"><label class="control-label pull-left">Vaccine Stage</label></div>
+                                                                            <div class="col-md-12">
+                                                                                <asp:DropDownList ID="ddlVaccineStage" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="col-md-12"><label class="control-label  pull-left">Vaccination Date</label></div>
+	                                                                            <div class="col-md-12">
+		                                                                            <div class="datepicker fuelux" id="vaccineDate">
+		                                                                            <div class="input-group">
+			                                                                            <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" ClientIDMode="Static" />
+			                                                                            <div class="input-group-btn">
+				                                                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+				                                                                        <span class="glyphicon glyphicon-calendar"></span>
+				                                                                        <span class="sr-only">Toggle Calendar</span>
+			                                                                            </button>
+			                                                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+				                                                                        <div class="datepicker-calendar">
+				                                                                            <div class="datepicker-calendar-header">
+					                                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+					                                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+					                                                                            <button type="button" class="title" data-month="11" data-year="2014">
+							                                                                        <span class="month">
+							                                                                            <span data-month="0">January</span>
+							                                                                            <span data-month="1">February</span>
+							                                                                            <span data-month="2">March</span>
+							                                                                            <span data-month="3">April</span>
+							                                                                            <span data-month="4">May</span>
+							                                                                            <span data-month="5">June</span>
+							                                                                            <span data-month="6">July</span>
+							                                                                            <span data-month="7">August</span>
+							                                                                            <span data-month="8">September</span>
+							                                                                            <span data-month="9">October</span>
+							                                                                            <span data-month="10">November</span>
+							                                                                            <span data-month="11" class="current">December</span>
+							                                                                        </span> <span class="year">2014</span>
+					                                                                            </button>
+				                                                                            </div>
+				                                                                            <table class="datepicker-calendar-days">
+					                                                                        <thead>
+					                                                                        <tr>
+					                                                                            <th>Su</th>
+					                                                                            <th>Mo</th>
+					                                                                            <th>Tu</th>
+					                                                                            <th>We</th>
+					                                                                            <th>Th</th>
+					                                                                            <th>Fr</th>
+					                                                                            <th>Sa</th>
+					                                                                        </tr>
+					                                                                        </thead>
+					                                                                        <tbody></tbody>
+				                                                                            </table>
+				                                                                            <div class="datepicker-calendar-footer">
+					                                                                        <button type="button" class="datepicker-today">Today</button>
+				                                                                            </div>
+				                                                                        </div>
+				                                                                        <div class="datepicker-wheels" aria-hidden="true">
+				                                                                            <div class="datepicker-wheels-month">
+					                                                                        <h2 class="header">Month</h2>
+					                                                                        <ul>
+					                                                                            <li data-month="0"><button type="button">Jan</button></li>
+					                                                                            <li data-month="1"><button type="button">Feb</button></li>
+					                                                                            <li data-month="2"><button type="button">Mar</button></li>
+					                                                                            <li data-month="3"><button type="button">Apr</button></li>
+					                                                                            <li data-month="4"><button type="button">May</button></li>
+					                                                                            <li data-month="5"><button type="button">Jun</button></li>
+					                                                                            <li data-month="6"><button type="button">Jul</button></li>
+					                                                                            <li data-month="7"><button type="button">Aug</button></li>
+					                                                                            <li data-month="8"><button type="button">Sep</button></li>
+					                                                                            <li data-month="9"><button type="button">Oct</button></li>
+					                                                                            <li data-month="10"><button type="button">Nov</button></li>
+					                                                                            <li data-month="11"><button type="button">Dec</button></li>
+					                                                                        </ul>
+				                                                                            </div>
+				                                                                            <div class="datepicker-wheels-year">
+					                                                                        <h2 class="header">Year</h2>
+					                                                                        <ul></ul>
+				                                                                            </div>
+				                                                                            <div class="datepicker-wheels-footer clearfix">
+					                                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+					                                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+				                                                                            </div>
+				                                                                        </div>
+			                                                                            </div>
+			                                                                        </div>
+		                                                                            </div>
+	                                                                        </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            <div class="col-md-12"><label class="control-label pull-left">Action</label></div>
+                                                                            <div class="col-md-12">
+                                                                                <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddVaccine" onclick="AddVaccine();" >Add</button>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
 
                                                                     <div class="col-md-12 form-group">
-                                                                         <div class="col-md-4"><label class="control-label pull-left">Pentavallent Vaccine (penta)</label></div>
-                                                                         <div class="col-md-8">
-                                                                              <div class="col-md-3">
-                                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pentavalent1" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pentavalent2" value="option1"> <span class="checkbox-label"> </span>
-                                                                                  </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pentavalent3" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="pentavallent4" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
+                                                                        <div class="panel panel-info">
+                                                                             <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                                <table id="dtlVaccines" class="table table-bordered table-striped">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>
+                                                                                                Vaccine
+                                                                                            </th>
+                                                                                            <th>
+                                                                                                Vaccine Stage
+                                                                                            </th>
+                                                                                            <th>
+                                                                                                Vaccination Date
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                </table>
+                                                                                    <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 80px;" id="btnRemoveVaccine">Remove</button>
+                                                                            </div>
                                                                          </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-md-12 form-group">
-                                                                         <div class="col-md-4"><label class="control-label pull-left">Pneumococcal Vaccine (pv)</label></div>
-                                                                         <div class="col-md-8">
-                                                                              <div class="col-md-3">
-                                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pneumococcal1" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pneumococcal2" value="option1"> <span class="checkbox-label"> </span>
-                                                                                  </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pneumococcal3" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Pneumococcal4" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                         </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-md-12 form-group">
-                                                                         <div class="col-md-4"><label class="control-label pull-left">Measles Vaccine (pv)</label></div>
-                                                                         <div class="col-md-8">
-                                                                              <div class="col-md-3">
-                                                                                   <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Measles1" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Measles2" value="option1"> <span class="checkbox-label"> </span>
-                                                                                  </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="Measles3" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                              <div class="col-md-3">
-                                                                                  <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox">
-                                                                                       <input class="sr-only" type="checkbox" id="measles4" value="option1"> <span class="checkbox-label"> </span>
-                                                                                   </label>
-                                                                              </div>
-                                                                         </div>
-                                                                    </div>
+                                                                     </div>
                                                             
                                                                 </div><%-- .panel-body--%>
 
                                                             </div> <%--.panel--%>
-                                                      </div><%-- .col-md-12--%>
+                                                      <%--</div>--%><%-- .col-md-12--%>
                                                   </div>
 
                                             </div>
@@ -834,11 +922,11 @@
                                                  </div>
                                                    
                                                   </div><%-- .col-md-11--%>
-                                                
+                                                <div class="col-md-12"><hr /></div>
                                                 <div class="col-md-12">
                                                      
-                                                    <div class="col-md-4">
-                                                          <div class="col-md-12"><hr /></div>
+                                                    <div class="col-md-5">
+                                                          
                                                           <div class="col-md-12 form-group">
                                                               <div class="col-md-6"><label class="control-label pull-left">ARV Adherence</label></div>
                                                                <div class="col-md-6">
@@ -846,15 +934,18 @@
                                                               </div>
                                                           </div><%-- .col-md-12--%>
 
-                                                          <div class="col-md-12 form-group">
+                                                        <div class="col-md-12 form-group">
                                                               <div class="col-md-6"><label class="control-label pull-left">CTX/Dapsone Adherence</label></div>
                                                               <div class="col-md-6">
                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static"/>
                                                               </div>
                                                          </div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                          
 
                                                           <div class="col-md-12">
-                                                              <div class="col-md-12"><hr /></div>
+                                                              <%--<div class="col-md-12"><hr /></div>--%>
                                                               <div class="col-md-12">
                                                                    <div class="col-md-5"><label class="control-label pull-left">Next Appointment </label></div>
                                                                    <div class="col-md-7">
@@ -955,7 +1046,7 @@
                                                               </div>
                                                           </div>
                                                      </div><%-- .col-md-4--%>
-                                                     <div class="col-md-8"></div>
+                                                     <%--<div class="col-md-8"></div>--%>
                                                  
                                                 </div> <%--.col-md-12--%>
                                             </div> <%--.col-md-11--%>
@@ -1153,141 +1244,273 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            
+            $('#DateOfVisit').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#OnsetDate').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#FemaleLMP').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#EDCD').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#AntigenDate').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#NextAppDate').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            $('#vaccineDate').datepicker({
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
+            
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            $('#dtlAdverseEvents').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
 
-            $('#OnsetDate').datepicker();
-            $('#FemaleLMP').datepicker();
-            $('#EDCD').datepicker();
-            $('#AntigenDate').datepicker();
-            $('#NextAppDate').datepicker();
-            $('#myWizard').wizard();
+            $('#dtlChronicIllness').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+
+            $('#dtlVaccines').DataTable({
+                paging: false,
+                searching: false,
+                info: false
+            });
+
+
+            var tableAdverseEvents = $('#dtlAdverseEvents').DataTable();
+            var tableChronicIllness = $('#dtlChronicIllness').DataTable();
+            var tableVaccines = $('#dtlVaccines').DataTable();
+        
+            var index;
+
+            ///dtlAdverseEvents
+            $('#dtlAdverseEvents tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    tableAdverseEvents.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#btnRemoveAdvEvent').click(function () {
+                tableAdverseEvents.row('.selected').remove().draw(false);
+                if (index > -1) {
+                    arrAdverseEvent.splice(index, 1);
+                }
+            });
+
+            $('#dtlAdverseEvents').on('click', 'tr', function () {
+                var aData = tableAdverseEvents.row(this).data();
+                index = arrAdverseEvent.findIndex(x => x.adverseEvent == aData[0]);
+            });
+
+
+            ////dtlChronicIllness
+            $('#dtlChronicIllness tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    tableChronicIllness.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#btnRemoveChronicIllness').click(function () {
+                tableChronicIllness.row('.selected').remove().draw(false);
+                if (index > -1) {
+                    arrChronicIllness.splice(index, 1);
+                }
+            });
+
+            $('#dtlChronicIllness').on('click', 'tr', function () {
+                var aData = tableChronicIllness.row(this).data();
+                index = arrChronicIllness.findIndex(x => x.chronicIllness == aData[0]);
+            });
+
+            ////dtlVaccines
+            $('#dtlVaccines tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    tableVaccines.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $('#btnRemoveVaccine').click(function () {
+                tableVaccines.row('.selected').remove().draw(false);
+                if (index > -1) {
+                    arrVaccines.splice(index, 1);
+                }
+            });
+
+            $('#dtlVaccines').on('click', 'tr', function () {
+                var aData = tableVaccines.row(this).data();
+                index = arrVaccines.findIndex(x => x.vaccine == aData[0]);
+            });
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //$('#myWizard').wizard();
+            $("#myWizard")
+                    .on("actionclicked.fu.wizard", function (evt, data) {
+                        var currentStep = data.step;
+                        var nextStep = 0;
+                        var previousStep = 0;
+                        var totalError = 0;
+                        var stepError = 0;
+                        /*var form = $("form[name='form1']");*/
+
+                        if (data.direction === 'next')
+                            nextStep = currentStep += 1;
+                        else
+                            previousStep = nextStep -= 1;
+                        if (data.step === 1) {
+
+                            /* add constraints based on age*/
+
+                            if ($('#datastep1').parsley().validate()) {
+                                savePatientEncounterPresentingComplaint();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        else if (data.step === 2) {
+                            savePatientEncounterChronicIllness();
+                            //if ($("#datastep2").parsley().validate()) {
+
+                            //} else {
+                            //    stepError = $('.parsley-error').length === 0;
+                            //    totalError += stepError;
+                            //    evt.preventDefault();
+                            //}
+                        }
+                        /*else if (data.step === 3) {
+                            if ($("#datastep3").parsley().validate()) {
+
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        else if (data.step === 4) {
+                            if ($("#datastep2").parsley().validate()) {
+
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                if (totalError > 0) {
+                                    $('.bs-callout-danger').toggleClass('hidden', f);
+                                }
+                                evt.preventDefault();
+                            }
+                            //var ok4 = $('.parsley-error').length === 0;
+                            //$('.bs-callout-info').toggleClass('hidden', !ok4);
+                        }*/
+                    })
+                    .on("changed.fu.wizard",
+                        function () {
+
+                        })
+                    .on('stepclicked.fu.wizard',
+                        function () {
+
+                        })
+                    .on('finished.fu.wizard',
+                        function (e) {
+
+                        });
+
+            function savePatientEncounterPresentingComplaint() {
+                var visitDate = $("#<%=VisitDate.ClientID%>").val();
+                var visitScheduled = $('input[name="Scheduled"]:checked').val();
+                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+                var complaints = $("#<%=complaints.ClientID%>").val();
+                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+                var LMP = $("#<%=lmp.ClientID%>").val();
+                var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
+                var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
+                var ANCProfile = $('input[name="ANCProfile"]:checked').val();
+                var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
+                var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+
+                var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
+                var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
+                var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
+                
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(arrAdverseEvent) + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            alert("Saved");        
+                        },
+                        failure: function (msg) {
+                            alert(msg);
+                        }
+                    });
+            }
+
+
+
+            function savePatientEncounterChronicIllness() {
+                var BCGVaccine = $('#BCG:checked').val();
+                var PolioVaccine = $('.sr-only:checked').val();
+                var PentaVaccine = $('.sr-only:checked').val();
+                var PCV = $('.sr-only:checked').val();
+                var Measles = $('.sr-only:checked').val();
+ 
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
+                    data: "{'chronicIllness':'" + JSON.stringify(arrChronicIllness) + "','vaccines':'" + JSON.stringify(arrVaccine) + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Saved");        
+                    },
+                    failure: function (msg) {
+                        alert(msg);
+                    }
+                });
+            }
+
+
         });
 
     </script>
 </asp:Content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

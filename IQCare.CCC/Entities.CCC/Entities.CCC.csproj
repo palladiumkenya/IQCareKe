@@ -68,6 +68,7 @@
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
     <Compile Include="Encounter\PatientClinicalNotes.cs" />
     <Compile Include="Encounter\PatientDiagnosis.cs" />
+    <Compile Include="Encounter\PatientEncounter.cs" />
     <Compile Include="Encounter\PatientFamilyPlanning.cs" />
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
