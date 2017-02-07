@@ -45,5 +45,42 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
+
+        /* pw getlablist implementation   */
+        public static string GetLookupLabsListJson()
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupLabs> lookuplabsList = lookupManager.GetLookupLabs();   //Interface ==>similar declaration
+
+            if (lookuplabsList != null && lookuplabsList.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookuplabsList);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+        /* pw .getlablist implementation   */
+        /* pw get previous lab list implementation   */
+        public static string GetLookupPreviousLabsListJson(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetLookupPreviousLabs(patientId);   //Interface ==>similar declaration
+
+            if (lookupprevlabsList != null && lookupprevlabsList.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupprevlabsList);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+        /* pw .previous lab list implementation   */
     }
 }

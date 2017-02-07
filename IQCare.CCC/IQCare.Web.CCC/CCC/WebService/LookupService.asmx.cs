@@ -1,6 +1,9 @@
 ﻿
 using System.Web.Services;
 using IQCare.CCC.UILogic;
+using System.Xml;
+using System.Text;
+using System;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -37,7 +40,7 @@ namespace IQCare.Web.CCC.WebService
             //}
             return jsonObject;
         }
-
+        
         [WebMethod]
         public string GetLookupWardList(string subcounty)
         {
@@ -54,8 +57,37 @@ namespace IQCare.Web.CCC.WebService
             //}
             //return jsonObject;
 
-            string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);
+            string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);  
             return jsonObject;
         }
+
+        // pw lookup lablist
+        [WebMethod]
+        public string GetLookupLabsList()
+        {
+            string jsonObject = LookupLogic.GetLookupLabsListJson();  
+            
+            //this is what is implemented at UIlogic
+            
+            return jsonObject;
+        }
+        // pw .lookup lablist             
+        // pw .typeahead 
+
+        // pw lookup previous lablist
+        
+           [WebMethod]
+           public string GetLookupPreviousLabsList(int patientId)
+           {
+               string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);
+
+               //this is what is implemented at UIlogic
+
+               return jsonObject;
+           }
+           // pw .lookup previous lablist             
+           // pw .grid 
+           
     }
+
 }

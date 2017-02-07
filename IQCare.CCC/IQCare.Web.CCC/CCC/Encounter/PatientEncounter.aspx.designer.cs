@@ -382,13 +382,13 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlSelect PrescribedBy;
         
         /// <summary>
-        /// OrderedLab control.
+        /// txtautofromDB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox OrderedLab;
+        protected global::System.Web.UI.WebControls.TextBox txtautofromDB;
         
         /// <summary>
         /// labOrderReason control.

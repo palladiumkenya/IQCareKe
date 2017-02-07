@@ -3,8 +3,63 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-          
-        <div class="row">
+
+    <!-- Auto complete code here-->
+    <script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+    <script src="../Scripts/css/jquery-ui.css"></script>
+    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />   
+<!--  .end auto complete   -->
+       <!-- line graph for viral tracker  -->  
+  	
+		<style type="text/css">
+		</style>
+		<script type="text/javascript">
+		    $(function () {
+		        $('#container').highcharts({
+		            title: {
+		                text: 'Viral Load Trend',
+		                x: -20 //center
+		            },
+		            subtitle: {
+		                text: 'VL cp/ml',
+		                x: -20
+		            },
+		            xAxis: {
+		                categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+		            },
+		            yAxis: {
+		                title: {
+		                    text: 'Viral Load cp/ml'
+		                },
+		                plotLines: [{
+		                    value: 0,
+		                    width: 1,
+		                    color: '#808080'
+		                }]
+		            },
+		            tooltip: {
+		                valueSuffix: 'cp/ml'
+		            },
+		            legend: {
+		                layout: 'vertical',
+		                align: 'right',
+		                verticalAlign: 'middle',
+		                borderWidth: 0
+		            },
+		            series: [{
+		                name: 'Patrick',
+		                data: [200, 300, 500, 1000, 750, 500, 400]
+		            }, {
+		                name: 'Threshold',
+		                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+		            }]
+		        });
+		    });
+		  		
+		</script>
+<!--end line graph for viral tracker    -->          
+       <div class="row">
             <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
             </div>
@@ -36,9 +91,9 @@
                               <div class="col-md-4" style="padding-top: 1%">
                              
                                   <div class="col-md-12 bs-callout bs-callout-default">
-                                       <div class="col-md-12"><label class="control-label pull-left text-default">Laboratory Summary</label></div>
+                                 <div class="col-md-12"><label class="control-label pull-left text-default">Laboratory Summary</label></div>
                                       <div class="col-md-12"><hr/></div>
-                                      
+                                       viral load summary here  vx
                                            <div class="col-md-12">
                                                <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4</label></div>
                                                <div class="col-md-4">
@@ -63,7 +118,7 @@
                                                    <asp:Label runat="server" ID="enrollmentviralloaddate" CssClass="control-label" ClientIDMode="Static">00-00-000</asp:Label>
                                                </div>
                                           </div>
-                                     
+                                   
                                   </div>
                                   
                               </div>
@@ -968,23 +1023,61 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>
-                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">...</div><!-- .viraload tracker-->
+                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
+                    <!-- pw implementation of viral load tracker here-->
+                             <div class="col-md-6">
+                                    <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
+                                   
+                      <!--pw implementation of laboratory module here-->
+                                                 <div class="col-md-12">
+                                                      <div class="col-md-12"><hr/></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
+                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
+                                                  </div>
 
+                     <!--pw .implementation of  laboratory module here-->
+                             
+                                </div>
+                                    <script src="https://code.highcharts.com/highcharts.js"></script>
+                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                    <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
+                                                            
+
+                      <!-- pw .implementation of viral load tracker here-->
+                      </div><!-- .viraload tracker-->
+                    
                       <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
                             <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
                             </div>
                             
                             <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs</strong> </h4>
+                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>
                             </div>
-                            
+                           
                             <div class="col-md-12 bs-callout bs-callout-info">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
-                                    <div class="col-md-12"><hr/></div>
+                                    <div class="col-md-12"><hr/>
+                      <!--pw implementation of pending labs laboratory module here-->
+                                                 <div class="col-md-12">
+                                                      <div class="col-md-12"><hr/></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
+                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
+                                                  </div>
+
+                    <!--pw implementation of pending laboratory module here-->
+                               </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
                                     <div class="col-md-12">
                                         <div class="panel panel-default">
@@ -993,13 +1086,21 @@
                                                   <div class="col-md-12 form-group">
                                                       <div class="col-md-3"><label class="control-label pull-left">Select Lab(s)</label></div>
                                                       <div class="col-md-9">
-                                                           <asp:TextBox runat="server" ID="OrderedLab" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
-                                                      </div>
+                                                           <asp:TextBox runat="server" ID="txtautofromDB" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                                                                              
+                                                             </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-3"><label class="control-label pull-left"> Lab Order Reason</label></div>
                                                       <div class="col-md-9">
-                                                          <asp:DropDownList runat="server" ID="labOrderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                          <asp:DropDownList runat="server" ID="labOrderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
+                                                         <asp:ListItem Text=" " Value="1" />
+                                                         <asp:ListItem Text="Baseline" Value="2" />
+                                                         <asp:ListItem Text="Routine" Value="3" />
+                                                         <asp:ListItem Text="Confirmatory" Value="4" />
+                                                         <asp:ListItem Text="Suspected drug resistance" Value="5" />
+                                                         <asp:ListItem Text="Other" Value="5" />
+                                                    </asp:DropDownList>
                                                       </div>
                                                   </div>
                                                   
@@ -1016,13 +1117,43 @@
                                                           <asp:LinkButton runat="server" CssClass="btn btn-warning fa fa-plus-circle"> Add Lab</asp:LinkButton>
                                                       </div>
                                                   </div>
+                    
                                                   <div class="col-md-12">
                                                       <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count.#</label></div>
-                                                      <div class="col-md-4"><label class="control-label text-warning pull-left">Ordered Lab Test</label></div>
-                                                      <div class="col-md-4"><label class="control-label text-warning pull-left">Lab Order Reason</label></div>
-                                                  </div>
-                                              </div>
+                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Count.#</label></div>
+                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Ordered Lab Test</label></div>
+                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Lab Order Reason</label></div>
+                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Lab Order Date</label></div>
+                                                  </div>   
+<!--
+<div class="col-md-12 form-group">
+            
+             <table id="currentlab_orders" >
+                        <thead>
+                          <tr>
+      	                    <th>Count.# </th> 
+                            <th>Lab Test </th> 
+      	                    <th>Order Reason </th> 
+      	                    <th>Order Date </th> 
+      	                    <th>Order Status </th> 
+      	                  </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+      	                    <td>demo</td> 
+      	                    <td>demo</td>
+      	                    <td>demo</td> 
+      	                    <td>mm/dd/yyy</td> 
+      	                    <td>demo</td>                  
+                          </tr>
+                         
+                        </tbody>
+                    </table>
+                </div>
+
+-->
+   
+                                                </div>
                                         </div>
                                     </div>
 
@@ -1049,7 +1180,7 @@
                             </div>
                             
 
-                      </div><!-- .laboratory-->
+                      </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
 
                       <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
                           <div class="col-md-12" style="padding-top: 1%">
@@ -1150,19 +1281,52 @@
                  </div><!-- .tab-content-->
             </div><!-- .col-md-12 -->
         </div><!-- .row -->
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
+    <!-- ajax begin -->
+   <script type="text/javascript">
+       $(document).ready(function () {
+           /*   Ajax functions originally set will return later ---
             $('#OnsetDate').datepicker();
             $('#FemaleLMP').datepicker();
             $('#EDCD').datepicker();
             $('#AntigenDate').datepicker();
             $('#NextAppDate').datepicker();
-            $('#myWizard').wizard();
-        });
+            $('#myWizard').wizard();    */
 
+            //pw autocomplete
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookupLabsList",
+                dataType: "json",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    
+                    var serverData = JSON.parse(data.d);    //clean object
+                   
+                    var labtests = [];
+                    for (var i = 0; i < serverData.length; i++) {
+                        
+                        labtests.push(serverData[i]["ParameterName"]);  //push data to array important
+                    }
+                    
+                    //console.log(labtests);                    
+                              
+                        $("[id$='txtautofromDB']").autocomplete({
+                            source: labtests
+                        
+                     });
+                },
+                    error: function (errorThrown) {
+                        alert(textStatus);
+                        console.log(errorThrown)
+
+                     }
+            });
+       });		  
+       //pw .autocomplete 
     </script>
+    
+    
 </asp:Content>
 
 

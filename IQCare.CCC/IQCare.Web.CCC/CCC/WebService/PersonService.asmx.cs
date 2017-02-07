@@ -178,12 +178,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPersonPopulation(PatientPopulation patientPopulation)
+        public string AddPersonPopulation(int _personId, int PopulationTypeId, int PopulationCategory, int CreatedBy)
         {
             try
             {
-                var personOvcStatus = new PersonOvcStatusManager();
-                _result = personOvcStatus.AddPatientOvcStatus(_personId, patientPopulation.PopulationTypeId, patientPopulation.PopulationCategory, patientPopulation.CreatedBy);
+                var personOvcStatus = new PatientPopulationManager();
+                _result = personOvcStatus.AddPatientPopulation(_personId, PopulationTypeId, PopulationCategory, CreatedBy);
                 if (_result > 0)
                 {
                     _msg = "Person OVC Status Recorded Successfully!";

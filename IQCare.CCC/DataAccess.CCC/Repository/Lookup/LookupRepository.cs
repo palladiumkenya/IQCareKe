@@ -37,5 +37,13 @@ namespace DataAccess.CCC.Repository.Lookup
            return myList.OrderBy(l => l.OrdRank).ToList();
           //  return myList;
         }
+        /* pw GetLookupLabs implementation   */
+        public List<LookupItemView> GetLabsList(string lab)
+        {
+            ILookupRepository x = new LookupRepository();
+            var myList = x.FindBy(g => g.MasterName == lab.ToString());
+            return myList.OrderBy(l => l.OrdRank).ToList();
+            //  return myList;
+        }
     }
 }

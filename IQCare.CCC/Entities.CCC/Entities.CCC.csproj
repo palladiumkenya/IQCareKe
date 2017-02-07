@@ -86,6 +86,8 @@
     <Compile Include="Enrollment\PatientEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Enrollment\PatientIdentifier.cs" />
+    <Compile Include="Lookup\LookupPreviousLabs.cs" />
+    <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Lookup\LookupCounty.cs" />
     <Compile Include="Lookup\LookupItemView.cs" />
     <Compile Include="Lookup\LookupItem.cs" />

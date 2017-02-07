@@ -49,6 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCC\Dashboard.aspx" />
+    <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
     <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
@@ -59,6 +60,10 @@
     <Content Include="CCC\Patient\PatientRegistration.aspx" />
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
+    <Content Include="CCC\Scripts\css\jquery-ui.css" />
+    <Content Include="CCC\Scripts\js\jquery-1.4.2.min.js" />
+    <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
+    <Content Include="CCC\Scripts\js\linegraph_1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />

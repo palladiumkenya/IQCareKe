@@ -1,5 +1,4 @@
-﻿using Entities.CCC.Visit;
-using Entities.Common;
+﻿using Entities.Common;
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
