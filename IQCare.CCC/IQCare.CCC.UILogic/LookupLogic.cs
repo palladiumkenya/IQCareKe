@@ -60,5 +60,22 @@ namespace IQCare.CCC.UILogic
                 }
             }
         }
+
+        public static string GetLookupItemByName(string itemName)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager =
+                (ILookupManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            List<LookupItemView> lookupItem = lookupManager.GetLookItemByGroup(itemName);
+            if (lookupItem !=null && lookupItem.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupItem);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }  
     }
 }

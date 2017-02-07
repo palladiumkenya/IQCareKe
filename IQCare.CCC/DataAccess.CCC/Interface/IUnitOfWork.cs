@@ -1,8 +1,11 @@
-﻿using DataAccess.CCC.Repository;
-using DataAccess.CCC.Repository.Patient;
-using DataAccess.Context.ModuleMaster;
+﻿using DataAccess.Context.ModuleMaster;
 using System;
+using DataAccess.CCC.Interface.Baseline;
+using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Interface.person;
+using DataAccess.CCC.Interface.Patient;
+using DataAccess.CCC.Interface.visit;
 
 namespace DataAccess.CCC.Interface
 {
@@ -12,18 +15,39 @@ namespace DataAccess.CCC.Interface
         
         IModuleRepository ModuleRepository { get; }
 
-        //Patient Context Interfaces
-        //ICCCPatientRepository CCCPatientRepository { get; }
-        //IPatientContactRepository PatientContactRepository { get; }
-        //IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
-        //IPatientLocationRepository PatientLocationRepository { get; }
-        //IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
-        //IPatientOVCStatusRepository PatientOvcStatusRepository { get; }
-        //IPatientPopulationRepository PatientPopulationRepository { get; }
-        //IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
-
-        //LookupContext
+        /* LookupContext */
         ILookupRepository LookupRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
+        IPatientLookupRepository PatientLookupRepository { get; }
+
+        /* person and patient */
+        IPersonRepository PersonRepository { get; }
+        IPersonLocationRepository PersonLocationRepository { get; }
+        IPersonContactRepository PersonContactRepository { get; }
+        IPersonRelationshipRepository PersonRelationshipRepository { get; }
+        IPatientOvcStatusRepository PatientOvcStatusRepository { get; }
+        IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
+        IPatientPopulationRepository PatientPopulationRepository { get;}
+        IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
+
+        /* patient visit */
+        IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
+        IPatientEncounterRepository PatientEncounterRepository { get; }
+
+        /* Enrollment */
+        IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
+        IPatientEntryPointRepository PatientEntryPointRepository { get; }
+        IPatientIdentifierRepository PatientIdentifierRepository { get; }
+
+        /*Triage*/
+        IPatientVitalsRepository PatientVitalsRepository { get; }
+
+        /* Baseline */
+        IPatientArvHistoryRepository PatientArvHistoryRepository { get;  }
+        IPatientDiagnosisHivHistoryRepository PatientDiagnosisHivHistoryRepository { get; }
+        IPatientDisclosureRepository PatientDisclosureRepository { get; }
+        IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository { get; }
+        IPatientTransferInRepository PatientTransferInRepository { get; }
+        IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get; }
     }
 }

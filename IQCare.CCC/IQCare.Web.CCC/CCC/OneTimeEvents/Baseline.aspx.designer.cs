@@ -31,6 +31,24 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblTINA;
         
         /// <summary>
+        /// TransferInYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox TransferInYes;
+        
+        /// <summary>
+        /// TransferInNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox TransferInNo;
+        
+        /// <summary>
         /// lblTIDate control.
         /// </summary>
         /// <remarks>
@@ -121,6 +139,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.DropDownList TransferFromCounty;
         
         /// <summary>
+        /// transferInNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox transferInNotes;
+        
+        /// <summary>
         /// lblDateOfHIVDiagnosis control.
         /// </summary>
         /// <remarks>
@@ -184,6 +211,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.CheckBox PMTCT;
         
         /// <summary>
+        /// CheckBox1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        
+        /// <summary>
         /// NONE control.
         /// </summary>
         /// <remarks>
@@ -199,7 +235,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList RegimenPurpose;
+        protected global::System.Web.UI.WebControls.TextBox RegimenPurpose;
         
         /// <summary>
         /// HistoryRegimen control.
@@ -308,5 +344,14 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox BaselineViralload;
+        
+        /// <summary>
+        /// TIRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TIRegimen;
     }
 }

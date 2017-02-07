@@ -273,8 +273,13 @@
     <Content Include="Content\css\jquery.validate.css" />
     <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\noty\css\animate.css" />
+    <Content Include="Content\noty\css\buttons.css" />
+    <Content Include="Content\noty\js\jquery.noty.packaged.js" />
     <Content Include="Content\pace\css\pace.css" />
     <Content Include="Content\pace\js\pace.js" />
+    <Content Include="Content\toast\css\toastr.css" />
+    <Content Include="Content\toast\js\toastr.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />

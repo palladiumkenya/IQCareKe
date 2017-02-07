@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head runat="server" id="pageHead">
+<head  runat="server" id="pageHead">
     <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
     <title id="lblTitle" runat="server">International Quality Care Patient Management and Monitoring System</title>
     
@@ -25,7 +25,7 @@
     <link href="<%# ResolveUrl("~/Content/fuelux/css/fuelux.css")  %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Content/pace/css/pace.css")  %>" rel="stylesheet" type="text/css" />
     <link href="<%# ResolveUrl("~/Content/datatables/css/jquery.datatables.css")  %>" rel="stylesheet" type="text/css" />
-    <%--<link href="<%# ResolveUrl("~/Content/css/jquery.validate.css")  %>" rel="stylesheet" type="text/css" />--%>
+    <link href="<%# ResolveUrl("~/Content/toast/css/toastr.css")  %>" rel="stylesheet" type="text/css" />
 
     <script src="<%# ResolveUrl("~/Incl/jquery-1.9.1.js")%>" type="text/javascript" ></script>
     <script src="<%# ResolveUrl("~/Content/js/bootstrap.js") %>" type="text/javascript"></script>
@@ -39,6 +39,9 @@
     <script src="<%# ResolveUrl("~/Content/fuelux/js/fuelux.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/pace/js/pace.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/datatables/js/jquery.dataTables.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/Content/toast/js/toastr.js")%>" type="text/javascript"></script>
+
+</head>
    <%-- <script src="<%# ResolveUrl("~/Content/js/jquery.validate.js")%>" type="text/javascript"></script>--%>
 
     
@@ -159,6 +162,8 @@
                                     <span class="fa fa-heartbeat fa-1x pull-left"></span> Capture Vitals <span class="badge">8</span>
                                 </a>
 
+                                <a  href="../Enrollment/ServiceEnrollment.aspx" class="list-group-item">
+                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 <a href="#" class="list-group-item">
                                     <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointment <span class="badge">8</span>
                                 </a>

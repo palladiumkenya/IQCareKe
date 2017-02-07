@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Common
 {
     [Serializable]
-    public  class PersonLocation:IAuditEntity
+    public  class PersonLocation:BaseEntity
     {
+        [Key]
         public int Id { get; set; }
         [ForeignKey("Person")]
         public int PersonId { get; set; }
@@ -14,28 +16,10 @@ namespace Entities.Common
         public int? SubCounty { get; set; }
         public int? Ward { get; set; }
         public string Village { get; set; }
-        public string Estate { get; set; }
+        public string Location { get; set; }
+        public string SubLocation { get; set; }
         public string LandMark { get; set; }
         public string NearestHealthCentre { get; set; }
 
-        public int CreatedBy
-        {
-            get; set;
-        }
-
-        public DateTime CreateDate
-        {
-            get; set;
-        }
-
-        public bool DeleteFlag
-        {
-            get; set;
-        }
-
-        public string AuditData
-        {
-            get; set;
-        }
     }
 }

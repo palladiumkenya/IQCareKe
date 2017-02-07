@@ -153,12 +153,12 @@ namespace IQCare.SCM
         /// <summary>
         /// The prophylaxis
         /// </summary>
-        private Int32 theProphylaxis = 0;
+        private int theProphylaxis = 0;
 
         /// <summary>
         /// The return order identifier
         /// </summary>
-        private Int32 theReturnOrderId = 0;
+        private int theReturnOrderId = 0;
 
         ////////////
         /// <summary>
@@ -169,12 +169,12 @@ namespace IQCare.SCM
         /// <summary>
         /// The selling price
         /// </summary>
-        private double theSellingPrice = 0;
+        private decimal theSellingPrice = 0;
 
         /// <summary>
         /// The strength
         /// </summary>
-        private Int32 theStrength = 0;
+        private int theStrength = 0;
 
         /// <summary>
         /// The XMLDS
@@ -2019,7 +2019,7 @@ namespace IQCare.SCM
                     theBatchId = Convert.ToInt32(theDV[0]["BatchId"]);
                     txtExpirydate.Text = ((DateTime)theDV[0]["ExpiryDate"]).ToString(GblIQCare.AppDateFormat);
 
-                    theSellingPrice = Convert.ToDouble(theDV[0]["SellingPrice"]);
+                    theSellingPrice = Convert.ToDecimal(theDV[0]["SellingPrice"]);
                     theItemTypeId = Convert.ToInt32(theDV[0]["ItemTypeID"]);
                     this.GetPrice(theItemId, theItemTypeId);
                     theConfigSellingPrice = Convert.ToDecimal(theDV[0]["ConfigSellingPrice"]);
@@ -2579,7 +2579,7 @@ namespace IQCare.SCM
                 txtBatchNo.Text = theDV[0]["BatchNo"].ToString();
                 theBatchId = Convert.ToInt32(theDV[0]["BatchId"]);
                 txtExpirydate.Text = ((DateTime)theDV[0]["ExpiryDate"]).ToString(GblIQCare.AppDateFormat);
-                theSellingPrice = Convert.ToDouble(theDV[0]["SellingPrice"]);
+                theSellingPrice = Convert.ToDecimal(theDV[0]["SellingPrice"]);
                 theItemTypeId = Convert.ToInt32(theDV[0]["ItemTypeID"]);
                 this.GetPrice(theItemId, theItemTypeId);
 
