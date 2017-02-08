@@ -287,12 +287,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="IQCare.Service\IQCare.Service.csproj">
-      <Project>{82EBF600-0829-4FEA-9D90-A396A302DDDC}</Project>
-      <Name>IQCare.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Images\btnDown.Image.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -113,6 +113,23 @@ namespace IQCare.CCC.UILogic
                 jsonObject = "[]";
             }
             return jsonObject;
-        }  
+        }
+
+        public static string GetLookupNameById(int id)
+        {
+            string lookupName = null;
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                 lookupName = lookupManager.GetLookupNameFromId(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return lookupName;
+        } 
     }
 }

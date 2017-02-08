@@ -8,7 +8,7 @@ namespace Entities.Administration
     {
        
         public string LoginName { get; set; }       
-        public bool DeleteFlag { get; set; }
+      //  public bool DeleteFlag { get; set; }
         public bool Active { get; set; }
         public override string ToString()
         {
