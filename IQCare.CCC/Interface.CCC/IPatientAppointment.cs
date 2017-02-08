@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccess.Context;
 using Entities.CCC.Appointment;
 
-namespace DataAccess.CCC.Interface.Patient
+namespace Interface.CCC
 {
-    public interface IPatientAppointmentRepository : IRepository<PatientAppointment>
+    public interface IPatientAppointment
     {
+        int AddPatientAppointments(PatientAppointment p);
+        PatientAppointment GetPatientAppointments(int id);
+        void DeletePatientAppointments(int id);
+        int UpdatePatientAppointments(PatientAppointment p);
         List<PatientAppointment> GetByPatientId(int patientId);
         List<PatientAppointment> GetByDate(DateTime date);
         List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate);
-
     }
 }

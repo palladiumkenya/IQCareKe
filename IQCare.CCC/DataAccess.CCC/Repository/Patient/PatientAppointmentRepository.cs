@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.Context;
@@ -17,19 +18,25 @@ namespace DataAccess.CCC.Repository.Patient
         {
         }
 
-        public PatientAppointment GetByPatientId(int patientId)
+        public List<PatientAppointment> GetByPatientId(int patientId)
         {
-            throw new NotImplementedException();
+            IPatientAppointmentRepository patientAppointmentRepository = new PatientAppointmentRepository();
+            List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => p.PatientId == patientId).ToList();
+            return patientAppointment;
         }
 
         public List<PatientAppointment> GetByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            IPatientAppointmentRepository patientAppointmentRepository = new PatientAppointmentRepository();
+            List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => p.AppointmentDate == date).ToList();
+            return patientAppointment;
         }
 
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            IPatientAppointmentRepository patientAppointmentRepository = new PatientAppointmentRepository();
+            List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => p.AppointmentDate >= startDate && p.AppointmentDate<= endDate).ToList();
+            return patientAppointment;
         }
     }
 }
