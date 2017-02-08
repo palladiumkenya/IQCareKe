@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment\PatientAppointment.cs" />
     <Compile Include="Baseline\INHProphylaxis.cs" />
     <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\PatientArtUseHistory.cs" />

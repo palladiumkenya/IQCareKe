@@ -64,6 +64,8 @@ namespace DataAccess.CCC.Repository
         private IPatientTransferInRepository _patientTransferInRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
 
+        /*Appointment*/
+        private IPatientAppointmentRepository _patientAppointmentRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -229,6 +231,11 @@ namespace DataAccess.CCC.Repository
             get { return _patientLookupRepository??(_patientLookupRepository=new PatientLookupRepository((LookupContext)_context));}
         }
 
+        public IPatientAppointmentRepository PatientAppointmentRepository
+        {
+            get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
+        }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -238,5 +245,6 @@ namespace DataAccess.CCC.Repository
         {
             _context.Dispose();
         }
+
     }
 }
