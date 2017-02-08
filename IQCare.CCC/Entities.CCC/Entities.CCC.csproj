@@ -87,6 +87,7 @@
     <Compile Include="Encounter\PregnancyIndicator.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
+    <Compile Include="Encounter\LabOrderEntity.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Enrollment\PatientEntityIdentifier.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Triage\PatientChronicIllness.cs" />
     <Compile Include="Encounter\PatientPhdp.cs" />
     <Compile Include="Triage\PatientVital.cs" />
+    <Compile Include="Visit\PatientLabTracker.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
   </ItemGroup>

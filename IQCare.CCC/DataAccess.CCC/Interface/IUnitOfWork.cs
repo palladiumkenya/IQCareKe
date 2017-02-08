@@ -33,6 +33,7 @@ namespace DataAccess.CCC.Interface
         /* patient visit */
         IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
         IPatientEncounterRepository PatientEncounterRepository { get; }
+        IPatientLabTrackerRepository PatientLabTrackerRepository { get; }
 
         /* Enrollment */
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
