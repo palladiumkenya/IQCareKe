@@ -99,6 +99,7 @@
     <Compile Include="Interface\person\IPersonLocationRepository.cs" />
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Interface\visit\IPatientLabTrackerRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
@@ -137,10 +138,10 @@
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
+    <Compile Include="Repository\visit\PatientLabTrackerRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\Encounter\" />
     <Folder Include="Repository\OneTimeEvent\" />
   </ItemGroup>
   <ItemGroup>

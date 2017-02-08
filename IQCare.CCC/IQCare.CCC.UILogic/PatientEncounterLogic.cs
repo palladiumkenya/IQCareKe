@@ -30,6 +30,6 @@ namespace IQCare.CCC.UILogic
             var vacc = parser.Deserialize<List<Vaccines>>(Vaccines);
             int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, chrIllness, vacc);
         }
-
+      
     }
 }

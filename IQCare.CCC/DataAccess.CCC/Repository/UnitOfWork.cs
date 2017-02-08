@@ -46,6 +46,7 @@ namespace DataAccess.CCC.Repository
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
+        private IPatientLabTrackerRepository _patientLabTrackerRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -156,6 +157,10 @@ namespace DataAccess.CCC.Repository
         public IPatientEncounterRepository PatientEncounterRepository
         {
             get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
+        }
+        public IPatientLabTrackerRepository PatientLabTrackerRepository
+        {
+            get { return _patientLabTrackerRepository ?? (_patientLabTrackerRepository = new PatientLabTrackerRepository((GreencardContext)_context)); }
         }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository

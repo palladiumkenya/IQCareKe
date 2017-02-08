@@ -1721,20 +1721,20 @@
                generate("error", "You have not added any lab order");
                return false;
            } else {
-               var entryPointId = $("#entryPoint").val();
-               addLabOrder(_fp, entryPointId);
+               var patientID = $("#entryPoint").val();
+               addLabOrder(_fp, patientID);
            }
 
            
        });
-       function addLabOrder(_fp, entryPointId) {
+       function addLabOrder(_fp, patientID) {
            var labOrder = JSON.stringify(_fp);
-
+         
            $.ajax({
                type: "POST",
                //url: "../WebService/EnrollmentService.asmx/AddPatient",
-               url: "../WebService/LabOrderService.asmx/AddLabOrder",
-               data: "{'personid':'" + 1058 + "','facilityId':'" + 755 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','labOrderDate': '" + labOrderDate + "'}",
+               url: "../WebService/LabService.asmx/AddLabOrder",
+               data: "{'patientID':'" + 1058 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','  labNotes': '" + LabNotes + "','labOrderDate': '" + labOrderDate + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                success: function (response) {
