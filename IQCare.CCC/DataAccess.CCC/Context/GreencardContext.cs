@@ -9,6 +9,7 @@ using Entities.CCC.Screening;
 using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
+using Entities.CCC.Appointment;
 using Entities.PatientCore;
 
 namespace DataAccess.CCC.Context
@@ -77,6 +78,9 @@ namespace DataAccess.CCC.Context
         public DbSet<Pregnancy> Pregnancies { get; set; }
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
        
+
+        //Appointment
+        public DbSet<PatientAppointment> PatientAppointments { get; set; }
 
     }
 }

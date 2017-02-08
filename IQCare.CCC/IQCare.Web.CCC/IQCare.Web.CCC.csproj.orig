@@ -48,7 +48,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
+=======
+    <Content Include="CCC\Dashboard.aspx" />
+>>>>>>> df740b5c7a3e2ad6089a1a7863558e8e5b0d40a6
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
@@ -71,7 +75,6 @@
     <Content Include="CCC\Patient\FindPatient.aspx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
-    <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -84,6 +87,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
     <Compile Include="CCC\Appointment\TodaysAppointments.aspx.cs">
       <DependentUpon>TodaysAppointments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -94,6 +101,10 @@
     <Compile Include="CCC\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+=======
+    <Compile Include="CCC\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+>>>>>>> df740b5c7a3e2ad6089a1a7863558e8e5b0d40a6
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
@@ -206,10 +217,6 @@
     </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CCC\WebService\LabService.asmx.cs">
-      <DependentUpon>LabService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

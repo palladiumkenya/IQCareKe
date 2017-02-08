@@ -8,7 +8,7 @@ namespace Interface.CCC.Lookup
 {
     public interface IPatientLookupmanager
     {
-        List<PatientLookup> SearchPatient();
+        List<PatientLookup> SearchPatient(string identificationNumber);
         List<PatientLookup> GetPatientDetailsLookup(int id);
     }
 }

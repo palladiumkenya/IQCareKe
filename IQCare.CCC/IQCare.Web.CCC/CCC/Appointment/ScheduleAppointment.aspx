@@ -5,7 +5,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12 bs-callout bs-callout-info">
         <div class="col-md-12">
-            <label class="control-lable pull-left">Patient Appointment </label>
+            <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">
+                <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>New Appointment</span>
         </div>
         <div class="col-md-12">
             <uc:PatientDetails runat="server" />
@@ -20,30 +21,47 @@
         </div>
 
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="col-md-12">
+                    <label class="control-label">Service Area</label></div>
+                <div class="col-md-12 pull-right">
+                    <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <label for="Inschool" class="control-label pull-left">Appointment Type </label>
+                        <label for="reason" class="control-label pull-left">Reason</label>
                     </div>
                     <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="AppointmentType" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                        <asp:DropDownList runat="server" ID="Reason" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <label for="Inschool" class="control-label pull-left">Person To See </label>
+                        <label for="description" class="control-label pull-left">Description</label>
                     </div>
                     <div class="col-md-12">
-                        <asp:DropDownList runat="server" ID="AppointmentPerson" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                        <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <label class="control-label pull-left">Appointment Date</label>
+                        <label for="status" class="control-label pull-left">Status</label>
+                    </div>
+                    <div class="col-md-12">
+                        <asp:DropDownList runat="server" ID="status" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="control-label pull-left">Date</label>
                     </div>
                     <div class="col-md-12">
                         <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
@@ -140,29 +158,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="col-md-12"><label class="control-label">Action</label></div>      
-                <div class="col-md-12 pull-right">
-                          <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Detail</asp:LinkButton>
-                      </div>
-                 </div>
         </div>
-        <div class="col-md-12 form-group">
-            <div class="col-md-12 bg-primary"><span class="pull-left"></span>Appointment Details </div>
-            <table class="table table-striped table-condensed" id="tblAppointment" clientidmode="Static" runat="server">
-                <thead>
-                    <tr>
-                        <th><i class="text-primary" aria-hidden="true">#</i></th>
-                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Appointment Type</i> </th>
-                        <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Appointment Date</i> </th>
-                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Person To Visit</i> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-        </div>
+        
         <div class="col-md-12">
             <div class="col-md-6"></div>
             <div class="col-md-6">
