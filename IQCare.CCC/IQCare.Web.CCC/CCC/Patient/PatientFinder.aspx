@@ -255,8 +255,8 @@
                         </thead>
                         <tbody>
                           <tr>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
+      	                    <td>jane</td>
+      	                    <td>doe</td>
       	                    <td>demo</td>
       	                    <td>demo</td>
       	                    <td>mm/dd/yyy</td>
@@ -284,11 +284,50 @@
     
     <script type="text/javascript">
         $(document).ready(function() {
-            
-            $("#SearchDoB").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY'} });
-            $("#RegDate").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY'} });
 
-            $("#tblFindPatient").dataTable();
-        })
+            $.ajaxSetup({
+                cache: false
+            });
+
+            $("#SearchDoB")
+                .datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
+            $("#RegDate").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
+
+            $('#tblFindPatient tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+
+          var table=  $("#tblFindPatient").dataTable({
+
+                "autoWidth":true,
+
+                "Processing": true,
+                "ScrollCollapse": true,
+                "info": true,
+                "stateSave": true,
+                "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+          });
+
+            //row selection
+          $('#myTable').on('click', 'tbody tr', function () {
+              window.location.href = $(this).attr('href');
+          });
+
+            // Apply the search
+          table.columns().every(function () {
+              var that = this;
+
+              $('input', this.footer()).on('keyup change', function () {
+                  if (that.search() !== this.value) {
+                      that
+                          .search(this.value)
+                          .draw();
+                  }
+              });
+          });
+
+
+        });
     </script>
 </asp:Content>

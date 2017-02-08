@@ -30,7 +30,7 @@ namespace BusinessProcess.CCC
         {
             List<PatientMaritalStatus> myList;
            myList= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag)
-                //.OrderBy(x => x.i)
+                .OrderBy(x => x.Id)
                 .ToList();
             return myList;
         }

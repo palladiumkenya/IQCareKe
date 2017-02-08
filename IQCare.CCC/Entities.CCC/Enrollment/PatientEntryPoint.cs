@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
-using Entities.PatientCore;
 
 namespace Entities.CCC.Enrollment
 {
@@ -15,9 +14,9 @@ namespace Entities.CCC.Enrollment
     {
         [Key]
         public int Id { get; set; }
+        public int? PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
+        public virtual PatientEntity Patient { get; set; }
         public int ServiceAreaId { get; set; }
         public int EntryPointId { get; set; }
     }

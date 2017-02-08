@@ -8,10 +8,10 @@ namespace Interface.CCC.Visit
 {
     public interface IPatientIdentifierManager
     {
-        int AddPatientIdentifier(PatientIdentifier patientIdentifier);
-        int UpdatePatientIdentifier(PatientIdentifier patientIdentifier);
+        int AddPatientIdentifier(PatientEntityIdentifier patientIdentifier);
+        int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier);
         int DeletePatientIdentifier(int id);
-        List<PatientIdentifier> GetPatientIdentifiers(int patientId);
-        List<PatientIdentifier> GetPatientServicePatientIdentifiers(int serviceId, int personId);
+        List<PatientEntityIdentifier> GetPatientIdentifiers(int patientId);
+        List<PatientEntityIdentifier> GetPatientServicePatientIdentifiers(int serviceId, int personId);
     }
 }

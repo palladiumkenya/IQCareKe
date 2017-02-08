@@ -16,5 +16,7 @@ namespace Entities.Common
        // public virtual Person Person { get; set; }
         public string PhysicalAddress { get; set; }
         public string MobileNumber { get; set; }
+        public string AlternativeNumber { get; set; }
+        public string EmailAddress { get; set; }
     }
 }

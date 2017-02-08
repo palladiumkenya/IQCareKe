@@ -52,23 +52,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Baseline\IINHProphylaxisManager.cs" />
+    <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
+    <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
+    <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
+    <Compile Include="IPatientTreatmeantSupporterManager.cs" />
+    <Compile Include="IPatientVitals.cs" />
+    <Compile Include="IPatientEncounter.cs" />
     <Compile Include="IPersonContactManager.cs" />
     <Compile Include="IPersonLocationManager.cs" />
     <Compile Include="IPersonManager.cs" />
     <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
+    <Compile Include="Lookup\IPatientLookupmanager.cs" />
+    <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Baseline\" />
     <Folder Include="Encounter\" />
-    <Folder Include="Enrollment\" />
     <Folder Include="OneTimeEvent\" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,6 @@
 using Application.Presentation;
 using Interface.CCC;
 using Entities.PatientCore;
-using System;
 
 namespace IQCare.CCC.UILogic
 {
@@ -11,12 +10,12 @@ namespace IQCare.CCC.UILogic
         private IPatientOvcStatusmanager _mgr = (IPatientOvcStatusmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientOvcStatusManager, BusinessProcess.CCC");
         private int _result;
 
-        public int AddPatientOvcStatus(int personid, int guardianId, Boolean orphan, Boolean inSchool, int userId)
+        public int AddPatientOvcStatus(int personId,int personGuardianId,bool orphan,bool inSchool,int userId)
         {
             PatientOVCStatus patientOvcStatus = new PatientOVCStatus()
             {
-                PersonId = personid,
-                GuardianId = guardianId,
+                PersonId = personId,
+                GuardianId = personGuardianId,
                 Orphan = orphan,
                 InSchool = inSchool,
                 Active = true,

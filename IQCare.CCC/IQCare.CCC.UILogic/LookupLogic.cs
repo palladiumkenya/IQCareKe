@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
+
 namespace IQCare.CCC.UILogic
 {
     public class LookupLogic
     {
-
         public static string GeSubCountyListJson(string county)
         {
             string jsonObject = "[]";
@@ -82,5 +83,36 @@ namespace IQCare.CCC.UILogic
             return jsonObject;
         }
         /* pw .previous lab list implementation   */
+
+        public void populateDDL(DropDownList ddl, string groupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    ddl.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
+        public static string GetLookupItemByName(string itemName)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager =
+                (ILookupManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            List<LookupItemView> lookupItem = lookupManager.GetLookItemByGroup(itemName);
+            if (lookupItem !=null && lookupItem.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupItem);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }  
     }
 }

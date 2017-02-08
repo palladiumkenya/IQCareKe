@@ -9,7 +9,7 @@ using Entities.CCC.Enrollment;
 
 namespace DataAccess.CCC.Repository.Enrollment
 {
-   public class PatientIdentifierRepository:BaseRepository<PatientIdentifier>,IPatientIdentifierRepository
+   public class PatientIdentifierRepository:BaseRepository<PatientEntityIdentifier>,IPatientIdentifierRepository
    {
        private readonly GreencardContext _context;
 
