@@ -67,10 +67,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Interface.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -88,6 +84,7 @@
     <Compile Include="Baseline\BPatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\BPatientTransferInManager.cs" />
     <Compile Include="BLookupManager.cs" />
+    <Compile Include="BPatientAppointment.cs" />
     <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
@@ -111,6 +108,10 @@
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
       <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
       <Name>DataAccess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
+      <Project>{174b280e-08d7-4fe7-b080-3a017f0944cd}</Project>
+      <Name>Interface.CCC</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

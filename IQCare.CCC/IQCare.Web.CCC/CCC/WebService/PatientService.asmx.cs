@@ -2,6 +2,7 @@
 using IQCare.CCC.UILogic;
 using System;
 using System.Web.Services;
+using Entities.CCC.Appointment;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -41,11 +42,40 @@ namespace IQCare.Web.CCC.WebService
                     BMI = bmi,
                     HeadCircumference = headCircumference
                 };
-                var vital = new PatientVitalsLogic();
+                var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital);
                 if (Result > 0)
                 {
                     Msg = "Patient Vitals Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message + ' ' + e.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod]
+        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId)
+        {
+            PatientAppointment patientAppointment = new PatientAppointment()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                AppointmentDate = appointmentDate,
+                Description = description,
+                ReasonId = reasonId,
+                ServiceAreaId = serviceAreaId,
+                StatusId = statusId,
+            };
+            try
+            {
+                var appointment = new PatientAppointmentManager();
+                Result = appointment.AddPatientAppointments(patientAppointment);
+                if (Result > 0)
+                {
+                    Msg = "Patient appointment Added Successfully!";
                 }
             }
             catch (Exception e)

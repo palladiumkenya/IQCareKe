@@ -167,8 +167,8 @@
                                 <a  href="../CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointment <span class="badge">8</span>
+                                <a href="../Appointment/TodaysAppointments.aspx" class="list-group-item">
+                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointments <span class="badge">8</span>
                                 </a>
                                 <a href="../Appointment/ScheduleAppointment.aspx" class="list-group-item">
                                     <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>

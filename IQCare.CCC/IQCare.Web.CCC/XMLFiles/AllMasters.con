@@ -557,21 +557,6 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
-          <xs:element name="Users">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="UserId" type="xs:int" minOccurs="0" />
-                <xs:element name="SystemUserName" type="xs:string" minOccurs="0" />
-                <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="EmployeeName" type="xs:string" minOccurs="0" />
-                <xs:element name="UserDeleteFlag" type="xs:int" minOccurs="0" />
-                <xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
-                <xs:element name="DesignationId" type="xs:int" minOccurs="0" />
-                <xs:element name="Designation" type="xs:string" minOccurs="0" />
-                <xs:element name="EmployeeDeleteFlag" type="xs:int" minOccurs="0" />
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
         </xs:choice>
       </xs:complexType>
     </xs:element>
@@ -125998,82 +125983,4 @@
     <UserID>1</UserID>
     <CreateDate>2011-08-19T12:00:10+03:00</CreateDate>
   </mst_RegimenLine>
-  <Users>
-    <UserId>9</UserId>
-    <SystemUserName>KIBET</SystemUserName>
-    <Name>ANDREW KIBET</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>6</UserId>
-    <SystemUserName>MWANGI</SystemUserName>
-    <Name>JAMES MWANGI</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>5</UserId>
-    <SystemUserName>JARED</SystemUserName>
-    <Name>JARED MOGAKA</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>3</UserId>
-    <SystemUserName>jgitau</SystemUserName>
-    <Name>John Gitau</Name>
-    <EmployeeName>M&amp;E 2</EmployeeName>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeId>2</EmployeeId>
-    <DesignationId>4</DesignationId>
-    <Designation>M&amp;E</Designation>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>4</UserId>
-    <SystemUserName>LUCY</SystemUserName>
-    <Name>LUCY KARURI</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>2</UserId>
-    <SystemUserName>makadara</SystemUserName>
-    <Name>makadara makadara</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>7</UserId>
-    <SystemUserName>FELISTUS</SystemUserName>
-    <Name>MUENI FELISTUS</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>10</UserId>
-    <SystemUserName>NYAMBURA</SystemUserName>
-    <Name>NYAMBURA KINGORI</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>8</UserId>
-    <SystemUserName>SOCHIENG</SystemUserName>
-    <Name>SARAH OCHIENG</Name>
-    <EmployeeName>Physician/Clinical Officer 1</EmployeeName>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>1</EmployeeId>
-    <DesignationId>1</DesignationId>
-    <Designation>Physician/Clinical Officer</Designation>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1</UserId>
-    <SystemUserName>Admin</SystemUserName>
-    <Name>System Admin</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
 </NewDataSet>
