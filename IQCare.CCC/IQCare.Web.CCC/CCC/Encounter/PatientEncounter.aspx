@@ -1748,13 +1748,12 @@
                    toastr.error(response.d, "Lab order");
                }
            });
-       }
-                     }
-            });
-
+       };	
+                   
+           
            //pw .autocomplete
          
-       });		  
+     	  
       
     </script>
     
