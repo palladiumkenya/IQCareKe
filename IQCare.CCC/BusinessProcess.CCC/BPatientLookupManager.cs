@@ -5,11 +5,12 @@ using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using Application.Common;
+using DataAccess.Base;
 using DataAccess.CCC.Context;
 
 namespace BusinessProcess.CCC
 {
-    public class BPatientLookupManager : IPatientLookupmanager
+    public class BPatientLookupManager :ProcessBase, IPatientLookupmanager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
         private readonly Utility _utility = new Utility();
@@ -17,15 +18,20 @@ namespace BusinessProcess.CCC
         public List<PatientLookup> GetPatientDetailsLookup(int id)
         {
             var patientDetails = _unitOfWork.PatientLookupRepository
-                .FindBy(x => x.Id == id || x.PtnPk == id & !x.DeleteFlag)
+                .FindBy(x => x.Id == id || x.ptn_pk.Value == id & !x.Active)
                 .Take(1).ToList();
 
             return patientDetails;
         }
 
-        public List<PatientLookup> SearchPatient()
+        public List<PatientLookup> SearchPatient(string identificationNumber)
         {
-            throw new NotImplementedException();
+            var patientDetails =
+                _unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumber.Contains(identificationNumber))
+                    .OrderByDescending(x => x.Id)
+                    .Distinct()
+                    .ToList();
+            return patientDetails;
         }
     }
 }

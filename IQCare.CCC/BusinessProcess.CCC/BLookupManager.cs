@@ -62,6 +62,10 @@ namespace BusinessProcess.CCC
 
 
         }
-       
+
+        public string GetLookupNameFromId(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

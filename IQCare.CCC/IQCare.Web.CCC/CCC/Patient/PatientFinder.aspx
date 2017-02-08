@@ -310,7 +310,7 @@
           });
 
             //row selection
-          $('#myTable').on('click', 'tbody tr', function () {
+          $('#tblFindPatient').on('click', 'tbody tr', function () {
               window.location.href = $(this).attr('href');
           });
 

@@ -60,10 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Interface.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -81,12 +77,14 @@
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="LookupLogic.cs" />
+    <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
-    <Compile Include="PatientVitalsLogic.cs" />
+    <Compile Include="PatientVitalsManager.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonManager.cs" />
@@ -101,6 +99,10 @@
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
       <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
       <Name>DataAccess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
+      <Project>{174b280e-08d7-4fe7-b080-3a017f0944cd}</Project>
+      <Name>Interface.CCC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
