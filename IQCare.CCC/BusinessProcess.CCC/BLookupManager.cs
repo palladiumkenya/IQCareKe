@@ -1,7 +1,6 @@
 ﻿using DataAccess.Base;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
-using System.Linq;
 using Entities.CCC.Lookup;
 using DataAccess.CCC.Repository.Lookup;
 
@@ -39,13 +38,30 @@ namespace BusinessProcess.CCC
             LookupCountyRepository lookupCountyRepository= new LookupCountyRepository();
             return lookupCountyRepository.GetWardsList(subcounty);
         }
-
-        public string GetLookupNameFromId(int id)
+        /* pw GetLookupLabs implementation   */
+        public List<LookupLabs> GetLookupLabs()
+              
         {
-            LookupRepository lookupRepository=new LookupRepository();
-            var lookupName = lookupRepository.FindBy(x => x.ItemId == id).Single();
-            return lookupName.ItemName;
+            LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
+            return lookupLabRepository.GetLabs();
+
+            //LookupLabs declared in entities/lookup
+            //GetLookupLabs declared in Interface/Ilookupmanager
+            //LookupLabsRepository declared in Dataaccess/Repository/lookup
+            //GetLabs() a method in Dataaccess/Repository/lookup ==> List<LookupLabs> GetLabs()
+
 
         }
+        /* pw .GetLookupLabs implementation   */
+        /* pw GetLookupLabs implementation   */
+        public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
+
+        {
+            LookupPreviousLabsRepository lookupLabprevRepository = new LookupPreviousLabsRepository();
+            return lookupLabprevRepository.GetPreviousLabs(patientId);
+
+
+        }
+       
     }
 }

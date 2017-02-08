@@ -12878,139 +12878,139 @@
     <Name>6 weeks</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-04T13:06:41+03:00</CreateDate>
+    <CreateDate>2011-07-04T13:06:41-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>2</ID>
     <Name>10 weeks</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-04T15:42:27+03:00</CreateDate>
+    <CreateDate>2011-07-04T15:42:27-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>3</ID>
     <Name>14 weeks</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-05T11:45:20+03:00</CreateDate>
+    <CreateDate>2011-07-05T11:45:20-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>4</ID>
     <Name>9 Months</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-06T15:30:54+03:00</CreateDate>
+    <CreateDate>2011-07-06T15:30:54-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>5</ID>
     <Name>+4 weeks</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-08T16:42:36+03:00</CreateDate>
+    <CreateDate>2011-07-08T16:42:36-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>6</ID>
     <Name>10-12 Years</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-08T16:42:47+03:00</CreateDate>
+    <CreateDate>2011-07-08T16:42:47-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>7</ID>
     <Name>+5 Years</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-08T16:43:08+03:00</CreateDate>
+    <CreateDate>2011-07-08T16:43:08-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>8</ID>
     <Name>At Birth</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-12T15:33:19+03:00</CreateDate>
+    <CreateDate>2011-07-12T15:33:19-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>9</ID>
     <Name>15-49 Years</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-12T15:34:07+03:00</CreateDate>
+    <CreateDate>2011-07-12T15:34:07-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>10</ID>
     <Name>+6 Months</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-12T15:34:30+03:00</CreateDate>
+    <CreateDate>2011-07-12T15:34:30-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>11</ID>
     <Name>+1 Year</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-12T15:34:41+03:00</CreateDate>
+    <CreateDate>2011-07-12T15:34:41-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>12</ID>
     <Name>3 months</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-12T15:42:06+03:00</CreateDate>
+    <CreateDate>2011-07-12T15:42:06-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>13</ID>
     <Name>'3 week</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-13T11:14:49+03:00</CreateDate>
+    <CreateDate>2011-07-13T11:14:49-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>14</ID>
     <Name>'3 weeks</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-07-13T11:15:11+03:00</CreateDate>
+    <CreateDate>2011-07-13T11:15:11-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>15</ID>
     <Name>+5 Months</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:24:21+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:24:21-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>16</ID>
     <Name>TT1</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:31:40+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:31:40-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>17</ID>
     <Name>TT2</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:31:54+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:31:54-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>18</ID>
     <Name>TT3</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:32:01+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:32:01-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>19</ID>
     <Name>TT4</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:32:08+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:32:08-07:00</CreateDate>
   </Mst_DrugSchedule>
   <Mst_DrugSchedule>
     <ID>20</ID>
     <Name>TT5</Name>
     <DeleteFlag>0</DeleteFlag>
     <UserID>1</UserID>
-    <CreateDate>2011-09-07T16:32:13+03:00</CreateDate>
+    <CreateDate>2011-09-07T16:32:13-07:00</CreateDate>
   </Mst_DrugSchedule>
 </NewDataSet>
