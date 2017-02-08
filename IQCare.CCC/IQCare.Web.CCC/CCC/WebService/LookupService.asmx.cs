@@ -4,7 +4,7 @@ using System.Web.Services;
 using IQCare.CCC.UILogic;
 using System.Xml;
 using System.Text;
-using System;
+
 
 namespace IQCare.Web.CCC.WebService
 {

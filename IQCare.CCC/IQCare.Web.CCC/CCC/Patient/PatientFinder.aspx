@@ -303,8 +303,21 @@
                 "autoWidth":true,
 
                 "Processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "../WebService/PatientLookupService.asmx/GetPatientSearch",
+                    type: "Post",
+                    dataType:"json",
+                    data:{},
+                    error:function() {
+                        
+                    }
+                },
                 "ScrollCollapse": true,
                 "info": true,
+                "select": true,
+                "responsive": true,
+                "buttons":true,
                 "stateSave": true,
                 "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
           });

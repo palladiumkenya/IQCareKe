@@ -13,7 +13,7 @@ namespace IQCare.CCC.UILogic
     {
         IPatientManager _mgr = (IPatientManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Patient.BPatient, BusinessProcess.CCC");
 
-        public int addPatient(Entities.CCC.Enrollment.PatientEntity patient)
+        public int AddPatient(Entities.CCC.Enrollment.PatientEntity patient)
         {
             int returnValue;
 
