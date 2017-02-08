@@ -73,10 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
+    <Compile Include="Baseline\PatientVaccinationManager.cs" />
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="LookupLogic.cs" />
+    <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="PersonOvcStatusManager.cs" />
     <Compile Include="PersonRelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>

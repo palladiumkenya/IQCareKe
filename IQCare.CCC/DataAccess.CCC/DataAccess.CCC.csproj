@@ -79,6 +79,7 @@
     <Compile Include="Interface\Baseline\IPatientHivEnrollmentBaselineRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTransferInRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Interface\person\IPersonLocationRepository.cs" />
     <Compile Include="Interface\person\IPersonRepository.cs" />
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
+    <Compile Include="Interface\visit\IPatientLabTrackerRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Repository\Baseline\PatientHivEnrollmentBaselineRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTransferInRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
@@ -139,10 +142,10 @@
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
+    <Compile Include="Repository\visit\PatientLabTrackerRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\Encounter\" />
     <Folder Include="Repository\OneTimeEvent\" />
   </ItemGroup>
   <ItemGroup>

@@ -16,16 +16,16 @@ namespace Entities.CCC.Baseline
         public int Id { get; set; }
 
         public int PatientId { get; set; }
-        [ForeignKey("Patient")]
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
-        [ForeignKey("PatientMasterVisitId")]
         public int PatientMasterVisitId { get; set; }        
         public string TreatmentType { get; set; }
         public string Purpose { get; set; }
         public string Regimen { get; set; }
         public DateTime DateLastUsed { get; set; }
 
-        public virtual PatientEntity PatientEntity { get; set; }
+        //public virtual PatientEntity PatientEntity { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
 }

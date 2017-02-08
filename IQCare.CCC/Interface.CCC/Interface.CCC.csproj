@@ -56,6 +56,7 @@
     <Compile Include="Baseline\IPatientArtInitiationBaselineManager.cs" />
     <Compile Include="Baseline\IPatientArtUseHistoryManager.cs" />
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
     <Compile Include="Baseline\IPatientHvTestingManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
+    <Compile Include="Visit\IPatientLabOrderManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>

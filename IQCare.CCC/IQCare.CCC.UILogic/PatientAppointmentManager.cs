@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Presentation;
+﻿using Application.Presentation;
 using Entities.CCC.Appointment;
 using Interface.CCC;
+using System;
+using System.Collections.Generic;
 
 namespace IQCare.CCC.UILogic
 {
     public class PatientAppointmentManager
     {
         private IPatientAppointment _appointment = (IPatientAppointment)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientAppointment, BusinessProcess.CCC");
+
         public int AddPatientAppointments(PatientAppointment p)
         {
             PatientAppointment appointment = new PatientAppointment()
@@ -24,7 +22,6 @@ namespace IQCare.CCC.UILogic
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
                 StatusDate = DateTime.Now,
-                
             };
             return _appointment.AddPatientAppointments(appointment);
         }
@@ -52,7 +49,6 @@ namespace IQCare.CCC.UILogic
                 ServiceAreaId = p.ServiceAreaId,
                 StatusId = p.StatusId,
                 StatusDate = DateTime.Now,
-
             };
             return _appointment.UpdatePatientAppointments(appointment);
         }

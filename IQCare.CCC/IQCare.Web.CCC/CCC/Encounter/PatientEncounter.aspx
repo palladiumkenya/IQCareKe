@@ -1285,7 +1285,7 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>
-                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
+                      <div  role="tabpanel"  class="tab-pane fade" id="vloadTracker">
                             <!-- pw implementation of viral load tracker here-->
                             <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
@@ -1304,8 +1304,14 @@
                                 <!--pw .implementation of  laboratory module here-->
                              
                                 </div>
-                                    <script src="https://code.highcharts.com/highcharts.js"></script>
-                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                          
+                                    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+                                    <script src="../Scripts/css/exporting.css"></script>
+                                    <link href="../Scripts/css/exporting.css" rel="stylesheet" type="text/css" />   
+
+                             <!--      <script src="../Scripts/js/highcharts.js" type="text/javascript"></script>
+                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>  -->
+
                                     <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
@@ -1721,20 +1727,20 @@
                generate("error", "You have not added any lab order");
                return false;
            } else {
-               var entryPointId = $("#entryPoint").val();
-               addLabOrder(_fp, entryPointId);
+               var patientID = $("#entryPoint").val();
+               addLabOrder(_fp, patientID);
            }
 
            
        });
-       function addLabOrder(_fp, entryPointId) {
+       function addLabOrder(_fp, patientID) {
            var labOrder = JSON.stringify(_fp);
-
+         
            $.ajax({
                type: "POST",
                //url: "../WebService/EnrollmentService.asmx/AddPatient",
-               url: "../WebService/LabOrderService.asmx/AddLabOrder",
-               data: "{'personid':'" + 1058 + "','facilityId':'" + 755 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','labOrderDate': '" + labOrderDate + "'}",
+               url: "../WebService/LabService.asmx/AddLabOrder",
+               data: "{'patientID':'" + 1058 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','  labNotes': '" + LabNotes + "','labOrderDate': '" + labOrderDate + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                success: function (response) {

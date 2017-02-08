@@ -46,6 +46,7 @@ namespace DataAccess.CCC.Repository
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
+        private IPatientLabTrackerRepository _patientLabTrackerRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -63,6 +64,7 @@ namespace DataAccess.CCC.Repository
         private IPatientHivEnrollmentBaselineRepository _patientHivEnrollmentBaselineRepository;
         private IPatientTransferInRepository _patientTransferInRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
+        private IPatientVaccinationRepository _patientVaccinationRepository;
 
         /*Appointment*/
         private IPatientAppointmentRepository _patientAppointmentRepository;
@@ -159,6 +161,10 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
         }
+        public IPatientLabTrackerRepository PatientLabTrackerRepository
+        {
+            get { return _patientLabTrackerRepository ?? (_patientLabTrackerRepository = new PatientLabTrackerRepository((GreencardContext)_context)); }
+        }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {
@@ -188,6 +194,11 @@ namespace DataAccess.CCC.Repository
         public IINHProphylaxisRepository INHProphylaxisRepository
         {
             get { return _inhProphylaxisRepository ?? (_inhProphylaxisRepository = new INHProphylaxisRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientVaccinationRepository PatientVaccinationRepository
+        {
+            get { return _patientVaccinationRepository ?? (_patientVaccinationRepository = new PatientVaccinationRepository((GreencardContext)_context)); }
         }
 
         public IPatientVitalsRepository PatientVitalsRepository

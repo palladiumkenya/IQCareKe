@@ -48,6 +48,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
@@ -63,6 +64,8 @@
     <Content Include="CCC\Patient\PatientTest.aspx" />
     <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
+    <Content Include="CCC\Scripts\css\exporting.css" />
+    <Content Include="CCC\Scripts\js\highcharts.js" />
     <Content Include="CCC\Scripts\js\jquery-1.4.2.min.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph_1.js" />
@@ -77,6 +80,7 @@
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
+    <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -89,6 +93,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.cs">
+      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.designer.cs">
+      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -215,20 +230,12 @@
       <DependentUpon>LookupService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
-      <DependentUpon>PatientEncounterService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CCC\WebService\PatientLookupService.asmx.cs">
-      <DependentUpon>PatientLookupService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CCC\WebService\PatientService.asmx.cs">
-      <DependentUpon>PatientService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\LabService.asmx.cs">
+      <DependentUpon>LabService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

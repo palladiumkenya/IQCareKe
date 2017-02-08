@@ -15,9 +15,7 @@ namespace Entities.CCC.Baseline
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Patient")]
-        public int PatientId { get; set; }
-        [ForeignKey("PatientMasterVisitId")]       
+        public int PatientId { get; set; }     
         public int PatientMasterVisitId { get; set; }    
         public DateTime HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
@@ -27,9 +25,9 @@ namespace Entities.CCC.Baseline
         public bool HivRetest { get; set; }
         public int HivRetestTypeId { get; set; }
         public string ReasonForNoRetest { get; set; }
-
-
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
 }

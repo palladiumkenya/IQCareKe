@@ -14,10 +14,8 @@ namespace Entities.CCC.Baseline
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Patient")]
         public int PatientId { get; set; }
         public int ServiceAreaId { get; set; }
-        [ForeignKey("PatientMasterVisit")]
         public int PatientMasterVisitId { get; set; }
         public DateTime TransferInDate { get; set; }
         public DateTime TreatmentStartDate { get; set; }
@@ -26,8 +24,9 @@ namespace Entities.CCC.Baseline
         public int MflCode { get; set; }
         public string CountyFrom { get; set; }
         public string TransferInNotes { get; set; }
-
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
 

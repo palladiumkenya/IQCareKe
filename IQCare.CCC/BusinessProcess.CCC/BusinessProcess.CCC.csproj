@@ -80,6 +80,7 @@
     <Compile Include="Baseline\BPatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\BPatientArtUseHistoryManager.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
+    <Compile Include="Baseline\BPatientVaccination.cs" />
     <Compile Include="Baseline\BPatientFamilyTestingManager.cs" />
     <Compile Include="Baseline\BPatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\BPatientTransferInManager.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="visit\BPatientEncounterManager.cs" />
     <Compile Include="visit\BPatientIdentifierManager.cs" />
+    <Compile Include="visit\BPatientLabOrdermanager.cs" />
     <Compile Include="visit\BPatientmasterVisit.cs" />
   </ItemGroup>
   <ItemGroup>

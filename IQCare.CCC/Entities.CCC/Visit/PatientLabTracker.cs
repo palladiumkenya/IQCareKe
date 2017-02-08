@@ -1,27 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
 using Entities.Common;
 using Entities.CCC.Enrollment;
-using Entities.CCC.Visit;
 
-namespace Entities.CCC.Baseline
+namespace Entities.CCC.Visit
 {
     [Serializable]
-    [Table("Disclosure")]
-
-    public class PatientDisclosure :BaseEntity
+    [Table("PatientLabTracker")]
+    public class PatientLabTracker : BaseEntity
     {
         [Key]
         public int Id { get; set; }
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public virtual PatientEntity PatientEntity { get; set; }
+        public virtual PatientEntity Patient { get; set; }
+        public string LabName { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-        public string Category { get; set; }
-        public string DisclosureStage { get; set; }
-        public DateTime DisclosureDate { get; set; }
+        public string SampleDate { get; set; }
+        public string Reasons { get; set; }       
+        public string Results  { get; set; }
+       
     }
 }
+
+      
