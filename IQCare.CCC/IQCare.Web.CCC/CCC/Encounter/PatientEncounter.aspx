@@ -1758,369 +1758,91 @@
       
     </script>
     
-    
-</asp:Content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            
-            $('#DateOfVisit').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#OnsetDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#FemaleLMP').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#EDCD').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#AntigenDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#NextAppDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#vaccineDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            
-            ////////////////////////////////////////////////////////////////////////////////////////////
-            $('#dtlAdverseEvents').DataTable({
-                paging: false,
-                searching: false,
-                info: false
-            });
-
-            $('#dtlChronicIllness').DataTable({
-                paging: false,
-                searching: false,
-                info: false
-            });
-
-            $('#dtlVaccines').DataTable({
-                paging: false,
-                searching: false,
-                info: false
-            });
-
-
-            var tableAdverseEvents = $('#dtlAdverseEvents').DataTable();
-            var tableChronicIllness = $('#dtlChronicIllness').DataTable();
-            var tableVaccines = $('#dtlVaccines').DataTable();
-        
-            var index;
-
-            ///dtlAdverseEvents
-            $('#dtlAdverseEvents tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableAdverseEvents.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-
-            $('#btnRemoveAdvEvent').click(function () {
-                tableAdverseEvents.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrAdverseEvent.splice(index, 1);
-                }
-            });
-
-            $('#dtlAdverseEvents').on('click', 'tr', function () {
-                var aData = tableAdverseEvents.row(this).data();
-                index = arrAdverseEvent.findIndex(x => x.adverseEvent == aData[0]);
-            });
-
-
-            ////dtlChronicIllness
-            $('#dtlChronicIllness tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableChronicIllness.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-
-            $('#btnRemoveChronicIllness').click(function () {
-                tableChronicIllness.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrChronicIllness.splice(index, 1);
-                }
-            });
-
-            $('#dtlChronicIllness').on('click', 'tr', function () {
-                var aData = tableChronicIllness.row(this).data();
-                index = arrChronicIllness.findIndex(x => x.chronicIllness == aData[0]);
-            });
-
-            ////dtlVaccines
-            $('#dtlVaccines tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableVaccines.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-
-            $('#btnRemoveVaccine').click(function () {
-                tableVaccines.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrVaccines.splice(index, 1);
-                }
-            });
-
-            $('#dtlVaccines').on('click', 'tr', function () {
-                var aData = tableVaccines.row(this).data();
-                index = arrVaccines.findIndex(x => x.vaccine == aData[0]);
-            });
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-            //$('#myWizard').wizard();
-            $("#myWizard")
-                    .on("actionclicked.fu.wizard", function (evt, data) {
-                        var currentStep = data.step;
-                        var nextStep = 0;
-                        var previousStep = 0;
-                        var totalError = 0;
-                        var stepError = 0;
-                        /*var form = $("form[name='form1']");*/
-
-                        if (data.direction === 'next')
-                            nextStep = currentStep += 1;
-                        else
-                            previousStep = nextStep -= 1;
-                        if (data.step === 1) {
-
-                            /* add constraints based on age*/
-
-                            if ($('#datastep1').parsley().validate()) {
-                                savePatientEncounterPresentingComplaint();
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
-                            }
-                        }
-                        else if (data.step === 2) {
-                            savePatientEncounterChronicIllness();
-                            //if ($("#datastep2").parsley().validate()) {
-
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
-                        }
-                        /*else if (data.step === 3) {
-                            if ($("#datastep3").parsley().validate()) {
-
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
-                            }
-                        }
-                        else if (data.step === 4) {
-                            if ($("#datastep2").parsley().validate()) {
-
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                if (totalError > 0) {
-                                    $('.bs-callout-danger').toggleClass('hidden', f);
-                                }
-                                evt.preventDefault();
-                            }
-                            //var ok4 = $('.parsley-error').length === 0;
-                            //$('.bs-callout-info').toggleClass('hidden', !ok4);
-                        }*/
-                    })
-                    .on("changed.fu.wizard",
-                        function () {
-
-                        })
-                    .on('stepclicked.fu.wizard',
-                        function () {
-
-                        })
-                    .on('finished.fu.wizard',
-                        function (e) {
-
-                        });
-
-            function savePatientEncounterPresentingComplaint() {
-                var visitDate = $("#<%=VisitDate.ClientID%>").val();
-                var visitScheduled = $('input[name="Scheduled"]:checked').val();
-                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-                var complaints = $("#<%=complaints.ClientID%>").val();
-                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-                var LMP = $("#<%=lmp.ClientID%>").val();
-                var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
-                var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                var ANCProfile = $('input[name="ANCProfile"]:checked').val();
-                var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
-
-                var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
-                var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-                var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
-                
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(arrAdverseEvent) + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            alert("Saved");        
-                        },
-                        failure: function (msg) {
-                            alert(msg);
-                        }
-                    });
-            }
-
-
-
-            function savePatientEncounterChronicIllness() {
-                var BCGVaccine = $('#BCG:checked').val();
-                var PolioVaccine = $('.sr-only:checked').val();
-                var PentaVaccine = $('.sr-only:checked').val();
-                var PCV = $('.sr-only:checked').val();
-                var Measles = $('.sr-only:checked').val();
  
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
-                    data: "{'chronicIllness':'" + JSON.stringify(arrChronicIllness) + "','vaccines':'" + JSON.stringify(arrVaccine) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Saved");        
-                    },
-                    failure: function (msg) {
-                        alert(msg);
-                    }
-                });
-            }
 
 
-        });
 
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </asp:Content>
