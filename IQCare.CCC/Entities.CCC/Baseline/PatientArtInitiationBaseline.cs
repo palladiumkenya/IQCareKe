@@ -21,8 +21,8 @@ namespace Entities.CCC.Baseline
         [ForeignKey("PatientId")]
         public virtual PatientEntity PatientEntity { get; set; }
         public int PatientMasterVisitId { get; set; }
-        /*[ForeignKey("PatientMasterVisitId")]
-        public virtual PatientMasterVisit PatientMasterVisit { get; set; }*/
+        [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public bool HBVInfected { get; set; }
         public bool Pregnant { get; set; }
         public bool TBInfected { get; set; }
