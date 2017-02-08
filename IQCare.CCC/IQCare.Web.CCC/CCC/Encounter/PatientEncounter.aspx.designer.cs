@@ -382,22 +382,49 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlSelect PrescribedBy;
         
         /// <summary>
-        /// txtautofromDB control.
+        /// labTestTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtautofromDB;
+        protected global::System.Web.UI.WebControls.TextBox labTestTypes;
         
         /// <summary>
-        /// labOrderReason control.
+        /// OrderReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList labOrderReason;
+        protected global::System.Web.UI.WebControls.DropDownList OrderReason;
+        
+        /// <summary>
+        /// LabNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LabNotes;
+        
+        /// <summary>
+        /// btnAddLab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAddLab;
+        
+        /// <summary>
+        /// tblAddLabs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblAddLabs;
         
         /// <summary>
         /// btnSaveLab control.

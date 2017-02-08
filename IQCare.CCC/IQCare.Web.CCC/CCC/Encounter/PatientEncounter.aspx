@@ -1031,7 +1031,7 @@
                       <!--pw implementation of laboratory module here-->
                                                  <div class="col-md-12">
                                                       <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
+                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>  
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
@@ -1063,18 +1063,34 @@
                                 <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
                                     <div class="col-md-12"><hr/>
-                      <!--pw implementation of pending labs laboratory module here-->
-                                                 <div class="col-md-12">
-                                                      <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
-                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
-                                                  </div>
-
-                    <!--pw implementation of pending laboratory module here-->
+                      <!--pw implementation of previous labs laboratory module here  porders-->
+                                        <div class="col-md-12 form-group">
+            
+                                                             <table id="previouslab_orders" >
+                                                                        <thead>
+                                                                          <tr>
+      	                                                                    <th>Count.# </th> 
+                                                                            <th>Lab Test </th> 
+      	                                                                    <th>Order Reason </th> 
+      	                                                                    <th>Order Date </th> 
+      	                                                                    <th>Order Status </th> 
+      	                                                                  </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                          <tr>
+      	                                                                    <td>demo</td> 
+      	                                                                    <td>txttName</td>
+      	                                                                    <td>demo</td> 
+      	                                                                    <td>mm/dd/yyy</td> 
+      	                                                                    <td>demo</td>                  
+                                                                          </tr>
+                         
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                            <!--
+                                                 
+                    <!--pw implementation of previous laboratory module here-->
                                </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1086,15 +1102,15 @@
                                                   <div class="col-md-12 form-group">
                                                       <div class="col-md-3"><label class="control-label pull-left">Select Lab(s)</label></div>
                                                       <div class="col-md-9">
-                                                           <asp:TextBox runat="server" ID="txtautofromDB" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                          
+                                                           <asp:TextBox runat="server" ID="labTestTypes" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                                                                               
                                                              </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-3"><label class="control-label pull-left"> Lab Order Reason</label></div>
                                                       <div class="col-md-9">
-                                                          <asp:DropDownList runat="server" ID="labOrderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
-                                                         <asp:ListItem Text=" " Value="1" />
+                                                          <asp:DropDownList runat="server" ID="OrderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
                                                          <asp:ListItem Text="Baseline" Value="2" />
                                                          <asp:ListItem Text="Routine" Value="3" />
                                                          <asp:ListItem Text="Confirmatory" Value="4" />
@@ -1108,50 +1124,33 @@
                                                        <div class="col-md-3"><label class="control-label pull-left"> Lab Order Notes</label></div>
                                                       <div class="col-md-9">
                                                          
-                                                          <asp:TextBox runat="server" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" ID="LabNotes" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-2 pull-right">
-                                                          <asp:LinkButton runat="server" CssClass="btn btn-warning fa fa-plus-circle"> Add Lab</asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Lab</asp:LinkButton>
+                                                        
                                                       </div>
                                                   </div>
-                    
-                                                  <div class="col-md-12">
-                                                      <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Count.#</label></div>
-                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Ordered Lab Test</label></div>
-                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Lab Order Reason</label></div>
-                                                      <div class="col-md-3"><label class="control-label text-warning pull-left">Lab Order Date</label></div>
-                                                  </div>   
-<!--
-<div class="col-md-12 form-group">
-            
-             <table id="currentlab_orders" >
-                        <thead>
-                          <tr>
-      	                    <th>Count.# </th> 
-                            <th>Lab Test </th> 
-      	                    <th>Order Reason </th> 
-      	                    <th>Order Date </th> 
-      	                    <th>Order Status </th> 
-      	                  </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-      	                    <td>demo</td> 
-      	                    <td>demo</td>
-      	                    <td>demo</td> 
-      	                    <td>mm/dd/yyy</td> 
-      	                    <td>demo</td>                  
-                          </tr>
-                         
-                        </tbody>
-                    </table>
-                </div>
-
--->
+                                                  
+                                                 <div class="col-md-12 form-group">                                         
+                                            <table class="table table-striped table-condensed" id="tblAddLabs" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> # </i> </th>
+                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Lab Test</i> </th>
+                                                         <th> <i class="control-label text-warning pull-left " aria-hidden="true"> Order Reason</i> </th>
+                                                        <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Date </i></th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+                                            </div>
+                                                              
    
                                                 </div>
                                         </div>
@@ -1164,7 +1163,8 @@
                                         <div class="col-md-7"></div>
                                          <div class="col-md-5">
                                              <div class="col-md-3">
-                                                 <asp:LinkButton runat="server" ID="btnSaveLab" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
+                                                 
+                                                 <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
                                                  <asp:LinkButton runat="server" ID="btnPrintOrder" CssClass="btn btn-primary fa fa-print" ClientIDMode="Static"> Print Order</asp:LinkButton>
@@ -1291,7 +1291,28 @@
             $('#AntigenDate').datepicker();
             $('#NextAppDate').datepicker();
             $('#myWizard').wizard();    */
+           function generate(type, text) {
 
+               var n = noty({
+                   text: text,
+                   type: type,
+                   dismissQueue: true,
+                   progressBar: true,
+                   timeout: 5000,
+                   layout: 'topRight',
+                   closeWith: ['click'],
+                   theme: 'relax',
+                   maxVisible: 10,
+                   animation: {
+                       open: 'animated bounceInLeft',
+                       close: 'animated bounceOutLeft',
+                       easing: 'swing',
+                       speed: 500
+                   }
+               });
+               console.log('html: ' + n.options.id);
+               return n;
+           }
             //pw autocomplete
             $.ajax({
                 type: "POST",
@@ -1311,7 +1332,7 @@
                     
                     //console.log(labtests);                    
                               
-                        $("[id$='txtautofromDB']").autocomplete({
+                         $("[id$='labTestTypes']").autocomplete({
                             source: labtests
                         
                      });
@@ -1322,8 +1343,84 @@
 
                      }
             });
+
+
+   // Load lab order
+            $("#btnAddLab").click(function (e) {
+              
+
+
+                var labOrderDate = moment().format('D MMM, YYYY');
+                var labType = $("#labTestTypes").val();
+                var labOrderReason = $("#OrderReason").find(":selected").text();
+                var labNotes = $("#LabNotes").val();
+
+                    
+
+              if (labType < 1) {
+                    generate("error", "Please select at least One(1) Lab Type from the List");
+                    return false;
+                }  
+                if (labOrderReason < 1) {
+                    generate("error", "Please select at least One(1) Lab Order Reason from the List");
+                    return false;
+                }
+                
+               else {
+                   
+                   
+                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td></tr>";
+                    $("#tblAddLabs>tbody:first").append('' + tr + '');
+                   
+                }
+
+                e.preventDefault();
+            });
+          
        });		  
-       //pw .autocomplete 
+     // Save lab order
+       $("#btnSaveLab").click(function (e) {
+           var _fp = [];
+           var data = $('#tblAddLabs tr').each(function (row, tr) {
+               _fp[row] = {
+                  "labType": $(tr).find('td:eq(2)').val()
+                , "orderReason": $(tr).find('td:eq(3)').val()
+                , "labOrderDate": $(tr).find('td:eq(4)').val()
+
+               }
+           });
+           _fp.shift();//first row will be empty -so remove
+
+           if ($.isEmptyObject(_fp)) {
+               generate("error", "You have not added any lab order");
+               return false;
+           } else {
+               var entryPointId = $("#entryPoint").val();
+               addLabOrder(_fp, entryPointId);
+           }
+
+           
+       });
+       function addLabOrder(_fp, entryPointId) {
+           var labOrder = JSON.stringify(_fp);
+
+           $.ajax({
+               type: "POST",
+               //url: "../WebService/EnrollmentService.asmx/AddPatient",
+               url: "../WebService/LabOrderService.asmx/AddLabOrder",
+               data: "{'personid':'" + 1058 + "','facilityId':'" + 755 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','labOrderDate': '" + labOrderDate + "'}",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               success: function (response) {
+                   //generate('success', '<p>,</p>' + response.d);
+                   toastr.success(response.d, "Lab order successful");
+               },
+               error: function (response) {
+                   //generate('error', response.d);
+                   toastr.error(response.d, "Lab order");
+               }
+           });
+       }
     </script>
     
     

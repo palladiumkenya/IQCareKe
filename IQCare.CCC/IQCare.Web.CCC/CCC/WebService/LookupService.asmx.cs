@@ -66,22 +66,17 @@ namespace IQCare.Web.CCC.WebService
         public string GetLookupLabsList()
         {
             string jsonObject = LookupLogic.GetLookupLabsListJson();  
-            
-            //this is what is implemented at UIlogic
-            
+           
             return jsonObject;
         }
         // pw .lookup lablist             
         // pw .typeahead 
-
         // pw lookup previous lablist
         
            [WebMethod]
            public string GetLookupPreviousLabsList(int patientId)
            {
-               string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);
-
-               //this is what is implemented at UIlogic
+               string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);            
 
                return jsonObject;
            }
