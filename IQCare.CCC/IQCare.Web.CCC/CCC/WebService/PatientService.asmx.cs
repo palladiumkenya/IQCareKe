@@ -69,19 +69,19 @@ namespace IQCare.Web.CCC.WebService
                 ServiceAreaId = serviceAreaId,
                 StatusId = statusId,
             };
-            try
-            {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.AddPatientAppointments(patientAppointment);
-                if (Result > 0)
-                {
-                    Msg = "Patient appointment Added Successfully!";
-                }
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message + ' ' + e.InnerException;
-            }
+            //try
+            //{
+            //    var appointment = new PatientAppointmentManager();
+            //    Result = appointment.AddPatientAppointments(patientAppointment);
+            //    if (Result > 0)
+            //    {
+            //        Msg = "Patient appointment Added Successfully!";
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Msg = e.Message + ' ' + e.InnerException;
+            //}
             return Msg;
         }
     }

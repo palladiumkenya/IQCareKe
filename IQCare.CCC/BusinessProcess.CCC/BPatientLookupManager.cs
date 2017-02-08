@@ -24,29 +24,13 @@ namespace BusinessProcess.CCC
             return patientDetails;
         }
 
-        public List<PatientLookup> SearchPatient()
+        public List<PatientLookup> GetPatientSearchPayload()
         {
-            var patientDetails =
-                _unitOfWork.PatientLookupRepository.FindBy(x => !x.Active)
-                    .OrderByDescending(x => x.Id)
-                    .Distinct()
-                    .Select(
-                        x =>
-                            new PatientLookup
-                            {
-                               EnrollmentNumber = x.EnrollmentNumber,
-                              PatientIndex  = x.PatientIndex,
-                              FirstName  = x.FirstName,
-                              MiddleName  = x.MiddleName,
-                              DateOfBirth  = x.DateOfBirth,
-                              Sex  = x.Sex,
-                              RegistrationDate  = x.RegistrationDate,
-                              PatientStatus  = x.PatientStatus
-                            })
-                    .OrderByDescending(x => x.Id)
+            var patientSearchDetails =_unitOfWork.PatientLookupRepository
+                    .GetAll()
                     .ToList();
 
-            return patientDetails;
+            return patientSearchDetails;
         }
     }
 }

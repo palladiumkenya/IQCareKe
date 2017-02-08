@@ -298,6 +298,10 @@
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
 
+            $("#btnFindPatient").click(function() {
+                alert("test");
+            });
+
           var table=  $("#tblFindPatient").dataTable({
 
                 "autoWidth":true,
@@ -318,7 +322,7 @@
                 "select": true,
                 "responsive": true,
                 "buttons":true,
-                "stateSave": true,
+                //"stateSave": true,
                 "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
           });
 
@@ -327,7 +331,7 @@
               window.location.href = $(this).attr('href');
           });
 
-            // Apply the search
+          // Apply the search
           table.columns().every(function () {
               var that = this;
 

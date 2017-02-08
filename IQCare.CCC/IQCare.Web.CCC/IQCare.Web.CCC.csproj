@@ -89,12 +89,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CCC\Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CCC\Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

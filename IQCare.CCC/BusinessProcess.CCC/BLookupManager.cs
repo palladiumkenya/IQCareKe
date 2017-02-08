@@ -3,7 +3,6 @@ using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Lookup;
 using DataAccess.CCC.Repository.Lookup;
-using System;
 using System.Linq;
 
 namespace BusinessProcess.CCC

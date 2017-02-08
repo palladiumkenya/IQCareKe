@@ -8,7 +8,7 @@ namespace IQCare.CCC.UILogic
     public class PatientLookupManager
     {
         readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-
+        
        public List<PatientLookup> GetPatientDetailSummary(int id)
         {
             var patientDetails = _patientLookupmanager.GetPatientDetailsLookup(id);
@@ -24,10 +24,11 @@ namespace IQCare.CCC.UILogic
         }
 
 
-       public List<PatientLookup> GetPatientSearchList()
+       public List<PatientLookup> GetPatientSearchListPayload()
         {
-            var patientDetails = _patientLookupmanager.SearchPatient();
-            return patientDetails;
+            var patientDetails = _patientLookupmanager.GetPatientSearchPayload();
+
+            return patientDetails.FindAll(x=>x.Active);
         }
     }
 }

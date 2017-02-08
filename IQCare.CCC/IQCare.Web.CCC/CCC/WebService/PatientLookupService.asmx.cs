@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using Application.Presentation;
 using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using IQCare.Web.Admin;
 using Newtonsoft.Json;
@@ -32,22 +34,21 @@ namespace IQCare.Web.CCC.WebService
         public string GetPatientSearch()
         {
             string jsonData = null;
-
-
             var echo = Convert.ToInt32(HttpContext.Current.Request.Params["sEcho"]);
-            var displayLength = Convert.ToInt32(HttpContext.Current.Request.Params["iDisplayLength"]);
-            var displayStart = Convert.ToInt32(HttpContext.Current.Request.Params["iDisplayStart"]);
+            var displayLength = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
+            var displayStart = Convert.ToInt32(HttpContext.Current.Request.Params["start"]);
             var sortOrder = Convert.ToString(HttpContext.Current.Request.Params["sSortDir_0"]);
             var totalRecords = 0;
             var totalFiltered = 0;
 
             try
             {
-                var patientLookup= new PatientLookupManager();
-                List<PatientLookup> foundPatient= new List<PatientLookup>();
-                foundPatient=patientLookup.GetPatientSearchList();
+                //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
-                if (foundPatient !=null & foundPatient.Count > 0)
+                var patientLookup = new PatientLookupManager();
+                var foundPatient = patientLookup.GetPatientSearchListPayload();
+
+                if (foundPatient.Count > 0)
                 {
                     totalFiltered = Convert.ToInt32(foundPatient.Count);
                     totalRecords = Convert.ToInt32(foundPatient.Count);
