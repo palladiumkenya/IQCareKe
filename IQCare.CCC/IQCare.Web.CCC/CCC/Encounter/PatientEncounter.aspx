@@ -59,12 +59,10 @@
 		  		
 		</script>
 <!--end line graph for viral tracker    -->          
-       <div class="row">
-    <script src="../../CCCScripts/PatientEncounter.js"></script>
-          
+
+    <script src="../../CCCScripts/PatientEncounter.js"></script>          
     <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
     <script src="../Scripts/css/jquery-ui.css"></script>
-
     <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />  
     <!--  .end auto complete   -->
        <!-- line graph for viral tracker  -->  
