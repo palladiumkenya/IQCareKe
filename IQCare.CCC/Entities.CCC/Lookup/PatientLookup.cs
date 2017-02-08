@@ -11,7 +11,7 @@ namespace Entities.CCC.Lookup
         [Key]
         public int Id { get; set; }
         public int PersonId { get; set; }
-        public int? PtnPk { get; set; }
+        public int? ptn_pk { get; set; }
         public string  EnrollmentNumber { get; set; }
         public string PatientIndex { get; set; }
         public string FirstName { get; set; }
@@ -20,12 +20,11 @@ namespace Entities.CCC.Lookup
         public int Sex { get; set; }
         public bool Active { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public DateTime EnrollmentDate { get; set; }
-        public bool PatientStatus { get; set; }
+        public DateTime? EnrollmentDate { get; set; }
         public bool TransferIn { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string NationalId { get; set; }
         public int FacilityId { get; set; }
-        public bool DeleteFlag { get; set; }
+        public bool PatientStatus { get; set; }
     }
 }

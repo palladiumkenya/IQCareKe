@@ -54,7 +54,34 @@ namespace BusinessProcess.CCC
             LookupCountyRepository lookupCountyRepository= new LookupCountyRepository();
             return lookupCountyRepository.GetWardsList(subcounty);
         }
+        /* pw GetLookupLabs implementation   */
+        public List<LookupLabs> GetLookupLabs()
+              
+        {
+            LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
+            return lookupLabRepository.GetLabs();
+
+            //LookupLabs declared in entities/lookup
+            //GetLookupLabs declared in Interface/Ilookupmanager
+            //LookupLabsRepository declared in Dataaccess/Repository/lookup
+            //GetLabs() a method in Dataaccess/Repository/lookup ==> List<LookupLabs> GetLabs()
 
 
+        }
+        /* pw .GetLookupLabs implementation   */
+        /* pw GetLookupLabs implementation   */
+        public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
+
+        {
+            LookupPreviousLabsRepository lookupLabprevRepository = new LookupPreviousLabsRepository();
+            return lookupLabprevRepository.GetPreviousLabs(patientId);
+
+
+        }
+
+        public string GetLookupNameFromId(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

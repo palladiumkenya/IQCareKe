@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appointment\PatientAppointment.cs" />
     <Compile Include="Baseline\INHProphylaxis.cs" />
     <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
     <Compile Include="Baseline\PatientArtUseHistory.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
     <Compile Include="Encounter\PatientClinicalNotes.cs" />
     <Compile Include="Encounter\PatientDiagnosis.cs" />
+    <Compile Include="Encounter\PatientEncounter.cs" />
     <Compile Include="Encounter\PatientFamilyPlanning.cs" />
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="Encounter\PregnancyIndicator.cs" />
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
+    <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Lookup\LookupPreviousLabs.cs" />
+    <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Enrollment\PatientEntityIdentifier.cs" />
     <Compile Include="Lookup\LookupCounty.cs" />
     <Compile Include="Lookup\LookupItemView.cs" />
@@ -101,6 +106,7 @@
     <Compile Include="Triage\PatientChronicIllness.cs" />
     <Compile Include="Encounter\PatientPhdp.cs" />
     <Compile Include="Triage\PatientVital.cs" />
+    <Compile Include="Visit\PatientLabTracker.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
   </ItemGroup>

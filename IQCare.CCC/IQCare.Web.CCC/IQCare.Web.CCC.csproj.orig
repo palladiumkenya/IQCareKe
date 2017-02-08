@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1FD9CC7D-0CA8-4746-8565-AE446765410A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQCare.Web</RootNamespace>
+    <AssemblyName>IQCare.Web.CCC</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
+=======
+    <Content Include="CCC\Dashboard.aspx" />
+>>>>>>> df740b5c7a3e2ad6089a1a7863558e8e5b0d40a6
+    <Content Include="CCC\Data\States.xml" />
+    <Content Include="CCC\Encounter\PatientEncounter.aspx" />
+    <Content Include="CCC\Encounter\StartEncounter.aspx" />
+    <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
+    <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
+    <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
+    <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
+    <Content Include="CCC\Patient\PatientFinder.aspx" />
+    <Content Include="CCC\Patient\PatientRegistration.aspx" />
+    <Content Include="CCC\Patient\PatientTest.aspx" />
+    <Content Include="CCC\Patient\ServiceArea.aspx" />
+    <Content Include="CCC\Scripts\css\jquery-ui.css" />
+    <Content Include="CCC\Scripts\js\jquery-1.4.2.min.js" />
+    <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
+    <Content Include="CCC\Scripts\js\linegraph_1.js" />
+    <Content Include="CCC\Scripts\js\PatientRegistration.js" />
+    <Content Include="CCC\UC\ucPatientDetails.ascx" />
+    <Content Include="CCC\UC\ucPatientTriage.ascx" />
+    <Content Include="CCC\UC\ucVisitDetails.ascx" />
+    <Content Include="CCC\Patient\FindPatient.aspx" />
+    <Content Include="CCC\WebService\PersonService.asmx" />
+    <Content Include="CCC\WebService\LookupService.asmx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="CCC\Greencard.Master" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CCC\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.cs">
+      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.designer.cs">
+      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+=======
+    <Compile Include="CCC\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+>>>>>>> df740b5c7a3e2ad6089a1a7863558e8e5b0d40a6
+    </Compile>
+    <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
+      <DependentUpon>PatientEncounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
+      <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\StartEncounter.aspx.designer.cs">
+      <DependentUpon>StartEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.designer.cs">
+      <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Greencard.Master.designer.cs">
+      <DependentUpon>Greencard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
+      <DependentUpon>PatientFinder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.designer.cs">
+      <DependentUpon>PatientRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTest.aspx.designer.cs">
+      <DependentUpon>PatientTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\ServiceArea.aspx.designer.cs">
+      <DependentUpon>ServiceArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\FindPatient.aspx.cs">
+      <DependentUpon>FindPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\FindPatient.aspx.designer.cs">
+      <DependentUpon>FindPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">
+      <DependentUpon>Baseline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\Baseline.aspx.designer.cs">
+      <DependentUpon>Baseline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\FamilyTesting.aspx.cs">
+      <DependentUpon>FamilyTesting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\FamilyTesting.aspx.designer.cs">
+      <DependentUpon>FamilyTesting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.cs">
+      <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
+      <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientDetails.ascx.cs">
+      <DependentUpon>ucPatientDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
+      <DependentUpon>ucPatientDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriage.ascx.cs">
+      <DependentUpon>ucPatientTriage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriage.ascx.designer.cs">
+      <DependentUpon>ucPatientTriage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucVisitDetails.ascx.cs">
+      <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucVisitDetails.ascx.designer.cs">
+      <DependentUpon>ucVisitDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\WebService\LookupService.asmx.cs">
+      <DependentUpon>LookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PersonService.asmx.cs">
+      <DependentUpon>PersonService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\References\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess.Context">
+      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Administration">
+      <HintPath>..\..\References\Entities.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.Common">
+      <HintPath>..\..\References\Entities.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.CCC">
+      <HintPath>..\..\References\Interface.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Scheduler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Interface.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.CCC.UILogic">
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\IQCare.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Design">
+      <HintPath>..\..\Library\Telerik.Web.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8CC162FB-01FB-42AE-B63F-47E007E469E6}</Project>
+      <Name>DataAccess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
+      <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
+      <Name>Entities.CCC</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>23039</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:23039/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

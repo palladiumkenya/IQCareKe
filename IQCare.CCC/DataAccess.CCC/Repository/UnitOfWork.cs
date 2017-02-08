@@ -46,6 +46,7 @@ namespace DataAccess.CCC.Repository
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
+        private IPatientLabTrackerRepository _patientLabTrackerRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -65,6 +66,8 @@ namespace DataAccess.CCC.Repository
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
         private IPatientVaccinationRepository _patientVaccinationRepository;
 
+        /*Appointment*/
+        private IPatientAppointmentRepository _patientAppointmentRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -158,6 +161,10 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientEncounterRepository??(_patientEncounterRepository=new PatientEncounterRepository((GreencardContext)_context));}
         }
+        public IPatientLabTrackerRepository PatientLabTrackerRepository
+        {
+            get { return _patientLabTrackerRepository ?? (_patientLabTrackerRepository = new PatientLabTrackerRepository((GreencardContext)_context)); }
+        }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {
@@ -235,6 +242,11 @@ namespace DataAccess.CCC.Repository
             get { return _patientLookupRepository??(_patientLookupRepository=new PatientLookupRepository((LookupContext)_context));}
         }
 
+        public IPatientAppointmentRepository PatientAppointmentRepository
+        {
+            get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
+        }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -244,5 +256,6 @@ namespace DataAccess.CCC.Repository
         {
             _context.Dispose();
         }
+
     }
 }
