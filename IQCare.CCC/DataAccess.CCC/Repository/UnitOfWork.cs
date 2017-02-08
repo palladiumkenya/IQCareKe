@@ -63,6 +63,7 @@ namespace DataAccess.CCC.Repository
         private IPatientHivEnrollmentBaselineRepository _patientHivEnrollmentBaselineRepository;
         private IPatientTransferInRepository _patientTransferInRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
+        private IPatientVaccinationRepository _patientVaccinationRepository;
 
 
         public UnitOfWork(BaseContext context)
@@ -186,6 +187,11 @@ namespace DataAccess.CCC.Repository
         public IINHProphylaxisRepository INHProphylaxisRepository
         {
             get { return _inhProphylaxisRepository ?? (_inhProphylaxisRepository = new INHProphylaxisRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientVaccinationRepository PatientVaccinationRepository
+        {
+            get { return _patientVaccinationRepository ?? (_patientVaccinationRepository = new PatientVaccinationRepository((GreencardContext)_context)); }
         }
 
         public IPatientVitalsRepository PatientVitalsRepository

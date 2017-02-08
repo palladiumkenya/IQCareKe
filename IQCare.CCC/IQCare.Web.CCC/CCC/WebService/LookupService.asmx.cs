@@ -73,5 +73,20 @@ namespace IQCare.Web.CCC.WebService
             }
             return _jsonObject;
         }
+
+        [WebMethod]
+        public string GetLookUpItemViewByMasterName(string masterName)
+        {
+            try
+            {
+                _jsonObject = LookupLogic.GetLookUpItemViewByMasterName(masterName);
+            }
+            catch (Exception e)
+            {
+                _jsonObject = e.Message;
+            }
+
+            return _jsonObject;
+        }
     }
 }

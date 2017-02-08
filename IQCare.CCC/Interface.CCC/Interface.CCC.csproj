@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />

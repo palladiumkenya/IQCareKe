@@ -15,7 +15,7 @@ namespace Entities.CCC.Triage
     public class PatientAllergy : BaseObject
     {
         [Column]
-        public virtual int PatientId { get; set; }
+        public int PatientId { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }

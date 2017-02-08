@@ -10,17 +10,19 @@ namespace Entities.CCC.Baseline
 {
     [Serializable]
     [Table("ARTInitiationBaseline")]
-    public class PatientArtInitiationBaseline:BaseEntity
+    public class PatientArtInitiationBaseline : BaseEntity
     {
 
-        private PatientArtInitiationBaseline() { }
-
+        //private PatientArtInitiationBaseline() { }
+        //
         [Key]
         public int Id { get; set; }
-        [ForeignKey("patient")]
         public int PatientId { get; set; }
-        [ForeignKey("PatientMasterVisitId")]
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity PatientEntity { get; set; }
         public int PatientMasterVisitId { get; set; }
+        /*[ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }*/
         public bool HBVInfected { get; set; }
         public bool Pregnant { get; set; }
         public bool TBInfected { get; set; }
@@ -34,11 +36,6 @@ namespace Entities.CCC.Baseline
         public decimal Height { get; set; }
         public string ARTCohort { get; set; }
         public DateTime FirstlineDate { get; set; }
-        public int StartRegimen { get; set; } 
-
-
-        public virtual PatientEntity Patient { get; set; }
-        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-
+        public int StartRegimen { get; set; }
     }
 }

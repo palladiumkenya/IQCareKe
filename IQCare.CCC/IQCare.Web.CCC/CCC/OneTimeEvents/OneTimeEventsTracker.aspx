@@ -25,7 +25,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage1">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="Stage1Date" type="text" data-parsley-required="true" runat="server" />
+                                                    <input  class="form-control input-sm" id="Stage1Date" type="text" data-parsley-required="true" runat="server" ClientIDMode="Static" />
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -110,7 +110,7 @@
                                        <div class="col-md-7">
                                             <div class="datepicker fuelux form-group" id="Stage2">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" runat="server"  />
+                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" runat="server"  ClientIDMode="Static" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -195,7 +195,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage3">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" runat="server"  />
+                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" runat="server" ClientIDMode="Static" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -280,7 +280,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="SexPartner">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" runat="server"  />
+                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" runat="server" ClientIDMode="Static"  />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -465,17 +465,17 @@
                                            <label class="radio-custom radio-inline pull-left" data-initialize="radio"  id="lblCompletionYes">
                                                <!--<input class="sr-only" type="radio" id="CompletionYes" value="option1" name="INH"> <span class="checkbox-label"><strong> Yes </strong></span>-->
 
-                                               <asp:RadioButton ID="CompletionYes" runat="server" GroupName="INH" /><span class="checkbox-label"><strong> Yes </strong></span>
+                                               <asp:RadioButton ID="CompletionYes" runat="server" GroupName="INH" ClientIDMode="Static" /><span class="checkbox-label"><strong> Yes </strong></span>
                                            </label>
 
                                            <label class="radio-custom radio-inline pull-left" data-initialize="radio"  id="lblCompletionNo">
                                              <!--<input class="sr-only" type="radio" id="CompletionNo" value="option1" name="INH"> <span class="checkbox-label"><strong> No </strong></span>-->
-                                               <asp:RadioButton ID="CompletionNo" runat="server" GroupName="INH" /><span class="checkbox-label"><strong> No </strong></span>
+                                               <asp:RadioButton ID="CompletionNo" runat="server" GroupName="INH" ClientIDMode="Static" /><span class="checkbox-label"><strong> No </strong></span>
                                            </label>
                                       </div>
                                  </div>
 
-                                <div class="col-md-12 form-group">
+                                <div class="col-md-12 form-group" id="ISCompletionDate">
                                       <div class="col-md-5"><label class="control-label pull-left">Completion Date</label></div>
                                       <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="CompletionDate">
@@ -569,13 +569,17 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-7">
                                  <div class="col-md-12">
-                                      <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblHBV">
-                                        <input class="sr-only" type="checkbox" id="HBV" value="option1"> <span class="checkbox-label"><strong> HBV </strong></span>
-                                 </label></div>
 
-                                      <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblFluVaccine">
-                                         <input class="sr-only" type="checkbox" id="FluVaccine" value="option1"> <span class="checkbox-label"><strong> Flu Vaccine </strong></span>
-                                         </label>
+                                      <div class="col-md-12 form-group">
+                                          <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblHBV">
+                                              <input class="sr-only" type="checkbox" id="HBV" value="HBV" name="vaccineAdult"><span class="checkbox-label"><strong> HBV </strong></span>
+                                          </label>
+                                      </div>
+
+                                      <div class="col-md-12 form-group">
+                                          <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblFluVaccine">
+                                              <input class="sr-only" type="checkbox" id="FluVaccine" value="FluVaccine" name="vaccineAdult"><span class="checkbox-label"><strong>Flu Vaccine</strong></span>
+                                          </label>
                                       </div>
                                  </div>
 
@@ -598,83 +602,52 @@
                                     <div class="panel-heading">Child Vaccination</div>
                                     <div class="panel-body">
 
-                                        <div class="col-md-1">
-                                             <div class="col-md-12"><label class="control-label pull-left"> BCG</label></div>
-                                             <div class="col-md-12">
-                                                 <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblBCG">
-                                                        <input class="sr-only" type="checkbox" id="BCG" value="option1"> <span class="checkbox-label"><strong> BCG </strong></span>
-                                                 </label>
-                                             </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12"><label class="pull-left control-label">Vaccine</label></div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineType" ClientIDMode="Static"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="col-md-12"><label class="pull-left control-label">Vaccine Stage</label></div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineStage" ClientIDMode="Static"/>
+                                            </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label pull-left"> Polio Vaccine</label></div>
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPolioVaccine1">
-                                                    <input class="sr-only" type="checkbox" id="PolioVaccinw1" value="option1"> <span class="checkbox-label"><strong> Polio Vaccine 1 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblpoliovaccine2">
-                                                    <input class="sr-only" type="checkbox" id="poliovaccine2" value="option1"> <span class="checkbox-label"><strong> Polio Vaccine 2 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblpoliovaccine3">
-                                                    <input class="sr-only" type="checkbox" id="PolioVaccine3" value="option1"> <span class="checkbox-label"><strong> Polio Vaccine 3 </strong></span>
-                                             </label></div>
-
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label pull-left"> Pentavalent</label></div>
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPentavalent1">
-                                                    <input class="sr-only" type="checkbox" id="Pentavalent1" value="option1"> <span class="checkbox-label"><strong> Pentavalent 1 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPentavalent2">
-                                                    <input class="sr-only" type="checkbox" id="Pentavalent2" value="option1"> <span class="checkbox-label"><strong> Pentavalent 2 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPentavalent3">
-                                                    <input class="sr-only" type="checkbox" id="Pentavalent3" value="option1"> <span class="checkbox-label"><strong> Pentavalent 3 </strong></span>
-                                             </label></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label pull-left"> Pneumococcal</label></div>
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPneumococcal1">
-                                                    <input class="sr-only" type="checkbox" id="Pneumococcal1" value="option1"> <span class="checkbox-label"><strong> Pneumococcal 1 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPneumococcal2">
-                                                    <input class="sr-only" type="checkbox" id="Pneumococcal2" value="option1"> <span class="checkbox-label"><strong> Pneumococcal 2 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPneumococcal3">
-                                                    <input class="sr-only" type="checkbox" id="Pneumococcal3" value="option1"> <span class="checkbox-label"><strong> Pneumococcal 3 </strong></span>
-                                             </label></div>
-                                        </div>
-                                        <div class="col-md-2">
-                                             <div class="col-md-12"><label class="control-label pull-left"> Measles</label></div>
-                                             <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblMeasles1">
-                                                    <input class="sr-only" type="checkbox" id="Measles1" value="option1"> <span class="checkbox-label"><strong> Measles 1 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblMeasles2">
-                                                    <input class="sr-only" type="checkbox" id="Measles2" value="option1"> <span class="checkbox-label"><strong> Measles 2 </strong></span>
-                                             </label></div>
-
-                                            <div class="col-md-12 form-group"><label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblMeasles3">
-                                                    <input class="sr-only" type="checkbox" id="Measlesl3" value="option1"> <span class="checkbox-label"><strong> Measles 3 </strong></span>
-                                             </label></div>
-                                        </div>
+                                            <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
+                                            <div class="col-md-12 pull-right">
+                                                  <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Vaccine</asp:LinkButton>
+                                            </div>
+                                         </div>
                                         
+                                        <div class="panel-body col-md-9 form-group">
+                                            <table class="table table-striped table-condensed form-group" id="tblVaccines" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                        <th>#</th>
+                                                        <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Vaccine</i> </th>
+                                                        <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Vaccine Stage</i> </th>
+                                                        <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>                               
                                     </div>
+                                    
                                 </div>
-                      </div>
+                        </div>
 
                         <div class="col-md-12">
                             <hr />
                             <div class="col-md-6"></div>
 
                             <div class="col-md-6">
-                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right"> Save One Time Event</asp:LinkButton></div>
+                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" ClientIDMode="Static" OnClientClick="return false;"> Save One Time Event</asp:LinkButton></div>
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="LinkButton1" CssClass=" btn btn-warning btn-lg fa fa-refresh" > Reset One Time Event</asp:LinkButton></div> 
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close One Time Event</asp:LinkButton></div>
                             </div>
@@ -692,6 +665,180 @@
             $('#Stage3').datepicker();
             $('#SexPartner').datepicker();*/
 
+            $('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
+                if ($('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val() == "CompletionYes") {
+                    $("#ISCompletionDate").show();
+                } else {
+                    $("#ISCompletionDate").hide();
+                    $("#INHCompletionDate").val('');
+                }
+            });
+
+            /*Lookup vaccines*/
+            var vaccinesList = new Array();
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookUpItemByName",
+                data: "{'itemName':'Vaccine'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $("#<%=VaccineType.ClientID%>").find('option').remove().end();
+                    $("#<%=VaccineType.ClientID%>").append('<option value="0">Select</option>');
+                    $.each(itemList, function (index, itemList) {
+                        $("#<%=VaccineType.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemName + '</option>');
+                    }); 
+                },
+                error: function (msg) {
+                    alert(msg);
+                }
+            });
+
+            $("#btnAdd").click(function(e) {
+
+                var identifierCount = 0;
+                var vaccineFound = 0;
+
+                var vaccineTypeId = $("#<%=VaccineType.ClientID%>").find(':selected').val();
+                var vaccineStageId = $("#<%=VaccineStage.ClientID%>").find(":selected").val();
+
+                var vaccineType = $("#<%=VaccineType.ClientID%>").find(':selected').text();
+                var vaccineStage = $("#<%=VaccineStage.ClientID%>").find(':selected').text();
+
+                //console.log(vaccineStage);
+
+                if (vaccineStageId === undefined || vaccineStageId === null) {
+                    toastr.error("error", "Please select at least One(1) vaccine from the List");
+                    return false;
+                }else if (vaccineStageId < 1) {
+                    toastr.error("error", "Please select at least One(1) vaccine from the List");
+                    return false;
+                }
+                //console.log(vaccinesList);
+                //vaccineFound = $.inArray("" + vaccineStageId + "", vaccinesList);
+                for (var key in vaccinesList) {
+                    if ((key == vaccineTypeId) && (vaccinesList[key] == vaccineStageId)) {
+                        vaccineFound = -1;
+                    }
+                }
+              
+                if (vaccineFound == -1) {
+                    
+                    toastr.error("error", vaccineStage + " Vaccine already exists in the List");
+                    return false; // message box herer
+                } else {
+                    
+                    //vaccinesList.push("" + vaccineStageId + "");
+                    vaccinesList[vaccineTypeId] = vaccineStageId;
+
+                    var tr = "<tr><td align='left'></td><td align='left'>" + vaccineType + "</td><td align='left'>" + vaccineStage + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    $("#tblVaccines>tbody:first").append('' + tr + '');
+                }
+
+                e.preventDefault();
+            });
+
+            $("#tblVaccines").on('click', '.btnDelete', function () {
+                $(this).closest('tr').remove();
+                var x = $(this).closest('tr').find('td').eq(0).html();
+
+                vaccinesList.splice($.inArray(x, vaccinesList), 1);
+            });
+
+            $("#VaccineType").on('change', function (e) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+                    data: "{'masterName': '" + $('#VaccineType option:selected').text() + "' }",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var itemList = JSON.parse(response.d);
+                        $("#<%=VaccineStage.ClientID%>").find('option').remove().end();
+                        $("#<%=VaccineStage.ClientID%>").append('<option value="0">Select</option>');
+                        $.each(itemList, function (index, itemList) {
+                            $("#<%=VaccineStage.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.DisplayName + '</option>');
+                        }); 
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                });
+            });
+
+
+            $("#btnOneTimeEventsTracker").click(function () {
+                if ($("#onetimeeventstracker").parsley().validate()) {
+                    var _fp = [];
+                    var data = $('#tblVaccines tr').each(function (row, tr) {
+                        _fp[row] = {
+                            "vaccineType": $(tr).find('td:eq(1)').text()
+                         , "vaccineStage": $(tr).find('td:eq(2)').text()
+                        }
+                    });
+                    _fp.shift();//first row will be empty -so remove
+
+                    var Stage1DateValue = $("#Stage1Date").val();
+                    var Stage2DateValue = $("#Stage2Date").val();
+                    var Stage3DateValue = $("#Stage3Date").val();
+                    var SexPartnerDateValue = $("#SexPartnerDate").val();
+                    var INHStartDateValue = $("#INHStartDate").val();
+                    var INHCompletion = null;
+                    var INHCompletionDateValue = null;
+
+                    //alert(document.getElementById("CompletionNo").Value);
+                    //alert(document.getElementById("CompletionYes").Value);
+                    var INH = $('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val();
+                    if (INH == 'CompletionYes') {
+                        INHCompletion = true;
+                        INHCompletionDateValue = $("#INHCompletionDate").val();
+                    } else if (INH == 'CompletionNo') {
+                        INHCompletion = false;
+                    }
+
+                    var vaccineAdult = [];
+
+                    $.each($("input[name='vaccineAdult']:checked"), function () {
+                        vaccineAdult.push($(this).val());
+                    });
+
+                    if ($("#vaccinationotheradult").val() != null) {
+                        vaccineAdult.push($("#vaccinationotheradult").val());
+                    }
+
+                    //console.log(vaccineAdult);
+                    addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult);
+
+                } else {
+                    return false;
+                }
+            });
+
+
+            function addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult) {
+                var vaccines = JSON.stringify(_fp);
+                var adultVaccine = JSON.stringify(vaccineAdult);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/OneTimeEventsTrackerService.asmx/addOneTimeEventsTracker",
+                    data: "{'Stage1DateValue':'" + Stage1DateValue + "','Stage2DateValue':'" + Stage2DateValue + "', 'Stage3DateValue': '" +
+                        Stage3DateValue + "', 'SexPartnerDateValue':'" + SexPartnerDateValue + "','INHStartDateValue': '" + INHStartDateValue +
+                        "','INHCompletion': '" + INHCompletion + "','CompletionDate': '" + INHCompletionDateValue + "','adultVaccine': '" + adultVaccine + "','vaccines': '" + vaccines + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        toastr.success(response.d, "Patient Enrollment");
+                    },
+                    error: function (response) {
+                        //generate('error', response.d);
+                        toastr.error(response.d, "Patient Enrollment");
+                    }
+                });
+            }
         });
 
         $('#Stage1').datepicker({
@@ -734,14 +881,5 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
             restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
-
-        $("#ctl00_IQCareContentPlaceHolder_btnOneTimeEventsTracker").click(function () {
-            if ($("#onetimeeventstracker").parsley().validate()) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
     </script>
 </asp:Content>

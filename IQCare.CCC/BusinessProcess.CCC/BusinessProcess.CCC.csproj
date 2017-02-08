@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Baseline\BINHProphylaxis.cs" />
     <Compile Include="Baseline\BPatientDisclosure.cs" />
+    <Compile Include="Baseline\BPatientVaccination.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BPatientLookupManager.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
