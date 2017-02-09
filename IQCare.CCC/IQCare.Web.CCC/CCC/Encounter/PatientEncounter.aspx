@@ -1361,10 +1361,10 @@
                       <!--pw implementation of previous labs laboratory module here  porders-->
                                         <div class="col-md-12 form-group">
             
-                                                             <table id="previouslab_orders" >
+                                                             <table id="plab_orders" >
                                                                         <thead>
                                                                           <tr>
-      	                                                                    <th>Count.# </th> 
+      	                                                                    <th> # </th>  
                                                                             <th>Lab Test </th> 
       	                                                                    <th>Order Reason </th> 
       	                                                                    <th>Order Date </th> 
@@ -1374,54 +1374,15 @@
                                                                         <tbody>
                                                                           <tr>
       	                                                                    <td>demo</td> 
-      	                                                                    <td>"txttName"</td>
+      	                                                                    <td>demo</td>
       	                                                                    <td>demo</td> 
       	                                                                    <td>mm/dd/yyy</td> 
       	                                                                    <td>demo</td>                  
                                                                           </tr>
                          
                                                                         </tbody>
-                                                                    </table>
-                                                                </div>
-                            <!--
-                                                 <div class="col-md-12">
-                                                      <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
-                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
-                                                  </div>
-                                        !>
-                    <!--pw implementation of previous laboratory module here-->
-                      <!--pw implementation of previous labs laboratory module here  porders-->
-                                        <div class="col-md-12 form-group">
-            
-                                                             <table id="previouslab_orders" >
-                                                                        <thead>
-                                                                          <tr>
-      	                                                                    <th>Count.# </th> 
-                                                                            <th>Lab Test </th> 
-      	                                                                    <th>Order Reason </th> 
-      	                                                                    <th>Order Date </th> 
-      	                                                                    <th>Order Status </th> 
-      	                                                                  </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                          <tr>
-      	                                                                    <td>demo</td> 
-      	                                                                    <td>txttName</td>
-      	                                                                    <td>demo</td> 
-      	                                                                    <td>mm/dd/yyy</td> 
-      	                                                                    <td>demo</td>                  
-                                                                          </tr>
-                         
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                            <!--
-                                                 
+                                                                    </table>                 
+                                                                   
                     <!--pw implementation of previous laboratory module here-->
                                </div>
                                 </div>
@@ -1623,28 +1584,7 @@
             $('#AntigenDate').datepicker();
             $('#NextAppDate').datepicker();
             $('#myWizard').wizard();    */
-           function generate(type, text) {
-
-               var n = noty({
-                   text: text,
-                   type: type,
-                   dismissQueue: true,
-                   progressBar: true,
-                   timeout: 5000,
-                   layout: 'topRight',
-                   closeWith: ['click'],
-                   theme: 'relax',
-                   maxVisible: 10,
-                   animation: {
-                       open: 'animated bounceInLeft',
-                       close: 'animated bounceOutLeft',
-                       easing: 'swing',
-                       speed: 500
-                   }
-               });
-               console.log('html: ' + n.options.id);
-               return n;
-           }
+          
             //pw autocomplete
             $.ajax({
                 type: "POST",
@@ -1753,9 +1693,30 @@
                }
            });
        };	
-                   
+       function generate(type, text) {
+
+           var n = noty({
+               text: text,
+               type: type,
+               dismissQueue: true,
+               progressBar: true,
+               timeout: 5000,
+               layout: 'topRight',
+               closeWith: ['click'],
+               theme: 'relax',
+               maxVisible: 10,
+               animation: {
+                   open: 'animated bounceInLeft',
+                   close: 'animated bounceOutLeft',
+                   easing: 'swing',
+                   speed: 500
+               }
+           });
+           console.log('html: ' + n.options.id);
+           return n;
+       }
            
-           //pw .autocomplete
+         
          
      	  
       

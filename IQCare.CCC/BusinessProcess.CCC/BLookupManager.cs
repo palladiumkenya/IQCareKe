@@ -61,15 +61,9 @@ namespace BusinessProcess.CCC
             LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
             return lookupLabRepository.GetLabs();
 
-            //LookupLabs declared in entities/lookup
-            //GetLookupLabs declared in Interface/Ilookupmanager
-            //LookupLabsRepository declared in Dataaccess/Repository/lookup
-            //GetLabs() a method in Dataaccess/Repository/lookup ==> List<LookupLabs> GetLabs()
-
-
+           
         }
-        /* pw .GetLookupLabs implementation   */
-        /* pw GetLookupLabs implementation   */
+      
         public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
 
         {
