@@ -141,7 +141,6 @@ namespace IQCare.CCC.UILogic
 
             return masterId;
         }
-        }
 
         public static string GetLookupNameById(int id)
         {
@@ -149,7 +148,7 @@ namespace IQCare.CCC.UILogic
             try
             {
                 ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
-                 lookupName = lookupManager.GetLookupNameFromId(id);
+                lookupName = lookupManager.GetLookupNameFromId(id);
             }
             catch (Exception e)
             {
@@ -158,6 +157,6 @@ namespace IQCare.CCC.UILogic
             }
 
             return lookupName;
-        } 
+        }
     }
 }
