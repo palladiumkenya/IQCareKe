@@ -1285,7 +1285,7 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>
-                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
+                      <div  role="tabpanel"  class="tab-pane fade" id="vloadTracker">
                             <!-- pw implementation of viral load tracker here-->
                             <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
@@ -1304,8 +1304,14 @@
                                 <!--pw .implementation of  laboratory module here-->
                              
                                 </div>
-                                    <script src="https://code.highcharts.com/highcharts.js"></script>
-                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                          
+                                    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+                                    <script src="../Scripts/css/exporting.css"></script>
+                                    <link href="../Scripts/css/exporting.css" rel="stylesheet" type="text/css" />   
+
+                             <!--      <script src="../Scripts/js/highcharts.js" type="text/javascript"></script>
+                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>  -->
+
                                     <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
