@@ -255,15 +255,15 @@
                         </thead>
                         <tbody>
                           <tr>
-      	                    <td>jane</td>
-      	                    <td>doe</td>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-                              <td>demo</td>
+      	                    <td align="left">jane</td>
+      	                    <td align="left">doe</td>
+      	                    <td align="left">demo</td>
+      	                    <td align="left">demo</td>
+      	                    <td align="left">mm/dd/yyy</td>
+      	                    <td align="left">demo</td>
+      	                    <td align="left">mm/dd/yyy</td>
+      	                    <td align="left">demo</td>
+                              <td align="left">demo</td>
                           </tr>
                           <tr>
       	                    <td>demo</td>
@@ -319,7 +319,9 @@
                 },
                 "ScrollCollapse": true,
                 "info": true,
-                "select": true,
+                select: {
+                    style: 'single'
+                },
                 "responsive": true,
                 "buttons":true,
                 //"stateSave": true,
@@ -327,9 +329,9 @@
           });
 
             //row selection
-          $('#tblFindPatient').on('click', 'tbody tr', function () {
-              window.location.href = $(this).attr('href');
-          });
+          //$('#tblFindPatient').on('click', 'tbody tr', function () {
+          //    window.location.href = $(this).attr('href');
+          //});
 
           // Apply the search
           table.columns().every(function () {
@@ -343,11 +345,11 @@
                   }
               });
           });
-            $('#tblFindPatient').on('click',
-                'tbody tr',
-                function() {
-                    console.log('API row values : ', table.row(this).data());
-                });
+
+          $("#tblFindPatient tbody tr").on('click', function (event) {
+              $("#tblFindPatient tbody tr").removeClass('row_selected');
+              $(this).addClass('row_selected');
+          });
 
         });
     </script>

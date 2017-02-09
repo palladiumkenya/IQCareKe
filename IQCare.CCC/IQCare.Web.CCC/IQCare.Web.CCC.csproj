@@ -93,6 +93,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.designer.cs">
+      <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Appointment\TodaysAppointments.aspx.cs">
       <DependentUpon>TodaysAppointments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +224,21 @@
     </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\OneTimeEventsTrackerService.asmx.cs">
+      <DependentUpon>OneTimeEventsTrackerService.asmx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
+      <DependentUpon>PatientEncounterService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientLookupService.asmx.cs">
+      <DependentUpon>PatientLookupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientService.asmx.cs">
+      <DependentUpon>PatientService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">

@@ -43,7 +43,7 @@ namespace IQCare.Web.CCC.WebService
 
             try
             {
-                //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+                IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
                 var patientLookup = new PatientLookupManager();
                 var foundPatient = patientLookup.GetPatientSearchListPayload();
@@ -61,7 +61,7 @@ namespace IQCare.Web.CCC.WebService
                         data = foundPatient
                     };
 
-                    jsonData = JsonConvert.SerializeObject(jsnonData);
+                   jsonData = JsonConvert.SerializeObject(jsnonData);
                 }
 
             }

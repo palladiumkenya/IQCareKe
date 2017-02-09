@@ -3,14 +3,14 @@
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="col-md-12 bs-callout bs-callout-info">
-        <div class="col-md-12">
-            <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">
-                <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>New Appointment</span>
-        </div>
-        <div class="col-md-12">
-            <uc:PatientDetails runat="server" />
-        </div>
+    <div class="col-md-12">
+        <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">
+            <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>New Appointment</span>
+    </div>
+    <div class="col-md-12">
+    <uc:PatientDetails runat="server" />
+    <div id="callout-labels-inline-block" class="col-md-12 well well-sm bs-callout bs-callout-primary" style="padding-bottom: 1%">
+
         <div class="col-md-12 form-group">
             <div class="col-md-12">
                 <label class="control-label pull-left text-primary">Appointment Details</label>
@@ -23,7 +23,8 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="col-md-12">
-                    <label class="control-label">Service Area</label></div>
+                    <label class="control-label">Service Area</label>
+                </div>
                 <div class="col-md-12 pull-right">
                     <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                 </div>
@@ -159,27 +160,58 @@
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-12">
-            <div class="col-md-6"></div>
-            <div class="col-md-6">
-                <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
-                </div>
-                <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Entry  </asp:LinkButton>
-                </div>
-                <div class="col-md-4">
-                    <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Appointment </asp:LinkButton>
-                </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
+            </div>
+            <div class="col-md-4">
+                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Entry  </asp:LinkButton>
+            </div>
+            <div class="col-md-4">
+                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Appointment </asp:LinkButton>
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
             allowPastDates: false,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
+
+        $(document).ready(function () {
+            $("#btnSaveAppointment").click(function () {
+                addPatientAppointment();
+            });
+        });
+
+        function addPatientAppointment() {
+            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+            var reason = $("#<%=Reason.ClientID%>").val();
+            var description = $("#<%=description.ClientID%>").val();
+            var status = $("#<%=status.ClientID%>").val();
+            /*if (status === '') { status = null }*/
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var patientId = 0;
+            var patientMasterVisitId = 0;
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/AddPatientAppointment",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    generate('success', '' + response.d);
+                },
+                error: function (response) {
+                    generate('error', response.d);
+                }
+            });
+        }
     </script>
 </asp:Content>
 
