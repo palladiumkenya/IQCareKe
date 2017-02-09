@@ -75,6 +75,7 @@
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\Patient\FindPatient.aspx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
+    <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />

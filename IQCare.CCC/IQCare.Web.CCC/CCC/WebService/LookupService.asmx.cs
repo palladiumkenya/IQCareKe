@@ -93,30 +93,27 @@ namespace IQCare.Web.CCC.WebService
 
             return _jsonObject;
         }
-    }
 
         // pw lookup lablist
         [WebMethod]
         public string GetLookupLabsList()
         {
-            string jsonObject = LookupLogic.GetLookupLabsListJson();  
-           
+            string jsonObject = LookupLogic.GetLookupLabsListJson();
+
             return jsonObject;
         }
         // pw .lookup lablist             
         // pw .typeahead 
         // pw lookup previous lablist
-        
-           [WebMethod]
-           public string GetLookupPreviousLabsList(int patientId)
-           {
-               string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);            
 
-               return jsonObject;
-           }
-           // pw .lookup previous lablist             
-           // pw .grid 
-           
+        [WebMethod]
+        public string GetLookupPreviousLabsList(int patientId)
+        {
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);
+
+            return jsonObject;
+        }
+        // pw .lookup previous lablist             
+        // pw .grid
     }
-
 }

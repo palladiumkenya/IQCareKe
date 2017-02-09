@@ -35,8 +35,8 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string addOneTimeEventsTracker( string Stage1DateValue , string Stage2DateValue, string Stage3DateValue, 
-            string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
+        public string addOneTimeEventsTracker(string Stage1DateValue, string Stage2DateValue, string Stage3DateValue,
+    string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace IQCare.Web.CCC.WebService
 
                 inhProphylaxis.addINHProphylaxis(prophylaxis);
 
-                for(var i = 0; i < data.Count; i++)
+                for (var i = 0; i < data.Count; i++)
                 {
                     PatientVaccination patientVaccine = new PatientVaccination()
                     {
@@ -98,7 +98,7 @@ namespace IQCare.Web.CCC.WebService
                     patientVaccination.addPatientVaccination(patientVaccine);
                 }
 
-                for(var i = 0; i < dataAdult.Count; i++)
+                for (var i = 0; i < dataAdult.Count; i++)
                 {
                     int vaccine = 0;
                     if (dataAdult[i].ToString() == "FluVaccine" || dataAdult[i].ToString() == "HBV")
