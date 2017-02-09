@@ -73,7 +73,6 @@
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
-    <Content Include="CCC\Patient\FindPatient.aspx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
@@ -100,10 +99,6 @@
     </Compile>
     <Compile Include="CCC\Appointment\TodaysAppointments.aspx.designer.cs">
       <DependentUpon>TodaysAppointments.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CCC\Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
@@ -174,13 +169,6 @@
     </Compile>
     <Compile Include="CCC\Patient\ServiceArea.aspx.designer.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CCC\Patient\FindPatient.aspx.cs">
-      <DependentUpon>FindPatient.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CCC\Patient\FindPatient.aspx.designer.cs">
-      <DependentUpon>FindPatient.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">
       <DependentUpon>Baseline.aspx</DependentUpon>
