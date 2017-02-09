@@ -73,7 +73,7 @@ namespace IQCare.Web.CCC.WebService
                         Active = true
                     };
 
-                    patientId = patientManager.addPatient(patient);
+                    patientId = patientManager.AddPatient(patient);
 
                     if (patientId > 0)
                     {

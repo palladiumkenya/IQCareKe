@@ -16,7 +16,10 @@ namespace Interface.CCC.Lookup
        
         List<LookupLabs> GetLookupLabs();  
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
-       string GetLookupNameFromId(int id);
+     string GetLookupNameFromId(int id);
+    }
 
-   }
+       
+
+   
 }

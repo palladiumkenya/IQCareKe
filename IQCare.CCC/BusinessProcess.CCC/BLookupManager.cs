@@ -81,7 +81,9 @@ namespace BusinessProcess.CCC
 
         public string GetLookupNameFromId(int id)
         {
-            throw new System.NotImplementedException();
+            LookupRepository lookupRepository=new LookupRepository();
+            var itemName = lookupRepository.FindBy(x => x.ItemId == id).Select(x=>x.ItemName).Single();
+            return itemName.ToString();
         }
     }
 }

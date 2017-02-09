@@ -574,6 +574,11 @@
                             }
                         }
                         else if (data.step === 2) {
+                            $('#datastep2').parsley().destroy();
+                            $('#datastep2').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep2").parsley().validate()) {
                                 addPersonLocation();
                             } else {
@@ -583,6 +588,11 @@
                             }
                         }
                         else if (data.step === 3) {
+                            $('#datastep3').parsley().destroy();
+                            $('#datastep3').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep3").parsley().validate()) {
                                 $.when(addPatientContact()).then(addPersonTreatmentSupporter());
                                 addTreatmentSupporter();
@@ -593,7 +603,11 @@
                             }
                         }
                         else if (data.step===4) {
-                            
+                            $('#datastep4').parsley().destroy();
+                            $('#datastep4').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep4").parsley().validate()) {
                                 addPersonPopulation();
                             } else {
@@ -632,6 +646,24 @@
                     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
                     {
                         age--;
+                    }
+                    if (personAge >= 18)
+                    {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                        $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                    } else {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                        $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                     }
                     return age;
                 }

@@ -5,9 +5,23 @@
         <uc:PatientDetails ID="PatientSummary" runat="server" />
     </div>
     <div class="col-md-12">
-<%--         <div class="col-md-12"><small class="pull-left fa fa-arrow-circle-o-right fa-2x"> Baseline Assessment & Treatment Inititiation</small></div>
-              <div class="col-md-12"><hr /></div>--%>
-         <div class="wizard" data-initialize="wizard" id="PatientBaseline">
+        <div class="col-md-12">
+           <div class="col-md-12">
+             <div class="bs-callout bs-callout-danger hidden">
+                 <h4 class="fa fa-exclamation-circle"> VALIDATION ERROR(S)</h4>
+                 <p>This form seems to be invalid :(</p>
+             </div>
+        </div> 
+
+
+            <div class="bs-callout bs-callout-info hidden">
+                  <h4 class="fa fa-check-square-o"> All SECTION VALIDATION PASSED</h4>
+                  <p>Everything seems to be ok :)</p>
+             </div>
+
+        </div>
+
+         <div class="wizard" data-initialize="wizard" id="myWizard">
               <div class="steps-container">
 	               <ul class="steps">
 		                <li data-step="1" data-name="campaign" class="active">
@@ -278,7 +292,7 @@
                         </div>
 	                </div><%-- .data-step1--%>
                   
-	                <div class="step-pane sample-pane " data-step="2">
+	                <div class="step-pane sample-pane" id="datastep2" data-step="2">
                          <div class="col-md-12"><small class="text-primary pull-left">2.Patient HIV Diagnosis</small></div>
                          <div class="col-md-12"><hr/></div>
                          <div class="form-group col-md-12">
@@ -453,7 +467,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
                                   </div>
                              </div>
                          </div>
@@ -745,7 +759,7 @@
                                  </div>
                                 
                                  <div class="col-md-2 col-xs-12">
-                                      <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblB/HIV">
+                                      <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblBHIV">
                                             <input class="sr-only" type="checkbox" id="BHIV" value="yes"> <span class="checkbox-label"> B/HIV</span>
                                       </label>
                                  </div>
@@ -784,13 +798,13 @@
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblWeight">Weight (Kgs) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley="required=true"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley-required="true" data-aprsley-type="number" data-parsley-min="2"></asp:TextBox>
                                       </div>
                                  </div>
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblheight">Height (cm) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true" data-parsley-type="number" data-parsley-min="5"></asp:TextBox>
                                       </div>
                                 </div>
                                  <div class="col-md-3">
@@ -901,7 +915,7 @@
                                  <div class="col-md-3">
                                      <div class="col-md-12"><label class="control-label pull-left">Baseline Viralload</label></div>
                                      <div class="col-md-12">
-                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static"></asp:TextBox>
+                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="2"></asp:TextBox>
                                      </div>
                                  </div>
                                  <div class="col-md-3">
@@ -994,7 +1008,7 @@
                                  <div class="col-md-3">
                                      <div class="col-md-12"><label class="control-label pull-left">Regimen</label></div>
                                      <div class="col-md-12">
-                                          <asp:TextBox runat="server" ID="TIRegimen" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select.."></asp:TextBox>
+                                          <asp:TextBox runat="server" ID="TIRegimen" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select.." data-parsley-required="true"></asp:TextBox>
                                      </div>
                                  </div>
                                  <div class="col-md-3"></div>
@@ -1063,7 +1077,8 @@
             noneChecked();
 
             $("#lblTransferInYes").checkbox('uncheck');
-            $("#lblTransferInNo").checkbox('uncheck');
+            $("#lblTransferInNo").checkbox('check');
+            $("#lblNONE").checkbox('check');
 
             $("#lblTransferInYes").on('checked.fu.checkbox',
                 function() {
@@ -1174,7 +1189,7 @@
             $("#lblBVCoInfection").checkbox('uncheck');
             $("#lblPregnancy").checkbox('uncheck');
             $("#lblPregnancy").checkbox('uncheck');
-            $("#lblB/HIV").checkbox('uncheck');
+            $("#lblBHIV").checkbox('uncheck');
 
     <%--         $("#<%=.ClientID%>").prop('disabled', true);
             $("#<%=.ClientID%>").prop('disabled', true);
@@ -1218,6 +1233,113 @@
                 $("#DLUsed").datepicker("enable");
                 $("#<%=AddPriorHistory.ClientID%>").removeAttr("disabled");   
             }
+
+  $("#myWizard")
+    .on("actionclicked.fu.wizard", function (evt, data) {
+        var currentStep = data.step;
+        var nextStep = 0;
+        var previousStep = 0;
+        var totalError = 0;
+        var stepError = 0;
+        /*var form = $("form[name='form1']");*/
+
+
+        if (data.direction === 'next')
+            nextStep = currentStep += 1;
+        else
+            previousStep = nextStep -= 1;
+        if (data.step === 1) {
+            $('#datastep1').parsley().destroy();
+            $('#datastep1').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+
+            /* add constraints based on age*/
+            if ($('#datastep1').parsley().validate()) {            
+                   // $.when(addPerson()).then(addPersonGaurdian());
+                //$.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
+               
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 2) {
+            $('#datastep2').parsley().destroy();
+            $('#datastep2').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep2").parsley().validate()) {
+               // addPersonLocation();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 3) {
+            $('#datastep3').parsley().destroy();
+            $('#datastep3').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep3").parsley().validate()) {
+              //  $.when(addPatientContact()).then(addPersonTreatmentSupporter());
+                //addTreatmentSupporter();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 4) {
+            $('#datastep4').parsley().destroy();
+            $('#datastep4').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep4").parsley().validate()) {
+                //  $.when(addPatientContact()).then(addPersonTreatmentSupporter());
+                //addTreatmentSupporter();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 5) {
+
+            if ($("#datastep4").parsley().validate()) {
+                //addPersonPopulation();
+            } else {
+
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                if (totalError > 0) {
+                    $('.bs-callout-danger').toggleClass('hidden', f);
+                }
+                evt.preventDefault();
+            }
+            //var ok4 = $('.parsley-error').length === 0;
+            //$('.bs-callout-info').toggleClass('hidden', !ok4);
+        }
+    })
+    .on("changed.fu.wizard",
+        function () {
+
+        })
+    .on('stepclicked.fu.wizard',
+        function () {
+
+        })
+    .on('finished.fu.wizard',
+        function (e) {
+
+        });
+
         });
     </script>
 

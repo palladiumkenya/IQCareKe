@@ -298,14 +298,31 @@
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
 
+            $("#btnFindPatient").click(function() {
+                alert("test");
+            });
+
           var table=  $("#tblFindPatient").dataTable({
 
                 "autoWidth":true,
 
                 "Processing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "../WebService/PatientLookupService.asmx/GetPatientSearch",
+                    type: "Post",
+                    dataType:"json",
+                    data:{},
+                    error:function() {
+                        
+                    }
+                },
                 "ScrollCollapse": true,
                 "info": true,
-                "stateSave": true,
+                "select": true,
+                "responsive": true,
+                "buttons":true,
+                //"stateSave": true,
                 "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
           });
 
@@ -314,7 +331,7 @@
               window.location.href = $(this).attr('href');
           });
 
-            // Apply the search
+          // Apply the search
           table.columns().every(function () {
               var that = this;
 
@@ -326,7 +343,11 @@
                   }
               });
           });
-
+            $('#tblFindPatient').on('click',
+                'tbody tr',
+                function() {
+                    console.log('API row values : ', table.row(this).data());
+                });
 
         });
     </script>

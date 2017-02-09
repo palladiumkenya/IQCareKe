@@ -81,6 +81,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
        
 
+       
+
         //Appointment
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
 
