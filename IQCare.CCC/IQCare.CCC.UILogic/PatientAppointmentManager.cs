@@ -8,7 +8,7 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientAppointmentManager
     {
-        private IPatientAppointment _appointment = (IPatientAppointment)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientAppointment, BusinessProcess.CCC");
+        private IPatientAppointment _appointment = (IPatientAppointment)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientAppointment, BusinessProcess.CCC");
 
         public int AddPatientAppointments(PatientAppointment p)
         {

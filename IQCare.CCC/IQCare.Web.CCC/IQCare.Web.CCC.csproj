@@ -135,6 +135,10 @@
     <Compile Include="CCC\Greencard.Master.designer.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
