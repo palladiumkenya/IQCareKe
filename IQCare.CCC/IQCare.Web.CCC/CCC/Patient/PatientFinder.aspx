@@ -343,7 +343,11 @@
                   }
               });
           });
-
+            $('#tblFindPatient').on('click',
+                'tbody tr',
+                function() {
+                    console.log('API row values : ', table.row(this).data());
+                });
 
         });
     </script>
