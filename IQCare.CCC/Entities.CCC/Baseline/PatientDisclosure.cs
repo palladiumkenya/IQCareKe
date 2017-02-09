@@ -13,16 +13,15 @@ namespace Entities.CCC.Baseline
     public class PatientDisclosure :BaseEntity
     {
         [Key]
-        public int?Id { get; set; }
-        [ForeignKey("PatientId")]
+        public int Id { get; set; }
         public int PatientId { get; set; }
-       [ForeignKey("PatientMasterVisit")]
-        public int PatientMasterVisitId { get; set; }      
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity PatientEntity { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public string Category { get; set; }
         public string DisclosureStage { get; set; }
         public DateTime DisclosureDate { get; set; }
-
-        public virtual PatientEntity PatientEntity { get; set; }
-        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
 }

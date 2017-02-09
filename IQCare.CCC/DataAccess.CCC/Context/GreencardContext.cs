@@ -33,6 +33,7 @@ namespace DataAccess.CCC.Context
         //Enrollment
         public DbSet<PatientEntryPoint> PatientEntryPoint { get; set; }
         public DbSet<PatientEntityIdentifier> PatientIdentifiers { get; set; }
+        public DbSet<PatientEntityEnrollment> PatientEntityEnrollments { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
@@ -50,7 +51,7 @@ namespace DataAccess.CCC.Context
 
 
         //Baseline Entities
-        public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
+        //public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
         public DbSet<PatientDisclosure> PatientDisclosures { get; set; }
         public DbSet<PatientHivEnrollmentBaseline> PatientHivEnrollmentBaselines { get; set; }
         public DbSet<PatientHivTesting> PatientHivTestings { get; set; }
@@ -58,6 +59,7 @@ namespace DataAccess.CCC.Context
         public DbSet<DiagnosisArvHistory> DiagnosisArvHistory { get; set; }
         public DbSet<PatientArtInitiationBaseline> PatientArtInitiation { get; set; }
         public DbSet<PatientArtUseHistory> PatientArtUseHistory { get; set; }
+        public DbSet<INHProphylaxis> INHProphylaxis { get; set; }
 
 
         //Encounter

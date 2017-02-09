@@ -13,9 +13,9 @@ namespace Entities.CCC.Enrollment
         [Key]
         public int Id { get; set; }
         
-        public int? PatientId { get; set; }
+        public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public PatientEntity Patient { get; set; }
+        public virtual PatientEntity Patient { get; set; }
         [ForeignKey("PatientEnrollment")]
         public int? PatientEnrollmentId { get; set; }
         public virtual PatientEntityEnrollment PatientEnrollment { get; set; }

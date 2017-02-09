@@ -12,6 +12,7 @@ namespace Entities.CCC.Lookup
         public int MasterId { get; set ; }
 
         [Key]
+        public Int64 RowID { get; set; }
         public int ItemId { get; set ; }
         public string MasterName { get; set; }
         public string ItemName { get; set; }
