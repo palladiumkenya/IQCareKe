@@ -58,8 +58,7 @@ namespace IQCare.Web.CCC.WebService
                         data = foundPatient
                     };
 
-                    jsonData =jsnonData;                 
-                   jsonData = JsonConvert.SerializeObject(jsnonData);
+                    jsonData = JsonConvert.SerializeObject(jsnonData);
                 }
 
             }
