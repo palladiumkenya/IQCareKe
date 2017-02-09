@@ -562,10 +562,18 @@
                             /* add constraints based on age*/                                         
                             if ($('#datastep1').parsley().validate()) {
                                 if (personAge >= 18) {
-                                    $.when(addPerson()).then(addPersonMaritalStatus());                                   
+                                    $.when(addPerson()).then(function(){
+                                        addPersonMaritalStatus();
+                                    });                                   
                                 } else {
-                                    $.when(addPerson()).then(addPersonGaurdian());                                
-                                    $.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
+                                    $.when(addPerson()).then(function(){
+                                        addPersonGaurdian();
+                                        $.when(addPersonMaritalStatus()).then(function(){
+                                            addPersonOvcStatus();
+                                        });
+                                    });
+                                    //$.when(addPerson()).then(addPersonGaurdian());                                
+                                    //$.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
@@ -724,12 +732,12 @@
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
                     var natId = $("#<%=NationalId.ClientID%>").val();
                     var userId = <%=UserId%>;
-                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');;
+                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':" + moment(dateOfBirth).format('DD-MMM-YYYY')  + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -853,7 +861,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonLocation",
-                        data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':" + ward + ",'village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
+                        data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':'" + ward + "','village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {

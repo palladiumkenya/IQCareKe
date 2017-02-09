@@ -68,6 +68,7 @@ namespace IQCare.Web.CCC.WebService
                     PatientEntity patient = new PatientEntity
                     {
                         PersonId = personid,
+                        ptn_pk = 0,
                         FacilityId = facilityId,
                         PatientIndex = datevalue.Year.ToString() + '-' + personid,
                         Active = true
