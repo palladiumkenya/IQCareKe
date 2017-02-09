@@ -1,0 +1,1 @@
+{"draw":1,"recordsTotal":1,"recordsFiltered":1,"data":[{"Id":2,"EnrollmentNumber":"12345","PatientIndex":"1065-2017","FirstName":"MvhZninO7Fs=","MiddleName":"MvhZninO7Fs=","LastName":"28by3aG1iNw=","Sex":62,"RegistrationDate":"\/Date(1486449017963)\/","DateOfBirth":"\/Date(1485982800000)\/","PatientStatus":false}]}

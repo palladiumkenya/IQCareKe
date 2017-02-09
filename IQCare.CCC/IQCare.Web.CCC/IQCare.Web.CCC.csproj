@@ -81,6 +81,7 @@
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
+    <Content Include="CCC\WebService\test.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -134,6 +135,10 @@
     </Compile>
     <Compile Include="CCC\Greencard.Master.designer.cs">
       <DependentUpon>Greencard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -304,6 +309,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />

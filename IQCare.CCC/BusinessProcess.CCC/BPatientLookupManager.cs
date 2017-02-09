@@ -28,6 +28,17 @@ namespace BusinessProcess.CCC
         {
             var patientSearchDetails =_unitOfWork.PatientLookupRepository
                     .GetAll()
+                    .Select(x=> new PatientLookup()
+                {
+                    Id = x.Id,
+                    PatientIndex = x.PatientIndex,
+                    FirstName = x.FirstName,
+                    MiddleName = x.MiddleName,
+                    DateOfBirth = x.DateOfBirth,
+                    Sex = x.Sex,
+                    RegistrationDate = x.RegistrationDate,
+                    PatientStatus = x.PatientStatus
+                })
                     .ToList();
 
             return patientSearchDetails;
