@@ -42,6 +42,35 @@ namespace IQCare.CCC.UILogic
             return retval;
         }
 
+        public int AddPersonTreatmentSupporterUiLogic(string firstName, string midName, string lastName, int gender, string nationalId,
+    int userId)
+        {
+            int retval;
+
+            try
+            {
+                Person p = new Person()
+                {
+                    FirstName = util.Encrypt(_textInfo.ToTitleCase(firstName)),
+                    MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
+                    LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
+                    Sex = gender,
+                    NationalId = util.Encrypt(nationalId),
+                    CreatedBy = userId,
+                    DateOfBirth = DateTime.Now
+                };
+                retval = _mgr.AddPerson(p);
+                //HttpContext.Current.Session["PersonId"] = p.Id;
+            }
+            catch (Exception exception)
+            {
+
+                throw new Exception(exception.Message);
+            }
+
+            return retval;
+        }
+
         public void UpdatePerson(Person person,int id)
         {
             _mgr.UpdatePerson(person,id);

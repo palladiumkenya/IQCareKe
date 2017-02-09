@@ -122,11 +122,11 @@
                                     <span class=""></span> Find /Add Patients <span class="badge"></span>
                                 </a>
 
-                                <a href="../CCC/Patient/PatientFinder.aspx" class="list-group-item">
+                                <a href="/CCC/Patient/PatientFinder.aspx" class="list-group-item">
                                     <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">0</span>
                                 </a>
                                 
-                                <a  href="../CCC/Patient/PatientRegistration.aspx" class="list-group-item">
+                                <a  href="/CCC/Patient/PatientRegistration.aspx" class="list-group-item">
                                     <span class="fa fa-user-plus fa-1x pull-left"></span> Register Patient 
                                 </a>
 
@@ -134,13 +134,13 @@
                                     <span class=""></span> Patient Baseline<span class="badge"></span>
                                 </a>
 
-                              <a href="../CCC/OneTimeEvents/Baseline.aspx" class="list-group-item">
+                              <a href="/CCC/OneTimeEvents/Baseline.aspx" class="list-group-item">
                                     <span class="fa fa-bar-chart fa-1x pull-left"></span> Treatment Baseline
                                 </a>
-                              <a href="../CCC/OneTimeEvents/FamilyTesting.aspx" class="list-group-item">
+                              <a href="/CCC/OneTimeEvents/FamilyTesting.aspx" class="list-group-item">
                                     <span class="fa fa-users fa-1x pull-left"></span> Family Testing <span class="badge">0</span>
                                 </a>
-                              <a href="../CCC/OneTimeEvents/OneTimeEventsTracker.aspx" class="list-group-item">
+                              <a href="/CCC/OneTimeEvents/OneTimeEventsTracker.aspx" class="list-group-item">
                                     <span class="fa fa-history fa-1x pull-left"></span> One Time Events Tracker 
                               </a>
 
@@ -148,7 +148,7 @@
                                    <span class=""></span> Patient Encounters<span class="badge"></span>
                               </a> 
                               
-                              <a  href="../CCC/Encounter/PatientEncounter.aspx" class="list-group-item">
+                              <a  href="/CCC/Encounter/PatientEncounter.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
                                 </a>
 
@@ -156,7 +156,7 @@
                                     <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
                                 </a>
 
-                                <a  href="../Encounter/PatientEncounter.aspx" class="list-group-item" onclick="IsNewEncounter();">
+                                <a  href="/Encounter/PatientEncounter.aspx" class="list-group-item" onclick="IsNewEncounter();">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter
                                 </a>
 
@@ -164,13 +164,13 @@
                                     <span class="fa fa-heartbeat fa-1x pull-left"></span> Capture Vitals <span class="badge">8</span>
                                 </a>
 
-                                <a  href="../CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
+                                <a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>
-                                <a href="../Appointment/TodaysAppointments.aspx" class="list-group-item">
+                                <a href="/CCC/Appointment/TodaysAppointments.aspx" class="list-group-item">
                                     <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointments <span class="badge">8</span>
                                 </a>
-                                <a href="../Appointment/ScheduleAppointment.aspx" class="list-group-item">
+                                <a href="/CCC/Appointment/ScheduleAppointment.aspx" class="list-group-item">
                                     <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>
                                 </a>
 

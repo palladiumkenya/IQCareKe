@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Common;
+using Entities.CCC.Visit;
 
 namespace Entities.CCC.Appointment
 {
@@ -11,7 +12,6 @@ namespace Entities.CCC.Appointment
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("PatientMasterVisitId")]
         public int PatientMasterVisitId { get; set; }
         public int PatientId { get; set; }
         public int ServiceAreaId { get; set; }
@@ -20,5 +20,7 @@ namespace Entities.CCC.Appointment
         public string Description { get; set; }
         public int StatusId { get; set; }
         public DateTime StatusDate { get; set; }
+        [ForeignKey("PatientMasterVisitId")]
+        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace IQCare.CCC.UILogic
 
     public class PersonLocationManager
     {
-        private IPersonLocationManager _mgr = (IPersonLocationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PersonLocationManager, BusinessProcess.CCC");
+        private IPersonLocationManager _mgr = (IPersonLocationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonLocationmanager, BusinessProcess.CCC");
         private int _result;
 
         public int AddPersonLocation(int personId,int county,int subcounty,int ward,string village,string location,string sublocation,string landmark,string nearesthealthcentre,int userId)
