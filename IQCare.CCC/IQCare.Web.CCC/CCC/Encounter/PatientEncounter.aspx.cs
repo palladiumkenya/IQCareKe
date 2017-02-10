@@ -11,13 +11,14 @@ namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
+        public string serversideval = "0";
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
             {
                 //HtmlInputHidden hdnID = (HtmlInputHidden)Page.Master.FindControl("isNewEncounter");
                 //string k = ((HtmlInputHidden)Page.Master.FindControl("isNewEncounter")).Value;
-                string k = Session["PatientMasterVisitID"].ToString();
+                //string k = Session["PatientMasterVisitID"].ToString();
 
                 LookupLogic lookUp = new LookupLogic();
                 lookUp.populateDDL(tbscreeningstatus, "TBStatus");
@@ -34,9 +35,16 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(ddlVaccine, "");
                 lookUp.populateDDL(ddlVaccineStage, "");
                 lookUp.populateDDL(ddlNoFP, "NoFamilyPlanning");
+                lookUp.populateDDL(ddlExaminationType, "ExaminationType");
+                lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                lookUp.populateCBL(cblPHDP, "PHDP");
+                lookUp.populateDDL(ddlReferredFor, "AppointmentType");
+                lookUp.populateDDL(arvAdherance, "ARVAdherence");
+                lookUp.populateDDL(ctxAdherance, "CTXAdherence");
 
             }
         }
+
     }
 
 }

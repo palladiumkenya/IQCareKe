@@ -34,6 +34,19 @@ namespace Entities.CCC.Encounter
             public string dose { get; set; }
             public string duration { get; set; }
         }
+        [Serializable]
+        public class PhysicalExamination
+        {
+            public string examType { get; set; }
+            public string exam { get; set; }
+            public string findings { get; set; }
+        }
 
+        [Serializable]
+        public class Diagnosis
+        {
+            public string diagnosis { get; set; }
+            public string treatment { get; set; }
+        }
     }
 }
