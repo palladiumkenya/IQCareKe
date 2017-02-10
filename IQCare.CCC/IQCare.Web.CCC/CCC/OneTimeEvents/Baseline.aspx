@@ -5,9 +5,23 @@
         <uc:PatientDetails ID="PatientSummary" runat="server" />
     </div>
     <div class="col-md-12">
-<%--         <div class="col-md-12"><small class="pull-left fa fa-arrow-circle-o-right fa-2x"> Baseline Assessment & Treatment Inititiation</small></div>
-              <div class="col-md-12"><hr /></div>--%>
-         <div class="wizard" data-initialize="wizard" id="PatientBaseline">
+        <div class="col-md-12">
+           <div class="col-md-12">
+             <div class="bs-callout bs-callout-danger hidden">
+                 <h4 class="fa fa-exclamation-circle"> VALIDATION ERROR(S)</h4>
+                 <p>This form seems to be invalid :(</p>
+             </div>
+        </div> 
+
+
+            <div class="bs-callout bs-callout-info hidden">
+                  <h4 class="fa fa-check-square-o"> All SECTION VALIDATION PASSED</h4>
+                  <p>Everything seems to be ok :)</p>
+             </div>
+
+        </div>
+
+         <div class="wizard" data-initialize="wizard" id="myWizard">
               <div class="steps-container">
 	               <ul class="steps">
 		                <li data-step="1" data-name="campaign" class="active">
@@ -153,7 +167,7 @@
                                   <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblARTStartDate">ART Start Date</asp:Label></div>
                                        <div class="col-md-12">
-                                            <div class="datepicker fuelux" id="ARTStartDate">
+                                            <div class="datepicker fuelux" Id="TIARTStartDate">
                                                                           <div class="input-group">
                                                                               <input class="form-control input-sm" id="StartDateART" type="text" />
                                                                               <div class="input-group-btn">
@@ -278,7 +292,7 @@
                         </div>
 	                </div><%-- .data-step1--%>
                   
-	                <div class="step-pane sample-pane " data-step="2">
+	                <div class="step-pane sample-pane" id="datastep2" data-step="2">
                          <div class="col-md-12"><small class="text-primary pull-left">2.Patient HIV Diagnosis</small></div>
                          <div class="col-md-12"><hr/></div>
                          <div class="form-group col-md-12">
@@ -453,7 +467,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
                                   </div>
                              </div>
                          </div>
@@ -722,7 +736,7 @@
                             <div class=" form-group col-md-12">
                                  <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblWHOStageHistory">
-                                            <input class="sr-only" type="checkbox" id="WHOStageHistory" value="yes"> <span class="checkbox-label"> WHO Stage</span>
+                                            <input class="sr-only" type="checkbox" id="WHOStageHistory" value="true"> <span class="checkbox-label"> WHO Stage</span>
                                      </label>
                                 </div>
 
@@ -734,19 +748,19 @@
 
                                  <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblBVCoInfection">
-                                             <input class="sr-only" type="checkbox" id="BVCoInfection" value="yes"> <span class="checkbox-label"> BV Co-Infection</span>
+                                             <input class="sr-only" type="checkbox" id="BVCoInfection" value="true"> <span class="checkbox-label"> BV Co-Infection</span>
                                       </label>
                                  </div>
                                 
                                  <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblPregnancy">
-                                             <input class="sr-only" type="checkbox" id="Pregnancy" value="yes"> <span class="checkbox-label"> Pregnancy</span>
+                                             <input class="sr-only" type="checkbox" id="Pregnancy" value="true"> <span class="checkbox-label"> Pregnancy</span>
                                       </label>
                                  </div>
                                 
                                  <div class="col-md-2 col-xs-12">
-                                      <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblB/HIV">
-                                            <input class="sr-only" type="checkbox" id="BHIV" value="yes"> <span class="checkbox-label"> B/HIV</span>
+                                      <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblBHIV">
+                                            <input class="sr-only" type="checkbox" id="BHIV" value="true"> <span class="checkbox-label"> B/HIV</span>
                                       </label>
                                  </div>
 
@@ -758,13 +772,13 @@
 
                                  <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblBreastFeeding">
-                                           <input class="sr-only" type="checkbox" id="BreastFeeding" value="yes"> <span class="checkbox-label"> BreastFeeding</span>
+                                           <input class="sr-only" type="checkbox" id="BreastFeeding" value="true"> <span class="checkbox-label"> BreastFeeding</span>
                                      </label>
                                  </div>
                                  
                                 <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblTbInfected">
-                                           <input class="sr-only" type="checkbox" id="TBInfected" value="yes"> <span class="checkbox-label"> TB Infected</span>
+                                           <input class="sr-only" type="checkbox" id="TBInfected" value="true"> <span class="checkbox-label"> TB Infected</span>
                                      </label>
                                  </div>
 
@@ -784,13 +798,13 @@
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblWeight">Weight (Kgs) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley="required=true"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley-required="true" data-aprsley-type="number" data-parsley-min="2"></asp:TextBox>
                                       </div>
                                  </div>
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblheight">Height (cm) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true" data-parsley-type="number" data-parsley-min="5"></asp:TextBox>
                                       </div>
                                 </div>
                                  <div class="col-md-3">
@@ -813,8 +827,7 @@
                                      <div class="col-md-12">
                                          <div class="datepicker fuelux" id="DateStartedOn1stLine">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" />
-                                                    <div class="input-group-btn">
+                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" /><div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                                 <span class="sr-only">Toggle Calendar</span>
@@ -901,7 +914,7 @@
                                  <div class="col-md-3">
                                      <div class="col-md-12"><label class="control-label pull-left">Baseline Viralload</label></div>
                                      <div class="col-md-12">
-                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static"></asp:TextBox>
+                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineViralload" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="2"></asp:TextBox>
                                      </div>
                                  </div>
                                  <div class="col-md-3">
@@ -994,7 +1007,7 @@
                                  <div class="col-md-3">
                                      <div class="col-md-12"><label class="control-label pull-left">Regimen</label></div>
                                      <div class="col-md-12">
-                                          <asp:TextBox runat="server" ID="TIRegimen" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select.."></asp:TextBox>
+                                          <asp:TextBox runat="server" ID="TIRegimen" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select.." data-parsley-required="true"></asp:TextBox>
                                      </div>
                                  </div>
                                  <div class="col-md-3"></div>
@@ -1015,6 +1028,18 @@
         $(document).ready(function(){
 
             var purposeList = new Array();
+            var patientId = 0;
+            var patientmasterVisitId = 0;
+            var transferIn = 0;
+            var treatmentType = 0;
+
+            var whostage = false;
+            var cD4Count=false;
+            var bVCoInfection = false;
+            var breastfeeding = false;
+            var pregnancy = false;
+            var bHiV = false;
+            var tbInfection = false;
 
             $('#ARTStartDate').datepicker({
                 allowPastDates: true,
@@ -1063,11 +1088,13 @@
             noneChecked();
 
             $("#lblTransferInYes").checkbox('uncheck');
-            $("#lblTransferInNo").checkbox('uncheck');
+            $("#lblTransferInNo").checkbox('check');
+            $("#lblNONE").checkbox('check');
 
             $("#lblTransferInYes").on('checked.fu.checkbox',
                 function() {
                     //uncheck No
+                    transferIn = 1;
                     $("#lblTransferInNo").checkbox('uncheck');
                     enableIfTransferIn();
                 });
@@ -1081,6 +1108,7 @@
 
             $("#lblTransferInNo").on("checked.fu.checkbox",
                 function() {
+                    transferIn = 0;
                     $("#lblTransferInYes").checkbox('uncheck');
                     disableIfNotTransferIn();
                 });
@@ -1091,6 +1119,7 @@
             //    });
             $("#PrEP").on("checked.fu.checkbox",
                 function() {
+                    treatmentType = 1;
                     $("#lblPMTCT").checkbox('uncheck');
                     $("#lblPEP").checkbox('uncheck');
                     $("#lblNONE").checkbox('uncheck');
@@ -1098,6 +1127,7 @@
                 });
             $("#lblPEP").on("checked.fu.checkbox",
                 function() {
+                    treatmentType = 2;
                     $("#lblPMTCT").checkbox('uncheck');
                     $("#PrEP").checkbox('uncheck');
                     $("#lblNONE").checkbox('uncheck');
@@ -1105,6 +1135,7 @@
                 });
             $("#lblPMTCT").on("checked.fu.checkbox",
                 function() {
+                    treatmentType = 3;
                     $("#PrEP").checkbox('uncheck');
                     $("#lblPEP").checkbox('uncheck');
                     $("#lblNONE").checkbox('uncheck');
@@ -1112,11 +1143,14 @@
                 });
             $("#lblNONE").on("checked.fu.checkbox",
                 function() {
+                    treatmentType = 4;
                     $("#lblPMTCT").checkbox('uncheck');
                     $("#lblPEP").checkbox('uncheck');
                     $("#PrEP").checkbox('uncheck');
                     noneChecked();
                 });
+
+
 
             $("#AddPriorHistory").click(function(e) {
                
@@ -1173,8 +1207,27 @@
             $("#lblCD4Count").checkbox('uncheck');
             $("#lblBVCoInfection").checkbox('uncheck');
             $("#lblPregnancy").checkbox('uncheck');
-            $("#lblPregnancy").checkbox('uncheck');
-            $("#lblB/HIV").checkbox('uncheck');
+            $("#lblBreastFeeding").checkbox('uncheck');
+            $("#lblBHIV").checkbox('uncheck');
+            $("#lblTbInfection").checkbox('uncheck');
+
+            /* when checked */
+            $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });
+            $("#lblCD4Count").on('checked.fu.checkbox', function () { cD4Count = true; });
+            $("#lblBVCoInfection").on('checked.fu.checkbox', function () { bVCoInfection = true; });
+            $("#lblPregnancy").on('checked.fu.checkbox', function () { pregnancy = true; });
+            $("#lblBreastFeeding").on('checked.fu.checkbox', function () { breastfeeding = true; });
+            $("#lblBHIV").on('checked.fu.checkbox', function () { bHiV = true; });
+            $("#lblTbInfection").on('checked.fu.checkbox', function () { tbInfection = true; });
+
+            /* when unchecked */
+            $("#lblwhostage").on('unchecked.fu.checkbox', function () { whostage = false; });
+            $("#lblCD4Count").on('unchecked.fu.checkbox', function () { cD4Count = false; });
+            $("#lblBVCoInfection").on('unchecked.fu.checkbox', function () { bVCoInfection = false; });
+            $("#lblPregnancy").on('unchecked.fu.checkbox', function () { pregnancy = false; });
+            $("#lblBreastFeeding").on('unchecked.fu.checkbox', function () { breastfeeding = false; });
+            $("#lblBHIV").on('unchecked.fu.checkbox', function () { bHiV = false; });
+            $("#lblTbInfection").on('unchecked.fu.checkbox', function () { tbInfection = false; });
 
     <%--         $("#<%=.ClientID%>").prop('disabled', true);
             $("#<%=.ClientID%>").prop('disabled', true);
@@ -1218,6 +1271,247 @@
                 $("#DLUsed").datepicker("enable");
                 $("#<%=AddPriorHistory.ClientID%>").removeAttr("disabled");   
             }
+
+  $("#myWizard")
+    .on("actionclicked.fu.wizard", function (evt, data) {
+        var currentStep = data.step;
+        var nextStep = 0;
+        var previousStep = 0;
+        var totalError = 0;
+        var stepError = 0;
+        /*var form = $("form[name='form1']");*/
+
+
+        if (data.direction === 'next')
+            nextStep = currentStep += 1;
+        else
+            previousStep = nextStep -= 1;
+        if (data.step === 1) {
+            $('#datastep1').parsley().destroy();
+            $('#datastep1').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+
+            /* add constraints based on age*/
+            if ($('#datastep1').parsley().validate()) {            
+                
+                if (transferIn > 0) {
+                    addPatientTransferIn();
+                } else {
+                    toastr.info("Patient is NOT a transferIN", "PatientTransferIn status");
+                }
+               
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 2) {
+            $('#datastep2').parsley().destroy();
+            $('#datastep2').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep2").parsley().validate()) {
+                addPatientArtUseInitiationBaseline();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 3) {
+            $('#datastep3').parsley().destroy();
+            $('#datastep3').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep3").parsley().validate()) {
+                if (treatmentType > 3) {
+                    toastr.info("No ART/ARV History Selected for this patient!", "ARV/ART Use History Status");
+                } else {
+                    addPatientArtUseHistory();
+                }
+                
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        else if (data.step === 4) {
+            $('#datastep4').parsley().destroy();
+            $('#datastep4').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep4").parsley().validate()) {
+                addPatientHivEnrollmentbaseline();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }
+        
+    })
+    .on("changed.fu.wizard",
+        function () {
+
+        })
+    .on('stepclicked.fu.wizard',
+        function () {
+
+        })
+    .on('finished.fu.wizard',
+        function (e) {
+
+        });
+                    /* datat persistence functions */
+            function addPatientTransferIn() {
+
+                var serviceAreaId = 0;
+                var transferInDate = $('#TIDate').datepicker('getDate');
+                var treatmentStartDate = $('#<%=lblARTStartDate.ClientID%>').datepicker('getDate');
+                var currentTreatment = $('#<%=TIRegimen.ClientID%>').val();
+                var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();
+                var mflCode = $('#<%=FacilityMFLCode.ClientID%>').val();
+                var countyFrom = $('#<%=TransferFromCounty.ClientID%>').find(":selected").val();
+                var transferInNotes = $('#<%=transferInNotes.ClientID%>').val();
+                var ptnId = patientId;
+                var ptnmasterVisitId = patientmasterVisitId;
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/AddPatientTransferStatus",
+                    data: "{'personId':'" +
+                        ptnId +
+                        "','patientMasterVisitId':'" +
+                        ptnmasterVisitId +
+                        "','transferInDate':'" +
+                        transferInDate +
+                        "','currentTreatment':'" +
+                        currentTreatment +
+                        "','facilityFrom':'" +
+                        facilityFrom +
+                        "','mflCode':'" +
+                        mflCode +
+                        "','countyFrom':'" +
+                        countyFrom +
+                        "','transferInNotes':'" +
+                        transferInNotes +
+                        "','userId':'" +
+                        userId +
+                        "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        toastr.success(response.d, "PatientTransferIn Status");
+                    },
+                    error: function(response) {
+                        toastr.error(response.d, "--- Patient TransferIn Status Error ---");
+                    }
+                });
+            }
+
+            
+            function addPatientHivEnrollmentbaseline() {
+                
+                
+                var hivDiagnosisDate = $('#DHID').datepicker('getDate');
+                var enrollmentDate = $('#DOE').datepicker('getDate');
+                var artInitiationDate = $('#DARTI').datepicker('getDate');
+                var enrollmentWhoStage = $('#<%=WHOStageAtEnrollment.ClientID%>').find(":selected").val();
+                var ptnId = patientId;
+                var ptnmasterVisitId = patientmasterVisitId;
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/AddPatientArtUseHistory",
+                    data: "{'personId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +
+                        "','artInitiationDate':'" +
+                        artInitiationDate +
+                        "','userId':'" +
+                        userId +
+                        "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        toastr.success(response.d, "Patient HIV Dignosis Status");
+                    },
+                    error: function(response) {
+                        toastr.error(response.d, "--- Patient HIV Diagnosis Status Error ---");
+                    }
+                });
+            }
+
+
+            function addPatientArtUseHistory() {
+                
+                var ptnId = patientId;
+                var ptnmasterVisitId = patientmasterVisitId;
+
+                var artuseHistoryTable = new Array();
+                $("# tr").each(function(row, tr) {
+                    artuseHistoryTable[row] = {
+                        "purpose": $(tr).find('td:eq(1)').text(),
+                        "regimen": $(tr).find('td:eq(2)').text(),
+                        "dateLastUsed": $(tr).find('td:eq(3)').text()
+                    }
+                });
+
+                artuseHistoryTable.shift();//first row will be empty-so remove it
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/AddPatientHivEnrollmentbaseline",
+                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','artuseStrings':'" + artuseHistoryTable + "','userId':'" + userId +
+                        "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        toastr.success(response.d, "PatientTransferIn Status");
+                    },
+                    error: function(response) {
+                        toastr.error(response.d, "--- Patient TransferIn Status Error ---");
+                    }
+                });
+            }
+
+
+
+            function addPatientArtUseInitiationBaseline() {
+
+                var viralLoad= $("#<%=BaselineViralload.ClientID%>").val(); 
+                var viralLoadDate= $("#BaselineViralloadDate").datepicker("getDate");
+
+                var muac= $("#<%=BaselineMUAC.ClientID%>").val();
+                var weight= $("#<%=BaselineWeight.ClientID%>").val(); 
+                var height= $("#<%=BaselineHeight.ClientID%>").val();
+                var artCohort= $("#<%=ARTCohort.ClientID%>").val(); 
+                var firstlineStartDate= $("#DateStartedOn1stLine").datepicker('getDate');
+                var startRegimen = $("#<%=TIRegimen.ClientID%>").val();
+
+                var ptnId = patientId;
+                var ptnmasterVisitId = patientmasterVisitId;
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/AddPatientArtUseInitiationBaseline",
+                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','hbvInfected':'" + hbvInfected + "','pregnant':'" + pregnant + "','tbInfected':'" + artuseHistoryTable + "','whoStage':'" + artuseHistoryTable + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + artuseHistoryTable + "','viralLoad':'" + viralLoad + "','viralLoadDate':'" + viralLoadDate + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','artCohort':'" + artCohort + "','firstlineStartDate':'" + firstlineStartDate + "','startRegimen':'" + startRegimen + "','userId':'" + userId +
+                        "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "PatientTransferIn Status");
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "--- Patient TransferIn Status Error ---");
+                    }
+                });
+            }
+
         });
     </script>
 

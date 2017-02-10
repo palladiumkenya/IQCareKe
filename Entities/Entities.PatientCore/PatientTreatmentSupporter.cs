@@ -9,12 +9,13 @@ using System.Text;
 namespace Entities.PatientCore
 {
     [Serializable]
+    [Table("PatientTreatmentSupporter")]
     public class PatientTreatmentSupporter :  BaseEntity
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Person")]
-        public int?PersonId { get; set; }
+        public int? PersonId { get; set; }
+        [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }
         public int SupporterId {get;set;}
         public int MobileContact { get; set; }

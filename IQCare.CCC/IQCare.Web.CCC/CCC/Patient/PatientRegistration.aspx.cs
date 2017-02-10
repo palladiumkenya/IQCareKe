@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.Patient
         protected void Page_Load(object sender, EventArgs e)
         {
             //Session["PersonId"] = 0;
-            Session["PersonId"] = 0;
+            //Session["PersonId"] = 0;
             Session["PersonGuardianId"] = 0;
             Session["PersonTreatmentSupporterId"] = 0;
 

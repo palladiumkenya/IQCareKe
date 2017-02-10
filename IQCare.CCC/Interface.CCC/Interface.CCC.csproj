@@ -53,10 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
+    <Compile Include="Baseline\IPatientArtInitiationBaselineManager.cs" />
+    <Compile Include="Baseline\IPatientArtUseHistoryManager.cs" />
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Baseline\IPatientVaccinationManager.cs" />
+    <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
+    <Compile Include="Baseline\IPatientHvTestingManager.cs" />
+    <Compile Include="Baseline\IPatientTranfersInManager.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
+    <Compile Include="IPatientAppointment.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
@@ -73,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
+    <Compile Include="Visit\IPatientLabOrderManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>

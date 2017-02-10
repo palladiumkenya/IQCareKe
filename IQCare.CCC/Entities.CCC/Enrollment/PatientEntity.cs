@@ -23,10 +23,10 @@ namespace Entities.CCC.Enrollment
         public bool Active { get; set; }
 
         public virtual Person Person { get; set; }
-        public virtual PatientArtInitiationBaseline PatientArtInitiationBaseline { get; set; }
+        /*public virtual PatientArtInitiationBaseline PatientArtInitiationBaseline { get; set; }
         public virtual PatientArtUseHistory PatientArtUseHistory { get; set; }
         public virtual DiagnosisArvHistory PatientDiagnosis { get; set; }
-        public virtual PatientHivEnrollmentBaseline PatientHivEnrollmentBaseline { get; set; } 
+        public virtual PatientHivEnrollmentBaseline PatientHivEnrollmentBaseline { get; set; }*/
 
     }
 }

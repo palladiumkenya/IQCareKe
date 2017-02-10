@@ -9,6 +9,7 @@ using Entities.CCC.Screening;
 using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
+using Entities.CCC.Appointment;
 using Entities.PatientCore;
 
 namespace DataAccess.CCC.Context
@@ -32,6 +33,7 @@ namespace DataAccess.CCC.Context
         //Enrollment
         public DbSet<PatientEntryPoint> PatientEntryPoint { get; set; }
         public DbSet<PatientEntityIdentifier> PatientIdentifiers { get; set; }
+        public DbSet<PatientEntityEnrollment> PatientEntityEnrollments { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
@@ -45,10 +47,11 @@ namespace DataAccess.CCC.Context
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
         public DbSet<Entities.CCC.Visit.PatientEncounter> PatientEncounters { get; set; }
+        public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
 
 
         //Baseline Entities
-        public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
+        //public DbSet<PatientArtUseHistory> PatientArtUseHistories { get; set; }
         public DbSet<PatientDisclosure> PatientDisclosures { get; set; }
         public DbSet<PatientHivEnrollmentBaseline> PatientHivEnrollmentBaselines { get; set; }
         public DbSet<PatientHivTesting> PatientHivTestings { get; set; }
@@ -56,6 +59,7 @@ namespace DataAccess.CCC.Context
         public DbSet<DiagnosisArvHistory> DiagnosisArvHistory { get; set; }
         public DbSet<PatientArtInitiationBaseline> PatientArtInitiation { get; set; }
         public DbSet<PatientArtUseHistory> PatientArtUseHistory { get; set; }
+        public DbSet<INHProphylaxis> INHProphylaxis { get; set; }
 
 
         //Encounter
@@ -75,6 +79,12 @@ namespace DataAccess.CCC.Context
         public DbSet<PhysicalExamination> PhysicalExamination { get; set; }
         public DbSet<Pregnancy> Pregnancies { get; set; }
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
+       
+
+       
+
+        //Appointment
+        public DbSet<PatientAppointment> PatientAppointments { get; set; }
 
     }
 }

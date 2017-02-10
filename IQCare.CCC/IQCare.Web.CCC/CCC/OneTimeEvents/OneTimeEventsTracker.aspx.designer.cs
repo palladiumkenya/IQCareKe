@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucTriage PatientSummary;
+        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
         /// Stage1Date control.
@@ -101,6 +101,42 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox vaccinationotheradult;
+        
+        /// <summary>
+        /// VaccineType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList VaccineType;
+        
+        /// <summary>
+        /// VaccineStage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList VaccineStage;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdd;
+        
+        /// <summary>
+        /// tblVaccines control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblVaccines;
         
         /// <summary>
         /// btnOneTimeEventsTracker control.

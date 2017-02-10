@@ -13,8 +13,8 @@ namespace Entities.PatientCore
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Person")]
         public  int PersonId { get; set; }
+        [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }  
         public int GuardianId { get; set; }
         public bool Orphan { get; set; }

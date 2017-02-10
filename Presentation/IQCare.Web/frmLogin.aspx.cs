@@ -56,7 +56,12 @@ namespace IQCare.Web
             Session.Add("AppUserEmployeeId", "");
             Session.Add("CustomfrmDrug", "");
             Session.Add("CustomfrmLab", "");
-            Session.Add("PatientMasterVisitID", "0");
+            //Session.Add("PatientMasterVisitID", "0");
+
+            Session.Add("PersonId", "0");
+            Session.Add("EncounterId","0");
+            Session.Add("PatientMasterVisitId","0");
+            Session.Add("PatientId","0");
             ////////////////////////////////////////
 
             lblDate.Text = "";

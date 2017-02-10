@@ -7,81 +7,90 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.OneTimeEvents {
+namespace IQCare.Web.CCC.Appointment {
     
     
-    public partial class FamilyTesting {
+    public partial class ScheduleAppointment {
         
         /// <summary>
-        /// PatientSummary control.
+        /// Span1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
         
         /// <summary>
-        /// relationship control.
+        /// ServiceArea control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect relationship;
+        protected global::System.Web.UI.WebControls.DropDownList ServiceArea;
         
         /// <summary>
-        /// BaselineHIVStatus control.
+        /// Reason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect BaselineHIVStatus;
+        protected global::System.Web.UI.WebControls.DropDownList Reason;
         
         /// <summary>
-        /// hivtestingresult control.
+        /// description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList hivtestingresult;
+        protected global::System.Web.UI.WebControls.TextBox description;
         
         /// <summary>
-        /// btnAddFamilyTesting control.
+        /// status control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddFamilyTesting;
+        protected global::System.Web.UI.WebControls.DropDownList status;
         
         /// <summary>
-        /// btnOneTimeEventsTracker control.
+        /// AppointmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnOneTimeEventsTracker;
+        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
         
         /// <summary>
-        /// btnReloadHistory control.
+        /// btnSaveAppointment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnReloadHistory;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveAppointment;
         
         /// <summary>
-        /// btnClose control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnClose;
+        protected global::System.Web.UI.WebControls.LinkButton btnReset;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }

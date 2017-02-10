@@ -17,18 +17,17 @@ namespace Entities.CCC.Baseline
     {
         [Key]
         public int Id { get; set; }
-
-        [ForeignKey("Patient")]
-        public virtual int PatientId { get; set; }
-        [ForeignKey("PatientMasterVisitId")]
-        public virtual int PatientMasterVisitId { get; set; }
+        public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
         public DateTime HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentWhoStage { get; set; }
         public DateTime ArtInitiationDate { get; set; }
+        [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
 
-        public virtual PatientEntity PatientEntity {get;set;}
+        //public virtual PatientEntity PatientEntity {get;set;}
+        [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
 }

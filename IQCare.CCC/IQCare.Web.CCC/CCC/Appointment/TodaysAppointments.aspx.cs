@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace IQCare.Web.CCC.Patient
+namespace IQCare.Web.CCC.Appointment
 {
-    public partial class FindPatient : System.Web.UI.Page
+    public partial class TodaysAppointments : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

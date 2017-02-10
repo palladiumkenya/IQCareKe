@@ -4,7 +4,7 @@ using Interface.CCC;
 
 namespace IQCare.CCC.UILogic
 {
-    public class PatientVitalsLogic 
+    public class PatientVitalsManager 
     {
         IPatientVitals _vitals = (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
         public int AddPatientVitals(PatientVital p)

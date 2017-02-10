@@ -562,10 +562,18 @@
                             /* add constraints based on age*/                                         
                             if ($('#datastep1').parsley().validate()) {
                                 if (personAge >= 18) {
-                                    $.when(addPerson()).then(addPersonMaritalStatus());                                   
+                                    $.when(addPerson()).then(function(){
+                                        addPersonMaritalStatus();
+                                    });                                   
                                 } else {
-                                    $.when(addPerson()).then(addPersonGaurdian());                                
-                                    $.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
+                                    $.when(addPerson()).then(function(){
+                                        addPersonGaurdian();
+                                        $.when(addPersonMaritalStatus()).then(function(){
+                                            addPersonOvcStatus();
+                                        });
+                                    });
+                                    //$.when(addPerson()).then(addPersonGaurdian());                                
+                                    //$.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
@@ -574,6 +582,11 @@
                             }
                         }
                         else if (data.step === 2) {
+                            $('#datastep2').parsley().destroy();
+                            $('#datastep2').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep2").parsley().validate()) {
                                 addPersonLocation();
                             } else {
@@ -583,6 +596,11 @@
                             }
                         }
                         else if (data.step === 3) {
+                            $('#datastep3').parsley().destroy();
+                            $('#datastep3').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep3").parsley().validate()) {
                                 $.when(addPatientContact()).then(addPersonTreatmentSupporter());
                                 addTreatmentSupporter();
@@ -593,7 +611,11 @@
                             }
                         }
                         else if (data.step===4) {
-                            
+                            $('#datastep4').parsley().destroy();
+                            $('#datastep4').parsley({
+                                excluded:
+                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                            });
                             if ($("#datastep4").parsley().validate()) {
                                 addPersonPopulation();
                             } else {
@@ -619,7 +641,7 @@
                         })
                     .on('finished.fu.wizard',
                         function(e) {
-
+                            window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
                         });
 
                 /* calculate Person Age */
@@ -632,6 +654,24 @@
                     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
                     {
                         age--;
+                    }
+                    if (personAge >= 18)
+                    {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                        $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                    } else {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                        $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                     }
                     return age;
                 }
@@ -692,12 +732,12 @@
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
                     var natId = $("#<%=NationalId.ClientID%>").val();
                     var userId = <%=UserId%>;
-                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');;
+                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':" + moment(dateOfBirth).format('DD-MMM-YYYY')  + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -821,7 +861,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonLocation",
-                        data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':" + ward + ",'village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
+                        data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':'" + ward + "','village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {

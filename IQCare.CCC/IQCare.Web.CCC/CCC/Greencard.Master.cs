@@ -52,6 +52,7 @@ namespace IQCare.Web.CCC
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Create New sessions:
             Page.Header.DataBind();
             if (Session["AppLocation"] == null)
             {

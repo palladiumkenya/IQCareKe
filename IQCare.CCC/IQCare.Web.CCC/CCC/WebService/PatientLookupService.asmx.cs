@@ -6,7 +6,7 @@ using System.Web.Services;
 using Application.Presentation;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -61,7 +61,7 @@ namespace IQCare.Web.CCC.WebService
                         data = foundPatient
                     };
 
-                    //jsonData = JsonConvert.SerializeObject(jsnonData);
+                    jsonData = JsonConvert.SerializeObject(jsnonData);
                 }
 
             }
