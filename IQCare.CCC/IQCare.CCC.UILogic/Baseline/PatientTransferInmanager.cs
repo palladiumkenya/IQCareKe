@@ -8,12 +8,12 @@ namespace IQCare.CCC.UILogic.Baseline
 {
     public class PatientTransferInmanager
     {
-        private readonly IPatientTranfersInManager  _patientTranfersIn = (IPatientTranfersInManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientArtInitiationBaselineManager, BusinessProcess.CCC");
+        private readonly IPatientTranfersInManager  _patientTranfersIn = (IPatientTranfersInManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientTransferInManager, BusinessProcess.CCC");
         private int _result;
 
         public int AddpatientTransferIn(int patientId, int patientMastervisitId, int serviceAreaId, DateTime transferinDate,
             DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,
-            string transferInNotes)
+            string transferInNotes,int userId)
         {
             PatientTransferIn patientTransferIn=new PatientTransferIn()
             {
@@ -26,7 +26,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 FacilityFrom = facilityFrom,
                 MflCode = mflCode,
                 CountyFrom = countyFrom,
-                TransferInNotes = transferInNotes
+                TransferInNotes = transferInNotes,
+                CreatedBy = userId
             };
 
             return _result=_patientTranfersIn.AddPatientTranferIn(patientTransferIn);
@@ -35,7 +36,7 @@ namespace IQCare.CCC.UILogic.Baseline
         public int UpdatePatientTransferIn(int patientId, int patientMastervisitId, int serviceAreaId,
             DateTime transferinDate,
             DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,
-            string transferInNotes)
+            string transferInNotes,int userId)
         {
             PatientTransferIn patientTransferIn = new PatientTransferIn()
             {
@@ -48,7 +49,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 FacilityFrom = facilityFrom,
                 MflCode = mflCode,
                 CountyFrom = countyFrom,
-                TransferInNotes = transferInNotes
+                TransferInNotes = transferInNotes,
+                CreatedBy = userId
             };
 
             return _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);

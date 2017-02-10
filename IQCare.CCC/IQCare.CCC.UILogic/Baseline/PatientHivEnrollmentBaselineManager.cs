@@ -15,7 +15,7 @@ namespace IQCare.CCC.UILogic.Baseline
         private int _result;
 
 
-        public int AddHivEnrollmentBaseline(int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,DateTime artInitiationDate,bool artHistoryUse,bool hivRetest,int hivRetestTypeId,string reasonForNotRetest)
+        public int AddHivEnrollmentBaseline(int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,DateTime artInitiationDate,bool artHistoryUse,bool hivRetest,int hivRetestTypeId,string reasonForNotRetest,int userId)
         {
             PatientHivEnrollmentBaseline patientHivEnrollment=new PatientHivEnrollmentBaseline()
             {
@@ -28,10 +28,42 @@ namespace IQCare.CCC.UILogic.Baseline
                 ArtHistoryUse = artHistoryUse,
                 HivRetest = hivRetest,
                 HivRetestTypeId = hivRetestTypeId,
-                ReasonForNoRetest = reasonForNotRetest
+                ReasonForNoRetest = reasonForNotRetest,
+                CreatedBy = userId
             };
 
             return _result=_patientHivEnrolmet.AddPatientHivEnrollment(patientHivEnrollment);
+        }
+
+
+        public int UpdateHivEnrollmentBaseline(int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate, DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, bool artHistoryUse, bool hivRetest, int hivRetestTypeId, string reasonForNotRetest, int userId)
+        {
+            PatientHivEnrollmentBaseline patientHivEnrollment = new PatientHivEnrollmentBaseline()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                HivDiagnosisDate = hivDiagnosisDate,
+                EnrollmentDate = enrollmentDate,
+                EnrollmentWhoStage = enrollmentWhoStage,
+                ArtInitiationDate = artInitiationDate,
+                ArtHistoryUse = artHistoryUse,
+                HivRetest = hivRetest,
+                HivRetestTypeId = hivRetestTypeId,
+                ReasonForNoRetest = reasonForNotRetest,
+                CreatedBy = userId
+            };
+
+            return _result = _patientHivEnrolmet.AddPatientHivEnrollment(patientHivEnrollment);
+        }
+
+        public int DeleteEnrollmentbaseline(int id)
+        {
+            return _result=_patientHivEnrolmet.DeletePatientHivEnrollment(id);
+        }
+
+        public List<PatientHivEnrollmentBaseline> GetPatientHivEnrollmentBaselines(int patientId)
+        {
+            return _patientHivEnrolmet.GetPatientHivEnrollmentBaselines(patientId);
         }
     }
 }

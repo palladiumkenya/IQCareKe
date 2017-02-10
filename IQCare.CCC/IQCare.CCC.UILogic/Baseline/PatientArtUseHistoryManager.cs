@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Presentation;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
-   public class PatientArtUseHistoryManager
+    public class PatientArtUseHistoryManager
     {
         private readonly IPatientArtUseHistoryManager _patientArtUseHistoryManager = (IPatientArtUseHistoryManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientArtUseHistoryManager, BusinessProcess.CCC");
         private int _result;
 
-        public int AddPatientArtUseHistory(int patientId,int patientMasterVisitId,string treatmentType,string purpose,string regimen,DateTime dateLastUsed)
+        public int AddPatientArtUseHistory(int patientId,int patientMasterVisitId,string treatmentType,string purpose,string regimen,DateTime dateLastUsed,int userId)
         {
             PatientArtUseHistory patientArtUseHistory=new PatientArtUseHistory()
             {
@@ -23,7 +20,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 TreatmentType = treatmentType,
                 Purpose = purpose,
                 Regimen = regimen,
-                DateLastUsed = dateLastUsed
+                DateLastUsed = dateLastUsed,
+                CreatedBy = userId
             };
 
             if (GetPatientArtUseHistory(patientId).Count < 1)
@@ -36,7 +34,7 @@ namespace IQCare.CCC.UILogic.Baseline
             }
         }
 
-        public int UpdatePatientArtUseHistory(int patientId, int patientMasterVisitId, string treatmentType, string purpose, string regimen, DateTime dateLastUsed)
+        public int UpdatePatientArtUseHistory(int patientId, int patientMasterVisitId, string treatmentType, string purpose, string regimen, DateTime dateLastUsed,int userId)
         {
             PatientArtUseHistory patientArtUseHistory = new PatientArtUseHistory()
             {
@@ -45,7 +43,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 TreatmentType = treatmentType,
                 Purpose = purpose,
                 Regimen = regimen,
-                DateLastUsed = dateLastUsed
+                DateLastUsed = dateLastUsed,
+                CreatedBy = userId
             };
 
             return _result = _patientArtUseHistoryManager.UpdatePatientArtUseHistory(patientArtUseHistory);

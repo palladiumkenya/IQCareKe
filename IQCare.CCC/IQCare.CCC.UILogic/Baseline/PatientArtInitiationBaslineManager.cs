@@ -14,7 +14,7 @@ namespace IQCare.CCC.UILogic.Baseline
         public int AddArtInitiationbaseline(int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant,
             bool tbInfected, int whoStage, bool breastfeeding, int cd4Count, decimal viralLoad, DateTime viralLoadDate,
             decimal muac, decimal weight, decimal height, string artCohort, DateTime firstlineStartDate,
-            int startRegimen)
+            int startRegimen,int userId)
         {
             PatientArtInitiationBaseline patientArtInitiationBaselines= new PatientArtInitiationBaseline()
                 {
@@ -33,7 +33,8 @@ namespace IQCare.CCC.UILogic.Baseline
                     Height = height,
                     ARTCohort = artCohort,
                     FirstlineDate = firstlineStartDate,
-                    StartRegimen = startRegimen
+                    StartRegimen = startRegimen,
+                    CreatedBy = userId
                 };
           return _result=  _mgr.AddArtInitiationBaseline(patientArtInitiationBaselines);
         }
@@ -41,7 +42,7 @@ namespace IQCare.CCC.UILogic.Baseline
         public int UpdateArtInitiationbaseline(int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant,
             bool tbInfected, int whoStage, bool breastfeeding, int cd4Count, decimal viralLoad, DateTime viralLoadDate,
             decimal muac, decimal weight, decimal height, string artCohort, DateTime firstlineStartDate,
-            int startRegimen)
+            int startRegimen,int userId)
         {
             PatientArtInitiationBaseline patientArtInitiationBaselines = new PatientArtInitiationBaseline()
             {
@@ -60,7 +61,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 Height = height,
                 ARTCohort = artCohort,
                 FirstlineDate = firstlineStartDate,
-                StartRegimen = startRegimen
+                StartRegimen = startRegimen,
+                CreatedBy = userId
             };
             return _result = _mgr.UpdateArtInitiationBaseline(patientArtInitiationBaselines);
         }
