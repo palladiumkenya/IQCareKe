@@ -98,7 +98,7 @@
 		                                    </li>
                                             
                                             <li data-step="2">
-			                                    <span class="badge">3</span>Patient Chronic Illness
+			                                    <span class="badge">2</span>Patient Chronic Illness
 			                                    <span class="chevron"></span>
 		                                    </li>
 		                                    <li data-step="3" id="dsPatientExamination" data-name="">
@@ -135,7 +135,6 @@
 	                                              <div class="col-md-12">
 		                                              <div class="datepicker fuelux" id="DateOfVisit">
 		                                              <div class="input-group">
-
 			                                              <input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />
 			                                              <div class="input-group-btn">
 				                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -222,10 +221,10 @@
 	                                               <div class="col-md-12"><label class="control-label  pull-left">Visit Scheduled?</label></div>
 	                                               <div class="col-md-12">
 		                                              <label class="radio-custom radio-inline pull-left" data-initialize="radio">
-			                                              <input class="sr-only" name="Scheduled" type="radio" value="1"> Yes
+			                                              <input class="sr-only" name="Scheduled" type="radio" value="1" > Yes
 		                                              </label>
 		                                              <label class="radio-custom radio-inline pull-left" data-initialize="radio">
-			                                              <input class="sr-only" name="Scheduled" type="radio" data-parsley-required="true" value="0"> No
+			                                              <input class="sr-only" name="Scheduled" type="radio" data-parsley-required="true" value="0" > No
 		                                              </label>
 	                                              </div>
                                               </div>
@@ -339,24 +338,17 @@
                                                         <table id="dtlAdverseEvents" class="table table-bordered table-striped">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width: 50px;">
-                                                                        Adverse Event
-                                                                    </th>
-                                                                    <th style="width: 50px;">
-                                                                        Medicine Causing A/E
-                                                                    </th>
-                                                                    <th style="width: 30px;">
-                                                                        Severity
-                                                                    </th>
-                                                                    <th style="width: 50px;">
-                                                                        Action
-                                                                    </th>
-                                                                    
+                                                                    <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Adverse Event</span></th>
+                                                                    <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Medicine Causing A/E</span></th>
+                                                                    <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Severity</span></th>
+                                                                    <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Action</span></th>
+                                                                    <th><span class="text-primary"></span></th>
                                                                 </tr>
                                                             </thead>
+                                                            <tbody></tbody>
                                                         </table>
-                                                            <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 80px;" id="btnRemoveAdvEvent">Remove</button>
-                                                    </div>
+                                                            
+                                                        </div>
                                                     
                                                     </div> <%--.panel--%>
                                                    </div>
@@ -666,23 +658,15 @@
                                                                     <table id="dtlChronicIllness" class="table table-bordered table-striped">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th style="width: 50px;">
-                                                                                    Illness
-                                                                                </th>
-                                                                                <th style="width: 50px;">
-                                                                                    Current Treatment
-                                                                                </th>
-                                                                                <th style="width: 30px;">
-                                                                                    Dose
-                                                                                </th>
-                                                                                <th style="width: 50px;">
-                                                                                    Duration
-                                                                                </th>
-                                                                    
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Illness</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Current Treatment</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Dose</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Duration</span></th>
+                                                                                <th></th>
                                                                             </tr>
                                                                         </thead>
                                                                     </table>
-                                                                        <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 150px" id="btnRemoveChronicIllness">Remove Selected Row</button>
+                                                                        
                                                                 </div>
                                                              </div>
                                                          </div>
@@ -808,19 +792,14 @@
                                                                                 <table id="dtlVaccines" class="table table-bordered table-striped">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>
-                                                                                                Vaccine
-                                                                                            </th>
-                                                                                            <th>
-                                                                                                Vaccine Stage
-                                                                                            </th>
-                                                                                            <th>
-                                                                                                Vaccination Date
-                                                                                            </th>
+                                                                                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Vaccine</span></th>
+                                                                                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Vaccine Stage</span></th>
+                                                                                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Vaccination Date</span></th>
+                                                                                            <th></th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                 </table>
-                                                                                    <button type="button" class="btn btn-block btn-primary btn-sm" style="width: 80px;" id="btnRemoveVaccine">Remove</button>
+                                                                                    
                                                                             </div>
                                                                          </div>
                                                                      </div>
@@ -842,37 +821,61 @@
                                                      <h4 class="pull-left text-warning"><i class="fa fa-search fa-5x" aria-hidden="true"></i></h4>
                                                  </div>
                                                  <div class="col-md-11">
-                                                     <div class="col-md-6">
-                                                         <div class="col-md-12"><h1 class="text-primary pull-left"><small>Physical Examination</small> </h1></div>
-                                                         <div class="col-md-12"><hr /></div>
+                                                     <div class="col-md-12 form-group">
+                                                              <div class="col-md-3 form-group">
+                                                                  <div class="col-md-12"><label for="ChronicIllnessName" class="control-label pull-left">Examination Type</label></div>
+                                                                  <div class="col-md-12">
+                                                                      <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                  </div>
+                                                              </div>
 
-                                                         <div class="col-md-12 form-group">
-                                                             <label class="control-label pull-left">Indicate Physical Examination Findings below </label>
+                                                              <div class="col-md-3 form-group">
+                                                                   <div class="col-md-12"><label class="control-label pull-left">Examination</label></div>
+                                                                   <div class="col-md-12">
+                                                                       <asp:DropDownList runat="server" ID="ddlExamination" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                   </div>
+                                                              </div>
+
+                                                             <div class="col-md-5 form-group">
+                                                                 <div class="col-md-12"><label class="control-label pull-left"> Findings</label></div>
+                                                                 <div class="col-md-12">
+
+                                                                     <asp:TextBox runat="server" ID="txtExamFindings" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="Findings.." Rows="3" TextMode="MultiLine"></asp:TextBox>
+                                                                 </div>
+                                                             </div>
+
+                                                             <div class="col-md-1">
+                                                                 <div class="col-md-12"><label class="control-label pull-left"><span class="fa fa-cog">Action</span></label></div>
+                                                                 <div class="col-md-4">
+                                                                     <%--<asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn btn-info btn-lg fa fa-plus-circle">Add</asp:LinkButton>--%>
+                                                                     <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPhysicalExam" onclick="AddPhysicalExam();">Add</button>
+                                                                 </div>
+                                                             </div>
                                                          </div>
 
-                                                         <div class="form-group col-md-12">
-                                                              <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblpallor">
-                                                                    <input class="sr-only" type="checkbox" id="pallor" value="option1"> <span class="checkbox-label"><strong> Pallor </strong> </span>
-                                                            </label>
+                                                        <div class="col-md-12 form-group">
+                                                            <div class="panel panel-info">
+                                                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                    <table id="dtlPhysicalExam" class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Examination Type</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Examination</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Findings</span></th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                     
+                                                                </div>
+                                                             </div>
                                                          </div>
-                                                         <div class="form-group col-md-12">
-                                                             <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblJaundice">
-                                                                 <input class="sr-only" type="checkbox" id="Jaundice" value="option1"> <span class="checkbox-label"><strong> Jaundice </strong> </span>
-                                                            </label>
-                                                         </div>
-                                                         <div class="form-group col-md-12">
-                                                             <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblOedema">
-                                                                 <input class="sr-only" type="checkbox" id="Oedema" value="option1"> <span class="checkbox-label"><strong> Oedema </strong> </span>
-                                                            </label>
-                                                         </div>
-                                                         <div class="form-group col-md-12">
-                                                             <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblOralThhrush">
-                                                                 <input class="sr-only" type="checkbox" id="OralThrush" value="option1"> <span class="checkbox-label"><strong> Oral Thrush </strong> </span>
-                                                            </label>
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-6">
-                                                          <div class="col-md-12"><h1 class="text-primary pull-left"><small>Physical Examination Notes</small> </h1></div>
+                                                    
+                                                 </div>
+
+                                                 <div class="col-md-1"></div>
+                                                 <div class="col-md-11">
+                                                     <div class="col-md-12">
                                                          <div class="col-md-12"><hr /></div>
                                                          <div class="row">
                                                              <div class="col-md-12 form-group">
@@ -898,72 +901,61 @@
                                                 <div class="col-md-12">
                                                   
                                                        <div class="col-md-4">
-                                                       <h1 class="col-md-12"><small class="pull-left">Positive Health,Dignity & Prevention (PHDP)</small></h1>
+                                                       <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>
                                                        <div class="col-md-12"><hr /></div>
-                                                            
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblAdc">
-                                                                         <input class="sr-only" type="checkbox" id="adc" value="option1"> <span class="checkbox-label"><strong> Adherance Counselling (Adc) </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblcondom">
-                                                                         <input class="sr-only" type="checkbox" id="CondonUse" value="option1"> <span class="checkbox-label"><strong> Condom Distribution (CD) </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblsubstanceAbuse">
-                                                                         <input class="sr-only" type="checkbox" id="SubstanceAbuse" value="option1"> <span class="checkbox-label"><strong> Substance Abuse (SA) </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lbldsp">
-                                                                         <input class="sr-only" type="checkbox" id="DisclosureToSexPartner" value="option1"> <span class="checkbox-label"><strong> Disclosure to Sex Partner (Disc) </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                            <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblPartnerTesting">
-                                                                         <input class="sr-only" type="checkbox" id="Partner Testing" value="option1"> <span class="checkbox-label"><strong> Partner Testing (PT) </strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                             <div class="form-group col-md-12">
-                                                                     <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox"  id="lblstiscreening">
-                                                                         <input class="sr-only" type="checkbox" id="STIScreening" value="option1"> <span class="checkbox-label"><strong> STI Screening (STI)</strong></span>
-                                                                     </label>
-                                                                  </div>
-
-                                                             
+                                                           <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                               <ContentTemplate>
+                                                                   <div class="form-group col-md-12" style="text-align:left">
+                                                                       <asp:CheckBoxList ID="cblPHDP" runat="server" ></asp:CheckBoxList>
+                                              
+                                                                    </div>     
+                                                               </ContentTemplate>
+                                                           </asp:UpdatePanel>                         
                                                   </div>
 
                                                        <div class="col-md-8">
                                                             
-                                                            <h1 class="col-md-12"><small class="pull-left"> Patient Diagnosis and Treatment</small></h1>
+                                                            <h1 class="col-md-12"> Patient Diagnosis and Treatment</h1>
                                                             <div class="col-md-12"><hr /></div>
                                                             
                                                             <div class="col-md-12">
-                                                                 <div class="col-md-7"><label class="control-label pull-left">Diagnosis (ICD 10 Codes)</label></div>
-                                                                 <div class="col-md-3"><label class="control-label pull-left">Treatment</label></div>
-                                                                 <div class="col-md-2"><label class="control-label pull-left">Action</label></div>
+                                                                 <div class="col-md-6"><label class="control-label pull-left">Diagnosis (ICD 10 Codes)</label></div>
+                                                                 <div class="col-md-5"><label class="control-label pull-left">Treatment</label></div>
+                                                                 <div class="col-md-1"><label class="control-label pull-left">Action</label></div>
                                                             </div>
                                                             <div class="col-md-12">
-                                                                 <div class="col-md-7 form-group">
-                                                                      <input type="text" id="Diagnosis" class ="form-control input-sm" placeholder="Type Diagnosis......" runat="server" />
+                                                                 <div class="col-md-6 form-group">
+                                                                      <input type="text" id="Diagnosis" class ="form-control input-sm" placeholder="Type Diagnosis......" runat="server" ClientIDMode="Static" />
                                                                  </div>
                                                                 
-                                                                 <div class="col-md-3 form-group">
-                                                                     <input type="text" id="DiagnosisTreatment" class ="form-control input-sm" placeholder="treatment" runat="server" />
+                                                                 <div class="col-md-5 form-group">
+                                                                     <input type="text" id="DiagnosisTreatment" class ="form-control input-sm" placeholder="treatment" runat="server" ClientIDMode="Static" />
                                                                  </div>
                                                                  
-                                                                <div class="col-md-2 form-group">
-                                                                      <asp:LinkButton runat="server" ID="btnAddDiagnosis" CssClass="btn btn-info btn-lg fa fa-plus-circle"> Add</asp:LinkButton>
+                                                                <div class="col-md-1 form-group">
+                                                                      <%--<asp:LinkButton runat="server" ID="btnAddDiagnosis" CssClass="btn btn-info btn-lg fa fa-plus-circle"> Add</asp:LinkButton>--%>
+                                                                    <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDiagnosis" onclick="AddDiagnosis();">Add</button>
                                                                  </div>
                                                                 
                                                             </div>
+
+                                                           <div class="col-md-12 form-group">
+                                                            <div class="panel panel-info">
+                                                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                    <table id="dtlDiagnosis" class="table table-bordered table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Diagnosis</span></th>
+                                                                                <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"></i><span class="text-primary">Treatment</span></th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                   
+                                                                </div>
+                                                             </div>
+                                                         </div>
+
 
                                                             <div class="col-md-12">
                                                                  <div class="col-md-12">
@@ -1007,7 +999,7 @@
                                                                    <div class="col-md-7">
                                                                         <div class="datepicker fuelux form-group" id="NextAppDate">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="NextAppointmentDate" type="text" />
+                                                                              <input class="form-control input-sm" id="NextAppointmentDate" type="text" runat="server" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1090,16 +1082,11 @@
                                                               <div class="col-md-12">
                                                                    <div class="col-md-5"><label class="control-label pull-left">Referred for </label></div>
                                                                    <div class="col-md-7 form-group">
-                                                                       <input type="text" class="form-control input-sm" id="ReferredFor" placeholder="referred for" runat="server" />
+                                                                       <asp:DropDownList ID="ddlReferredFor" runat="server" CssClass="form-control input-sm"></asp:DropDownList>
                                                                    </div>
                                                               </div>
                                                               
-                                                              <div class="col-md-12">
-                                                                  <div class="col-md-5"><label class="control-label pull-left">Referred for </label></div>
-                                                                  <div class="col-md-7 form-group">
-                                                                      <select class="form-control input-sm" id="PrescribedBy" runat="server"></select>
-                                                                  </div>
-                                                              </div>
+                                                              
                                                           </div>
                                                      </div><%-- .col-md-4--%>
                                                      <%--<div class="col-md-8"></div>--%>
@@ -1302,6 +1289,7 @@
                                               </div>
                                          </div>
                                          
+
                                         <div class="col-md-12">
                                               <div class="col-md-12"><hr/></div>
                                               <div class="col-md-6"></div>
@@ -1326,6 +1314,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             
+            var AEList = new Array();
+
             $('#DateOfVisit').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
@@ -1366,98 +1356,129 @@
             $('#dtlAdverseEvents').DataTable({
                 paging: false,
                 searching: false,
-                info: false
+                info: false,
+                ordering: false
             });
 
             $('#dtlChronicIllness').DataTable({
                 paging: false,
                 searching: false,
-                info: false
+                info: false,
+                ordering: false
             });
 
             $('#dtlVaccines').DataTable({
                 paging: false,
                 searching: false,
-                info: false
+                info: false,
+                ordering: false
             });
 
+            $('#dtlPhysicalExam').DataTable({
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false
+            });
+
+            $('#dtlDiagnosis').DataTable({
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false
+            });
 
             var tableAdverseEvents = $('#dtlAdverseEvents').DataTable();
             var tableChronicIllness = $('#dtlChronicIllness').DataTable();
             var tableVaccines = $('#dtlVaccines').DataTable();
-        
+            var tablePhysicalExam = $('#dtlPhysicalExam').DataTable();
+            var tableDiagnosis = $('#dtlDiagnosis').DataTable();
+            
             var index;
 
             ///dtlAdverseEvents
-            $('#dtlAdverseEvents tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableAdverseEvents.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+            //$('#dtlAdverseEvents tbody').on('click', 'tr', function () {
+            //    if ($(this).hasClass('selected')) {
+            //        $(this).removeClass('selected');
+            //    }
+            //    else {
+            //        tableAdverseEvents.$('tr.selected').removeClass('selected');
+            //        $(this).addClass('selected');
+            //    }
+            //});
 
-            $('#btnRemoveAdvEvent').click(function () {
-                tableAdverseEvents.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrAdverseEvent.splice(index, 1);
-                }
-            });
+            //$('#btnRemoveAdvEvent').click(function () {
+            //    tableAdverseEvents.row('.selected').remove().draw(false);
+            //    if (index > -1) {
+            //        arrAdverseEvent.splice(index, 1);
+            //    }
+            //});
 
-            $('#dtlAdverseEvents').on('click', 'tr', function () {
-                var aData = tableAdverseEvents.row(this).data();
-                index = arrAdverseEvent.findIndex(x => x.adverseEvent == aData[0]);
-            });
+            //$('#dtlAdverseEvents').on('click', 'tr', function () {
+            //    var aData = tableAdverseEvents.row(this).data();
+            //    index = arrAdverseEvent.findIndex(x => x.adverseEvent == aData[0]);
+            //});
 
+            $("#dtlAdverseEvents").on('click',
+                '.btnDelete',
+                function () {
+                    $(this).closest('tr').remove();
+                    var y = $(this).closest('tr').find('td').eq(0).html();
+                    index = arrAdverseEvent.findIndex(x => x.adverseEvent == y);
+                    if (index > -1) {
+                        arrAdverseEvent.splice(index, 1);
+                    }
+                });
 
             ////dtlChronicIllness
-            $('#dtlChronicIllness tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableChronicIllness.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
-
-            $('#btnRemoveChronicIllness').click(function () {
-                tableChronicIllness.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrChronicIllness.splice(index, 1);
-                }
-            });
-
-            $('#dtlChronicIllness').on('click', 'tr', function () {
-                var aData = tableChronicIllness.row(this).data();
-                index = arrChronicIllness.findIndex(x => x.chronicIllness == aData[0]);
-            });
+            $("#dtlChronicIllness").on('click',
+                '.btnDelete',
+                function () {
+                    $(this).closest('tr').remove();
+                    var y = $(this).closest('tr').find('td').eq(0).html();
+                    index = arrChronicIllness.findIndex(x => x.adverseEvent == y);
+                    if (index > -1) {
+                        arrChronicIllness.splice(index, 1);
+                    }
+                });
 
             ////dtlVaccines
-            $('#dtlVaccines tbody').on('click', 'tr', function () {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    tableVaccines.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+            $("#dtlVaccines").on('click',
+                '.btnDelete',
+                function () {
+                    $(this).closest('tr').remove();
+                    var y = $(this).closest('tr').find('td').eq(0).html();
+                    index = arrVaccine.findIndex(x => x.adverseEvent == y);
+                    if (index > -1) {
+                        arrVaccine.splice(index, 1);
+                    }
+                });
 
-            $('#btnRemoveVaccine').click(function () {
-                tableVaccines.row('.selected').remove().draw(false);
-                if (index > -1) {
-                    arrVaccines.splice(index, 1);
-                }
-            });
 
-            $('#dtlVaccines').on('click', 'tr', function () {
-                var aData = tableVaccines.row(this).data();
-                index = arrVaccines.findIndex(x => x.vaccine == aData[0]);
-            });
+            ////dtlPhysicalExam
+            $("#dtlPhysicalExam").on('click',
+                '.btnDelete',
+                function () {
+                    $(this).closest('tr').remove();
+                    var y = $(this).closest('tr').find('td').eq(0).html();
+                    index = arrPhysicalExam.findIndex(x => x.adverseEvent == y);
+                    if (index > -1) {
+                        arrPhysicalExam.splice(index, 1);
+                    }
+                });
 
+            ////dtlDiagnosis
+            $("#dtlDiagnosis").on('click',
+                '.btnDelete',
+                function () {
+                    $(this).closest('tr').remove();
+                    var y = $(this).closest('tr').find('td').eq(0).html();
+                    index = arrDiagnosis.findIndex(x => x.adverseEvent == y);
+                    if (index > -1) {
+                        arrDiagnosis.splice(index, 1);
+                    }
+                });
+            
             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             //$('#myWizard').wizard();
@@ -1496,29 +1517,31 @@
                             //    evt.preventDefault();
                             //}
                         }
-                        /*else if (data.step === 3) {
-                            if ($("#datastep3").parsley().validate()) {
+                        else if (data.step === 3) {
+                            savePatientPhysicalExams();
+                            //if ($("#datastep3").parsley().validate()) {
 
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
-                            }
+                            //} else {
+                            //    stepError = $('.parsley-error').length === 0;
+                            //    totalError += stepError;
+                            //    evt.preventDefault();
+                            //}
                         }
                         else if (data.step === 4) {
-                            if ($("#datastep2").parsley().validate()) {
+                            savePatientPatientManagement();
+                            //if ($("#datastep2").parsley().validate()) {
 
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                if (totalError > 0) {
-                                    $('.bs-callout-danger').toggleClass('hidden', f);
-                                }
-                                evt.preventDefault();
-                            }
-                            //var ok4 = $('.parsley-error').length === 0;
-                            //$('.bs-callout-info').toggleClass('hidden', !ok4);
-                        }*/
+                            //} else {
+                            //    stepError = $('.parsley-error').length === 0;
+                            //    totalError += stepError;
+                            //    if (totalError > 0) {
+                            //        $('.bs-callout-danger').toggleClass('hidden', f);
+                            //    }
+                            //    evt.preventDefault();
+                            //}
+                            ////var ok4 = $('.parsley-error').length === 0;
+                            ////$('.bs-callout-info').toggleClass('hidden', !ok4);
+                        }
                     })
                     .on("changed.fu.wizard",
                         function () {
@@ -1558,22 +1581,18 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                            alert("Saved");        
+                           // alert("Saved");
+                            toastr.success(response.d, "Presenting Complaints");
                         },
-                        failure: function (msg) {
-                            alert(msg);
+                        error: function (response) {
+                            //alert(msg);
+                            toastr.error(response.d, "Presenting Complaints Error");
                         }
                     });
             }
 
 
-
             function savePatientEncounterChronicIllness() {
-                var BCGVaccine = $('#BCG:checked').val();
-                var PolioVaccine = $('.sr-only:checked').val();
-                var PentaVaccine = $('.sr-only:checked').val();
-                var PCV = $('.sr-only:checked').val();
-                var Measles = $('.sr-only:checked').val();
  
                 $.ajax({
                     type: "POST",
@@ -1582,14 +1601,115 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        alert("Saved");        
+                        toastr.success(response.d, "Chronic Illness");
                     },
-                    failure: function (msg) {
-                        alert(msg);
+                    error: function (response) {
+                        //alert(msg);
+                        toastr.error(response.d, "Chronic Illness Error");
                     }
                 });
             }
 
+            function savePatientPhysicalExams() {
+                
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
+                    data: "{'physicalExam':'" + JSON.stringify(arrPhysicalExam) + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "Physical Exam");
+                    },
+                    error: function (response) {
+                        //alert(msg);
+                        toastr.error(response.d, "Physical Exam Error");
+                    }
+                });
+            }
+
+
+            function savePatientPatientManagement() {
+                
+                var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
+                var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
+                var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
+                var nextAppDate = $("#<%=NextAppointmentDate.ClientID%>").val();
+                var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
+                    data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(arrDiagnosis) + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        // alert("Saved");
+                        toastr.success(response.d, "Presenting Complaints");
+                    },
+                    error: function (response) {
+                        //alert(msg);
+                        toastr.error(response.d, "Presenting Complaints Error");
+                    }
+                });
+            }
+
+
+            function GetCheckBoxListValues1()
+            {
+                
+                var chkBox = document.getElementById('<%= cblPHDP.ClientID %>');
+                
+                var options = chkBox.getElementsByTagName('input');
+                var listOfSpans = chkBox.getElementsByTagName('span');
+                
+                for (var i = 0; i < options.length; i++)
+                {
+                    if(options[i].checked)
+                    {
+                        alert(options[i].innerHTML);
+                        //alert(listOfSpans[i].value);
+                        //alert(listOfSpans[i].attributes["JSvalue"].value);
+                    }
+                }
+            }
+
+
+            /////////////////////////////
+
+            function getCheckBoxListItemsChecked(elementId) {
+                var elementRef = document.getElementById(elementId);
+                var checkBoxArray = elementRef.getElementsByTagName('input');
+                var checkedValues = '';
+
+                for (var i = 0; i < checkBoxArray.length; i++) {
+                    var checkBoxRef = checkBoxArray[i];
+
+                    if (checkBoxRef.checked == true) {
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        // AFAIK, you cannot get the value property of a ListItem in a CheckBoxList.
+                        // You can only get the Text property, which will be in an HTML label element.
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
+
+                        if (labelArray.length > 0) {
+                            if (checkedValues.length > 0)
+                                checkedValues += ',';
+
+                            checkedValues += labelArray[0].innerHTML;
+                        }
+                    }
+                }
+
+                return checkedValues;
+            }
+
+            function GetCheckBoxListValues() {
+                var checkedItems = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
+                alert('Items checked: ' + checkedItems);
+                //var mJSVariable = ;
+            }
 
         });
 

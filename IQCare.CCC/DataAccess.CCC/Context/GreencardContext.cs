@@ -44,7 +44,7 @@ namespace DataAccess.CCC.Context
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
-        public DbSet<PatientEncounter> PatientEncounters { get; set; }
+        public DbSet<Entities.CCC.Visit.PatientEncounter> PatientEncounters { get; set; }
 
 
         //Baseline Entities

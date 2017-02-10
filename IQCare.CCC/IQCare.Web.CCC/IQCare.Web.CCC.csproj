@@ -52,7 +52,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCCScripts\PatientEncounter.js" />
-    <Content Include="CCC\Dashboard.aspx" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
