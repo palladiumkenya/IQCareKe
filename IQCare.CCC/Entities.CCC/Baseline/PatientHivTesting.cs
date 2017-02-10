@@ -21,6 +21,7 @@ namespace Entities.CCC.Baseline
         public int BaselineResult { get; set; }
         public DateTime BaselineDate { get; set; }
         public DateTime TestingDate { get; set; }
+        public int TestintResult { get; set; }
         public bool ReferredToCare { get; set; }
         public string CccNumber { get; set; }
         public int EnrollmentId { get; set; }

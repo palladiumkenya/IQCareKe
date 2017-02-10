@@ -1,11 +1,6 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Encounter;
 using Interface.CCC.Baseline;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
@@ -17,6 +12,11 @@ namespace IQCare.CCC.UILogic.Baseline
         public int addPatientVaccination(PatientVaccination patientVaccination)
         {
             return _retval = _mgr.addPatientVaccination(patientVaccination);
+        }
+
+        public int UpdatePatientVaccination(PatientVaccination patientVaccination)
+        {
+            return _retval = _mgr.updatePatientVaccination(patientVaccination);
         }
     }
 }
