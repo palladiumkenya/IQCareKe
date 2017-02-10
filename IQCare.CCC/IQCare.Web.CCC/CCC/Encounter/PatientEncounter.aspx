@@ -1387,16 +1387,8 @@
     <!-- ajax begin -->
    <script type="text/javascript">
        $(document).ready(function () {
-           /*   Ajax functions originally set will return later ---
-            $('#OnsetDate').datepicker();
-            $('#FemaleLMP').datepicker();
-            $('#EDCD').datepicker();
-            $('#AntigenDate').datepicker();
-            $('#NextAppDate').datepicker();
-            $('#myWizard').wizard();    */
 
-
-           /////////////////////////////////PATIENT ENCOUNTER///////////////////////////////////////////
+           /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
 
             $('#DateOfVisit').datepicker({
                 allowPastDates: true,
@@ -1477,29 +1469,6 @@
             var tableDiagnosis = $('#dtlDiagnosis').DataTable();
             
             var index;
-
-            ///dtlAdverseEvents
-            //$('#dtlAdverseEvents tbody').on('click', 'tr', function () {
-            //    if ($(this).hasClass('selected')) {
-            //        $(this).removeClass('selected');
-            //    }
-            //    else {
-            //        tableAdverseEvents.$('tr.selected').removeClass('selected');
-            //        $(this).addClass('selected');
-            //    }
-            //});
-
-            //$('#btnRemoveAdvEvent').click(function () {
-            //    tableAdverseEvents.row('.selected').remove().draw(false);
-            //    if (index > -1) {
-            //        arrAdverseEvent.splice(index, 1);
-            //    }
-            //});
-
-            //$('#dtlAdverseEvents').on('click', 'tr', function () {
-            //    var aData = tableAdverseEvents.row(this).data();
-            //    index = arrAdverseEvent.findIndex(x => x.adverseEvent == aData[0]);
-            //});
 
             $("#dtlAdverseEvents").on('click',
                 '.btnDelete',
@@ -1737,28 +1706,6 @@
             }
 
 
-            function GetCheckBoxListValues1()
-            {
-                
-                var chkBox = document.getElementById('<%= cblPHDP.ClientID %>');
-                
-                var options = chkBox.getElementsByTagName('input');
-                var listOfSpans = chkBox.getElementsByTagName('span');
-                
-                for (var i = 0; i < options.length; i++)
-                {
-                    if(options[i].checked)
-                    {
-                        alert(options[i].innerHTML);
-                        //alert(listOfSpans[i].value);
-                        //alert(listOfSpans[i].attributes["JSvalue"].value);
-                    }
-                }
-            }
-
-
-            /////////////////////////////
-
             function getCheckBoxListItemsChecked(elementId) {
                 var elementRef = document.getElementById(elementId);
                 var checkBoxArray = elementRef.getElementsByTagName('input');
@@ -1768,11 +1715,6 @@
                     var checkBoxRef = checkBoxArray[i];
 
                     if (checkBoxRef.checked == true) {
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // AFAIK, you cannot get the value property of a ListItem in a CheckBoxList.
-                        // You can only get the Text property, which will be in an HTML label element.
-                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
                         var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
 
                         if (labelArray.length > 0) {
@@ -1786,13 +1728,6 @@
 
                 return checkedValues;
             }
-
-            function GetCheckBoxListValues() {
-                var checkedItems = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
-                alert('Items checked: ' + checkedItems);
-                //var mJSVariable = ;
-            }
-
 
 
 
