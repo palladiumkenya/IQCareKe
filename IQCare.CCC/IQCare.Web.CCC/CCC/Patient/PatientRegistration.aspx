@@ -641,7 +641,7 @@
                         })
                     .on('finished.fu.wizard',
                         function(e) {
-
+                            window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
                         });
 
                 /* calculate Person Age */

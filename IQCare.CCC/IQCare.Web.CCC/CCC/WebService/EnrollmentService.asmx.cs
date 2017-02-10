@@ -36,6 +36,7 @@ namespace IQCare.Web.CCC.WebService
         private int patientEnrollmentId { get; set; }
         private int patientIdentifierId { get; set; }
         private int patientEntryPointId { get; set; }
+        private int PersonId { get; set; }
 
         [WebMethod]
         public string HelloWorld()
@@ -43,11 +44,12 @@ namespace IQCare.Web.CCC.WebService
             return "Hello World";
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddPatient(int personid, int facilityId, string enrollment, int entryPointId)
         {
             try
             {
+                PersonId = int.Parse(Session["PersonId"].ToString());
                 var jss = new JavaScriptSerializer();
                 IList<ListEnrollment> data = jss.Deserialize<IList<ListEnrollment>>(enrollment);
                 
@@ -60,21 +62,22 @@ namespace IQCare.Web.CCC.WebService
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
 
-                int isPersonEnrolled = patientManager.CheckPersonEnrolled(personid).Count;
+                int isPersonEnrolled = patientManager.CheckPersonEnrolled(PersonId).Count;
 
                 if (isPersonEnrolled == 0)
                 {
 
                     PatientEntity patient = new PatientEntity
                     {
-                        PersonId = personid,
+                        PersonId = PersonId,
                         ptn_pk = 0,
                         FacilityId = facilityId,
-                        PatientIndex = datevalue.Year.ToString() + '-' + personid,
+                        PatientIndex = datevalue.Year.ToString() + '-' + PersonId,
                         Active = true
                     };
 
                     patientId = patientManager.AddPatient(patient);
+                    Session["PatientId"] = patientId;
 
                     if (patientId > 0)
                     {
@@ -103,6 +106,8 @@ namespace IQCare.Web.CCC.WebService
                         patientMasterVisitId = patientMasterVisitManager.addMasterVisit(visit);
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
                         patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
+
+                        Session["PatientMasterVisitId"] = patientMasterVisitId;
 
                         if (patientMasterVisitId > 0)
                         {
