@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -56,7 +57,8 @@ namespace IQCare.Web.CCC.WebService
         {
            // var request = HttpContext.Current.Request;
             int sEcho = 0;int displayStart = 0;int displayLength = 0;
-
+            var patientList =new PatientLookup();
+            
 
             var c = data.FirstOrDefault(x => x.name == "sEcho").value;
             var dl = data.FirstOrDefault(x => x.name == "iDisplayLength").value;
@@ -64,25 +66,31 @@ namespace IQCare.Web.CCC.WebService
 
             /* search parameters */
 
-
             if (sEcho > 0){ sEcho = Convert.ToInt32(sEcho);}
             if (Convert.ToInt32(dl) > 0){ displayLength = Convert.ToInt32(dl);}
             if (Convert.ToInt32(ds) > 0){ displayStart = Convert.ToInt32(ds); }
 
-            //string jsonObject="steve";
             try
             {
+                PatientLookupManager patientLookup=new PatientLookupManager();
+               var patientLookups= patientLookup.GetPatientSearchListPayload();
 
+                dynamic patientTableLoad = new
+                {
+                    status = "success",
+                    draw = sEcho,
+                    recordsTotal = patientLookups.Count(),
+                    recordsFiltered = patientLookups.Count(),
+                    data = patientLookups
+                };
+
+                return patientTableLoad;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            return sEcho.ToString();
-            //  ClassName ObjectName = JsonConvert.DeserializeObject<ClassName>(jsonObject);
-
-
         }
     }
     public class Data
