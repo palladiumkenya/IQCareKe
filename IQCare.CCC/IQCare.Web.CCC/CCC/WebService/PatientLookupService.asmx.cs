@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
-using System.Web.Script.Services;
 using System.Web.Services;
-using Application.Presentation;
-using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -22,47 +22,56 @@ namespace IQCare.Web.CCC.WebService
     {
 
 
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GetPatientSearch()
+        [WebMethod]
+        public string HelloWorld()
         {
+            return "Hello World";
+        }
 
-            dynamic jsonData = null;
-            var echo = Convert.ToInt32(HttpContext.Current.Request.Params["sEcho"]);
-            var displayLength = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
-            var displayStart = Convert.ToInt32(HttpContext.Current.Request.Params["start"]);
-            var sortOrder = Convert.ToString(HttpContext.Current.Request.Params["sSortDir_0"]);
-            var totalRecords = 0;
-            var totalFiltered = 0;
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetPatientSearchx()
+        {
+            String output;
 
             try
             {
-                IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+                PatientLookupManager patientLookup=new PatientLookupManager();
+                var jsonData = patientLookup.GetPatientSearchListPayload();
+                output= JsonConvert.SerializeObject(jsonData);
 
-                var patientLookup = new PatientLookupManager();
-                var foundPatient = patientLookup.GetPatientSearchListPayload();
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
-                if (foundPatient.Count > 0)
-                {
-                    totalFiltered = Convert.ToInt32(foundPatient.Count);
-                    totalRecords = Convert.ToInt32(foundPatient.Count);
+            return output;
+        }
 
-                    dynamic jsnonData = new
-                    {
-                        draw= HttpContext.Current.Request.Params["draw"],
-                        recordsTotal= totalRecords,
-                        recordsFiltered=totalFiltered,
-                        data = foundPatient
-                    };
+        [WebMethod]
+        public string FindPatient(List<Data> data)
+        {
+           // var request = HttpContext.Current.Request;
+            int sEcho = 0;int displayStart = 0;int displayLength = 0;
 
-                    jsonData = JsonConvert.SerializeObject(jsnonData);
-                }
+
+            var c = data.FirstOrDefault(x => x.name == "sEcho").value;
+            var dl = data.FirstOrDefault(x => x.name == "iDisplayLength").value;
+            var ds = data.FirstOrDefault(x => x.name == "iDisplayStart").value;
+
+            /* search parameters */
+
+
+            if (sEcho > 0){ sEcho = Convert.ToInt32(sEcho);}
+            if (Convert.ToInt32(dl) > 0){ displayLength = Convert.ToInt32(dl);}
+            if (Convert.ToInt32(ds) > 0){ displayStart = Convert.ToInt32(ds); }
+
+            //string jsonObject="steve";
+            try
+            {
 
             }
             catch (Exception e)
@@ -70,8 +79,20 @@ namespace IQCare.Web.CCC.WebService
                 Console.WriteLine(e);
                 throw;
             }
-            Context.Response.ContentType = "application/json; charset=utf-8";
-            return new JavaScriptSerializer().Serialize(jsonData);
+            return sEcho.ToString();
+            //  ClassName ObjectName = JsonConvert.DeserializeObject<ClassName>(jsonObject);
+
+
         }
+    }
+    public class Data
+    {
+        public string name { get; set; }
+        public string value { get; set; }
+    }
+
+    public class Data1
+    {
+        public List<Data> data { get; set; }
     }
 }

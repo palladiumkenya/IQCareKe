@@ -30,5 +30,10 @@ namespace IQCare.CCC.UILogic
 
             return patientDetails.FindAll(x=>x.Active);
         }
+
+        public int GetTotalpatientCount()
+        {
+            return _patientLookupmanager.GetTotalpatientCount();
+        }
     }
 }

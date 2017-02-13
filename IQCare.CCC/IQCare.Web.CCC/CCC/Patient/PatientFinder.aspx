@@ -355,8 +355,31 @@
  
                          }
                      },*/
-                    "sAjaxSource": "../WebService/PatientLookupService.asmx/GetPatientSearch",
-                    "sServerMethod": "POST",
+                    "sAjaxSource": "../WebService/PatientLookupService.asmx/FindPatient",
+                    "fnServerData":function(sSource, aoData, fnCallback, oSettings) {
+                        aoData.push({ "name": "patientId", "value": ""+$("#<%=PatientNumber.ClientID%>").val()+"" });
+                        aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "DateOfBirth", "value": "" + moment($("#SearchDoB").datepicker('getDate')).format('DD-MMM-YYYY') + "" });
+                        aoData.push({ "name": "gender", "value": ""+$("#<%=Sex.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "registrationDate", "value": ""+moment($("#RegDate").datepicker('getDate')).format('DD-MMM-YYYY') +"" });
+                        oSettings.jqXHR = $.ajax({
+                            "dataType": 'json',
+                            "type": 'POST',
+                            "contentType": 'application/json; charset=utf-8',
+                            "url": sSource,
+                            "data":JSON.stringify({data: aoData }),
+                            "success": fnCallback,
+                            "error":function (xhr,errorType,exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" + xhr.status + "" + jsonError.Message+" "+jsonError.StackTrace+" "+jsonError.ExceptionType, "Patient Finder Method");
+                                return false;
+                            }
+                        });
+                    },
+                    //"sServerMethod": "POST",
                     //"bDestroy":true,
                     //"bautoWidth": true,
 

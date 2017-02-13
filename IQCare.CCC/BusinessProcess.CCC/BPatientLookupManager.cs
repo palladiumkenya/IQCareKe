@@ -43,5 +43,12 @@ namespace BusinessProcess.CCC
 
             return patientSearchDetails;
         }
+
+        public int GetTotalpatientCount()
+        {
+            var totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
+
+            return totalCount;
+        }
     }
 }
