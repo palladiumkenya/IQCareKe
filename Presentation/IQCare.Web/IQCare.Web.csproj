@@ -20,10 +20,6 @@
     <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
     <RelDir Condition=" '$(RelDir)' == '' ">$(TrunkDir)IQCare.Release\</RelDir>
     <TargetFrameworkProfile />
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

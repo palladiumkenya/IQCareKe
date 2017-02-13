@@ -11,11 +11,7 @@
     <RootNamespace>RemServer.Service</RootNamespace>
     <AssemblyName>RemServer.Service</AssemblyName>
     <StartupObject>RemServer.Service.IQCareService</StartupObject>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
-    <FileUpgradeFlags>
+     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
