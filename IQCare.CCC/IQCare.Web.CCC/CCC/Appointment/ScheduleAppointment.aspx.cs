@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Interface.Scheduler;
+using IQCare.Web.UILogic;
 
 namespace IQCare.Web.CCC.Appointment
 {
@@ -17,9 +18,13 @@ namespace IQCare.Web.CCC.Appointment
             if (!IsPostBack)
             {
                 this.PopulateDropDown();
+                //CurrentSession session = CurrentSession.Current;
+                //Entities.PatientCore.Patient patient = session.CurrentPatient;
+                //txtpatientId = patient.Id;
+                //txtpatientMasterVisitId = session.
+
             }
         }
-
         private void PopulateDropDown()
         {
             //*******Get the patient details on the basis of Patient Enrollment Id and show the details.*******//

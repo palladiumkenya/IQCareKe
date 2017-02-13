@@ -51,6 +51,8 @@
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
+    <Content Include="CCCScripts\PatientEncounter.js" />
+    <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
     <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />

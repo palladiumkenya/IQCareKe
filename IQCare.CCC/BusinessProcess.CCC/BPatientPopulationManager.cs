@@ -33,7 +33,7 @@ namespace BusinessProcess.CCC
 
         public List<PatientPopulation> GetAllPatientPopulations(int patientId)
         {
-           List<PatientPopulation> patientPopulations= _unitOfWork.PatientPopulationRepository.FindBy(x => x.PatientId == patientId & x.DeleteFlag == false)
+           List<PatientPopulation> patientPopulations= _unitOfWork.PatientPopulationRepository.FindBy(x => x.PersonId == patientId & x.DeleteFlag == false)
                 .OrderByDescending(x => x.Id)
                 .ToList();
             return patientPopulations;
@@ -43,7 +43,7 @@ namespace BusinessProcess.CCC
         {
            List<PatientPopulation> patientPopulations =
                     _unitOfWork.PatientPopulationRepository.FindBy(
-                            x => x.PatientId == patientId & x.Active & !x.DeleteFlag)
+                            x => x.PersonId == patientId & x.Active & !x.DeleteFlag)
                             .OrderByDescending(x=>x.Id)
                             .Take(1)
                         .ToList();
