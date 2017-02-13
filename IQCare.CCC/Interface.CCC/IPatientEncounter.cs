@@ -13,5 +13,7 @@ namespace Interface.CCC
         int saveChronicIllness(string masterVisitID, string patientID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines);
         int savePhysicalEaxminations(string masterVisitID, string patientID, List<PhysicalExamination> physicalExam);
         int savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, List<string> phdp, List<Diagnosis> diagnosis);
+        DataSet getPatientEncounter(string PatientMasterVisitID, string PatientID);
+        DataTable getPatientEncounterHistory(string PatientID);
     }
 }
