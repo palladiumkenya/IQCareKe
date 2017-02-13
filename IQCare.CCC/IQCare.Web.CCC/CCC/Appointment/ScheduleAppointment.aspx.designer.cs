@@ -67,6 +67,24 @@ namespace IQCare.Web.CCC.Appointment {
         protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
         
         /// <summary>
+        /// txtpatientMasterVisitId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpatientMasterVisitId;
+        
+        /// <summary>
+        /// txtpatientId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected int txtpatientId;
+        
+        /// <summary>
         /// btnSaveAppointment control.
         /// </summary>
         /// <remarks>

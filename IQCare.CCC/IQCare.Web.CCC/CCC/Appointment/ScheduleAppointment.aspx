@@ -161,6 +161,8 @@
             </div>
         </div>
     </div>
+        <asp:TextBox runat="server" ID="txtpatientMasterVisitId" ClientIDMode="Static" Visible="False" />
+        <asp:TextBox runat="server" ID="txtpatientId" ClientIDMode="Static" Visible="False" />
     <div class="col-md-12">
         <div class="col-md-6"></div>
         <div class="col-md-6">

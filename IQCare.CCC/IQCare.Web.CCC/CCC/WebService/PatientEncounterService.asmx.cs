@@ -42,5 +42,27 @@ namespace IQCare.Web.CCC.WebService
 
             patientEncounter.savePatientEncounterChronicIllness(patientMasterVisitID, "1", chronicIllness,vaccines);
         }
+
+        [WebMethod(EnableSession = true)]
+        public void savePatientPhysicalExam(string physicalExam)
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            patientEncounter.savePatientEncounterPhysicalExam(patientMasterVisitID, "1", physicalExam);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void savePatientManagement(string phdp,string ARVAdherence,string CTXAdherence,string appointmentDate,string appointmentType,string diagnosis)
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            patientEncounter.savePatientManagement(patientMasterVisitID, "1", ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
+        }
     }
 }
