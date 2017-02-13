@@ -18,7 +18,7 @@ namespace BusinessProcess.CCC
         public List<PatientLookup> GetPatientDetailsLookup(int id)
         {
             var patientDetails = _unitOfWork.PatientLookupRepository
-                .FindBy(x => x.Id == id || x.ptn_pk.Value == id & !x.Active)
+                .FindBy(x => x.Id == id || (x.ptn_pk.Value == id & !x.Active))
                 .Take(1).ToList();
 
             return patientDetails;

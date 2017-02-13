@@ -4,11 +4,12 @@ using Entities.Common;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 
+
 namespace IQCare.Web.CCC.WebService
 {
-    /// <summary>
-    /// Summary description for PersonSeervice
-    /// </summary>
+   // <summary>
+     /// Summary description for PersonSeervice
+     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
@@ -22,18 +23,15 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
       
-
-        
-      
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patientID, string labType, string orderReason, string labNotes, string labOrderDate)
+        public string AddLabOrder(int patientId, string patientLabOrder)
         {
             
             try
             {
-                //patientID = Convert.ToInt32(Session["patientID"]);
-                var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientID, labType, orderReason, labNotes, labOrderDate);
+
+                 var labOrder = new PatientLabOrderManager();
+                Result = labOrder.savePatientLabOrder(patientId, patientLabOrder);
                 if (Result > 0)
                 {
                     Msg = "Patient Lab Order Recorded Successfully .";
