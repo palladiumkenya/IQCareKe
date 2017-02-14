@@ -344,12 +344,13 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'personid':'" + 1058 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '"+ entryPointId + "'}",
+                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '"+ entryPointId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
                         toastr.success(response.d, "Patient Enrollment");
+                        window.location.href = "/CCC/Patient/PatientHome.aspx";
                     },
                     error: function (response) {
                         //generate('error', response.d);

@@ -27,7 +27,7 @@ namespace DataAccess.CCC.Repository.person
             List<PatientPopulation> myList =
                 new List<PatientPopulation>
                 {
-                    patientPopulationRepository.FindBy(x => x.PatientId == patientId & x.DeleteFlag == true)
+                    patientPopulationRepository.FindBy(x => x.PersonId == patientId & x.DeleteFlag == true)
                         .OrderBy(x => x.Id)
                         .FirstOrDefault()
                 };

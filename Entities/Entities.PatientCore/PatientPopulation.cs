@@ -1,5 +1,6 @@
 ﻿using Entities.Common;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.PatientCore
 {
@@ -7,10 +8,12 @@ namespace Entities.PatientCore
     public class PatientPopulation: BaseEntity
     {
         public int Id { get; set; }
-        public int PatientId { get; set; }
+        public int PersonId { get; set; }
         public string PopulationType { get; set; }
         public int PopulationCategory { get; set; }
         public bool Active { get; set; }
+        [ForeignKey("PersonId")]
+        public virtual Person Person { get; set; }
     }
 
     //[Serializable]

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
-using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
-using IQCare.Web.Admin;
-//using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -24,16 +22,18 @@ namespace IQCare.Web.CCC.WebService
     {
 
 
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
+        //[WebMethod]
+        //public string HelloWorld()
+        //{
+        //    return "Hello World";
+        //}
 
         [WebMethod(EnableSession = true)]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string GetPatientSearch()
         {
-            string jsonData = null;
+
+            dynamic jsonData = null;
             var echo = Convert.ToInt32(HttpContext.Current.Request.Params["sEcho"]);
             var displayLength = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
             var displayStart = Convert.ToInt32(HttpContext.Current.Request.Params["start"]);
@@ -61,7 +61,7 @@ namespace IQCare.Web.CCC.WebService
                         data = foundPatient
                     };
 
-                  // jsonData = JsonConvert.SerializeObject(jsnonData);
+                    jsonData = JsonConvert.SerializeObject(jsnonData);
                 }
 
             }
@@ -70,7 +70,8 @@ namespace IQCare.Web.CCC.WebService
                 Console.WriteLine(e);
                 throw;
             }
-            return jsonData;
+            Context.Response.ContentType = "application/json; charset=utf-8";
+            return new JavaScriptSerializer().Serialize(jsonData);
         }
     }
 }

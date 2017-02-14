@@ -51,6 +51,8 @@
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
+    <Content Include="CCCScripts\PatientEncounter.js" />
+    <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
     <Content Include="CCC\Enrollment\ServiceEnrollment.aspx" />
@@ -76,12 +78,14 @@
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
+    <Content Include="CCC\WebService\PatientBaselineService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
+    <Content Include="CCC\WebService\test.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -230,6 +234,10 @@
     <Compile Include="CCC\WebService\OneTimeEventsTrackerService.asmx.cs">
       <DependentUpon>OneTimeEventsTrackerService.asmx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\PatientBaselineService.asmx.cs">
+      <DependentUpon>PatientBaselineService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
       <DependentUpon>PatientEncounterService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -309,6 +317,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />

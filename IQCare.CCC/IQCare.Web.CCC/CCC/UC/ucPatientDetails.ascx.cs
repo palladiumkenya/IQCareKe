@@ -4,6 +4,7 @@ using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using Application.Common;
+using System.Web;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -22,7 +23,7 @@ namespace IQCare.Web.CCC.UC
 
             IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
-            List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(2);
+            List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(int.Parse(HttpContext.Current.Session["PatientId"].ToString()));
 
             foreach (var x in patientLookups)
             {
