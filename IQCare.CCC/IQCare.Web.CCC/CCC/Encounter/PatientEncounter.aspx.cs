@@ -17,7 +17,7 @@ namespace IQCare.Web.CCC.Encounter
             {
                 //HtmlInputHidden hdnID = (HtmlInputHidden)Page.Master.FindControl("isNewEncounter");
                 //string k = ((HtmlInputHidden)Page.Master.FindControl("isNewEncounter")).Value;
-                string k = Session["PatientMasterVisitID"].ToString();
+               // string k = Session["PatientMasterVisitID"].ToString();
 
                 LookupLogic lookUp = new LookupLogic();
                 lookUp.populateDDL(tbscreeningstatus, "TBStatus");

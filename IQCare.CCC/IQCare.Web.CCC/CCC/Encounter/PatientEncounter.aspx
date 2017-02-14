@@ -5,7 +5,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
 
     <!-- Auto complete code here-->
-    <script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <!--<script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>    -->
+    <script src="../Scripts/js/highcharts.js"></script>
+    <script src="../Scripts/js/vl_linegraph.js"></script>
     <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
     <script src="../Scripts/css/jquery-ui.css"></script>
     <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />   
@@ -58,64 +60,9 @@
 		    });
 		  		
 		</script>
-<!--end line graph for viral tracker    -->          
+<!--end line graph for viral tracker    -->     
 
-    <script src="../../CCCScripts/PatientEncounter.js"></script>          
-    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
-    <script src="../Scripts/css/jquery-ui.css"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />  
-    <!--  .end auto complete   -->
-       <!-- line graph for viral tracker  -->  
-  	
-		<style type="text/css">
-		</style>
-		<script type="text/javascript">
-		    $(function () {
-		        $('#container').highcharts({
-		            title: {
-		                text: 'Viral Load Trend',
-		                x: -20 //center
-		            },
-		            subtitle: {
-		                text: 'VL cp/ml',
-		                x: -20
-		            },
-		            xAxis: {
-		                categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
-		            },
-		            yAxis: {
-		                title: {
-		                    text: 'Viral Load cp/ml'
-		                },
-		                plotLines: [{
-		                    value: 0,
-		                    width: 1,
-		                    color: '#808080'
-		                }]
-		            },
-		            tooltip: {
-		                valueSuffix: 'cp/ml'
-		            },
-		            legend: {
-		                layout: 'vertical',
-		                align: 'right',
-		                verticalAlign: 'middle',
-		                borderWidth: 0
-		            },
-		            series: [{
-		                name: 'Patrick',
-		                data: [200, 300, 500, 1000, 750, 500, 400]
-		            }, {
-		                name: 'Threshold',
-		                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-		            }]
-		        });
-		    });
-		  		
-		</script>
-
-
-        <div class="row">
+       <div class="row">  
             <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
             </div>
@@ -246,8 +193,8 @@
                               <div class="col-md-4"></div>
                           </div>
                           <div class="col-md-12"><hr/></div>
+                        
                       </div><!-- .home-->
-
                     
                       <div  role="tabpanel" class="tab-pane fade" id="encounter">
                          <div class="col-md-12">
@@ -1284,49 +1231,17 @@
                              </div> <%--.col-md-12--%>
                          </div>
                       </div><!-- .encounter-->
-                    </div>
-                      <div  role="tabpanel"  class="tab-pane fade" id="vloadTracker">
-                            <!-- pw implementation of viral load tracker here-->
-                            <div class="col-md-6">
-                                    <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
-                                   
-                                    <!--pw implementation of laboratory module here-->
-                                                 <div class="col-md-12">
-                                                      <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
-                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
-                                                  </div>
-
-                                <!--pw .implementation of  laboratory module here-->
-                             
-                                </div>
-                          
-                                    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
-                                    <script src="../Scripts/css/exporting.css"></script>
-                                    <link href="../Scripts/css/exporting.css" rel="stylesheet" type="text/css" />   
-
-                             <!--      <script src="../Scripts/js/highcharts.js" type="text/javascript"></script>
-                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>  -->
-
-                                    <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
-                                                            
-
-                      <!-- pw .implementation of viral load tracker here-->
-                      </div><!-- .viraload tracker-->
+                    </div>                     
 
                       <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
                              <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
                                    
-                      <!--pw implementation of laboratory module here-->
+                      <!--pw implementation of vllabhistory module here-->
                                                  <div class="col-md-12">
                                                       <div class="col-md-12"><hr/></div>
-                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>  
+                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>  
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
                                                       <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
@@ -1334,15 +1249,14 @@
                                                       <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
                                                   </div>
 
-                     <!--pw .implementation of  laboratory module here-->
+                     <!--pw .implementation of  vllabhistory module here-->
                              
                                 </div>
-                                    <script src="https://code.highcharts.com/highcharts.js"></script>
-                                    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                   
                                     <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
-                      <!-- pw .implementation of viral load tracker here-->
+                      <!-- pw .implementation of viral load tracker line graph here-->
                       </div><!-- .viraload tracker-->
                     
                       <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
@@ -1358,10 +1272,10 @@
                                 <div class="col-md-6">
                                     <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
                                     <div class="col-md-12"><hr/>
-                      <!--pw implementation of previous labs laboratory module here  porders-->
+                      <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         <div class="col-md-12 form-group">
-            
-                                                             <table id="plab_orders" >
+                                                                
+                                                         <table id="plab_orders" >
                                                                         <thead>
                                                                           <tr>
       	                                                                    <th> # </th>  
@@ -1382,8 +1296,8 @@
                          
                                                                         </tbody>
                                                                     </table>                 
-                                                                   
-                    <!--pw implementation of previous laboratory module here-->
+                                            </div>                    
+                    <!--pw implementation of previous orders laboratory module here-->
                                </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1403,7 +1317,7 @@
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-3"><label class="control-label pull-left"> Lab Order Reason</label></div>
                                                       <div class="col-md-9">
-                                                          <asp:DropDownList runat="server" ID="OrderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
+                                                          <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
                                                          <asp:ListItem Text="Baseline" Value="2" />
                                                          <asp:ListItem Text="Routine" Value="3" />
                                                          <asp:ListItem Text="Confirmatory" Value="4" />
@@ -1417,7 +1331,7 @@
                                                        <div class="col-md-3"><label class="control-label pull-left"> Lab Order Notes</label></div>
                                                       <div class="col-md-9">
                                                          
-                                                          <asp:TextBox runat="server" ID="LabNotes" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12">
@@ -1616,7 +1530,7 @@
                      }
             });
 
-
+       
    // Load lab order
             $("#btnAddLab").click(function (e) {
               
@@ -1624,10 +1538,8 @@
 
                 var labOrderDate = moment().format('D MMM, YYYY');
                 var labType = $("#labTestTypes").val();
-                var labOrderReason = $("#OrderReason").find(":selected").text();
-                var labNotes = $("#LabNotes").val();
-
-                    
+                var labOrderReason = $("#orderReason").find(":selected").text();
+                var labOrderNotes = $("#labNotes").val();
 
               if (labType < 1) {
                     generate("error", "Please select at least One(1) Lab Type from the List");
@@ -1649,51 +1561,53 @@
                 e.preventDefault();
             });
           
-       });		  
+      	  
      // Save lab order
        $("#btnSaveLab").click(function (e) {
            var _fp = [];
            var data = $('#tblAddLabs tr').each(function (row, tr) {
+
+              
                _fp[row] = {
-                  "labType": $(tr).find('td:eq(2)').val()
-                , "orderReason": $(tr).find('td:eq(3)').val()
-                , "labOrderDate": $(tr).find('td:eq(4)').val()
+                  "labType": $(tr).find('td:eq(1)').text()
+                 ,"orderReason": $(tr).find('td:eq(2)').text()
+                , "labOrderDate": $(tr).find('td:eq(3)').text()
 
                }
            });
-           _fp.shift();//first row will be empty -so remove
-
+           _fp.shift();
+          
            if ($.isEmptyObject(_fp)) {
                generate("error", "You have not added any lab order");
                return false;
            } else {
-               var patientID = $("#entryPoint").val();
-               addLabOrder(_fp, patientID);
+               var patientId = $("#entryPoint").val();
+               addLabOrder(_fp, patientId);
            }
 
            
        });
-       function addLabOrder(_fp, patientID) {
+     function addLabOrder(_fp, patientId) {
            var labOrder = JSON.stringify(_fp);
-         
+           console.log(labOrder);
            $.ajax({
                type: "POST",
-               //url: "../WebService/EnrollmentService.asmx/AddPatient",
+               
                url: "../WebService/LabService.asmx/AddLabOrder",
-               data: "{'patientID':'" + 1058 + "','labType': '" + labType + "','orderReason': '" + orderReason + "','  labNotes': '" + LabNotes + "','labOrderDate': '" + labOrderDate + "'}",
+               data: "{'patientId':'" + 1058 + "','patientLabOrder': '" + labOrder + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                success: function (response) {
-                   //generate('success', '<p>,</p>' + response.d);
+                 
                    toastr.success(response.d, "Lab order successful");
                },
                error: function (response) {
                    //generate('error', response.d);
-                   toastr.error(response.d, "Lab order");
+                   toastr.error(response.d, "Lab order unsuccessful");
                }
            });
        };	
-       function generate(type, text) {
+    function generate(type, text) {
 
            var n = noty({
                text: text,
@@ -1712,12 +1626,11 @@
                    speed: 500
                }
            });
-           console.log('html: ' + n.options.id);
-           return n;
-       }
+                return n;
+         }
            
          
-         
+       });
      	  
       
     </script>

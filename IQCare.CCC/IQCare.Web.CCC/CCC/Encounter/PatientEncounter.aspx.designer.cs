@@ -436,22 +436,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.TextBox labTestTypes;
         
         /// <summary>
-        /// OrderReason control.
+        /// orderReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList OrderReason;
+        protected global::System.Web.UI.WebControls.DropDownList orderReason;
         
         /// <summary>
-        /// LabNotes control.
+        /// labNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LabNotes;
+        protected global::System.Web.UI.WebControls.TextBox labNotes;
         
         /// <summary>
         /// btnAddLab control.
