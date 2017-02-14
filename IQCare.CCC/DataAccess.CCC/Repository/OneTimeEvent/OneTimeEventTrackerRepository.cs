@@ -1,14 +1,10 @@
 ﻿using DataAccess.CCC.Context;
 using DataAccess.Context;
-using Entities.CCC.OneTimeEvent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Repository.OneTimeEvent
 {
-    public class OneTimeEventTrackerRepository: BaseRepository<OneTimeEventTracker>
+    public class OneTimeEventTrackerRepository: BaseRepository<PatientDisclosure>
     {
         private readonly GreencardContext _context;
 

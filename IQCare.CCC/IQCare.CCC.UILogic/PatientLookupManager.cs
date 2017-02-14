@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -28,7 +30,7 @@ namespace IQCare.CCC.UILogic
         {
             var patientDetails = _patientLookupmanager.GetPatientSearchPayload();
 
-            return patientDetails.FindAll(x=>x.Active);
+            return patientDetails;
         }
 
         public int GetTotalpatientCount()

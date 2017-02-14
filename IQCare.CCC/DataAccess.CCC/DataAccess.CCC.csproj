@@ -115,14 +115,9 @@
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
-    <Compile Include="Repository\Patient\IPatientEnrollmentRepository.cs" />
-    <Compile Include="Repository\Patient\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientContactRepository.cs" />
-    <Compile Include="Repository\Patient\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientLocationRepository.cs" />
-    <Compile Include="Repository\Patient\PatientMaritalStatusRepository.cs" />
-    <Compile Include="Repository\Patient\PatientOVCStatusRepository.cs" />
     <Compile Include="Repository\Patient\PatientRepository.cs" />
     <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
     <Compile Include="Repository\Patient\PatientVitalsRepository.cs" />

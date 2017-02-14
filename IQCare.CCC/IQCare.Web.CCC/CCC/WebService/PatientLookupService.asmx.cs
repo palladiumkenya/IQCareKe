@@ -53,38 +53,52 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string FindPatient(List<Data> data)
+        public string FindPatient(List<Data> dataPayLoad)
         {
            // var request = HttpContext.Current.Request;
             int sEcho = 0;int displayStart = 0;int displayLength = 0;
-            var patientList =new PatientLookup();
+            dynamic patientList = null;
             
 
-            var c = data.FirstOrDefault(x => x.name == "sEcho").value;
-            var dl = data.FirstOrDefault(x => x.name == "iDisplayLength").value;
-            var ds = data.FirstOrDefault(x => x.name == "iDisplayStart").value;
+            var c = dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value;
+            var dl = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value;
+            var ds = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value;
 
             /* search parameters */
 
-            if (sEcho > 0){ sEcho = Convert.ToInt32(sEcho);}
+            if (Convert.ToInt32(c) > 0){ sEcho = Convert.ToInt32(c);}
             if (Convert.ToInt32(dl) > 0){ displayLength = Convert.ToInt32(dl);}
             if (Convert.ToInt32(ds) > 0){ displayStart = Convert.ToInt32(ds); }
 
             try
             {
                 PatientLookupManager patientLookup=new PatientLookupManager();
-               var patientLookups= patientLookup.GetPatientSearchListPayload();
+               var patientLookups= patientLookup.GetPatientSearchListPayload().ToList();
 
-                dynamic patientTableLoad = new
+                if (patientLookups.Count>0)
                 {
-                    status = "success",
-                    draw = sEcho,
-                    recordsTotal = patientLookups.Count(),
-                    recordsFiltered = patientLookups.Count(),
-                    data = patientLookups
-                };
-
-                return patientTableLoad;
+                    dynamic patientTableLoad = new
+                    {
+                        //status = "success",
+                        draw = sEcho,
+                        recordsTotal = Convert.ToInt32(patientLookups.Count()),
+                        recordsFiltered = Convert.ToInt32(patientLookups.Count()),
+                        data = patientLookups.Select(x=> new 
+                        {
+                            EnrollmentNumber=x.Id,
+                            PatientIndex=x.PatientIndex,
+                            FirstName=x.FirstName,
+                            MiddleName=x.MiddleName,
+                            LastName=x.LastName,
+                            DateOfBirth=x.DateOfBirth,
+                            Sex=x.Sex,
+                            RegistrationDate=x.RegistrationDate,
+                            PatientStatus=x.PatientStatus
+                        })
+                    };
+                    patientList= patientTableLoad;
+                }
+                return JsonConvert.SerializeObject(patientList);
             }
             catch (Exception e)
             {

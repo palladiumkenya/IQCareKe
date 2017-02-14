@@ -253,7 +253,7 @@
 		                                              <div class="datepicker fuelux" id="DateOfVisit">
 		                                              <div class="input-group">
 
-			                                              <input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />
+			                                              <input class="form-control input-sm" id="VisitDate" />
 			                                              <div class="input-group-btn">
 				                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
 				                                            <span class="glyphicon glyphicon-calendar"></span>
