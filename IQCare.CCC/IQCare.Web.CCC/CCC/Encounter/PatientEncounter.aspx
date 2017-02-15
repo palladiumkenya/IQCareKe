@@ -10,7 +10,7 @@
     <!--<script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>    -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
-    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
+    <%--<script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>--%>
     <script src="../Scripts/css/jquery-ui.css"></script>
     <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />   
 <!--  .end auto complete   -->
@@ -919,10 +919,6 @@
                                                                      <input type="text" id="DiagnosisTreatment" class ="form-control input-sm" placeholder="treatment" runat="server" ClientIDMode="Static" />
                                                                  </div>
                                                                 
-                                                                 <div class="col-md-3 form-group">
-                                                                     <input type="text" id="DiagnosisTreatment" class ="form-control input-sm" placeholder="treatment" runat="server" />
-                                                                 </div>
-                                                                
                                                             </div>
 
                                                            <div class="col-md-12 form-group">
@@ -1068,7 +1064,8 @@
                                                               <div class="col-md-12">
                                                                    <div class="col-md-5"><label class="control-label pull-left">Referred for </label></div>
                                                                    <div class="col-md-7 form-group">
-                                                                       <input type="text" class="form-control input-sm" id="ReferredFor" placeholder="referred for" runat="server" />
+                                                                       <%--<input type="text" class="form-control input-sm" id="ReferredFor" placeholder="referred for" runat="server" />--%>
+                                                                       <asp:DropDownList ID="ddlReferredFor" runat="server" CssClass="form-control input-sm"></asp:DropDownList>
                                                                    </div>
                                                               </div>
                                                               
