@@ -242,40 +242,18 @@
              <table id="tblFindPatient" class="display">
                         <thead>
                           <tr>
-      	                    <th>Enrollment No.#</th>
-                            <th>Patient Index</th>
-      	                    <th>First Name</th>
-      	                    <th>Middle Name</th>
-      	                    <th>Last Name</th>
-      	                    <th>Date of Birth</th>
+      	                    <th>EnrollmentNumber</th>
+                            <th>PatientIndex</th>
+      	                    <th>FirstName</th>
+      	                    <th>MiddleName</th>
+      	                    <th>LastName</th>
+      	                    <th>DateOfBirth</th>
       	                    <th>Sex</th>
-      	                    <th>Registration Date</th>
-                            <th>Patient Status</th>
+      	                    <th>RegistrationDate</th>
+                            <th>PatientStatus</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-      	                    <td align="left">jane</td>
-      	                    <td align="left">doe</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">mm/dd/yyy</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">mm/dd/yyy</td>
-      	                    <td align="left">demo</td>
-                              <td align="left">demo</td>
-                          </tr>
-                          <tr>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-                              <td>demo</td>
-                          </tr>
                         </tbody>
                     </table>
                 </div>
@@ -305,84 +283,62 @@
                     bAutoWidth: false,
                     bDestroy: true,
                     bJQuieryUI: true,
-                    //"columns": [
-                    //    { "data": "" },
-                    //    { "render": "[,].names" },
-                    //    { "data": "sex" },
-                    //    { "data": "dob" },
-                    //    { "data": "type" },
-                    //    { "data": "subcounty" },
-                    //    { "data": "action" }
-                    //],
-                    //"aoColumns": [
-                    //  { "targets": 0, "bSortable": false, "mRender": function () { return '<label class=\"pos-rel\"><input type=\"checkbox\" class=\"ace\" /><span class=\"lbl\"></span></label>' } },
-                    //  { "targets": 1, "bSearchable": true, "bSortable": true, "mData": 1},
-                    //  { "targets": 2, "mData": 2, "sTitle": "Houhosehold Number" },
-                    //  { "targets": 3, "mData": 3, "sTitle": "Gender" },
-                    //  { "targets": 4, "mData": 4, "sTitle": "Date of Birth" },
-                    //  { "targets": 5, "mData": 5, "sTitle": "Person Type" },
-                    //  { "targets": 6, "mData": 6, "sTitle": "Sub-County" },
-                    //  {
-                    //      "targets": 7, "sTitle": "<span class='fa fa-cog'> Action </span>", "bSortable": false, "mData": 7, "mRender": function (data, type, full) {
-                    //          var BaseURL = '#page/portal.php';
-                    //          var PersonId = full[7];
-                    //          var url = BaseURL + '' + PersonId;
-
-                    //          var str = PersonId.substring(10);
-                    //          var i = str.indexOf('&');
-                    //          var Pid = str.substring(0, i);
-                    //          //var editUrl="\javascript:InitiateEdit("+personId+"\)";
-                    //          //var durl='javascript\:\InitiateEdit(\''+PersonId+'\);\'';
-                    //          //var Id=personId.substring(10);
-                    //          // var durl= "\<a href=\"javascript:InitiateEdit("+Pid+");\">"
-                    //          // return '<a href="' + url + '">Load Person</a>';
-                    //          //<a href="'+url+'"><span class=\'fa fa-pencil-square-o\'>update</span></a>
-                    //          return '<a href="' + url + '" style=\'margin-right:4%\'><span class=\'fa fa-male\'> Fetch Portal</span></a> '
-                    //      }
-                    //  }
-                    //],
                     "aaSorting": [],
-
                     "bProcessing": true,
                     "bServerSide": true,
-                    /* "ajax":{
-                         url:"",
-                         type:"get",
-                         error:function(data){
-                             $(".text-danger").html('');
-                              $("#tblPerson").append('<tbody class="text-danger"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                              $("#tblPerson").css("display","none");
- 
-                         }
-                     },*/
-                    "sAjaxSource": "../WebService/PatientLookupService.asmx/GetPatientSearch",
-                    "sServerMethod": "POST",
-                    //"bDestroy":true,
-                    //"bautoWidth": true,
+                    "columns": [
+                        { "data": "EnrollmentNumber"},
+                        { "data": "PatientIndex" },
+                        { "data": "FirstName" },
+                        { "data": "MiddleName" },
+                        { "data": "LastName" },
+                        { "data": "DateOfBirth" },
+                        { "data": "Sex" },
+                        { "data": "RegistrationDate" },
+                        { "data": "PatientStatus" }
+                    ],/*
+                    "columnDefs": [
+                        { "targets": 0, "mData": "0", "sTitle": "Enrollment Number" },
+                        { "targets": 1,  "mData": "1", "sTitle": "Patient Index" },
+                        { "targets": 2,  "mData": "2", "sTitle": "First Name" },
+                        { "targets": 3,  "mData": "3", "sTitle": "Middle Name" },
+                        { "targets": 4,  "mData": "4", "sTitle": "Last Name" },
+                        { "targets": 5,  "mData": "5", "sTitle": "Date of Birth" },
+                        { "targets": 6,  "mData": "6", "sTitle": "Gender" },
+                        { "targets": 7,  "mData": "7", "sTitle": "Registration Date" },
+                        { "targets": 8, "mData": "8", "sTitle": "Patient Status" }
 
-                    ////"bProcessing": true,
-                    //"bserverSide": true,
-                    //"ajax": {
-                    //    url: "../WebService/PatientLookupService.asmx/GetPatientSearch",
-                    //    type: "Post",
-                    //    contentType: "application/json; charset=utf-8",
-                    //    dataType: "json",
-                    //    data: {},
-                    //    success:function(response) {
-                    //        //var json = $.ParseJSON(response.d);
-                    //       // $.fnCallback(response.d);
-                    //    },
-                    //    error: function () {
-
-                    //    }
-                    //},
-                    //"ScrollCollapse": true,
-                    //"info": true,
-                    //"select": {
-                    //    style: 'single'
-                    //},
-                    //"responsive": true,
-                    //"stateSave": true,
+                        //this name should exist in your JSON response
+                        //"render": function ( data, type, full, meta ) {
+                        //    return '<span class="label label-danger">'+data+'</span>';
+                        //}
+                    ],*/
+                    "sAjaxSource": "../WebService/PatientLookupService.asmx/FindPatient",
+                    "fnServerData":function(sSource, aoData, fnCallback, oSettings) {
+                        aoData.push({ "name": "patientId", "value": ""+$("#<%=PatientNumber.ClientID%>").val()+"" });
+                        aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "DateOfBirth", "value": "" + moment($("#SearchDoB").datepicker('getDate')).format('DD-MMM-YYYY') + "" });
+                        aoData.push({ "name": "gender", "value": ""+$("#<%=Sex.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "registrationDate", "value": ""+moment($("#RegDate").datepicker('getDate')).format('DD-MMM-YYYY') +"" });
+                        oSettings.jqXHR = $.ajax({
+                            "dataType": 'json',
+                            "type": 'POST',
+                            "contentType": 'application/json; charset=utf-8',
+                            "url": sSource,
+                            "data": JSON.stringify({ dataPayLoad: aoData }),
+                            "success": function (response) { var json = response.d; fnCallback(json) },
+                            "error":function (xhr,errorType,exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" + xhr.status + "" + jsonError.Message+" "+jsonError.StackTrace+" "+jsonError.ExceptionType, "Patient Finder Method");
+                                return false;
+                            }
+                        });
+                    },
+                    "sAjaxDataProp":"data",
+                    "responsive":true,
                     "bPaginate": true,
                     "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
                 });

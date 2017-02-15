@@ -3,40 +3,60 @@ using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web.Script.Serialization;
+
 
 namespace IQCare.CCC.UILogic
 {
+    public class ListLabOrder
+    {
+        
+        public string labType { get; set; }
+        public string orderReason { get; set; }
+        public string labOrderDate { get; set; }
+
+    }
     public class PatientLabOrderManager
     {
+        private string Msg { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
        
-        public int savePatientLabOrder(int patientID, string labType, string orderReason, string labNotes, string SampleDate)
+        public int savePatientLabOrder(int patientId, string patientLabOrder)
         {
-
-
-            int returnValue;
+           
             try
             {
-                PatientLabTracker patientLabOrder = new PatientLabTracker()
+                var jss = new JavaScriptSerializer();
+            IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+
+                 if (patientId > 0)
                 {
-                    PatientId = patientID,
-                    LabName = labType,
-                    Reasons = orderReason,
-                    SampleDate = SampleDate,
 
-                };
+                    int returnValue;
 
-                returnValue = _mgr.AddPatientLabOrder(patientLabOrder);
-                return returnValue;
-            }
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        PatientLabTracker LabOrder = new PatientLabTracker()
+                        {
+                            PatientId = patientId,
+                            LabName = data[i].labType,
+                            Reasons = data[i].orderReason,
+                            SampleDate = data[0].labOrderDate
+
+                        };
+
+                        returnValue = _mgr.AddPatientLabOrder(LabOrder);
+                        return returnValue;
+                    }
+                }
+             }
             catch (Exception ex)
             {
-                throw ex;
+                Msg = ex.Message + ' ' + ex.InnerException;
             }
+
+            return int.Parse(Msg);
         }
     }
-}
+   }

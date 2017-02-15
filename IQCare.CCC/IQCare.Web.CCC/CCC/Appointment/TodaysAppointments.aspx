@@ -13,8 +13,9 @@
                 <thead>
                     <tr>
                         <th><i class="text-primary" aria-hidden="true">#</i></th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Patient Name</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Service Area</i> </th>
-                        <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Reason</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Reason</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Description</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Status</i> </th>
                     </tr>

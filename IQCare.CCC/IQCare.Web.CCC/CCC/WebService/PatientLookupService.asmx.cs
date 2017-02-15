@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
-using System.Web.Script.Services;
 using System.Web.Services;
-using Application.Presentation;
-using Interface.CCC.Lookup;
+using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -22,56 +23,98 @@ namespace IQCare.Web.CCC.WebService
     {
 
 
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GetPatientSearch()
+        [WebMethod]
+        public string HelloWorld()
         {
+            return "Hello World";
+        }
 
-            dynamic jsonData = null;
-            var echo = Convert.ToInt32(HttpContext.Current.Request.Params["sEcho"]);
-            var displayLength = Convert.ToInt32(HttpContext.Current.Request.Params["length"]);
-            var displayStart = Convert.ToInt32(HttpContext.Current.Request.Params["start"]);
-            var sortOrder = Convert.ToString(HttpContext.Current.Request.Params["sSortDir_0"]);
-            var totalRecords = 0;
-            var totalFiltered = 0;
+        [WebMethod]
+        //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public string GetPatientSearchx()
+        {
+            String output;
 
             try
             {
-                IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+                PatientLookupManager patientLookup=new PatientLookupManager();
+                var jsonData = patientLookup.GetPatientSearchListPayload();
+                output= JsonConvert.SerializeObject(jsonData);
 
-                var patientLookup = new PatientLookupManager();
-                var foundPatient = patientLookup.GetPatientSearchListPayload();
-
-                if (foundPatient.Count > 0)
-                {
-                    totalFiltered = Convert.ToInt32(foundPatient.Count);
-                    totalRecords = Convert.ToInt32(foundPatient.Count);
-
-                    dynamic jsnonData = new
-                    {
-                        draw= HttpContext.Current.Request.Params["draw"],
-                        recordsTotal= totalRecords,
-                        recordsFiltered=totalFiltered,
-                        data = foundPatient
-                    };
-
-                    jsonData = JsonConvert.SerializeObject(jsnonData);
-                }
-
+                
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            Context.Response.ContentType = "application/json; charset=utf-8";
-            return new JavaScriptSerializer().Serialize(jsonData);
+
+            return output;
         }
+
+        [WebMethod]
+        public string FindPatient(List<Data> dataPayLoad)
+        {
+           // var request = HttpContext.Current.Request;
+            int sEcho = 0;int displayStart = 0;int displayLength = 0;
+            dynamic patientList = null;
+            
+
+            var c = dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value;
+            var dl = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value;
+            var ds = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value;
+
+            /* search parameters */
+
+            if (Convert.ToInt32(c) > 0){ sEcho = Convert.ToInt32(c);}
+            if (Convert.ToInt32(dl) > 0){ displayLength = Convert.ToInt32(dl);}
+            if (Convert.ToInt32(ds) > 0){ displayStart = Convert.ToInt32(ds); }
+
+            try
+            {
+                PatientLookupManager patientLookup=new PatientLookupManager();
+               var patientLookups= patientLookup.GetPatientSearchListPayload().ToList();
+
+                if (patientLookups.Count>0)
+                {
+                    dynamic patientTableLoad = new
+                    {
+                        //status = "success",
+                        draw = sEcho,
+                        recordsTotal = Convert.ToInt32(patientLookups.Count()),
+                        recordsFiltered = Convert.ToInt32(patientLookups.Count()),
+                        data = patientLookups.Select(x=> new 
+                        {
+                            EnrollmentNumber=x.Id,
+                            PatientIndex=x.PatientIndex,
+                            FirstName=x.FirstName,
+                            MiddleName=x.MiddleName,
+                            LastName=x.LastName,
+                            DateOfBirth=x.DateOfBirth,
+                            Sex=x.Sex,
+                            RegistrationDate=x.RegistrationDate,
+                            PatientStatus=x.PatientStatus
+                        })
+                    };
+                    patientList= patientTableLoad;
+                }
+                return JsonConvert.SerializeObject(patientList);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+    }
+    public class Data
+    {
+        public string name { get; set; }
+        public string value { get; set; }
+    }
+
+    public class Data1
+    {
+        public List<Data> data { get; set; }
     }
 }

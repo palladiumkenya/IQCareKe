@@ -11,7 +11,8 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           // Session["PatientMasterVisitID"] = 0;
+            Session["PatientId"] = HttpContext.Current.Session["PatientId"];
+            Session["PatientMasterVisitID"] = 0;
         }
     }
 }
