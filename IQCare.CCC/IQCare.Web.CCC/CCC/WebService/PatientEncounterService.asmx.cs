@@ -1,8 +1,13 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 using System.Web.Services;
 
 namespace IQCare.Web.CCC.WebService
@@ -64,5 +69,66 @@ namespace IQCare.Web.CCC.WebService
 
             patientEncounter.savePatientManagement(patientMasterVisitID, "1", ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetAdverseEvents()
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(patientMasterVisitID, "1");
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[6] { row["SeverityID"].ToString(), row["EventName"].ToString(), row["EventCause"].ToString(), row["Severity"].ToString(), row["Action"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetChronicIllness()
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterChronicIllness(patientMasterVisitID, "1");
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[6] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["dose"].ToString(), row["duration"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetVaccines()
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterVaccines(patientMasterVisitID, "1");
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
     }
 }

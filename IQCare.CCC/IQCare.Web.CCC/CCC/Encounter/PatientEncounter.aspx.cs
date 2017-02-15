@@ -1,9 +1,12 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -13,13 +16,14 @@ namespace IQCare.Web.CCC.Encounter
     public partial class PatientEncounter : System.Web.UI.Page
     {
         PatientEncounterLogic PEL = new PatientEncounterLogic();
-        public string serversideval = "0";
         int visitId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Request.QueryString["visitId"] != null)
+            {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
-                
+                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+            }    
 
             if (!IsPostBack)
             {
@@ -45,21 +49,52 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
 
-                if(visitId > 0)
+                if (visitId > 0)
                     loadPatientEncounter();
-                PEL.EncounterHistory(TreeViewEncounterHistory);
 
+               
             }
         }
 
         private void loadPatientEncounter()
         {
-            DataSet theDS = PEL.loadPatientEncounter(visitId, "1");
-            VisitDate.Text = theDS.Tables[0].Rows[0]["visitDate"].ToString();
-            if (theDS.Tables[0].Rows[0]["visitDate"].ToString() == "1")
-                scheduledYes.Checked = true;
-            else
-                scheduledNo.Checked = true;
+            Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
+            pce = PEL.loadPatientEncounter(visitId, "1");
+
+            /////PRESENTING COMPLAINTS
+            VisitDate.Text = pce.visitDate;
+            rblVisitScheduled.SelectedValue = pce.visitScheduled;
+            ddlVisitBy.SelectedValue = pce.visitBy;
+            complaints.Value = pce.complaints;
+            //screening
+            lmp.Value = pce.lmp;
+            examinationPregnancyStatus.SelectedValue = pce.pregStatus;
+            ExpectedDateOfChildBirth.Value = pce.edd;
+            //anc
+            onFP.SelectedValue = pce.onFP;
+            fpMethod.SelectedValue = pce.fpMethod;
+            //nofp
+            stiPartnerNotification.SelectedValue = pce.STIPartnerNotification;
+
+            ////PATIENT MANAGEMENT
+            foreach(ListItem item in cblPHDP.Items)
+            {
+                for (int i = 0; i < pce.phdp.Length; i++)
+                {
+                    if(item.Value == pce.phdp[i])
+                    {
+                        item.Selected = true;
+                    }
+                    //cblPHDP.SelectedValue = pce.phdp[i];
+                }
+            }
+            
+            //cblPHDP.SelectedValue
+            //arvAdherance
+            //ctxAdherance
+            NextAppointmentDate.Value = pce.nextAppointmentDate;
+            ddlReferredFor.SelectedValue = pce.nextAppointmentType;
+
         }
 
     }

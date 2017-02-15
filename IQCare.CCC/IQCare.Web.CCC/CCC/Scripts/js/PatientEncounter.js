@@ -1,10 +1,4 @@
-﻿var arrAdverseEvent = [];
-var arrChronicIllness = [];
-var arrVaccine = [];
-var arrPhysicalExam = [];
-var arrDiagnosis = [];
-
-function DrawDataTable(ctrlName, arrUI) {
+﻿function DrawDataTable(ctrlName, arrUI) {
 
     if (arrUI.length > 0) {
         var table = $("#" + ctrlName).DataTable();
@@ -17,7 +11,6 @@ function AddAdverseReaction() {
     var medicineCausingAE = $("#AdverseEventCause").val();
     var adverseEventSeverity = $('#ddlAdverseEventSeverity').find(":selected").text();
     var adverseEventSeverityID = $('#ddlAdverseEventSeverity').find(":selected").val();
-
     var adverseEventAction = $("#AdverseEventAction").val();
 
     if (adverseEvent == "") {
@@ -30,15 +23,16 @@ function AddAdverseReaction() {
         return;
     }
 
-    var chkData = $.grep(arrAdverseEvent, function (e) { return e.adverseEvent == adverseEvent; });
+    //var chkData = $.grep(arrAdverseEvent, function (e) { return e.adverseEvent == adverseEvent; });
+    
     arrAdverseEventUI = [];
-    if (jQuery.isEmptyObject(chkData) == true) {
-        arrAdverseEvent.push({ adverseEvent: adverseEvent, medicineCausingAE: medicineCausingAE, adverseSeverity: adverseEventSeverityID, adverseAction: adverseEventAction });
-        arrAdverseEventUI.push([adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    }
-    else {
-        alert("Already exits in the table.");
-    }
+    //if (jQuery.isEmptyObject(chkData) == true) {
+        //arrAdverseEvent.push({ adverseEvent: adverseEvent, medicineCausingAE: medicineCausingAE, adverseSeverity: adverseEventSeverityID, adverseAction: adverseEventAction });
+    arrAdverseEventUI.push([adverseEventSeverityID,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    //}
+    //else {
+    //    alert("Already exits in the table.");
+    //}
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
 }
 
@@ -60,15 +54,16 @@ function AddChronicIllness() {
     }
     else
     {
-        var chkData = $.grep(arrChronicIllness, function (e) { return e.chronicIllness == chronicIllnessID; });
+        //var chkData = $.grep(arrChronicIllness, function (e) { return e.chronicIllness == chronicIllnessID; });
+        
         arrChronicIllnessUI = [];
-        if (jQuery.isEmptyObject(chkData) == true) {
-            arrChronicIllness.push({ chronicIllness: chronicIllnessID, treatment: illnessTreatment, dose: treatmentDose, duration: treatmentDuration });
-            arrChronicIllnessUI.push([chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-        }
-        else {
-            alert("Already exits in the table.");
-        }
+        //if (jQuery.isEmptyObject(chkData) == true) {
+        //    arrChronicIllness.push({ chronicIllness: chronicIllnessID, treatment: illnessTreatment, dose: treatmentDose, duration: treatmentDuration });
+        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+        //}
+        //else {
+        //    alert("Already exits in the table.");
+        //}
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
     }
     
@@ -87,15 +82,16 @@ function AddVaccine() {
         return;
     }
 
-    var chkData = $.grep(arrVaccine, function (e) { return e.vaccine == vaccineID; });
+    //var chkData = $.grep(arrVaccine, function (e) { return e.vaccine == vaccineID; });
+    
     arrVaccineUI = [];
-    if (jQuery.isEmptyObject(chkData) == true) {
-        arrVaccine.push({ vaccine: vaccineID, vaccineStage: vaccineStageID, vaccinationDate: vaccinationDate });
-        arrVaccineUI.push([vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    }
-    else {
-        alert("Already exits in the table.");
-    }
+    //if (jQuery.isEmptyObject(chkData) == true) {
+    //    arrVaccine.push({ vaccine: vaccineID, vaccineStage: vaccineStageID, vaccinationDate: vaccinationDate });
+    arrVaccineUI.push([vaccineID, vaccineStageID, vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    //}
+    //else {
+    //    alert("Already exits in the table.");
+    //}
     DrawDataTable("dtlVaccines", arrVaccineUI);
 }
 
@@ -111,15 +107,16 @@ function AddPhysicalExam() {
         return;
     }
 
-    var chkData = $.grep(arrPhysicalExam, function (e) { return e.exam == examID; });
+    //var chkData = $.grep(arrPhysicalExam, function (e) { return e.exam == examID; });
+    
     arrPhysicalExamUI = [];
-    if (jQuery.isEmptyObject(chkData) == true) {
-        arrPhysicalExam.push({ examType: examTypeID, exam: examID, findings: findings });
-        arrPhysicalExamUI.push([examType, exam, findings, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    }
-    else {
-        alert("Already exits in the table.");
-    }
+    //if (jQuery.isEmptyObject(chkData) == true) {
+    //    arrPhysicalExam.push({ examType: examTypeID, exam: examID, findings: findings });
+    arrPhysicalExamUI.push([examTypeID, examID, examType, exam, findings, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    //}
+    //else {
+    //    alert("Already exits in the table.");
+    //}
     DrawDataTable("dtlPhysicalExam", arrPhysicalExamUI);
 }
 
@@ -132,10 +129,11 @@ function AddDiagnosis() {
         return;
     }
 
-    var chkData = $.grep(arrDiagnosis, function (e) { return e.diagnosis == diagnosis; });
+    //var chkData = $.grep(arrDiagnosis, function (e) { return e.diagnosis == diagnosis; });
+    
     arrDiagnosisUI = [];
     //if (jQuery.isEmptyObject(chkData) == true) {
-        arrDiagnosis.push({ diagnosis: diagnosis, treatment: treatment });
+        //arrDiagnosis.push({ diagnosis: diagnosis, treatment: treatment });
         arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
     //}
     //else {

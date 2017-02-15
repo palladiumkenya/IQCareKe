@@ -11,7 +11,7 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["PatientMasterVisitID"] = 0;
+           // Session["PatientMasterVisitID"] = 0;
         }
     }
 }
