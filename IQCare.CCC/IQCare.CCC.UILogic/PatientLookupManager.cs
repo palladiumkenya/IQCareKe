@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
+using Application.Common;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -8,6 +12,7 @@ namespace IQCare.CCC.UILogic
     public class PatientLookupManager
     {
         readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+        Utility _utility=new Utility();
         
        public List<PatientLookup> GetPatientDetailSummary(int id)
         {
@@ -25,10 +30,14 @@ namespace IQCare.CCC.UILogic
 
 
        public List<PatientLookup> GetPatientSearchListPayload()
-        {
-            var patientDetails = _patientLookupmanager.GetPatientSearchPayload();
+       {
+           var patientDetails = _patientLookupmanager.GetPatientSearchPayload();         
+            return patientDetails;
+        }
 
-            return patientDetails.FindAll(x=>x.Active);
+        public int GetTotalpatientCount()
+        {
+            return _patientLookupmanager.GetTotalpatientCount();
         }
     }
 }

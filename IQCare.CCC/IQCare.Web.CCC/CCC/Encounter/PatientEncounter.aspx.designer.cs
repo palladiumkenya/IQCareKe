@@ -22,121 +22,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
-        /// EnrollmentCD4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EnrollmentCD4;
-        
-        /// <summary>
-        /// EnrollmentCD4Date control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EnrollmentCD4Date;
-        
-        /// <summary>
-        /// enrollmentViralload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label enrollmentViralload;
-        
-        /// <summary>
-        /// enrollmentviralloaddate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label enrollmentviralloaddate;
-        
-        /// <summary>
-        /// vitalHeight control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalHeight;
-        
-        /// <summary>
-        /// vitalsWeight control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsWeight;
-        
-        /// <summary>
-        /// vitalsCircumference control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsCircumference;
-        
-        /// <summary>
-        /// vitalsMUAC control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsMUAC;
-        
-        /// <summary>
-        /// vitalBloodPressure control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalBloodPressure;
-        
-        /// <summary>
-        /// vitalTemperature control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalTemperature;
-        
-        /// <summary>
-        /// vitalRespiratoryRate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalRespiratoryRate;
-        
-        /// <summary>
-        /// lblOxygenSaturation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOxygenSaturation;
-        
-        /// <summary>
         /// VisitDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText VisitDate;
+        protected global::System.Web.UI.WebControls.TextBox VisitDate;
+        
+        /// <summary>
+        /// rblVisitScheduled control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblVisitScheduled;
         
         /// <summary>
         /// ddlVisitBy control.
@@ -236,6 +137,15 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText ExpectedDateOfChildBirth;
+        
+        /// <summary>
+        /// rblANCProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblANCProfile;
         
         /// <summary>
         /// onFP control.
@@ -355,13 +265,49 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtVaccinationDate;
         
         /// <summary>
-        /// examinationNotes control.
+        /// ddlExaminationType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea examinationNotes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlExaminationType;
+        
+        /// <summary>
+        /// ddlExamination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlExamination;
+        
+        /// <summary>
+        /// txtExamFindings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
+        
+        /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
+        /// cblPHDP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblPHDP;
         
         /// <summary>
         /// Diagnosis control.
@@ -382,15 +328,6 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
         
         /// <summary>
-        /// btnAddDiagnosis control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddDiagnosis;
-        
-        /// <summary>
         /// arvAdherance control.
         /// </summary>
         /// <remarks>
@@ -409,22 +346,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
         
         /// <summary>
-        /// ReferredFor control.
+        /// NextAppointmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ReferredFor;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText NextAppointmentDate;
         
         /// <summary>
-        /// PrescribedBy control.
+        /// ddlReferredFor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect PrescribedBy;
+        protected global::System.Web.UI.WebControls.DropDownList ddlReferredFor;
         
         /// <summary>
         /// labTestTypes control.

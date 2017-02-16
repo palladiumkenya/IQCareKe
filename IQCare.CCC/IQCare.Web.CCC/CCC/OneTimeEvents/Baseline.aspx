@@ -1373,8 +1373,8 @@
             function addPatientTransferIn() {
 
                 var serviceAreaId = 0;
-                var transferInDate = $('#TIDate').datepicker('getDate');
-                var treatmentStartDate = $('#<%=lblARTStartDate.ClientID%>').datepicker('getDate');
+                var transferInDate = moment($('#TIDate').datepicker('getDate')).format('DD-MMM-YYYY');
+                var treatmentStartDate = moment($('#<%=lblARTStartDate.ClientID%>').datepicker('getDate')).format('DD-MMM-YYYY');
                 var currentTreatment = $('#<%=TIRegimen.ClientID%>').val();
                 var facilityFrom = $('#<%=TransferFromFacility.ClientID%>').val();
                 var mflCode = $('#<%=FacilityMFLCode.ClientID%>').val();
@@ -1420,9 +1420,9 @@
             function addPatientHivEnrollmentbaseline() {
                 
                 
-                var hivDiagnosisDate = $('#DHID').datepicker('getDate');
-                var enrollmentDate = $('#DOE').datepicker('getDate');
-                var artInitiationDate = $('#DARTI').datepicker('getDate');
+                var hivDiagnosisDate = moment($('#DHID').datepicker('getDate')).format('DD-MMM-YYYY');
+                var enrollmentDate = moment($('#DOE').datepicker('getDate')).format('DD-MMM-YYYY');
+                var artInitiationDate = moment($('#DARTI').datepicker('getDate')).format('DD-MMM-YYYY');
                 var enrollmentWhoStage = $('#<%=WHOStageAtEnrollment.ClientID%>').find(":selected").val();
                 var ptnId = patientId;
                 var ptnmasterVisitId = patientmasterVisitId;

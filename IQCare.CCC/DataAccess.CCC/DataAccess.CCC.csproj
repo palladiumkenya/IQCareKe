@@ -114,7 +114,10 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
+    <Compile Include="Repository\Patient\PatientContactRepository.cs" />
+    <Compile Include="Repository\Patient\PatientLocationRepository.cs" />
     <Compile Include="Repository\Patient\PatientRepository.cs" />
     <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
     <Compile Include="Repository\Patient\PatientVitalsRepository.cs" />
@@ -146,7 +149,7 @@
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\OneTimeEvent\" />
+    <Folder Include="Repository\Encounter\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">

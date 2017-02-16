@@ -50,10 +50,40 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID,ARVAdherence,CTXAdherence,nextAppointment,appointmentType, PHDPList, diag);
         }
 
-        public DataSet loadPatientEncounter(int PatientMasterVisitID, string PatientID)
+        public PresentingComplaintsEntity loadPatientEncounter(int PatientMasterVisitID, string PatientID)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             return patientEncounter.getPatientEncounter(PatientMasterVisitID.ToString(), PatientID);
+        }
+
+        public DataTable loadPatientEncounterAdverseEvents(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterAdverseEvents(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterChronicIllness(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterChronicIllness(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterVaccines(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterVaccines(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterPhysicalExam(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterPhysicalExam(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterDiagnosis(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterDiagnosis(PatientMasterVisitID, PatientID);
         }
 
         public void EncounterHistory(TreeView TreeViewEncounterHistory)

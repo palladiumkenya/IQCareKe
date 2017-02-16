@@ -28,20 +28,46 @@ namespace BusinessProcess.CCC
         {
             var patientSearchDetails =_unitOfWork.PatientLookupRepository
                     .GetAll()
-                    .Select(x=> new PatientLookup()
-                {
-                    Id = x.Id,
-                    PatientIndex = x.PatientIndex,
-                    FirstName = x.FirstName,
-                    MiddleName = x.MiddleName,
-                    DateOfBirth = x.DateOfBirth,
-                    Sex = x.Sex,
-                    RegistrationDate = x.RegistrationDate,
-                    PatientStatus = x.PatientStatus
-                })
+                //    .Select(x=> new PatientLookup 
+                //{
+                //    EnrollmentNumber = x.EnrollmentNumber,
+                //    PatientIndex = x.PatientIndex,
+                //    FirstName = x.FirstName,
+                //    MiddleName = x.MiddleName,
+                //    DateOfBirth = x.DateOfBirth,
+                //    Sex = x.Sex,
+                //    RegistrationDate = x.RegistrationDate,
+                //    PatientStatus = x.PatientStatus
+                //})
                     .ToList();
 
             return patientSearchDetails;
+        }
+
+        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type)
+        {
+            var searchPayload = _unitOfWork.PatientLookupRepository.FindBy(
+                   x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));;
+
+            //switch (type)
+            //{
+            //    case "s":
+            //        searchPayload =
+            //            _unitOfWork.PatientLookupRepository.FindBy(
+            //                x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));
+            //        break;
+            //    case "i":
+            //        break;
+            //}
+
+            return searchPayload.ToList();
+        }
+
+        public int GetTotalpatientCount()
+        {
+            var totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
+
+            return totalCount;
         }
     }
 }
