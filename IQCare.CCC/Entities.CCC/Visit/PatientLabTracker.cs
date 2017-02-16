@@ -19,13 +19,18 @@ namespace Entities.CCC.Visit
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
         public string LabName { get; set; }
-        public int PatientMasterVisitId { get; set; }
-        [ForeignKey("PatientMasterVisitId")]
-        public virtual PatientMasterVisit PatientMasterVisit { get; set; }
+        public int patientMasterVisitId { get; set; }
+       //[ForeignKey("patientMasterVisitId")]
+        //public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public string SampleDate { get; set; }
         public string Reasons { get; set; }       
         public string Results  { get; set; }
-       
+        //public string CreatedBy { get; set; }
+        //public int DeleteFlag { get; set; }
+       // public string AuditData { get; set; }
+
+
+
     }
 }
 

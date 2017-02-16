@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Entities.CCC.Lookup;
 
 namespace Interface.CCC.Lookup
@@ -7,7 +8,7 @@ namespace Interface.CCC.Lookup
     {
         List<PatientLookup> GetPatientSearchPayload();
         List<PatientLookup> GetPatientDetailsLookup(int id);
-        List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type);
+        List<PatientLookup> GetPatientSearchPayloadWithParameter(int patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility, DateTime regDate);
         int GetTotalpatientCount();
     }
 }
