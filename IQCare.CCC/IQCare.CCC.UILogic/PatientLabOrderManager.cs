@@ -13,6 +13,7 @@ namespace IQCare.CCC.UILogic
         
         public string labType { get; set; }
         public string orderReason { get; set; }
+        public string results { get; set; }
         public string labOrderDate { get; set; }
 
     }
@@ -22,7 +23,7 @@ namespace IQCare.CCC.UILogic
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
        
-        public int savePatientLabOrder(int patientId, string patientLabOrder)
+        public int savePatientLabOrder(int patientId, int visitId, string patientLabOrder)
         {
            
             try
@@ -40,6 +41,8 @@ namespace IQCare.CCC.UILogic
                         PatientLabTracker LabOrder = new PatientLabTracker()
                         {
                             PatientId = patientId,
+                            patientMasterVisitId = visitId,
+                            Results= data[i].results,
                             LabName = data[i].labType,
                             Reasons = data[i].orderReason,
                             SampleDate = data[0].labOrderDate

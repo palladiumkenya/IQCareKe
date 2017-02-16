@@ -24,14 +24,14 @@ namespace IQCare.Web.CCC.WebService
 
       
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patientId, string patientLabOrder)
+        public string AddLabOrder(int patientId, int visitId,string patientLabOrder)
         {
             
             try
             {
 
                  var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientId, patientLabOrder);
+                Result = labOrder.savePatientLabOrder(patientId,visitId,patientLabOrder);
                 if (Result > 0)
                 {
                     Msg = "Patient Lab Order Recorded Successfully .";

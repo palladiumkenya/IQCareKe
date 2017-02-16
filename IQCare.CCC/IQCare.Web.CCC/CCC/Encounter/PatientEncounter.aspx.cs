@@ -66,14 +66,17 @@ namespace IQCare.Web.CCC.Encounter
             rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
             complaints.Value = pce.complaints;
-            //screening
+            tbscreeningstatus.SelectedValue = pce.tbScreening;
+            nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             lmp.Value = pce.lmp;
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
             ExpectedDateOfChildBirth.Value = pce.edd;
-            //anc
+            rblANCProfile.SelectedValue = pce.ancProfile;
             onFP.SelectedValue = pce.onFP;
             fpMethod.SelectedValue = pce.fpMethod;
             //nofp
+            cacxscreening.SelectedValue = pce.CaCX;
+            stiScreening.SelectedValue = pce.STIScreening;
             stiPartnerNotification.SelectedValue = pce.STIPartnerNotification;
 
             ////PATIENT MANAGEMENT
@@ -85,13 +88,11 @@ namespace IQCare.Web.CCC.Encounter
                     {
                         item.Selected = true;
                     }
-                    //cblPHDP.SelectedValue = pce.phdp[i];
                 }
             }
-            
-            //cblPHDP.SelectedValue
-            //arvAdherance
-            //ctxAdherance
+
+            arvAdherance.SelectedValue = pce.ARVAdherence;
+            ctxAdherance.SelectedValue = pce.CTXAdherence;
             NextAppointmentDate.Value = pce.nextAppointmentDate;
             ddlReferredFor.SelectedValue = pce.nextAppointmentType;
 
