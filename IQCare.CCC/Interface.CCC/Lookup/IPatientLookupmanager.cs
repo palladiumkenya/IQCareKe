@@ -7,6 +7,7 @@ namespace Interface.CCC.Lookup
     {
         List<PatientLookup> GetPatientSearchPayload();
         List<PatientLookup> GetPatientDetailsLookup(int id);
+        List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type);
         int GetTotalpatientCount();
     }
 }

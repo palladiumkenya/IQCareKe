@@ -44,6 +44,25 @@ namespace BusinessProcess.CCC
             return patientSearchDetails;
         }
 
+        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type)
+        {
+            var searchPayload = _unitOfWork.PatientLookupRepository.FindBy(
+                   x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));;
+
+            //switch (type)
+            //{
+            //    case "s":
+            //        searchPayload =
+            //            _unitOfWork.PatientLookupRepository.FindBy(
+            //                x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));
+            //        break;
+            //    case "i":
+            //        break;
+            //}
+
+            return searchPayload.ToList();
+        }
+
         public int GetTotalpatientCount()
         {
             var totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();

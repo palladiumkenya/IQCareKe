@@ -3,10 +3,25 @@
 <%@ Register Src="~/CCC/UC/ucPatientDetails.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="row">
-        <div class="col-md-12">
-            <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
+ 
+    <div class="col-md-12 col-xs-12">
+         <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-3 col-xs-12 bs-callout bs-callout-danger">
+             <div class="pull-left"><i class="fa fa-info-circle text-muted" aria-hidden="true"></i> Last Visit Date.</div>
         </div>
+
+         <div class="col-md-3 bs-callout bs-callout-danger">
+             <div class="pull-left"><i class="fa fa-info-circle text-muted" aria-hidden="true"></i> Last VL Results.</div>
+         </div>
+
+         <div class="col-md-4  bs-callout bs-callout-danger"></div>
+         <%--<div class="col-md-3 col-xs-12 bs-callout bs-callout-danger"></div>--%>
+    </div>
+        
+           
+        
 
         <div class="col-md-12 col-xs-12">
 
@@ -128,5 +143,5 @@
 
                   
          </div>
-    </div>
+   
 </asp:Content>

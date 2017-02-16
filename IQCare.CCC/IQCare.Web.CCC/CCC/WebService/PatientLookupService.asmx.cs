@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using Application.Common;
 using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -52,6 +55,50 @@ namespace IQCare.Web.CCC.WebService
             return output;
         }
 
+        //[WebMethod]
+        //public string PatientFinder()
+        //{
+        //    string patientList = null;
+
+        //    try
+        //    {
+        //        PatientLookupManager patientLookup = new PatientLookupManager();
+        //        var patientLookups = patientLookup.GetPatientSearchListPayload().ToList();
+
+        //        if (patientLookups.Count > 0)
+        //        {
+        //            var json = new
+        //            {
+
+        //                draw = 1,
+        //                recordsTotal = 1, // Convert.ToInt32(patientLookups.Count()),
+        //                recordsFiltered = 1, // Convert.ToInt32(patientLookups.Count()),
+        //                data = patientLookups.Select(x => new string[]
+        //                {
+        //                    x.Id.ToString(),
+        //                    x.PatientIndex.ToString(),
+        //                    x.FirstName,
+        //                    x.MiddleName,
+        //                    x.LastName,
+        //                    x.DateOfBirth.ToShortDateString(),
+        //                    x.Sex.ToString(),
+        //                    x.RegistrationDate.ToShortDateString(),
+        //                    x.PatientStatus.ToString()
+        //                })
+        //            };
+        //            patientList = json.ToString();
+        //        }
+        //    }
+        //    catch (Exception var )
+        //    {
+        //        Console.WriteLine(var );
+        //        throw;
+        //    }
+
+        //    return JsonConvert.SerializeObject(patientList);
+        //}
+        
+
         [WebMethod]
         public string FindPatient(List<Data> dataPayLoad)
         {
@@ -59,6 +106,7 @@ namespace IQCare.Web.CCC.WebService
             int sEcho = 0;int displayStart = 0;int displayLength = 0;
             dynamic patientList = null;
             
+            Utility utility=new Utility();
 
             var c = dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value;
             var dl = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value;
@@ -73,30 +121,30 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PatientLookupManager patientLookup=new PatientLookupManager();
-               var patientLookups= patientLookup.GetPatientSearchListPayload().ToList();
+                var patientLookups= patientLookup.GetPatientSearchListPayload().ToList();
 
                 if (patientLookups.Count>0)
                 {
-                    dynamic patientTableLoad = new
+                    var json = new 
                     {
-                        //status = "success",
+
                         draw = sEcho,
                         recordsTotal = Convert.ToInt32(patientLookups.Count()),
                         recordsFiltered = Convert.ToInt32(patientLookups.Count()),
-                        data = patientLookups.Select(x=> new 
+                        data = patientLookups.Select(x => new string[]
                         {
-                            EnrollmentNumber=x.Id,
-                            PatientIndex=x.PatientIndex,
-                            FirstName=x.FirstName,
-                            MiddleName=x.MiddleName,
-                            LastName=x.LastName,
-                            DateOfBirth=x.DateOfBirth,
-                            Sex=x.Sex,
-                            RegistrationDate=x.RegistrationDate,
-                            PatientStatus=x.PatientStatus
+                            x.Id.ToString(),
+                            x.EnrollmentNumber,
+                            utility.Decrypt(x.FirstName),
+                            utility.Decrypt(x.MiddleName),
+                            utility.Decrypt(x.LastName),
+                            x.DateOfBirth.ToString("MMM-dd-yyyy"),
+                            LookupLogic.GetLookupNameById(x.Sex),
+                            x.RegistrationDate.ToString("MMM-dd-yyyy"),
+                            x.PatientStatus.ToString()
                         })
                     };
-                    patientList= patientTableLoad;
+                    patientList= json;
                 }
                 return JsonConvert.SerializeObject(patientList);
             }
