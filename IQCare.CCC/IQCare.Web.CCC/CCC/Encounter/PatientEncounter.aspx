@@ -246,7 +246,7 @@
                                                     <h4 class="pull-left text-danger"><i class="fa fa-user-md fa-5x" aria-hidden="true"></i></h4>
                                                 </div>--%>
                                                 <div class="col-md-12">
-                                                     <div class="col-md-7">
+                                                     <div class="col-md-6">
                                                          <%--<div class="col-md-12"><h1 class="text-primary pull-left"><small>Complaints & History of Complaints</small></h1></div>
                                                          <div class="col-md-12"><hr /></div>--%>
                                                         
@@ -254,7 +254,7 @@
                                                                <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4"></textarea> 
                                                     </div>
 
-                                                      <div class="col-md-5">
+                                                      <div class="col-md-6">
                                                             <%--<div class="col-md-12"><small class="muted pull-left"><strong>TB Screening and Nutrition Status</strong></small></div><div class="col-md-12"><hr /> </div> --%>
                                                             <div class="col-md-12  form-group">
                                                                 <div class="col-md-6"><label class="control-label pull-left input-sm" for="tbscreeningstatus">TB Screening</label></div>
@@ -530,12 +530,17 @@
                                                                   <div class="col-md-12 form-group">
                                                                        <div class="col-md-12"><label class="control-label  pull-left">ANC/PNC Profile</label></div>
                                                                        <div class="col-md-12">
-                                                                          <label class="radio-custom radio-inline pull-left" data-initialize="radio">
+                                                                           <asp:RadioButtonList ID="rblANCProfile" runat="server" RepeatDirection="Horizontal">
+                                                                               <asp:ListItem Text="Yes" Value="1" />
+                                                                               <asp:ListItem Text="No" Value="0" />
+                                                                           </asp:RadioButtonList>
+
+                                                                          <%--<label class="radio-custom radio-inline pull-left" data-initialize="radio">
                                                                               <input class="sr-only" name="ANCProfile" type="radio" value="1"> Yes
                                                                           </label>
                                                                           <label class="radio-custom radio-inline pull-left" data-initialize="radio">
                                                                               <input class="sr-only" name="ANCProfile" type="radio" value="0"> No
-                                                                          </label>
+                                                                          </label>--%>
                                                                       </div>
                                                                   </div>
                                                                  <div class="col-md-12 form-group">
@@ -860,7 +865,7 @@
                                                     
                                                  </div>
 
-                                                 <div class="col-md-1"></div>
+                                                 <%--<div class="col-md-1"></div>
                                                  <div class="col-md-11">
                                                      <div class="col-md-12">
                                                          <div class="col-md-12"><hr /></div>
@@ -873,7 +878,7 @@
                                                              </div>
                                                          </div>
                                                      </div>
-                                                 </div>
+                                                 </div>--%>
                                              </div>
                                              
 	                                    </div><%-- .data-step-3--%>
@@ -918,7 +923,9 @@
                                                                  <div class="col-md-5 form-group">
                                                                      <input type="text" id="DiagnosisTreatment" class ="form-control input-sm" placeholder="treatment" runat="server" ClientIDMode="Static" />
                                                                  </div>
-                                                                
+                                                                <div class="col-md-1 form-group">
+                                                                    <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDiagnosis" onclick="AddDiagnosis();">Add</button>
+                                                                </div>
                                                             </div>
 
                                                            <div class="col-md-12 form-group">
@@ -1458,7 +1465,7 @@
            var examTable = $('#dtlPhysicalExam').DataTable({
                ajax: {
                    type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                   url: "../WebService/PatientEncounterService.asmx/GetPhysicalExam",
                    dataSrc: 'd',
                    contentType: "application/json; charset=utf-8",
                    dataType: "json"
@@ -1484,7 +1491,7 @@
            var diagnosisTable = $('#dtlDiagnosis').DataTable({
                ajax: {
                    type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                   url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
                    dataSrc: 'd',
                    contentType: "application/json; charset=utf-8",
                    dataType: "json"
@@ -1638,15 +1645,29 @@
                 //var visitScheduled = $('input[name="Scheduled"]:checked').val();
                 ////////////////////////////////////////
                 var rblVS = '<%= rblVisitScheduled.ClientID %>';
-                var list = document.getElementById(rblVS); //Client ID of the radiolist
-                var inputs = list.getElementsByTagName("input");
+                var rblANC = '<%= rblANCProfile.ClientID %>';
+                
+                var listVS = document.getElementById(rblVS); //Client ID of the radiolist
+                var listANC = document.getElementById(rblANC);
+                var inputsVS = listVS.getElementsByTagName("input");
+                var inputsANC = listANC.getElementsByTagName("input");
                 var visitScheduled;
-                for (var i = 0; i < inputs.length; i++) {
-                    if (inputs[i].checked) {
-                        visitScheduled = inputs[i].value;
+                var ANCProfile;
+                for (var i = 0; i < inputsVS.length; i++) {
+                    if (inputsVS[i].checked) {
+                        visitScheduled = inputsVS[i].value;
                         break;
                     }
                 }
+
+                for (var i = 0; i < inputsANC.length; i++) {
+                    if (inputsANC[i].checked) {
+                        ANCProfile = inputsANC[i].value;
+                        break;
+                    }
+                }
+
+
                 /////////////////////////////////////////////
                 if (visitScheduled == undefined)
                 {
@@ -1659,6 +1680,11 @@
 
                     //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
                 }
+
+                if (ANCProfile == undefined)
+                {
+                    ANCProfile = "99";
+                }
                     
 
                 var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
@@ -1668,7 +1694,7 @@
                 var LMP = $("#<%=lmp.ClientID%>").val();
                 var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                var ANCProfile = $('input[name="ANCProfile"]:checked').val();
+                //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
                 var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
 

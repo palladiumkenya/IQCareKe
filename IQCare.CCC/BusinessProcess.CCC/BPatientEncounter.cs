@@ -257,53 +257,77 @@ namespace BusinessProcess.CCC
 
                 PresentingComplaintsEntity pce = new PresentingComplaintsEntity();
        
-                //////////PRESENTING COMPLAINTS
                 if(theDS.Tables[0].Rows.Count > 0)
                 {
                     pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
                     pce.visitScheduled = theDS.Tables[0].Rows[0]["visitScheduled"].ToString();
                     pce.visitBy = theDS.Tables[0].Rows[0]["visitBy"].ToString();
                 }
+
                 if(theDS.Tables[1].Rows.Count > 0)
                 {
                     pce.complaints = theDS.Tables[1].Rows[0]["PresentingComplaint"].ToString();
                 }
 
-                //pce.tbScreening
-                //pce.nutritionStatus
                 if (theDS.Tables[2].Rows.Count > 0)
                 {
                     pce.lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
                     pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
                     pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
                     pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
+                    pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
                 }
-                //pce.ancProfile
-                if(theDS.Tables[4].Rows.Count > 0)
+
+                if (theDS.Tables[3].Rows.Count > 0)
                 {
-                    pce.onFP = theDS.Tables[4].Rows[0]["FPStatusId"].ToString();
+                    pce.tbScreening = theDS.Tables[3].Rows[0]["ScreeningValueId"].ToString();
                 }
+
+                if (theDS.Tables[4].Rows.Count > 0)
+                {
+                    pce.nutritionStatus = theDS.Tables[4].Rows[0]["ScreeningValueId"].ToString();
+                }
+
                 if (theDS.Tables[5].Rows.Count > 0)
                 {
-                    pce.fpMethod = theDS.Tables[5].Rows[0]["FPMethodId"].ToString();
+                    pce.CaCX = theDS.Tables[5].Rows[0]["ScreeningValueId"].ToString();
                 }
-                //pce.CaCX
-                //pce.STIScreening
 
-
-                ////PATIENT MANAGEMENT
-                //pce.ARVAdherence = 
-                //pce.CTXAdherence=
                 if (theDS.Tables[6].Rows.Count > 0)
                 {
-                    pce.nextAppointmentDate = ((DateTime)theDS.Tables[6].Rows[0]["AppointmentDate"]).ToString("dd-MMM-yyyy");
-                    pce.nextAppointmentType = theDS.Tables[6].Rows[0]["ReasonID"].ToString();
+                    pce.STIScreening = theDS.Tables[6].Rows[0]["ScreeningValueId"].ToString();
+                }
+
+                if (theDS.Tables[7].Rows.Count > 0)
+                {
+                    pce.onFP = theDS.Tables[7].Rows[0]["FPStatusId"].ToString();
+                }
+
+                if (theDS.Tables[8].Rows.Count > 0)
+                {
+                    pce.fpMethod = theDS.Tables[8].Rows[0]["FPMethodId"].ToString();
+                }
+
+                if (theDS.Tables[9].Rows.Count > 0)
+                {
+                    pce.nextAppointmentDate = ((DateTime)theDS.Tables[9].Rows[0]["AppointmentDate"]).ToString("dd-MMM-yyyy");
+                    pce.nextAppointmentType = theDS.Tables[9].Rows[0]["ReasonID"].ToString();
                 }
                 
-                pce.phdp = new string[theDS.Tables[7].Rows.Count];
-                for (int k = 0; k < theDS.Tables[7].Rows.Count; k++)
+                pce.phdp = new string[theDS.Tables[10].Rows.Count];
+                for (int k = 0; k < theDS.Tables[10].Rows.Count; k++)
                 {
-                    pce.phdp[k] = theDS.Tables[7].Rows[k]["phdp"].ToString();
+                    pce.phdp[k] = theDS.Tables[10].Rows[k]["phdp"].ToString();
+                }
+
+                if (theDS.Tables[11].Rows.Count > 0)
+                {
+                    pce.ARVAdherence = theDS.Tables[11].Rows[0]["Score"].ToString();
+                }
+
+                if (theDS.Tables[12].Rows.Count > 0)
+                {
+                    pce.CTXAdherence = theDS.Tables[12].Rows[0]["Score"].ToString();
                 }
 
                 return pce;
@@ -359,6 +383,32 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterVaccines", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public DataTable getPatientEncounterPhysicalExam(string PatientMasterVisitID, string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterExam", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public DataTable getPatientEncounterDiagnosis(string PatientMasterVisitID, string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterDiagnosis", ClsUtility.ObjectEnum.DataTable);
             }
         }
     }

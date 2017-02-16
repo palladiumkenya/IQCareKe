@@ -139,6 +139,15 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlInputText ExpectedDateOfChildBirth;
         
         /// <summary>
+        /// rblANCProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblANCProfile;
+        
+        /// <summary>
         /// onFP control.
         /// </summary>
         /// <remarks>
@@ -281,15 +290,6 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
-        
-        /// <summary>
-        /// examinationNotes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea examinationNotes;
         
         /// <summary>
         /// UpdatePanel1 control.

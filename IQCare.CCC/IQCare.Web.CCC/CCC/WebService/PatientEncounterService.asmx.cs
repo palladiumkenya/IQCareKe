@@ -130,5 +130,45 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPhysicalExam()
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(patientMasterVisitID, "1");
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[6] { row["examTypeID"].ToString(), row["examID"].ToString(), row["examType"].ToString(), row["exam"].ToString(), row["findings"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDiagnosis()
+        {
+            string patientMasterVisitID = "0";
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            if (Session["PatientMasterVisitID"].ToString() != null)
+                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterDiagnosis(patientMasterVisitID, "1");
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[3] { row["Diagnosis"].ToString(), row["ManagementPlan"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
     }
 }
