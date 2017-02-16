@@ -253,7 +253,7 @@
 		                                              <div class="datepicker fuelux" id="DateOfVisit">
 		                                              <div class="input-group">
 
-			                                              <input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />
+			                                              <!-- <input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" /> -->
 			                                              <div class="input-group-btn">
 				                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
 				                                            <span class="glyphicon glyphicon-calendar"></span>
@@ -1537,6 +1537,7 @@
 
 
                 var labOrderDate = moment().format('D MMM, YYYY');
+                var visitId = moment().format('D MMM, YYYY');
                 var labType = $("#labTestTypes").val();
                 var labOrderReason = $("#orderReason").find(":selected").text();
                 var labOrderNotes = $("#labNotes").val();
@@ -1570,7 +1571,8 @@
               
                _fp[row] = {
                   "labType": $(tr).find('td:eq(1)').text()
-                 ,"orderReason": $(tr).find('td:eq(2)').text()
+                 , "orderReason": $(tr).find('td:eq(2)').text()
+                 , "results": $(tr).find('td:eq(2)').text()
                 , "labOrderDate": $(tr).find('td:eq(3)').text()
 
                }
@@ -1594,7 +1596,7 @@
                type: "POST",
                
                url: "../WebService/LabService.asmx/AddLabOrder",
-               data: "{'patientId':'" + 1058 + "','patientLabOrder': '" + labOrder + "'}",
+               data: "{'patientId':'" + 1058 + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                success: function (response) {
