@@ -44,10 +44,25 @@ namespace BusinessProcess.CCC
             return patientSearchDetails;
         }
 
-        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type)
+        public List<PatientLookup> GetPatientSearchPayloadWithParameter(int patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility, DateTime regDate)
         {
+            var result = _unitOfWork.PatientLookupRepository.GetAll();
+
+            if (sex > 0)
+            {
+                result = result.Where(x => x.Sex == sex);
+            }
+
+            if (!string.IsNullOrWhiteSpace(fname))
+            {
+                result = result.Where(x => x.FirstName.Contains(fname.ToLower()));
+            }
+
+
+            return result.ToList();
+           
             var searchPayload = _unitOfWork.PatientLookupRepository.FindBy(
-                   x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));;
+                   x => x.FirstName.ToLower().StartsWith("osewe") || x.FirstName.ToLower().EndsWith("oswe"));
 
             //switch (type)
             //{
