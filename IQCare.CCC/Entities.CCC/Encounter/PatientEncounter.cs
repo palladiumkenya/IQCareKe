@@ -13,6 +13,7 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class AdverseEvents
         {
+            public string adverseSeverityID { get; set; }
             public string adverseEvent { get; set; }
             public string medicineCausingAE { get; set; }
             public string adverseSeverity { get; set; }
@@ -22,13 +23,16 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class Vaccines
         {
+            public string vaccineID { get; set; }
+            public string vaccineStageID { get; set; }
             public string vaccine { get; set; }
             public string vaccineStage { get; set; }
-            public string vaccinationDate { get; set; }
+            public string vaccineDate { get; set; }
         }
         [Serializable]
         public class ChronicIlness
         {
+            public string chronicIllnessID { get; set; }
             public string chronicIllness { get; set; }
             public string treatment { get; set; }
             public string dose { get; set; }
@@ -37,6 +41,8 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class PhysicalExamination
         {
+            public string examTypeID { get; set; }
+            public string examID { get; set; }
             public string examType { get; set; }
             public string exam { get; set; }
             public string findings { get; set; }
@@ -47,6 +53,31 @@ namespace Entities.CCC.Encounter
         {
             public string diagnosis { get; set; }
             public string treatment { get; set; }
+        }
+
+        [Serializable]
+        public class PresentingComplaintsEntity
+        {
+            public string visitDate { get; set; }
+            public string visitScheduled { get; set; }
+            public string visitBy { get; set; }
+            public string complaints { get; set; }
+            public string tbScreening { get; set; }
+            public string nutritionStatus { get; set; }
+            public string lmp { get; set; }
+            public string pregStatus { get; set; }
+            public string edd { get; set; }
+            public string ancProfile { get; set; }
+            public string onFP { get; set; }
+            public string fpMethod { get; set; }
+            public string CaCX { get; set; }
+            public string STIScreening { get; set; }
+            public string STIPartnerNotification { get; set; }
+            public string ARVAdherence { get; set; }
+            public string CTXAdherence { get; set; }
+            public string nextAppointmentDate { get; set; }
+            public string nextAppointmentType { get; set; }
+            public string[] phdp { get; set; }
         }
     }
 }

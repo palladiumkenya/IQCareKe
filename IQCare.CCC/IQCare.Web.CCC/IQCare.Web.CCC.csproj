@@ -51,7 +51,8 @@
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
-    <Content Include="CCCScripts\PatientEncounter.js" />
+    <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
     <Content Include="CCC\Encounter\StartEncounter.aspx" />
@@ -113,6 +114,13 @@
     </Compile>
     <Compile Include="CCC\Appointment\TodaysAppointments.aspx.designer.cs">
       <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\EncounterHistory.aspx.cs">
+      <DependentUpon>EncounterHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\EncounterHistory.aspx.designer.cs">
+      <DependentUpon>EncounterHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
