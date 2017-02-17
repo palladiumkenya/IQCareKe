@@ -35,21 +35,19 @@
     <script src="<%# ResolveUrl("~/Content/js/moment.js") %>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Incl/jsDate.js") %>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Incl/quicksearch.js") %>" type="text/javascript">  </script>
-     <script src="<%# ResolveUrl("~/Content/js/parsley.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/Content/js/parsley.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/fuelux/js/fuelux.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/pace/js/pace.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/datatables/js/jquery.dataTables.js")%>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("~/Content/toast/js/toastr.js")%>" type="text/javascript"></script>
 
 </head>
-   <%-- <script src="<%# ResolveUrl("~/Content/js/jquery.validate.js")%>" type="text/javascript"></script>--%>
 
 <body style="padding-bottom: 60px" class="fuelux">
     <input type="hidden" id="isNewEncounter" runat="server" value="" />
     <script type="text/javascript">
     </script>
     
-
      <div class="container-fluid">
           <form id="form1" class="form" runat="server" clientidmode="Static" enctype="multipart/form-data">
         
@@ -118,8 +116,10 @@
                                     <span class=""></span> Find /Add Patients <span class="badge"></span>
                                 </a>
 
-                                <a href="/CCC/Patient/PatientFinder.aspx" class="list-group-item">
-                                    <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">0</span>
+                                <a href="./Patient/PatientFinder.aspx" class="list-group-item">
+                                    <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">
+                                        <asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
+                               
                                 </a>
                                 
                                 <a  href="/CCC/Patient/PatientRegistration.aspx" class="list-group-item">
@@ -144,16 +144,18 @@
                                    <span class=""></span> Patient Encounters<span class="badge"></span>
                               </a> 
                               
-                              <a  href="/CCC/Encounter/PatientEncounter.aspx" class="list-group-item">
-                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter  <span class="badge">8</span>
+                              <a  href="../Home.aspx" class="list-group-item" >
+                                    <span class="fa fa-home fa-1x pull-left text-danger"></span> Patient Home
                                 </a>
+
+                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
+                                  <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span>Start Encounter</asp:LinkButton>
+
+                              <asp:LinkButton ID="LinkButton2" runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
+                                  <span class="fa fa-history fa-1x pull-left text-danger"></span>Encounter History</asp:LinkButton>
 
                                 <a href="#" class="list-group-item ">
                                     <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
-                                </a>
-
-                                <a  href="/CCC/Encounter/PatientEncounter.aspx" class="list-group-item" onclick="IsNewEncounter();">
-                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Start Encounter
                                 </a>
 
                                 <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">
@@ -169,7 +171,6 @@
                                 <a href="/CCC/Appointment/ScheduleAppointment.aspx" class="list-group-item">
                                     <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>
                                 </a>
-
                           </div>
                      </div>
                  </div><%--. row--%>

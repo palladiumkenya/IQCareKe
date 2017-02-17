@@ -6,10 +6,11 @@ using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Base;
 
 namespace BusinessProcess.CCC.visit
 {
-    public class BPatientLabOrdermanager : IPatientLabOrderManager
+    public class BPatientLabOrdermanager : ProcessBase, IPatientLabOrderManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;

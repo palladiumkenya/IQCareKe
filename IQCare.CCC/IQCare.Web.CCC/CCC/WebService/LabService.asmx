@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="LabService.asmx.cs" Class="IQCare.Web.CCC.WebService.WebService1" %>
+﻿<%@ WebService Language="C#" CodeBehind="LabService.asmx.cs" Class="IQCare.Web.CCC.WebService.LabService" %>

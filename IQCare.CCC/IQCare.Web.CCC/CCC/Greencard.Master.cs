@@ -5,6 +5,7 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC
 {
@@ -52,6 +53,11 @@ namespace IQCare.Web.CCC
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //set menu count values
+            PatientLookupManager patientLookup=new PatientLookupManager();
+
+            lblPatientCount.Text = patientLookup.GetTotalpatientCount().ToString();
+
             //Create New sessions:
             Page.Header.DataBind();
             if (Session["AppLocation"] == null)
@@ -144,5 +150,18 @@ namespace IQCare.Web.CCC
             lblversion.Text = GblIQCare.VersionName;// AuthenticationManager.AppVersion;
             lblrelDate.Text = GblIQCare.ReleaseDate;//AuthenticationManager.ReleaseDate;
         }
+
+        protected void New_Encounter_Click(object sender, EventArgs e)
+        {
+            Session["PatientMasterVisitID"] = "0";
+            Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
+        }
+
+        protected void EncounterHistory_Click(object sender, EventArgs e)
+        {
+            Session["PatientMasterVisitID"] = "0";
+            Response.Redirect("~/CCC/Encounter/EncounterHistory.aspx");
+        }
+
     }
 }

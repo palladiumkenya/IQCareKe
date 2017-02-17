@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientFinder.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientFinder" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
-         <div class="col-md-12 bs-callout bs-callout-info">
+         <div class="col-md-12 bs-callout bs-callout-info" id="searchGrid">
               <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12">
@@ -237,48 +237,72 @@
                               </div> 
                           </div>
          </div> 
+         <div class="col-md-12 bs-callout bs-callout-info" id="infoGrid">
+             <div class="col-md-6">
+                 <label class="control-label pull-left text-warning fa fa-search-plus"> Patient Search Results </label>
+             </div>
+             <div class="col-md-6 pull-right">
+                 <button id="btnRemoveGrid" class="btn btn-info btn-sm pull-right" onclick="return false">Back to Search</button>
+             </div>
+         </div>
          <div class="col-md-12 form-group" id="PatientSearch">
       
-             <table id="tblFindPatient" class="display">
-                        <thead>
-                          <tr>
-      	                    <th>Enrollment No.#</th>
-                            <th>Patient Index</th>
-      	                    <th>First Name</th>
-      	                    <th>Middle Name</th>
-      	                    <th>Last Name</th>
-      	                    <th>Date of Birth</th>
-      	                    <th>Sex</th>
-      	                    <th>Registration Date</th>
-                            <th>Patient Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-      	                    <td align="left">jane</td>
-      	                    <td align="left">doe</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">mm/dd/yyy</td>
-      	                    <td align="left">demo</td>
-      	                    <td align="left">mm/dd/yyy</td>
-      	                    <td align="left">demo</td>
-                              <td align="left">demo</td>
-                          </tr>
-                          <tr>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-      	                    <td>mm/dd/yyy</td>
-      	                    <td>demo</td>
-                              <td>demo</td>
-                          </tr>
-                        </tbody>
+             <table id="tblFindPatient" class="display" width="100%">
+                 <thead>
+                    <tr>
+      	                <th>PatientId</th>
+                        <th>CCC Number</th>
+      	                <th>First Name</th>
+      	                <th>Middle Name</th>
+      	                <th>Last Name</th>
+      	                <th>Date Of Birth</th>
+      	                <th>Sex</th>
+      	                <th>Enrollment Date</th>
+                        <th>PatientStatus</th>
+                    </tr>
+                 </thead>
+                 <tbody></tbody>
+                 <tfoot>
+                    <tr>
+      	                <th>EnrollmentNumber</th>
+                        <th>PatientIndex</th>
+      	                <th>FirstName</th>
+      	                <th>MiddleName</th>
+      	                <th>LastName</th>
+      	                <th>DateOfBirth</th>
+      	                <th>Sex</th>
+      	                <th>RegistrationDate</th>
+                        <th>PatientStatus</th>
+                    </tr>
+                 </tfoot>
+
                     </table>
                 </div>
+        <div class="col-md-12"><hr/></div>
+<%--        <div class="col-md-12">
+            <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+        </div>--%>
             
     </div><%--.col-md-12--%>
     
@@ -289,133 +313,210 @@
                 cache: false
             });
 
+            $("#btnRemoveGrid").click(function() {
+                $("#infoGrid").slideUp("fast",
+                    function() {
+                        $("#PatientSearch").slideUp("fast",
+                            function() {
+                                $("#searchGrid").slideDown("fast");
+                            });
+                    });
+            });
+
             $("#PatientSearch").hide();
+            $("#infoGrid").hide();
+
             $("#SearchDoB")
                 .datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
             $("#RegDate").datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
+
+            $("#btnFindPatient").click(function (e) {
+
+                $("#tblFindPatient").dataTable({
+                    "oLanguage": {
+                        "sZeroRecords": "No records to display",
+                        "sSearch": "Search from all Records"
+                    },
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "bDestroy": true,
+                    "sAjaxSource": "../WebService/PatientLookupService.asmx/FindPatient",
+                    "sPaginationType": "full_numbers",
+                    "bDeferRender": true,
+                    "responsive":true,
+                    "bPaginate": true,
+                    "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                    "aoColumns":
+                                [
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                                ],
+                    "fnServerData": function (sSource, aoData, fnCallback) {
+                        aoData.push({ "name": "patientId", "value": "" + $("#<%=PatientNumber.ClientID%>").val() + "" });
+                         aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "DateOfBirth", "value": "" + moment($("#SearchDoB").datepicker('getDate')).format('DD-MMM-YYYY') + "" });
+                        aoData.push({ "name": "gender", "value": ""+$("#<%=Sex.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "registrationDate", "value": ""+moment($("#RegDate").datepicker('getDate')).format('DD-MMM-YYYY') +"" });
+
+                        $.ajax({
+                            "dataType": 'json',
+                            "contentType": "application/json; charset=utf-8",
+                            "type": "POST",
+                            "url": sSource,
+                            "data": JSON.stringify({dataPayLoad: aoData }),
+                            "success": function (msg) {
+                                     var json = jQuery.parseJSON(msg.d);
+                                     fnCallback(json);
+                                     $("#PatientSearch").slideDown("fast", function () { $("#infoGrid").slideDown("fast", function () { $("#searchGrid").slideUp("fast") }); });
+                            },
+                            "error":function(xhr, errorType, exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType, "Patient Finder Method");
+                                return false;
+                            }
+                        });
+                    }
+                });
+                 
+             });
+
 
             //$('#tblFindPatient tfoot th').each(function () {
             //    var title = $(this).text();
             //    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             //});
 
-            $("#btnFindPatient").click(function(e) {
+            /*$('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "../Webservice/datatable.txt"
+               // "ajax": "../Webservice/datatable.txt"
+            });*/
+
+
+<%--            $("#btnFindPatient").click(function(e) {
 
                 var table = $("#tblFindPatient").dataTable({
                     bAutoWidth: false,
-                    bDestroy: true,
+                    //debug:true,
+                   bDestroy: true,
                     bJQuieryUI: true,
-                    //"columns": [
-                    //    { "data": "" },
-                    //    { "render": "[,].names" },
-                    //    { "data": "sex" },
-                    //    { "data": "dob" },
-                    //    { "data": "type" },
-                    //    { "data": "subcounty" },
-                    //    { "data": "action" }
-                    //],
-                    //"aoColumns": [
-                    //  { "targets": 0, "bSortable": false, "mRender": function () { return '<label class=\"pos-rel\"><input type=\"checkbox\" class=\"ace\" /><span class=\"lbl\"></span></label>' } },
-                    //  { "targets": 1, "bSearchable": true, "bSortable": true, "mData": 1},
-                    //  { "targets": 2, "mData": 2, "sTitle": "Houhosehold Number" },
-                    //  { "targets": 3, "mData": 3, "sTitle": "Gender" },
-                    //  { "targets": 4, "mData": 4, "sTitle": "Date of Birth" },
-                    //  { "targets": 5, "mData": 5, "sTitle": "Person Type" },
-                    //  { "targets": 6, "mData": 6, "sTitle": "Sub-County" },
-                    //  {
-                    //      "targets": 7, "sTitle": "<span class='fa fa-cog'> Action </span>", "bSortable": false, "mData": 7, "mRender": function (data, type, full) {
-                    //          var BaseURL = '#page/portal.php';
-                    //          var PersonId = full[7];
-                    //          var url = BaseURL + '' + PersonId;
+                    aaSorting: [],
+                    Processing: true,
+                    ServerSide: true,
+                    columns: [
+                        { "data": "EnrollmentNumber" },
+                        { "data": "PatientIndex" },
+                        { "data": "FirstName" },
+                        { "data": "MiddleName" },
+                        { "data": "LastName" },
+                        { "data": "DateOfBirth" },
+                        { "data": "Sex" },
+                        { "data": "DateOfBirth" },
+                        { "data": "LastName" }
+                    ],
+                    /*
+                    "aocolumns": [
+                        { "mData": "EnrollmentNumber"},
+                        { "mData": "PatientIndex" },
+                        { "mData": "FirstName" },
+                        { "mData": "MiddleName" },
+                        { "mData": "LastName" },
+                        { "mData": "DateOfBirth" },
+                        { "mData": "Sex" },
+                        { "mData": "RegistrationDate" },
+                        { "mData": "PatientStatus" }
+                    ],*/
+                    "aoColumns": [
+                        { "mDataProp": "EnrollmentNumber", "sTitle": "Enrollment Number" },
+                        { "mDataProp": "PatientIndex", "sTitle": "Patient Index" },
+                        { "mDataProp": "FirstName", "sTitle": "First Name" },
+                        { "mDataProp": "MiddleName", "sTitle": "Middle Name" },
+                        { "mDataProp": "LastName", "sTitle": "Last Name" },
+                        { "mDataProp": "DateOfBirth", "sTitle": "Date of Birth" },
+                        { "mDataProp": "Sex", "sTitle": "Gender" },
+                        { "mDataProp": "RegistrationDate", "sTitle": "Registration Date" },
+                        { "mDataProp": "PatientStatus", "sTitle": "Patient Status" }
 
-                    //          var str = PersonId.substring(10);
-                    //          var i = str.indexOf('&');
-                    //          var Pid = str.substring(0, i);
-                    //          //var editUrl="\javascript:InitiateEdit("+personId+"\)";
-                    //          //var durl='javascript\:\InitiateEdit(\''+PersonId+'\);\'';
-                    //          //var Id=personId.substring(10);
-                    //          // var durl= "\<a href=\"javascript:InitiateEdit("+Pid+");\">"
-                    //          // return '<a href="' + url + '">Load Person</a>';
-                    //          //<a href="'+url+'"><span class=\'fa fa-pencil-square-o\'>update</span></a>
-                    //          return '<a href="' + url + '" style=\'margin-right:4%\'><span class=\'fa fa-male\'> Fetch Portal</span></a> '
-                    //      }
-                    //  }
-                    //],
-                    "aaSorting": [],
+                        //this name should exist in your JSON response
+                        //"render": function ( data, type, full, meta ) {
+                        //    return '<span class="label label-danger">'+data+'</span>';
+                        //}
+                    ],
 
-                    "bProcessing": true,
-                    "bServerSide": true,
-                    /* "ajax":{
-                         url:"",
-                         type:"get",
-                         error:function(data){
-                             $(".text-danger").html('');
-                              $("#tblPerson").append('<tbody class="text-danger"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                              $("#tblPerson").css("display","none");
- 
-                         }
-                     },*/
-                    "sAjaxSource": "../WebService/PatientLookupService.asmx/GetPatientSearch",
-                    "sServerMethod": "POST",
-                    //"bDestroy":true,
-                    //"bautoWidth": true,
-
-                    ////"bProcessing": true,
-                    //"bserverSide": true,
-                    //"ajax": {
-                    //    url: "../WebService/PatientLookupService.asmx/GetPatientSearch",
-                    //    type: "Post",
-                    //    contentType: "application/json; charset=utf-8",
-                    //    dataType: "json",
-                    //    data: {},
-                    //    success:function(response) {
-                    //        //var json = $.ParseJSON(response.d);
-                    //       // $.fnCallback(response.d);
-                    //    },
-                    //    error: function () {
-
-                    //    }
-                    //},
-                    //"ScrollCollapse": true,
-                    //"info": true,
-                    //"select": {
-                    //    style: 'single'
-                    //},
-                    //"responsive": true,
-                    //"stateSave": true,
+                    "sAjaxSource": "../WebService/PatientLookupService.asmx/FindPatient",
+                    "fnServerData":function(sSource, aoData, fnCallback, oSettings) {
+                        aoData.push({ "name": "patientId", "value": ""+$("#<%=PatientNumber.ClientID%>").val()+"" });
+                        aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
+                        aoData.push({ "name": "DateOfBirth", "value": "" + moment($("#SearchDoB").datepicker('getDate')).format('DD-MMM-YYYY') + "" });
+                        aoData.push({ "name": "gender", "value": ""+$("#<%=Sex.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").text()+"" });
+                        aoData.push({ "name": "registrationDate", "value": ""+moment($("#RegDate").datepicker('getDate')).format('DD-MMM-YYYY') +"" });
+                        oSettings.jqXHR = $.ajax({
+                            "dataType": 'json',
+                            "type": 'POST',
+                            "contentType": 'application/json; charset=utf-8',
+                            "url": sSource,
+                            "data": JSON.stringify({ dataPayLoad: aoData }),
+                            "dataSrc": "data",
+                            "success": function (response) { var json = jQuery.parseJSON(response.d);
+                                alert(json); fnCallback(json);
+                                $("#PatientSearch").slideDown('fast', function () { $("#searchGrid").slideUp('fast') });
+                            },
+                            "error":function (xhr,errorType,exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" + xhr.status + "" + jsonError.Message+" "+jsonError.StackTrace+" "+jsonError.ExceptionType, "Patient Finder Method");
+                                return false;
+                            }
+                        });
+                    },
+                   "sAjaxDataProp": "",
+                    "responsive":true,
                     "bPaginate": true,
                     "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
                 });
-
-                $("#PatientSearch").slideDown();
-                $("div.toolbar").html('<b>Patient Search Result(s)</b>');
-                e.preventDefault();
-            });
+            });--%>
 
 
 
             //row selection
-          //$('#tblFindPatient').on('click', 'tbody tr', function () {
-          //    window.location.href = $(this).attr('href');
-          //});
+          $('#tblFindPatient').on('click', 'tbody tr', function () {
+              // window.location.href = $(this).attr('href');
+              var patientId = $(this).find('td').first().text();
+
+              window.location.href = "../patient/patientHome.aspx?patient="+patientId;
+             // alert(rowIndex);
+          });
 
           // Apply the search
-          //table.columns().every(function () {
-          //    var that = this;
+          $("#tblFindPatient").columns().every(function () {
+              var that = this;
 
-          //    $('input', this.footer()).on('keyup change', function () {
-          //        if (that.search() !== this.value) {
-          //            that
-          //                .search(this.value)
-          //                .draw();
-          //        }
-          //    });
-          //});
+              $('input', this.footer()).on('keyup change', function () {
+                  if (that.search() !== this.value) {
+                      that
+                          .search(this.value)
+                          .draw();
+                  }
+              });
+          });
 
-          //$("#tblFindPatient tbody tr").on('click', function (event) {
-          //    $("#tblFindPatient tbody tr").removeClass('row_selected');
-          //    $(this).addClass('row_selected');
-          //});
+          $("#tblFindPatient tbody tr").on('click', function (event) {
+              $("#tblFindPatient tbody tr").removeClass('row_selected');
+              $(this).addClass('row_selected');
+          });
 
       //      $('#tblFindPatient tbody')
       //.on('mouseenter', 'td', function () {

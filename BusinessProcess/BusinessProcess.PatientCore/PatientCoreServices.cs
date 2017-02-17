@@ -3,7 +3,6 @@ using DataAccess.Context;
 using Entities.PatientCore;
 using Interface.PatientCore;
 using DataAccess.Base;
-using System;
 using DataAccess.Entity;
 using System.Data;
 using DataAccess.Common;

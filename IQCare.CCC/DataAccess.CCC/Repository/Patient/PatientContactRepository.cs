@@ -1,10 +1,12 @@
 ﻿
+using DataAccess.CCC.Context;
 using DataAccess.Context;
+using Entities.Common;
 using Entities.PatientCore;
 
 namespace DataAccess.CCC.Repository.Patient
 {
-   public class PatientContactRepository :BaseRepository<PatientContact>,IPatientContactRepository
+   public class PatientContactRepository :BaseRepository<PersonContact>,IPatientContactRepository
     {
         private readonly GreencardContext _context;
 
@@ -19,7 +21,7 @@ namespace DataAccess.CCC.Repository.Patient
         }
     }
 
-    public class PatientContactRepository1 : BaseRepository<PatientContact>, IRepository<PatientContact>
+    public class PatientContactRepository1 : BaseRepository<PersonContact>, IRepository<PersonContact>
     {
         private readonly GreencardContext _context;
 
