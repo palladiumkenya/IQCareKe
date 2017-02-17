@@ -22,40 +22,40 @@ namespace IQCare.Web.CCC.Patient {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails ucPatientDetails;
         
         /// <summary>
-        /// EnrollmentCD4 control.
+        /// lblviralload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EnrollmentCD4;
+        protected global::System.Web.UI.WebControls.Label lblviralload;
         
         /// <summary>
-        /// EnrollmentCD4Date control.
+        /// lblVLDueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EnrollmentCD4Date;
+        protected global::System.Web.UI.WebControls.Label lblVLDueDate;
         
         /// <summary>
-        /// enrollmentViralload control.
+        /// lblCurARVRegimen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label enrollmentViralload;
+        protected global::System.Web.UI.WebControls.Label lblCurARVRegimen;
         
         /// <summary>
-        /// enrollmentviralloaddate control.
+        /// lblrecentCD4ValueDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label enrollmentviralloaddate;
+        protected global::System.Web.UI.WebControls.Label lblrecentCD4ValueDate;
         
         /// <summary>
         /// vitalHeight control.
@@ -128,5 +128,41 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOxygenSaturation;
+        
+        /// <summary>
+        /// EnrollmentCD4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EnrollmentCD4;
+        
+        /// <summary>
+        /// EnrollmentCD4Date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label EnrollmentCD4Date;
+        
+        /// <summary>
+        /// enrollmentViralload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label enrollmentViralload;
+        
+        /// <summary>
+        /// enrollmentviralloaddate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label enrollmentviralloaddate;
     }
 }

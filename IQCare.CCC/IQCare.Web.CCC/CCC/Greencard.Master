@@ -47,10 +47,6 @@
 <body style="padding-bottom: 60px" class="fuelux">
     <input type="hidden" id="isNewEncounter" runat="server" value="" />
     <script type="text/javascript">
-        function IsNewEncounter()
-        {
-            '<%Session["PatientMasterVisitID"] = "0"; %>';
-        }
     </script>
     
 

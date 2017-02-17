@@ -12,7 +12,7 @@ namespace IQCare.Web.CCC.Patient
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["PatientId"] = HttpContext.Current.Session["PatientId"];
-            Session["PatientMasterVisitID"] = 0;
+            Session["PatientMasterVisitId"] = HttpContext.Current.Session["PatientMasterVisitId"];
         }
     }
 }

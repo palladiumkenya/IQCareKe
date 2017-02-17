@@ -617,7 +617,9 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep4").parsley().validate()) {
-                                addPersonPopulation();
+                                $.when(addPersonPopulation()).then(function() {
+                                    window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
+                                });
                             } else {
                                
                                 stepError = $('.parsley-error').length === 0;
@@ -641,7 +643,6 @@
                         })
                     .on('finished.fu.wizard',
                         function(e) {
-                            window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
                         });
 
                 /* calculate Person Age */
