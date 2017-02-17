@@ -786,7 +786,7 @@
                     var SexPartnerDateValue = $("#SexPartnerDate").val();
                     var INHStartDateValue = $("#INHStartDate").val();
                     var INHCompletion = null;
-                    var INHCompletionDateValue = null;
+                    var INHCompletionDateValue = "";
 
                     //alert(document.getElementById("CompletionNo").Value);
                     //alert(document.getElementById("CompletionYes").Value);

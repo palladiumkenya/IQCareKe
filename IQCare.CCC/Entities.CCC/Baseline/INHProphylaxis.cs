@@ -13,8 +13,8 @@ namespace Entities.CCC.Baseline
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
         public int PatientMasterVisitId { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         public bool Complete { get; set; }
-        public DateTime CompletionDate { get; set; }
+        public DateTime? CompletionDate { get; set; }
     }
 }

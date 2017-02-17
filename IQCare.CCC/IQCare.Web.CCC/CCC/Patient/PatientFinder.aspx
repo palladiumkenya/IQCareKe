@@ -308,6 +308,7 @@
     
     <script type="text/javascript">
         $(document).ready(function() {
+            var table = null;
 
             $.ajaxSetup({
                 cache: false
@@ -332,7 +333,7 @@
 
             $("#btnFindPatient").click(function (e) {
 
-                $("#tblFindPatient").dataTable({
+                table = $("#tblFindPatient").dataTable({
                     "oLanguage": {
                         "sZeroRecords": "No records to display",
                         "sSearch": "Search from all Records"
@@ -387,7 +388,20 @@
                         });
                     }
                 });
-                 
+
+                // Apply the search
+                /*table.columns().every(function () {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this.value) {
+                            that
+                                .search(this.value)
+                                .draw();
+                        }
+                    });
+                });
+                 */
              });
 
 
@@ -501,7 +515,7 @@
           });
 
           // Apply the search
-          $("#tblFindPatient").columns().every(function () {
+          /*table.columns().every(function () {
               var that = this;
 
               $('input', this.footer()).on('keyup change', function () {
@@ -511,7 +525,9 @@
                           .draw();
                   }
               });
-          });
+          });*/
+
+            console.log(table);
 
           $("#tblFindPatient tbody tr").on('click', function (event) {
               $("#tblFindPatient tbody tr").removeClass('row_selected');
