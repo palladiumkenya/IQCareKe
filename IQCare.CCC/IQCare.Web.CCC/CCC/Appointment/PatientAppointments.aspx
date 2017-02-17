@@ -27,36 +27,34 @@
     </div>
     <script>
         $(document).ready(function () {
-            var patientId = <%=PatientId%>.toString;
+            var patientId ="<%=PatientId%>";
             jQuery.support.cors = true;
-            debugger;
             $.ajax(
             {
-                type: "GET",
+                type: "POST",
                 url: "../WebService/PatientService.asmx/GetPatientAppointments",
                 data: "{'patientId':'" + patientId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
-                success: function (data) {
-
+                success: function (response) {
+                    console.log(response.d);
+                    var itemList = response.d;
                     var table = '';
-
-                    $.each(data.Id, function (i, item) {
-
-                        table += '<tr><td>' + data.ServiceAreaId[i] + '</td><td>' + data.ReasonId[i] + '</td></tr>' + data.Description[i] + '</td></tr>' + data.StatusId[i] + '</td></tr>';
+                    itemList.forEach(function (item, i) {
+                        n = i + 1;
+                        table += '<tr><td>' + n + '</td><td>' + item.ServiceAreaId + '</td><td>' + item.ReasonId + '</td><td>' + item.Description + '</td><td>' + item.StatusId + '</td></tr>';
                     });
-
+                   
                     $('#tblAppointment').append(table);
 
                 },
-                
-                error: function (msg) {
 
+                error: function (msg) {
                     alert(msg.responseText);
                 }
             });
-            debugger;
+           
         })
 
     </script>

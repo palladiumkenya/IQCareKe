@@ -85,7 +85,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-
+        [WebMethod]
         public List<PatientAppointment> GetPatientAppointments(string patientId)
         {
             List<PatientAppointment> appointments = new List<PatientAppointment>();
@@ -101,5 +101,6 @@ namespace IQCare.Web.CCC.WebService
             }
             return appointments;
         }
+
     }
 }
