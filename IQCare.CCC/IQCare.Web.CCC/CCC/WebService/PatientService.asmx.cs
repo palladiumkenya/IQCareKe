@@ -1,6 +1,7 @@
 ﻿using Entities.CCC.Triage;
 using IQCare.CCC.UILogic;
 using System;
+using System.Collections.Generic;
 using System.Web.Services;
 using Entities.CCC.Appointment;
 
@@ -83,6 +84,22 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message + ' ' + e.InnerException;
             }
             return Msg;
+        }
+
+        public List<PatientAppointment> GetPatientAppointments(string patientId)
+        {
+            List<PatientAppointment> appointments = new List<PatientAppointment>();
+            try
+            {
+                var patientAppointment = new PatientAppointmentManager();
+                int id = Convert.ToInt32(patientId);
+                appointments = patientAppointment.GetByPatientId(id);
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message + ' ' + e.InnerException;
+            }
+            return appointments;
         }
     }
 }

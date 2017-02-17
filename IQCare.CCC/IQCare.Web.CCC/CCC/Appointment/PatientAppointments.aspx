@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="TodaysAppointments.aspx.cs" Inherits="IQCare.Web.CCC.Appointment.TodaysAppointments" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientAppointments.aspx.cs" Inherits="IQCare.Web.CCC.Appointment.TodaysAppointments" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
 
@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th><i class="text-primary" aria-hidden="true">#</i></th>
-                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Patient Name</i> </th>
+                       <%-- <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Patient Name</i> </th>--%>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Service Area</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Reason</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Description</i> </th>
@@ -25,4 +25,39 @@
             </table>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            var patientId = <%=PatientId%>.toString;
+            jQuery.support.cors = true;
+            debugger;
+            $.ajax(
+            {
+                type: "GET",
+                url: "../WebService/PatientService.asmx/GetPatientAppointments",
+                data: "{'patientId':'" + patientId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+
+                    var table = '';
+
+                    $.each(data.Id, function (i, item) {
+
+                        table += '<tr><td>' + data.ServiceAreaId[i] + '</td><td>' + data.ReasonId[i] + '</td></tr>' + data.Description[i] + '</td></tr>' + data.StatusId[i] + '</td></tr>';
+                    });
+
+                    $('#tblAppointment').append(table);
+
+                },
+                
+                error: function (msg) {
+
+                    alert(msg.responseText);
+                }
+            });
+            debugger;
+        })
+
+    </script>
 </asp:Content>

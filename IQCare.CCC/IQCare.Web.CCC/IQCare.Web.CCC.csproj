@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
-    <Content Include="CCC\Appointment\TodaysAppointments.aspx" />
+    <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
@@ -108,12 +108,12 @@
     <Compile Include="CCC\Appointment\ScheduleAppointment.aspx.designer.cs">
       <DependentUpon>ScheduleAppointment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.cs">
-      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+    <Compile Include="CCC\Appointment\PatientAppointments.aspx.cs">
+      <DependentUpon>PatientAppointments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\Appointment\TodaysAppointments.aspx.designer.cs">
-      <DependentUpon>TodaysAppointments.aspx</DependentUpon>
+    <Compile Include="CCC\Appointment\PatientAppointments.aspx.designer.cs">
+      <DependentUpon>PatientAppointments.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\EncounterHistory.aspx.cs">
       <DependentUpon>EncounterHistory.aspx</DependentUpon>

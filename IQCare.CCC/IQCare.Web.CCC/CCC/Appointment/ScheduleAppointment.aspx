@@ -188,12 +188,9 @@
             $("#btnSaveAppointment").click(function () {
                 addPatientAppointment();
             });
-            $("#btnReset").click(function () {
+            /*$("#btnReset").click(function () {
                 resetFields();
-            });
-            $("#btnReset").click(function () {
-                window.history.back();
-            });
+            });*/
         });
 
         function addPatientAppointment() {
@@ -214,7 +211,7 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Appointment saved successfully");
-                    resetFields();
+                    //resetFields();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Appointment not saved");
@@ -222,11 +219,11 @@
             });
         }
         function resetFields() {
-            document.getElementById("ServiceArea").reset();
-            document.getElementById("Reason").reset();
-            document.getElementById("description").reset();
-            document.getElementById("status").reset();
-            document.getElementById("PersonAppointmentDate").reset();
+            document.getElementById("ServiceArea").value = '';
+            document.getElementById("Reason").value = '';
+            document.getElementById("description").value = '';
+            document.getElementById("status").value = '';
+            document.getElementById("PersonAppointmentDate").value = '';
         }
     </script>
 </asp:Content>
