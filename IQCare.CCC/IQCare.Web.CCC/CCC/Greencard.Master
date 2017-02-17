@@ -116,7 +116,7 @@
                                     <span class=""></span> Find /Add Patients <span class="badge"></span>
                                 </a>
 
-                                <a href="./Patient/PatientFinder.aspx" class="list-group-item">
+                                <a href="/CCC/Patient/PatientFinder.aspx" class="list-group-item">
                                     <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">
                                         <asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
                                

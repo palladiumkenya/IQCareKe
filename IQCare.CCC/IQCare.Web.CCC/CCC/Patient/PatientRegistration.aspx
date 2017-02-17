@@ -618,7 +618,9 @@
                             });
                             if ($("#datastep4").parsley().validate()) {
                                 $.when(addPersonPopulation()).then(function() {
-                                    window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
+                                    setTimeout(function(){
+                                        window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
+                                    }, 2000);
                                 });
                             } else {
                                
