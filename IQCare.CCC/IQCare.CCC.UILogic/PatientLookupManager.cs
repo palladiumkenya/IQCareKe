@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Application.Common;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -26,11 +28,23 @@ namespace IQCare.CCC.UILogic
         }
 
 
-       public List<PatientLookup> GetPatientSearchListPayload()
-       {
-           var patientDetails = _patientLookupmanager.GetPatientSearchPayload();         
+        public List<PatientLookup> GetPatientSearchListPayload()
+        {
+            var patientDetails = _patientLookupmanager.GetPatientSearchPayload();
+
             return patientDetails;
         }
+
+        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname,
+            string lname, DateTime doB, int sex, int facility, int start, int length)
+        {
+            IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+
+            var patientList = patientLookupmanager.GetPatientSearchPayloadWithParameter(patientId, fname, mname, lname,
+                doB, sex, facility,start,length);
+            return patientList;
+        }
+
 
         public int GetTotalpatientCount()
         {

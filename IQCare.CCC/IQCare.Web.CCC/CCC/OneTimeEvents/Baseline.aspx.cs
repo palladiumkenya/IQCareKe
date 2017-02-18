@@ -12,6 +12,12 @@ namespace IQCare.Web.CCC.OneTimeEvents
 {
     public partial class Baseline : System.Web.UI.Page
     {
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

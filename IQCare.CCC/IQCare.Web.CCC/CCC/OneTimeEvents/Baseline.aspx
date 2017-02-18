@@ -1040,8 +1040,9 @@
             var pregnancy = false;
             var bHiV = false;
             var tbInfection = false;
+            var userId=<%=UserId%>; /* get the current userId*/
 
-            $('#ARTStartDate').datepicker({
+            $('#TIARTStartDate').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -1236,7 +1237,7 @@
 
             function enableIfTransferIn() {
                 $("#TIDate").datepicker('enable');
-                $("#ARTStartDate").datepicker('enable');
+                $("#TIARTStartDate").datepicker('enable');
                 $("#DateStartedOn1stLine").datepicker('enable');
                 $("#<%=TransferRegimen.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', false);
@@ -1249,7 +1250,7 @@
             function disableIfNotTransferIn() {
                 
                 $("#TIDate").datepicker('disable');
-                $("#ARTStartDate").datepicker('disable');
+                $("#TIARTStartDate").datepicker('disable');
                 $("#DateStartedOn1stLine").datepicker('disable');
                 $("#<%=TransferRegimen.ClientID%>").prop('disabled', true);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', true);

@@ -29,24 +29,81 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod]
         //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public string GetPatientSearchx()
+        public string GetPatientSearchx(List<Data> dataPayLoad)
         {
-            String output;
-
+            String output=null;
+            Utility utility=new Utility();
             try
             {
                 PatientLookupManager patientLookup=new PatientLookupManager();
                 var jsonData = patientLookup.GetPatientSearchListPayload();
-                output= JsonConvert.SerializeObject(jsonData);
 
-                
+                if (jsonData.Count > 0)
+                {
+                    var sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
+                    var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                    var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
+                    var patientId = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "patientId").value);
+                    var firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
+                    var middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
+                    var lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                   // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
+                   // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
+                    var facility = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "facility").value);
+
+                    if (!string.IsNullOrWhiteSpace(patientId))
+                    {
+                        jsonData = jsonData.Where(x=>x.EnrollmentNumber==patientId).ToList();
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(firstName))
+                    {
+                        jsonData = jsonData.Where(x => x.FirstName == firstName).ToList();
+                    }
+                    if (!string.IsNullOrWhiteSpace(lastName))
+                    {
+                        jsonData = jsonData.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower())).ToList();
+                    }
+                    if (!string.IsNullOrWhiteSpace(middleName))
+                    {
+                        jsonData = jsonData.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower())).ToList();
+                    }
+
+                    /*---- Perform paging based on request */
+                    var skip = (displayLength * displayStart);
+                    var ableToSkip = skip < displayLength;
+                    string patientStatus;
+                    jsonData = jsonData.Skip(skip).Take(displayLength).ToList();
+
+                    var json = new
+                    {
+
+                        draw = sEcho,
+                        recordsTotal = jsonData.Count,
+                        recordsFiltered = jsonData.Count,
+                      
+                        data = jsonData.Select(x => new string[]
+                        {
+                            
+                            x.Id.ToString(),
+                            x.EnrollmentNumber.ToString(),
+                            utility.Decrypt(x.FirstName),
+                            utility.Decrypt(x.MiddleName),
+                            utility.Decrypt(x.LastName),
+                            x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                            LookupLogic.GetLookupNameById(x.Sex),
+                            x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                            x.PatientStatus.ToString()
+                        })
+                    };
+                    output = JsonConvert.SerializeObject(json);
+                }         
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                output = e.Message + ' ' + e.InnerException;
             }
-
             return output;
         }
 
@@ -97,26 +154,29 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string FindPatient(List<Data> dataPayLoad)
         {
-           // var request = HttpContext.Current.Request;
-            int sEcho = 0;int displayStart = 0;int displayLength = 0;
-            dynamic patientList = null;
-            
+            /*set util function to decrypt*/
             Utility utility=new Utility();
 
-            var c = dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value;
-            var dl = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value;
-            var ds = dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value;
+            /* Grab values from aoData object sent by datatables */
+            dynamic patientList = null;
+            var sEcho =Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
+            var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+            var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
+            var patientId=Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name=="patientId").value);
+            var firstName=Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name== "firstName").value);
+            var middleName=Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name== "middleName").value);
+            var lastName=Convert.ToString(dataPayLoad.FirstOrDefault(x=>x.name== "lastName").value);
+            var dateOfBirth=Convert.ToDateTime(dataPayLoad.FirstOrDefault(x=>x.name== "DateOfBirth").value);
+            var gender=Convert.ToInt32(dataPayLoad.FirstOrDefault(x=>x.name== "gender").value);
+            var facility=Convert.ToInt32(dataPayLoad.FirstOrDefault(x=>x.name== "facility").value);
+            //var registrationDate =Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "registrationDate").value);
 
-            /* search parameters */
-
-            if (Convert.ToInt32(c) > 0){ sEcho = Convert.ToInt32(c);}
-            if (Convert.ToInt32(dl) > 0){ displayLength = Convert.ToInt32(dl);}
-            if (Convert.ToInt32(ds) > 0){ displayStart = Convert.ToInt32(ds); }
 
             try
             {
                 PatientLookupManager patientLookup=new PatientLookupManager();
-                var patientLookups= patientLookup.GetPatientSearchListPayload().ToList();
+                var patientLookups = patientLookup.GetPatientSearchPayloadWithParameter(patientId, firstName, middleName,
+                    lastName, dateOfBirth, gender, facility, displayStart,displayLength);
 
                 if (patientLookups.Count>0)
                 {
@@ -134,7 +194,7 @@ namespace IQCare.Web.CCC.WebService
                             utility.Decrypt(x.MiddleName),
                             utility.Decrypt(x.LastName),
                             x.DateOfBirth.ToString("MMM-dd-yyyy"),
-                            LookupLogic.GetLookupNameById(x.Sex),
+                            x.Sex.ToString(),
                             x.RegistrationDate.ToString("MMM-dd-yyyy"),
                             x.PatientStatus.ToString()
                         })

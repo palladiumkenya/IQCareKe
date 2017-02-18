@@ -61,8 +61,7 @@ namespace IQCare.Web.CCC.WebService
 
             string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);  
             return jsonObject;
-            _jsonObject = LookupLogic.GetLookupWardListJson(subcounty);
-            return _jsonObject;
+
         }
 
         [WebMethod]
