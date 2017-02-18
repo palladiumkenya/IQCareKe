@@ -1358,7 +1358,7 @@
            $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-               data: "{'patient_ID':'" + JSON.stringify(patientId) + "'}",
+               data: "{'patientId':'" + patientId + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,

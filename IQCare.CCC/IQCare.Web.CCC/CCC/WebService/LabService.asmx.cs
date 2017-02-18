@@ -46,15 +46,15 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string GetLookupPreviousLabsList(string patient_ID)
+        public string GetLookupPreviousLabsList(string patientId)
         {
 
             //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
             //var patient_id = JSON.parse(patientID);
-             int patientId = Convert.ToInt32(patient_ID);
+             int id = Convert.ToInt32(patientId);
             // int patientId = int.Parse(patient_Id);
           //  patientID = Convert.ToInt32(Session["PersonId"]);
-            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(id);
 
             return jsonObject;
         }
