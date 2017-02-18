@@ -6,6 +6,7 @@ using System.Xml;
 using System.Text;
 
 
+
 namespace IQCare.Web.CCC.WebService
 {
     /// <summary>
@@ -101,18 +102,7 @@ namespace IQCare.Web.CCC.WebService
 
             return jsonObject;
         }
-        // pw .lookup lablist             
-        // pw .typeahead 
-        // pw lookup previous lablist
-
-        [WebMethod]
-        public string GetLookupPreviousLabsList(int patientId)
-        {
-            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(1);
-
-            return jsonObject;
-        }
-        // pw .lookup previous lablist             
-        // pw .grid
+       
+       
     }
 }

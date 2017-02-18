@@ -1,30 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Application.Presentation;
+﻿using Application.Presentation;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
 using Interface.Scheduler;
-using IQCare.Web.UILogic;
+using System;
+using System.Data;
+using System.Web;
+using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Appointment
 {
     public partial class ScheduleAppointment : System.Web.UI.Page
     {
+        public int PatientId;
+        public int PatientMasterVisitId;
+        private IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 this.PopulateDropDown();
-                //CurrentSession session = CurrentSession.Current;
-                //Entities.PatientCore.Patient patient = session.CurrentPatient;
-                //txtpatientId = patient.Id;
-                //txtpatientMasterVisitId = session.
-
+                this.GetSessionDetails();
             }
         }
+
+        private void GetSessionDetails()
+        {
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            if (PatientMasterVisitId == 0)
+            {
+                PatientMasterVisit visit = new PatientMasterVisit()
+                {
+                    PatientId = PatientId,
+                    Start = DateTime.Now,
+                    Active = true,
+                };
+                PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
+            }
+        }
+
         private void PopulateDropDown()
         {
             //*******Get the patient details on the basis of Patient Enrollment Id and show the details.*******//

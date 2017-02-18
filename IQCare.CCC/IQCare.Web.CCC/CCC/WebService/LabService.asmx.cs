@@ -3,6 +3,7 @@ using System.Web.Services;
 using Entities.Common;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
+using Newtonsoft.Json;
 
 
 namespace IQCare.Web.CCC.WebService
@@ -44,7 +45,25 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-       }
+        [WebMethod(EnableSession = true)]
+        public string GetLookupPreviousLabsList(string patientId)
+        {
+
+            //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
+            //var patient_id = JSON.parse(patientID);
+             int id = Convert.ToInt32(patientId);
+            // int patientId = int.Parse(patient_Id);
+          //  patientID = Convert.ToInt32(Session["PersonId"]);
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(id);
+
+            return jsonObject;
+        }
+        // pw .lookup previous lablist             
+        // pw .grid
+
+
 
     }
+
+}
 

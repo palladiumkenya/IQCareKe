@@ -45,6 +45,9 @@
 </head>
 
 <body style="padding-bottom: 60px" class="fuelux">
+    <input type="hidden" id="isNewEncounter" runat="server" value="" />
+    <script type="text/javascript">
+    </script>
     
      <div class="container-fluid">
           <form id="form1" class="form" runat="server" clientidmode="Static" enctype="multipart/form-data">
@@ -114,7 +117,7 @@
                                     <span class=""></span> Find /Add Patients <span class="badge"></span>
                                 </a>
 
-                                <a href="./Patient/PatientFinder.aspx" class="list-group-item">
+                                <a href="/CCC/Patient/PatientFinder.aspx" class="list-group-item">
                                     <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">
                                         <asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
                                
@@ -156,15 +159,15 @@
                                     <span class="fa fa-line-chart fa-1x pull-left"></span> <span class="align-left">Active Visit(s)</span> <span class="badge">50</span>
                                 </a>
 
-                                <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal">
+                                <a href="/CCC/Patient/PatientTest.aspx" class="list-group-item" data-toggle="modal" data-target="#myModal">
                                     <span class="fa fa-heartbeat fa-1x pull-left"></span> Capture Vitals <span class="badge">8</span>
                                 </a>
 
                                 <!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>-->
-                                <a href="/CCC/Appointment/TodaysAppointments.aspx" class="list-group-item">
-                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Today's Appointments <span class="badge">8</span>
+                                <a href="/CCC/Appointment/PatientAppointments.aspx" class="list-group-item">
+                                    <span class="fa fa-calendar-check-o fa-1x pull-left"></span> Patient Appointments <span class="badge">8</span>
                                 </a>
                                 <a href="/CCC/Appointment/ScheduleAppointment.aspx" class="list-group-item">
                                     <span class="fa fa-calendar fa-1x pull-left"></span>Schedule Appointment <span class="badge">8</span>

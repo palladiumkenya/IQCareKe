@@ -10,9 +10,12 @@
     <!--<script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>    -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
-    <%--<script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>--%>
+    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
     <script src="../Scripts/css/jquery-ui.css"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />   
+    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+      
+
+
 <!--  .end auto complete   -->
        <!-- line graph for viral tracker  -->  
   	
@@ -1133,30 +1136,24 @@
                                     <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
                                     <div class="col-md-12"><hr/>
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
+                                        
                                         <div class="col-md-12 form-group">
-                                                                
-                                                         <table id="plab_orders" >
-                                                                        <thead>
-                                                                          <tr>
-      	                                                                    <th> # </th>  
-                                                                            <th>Lab Test </th> 
-      	                                                                    <th>Order Reason </th> 
-      	                                                                    <th>Order Date </th> 
-      	                                                                    <th>Order Status </th> 
-      	                                                                  </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                          <tr>
-      	                                                                    <td>demo</td> 
-      	                                                                    <td>demo</td>
-      	                                                                    <td>demo</td> 
-      	                                                                    <td>mm/dd/yyy</td> 
-      	                                                                    <td>demo</td>                  
-                                                                          </tr>
-                         
-                                                                        </tbody>
-                                                                    </table>                 
-                                            </div>                    
+                                              <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> # </i> </th>
+                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Lab Test</i> </th>
+                                                         <th> <i class="control-label text-warning pull-left " aria-hidden="true"> Order Reason</i> </th>
+                                                        <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Date </i></th>
+                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Status </i></th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+
+                                       </div>                    
                     <!--pw implementation of previous orders laboratory module here-->
                                </div>
                                 </div>
@@ -1351,9 +1348,151 @@
                  </div><!-- .tab-content-->
             </div><!-- .col-md-12 -->
     <!-- ajax begin -->
+    
    <script type="text/javascript">
        $(document).ready(function () {
+          var patientId ="<%=PatientId%>";
+          //var patientId = JSON.stringify(patient_Id);
+           //var patientId = 18;
+           console.log(patientId);
+           $.ajax({
+               type: "POST",
+               url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
+               data: "{'patientId':'" + patientId + "'}",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               cache: false,
+               success: function (response) {
+                   console.log(response.d);
+                   var itemList = response.d;
+                   var table = '';
+                   itemList.forEach(function (item) {
 
+                       table += '<tr><td>' + item.LabName + '</td><td>' + item.Reasons + '</td></tr>' + item.SampleDate + '</td></tr>' + item.Results + '</td></tr>';
+                   });
+
+                   $('#tblPrevLabs').append(table);
+
+               },
+
+                 error: function (msg) {
+
+                alert(msg.responseText);
+                }
+           });
+        
+           //pw autocomplete
+           $.ajax({
+               type: "POST",
+               url: "../WebService/LookupService.asmx/GetLookupLabsList",
+               dataType: "json",
+               data: "{}",
+               contentType: "application/json; charset=utf-8",
+               success: function (data) {
+
+                   var serverData = JSON.parse(data.d);    //clean object
+
+                   var labtests = [];
+                   for (var i = 0; i < serverData.length; i++) {
+
+                       labtests.push(serverData[i]["ParameterName"]);  //push data to array important
+                   }
+
+                   //console.log(labtests);                    
+
+                   $("[id$='labTestTypes']").autocomplete({
+                       source: labtests
+
+                   });
+               },
+               error: function (errorThrown) {
+                   alert(textStatus);
+                   console.log(errorThrown)
+
+               }
+           });
+           //pw get previous labs
+           //debugger;
+          
+
+           // Load lab order
+           $("#btnAddLab").click(function (e) {
+
+
+
+               var labOrderDate = moment().format('D MMM, YYYY');
+               var labType = $("#labTestTypes").val();
+               var labOrderReason = $("#orderReason").find(":selected").text();
+               var labOrderNotes = $("#labNotes").val();
+
+               if (labType < 1) {
+                   generate("error", "Please select at least One(1) Lab Type from the List");
+                   return false;
+               }
+               if (labOrderReason < 1) {
+                   generate("error", "Please select at least One(1) Lab Order Reason from the List");
+                   return false;
+               }
+
+               else {
+
+
+                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td></tr>";
+                   $("#tblAddLabs>tbody:first").append('' + tr + '');
+
+               }
+
+               e.preventDefault();
+           });
+
+
+           // Save lab order
+           $("#btnSaveLab").click(function (e) {
+               var _fp = [];
+               var data = $('#tblAddLabs tr').each(function (row, tr) {
+
+
+                   _fp[row] = {
+                       "labType": $(tr).find('td:eq(1)').text()
+                     , "orderReason": $(tr).find('td:eq(2)').text()
+                     , "results": $(tr).find('td:eq(2)').text()
+                    , "labOrderDate": $(tr).find('td:eq(3)').text()
+
+                   }
+               });
+               _fp.shift();
+
+               if ($.isEmptyObject(_fp)) {
+                   generate("error", "You have not added any lab order");
+                   return false;
+               } else {
+                   var patientId = $("#entryPoint").val();
+                   addLabOrder(_fp, patientId);
+               }
+
+
+           });
+           function addLabOrder(_fp, patientId) {
+               var labOrder = JSON.stringify(_fp);
+               console.log(labOrder);
+               $.ajax({
+                   type: "POST",
+
+                   url: "../WebService/LabService.asmx/AddLabOrder",
+                   data: "{'patientId':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+
+                       toastr.success(response.d, "Lab order successful");
+                   },
+                   error: function (response) {
+                       //generate('error', response.d);
+                       toastr.error(response.d, "Lab order unsuccessful");
+                   }
+               });
+           };
+        
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
            
             $('#DateOfVisit').datepicker({
@@ -1555,7 +1694,7 @@
             ////dtlDiagnosis
             $("#dtlDiagnosis").on('click',
                 '.btnDelete',
-                function () {
+                    function () {
                     diagnosisTable
                         .row($(this).parents('tr'))
                         .remove()
@@ -1902,114 +2041,7 @@
 
 
           
-            //pw autocomplete
-            $.ajax({
-                type: "POST",
-                url: "../WebService/LookupService.asmx/GetLookupLabsList",
-                dataType: "json",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    
-                    var serverData = JSON.parse(data.d);    //clean object
-                   
-                    var labtests = [];
-                    for (var i = 0; i < serverData.length; i++) {
-                        
-                        labtests.push(serverData[i]["ParameterName"]);  //push data to array important
-                    }
-                    
-                    //console.log(labtests);                    
-                              
-                         $("[id$='labTestTypes']").autocomplete({
-                            source: labtests
-                        
-                     });
-                },
-                    error: function (errorThrown) {
-                        alert(textStatus);
-                        console.log(errorThrown)
-
-                     }
-            });
-
-       
-   // Load lab order
-            $("#btnAddLab").click(function (e) {
-              
-
-
-                var labOrderDate = moment().format('D MMM, YYYY');
-                var labType = $("#labTestTypes").val();
-                var labOrderReason = $("#orderReason").find(":selected").text();
-                var labOrderNotes = $("#labNotes").val();
-
-              if (labType < 1) {
-                    generate("error", "Please select at least One(1) Lab Type from the List");
-                    return false;
-                }  
-                if (labOrderReason < 1) {
-                    generate("error", "Please select at least One(1) Lab Order Reason from the List");
-                    return false;
-                }
-                
-               else {
-                   
-                   
-                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td></tr>";
-                    $("#tblAddLabs>tbody:first").append('' + tr + '');
-                   
-                }
-
-                e.preventDefault();
-            });
-          
-      	  
-     // Save lab order
-       $("#btnSaveLab").click(function (e) {
-           var _fp = [];
-           var data = $('#tblAddLabs tr').each(function (row, tr) {
-
-              
-               _fp[row] = {
-                  "labType": $(tr).find('td:eq(1)').text()
-                 ,"orderReason": $(tr).find('td:eq(2)').text()
-                , "labOrderDate": $(tr).find('td:eq(3)').text()
-
-               }
-           });
-           _fp.shift();
-          
-           if ($.isEmptyObject(_fp)) {
-               generate("error", "You have not added any lab order");
-               return false;
-           } else {
-               var patientId = $("#entryPoint").val();
-               addLabOrder(_fp, patientId);
-           }
-
            
-       });
-     function addLabOrder(_fp, patientId) {
-           var labOrder = JSON.stringify(_fp);
-           console.log(labOrder);
-           $.ajax({
-               type: "POST",
-               
-               url: "../WebService/LabService.asmx/AddLabOrder",
-               data: "{'patientId':'" + 1058 + "','patientLabOrder': '" + labOrder + "'}",
-               contentType: "application/json; charset=utf-8",
-               dataType: "json",
-               success: function (response) {
-                 
-                   toastr.success(response.d, "Lab order successful");
-               },
-               error: function (response) {
-                   //generate('error', response.d);
-                   toastr.error(response.d, "Lab order unsuccessful");
-               }
-           });
-       };	
     function generate(type, text) {
 
            var n = noty({
