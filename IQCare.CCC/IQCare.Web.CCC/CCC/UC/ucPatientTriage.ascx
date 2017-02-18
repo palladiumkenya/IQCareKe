@@ -2,10 +2,10 @@
 
 <div class="col-md-12 bs-callout bs-callout-primary">
 
-    <div class="col-md-12"><small class="muted pull-left"><strong><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>PATIENT TRIAGE </strong></small></div>
+    <%--<div class="col-md-12"><small class="muted pull-left"><strong><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>PATIENT TRIAGE </strong></small></div>
     <div class="col-md-12">
         <hr />
-    </div>
+    </div>--%>
     <div class="col-md-12" id="vitalsform" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-6" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             <div class="col-md-12">
@@ -179,8 +179,8 @@
         if (tempreture === '') { tempreture = 0 }
         var respiratoryRate = $("#<%=RespiratoryRate.ClientID%>").val();
         if (respiratoryRate === '') { respiratoryRate = 0 }
-        var patientId = 0;
-        var patientMasterVisitId = 0;
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
         var heartRate = $("#<%=HeartRate.ClientID%>").val();
         if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
@@ -192,10 +192,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                   generate('success', ''+response.d);
+                    toastr.success(response.d, "Vitals saved successfully");
                 },
                 error: function (response) {
-                   generate('error', response.d);
+                    toastr.success(response.d, "Vitals not saved");
                 }
             });
         }

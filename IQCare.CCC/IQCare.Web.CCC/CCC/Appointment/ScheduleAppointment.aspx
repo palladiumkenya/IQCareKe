@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-12">
     <uc:PatientDetails runat="server" />
-    <div id="callout-labels-inline-block" class="col-md-12 well well-sm bs-callout bs-callout-primary" style="padding-bottom: 1%">
+    <div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
 
         <div class="col-md-12 form-group">
             <div class="col-md-12">
@@ -21,15 +21,15 @@
         </div>
 
         <div class="col-md-12">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="col-md-12">
-                    <label class="control-label">Service Area</label>
+                    <label class="control-label pull-left">Service Area</label>
                 </div>
                 <div class="col-md-12 pull-right">
                     <asp:DropDownList runat="server" ID="ServiceArea" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="reason" class="control-label pull-left">Reason</label>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="col-md-12">
                         <label for="status" class="control-label pull-left">Status</label>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <div class="col-md-12">
                         <label class="control-label pull-left">Date</label>
@@ -188,6 +188,9 @@
             $("#btnSaveAppointment").click(function () {
                 addPatientAppointment();
             });
+            /*$("#btnReset").click(function () {
+                resetFields();
+            });*/
         });
 
         function addPatientAppointment() {
@@ -197,8 +200,8 @@
             var status = $("#<%=status.ClientID%>").val();
             /*if (status === '') { status = null }*/
             var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-            var patientId = 0;
-            var patientMasterVisitId = 0;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
             debugger;
             $.ajax({
                 type: "POST",
@@ -207,12 +210,20 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    generate('success', '' + response.d);
+                    toastr.success(response.d, "Appointment saved successfully");
+                    //resetFields();
                 },
                 error: function (response) {
-                    generate('error', response.d);
+                    toastr.error(response.d, "Appointment not saved");
                 }
             });
+        }
+        function resetFields() {
+            document.getElementById("ServiceArea").value = '';
+            document.getElementById("Reason").value = '';
+            document.getElementById("description").value = '';
+            document.getElementById("status").value = '';
+            document.getElementById("PersonAppointmentDate").value = '';
         }
     </script>
 </asp:Content>
