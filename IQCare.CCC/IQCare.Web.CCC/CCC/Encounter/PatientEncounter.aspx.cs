@@ -15,11 +15,14 @@ namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
+        public int PatientId;
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         int visitId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["visitId"] != null)
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+
+            if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();

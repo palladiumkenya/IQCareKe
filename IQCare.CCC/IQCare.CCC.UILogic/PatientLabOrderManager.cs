@@ -41,7 +41,7 @@ namespace IQCare.CCC.UILogic
                         PatientLabTracker LabOrder = new PatientLabTracker()
                         {
                             PatientId = patientId,
-                            patientMasterVisitId = visitId,
+                            masterVisitId = visitId,
                             Results= data[i].results,
                             LabName = data[i].labType,
                             Reasons = data[i].orderReason,

@@ -39,7 +39,7 @@ namespace DataAccess.CCC.Repository.Lookup
 
            
             var myList = previouslabsrepository.FindBy(x => x.Id == patientId);
-            var list = myList.GroupBy(x => x.TestName).Select(x => x.First());
+            var list = myList.GroupBy(x => x.LabName).Select(x => x.First());
             return list.Distinct().ToList();
         }
 
