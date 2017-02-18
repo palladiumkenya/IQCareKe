@@ -22,7 +22,7 @@ namespace Entities.CCC.Lookup
         public int masterVisitId { get; set; }
         //[ForeignKey("patientMasterVisitId")]
         //public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-        public string SampleDate { get; set; }
+        public DateTime SampleDate { get; set; }
         public string Reasons { get; set; }
         public string Results { get; set; }
         //public string CreatedBy { get; set; }

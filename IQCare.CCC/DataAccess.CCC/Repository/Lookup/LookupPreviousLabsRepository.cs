@@ -34,12 +34,12 @@ namespace DataAccess.CCC.Repository.Lookup
         public List<LookupPreviousLabs> GetPreviousLabs(int patientId)
         {
             ILookupPreviousLabs previouslabsrepository = new LookupPreviousLabsRepository();
-           // var list = previouslabsrepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.TestName);
+            // var list = previouslabsrepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.TestName);
             //return list.ToList();
+          
 
-           
-            var myList = previouslabsrepository.FindBy(x => x.Id == patientId);
-            var list = myList.GroupBy(x => x.LabName).Select(x => x.First());
+            var myList = previouslabsrepository.FindBy(x => x.PatientId == patientId);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName); ;
             return list.Distinct().ToList();
         }
 

@@ -14,8 +14,6 @@
     <script src="../Scripts/css/jquery-ui.css"></script>
     <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
       
-
-
 <!--  .end auto complete   -->
        <!-- line graph for viral tracker  -->  
   	
@@ -1351,24 +1349,25 @@
     
    <script type="text/javascript">
        $(document).ready(function () {
-          var patientId ="<%=PatientId%>";
+          var patient_Id ="<%=PatientId%>";
           //var patientId = JSON.stringify(patient_Id);
            //var patientId = 18;
-           console.log(patientId);
+           console.log(patient_Id);
            $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-               data: "{'patient_ID':'" + JSON.stringify(patientId) + "'}",
+               data: "{'patient_ID':'" + JSON.stringify(patient_Id) + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
                success: function (response) {
                    console.log(response.d);
-                   var itemList = response.d;
+                   var itemList = JSON.parse(response.d);
                    var table = '';
-                   itemList.forEach(function (item) {
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
 
-                       table += '<tr><td>' + item.LabName + '</td><td>' + item.Reasons + '</td></tr>' + item.SampleDate + '</td></tr>' + item.Results + '</td></tr>';
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.SampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    });
 
                    $('#tblPrevLabs').append(table);
@@ -1466,7 +1465,8 @@
                    generate("error", "You have not added any lab order");
                    return false;
                } else {
-                   var patientId = $("#entryPoint").val();
+                   // var patientId = $("#entryPoint").val();
+                   var patientId = JSON.stringify(patient_Id);
                    addLabOrder(_fp, patientId);
                }
 
@@ -1479,7 +1479,7 @@
                    type: "POST",
 
                    url: "../WebService/LabService.asmx/AddLabOrder",
-                   data: "{'patientId':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
+                   data: "{'patientID':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    success: function (response) {
