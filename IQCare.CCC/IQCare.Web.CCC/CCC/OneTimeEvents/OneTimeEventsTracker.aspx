@@ -643,14 +643,14 @@
                         </div>
 
                         <div class="col-md-12">
-                            <hr />
-                            <div class="col-md-6"></div>
+                            <div class="col-md-3"></div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" ClientIDMode="Static" OnClientClick="return false;"> Save One Time Event</asp:LinkButton></div>
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="LinkButton1" CssClass=" btn btn-warning btn-lg fa fa-refresh" > Reset One Time Event</asp:LinkButton></div> 
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close One Time Event</asp:LinkButton></div>
                             </div>
+                            <div class="col-md-3"></div>
                         </div>
 
                   </div> <%--.panel-body--%>

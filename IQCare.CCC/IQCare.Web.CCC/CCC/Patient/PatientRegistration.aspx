@@ -497,6 +497,7 @@
                 $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disabled');
 
                 $('#MyDateOfBirth').datepicker({
+                        date:null,
                         allowPastDates: true,
                         momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                         //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]

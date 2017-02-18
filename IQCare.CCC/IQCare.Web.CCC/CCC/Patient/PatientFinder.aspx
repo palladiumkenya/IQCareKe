@@ -220,8 +220,8 @@
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12">
                               <div class="col-md-4"></div>
-                              <div class="col-md-4"></div> 
-                              <div class="col-md-4">
+                              <div class="col-md-3"></div> 
+                              <div class="col-md-5">
                                    <div class="col-md-4">
                                         <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
                                     </div>

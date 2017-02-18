@@ -25,14 +25,13 @@ namespace IQCare.Web.CCC.WebService
 
       
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(string patientID, int visitId,string patientLabOrder)
+        public string AddLabOrder(int patientId, int visitId,string patientLabOrder)
         {
             
             try
-            { 
-                //conversion error
-                int patientId = 18;
-                var labOrder = new PatientLabOrderManager();
+            {
+
+                 var labOrder = new PatientLabOrderManager();
                 Result = labOrder.savePatientLabOrder(patientId,visitId,patientLabOrder);
                 if (Result > 0)
                 {
@@ -47,16 +46,15 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string GetLookupPreviousLabsList(string patient_ID)
+        public string GetLookupPreviousLabsList(string patientId)
         {
 
             //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
             //var patient_id = JSON.parse(patientID);
-            //int patientId = Convert.ToInt32(patient_ID);
-            //int patientId = int.Parse(patient_ID);
-            //  patientID = Convert.ToInt32(Session["PersonId"]);
-            int patientId = 18;
-            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
+             int id = Convert.ToInt32(patientId);
+            // int patientId = int.Parse(patient_Id);
+          //  patientID = Convert.ToInt32(Session["PersonId"]);
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(id);
 
             return jsonObject;
         }
