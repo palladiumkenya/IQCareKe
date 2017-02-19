@@ -29,32 +29,34 @@ namespace IQCare.Web.CCC.UC
             {
                 DoB = Convert.ToDateTime(x.DateOfBirth);
 
-                lblLastName.Text = _utility.Decrypt(x.FirstName);
+                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.FirstName)+"</i></strong>";
                 if (x.Active)
                 {
-                    lblStatus.Text = "<i class='fa fa-check - square - o text-success' aria-hidden='true'></i> Active";
+                    lblStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
                 }
                 else
                 {
-                    lblStatus.Text = "Inactive";
+                    lblStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
                 }
                 string femaleIcon= "<i class='fa fa-female' aria-hidden='true'></i>";
                 string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
                 if (x.Sex == 62)
                 {
-                    lblGender.Text= femaleIcon + _lookupManager.GetLookupNameFromId(x.Sex);
+                    lblGender.Text= femaleIcon + "<strong><i>"+_lookupManager.GetLookupNameFromId(x.Sex)+ "</i></strong>";
                 }
                 if (x.Sex==61)
                 {
-                    lblGender.Text = maleIcon + _lookupManager.GetLookupNameFromId(x.Sex);
+                    lblGender.Text = maleIcon + "<strong><i>" + _lookupManager.GetLookupNameFromId(x.Sex) + "</i></strong>";
                 }
                 
 
-                lblOtherNames.Text = _utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName);
+                lblOtherNames.Text = "<strong></i>"+_utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName)+"</i></strong>";
 
-                lblAge.Text = Convert.ToString(myDate - DoB.Year)+" Years " + Convert.ToString(myDateMonth-DoB.Month) + "Months ";
+                lblAge.Text ="<strong><i>"+ Convert.ToString(myDate - DoB.Year)+" Years " + Convert.ToString(myDateMonth-DoB.Month) + " Months </i></strong>";
                 lblCCCReg.Text = x.EnrollmentNumber;
+
+                lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
             }
 
 
