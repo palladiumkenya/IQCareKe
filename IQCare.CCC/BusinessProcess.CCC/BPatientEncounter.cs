@@ -278,9 +278,9 @@ namespace BusinessProcess.CCC
 
                 if (theDS.Tables[2].Rows.Count > 0)
                 {
-                    pce.lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
+                    pce.lmp = ((DateTime)theDS.Tables[2].Rows[0]["FemaleLMP"]).ToString("dd-MMM-yyyy");
                     pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
-                    pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
+                    pce.edd = ((DateTime)theDS.Tables[2].Rows[0]["ExpectedDateOfChild"]).ToString("dd-MMM-yyyy");
                     pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
                     pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
                 }
