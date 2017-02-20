@@ -2,7 +2,9 @@
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Lookup;
+using Entities.CCC.Visit;
 using DataAccess.CCC.Repository.Lookup;
+using DataAccess.CCC.Repository.visit;
 using System;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
@@ -71,6 +73,20 @@ namespace BusinessProcess.CCC
             return lookupLabprevRepository.GetPreviousLabs(patientId);
 
 
+        }
+        public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
+
+        {
+            
+            LookupPreviousLabsRepository lookupVllabsRepository = new LookupPreviousLabsRepository();
+            return lookupVllabsRepository.GetVlLabs(patientId);
+        }
+        public List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId)
+
+        {
+
+            LookupPreviousLabsRepository lookupPendingVllabsRepository = new LookupPreviousLabsRepository();
+            return lookupPendingVllabsRepository.GetPendingVlLabs(patientId);
         }
 
         public string GetLookupNameFromId(int id)

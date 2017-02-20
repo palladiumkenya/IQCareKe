@@ -1,4 +1,5 @@
 ﻿using Entities.CCC.Lookup;
+using Entities.CCC.Visit;
 using System.Collections.Generic;
 
 namespace Interface.CCC.Lookup
@@ -16,6 +17,8 @@ namespace Interface.CCC.Lookup
        
         List<LookupLabs> GetLookupLabs();  
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
+        List<LookupPreviousLabs> GetLookupVllabs(int patientId);
+        List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         string GetLookupNameFromId(int id);
     }
 

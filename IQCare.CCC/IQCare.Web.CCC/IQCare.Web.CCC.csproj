@@ -52,6 +52,8 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
+    <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />

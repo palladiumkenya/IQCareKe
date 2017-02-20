@@ -60,8 +60,27 @@ namespace IQCare.Web.CCC.WebService
 
             return jsonObject;
         }
-        // pw .lookup previous lablist             
-        // pw .grid
+
+        [WebMethod(EnableSession = true)]
+        public string GetvlTests(string patient_ID)
+        {
+
+          
+            int patientId = Convert.ToInt32(patient_ID);           
+            string jsonObject = LookupLogic.GetvlTestsJson(patientId);
+
+            return jsonObject;
+        }
+        [WebMethod(EnableSession = true)]
+        public string GetPendingvlTests(string patient_ID)
+        {
+
+
+            int patientId = Convert.ToInt32(patient_ID);
+            string jsonObject = LookupLogic.GetPendingvlTestsJson(patientId);
+
+            return jsonObject;
+        }
 
 
 
