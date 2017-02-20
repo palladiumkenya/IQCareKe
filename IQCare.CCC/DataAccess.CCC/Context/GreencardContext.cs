@@ -86,7 +86,8 @@ namespace DataAccess.CCC.Context
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
-        public DbSet<LookupPreviousLabs> LookupPreviousLaboratories { get; set; }
+        public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
+
 
 
     }

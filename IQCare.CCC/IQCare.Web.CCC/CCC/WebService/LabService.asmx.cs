@@ -8,9 +8,9 @@ using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
-   // <summary>
-     /// Summary description for PersonSeervice
-     /// </summary>
+    // <summary>
+    /// Summary description for PersonSeervice
+    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
@@ -19,20 +19,21 @@ namespace IQCare.Web.CCC.WebService
     public class LabService : System.Web.Services.WebService
     {
 
-        private int patientID { get; set; }       
+        private int patientID { get; set; }
         private string Msg { get; set; }
         private int Result { get; set; }
 
-      
+
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patientId, int visitId,string patientLabOrder)
+        public string AddLabOrder(string patientID, int visitId, string patientLabOrder)
         {
-            
+
             try
             {
-
-                 var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientId,visitId,patientLabOrder);
+                //conversion error
+                int patientId = 18;
+                var labOrder = new PatientLabOrderManager();
+                Result = labOrder.savePatientLabOrder(patientId, visitId, patientLabOrder);
                 if (Result > 0)
                 {
                     Msg = "Patient Lab Order Recorded Successfully .";
@@ -46,15 +47,16 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string GetLookupPreviousLabsList(string patientId)
+        public string GetLookupPreviousLabsList(string patient_ID)
         {
 
             //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
             //var patient_id = JSON.parse(patientID);
-             int id = Convert.ToInt32(patientId);
-            // int patientId = int.Parse(patient_Id);
-          //  patientID = Convert.ToInt32(Session["PersonId"]);
-            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(id);
+            int patientId = Convert.ToInt32(patient_ID);
+            //int patientId = int.Parse(patient_ID);
+            //patientId = Convert.ToInt32(Session["PersonId"]);
+           // int patientId = 18;
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
 
             return jsonObject;
         }

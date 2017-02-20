@@ -3,19 +3,16 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <script src="../Scripts/js/PatientEncounter.js"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/js/PatientEncounter.js"></script>   
 
     <!-- Auto complete code here-->
-    <!--<script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>    -->
+   
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
-    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
-    <script src="../Scripts/css/jquery-ui.css"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
-      
-
-
+    <!--Using jquery 12.1  --->
+    <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
+    <script src="../Scripts/js/jquery-ui.min.js"></script>
+   
 <!--  .end auto complete   -->
        <!-- line graph for viral tracker  -->  
   	
@@ -1193,15 +1190,17 @@
                                                   </div>
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
-                                                      <div class="col-md-2 pull-right">
-                                            <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Lab</asp:LinkButton>
+                                                      <div class="col-md-3 pull-right ">
+                                            <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
                                                         
                                                       </div>
+                                                      <div></div>
                                                   </div>
                                                   
                                                  <div class="col-md-12 form-group">                                         
                                             <table class="table table-striped table-condensed" id="tblAddLabs" clientidmode="Static" runat="server">
                                                 <thead>
+                                                     
                                                     <tr >
                                                          <th> <i class="control-label text-warning pull-left" aria-hidden="true"> # </i> </th>
                                                          <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Lab Test</i> </th>
@@ -1351,24 +1350,35 @@
     
    <script type="text/javascript">
        $(document).ready(function () {
-          var patientId ="<%=PatientId%>";
+          var patient_Id ="<%=PatientId%>";
           //var patientId = JSON.stringify(patient_Id);
            //var patientId = 18;
-           console.log(patientId);
+           console.log(patient_Id);
            $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-               data: "{'patientId':'" + patientId + "'}",
+               data: "{'patient_ID':'" + patient_Id + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
                success: function (response) {
                    console.log(response.d);
-                   var itemList = response.d;
+                   var itemList = JSON.parse(response.d);
                    var table = '';
-                   itemList.forEach(function (item) {
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
 
-                       table += '<tr><td>' + item.LabName + '</td><td>' + item.Reasons + '</td></tr>' + item.SampleDate + '</td></tr>' + item.Results + '</td></tr>';
+                      // var sampleDate = formatJsonDate(Date(itemList.SampleDate));
+                       //var sampleDate = $.datepicker.formatDate('mm/dd/yy', new Date(Date(itemList.SampleDate)));
+                       var dateString = itemList.SampleDate.substr(6);
+                       var currentTime = new Date(parseInt(dateString));
+                       var month = currentTime.getMonth() + 1;
+                       var day = currentTime.getDate();
+                       var year = currentTime.getFullYear();
+                       var sampleDate = day + "/" + month + "/" + year;
+                      // alert(date);
+
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    });
 
                    $('#tblPrevLabs').append(table);
@@ -1466,7 +1476,8 @@
                    generate("error", "You have not added any lab order");
                    return false;
                } else {
-                   var patientId = $("#entryPoint").val();
+                   // var patientId = $("#entryPoint").val();
+                   var patientId = JSON.stringify(patient_Id);
                    addLabOrder(_fp, patientId);
                }
 
@@ -1479,7 +1490,7 @@
                    type: "POST",
 
                    url: "../WebService/LabService.asmx/AddLabOrder",
-                   data: "{'patientId':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
+                   data: "{'patientID':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    success: function (response) {
@@ -1492,7 +1503,9 @@
                    }
                });
            };
-        
+        function formatJsonDate(jsonDate) {
+               return (new Date(parseInt(jsonDate.substr(6)))).format("dd/mm/yyyy");
+           };
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
            
             $('#DateOfVisit').datepicker({
@@ -2066,7 +2079,7 @@
            
          
        });
-     	  
+      
       
     </script>
     
