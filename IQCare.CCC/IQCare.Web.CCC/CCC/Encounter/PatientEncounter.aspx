@@ -3,68 +3,17 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <script src="../Scripts/js/PatientEncounter.js"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="../Scripts/js/PatientEncounter.js"></script>   
 
-    <!-- Auto complete code here-->
-    <!--<script src="../Scripts/js/jquery-1.4.2.min.js" type="text/javascript"></script>    -->
+     <!--Using jquery 12.1  --->
+    <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
+    <script src="../Scripts/js/jquery-ui.min.js"></script>
+
+   <!-- Jquery for High charts   -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
-    <script src="../Scripts/js/jquery-ui-1.8.custom.min.js" type="text/javascript"></script>
-    <script src="../Scripts/css/jquery-ui.css"></script>
-    <link href="../Scripts/css/jquery-ui.css" rel="stylesheet" type="text/css" />
-      
-
-
-<!--  .end auto complete   -->
-       <!-- line graph for viral tracker  -->  
-  	
-		<script type="text/javascript">
-		    $(function () {
-		        $('#container').highcharts({
-		            title: {
-		                text: 'Viral Load Trend',
-		                x: -20 //center
-		            },
-		            subtitle: {
-		                text: 'VL cp/ml',
-		                x: -20
-		            },
-		            xAxis: {
-		                categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
-		            },
-		            yAxis: {
-		                title: {
-		                    text: 'Viral Load cp/ml'
-		                },
-		                plotLines: [{
-		                    value: 0,
-		                    width: 1,
-		                    color: '#808080'
-		                }]
-		            },
-		            tooltip: {
-		                valueSuffix: 'cp/ml'
-		            },
-		            legend: {
-		                layout: 'vertical',
-		                align: 'right',
-		                verticalAlign: 'middle',
-		                borderWidth: 0
-		            },
-		            series: [{
-		                name: 'Patrick',
-		                data: [200, 300, 500, 1000, 750, 500, 400]
-		            }, {
-		                name: 'Threshold',
-		                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-		            }]
-		        });
-		    });
-		  		
-		</script>
-<!--end line graph for viral tracker    -->          
-            <div class="col-md-12">
+   
+     <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
             </div>
             <div class="col-md-12 col-xs-12">
@@ -1098,20 +1047,35 @@
 
                       <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
-                             <div class="col-md-6">
-                                    <div class="col-md-12"><label class="control-label pull-left">Pending VL results</label></div>
-                                   
-                      <!--pw implementation of vllabhistory module here-->
-                                                 <div class="col-md-12">
-                                                      <div class="col-md-12"><hr/></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Count#</label></div>  
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered Test</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Date</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Ordered By</label></div>
-                                                      <div class="col-md-2"><label class="control-label text-warning pull-left">Order Reason</label></div>  
-                                                      <div class="col-md-1"><label class="control-label text-warning pull-left">Order Status</label></div>
-                                                  </div>
 
+                      <div class="col-md-6">      
+                       <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>
+
+                              <asp:TextBox runat="server" ID="pendingVl" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="None...."></asp:TextBox> 
+
+                            </div>
+                               
+        
+                      <!--pw implementation of vllabhistory module here-->
+                                             
+                                   <div class="col-md-12 form-group">
+                                              <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+
+                                       </div>          
                      <!--pw .implementation of  vllabhistory module here-->
                              
                                 </div>
@@ -1193,15 +1157,17 @@
                                                   </div>
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
-                                                      <div class="col-md-2 pull-right">
-                                            <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Lab</asp:LinkButton>
+                                                      <div class="col-md-3 pull-right ">
+                                            <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
                                                         
                                                       </div>
+                                                      <div></div>
                                                   </div>
                                                   
                                                  <div class="col-md-12 form-group">                                         
                                             <table class="table table-striped table-condensed" id="tblAddLabs" clientidmode="Static" runat="server">
                                                 <thead>
+                                                     
                                                     <tr >
                                                          <th> <i class="control-label text-warning pull-left" aria-hidden="true"> # </i> </th>
                                                          <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Lab Test</i> </th>
@@ -1351,24 +1317,33 @@
     
    <script type="text/javascript">
        $(document).ready(function () {
-          var patientId ="<%=PatientId%>";
-          //var patientId = JSON.stringify(patient_Id);
-           //var patientId = 18;
-           console.log(patientId);
+          var patient_Id ="<%=PatientId%>";
+           console.log(patient_Id);
+
+
            $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-               data: "{'patientId':'" + patientId + "'}",
+               data: "{'patient_ID':'" + patient_Id + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
                success: function (response) {
-                   console.log(response.d);
-                   var itemList = response.d;
+                  // console.log(response.d);
+                   var itemList = JSON.parse(response.d);
                    var table = '';
-                   itemList.forEach(function (item) {
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
 
-                       table += '<tr><td>' + item.LabName + '</td><td>' + item.Reasons + '</td></tr>' + item.SampleDate + '</td></tr>' + item.Results + '</td></tr>';
+                       var dateString = itemList.SampleDate.substr(6);
+                       var currentTime = new Date(parseInt(dateString));
+                       var month = currentTime.getMonth() + 1;
+                       var day = currentTime.getDate();
+                       var year = currentTime.getFullYear();
+                       var sampleDate = day + "/" + month + "/" + year;
+                      // alert(date);
+
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    });
 
                    $('#tblPrevLabs').append(table);
@@ -1379,10 +1354,80 @@
 
                 alert(msg.responseText);
                 }
+              });
+        $.ajax({
+               type: "POST",
+               url: "../WebService/LabService.asmx/GetvlTests",
+               data: "{'patient_ID':'" + patient_Id + "'}",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               cache: false,
+               success: function (response) {
+                   //console.log(response.d);
+                   var itemList = JSON.parse(response.d);
+                   var table = '';
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
+
+                       var dateString = itemList.SampleDate.substr(6);
+                       var currentTime = new Date(parseInt(dateString));
+                       var month = currentTime.getMonth() + 1;
+                       var day = currentTime.getDate();
+                       var year = currentTime.getFullYear();
+                       var sampleDate = day + "/" + month + "/" + year;
+                       // alert(date);
+
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
+                   });
+
+                   $('#tblVL').append(table);
+
+               },
+
+               error: function (msg) {
+
+                   alert(msg.responseText);
+               }
            });
-        
-           //pw autocomplete
-           $.ajax({
+
+       $.ajax({
+            type: "POST",
+            url: "../WebService/LabService.asmx/GetPendingvlTests",
+            data: "{'patient_ID':'" + patient_Id + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            cache: false,
+            success: function (response) {
+                console.log(response.d);
+                var itemList = JSON.parse(response.d);
+                var table = '';
+                //itemList.forEach(function (item) {
+                $.each(itemList, function (index, itemList) {
+
+                    var dateString = itemList.SampleDate.substr(6);
+                    var currentTime = new Date(parseInt(dateString));
+                    var month = currentTime.getMonth() + 1;
+                    var day = currentTime.getDate();
+                    var year = currentTime.getFullYear();
+                    var sampleDate = day + "/" + month + "/" + year;
+                    // alert(date);
+
+                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
+                });
+
+                $('#tblVL').append(table);
+
+            },
+
+            error: function (msg) {
+
+                alert(msg.responseText);
+            }
+        });
+
+
+
+         $.ajax({
                type: "POST",
                url: "../WebService/LookupService.asmx/GetLookupLabsList",
                dataType: "json",
@@ -1390,12 +1435,11 @@
                contentType: "application/json; charset=utf-8",
                success: function (data) {
 
-                   var serverData = JSON.parse(data.d);    //clean object
-
+                   var serverData = JSON.parse(data.d);    
                    var labtests = [];
                    for (var i = 0; i < serverData.length; i++) {
 
-                       labtests.push(serverData[i]["ParameterName"]);  //push data to array important
+                       labtests.push(serverData[i]["ParameterName"]);  
                    }
 
                    //console.log(labtests);                    
@@ -1411,10 +1455,7 @@
 
                }
            });
-           //pw get previous labs
-           //debugger;
-          
-
+           
            // Load lab order
            $("#btnAddLab").click(function (e) {
 
@@ -1466,7 +1507,8 @@
                    generate("error", "You have not added any lab order");
                    return false;
                } else {
-                   var patientId = $("#entryPoint").val();
+                   // var patientId = $("#entryPoint").val();
+                   var patientId = JSON.stringify(patient_Id);
                    addLabOrder(_fp, patientId);
                }
 
@@ -1479,7 +1521,7 @@
                    type: "POST",
 
                    url: "../WebService/LabService.asmx/AddLabOrder",
-                   data: "{'patientId':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
+                   data: "{'patientID':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    success: function (response) {
@@ -1492,7 +1534,47 @@
                    }
                });
            };
-        
+           $(function () {
+               $('#container').highcharts({
+                   title: {
+                       text: 'Viral Load Trend',
+                       x: -20 //center
+                   },
+                   subtitle: {
+                       text: 'VL cp/ml',
+                       x: -20
+                   },
+                   xAxis: {
+                       categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                   },
+                   yAxis: {
+                       title: {
+                           text: 'Viral Load cp/ml'
+                       },
+                       plotLines: [{
+                           value: 0,
+                           width: 1,
+                           color: '#808080'
+                       }]
+                   },
+                   tooltip: {
+                       valueSuffix: 'cp/ml'
+                   },
+                   legend: {
+                       layout: 'vertical',
+                       align: 'right',
+                       verticalAlign: 'middle',
+                       borderWidth: 0
+                   },
+                   series: [{
+                       name: 'VL',
+                       data: [200, 300, 500, 1000, 750, 500, 400]
+                   }, {
+                       name: 'Threshold',
+                       data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                   }]
+               });
+           });
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
            
             $('#DateOfVisit').datepicker({
@@ -2066,7 +2148,7 @@
            
          
        });
-     	  
+      
       
     </script>
     
