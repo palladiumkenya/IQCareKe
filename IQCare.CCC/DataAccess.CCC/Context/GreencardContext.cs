@@ -11,6 +11,7 @@ using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
 using Entities.PatientCore;
+using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Context
 {
@@ -47,7 +48,7 @@ namespace DataAccess.CCC.Context
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
         public DbSet<Entities.CCC.Visit.PatientEncounter> PatientEncounters { get; set; }
-        public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
+      
 
 
         //Baseline Entities
@@ -83,8 +84,11 @@ namespace DataAccess.CCC.Context
 
        
 
-        //Appointment
+        //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
+        public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
+
+
 
     }
 }

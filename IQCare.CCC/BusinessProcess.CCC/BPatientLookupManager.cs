@@ -44,23 +44,41 @@ namespace BusinessProcess.CCC
             return patientSearchDetails;
         }
 
-        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string param, string type)
+        public List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,  int start, int length)
         {
-            var searchPayload = _unitOfWork.PatientLookupRepository.FindBy(
-                   x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));;
+            var result = _unitOfWork.PatientLookupRepository.GetAll();
 
-            //switch (type)
-            //{
-            //    case "s":
-            //        searchPayload =
-            //            _unitOfWork.PatientLookupRepository.FindBy(
-            //                x => x.FirstName.ToLower().StartsWith(param) || x.FirstName.ToLower().EndsWith(param));
-            //        break;
-            //    case "i":
-            //        break;
-            //}
+                //if (!string.IsNullOrWhiteSpace(patientId))
+                //{
+                //    result = result.Where(x => x.EnrollmentNumber == patientId.ToString());
+                //}
+                //if (sex > 0)
+                //{
+                //    result = result.Where(x => x.Sex == sex);
+                //}
 
-            return searchPayload.ToList();
+                //if (!string.IsNullOrWhiteSpace(fname))
+                //{
+                //    result = result.Where(x =>utility.Decrypt(x.FirstName).ToLower().Contains(fname.ToLower()));
+                //}
+                //if (!string.IsNullOrWhiteSpace(lname))
+                //{
+                //    result = result.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lname.ToLower()));
+                //}
+                //if (!string.IsNullOrWhiteSpace(mname))
+                //{
+                //    result = result.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(mname.ToLower()));
+                //}
+                //if (!string.IsNullOrWhiteSpace(doB.ToShortDateString()))
+                //{
+                //    result = result.Where(x => x.DateOfBirth.ToShortDateString() == doB.ToShortDateString());
+                //}
+                //if (facility > 0)
+                //{
+                //    result = result.Where(x => x.FacilityId == facility);
+                //}
+
+                return result.ToList();
         }
 
         public int GetTotalpatientCount()

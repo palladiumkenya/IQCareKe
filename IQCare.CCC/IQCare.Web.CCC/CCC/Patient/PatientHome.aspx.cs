@@ -11,8 +11,16 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["PatientId"] =Convert.ToInt32(Request.QueryString["patient"]);
-            Session["PatientMasterVisitID"] = 0;
+            int patientId = Convert.ToInt32(Request.QueryString["patient"]);
+            if (patientId != null)
+            {
+                Session["PatientId"] = patientId;
+            }
+            else
+            {
+                Session["PatientId"] = HttpContext.Current.Session["PatientId"];
+                Session["PatientMasterVisitId"] = HttpContext.Current.Session["PatientMasterVisitId"];
+            }
         }
     }
 }

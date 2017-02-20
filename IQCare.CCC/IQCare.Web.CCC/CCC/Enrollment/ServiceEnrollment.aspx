@@ -9,8 +9,10 @@
         <div class="col-md-12">
             <label class="control-lable pull-left"> Patient Enrollment </label>
         </div>
-        <div class="col-md-12"><hr/></div>
-        <div class="col-md-12 form-group">
+        
+        <div class="col-md-12"><hr /></div>
+        
+        <div class="row">
             <div class="col-md-3">
                 <div class="col-md-12"><label class="control-label pull-left">Enrollment Date </label></div>
                 <div class="col-md-12">
@@ -96,6 +98,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-2">
+                <div class="col-md-12"><label class="control-label pull-left" for="entrypoint">Entry Point</label></div>
+                <div class="col-sm-10">
+                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-12"><hr /></div>
+
+        <div class="row form-group">
+            
             
             <div class="col-md-3">
                   <div class="col-md-12"><label class="pull-left control-label">Enrollment Identifier</label></div>
@@ -108,13 +126,6 @@
                 <div class="col-md-10"><label class="pull-left control-label">Enrollment No.#</label></div>
                 <div class="col-md-10">
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-required="true"></asp:TextBox>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="col-md-12"><label class="control-label" for="entrypoint">Entry Point</label></div>
-                <div class="col-sm-10">
-                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
                 </div>
             </div>
 
@@ -143,33 +154,20 @@
                     <tbody>
                         
                     </tbody>
-<%--                    <tfoot>
-                      
-                        <tr class="bg-primary">
-                            <th>#</th>
-                            <th><i class="fa fa-calendar-check-o " aria-hidden="true"> Enrollment Date</i> </th>
-                            <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Enrollement Identifier</i> </th>
-                            <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
-                            <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Enrollment Number </i></th>
-                            <th><span class="fa fa-times text-danger "></span> Action</th>
-                        </tr>
-              
-                    </tfoot>--%>
                 </table>
 
             </div>
-            <div class="col-md-12"><hr /></div>
             <div class="col-md-12">
                 <div class="col-md-3"></div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                      <div class="col-md-4">
                           <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
                      </div>
                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh"> Enroll and Register New</asp:LinkButton>
+                          <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static"> Enroll and Register New</asp:LinkButton>
                      </div>
                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times"> Close Enrollemnt</asp:LinkButton>
+                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static"> Close Enrollemnt</asp:LinkButton>
                      </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -182,6 +180,7 @@
         $(document).ready(function() {
 
             $('#EnrollmentDate').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
                 restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -231,6 +230,10 @@
                         }
             });
 
+            $("#btnClose").click(function () {
+                window.location.href = '/CCC/Patient/PatientFinder.aspx';
+            });
+
 
 
             $("#btnAdd").click(function(e) {
@@ -247,6 +250,11 @@
                 if (moment(''+enrollmentDate+'').isAfter()) {
                     
                     toastr.warning("Future dates not allowed during the patient enrollment process." + response.d, "Patient Enrollment");
+                    return false;
+                }
+
+                if (!moment(''+enrollmentDate+'').isValid()) {
+                    toastr.error("error", "Please select an enrollment date");
                     return false;
                 }
 
@@ -274,11 +282,18 @@
                     identifierList.push("" + identifier + "");
                     enrollmentNoList.push("" + enrollmentNo + "");
                     var tr = "<tr><td align='left'></td><td align='left'>" + moment(enrollmentDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                    $("#tblEnrollment>tbody:first").append(''+tr+'');
+                    $("#tblEnrollment>tbody:first").append('' + tr + '');
+
+                    resetElements();
                 }
 
                 e.preventDefault();
             });
+
+            function resetElements(parameters) {
+                $("#IdentifierTypeId").val("");
+                $("#IdentifierValue").val("");
+            }
 
             $("#tblEnrollment").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();

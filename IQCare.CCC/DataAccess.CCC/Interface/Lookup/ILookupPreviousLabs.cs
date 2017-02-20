@@ -6,9 +6,10 @@ using DataAccess.Context;
 using Entities.CCC.Lookup;
 namespace DataAccess.CCC.Interface.Lookup
 {
-    interface ILookupPreviousLabs : IRepository<LookupPreviousLabs>
+    public interface ILookupPreviousLabs : IRepository<LookupPreviousLabs>
     {
         List<LookupPreviousLabs> GetPreviousLabs(int patientId);
-        List<LookupPreviousLabs> FindBy(Func<LookupPreviousLabs, bool> p);
+        List<LookupPreviousLabs> GetVlLabs(int patientId);
+        // List<LookupPreviousLabs> FindBy(Func<LookupPreviousLabs, bool> p);
     }
 }

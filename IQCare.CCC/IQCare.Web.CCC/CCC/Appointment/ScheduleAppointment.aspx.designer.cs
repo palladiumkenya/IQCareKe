@@ -13,13 +13,13 @@ namespace IQCare.Web.CCC.Appointment {
     public partial class ScheduleAppointment {
         
         /// <summary>
-        /// Span1 control.
+        /// AppointmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
+        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
         
         /// <summary>
         /// ServiceArea control.
@@ -40,6 +40,15 @@ namespace IQCare.Web.CCC.Appointment {
         protected global::System.Web.UI.WebControls.DropDownList Reason;
         
         /// <summary>
+        /// DifferentiatedCare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DifferentiatedCare;
+        
+        /// <summary>
         /// description control.
         /// </summary>
         /// <remarks>
@@ -56,33 +65,6 @@ namespace IQCare.Web.CCC.Appointment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList status;
-        
-        /// <summary>
-        /// AppointmentDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
-        
-        /// <summary>
-        /// txtpatientMasterVisitId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpatientMasterVisitId;
-        
-        /// <summary>
-        /// txtpatientId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected int txtpatientId;
         
         /// <summary>
         /// btnSaveAppointment control.
@@ -110,5 +92,23 @@ namespace IQCare.Web.CCC.Appointment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        
+        /// <summary>
+        /// txtpatientMasterVisitId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpatientMasterVisitId;
+        
+        /// <summary>
+        /// txtpatientId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpatientId;
     }
 }

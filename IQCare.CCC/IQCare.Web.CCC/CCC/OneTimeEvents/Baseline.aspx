@@ -252,35 +252,43 @@
                             
                              <div class="form-group col-md-12">
                                   <div class="col-md-4">
+                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="Label1">Regimen Category </asp:Label></div>
+                                       <div class="col-md-12">
+                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                       </div>
+                                  </div>
+                                  <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblRegimen">Regimen</asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:TextBox runat="server" id="TransferRegimen" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="regimen" data-parsley-required="true"></asp:TextBox>
+                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                         </div>
                                   </div>
-
-                                  <div class="col-md-4">
+     
+                             </div>
+                            
+                            <div class="col-md-12">
+                                <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblfacility">Facility Transferred from :</asp:Label></div>  
                                        <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="TransferFromFacility" CssClass="form-control input-sm" placeholder="facility name.." ClientIDMode="Static" data-parsley-required="true"></asp:TextBox>
                                        </div>
                                   </div>
-
-                                  <div class="col-md-4">
+                                <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblmflcode">MFL Code:</asp:Label></div>
                                        <div class="col-md-12">
                                            <asp:TextBox runat="server" ID="FacilityMFLCode" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="mfl code" data-parsley-required="true"></asp:TextBox>
                                        </div>
                                   </div>
-                             </div>
-                            
-                             <div class="form-group col-md-12">
-                                 <div class="col-md-4">
+                                <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblcounty">County:</asp:Label></div>
                                       <div class="col-md-12">
                                            <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true"/>
                                       </div>
-                                 </div> 
-                                 <div class="col-md-8">
+                                 </div>
+                            </div>
+                             <div class="form-group col-md-12">
+                                  
+                                 <div class="col-md-12">
                                      <div class="col-md-12"><label class="control-label pull-left">TransferIn Notes</label></div>
                                      <div class="col-md-12">
                                          <asp:TextBox runat="server" ID="transferInNotes" CssClass="form-control input-sm" ClientIDMode="Static"></asp:TextBox>
@@ -1040,8 +1048,9 @@
             var pregnancy = false;
             var bHiV = false;
             var tbInfection = false;
+            var userId=<%=UserId%>; /* get the current userId*/
 
-            $('#ARTStartDate').datepicker({
+            $('#TIARTStartDate').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -1194,7 +1203,7 @@
                 e.preventDefault();
 
             });
-
+    
             $("#tblARVUseHistory").on('click',
                 '.btnDelete',
                 function() {
@@ -1236,9 +1245,10 @@
 
             function enableIfTransferIn() {
                 $("#TIDate").datepicker('enable');
-                $("#ARTStartDate").datepicker('enable');
+                $("#TIARTStartDate").datepicker('enable');
                 $("#DateStartedOn1stLine").datepicker('enable');
-                $("#<%=TransferRegimen.ClientID%>").prop('disabled', false);
+                $("#<%=RegimenId.ClientID%>").prop('disabled', false);
+                 $("#<%=regimenCategory.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', false);
                 $("#<%=FacilityMFLCode.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromCounty.ClientID%>").prop('disabled', false);
@@ -1249,13 +1259,14 @@
             function disableIfNotTransferIn() {
                 
                 $("#TIDate").datepicker('disable');
-                $("#ARTStartDate").datepicker('disable');
+                $("#TIARTStartDate").datepicker('disable');
                 $("#DateStartedOn1stLine").datepicker('disable');
-                $("#<%=TransferRegimen.ClientID%>").prop('disabled', true);
+                $("#<%=RegimenId.ClientID%>").prop('disabled', true);
+                $("#<%=regimenCategory.ClientID%>").prop('disabled', true);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', true);
                 $("#<%=FacilityMFLCode.ClientID%>").prop('disabled', true);
                 $("#<%=TransferFromCounty.ClientID%>").prop('disabled', true);
-                 $("#<%=transferInNotes.ClientID%>").prop('disabled', true);
+                $("#<%=transferInNotes.ClientID%>").prop('disabled', true);
             }
 
             function noneChecked() {
@@ -1367,9 +1378,44 @@
         })
     .on('finished.fu.wizard',
         function (e) {
-
+            window.open("/CCC/patient/PatientHome.aspx");
         });
-                    /* datat persistence functions */
+
+            /*filter regimens*/
+            $("#regimenCategory").on("change",
+                function() {
+
+                    var reg = $(this).find(":selected").text();
+                    var str =reg.replace(/\s+/g,''); 
+                    //reg =reg.replace("/+/g", "");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+                        data: "{'masterName':'" + str + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(response) {
+                            var itemList = JSON.parse(response.d);
+                            $("#<%=RegimenId.ClientID%>").find('option').remove().end();
+                            $("#<%=RegimenId.ClientID%>").append('<option value="0">Select</option>');
+                            $.each(itemList,
+                                function(index, itemList) {
+                                    $("#<%=RegimenId.ClientID%>")
+                                        .append('<option value="' +
+                                            itemList.LookupItemId +
+                                            '">' +
+                                            itemList.ItemName +"("+itemList.ItemDisplayName+")"+
+                                            '</option>');
+                                });
+                        },
+                        error: function(response) {
+                            toastr.error("Error in Fetching Ward list " + response.d, "Fetching Ward List");
+                        }
+                    });
+                });
+
+            /* datat persistence functions */
             function addPatientTransferIn() {
 
                 var serviceAreaId = 0;
@@ -1499,7 +1545,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientBaselineService.asmx/AddPatientArtUseInitiationBaseline",
-                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','hbvInfected':'" + hbvInfected + "','pregnant':'" + pregnant + "','tbInfected':'" + artuseHistoryTable + "','whoStage':'" + artuseHistoryTable + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + artuseHistoryTable + "','viralLoad':'" + viralLoad + "','viralLoadDate':'" + viralLoadDate + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','artCohort':'" + artCohort + "','firstlineStartDate':'" + firstlineStartDate + "','startRegimen':'" + startRegimen + "','userId':'" + userId +
+                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','hbvInfected':'" + bHiV + "','pregnant':'" + pregnancy + "','tbInfected':'" + tbInfection + "','whoStage':'" + whostage + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + cD4Count + "','viralLoad':'" + viralLoad + "','viralLoadDate':'" + viralLoadDate + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','artCohort':'" + artCohort + "','firstlineStartDate':'" + firstlineStartDate + "','startRegimen':'" + startRegimen + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

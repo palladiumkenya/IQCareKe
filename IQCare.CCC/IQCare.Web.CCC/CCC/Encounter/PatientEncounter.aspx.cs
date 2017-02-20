@@ -1,20 +1,13 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Web;
-using System.Web.Script.Serialization;
-using System.Web.Services;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
+        public int PatientId;
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         int visitId = 0;
         public string visitdateval = "";
@@ -23,7 +16,9 @@ namespace IQCare.Web.CCC.Encounter
         public string nxtAppDateval = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["visitId"] != null)
+            //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            this. PatientId = int.Parse(Session["PatientId"].ToString());
+            if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();

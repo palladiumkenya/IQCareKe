@@ -27,6 +27,8 @@ namespace IQCare.Web.CCC.WebService
     public class OneTimeEventsTrackerService : System.Web.Services.WebService
     {
         private string Msg { get; set; }
+        private DateTime? IsCompletionDate { get; set; }
+        private DateTime? IsINHStartDateValue { get; set; }
 
         [WebMethod]
         public string HelloWorld()
@@ -34,7 +36,7 @@ namespace IQCare.Web.CCC.WebService
             return "Hello World";
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string addOneTimeEventsTracker(string Stage1DateValue, string Stage2DateValue, string Stage3DateValue,
     string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
         {
@@ -53,23 +55,42 @@ namespace IQCare.Web.CCC.WebService
                 int patientId = int.Parse(HttpContext.Current.Session["PatientId"].ToString());
                 //int patientId = int.Parse(Session["PatientId"].ToString());
                 int patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
-                //int patientId = 15;
-                //int patientMasterVisitId = 10;
+
+                if (String.IsNullOrEmpty(CompletionDate))
+                {
+                    IsCompletionDate = null;
+                }
+                else
+                {
+                    IsCompletionDate = DateTime.Parse(CompletionDate);
+                }
+
+                if (String.IsNullOrEmpty(INHStartDateValue))
+                {
+                    IsINHStartDateValue = null;
+                }
+                else
+                {
+                    IsINHStartDateValue = DateTime.Parse(INHStartDateValue);
+                }
 
 
                 if (Stage1DateValue != null)
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage1", DateTime.Parse(Stage1DateValue));
                 }
-                else if (Stage2DateValue != null)
+
+                if (Stage2DateValue != null)
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage2", DateTime.Parse(Stage2DateValue));
                 }
-                else if (Stage3DateValue != null)
+
+                if (Stage3DateValue != null)
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage3", DateTime.Parse(Stage3DateValue));
                 }
-                else if (SexPartnerDateValue != null)
+
+                if (SexPartnerDateValue != null)
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "SexPartner", DateTime.Parse(SexPartnerDateValue));
                 }
@@ -79,9 +100,9 @@ namespace IQCare.Web.CCC.WebService
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
-                    StartDate = DateTime.Parse(INHStartDateValue),
+                    StartDate = IsINHStartDateValue,
                     Complete = Boolean.Parse(INHCompletion),
-                    CompletionDate = DateTime.Parse(CompletionDate)
+                    CompletionDate = IsCompletionDate
                 };
 
                 inhProphylaxis.addINHProphylaxis(prophylaxis);

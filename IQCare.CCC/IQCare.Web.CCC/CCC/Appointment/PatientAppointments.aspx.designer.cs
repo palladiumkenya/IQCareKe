@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Patient {
+namespace IQCare.Web.CCC.Appointment {
     
     
-    public partial class PatientTest {
+    public partial class TodaysAppointments {
         
         /// <summary>
-        /// Span1 control.
+        /// tblAppointment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblAppointment;
     }
 }

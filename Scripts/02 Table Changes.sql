@@ -238,12 +238,16 @@ Begin
   Alter table dbo.lnk_PatientModuleIdentifier Add RequiredFlag  bit Default 0
 End
 Go
-If Not Exists (Select * From sys.columns Where Name = N'SP02' And Object_ID = Object_id(N'dtl_PatientVitals'))    
+If Not Exists (Select * From sys.columns Where Name = N'SpO2' And Object_ID = Object_id(N'PatientVitals'))    
 Begin
-  Alter table dbo.dtl_PatientVitals Add SP02  decimal(7,2) Null
+  Alter table dbo.PatientVitals Add SpO2  decimal(7,2) Null
 End
 Go
-
+If Not Exists (Select * From sys.columns Where Name = N'DifferentiatedCareId' And Object_ID = Object_id(N'PatientAppointment'))    
+Begin
+  Alter table dbo.PatientAppointment Add DifferentiatedCareId  int Null
+End
+Go
 If Not Exists (Select * From sys.columns Where Name = N'Active' And Object_ID = Object_id(N'Mst_ClinicalService'))    
 Begin
   Alter table dbo.Mst_ClinicalService Add Active bit Default 1

@@ -64,14 +64,12 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
-        /* pw .getlablist implementation   */
-        /* pw get previous lab list implementation   */
+      
         public static string GetLookupPreviousLabsListJson(int patientId)
         {
             string jsonObject;
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetLookupPreviousLabs(patientId);   //Interface ==>similar declaration
-
+            List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetLookupPreviousLabs(patientId);  
             if (lookupprevlabsList != null && lookupprevlabsList.Count > 0)
             {
                 jsonObject = new JavaScriptSerializer().Serialize(lookupprevlabsList);
@@ -82,7 +80,36 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
-        /* pw .previous lab list implementation   */
+        public static string GetvlTestsJson(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupPreviousLabs> lookupVllabs = lookupManager.GetLookupVllabs(patientId);
+            if (lookupVllabs != null && lookupVllabs.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupVllabs);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+        public static string GetPendingvlTestsJson(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupPreviousLabs> lookupPendingVllabs = lookupManager.GetLookupPendingVllabs(patientId);
+            if (lookupPendingVllabs != null && lookupPendingVllabs.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupPendingVllabs);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
 
         public void populateDDL(DropDownList ddl, string groupName)
         {
@@ -145,6 +172,25 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
+
+        public static string GetLookUpItemViewByMasterId(int id)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager =
+                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            List<LookupItemView> lookupItem = lookupManager.GetLookUpItemViewByMasterId(id);
+            if (lookupItem != null && lookupItem.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupItem);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+
+
 
         public static int GetLookUpMasterId(string masterName)
         {

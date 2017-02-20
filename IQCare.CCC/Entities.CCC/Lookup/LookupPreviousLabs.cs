@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using Entities.Common;
+using Entities.CCC.Enrollment;
 
 namespace Entities.CCC.Lookup
 {
     [Serializable]
-    [Table("VW_PatientLaboratory")]
-    public class LookupPreviousLabs 
+    [Table("PatientLabTracker")]
+    public class LookupPreviousLabs : BaseEntity
     {
+        [Key]
         public int Id { get; set; }
-        public string TestName { get; set; }
-        public DateTime OrderedByDate { get; set; }
-        public string OrderedByName { get; set; }
-        public string TestResults { get; set; }
-        //public int LabId { get; set; }
-       
-    
+        public int PatientId { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
+        public string LabName { get; set; }
+        public int PatientmasterVisitId { get; set; }
+        //[ForeignKey("patientMasterVisitId")]
+        //public virtual PatientMasterVisit PatientMasterVisit { get; set; }
+        public DateTime SampleDate { get; set; }
+        public string Reasons { get; set; }
+        public string Results { get; set; }
+        //public string CreatedBy { get; set; }
+        //public int DeleteFlag { get; set; }
+        // public string AuditData { get; set; }
+
+
     }
 }
