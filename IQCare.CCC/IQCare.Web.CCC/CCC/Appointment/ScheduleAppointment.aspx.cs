@@ -11,8 +11,18 @@ namespace IQCare.Web.CCC.Appointment
 {
     public partial class ScheduleAppointment : System.Web.UI.Page
     {
-        public int PatientId;
-        public int PatientMasterVisitId;
+        
+        protected int PatientId
+        {
+            get { return Convert.ToInt32(Session["patientId"]); } 
+
+        }
+
+        protected int PatientMasterVisitId
+        {
+            get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+        }
+
         private IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,8 +36,8 @@ namespace IQCare.Web.CCC.Appointment
 
         private void GetSessionDetails()
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+           // PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+           // PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["patientMasterVisitId"]);
             if (PatientMasterVisitId == 0)
             {
                 PatientMasterVisit visit = new PatientMasterVisit()
