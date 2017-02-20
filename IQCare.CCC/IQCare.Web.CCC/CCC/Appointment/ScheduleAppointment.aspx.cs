@@ -1,9 +1,10 @@
 ﻿using Application.Presentation;
+using Entities.CCC.Lookup;
 using Entities.CCC.Visit;
+using Interface.CCC.Lookup;
 using Interface.CCC.Visit;
-using Interface.Scheduler;
 using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -13,14 +14,44 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-        private IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            this.GetSessionDetails();
+
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            if (statuses != null && statuses.Count > 0)
             {
-                this.PopulateDropDown();
-                this.GetSessionDetails();
+                status.Items.Add(new ListItem("select", "0"));
+                foreach (var k in statuses)
+                {
+                    status.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+                status.SelectedIndex = 1;
+                status.Enabled = false;
+            }
+
+            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
+            if (areas != null && areas.Count > 0)
+            {
+                ServiceArea.Items.Add(new ListItem("select", "0"));
+                foreach (var k in areas)
+                {
+                    ServiceArea.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
+
+            List<LookupItemView> reasons = mgr.GetLookItemByGroup("AppointmentReason");
+            if (reasons != null && reasons.Count > 0)
+            {
+                Reason.Items.Add(new ListItem("select", "0"));
+                foreach (var k in reasons)
+                {
+                    Reason.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
             }
         }
 
@@ -39,42 +70,5 @@ namespace IQCare.Web.CCC.Appointment
                 PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
             }
         }
-
-        private void PopulateDropDown()
-        {
-            //*******Get the patient details on the basis of Patient Enrollment Id and show the details.*******//
-            var formManager = (IAppointment)ObjectFactory.CreateInstance("BusinessProcess.Scheduler.BAppointment, BusinessProcess.Scheduler");
-            var theDtSet = formManager.GetAppointmentStatus();
-
-            BindFunctions appBind = new BindFunctions();
-            IQCareUtils theUtils = new IQCareUtils();
-
-            appBind.BindCombo(status, theDtSet.Tables[0], "Name", "Id", "Id");
-            ListItem item = status.Items.FindByText("Pending");
-            if (item != null)
-            {
-                item.Selected = true;
-            }
-            else
-            {
-                status.ClearSelection();
-            }
-
-            DataSet theDtSetPurpose = formManager.GetAppointmentReasons(0);
-
-            DataView theDv = new DataView(theDtSetPurpose.Tables[0]);
-            theDv.RowFilter = "DeleteFlag=0";
-            DataTable TheDT = (DataTable)theUtils.CreateTableFromDataView(theDv);
-            appBind.BindCombo(Reason, TheDT, "Name", "Id");
-            theDv.Dispose();
-            TheDT.Clear();
-
-            appBind = new BindFunctions();
-            DataTable dt = (((DataTable)Session["AppModule"]).DefaultView).ToTable(true, "ModuleName", "ModuleId");
-            dt.DefaultView.RowFilter = "ModuleName Not In ('PM/SCM')";
-            appBind.BindCombo(ServiceArea, dt, "ModuleName", "ModuleId", "ModuleName");
-
-            ServiceArea.ClearSelection();
-        }
     }
-}
+}//test

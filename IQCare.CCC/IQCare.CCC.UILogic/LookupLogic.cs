@@ -173,6 +173,25 @@ namespace IQCare.CCC.UILogic
             return jsonObject;
         }
 
+        public static string GetLookUpItemViewByMasterId(int id)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager =
+                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            List<LookupItemView> lookupItem = lookupManager.GetLookUpItemViewByMasterId(id);
+            if (lookupItem != null && lookupItem.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupItem);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+
+
+
         public static int GetLookUpMasterId(string masterName)
         {
             int masterId;

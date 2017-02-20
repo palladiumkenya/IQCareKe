@@ -54,223 +54,236 @@
 
                  <div class="step-content">
 	                  <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
-                            <div class="col-md-12">
-                                 <small class="pull-left text-primary">1.Patient Basic Details</small>
-                                 <hr />
-                             </div>
+                          <div class="col-md-12">
+                              <small class="pull-left text-primary">1.Patient Basic Details</small>
+                              <hr />
+                          </div>
 
-		                     <div class="col-md-12">
-                                  <div class="col-md-3">
-                                       <div class="form-group">
-                                            <asp:HiddenField ID="hdnPersonId" ClientIDMode="Static" runat="Server" Value="" />
-                                            <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
-                                            <div class="col-md-12">
-                                                 <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
-                                            </div>
-                                       </div>
-                                  </div>
-                                                <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label for="personMName" class="control-label pull-left">Middle Name</label></div>
-                                                        <div class="col-md-12">
-                                                             <asp:TextBox runat="server" ID="personMName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="middle name"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                                <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
-                                                        <div class="col-md-12">
-                                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" data-parsley-length="[2,25]"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                                <div class="col-md-3">
-                                                   <div class="col-md-12"><label for="Gender" class="control-label pull-left">Gender</label></div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
-                                                    </div>
-                                                </div>
-		                                   </div><%--.col-md-12  --%>    
-
-                                    <div class="col-md-12" style="padding-top:2%">
-                                               <div class="col-md-3">
-                                                   <div class="form-group"><div class="col-md-12"><label for="PersonDoB" class="control-label pull-left text-primary">Social Status </label></div></div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label class="control-label pull-left">Date of Birth</label></div>
-                                                       <div class="col-md-12">
-                                                            <div class="datepicker fuelux form-group" id="MyDateOfBirth">
-                                                                 <div class="input-group">
-                                                                     <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB"></asp:TextBox>        
-                                                                     <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
-                                                                     <div class="input-group-btn">
-                                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                            <span class="sr-only">Toggle Calendar</span>
-                                                                         </button>
-                                                                         <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                              <div class="datepicker-calendar">
-                                                                                  <div class="datepicker-calendar-header">
-                                                                                       <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                                       <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                                       <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                            <span class="month">
-                                                                                              <span data-month="0">January</span>
-                                                                                              <span data-month="1">February</span>
-                                                                                              <span data-month="2">March</span>
-                                                                                              <span data-month="3">April</span>
-                                                                                              <span data-month="4">May</span>
-                                                                                              <span data-month="5">June</span>
-                                                                                              <span data-month="6">July</span>
-                                                                                              <span data-month="7">August</span>
-                                                                                              <span data-month="8">September</span>
-                                                                                              <span data-month="9">October</span>
-                                                                                              <span data-month="10">November</span>
-                                                                                              <span data-month="11" class="current">December</span>
-                                                                                            </span> <span class="year">2014</span>
-                                                                                       </button>
-                                                                                  </div>
-                                                                                  <table class="datepicker-calendar-days">
-                                                                                    <thead>
-                                                                                    <tr>
-                                                                                      <th>Su</th>
-                                                                                      <th>Mo</th>
-                                                                                      <th>Tu</th>
-                                                                                      <th>We</th>
-                                                                                      <th>Th</th>
-                                                                                      <th>Fr</th>
-                                                                                      <th>Sa</th>
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody></tbody>
-                                                                                  </table>
-                                                                                  <div class="datepicker-calendar-footer">
-                                                                                    <button type="button" class="datepicker-today">Today</button>
-                                                                                  </div>
-                                                                              </div>
-                                                                              <div class="datepicker-wheels" aria-hidden="true">
-                                                                                  <div class="datepicker-wheels-month">
-                                                                                    <h2 class="header">Month</h2>
-                                                                                    <ul>
-                                                                                      <li data-month="0"><button type="button">Jan</button></li>
-                                                                                      <li data-month="1"><button type="button">Feb</button></li>
-                                                                                      <li data-month="2"><button type="button">Mar</button></li>
-                                                                                      <li data-month="3"><button type="button">Apr</button></li>
-                                                                                      <li data-month="4"><button type="button">May</button></li>
-                                                                                      <li data-month="5"><button type="button">Jun</button></li>
-                                                                                      <li data-month="6"><button type="button">Jul</button></li>
-                                                                                      <li data-month="7"><button type="button">Aug</button></li>
-                                                                                      <li data-month="8"><button type="button">Sep</button></li>
-                                                                                      <li data-month="9"><button type="button">Oct</button></li>
-                                                                                      <li data-month="10"><button type="button">Nov</button></li>
-                                                                                      <li data-month="11"><button type="button">Dec</button></li>
-                                                                                    </ul>
-                                                                                  </div>
-                                                                                  <div class="datepicker-wheels-year">
-                                                                                    <h2 class="header">Year</h2>
-                                                                                    <ul></ul>
-                                                                                  </div>
-                                                                                  <div class="datepicker-wheels-footer clearfix">
-                                                                                    <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                                    <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                                  </div>
-                                                                                </div>
-                                                                         </div>
-                                                                     </div>
-                                                                 </div>
-                                                            </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                    <div class="col-md-5">
-                                                         <div class="form-group">
-                                                              <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
-                                                             <div class="col-md-12">
-                                                                  <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
-                                                             </div>
-                                                         </div>
-                                                    </div>
-                                                   <div class="col-md-7">
-                                                       <div class="form-group">
-                                                            <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yr) Orphan</label></div>
-                                                            <div class="col-md-12">
-                                                                <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true"/>    
-                                                            </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div class="col-md-3">
-                                                    <div class="form-group">
-                                                         <div class="col-md-12"><label for="Inschool" class="control-label pull-left">In School ? </label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:DropDownList runat="server" ID="Inschool" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
-                                                         </div>
-                                                    </div>
-                                               </div>
-                                               
-                                           </div><%-- .col-md-12--%>
-
-                                    <div class="col-md-12 form-group">
-                                         <div class="col-md-12"><label class="control-label pull-left text-primary">Adult : (<i>provide ID number and marital status</i>)</label></div>    
-                                        <div class="col-md-12"><hr style="margin-bottom: 1%;margin-top: 1%" /></div>  
+		                 <div class="col-md-12" style="margin-bottom: 2%">
+		                     <div class="col-md-3">
+		                         <div class="form-group">
+                                    <asp:HiddenField ID="hdnPersonId" ClientIDMode="Static" runat="Server" Value="" />
+                                    <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
+                                    <div class="col-md-12">
+                                            <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="col-md-12 form-group">
-                                         <div class="col-md-3">
-                                              <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
-                                              <div class="col-md-12">
-                                                   <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[8,8]"  />
-                                               </div>
-                                         </div>
-                                         
-                                         <div class="col-md-3">
-                                             <div class="col-md-12"><label for="MaritalStatusId" class="control-label pull-left">Marital Status </label></div>
-                                             <div class="col-md-12">
-                                                  <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
-                                             </div>
-                                         </div> 
-                                         <div class="col-md-3"></div>
-                                         <div class="col-md-3"></div>  
-                                      </div> 
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-md-12"><label for="personMName" class="control-label pull-left">Middle Name</label></div>
+                                    <div class="col-md-12">
+                                            <asp:TextBox runat="server" ID="personMName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="middle name"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
 
-                                   <div class="col-md-12 form-group">  
-                                        <div class="col-md-12"><hr /></div> 
-                                        <div class="col-md-12"><label class="control-label pull-left text-primary"><strong>Child :</strong> Parent / Gurdian Name</label></div>  
-                                   </div>
-                                   <div class="col-md-12 form-group">   
-                                        <div class="col-md-3">
-                                             <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
-                                             <div class="col-md-12">
-                                                  <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" />
-                                             </div>
-                                        </div>
-                                              
-                                        <div class="col-md-3">
-                                              <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
-                                              <div class="col-md-12">
-                                                    <asp:TextBox runat="server" type="text" id="GurdianMName" name="GurdianMName" class="form-control input-sm" placeholder="guardian Middle name" ClientIDMode="Static" />
-                                              </div>
-                                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12">
+                                            <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" data-parsley-length="[2,25]"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="col-md-12"><label for="Gender" class="control-label pull-left">Gender</label></div>
+                                <div class="col-md-12">
+                                    <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
+                                </div>
+                            </div>
+
+		                </div><%--.col-md-12  --%>
+                          
+                        <div class="col-md-12">
+                              <div class="pull-left text-primary">Social Status</div>
+
+                              <!--<div class="form-group">
+                                  <div class="col-md-12"><label for="PersonDoB" class="control-label pull-left text-primary">Social Status </label></div>
+                              </div>-->
+                          </div>
+
+                        <div class="col-md-12" style="padding-top:2%">
                                                
-                                        <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
-                                            <div class="col-md-12">
-                                                <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name"></asp:TextBox>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Date of Birth</label></div>
+                                        <div class="col-md-12">
+                                            <div class="datepicker fuelux form-group" id="MyDateOfBirth">
+                                                    <div class="input-group">
+                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB"></asp:TextBox>        
+                                                        <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
+                                                        <div class="input-group-btn">
+                                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                            <span class="sr-only">Toggle Calendar</span>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                <div class="datepicker-calendar">
+                                                                    <div class="datepicker-calendar-header">
+                                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                                            <span class="month">
+                                                                                <span data-month="0">January</span>
+                                                                                <span data-month="1">February</span>
+                                                                                <span data-month="2">March</span>
+                                                                                <span data-month="3">April</span>
+                                                                                <span data-month="4">May</span>
+                                                                                <span data-month="5">June</span>
+                                                                                <span data-month="6">July</span>
+                                                                                <span data-month="7">August</span>
+                                                                                <span data-month="8">September</span>
+                                                                                <span data-month="9">October</span>
+                                                                                <span data-month="10">November</span>
+                                                                                <span data-month="11" class="current">December</span>
+                                                                            </span> <span class="year">2014</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <table class="datepicker-calendar-days">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Su</th>
+                                                                        <th>Mo</th>
+                                                                        <th>Tu</th>
+                                                                        <th>We</th>
+                                                                        <th>Th</th>
+                                                                        <th>Fr</th>
+                                                                        <th>Sa</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody></tbody>
+                                                                    </table>
+                                                                    <div class="datepicker-calendar-footer">
+                                                                    <button type="button" class="datepicker-today">Today</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                                    <div class="datepicker-wheels-month">
+                                                                    <h2 class="header">Month</h2>
+                                                                    <ul>
+                                                                        <li data-month="0"><button type="button">Jan</button></li>
+                                                                        <li data-month="1"><button type="button">Feb</button></li>
+                                                                        <li data-month="2"><button type="button">Mar</button></li>
+                                                                        <li data-month="3"><button type="button">Apr</button></li>
+                                                                        <li data-month="4"><button type="button">May</button></li>
+                                                                        <li data-month="5"><button type="button">Jun</button></li>
+                                                                        <li data-month="6"><button type="button">Jul</button></li>
+                                                                        <li data-month="7"><button type="button">Aug</button></li>
+                                                                        <li data-month="8"><button type="button">Sep</button></li>
+                                                                        <li data-month="9"><button type="button">Oct</button></li>
+                                                                        <li data-month="10"><button type="button">Nov</button></li>
+                                                                        <li data-month="11"><button type="button">Dec</button></li>
+                                                                    </ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-year">
+                                                                    <h2 class="header">Year</h2>
+                                                                    <ul></ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-footer clearfix">
+                                                                    <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                    <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label pull-left">Guardian Gender</label></div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" />
-                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
+                                        <div class="col-md-12">
+                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0" ReadOnly="True"></asp:TextBox>
                                         </div>
-                                     </div>           
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yr) Orphan</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true"/>    
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group">
+                                            <div class="col-md-12"><label for="Inschool" class="control-label pull-left">In School ? </label></div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" ID="Inschool" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
+                                            </div>
+                                    </div>
+                                </div>
+                                               
+                            </div><%-- .col-md-12--%>
+
+                        <div class="col-md-12 form-group">
+                                <div class="col-md-12"><label class="control-label pull-left text-primary">Adult : (<i>provide ID number and marital status</i>)</label></div>    
+                            <div class="col-md-12"><hr style="margin-bottom: 1%;margin-top: 1%" /></div>  
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
+                                    <div class="col-md-12">
+                                        <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[8,8]"  />
+                                    </div>
+                                </div>
+                                         
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label for="MaritalStatusId" class="control-label pull-left">Marital Status </label></div>
+                                    <div class="col-md-12">
+                                        <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
+                                    </div>
+                                </div> 
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3"></div>  
+                            </div> 
+
+                            <div class="col-md-12 form-group">  
+                                <div class="col-md-12"><hr /></div> 
+                                <div class="col-md-12"><label class="control-label pull-left text-primary"><strong>Child :</strong> Parent / Gurdian Name</label></div>  
+                            </div>
+
+                            <div class="col-md-12 form-group">   
+                                <div class="col-md-3">
+                                        <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                        <div class="col-md-12">
+                                            <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" />
+                                        </div>
+                                </div>
+                                              
+                                <div class="col-md-3">
+                                        <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                                        <div class="col-md-12">
+                                            <asp:TextBox runat="server" type="text" id="GurdianMName" name="GurdianMName" class="form-control input-sm" placeholder="guardian Middle name" ClientIDMode="Static" />
+                                        </div>
+                                </div>
+                                               
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12">
+                                        <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Guardian Gender</label></div>
+                                    <div class="col-md-12">
+                                        <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" />
+                                    </div>
+                                </div>
+                                </div>           
                           
                                            
-	                            </div><%-- .step-pane--%>
+	                    </div><%-- .step-pane--%>
 
 	                  <div class="step-pane sample-pane" id="datastep2" data-parsley-validate="true" data-step="2">      
                            <div class="col-md-12">
@@ -280,35 +293,35 @@
                                          
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                                   <div class="form-group">
-                                                        <div class="col-md-12"><label class="control-label pull-left">County</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
-                                                       </div>
-                                                   </div>
-                                               </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">County</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-3">
-                                                   <div class="form-group">
-                                                       <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
-                                                       <div class="col-md-12">
-                                                           <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1" />
-                                                       </div>
-                                                   </div>
-                                               </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-3">
                                                   <div class="form-group">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
-                                                      <div class="col-md-12">
-                                                          <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
-                                                      </div>
-                                                  </div>
-                                              </div>
-
-                                <div class="col-md-3">
-                                                  <div class="form-group">
-                                                      <div class="col-md-12"><label class="control-label pull-left">Villager</label></div>
+                                                      <div class="col-md-12"><label class="control-label pull-left">Village</label></div>
                                                       <div class="col-md-12">
                                                           <asp:TextBox runat="server" ID="LocalCouncils" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="person village.." ></asp:TextBox>
                                                       </div>
@@ -449,7 +462,7 @@
                                      <div class="col-md-12 radio">
                                           <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
                                           <input class="sr-only" id="rdbGenPopulation" name="Population" type="radio" value="General Population">
-                                              Genenal Population
+                                              General Population
                                           </label>
                                      </div>
                                      
@@ -506,6 +519,7 @@
                 $('#MyDateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
                     var x = $('#MyDateOfBirth').datepicker('getDate');
                     $('#<%=personAge.ClientID%>').val(getAge(x));
+                    personAgeRule();
                 });
 
                 $('#<%=countyId.ClientID%>').on("change", function() {
@@ -515,11 +529,14 @@
                 $("#<%=SubcountyId.ClientID%>").on("change", function() {
                     getWardList();
                 });
+
+
                 
                 /* Business Rules setup */
-                $('#<%=personAge.ClientID%>').on("blur", function ()
+                function personAgeRule()
                 {
-                    personAge = $(this).val();      
+                    personAge = $("#personAge").val();
+
                     if (personAge >= 18)
                     {
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
@@ -538,7 +555,7 @@
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                     }
-                });
+                };
 
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
@@ -564,14 +581,23 @@
                             if ($('#datastep1').parsley().validate()) {
                                 if (personAge >= 18) {
                                     $.when(addPerson()).then(function(){
-                                        addPersonMaritalStatus();
+                                        setTimeout(function(){
+                                            addPersonMaritalStatus();
+                                        }, 2000);
+                                        //addPersonMaritalStatus();
                                     });                                   
                                 } else {
                                     $.when(addPerson()).then(function(){
-                                        addPersonGaurdian();
+                                        setTimeout(function(){
+                                            addPersonGaurdian();
+                                            $.when(addPersonMaritalStatus()).then(function(){
+                                                addPersonOvcStatus();
+                                            });
+                                        }, 2000);
+                                        /*addPersonGaurdian();
                                         $.when(addPersonMaritalStatus()).then(function(){
                                             addPersonOvcStatus();
-                                        });
+                                        });*/
                                     });
                                     //$.when(addPerson()).then(addPersonGaurdian());                                
                                     //$.when(addPersonMaritalStatus()).then(addPersonOvcStatus());

@@ -42,6 +42,11 @@ namespace IQCare.Web.CCC
             Response.Redirect("~/AdminForms/frmAdmin_ChangePassword.aspx");
         }
 
+        protected int PatientId
+        {
+            get { return Convert.ToInt32(Session["patientId"]); }
+        }
+
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -58,6 +63,12 @@ namespace IQCare.Web.CCC
 
             lblPatientCount.Text = patientLookup.GetTotalpatientCount().ToString();
 
+            //check session coming from stopped encounter
+            if (Request.QueryString["reset"] != null)
+            {
+                Response.Clear();
+                Session["patientId"] = 0;
+            }
             //Create New sessions:
             Page.Header.DataBind();
             if (Session["AppLocation"] == null)

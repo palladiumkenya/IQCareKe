@@ -13,6 +13,7 @@ namespace Interface.CCC.Lookup
        List<LookupCounty> GetLookupSubcounty(string county);
        List<LookupCounty> GetLookupWards(string subcounty);
         List<LookupItemView> GetLookUpItemViewByMasterName(string masterName);
+        List<LookupItemView> GetLookUpItemViewByMasterId(int id);
         int GetLookUpMasterId(string masterName);
        
         List<LookupLabs> GetLookupLabs();  

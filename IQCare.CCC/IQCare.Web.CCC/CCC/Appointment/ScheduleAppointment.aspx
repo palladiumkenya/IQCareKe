@@ -3,10 +3,10 @@
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="col-md-12">
+<%--    <div class="col-md-12">
         <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">
             <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>New Appointment</span>
-    </div>
+    </div>--%>
     <div class="col-md-12">
     <uc:PatientDetails runat="server" />
     <div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 form-group">
             <div class="col-md-4">
                 <div class="col-md-12">
                     <label class="control-label pull-left">Service Area</label>
@@ -49,6 +49,10 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        
+        <div class="col-md-12 col-xs-12 form-group">
             <div class="col-md-4">
                 <div class="form-group">
                     <div class="col-md-12">
@@ -159,24 +163,33 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12"></div>
         </div>
+        
+        <div class="col-md-12">
+            <hr/>
+        </div>
+        <div class="col-md-12">
+             <div class="col-md-6"></div>
+             <div class="col-md-6">
+             <div class="col-md-3"></div>
+                 <div class="col-md-3">
+                <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
+            </div>
+            <div class="col-md-3">
+                <asp:LinkButton runat="server" ID="btnReset"  CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Form  </asp:LinkButton>
+            </div>
+            <div class="col-md-3">
+                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" > Close Appointment </asp:LinkButton>
+            </div>
+                
+        </div>
+        </div>
+
     </div>
         <asp:TextBox runat="server" ID="txtpatientMasterVisitId" ClientIDMode="Static" Visible="False" />
         <asp:TextBox runat="server" ID="txtpatientId" ClientIDMode="Static" Visible="False" />
-    <div class="col-md-12">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-            <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
-            </div>
-            <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Entry  </asp:LinkButton>
-            </div>
-            <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Appointment </asp:LinkButton>
-            </div>
-        </div>
-    </div>
+    
 </div>
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({

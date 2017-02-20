@@ -12,6 +12,12 @@ namespace IQCare.Web.CCC.OneTimeEvents
 {
     public partial class Baseline : System.Web.UI.Page
     {
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -33,7 +39,18 @@ namespace IQCare.Web.CCC.OneTimeEvents
                 WHOStageAtEnrollment.Items.Add(new ListItem("select", "0"));
                 foreach (var k in ms)
                 {
-                    WHOStageAtEnrollment.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    WHOStageAtEnrollment.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
+
+            /* Regimen classification*/
+            List<LookupItemView> lookupItem = mgr.GetLookItemByGroup("RegimenClassification");
+            if (lookupItem != null && lookupItem.Count > 0)
+            {
+                regimenCategory.Items.Add(new ListItem("select", "0"));
+                foreach (var k in lookupItem)
+                {
+                    regimenCategory.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 

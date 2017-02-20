@@ -62,8 +62,7 @@ namespace IQCare.Web.CCC.WebService
 
             string jsonObject = LookupLogic.GetLookupWardListJson(subcounty);  
             return jsonObject;
-            _jsonObject = LookupLogic.GetLookupWardListJson(subcounty);
-            return _jsonObject;
+
         }
 
         [WebMethod]
@@ -94,6 +93,22 @@ namespace IQCare.Web.CCC.WebService
 
             return _jsonObject;
         }
+
+        [WebMethod]
+        public string GetLookUpItemViewByMasterId(int id)
+        {
+            try
+            {
+                _jsonObject = LookupLogic.GetLookUpItemViewByMasterId(id);
+            }
+            catch (Exception e)
+            {
+                _jsonObject = e.Message;
+            }
+
+            return _jsonObject;
+        }
+
 
         // pw lookup lablist
         [WebMethod]
