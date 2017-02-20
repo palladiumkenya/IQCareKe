@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -22,6 +24,7 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientService : System.Web.Services.WebService
     {
+        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private string Msg { get; set; }
         private int Result { get; set; }
 
@@ -65,6 +68,16 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
         {
+            if (patientMasterVisitId == 0)
+            {
+                PatientMasterVisit visit = new PatientMasterVisit()
+                {
+                    PatientId = patientId,
+                    Start = DateTime.Now,
+                    Active = true,
+                };
+                patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
+            }
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,

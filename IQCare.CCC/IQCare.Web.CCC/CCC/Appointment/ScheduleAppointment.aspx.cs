@@ -14,7 +14,6 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -69,16 +68,6 @@ namespace IQCare.Web.CCC.Appointment
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            if (PatientMasterVisitId == 0)
-            {
-                PatientMasterVisit visit = new PatientMasterVisit()
-                {
-                    PatientId = PatientId,
-                    Start = DateTime.Now,
-                    Active = true,
-                };
-                PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
-            }
         }
     }
 }
