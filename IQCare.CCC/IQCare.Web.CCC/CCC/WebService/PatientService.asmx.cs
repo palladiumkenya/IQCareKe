@@ -63,7 +63,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId)
+        public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
         {
             PatientAppointment patientAppointment = new PatientAppointment()
             {
@@ -71,6 +71,7 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisitId = patientMasterVisitId,
                 AppointmentDate = appointmentDate,
                 Description = description,
+                DifferentiatedCareId = differentiatedCareId,
                 ReasonId = reasonId,
                 ServiceAreaId = serviceAreaId,
                 StatusId = statusId,
@@ -122,6 +123,7 @@ namespace IQCare.Web.CCC.WebService
             string status = "";
             string reason = "";
             string serviceArea = "";
+            string differentiatedCare = "";
             List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
@@ -140,6 +142,12 @@ namespace IQCare.Web.CCC.WebService
             {
                 serviceArea = sa.ItemDisplayName;
             }
+            List<LookupItemView> care = mgr.GetLookItemByGroup("DifferentiatedCare");
+            var dc = care.FirstOrDefault(n => n.ItemId == a.DifferentiatedCareId);
+            if (dc != null)
+            {
+                differentiatedCare = dc.ItemDisplayName;
+            }
             PatientAppointmentDisplay appointment = new PatientAppointmentDisplay()
             {
                 ServiceArea = serviceArea,
@@ -147,6 +155,7 @@ namespace IQCare.Web.CCC.WebService
                 AppointmentDate = a.AppointmentDate,
                 Description = a.Description,
                 Status = status,
+                DifferentiatedCare = differentiatedCare
             };
 
             return appointment;
@@ -158,6 +167,7 @@ namespace IQCare.Web.CCC.WebService
         public string ServiceArea { get; set; }
         public DateTime AppointmentDate { get; set; }
         public string Reason { get; set; }
+        public string DifferentiatedCare { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
     }

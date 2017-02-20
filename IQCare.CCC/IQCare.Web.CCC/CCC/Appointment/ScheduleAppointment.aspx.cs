@@ -53,6 +53,16 @@ namespace IQCare.Web.CCC.Appointment
                     Reason.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
+            List<LookupItemView> care = mgr.GetLookItemByGroup("DifferentiatedCare");
+            if (care != null && care.Count > 0)
+            {
+                DifferentiatedCare.Items.Add(new ListItem("select", "0"));
+                foreach (var k in care)
+                {
+                    DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
         }
 
         private void GetSessionDetails()
@@ -71,4 +81,4 @@ namespace IQCare.Web.CCC.Appointment
             }
         }
     }
-}//test
+}

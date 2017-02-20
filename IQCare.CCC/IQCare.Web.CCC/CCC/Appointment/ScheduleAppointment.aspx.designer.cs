@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.Appointment {
     public partial class ScheduleAppointment {
         
         /// <summary>
+        /// AppointmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        
+        /// <summary>
         /// ServiceArea control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace IQCare.Web.CCC.Appointment {
         protected global::System.Web.UI.WebControls.DropDownList Reason;
         
         /// <summary>
+        /// DifferentiatedCare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DifferentiatedCare;
+        
+        /// <summary>
         /// description control.
         /// </summary>
         /// <remarks>
@@ -47,15 +65,6 @@ namespace IQCare.Web.CCC.Appointment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList status;
-        
-        /// <summary>
-        /// AppointmentDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
         
         /// <summary>
         /// btnSaveAppointment control.
