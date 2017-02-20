@@ -67,6 +67,24 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblARTStartDate;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// regimenCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList regimenCategory;
+        
+        /// <summary>
         /// lblRegimen control.
         /// </summary>
         /// <remarks>
@@ -76,13 +94,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.Label lblRegimen;
         
         /// <summary>
-        /// TransferRegimen control.
+        /// RegimenId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TransferRegimen;
+        protected global::System.Web.UI.WebControls.DropDownList RegimenId;
         
         /// <summary>
         /// lblfacility control.

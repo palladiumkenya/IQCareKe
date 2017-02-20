@@ -94,6 +94,22 @@ namespace IQCare.Web.CCC.WebService
             return _jsonObject;
         }
 
+        [WebMethod]
+        public string GetLookUpItemViewByMasterId(int id)
+        {
+            try
+            {
+                _jsonObject = LookupLogic.GetLookUpItemViewByMasterId(id);
+            }
+            catch (Exception e)
+            {
+                _jsonObject = e.Message;
+            }
+
+            return _jsonObject;
+        }
+
+
         // pw lookup lablist
         [WebMethod]
         public string GetLookupLabsList()
