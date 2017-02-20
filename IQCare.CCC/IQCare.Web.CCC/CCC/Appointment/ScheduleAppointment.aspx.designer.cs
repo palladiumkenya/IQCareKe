@@ -13,15 +13,6 @@ namespace IQCare.Web.CCC.Appointment {
     public partial class ScheduleAppointment {
         
         /// <summary>
-        /// Span1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span1;
-        
-        /// <summary>
         /// ServiceArea control.
         /// </summary>
         /// <remarks>
@@ -67,24 +58,6 @@ namespace IQCare.Web.CCC.Appointment {
         protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
         
         /// <summary>
-        /// txtpatientMasterVisitId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpatientMasterVisitId;
-        
-        /// <summary>
-        /// txtpatientId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtpatientId;
-        
-        /// <summary>
         /// btnSaveAppointment control.
         /// </summary>
         /// <remarks>
@@ -110,5 +83,23 @@ namespace IQCare.Web.CCC.Appointment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        
+        /// <summary>
+        /// txtpatientMasterVisitId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpatientMasterVisitId;
+        
+        /// <summary>
+        /// txtpatientId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtpatientId;
     }
 }

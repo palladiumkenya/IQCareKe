@@ -7,18 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Appointment {
+namespace IQCare.Web.CCC.Encounter {
     
     
-    public partial class TodaysAppointments {
+    public partial class VitalSigns {
         
         /// <summary>
-        /// tblAppointment control.
+        /// PatientSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblAppointment;
+        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
+        
+        /// <summary>
+        /// ptnVitalSigns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPatientTriage ptnVitalSigns;
     }
 }

@@ -320,13 +320,13 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Villager</label></div>
-                                        <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="LocalCouncils" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="person village.." ></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
+                                                  <div class="form-group">
+                                                      <div class="col-md-12"><label class="control-label pull-left">Village</label></div>
+                                                      <div class="col-md-12">
+                                                          <asp:TextBox runat="server" ID="LocalCouncils" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="person village.." ></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                               </div>
                            </div>
 
                            <div class="col-md-12 form-group">
@@ -462,7 +462,7 @@
                                      <div class="col-md-12 radio">
                                           <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
                                           <input class="sr-only" id="rdbGenPopulation" name="Population" type="radio" value="General Population">
-                                              Genenal Population
+                                              General Population
                                           </label>
                                      </div>
                                      

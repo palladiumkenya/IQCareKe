@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.Appointment
                     Start = DateTime.Now,
                     Active = true,
                 };
-                PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
+                //PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
             }
         }
 
