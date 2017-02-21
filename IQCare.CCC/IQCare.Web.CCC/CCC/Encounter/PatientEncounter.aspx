@@ -6,9 +6,9 @@
     <script src="../Scripts/js/PatientEncounter.js"></script>   
 
      <!--Using jquery 12.1  --->
-    <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
+   <%-- <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
     <script src="../Scripts/js/jquery-ui.min.js"></script>
-    
+    --%>
    <!-- Jquery for High charts   -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
@@ -1455,9 +1455,14 @@
     <!-- ajax begin -->
     
    <script type="text/javascript">
-       var patient_Id = "<%=PatientId%>";     
-       $(document).ready(function () {       
-         
+       var patient_Id = "<%=PatientId%>"; 
+
+      
+       //var jq14 = jQuery.noConflict(true);
+       $(document).ready(function () {
+
+       console.log($.fn.jquery);
+
       $("#LabDatePicker").datepicker({
            date: null,
            allowPastDates: true,
