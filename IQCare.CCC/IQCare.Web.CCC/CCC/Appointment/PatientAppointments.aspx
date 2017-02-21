@@ -12,7 +12,7 @@
                 <label class="control-label pull-left text-info"> Patient Appointment Summary </label>
                
             </div>
-            <table class="table table-striped table-condensed" id="tblAppointment" clientidmode="Static" runat="server">
+            <table class="table table-hover" id="tblAppointment" clientidmode="Static" runat="server">
                 <thead>
                     <tr>
                         <th><i class="" aria-hidden="true">#</i></th>
@@ -20,6 +20,7 @@
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Service Area</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Reason</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Description</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Differetiated Care</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Status</i> </th>
                     </tr>
                 </thead>
@@ -46,7 +47,7 @@
                     var table = '';
                     itemList.forEach(function (item, i) {
                         n = i + 1;
-                        table += '<tr><td>' + n + '</td><td>' + item.ServiceAreaId + '</td><td>' + item.ReasonId + '</td><td>' + item.Description + '</td><td>' + item.StatusId + '</td></tr>';
+                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align: left">' + item.Reason + '</td><td style="text-align: left">' + item.Description + '</td><td style="text-align: left">' + item.DifferentiatedCare + '</td><td style="text-align: left">' + item.Status + '</td></tr>';
                     });
                    
                     $('#tblAppointment').append(table);

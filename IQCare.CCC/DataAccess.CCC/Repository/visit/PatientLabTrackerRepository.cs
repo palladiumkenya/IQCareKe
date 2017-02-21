@@ -21,7 +21,8 @@ namespace DataAccess.CCC.Repository.visit
         public PatientLabTrackerRepository(GreencardContext context) : base(context)
        {
             _context = context;
-        }
+        }       
+       
 
     }
 }

@@ -18,6 +18,7 @@ namespace Entities.CCC.Appointment
         public DateTime AppointmentDate { get; set; }
         public int ReasonId { get; set; }
         public string Description { get; set; }
+        public int DifferentiatedCareId { get; set; }
         public int StatusId { get; set; }
         public DateTime StatusDate { get; set; }
         [ForeignKey("PatientMasterVisitId")]

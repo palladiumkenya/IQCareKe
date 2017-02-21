@@ -1,7 +1,6 @@
 ﻿using DataAccess.Base;
 using DataAccess.Common;
 using DataAccess.Entity;
-using DataAccess.Context;
 using Interface.CCC;
 using System;
 using System.Collections;

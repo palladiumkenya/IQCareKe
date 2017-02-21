@@ -2,9 +2,7 @@
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Lookup;
-using Entities.CCC.Visit;
 using DataAccess.CCC.Repository.Lookup;
-using DataAccess.CCC.Repository.visit;
 using System;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
@@ -74,32 +72,12 @@ namespace BusinessProcess.CCC
 
 
         }
-        public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
-
-        {
-            
-            LookupPreviousLabsRepository lookupVllabsRepository = new LookupPreviousLabsRepository();
-            return lookupVllabsRepository.GetVlLabs(patientId);
-        }
-        public List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId)
-
-        {
-
-            LookupPreviousLabsRepository lookupPendingVllabsRepository = new LookupPreviousLabsRepository();
-            return lookupPendingVllabsRepository.GetPendingVlLabs(patientId);
-        }
 
         public string GetLookupNameFromId(int id)
         {
             LookupRepository lookupRepository=new LookupRepository();
             var itemName = lookupRepository.FindBy(x => x.ItemId == id).Select(x=>x.ItemName).Single();
             return itemName.ToString();
-        }
-
-        public List<LookupItemView> GetLookUpItemViewByMasterId(int id)
-        {
-            List<LookupItemView> lookupItem = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
-            return lookupItem;
         }
     }
 }
