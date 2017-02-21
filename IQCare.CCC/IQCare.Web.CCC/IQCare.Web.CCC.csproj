@@ -52,8 +52,6 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
-    <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
-    <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
@@ -138,6 +136,13 @@
     </Compile>
     <Compile Include="CCC\Encounter\StartEncounter.aspx.designer.cs">
       <DependentUpon>StartEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\VitalSigns.aspx.cs">
+      <DependentUpon>VitalSigns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\VitalSigns.aspx.designer.cs">
+      <DependentUpon>VitalSigns.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Enrollment\ServiceEnrollment.aspx.cs">
       <DependentUpon>ServiceEnrollment.aspx</DependentUpon>
