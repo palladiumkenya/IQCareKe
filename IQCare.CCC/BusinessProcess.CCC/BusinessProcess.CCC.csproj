@@ -93,6 +93,7 @@
     <Compile Include="BPatientTreatmentSupporterManager.cs" />
     <Compile Include="BPatientVitals.cs" />
     <Compile Include="BPersonLocationmanager.cs" />
+    <Compile Include="BPersonLookUpManager.cs" />
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />

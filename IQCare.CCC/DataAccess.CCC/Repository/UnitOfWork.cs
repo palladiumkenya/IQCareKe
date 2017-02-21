@@ -44,7 +44,7 @@ namespace DataAccess.CCC.Repository
         private IPatientLookupRepository _patientLookupRepository;
         private ILookupLabs _lookupLabsRepository;
         private ILookupPreviousLabs _lookupPreviousLabsRepository;
-
+        private IPersonLookUpRepository _personLookUpRepository;
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
@@ -253,6 +253,15 @@ namespace DataAccess.CCC.Repository
         public IPatientLookupRepository PatientLookupRepository
         {
             get { return _patientLookupRepository??(_patientLookupRepository=new PatientLookupRepository((LookupContext)_context));}
+        }
+
+        public IPersonLookUpRepository PersonLookUpRepository
+        {
+            get
+            {
+                return _personLookUpRepository ??
+                       (_personLookUpRepository = new PersonLookUpRepository((LookupContext) _context));
+            }
         }
 
         public IPatientAppointmentRepository PatientAppointmentRepository

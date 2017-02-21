@@ -12,7 +12,7 @@ namespace IQCare.Web.CCC.Patient
         protected void Page_Load(object sender, EventArgs e)
         {
             int patientId = Convert.ToInt32(Request.QueryString["patient"]);
-            if (patientId != null)
+            if (patientId != null && patientId != 0)
             {
                 Session["PatientId"] = patientId;
             }

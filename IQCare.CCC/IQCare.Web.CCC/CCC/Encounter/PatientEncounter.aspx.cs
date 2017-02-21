@@ -10,7 +10,10 @@ namespace IQCare.Web.CCC.Encounter
         public int PatientId;
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         int visitId = 0;
-
+        public string visitdateval = "";
+        public string LMPval = "";
+        public string EDDval = "";
+        public string nxtAppDateval = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
@@ -58,15 +61,17 @@ namespace IQCare.Web.CCC.Encounter
             pce = PEL.loadPatientEncounter(visitId, "1");
 
             /////PRESENTING COMPLAINTS
-            VisitDate.Text = pce.visitDate;
+            visitdateval = pce.visitDate;
+            LMPval = pce.lmp;
+            EDDval = pce.edd;
+            nxtAppDateval = pce.nextAppointmentDate;
+
             rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
-            lmp.Value = pce.lmp;
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
-            ExpectedDateOfChildBirth.Value = pce.edd;
             rblANCProfile.SelectedValue = pce.ancProfile;
             onFP.SelectedValue = pce.onFP;
             fpMethod.SelectedValue = pce.fpMethod;
@@ -89,7 +94,6 @@ namespace IQCare.Web.CCC.Encounter
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
-            NextAppointmentDate.Value = pce.nextAppointmentDate;
             ddlReferredFor.SelectedValue = pce.nextAppointmentType;
 
         }

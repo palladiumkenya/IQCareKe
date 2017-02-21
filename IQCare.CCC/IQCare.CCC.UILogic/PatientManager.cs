@@ -33,5 +33,10 @@ namespace IQCare.CCC.UILogic
             return _mgr.CheckPersonEnrolled(personId);
         }
 
+        public PatientEntity GetPatientEntity(int patientId)
+        {
+            return _mgr.GetPatient(patientId);
+        }
+
     }
 }

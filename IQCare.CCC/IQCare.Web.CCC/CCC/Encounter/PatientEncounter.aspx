@@ -76,7 +76,6 @@
 	                                            <div class="col-md-12 form-group">
 	                                              <div class="col-md-12"><label class="control-label  pull-left">Visit Date</label></div>
 	                                              <div class="col-md-12">
-                                                      
 		                                              <div class="datepicker" id="DateOfVisit">
 		                                              <div class="input-group">
                                                           <asp:TextBox ID="VisitDate" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
@@ -1752,9 +1751,26 @@
                });
            });
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
-           
+           var getVisitDateVal = "<%= this.visitdateval %>";
+           var getFemaleLMPVal = "<%= this.LMPval %>";
+           var getEDDPVal = "<%= this.EDDval %>";
+           var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
+
+           if (getVisitDateVal == '')
+               getVisitDateVal = new Date();
+
+           if (getFemaleLMPVal == '')
+               getFemaleLMPVal = new Date();
+
+           if (getEDDPVal == '')
+               getEDDPVal = new Date();
+
+           if (getNxtAppDateVal == '')
+               getNxtAppDateVal = new Date();
+
             $('#DateOfVisit').datepicker({
                 allowPastDates: true,
+                date: getVisitDateVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
@@ -1765,11 +1781,13 @@
             });
             $('#FemaleLMP').datepicker({
                 allowPastDates: true,
+                date: getFemaleLMPVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#EDCD').datepicker({
                 allowPastDates: true,
+                date: getEDDPVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
@@ -1780,6 +1798,7 @@
             });
             $('#NextAppDate').datepicker({
                 allowPastDates: true,
+                date: getNxtAppDateVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
@@ -1952,7 +1971,7 @@
             ////dtlDiagnosis
             $("#dtlDiagnosis").on('click',
                 '.btnDelete',
-                    function () {
+                function () {
                     diagnosisTable
                         .row($(this).parents('tr'))
                         .remove()
@@ -2068,7 +2087,7 @@
                 /////////////////////////////////////////////
                 if (visitScheduled == undefined)
                 {
-                    alert(visitScheduled);
+                    alert("Kindly select if visit was scheduled.");
                     var specificField = $(rblVS).parsley();
                     // add the error
                     window.ParsleyUI.addError(specificField, "myCustomError", 'this is a custom error message');

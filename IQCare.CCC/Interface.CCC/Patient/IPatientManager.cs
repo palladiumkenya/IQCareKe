@@ -11,7 +11,7 @@ namespace Interface.CCC.Patient
         int AddPatient(Entities.CCC.Enrollment.PatientEntity patient);
         int UpdatePatient(Entities.CCC.Enrollment.PatientEntity patient);
         int DeletePatient(int id);
-        Entities.CCC.Enrollment.PatientEntity GetPatient(int id);
+        PatientEntity GetPatient(int id);
         List<PatientEntity> CheckPersonEnrolled(int persionId);
     }
 }

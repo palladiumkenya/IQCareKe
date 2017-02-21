@@ -11,6 +11,7 @@ namespace Interface.CCC
         int AddPatientOvcStatus(PatientOVCStatus ovc);
         int UpdatePatientOvcStatus(PatientOVCStatus ovc);
         List<PatientOVCStatus> GetPatientOvcStatus(int id);
+        PatientOVCStatus GetSpecificPatientOvcStatus(int personId);
         int DeletePatientOvcStatus(int id);
     }
 }

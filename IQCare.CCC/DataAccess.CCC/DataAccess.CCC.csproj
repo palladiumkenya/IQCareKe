@@ -91,6 +91,7 @@
     <Compile Include="Interface\Lookup\ILookupLabs.cs" />
     <Compile Include="Interface\Lookup\ILookupPreviousLabs.cs" />
     <Compile Include="Interface\Lookup\IPatientLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPersonLookUpRepository.cs" />
     <Compile Include="Interface\Patient\IPatientAppointmentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientContactRepository.cs" />

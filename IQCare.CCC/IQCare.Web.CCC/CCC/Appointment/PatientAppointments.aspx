@@ -20,6 +20,7 @@
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Service Area</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Reason</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Description</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Differetiated Care</i> </th>
                         <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Status</i> </th>
                     </tr>
                 </thead>
@@ -46,7 +47,7 @@
                     var table = '';
                     itemList.forEach(function (item, i) {
                         n = i + 1;
-                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align: left">' + item.Reason + '</td><td style="text-align: left">' + item.Description + '</td><td style="text-align: left">' + item.Status + '</td></tr>';
+                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align: left">' + item.Reason + '</td><td style="text-align: left">' + item.Description + '</td><td style="text-align: left">' + item.DifferentiatedCare + '</td><td style="text-align: left">' + item.Status + '</td></tr>';
                     });
                    
                     $('#tblAppointment').append(table);
