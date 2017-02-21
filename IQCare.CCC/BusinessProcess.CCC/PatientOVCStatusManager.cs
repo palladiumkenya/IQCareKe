@@ -5,6 +5,7 @@ using DataAccess.CCC.Repository;
 using DataAccess.Context;
 using Interface.CCC;
 using Entities.PatientCore;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -38,6 +39,11 @@ namespace BusinessProcess.CCC
         {
             _unitOfWork.PatientOvcStatusRepository.Update(ovc);
           return _result= _unitOfWork.Complete();
+        }
+
+        public PatientOVCStatus GetSpecificPatientOvcStatus(int personId)
+        {
+            return _unitOfWork.PatientOvcStatusRepository.FindBy(x => x.PersonId == personId).FirstOrDefault();
         }
     }
 }

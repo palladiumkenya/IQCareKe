@@ -45,5 +45,10 @@ namespace IQCare.CCC.UILogic
 
           return _result= _mgr.UpdatePatientOvcStatus(patientOvcStatus);
         }
+
+        public PatientOVCStatus GetSpecificPatientOvcStatus(int personId)
+        {
+            return _mgr.GetSpecificPatientOvcStatus(personId);
+        }
     }
 }

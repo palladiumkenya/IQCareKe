@@ -126,6 +126,10 @@
                                 <a  href="/CCC/Patient/PatientRegistration.aspx" class="list-group-item">
                                     <span class="fa fa-user-plus fa-1x pull-left"></span> Register Patient 
                                 </a>
+                              
+                                <a href="#" class="list-group-item" id="editPatientDetails" onclick="test(); return false;">
+                                    <span class="fa fa-user-plus fa-1x pull-left"></span> Edit Patient Details
+                                </a>
 
                                 <a href="#" class="list-group-item active" id="titlePatientBaseline">
                                     <span class=""></span> Patient Baseline<span class="badge"></span>
@@ -231,6 +235,12 @@
 
             var patientId = <%=PatientId%>;
 
+            if (patientId > 0) {
+                $("#editPatientDetails").show();
+            } else {
+                $("#editPatientDetails").hide();
+            }
+
             $("#menuStartEncounter").click(function() {
                 if (patientId < 1) {
                     toastr.error("No Patient Selected to start Encounter", "==Patient Encounter Start Alert==");
@@ -240,7 +250,7 @@
                     toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
                     return false;
                 } else {
-                   
+
                     toastr.info("Encounter Start Activated", "Encounter Start Alert");
                     encounterStarted();
                     $(this).hide();
@@ -262,11 +272,11 @@
                     startEncounter = 0;
                     toastr.info("Encounter Stopped Successfully", "Encounter Start Alert");
                 }
-                
+
             });
 
             function encounterStopped() {
-                
+
                 $("#titlePatientBaseline").hide();
                 $("#menuBaseline").hide();
                 $("#menuFamilyTesting").hide();
@@ -279,7 +289,7 @@
                 $("#menuCaptureVitals").hide();
                 $("#menuNewEncounter").hide();
                 $("#menuPatientVitals").hide();
-               <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+                <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
             }
 
             function encounterStarted() {
@@ -298,9 +308,18 @@
                 stopEncounter = 0;
                 $("#menuStopEncounter").show();
                 $("#menuPatientVitals").show();
-               
+
             }
-        })
+
+            /*$("#editPatientDetails").onclick(function() {
+                alert("hre");
+                window.location.href = "/CCC/Patient/PatientRegistration.aspx?PatientId=" + patientId;
+            });*/
+
+            function test() {
+                alert("here");
+            }
+        });
     </script>
 </body>
 </html>
