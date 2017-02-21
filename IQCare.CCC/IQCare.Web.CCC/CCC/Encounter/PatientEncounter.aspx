@@ -8,7 +8,7 @@
      <!--Using jquery 12.1  --->
     <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
     <script src="../Scripts/js/jquery-ui.min.js"></script>
-
+    
    <!-- Jquery for High charts   -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
@@ -1045,25 +1045,18 @@
                       </div><!-- .encounter-->
                     </div>                     
 
-                      <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
+              <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
 
                       <div class="col-md-6">      
                        <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>
+                                <h4 class="pull-left"> <strong>Pending VL Test(s):</strong> </h4>
 
-                              <asp:TextBox runat="server" ID="pendingVl" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="None...."></asp:TextBox> 
-
-                            </div>
-                               
-        
-                      <!--pw implementation of vllabhistory module here-->
-                                             
-                                   <div class="col-md-12 form-group">
-                                              <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
+                           
+                            <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
                                                 <thead>
                                                     <tr >
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
+                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
                                                           <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
@@ -1074,31 +1067,72 @@
                                                 <tbody>                        
                                                 </tbody>                  
                                                 </table>
-
-                                       </div>          
+                            </div>
+                               
+        
+                      <!--pw implementation of vllabhistory module here-->
+                                
+                         <div class="col-md-12 bs-callout bs-callout-info">
+                                         <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
+                                              <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
+                                                        
+                                                          
+                                                          </tr>
+                                                     </thead>
+                                                   <tbody>                        
+                                                  </tbody>                  
+                                                </table>
+                                            </div> 
+                                               
                      <!--pw .implementation of  vllabhistory module here-->
                              
                                 </div>
+                       
                                    
-                                    <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
+                             <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
                       <!-- pw .implementation of viral load tracker line graph here-->
                       </div><!-- .viraload tracker-->
                     
-                      <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                            <div class="col-md-12" style="padding-top: 1%">
+             <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
+                           <!-- <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
-                            </div>
+                            </div>    -->
                             
-                            <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>
-                            </div>
+                          <!--  <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>  
+                            </div> -->
                            
-                            <div class="col-md-12 bs-callout bs-callout-info">
-                                <div class="col-md-6">
-                                    <div class="col-md-12"><label class="control-label pull-left">Previous Labs</label></div>
-                                    <div class="col-md-12"><hr/>
+                <div class="col-md-6">  
+                 <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
+                                <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
+                                                <thead>
+                                                    <tr >
+                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
+                                                         </tr>
+                                                </thead>
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+                            </div>    
+        
+                
+
+                <div class="col-md-12 bs-callout bs-callout-info">
+                         <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
                                         <div class="col-md-12 form-group">
@@ -1120,24 +1154,28 @@
                                        </div>                    
                     <!--pw implementation of previous orders laboratory module here-->
                                </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
+
+                       </div>
+                           
+                       <div class="col-md-6">
+                         <!-- here  -->
+                                <div class="col-md-12">
+                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
                                     <div class="col-md-12">
                                         <div class="panel panel-default">
                                               <div class="panel-heading"></div>
                                               <div class="panel-body">
                                                   <div class="col-md-12 form-group">
-                                                      <div class="col-md-3"><label class="control-label pull-left">Select Lab(s)</label></div>
-                                                      <div class="col-md-9">
+                                                      <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
+                                                      <div class="col-md-8">
                                                           
                                                            <asp:TextBox runat="server" ID="labTestTypes" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                                                                               
                                                              </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
-                                                       <div class="col-md-3"><label class="control-label pull-left"> Lab Order Reason</label></div>
-                                                      <div class="col-md-9">
+                                                       <div class="col-md-4"><label class="control-label pull-left">Reason</label></div>
+                                                      <div class="col-md-8">
                                                           <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
                                                          <asp:ListItem Text="Baseline" Value="2" />
                                                          <asp:ListItem Text="Routine" Value="3" />
@@ -1149,12 +1187,115 @@
                                                   </div>
                                                   
                                                   <div class="col-md-12 form-group">
-                                                       <div class="col-md-3"><label class="control-label pull-left"> Lab Order Notes</label></div>
-                                                      <div class="col-md-9">
+                                                       <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
+                                                      <div class="col-md-8">
                                                          
-                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
+                                 <!--datepicker  -->
+                              
+               <div class="col-md-12 form-group">
+                    <div class="col-md-4">
+                        <label class="control-label pull-left">Date</label>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="datepicker fuelux form-group" id="LabDatePicker">
+                            <div class="input-group">
+                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate"></asp:TextBox>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <span class="sr-only">Toggle Calendar</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                        <div class="datepicker-calendar">
+                                            <div class="datepicker-calendar-header">
+                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                <button type="button" class="title" data-month="11" data-year="2014">
+                                                    <span class="month">
+                                                        <span data-month="0">January</span>
+                                                        <span data-month="1">February</span>
+                                                        <span data-month="2">March</span>
+                                                        <span data-month="3">April</span>
+                                                        <span data-month="4">May</span>
+                                                        <span data-month="5">June</span>
+                                                        <span data-month="6">July</span>
+                                                        <span data-month="7">August</span>
+                                                        <span data-month="8">September</span>
+                                                        <span data-month="9">October</span>
+                                                        <span data-month="10">November</span>
+                                                        <span data-month="11" class="current">December</span>
+                                                    </span><span class="year">2017</span>
+                                                </button>
+                                            </div>
+                                            <table class="datepicker-calendar-days">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Su</th>
+                                                        <th>Mo</th>
+                                                        <th>Tu</th>
+                                                        <th>We</th>
+                                                        <th>Th</th>
+                                                        <th>Fr</th>
+                                                        <th>Sa</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                            <div class="datepicker-calendar-footer">
+                                                <button type="button" class="datepicker-today">Today</button>
+                                            </div>
+                                        </div>
+                                        <div class="datepicker-wheels" aria-hidden="true">
+                                            <div class="datepicker-wheels-month">
+                                                <h2 class="header">Month</h2>
+                                                <ul>
+                                                    <li data-month="0">
+                                                        <button type="button">Jan</button></li>
+                                                    <li data-month="1">
+                                                        <button type="button">Feb</button></li>
+                                                    <li data-month="2">
+                                                        <button type="button">Mar</button></li>
+                                                    <li data-month="3">
+                                                        <button type="button">Apr</button></li>
+                                                    <li data-month="4">
+                                                        <button type="button">May</button></li>
+                                                    <li data-month="5">
+                                                        <button type="button">Jun</button></li>
+                                                    <li data-month="6">
+                                                        <button type="button">Jul</button></li>
+                                                    <li data-month="7">
+                                                        <button type="button">Aug</button></li>
+                                                    <li data-month="8">
+                                                        <button type="button">Sep</button></li>
+                                                    <li data-month="9">
+                                                        <button type="button">Oct</button></li>
+                                                    <li data-month="10">
+                                                        <button type="button">Nov</button></li>
+                                                    <li data-month="11">
+                                                        <button type="button">Dec</button></li>
+                                                </ul>
+                                            </div>
+                                            <div class="datepicker-wheels-year">
+                                                <h2 class="header">Year</h2>
+                                                <ul></ul>
+                                            </div>
+                                            <div class="datepicker-wheels-footer clearfix">
+                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+                                  <!--.datepicker   -->
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
@@ -1175,20 +1316,19 @@
                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Date </i></th>
                                                         
                                                     </tr>
-                                                </thead>
-                                                <tbody>                        
-                                                </tbody>                  
-                                                </table>
+                                                  </thead>
+                                                  <tbody>                        
+                                                 </tbody>                  
+                                                 </table>
                                             </div>
                                                               
    
                                                 </div>
                                         </div>
-                                    </div>
-
-                                </div>
-                                
-                                <div class="col-md-12">
+                                    </div>     
+                       </div>
+                 </div>
+                           <!--  to here-->
                                         <div class="col-md-12"><hr/></div>
                                         <div class="col-md-7"></div>
                                          <div class="col-md-5">
@@ -1206,9 +1346,9 @@
                                                  <asp:LinkButton runat="server" ID="btnCancelOrder" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
-                                    </div>
+                                   
                             </div>
-                            
+                        
 
                       </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
 
@@ -1316,12 +1456,16 @@
     <!-- ajax begin -->
     
    <script type="text/javascript">
-       $(document).ready(function () {
-          var patient_Id ="<%=PatientId%>";
-           console.log(patient_Id);
-
-
-           $.ajax({
+       var patient_Id = "<%=PatientId%>";     
+       $(document).ready(function () {       
+         
+      $("#LabDatePicker").datepicker({
+           date: null,
+           allowPastDates: true,
+           momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+           });
+      
+          $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
                data: "{'patient_ID':'" + patient_Id + "'}",
@@ -1354,7 +1498,42 @@
 
                 alert(msg.responseText);
                 }
-              });
+           });
+
+           $.ajax({
+               type: "POST",
+               url: "../WebService/LabService.asmx/GetLookupPendingLabsList",
+               data: "{'patient_ID':'" + patient_Id + "'}",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               cache: false,
+               success: function (response) {
+                   // console.log(response.d);
+                   var itemList = JSON.parse(response.d);
+                   var table = '';
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
+
+                       var dateString = itemList.SampleDate.substr(6);
+                       var currentTime = new Date(parseInt(dateString));
+                       var month = currentTime.getMonth() + 1;
+                       var day = currentTime.getDate();
+                       var year = currentTime.getFullYear();
+                       var sampleDate = day + "/" + month + "/" + year;
+                       // alert(date);
+
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                   });
+
+                   $('#tblPendingLabs').append(table);
+
+               },
+
+               error: function (msg) {
+
+                   alert(msg.responseText);
+               }
+           });
         $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetvlTests",
@@ -1398,7 +1577,7 @@
             dataType: "json",
             cache: false,
             success: function (response) {
-                console.log(response.d);
+               // console.log(response.d);
                 var itemList = JSON.parse(response.d);
                 var table = '';
                 //itemList.forEach(function (item) {
@@ -1415,7 +1594,7 @@
                     table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
                 });
 
-                $('#tblVL').append(table);
+                $('#tblVlpending').append(table);
 
             },
 
@@ -1424,7 +1603,6 @@
                 alert(msg.responseText);
             }
         });
-
 
 
          $.ajax({
@@ -1458,10 +1636,8 @@
            
            // Load lab order
            $("#btnAddLab").click(function (e) {
-
-
-
-               var labOrderDate = moment().format('D MMM, YYYY');
+             
+               var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
                var labOrderReason = $("#orderReason").find(":selected").text();
                var labOrderNotes = $("#labNotes").val();
@@ -2149,8 +2325,8 @@
          
        });
       
-      
-    </script>
+   
+</script>
     
  
 

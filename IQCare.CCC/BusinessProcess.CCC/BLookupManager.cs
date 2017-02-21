@@ -74,6 +74,14 @@ namespace BusinessProcess.CCC
 
 
         }
+        public List<LookupPreviousLabs> GetLookupPendingLabs(int patientId)
+
+        {
+            LookupPreviousLabsRepository lookupPendingLabsRepository = new LookupPreviousLabsRepository();
+            return lookupPendingLabsRepository.GetPendingLabs(patientId);
+
+
+        }
         public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
 
         {

@@ -80,6 +80,22 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
+
+        public static string GetLookupPendingLabsListJson(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupPreviousLabs> lookuppendinglabsList = lookupManager.GetLookupPendingLabs(patientId);
+            if (lookuppendinglabsList != null && lookuppendinglabsList.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookuppendinglabsList);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
         public static string GetvlTestsJson(int patientId)
         {
             string jsonObject;
