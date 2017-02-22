@@ -1,6 +1,5 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
-using System.Web;
 using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Encounter
