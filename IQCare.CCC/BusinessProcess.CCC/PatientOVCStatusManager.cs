@@ -43,7 +43,16 @@ namespace BusinessProcess.CCC
 
         public PatientOVCStatus GetSpecificPatientOvcStatus(int personId)
         {
-            return _unitOfWork.PatientOvcStatusRepository.FindBy(x => x.PersonId == personId).FirstOrDefault();
+            return
+                _unitOfWork.PatientOvcStatusRepository.FindBy(x => x.PersonId == personId)
+                    .OrderByDescending(o => o.CreateDate)
+                    .FirstOrDefault();
+        }
+
+        public PatientOVCStatus GetOvcByPersonAndGuardian(int personId, int guardianId)
+        {
+            return
+                _unitOfWork.PatientOvcStatusRepository.FindBy(x => x.PersonId == personId && x.GuardianId == guardianId).FirstOrDefault();
         }
     }
 }

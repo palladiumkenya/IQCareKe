@@ -101,5 +101,11 @@ namespace BusinessProcess.CCC
             List<LookupItemView> lookupItem = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
             return lookupItem;
         }
+
+        public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
+        {
+            return
+                _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName).ToList();
+        }
     }
 }

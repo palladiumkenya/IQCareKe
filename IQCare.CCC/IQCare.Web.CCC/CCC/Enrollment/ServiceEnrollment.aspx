@@ -365,7 +365,8 @@
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
                         toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = "/CCC/Patient/PatientHome.aspx";
+                        //window.location.href = "/CCC/Patient/PatientHome.aspx";
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>';
                     },
                     error: function (response) {
                         //generate('error', response.d);

@@ -13,5 +13,6 @@ namespace Interface.CCC
         List<PatientOVCStatus> GetPatientOvcStatus(int id);
         PatientOVCStatus GetSpecificPatientOvcStatus(int personId);
         int DeletePatientOvcStatus(int id);
+        PatientOVCStatus GetOvcByPersonAndGuardian(int personId, int guardianId);
     }
 }

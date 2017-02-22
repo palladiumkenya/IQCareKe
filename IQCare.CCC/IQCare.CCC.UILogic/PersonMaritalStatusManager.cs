@@ -12,24 +12,23 @@ namespace IQCare.CCC.UILogic
 
         public int AddPatientMaritalStatus(int personId,int maritalStatusId,int userId)
         {
+            int maritalStatus;
+            var lookUpLogic = new LookupLogic();
+            maritalStatus = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Child")[0].ItemId;
+
             PatientMaritalStatus patientMaritalStatus=new PatientMaritalStatus()
             {
                 PersonId = personId,
-                MaritalStatusId = maritalStatusId,
+                MaritalStatusId = maritalStatus,
                 CreatedBy = userId,
                 Active = true  
             };
           return result=  _mgr.AddPatientMaritalStatus(patientMaritalStatus);
         }
 
-       public int UpdatePatientMaritalStatus(int maritalstatusId)
+       public int UpdatePatientMaritalStatus(PatientMaritalStatus _matStatus)
         {
-            PatientMaritalStatus patientMaritalStatus=new PatientMaritalStatus()
-            {
-                MaritalStatusId = maritalstatusId
-            };
-
-           return result= _mgr.UpdatePatientMaritalStatus(patientMaritalStatus);
+            return result = _mgr.UpdatePatientMaritalStatus(_matStatus);
         }
 
         public int DeletePatientMaritalStatus(int id)
@@ -37,10 +36,15 @@ namespace IQCare.CCC.UILogic
           return result=  _mgr.DeletePatientMaritalStatus(id);
         }
 
-        List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)
+        public List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)
         {
             var myList = _mgr.GetAllMaritalStatuses(personId);
             return myList;
+        }
+
+        public PatientMaritalStatus GetInitialPatientMaritalStatus(int personId)
+        {
+            return _mgr.GetFirstPatientMaritalStatus(personId);
         }
     }
 }

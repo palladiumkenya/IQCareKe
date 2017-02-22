@@ -28,18 +28,9 @@ namespace IQCare.CCC.UILogic
             return _result;
         }
 
-        public int UpdatePatientTreatmentSupporter(int personId, int supporterId, int mobileConatct, int userId)
+        public int UpdatePatientTreatmentSupporter(PatientTreatmentSupporter supporter)
         {
-
-                PatientTreatmentSupporter supporter = new PatientTreatmentSupporter()
-                {
-                    PersonId = personId,
-                    SupporterId = supporterId,
-                    MobileContact = mobileConatct,
-                    CreatedBy = userId
-                };
-                _result = _mgr.UpdatePatientTreatmentSupporter(supporter);
-
+            _result = _mgr.UpdatePatientTreatmentSupporter(supporter);
             return _result;
         }
 
