@@ -164,9 +164,11 @@
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-info"></span> <strong class="text-success">Start Clinical Encounter </strong>
                                 </a>
                               
-                               <a href="/CCC/Encounter/PatientEncounter.aspx" id="menuNewEncounter" class="list-group-item" >
+                               <%--<a href="/CCC/Encounter/PatientEncounter.aspx" id="menuNewEncounter" class="list-group-item" >
                                     <span class="fa fa-exchange fa-1x pull-left text-info"></span> New Encounter 
-                                </a>
+                                </a>--%>
+                               <asp:LinkButton ID="menuNewEncounter" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
+                                  <span class="fa fa-exchange fa-1x pull-left text-info"></span>New Encounter</asp:LinkButton>
 
      
                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" class="list-group-item" >
@@ -322,9 +324,6 @@
                 alert("hre");
                 window.location.href = "/CCC/Patient/PatientRegistration.aspx?PatientId=" + patientId;
             });*/
-
-            function test() {
-                alert("here");
             }
         });
     </script>
