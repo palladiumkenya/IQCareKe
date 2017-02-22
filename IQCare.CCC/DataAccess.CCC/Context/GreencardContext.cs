@@ -80,6 +80,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PhysicalExamination> PhysicalExamination { get; set; }
         public DbSet<Pregnancy> Pregnancies { get; set; }
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
+        public DbSet<PatientFamilyTesting> PatientFamilyTestings { get; set; }
        
 
        

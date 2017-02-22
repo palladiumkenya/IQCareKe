@@ -14,7 +14,7 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             this.GetSessionDetails();
@@ -62,6 +62,14 @@ namespace IQCare.Web.CCC.Appointment
                     DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
+            //btnSaveAppointment.Attributes.Add("OnClick", "btn_Click");
+            btnSaveAppointment.Click += new EventHandler(this.btn_Click);
+        }
+
+        protected void btn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Patient/PatientHome.aspx");
         }
 
         private void GetSessionDetails()
