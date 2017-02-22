@@ -1,11 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Services;
+using Entities.CCC.Enrollment;
 using Entities.Common;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
+using System.Web.Script.Serialization;
+using Application.Common;
+using Entities.CCC.Lookup;
 
 namespace IQCare.Web.CCC.WebService
 {
+    public class PatientDetails
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public int Gender { get; set; }
+        public string PersonDoB { get; set; }
+        public string ChildOrphan { get; set; }
+        public string Inschool { get; set; }
+        public string NationalId { get; set; }
+        public int MaritalStatusId { get; set; }
+        public string GurdianFNames { get; set; }
+        public string GurdianMName { get; set; }
+        public string GurdianLName { get; set; }
+        public int GuardianGender { get; set; }
+        public string Age { get; set; }
+
+
+        public string GetAge(DateTime DateOfBirth)
+        {
+            TimeSpan age = DateTime.Now - DateOfBirth;
+            int Year = DateTime.Now.Year - DateOfBirth.Year;
+            if (DateOfBirth.AddYears(Year) > DateTime.Now) Year--;
+
+            return Year.ToString();
+        }
+    }
     /// <summary>
     /// Summary description for PersonSeervice
     /// </summary>
@@ -22,6 +54,9 @@ namespace IQCare.Web.CCC.WebService
         private int PersonTreatmentSupporterId { get; set; }
         private string Msg { get; set; }
         private int Result { get; set; }
+
+        private List<PatientLookup> Patient { get; set; }
+        Utility _utility = new Utility();
 
         [WebMethod(EnableSession = true)]
         public string AddPerson(string firstname, string middlename, string lastname, int gender,string dateOfBirth, string nationalId, int userId)
@@ -232,5 +267,48 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod(EnableSession = true)]
+        public string GetPersonDetails(int PatientId)
+        {
+            PatientDetails patientDetails = new PatientDetails();
+            try
+            {
+                var patientLookManager = new PatientLookupManager();
+                var personOvcStatusManager = new PersonOvcStatusManager();
+                var personLookUpManager = new PersonLookUpManager();
+
+
+                Patient = patientLookManager.GetPatientDetailSummary(PatientId);
+                
+                if (Patient != null)
+                {
+                    var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(Patient[0].PersonId);
+                    var Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
+
+                    patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
+                    patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
+                    patientDetails.LastName = _utility.Decrypt(Patient[0].LastName);
+                    patientDetails.Gender = Patient[0].Sex;
+                    patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", Patient[0].DateOfBirth);
+                    patientDetails.Age = patientDetails.GetAge(Patient[0].DateOfBirth);
+                    //patientDetails.ChildOrphan = Patient[0].
+                    //patientDetails.Inschool
+                    patientDetails.NationalId = _utility.Decrypt(Patient[0].NationalId);
+                    //patientDetails.MaritalStatusId = Patient[0].
+                    patientDetails.GurdianFNames = _utility.Decrypt(Guardian[0].FirstName.ToString());
+                    patientDetails.GurdianMName = _utility.Decrypt(Guardian[0].MiddleName.ToString());
+                    patientDetails.GurdianLName = _utility.Decrypt(Guardian[0].LastName.ToString());
+                    patientDetails.GuardianGender = Guardian[0].Sex;
+
+                    return new JavaScriptSerializer().Serialize(patientDetails);
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

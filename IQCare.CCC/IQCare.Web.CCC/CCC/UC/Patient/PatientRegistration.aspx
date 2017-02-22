@@ -789,7 +789,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonGuardian",
-                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender':" + gsex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1016,6 +1016,56 @@
                 //    return n;
                 //}
 
+                $.urlParam = function(name){
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    if (results==null){
+                        return null;
+                    }
+                    else{
+                        return results[1] || 0;
+                    }
+                }
+
+                var PatientId = $.urlParam('PatientId');
+
+                if (PatientId > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/GetPersonDetails",
+                        data: "{'PatientId':'" + PatientId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var patientDetails = JSON.parse(response.d);
+
+                            /*Patient Details*/
+                            $("#personFname").val(patientDetails.FirstName);
+                            $("#personMName").val(patientDetails.MiddleName);
+                            $("#personLName").val(patientDetails.LastName);
+                            $("#Gender").val(patientDetails.Gender);
+                            
+                            /*Social Status*/
+                            //$("#MyDateOfBirth").val(patientDetails.DateOfBirth);
+                            $('#MyDateOfBirth').datepicker('setDate', patientDetails.DateOfBirth);
+                            $("#ChildOrphan").val(patientDetails.ChildOrphan);
+                            $("#Inschool").val(patientDetails.Inschool);
+                            $("#personAge").val(patientDetails.Age);
+                            /*Adult*/
+                            $("#NationalId").val(patientDetails.NationalId);
+                            $("#MaritalStatusId").val(patientDetails.MaritalStatusId);
+
+                            /*Child*/
+                            $("#GurdianFNames").val(patientDetails.GurdianFNames);
+                            $("#GurdianMName").val(patientDetails.GurdianMName);
+                            $("#GurdianLName").val(patientDetails.GurdianLName);
+                            $("#GuardianGender").val(patientDetails.GuardianGender);
+
+                        },
+                        error: function (response) {
+
+                        }
+                    });
+                }
 
             });
 

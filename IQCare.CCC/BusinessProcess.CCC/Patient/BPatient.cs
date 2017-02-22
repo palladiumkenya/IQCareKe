@@ -30,7 +30,8 @@ namespace BusinessProcess.CCC.Patient
 
         public PatientEntity GetPatient(int id)
         {
-            throw new NotImplementedException();
+            var patientInfo = _unitOfWork.PatientRepository.GetById(id);
+            return patientInfo;
         }
 
         public int UpdatePatient(PatientEntity patient)

@@ -95,6 +95,7 @@
     <Compile Include="PatientVitalsManager.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
+    <Compile Include="PersonLookUpManager.cs" />
     <Compile Include="PersonManager.cs" />
     <Compile Include="PersonMaritalStatusManager.cs" />
     <Compile Include="PersonOvcStatusManager.cs" />
