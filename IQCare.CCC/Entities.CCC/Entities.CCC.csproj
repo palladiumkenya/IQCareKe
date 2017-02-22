@@ -80,6 +80,7 @@
     <Compile Include="Encounter\PatientFamilyPlanning.cs" />
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
+    <Compile Include="Encounter\PatientFamilyTesting.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
     <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />

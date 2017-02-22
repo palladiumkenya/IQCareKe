@@ -22,13 +22,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
-        /// relationship control.
+        /// Name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect relationship;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Name;
         
         /// <summary>
         /// BaselineHIVStatus control.
@@ -49,13 +49,58 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.DropDownList hivtestingresult;
         
         /// <summary>
-        /// btnAddFamilyTesting control.
+        /// CccReferal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAddFamilyTesting;
+        protected global::System.Web.UI.WebControls.DropDownList CccReferal;
+        
+        /// <summary>
+        /// Relationship control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect Relationship;
+        
+        /// <summary>
+        /// BaselineHIVStatusDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox BaselineHIVStatusDate;
+        
+        /// <summary>
+        /// HIVTestingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HIVTestingDate;
+        
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAdd;
+        
+        /// <summary>
+        /// tblFamilyTesting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblFamilyTesting;
         
         /// <summary>
         /// btnOneTimeEventsTracker control.

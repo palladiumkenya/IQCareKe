@@ -58,7 +58,9 @@
                     alert(msg.responseText);
                 }
             });
-           
+            $("#btnClose").click(function () {
+                window.location.href = '/CCC/Home.aspx';
+            });
         })
 
     </script>
