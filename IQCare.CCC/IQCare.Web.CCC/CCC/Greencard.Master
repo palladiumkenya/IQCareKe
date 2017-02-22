@@ -322,9 +322,6 @@
                 alert("hre");
                 window.location.href = "/CCC/Patient/PatientRegistration.aspx?PatientId=" + patientId;
             });*/
-
-            function test() {
-                alert("here");
             }
         });
     </script>

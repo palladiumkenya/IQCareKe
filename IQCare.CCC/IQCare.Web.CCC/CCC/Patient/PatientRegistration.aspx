@@ -646,7 +646,7 @@
                             if ($("#datastep4").parsley().validate()) {
                                 $.when(addPersonPopulation()).then(function() {
                                     setTimeout(function(){
-                                        window.location.href = "/CCC/Enrollment/ServiceEnrollment.aspx";
+                                        window.location.href ='<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
                                     }, 2000);
                                 });
                             } else {
