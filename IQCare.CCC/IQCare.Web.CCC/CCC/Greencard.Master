@@ -117,7 +117,7 @@
 								    <asp:HyperLink ID="Link1" runat="server"  CssClass="ui-icon-link  text-muted"  NavigateUrl="~/CCC/Patient/PatientFinder.aspx" Text="Add Vendor" />
 								</i>--%>
 
-                                <a href="/CCC/Patient/PatientFinder.aspx" class="list-group-item">
+                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx") %>' class="list-group-item">
                                     <span class="fa fa-search fa-1x pull-left"></span> Find Patients <span class="badge">
                                         <asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
                                
