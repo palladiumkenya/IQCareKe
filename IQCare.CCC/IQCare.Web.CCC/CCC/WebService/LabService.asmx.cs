@@ -60,6 +60,21 @@ namespace IQCare.Web.CCC.WebService
 
             return jsonObject;
         }
+        [WebMethod(EnableSession = true)]
+        public string GetLookupPendingLabsList(string patient_ID)
+        {
+
+            //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
+            //var patient_id = JSON.parse(patientID);
+            int patientId = Convert.ToInt32(patient_ID);
+            //int patientId = int.Parse(patient_ID);
+            //patientId = Convert.ToInt32(Session["PersonId"]);
+            // int patientId = 18;
+            string jsonObject = LookupLogic.GetLookupPendingLabsListJson(patientId);
+
+            return jsonObject;
+        }
+
 
         [WebMethod(EnableSession = true)]
         public string GetvlTests(string patient_ID)
@@ -71,6 +86,7 @@ namespace IQCare.Web.CCC.WebService
 
             return jsonObject;
         }
+
         [WebMethod(EnableSession = true)]
         public string GetPendingvlTests(string patient_ID)
         {

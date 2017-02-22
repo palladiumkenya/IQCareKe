@@ -14,30 +14,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer.Service", "..\..\IQCareService\RemServer.Service\RemServer.Service.csproj", "{32C66861-E9CC-40F6-A791-8E8A4C864A34}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://futuresserver:8080/tfs/kehmis_iqcare
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\IQCareService\\IQCareServiceControl\\IQCareServiceControl.csproj
-		SccProjectName1 = ../../IQCareService/IQCareServiceControl
-		SccLocalPath1 = ..\\..\\IQCareService\\IQCareServiceControl
-		SccProjectUniqueName2 = ..\\..\\IQCareService\\IQConnection\\IQConnection.csproj
-		SccProjectName2 = ../../IQCareService/IQConnection
-		SccLocalPath2 = ..\\..\\IQCareService\\IQConnection
-		SccProjectUniqueName3 = ..\\..\\IQCareService\\IQServiceConfig\\IQServiceConfig.csproj
-		SccProjectName3 = ../../IQCareService/IQServiceConfig
-		SccLocalPath3 = ..\\..\\IQCareService\\IQServiceConfig
-		SccProjectUniqueName4 = ..\\..\\IQCareService\\IQCareServiceSetup\\IQCareServiceSetup.vdproj
-		SccProjectName4 = ../../IQCareService/IQCareServiceSetup
-		SccLocalPath4 = ..\\..\\IQCareService\\IQCareServiceSetup
-		SccProjectUniqueName5 = ..\\..\\IQCareService\\Dependancy\\Dependancy.csproj
-		SccProjectName5 = ../../IQCareService/Dependancy
-		SccLocalPath5 = ..\\..\\IQCareService\\Dependancy
-		SccProjectUniqueName6 = ..\\..\\IQCareService\\RemServer.Service\\RemServer.Service.csproj
-		SccProjectName6 = ../../IQCareService/RemServer.Service
-		SccLocalPath6 = ..\\..\\IQCareService\\RemServer.Service
-	EndGlobalSection
+	
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86

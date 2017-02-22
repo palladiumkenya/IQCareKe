@@ -364,13 +364,13 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.DropDownList ddlReferredFor;
         
         /// <summary>
-        /// pendingVl control.
+        /// tblVlpending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pendingVl;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblVlpending;
         
         /// <summary>
         /// tblVL control.
@@ -380,6 +380,15 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tblVL;
+        
+        /// <summary>
+        /// tblPendingLabs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblPendingLabs;
         
         /// <summary>
         /// tblPrevLabs control.
@@ -416,6 +425,15 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox labNotes;
+        
+        /// <summary>
+        /// LabDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LabDate;
         
         /// <summary>
         /// btnAddLab control.

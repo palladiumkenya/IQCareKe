@@ -51,7 +51,7 @@ namespace IQCare.Web.CCC.Patient
             }
             catch (Exception ex)
             {
-                throw;
+               throw new Exception("",ex);
             }
         }
     }
