@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare Management", "..\..\IQCare Management\IQCare Management.csproj", "{0F4F7B80-C05C-4129-A644-911E14BBB67A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FC595C57-2718-4639-AD31-25CF08BF1A2A} = {FC595C57-2718-4639-AD31-25CF08BF1A2A}
+		{D6D52F8E-125C-477E-8F21-BA3C513CDAA7} = {D6D52F8E-125C-477E-8F21-BA3C513CDAA7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.FormBuilder", "..\..\IQCare Management\IQCare.FormBuilder\IQCare.FormBuilder.csproj", "{FC595C57-2718-4639-AD31-25CF08BF1A2A}"
 EndProject

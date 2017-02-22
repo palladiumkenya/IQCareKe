@@ -89,7 +89,8 @@ namespace Interface.Clinical
             DateTime? registrationDate, 
             int ModuleId = 999, 
             int MaxRecords=100,
-            string ruleFilter= "");
+            string ruleFilter= "",
+            string phoneNumber="");
 
         /// <summary>
         /// Gets the patient service lines.

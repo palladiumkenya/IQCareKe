@@ -199,7 +199,24 @@ IF Exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Mst_La
 	Delete from lnk_parameterresult where Result Is Null
 End
 Go
+ If Not Exists (Select * From sys.columns Where Name = N'PONumber' And Object_ID = object_id(N'ord_PurchaseOrder')) Begin
+	Alter Table dbo.ord_PurchaseOrder Add PONumber varchar(36) 
+End
+Go
+Update ord_PurchaseOrder Set PONumber = OrderNo Where PONumber Is Null;
+Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_PurchaseItem'))    
+Begin
+  Alter table dbo.Dtl_PurchaseItem Add Id int Not Null Identity(1,1)
+End
+Go
+IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.Dtl_PurchaseItem') AND Name = 'PK_Dtl_PurchaseItem')
+   ALTER TABLE [dbo].[Dtl_PurchaseItem] ADD  CONSTRAINT [PK_Dtl_PurchaseItem] PRIMARY KEY CLUSTERED 
+	(
+	[Id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 
+GO
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Mst_ItemMaster]') AND name = N'NCI_ItemMaster_ItemTypeID')
 DROP INDEX [NCI_ItemMaster_ItemTypeID] ON [dbo].[Mst_ItemMaster] WITH ( ONLINE = OFF )
 GO
