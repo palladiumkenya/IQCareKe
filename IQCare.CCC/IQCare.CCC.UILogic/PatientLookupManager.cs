@@ -50,5 +50,11 @@ namespace IQCare.CCC.UILogic
         {
             return _patientLookupmanager.GetTotalpatientCount();
         }
+
+        public static bool IsEncrypted(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return false;
+            return text.StartsWith("0x002", StringComparison.InvariantCulture);
+        }
     }
 }

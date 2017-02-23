@@ -91,8 +91,10 @@
     <Compile Include="Interface\Lookup\ILookupLabs.cs" />
     <Compile Include="Interface\Lookup\ILookupPreviousLabs.cs" />
     <Compile Include="Interface\Lookup\IPatientLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPersonContactLookUpRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonLookUpRepository.cs" />
     <Compile Include="Interface\Patient\IPatientAppointmentRepository.cs" />
+    <Compile Include="Interface\Patient\IPatientFamilyTestingRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
@@ -115,10 +117,12 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
     <Compile Include="Repository\Patient\PatientContactRepository.cs" />
+    <Compile Include="Repository\Patient\PatientFamilyTestingRepository.cs" />
     <Compile Include="Repository\Patient\PatientLocationRepository.cs" />
     <Compile Include="Repository\Patient\PatientRepository.cs" />
     <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
@@ -157,6 +161,10 @@
     <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
       <Project>{bbcc4817-4e69-4722-a560-8988a795ce50}</Project>
       <Name>Entities.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
+      <Project>{174B280E-08D7-4FE7-B080-3A017F0944CD}</Project>
+      <Name>Interface.CCC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

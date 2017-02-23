@@ -64,6 +64,7 @@
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
+    <Compile Include="IPatientFamilyTesting.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
+    <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

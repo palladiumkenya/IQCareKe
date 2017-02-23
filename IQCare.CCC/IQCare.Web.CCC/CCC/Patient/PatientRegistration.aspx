@@ -537,8 +537,10 @@
                 {
                     personAge = $("#personAge").val();
 
-                    if (personAge >= 18)
-                    {
+                    if (personAge >= 18) {
+                        $("#ChildOrphan").val("");
+                        $("#Inschool").val("");
+
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
                         $("#<%=Inschool.ClientID%>").prop('disabled', true);
                         $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
@@ -591,7 +593,10 @@
                                         setTimeout(function(){
                                             addPersonGaurdian();
                                             $.when(addPersonMaritalStatus()).then(function(){
-                                                addPersonOvcStatus();
+                                                //addPersonOvcStatus();
+                                                setTimeout(function(){
+                                                    addPersonOvcStatus();
+                                                }, 2000);
                                             });
                                         }, 2000);
                                         /*addPersonGaurdian();
@@ -629,8 +634,17 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep3").parsley().validate()) {
-                                $.when(addPatientContact()).then(addPersonTreatmentSupporter());
-                                addTreatmentSupporter();
+                                //$.when(addPatientContact()).then(addPersonTreatmentSupporter());
+                                $.when(addPatientContact()).then(function() {
+                                    $.when(addPersonTreatmentSupporter()).then(function() {
+                                        //addTreatmentSupporter();
+                                        setTimeout(function(){
+                                            addTreatmentSupporter();
+                                        }, 2000);
+                                    });
+                                    //addPersonTreatmentSupporter();
+                                });
+                                //addTreatmentSupporter();
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -709,6 +723,7 @@
                 function getSubcountyList()
                 {
                     var countyId = $("#<%=countyId.ClientID%>").find(":selected").text();
+                    //alert(countyId);
                     $.ajax({
                         type: "POST",
                         url: "../WebService/LookupService.asmx/GetLookupSubcountyList",
@@ -733,7 +748,7 @@
                 function getWardList()
                 {
                     var subcountyName = $("#<%=SubcountyId.ClientID%>").find(":selected").text();
-                    
+                    //alert(subcountyName);
                     $.ajax({
                         type: "POST",
                         url: "../WebService/LookupService.asmx/GetLookupWardList",
@@ -756,6 +771,8 @@
 
                 function addPerson() {
 
+                    var isPatientSet = $.urlParam('PatientId');
+
                     var fname = $("#<%=personFname.ClientID%>").val();
                     var mname =  $("#<%=personMName.ClientID%>").val();
                     var lname =  $("#<%=personLName.ClientID%>").val();
@@ -764,10 +781,20 @@
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
 
+                    //Set up url for adding a person
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePerson";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPerson";
+                    }
+                    
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        url: url,
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -780,16 +807,29 @@
                 }
 
                 function addPersonGaurdian() {
+
+                    var isPatientSet = $.urlParam('PatientId');
 					var returnValue=0;
                     var gfname = $("#<%=GurdianFNames.ClientID%>").val();
                     var gmname = $("#<%=GurdianMName.ClientID%>").val();
                     var glname = $("#<%=GurdianLName.ClientID%>").val();
                     var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
+
+                    //Set up url for adding a person
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonGuardian";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonGuardian";
+                    }
+
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonGuardian",
-                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        url: url,
+                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','userId':'" + userId + "', 'patientid':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -802,16 +842,27 @@
                 }
 
                function addPersonTreatmentSupporter() {
+                   var isPatientSet = $.urlParam('PatientId');
 
                     var tFname = $("#<%=tsFname.ClientID%>").val();
                     var tMname = $("#<%=tsMiddleName.ClientID%>").val();
                     var tLname = $("#<%=tsLastName.ClientID%>").val();
                     var tSex = $("#<%=tsGender.ClientID%>").val();
-                    var natId = 999999;
+                   var natId = 999999;
+
+                   //Set up url for adding a person
+                   var url = null;
+
+                   if (isPatientSet > 0) {
+                       url = "../WebService/PersonService.asmx/UpdatePersonTreatmentSupporter";
+                   } else {
+                       url = "../WebService/PersonService.asmx/AddPersonTreatmentSupporter";
+                   }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
-                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "'}",
+                        url: url,
+                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -824,11 +875,21 @@
                }
 
                 function addTreatmentSupporter() {
-
+                    var isPatientSet = $.urlParam('PatientId');
                     var mobileContact = $("#<%=TSContacts.ClientID%>").val();
+
+                    //Set up url for adding a person
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdateTreatmentSupporter";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddTreatmentSupporter";
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddTreatmentSupporter",
+                        url: url,
                         data: "{'personId':'" + personId + "','supporterId':'0','mobileContact':'" + mobileContact + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -844,10 +905,20 @@
                 function addPersonMaritalStatus() {
 
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
+                    var isPatientSet = $.urlParam('PatientId');
+
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonMaritalStatus";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonMaritalStatus";
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonMaritalStatus",
-                        data: "{'personId':'" + personId + "','maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "'}",
+                        url: url,
+                        data: "{'personId':'" + personId + "','maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','patientid':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -860,12 +931,22 @@
                 }
 
                 function addPersonOvcStatus() {
+                    var isPatientSet = $.urlParam('PatientId');
+
                     var personGuardianId = 0;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
                     var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonOvcStatus";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonOvcStatus";
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonOvcStatus",
+                        url: url,
                         data: "{'personId':'" +personId  + "','guardianId':'" + personGuardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -879,6 +960,8 @@
                 }
 
                 function addPersonLocation() {
+
+                    var isPatientSet = $.urlParam('PatientId');
                     var county = $("#<%=countyId.ClientID%>").find(":selected").val();
                     var subcounty=$("#<%=SubcountyId.ClientID%>").find(":selected").val();
                     var ward = $("#<%=WardId.ClientID%>").find(":selected").val();
@@ -887,10 +970,17 @@
                     var subLocation = $("#<%=sublocation.ClientID%>").val();
                     var landmark = $("#<%=PatientLandmark.ClientID%>").val();
                     var nearestHc = $("#<%=NearestHealthCentre.ClientID%>").val();
+
+                    var url = null;
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonLocation";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonLocation";
+                    }
               
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonLocation",
+                        url: url,
                         data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':'" + ward + "','village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -904,14 +994,22 @@
                 }
 
                 function addPatientContact() {
+                    var isPatientSet = $.urlParam('PatientId');
                     var postalAddress =$("#<%=PatientPostalAddress.ClientID%>").val() ;
                     var mobileNumber = $("#<%=PatientMobileNo.ClientID%>").val();
                     var altMobile =$("#<%=PatientAlternativeMobile.ClientID%>").val() ;
                     var emailAddress = $("#<%=PatientEmailAddress.ClientID%>").val();
 
+                    var url = null;
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonContact";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonContact";
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonContact",
+                        url: url,
                         data: "{'personId':'" + personId + "','physicalAddress':'" + postalAddress + "','mobileNumber':'" + mobileNumber + "','alternativeNumber':'" + altMobile + "','emailAddress':'" + emailAddress + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -925,12 +1023,20 @@
                 }
 
                 function addPersonPopulation() {
-
+                    var isPatientSet = $.urlParam('PatientId');
                     var populationType = $("input[name='Population']").val();
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
+
+                    var url = null;
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonPopulation";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonPopulation";
+                    }
+
                     $.ajax({
                         type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
+                        url: url,
                         data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1037,7 +1143,7 @@
                         dataType: "json",
                         success: function (response) {
                             var patientDetails = JSON.parse(response.d);
-
+                            //console.log(patientDetails);
                             /*Patient Details*/
                             $("#personFname").val(patientDetails.FirstName);
                             $("#personMName").val(patientDetails.MiddleName);
@@ -1045,11 +1151,11 @@
                             $("#Gender").val(patientDetails.Gender);
                             
                             /*Social Status*/
-                            //$("#MyDateOfBirth").val(patientDetails.DateOfBirth);
-                            $('#MyDateOfBirth').datepicker('setDate', patientDetails.DateOfBirth);
+                            $('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
                             $("#ChildOrphan").val(patientDetails.ChildOrphan);
                             $("#Inschool").val(patientDetails.Inschool);
                             $("#personAge").val(patientDetails.Age);
+
                             /*Adult*/
                             $("#NationalId").val(patientDetails.NationalId);
                             $("#MaritalStatusId").val(patientDetails.MaritalStatusId);
@@ -1060,9 +1166,37 @@
                             $("#GurdianLName").val(patientDetails.GurdianLName);
                             $("#GuardianGender").val(patientDetails.GuardianGender);
 
+                            /*County*/
+                            $("#countyId").val(patientDetails.CountyId);
+                            $.when(getSubcountyList()).then(function() {
+                                setTimeout(function(){
+
+                                    $("#SubcountyId").val(patientDetails.SubCounty);
+
+                                    $.when(getWardList()).then(function() {
+                                        setTimeout(function(){
+                                            $("#WardId").val(patientDetails.Ward);
+                                        }, 2000);
+                                    });
+
+                                }, 2000);
+                            });
+
+                            $("#LocalCouncils").val(patientDetails.Village);
+                            $("#PatientLocation").val(patientDetails.Location);
+                            $("#ctl00_IQCareContentPlaceHolder_sublocation").val(patientDetails.SubLocation);
+                            $("#ctl00_IQCareContentPlaceHolder_PatientLandmark").val(patientDetails.LandMark);
+                            $("#NearestHealthCentre").val(patientDetails.NearestHealthCentre);
+                            /*Person Contact*/
+                            $("#PatientPostalAddress").val(patientDetails.PatientPostalAddress);
+                            $("#PatientMobileNo").val(patientDetails.MobileNumber);
+                            $("#PatientAlternativeMobile").val(patientDetails.AlternativeNumber);
+                            $("#PatientEmailAddress").val(patientDetails.EmailAddress);
+
+                            personAgeRule();
                         },
                         error: function (response) {
-
+                            toastr.error(response.d, "Error Getting Person Details");
                         }
                     });
                 }
