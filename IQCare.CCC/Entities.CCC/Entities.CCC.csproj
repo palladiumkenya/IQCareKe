@@ -68,6 +68,7 @@
     <Compile Include="Baseline\PatientArtUseHistory.cs" />
     <Compile Include="Baseline\DiagnosisArvHistory.cs" />
     <Compile Include="Baseline\PatientDisclosure.cs" />
+    <Compile Include="Baseline\PatientFamilyTesting.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />

@@ -162,6 +162,10 @@
       <Project>{bbcc4817-4e69-4722-a560-8988a795ce50}</Project>
       <Name>Entities.CCC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interface.CCC\Interface.CCC.csproj">
+      <Project>{174B280E-08D7-4FE7-B080-3A017F0944CD}</Project>
+      <Name>Interface.CCC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
