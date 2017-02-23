@@ -103,7 +103,7 @@ namespace IQCare.Web.CCC.WebService
                             EntryPointId = entryPointId
                         };
 
-                        patientMasterVisitId = patientMasterVisitManager.addMasterVisit(visit);
+                        patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(visit);
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
                         patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
 
