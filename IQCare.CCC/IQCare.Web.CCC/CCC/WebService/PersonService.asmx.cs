@@ -40,6 +40,13 @@ namespace IQCare.Web.CCC.WebService
         public string EmailAddress { get; internal set; }
         public string AlternativeNumber { get; internal set; }
         public string MobileNumber { get; internal set; }
+        public string tsFname { get; internal set; }
+        public int ISContacts { get; internal set; }
+        public int tsGender { get; internal set; }
+        public string tsLastName { get; internal set; }
+        public string tsMiddleName { get; internal set; }
+        public string population { get; internal set; }
+        public int PopulationCategoryId { get; internal set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -410,7 +417,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, string patientid)
+        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, int mobileContact, string patientid)
         {
             try
             {
@@ -423,6 +430,13 @@ namespace IQCare.Web.CCC.WebService
                 if (PersonTreatmentSupporterId > 0)
                 {
                     Msg = "New Treatment Supporter Person Added Successfully!";
+
+                    var treatmentSupporter = new PatientTreatmentSupporterManager();
+                    Result = treatmentSupporter.AddPatientTreatmentSupporter(PersonId, PersonTreatmentSupporterId, mobileContact, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Person Treatement Supported Addeded Successfully!";
+                    }
                 }
             }
             catch (Exception e)
@@ -433,7 +447,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string UpdatePersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender, string nationalId, int userId, string patientid)
+        public string UpdatePersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender, string nationalId, int userId, int mobileContact, string patientid)
         {
             try
             {
@@ -458,8 +472,24 @@ namespace IQCare.Web.CCC.WebService
                         NationalId = _utility.Encrypt(nationalId)
                     };
                     personLogic.UpdatePerson(person, listPatientTreatmentSupporter[0].SupporterId);
+
                     Session["PersonTreatmentSupporterId"] = listPatientTreatmentSupporter[0].SupporterId;
 
+                    if (listPatientTreatmentSupporter[0].SupporterId > 0)
+                    {
+                        var treatmentSupporterManager = new PatientTreatmentSupporterManager();
+                        var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                        if (treatmentSupporter.Count > 0)
+                        {
+                            treatmentSupporter[0].PersonId = personId;
+                            treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
+                            treatmentSupporter[0].MobileContact = mobileContact;
+
+                            treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
+
+                            Msg = "Person Treatement Supported Updated Successfully";
+                        }
+                    }
                     Msg = "Person Treatment Supporter Updated Successfully";
                 }
             }
@@ -471,7 +501,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
-        [WebMethod(EnableSession = true)]
+        /*[WebMethod(EnableSession = true)]
         public string AddTreatmentSupporter(int personId,int supporterId,int mobileContact,int userId)
         {
             try
@@ -490,9 +520,9 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message + ' ' + e.InnerException;
             }
             return Msg;
-        }
+        }*/
 
-        [WebMethod(EnableSession = true)]
+        /*[WebMethod(EnableSession = true)]
         public string UpdateTreatmentSupporter(int personId, int supporterId, int mobileContact, int userId)
         {
             try
@@ -517,7 +547,7 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
-        }
+        }*/
 
         [WebMethod(EnableSession = true)]
         public string AddPersonRelationship(PersonRelationship relationship)
@@ -587,10 +617,16 @@ namespace IQCare.Web.CCC.WebService
                 var personMaritalStatus = new PersonMaritalStatusManager();
                 var lookupLogic = new LookupLogic();
                 var Guardian = new List<PersonLookUp>();
+                var supporter = new List<PersonLookUp>();
                 var maritalsStatus = new List<PatientMaritalStatus>();
                 var personLocation = new PersonLocationManager();
                 var personContacts = new List<PersonContactLookUp>();
                 var personContactLookUpManager = new PersonContactLookUpManager();
+                var patientTreatmentSupporterManager = new PatientTreatmentSupporterManager();
+                var patientTreatmentSupporter = new List<PatientTreatmentSupporter>();
+                var keyPopulationManager = new PatientPopulationManager();
+                var keyPopulation = new List<PatientPopulation>();
+
 
                 Patient = patientLookManager.GetPatientDetailSummary(PatientId);
 
@@ -603,6 +639,9 @@ namespace IQCare.Web.CCC.WebService
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
                     maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(Patient[0].PersonId);
                     personContacts = personContactLookUpManager.GetPersonContactByPersonId(Patient[0].PersonId);
+                    patientTreatmentSupporter =
+                        patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(Patient[0].PersonId);
+                    keyPopulation = keyPopulationManager.GetAllPatientPopulations(Patient[0].PersonId);
 
                     patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
                     patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
@@ -662,15 +701,34 @@ namespace IQCare.Web.CCC.WebService
                         patientDetails.AlternativeNumber = _utility.Decrypt(personContacts[0].AlternativeNumber);
                         patientDetails.EmailAddress = _utility.Decrypt(personContacts[0].EmailAddress);
                     }
-
-                    return new JavaScriptSerializer().Serialize(patientDetails);
+                    //Treatment Supporter
+                    if (patientTreatmentSupporter.Count > 0)
+                    {
+                        supporter = personLookUpManager.GetPersonById(patientTreatmentSupporter[0].SupporterId);
+                        if (supporter.Count > 0)
+                        {
+                            patientDetails.tsFname = _utility.Decrypt(supporter[0].FirstName);
+                            patientDetails.tsMiddleName = _utility.Decrypt(supporter[0].MiddleName);
+                            patientDetails.tsLastName = _utility.Decrypt(supporter[0].LastName);
+                            patientDetails.tsGender = supporter[0].Sex;
+                            patientDetails.ISContacts =
+                                patientTreatmentSupporter[0].MobileContact;
+                        }
+                        
+                    }
+                    //Key Population
+                    if (keyPopulation.Count > 0)
+                    {
+                        patientDetails.population = keyPopulation[0].PopulationType;
+                        patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
+                    }
                 }
-                return null;
+
+                return new JavaScriptSerializer().Serialize(patientDetails);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return e.Message;
             }
         }
     }

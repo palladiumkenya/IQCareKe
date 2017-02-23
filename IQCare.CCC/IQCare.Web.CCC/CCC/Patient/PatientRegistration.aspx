@@ -638,9 +638,9 @@
                                 $.when(addPatientContact()).then(function() {
                                     $.when(addPersonTreatmentSupporter()).then(function() {
                                         //addTreatmentSupporter();
-                                        setTimeout(function(){
+                                        /*setTimeout(function(){
                                             addTreatmentSupporter();
-                                        }, 2000);
+                                        }, 2000);*/
                                     });
                                     //addPersonTreatmentSupporter();
                                 });
@@ -847,7 +847,8 @@
                     var tFname = $("#<%=tsFname.ClientID%>").val();
                     var tMname = $("#<%=tsMiddleName.ClientID%>").val();
                     var tLname = $("#<%=tsLastName.ClientID%>").val();
-                    var tSex = $("#<%=tsGender.ClientID%>").val();
+                   var tSex = $("#<%=tsGender.ClientID%>").val();
+                   var mobileContact = $("#<%=TSContacts.ClientID%>").val();
                    var natId = 999999;
 
                    //Set up url for adding a person
@@ -862,7 +863,7 @@
                     $.ajax({
                         type: "POST",
                         url: url,
-                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
+                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1024,7 +1025,8 @@
 
                 function addPersonPopulation() {
                     var isPatientSet = $.urlParam('PatientId');
-                    var populationType = $("input[name='Population']").val();
+                    //var populationType = $("input[name='Population']").val();
+                    var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
                     var url = null;
@@ -1192,6 +1194,15 @@
                             $("#PatientMobileNo").val(patientDetails.MobileNumber);
                             $("#PatientAlternativeMobile").val(patientDetails.AlternativeNumber);
                             $("#PatientEmailAddress").val(patientDetails.EmailAddress);
+                            /*Treatment Supporter*/
+                            $("#tsFname").val(patientDetails.tsFname);
+                            $("#tsMiddleName").val(patientDetails.tsMiddleName);
+                            $("#tsLastName").val(patientDetails.tsLastName);
+                            $("#tsGender").val(patientDetails.tsGender);
+                            $("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
+                            /*Key Population*/
+                            $('input[name="Population"]').value = patientDetails.population;
+                            $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
 
                             personAgeRule();
                         },
