@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +29,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,6 +86,7 @@
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="PatientFamilyTestingManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />

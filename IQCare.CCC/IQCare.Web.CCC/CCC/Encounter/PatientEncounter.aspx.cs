@@ -57,7 +57,7 @@ namespace IQCare.Web.CCC.Encounter
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(visitId, "1");
+            pce = PEL.loadPatientEncounter(visitId, Session["PatientId"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;

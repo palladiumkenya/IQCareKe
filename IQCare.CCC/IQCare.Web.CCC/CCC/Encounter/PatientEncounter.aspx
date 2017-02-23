@@ -1346,7 +1346,7 @@
                                              </div>
                                          </div>
                                    
-                            </div>
+                            <%--</div>--%>
                         
 
                       </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->

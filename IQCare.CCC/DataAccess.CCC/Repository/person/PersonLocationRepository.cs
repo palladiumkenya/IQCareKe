@@ -28,7 +28,7 @@ namespace DataAccess.CCC.Repository.person
             List<PersonLocation> myList =
                 new List<PersonLocation>
                 {
-                    personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == true)
+                    personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
                         .OrderBy(x => x.Id)
                         .FirstOrDefault()
                 };
