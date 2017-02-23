@@ -77,6 +77,7 @@
     <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
+    <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

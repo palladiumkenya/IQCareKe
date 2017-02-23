@@ -537,8 +537,10 @@
                 {
                     personAge = $("#personAge").val();
 
-                    if (personAge >= 18)
-                    {
+                    if (personAge >= 18) {
+                        $("#ChildOrphan").val("");
+                        $("#Inschool").val("");
+
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
                         $("#<%=Inschool.ClientID%>").prop('disabled', true);
                         $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
@@ -635,7 +637,10 @@
                                 //$.when(addPatientContact()).then(addPersonTreatmentSupporter());
                                 $.when(addPatientContact()).then(function() {
                                     $.when(addPersonTreatmentSupporter()).then(function() {
-                                        addTreatmentSupporter();
+                                        //addTreatmentSupporter();
+                                        setTimeout(function(){
+                                            addTreatmentSupporter();
+                                        }, 2000);
                                     });
                                     //addPersonTreatmentSupporter();
                                 });
@@ -1146,12 +1151,11 @@
                             $("#Gender").val(patientDetails.Gender);
                             
                             /*Social Status*/
-                            //$("#MyDateOfBirth").val(patientDetails.DateOfBirth);
-                            //console.log(patientDetails.PersonDoB);
                             $('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
                             $("#ChildOrphan").val(patientDetails.ChildOrphan);
                             $("#Inschool").val(patientDetails.Inschool);
                             $("#personAge").val(patientDetails.Age);
+
                             /*Adult*/
                             $("#NationalId").val(patientDetails.NationalId);
                             $("#MaritalStatusId").val(patientDetails.MaritalStatusId);
@@ -1166,7 +1170,15 @@
                             $("#countyId").val(patientDetails.CountyId);
                             $.when(getSubcountyList()).then(function() {
                                 setTimeout(function(){
+
                                     $("#SubcountyId").val(patientDetails.SubCounty);
+
+                                    $.when(getWardList()).then(function() {
+                                        setTimeout(function(){
+                                            $("#WardId").val(patientDetails.Ward);
+                                        }, 2000);
+                                    });
+
                                 }, 2000);
                             });
 
@@ -1175,13 +1187,11 @@
                             $("#ctl00_IQCareContentPlaceHolder_sublocation").val(patientDetails.SubLocation);
                             $("#ctl00_IQCareContentPlaceHolder_PatientLandmark").val(patientDetails.LandMark);
                             $("#NearestHealthCentre").val(patientDetails.NearestHealthCentre);
-                            
-                            $.when(getWardList()).then(function() {
-                                setTimeout(function(){
-                                    $("#WardId").val(patientDetails.Ward);
-                                }, 4000);
-                            });
-                            
+                            /*Person Contact*/
+                            $("#PatientPostalAddress").val(patientDetails.PatientPostalAddress);
+                            $("#PatientMobileNo").val(patientDetails.MobileNumber);
+                            $("#PatientAlternativeMobile").val(patientDetails.AlternativeNumber);
+                            $("#PatientEmailAddress").val(patientDetails.EmailAddress);
 
                             personAgeRule();
                         },

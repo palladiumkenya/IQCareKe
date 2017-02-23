@@ -36,6 +36,10 @@ namespace IQCare.Web.CCC.WebService
         public string Village { get; internal set; }
         public int? Ward { get; internal set; }
         public int? SubCounty { get; internal set; }
+        public string PatientPostalAddress { get; internal set; }
+        public string EmailAddress { get; internal set; }
+        public string AlternativeNumber { get; internal set; }
+        public string MobileNumber { get; internal set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -585,6 +589,8 @@ namespace IQCare.Web.CCC.WebService
                 var Guardian = new List<PersonLookUp>();
                 var maritalsStatus = new List<PatientMaritalStatus>();
                 var personLocation = new PersonLocationManager();
+                var personContacts = new List<PersonContactLookUp>();
+                var personContactLookUpManager = new PersonContactLookUpManager();
 
                 Patient = patientLookManager.GetPatientDetailSummary(PatientId);
 
@@ -596,7 +602,7 @@ namespace IQCare.Web.CCC.WebService
                     if (personOVC != null)
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
                     maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(Patient[0].PersonId);
-
+                    personContacts = personContactLookUpManager.GetPersonContactByPersonId(Patient[0].PersonId);
 
                     patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
                     patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
@@ -647,6 +653,14 @@ namespace IQCare.Web.CCC.WebService
                         patientDetails.SubLocation = perLocation[0].SubLocation;
                         patientDetails.LandMark = perLocation[0].LandMark;
                         patientDetails.NearestHealthCentre = perLocation[0].NearestHealthCentre;
+                    }
+                    //Person Contacts
+                    if (personContacts.Count > 0)
+                    {
+                        patientDetails.PatientPostalAddress = _utility.Decrypt(personContacts[0].PhysicalAddress);
+                        patientDetails.MobileNumber = _utility.Decrypt(personContacts[0].MobileNumber);
+                        patientDetails.AlternativeNumber = _utility.Decrypt(personContacts[0].AlternativeNumber);
+                        patientDetails.EmailAddress = _utility.Decrypt(personContacts[0].EmailAddress);
                     }
 
                     return new JavaScriptSerializer().Serialize(patientDetails);
