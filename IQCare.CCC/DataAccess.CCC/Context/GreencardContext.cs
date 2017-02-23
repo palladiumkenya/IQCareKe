@@ -11,7 +11,7 @@ using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
 using Entities.PatientCore;
-using Entities.CCC.Lookup;
+
 
 namespace DataAccess.CCC.Context
 {
