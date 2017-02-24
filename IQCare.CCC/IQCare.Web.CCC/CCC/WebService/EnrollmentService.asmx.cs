@@ -85,7 +85,10 @@ namespace IQCare.Web.CCC.WebService
                             PatientId = patientId,
                             ServiceId = 1,
                             Start = DateTime.Now,
-                            Active = true
+                            Active = true,
+                            CreateDate = DateTime.Now,
+                            DeleteFlag = false,
+                            VisitDate = DateTime.Now
                         };
 
                         PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment

@@ -59,7 +59,7 @@
                               <hr />
                           </div>
 
-		                 <div class="col-md-12" style="margin-bottom: 2%">
+		                 <div class="col-md-12" style="margin-bottom: 2%"> 
 		                     <div class="col-md-3">
 		                         <div class="form-group">
                                     <asp:HiddenField ID="hdnPersonId" ClientIDMode="Static" runat="Server" Value="" />
@@ -464,13 +464,14 @@
                                      <div class="form-group"><label class="control-label pull-left text-primary">Population type</label></div>
                                 </div>
                                 
-                                <div class="col-md-4">
+                               <div class="col-md-4">
                                                     
                                      <div class="form-group"><div class="col-md-12"><label class="control-label pull-left">Select Population type</label></div></div>
 
                                      <div class="col-md-12 radio">
-                                         <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
+                                         
                                           <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
+                                              <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
                                               General Population
                                           </label>
                                      </div>
@@ -491,6 +492,7 @@
                                         <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="KeyPopulationCategoryId" data-parsley-min="1"/>
                                     </div>        
                                </div>
+                                
                                 <div class="col-md-2"></div>
                            </div>
                                           
@@ -982,7 +984,7 @@
 
                 function addPersonPopulation() {
                     var isPatientSet = $.urlParam('PatientId');
-                    var populationType = $("input[name='Population']").val();
+                    var populationType = $("input[name='Population']:checked").val();
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
@@ -1154,13 +1156,16 @@
                             $("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
                             /*Key Population*/
                             //$('input[name="Population"]').value = patientDetails.population;
-                            //("input[name='Population']:checked").value = patientDetails
-                            // .population;
+                            console.log(patientDetails.population);
+
                             if (patientDetails.population == "General Population") {
-                                $("#rdbGenPopulation").attr('checked','checked');
-                            }else if (patientDetails.population=="Key Population") {
-                                $("#rdbKeyPopulation").attr('checked','checked');
+                                var d = document.getElementById("GenPopulation");
+                                d.className += " checked";
+                            } else if(patientDetails.population == "Key Population") {
+                                var d = document.getElementById("KeyPopulation");
+                                d.className += " checked";
                             }
+                            $('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
                             $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
 
                             personAgeRule();

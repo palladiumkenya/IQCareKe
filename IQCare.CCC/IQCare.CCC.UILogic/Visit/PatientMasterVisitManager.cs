@@ -47,7 +47,7 @@ namespace IQCare.CCC.UILogic.Visit
             {
                 PatientId = patientId,
                 Status = 2,
-                VisitSchedule = visitSchedule,
+                VisitScheduled = visitSchedule,
                 VisitBy = visitBy,
                 VisitType = visitBy,
                 VisitDate = visitDate
