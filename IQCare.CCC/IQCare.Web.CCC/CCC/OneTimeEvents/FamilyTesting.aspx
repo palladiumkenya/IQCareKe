@@ -397,7 +397,7 @@
                     <hr />
                 </div>
                 <div class="col-md-12">
-                    <asp:LinkButton runat="server" ID="btnAdd" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Member</asp:LinkButton>
                 </div>
 
                 <div class="col-md-12">
@@ -437,13 +437,13 @@
                 <div class="col-md-5">
 
                     <div class="col-md-4">
-                        <asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right"> Save Family Testing</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnSave" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" ClientIDMode="Static" OnClientClick="return false;"> Save Family Testing</asp:LinkButton>
                     </div>
                     <div class="col-md-4">
-                        <asp:LinkButton runat="server" ID="btnReloadHistory" CssClass=" btn btn-warning fa fa-refresh btn-lg"> Reset Family Form</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnReset" CssClass=" btn btn-warning fa fa-refresh btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Reset Family Form</asp:LinkButton>
                     </div>
                     <div class="col-md-4">
-                        <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg"> Close Family Form</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close Family Form</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -484,27 +484,26 @@
                 debugger;
                 var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationship + "</td><td align='left'>" + baselineHivStatus + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingResults + "</td><td align='left'>" + hivTestingResultsDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                 $("#tblFamilyTesting>tbody:first").append('' + table + '');
-
                 resetElements();
-
                 e.preventDefault();
             });
-            
-            function resetElements(parameters) {
-                $("#Name").val("");
-                $("#Relationship").val("");
-                $("#Relationship").val("");
-                $("#BaselineHIVStatus").val("");
-                $("#BaselineHIVStatusDate").val("");
-                $("#hivtestingresult").val("");
-                $("#HIVTestingDate").val("");
-                $("#CccReferal").val("");
-            }
                 
             $("#btnClose").click(function () {
-                window.location.href = '/CCC/Home.aspx';
+                debugger;
+                window.location.href = '/CCC/patient/patientHome.aspx';
+            });
+            $("#tblFamilyTesting").on('click', '.btnDelete', function () {
+                debugger;
+                $(this).closest('tr').remove();
+            });
+            $("#btnReset").click(function () {
+                resetElements();
             });
         });
+
+        function resetElements(parameters) {
+            $(".input-sm").val("");
+        }
 
     </script>
 

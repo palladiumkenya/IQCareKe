@@ -1,5 +1,6 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Encounter
@@ -8,7 +9,8 @@ namespace IQCare.Web.CCC.Encounter
     {
         public int PatientId;
         PatientEncounterLogic PEL = new PatientEncounterLogic();
-        int visitId = 0;
+        public int visitId = 0;
+        public int PatientMasterVisitId = 0;
         public string visitdateval = "";
         public string LMPval = "";
         public string EDDval = "";
@@ -17,6 +19,8 @@ namespace IQCare.Web.CCC.Encounter
         {
             //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             this. PatientId = int.Parse(Session["PatientId"].ToString());
+           
+
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
@@ -53,6 +57,15 @@ namespace IQCare.Web.CCC.Encounter
                
             }
         }
+
+
+        private void GetSessionDetails()
+        {
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+        }
+
+
 
         private void loadPatientEncounter()
         {

@@ -8,6 +8,7 @@ using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.visit;
+using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
@@ -51,6 +52,7 @@ namespace DataAccess.CCC.Repository
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
         private IPatientLabTrackerRepository _patientLabTrackerRepository;
+        private IPatientLabOrderRepository _patientLabOrderRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -179,6 +181,10 @@ namespace DataAccess.CCC.Repository
         public IPatientLabTrackerRepository PatientLabTrackerRepository
         {
             get { return _patientLabTrackerRepository ?? (_patientLabTrackerRepository = new PatientLabTrackerRepository((GreencardContext)_context)); }
+        }
+        public IPatientLabOrderRepository PatientLabOrderRepository
+        {
+            get { return _patientLabOrderRepository ?? (_patientLabOrderRepository = new PatientLabOrderRepository((GreencardContext)_context)); }
         }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
