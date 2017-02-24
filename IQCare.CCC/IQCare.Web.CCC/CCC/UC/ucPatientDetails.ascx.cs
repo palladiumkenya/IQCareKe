@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.UC
             {
                 DoB = Convert.ToDateTime(x.DateOfBirth);
 
-                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.FirstName)+"</i></strong>";
+                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.LastName)+"</i></strong>";
                 if (x.Active)
                 {
                     lblStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";

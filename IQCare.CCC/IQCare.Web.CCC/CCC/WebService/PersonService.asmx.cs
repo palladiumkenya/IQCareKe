@@ -79,19 +79,71 @@ namespace IQCare.Web.CCC.WebService
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender,string dateOfBirth, string nationalId, int userId, string patientid)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender,string dateOfBirth, string nationalId, int maritalStatusId, int userId, string patientid)
         {
+            patientid = patientid == "null" ? null : patientid;
+
             try
             {
-                
-                var personLogic = new PersonManager();
-                var dob = DateTime.Parse(dateOfBirth);
-
-                PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dob, nationalId, userId);
-                Session["PersonId"] = PersonId;
-                if (PersonId > 0)
+                if (patientid !=null && int.Parse(patientid) > 0)
                 {
-                    Msg = "New Person Added successfully : PersonId=> "+PersonId;
+                    var personManager = new PersonManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
+                    int personId = patient[0].PersonId;
+
+                    
+                    personManager.UpdatePerson(firstname, middlename, lastname, gender, dateOfBirth, nationalId, userId , personId);
+                    Session["PersonId"] = personId;
+
+                    Msg = "<p>Person Updated successfully</p>";
+
+                    //PersonId = Convert.ToInt32(Session["PersonId"]);
+
+                    var maritalStatus = new PersonMaritalStatusManager();
+                    var _matStatus = maritalStatus.GetInitialPatientMaritalStatus(personId);
+
+                    int matStatusId;
+                    var lookUpLogic = new LookupLogic();
+                    matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+
+                    _matStatus.MaritalStatusId = matStatusId;
+                    _matStatus.CreatedBy = userId;
+
+                    Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
+                    if (Result > 0)
+                    {
+                        Msg += "<p>Person Marital Status Updated Successfully!</p>";
+                    }
+                }
+                else
+                {
+                    var personLogic = new PersonManager();
+                    var dob = DateTime.Parse(dateOfBirth);
+
+                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dob, nationalId,
+                        userId);
+                    Session["PersonId"] = PersonId;
+                    if (PersonId > 0)
+                    {
+                        Msg = "<p>New Person Added successfully : PersonId=> " + PersonId + " </p>";
+
+                        PersonId = Convert.ToInt32(Session["PersonId"]);
+                        var maritalStatus = new PersonMaritalStatusManager();
+                        var lookUpLogic = new LookupLogic();
+
+                        if (maritalStatusId == 0)
+                        {
+                            maritalStatusId =
+                                lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                        }
+
+                        Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId, userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Marital Status Added Successfully!</p>";
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -103,104 +155,91 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string UpdatePerson(string firstname, string middlename, string lastname, int gender, string dateOfBirth, string nationalId, int userId, string patientid)
+        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, string orphan, string inSchool, int userId, string patientid)
         {
+            patientid = patientid == "null" ? null : patientid;
+
+            bool _orphan;
+            bool _inSchool;
+
+            _orphan = orphan == "Yes" ? true : false;
+            _inSchool = inSchool == "Yes" ? true : false;
+
             try
             {
-                var personManager = new PersonManager();
-                var patientLogic = new PatientLookupManager();
-                var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                int personId = patient[0].PersonId;
-
-                Person person = new Person()
+                if (patientid !=null && int.Parse(patientid) > 0)
                 {
-                    FirstName = _utility.Encrypt(_textInfo.ToTitleCase(firstname)),
-                    MidName = _utility.Encrypt(_textInfo.ToTitleCase(middlename)),
-                    LastName = _utility.Encrypt(_textInfo.ToTitleCase(lastname)),
-                    Sex = gender,
-                    DateOfBirth = DateTime.Parse(dateOfBirth),
-                    NationalId = _utility.Encrypt(nationalId),
-                    CreatedBy = userId
-                };
-                personManager.UpdatePerson(person, personId);
-                Session["PersonId"] = personId;
+                    var personLogic = new PersonManager();
+                    var patientLogic = new PatientLookupManager();
+                    var personOvcStatusManager = new PersonOvcStatusManager();
+                    var personLookUpManager = new PersonLookUpManager();
+                    var Guardian = new List<PersonLookUp>();
 
-                Msg = "Person Updated successfully";
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return Msg;
-        }
+                    var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
+                    if (patient.Count > 0)
+                    {
+                        var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(patient[0].PersonId);
+                        if (personOVC != null)
+                        {
+                            Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
 
-        [WebMethod(EnableSession = true)]
-        public string AddPersonMaritalStatus(int personId,int maritalStatusId,int userId, string patientid)
-        {
-            try
-            {
-                PersonId =Convert.ToInt32(Session["PersonId"]);
-                var maritalStatus = new PersonMaritalStatusManager();
-                var lookUpLogic = new LookupLogic();
+                            if (Guardian.Count > 0)
+                            {
+                                personLogic.UpdatePerson(firstname, middlename, lastname, gender, dateOfBirth.ToString(), nationalId, userId, Guardian[0].Id);
+                                Session["PersonGuardianId"] = Guardian[0].Id;
 
-                if (maritalStatusId == 0)
-                {
-                    maritalStatusId = lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                                Msg = "<p>Updated Guardian Successfully</p>";
+
+                                //PersonGuardianId = Convert.ToInt32(Session["PersonGuardianId"]);
+                                //PersonId = Convert.ToInt32(Session["PersonId"]);
+
+                                var ovcStatus = new PersonOvcStatusManager();
+
+                                PatientOVCStatus patientOvcStatus = ovcStatus.GetOvcByPersonAndGuardian(patient[0].PersonId,
+                                    Guardian[0].Id);
+                                if (patientOvcStatus != null)
+                                {
+                                    patientOvcStatus.Orphan = _orphan;
+                                    patientOvcStatus.InSchool = _inSchool;
+
+                                    Result = ovcStatus.UpdatePatientOvcStatus(patientOvcStatus);
+
+                                    Msg += "<p>Updated Person Ovc Status<p>";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int guardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dateOfBirth, nationalId,
+                                userId);
+                            var ovcStatus = new PersonOvcStatusManager();
+                            var patientovc = ovcStatus.AddPatientOvcStatus(patient[0].PersonId, guardianId, _orphan, _inSchool, userId);
+
+                            if (patientovc > 0)
+                            {
+                                Msg += "<p>Added Person Ovc Status<p>";
+                            }
+                        }
+                    }
                 }
-
-                Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId,userId);
-                if (Result > 0)
+                else
                 {
-                    Msg = "Person Marital Status Added Successfully!";
-                }
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message+' '+ e.InnerException;
-            }
-            return Msg;
-        }
+                    var personLogic = new PersonManager();
+                    PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dateOfBirth,
+                        nationalId, userId);
+                    Session["PersonGuardianId"] = PersonGuardianId;
+                    if (PersonGuardianId > 0)
+                    {
+                        Msg = "<p>New Guardian Person Added successfully : GuardianId=> " + PersonGuardianId + "</p>";
 
-        [WebMethod(EnableSession = true)]
-        public string UpdatePersonMaritalStatus(int personId, int maritalStatusId, int userId, string patientid)
-        {
-            try
-            {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-                var maritalStatus = new PersonMaritalStatusManager();
-                var _matStatus = maritalStatus.GetInitialPatientMaritalStatus(PersonId);
-
-                int matStatusId;
-                var lookUpLogic = new LookupLogic();
-                matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
-
-                _matStatus.MaritalStatusId = matStatusId;
-                _matStatus.CreatedBy = userId;
-
-                Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
-                if (Result > 0)
-                {
-                    Msg = "Person Marital Status Updated Successfully!";
-                }
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return Msg;
-        }
-
-        [WebMethod(EnableSession = true)]
-        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, int userId, string patientid)
-        {
-            try
-            {
-                var personLogic = new PersonManager();
-                PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender,dateOfBirth, nationalId, userId);
-                Session["PersonGuardianId"] = PersonGuardianId;
-                if (PersonGuardianId > 0)
-                {
-                    Msg = "New Guardian Person Added successfully : GuardianId=>"+PersonGuardianId;
+                        PersonId = Convert.ToInt32(Session["PersonId"]);
+                        var ovcStatus = new PersonOvcStatusManager();
+                        Result = ovcStatus.AddPatientOvcStatus(PersonId, PersonGuardianId, _orphan, _inSchool, userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Child OVC Status Recorded Successfully</p>";
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -210,9 +249,15 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
-        [WebMethod(EnableSession = true)]
-        public string UpdatePersonGuardian(string firstname, string middlename, string lastname, int gender, DateTime dateOfBirth, string nationalId, int userId, string patientid)
+        /*[WebMethod(EnableSession = true)]
+        public string UpdatePersonGuardian(string firstname, string middlename, string lastname, int gender, DateTime dateOfBirth, string nationalId, string orphan, string inSchool, int userId, string patientid)
         {
+            bool _orphan;
+            bool _inSchool;
+
+            _orphan = orphan == "Yes" ? true : false;
+            _inSchool = inSchool == "Yes" ? true : false;
+
             try
             {
                 var personLogic = new PersonManager();
@@ -226,24 +271,55 @@ namespace IQCare.Web.CCC.WebService
                 {
                     var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(patient[0].PersonId);
                     if (personOVC != null)
+                    {
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
 
-                    if (Guardian.Count > 0)
-                    {
-                        Person person = new Person()
+                        if (Guardian.Count > 0)
                         {
-                            FirstName = _utility.Encrypt(_textInfo.ToTitleCase(firstname)),
-                            MidName = _utility.Encrypt(_textInfo.ToTitleCase(middlename)),
-                            LastName = _utility.Encrypt(_textInfo.ToTitleCase(lastname)),
-                            Sex = gender,
-                            DateOfBirth = dateOfBirth,
-                            NationalId = _utility.Encrypt(nationalId)
-                        };
+                            Person person = new Person()
+                            {
+                                FirstName = _utility.Encrypt(_textInfo.ToTitleCase(firstname)),
+                                MidName = _utility.Encrypt(_textInfo.ToTitleCase(middlename)),
+                                LastName = _utility.Encrypt(_textInfo.ToTitleCase(lastname)),
+                                Sex = gender,
+                                DateOfBirth = dateOfBirth,
+                                NationalId = _utility.Encrypt(nationalId)
+                            };
 
-                        personLogic.UpdatePerson(person, Guardian[0].Id);
-                        Session["PersonGuardianId"] = Guardian[0].Id;
+                            personLogic.UpdatePerson(person, Guardian[0].Id);
+                            Session["PersonGuardianId"] = Guardian[0].Id;
 
-                        Msg = "Updated Guardian Successfully";
+                            Msg = "<p>Updated Guardian Successfully</p>";
+
+                            //PersonGuardianId = Convert.ToInt32(Session["PersonGuardianId"]);
+                            //PersonId = Convert.ToInt32(Session["PersonId"]);
+
+                            var ovcStatus = new PersonOvcStatusManager();
+
+                            PatientOVCStatus patientOvcStatus = ovcStatus.GetOvcByPersonAndGuardian(patient[0].PersonId,
+                                Guardian[0].Id);
+                            if (patientOvcStatus != null)
+                            {
+                                patientOvcStatus.Orphan = _orphan;
+                                patientOvcStatus.InSchool = _inSchool;
+
+                                Result = ovcStatus.UpdatePatientOvcStatus(patientOvcStatus);
+
+                                Msg += "<p>Updated Person Ovc Status<p>";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int guardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dateOfBirth, nationalId,
+                            userId);
+                        var ovcStatus = new PersonOvcStatusManager();
+                        var patientovc = ovcStatus.AddPatientOvcStatus(patient[0].PersonId, guardianId, _orphan, _inSchool, userId);
+
+                        if (patientovc > 0)
+                        {
+                            Msg += "<p>Added Person Ovc Status<p>";
+                        }
                     }
                 }
             }
@@ -253,6 +329,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
         [WebMethod(EnableSession = true)]
         public string AddPersonOvcStatus(int personId,int guardianId,string orphan,string inSchool,int userId)
         {
@@ -277,10 +354,11 @@ namespace IQCare.Web.CCC.WebService
             {
                 Msg = "Error Message: " + e.Message+' '+" Exception: "+e.InnerException;
             }
-            return Msg; 
-        }
 
-        [WebMethod(EnableSession = true)]
+            return Msg; 
+        }*/
+
+        /*[WebMethod(EnableSession = true)]
         public string UpdatePersonOvcStatus(int personId, int guardianId, string orphan, string inSchool, int userId)
         {
             bool _orphan;
@@ -310,6 +388,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+        */
         [WebMethod(EnableSession = true)]
         public string AddPersonLocation(int personId, int county, int subcounty, int ward, string village, string location, string sublocation, string landmark, string nearesthealthcentre,int userId)
         {
@@ -317,25 +396,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
                 var personLocation = new PersonLocationManager();
-               Result= personLocation.AddPersonLocation(PersonId, county,subcounty,ward,village,location,sublocation,landmark, nearesthealthcentre,userId);
-               if(Result>0) { Msg = "Current Person Location Addedd successfully during !";}
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message+ ' ' + e.InnerException;
-            }
-            return Msg;
-        }
 
-        [WebMethod(EnableSession = true)]
-        public string UpdatePersonLocation(int personId, int county, int subcounty, int ward, string village, string location, string sublocation, string landmark, string nearesthealthcentre, int userId)
-        {
-            try
-            {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-                var personLocation = new PersonLocationManager();
-
-                var currentLocation =  personLocation.GetCurrentPersonLocation(PersonId);
+                var currentLocation = personLocation.GetCurrentPersonLocation(PersonId);
                 if (currentLocation.Count > 0)
                 {
                     currentLocation[0].PersonId = PersonId;
@@ -352,26 +414,65 @@ namespace IQCare.Web.CCC.WebService
 
                     Msg = "Person Location successfully updated";
                 }
-
-                
+                else
+                {
+                    Result = personLocation.AddPersonLocation(PersonId, county, subcounty, ward, village, location,
+                        sublocation, landmark, nearesthealthcentre, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Current Person Location Addedd successfully during !";
+                    }
+                }
             }
             catch (Exception e)
             {
-                Msg = e.Message;
+                Msg = e.Message+ ' ' + e.InnerException;
             }
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string AddPersonContact(int personId,string physicalAddress,string mobileNumber,string alternativeNumber,string emailAddress,int userId)
+        public string AddPersonContact(int personId,string physicalAddress,string mobileNumber,string alternativeNumber,string emailAddress,int userId, string patientid)
         {
+            patientid = patientid == "null" ? null : patientid;
+            
             try
             {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-                var personContact = new PersonContactManager();
-                Result = personContact.AddPersonContact(PersonId, physicalAddress, mobileNumber,alternativeNumber,emailAddress,userId);
-                if (Result > 0)
+                if (patientid != null && int.Parse(patientid) > 0)
                 {
-                    Msg = "Person Contact Addedd successuly!";
+                    PersonId = Convert.ToInt32(Session["PersonId"]);
+                    var personContact = new PersonContactManager();
+
+                    if (alternativeNumber != null)
+                    {
+                        alternativeNumber = _utility.Encrypt(alternativeNumber);
+                    }
+                    if (emailAddress != null)
+                    {
+                        emailAddress = _utility.Encrypt(emailAddress);
+                    }
+
+                    PersonContact perContact = new PersonContact
+                    {
+                        PersonId = personId,
+                        PhysicalAddress = _utility.Encrypt(physicalAddress),
+                        MobileNumber = _utility.Encrypt(mobileNumber),
+                        AlternativeNumber = alternativeNumber,
+                        EmailAddress = emailAddress
+                    };
+
+                    personContact.UpdatePatientContact(perContact);
+                    Msg = "Updated Person Contact Successfully";
+                }
+                else
+                {
+                    PersonId = Convert.ToInt32(Session["PersonId"]);
+                    var personContact = new PersonContactManager();
+                    Result = personContact.AddPersonContact(PersonId, physicalAddress, mobileNumber, alternativeNumber,
+                        emailAddress, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Person Contact Addedd successuly!";
+                    }
                 }
             }
             catch (Exception exception)
@@ -382,60 +483,66 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string UpdatePersonContact(int personId, string physicalAddress, string mobileNumber, string alternativeNumber, string emailAddress, int userId)
-        {
-            try
-            {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-                var personContact = new PersonContactManager();
-
-                if (alternativeNumber != null)
-                {
-                    alternativeNumber = _utility.Encrypt(alternativeNumber);
-                }
-                if (emailAddress != null)
-                {
-                    emailAddress = _utility.Encrypt(emailAddress);
-                }
-
-                PersonContact perContact = new PersonContact
-                {
-                    PersonId = personId,
-                    PhysicalAddress = _utility.Encrypt(physicalAddress),
-                    MobileNumber = _utility.Encrypt(mobileNumber),
-                    AlternativeNumber = alternativeNumber,
-                    EmailAddress = emailAddress
-                };
-
-                personContact.UpdatePatientContact(perContact);
-                Msg = "Updated Person Contact Successfully";
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return Msg;
-        }
-        [WebMethod(EnableSession = true)]
         public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, int mobileContact, string patientid)
         {
             try
             {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-               
-                var personLogic = new PersonManager();
-                PersonTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstname, middlename, lastname, gender ,nationalId, userId);
-                Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+                patientid = patientid == "null" ? null : patientid;
 
-                if (PersonTreatmentSupporterId > 0)
+                if (patientid != null && int.Parse(patientid) > 0)
                 {
-                    Msg = "New Treatment Supporter Person Added Successfully!";
+                    var personLogic = new PersonManager();
+                    var patientLogic = new PatientLookupManager();
+                    var patientTreatmentSupporter = new PatientTreatmentSupporterManager();
 
-                    var treatmentSupporter = new PatientTreatmentSupporterManager();
-                    Result = treatmentSupporter.AddPatientTreatmentSupporter(PersonId, PersonTreatmentSupporterId, mobileContact, userId);
-                    if (Result > 0)
+                    var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
+                    int personId = patient[0].PersonId;
+                    var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
+
+                    if (listPatientTreatmentSupporter.Count > 0)
                     {
-                        Msg = "Person Treatement Supported Addeded Successfully!";
+                        personLogic.UpdatePerson(firstname, middlename, lastname, gender, DateTime.Now.ToString(), nationalId, userId, listPatientTreatmentSupporter[0].SupporterId);
+
+                        Session["PersonTreatmentSupporterId"] = listPatientTreatmentSupporter[0].SupporterId;
+
+                        if (listPatientTreatmentSupporter[0].SupporterId > 0)
+                        {
+                            var treatmentSupporterManager = new PatientTreatmentSupporterManager();
+                            var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                            if (treatmentSupporter.Count > 0)
+                            {
+                                treatmentSupporter[0].PersonId = personId;
+                                treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
+                                treatmentSupporter[0].MobileContact = mobileContact;
+
+                                treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
+
+                                Msg = "Person Treatement Supported Updated Successfully";
+                            }
+                        }
+                        Msg = "Person Treatment Supporter Updated Successfully";
+                    }
+                }
+                else
+                {
+                    PersonId = Convert.ToInt32(Session["PersonId"]);
+
+                    var personLogic = new PersonManager();
+                    PersonTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstname, middlename,
+                        lastname, gender, nationalId, userId);
+                    Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+
+                    if (PersonTreatmentSupporterId > 0)
+                    {
+                        Msg = "New Treatment Supporter Person Added Successfully!";
+
+                        var treatmentSupporter = new PatientTreatmentSupporterManager();
+                        Result = treatmentSupporter.AddPatientTreatmentSupporter(PersonId, PersonTreatmentSupporterId,
+                            mobileContact, userId);
+                        if (Result > 0)
+                        {
+                            Msg = "Person Treatement Supported Addeded Successfully!";
+                        }
                     }
                 }
             }
@@ -443,61 +550,6 @@ namespace IQCare.Web.CCC.WebService
             {
                 Msg = e.Message + ' ' +e.InnerException;
             }
-            return Msg;
-        }
-
-        [WebMethod(EnableSession = true)]
-        public string UpdatePersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender, string nationalId, int userId, int mobileContact, string patientid)
-        {
-            try
-            {
-                var personLogic = new PersonManager();
-                var patientLogic = new PatientLookupManager();
-                var patientTreatmentSupporter = new PatientTreatmentSupporterManager();
-                
-                var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                int personId = patient[0].PersonId;
-                var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
-
-                if (listPatientTreatmentSupporter.Count > 0)
-                {
-
-                    Person person = new Person()
-                    {
-                        FirstName = _utility.Encrypt(_textInfo.ToTitleCase(firstname)),
-                        MidName = _utility.Encrypt(_textInfo.ToTitleCase(middlename)),
-                        LastName = _utility.Encrypt(_textInfo.ToTitleCase(lastname)),
-                        Sex = gender,
-                        DateOfBirth = DateTime.Now,
-                        NationalId = _utility.Encrypt(nationalId)
-                    };
-                    personLogic.UpdatePerson(person, listPatientTreatmentSupporter[0].SupporterId);
-
-                    Session["PersonTreatmentSupporterId"] = listPatientTreatmentSupporter[0].SupporterId;
-
-                    if (listPatientTreatmentSupporter[0].SupporterId > 0)
-                    {
-                        var treatmentSupporterManager = new PatientTreatmentSupporterManager();
-                        var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
-                        if (treatmentSupporter.Count > 0)
-                        {
-                            treatmentSupporter[0].PersonId = personId;
-                            treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
-                            treatmentSupporter[0].MobileContact = mobileContact;
-
-                            treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
-
-                            Msg = "Person Treatement Supported Updated Successfully";
-                        }
-                    }
-                    Msg = "Person Treatment Supporter Updated Successfully";
-                }
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-
             return Msg;
         }
 
@@ -575,10 +627,24 @@ namespace IQCare.Web.CCC.WebService
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
                 var personPoulation = new PatientPopulationManager();
-                Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, populationCategory, userId);
-                if (Result > 0)
+                var population = personPoulation.GetCurrentPatientPopulations(PersonId);
+                if (population.Count > 0)
                 {
-                    Msg = "Person OVC Status Recorded Successfully!";
+                    population[0].PopulationCategory = populationCategory;
+                    population[0].PopulationType = populationtypeId;
+
+                    personPoulation.UpdatePatientPopulation(population[0]);
+
+                    Msg = "Person Population Edited Successfully.";
+
+                }
+                else
+                {
+                    Result = personPoulation.AddPatientPopulation(PersonId, populationtypeId, populationCategory, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Person Population Status Recorded Successfully!";
+                    }
                 }
             }
             catch (Exception e)
@@ -586,23 +652,6 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message+' '+ e.InnerException;
             }
             return Msg;
-        }
-
-        [WebMethod(EnableSession = true)]
-        public string UpdatePersonPopulation(int patientId, string populationtypeId, int populationCategory, int userId)
-        {
-            try
-            {
-                PersonId = Convert.ToInt32(Session["PersonId"]);
-                var personPoulation = new PatientPopulationManager();
-                //personPoulation.UpdatePatientPopulation()
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            return null;
         }
 
         [WebMethod(EnableSession = true)]

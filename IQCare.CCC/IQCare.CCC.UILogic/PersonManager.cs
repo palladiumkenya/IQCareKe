@@ -71,8 +71,19 @@ namespace IQCare.CCC.UILogic
             return retval;
         }
 
-        public void UpdatePerson(Person person,int id)
+        public void UpdatePerson(string firstname, string middlename, string lastname, int gender, string dateOfBirth, string nationalId, int userId, int id)
         {
+            Person person = new Person()
+            {
+                FirstName = util.Encrypt(_textInfo.ToTitleCase(firstname)),
+                MidName = util.Encrypt(_textInfo.ToTitleCase(middlename)),
+                LastName = util.Encrypt(_textInfo.ToTitleCase(lastname)),
+                Sex = gender,
+                DateOfBirth = DateTime.Parse(dateOfBirth),
+                NationalId = util.Encrypt(nationalId),
+                CreatedBy = userId
+            };
+
             _mgr.UpdatePerson(person,id);
         }
 

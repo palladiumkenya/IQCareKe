@@ -31,8 +31,12 @@ namespace BusinessProcess.CCC
 
         public List<PersonLocation> GetCurrentPersonLocation(int persoId)
         {
+            return _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == persoId && x.DeleteFlag == false).ToList();
+                /*personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
+                .OrderBy(x => x.Id)
+                .FirstOrDefault();
             var myList = _unitOfWork.PersonLocationRepository.GetPersonCurrentLocation(persoId);
-            return myList;
+            return myList;*/
         }
 
         public List<PersonLocation> GetPersonLocationAll(int personId)

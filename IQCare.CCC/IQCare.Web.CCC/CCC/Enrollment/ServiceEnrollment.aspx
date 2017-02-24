@@ -346,19 +346,20 @@
                     return false;
                 } else {
                     var entryPointId = $("#entryPoint").val();
-                    addPatient(_fp, entryPointId);
+                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'));
                 }
 
                 //addPatient(_fp);
             });
 
-            function addPatient(_fp, entryPointId) {
+            function addPatient(_fp, entryPointId, enrollmentDate) {
                 var enrollments = JSON.stringify(_fp);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '"+ entryPointId + "'}",
+                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

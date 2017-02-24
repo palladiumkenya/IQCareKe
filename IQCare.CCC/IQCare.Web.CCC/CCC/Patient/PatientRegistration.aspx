@@ -208,7 +208,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yr) Orphan</label></div>
                                         <div class="col-md-12">
-                                            <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true"/>    
+                                            <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>    
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@
                                 <div class="col-md-3">
                                         <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
                                         <div class="col-md-12">
-                                            <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" />
+                                            <asp:TextBox runat="server" type="text" id="GurdianFNames" class="form-control input-sm" placeholder="gurdian first name.." ClientIDMode="Static" data-parsley-required="true" />
                                         </div>
                                 </div>
                                               
@@ -271,7 +271,7 @@
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
                                     <div class="col-md-12">
-                                        <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="GurdianLName" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="guardian last name" data-parsley-required="true"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -280,7 +280,7 @@
                                         <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" />
                                     </div>
                                 </div>
-                                </div>           
+                            </div>           
                           
                                            
 	                    </div><%-- .step-pane--%>
@@ -373,18 +373,18 @@
                                           <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-required="true" data-parsley-length="[8,100]" ClientIDMode="Static"/>
                                      </div>     
                                 </div>
-                                
-                                <div class="col-md-2">
+                               
+                               <div class="col-md-2">
                                     <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox  runat="server" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[10,14]" />
+                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
                                     </div>         
                                </div>
                                
                                 <div class="col-md-2">
                                     <div class="col-md-12"><label class="control-label pull-left">Alt. Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox runat="server" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" placeholder="alternative mobile no..." ClientIDMode="Static"  />
+                                         <asp:TextBox runat="server" type="text" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" placeholder="alternative mobile no..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
                                     </div>       
                               </div>
 
@@ -432,12 +432,21 @@
                             </div>
                                    
                            <div class="col-md-12 form-group">
-                                 <div class="col-md-3">
+                               
+                                <!-- <div class="col-md-3">
                                       <div class="col-md-12"><label class="control-label pull-left">Mobile Contact </label></div>
                                       <div class="col-md-12">
-                                           <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContacts" placeholder="mobile no.." data-parsley-required="true" data-parsley-length="[8,14]"></asp:TextBox>
+                                           <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContactsz" placeholder="mobile no.." data-parsley-required="true" data-parsley-length="[8,14]"></asp:TextBox>
                                       </div>
-                                 </div> 
+                                 </div>-->
+                               
+                               <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Mobile Contact.</label></div>
+                                    <div class="col-md-12">
+                                         <asp:TextBox  runat="server" type="text" id="TSContacts" class="form-control input-sm" placeholder="Mobile No..." data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
+                                    </div>         
+                               </div>
+
                                  <div class="col-md-3"></div>
                                  <div class="col-md-3"></div>
                                  <div class="col-md-3"></div>
@@ -458,20 +467,22 @@
                                 <div class="col-md-4">
                                                     
                                      <div class="form-group"><div class="col-md-12"><label class="control-label pull-left">Select Population type</label></div></div>
-                                                        
+
                                      <div class="col-md-12 radio">
+                                         <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
                                           <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
-                                          <input class="sr-only" id="rdbGenPopulation" name="Population" type="radio" value="General Population">
                                               General Population
                                           </label>
                                      </div>
                                      
                                      <div class="col-md-12 radio checked">
                                           <label class="radio-custom pull-left" data-initialize="radio" id="KeyPopulation">
-                                          <input class="sr-only"  id="rdbKeyPopulation" name="Population" type="radio" value="Key Population">
+                                              <input type="radio" name="Population" value="Key Population" class="sr-only" id="rdbKeyPopulation" />
+                                              
                                                 Key population
                                           </label>
                                      </div>
+
                                 </div>
                                 
                                 <div class="col-md-3">
@@ -582,30 +593,13 @@
                             /* add constraints based on age*/                                         
                             if ($('#datastep1').parsley().validate()) {
                                 if (personAge >= 18) {
-                                    $.when(addPerson()).then(function(){
-                                        setTimeout(function(){
-                                            addPersonMaritalStatus();
-                                        }, 2000);
-                                        //addPersonMaritalStatus();
-                                    });                                   
+                                    $.when(addPerson()).then(function(){});                                   
                                 } else {
                                     $.when(addPerson()).then(function(){
                                         setTimeout(function(){
                                             addPersonGaurdian();
-                                            $.when(addPersonMaritalStatus()).then(function(){
-                                                //addPersonOvcStatus();
-                                                setTimeout(function(){
-                                                    addPersonOvcStatus();
-                                                }, 2000);
-                                            });
-                                        }, 2000);
-                                        /*addPersonGaurdian();
-                                        $.when(addPersonMaritalStatus()).then(function(){
-                                            addPersonOvcStatus();
-                                        });*/
+                                        }, 2000);                            
                                     });
-                                    //$.when(addPerson()).then(addPersonGaurdian());                                
-                                    //$.when(addPersonMaritalStatus()).then(addPersonOvcStatus());
                                 }
                             } else {
                                 stepError = $('.parsley-error').length === 0;
@@ -780,21 +774,12 @@
                     var natId = $("#<%=NationalId.ClientID%>").val();
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
-
-                    //Set up url for adding a person
-                    var url = null;
-
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePerson";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPerson";
-                    }
-                    
+                    var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
 
                     $.ajax({
                         type: "POST",
-                        url: url,
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
+                        url: "../WebService/PersonService.asmx/AddPerson",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "', 'maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -815,21 +800,14 @@
                     var glname = $("#<%=GurdianLName.ClientID%>").val();
                     var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
-
-                    //Set up url for adding a person
-                    var url = null;
-
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonGuardian";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonGuardian";
-                    }
+                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
+                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
 
 
                     $.ajax({
                         type: "POST",
-                        url: url,
-                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','userId':'" + userId + "', 'patientid':'" + isPatientSet + "'}",
+                        url: "../WebService/PersonService.asmx/AddPersonGuardian",
+                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "', 'patientid':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -851,18 +829,9 @@
                    var mobileContact = $("#<%=TSContacts.ClientID%>").val();
                    var natId = 999999;
 
-                   //Set up url for adding a person
-                   var url = null;
-
-                   if (isPatientSet > 0) {
-                       url = "../WebService/PersonService.asmx/UpdatePersonTreatmentSupporter";
-                   } else {
-                       url = "../WebService/PersonService.asmx/AddPersonTreatmentSupporter";
-                   }
-
                     $.ajax({
                         type: "POST",
-                        url: url,
+                        url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
                         data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -971,17 +940,10 @@
                     var subLocation = $("#<%=sublocation.ClientID%>").val();
                     var landmark = $("#<%=PatientLandmark.ClientID%>").val();
                     var nearestHc = $("#<%=NearestHealthCentre.ClientID%>").val();
-
-                    var url = null;
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonLocation";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonLocation";
-                    }
               
                     $.ajax({
                         type: "POST",
-                        url: url,
+                        url: "../WebService/PersonService.asmx/AddPersonLocation",
                         data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':'" + ward + "','village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1002,16 +964,11 @@
                     var emailAddress = $("#<%=PatientEmailAddress.ClientID%>").val();
 
                     var url = null;
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonContact";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonContact";
-                    }
 
                     $.ajax({
                         type: "POST",
-                        url: url,
-                        data: "{'personId':'" + personId + "','physicalAddress':'" + postalAddress + "','mobileNumber':'" + mobileNumber + "','alternativeNumber':'" + altMobile + "','emailAddress':'" + emailAddress + "','userId':'" + userId + "'}",
+                        url: "../WebService/PersonService.asmx/AddPersonContact",
+                        data: "{'personId':'" + personId + "','physicalAddress':'" + postalAddress + "','mobileNumber':'" + mobileNumber + "','alternativeNumber':'" + altMobile + "','emailAddress':'" + emailAddress + "','userId':'" + userId + "','patientid':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1025,20 +982,13 @@
 
                 function addPersonPopulation() {
                     var isPatientSet = $.urlParam('PatientId');
-                    //var populationType = $("input[name='Population']").val();
-                    var populationType = $('input[name="Population"]').value;
+                    var populationType = $("input[name='Population']").val();
+                    //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
-
-                    var url = null;
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonPopulation";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonPopulation";
-                    }
 
                     $.ajax({
                         type: "POST",
-                        url: url,
+                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
                         data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -1058,8 +1008,10 @@
                         if (itemName === 'General Population') {
                             $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
                             $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
+                            $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
                         } else {
                             itemName = "KeyPopulation";
+                            $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', false);
                             $.ajax({
                                 type: "POST",
                                 url: "../WebService/LookupService.asmx/GetLookUpItemByName",
@@ -1201,7 +1153,14 @@
                             $("#tsGender").val(patientDetails.tsGender);
                             $("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
                             /*Key Population*/
-                            $('input[name="Population"]').value = patientDetails.population;
+                            //$('input[name="Population"]').value = patientDetails.population;
+                            //("input[name='Population']:checked").value = patientDetails
+                            // .population;
+                            if (patientDetails.population == "General Population") {
+                                $("#rdbGenPopulation").attr('checked','checked');
+                            }else if (patientDetails.population=="Key Population") {
+                                $("#rdbKeyPopulation").attr('checked','checked');
+                            }
                             $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
 
                             personAgeRule();
