@@ -144,7 +144,6 @@
                     <thead>
                         <tr >
                             <th>#</th>
-                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"> Enrollment Date</i> </th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollement Identifier</i> </th>
                              <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollment Number </i></th>
@@ -167,7 +166,7 @@
                           <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static"> Enroll and Register New</asp:LinkButton>
                      </div>
                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static"> Close Enrollemnt</asp:LinkButton>
+                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
                      </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -231,7 +230,7 @@
             });
 
             $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>;
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
             });
 
 
@@ -281,7 +280,7 @@
                     
                     identifierList.push("" + identifier + "");
                     enrollmentNoList.push("" + enrollmentNo + "");
-                    var tr = "<tr><td align='left'></td><td align='left'>" + moment(enrollmentDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    var tr = "<tr><td align='left'></td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblEnrollment>tbody:first").append('' + tr + '');
 
                     resetElements();
@@ -347,19 +346,20 @@
                     return false;
                 } else {
                     var entryPointId = $("#entryPoint").val();
-                    addPatient(_fp, entryPointId);
+                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'));
                 }
 
                 //addPatient(_fp);
             });
 
-            function addPatient(_fp, entryPointId) {
+            function addPatient(_fp, entryPointId, enrollmentDate) {
                 var enrollments = JSON.stringify(_fp);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '"+ entryPointId + "'}",
+                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

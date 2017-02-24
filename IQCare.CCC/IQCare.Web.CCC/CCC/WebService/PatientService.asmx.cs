@@ -7,6 +7,7 @@ using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Services;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
@@ -32,6 +33,9 @@ namespace IQCare.Web.CCC.WebService
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
             decimal weight, decimal bmi, decimal headCircumference)
         {
+            //ToDo remove this section
+            if (patientMasterVisitId == 0)
+                patientMasterVisitId = 1;
             try
             {
                 PatientVital patientVital = new PatientVital()
@@ -67,15 +71,10 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
         {
+
+            //ToDo remove this section
             if (patientMasterVisitId == 0)
-            {
-                PatientMasterVisit visit = new PatientMasterVisit()
-                {
-                    PatientId = patientId,
-                    Active = true,
-                };
-                patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
-            }
+                patientMasterVisitId = 1;
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,

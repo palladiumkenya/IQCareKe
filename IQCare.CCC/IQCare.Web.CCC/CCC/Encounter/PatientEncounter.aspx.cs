@@ -1,5 +1,6 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Encounter
@@ -8,7 +9,8 @@ namespace IQCare.Web.CCC.Encounter
     {
         public int PatientId;
         PatientEncounterLogic PEL = new PatientEncounterLogic();
-        int visitId = 0;
+        public int visitId = 0;
+        public int PatientMasterVisitId = 0;
         public string visitdateval = "";
         public string LMPval = "";
         public string EDDval = "";
@@ -17,6 +19,8 @@ namespace IQCare.Web.CCC.Encounter
         {
             //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             this. PatientId = int.Parse(Session["PatientId"].ToString());
+           
+
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
@@ -54,10 +58,19 @@ namespace IQCare.Web.CCC.Encounter
             }
         }
 
+
+        private void GetSessionDetails()
+        {
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+        }
+
+
+
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(visitId, Session["PatientId"].ToString());
+            pce = PEL.loadPatientEncounter(visitId.ToString(), Session["PatientId"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
@@ -80,11 +93,11 @@ namespace IQCare.Web.CCC.Encounter
             stiPartnerNotification.SelectedValue = pce.STIPartnerNotification;
 
             ////PATIENT MANAGEMENT
-            foreach(ListItem item in cblPHDP.Items)
+            foreach (ListItem item in cblPHDP.Items)
             {
                 for (int i = 0; i < pce.phdp.Length; i++)
                 {
-                    if(item.Value == pce.phdp[i])
+                    if (item.Value == pce.phdp[i])
                     {
                         item.Selected = true;
                     }

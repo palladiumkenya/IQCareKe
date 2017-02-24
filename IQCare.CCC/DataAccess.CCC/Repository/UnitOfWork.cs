@@ -8,6 +8,7 @@ using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.visit;
+using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
@@ -46,10 +47,12 @@ namespace DataAccess.CCC.Repository
         private ILookupLabs _lookupLabsRepository;
         private ILookupPreviousLabs _lookupPreviousLabsRepository;
         private IPersonLookUpRepository _personLookUpRepository;
+        private IPersonContactLookUpRepository _personContactLookUpRepository;
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
         private IPatientLabTrackerRepository _patientLabTrackerRepository;
+        private IPatientLabOrderRepository _patientLabOrderRepository;
 
         /* Enrollment */
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
@@ -68,6 +71,7 @@ namespace DataAccess.CCC.Repository
         private IPatientTransferInRepository _patientTransferInRepository;
         private IPatientBaselineAssessmentRepository _patientBaselineAssessmentRepository;
         private IPatientVaccinationRepository _patientVaccinationRepository;
+        private IPatientHivTestingRepository _patientHivTestingRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
 
         /*Appointment*/
@@ -180,6 +184,10 @@ namespace DataAccess.CCC.Repository
         {
             get { return _patientLabTrackerRepository ?? (_patientLabTrackerRepository = new PatientLabTrackerRepository((GreencardContext)_context)); }
         }
+        public IPatientLabOrderRepository PatientLabOrderRepository
+        {
+            get { return _patientLabOrderRepository ?? (_patientLabOrderRepository = new PatientLabOrderRepository((GreencardContext)_context)); }
+        }
 
         public IPatientEnrollmentRepository PatientEnrollmentRepository
         {
@@ -266,6 +274,15 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+        public IPersonContactLookUpRepository PersonContactLookUpRepository
+        {
+            get
+            {
+                return _personContactLookUpRepository ??
+                       (_personContactLookUpRepository = new PersonContactLookUpRepository((LookupContext) _context));
+            }
+        }
+
         public IPatientAppointmentRepository PatientAppointmentRepository
         {
             get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
@@ -285,6 +302,11 @@ namespace DataAccess.CCC.Repository
                            new PatientTreatmentInitiationRepository((GreencardContext) _context));
             }
         }
+        public IPatientHivTestingRepository PatientHivTestingRepository
+        {
+            get {return _patientHivTestingRepository??(_patientHivTestingRepository = new PatientHivTestingRepository((GreencardContext)_context));}
+        }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -295,5 +317,6 @@ namespace DataAccess.CCC.Repository
             _context.Dispose();
         }
 
+        
     }
 }

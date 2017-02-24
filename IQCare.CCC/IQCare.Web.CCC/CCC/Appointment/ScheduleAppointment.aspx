@@ -186,10 +186,10 @@
                         <asp:LinkButton runat="server" ID="btnSaveAppointment" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Appointment </asp:LinkButton>
                     </div>
                     <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Form  </asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset Form  </asp:LinkButton>
                     </div>
                     <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Appointment </asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close Appointment </asp:LinkButton>
                     </div>
 
                 </div>
@@ -208,11 +208,19 @@
 
         $(document).ready(function () {
             $("#btnSaveAppointment").click(function () {
-                addPatientAppointment();
+                if ($('#vitalsform').parsley().validate()) {
+                    addPatientAppointment();
+                } else {
+                    return false;
+                }
             });
-            /*$("#btnReset").click(function () {
+            $("#btnReset").click(function () {
                 resetFields();
-            });*/
+            });
+            $("#btnCancel").click(function () {
+                debugger;
+                window.location.href = '/CCC/patient/patientHome.aspx';
+            });
         });
 
         function addPatientAppointment() {
@@ -234,19 +242,21 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Appointment saved successfully");
-                    //resetFields();
+                    resetFields();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Appointment not saved");
                 }
             });
         }
-        function resetFields() {
-            document.getElementById("ServiceArea").value = '';
-            document.getElementById("Reason").value = '';
-            document.getElementById("description").value = '';
-            document.getElementById("status").value = '';
-            document.getElementById("PersonAppointmentDate").value = '';
+
+        function resetFields(parameters) {
+            $("#ServiceArea").val("");
+            $("#Reason").val("");
+            $("#DifferentiatedCare").val("");
+            $("#description").val("");
+            $("#status").val("");
+            $("#AppointmentDate").val("");
         }
     </script>
 </asp:Content>

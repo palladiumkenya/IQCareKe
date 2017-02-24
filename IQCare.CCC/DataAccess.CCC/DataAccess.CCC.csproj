@@ -77,10 +77,12 @@
     <Compile Include="Interface\Baseline\IPatientHivDiagnosisRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientDisclosureRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientHivTestingRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTransferInRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientBaselineAssessmentRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientLabOrderRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Interface\Lookup\ILookupLabs.cs" />
     <Compile Include="Interface\Lookup\ILookupPreviousLabs.cs" />
     <Compile Include="Interface\Lookup\IPatientLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPersonContactLookUpRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonLookUpRepository.cs" />
     <Compile Include="Interface\Patient\IPatientAppointmentRepository.cs" />
     <Compile Include="Interface\Patient\IPatientFamilyTestingRepository.cs" />
@@ -111,13 +114,16 @@
     <Compile Include="Repository\Baseline\PatientHivDiagnosisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientDisclosureRepository.cs" />
     <Compile Include="Repository\Baseline\PatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientHivTestingRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTransferInRepository.cs" />
     <Compile Include="Repository\Baseline\PatientBaselineAssessmentRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientLabOrderRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
     <Compile Include="Repository\Patient\PatientAppointmentRepository.cs" />
@@ -154,9 +160,7 @@
     <Compile Include="Repository\visit\PatientLabTrackerRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Encounter\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
       <Project>{bbcc4817-4e69-4722-a560-8988a795ce50}</Project>

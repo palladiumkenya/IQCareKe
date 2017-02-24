@@ -88,12 +88,13 @@
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
-    <Compile Include="PatientFamilyTestingManager.cs" />
+    <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
     <Compile Include="PatientVitalsManager.cs" />
+    <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />

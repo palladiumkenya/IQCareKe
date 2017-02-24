@@ -84,7 +84,7 @@
     <Compile Include="Baseline\BPatientHivDiagnosis.cs" />
     <Compile Include="Baseline\BPatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\BPatientVaccination.cs" />
-    <Compile Include="Baseline\BPatientFamilyTestingManager.cs" />
+    <Compile Include="Baseline\BPatientHivTestingManager.cs" />
     <Compile Include="Baseline\BPatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\BPatientTransferInManager.cs" />
     <Compile Include="BLookupManager.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
+    <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
     <Compile Include="Patient\BPatient.cs" />
