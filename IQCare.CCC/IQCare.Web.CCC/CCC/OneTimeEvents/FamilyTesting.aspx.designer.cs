@@ -139,22 +139,22 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.HtmlControls.HtmlTable tblFamilyTesting;
         
         /// <summary>
-        /// btnOneTimeEventsTracker control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnOneTimeEventsTracker;
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
         
         /// <summary>
-        /// btnReloadHistory control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnReloadHistory;
+        protected global::System.Web.UI.WebControls.LinkButton btnReset;
         
         /// <summary>
         /// btnClose control.
