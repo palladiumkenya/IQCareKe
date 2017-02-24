@@ -57,10 +57,11 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientHivEnrollmentBaseline> PatientHivEnrollmentBaselines { get; set; }
         public DbSet<PatientHivTesting> PatientHivTestings { get; set; }
         public DbSet<PatientTransferIn> PatientTransferIns { get; set; }
-        public DbSet<DiagnosisArvHistory> DiagnosisArvHistory { get; set; }
-        public DbSet<PatientArtInitiationBaseline> PatientArtInitiation { get; set; }
-        public DbSet<PatientArtUseHistory> PatientArtUseHistory { get; set; }
+        public DbSet<PatientHivDiagnosis> DiagnosisArvHistory { get; set; }
+        public DbSet<PatientBaselineAssessment> PatientArtInitiation { get; set; }
+        public DbSet<PatientArvHistory> PatientArtUseHistory { get; set; }
         public DbSet<INHProphylaxis> INHProphylaxis { get; set; }
+        public DbSet<PatientTreatmentInitiation> PatientTreatmentInitiations { get; set; }
 
 
         //Encounter

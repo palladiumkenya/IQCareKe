@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Baseline
 {
     public class PatientFamilyTestingManager
     {
-        private readonly IPatientHvTestingManager _patientHvTesting = (IPatientHvTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientArtInitiationBaselineManager, BusinessProcess.CCC");
+        private readonly IPatientHivTestingManager _patientHvTesting = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientArtInitiationBaselineManager, BusinessProcess.CCC");
         private int _result;
 
         public int AddFamilyHivTesting(int personId, int patientMasterVisitId, int baselineResult, DateTime baselineDate,

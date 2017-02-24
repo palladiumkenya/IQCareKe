@@ -7,7 +7,6 @@ using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Services;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
@@ -73,7 +72,6 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisit visit = new PatientMasterVisit()
                 {
                     PatientId = patientId,
-                    Start = DateTime.Now,
                     Active = true,
                 };
                 patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);

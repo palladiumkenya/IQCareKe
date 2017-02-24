@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientFinder.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientFinder" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
-         <div class="col-md-12 bs-callout bs-callout-info" id="searchGrid">
+         <div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-info" id="searchGrid">
               <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12">
@@ -61,14 +61,14 @@
                               <div class="col-md-4"></div>
                               <div class="col-md-4"></div> 
                               <div class="col-md-4">
-                                   <div class="col-md-4">
+                                   <div class="col-md-4 col-xs-12 col-sm-12">
                                         <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
                                     </div>
-                                   <div class="col-md-4">
+                                   <div class="col-md-4 col-xs-12 col-sm-12">
                                         <asp:LinkButton runat="server" ID="btnReset" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-warning btn-lg fa fa-refresh"> Reset Find</asp:LinkButton>
 
                                   </div>
-                                   <div class="col-md-4">
+                                   <div class="col-md-4 col-xs-12 col-sm-12">
                                         <asp:LinkButton runat="server" ClientIDMode="Static" OnClientClick="return false" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times"> Close Find </asp:LinkButton>
                                    </div>
 

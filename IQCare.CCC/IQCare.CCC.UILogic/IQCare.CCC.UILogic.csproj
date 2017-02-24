@@ -73,11 +73,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
-    <Compile Include="Baseline\PatientArtInitiationBaslineManager.cs" />
-    <Compile Include="Baseline\PatientArtUseHistoryManager.cs" />
+    <Compile Include="Baseline\PatientBaslineAssessmentManager.cs" />
+    <Compile Include="Baseline\PatientArvHistoryManager.cs" />
     <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
+    <Compile Include="Baseline\PatientHivDiagnosisManager.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
+    <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
     <Compile Include="Enrollment\PatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\PatientEntryPointManager.cs" />

@@ -26,7 +26,6 @@ namespace IQCare.Web.CCC.UC
                 PatientMasterVisit visit = new PatientMasterVisit()
                 {
                     PatientId = PatientId,
-                    Start = DateTime.Now,
                     Active = true,
                 };
                 PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);

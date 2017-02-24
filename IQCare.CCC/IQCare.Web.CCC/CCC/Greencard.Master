@@ -161,18 +161,18 @@
                                   <span class="fa fa-arrow-circle-o-right fa-2x pull-left text-info"></span>Start Encounter</asp:LinkButton>--%>
                               
                                 <a href="#" id="menuStartEncounter" class="list-group-item" onclick="return false">
-                                    <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-info"></span> <strong class="text-success">Start Clinical Encounter </strong>
+                                    <span class="fa fa-sign-in fa-2x pull-left text-warning"></span> <strong class="text-success">Patient Checkin </strong>
                                 </a>
                               
                                <a href='<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>' id="menuNewEncounter" class="list-group-item" >
                                     <span class="fa fa-exchange fa-1x pull-left text-info"></span> New Encounter 
-                                </a>--%>
+                                </a>
                                <asp:LinkButton ID="menuNewEncounter" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
-                                  <span class="fa fa-exchange fa-1x pull-left text-info"></span>New Encounter</asp:LinkButton>
+                                  <span class="fa fa-exchange fa-1x pull-left text-info"></span>Patient Clinical Encounter</asp:LinkButton>
 
      
                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" class="list-group-item" >
-                                    <span class="fa fa-times-circle-o fa-1x pull-left text-danger"></span><strong class="text-danger"> Stop Clinical Encounter </strong>
+                                    <span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
                                 </a>
 
 
@@ -244,27 +244,39 @@
             }
 
             $("#menuStartEncounter").click(function() {
-                if (patientId < 1) {
-                    toastr.error("No Patient Selected to start Encounter", "==Patient Encounter Start Alert==");
-                    return false;
-                };
-                if (startEncounter > 0) {
-                    toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
-                    return false;
-                } else {
-                   
-                   // toastr.info("Encounter Start Activated", "Encounter Start Alert");
-                    encounterStarted();
-                    
-                    $(this).hide();
-                    startEncounter = 1; /* denotes an active encounter */
-                    stopEncounter = 0;
-                    toastr.info("Encounter Start Successfully", "Encounter Start Alert");
-                };
 
+                if (patientId < 1) {
+                    toastr.error("No patient selected for Service checkin!");
+                    return false;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientMasterVisitService.asmx/PatientCheckin",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                                if (startEncounter > 0) {
+                                    toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
+                                    return false;
+                                } else {
+                                    encounterStarted();
+                                    $(this).hide();
+                                    startEncounter = 1; /* denotes an active encounter */
+                                    stopEncounter = 0;
+                                    toastr.info("Patient Service Checkedin successfully!");
+                                }
+                         },
+                    error:function(xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType, "Patient Finder Method");
+                        return false;
+                    }
+                });              
             });
 
             $("#menuStopEncounter").click(function() {
+
                 if (startEncounter < 0) {
                     toastr.error("No Active Encounter to Stop,", "Encounter Stop Alert");
                     return false;
@@ -274,8 +286,7 @@
                     stopEncounter = 1;
                     startEncounter = 0;
                     toastr.info("Encounter Stopped Successfully", "Encounter Start Alert");
-                }
-
+                };       
             });
 
             if(startEncounter===0 & stopEncounter===0){   encounterStopped();}

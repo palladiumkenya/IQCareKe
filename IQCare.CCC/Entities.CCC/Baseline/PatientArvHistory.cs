@@ -9,8 +9,8 @@ namespace Entities.CCC.Baseline
 {
     [Serializable]
 
-    [Table("ARTUseHistory")]
-   public class PatientArtUseHistory:BaseEntity
+    [Table("PatientArvHistory")]
+   public class PatientArvHistory:BaseEntity
     {
         [Key]
         public int Id { get; set; }

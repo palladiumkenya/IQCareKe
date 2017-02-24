@@ -47,11 +47,12 @@ namespace DataAccess.CCC.Interface
 
         /* Baseline */
         IPatientArvHistoryRepository PatientArvHistoryRepository { get;  }
-        IPatientDiagnosisHivHistoryRepository PatientDiagnosisHivHistoryRepository { get; }
+        IPatientHivDiagnosisRepository PatientDiagnosisHivHistoryRepository { get; }
         IPatientDisclosureRepository PatientDisclosureRepository { get; }
         IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository { get; }
         IPatientTransferInRepository PatientTransferInRepository { get; }
-        IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get; }
+        IPatientBaselineAssessmentRepository PatientBaselineAssessmentRepository { get; }
+        IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get;}
 
         /*Appointment*/
         IPatientAppointmentRepository PatientAppointmentRepository { get; }

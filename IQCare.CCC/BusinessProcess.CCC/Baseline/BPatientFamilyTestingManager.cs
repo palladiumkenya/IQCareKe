@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
@@ -10,7 +8,7 @@ using Interface.CCC.Baseline;
 
 namespace BusinessProcess.CCC.Baseline
 {
-    public class BPatientFamilyTestingManager:ProcessBase,IPatientHvTestingManager
+    public class BPatientFamilyTestingManager:ProcessBase,IPatientHivTestingManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
