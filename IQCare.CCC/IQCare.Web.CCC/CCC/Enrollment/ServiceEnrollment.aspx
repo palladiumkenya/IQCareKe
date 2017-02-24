@@ -144,7 +144,6 @@
                     <thead>
                         <tr >
                             <th>#</th>
-                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true"> Enrollment Date</i> </th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollement Identifier</i> </th>
                              <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollment Number </i></th>
@@ -167,7 +166,7 @@
                           <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static"> Enroll and Register New</asp:LinkButton>
                      </div>
                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static"> Close Enrollemnt</asp:LinkButton>
+                          <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
                      </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -231,7 +230,7 @@
             });
 
             $("#btnClose").click(function () {
-                window.location.href = '/CCC/Patient/PatientFinder.aspx';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
             });
 
 
@@ -281,7 +280,7 @@
                     
                     identifierList.push("" + identifier + "");
                     enrollmentNoList.push("" + enrollmentNo + "");
-                    var tr = "<tr><td align='left'></td><td align='left'>" + moment(enrollmentDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    var tr = "<tr><td align='left'></td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblEnrollment>tbody:first").append('' + tr + '');
 
                     resetElements();
@@ -365,7 +364,7 @@
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
                         toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = "/CCC/Patient/PatientHome.aspx";
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
                     },
                     error: function (response) {
                         //generate('error', response.d);

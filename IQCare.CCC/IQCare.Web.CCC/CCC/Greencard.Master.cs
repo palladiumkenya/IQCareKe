@@ -164,7 +164,7 @@ namespace IQCare.Web.CCC
 
         protected void New_Encounter_Click(object sender, EventArgs e)
         {
-            Session["PatientMasterVisitID"] = "0";
+            Session["PatientMasterVisitId"] = "0";
             Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
         }
 

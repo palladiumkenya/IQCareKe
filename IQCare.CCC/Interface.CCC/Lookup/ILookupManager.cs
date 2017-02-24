@@ -22,7 +22,8 @@ namespace Interface.CCC.Lookup
         List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
         string GetLookupNameFromId(int id);
-    }
+       List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName);
+   }
 
        
 

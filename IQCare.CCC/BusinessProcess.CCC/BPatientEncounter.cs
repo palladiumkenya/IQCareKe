@@ -258,30 +258,43 @@ namespace BusinessProcess.CCC
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
-                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.VarChar, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.VarChar, PatientID);
 
                 DataSet theDS = (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounter", ClsUtility.ObjectEnum.DataSet);
 
                 PresentingComplaintsEntity pce = new PresentingComplaintsEntity();
-       
-                if(theDS.Tables[0].Rows.Count > 0)
+
+                if (theDS.Tables[0].Rows.Count > 0)
                 {
                     pce.visitDate = ((DateTime)theDS.Tables[0].Rows[0]["visitDate"]).ToString("dd-MMM-yyyy");
                     pce.visitScheduled = theDS.Tables[0].Rows[0]["visitScheduled"].ToString();
                     pce.visitBy = theDS.Tables[0].Rows[0]["visitBy"].ToString();
                 }
 
-                if(theDS.Tables[1].Rows.Count > 0)
+                if (theDS.Tables[1].Rows.Count > 0)
                 {
                     pce.complaints = theDS.Tables[1].Rows[0]["PresentingComplaint"].ToString();
                 }
 
                 if (theDS.Tables[2].Rows.Count > 0)
                 {
-                    pce.lmp = ((DateTime)theDS.Tables[2].Rows[0]["FemaleLMP"]).ToString("dd-MMM-yyyy");
+                    string lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
+                    string edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
+                    if (lmp != "")
+                    {
+                        DateTime dtLmp = DateTime.Parse(lmp);
+                        pce.lmp = dtLmp.ToString("dd-MMM-yyyy");
+                    }
+
+                    if(edd != "")
+                    {
+                        DateTime dtEdd = DateTime.Parse(edd);
+                        pce.edd = dtEdd.ToString("dd-MMM-yyyy");
+                    }
+                    
                     pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
-                    pce.edd = ((DateTime)theDS.Tables[2].Rows[0]["ExpectedDateOfChild"]).ToString("dd-MMM-yyyy");
+                    //pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
                     pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
                     pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
                 }
@@ -321,7 +334,7 @@ namespace BusinessProcess.CCC
                     pce.nextAppointmentDate = ((DateTime)theDS.Tables[9].Rows[0]["AppointmentDate"]).ToString("dd-MMM-yyyy");
                     pce.nextAppointmentType = theDS.Tables[9].Rows[0]["ReasonID"].ToString();
                 }
-                
+
                 pce.phdp = new string[theDS.Tables[10].Rows.Count];
                 for (int k = 0; k < theDS.Tables[10].Rows.Count; k++)
                 {
@@ -337,6 +350,7 @@ namespace BusinessProcess.CCC
                 {
                     pce.CTXAdherence = theDS.Tables[12].Rows[0]["Score"].ToString();
                 }
+
 
                 return pce;
             }

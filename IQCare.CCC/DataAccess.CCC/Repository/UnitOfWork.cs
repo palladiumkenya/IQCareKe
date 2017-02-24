@@ -32,6 +32,7 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
+        private IPatientFamilyTestingRepository _patientFamilyTestingRepository;
 
         /* Patient Interface */
         private IPatientVitalsRepository _patientVitalsRepository;
@@ -46,6 +47,7 @@ namespace DataAccess.CCC.Repository
         private ILookupLabs _lookupLabsRepository;
         private ILookupPreviousLabs _lookupPreviousLabsRepository;
         private IPersonLookUpRepository _personLookUpRepository;
+        private IPersonContactLookUpRepository _personContactLookUpRepository;
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
@@ -270,9 +272,23 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+        public IPersonContactLookUpRepository PersonContactLookUpRepository
+        {
+            get
+            {
+                return _personContactLookUpRepository ??
+                       (_personContactLookUpRepository = new PersonContactLookUpRepository((LookupContext) _context));
+            }
+        }
+
         public IPatientAppointmentRepository PatientAppointmentRepository
         {
             get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
+        }
+
+        public IPatientFamilyTestingRepository PatientFamilyTestingRepository
+        {
+            get { return _patientFamilyTestingRepository??(_patientFamilyTestingRepository = new PatientFamilyTestingRepository((GreencardContext)_context));}
         }
 
         public int Complete()

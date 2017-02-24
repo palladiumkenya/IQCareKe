@@ -15,7 +15,6 @@ namespace IQCare.Web.CCC.WebService
 {
     public class ListEnrollment
     {
-        public string enrollmentDate { get; set; }
         public string enrollmentIdentifier { get; set; }
         public string identifierId { get; set; }
         public string enrollmentNo { get; set; }
@@ -45,7 +44,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatient(int personid, int facilityId, string enrollment, int entryPointId)
+        public string AddPatient(int personid, int facilityId, string enrollment, int entryPointId, string enrollmentDate)
         {
             try
             {
@@ -93,7 +92,7 @@ namespace IQCare.Web.CCC.WebService
                         {
                             PatientId = patientId,
                             ServiceAreaId = 1,
-                            EnrollmentDate = DateTime.Parse(data[0].enrollmentDate)
+                            EnrollmentDate = DateTime.Parse(enrollmentDate)
                         };
 
                         PatientEntryPoint patientEntryPoint = new PatientEntryPoint
@@ -103,7 +102,7 @@ namespace IQCare.Web.CCC.WebService
                             EntryPointId = entryPointId
                         };
 
-                        patientMasterVisitId = patientMasterVisitManager.addMasterVisit(visit);
+                        patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(visit);
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
                         patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
 

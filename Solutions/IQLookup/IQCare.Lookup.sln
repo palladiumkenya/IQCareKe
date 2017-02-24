@@ -57,26 +57,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://kenyahmis.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\IQCare.Lookup\\BusinessProcess.Lookup\\BusinessProcess.Lookup.csproj
-		SccProjectName1 = ../../IQCare.Lookup/BusinessProcess.Lookup
-		SccLocalPath1 = ..\\..\\IQCare.Lookup\\BusinessProcess.Lookup
-		SccProjectUniqueName2 = ..\\..\\IQCare.Lookup\\DataAccess.Lookup\\DataAccess.Lookup.csproj
-		SccProjectName2 = ../../IQCare.Lookup/DataAccess.Lookup
-		SccLocalPath2 = ..\\..\\IQCare.Lookup\\DataAccess.Lookup
-		SccProjectUniqueName3 = ..\\..\\IQCare.Lookup\\Entities.Lookup\\Entities.Lookup.csproj
-		SccProjectName3 = ../../IQCare.Lookup/Entities.Lookup
-		SccLocalPath3 = ..\\..\\IQCare.Lookup\\Entities.Lookup
-		SccProjectUniqueName4 = ..\\..\\IQCare.Lookup\\Interface.Lookup\\Interface.Lookup.csproj
-		SccProjectName4 = ../../IQCare.Lookup/Interface.Lookup
-		SccLocalPath4 = ..\\..\\IQCare.Lookup\\Interface.Lookup
-		SccProjectUniqueName5 = ..\\..\\IQCare.Lookup\\IQCare.Web.WebService\\IQCare.Web.WebService.csproj
-		SccProjectName5 = ../../IQCare.Lookup/IQCare.Web.WebService
-		SccLocalPath5 = ..\\..\\IQCare.Lookup\\IQCare.Web.WebService
-	EndGlobalSection
+	EndGlobalSection	
 EndGlobal

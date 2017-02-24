@@ -60,8 +60,30 @@ namespace BusinessProcess.CCC
 
         public int UpdatePersonContact(PersonContact p)
         {
-            _unitOfWork.PersonContactRepository.Update(p);
+            SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+            personIdParameter.Value = p.PersonId;
+
+            SqlParameter physicalAdressParameter = new SqlParameter("physicalAddressParameter", SqlDbType.VarBinary);
+            physicalAdressParameter.Value = Encoding.ASCII.GetBytes(p.PhysicalAddress);
+
+            SqlParameter mobileNumberParameter = new SqlParameter("mobileNumberParameter", SqlDbType.VarBinary);
+            mobileNumberParameter.Value = Encoding.ASCII.GetBytes(p.MobileNumber);
+
+            SqlParameter alternativeNumberParameter = new SqlParameter("alternativeNumberParameter", SqlDbType.VarBinary);
+            alternativeNumberParameter.Value = Encoding.ASCII.GetBytes(p.AlternativeNumber);
+
+            SqlParameter emailAddressParameter = new SqlParameter("emailAddressParameter", SqlDbType.VarBinary);
+            emailAddressParameter.Value = Encoding.ASCII.GetBytes(p.EmailAddress);
+
+            SqlParameter Id = new SqlParameter("Id", SqlDbType.Int);
+            Id.Value = p.Id;
+
+            _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Update @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter, @Id", personIdParameter, physicalAdressParameter, mobileNumberParameter, alternativeNumberParameter, emailAddressParameter, Id);
+            //_unitOfWork.PersonContactRepository.Add(p);
             return _result = _unitOfWork.Complete();
+
+            //_unitOfWork.PersonContactRepository.Update(p);
+            //return _result = _unitOfWork.Complete();
         }
     }
 }

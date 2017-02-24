@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="Baseline.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.Baseline" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="col-md-12">
+   
         <uc:PatientDetails ID="PatientSummary" runat="server" />
-    </div>
+    
     <div class="col-md-12">
         <div class="col-md-12">
            <div class="col-md-12">
@@ -57,7 +57,7 @@
                 </div>
               
              <div class="step-content">
-	                <div class="step-pane active sample-pane" id="datastep1" data-step="1">
+	                <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
                         <div class="col-md-12">
                              <div class="col-md-12"><small class="text-primary pull-left">1.Patient Transfer Status</small></div>
                              <div class="col-md-12"><hr/></div>
@@ -67,13 +67,13 @@
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblTINA">Transfer In ?</asp:Label></div>                                
                                            <div class="col-md-12">
                                                 <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblTransferInYes">
-                                                       <input runat="server" class="sr-only pull-left" name="TransferIn" id="TransferInYes" type="checkbox" value="Yes" ClientIDMode="Static"> <span class="checkbox-label pull-left"> <strong>Yes</strong> <i> [if patient from another Hospital]</i></span>
+                                                       <input runat="server" class="sr-only pull-left" name="TransferIn" id="TransferInYes" type="checkbox" value="Yes" ClientIDMode="Static" /> <span class="checkbox-label pull-left"> <strong>Yes</strong> <i> [if patient from another Hospital]</i></span> />
                                                 </label>
                                            </div>
 
                                            <div class="col-md-12">
                                                 <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblTransferInNo">
-                                                      <input runat="server" class="sr-only" id="TransferInNo" name="TransferIn" type="checkbox" value="No" checked="checked"> <span class="checkbox-label"><strong> No</strong> <i> [ if patient has not enrolled before]</i></span>
+                                                      <input runat="server" class="sr-only" id="TransferInNo" name="TransferIn" type="checkbox" value="No" checked="checked"> <span class="checkbox-label"><strong> No</strong> <i> [ if patient has not enrolled before]</i></span> />
                                                 </label>
                                            </div>
                                   </div>
@@ -254,13 +254,13 @@
                                   <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="Label1">Regimen Category </asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-minlength="1" data-parsley-required="true"/>
                                        </div>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblRegimen">Regimen</asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-minlength="1" data-parsley-required="true"/>
                                         </div>
                                   </div>
      
@@ -270,13 +270,13 @@
                                 <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblfacility">Facility Transferred from :</asp:Label></div>  
                                        <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="TransferFromFacility" CssClass="form-control input-sm" placeholder="facility name.." ClientIDMode="Static" data-parsley-required="true"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="TransferFromFacility" CssClass="form-control input-sm" placeholder="facility name.." ClientIDMode="Static" data-parsley-required="true" data-parsley-minlegth="4"></asp:TextBox>
                                        </div>
                                   </div>
                                 <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblmflcode">MFL Code:</asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:TextBox runat="server" ID="FacilityMFLCode" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="mfl code" data-parsley-required="true"></asp:TextBox>
+                                           <asp:TextBox runat="server" ID="FacilityMFLCode" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="mfl code" data-parsley-required="true" data-parsley-type="number" data-parsley-maxlength="5"></asp:TextBox>
                                        </div>
                                   </div>
                                 <div class="col-md-4">
@@ -300,7 +300,7 @@
                         </div>
 	                </div><%-- .data-step1--%>
                   
-	                <div class="step-pane sample-pane" id="datastep2" data-step="2">
+	                <div class="step-pane sample-pane" id="datastep2" data-parsley-validate="true" data-show-errors="true" data-step="2">
                          <div class="col-md-12"><small class="text-primary pull-left">2.Patient HIV Diagnosis</small></div>
                          <div class="col-md-12"><hr/></div>
                          <div class="form-group col-md-12">
@@ -569,7 +569,7 @@
                          </div>
 	                </div><%-- .data-step-2--%>
                  	
-                    <div class="step-pane sample-pane" id="datastep3" data-step="3">
+                    <div class="step-pane sample-pane" id="datastep3" data-parsley-validate="true" data-show-errors="true" data-step="3">
                          <div class="col-md-12"><small class="text-primary pull-left">3.Patient ARV History</small></div>
                          <div class="col-md-12"><hr/></div>
                         <div class="form-group col-md-12">
@@ -730,7 +730,7 @@
                         </div>
 	                </div><%-- .data-step-3--%>
                  
-                    <div class="step-pane sample-pane" id="datastep4" data-step="4">
+                    <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-show-errors="true" data-step="4">
                         <div class="col-md-12">
                             
                             <div class="col-md-12">
@@ -825,7 +825,7 @@
                         </div>
                     </div><%-- .col-md-12--%>
 
-	                <div class="step-pane sample-pane" id="datastep5" data-step="5">
+	                <div class="step-pane sample-pane" id="datastep5" data-parsley-validate="true" data-show-errors="true" data-step="5">
                          <div class="col-md-12">
                              <div class="col-md-12"><small class="text-primary pull-left">5. Treatment Inititation</small></div>  
                              <div class="col-md-12"><hr/></div>
@@ -1025,7 +1025,7 @@
                          </div>
 	                   
                     </div><%-- .data-step-4--%>
-                </div>
+             </div>
 
 
          </div><%-- .wizard--%>   
@@ -1036,8 +1036,9 @@
         $(document).ready(function(){
 
             var purposeList = new Array();
-            var patientId = 0;
-            var patientmasterVisitId = 0;
+            var userId=<%=UserId%>; /* get the current userId*/
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var transferIn = 0;
             var treatmentType = 0;
 
@@ -1048,7 +1049,8 @@
             var pregnancy = false;
             var bHiV = false;
             var tbInfection = false;
-            var userId=<%=UserId%>; /* get the current userId*/
+
+            var today = new Date();
 
             $('#TIARTStartDate').datepicker({
                 allowPastDates: true,
@@ -1091,6 +1093,39 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
+            /*-- check for future dates -- check if ART start Date >TI Date */
+            $('#TIARTStartDate').on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
+
+                var artStartDate = $('#TIARTStartDate').datepicker('getDate');
+                var tiDate= $('#TIDate').datepicker('getDate');
+                var isAfter=moment(artStartDate).isAfter(tiDate);              
+                var futureDate = moment(artStartDate).isAfter(today);
+                if (isAfter) {
+                    toastr.error("ART Start Date CANNOT be greater than transferin Date",
+                        "ART Start Date-Transfer in Validation");
+                    $("#TIDate").datepicker('setDate','');
+                    return false;
+                }
+
+                if(futureDate)
+                {
+                    toastr.error("Future Dates NOT ALLOWED!");
+                    return false;
+                }
+
+            });
+
+            /*--validate future dates */
+            $('#TIDate').on('changed.fu.datepicker dateClicked.fu.datepicker',
+                function(event, date) {
+                    var tiDate= $('#TIDate').datepicker('getDate');
+                    var futureDate=moment(tiDate).isAfter(today)
+                    if (futureDate) {
+                        toastr.error("future dates NOT allowed !");
+                        return false;
+                    }
+                });
 
             /* clientside validation */
             disableIfNotTransferIn();
@@ -1298,14 +1333,14 @@
         else
             previousStep = nextStep -= 1;
         if (data.step === 1) {
-            $('#datastep1').parsley().destroy();
-            $('#datastep1').parsley({
+                $('#datastep1').parsley().destroy();
+                $('#datastep1').parsley({
                 excluded:
                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-            });
+                });
 
             /* add constraints based on age*/
-            if ($('#datastep1').parsley().validate()) {            
+            if ($('#datastep1').parsley().validate()) {
                 
                 if (transferIn > 0) {
                     addPatientTransferIn();
@@ -1378,7 +1413,7 @@
         })
     .on('finished.fu.wizard',
         function (e) {
-            window.open("/CCC/patient/PatientHome.aspx");
+            window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');
         });
 
             /*filter regimens*/
@@ -1432,12 +1467,14 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientBaselineService.asmx/AddPatientTransferStatus",
-                    data: "{'personId':'" +
+                    data: "{'patientId':'" +
                         ptnId +
                         "','patientMasterVisitId':'" +
                         ptnmasterVisitId +
                         "','transferInDate':'" +
                         transferInDate +
+                        "','serviceAreaId':'" +
+                        serviceAreaId +
                         "','currentTreatment':'" +
                         currentTreatment +
                         "','facilityFrom':'" +

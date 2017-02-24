@@ -25,17 +25,17 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     string Stage3DateValue = Stage3Date.Value;
                     string SexPartnerDateValue = SexPartnerDate.Value;
                     string INHStartDateValue = INHStartDate.Text;
-                    bool INHCompletion = false;
+                    //bool INHCompletion = false;
                     string CompletionDate = INHCompletionDate.Text;
 
-                    if (CompletionYes.Checked == true)
-                    {
-                        INHCompletion = true;
-                    }
-                    else if(CompletionNo.Checked == true)
-                    {
-                        INHCompletion = false;
-                    }
+                    //if (CompletionYes.Checked == true)
+                    //{
+                    //    INHCompletion = true;
+                    //}
+                    //else if(CompletionNo.Checked == true)
+                    //{
+                    //    INHCompletion = false;
+                    //}
 
                     //bool ischecked = CompletionNo.Checked;
                     //bool isnotchecked = CompletionYes.Checked;

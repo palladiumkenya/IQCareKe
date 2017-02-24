@@ -72,7 +72,7 @@ namespace IQCare.Web.CCC.WebService
                     /*---- Perform paging based on request */
                     var skip = (displayLength * displayStart);
                     var ableToSkip = skip < displayLength;
-                    string patientStatus;
+                    //string patientStatus;
                     jsonData = jsonData.Skip(skip).Take(displayLength).ToList();
 
                     var json = new

@@ -1346,7 +1346,7 @@
                                              </div>
                                          </div>
                                    
-                            </div>
+                            <%--</div>--%>
                         
 
                       </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
@@ -2147,12 +2147,14 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
-                           // alert("Saved");
-                            toastr.success(response.d, "Presenting Complaints");
+                            if (response.d > 0)
+                                toastr.success(response.d, "Presenting Complaints");
+                            else
+                                toastr.error("Error occured while saving Presenting Complaints");
                         },
                         error: function (response) {
                             //alert(msg);
-                            toastr.error(response.d, "Presenting Complaints Error");
+                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
                         }
                     });
             }

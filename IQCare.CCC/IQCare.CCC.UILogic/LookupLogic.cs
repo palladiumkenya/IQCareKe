@@ -234,5 +234,19 @@ namespace IQCare.CCC.UILogic
 
             return lookupName;
         }
+
+        public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetItemIdByGroupAndItemName(groupName, itemName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

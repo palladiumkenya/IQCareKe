@@ -43,29 +43,8 @@ namespace IQCare.CCC.UILogic
             return _result = _mgr.DeletePersonContact(id);
         }
 
-        public int UpdatePatientContact(int personId, string physicalAddress, string mobileNumber, string alternativeNumber, string emailAddress, int userId)
+        public int UpdatePatientContact(PersonContact personContact)
         {
-            Utility x = new Utility();
-            if (alternativeNumber != null)
-            {
-                alternativeNumber = x.Encrypt(alternativeNumber);
-            }
-            if (emailAddress != null)
-            {
-                emailAddress = x.Encrypt(emailAddress);}
-
-            PersonContact personContact = new PersonContact
-            {
-               
-                PersonId = personId,
-                PhysicalAddress = x.Encrypt(physicalAddress),
-                MobileNumber = x.Encrypt(mobileNumber),
-                AlternativeNumber =alternativeNumber,
-                EmailAddress = emailAddress,
-                CreatedBy = userId
-
-            };
-
             return _result = _mgr.UpdatePersonContact(personContact);
         }
 
