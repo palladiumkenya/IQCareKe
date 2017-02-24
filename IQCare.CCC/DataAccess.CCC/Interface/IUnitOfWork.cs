@@ -52,6 +52,7 @@ namespace DataAccess.CCC.Interface
         IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository { get; }
         IPatientTransferInRepository PatientTransferInRepository { get; }
         IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get; }
+        IPatientHivTestingRepository PatientHivTestingRepository { get; }
 
         /*Appointment*/
         IPatientAppointmentRepository PatientAppointmentRepository { get; }

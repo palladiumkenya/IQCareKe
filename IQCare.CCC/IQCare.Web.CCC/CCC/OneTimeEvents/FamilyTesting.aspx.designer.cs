@@ -58,13 +58,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.HtmlControls.HtmlSelect Relationship;
         
         /// <summary>
-        /// Gender control.
+        /// Sex control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Gender;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect Sex;
         
         /// <summary>
         /// Dob control.

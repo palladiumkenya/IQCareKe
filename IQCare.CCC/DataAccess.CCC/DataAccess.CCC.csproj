@@ -77,6 +77,7 @@
     <Compile Include="Interface\Baseline\IPatientDiagnosisHivHistoryRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientDisclosureRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Interface\Baseline\IPatientHivTestingRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTransferInRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Repository\Baseline\PatientDiagnosisHivHistoryRepository.cs" />
     <Compile Include="Repository\Baseline\PatientDisclosureRepository.cs" />
     <Compile Include="Repository\Baseline\PatientHivEnrollmentBaselineRepository.cs" />
+    <Compile Include="Repository\Baseline\PatientHivTestingRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTransferInRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
