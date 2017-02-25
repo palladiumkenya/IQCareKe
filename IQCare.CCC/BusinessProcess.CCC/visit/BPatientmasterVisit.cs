@@ -53,5 +53,41 @@ namespace BusinessProcess.CCC.visit
             _unitOfWork.PatientMasterVisitRepository.Update(patientMasterVisit);
             return Result = _unitOfWork.Complete();
         }
+
+        public int PatienMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
+        {
+            /* for status column 1=checkedin 2=checkedout 3=systemcheckout*/
+            var visitId =
+                _unitOfWork.PatientMasterVisitRepository.FindBy(
+                    x =>
+                        x.PatientId == patientId & (DateTime.Now.Date.Subtract(x.CreateDate)).Hours <= 24 &
+                        x.Status == 1 & !x.DeleteFlag).Select(x=>x.Id).FirstOrDefault();
+            if (visitId < 1)
+            {
+                _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
+                _unitOfWork.Complete();
+                visitId = patientMasterVisit.Id;
+            }
+
+            return visitId;
+        }
+
+        public int PatientMasterVisitCheckout(int patientId,PatientMasterVisit patientMasterVisit)
+        {
+            var visitId =
+                _unitOfWork.PatientMasterVisitRepository.FindBy(
+                    x => x.PatientId == patientId & x.Status == 1 & !x.DeleteFlag).Select(x => x.Id).SingleOrDefault();
+            if (visitId > 0)
+            {
+                //var pmVisit=new PatientMasterVisit {Id = visitId,End =Convert.ToDateTime(DateTime.Now.TimeOfDay),ServiceId = 1,status = 2};
+                _unitOfWork.PatientMasterVisitRepository.Update(patientMasterVisit);
+                Result = _unitOfWork.Complete();
+            }
+            else
+            {
+                Result = 0;
+            }
+            return Result;
+        }
     }
 }

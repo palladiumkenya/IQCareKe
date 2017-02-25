@@ -35,20 +35,19 @@ namespace IQCare.CCC.UILogic
             return myList;
         }
 
-        public int UpdatePatientOvcStatus(bool orphan, bool inschool)
+        public int UpdatePatientOvcStatus(PatientOVCStatus patientOvcStatus)
         {
-            PatientOVCStatus patientOvcStatus=new PatientOVCStatus()
-            {
-                Orphan = orphan,
-                InSchool = inschool
-            };
-
           return _result= _mgr.UpdatePatientOvcStatus(patientOvcStatus);
         }
 
         public PatientOVCStatus GetSpecificPatientOvcStatus(int personId)
         {
             return _mgr.GetSpecificPatientOvcStatus(personId);
+        }
+
+        public PatientOVCStatus GetOvcByPersonAndGuardian(int personId, int guardianId)
+        {
+            return _mgr.GetOvcByPersonAndGuardian(personId, guardianId);
         }
     }
 }

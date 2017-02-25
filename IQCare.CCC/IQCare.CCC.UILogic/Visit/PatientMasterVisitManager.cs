@@ -2,29 +2,61 @@
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.CCC.UILogic.Visit
 {
     public class PatientMasterVisitManager
     {
-        IPatientMasterVisitManager _mgr = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+       private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+        private int _result=0;
 
-        public int addMasterVisit(PatientMasterVisit patientMasterVisit)
+        public int AddPatientMasterVisit(PatientMasterVisit patientMasterVisit)
         {
-            int returnValue;
             try
             {
-                returnValue = _mgr.AddPatientmasterVisit(patientMasterVisit);
-                return returnValue;
+                return _result = _patientMasterVisitManager.AddPatientmasterVisit(patientMasterVisit);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
+        }
+
+        public int PatientMasterVisitCheckin(int patientId)
+        {
+            var objPpatientMasterVisit=new PatientMasterVisit
+            {
+                PatientId = patientId,
+                ServiceId = 1,
+                Start =Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
+                Status = 1
+
+            };
+
+            if (patientId > 0)
+            {
+                _result = _patientMasterVisitManager.PatienMasterVisitCheckin(patientId,objPpatientMasterVisit);
+            }
+
+            return _result> 0 ?_result:0;
+        }
+
+        public int PatientMasterVisitCheckout(int patientId,int visitSchedule,int visitBy,int visitType,DateTime visitDate )
+        {
+            var objPatientMasterVisit = new PatientMasterVisit
+            {
+                PatientId = patientId,
+                Status = 2,
+                VisitScheduled = visitSchedule,
+                VisitBy = visitBy,
+                VisitType = visitBy,
+                VisitDate = visitDate
+            };
+            if (patientId > 0)
+            {
+                _result = _patientMasterVisitManager.UpdatePatientMasterVisit(objPatientMasterVisit);
+            }
+            return _result > 0 ? _result : 0;
         }
     }
 }

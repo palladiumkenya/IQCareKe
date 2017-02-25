@@ -21,19 +21,5 @@ namespace DataAccess.CCC.Repository.person
        {
            _context = context;
        }
-
-        public List<PersonLocation> GetPersonCurrentLocation(int personId)
-        {
-            IPersonLocationRepository personLocation = new PersonLocationRepository();
-            List<PersonLocation> myList =
-                new List<PersonLocation>
-                {
-                    personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == true)
-                        .OrderBy(x => x.Id)
-                        .FirstOrDefault()
-                };
-
-            return myList;
-        }
     }
 }

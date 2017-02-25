@@ -70,7 +70,7 @@ namespace IQCare.Web.CCC.Encounter
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(visitId, "1");
+            pce = PEL.loadPatientEncounter(visitId.ToString(), Session["PatientId"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
@@ -93,11 +93,11 @@ namespace IQCare.Web.CCC.Encounter
             stiPartnerNotification.SelectedValue = pce.STIPartnerNotification;
 
             ////PATIENT MANAGEMENT
-            foreach(ListItem item in cblPHDP.Items)
+            foreach (ListItem item in cblPHDP.Items)
             {
                 for (int i = 0; i < pce.phdp.Length; i++)
                 {
-                    if(item.Value == pce.phdp[i])
+                    if (item.Value == pce.phdp[i])
                     {
                         item.Selected = true;
                     }

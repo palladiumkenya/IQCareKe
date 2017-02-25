@@ -29,23 +29,9 @@ namespace IQCare.CCC.UILogic
           return _result=  _mgr.AddPersonLocation(personLocation);
         }
 
-        public int UpdatePersonLocation(int personId, int county, int subcounty, int ward, string village, string location, string sublocation, string landmark, string nearesthealthcentre,int userId)
+        public int UpdatePersonLocation(PersonLocation personLocation)
         {
-            PersonLocation personLocation = new PersonLocation()
-            {
-                PersonId = personId,
-                County = county,
-                SubCounty = subcounty,
-                Ward = ward,
-                Village = village,
-                Location = location,
-                SubLocation = sublocation,
-                LandMark = landmark,
-                NearestHealthCentre = nearesthealthcentre,
-                CreatedBy = userId
-            };
             return _result= _mgr.UpdatePersonLocation(personLocation);
-
         }
 
         public int DeletePersonLocation(int id)

@@ -17,6 +17,16 @@ namespace IQCare.Web.CCC.OneTimeEvents
             get { return Convert.ToInt32(Session["AppUserId"]); }
         }
 
+        protected int PatientId
+        {
+            get { return Convert.ToInt32(Session["patientId"]); }
+        }
+
+        protected int PatientMasterVisitId
+        {
+            get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +49,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
                 WHOStageAtEnrollment.Items.Add(new ListItem("select", "0"));
                 foreach (var k in ms)
                 {
-                    WHOStageAtEnrollment.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    WHOStageAtEnrollment.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                 }
             }
 

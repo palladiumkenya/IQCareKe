@@ -16,21 +16,15 @@ namespace IQCare.CCC.UILogic
                 PersonId = personId,
                 PopulationType = populationtypeId,
                 PopulationCategory = populationCategory,
-                CreatedBy = userId
+                CreatedBy = userId,
+                Active = true
             };
 
            return _result= _mgr.AddPatientPopulation(patientPopulation);
         }
 
-        public int UpdatePatientPopulation(int patientId, string populationTypeId, int populationcategory)
+        public int UpdatePatientPopulation(PatientPopulation patientPopulation)
         {
-            PatientPopulation patientPopulation = new PatientPopulation()
-            {
-                PersonId = patientId,
-                PopulationType = populationTypeId,
-                PopulationCategory = populationcategory
-            };
-
             return _result = _mgr.UpdatePatientPopulation(patientPopulation);
         }
 

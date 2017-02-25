@@ -31,5 +31,6 @@ namespace DataAccess.CCC.Context
         public DbSet<LookupPreviousLabs> LookupPreviousLaboratories { get; set; }
         public DbSet<PatientLookup> PatientLookups { get; set; }
         public DbSet<PersonLookUp> PersonLookUps { get; set; }
+        public DbSet<PersonContactLookUp> PersonContactLookUps { get; set; }
     }
 }

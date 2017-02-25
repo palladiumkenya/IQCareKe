@@ -9,7 +9,8 @@
     <div class="col-md-12" id="vitalsform" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-6" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             <div class="col-md-12">
-                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label></div>
+                <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label>
+            </div>
             <div class="col-md-12">
                 <br />
             </div>
@@ -28,7 +29,7 @@
                     <label class="control-label pull-left"><small class="text-danger">*</small> Weight </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number"></asp:TextBox>
                 </div>
             </div>
 
@@ -63,7 +64,8 @@
 
         <div class="col-md-6">
             <div class="col-md-12">
-                <label class="control-label text-primary pull-left text-muted">Vital Signs</label></div>
+                <label class="control-label text-primary pull-left text-muted">Vital Signs</label>
+            </div>
             <div class="col-md-12">
                 <br />
             </div>
@@ -127,24 +129,34 @@
         <div class="col-md-8"></div>
         <div class="col-md-4">
             <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnSaveTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Triage </asp:LinkButton></div>
+                <asp:LinkButton runat="server" ID="btnSaveTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save Triage </asp:LinkButton>
+            </div>
             <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg "> Reset Entry  </asp:LinkButton></div>
+                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset Entry  </asp:LinkButton>
+            </div>
             <div class="col-md-4">
-                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg"> Close Triage </asp:LinkButton></div>
+                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close Triage </asp:LinkButton>
+            </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-            $("#btnSaveTriage").click(function() {
-                if ($('#vitalsform').parsley().validate()) {
-                    addPatientVitals();
-                } else {
-                    return false;
-                }
-            });   
+        $("#btnSaveTriage").click(function() {
+            if ($('#vitalsform').parsley().validate()) {
+                addPatientVitals();
+            } else {
+                return false;
+            }
+        });
+        $("#btnReset").click(function() {
+            resetElements();
+        });
+        $("#btnCancel").click(function () {
+            debugger;
+            window.location.href = '/CCC/patient/patientHome.aspx';
+        });
     });
     $("#Heights").change(function () {
         var bmi = calcBMI();
@@ -165,7 +177,7 @@
     function addPatientVitals() {
         var height = $("#<%=Heights.ClientID%>").val();
         var weight = $("#<%=weights.ClientID%>").val();
-        var bmi = $("#<%=bmivalue.ClientID%>").val();//todo Mwasi: add bmi and headcircumference to database model
+        var bmi = $("#<%=bmivalue.ClientID%>").val();
         if (bmi === '') { bmi = 0 }
         var headCircumference = $("#<%=circumference.ClientID%>").val();
         if (headCircumference === '') { headCircumference = 0 }
@@ -185,18 +197,33 @@
         if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
         if (boSaturation === '') { boSaturation = 0 }
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PatientService.asmx/AddpatientVitals",
-                data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "'}", //todo Mwasi: add patient id and patientvistId
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    toastr.success(response.d, "Vitals saved successfully");
-                },
-                error: function (response) {
-                    toastr.success(response.d, "Vitals not saved");
-                }
-            });
-        }
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientService.asmx/AddpatientVitals",
+            data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "'}", //todo Mwasi: add patient id and patientvistId
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                toastr.success(response.d, "Vitals saved successfully");
+                resetElements();
+            },
+            error: function (response) {
+                toastr.success(response.d, "Vitals not saved");
+            }
+        });
+    }
+
+    function resetElements(parameters) {
+        $("#Heights").val("");
+        $("#weights").val("");
+        $("#bmivalue").val("");
+        $("#circumference").val("");
+        $("#muacs").val("");
+        $("#distolic").val("");
+        $("#systolic").val("");
+        $("#Tempreture").val("");
+        $("#RespiratoryRate").val("");
+        $("#HeartRate").val("");
+        $("#bosaturation").val("");
+    }
 </script>

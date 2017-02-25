@@ -43,15 +43,17 @@ echo "********** Building IQCare.Library **********" >> %log%
 echo "********** Building IQCare.Lookup **********" >> %log%
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQLookup\IQCare.Lookup.sln" >> %log%
 echo "********** Building Presentation **********" >> %log%
-"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Presentation\Presentation.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Presentation\Presentation.sln" >> %log%
 echo "********** Building Billing **********" >> %log%
-"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Billing\IQCare.Billing.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Billing\IQCare.Billing.sln" >> %log%
+echo "********** Building IQCare.CCC **********" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.CCC\IQCare.CCC.sln" >> %log%
 echo "********** Building IQCare Service **********" >> %log%
-"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQCareService\IQCareService.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCareService\IQCareService.sln" >> %log%
 echo "********** Building IQCare Management **********" >> %log%
-"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" >> %log%
 echo "********** Building IQCare.Release **********" >> %log%
-"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.Release.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.Release.sln" >> %log%
 @echo "********** Completed building  devenv**********" >> %log%
 
 

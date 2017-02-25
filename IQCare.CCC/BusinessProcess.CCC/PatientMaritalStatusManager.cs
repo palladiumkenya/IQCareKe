@@ -5,6 +5,7 @@ using Entities.PatientCore;
 using Interface.CCC;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -39,6 +40,13 @@ namespace BusinessProcess.CCC
         {
            _unitOfWork.PatientMaritalStatusRepository.Update(patientMarital);
           return result=  _unitOfWork.Complete();
+        }
+
+        public PatientMaritalStatus GetFirstPatientMaritalStatus(int personId)
+        {
+            return _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId)
+                .OrderByDescending(o => o.CreateDate)
+                .FirstOrDefault();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Interface.CCC.Visit
         int AddPatientLabTracker(PatientLabTracker patientLabTracker);      
 
         int AddPatientLabOrder(LabOrderEntity labOrderEntity);
-        //int AddPatientLabDetails(LabDetailsEntity labDetailsEntity);
         int UpdatePatientLabOrder(PatientLabTracker patientLabTracker);
         int DeletePatientLabOrder (int id);
         List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate);

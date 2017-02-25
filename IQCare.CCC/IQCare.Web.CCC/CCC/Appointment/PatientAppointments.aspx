@@ -15,13 +15,13 @@
             <table class="table table-hover" id="tblAppointment" clientidmode="Static" runat="server">
                 <thead>
                     <tr>
-                        <th><i class="" aria-hidden="true">#</i></th>
+                        <th><i class="text-primary" aria-hidden="true">#</i></th>
                        <%-- <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Patient Name</i> </th>--%>
-                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Service Area</i> </th>
-                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Reason</i> </th>
-                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Description</i> </th>
-                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Differetiated Care</i> </th>
-                        <th><i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Status</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Service Area</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Reason</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Description</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Differetiated Care</i> </th>
+                        <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Status</i> </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +58,9 @@
                     alert(msg.responseText);
                 }
             });
-           
+            $("#btnClose").click(function () {
+                window.location.href = '/CCC/Home.aspx';
+            });
         })
 
     </script>

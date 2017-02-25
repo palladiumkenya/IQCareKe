@@ -30,6 +30,7 @@ namespace DataAccess.CCC.Interface
         IPatientMaritalStatusRepository PatientMaritalStatusRepository { get; }
         IPatientPopulationRepository PatientPopulationRepository { get;}
         IPatientTreatmentSupporterRepository PatientTreatmentSupporterRepository { get; }
+        IPatientFamilyTestingRepository PatientFamilyTestingRepository { get; }
 
         /* patient visit */
         IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
@@ -51,6 +52,7 @@ namespace DataAccess.CCC.Interface
         IPatientHivEnrollmentBaselineRepository PatientHivEnrollmentBaselineRepository { get; }
         IPatientTransferInRepository PatientTransferInRepository { get; }
         IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository { get; }
+        IPatientHivTestingRepository PatientHivTestingRepository { get; }
 
         /*Appointment*/
         IPatientAppointmentRepository PatientAppointmentRepository { get; }

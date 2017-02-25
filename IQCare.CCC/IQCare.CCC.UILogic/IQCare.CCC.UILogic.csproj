@@ -75,7 +75,6 @@
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
     <Compile Include="Baseline\PatientArtInitiationBaslineManager.cs" />
     <Compile Include="Baseline\PatientArtUseHistoryManager.cs" />
-    <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
@@ -86,11 +85,13 @@
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
     <Compile Include="PatientVitalsManager.cs" />
+    <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />

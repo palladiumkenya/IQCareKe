@@ -58,7 +58,6 @@
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
     <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
-    <Compile Include="Baseline\IPatientHvTestingManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
+    <Compile Include="Baseline\IPatientHivTesting.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="IPersonRelationshipManager.cs" />
     <Compile Include="Lookup\ILookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
+    <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

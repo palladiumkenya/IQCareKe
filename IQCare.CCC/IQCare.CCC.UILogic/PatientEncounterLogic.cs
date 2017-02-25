@@ -50,10 +50,10 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID,ARVAdherence,CTXAdherence,nextAppointment,appointmentType, PHDPList, diag);
         }
 
-        public PresentingComplaintsEntity loadPatientEncounter(int PatientMasterVisitID, string PatientID)
+        public PresentingComplaintsEntity loadPatientEncounter(string PatientMasterVisitID, string PatientID)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
-            return patientEncounter.getPatientEncounter(PatientMasterVisitID.ToString(), PatientID);
+            return patientEncounter.getPatientEncounter(PatientMasterVisitID, PatientID);
         }
 
         public DataTable loadPatientEncounterAdverseEvents(string PatientMasterVisitID, string PatientID)

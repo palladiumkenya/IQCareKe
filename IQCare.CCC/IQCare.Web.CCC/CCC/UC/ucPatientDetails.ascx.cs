@@ -19,17 +19,24 @@ namespace IQCare.Web.CCC.UC
             var myDate = DateTime.Now.Year;
             var myDateMonth= DateTime.Now.Month;
 
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            if (Request.QueryString["patient"] != null)
+            {
+                patientId = Convert.ToInt32(Request.QueryString["patient"]);
+                Session["patientId"] = patientId;
+            }
+
             DateTime DoB;
 
             IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
-            List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(int.Parse(HttpContext.Current.Session["PatientId"].ToString()));
+            List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
 
             foreach (var x in patientLookups)
             {
                 DoB = Convert.ToDateTime(x.DateOfBirth);
 
-                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.FirstName)+"</i></strong>";
+                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.LastName)+"</i></strong>";
                 if (x.Active)
                 {
                     lblStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
