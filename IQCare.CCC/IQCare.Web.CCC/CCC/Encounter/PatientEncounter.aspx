@@ -1330,10 +1330,10 @@
                                                  <asp:LinkButton runat="server" ID="btnPrintOrder" CssClass="btn btn-primary fa fa-print" ClientIDMode="Static"> Print Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
-                                                 <asp:LinkButton runat="server" ID="btnResetOrder" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
+                                                 <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
-                                                 <asp:LinkButton runat="server" ID="btnCancelOrder" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
+                                                 <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
                                    
@@ -1442,7 +1442,8 @@
                            
                        </div>--%><!-- .history-->
                  </div><!-- .tab-content-->
-           <!--</div> .col-md-12 -->
+           </div> 
+
     <!-- ajax begin -->
    <script type="text/javascript">
              var patientId = <%=PatientId%>;
@@ -1628,11 +1629,15 @@
                  });
            
         });
-    
+      
+       var lorderType= new Array();
+       var lorderReason= new Array();
+       var lorderDate= new Array();
+       var lorderNotes= new Array();
          // Load lab order
-     $("#btnAddLab").click(function (e) {
-             
-               var labOrderDate = $("#<%=LabDate.ClientID%>").val();
+       $("#btnAddLab").click(function (e) {
+
+           var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
                var labOrderReason = $("#orderReason").find(":selected").text();
                var labOrderNotes = $("#labNotes").val();
@@ -1645,6 +1650,7 @@
                    generate("error", "Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
+                      
                if (labOrderDate < 1) {
                    generate("error", "Please input a date for the lab order");
                    return false;
@@ -1652,18 +1658,48 @@
 
                else {
 
+                   lorderType.push("" + labType + "");
+                   lorderReason.push("" + labOrderReason + "");
+                   lorderDate.push("" + labOrderDate + "");
+                   lorderNotes.push("" + labOrderNotes + "");
 
                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
-
+                  
                }
 
                e.preventDefault();
-           });
+     });
+        // $("#tblAddLabs").on('click', '.btnCancelOrder', function () {
+         $("#btnCancelOrder").click(function (e) {
 
 
+             //$('#tblAddLabs > tr').remove();
+             $("#tblAddLabs td").parent().remove();
+            // $('#myTable').empty();
+             //$(this).closest('tr').remove();
+             //var x = $(this).closest('tr').find('td').eq(0).html();
+
+             // lorderType.splice($.inArray(x, lorderType), 1);
+             // lorderReason.splice($.inArray(x, lorderReason), 1);
+             // lorderDate.splice($.inArray(x, lorderDate), 1);
+             // lorderNotes.splice($.inArray(x, lorderNotes), 1);
+
+
+         });
+      
+         $("#btnResetOrder").click(function (e) {   
+             resetLabOrder();
+         });
+        
+         function resetLabOrder(parameters) {
+             $("#labTestTypes").val("");
+             $("#orderReason").val("");
+             $("#labNotes").val("");
+             $("#LabDate").val("");
+         }
            // Save lab order
-           $("#btnSaveLab").click(function (e) {
+      $("#btnSaveLab").click(function (e) {
                var _fp = [];
                var data = $('#tblAddLabs tr').each(function (row, tr) {
 
@@ -1687,8 +1723,10 @@
                    addLabOrder(_fp);
                }
 
-
+               $("#tblAddLabs td").parent().remove();
            });
+
+
            function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
                console.log(patientId);

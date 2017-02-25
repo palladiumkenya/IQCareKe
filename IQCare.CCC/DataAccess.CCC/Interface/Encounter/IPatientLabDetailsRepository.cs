@@ -7,7 +7,7 @@ using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Interface.Encounter
 {
-    interface IPatientLabDetailsRepository : IRepository<LabDetailsEntity>
+    public interface IPatientLabDetailsRepository : IRepository<LabDetailsEntity>
     {
     }
 }
