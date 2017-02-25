@@ -26,6 +26,7 @@ namespace DataAccess.CCC.Context
         public DbSet<LookupMaster> LookupMasters { get; set; } 
         public DbSet<LookupMasterItem> LookupMasterItems { get; set; }
         public DbSet<LookupCounty> LookupCounties { get; set; }
+        public DbSet<LookupFacility> LookupFacility { get; set; }
         public DbSet<LookupLabs> LookupLaboratories { get; set; }
         public DbSet<LookupPreviousLabs> LookupPreviousLaboratories { get; set; }
         public DbSet<PatientLookup> PatientLookups { get; set; }

@@ -52,6 +52,10 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Scripts\css\awesomplete.css" />
+    <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
+    <Content Include="CCC\Scripts\css\typeaheadjs.css" />
+    <Content Include="CCC\Scripts\js\awesomplete.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
@@ -61,16 +65,17 @@
     <Content Include="CCC\OneTimeEvents\Baseline.aspx" />
     <Content Include="CCC\OneTimeEvents\FamilyTesting.aspx" />
     <Content Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx" />
-    <Content Include="CCC\UC\Patient\PatientFinder.aspx" />
-    <Content Include="CCC\UC\Patient\PatientHome.aspx" />
-    <Content Include="CCC\UC\Patient\PatientRegistration.aspx" />
-    <Content Include="CCC\UC\Patient\PatientTest.aspx" />
-    <Content Include="CCC\UC\Patient\ServiceArea.aspx" />
+    <Content Include="CCC\Patient\PatientFinder.aspx" />
+    <Content Include="CCC\Patient\PatientHome.aspx" />
+    <Content Include="CCC\Patient\PatientRegistration.aspx" />
+    <Content Include="CCC\Patient\PatientTest.aspx" />
+    <Content Include="CCC\Patient\ServiceArea.aspx" />
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />
-    <Content Include="CCC\Scripts\js\jquery-1.4.2.min.js" />
+    <Content Include="CCC\Scripts\js\jquery-ui-1.9.1.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
@@ -165,39 +170,39 @@
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientFinder.aspx.cs">
+    <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientFinder.aspx.designer.cs">
+    <Compile Include="CCC\Patient\PatientFinder.aspx.designer.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientHome.aspx.cs">
+    <Compile Include="CCC\Patient\PatientHome.aspx.cs">
       <DependentUpon>PatientHome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientHome.aspx.designer.cs">
+    <Compile Include="CCC\Patient\PatientHome.aspx.designer.cs">
       <DependentUpon>PatientHome.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientRegistration.aspx.cs">
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
       <DependentUpon>PatientRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientRegistration.aspx.designer.cs">
+    <Compile Include="CCC\Patient\PatientRegistration.aspx.designer.cs">
       <DependentUpon>PatientRegistration.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientTest.aspx.cs">
+    <Compile Include="CCC\Patient\PatientTest.aspx.cs">
       <DependentUpon>PatientTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\Patient\PatientTest.aspx.designer.cs">
+    <Compile Include="CCC\Patient\PatientTest.aspx.designer.cs">
       <DependentUpon>PatientTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\UC\Patient\ServiceArea.aspx.cs">
+    <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\UC\Patient\ServiceArea.aspx.designer.cs">
+    <Compile Include="CCC\Patient\ServiceArea.aspx.designer.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\OneTimeEvents\Baseline.aspx.cs">

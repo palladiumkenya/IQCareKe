@@ -3,13 +3,13 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <script src="../Scripts/js/PatientEncounter.js"></script>   
-
-     <!--Using jquery 12.1  --->
-   <%-- <link href="../Scripts/js/jquery-ui.min.css" rel="stylesheet" />
-    <script src="../Scripts/js/jquery-ui.min.js"></script>
-    --%>
-   <!-- Jquery for High charts   -->
+    <script src="../Scripts/js/PatientEncounter.js"></script>
+       
+    <!--Using Awesomplete for auto complete  --->
+     <link href="../Scripts/css/awesomplete.css" rel="stylesheet" />
+     <script src="../Scripts/js/awesomplete.js"></script>  
+  
+    <!-- Js for High charts   -->
     <script src="../Scripts/js/highcharts.js"></script>
     <script src="../Scripts/js/vl_linegraph.js"></script>
    
@@ -26,9 +26,9 @@
                  </ul>
              </div><!-- .col-md-12 -->
             
-            <div class="col-md-12 col-xs-12">
+          <div class="col-md-12 col-xs-12">  
 
-                 <div class="tab-content">
+                 <div class="tab-content">    
 
                       <div  role="tabpanel" class="tab-pane active" id="encounter">
                          <div class="col-md-12" style="padding-top:20px">
@@ -1043,7 +1043,7 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>                     
-
+               
               <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
 
@@ -1067,10 +1067,7 @@
                                                 </tbody>                  
                                                 </table>
                             </div>
-                               
-        
-                      <!--pw implementation of vllabhistory module here-->
-                                
+                      
                          <div class="col-md-12 bs-callout bs-callout-info">
                                          <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
                                               <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
@@ -1090,28 +1087,24 @@
                                                 </table>
                                             </div> 
                                                
-                     <!--pw .implementation of  vllabhistory module here-->
-                             
-                                </div>
+                                    </div>
                        
                                    
                              <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
                       <!-- pw .implementation of viral load tracker line graph here-->
-                      </div><!-- .viraload tracker-->
+                </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                           <!-- <div class="col-md-12" style="padding-top: 1%">
+                            <%--<div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
-                            </div>    -->
+                            </div>    -->--%>
                             
-                          <!--  <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>  
-                            </div> -->
+                       
                            
-                <div class="col-md-6">  
-                 <div class="col-md-12 bs-callout bs-callout-danger">
+                        <div class="col-md-6">  
+                         <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
@@ -1151,14 +1144,12 @@
                                                 </table>
 
                                        </div>                    
-                    <!--pw implementation of previous orders laboratory module here-->
-                               </div>
+                              </div>
 
                        </div>
                            
                        <div class="col-md-6">
-                         <!-- here  -->
-                                <div class="col-md-12">
+                         <div class="col-md-12">
                                         <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
                                     <div class="col-md-12">
                                         <div class="panel panel-default">
@@ -1168,7 +1159,7 @@
                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
                                                       <div class="col-md-8">
                                                           
-                                                           <asp:TextBox runat="server" ID="labTestTypes" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                                                                               
                                                              </div>
                                                   </div>
@@ -1194,11 +1185,11 @@
                                                   </div>
                                  <!--datepicker  -->
                               
-               <div class="col-md-12 form-group">
-                    <div class="col-md-4">
-                        <label class="control-label pull-left">Date</label>
-                    </div>
-                    <div class="col-md-6">
+                                   <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <label class="control-label pull-left">Date</label>
+                                        </div>
+                                        <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate"></asp:TextBox>
@@ -1284,17 +1275,17 @@
                                             <div class="datepicker-wheels-footer clearfix">
                                                 <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
                                                 <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
             
 
-                                  <!--.datepicker   -->
+                                 
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
@@ -1322,12 +1313,12 @@
                                             </div>
                                                               
    
-                                                </div>
-                                        </div>
-                                    </div>     
-                       </div>
-                 </div>
-                           <!--  to here-->
+                                                                </div>
+                                                        </div>
+                                                    </div>     
+                                                   </div>
+                                             </div>
+                           
                                         <div class="col-md-12"><hr/></div>
                                         <div class="col-md-7"></div>
                                          <div class="col-md-5">
@@ -1348,11 +1339,11 @@
                                    
                             </div>
                         
-
+                      
                       </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
-
-                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
-                          <div class="col-md-12" style="padding-top: 1%">
+                  
+               <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                     <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
                           </div>
                           <div class="col-md-12 bs-callout bs-callout-danger">
@@ -1451,28 +1442,28 @@
                            
                        </div>--%><!-- .history-->
                  </div><!-- .tab-content-->
-            </div><!-- .col-md-12 -->
+           <!--</div> .col-md-12 -->
     <!-- ajax begin -->
-    
    <script type="text/javascript">
-       var patient_Id = "<%=PatientId%>"; 
+             var patientId = <%=PatientId%>;
+             var patientMasterVisitId = <%=PatientMasterVisitId%>;
 
-      
-       //var jq14 = jQuery.noConflict(true);
-       $(document).ready(function () {
+     $(document).ready(function () {     
+           
 
-       console.log($.fn.jquery);
+         console.log(patientId);
+         console.log(patientMasterVisitId);
 
-      $("#LabDatePicker").datepicker({
+     $("#LabDatePicker").datepicker({
            date: null,
            allowPastDates: true,
            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-           });
+            });
       
-          $.ajax({
+      $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-               data: "{'patient_ID':'" + patient_Id + "'}",
+               data: "{'patient_ID':'" + patientId + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
@@ -1507,7 +1498,7 @@
            $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPendingLabsList",
-               data: "{'patient_ID':'" + patient_Id + "'}",
+               data: "{'patient_ID':'" + patientId + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
@@ -1541,7 +1532,7 @@
         $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetvlTests",
-               data: "{'patient_ID':'" + patient_Id + "'}",
+               data: "{'patient_ID':'" + patientId + "'}",
                contentType: "application/json; charset=utf-8",
                dataType: "json",
                cache: false,
@@ -1576,7 +1567,7 @@
        $.ajax({
             type: "POST",
             url: "../WebService/LabService.asmx/GetPendingvlTests",
-            data: "{'patient_ID':'" + patient_Id + "'}",
+            data: "{'patient_ID':'" + patientId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,
@@ -1606,40 +1597,40 @@
 
                 alert(msg.responseText);
             }
-        });
+       });
 
+       var input = document.getElementById("labTestTypes");
+       var awesomplete = new Awesomplete(input, {
+           minChars: 1,
+           autoFirst: true
+       });
 
-         $.ajax({
-               type: "POST",
-               url: "../WebService/LookupService.asmx/GetLookupLabsList",
-               dataType: "json",
+       $("input").on("keyup", function () {
+           $.ajax({
+               url: '../WebService/LookupService.asmx/GetLookupLabsList',
+               type: 'POST',
+               dataType: 'json',
                data: "{}",
                contentType: "application/json; charset=utf-8",
+           
                success: function (data) {
-
-                   var serverData = JSON.parse(data.d);    
+                   var serverData = JSON.parse(data.d);
+                   //console.log(serverData);
                    var labtests = [];
                    for (var i = 0; i < serverData.length; i++) {
 
-                       labtests.push(serverData[i]["ParameterName"]);  
+                       labtests.push(serverData[i]["ParameterName"]);
                    }
 
-                   //console.log(labtests);                    
-
-                   $("[id$='labTestTypes']").autocomplete({
-                       source: labtests
-
-                   });
-               },
-               error: function (errorThrown) {
-                   alert(textStatus);
-                   console.log(errorThrown)
-
-               }
-           });
+                  // console.log(labtests);
+                   awesomplete.list = labtests;
+                      }
+                 });
            
-           // Load lab order
-           $("#btnAddLab").click(function (e) {
+        });
+    
+         // Load lab order
+     $("#btnAddLab").click(function (e) {
              
                var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
@@ -1654,11 +1645,15 @@
                    generate("error", "Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
+               if (labOrderDate < 1) {
+                   generate("error", "Please input a date for the lab order");
+                   return false;
+               }
 
                else {
 
 
-                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td></tr>";
+                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
 
                }
@@ -1676,8 +1671,8 @@
                    _fp[row] = {
                        "labType": $(tr).find('td:eq(1)').text()
                      , "orderReason": $(tr).find('td:eq(2)').text()
-                     , "results": $(tr).find('td:eq(2)').text()
-                    , "labOrderDate": $(tr).find('td:eq(3)').text()
+                     , "labOrderDate": $(tr).find('td:eq(3)').text()
+                    , "labNotes": $(tr).find('td:eq(4)').text()
 
                    }
                });
@@ -1688,20 +1683,21 @@
                    return false;
                } else {
                    // var patientId = $("#entryPoint").val();
-                   var patientId = JSON.stringify(patient_Id);
-                   addLabOrder(_fp, patientId);
+                   //var patientId = JSON.stringify(patientId);
+                   addLabOrder(_fp);
                }
 
 
            });
-           function addLabOrder(_fp, patientId) {
+           function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
+               console.log(patientId);
                console.log(labOrder);
                $.ajax({
                    type: "POST",
 
                    url: "../WebService/LabService.asmx/AddLabOrder",
-                   data: "{'patientID':'" + patientId + "','visitId':'" + 10 + "','patientLabOrder': '" + labOrder + "'}",
+                   data: "{'patient_ID':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    success: function (response) {
@@ -1755,6 +1751,8 @@
                    }]
                });
            });
+
+           
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
            var getVisitDateVal = "<%= this.visitdateval %>";
            var getFemaleLMPVal = "<%= this.LMPval %>";
@@ -2318,33 +2316,33 @@
 
            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+   function generate(type, text) {
 
+                var n = noty({
+                    text: text,
+                    type: type,
+                    dismissQueue: true,
+                    progressBar: true,
+                    timeout: 5000,
+                    layout: 'topRight',
+                    closeWith: ['click'],
+                    theme: 'relax',
+                    maxVisible: 10,
+                    animation: {
+                        open: 'animated bounceInLeft',
+                        close: 'animated bounceOutLeft',
+                        easing: 'swing',
+                        speed: 500
+                    }
+                });
+                return n;
+      }
 
 
 
           
            
-    //function generate(type, text) {
-
-    //       var n = noty({
-    //           text: text,
-    //           type: type,
-    //           dismissQueue: true,
-    //           progressBar: true,
-    //           timeout: 5000,
-    //           layout: 'topRight',
-    //           closeWith: ['click'],
-    //           theme: 'relax',
-    //           maxVisible: 10,
-    //           animation: {
-    //               open: 'animated bounceInLeft',
-    //               close: 'animated bounceOutLeft',
-    //               easing: 'swing',
-    //               speed: 500
-    //           }
-    //       });
-    //            return n;
-    //     }
+    
            
          
        });

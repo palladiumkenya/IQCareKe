@@ -109,5 +109,12 @@ namespace BusinessProcess.CCC
             List<LookupItemView> lookupItem = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
             return lookupItem;
         }
+        public LookupFacility GetFacility()
+
+        {
+            LookupFacilityRepository lookupFacilityRepository = new LookupFacilityRepository();
+            return lookupFacilityRepository.GetFacility();
+        }
+       
     }
 }

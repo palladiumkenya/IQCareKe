@@ -80,10 +80,13 @@
     <Compile Include="Interface\Baseline\IPatientTransferInRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientLabOrderRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
+    <Compile Include="Interface\Lookup\ILookupFacility.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupMasterItemRepository.cs" />
@@ -112,8 +115,11 @@
     <Compile Include="Repository\Baseline\PatientTransferInRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientLabOrderRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
@@ -150,9 +156,7 @@
     <Compile Include="Repository\visit\PatientLabTrackerRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\Encounter\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
       <Project>{bbcc4817-4e69-4722-a560-8988a795ce50}</Project>

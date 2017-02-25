@@ -4,6 +4,21 @@ using Entities.Common;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 using Newtonsoft.Json;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
+using Application.Presentation;
+using Entities.CCC.Appointment;
+using Entities.CCC.Lookup;
+using Entities.CCC.Triage;
+using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
 
 
 namespace IQCare.Web.CCC.WebService
@@ -19,21 +34,39 @@ namespace IQCare.Web.CCC.WebService
     public class LabService : System.Web.Services.WebService
     {
 
-        private int patientID { get; set; }
+        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+
+        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        private int patient_ID { get; set; }
+        private int facilityID { get; set; }
         private string Msg { get; set; }
         private int Result { get; set; }
+        
 
 
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(string patientID, int visitId, string patientLabOrder)
+        public string AddLabOrder(int patient_ID, int patientMasterVisitId, string patientLabOrder)
         {
+            if (patientMasterVisitId == 0)
+            {
+                PatientMasterVisit visit = new PatientMasterVisit()
+                {
+                    PatientId = patient_ID,
+                    Start = DateTime.Now,
+                    Active = true,
+                };
+                patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
+            }
+// Get Facility ID service
+            LookupFacility facility = _lookupManager.GetFacility();
+            facilityID = facility.FacilityID;
 
             try
             {
-                //conversion error
-                int patientId = 18;
+                //conversion error                 
+               // int patient_ID = 18;
                 var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientId, visitId, patientLabOrder);
+                Result = labOrder.savePatientLabOrder(patient_ID,facilityID,patientMasterVisitId, patientLabOrder);
                 if (Result > 0)
                 {
                     Msg = "Patient Lab Order Recorded Successfully .";

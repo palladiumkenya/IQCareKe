@@ -71,6 +71,7 @@
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
+    <Compile Include="Encounter\LabDetailsEntity.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
     <Compile Include="Encounter\PatientCareEnding.cs" />
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Enrollment\PatientEntityIdentifier.cs" />

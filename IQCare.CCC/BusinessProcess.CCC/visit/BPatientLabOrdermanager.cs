@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Entities.CCC.Visit;
+using Entities.CCC.Encounter;
 using Interface.CCC.Visit;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+
 using DataAccess.Base;
 
 namespace BusinessProcess.CCC.visit
@@ -15,12 +17,16 @@ namespace BusinessProcess.CCC.visit
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
-        public int AddPatientLabOrder(PatientLabTracker patientLabTracker)
+        public int AddPatientLabTracker(PatientLabTracker patientLabTracker)
         {
             _unitOfWork.PatientLabTrackerRepository.Add(patientLabTracker);
             return Result = _unitOfWork.Complete();
         }
-
+        public int AddPatientLabOrder(LabOrderEntity labOrderEntity)
+        {
+            _unitOfWork.PatientLabOrderRepository.Add(labOrderEntity);
+            return Result = _unitOfWork.Complete();
+        }
         public int UpdatePatientLabOrder(PatientLabTracker patientLabTracker)
         {
             _unitOfWork.PatientLabTrackerRepository.Update(patientLabTracker);
@@ -34,6 +40,7 @@ namespace BusinessProcess.CCC.visit
             return Result = _unitOfWork.Complete();
         }
 
+       
         public List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate)
         {
             List<PatientLabTracker> patientLabOrders =
@@ -46,7 +53,7 @@ namespace BusinessProcess.CCC.visit
             return patientLabOrders;
         }
 
-       public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
+        public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
             List<PatientLabTracker> patientLabOrders =
                 _unitOfWork.PatientLabTrackerRepository.FindBy(

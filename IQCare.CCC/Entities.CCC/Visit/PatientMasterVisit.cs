@@ -18,7 +18,7 @@ namespace Entities.CCC.Visit
         public virtual PatientEntity Patient { get; set; }
         public int ServiceId { get; set; }
         public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
         public bool Active { get; set; }
     }
 }

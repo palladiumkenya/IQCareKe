@@ -60,6 +60,8 @@
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
     <Compile Include="Baseline\IPatientHvTestingManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
+    <Compile Include="Encounter\IPatientLabDetails.cs" />
+    <Compile Include="Encounter\IPatientLabOrder.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
@@ -85,7 +87,6 @@
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Encounter\" />
     <Folder Include="OneTimeEvent\" />
   </ItemGroup>
   <ItemGroup>
