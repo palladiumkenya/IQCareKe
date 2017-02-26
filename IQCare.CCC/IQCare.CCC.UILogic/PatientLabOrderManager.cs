@@ -16,6 +16,7 @@ namespace IQCare.CCC.UILogic
         public string orderReason { get; set; }
         public string results { get; set; }
         public DateTime labOrderDate { get; set; }
+        public int labOrderId { get; set; }
         public string labNotes { get; set; }
 
     }
@@ -25,7 +26,7 @@ namespace IQCare.CCC.UILogic
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
        
-        public int savePatientLabOrder(int patient_ID, int patientMasterVisitId, string patientLabOrder)
+        public int savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
            
             try
@@ -37,7 +38,9 @@ namespace IQCare.CCC.UILogic
                 {
 
                     int returnValue;
-                   
+                    int returnLabOrderSuccess;
+                    int returnLabDetailsSuccess;
+
 
                     for (int i = 0; i < data.Count; i++)
                     {
@@ -55,7 +58,8 @@ namespace IQCare.CCC.UILogic
 
                         LabOrderEntity LabOrder = new LabOrderEntity()
                         {
-                            Ptn_Pk = patient_ID,
+                            Ptn_pk = patient_ID,
+                            LocationId = facilityID,
                             visitid = patientMasterVisitId,
                             ClinicalOrderNotes = data[i].labNotes,
                             OrderStatus = data[i].results,
@@ -63,12 +67,30 @@ namespace IQCare.CCC.UILogic
                             //UserId = data[i].labType,
                             //ClinicalOrderNotes = data[i].results,       
                             //LocationId = data[i].orderReason,
-
-
-
-
                         };
-                        returnValue = _mgr.AddPatientLabOrder(LabOrder);
+                        returnLabOrderSuccess = _mgr.AddPatientLabOrder(LabOrder);
+
+                      
+                        //Populate lab details
+                        //if (returnLabOrderSuccess > 0)
+                        //{
+                        
+                        //    LabDetailsEntity LabDetails = new LabDetailsEntity()
+                        //    {
+                        //        LabOrderId = labOrderId,
+                        //        LabTestId = facilityID,
+                        //        TestNotes = data[i].labNotes,
+                        //        //IsParent = data[i].labNotes,
+                        //        //ParentTestId = data[i].results,
+                        //        //ResultNotes = data[i].labOrderDate
+                        //        //ResultStatus = data[i].labType,
+                        //        //ResultDate = data[i].results,
+                        //       // UserId = data[i].orderReason,
+                        //        //StatusDate = data[i].orderReason,
+                        //    };
+
+                        //    returnLabDetailsSuccess = _mgr.AddPatientLabDetails(LabDetails);
+                        // }
                         return returnValue;
 
                     }

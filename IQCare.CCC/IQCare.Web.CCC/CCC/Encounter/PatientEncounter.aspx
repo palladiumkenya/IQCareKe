@@ -26,9 +26,9 @@
                  </ul>
              </div><!-- .col-md-12 -->
             
-            <div class="col-md-12 col-xs-12">
+          <div class="col-md-12 col-xs-12">  
 
-                 <div class="tab-content">
+                 <div class="tab-content">    
 
                       <div  role="tabpanel" class="tab-pane active" id="encounter">
                          <div class="col-md-12" style="padding-top:20px">
@@ -1043,7 +1043,7 @@
                          </div>
                       </div><!-- .encounter-->
                     </div>                     
-
+               
               <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
 
@@ -1067,10 +1067,7 @@
                                                 </tbody>                  
                                                 </table>
                             </div>
-                               
-        
-                      <!--pw implementation of vllabhistory module here-->
-                                
+                      
                          <div class="col-md-12 bs-callout bs-callout-info">
                                          <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
                                               <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
@@ -1090,28 +1087,24 @@
                                                 </table>
                                             </div> 
                                                
-                     <!--pw .implementation of  vllabhistory module here-->
-                             
-                                </div>
+                                    </div>
                        
                                    
                              <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
 
                       <!-- pw .implementation of viral load tracker line graph here-->
-                      </div><!-- .viraload tracker-->
+                </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                           <!-- <div class="col-md-12" style="padding-top: 1%">
+                            <%--<div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
-                            </div>    -->
+                            </div>    -->--%>
                             
-                          <!--  <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs :</strong> </h4>  
-                            </div> -->
+                       
                            
-                <div class="col-md-6">  
-                 <div class="col-md-12 bs-callout bs-callout-danger">
+                        <div class="col-md-6">  
+                         <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
@@ -1151,14 +1144,12 @@
                                                 </table>
 
                                        </div>                    
-                    <!--pw implementation of previous orders laboratory module here-->
-                               </div>
+                              </div>
 
                        </div>
                            
                        <div class="col-md-6">
-                         <!-- here  -->
-                                <div class="col-md-12">
+                         <div class="col-md-12">
                                         <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
                                     <div class="col-md-12">
                                         <div class="panel panel-default">
@@ -1194,11 +1185,11 @@
                                                   </div>
                                  <!--datepicker  -->
                               
-               <div class="col-md-12 form-group">
-                    <div class="col-md-4">
-                        <label class="control-label pull-left">Date</label>
-                    </div>
-                    <div class="col-md-6">
+                                   <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <label class="control-label pull-left">Date</label>
+                                        </div>
+                                        <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate"></asp:TextBox>
@@ -1284,17 +1275,17 @@
                                             <div class="datepicker-wheels-footer clearfix">
                                                 <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
                                                 <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
             
 
-                                  <!--.datepicker   -->
+                                 
                                                   <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
@@ -1322,12 +1313,12 @@
                                             </div>
                                                               
    
-                                                </div>
-                                        </div>
-                                    </div>     
-                       </div>
-                 </div>
-                           <!--  to here-->
+                                                                </div>
+                                                        </div>
+                                                    </div>     
+                                                   </div>
+                                             </div>
+                           
                                         <div class="col-md-12"><hr/></div>
                                         <div class="col-md-7"></div>
                                          <div class="col-md-5">
@@ -1339,20 +1330,20 @@
                                                  <asp:LinkButton runat="server" ID="btnPrintOrder" CssClass="btn btn-primary fa fa-print" ClientIDMode="Static"> Print Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
-                                                 <asp:LinkButton runat="server" ID="btnResetOrder" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
+                                                 <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
-                                                 <asp:LinkButton runat="server" ID="btnCancelOrder" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
+                                                 <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
                                    
                             <%--</div>--%>
                         
-
+                      
                       </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
-
-                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
-                          <div class="col-md-12" style="padding-top: 1%">
+                  
+               <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                     <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
                           </div>
                           <div class="col-md-12 bs-callout bs-callout-danger">
@@ -1451,7 +1442,8 @@
                            
                        </div>--%><!-- .history-->
                  </div><!-- .tab-content-->
-            </div><!-- .col-md-12 -->
+           </div> 
+
     <!-- ajax begin -->
    <script type="text/javascript">
              var patientId = <%=PatientId%>;
@@ -1637,11 +1629,15 @@
                  });
            
         });
-    
+      
+       var lorderType= new Array();
+       var lorderReason= new Array();
+       var lorderDate= new Array();
+       var lorderNotes= new Array();
          // Load lab order
-     $("#btnAddLab").click(function (e) {
-             
-               var labOrderDate = $("#<%=LabDate.ClientID%>").val();
+       $("#btnAddLab").click(function (e) {
+
+           var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
                var labOrderReason = $("#orderReason").find(":selected").text();
                var labOrderNotes = $("#labNotes").val();
@@ -1654,21 +1650,56 @@
                    generate("error", "Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
+                      
+               if (labOrderDate < 1) {
+                   generate("error", "Please input a date for the lab order");
+                   return false;
+               }
 
                else {
 
+                   lorderType.push("" + labType + "");
+                   lorderReason.push("" + labOrderReason + "");
+                   lorderDate.push("" + labOrderDate + "");
+                   lorderNotes.push("" + labOrderNotes + "");
 
                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
-
+                  
                }
 
                e.preventDefault();
-           });
+     });
+        // $("#tblAddLabs").on('click', '.btnCancelOrder', function () {
+         $("#btnCancelOrder").click(function (e) {
 
 
+             //$('#tblAddLabs > tr').remove();
+             $("#tblAddLabs td").parent().remove();
+            // $('#myTable').empty();
+             //$(this).closest('tr').remove();
+             //var x = $(this).closest('tr').find('td').eq(0).html();
+
+             // lorderType.splice($.inArray(x, lorderType), 1);
+             // lorderReason.splice($.inArray(x, lorderReason), 1);
+             // lorderDate.splice($.inArray(x, lorderDate), 1);
+             // lorderNotes.splice($.inArray(x, lorderNotes), 1);
+
+
+         });
+      
+         $("#btnResetOrder").click(function (e) {   
+             resetLabOrder();
+         });
+        
+         function resetLabOrder(parameters) {
+             $("#labTestTypes").val("");
+             $("#orderReason").val("");
+             $("#labNotes").val("");
+             $("#LabDate").val("");
+         }
            // Save lab order
-           $("#btnSaveLab").click(function (e) {
+      $("#btnSaveLab").click(function (e) {
                var _fp = [];
                var data = $('#tblAddLabs tr').each(function (row, tr) {
 
@@ -1692,8 +1723,10 @@
                    addLabOrder(_fp);
                }
 
-
+               $("#tblAddLabs td").parent().remove();
            });
+
+
            function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
                console.log(patientId);
@@ -1756,6 +1789,8 @@
                    }]
                });
            });
+
+           
            /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
            var getVisitDateVal = "<%= this.visitdateval %>";
            var getFemaleLMPVal = "<%= this.LMPval %>";
@@ -2321,33 +2356,33 @@
 
            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+   function generate(type, text) {
 
+                var n = noty({
+                    text: text,
+                    type: type,
+                    dismissQueue: true,
+                    progressBar: true,
+                    timeout: 5000,
+                    layout: 'topRight',
+                    closeWith: ['click'],
+                    theme: 'relax',
+                    maxVisible: 10,
+                    animation: {
+                        open: 'animated bounceInLeft',
+                        close: 'animated bounceOutLeft',
+                        easing: 'swing',
+                        speed: 500
+                    }
+                });
+                return n;
+      }
 
 
 
           
            
-    function generate(type, text) {
-
-           var n = noty({
-               text: text,
-               type: type,
-               dismissQueue: true,
-               progressBar: true,
-               timeout: 5000,
-               layout: 'topRight',
-               closeWith: ['click'],
-               theme: 'relax',
-               maxVisible: 10,
-               animation: {
-                   open: 'animated bounceInLeft',
-                   close: 'animated bounceOutLeft',
-                   easing: 'swing',
-                   speed: 500
-               }
-           });
-                return n;
-         }
+    
            
          
        });

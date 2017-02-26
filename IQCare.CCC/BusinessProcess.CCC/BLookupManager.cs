@@ -115,5 +115,12 @@ namespace BusinessProcess.CCC
             return
                 _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName).ToList();
         }
+        public LookupFacility GetFacility()
+
+        {
+            LookupFacilityRepository lookupFacilityRepository = new LookupFacilityRepository();
+            return lookupFacilityRepository.GetFacility();
+        }
+       
     }
 }

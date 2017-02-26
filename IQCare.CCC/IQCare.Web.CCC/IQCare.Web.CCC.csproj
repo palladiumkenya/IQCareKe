@@ -53,6 +53,10 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Scripts\css\awesomplete.css" />
+    <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
+    <Content Include="CCC\Scripts\css\typeaheadjs.css" />
+    <Content Include="CCC\Scripts\js\awesomplete.js" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
@@ -73,8 +77,9 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />
-    <Content Include="CCC\Scripts\js\jquery-1.4.2.min.js" />
+    <Content Include="CCC\Scripts\js\jquery-ui-1.9.1.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />

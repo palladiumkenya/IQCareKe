@@ -33,11 +33,15 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class LabService : System.Web.Services.WebService
     {
+
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
-        
+
+        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private int patient_ID { get; set; }
+        private int facilityID { get; set; }
         private string Msg { get; set; }
         private int Result { get; set; }
+        
 
 
         [WebMethod(EnableSession = true)]
@@ -53,12 +57,16 @@ namespace IQCare.Web.CCC.WebService
                 };
                 patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
             }
+// Get Facility ID service
+            LookupFacility facility = _lookupManager.GetFacility();
+            facilityID = facility.FacilityID;
+
             try
             {
                 //conversion error                 
                // int patient_ID = 18;
                 var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patient_ID, patientMasterVisitId, patientLabOrder);
+                Result = labOrder.savePatientLabOrder(patient_ID,facilityID,patientMasterVisitId, patientLabOrder);
                 if (Result > 0)
                 {
                     Msg = "Patient Lab Order Recorded Successfully .";

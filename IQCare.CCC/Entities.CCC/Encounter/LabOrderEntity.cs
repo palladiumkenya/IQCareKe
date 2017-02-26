@@ -21,7 +21,7 @@ namespace Entities.CCC.Encounter
 
         [Key]
         public int Id { get; set; }
-        public int Ptn_Pk { get; set; }   //should use a patientID        
+        public int Ptn_pk { get; set; }   //should use a patientID        
         public DateTime OrderDate { get; set; }
         public string ClinicalOrderNotes { get; set; }
         public string OrderStatus { get; set; }
