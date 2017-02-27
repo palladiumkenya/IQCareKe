@@ -9,7 +9,7 @@ using Entities.CCC.Baseline;
 
 namespace BusinessProcess.CCC.Baseline
 {
-    public class BPatientHivTestingManager : ProcessBase, IPatientHivTesting
+    public class BPatientHivTestingManager : ProcessBase, IPatientHivTestingManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;

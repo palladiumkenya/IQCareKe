@@ -6,6 +6,7 @@ namespace Entities.CCC.Encounter
 {
     public class PatientFamilyTesting
     {
+        public int PersonId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int PatientId { get; set; }
         public string FirstName { get; set; }
