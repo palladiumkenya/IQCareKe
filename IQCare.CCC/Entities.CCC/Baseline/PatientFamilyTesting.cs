@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Encounter
+namespace Entities.CCC.Baseline
 {
     public class PatientFamilyTesting
     {

@@ -1,10 +1,8 @@
 using Application.Presentation;
-using Entities.CCC.Encounter;
-using Interface.CCC.Baseline;
-using System.Collections.Generic;
 using Entities.CCC.Baseline;
 using Entities.Common;
 using Interface.CCC;
+using Interface.CCC.Baseline;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
