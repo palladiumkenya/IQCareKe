@@ -23,6 +23,11 @@ function AddAdverseReaction() {
         return;
     }
 
+    if (adverseEventSeverityID == "0") {
+        alert("Please enter Adverse Event Severity");
+        return;
+    }
+
     //var chkData = $.grep(arrAdverseEvent, function (e) { return e.adverseEvent == adverseEvent; });
     
     arrAdverseEventUI = [];
