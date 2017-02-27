@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using Entities.CCC.Enrollment;
 using Entities.CCC.Visit;
 using Entities.Common;
 using Entities.PatientCore;
@@ -24,7 +25,7 @@ namespace Entities.CCC.Baseline
         public decimal BaselineViralload { get; set; }
         public DateTime BaselineViralloadDate { get; set; }
         [ForeignKey("PatientId")]
-        public virtual Patient Patient { get; set; }
+        public virtual PatientEntity Patient { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
