@@ -7,7 +7,7 @@ using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Interface.Baseline
 {
-    public interface IPatientArvHistoryRepository:IRepository<PatientArtUseHistory>
+    public interface IPatientArvHistoryRepository:IRepository<PatientArvHistory>
     {
 
     }

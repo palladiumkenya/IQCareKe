@@ -5,7 +5,7 @@ using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Repository.Baseline
 {
-    public class PatientArvHistoryRepository:BaseRepository<PatientArtUseHistory>,IPatientArvHistoryRepository
+    public class PatientArvHistoryRepository:BaseRepository<PatientArvHistory>,IPatientArvHistoryRepository
    {
 
        private readonly GreencardContext _context;

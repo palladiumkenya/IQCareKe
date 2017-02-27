@@ -759,8 +759,10 @@
                                 $("#<%=WardId.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
                             }); 
                         },
-                        error: function (response) {
-                            toastr.error("Error in Fetching Ward list " + response.d, "Fetching Ward List");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });     
                 }
@@ -988,19 +990,33 @@
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
-                        data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person Popuation");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Population Error");
-                        }
-                    });
+                    var sex = $("#Gender").find(":selected").text();
+                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
+
+                    if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
+                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
+                        return false;
+                    }
+                    else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
+                        toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                            "Person Population Error");
+                        return false;
+                    } else {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/AddPersonPopulation",
+                            data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                toastr.success(response.d, "Person Popuation");
+                            },
+                            error: function (response) {
+                                toastr.error(response.d, "Person Population Error");
+                            }
+                        });
+                    }
                     //var personId = 0;
                 }
 

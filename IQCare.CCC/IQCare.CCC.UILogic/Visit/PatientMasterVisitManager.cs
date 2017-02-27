@@ -2,6 +2,8 @@
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using System;
+using System.Data.Entity;
+using System.Web.ModelBinding;
 
 namespace IQCare.CCC.UILogic.Visit
 {
@@ -22,15 +24,17 @@ namespace IQCare.CCC.UILogic.Visit
             }
         }
 
-        public int PatientMasterVisitCheckin(int patientId)
+        public int PatientMasterVisitCheckin(int patientId,int userId)
         {
+
+
             var objPpatientMasterVisit=new PatientMasterVisit
             {
                 PatientId = patientId,
                 ServiceId = 1,
-                Start =Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
-                Status = 1
-
+                Status = 1,
+                Start = DateTime.Now,
+                CreatedBy =userId
             };
 
             if (patientId > 0)
@@ -41,10 +45,11 @@ namespace IQCare.CCC.UILogic.Visit
             return _result> 0 ?_result:0;
         }
 
-        public int PatientMasterVisitCheckout(int patientId,int visitSchedule,int visitBy,int visitType,DateTime visitDate )
+        public int PatientMasterVisitCheckout(int id,int patientId, int visitSchedule, int visitBy, int visitType, DateTime visitDate)
         {
             var objPatientMasterVisit = new PatientMasterVisit
             {
+                Id = id,
                 PatientId = patientId,
                 Status = 2,
                 VisitScheduled = visitSchedule,

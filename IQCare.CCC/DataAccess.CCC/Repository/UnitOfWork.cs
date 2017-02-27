@@ -32,7 +32,6 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
-        private IPatientFamilyTestingRepository _patientFamilyTestingRepository;
 
         /* Patient Interface */
         private IPatientVitalsRepository _patientVitalsRepository;
@@ -65,14 +64,15 @@ namespace DataAccess.CCC.Repository
         /*Baseline*/
        // private IPatientDisclosureRepository _patientDisclosureRepository;
         private IPatientArvHistoryRepository _patientArvHistoryRepository;
-        private IPatientDiagnosisHivHistoryRepository _patientDiagnosisHivHistoryRepository;
+        private IPatientHivDiagnosisRepository _patientDiagnosisHivHistoryRepository;
         private IPatientDisclosureRepository _patientDisclosureRepository;
         private IINHProphylaxisRepository _inhProphylaxisRepository;
         private IPatientHivEnrollmentBaselineRepository _patientHivEnrollmentBaselineRepository;
         private IPatientTransferInRepository _patientTransferInRepository;
-        private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
+        private IPatientBaselineAssessmentRepository _patientBaselineAssessmentRepository;
         private IPatientVaccinationRepository _patientVaccinationRepository;
         private IPatientHivTestingRepository _patientHivTestingRepository;
+        private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
 
         /*Appointment*/
         private IPatientAppointmentRepository _patientAppointmentRepository;
@@ -237,11 +237,11 @@ namespace DataAccess.CCC.Repository
             get { return  _patientArvHistoryRepository ?? (_patientArvHistoryRepository=new PatientArvHistoryRepository((GreencardContext)_context)); }
         }
 
-        public IPatientDiagnosisHivHistoryRepository PatientDiagnosisHivHistoryRepository
+        public IPatientHivDiagnosisRepository PatientDiagnosisHivHistoryRepository
         {
             get
             {
-                return _patientDiagnosisHivHistoryRepository ??  (_patientDiagnosisHivHistoryRepository = new PatientDiagnosisHivHistoryRepository((GreencardContext) _context));
+                return _patientDiagnosisHivHistoryRepository ??  (_patientDiagnosisHivHistoryRepository = new PatientHivDiagnosisRepository((GreencardContext) _context));
             }
         }
 
@@ -258,9 +258,9 @@ namespace DataAccess.CCC.Repository
             get { return _patientTransferInRepository??(_patientTransferInRepository=new PatientTransferInRepository((GreencardContext)_context));}
         }
 
-        public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository
+        public IPatientBaselineAssessmentRepository PatientBaselineAssessmentRepository
         {
-            get {  return _patientTreatmentInitiationRepository??(_patientTreatmentInitiationRepository=new PatientTreatmentInitiationRepository((GreencardContext)_context));}
+            get {  return _patientBaselineAssessmentRepository??(_patientBaselineAssessmentRepository=new PatientBaselineAssessmentRepository((GreencardContext)_context));}
         }
 
         public IPatientLookupRepository PatientLookupRepository
@@ -291,11 +291,15 @@ namespace DataAccess.CCC.Repository
             get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
         }
 
-        public IPatientFamilyTestingRepository PatientFamilyTestingRepository
+        public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository
         {
-            get { return _patientFamilyTestingRepository??(_patientFamilyTestingRepository = new PatientFamilyTestingRepository((GreencardContext)_context));}
+            get
+            {
+                return _patientTreatmentInitiationRepository ??
+                       (_patientTreatmentInitiationRepository =
+                           new PatientTreatmentInitiationRepository((GreencardContext) _context));
+            }
         }
-
         public IPatientHivTestingRepository PatientHivTestingRepository
         {
             get {return _patientHivTestingRepository??(_patientHivTestingRepository = new PatientHivTestingRepository((GreencardContext)_context));}

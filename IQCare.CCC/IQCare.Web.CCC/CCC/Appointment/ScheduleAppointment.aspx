@@ -255,7 +255,6 @@
             $("#Reason").val("");
             $("#DifferentiatedCare").val("");
             $("#description").val("");
-            $("#status").val("");
             $("#AppointmentDate").val("");
         }
     </script>

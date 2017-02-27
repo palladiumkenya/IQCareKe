@@ -60,9 +60,9 @@ namespace BusinessProcess.CCC.visit
             var visitId =
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
                     x =>
-                        x.PatientId == patientId & (DateTime.Now.Date.Subtract(x.CreateDate)).Hours <= 24 &
-                        x.Status == 1 & !x.DeleteFlag).Select(x=>x.Id).FirstOrDefault();
-            if (visitId < 1)
+                        x.PatientId == patientId & DbFunctions.AddHours(x.Start,24) < DateTime.Now &
+                        x.Status == 1 & !x.Active & !x.DeleteFlag).Select(x=> x.Id).FirstOrDefault();
+            if (visitId < 0)
             {
                 _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
                 _unitOfWork.Complete();

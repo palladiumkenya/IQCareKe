@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entities.CCC.Encounter
+namespace Entities.CCC.Baseline
 {
     public class PatientFamilyTesting
     {
+        public int PersonId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int PatientId { get; set; }
         public string FirstName { get; set; }

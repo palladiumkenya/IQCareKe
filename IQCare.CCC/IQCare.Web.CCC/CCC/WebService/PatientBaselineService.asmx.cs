@@ -57,7 +57,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 
-                PatientArtUseHistoryManager patientArtUseHistory=new PatientArtUseHistoryManager();
+                PatientArvHistoryManager patientArtUseHistory=new PatientArvHistoryManager();
                 _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
                 _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
@@ -80,8 +80,23 @@ namespace IQCare.Web.CCC.WebService
             return JsonMessage;
         }
 
+        [WebMethod]
+        public string AddPatientHIVDiagnosis(int patientId,int patientMasterVisitId, DateTime dateOfHIVDiagnsosi,DateTime dateofEnrollment,int whoStage,DateTime dateofArtInitiation)
+        {
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                JsonMessage = e.Message + ' ' + e.InnerException;
+            }
+
+            return JsonMessage;
+        }
+
         [WebMethod(EnableSession = true)]
-        public string AddPatientHivEnrollmentbaseline(int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate, DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, bool artHistoryUse, bool hivRetest, int hivRetestTypeId, string reasonForNotRetest,int userId)
+        public string AddPatientHivDiagnosis(int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate, DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, bool artHistoryUse, bool hivRetest, int hivRetestTypeId, string reasonForNotRetest,int userId)
         {
             try
             {
@@ -112,13 +127,16 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                PatientArtInitiationBaslineManager patientArtInitiationBasline=new PatientArtInitiationBaslineManager();
+                PatientBaslineAssessmentManager patientArtInitiationBasline=new PatientBaslineAssessmentManager();
                 _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
                 _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
-
-                Result = patientArtInitiationBasline.AddArtInitiationbaseline(_patientId, _patientMasterVisitId,
+                // Excess arguments provided
+                /*Result = patientArtInitiationBasline.AddArtInitiationbaseline(_patientId, _patientMasterVisitId,
                     hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, viralLoad, viralLoadDate, muac,
-                    weight, height, artCohort, firstlineStartDate, startRegimen,userId);
+                    weight, height, artCohort, firstlineStartDate, startRegimen,userId);*/
+                Result = patientArtInitiationBasline.AddArtInitiationbaseline(_patientId, _patientMasterVisitId,
+                hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, muac,
+                weight, height, userId);
                 if (Result > 0)
                 {
                     JsonMessage = "Patient ART Initiation Baseline Captured Successfully!";
