@@ -88,7 +88,6 @@
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
-    <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
