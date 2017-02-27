@@ -57,9 +57,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (lookupItem != null && lookupItem.Count > 0)
             {
                 regimenCategory.Items.Add(new ListItem("select", "0"));
+                InitiationRegimen.Items.Add(new ListItem("select", "0"));
                 foreach (var k in lookupItem)
                 {
                     regimenCategory.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    InitiationRegimen.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 

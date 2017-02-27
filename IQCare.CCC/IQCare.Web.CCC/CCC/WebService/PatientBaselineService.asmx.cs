@@ -82,7 +82,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string ManagePatientArvHistory(int id, int patientId, int patientMasterVisitId, string artuseStrings, int userId)
+        public string ManagePatientArvHistory(int id, int patientId, int patientMasterVisitId, dynamic artuseStrings, int userId)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     foreach (var item in artuse)
                     {
-                        _result = patientHivHistory.AddPatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment,item.purpose, item.regimen, item.dateLastUsed, userId);
+                        _result = patientHivHistory.AddPatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment.ToString(),item.purpose.ToString(), item.regimen.ToString(),Convert.ToDateTime(item.dateLastUsed), userId);
                     }   
                 }
                 else
