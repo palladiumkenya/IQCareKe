@@ -120,21 +120,25 @@
                   <div class="col-md-12">
                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true"/>
                   </div>
-             </div> 
-            
-            <div class="col-md-3">
-                <div class="col-md-10"><label class="pull-left control-label">Enrollment No.#</label></div>
-                <div class="col-md-10">
+             </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12"><label id="enrollmentLabel" class="pull-right  control-label">Enrollment No.#</label></div>
+                <div id="AppPosID">
+                    <div class="col-md-5" style="padding-right: 0;"><input type="text" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
+                    <div class="col-md-1" style="padding: 0;">-</div>
+                </div>   
+                <div class="col-md-6" style="padding-left: 0;">
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-required="true"></asp:TextBox>
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
                 <div class="col-md-12 pull-right">
-                          <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Identifier</asp:LinkButton>
-                      </div>
-                 </div>
+                    <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Identifier</asp:LinkButton>
+                </div>
+            </div>
         </div> 
             
             
@@ -244,7 +248,13 @@
                 var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
                 var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
                 var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
-                var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
+                var enrollmentNo = null;
+
+                if (identifier == "CCC Registration Number") {
+                    enrollmentNo = <%=Session["AppPosID"] %> + $("#<%=IdentifierValue.ClientID%>").val();
+                } else {
+                    enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
+                }
 
                 if (moment(''+enrollmentDate+'').isAfter()) {
                     
@@ -330,10 +340,9 @@
                 var _fp = [];
                 var data = $('#tblEnrollment tr').each(function (row, tr) {
                     _fp[row] = {
-                        "enrollmentDate": $(tr).find('td:eq(1)').text()
-                     , "enrollmentIdentifier": $(tr).find('td:eq(2)').text()
-                     , "identifierId": $(tr).find('td:eq(3)').text()
-                     , "enrollmentNo": $(tr).find('td:eq(4)').text()
+                        "enrollmentIdentifier": $(tr).find('td:eq(1)').text()
+                     , "identifierId": $(tr).find('td:eq(2)').text()
+                     , "enrollmentNo": $(tr).find('td:eq(3)').text()
                     }
                 });
                 _fp.shift();//first row will be empty -so remove
@@ -356,6 +365,8 @@
             function addPatient(_fp, entryPointId, enrollmentDate) {
                 var enrollments = JSON.stringify(_fp);
 
+                console.log(enrollments);
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
@@ -373,6 +384,18 @@
                     }
                 });
             }
+
+            $("#IdentifierTypeId").change(function() {
+                if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
+                    $("#AppPosID").show();
+                    $("#enrollmentLabel").removeClass("pull-left");
+                    $("#enrollmentLabel").addClass("pull-right");
+                } else {
+                    $("#AppPosID").css("display", "none");
+                    $("#enrollmentLabel").removeClass("pull-right");
+                    $("#enrollmentLabel").addClass("pull-left");
+                }
+            });
 
         });
 
