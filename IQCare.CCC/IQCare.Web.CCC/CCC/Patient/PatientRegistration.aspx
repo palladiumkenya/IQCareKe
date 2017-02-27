@@ -113,7 +113,7 @@
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="MyDateOfBirth">
                                                     <div class="input-group">
-                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB"></asp:TextBox>        
+                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB" data-parsley-required="true"></asp:TextBox>        
                                                         <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -553,6 +553,10 @@
                     if (personAge >= 18) {
                         $("#ChildOrphan").val("");
                         $("#Inschool").val("");
+                        $("#GurdianFNames").val("");
+                        $("#GurdianMName").val("");
+                        $("#GurdianLName").val("");
+                        $("#GuardianGender").val("");
 
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
                         $("#<%=Inschool.ClientID%>").prop('disabled', true);

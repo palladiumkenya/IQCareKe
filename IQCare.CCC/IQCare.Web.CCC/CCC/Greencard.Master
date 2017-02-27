@@ -229,6 +229,7 @@
             var stopEncounter = 0; /* starts encounter flags starts at false */
             var patientId = <%=PatientId%>;
 
+            var patientId = <%=PatientId%>;
             $("#menuStartEncounter").click(function() {
 
                 if (patientId < 1) {

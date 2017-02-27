@@ -24,7 +24,6 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientService : System.Web.Services.WebService
     {
-        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private string Msg { get; set; }
         private int Result { get; set; }
 
@@ -33,9 +32,6 @@ namespace IQCare.Web.CCC.WebService
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
             decimal weight, decimal bmi, decimal headCircumference)
         {
-            //ToDo remove this section
-            if (patientMasterVisitId == 0)
-                patientMasterVisitId = 1;
             try
             {
                 PatientVital patientVital = new PatientVital()
@@ -71,10 +67,6 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId)
         {
-
-            //ToDo remove this section
-            if (patientMasterVisitId == 0)
-                patientMasterVisitId = 1;
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = patientId,
@@ -103,12 +95,8 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresult, DateTime hivStatusresultDate, bool cccreferal)
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
         {
-
-            //ToDo remove this section
-            if (patientMasterVisitId == 0)
-                patientMasterVisitId = 1;
             PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
             {
                 PatientId = patientId,
@@ -121,9 +109,10 @@ namespace IQCare.Web.CCC.WebService
                 RelationshipId = relationshipId,
                 BaseLineHivStatusId = baselineHivStatusId,
                 BaselineHivStatusDate = baselineHivStatusDate,
-                HivTestingResultsDate = hivStatusresultDate,
-                HivTestingResultsId = hivTestingresult,
+                HivTestingResultsDate = hivTestingresultDate,
+                HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
+                CccReferaalNumber = cccReferalNumber
             };
             try
             {

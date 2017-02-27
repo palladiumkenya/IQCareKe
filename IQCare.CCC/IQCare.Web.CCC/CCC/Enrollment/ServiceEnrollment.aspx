@@ -129,7 +129,7 @@
                     <div class="col-md-1" style="padding: 0;">-</div>
                 </div>   
                 <div class="col-md-6" style="padding-left: 0;">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true"></asp:TextBox>
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-min="5"></asp:TextBox>
                 </div>
             </div>
 
@@ -252,13 +252,15 @@
                     var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
                     var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
                     var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
-                    var enrollmentNo = null;
+                    var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
 
+                    if (enrollmentNo.length < 5 || enrollmentNo.length > 5) {
+                        toastr.error("error", "Enrollment number should be more than Five Characters");
+                        return false;
+                    }
 
                     if (identifier == "CCC Registration Number") {
-                        enrollmentNo = <%=Session["AppPosID"] %> + $("#<%=IdentifierValue.ClientID%>").val();
-                    } else {
-                        enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
+                        enrollmentNo = <%=Session["AppPosID"] %> + "-" + enrollmentNo;
                     }
 
                     if (moment('' + enrollmentDate + '').isAfter()) {
@@ -275,10 +277,7 @@
                         toastr.error("error", "Please select at least One(1) Identifier Type from the List");
                         return false;
                     }
-                    if (enrollmentNo.length < 4) {
-                        toastr.error("error", "Enrollment number should be more than Four Characters");
-                        return false;
-                    }
+                    
 
                     identifierFound = $.inArray("" + identifier + "", identifierList);
                     enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);

@@ -11,7 +11,7 @@
 
 
         <div class="col-md-12 bs-callout bs-callout-info">
-            <div class="col-md-12">
+            <div class="col-md-12" id="FamilyTestingForm" data-parsley-validate="true" data-show-errors="true">
                 <div class="col-md-12">
 
                     <div class="col-md-12">
@@ -23,7 +23,7 @@
                                 <label class="control-label pull-left">First Name</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="FirstName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" />
+                                <input id="FirstName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -39,7 +39,7 @@
                                 <label class="control-label pull-left">Last Name</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="LastName" class="form-control input-sm" type="text" runat="server" placeholder="Last Name" />
+                                <input id="LastName" class="form-control input-sm" type="text" runat="server" placeholder="Last Name" required="true" />
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                 <label class="control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="Relationship" class="form-control input-sm"></select>
+                                <input id="Relationship" class="form-control input-sm" type="text" runat="server" required="true"/>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -58,7 +58,7 @@
                                 <label class="control-label pull-left">Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="Sex" class="form-control input-sm"></select>
+                                <select runat="server" id="Sex" class="form-control input-sm" required="true"></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -172,7 +172,7 @@
                                 <label class="control-label pull-left">Baseline HIV Status</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="BaselineHIVStatus" class="form-control input-sm"></select>
+                                <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" required="true"></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -180,7 +180,7 @@
                                 <label class="control-label pull-left">HIV Testing Results</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -188,7 +188,11 @@
                                 <label class="control-label pull-left">CCC Referal</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:DropDownList runat="server" ID="CccReferal" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                <%--<asp:DropDownList runat="server" ID="CccReferal" ClientIDMode="Static" CssClass="form-control input-sm" required="true"/>--%>
+                                <asp:DropDownList ID="CccReferal" runat="server" AutoPostBack="False" CssClass="form-control input-sm" onChange="CccEnabled();">
+                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                    <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                                </asp:DropDownList>
                             </div>
                         </div>
                     </div>
@@ -300,7 +304,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group" id="TestingDate">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate" required="true"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -391,6 +395,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">CCC Number</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="cccNumber" class="form-control input-sm" type="text" runat="server" enabled="False" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -418,7 +430,7 @@
                                     <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">HIV Testing Results</i> </th>
                                     <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">HIV Testing Results Date</i> </th>
                                     <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">CCC Referal</i></th>
-                                    <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
+                                    <th><span class="fa fa-times text-danger text-primary pull-right">Action</span></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -453,7 +465,7 @@
     <%--.container-fluid--%>
 
     <script type="text/javascript">
-
+        var familyMembers = [];
         $(document).ready(function () {
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
@@ -469,31 +481,38 @@
             });
 
             $("#btnAdd").click(function (e) {
-                var firstName = $("#<%=FirstName.ClientID%>").val();
-                var middleName = $("#<%=MiddleName.ClientID%>").val();
-                var lastName = $("#<%=LastName.ClientID%>").val();
-                var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
-                var sex = $("#<%=Sex.ClientID%>").val();
-                var dob = $("#<%=Dob.ClientID%>").val();
-                var relationship = $("#<%=Relationship.ClientID%>").val();
-                var baselineHivStatus = $("#<%=BaselineHIVStatus.ClientID%>").val();
-                var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
-                var hivTestingResults = $("#<%=hivtestingresult.ClientID%>").val();
-                var hivTestingResultsDate = $("#<%=HIVTestingDate.ClientID%>").val();
-                var cccreferal = $("#<%=CccReferal.ClientID%>").val();
-                debugger;
-                var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationship + "</td><td align='left'>" + baselineHivStatus + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingResults + "</td><td align='left'>" + hivTestingResultsDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                $("#tblFamilyTesting>tbody:first").append('' + table + '');
-                resetElements();
-                e.preventDefault();
-            });
+                if ($('#FamilyTestingForm').parsley().validate()) {
+                    var patientId = <%=PatientId%>;
+                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
+                    var firstName = $("#<%=FirstName.ClientID%>").val();
+                    var middleName = $("#<%=MiddleName.ClientID%>").val();
+                    var lastName = $("#<%=LastName.ClientID%>").val();
+                    var sex = $("#<%=Sex.ClientID%>").val();
+                    var dob = $("#<%=Dob.ClientID%>").val();
+                    var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
+                    var relationshipId = $("#<%=Relationship.ClientID%>").val();
+                    var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
+                    var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
+                    var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
+                    var hivTestingResultsDate = $("#<%=HIVTestingDate.ClientID%>").val();
+                    var cccreferal = $("#<%=CccReferal.ClientID%>").val();
+                    var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationship + "</td><td align='left'>" + baselineHivStatus + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingResults + "</td><td align='left'>" + hivTestingResultsDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    $("#tblFamilyTesting>tbody:first").append('' + table + '');
+                    var testing = { patientId: patientId, patientMasterVisitId: patientMasterVisitId, firstName: firstName, middleName: middleName, lastName: lastName, sex: sex, dob: dob,  relationshipId: relationshipId, baselineHivStatusId: baselineHivStatusId, baselineHivStatusDate: baselineHivStatusDate, hivTestingresultId: hivTestingresultId, hivTestingresultDate: hivTestingresultDate, cccreferal: cccreferal, cccReferalNumber: cccReferalNumber};
+                    familyMembers.append(testing);
+                    resetElements();
+                    debugger;
+                    e.preventDefault();
+                } else {
+                    return false;
+                }
                 
+            });
+
             $("#btnClose").click(function () {
-                debugger;
                 window.location.href = '/CCC/patient/patientHome.aspx';
             });
             $("#tblFamilyTesting").on('click', '.btnDelete', function () {
-                debugger;
                 $(this).closest('tr').remove();
             });
             $("#btnReset").click(function () {
@@ -503,6 +522,45 @@
 
         function resetElements(parameters) {
             $(".input-sm").val("");
+        }
+
+        function addFamilyTesting() {
+            var firstName = $("#<%=FirstName.ClientID%>").val();
+            var middleName = $("#<%=MiddleName.ClientID%>").val();
+            var lastName = $("#<%=LastName.ClientID%>").val();
+            var sex = $("#<%=Sex.ClientID%>").val();
+            var dob = $("#<%=Dob.ClientID%>").val();
+            var relationshipId = $("#<%=Relationship.ClientID%>").val();
+            var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
+            var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
+            var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
+            var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
+            var cccreferal = $("#<%=CccReferal.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/AddPatientFamilyTesting",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresult': '" + hivTestingresultId + "','hivStatusresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber +"'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Family testing saved successfully");
+                    resetElements();
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Family testing not saved");
+                }
+            });
+        }
+
+        function CccEnabled() {
+            if ($("#<%=CccReferal.ClientID%>").val() === "False") {
+                $("#<%=cccNumber.ClientID%>").disabled = 'true';
+            } else {
+                $("#<%=cccNumber.ClientID%>").disabled = 'false';
+            }
+            debugger;
         }
 
     </script>

@@ -5,11 +5,10 @@ using IQCare.CCC.UILogic;
 
 
 
+
 namespace IQCare.Web.CCC.WebService
 {
-    /// <summary>
-    /// Summary description for LookupService
-    /// </summary>
+   
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
