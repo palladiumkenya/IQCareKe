@@ -17,15 +17,14 @@ namespace IQCare.Web.CCC.Encounter
         public string nxtAppDateval = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            //this. PatientId = int.Parse(Session["PatientId"].ToString());
-           PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
 
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
-            }    
+            }
 
             if (!IsPostBack)
             {
@@ -54,7 +53,7 @@ namespace IQCare.Web.CCC.Encounter
                 if (visitId > 0)
                     loadPatientEncounter();
 
-               
+
             }
         }
         private void GetSessionDetails()

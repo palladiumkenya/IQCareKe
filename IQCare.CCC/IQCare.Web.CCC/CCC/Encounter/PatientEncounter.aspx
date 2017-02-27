@@ -1446,7 +1446,7 @@
 
     <!-- ajax begin -->
    <script type="text/javascript">
-             var patientId = <%=PatientId%>;
+            var patientId = <%=PatientId%>;
              var patientMasterVisitId = <%=PatientMasterVisitId%>;
 
      $(document).ready(function () {     
@@ -1857,7 +1857,7 @@
             });
             $('#vaccineDate').datepicker({
                 allowPastDates: true,
-                date: getVaccDateVal,
+                //date: getVaccDateVal,
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
