@@ -237,13 +237,13 @@
                                                             <div class="col-md-12"><hr /></div>
                                                             <div class="col-md-12 form-group">
                                                                  <div class="col-md-3">
-                                                                      <div class="col-md-12"><label class="control-label pull-left" ><small>Adverse event(s)</small></label></div>
+                                                                      <div class="col-md-12"><label class="control-label pull-left" >Adverse event(s)</label></div>
                                                                      <div class="col-md-12">
                                                                          <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
                                                                      </div>
                                                                  </div>
                                                                  <div class="col-md-3">
-                                                                     <div class="col-md-12"><label class="control-label" >Medicine Causing a/e</label></div>
+                                                                     <div class="col-md-12"><label class="control-label" >Medicine Causing A/E</label></div>
                                                                      <div class="col-md-12">
                                                                          <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
                                                                      </div>
