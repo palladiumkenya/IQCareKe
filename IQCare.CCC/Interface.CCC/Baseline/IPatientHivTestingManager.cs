@@ -4,7 +4,7 @@ using Entities.CCC.Encounter;
 
 namespace Interface.CCC.Baseline
 {
-    public interface IPatientHivTesting
+    public interface IPatientHivTestingManager
     {
         int AddPatientHivTesting(PatientHivTesting p);
 
