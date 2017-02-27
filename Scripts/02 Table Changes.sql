@@ -543,7 +543,11 @@ Begin
   Alter table dbo.Dtl_PatientPharmacyOrder Add WhyPartial  varchar(250) Null
 End
 Go
-
+ If Not Exists (Select * From sys.columns Where Name = N'ScheduleId' And Object_ID = Object_id(N'Dtl_PatientPharmacyOrder'))    
+Begin
+  Alter table dbo.Dtl_PatientPharmacyOrder Add ScheduleId  int Null
+End
+Go
 If Not Exists (Select * From sys.columns Where Name = N'ItemInstructions' And Object_ID = Object_id(N'Mst_ItemMaster'))    
 Begin
   Alter table dbo.Mst_ItemMaster Add ItemInstructions  varchar(250) Null
