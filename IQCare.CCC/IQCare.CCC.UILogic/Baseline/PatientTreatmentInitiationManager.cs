@@ -10,7 +10,7 @@ namespace IQCare.CCC.UILogic.Baseline
     {
         private readonly IPatientTreatmentInitiationManager _patientTreatmentInitiation = (IPatientTreatmentInitiationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientTreatmeantInitiationManager, BusinessProcess.CCC");
 
-        public int AddPatientTreatmentInititation(int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
+        public int AddPatientTreatmentInititation(int id,int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
         {
             var patientTreatmentInitiationInsert = new PatientTreatmentInitiation
             {

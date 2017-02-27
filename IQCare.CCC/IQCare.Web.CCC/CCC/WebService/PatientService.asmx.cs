@@ -3,14 +3,12 @@ using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
-using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Services;
-using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.WebService
 {

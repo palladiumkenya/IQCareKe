@@ -159,11 +159,9 @@
                                 <a href="#" id="menuStartEncounter" class="list-group-item" onclick="return false">
                                     <span class="fa fa-sign-in fa-2x pull-left text-warning"></span> <strong class="text-success">Patient Checkin </strong>
                                 </a>
-                              
-                               <a href='<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>' id="menuNewEncounter" class="list-group-item" >
-                                    <span class="fa fa-exchange fa-1x pull-left text-info"></span> New Encounter 
-                                </a>
-                               <asp:LinkButton ID="menuNewEncounter" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
+
+								
+                               <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
                                   <span class="fa fa-exchange fa-1x pull-left text-info"></span>Patient Clinical Encounter</asp:LinkButton>
 
      
@@ -172,7 +170,7 @@
                                 </a>
 
 
-                              <asp:LinkButton ID="LinkButton2" runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
+                              <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
                                   <span class="fa fa-history fa-1x pull-left text-danger"></span>Encounter History</asp:LinkButton>
 
                                 <!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
@@ -229,6 +227,7 @@
 
             var startEncounter = 0; /* starts encounter flags starts at false */
             var stopEncounter = 0; /* starts encounter flags starts at false */
+            var patientId = <%=PatientId%>;
 
             $("#menuStartEncounter").click(function() {
 
@@ -248,7 +247,7 @@
                                     return false;
                                 } else {
                                     encounterStarted();
-                                    $(this).hide();
+                                    $("#menuStartEncounter").hide();
                                     startEncounter = 1; /* denotes an active encounter */
                                     stopEncounter = 0;
                                     toastr.info("Patient Service Checkedin successfully!");
@@ -296,6 +295,7 @@
                 $("#menuCaptureVitals").hide();
                 $("#menuNewEncounter").hide();
                 $("#menuPatientVitals").hide();
+				$("#LinkButton2").hide();
                 <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
             }
 
@@ -315,6 +315,7 @@
                 stopEncounter = 0;
                 $("#menuStopEncounter").show();
                 $("#menuPatientVitals").show();
+				$("#LinkButton2").show();
 
             }
 

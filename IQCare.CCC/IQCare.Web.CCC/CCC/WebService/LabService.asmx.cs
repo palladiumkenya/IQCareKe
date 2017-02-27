@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Web.Services;
-using Entities.Common;
-using Entities.PatientCore;
+
 using IQCare.CCC.UILogic;
-using Newtonsoft.Json;
+
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using Application.Presentation;
-using Entities.CCC.Appointment;
+
 using Entities.CCC.Lookup;
-using Entities.CCC.Triage;
+
 using Interface.CCC.Lookup;
-using IQCare.CCC.UILogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using Entities.CCC.Visit;
-using Interface.CCC.Visit;
+
+
 
 
 namespace IQCare.Web.CCC.WebService

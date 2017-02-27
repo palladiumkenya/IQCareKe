@@ -745,14 +745,14 @@
                                  <div class="col-md-2 col-xs-12"> 
                                      <div class="col-md-12 col-xs-12 col-sm-12"><label class="control-label pull-left">Who Stage</label></div>  
                                      <div class="col-md-12 col-xs-12 col-sm-12">
-                                         <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control-input-sm" ID="bwhoStage" data-parsley-min="0"/>
+                                         <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="bwhoStage" data-parsley-min="0"/>
                                      </div>
                                 </div>
 
                                  <div class="col-md-2 col-xs-12">
-                                     <div class="col-md-12 col-xs-12 col-sm-12"><label class="control-label">CD4 Count </label></div> 
+                                     <div class="col-md-12 col-xs-12 col-sm-12"><label class="control-label pull-left">CD4 Count </label></div> 
                                      <div class="col-md-12">
-                                          <asp:TextBox runat="server" CssClass="form-control-input-sm" ID="bCd4Count" placeholder="cd4 count"  ClientIDMode="Static"></asp:TextBox>
+                                          <asp:TextBox runat="server" CssClass="form-control input-sm" ID="bCd4Count" placeholder="cd4 count"  ClientIDMode="Static"></asp:TextBox>
                                      </div>
                                  </div>
 
@@ -1129,6 +1129,16 @@
                     }
                 });
 
+            /* set cohort yeat and Month */
+            $("#DateStartedOn1stLine").on('changed.fu.datepicker dataClicked.fu.datepicker',
+                function(event, date) {
+
+                    var dateStarted = $(this).datepicker(getDate);
+                    var startMonth = dateStarted.format('MM');
+                    var startYear = dateStarted.format("YYYY");
+                    $("#ARTCohort").text(startMonth + '-' + startYear);
+                });
+
             /* clientside validation */
             disableIfNotTransferIn();
             noneChecked();
@@ -1363,7 +1373,7 @@
                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
             });
             if ($("#datastep2").parsley().validate()) {
-                addPatientHivDiagnosis();
+                managePatientHivDiagnosis();
             } else {
                 stepError = $('.parsley-error').length === 0;
                 totalError += stepError;
@@ -1377,11 +1387,11 @@
                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
             });
             if ($("#datastep3").parsley().validate()) {
-                //if (treatmentType > 3) {
-                //    toastr.info("No ART/ARV History Selected for this patient!");
-                //} else {
-                //    addPatientArtUseHistory();
-                //}
+                if (treatmentType > 3) {
+                    toastr.info("No ART/ARV History Selected for this patient!");
+                } else {
+                    managePatientArvHistory();
+                }
                 
             } else {
                 stepError = $('.parsley-error').length === 0;
@@ -1396,14 +1406,27 @@
                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
             });
             if ($("#datastep4").parsley().validate()) {
-                addPatientHivEnrollmentbaseline();
+                managePatientBaselineAssessment();
             } else {
                 stepError = $('.parsley-error').length === 0;
                 totalError += stepError;
                 evt.preventDefault();
             }
         }
-        
+        else if (data.step === 5) {
+            $("#datastep5").parsley().destroy();
+            $('#datastep4').parsley({
+                excluded:
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+            });
+            if ($("#datastep5").parsley().validate()) {
+                managePatientTreatmentInitiation();
+            } else {
+                stepError = $('.parsley-error').length === 0;
+                totalError += stepError;
+                evt.preventDefault();
+            }
+        }       
     })
     .on("changed.fu.wizard",
         function () {
@@ -1485,9 +1508,9 @@
             }
 
             
-            function addPatientHivDiagnosis() {
+            function managePatientHivDiagnosis() {
 
-                alert("Hiv Diagnosis");
+                var id = 0;
                 var hivDiagnosisDate = moment($('#DHID').datepicker('getDate')).format('DD-MMM-YYYY');
                 var enrollmentDate = moment($('#DOE').datepicker('getDate')).format('DD-MMM-YYYY');
                 var artInitiationDate = moment($('#DARTI').datepicker('getDate')).format('DD-MMM-YYYY');
@@ -1498,12 +1521,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientBaselineService.asmx/AddPatientHivDiagnosis",
-                    data: "{'patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +
-                        "','artInitiationDate':'" +
-                        artInitiationDate +
-                        "','userId':'" +
-                        userId +
-                        "'}",
+                    data: "{'id':'" +ptnId +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationDate':'" +artInitiationDate + "','userId':'" + userId +"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(response) {
@@ -1518,14 +1536,18 @@
             }
 
 
-            function addPatientArtUseHistory() {
-                
+            function managePatientArvHistory() {
+
+                var id = 0;
                 var ptnId = patientId;
-                var ptnmasterVisitId = patientmasterVisitId;
+                var ptnmasterVisitId = patientMasterVisitId;
+                var treatment;
+                if(treatmentType===1){treatment='PrEP'} else if(treatmentType===2){ treatment='PEP'} else if(treatmentType===3){treatment='PMTCT'}
 
                 var artuseHistoryTable = new Array();
                 $("# tr").each(function(row, tr) {
                     artuseHistoryTable[row] = {
+                        "treatment":treatment,
                         "purpose": $(tr).find('td:eq(1)').text(),
                         "regimen": $(tr).find('td:eq(2)').text(),
                         "dateLastUsed": $(tr).find('td:eq(3)').text()
@@ -1533,51 +1555,80 @@
                 });
 
                 artuseHistoryTable.shift();//first row will be empty-so remove it
+                var jsonArtHistory = JSON.stringify(artuseHistoryTable);
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientBaselineService.asmx/AddPatientHivEnrollmentbaseline",
-                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','artuseStrings':'" + artuseHistoryTable + "','userId':'" + userId +
+                    data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','artuseStrings':'" + jsonArtHistory + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(response) {
                         toastr.success(response.d, "PatientTransferIn Status");
                     },
-                    error: function(response) {
-                        toastr.error(response.d, "--- Patient TransferIn Status Error ---");
+                    error: function(xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
                     }
                 });
             }
 
 
 
-            function addPatientArtUseInitiationBaseline() {
+            function managePatientBaselineAssessment() {
 
-                var viralLoad= $("#<%=BaselineViralload.ClientID%>").val(); 
-                var viralLoadDate= $("#BaselineViralloadDate").datepicker("getDate");
+
 
                 var muac= $("#<%=BaselineMUAC.ClientID%>").val();
                 var weight= $("#<%=BaselineWeight.ClientID%>").val(); 
                 var height= $("#<%=BaselineHeight.ClientID%>").val();
-                var artCohort= $("#<%=ARTCohort.ClientID%>").val(); 
-                var firstlineStartDate= $("#DateStartedOn1stLine").datepicker('getDate');
-                var startRegimen = $("#<%=TIRegimen.ClientID%>").val();
-
+                var id = 0;
                 var ptnId = patientId;
-                var ptnmasterVisitId = patientmasterVisitId;
+                var ptnmasterVisitId = patientMasterVisitId;
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientBaselineService.asmx/AddPatientArtUseInitiationBaseline",
-                    data: "{'personId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','hbvInfected':'" + bHiV + "','pregnant':'" + pregnancy + "','tbInfected':'" + tbInfection + "','whoStage':'" + whostage + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + cD4Count + "','viralLoad':'" + viralLoad + "','viralLoadDate':'" + viralLoadDate + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','artCohort':'" + artCohort + "','firstlineStartDate':'" + firstlineStartDate + "','startRegimen':'" + startRegimen + "','userId':'" + userId +
+                    data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','pregnant':'" + pregnancy + "','tbInfected':'" + tbInfection + "','whoStage':'" + whostage + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + cD4Count + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        toastr.success(response.d, "PatientTransferIn Status");
+                        toastr.success(response.d);
                     },
-                    error: function (response) {
-                        toastr.error(response.d, "--- Patient TransferIn Status Error ---");
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    }
+                });
+            }
+
+            function managePatientTreatmentInitiation() {
+                
+                var viralLoad= $("#<%=BaselineViralload.ClientID%>").val(); 
+                var viralLoadDate= $("#BaselineViralloadDate").datepicker("getDate").format('DD-MMM-YYYY');;
+                var artCohort= $("#<%=ARTCohort.ClientID%>").val(); 
+                var firstlineStartDate= $("#DateStartedOn1stLine").datepicker('getDate').format('DD-MMM-YYYY');;
+                var startRegimen = $("#<%=TIRegimen.ClientID%>").val();
+
+                var id = 0;
+                var ptnId = patientId;
+                var ptnmasterVisitId = patientMasterVisitId;
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/AddPatientArtUseInitiationBaseline",
+                    data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','dateStartedOnFirstLine':'" + firstlineStartDate + "','cohort':'" + tbInfection + "','regimen':'" + regimen + "','baselineViralload':'" + viralLoad + "','baselineViralLoadDate':'" + viralLoadDate + "','userId':'" + userId +
+                        "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d);
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
                     }
                 });
             }
