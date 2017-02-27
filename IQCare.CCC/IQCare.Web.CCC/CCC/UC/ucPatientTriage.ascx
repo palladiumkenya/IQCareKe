@@ -154,7 +154,6 @@
             resetElements();
         });
         $("#btnCancel").click(function () {
-            debugger;
             window.location.href = '/CCC/patient/patientHome.aspx';
         });
     });
