@@ -1459,8 +1459,9 @@
            date: null,
            allowPastDates: true,
            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-            });
-      
+     });
+
+        
       $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
@@ -1481,12 +1482,16 @@
                        var day = currentTime.getDate();
                        var year = currentTime.getFullYear();
                        var sampleDate = day + "/" + month + "/" + year;
-                      // alert(date);
-
+                      
                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                   
+               });
+                  
+                   $('#tblPrevLabs').append(table);
+                   $('#tblPrevLabs tr:not(:first-child').each(function(idx){
+                      $(this).children(":eq(0)").html(idx + 1);
                    });
 
-                   $('#tblPrevLabs').append(table);
 
                },
 
@@ -1522,8 +1527,11 @@
                    });
 
                    $('#tblPendingLabs').append(table);
+                   $('#tblPendingLabs tr:not(:first-child').each(function(idx){
+                       $(this).children(":eq(0)").html(idx + 1);
+                   });
 
-               },
+                   },
 
                error: function (msg) {
 
@@ -1556,7 +1564,9 @@
                    });
 
                    $('#tblVL').append(table);
-
+                   $('#tblVL tr:not(:first-child').each(function(idx){
+                       $(this).children(":eq(0)").html(idx + 1);
+                   });
                },
 
                error: function (msg) {
@@ -1591,7 +1601,9 @@
                 });
 
                 $('#tblVlpending').append(table);
-
+                $('#tblVlpending tr:not(:first-child').each(function(idx){
+                    $(this).children(":eq(0)").html(idx + 1);
+                });
             },
 
             error: function (msg) {
@@ -1643,16 +1655,16 @@
                var labOrderNotes = $("#labNotes").val();
 
                if (labType < 1) {
-                   generate("error", "Please select at least One(1) Lab Type from the List");
+                  toastr.error("Please select at least One(1) Lab Type from the List");
                    return false;
                }
                if (labOrderReason < 1) {
-                   generate("error", "Please select at least One(1) Lab Order Reason from the List");
+                   toastr.error("Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
                       
                if (labOrderDate < 1) {
-                   generate("error", "Please input a date for the lab order");
+                   toastr.error("Please input a date for the lab order");
                    return false;
                }
 
@@ -1674,18 +1686,9 @@
          $("#btnCancelOrder").click(function (e) {
 
 
-             //$('#tblAddLabs > tr').remove();
+            
              $("#tblAddLabs td").parent().remove();
-            // $('#myTable').empty();
-             //$(this).closest('tr').remove();
-             //var x = $(this).closest('tr').find('td').eq(0).html();
-
-             // lorderType.splice($.inArray(x, lorderType), 1);
-             // lorderReason.splice($.inArray(x, lorderReason), 1);
-             // lorderDate.splice($.inArray(x, lorderDate), 1);
-             // lorderNotes.splice($.inArray(x, lorderNotes), 1);
-
-
+           
          });
       
          $("#btnResetOrder").click(function (e) {   
@@ -1715,11 +1718,11 @@
                _fp.shift();
 
                if ($.isEmptyObject(_fp)) {
-                   generate("error", "You have not added any lab order");
+                   toastr.error("You have not added any lab order");
+                 
                    return false;
                } else {
-                   // var patientId = $("#entryPoint").val();
-                   //var patientId = JSON.stringify(patientId);
+                  
                    addLabOrder(_fp);
                }
 
@@ -1729,8 +1732,8 @@
 
            function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
-               console.log(patientId);
-               console.log(labOrder);
+              // console.log(patientId);
+               //console.log(labOrder);
                $.ajax({
                    type: "POST",
 
@@ -1796,6 +1799,7 @@
            var getFemaleLMPVal = "<%= this.LMPval %>";
            var getEDDPVal = "<%= this.EDDval %>";
            var getNxtAppDateVal = "<%= this.nxtAppDateval %>";
+    
 
            if (getVisitDateVal == '')
                getVisitDateVal = new Date();
@@ -1808,10 +1812,15 @@
 
            if (getNxtAppDateVal == '')
                getNxtAppDateVal = new Date();
+         //Date processing
+           var today = new Date();
+           var tomorrow = new Date();
+           tomorrow.setDate(today.getDate() + 1);
 
             $('#DateOfVisit').datepicker({
                 allowPastDates: true,
                 date: getVisitDateVal,
+                restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
@@ -1820,10 +1829,13 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+           
             $('#FemaleLMP').datepicker({
                 allowPastDates: true,
                 date: getFemaleLMPVal,
+                restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+                
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#EDCD').datepicker({
@@ -1845,6 +1857,8 @@
             });
             $('#vaccineDate').datepicker({
                 allowPastDates: true,
+                date: getVaccDateVal,
+                restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
@@ -2356,36 +2370,8 @@
 
            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   function generate(type, text) {
-
-                var n = noty({
-                    text: text,
-                    type: type,
-                    dismissQueue: true,
-                    progressBar: true,
-                    timeout: 5000,
-                    layout: 'topRight',
-                    closeWith: ['click'],
-                    theme: 'relax',
-                    maxVisible: 10,
-                    animation: {
-                        open: 'animated bounceInLeft',
-                        close: 'animated bounceOutLeft',
-                        easing: 'swing',
-                        speed: 500
-                    }
-                });
-                return n;
-      }
-
-
-
-          
-           
-    
-           
          
-       });
+  });
       
    
 </script>

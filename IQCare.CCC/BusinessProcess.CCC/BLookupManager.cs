@@ -2,10 +2,7 @@
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Lookup;
-using Entities.CCC.Visit;
 using DataAccess.CCC.Repository.Lookup;
-using DataAccess.CCC.Repository.visit;
-using System;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
