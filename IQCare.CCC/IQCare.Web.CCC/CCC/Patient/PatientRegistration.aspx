@@ -759,8 +759,10 @@
                                 $("#<%=WardId.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
                             }); 
                         },
-                        error: function (response) {
-                            toastr.error("Error in Fetching Ward list " + response.d, "Fetching Ward List");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });     
                 }

@@ -9,16 +9,16 @@ using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Repository.Baseline
 {
-    public class PatientDiagnosisHivHistoryRepository:BaseRepository<DiagnosisArvHistory>,IPatientDiagnosisHivHistoryRepository
+    public class PatientHivDiagnosisRepository:BaseRepository<PatientHivDiagnosis>,IPatientHivDiagnosisRepository
     {
         private readonly GreencardContext _context;
 
-        public PatientDiagnosisHivHistoryRepository() : this(new GreencardContext())
+        public PatientHivDiagnosisRepository() : this(new GreencardContext())
         {
             
         }
 
-        public PatientDiagnosisHivHistoryRepository(GreencardContext context) : base(context)
+        public PatientHivDiagnosisRepository(GreencardContext context) : base(context)
         {
             _context = context;
         } 

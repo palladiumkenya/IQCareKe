@@ -12,8 +12,8 @@ using Entities.Common;
 namespace Entities.CCC.Baseline
 {
     [Serializable]
-    [Table("PatientDiagnosis")]
-    public class DiagnosisArvHistory:BaseEntity
+    [Table("PatientHivDiagnosis")]
+    public class PatientHivDiagnosis:BaseEntity
     {
         [Key]
         public int Id { get; set; }

@@ -64,14 +64,15 @@
   <ItemGroup>
     <Compile Include="Appointment\PatientAppointment.cs" />
     <Compile Include="Baseline\INHProphylaxis.cs" />
-    <Compile Include="Baseline\PatientArtInitiationBaseline.cs" />
-    <Compile Include="Baseline\PatientArtUseHistory.cs" />
-    <Compile Include="Baseline\DiagnosisArvHistory.cs" />
+    <Compile Include="Baseline\PatientBaselineAssessment.cs" />
+    <Compile Include="Baseline\PatientArvHistory.cs" />
+    <Compile Include="Baseline\PatientHivDiagnosis.cs" />
     <Compile Include="Baseline\PatientDisclosure.cs" />
-    <Compile Include="Baseline\PatientFamilyTesting.cs" />
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
+    <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
+    <Compile Include="Encounter\LabDetailsEntity.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
     <Compile Include="Encounter\PatientCareEnding.cs" />
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Encounter\PatientFamilyPlanning.cs" />
     <Compile Include="Encounter\PatientFamilyPlanningMethod.cs" />
     <Compile Include="Baseline\PatientHivTesting.cs" />
-    <Compile Include="Encounter\PatientFamilyTesting.cs" />
+    <Compile Include="Baseline\PatientFamilyTesting.cs" />
     <Compile Include="Encounter\PatientProphylaxis.cs" />
     <Compile Include="Encounter\PatientReferral.cs" />
     <Compile Include="Encounter\PatientTbTreatmentTracker.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Enrollment\PatientEntityEnrollment.cs" />
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
+    <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />
     <Compile Include="Enrollment\PatientEntityIdentifier.cs" />

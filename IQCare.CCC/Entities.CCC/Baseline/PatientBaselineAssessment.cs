@@ -9,8 +9,8 @@ using Entities.PatientCore;
 namespace Entities.CCC.Baseline
 {
     [Serializable]
-    [Table("ARTInitiationBaseline")]
-    public class PatientArtInitiationBaseline : BaseEntity
+    [Table("PatientBaselineAssessment")]
+    public class PatientBaselineAssessment : BaseEntity
     {
 
         //private PatientArtInitiationBaseline() { }
@@ -26,16 +26,11 @@ namespace Entities.CCC.Baseline
         public bool HBVInfected { get; set; }
         public bool Pregnant { get; set; }
         public bool TBInfected { get; set; }
-        public int WHOStage { get; set; }
         public bool Breastfeeding { get; set; }
-        public int CD4Count { get; set; }
-        public Decimal? ViralLoad { get; set; }
-        public DateTime? ViralLoadDate { get; set; }
+        public int WHOStage { get; set; }    
+        public Decimal CD4Count { get; set; }
         public decimal? MUAC { get; set; }
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
-        public string ARTCohort { get; set; }
-        public DateTime FirstlineDate { get; set; }
-        public int StartRegimen { get; set; }
     }
 }

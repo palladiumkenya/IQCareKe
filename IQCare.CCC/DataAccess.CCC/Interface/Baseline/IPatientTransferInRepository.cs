@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects.DataClasses;
-using System.Linq;
-using System.Text;
-using DataAccess.Context;
+﻿using DataAccess.Context;
 using Entities.CCC.Baseline;
 
 namespace DataAccess.CCC.Interface.Baseline

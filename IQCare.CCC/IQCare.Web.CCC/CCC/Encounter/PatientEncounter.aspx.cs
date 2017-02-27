@@ -18,8 +18,8 @@ namespace IQCare.Web.CCC.Encounter
         protected void Page_Load(object sender, EventArgs e)
         {
             //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            this. PatientId = int.Parse(Session["PatientId"].ToString());
-           
+            //this. PatientId = int.Parse(Session["PatientId"].ToString());
+           PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
 
             if (Request.QueryString["visitId"] != null)
             {
@@ -57,15 +57,11 @@ namespace IQCare.Web.CCC.Encounter
                
             }
         }
-
-
         private void GetSessionDetails()
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
         }
-
-
 
         private void loadPatientEncounter()
         {

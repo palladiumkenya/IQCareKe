@@ -40,6 +40,7 @@ namespace BusinessProcess.CCC.visit
             return Result = _unitOfWork.Complete();
         }
 
+       
         public List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate)
         {
             List<PatientLabTracker> patientLabOrders =
@@ -52,7 +53,7 @@ namespace BusinessProcess.CCC.visit
             return patientLabOrders;
         }
 
-       public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
+        public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
             List<PatientLabTracker> patientLabOrders =
                 _unitOfWork.PatientLabTrackerRepository.FindBy(

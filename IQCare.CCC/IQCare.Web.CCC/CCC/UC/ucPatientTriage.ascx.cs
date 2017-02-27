@@ -20,6 +20,14 @@ namespace IQCare.Web.CCC.UC
         {
              PatientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
              PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            if (PatientMasterVisitId == 0)
+            {
+                PatientMasterVisit visit = new PatientMasterVisit()
+                {
+                    PatientId = PatientId,
+                    Active = true,
+                };
+            }
         }
     }
 }

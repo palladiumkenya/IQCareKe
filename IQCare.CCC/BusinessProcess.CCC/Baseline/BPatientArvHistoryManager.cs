@@ -8,31 +8,31 @@ using Interface.CCC.Baseline;
 
 namespace BusinessProcess.CCC.Baseline
 {
-    public class BPatientArtUseHistoryManager:ProcessBase,IPatientArtUseHistoryManager
+    public class BPatientArvHistoryManager:ProcessBase,IPatientArvHistoryManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
-        public int AddPatientArtUseHistory(PatientArtUseHistory patientArtUseHistory)
+        public int AddPatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
             _unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
             return Result = _unitOfWork.Complete();
         }
 
-        public int UpdatePatientArtUseHistory(PatientArtUseHistory patientArtUseHistory)
+        public int UpdatePatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
             _unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
             return Result=_unitOfWork.Complete();
         }
 
-        public int DeletePatientArtUseHistory(int id)
+        public int DeletePatientArvHistory(int id)
         {
             var partArtHistory= _unitOfWork.PatientArvHistoryRepository.GetById(id);
             _unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
             return Result=_unitOfWork.Complete();
         }
 
-        public List<PatientArtUseHistory> GetPatientArtUseHistory(int patientId)
+        public List<PatientArvHistory> GetPatientArvHistory(int patientId)
         {
             var patientArtHistory =
                 _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)

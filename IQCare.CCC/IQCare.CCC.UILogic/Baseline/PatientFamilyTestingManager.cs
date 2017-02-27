@@ -1,62 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Presentation;
-using Entities.CCC.Baseline;
+using Entities.CCC.Encounter;
 using Interface.CCC.Baseline;
+using System.Collections.Generic;
+using Entities.CCC.Baseline;
+using Entities.Common;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
     public class PatientFamilyTestingManager
     {
-        private readonly IPatientHvTestingManager _patientHvTesting = (IPatientHvTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientArtInitiationBaselineManager, BusinessProcess.CCC");
-        private int _result;
+        private IPatientHivTesting _hivTesting = (IPatientHivTesting)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientFamilyTesting, BusinessProcess.CCC");
 
-        public int AddFamilyHivTesting(int personId, int patientMasterVisitId, int baselineResult, DateTime baselineDate,
-            DateTime testingDate, int testingResult, bool referredTocare, string cccNumber, int enrolmentid)
+        public int AddPatientFamilyTestings(PatientFamilyTesting p)
         {
-            PatientHivTesting patientHivTesting=new PatientHivTesting()
+            Person person = new Person()
             {
-                PersonId = personId,
-                PatientMasterVisitId = patientMasterVisitId,
-                BaselineResult = baselineResult,
-                BaselineDate = baselineDate,
-                TestingDate = testingDate,
-                TestintResult = testingResult,
-                ReferredToCare = referredTocare,
-                CccNumber = cccNumber
+                FirstName = p.FirstName,
+                MidName = p.MiddleName,
+                LastName = p.LastName,
+                Sex = p.Sex,
+                DateOfBirth = p.DateOfBirth,
             };
-            return _result = _patientHvTesting.AddPatientHivTesting(patientHivTesting);
-        }
 
-        public int UpdateFamilyHivTesting(int personId, int patientMasterVisitId, int baselineResult,
-            DateTime baselineDate,
-            DateTime testingDate, int testingResult, bool referredTocare, string cccNumber, int enrolmentid)
-        {
-            PatientHivTesting patientHivTesting = new PatientHivTesting()
+            PatientHivTesting familyTesting = new PatientHivTesting()
             {
-                PersonId = personId,
-                PatientMasterVisitId = patientMasterVisitId,
-                BaselineResult = baselineResult,
-                BaselineDate = baselineDate,
-                TestingDate = testingDate,
-                TestintResult = testingResult,
-                ReferredToCare = referredTocare,
-                CccNumber = cccNumber
+                //PersonId = p.PatientId,
+                PatientMasterVisitId = p.PatientMasterVisitId,
+                //RelationshipId = p.RelationshipId,
+                BaselineResult = p.BaseLineHivStatusId,
+                BaselineDate = p.BaselineHivStatusDate,
+                TestingResult = p.HivTestingResultsId,
+                TestingDate = p.HivTestingResultsDate,
+                ReferredToCare = p.CccReferal
             };
-            return _result = _patientHvTesting.AddPatientHivTesting(patientHivTesting);
+            return _hivTesting.AddPatientHivTesting(familyTesting);
         }
 
-        public int DeleteFamilyTesting(int id)
+        public PatientHivTesting GetPatientFamilyTestings(int id)
         {
-           return _result= _patientHvTesting.DeletePatientHivTesting(id);
+            var familyTesting = _hivTesting.GetPatientHivTesting(id);
+            return familyTesting;
         }
 
-        public List<PatientHivTesting> GetFamilyTestingDeatils(int patientId )
+        public void DeletePatientFamilyTestings(int id)
         {
-            return _patientHvTesting.GetPatientHivTestings(patientId);
+            _hivTesting.DeletePatientHivTesting(id);
+        }
+
+        public int UpdatePatientFamilyTestings(PatientFamilyTesting p)
+        {
+            Person person = new Person()
+            {
+                FirstName = p.FirstName,
+                MidName = p.MiddleName,
+                LastName = p.LastName,
+                Sex = p.Sex,
+                DateOfBirth = p.DateOfBirth,
+            };
+
+            PatientHivTesting familyTesting = new PatientHivTesting()
+            {
+                //PersonId = p.PatientId,
+                PatientMasterVisitId = p.PatientMasterVisitId,
+                //RelationshipId = p.RelationshipId,
+                BaselineResult = p.BaseLineHivStatusId,
+                BaselineDate = p.BaselineHivStatusDate,
+                TestingResult = p.HivTestingResultsId,
+                TestingDate = p.HivTestingResultsDate,
+                ReferredToCare = p.CccReferal
+            };
+            return _hivTesting.UpdatePatientHivTesting(familyTesting);
         }
     }
 }

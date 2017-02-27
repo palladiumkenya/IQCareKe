@@ -53,19 +53,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\IINHProphylaxisManager.cs" />
-    <Compile Include="Baseline\IPatientArtInitiationBaselineManager.cs" />
-    <Compile Include="Baseline\IPatientArtUseHistoryManager.cs" />
+    <Compile Include="Baseline\IPatientBaselineAssessmentManager.cs" />
+    <Compile Include="Baseline\IPatientArvHistoryManager.cs" />
     <Compile Include="Baseline\IPatientDisclosureManager.cs" />
+    <Compile Include="Baseline\IPatientHivDiagnosisManager.cs" />
+    <Compile Include="Baseline\IPatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
-    <Compile Include="Baseline\IPatientHvTestingManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
+    <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
     <Compile Include="IPatientAppointment.cs" />
-    <Compile Include="IPatientFamilyTesting.cs" />
+    <Compile Include="Baseline\IPatientHivTesting.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPopuationManager.cs" />

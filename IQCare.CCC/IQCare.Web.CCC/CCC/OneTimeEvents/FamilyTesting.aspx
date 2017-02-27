@@ -55,10 +55,10 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="control-label pull-left">Gender</label>
+                                <label class="control-label pull-left">Sex</label>
                             </div>
                             <div class="col-md-6">
-                                <select runat="server" id="Gender" class="form-control input-sm"></select>
+                                <select runat="server" id="Sex" class="form-control input-sm"></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -473,7 +473,7 @@
                 var middleName = $("#<%=MiddleName.ClientID%>").val();
                 var lastName = $("#<%=LastName.ClientID%>").val();
                 var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
-                var gender = $("#<%=Gender.ClientID%>").val();
+                var sex = $("#<%=Sex.ClientID%>").val();
                 var dob = $("#<%=Dob.ClientID%>").val();
                 var relationship = $("#<%=Relationship.ClientID%>").val();
                 var baselineHivStatus = $("#<%=BaselineHIVStatus.ClientID%>").val();
