@@ -101,6 +101,45 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresult, DateTime hivStatusresultDate, bool cccreferal)
+        {
+
+            //ToDo remove this section
+            if (patientMasterVisitId == 0)
+                patientMasterVisitId = 1;
+            PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                FirstName = firstName,
+                MiddleName = middleName,
+                LastName = lastName,
+                Sex = sex,
+                DateOfBirth = dob,
+                RelationshipId = relationshipId,
+                BaseLineHivStatusId = baselineHivStatusId,
+                BaselineHivStatusDate = baselineHivStatusDate,
+                HivTestingResultsDate = hivStatusresultDate,
+                HivTestingResultsId = hivTestingresult,
+                CccReferal = cccreferal,
+            };
+            try
+            {
+                var testing = new PatientFamilyTestingManager();
+                Result = testing.AddPatientFamilyTestings(patientAppointment);
+                if (Result > 0)
+                {
+                    Msg = "Patient family testing Added Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message + ' ' + e.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod]
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
             List<PatientAppointmentDisplay> appointmentsDisplay = new List<PatientAppointmentDisplay>();

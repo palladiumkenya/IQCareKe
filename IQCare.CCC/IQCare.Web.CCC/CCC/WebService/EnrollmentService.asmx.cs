@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
+using System.Web.Services.Protocols;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Enrollment;
@@ -140,7 +141,7 @@ namespace IQCare.Web.CCC.WebService
                     Msg = " The person is alreay enrolled";
                 }
             }
-            catch (Exception ex)
+            catch (SoapException ex)
             {
                 Msg = ex.Message + ' ' + ex.InnerException;
             }

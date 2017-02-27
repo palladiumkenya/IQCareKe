@@ -25,7 +25,6 @@ namespace IQCare.Web.CCC.UC
                     PatientId = PatientId,
                     Active = true,
                 };
-                PatientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
             }
         }
     }

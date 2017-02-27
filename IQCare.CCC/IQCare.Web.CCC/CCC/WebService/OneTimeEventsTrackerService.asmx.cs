@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using System.Web.Services.Protocols;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -140,7 +141,7 @@ namespace IQCare.Web.CCC.WebService
 
                 Msg = "Successfully Added OnIime Event Tracker";
             }
-            catch (Exception ex)
+            catch (SoapException ex)
             {
                 Msg = ex.Message + ' ' + ex.InnerException;
             }

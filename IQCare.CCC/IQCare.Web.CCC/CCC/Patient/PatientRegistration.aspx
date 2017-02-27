@@ -990,19 +990,33 @@
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
-                        data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person Popuation");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Population Error");
-                        }
-                    });
+                    var sex = $("#Gender").find(":selected").text();
+                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
+
+                    if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
+                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
+                        return false;
+                    }
+                    else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
+                        toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                            "Person Population Error");
+                        return false;
+                    } else {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/AddPersonPopulation",
+                            data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                toastr.success(response.d, "Person Popuation");
+                            },
+                            error: function (response) {
+                                toastr.error(response.d, "Person Population Error");
+                            }
+                        });
+                    }
                     //var personId = 0;
                 }
 

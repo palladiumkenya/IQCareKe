@@ -32,7 +32,6 @@ namespace DataAccess.CCC.Repository
         private IPatientOvcStatusRepository _patientOvcStatusRepository;
         private IPatientPopulationRepository _patientPopulationRepository;
         private IPatientTreatmentSupporterRepository _patientTreatmentSupporterRepository;
-        private IPatientFamilyTestingRepository _patientFamilyTestingRepository;
 
         /* Patient Interface */
         private IPatientVitalsRepository _patientVitalsRepository;
@@ -290,11 +289,6 @@ namespace DataAccess.CCC.Repository
         public IPatientAppointmentRepository PatientAppointmentRepository
         {
             get {return _patientAppointmentRepository??(_patientAppointmentRepository = new PatientAppointmentRepository((GreencardContext)_context));}
-        }
-
-        public IPatientFamilyTestingRepository PatientFamilyTestingRepository
-        {
-            get { return _patientFamilyTestingRepository??(_patientFamilyTestingRepository = new PatientFamilyTestingRepository((GreencardContext)_context));}
         }
 
         public IPatientTreatmentInitiationRepository PatientTreatmentInitiationRepository

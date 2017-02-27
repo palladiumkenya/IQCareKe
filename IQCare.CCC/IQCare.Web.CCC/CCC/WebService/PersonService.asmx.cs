@@ -7,6 +7,7 @@ using Entities.Common;
 using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 using System.Web.Script.Serialization;
+using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
 
@@ -146,7 +147,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message+' '+ e.InnerException;
             }
@@ -242,7 +243,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message;
             }
@@ -424,7 +425,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message+ ' ' + e.InnerException;
             }
@@ -475,7 +476,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception exception)
+            catch (SoapException exception)
             {
                 Msg = exception.Message;
             }
@@ -546,7 +547,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message + ' ' +e.InnerException;
             }
@@ -613,7 +614,7 @@ namespace IQCare.Web.CCC.WebService
                     Msg = "PersonRelationship Added successfully!";
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message;
             }
@@ -647,7 +648,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message+' '+ e.InnerException;
             }
@@ -775,7 +776,7 @@ namespace IQCare.Web.CCC.WebService
 
                 return new JavaScriptSerializer().Serialize(patientDetails);
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 return e.Message;
             }

@@ -5,7 +5,7 @@
       <%--  <uc:PatientDetails ID="PatientSummary" runat="server" />--%>
    
     
-    <div class="col-md-12 bs-callout bs-callout-info">
+    <div class="col-md-12 bs-callout bs-callout-info" id="enrollmentTab" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-12">
             <label class="control-lable pull-left"> Patient Enrollment </label>
         </div>
@@ -120,21 +120,25 @@
                   <div class="col-md-12">
                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true"/>
                   </div>
-             </div> 
-            
-            <div class="col-md-3">
-                <div class="col-md-10"><label class="pull-left control-label">Enrollment No.#</label></div>
-                <div class="col-md-10">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-required="true"></asp:TextBox>
+             </div>
+
+            <div class="col-md-6">
+                <div class="col-md-12"><label id="enrollmentLabel" class="pull-right  control-label">Enrollment No.#</label></div>
+                <div id="AppPosID">
+                    <div class="col-md-5" style="padding-right: 0;"><input type="text" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
+                    <div class="col-md-1" style="padding: 0;">-</div>
+                </div>   
+                <div class="col-md-6" style="padding-left: 0;">
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true"></asp:TextBox>
                 </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
                 <div class="col-md-12 pull-right">
-                          <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Identifier</asp:LinkButton>
-                      </div>
-                 </div>
+                    <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Identifier</asp:LinkButton>
+                </div>
+            </div>
         </div> 
             
             
@@ -163,7 +167,7 @@
                           <asp:LinkButton runat="server" ID="btnEnroll" CssClass="btn btn-info btn-lg fa fa-plus-circle" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Continue </asp:LinkButton>
                      </div>
                     <div class="col-md-4">
-                          <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static"> Enroll and Register New</asp:LinkButton>
+                          <asp:LinkButton runat="server" ID="btnRese" CssClass="btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Enroll and Register New</asp:LinkButton>
                      </div>
                     <div class="col-md-4">
                           <asp:LinkButton runat="server" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times" ClientIDMode="Static" OnClientClick="return false;"> Close Enrollemnt</asp:LinkButton>
@@ -235,58 +239,75 @@
 
 
 
-            $("#btnAdd").click(function(e) {
+            $("#btnAdd").click(function (e) {
 
-                var identifierCount = 0;
-                var identifierFound = 0;
-                var enrollmentNoFound = 0;
-
-                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
-                var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
-                var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
-
-                if (moment(''+enrollmentDate+'').isAfter()) {
-                    
-                    toastr.warning("Future dates not allowed during the patient enrollment process." + response.d, "Patient Enrollment");
+                if (!$('#enrollmentTab').parsley().validate()) {
                     return false;
-                }
-
-                if (!moment(''+enrollmentDate+'').isValid()) {
-                    toastr.error("error", "Please select an enrollment date");
-                    return false;
-                }
-
-                if (identifierId <1) {
-                    toastr.error("error", "Please select at least One(1) Identifier Type from the List");
-                    return false;
-                }
-                if (enrollmentNo.length < 4) {
-                    toastr.error("error", "Enrollment number should be more than Four Characters");
-                    return false;
-                }
-
-                identifierFound = $.inArray("" + identifier + "", identifierList);
-                enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);
-              
-                if (identifierFound > -1) {
-                    
-                    toastr.error("error", identifier + " Identifier already exists in the List");
-                    return false; // message box herer
-                } else if (enrollmentNoFound > -1) {
-                    toastr.error("error", enrollmentNo + " Enrollment No already exists in the List");
-                    return false; // message box herer
                 } else {
-                    
-                    identifierList.push("" + identifier + "");
-                    enrollmentNoList.push("" + enrollmentNo + "");
-                    var tr = "<tr><td align='left'></td><td align='left'>" + identifier + "</td><td align='left'>" + identifierId + "</td><td align='left'>" + enrollmentNo + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                    $("#tblEnrollment>tbody:first").append('' + tr + '');
 
-                    resetElements();
+                    var identifierCount = 0;
+                    var identifierFound = 0;
+                    var enrollmentNoFound = 0;
+
+                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                    var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
+                    var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
+                    var enrollmentNo = null;
+
+
+                    if (identifier == "CCC Registration Number") {
+                        enrollmentNo = <%=Session["AppPosID"] %> + $("#<%=IdentifierValue.ClientID%>").val();
+                    } else {
+                        enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
+                    }
+
+                    if (moment('' + enrollmentDate + '').isAfter()) {
+                        toastr.error("Future dates not allowed during the patient enrollment process.","Patient Enrollment");
+                        return false;
+                    }
+
+                    if (!moment('' + enrollmentDate + '').isValid()) {
+                        toastr.error("error", "Please select an enrollment date");
+                        return false;
+                    }
+
+                    if (identifierId < 1) {
+                        toastr.error("error", "Please select at least One(1) Identifier Type from the List");
+                        return false;
+                    }
+                    if (enrollmentNo.length < 4) {
+                        toastr.error("error", "Enrollment number should be more than Four Characters");
+                        return false;
+                    }
+
+                    identifierFound = $.inArray("" + identifier + "", identifierList);
+                    enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);
+
+                    if (identifierFound > -1) {
+
+                        toastr.error("error", identifier + " Identifier already exists in the List");
+                        return false; // message box herer
+                    } else if (enrollmentNoFound > -1) {
+                        toastr.error("error", enrollmentNo + " Enrollment No already exists in the List");
+                        return false; // message box herer
+                    } else {
+
+                        identifierList.push("" + identifier + "");
+                        enrollmentNoList.push("" + enrollmentNo + "");
+                        var tr = "<tr><td align='left'></td><td align='left'>" +
+                            identifier +
+                            "</td><td align='left'>" +
+                            identifierId +
+                            "</td><td align='left'>" +
+                            enrollmentNo +
+                            "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                        $("#tblEnrollment>tbody:first").append('' + tr + '');
+
+                        resetElements();
+                    }
+
+                    e.preventDefault();
                 }
-
-                e.preventDefault();
             });
 
             function resetElements(parameters) {
@@ -302,38 +323,38 @@
                 enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
             });
 
-            function generate(type, text) {
-
-                var n = noty({
-                    text: text,
-                    type: type,
-                    dismissQueue: true,
-                    progressBar: true,
-                    timeout: 5000,
-                    layout: 'topRight',
-                    closeWith: ['click'],
-                    theme: 'relax',
-                    maxVisible: 10,
-                    animation: {
-                        open: 'animated bounceInLeft',
-                        close: 'animated bounceOutLeft',
-                        easing: 'swing',
-                        speed: 500
+            $("#btnRese").click(function(e) {
+                var _fp = [];
+                var data = $('#tblEnrollment tr').each(function (row, tr) {
+                    _fp[row] = {
+                        "enrollmentIdentifier": $(tr).find('td:eq(1)').text()
+                     , "identifierId": $(tr).find('td:eq(2)').text()
+                     , "enrollmentNo": $(tr).find('td:eq(3)').text()
                     }
                 });
-                console.log('html: ' + n.options.id);
-                return n;
-            }
+                _fp.shift();//first row will be empty -so remove
+
+                if ($.isEmptyObject(_fp)) {
+                    toastr.error("error", "You have not added any identifiers");
+                    return false;
+                } else if ($("#entryPoint").val() == 0) {
+                    toastr.error("error", "You have not selected an entry point");
+                    return false;
+                } else {
+                    var entryPointId = $("#entryPoint").val();
+                    var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'));
+                }
+            });
 
 
             $("#btnEnroll").click(function (e) {
                 var _fp = [];
                 var data = $('#tblEnrollment tr').each(function (row, tr) {
                     _fp[row] = {
-                        "enrollmentDate": $(tr).find('td:eq(1)').text()
-                     , "enrollmentIdentifier": $(tr).find('td:eq(2)').text()
-                     , "identifierId": $(tr).find('td:eq(3)').text()
-                     , "enrollmentNo": $(tr).find('td:eq(4)').text()
+                        "enrollmentIdentifier": $(tr).find('td:eq(1)').text()
+                     , "identifierId": $(tr).find('td:eq(2)').text()
+                     , "enrollmentNo": $(tr).find('td:eq(3)').text()
                     }
                 });
                 _fp.shift();//first row will be empty -so remove
@@ -353,8 +374,31 @@
                 //addPatient(_fp);
             });
 
+            function addPatientRegister(_fp, entryPointId, enrollmentDate) {
+                var enrollments = JSON.stringify(_fp);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/AddPatient",
+                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        //generate('success', '<p>,</p>' + response.d);
+                        toastr.success(response.d, "Patient Enrollment");
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx")%>';
+                    },
+                    error: function (response) {
+                        //generate('error', response.d);
+                        toastr.error(response.d, "Patient Enrollment");
+                    }
+                });
+            }
+
             function addPatient(_fp, entryPointId, enrollmentDate) {
                 var enrollments = JSON.stringify(_fp);
+
+                console.log(enrollments);
 
                 $.ajax({
                     type: "POST",
@@ -373,6 +417,18 @@
                     }
                 });
             }
+
+            $("#IdentifierTypeId").change(function() {
+                if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
+                    $("#AppPosID").show();
+                    $("#enrollmentLabel").removeClass("pull-left");
+                    $("#enrollmentLabel").addClass("pull-right");
+                } else {
+                    $("#AppPosID").css("display", "none");
+                    $("#enrollmentLabel").removeClass("pull-right");
+                    $("#enrollmentLabel").addClass("pull-left");
+                }
+            });
 
         });
 

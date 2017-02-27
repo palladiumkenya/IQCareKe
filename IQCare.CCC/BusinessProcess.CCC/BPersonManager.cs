@@ -13,7 +13,7 @@ using System;
 namespace BusinessProcess.CCC
 {
 
-    public class BPersonManager:ProcessBase, IPersonManager
+    public class BPersonManager : ProcessBase, IPersonManager
     {
         private readonly UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
 
