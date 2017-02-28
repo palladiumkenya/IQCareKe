@@ -22,5 +22,6 @@ namespace DataAccess.CCC.Repository.Lookup
         {
             _context = context;
         }
+       
     }
 }
