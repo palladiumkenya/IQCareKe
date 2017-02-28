@@ -36,8 +36,8 @@ namespace BusinessProcess.CCC
             userId.Value = personContact.CreatedBy;
 
             _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Insert @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter,@UserId", personIdParameter, physicalAdressParameter, mobileNumberParameter,alternativeNumberParameter,emailAddressParameter,userId);
-            //_unitOfWork.PersonContactRepository.Add(p);
-            return _result = _unitOfWork.Complete();
+            _unitOfWork.Complete();
+            return 1;
         }
 
         public int DeletePersonContact(int id)
@@ -79,11 +79,8 @@ namespace BusinessProcess.CCC
             Id.Value = p.Id;
 
             _unitOfWork.PersonContactRepository.ExecuteProcedure("exec PersonContact_Update @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter, @Id", personIdParameter, physicalAdressParameter, mobileNumberParameter, alternativeNumberParameter, emailAddressParameter, Id);
-            //_unitOfWork.PersonContactRepository.Add(p);
-            return _result = _unitOfWork.Complete();
-
-            //_unitOfWork.PersonContactRepository.Update(p);
-            //return _result = _unitOfWork.Complete();
+            _unitOfWork.Complete();
+            return 1;
         }
     }
 }

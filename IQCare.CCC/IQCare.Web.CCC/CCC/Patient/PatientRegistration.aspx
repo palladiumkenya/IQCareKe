@@ -377,14 +377,14 @@
                                <div class="col-md-2">
                                     <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" />
+                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
                                     </div>         
                                </div>
                                
                                 <div class="col-md-2">
                                     <div class="col-md-12"><label class="control-label pull-left">Alt. Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox runat="server" type="text" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" data-parsley-trigger="keyup" placeholder="alternative mobile no..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" />
+                                         <asp:TextBox runat="server" type="text" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" data-parsley-trigger="keyup" placeholder="alternative mobile no..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientMobileNo" />
                                     </div>       
                               </div>
 
@@ -658,11 +658,27 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep4").parsley().validate()) {
-                                $.when(addPersonPopulation()).then(function() {
-                                    setTimeout(function(){
-                                        window.location.href ='<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                    }, 2000);
-                                });
+                                var sex = $("#Gender").find(":selected").text();
+                                var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
+
+                                if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
+                                    toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
+                                    return false;
+                                }
+                                else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
+                                    toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                                        "Person Population Error");
+                                    return false;
+                                } else {
+                                    $.when(addPersonPopulation()).then(function() {
+                                        setTimeout(function() {
+                                                window.location
+                                                    .href =
+                                                    '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                            },
+                                            2000);
+                                    });
+                                }
                             } else {
                                
                                 stepError = $('.parsley-error').length === 0;
@@ -994,33 +1010,19 @@
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
-                    var sex = $("#Gender").find(":selected").text();
-                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
-
-                    if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
-                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
-                        return false;
-                    }
-                    else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
-                        toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
-                            "Person Population Error");
-                        return false;
-                    } else {
-
-                        $.ajax({
-                            type: "POST",
-                            url: "../WebService/PersonService.asmx/AddPersonPopulation",
-                            data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                toastr.success(response.d, "Person Popuation");
-                            },
-                            error: function (response) {
-                                toastr.error(response.d, "Person Population Error");
-                            }
-                        });
-                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
+                        data: "{'personId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "','patientId':'" + isPatientSet + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d, "Person Popuation");
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "Person Population Error");
+                        }
+                    });
                     //var personId = 0;
                 }
 
