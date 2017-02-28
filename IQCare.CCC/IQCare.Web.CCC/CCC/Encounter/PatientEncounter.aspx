@@ -627,13 +627,13 @@
                                                                                 <asp:DropDownList ID="ddlVaccine" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ></asp:DropDownList>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-3">
                                                                             <div class="col-md-12"><label class="control-label pull-left">Vaccine Stage</label></div>
                                                                             <div class="col-md-12">
                                                                                 <asp:DropDownList ID="ddlVaccineStage" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-md-4">
                                                                             <div class="col-md-12"><label class="control-label  pull-left">Vaccination Date</label></div>
 	                                                                            <div class="col-md-12">
 		                                                                            <div class="datepicker fuelux" id="vaccineDate">
@@ -1859,7 +1859,7 @@
             });
             $('#vaccineDate').datepicker({
                 allowPastDates: true,
-                //date: getVaccDateVal,
+                date: "",
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]

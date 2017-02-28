@@ -40,7 +40,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 BaselineDate = p.BaselineHivStatusDate,
                 TestingResult = p.HivTestingResultsId,
                 TestingDate = p.HivTestingResultsDate,
-                ReferredToCare = p.CccReferal
+                ReferredToCare = p.CccReferal,
+                CccNumber = p.CccReferaalNumber
             };
             return _hivTestingManager.AddPatientHivTesting(familyTesting);
         }
@@ -84,7 +85,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 BaselineDate = p.BaselineHivStatusDate,
                 TestingResult = p.HivTestingResultsId,
                 TestingDate = p.HivTestingResultsDate,
-                ReferredToCare = p.CccReferal
+                ReferredToCare = p.CccReferal,
+                CccNumber = p.CccReferaalNumber
             };
             return _hivTestingManager.UpdatePatientHivTesting(familyTesting);
         }
