@@ -45,5 +45,13 @@ namespace DataAccess.CCC.Repository.Lookup
             return myList.OrderBy(l => l.OrdRank).ToList();
             //  return myList;
         }
+        public LookupItemView GetPatientGender(int genderID)
+        {
+            ILookupRepository lookupGender = new LookupRepository();
+            var genderType = lookupGender.FindBy(x => x.ItemId == genderID).FirstOrDefault();
+            return genderType;
+
+        }
+
     }
 }

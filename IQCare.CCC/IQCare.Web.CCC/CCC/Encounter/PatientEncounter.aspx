@@ -1448,14 +1448,16 @@
    <script type="text/javascript">
        var patientId = <%=PatientId%>;
        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var genderId = <%=genderID%>;
+       var genderId = <%=genderID%>;
+       var gender = "<%=gender%>";
 
      $(document).ready(function () {     
            
 
-         console.log(patientId);
-         console.log(patientMasterVisitId);
-         console.log(genderId);
+         //console.log(patientId);
+         //console.log(patientMasterVisitId);
+         //console.log(genderId);
+         //console.log(gender);
 
      $("#LabDatePicker").datepicker({
            //date: null,
@@ -1677,20 +1679,24 @@
                    lorderDate.push("" + labOrderDate + "");
                    lorderNotes.push("" + labOrderNotes + "");
 
-                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
+                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
                   
                }
 
                e.preventDefault();
-     });
-        // $("#tblAddLabs").on('click', '.btnCancelOrder', function () {
+            });
+
+        $("#tblAddLabs").on('click', '.btnDelete', function () {
+             $(this).closest('tr').remove();
+             var x = $(this).closest('tr').find('td').eq(0).html();
+
+             //identifierList.splice($.inArray(x, identifierList), 1);
+             //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+         });
+       
          $("#btnCancelOrder").click(function (e) {
-
-
-            
              $("#tblAddLabs td").parent().remove();
-           
          });
       
          $("#btnResetOrder").click(function (e) {   
@@ -1703,6 +1709,8 @@
              $("#labNotes").val("");
              $("#LabDate").val("");
          }
+        
+
            // Save lab order
       $("#btnSaveLab").click(function (e) {
                var _fp = [];
@@ -1732,7 +1740,7 @@
            });
 
 
-           function addLabOrder(_fp) {
+        function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
               // console.log(patientId);
                //console.log(labOrder);
@@ -1865,7 +1873,47 @@
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             
-            ////////////////////////////////////////////////////////////////////////////////////////////
+         ////////////////////////////////////////////////////////////////////////////////////////////
+         //Gender validations
+            var male = "Male";
+            if (gender == male) {
+                
+                $("#lmp").val("");
+                $("#examinationPregnancyStatus").val("");
+                $("#ExpectedDateOfChildBirth").val("");
+                $("#cacxscreening").val("");
+
+                $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
+                } else {
+                $("#<%=lmp.ClientID%>").prop('disabled', false);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
+
+                }
+         //.gender validation
+         //pregnancy validations
+        // var pregnancy = "";
+         var pregnant = "Pregnant";
+
+         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
+         //console.log(patientId);
+         //console.log(pregnancy);
+
+         if (pregnancy != pregnant) {
+                
+              $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+               
+                } else {
+                
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+              
+
+                }
+         //.pregnancy validation
             var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
                     type: "POST",
@@ -2114,6 +2162,9 @@
                         });
 
             function savePatientEncounterPresentingComplaint() {
+
+             
+
                 var visitDate = $("#<%=VisitDate.ClientID%>").val();
                 //var visitScheduled = $('input[name="Scheduled"]:checked').val();
                 ////////////////////////////////////////
@@ -2153,7 +2204,7 @@
 
                     //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
                 }
-
+           
                 if (ANCProfile == undefined)
                 {
                     ANCProfile = "99";
