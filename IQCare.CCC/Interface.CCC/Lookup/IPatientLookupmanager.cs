@@ -10,6 +10,7 @@ namespace Interface.CCC.Lookup
         List<PatientLookup> GetPatientDetailsLookup(int id);
         List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,int start,int length);
         int GetTotalpatientCount();
+        PatientLookup GetGender(int patientId);
     }
 }
  

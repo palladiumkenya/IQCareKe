@@ -1,31 +1,17 @@
 ﻿using System;
 using System.Web.Services;
-using Entities.Common;
-using Entities.PatientCore;
 using IQCare.CCC.UILogic;
-using Newtonsoft.Json;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using Application.Presentation;
-using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
-using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
-using IQCare.CCC.UILogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using Entities.CCC.Visit;
-using Interface.CCC.Visit;
+
 
 
 namespace IQCare.Web.CCC.WebService
 {
-    // <summary>
-    /// Summary description for PersonSeervice
-    /// </summary>
+   
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
@@ -37,7 +23,7 @@ namespace IQCare.Web.CCC.WebService
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-        private int patient_ID { get; set; }
+        
         private int facilityID { get; set; }
         private string Msg { get; set; }
         private int Result { get; set; }
@@ -83,12 +69,9 @@ namespace IQCare.Web.CCC.WebService
         public string GetLookupPreviousLabsList(string patient_ID)
         {
 
-            //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
-            //var patient_id = JSON.parse(patientID);
+            
             int patientId = Convert.ToInt32(patient_ID);
-            //int patientId = int.Parse(patient_ID);
-            //patientId = Convert.ToInt32(Session["PersonId"]);
-           // int patientId = 18;
+           
             string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
 
             return jsonObject;
@@ -97,12 +80,8 @@ namespace IQCare.Web.CCC.WebService
         public string GetLookupPendingLabsList(string patient_ID)
         {
 
-            //var patient_ID = JsonConvert.SerializeObject(patient_id);    //clean object
-            //var patient_id = JSON.parse(patientID);
+           
             int patientId = Convert.ToInt32(patient_ID);
-            //int patientId = int.Parse(patient_ID);
-            //patientId = Convert.ToInt32(Session["PersonId"]);
-            // int patientId = 18;
             string jsonObject = LookupLogic.GetLookupPendingLabsListJson(patientId);
 
             return jsonObject;

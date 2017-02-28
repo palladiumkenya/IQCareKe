@@ -55,7 +55,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Relationship;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Relationship;
         
         /// <summary>
         /// Sex control.
@@ -119,6 +119,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox HIVTestingDate;
+        
+        /// <summary>
+        /// cccNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText cccNumber;
         
         /// <summary>
         /// btnAdd control.

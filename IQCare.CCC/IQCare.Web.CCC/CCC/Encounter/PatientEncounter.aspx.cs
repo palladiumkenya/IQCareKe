@@ -2,6 +2,10 @@
 using System;
 using System.Web;
 using System.Web.UI.WebControls;
+using Application.Presentation;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
+
 
 namespace IQCare.Web.CCC.Encounter
 {
@@ -15,17 +19,26 @@ namespace IQCare.Web.CCC.Encounter
         public string LMPval = "";
         public string EDDval = "";
         public string nxtAppDateval = "";
+        public int genderID = 0;
+
+        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //this.patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            //this. PatientId = int.Parse(Session["PatientId"].ToString());
-           PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
 
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
-            }    
+            }
+
+            // Get Gender
+            PatientLookup gender = _patientLookupmanager.GetGender(PatientId);
+            genderID = gender.Sex;
+
 
             if (!IsPostBack)
             {
@@ -54,7 +67,7 @@ namespace IQCare.Web.CCC.Encounter
                 if (visitId > 0)
                     loadPatientEncounter();
 
-               
+
             }
         }
         private void GetSessionDetails()

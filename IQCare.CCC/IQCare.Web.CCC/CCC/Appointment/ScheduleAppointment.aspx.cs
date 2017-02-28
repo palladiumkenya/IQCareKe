@@ -63,13 +63,6 @@ namespace IQCare.Web.CCC.Appointment
                 }
             }
 
-            //btnSaveAppointment.Attributes.Add("OnClick", "btn_Click");
-            btnSaveAppointment.Click += new EventHandler(this.btn_Click);
-        }
-
-        protected void btn_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Patient/PatientHome.aspx");
         }
 
         private void GetSessionDetails()

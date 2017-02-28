@@ -23,6 +23,11 @@ function AddAdverseReaction() {
         return;
     }
 
+    if (adverseEventSeverityID == "0") {
+        alert("Please enter Adverse Event Severity");
+        return;
+    }
+
     //var chkData = $.grep(arrAdverseEvent, function (e) { return e.adverseEvent == adverseEvent; });
     
     arrAdverseEventUI = [];
@@ -77,11 +82,17 @@ function AddVaccine() {
     var vaccineStageID = $('#ddlVaccineStage').find(":selected").val();
     var vaccinationDate = $('#txtVaccinationDate').val();
 
-    if (vaccine == "") {
+    if (vaccineID == "0") {
         alert("Please enter vaccine");
         return;
     }
 
+    if (vaccineStageID == "0")
+    {
+        alert("Please enter vaccine stage");
+        return;
+    }
+        
     //var chkData = $.grep(arrVaccine, function (e) { return e.vaccine == vaccineID; });
     
     arrVaccineUI = [];
@@ -102,8 +113,13 @@ function AddPhysicalExam() {
     var examID = $('#ddlExamination').find(":selected").val();
     var findings = $('#txtExamFindings').val();
 
-    if (examType == "") {
+    if (examTypeID == "0") {
         alert("Please enter Examination Type");
+        return;
+    }
+
+    if (examID == "0") {
+        alert("Please enter Examination");
         return;
     }
 
