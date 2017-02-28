@@ -1192,7 +1192,7 @@
                                         <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
-                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate"></asp:TextBox>
+                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -1217,7 +1217,7 @@
                                                         <span data-month="9">October</span>
                                                         <span data-month="10">November</span>
                                                         <span data-month="11" class="current">December</span>
-                                                    </span><span class="year">2017</span>
+                                                    </span><span class="year">2014</span>
                                                 </button>
                                             </div>
                                             <table class="datepicker-calendar-days">
@@ -1446,17 +1446,19 @@
 
     <!-- ajax begin -->
    <script type="text/javascript">
-            var patientId = <%=PatientId%>;
-             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+       var patientId = <%=PatientId%>;
+       var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var genderId = <%=genderID%>;
 
      $(document).ready(function () {     
            
 
          console.log(patientId);
          console.log(patientMasterVisitId);
+         console.log(genderId);
 
      $("#LabDatePicker").datepicker({
-           date: null,
+           //date: null,
            allowPastDates: true,
            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
      });

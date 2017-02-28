@@ -206,7 +206,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yr) Orphan</label></div>
+                                        <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yrs) Orphan</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>    
                                         </div>

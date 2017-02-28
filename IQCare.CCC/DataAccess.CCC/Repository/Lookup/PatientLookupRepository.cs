@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using System.Linq;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.Context;
 using Entities.CCC.Lookup;
@@ -18,5 +19,16 @@ namespace DataAccess.CCC.Repository.Lookup
         {
             _context = context;
         }
+
+        public PatientLookup GetGender(int patientId)
+        {
+            IPatientLookupRepository patientRepository = new PatientLookupRepository();
+            var genderId = patientRepository.FindBy(x => x.Id == patientId).FirstOrDefault();
+            return genderId;
+
+        }
+
+
     }
+
 }
