@@ -42,7 +42,7 @@ namespace IQCare.Web.CCC.WebService
         public string AlternativeNumber { get; internal set; }
         public string MobileNumber { get; internal set; }
         public string tsFname { get; internal set; }
-        public int ISContacts { get; internal set; }
+        public string ISContacts { get; internal set; }
         public int tsGender { get; internal set; }
         public string tsLastName { get; internal set; }
         public string tsMiddleName { get; internal set; }
@@ -442,6 +442,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     PersonId = Convert.ToInt32(Session["PersonId"]);
                     var personContact = new PersonContactManager();
+                    var personContactLookUp = new PersonContactLookUpManager();
 
                     if (alternativeNumber != null)
                     {
@@ -452,17 +453,21 @@ namespace IQCare.Web.CCC.WebService
                         emailAddress = _utility.Encrypt(emailAddress);
                     }
 
-                    PersonContact perContact = new PersonContact
-                    {
-                        PersonId = personId,
-                        PhysicalAddress = _utility.Encrypt(physicalAddress),
-                        MobileNumber = _utility.Encrypt(mobileNumber),
-                        AlternativeNumber = alternativeNumber,
-                        EmailAddress = emailAddress
-                    };
+                    var contacts = personContactLookUp.GetPersonContactByPersonId(PersonId);
 
-                    personContact.UpdatePatientContact(perContact);
-                    Msg = "Updated Person Contact Successfully";
+                    if (contacts.Count > 0)
+                    {
+                        PersonContact perContact = new PersonContact();
+                        perContact.Id = contacts[0].Id;
+                        perContact.PersonId = contacts[0].PersonId;
+                        perContact.PhysicalAddress = _utility.Encrypt(physicalAddress);
+                        perContact.MobileNumber = _utility.Encrypt(mobileNumber);
+                        perContact.AlternativeNumber = alternativeNumber;
+                        perContact.EmailAddress = emailAddress;
+
+                        personContact.UpdatePatientContact(perContact);
+                        Msg = "Updated Person Contact Successfully";
+                    }
                 }
                 else
                 {
@@ -484,7 +489,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, int mobileContact, string patientid)
+        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, string mobileContact, string patientid)
         {
             try
             {

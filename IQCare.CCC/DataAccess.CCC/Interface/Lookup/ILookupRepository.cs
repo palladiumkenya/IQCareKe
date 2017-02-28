@@ -12,6 +12,7 @@ namespace DataAccess.CCC.Interface.Lookup
     {
         List<LookupItemView> GetLookupItemViews(string listGroup);
         List<LookupItemView> FindBy(Func<LookupItemView, bool> p);
+        LookupItemView GetPatientGender(int genderID);
 
     }
 }

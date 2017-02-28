@@ -647,8 +647,8 @@
 
                             <div class="col-md-7">
                                  <div class="col-md-4"><asp:LinkButton runat="server" ID="btnOneTimeEventsTracker" CssClass=" btn btn-info btn-lg fa fa-arrow-circle-o-right" ClientIDMode="Static" OnClientClick="return false;"> Save One Time Event</asp:LinkButton></div>
-                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="LinkButton1" CssClass=" btn btn-warning btn-lg fa fa-refresh" > Reset One Time Event</asp:LinkButton></div> 
-                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" > Close One Time Event</asp:LinkButton></div>
+                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnResetOneTimeEvent" CssClass=" btn btn-warning btn-lg fa fa-refresh" ClientIDMode="Static" OnClientClick="return false;"> Reset One Time Event</asp:LinkButton></div> 
+                                 <div class="col-md-4"><asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close One Time Event</asp:LinkButton></div>
                             </div>
                             <div class="col-md-3"></div>
                         </div>
@@ -768,6 +768,32 @@
                 });
             });
 
+            $("#btnClose").click(function() {
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+            });
+
+
+            $("#btnResetOneTimeEvent").click(function () {
+                $("#Stage1Date").val("");
+                $("#Stage2Date").val("");
+                $("#Stage3Date").val("");
+                $("#SexPartnerDate").val("");
+                $("#INHStartDate").val("");
+                $("#CompletionYes").attr("checked", false);
+                $("#CompletionNo").attr("checked", false);
+                $("#lblCompletionNo").removeClass("checked");
+                $("#lblCompletionYes").removeClass("checked");
+                $("#HBV").attr("checked", false);
+                $("#lblHBV").removeClass("checked");
+                $("#FluVaccine").attr("checked", false);
+                $("#lblFluVaccine").removeClass("checked");
+                $("#vaccinationotheradult").val("");
+                $("#INHCompletionDate").val("");
+
+                $("#tblVaccines").find("tr:gt(0)").remove();
+                vaccinesList.length = 0;
+
+            });
 
             $("#btnOneTimeEventsTracker").click(function () {
                 if ($("#onetimeeventstracker").parsley().validate()) {

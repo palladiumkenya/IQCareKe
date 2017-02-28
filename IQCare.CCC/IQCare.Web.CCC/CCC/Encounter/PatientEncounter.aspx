@@ -627,13 +627,13 @@
                                                                                 <asp:DropDownList ID="ddlVaccine" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ></asp:DropDownList>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-3">
                                                                             <div class="col-md-12"><label class="control-label pull-left">Vaccine Stage</label></div>
                                                                             <div class="col-md-12">
                                                                                 <asp:DropDownList ID="ddlVaccineStage" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-md-4">
                                                                             <div class="col-md-12"><label class="control-label  pull-left">Vaccination Date</label></div>
 	                                                                            <div class="col-md-12">
 		                                                                            <div class="datepicker fuelux" id="vaccineDate">
@@ -1192,7 +1192,7 @@
                                         <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
-                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate"></asp:TextBox>
+                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -1217,7 +1217,7 @@
                                                         <span data-month="9">October</span>
                                                         <span data-month="10">November</span>
                                                         <span data-month="11" class="current">December</span>
-                                                    </span><span class="year">2017</span>
+                                                    </span><span class="year">2014</span>
                                                 </button>
                                             </div>
                                             <table class="datepicker-calendar-days">
@@ -1446,17 +1446,21 @@
 
     <!-- ajax begin -->
    <script type="text/javascript">
-             var patientId = <%=PatientId%>;
-             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+       var patientId = <%=PatientId%>;
+       var patientMasterVisitId = <%=PatientMasterVisitId%>;
+       var genderId = <%=genderID%>;
+       var gender = "<%=gender%>";
 
      $(document).ready(function () {     
            
 
-         console.log(patientId);
-         console.log(patientMasterVisitId);
+         //console.log(patientId);
+         //console.log(patientMasterVisitId);
+         //console.log(genderId);
+         //console.log(gender);
 
      $("#LabDatePicker").datepicker({
-           date: null,
+           //date: null,
            allowPastDates: true,
            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
      });
@@ -1675,20 +1679,24 @@
                    lorderDate.push("" + labOrderDate + "");
                    lorderNotes.push("" + labOrderNotes + "");
 
-                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
+                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
                   
                }
 
                e.preventDefault();
-     });
-        // $("#tblAddLabs").on('click', '.btnCancelOrder', function () {
+            });
+
+        $("#tblAddLabs").on('click', '.btnDelete', function () {
+             $(this).closest('tr').remove();
+             var x = $(this).closest('tr').find('td').eq(0).html();
+
+             //identifierList.splice($.inArray(x, identifierList), 1);
+             //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+         });
+       
          $("#btnCancelOrder").click(function (e) {
-
-
-            
              $("#tblAddLabs td").parent().remove();
-           
          });
       
          $("#btnResetOrder").click(function (e) {   
@@ -1701,6 +1709,8 @@
              $("#labNotes").val("");
              $("#LabDate").val("");
          }
+        
+
            // Save lab order
       $("#btnSaveLab").click(function (e) {
                var _fp = [];
@@ -1730,7 +1740,7 @@
            });
 
 
-           function addLabOrder(_fp) {
+        function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
               // console.log(patientId);
                //console.log(labOrder);
@@ -1857,13 +1867,53 @@
             });
             $('#vaccineDate').datepicker({
                 allowPastDates: true,
-                //date: getVaccDateVal,
+                date: "",
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             
-            ////////////////////////////////////////////////////////////////////////////////////////////
+         ////////////////////////////////////////////////////////////////////////////////////////////
+         //Gender validations
+            var male = "Male";
+            if (gender == male) {
+                
+                $("#lmp").val("");
+                $("#examinationPregnancyStatus").val("");
+                $("#ExpectedDateOfChildBirth").val("");
+                $("#cacxscreening").val("");
+
+                $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
+                } else {
+                $("#<%=lmp.ClientID%>").prop('disabled', false);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
+
+                }
+         //.gender validation
+         //pregnancy validations
+        // var pregnancy = "";
+         var pregnant = "Pregnant";
+
+         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
+         //console.log(patientId);
+         //console.log(pregnancy);
+
+         if (pregnancy != pregnant) {
+                
+              $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+               
+                } else {
+                
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+              
+
+                }
+         //.pregnancy validation
             var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
                     type: "POST",
@@ -2112,6 +2162,9 @@
                         });
 
             function savePatientEncounterPresentingComplaint() {
+
+             
+
                 var visitDate = $("#<%=VisitDate.ClientID%>").val();
                 //var visitScheduled = $('input[name="Scheduled"]:checked').val();
                 ////////////////////////////////////////
@@ -2151,7 +2204,7 @@
 
                     //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
                 }
-
+           
                 if (ANCProfile == undefined)
                 {
                     ANCProfile = "99";

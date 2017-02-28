@@ -87,9 +87,10 @@ function AddVaccine() {
         return;
     }
 
-    if (vaccineStage == "Select")
+    if (vaccineStageID == "0")
     {
-        vaccineStage = "";
+        alert("Please enter vaccine stage");
+        return;
     }
         
     //var chkData = $.grep(arrVaccine, function (e) { return e.vaccine == vaccineID; });

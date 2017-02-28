@@ -40,7 +40,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var complete = "Complete";
 
             var myList = previouslabsrepository.FindBy(x => x.PatientId == patientId);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName).Where(x => x.LabName != vl).Where(x => x.Results == complete); ;
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName).Where(x => x.LabName != vl).Where(x => x.Results == complete); 
             return list.Distinct().ToList();
         }
 

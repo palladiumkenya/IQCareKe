@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
         private int _result;
         private string _msg;
 
-        public int AddPatientTreatmentSupporter(int personId,int supporterId,int mobileConatct,int userId)
+        public int AddPatientTreatmentSupporter(int personId,int supporterId,string mobileConatct,int userId)
         {
 
                 PatientTreatmentSupporter supporter = new PatientTreatmentSupporter()

@@ -7,6 +7,7 @@ using Interface.CCC.Lookup;
 using Application.Common;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
+using DataAccess.CCC.Repository.Lookup;
 
 namespace BusinessProcess.CCC
 {
@@ -86,6 +87,12 @@ namespace BusinessProcess.CCC
             var totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
 
             return totalCount;
+        }
+        public PatientLookup GetGenderID(int patientId)
+
+        {
+            PatientLookupRepository lookupGender = new PatientLookupRepository();
+            return lookupGender.GetGenderID(patientId);
         }
     }
 }
