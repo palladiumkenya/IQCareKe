@@ -133,6 +133,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+
         [WebMethod]
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
         {
