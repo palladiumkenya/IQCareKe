@@ -433,5 +433,17 @@ namespace BusinessProcess.CCC
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterDiagnosis", ClsUtility.ObjectEnum.DataTable);
             }
         }
+
+        public DataTable getPharmacyDrugList(string regimenLine)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@regimenLine", SqlDbType.Int, regimenLine);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugList", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
     }
 }

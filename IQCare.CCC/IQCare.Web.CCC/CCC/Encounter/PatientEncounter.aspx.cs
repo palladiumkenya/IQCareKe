@@ -64,6 +64,8 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
 
+                lookUp.populateDDL(regimenLine, "CTXAdherence");
+
                 if (visitId > 0)
                     loadPatientEncounter();
 

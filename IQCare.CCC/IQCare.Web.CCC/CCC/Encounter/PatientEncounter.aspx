@@ -302,12 +302,18 @@
                                                             <div class="col-md-12"><hr /></div>
                                                          <div class="col-md-12">
                                                              <div class="col-md-4">
+                                                                 <div class="col-md-12 form-group">
+                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" onChange="EnableDisableEDD();" />
+                                                                     </div>
+                                                                 </div>
                                                                   <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">Female LMP</label></div>
                                                                       <div class="col-md-12">
                                                                           <div class="datepicker fuelux" id="FemaleLMP">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" />
+                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" onkeyup="EnableDisableEDD();" onblur="EnableDisableEDD();" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -386,12 +392,7 @@
                                                                     </div>
                                                                       </div>
                                                                   </div>
-                                                                 <div class="col-md-12 form-group">
-                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
-                                                                     <div class="col-md-12">
-                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static"/>
-                                                                     </div>
-                                                                 </div>
+                                                                 
                                                                  <div class="col-md-12 form-group">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">EDD</label></div>
                                                                      <div class="col-md-12">
@@ -1381,7 +1382,7 @@
                                                              
                                                               <div class="col-md-4"><label class="control-label pull-left">Regimen Line </label></div>     
                                                               <div class="col-md-6  pull-right">
-                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimLine" ClientIDMode="Static"/>
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static"  onchange="getPharmacyDrugList();"/>
                                                               </div>
                                                               <div class="col-md-2 "></div>
                                                          </div>  
@@ -1392,7 +1393,7 @@
                                                                          
                                                                               <div class="col-md-3"><label class="control-label pull-left">Select Drug (s) </label></div>
                                                                               <div class="col-md-7">
-                                                                                  <input type="text" class="form-control input-sm" placeholder="type to search...." runat="server" />
+                                                                                  <input type="text" data-provide="typeahead" id="txtSelectDrug" class="form-control input-sm" placeholder="type to search...." runat="server" />
                                                                               </div>
                                                                              <div class="col-md-2">
                                                                                <asp:LinkButton runat="server" CssClass="btn btn-warning btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton> 
@@ -1852,7 +1853,7 @@
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#NextAppDate').datepicker({
-                allowPastDates: true,
+                allowPastDates: false,
                 date: getNxtAppDateVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -2344,6 +2345,8 @@
                 });
             }
 
+         
+
 
             function getCheckBoxListItemsChecked(elementId) {
                 var elementRef = document.getElementById(elementId);
@@ -2375,94 +2378,45 @@
          
   });
       
+       function getPharmacyDrugList() {
+           //var input = document.getElementById("txtSelectDrug");
+           //var awesomplete = new Awesomplete(input, {
+           //    minChars: 1,
+           //    autoFirst: true
+           //});
+             
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/GetDrugList",
+                   data: "{'regimenLine':'" + 0 + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+                       var drugListData = response.d;
+                       //alert(serverData.length);
+
+                       var drugList = [];
+                       for (var i = 0; i < drugListData.length; i++) {
+
+                           drugList.push(drugListData[i][1]);
+                           alert(drugListData[i][0] + " " + drugListData[i][1])
+                       }
+
+                       //awesomplete.list = drugList;
+                       $( "#ctl00_IQCareContentPlaceHolder_txtSelectDrug" ).autocomplete({
+                           source: drugList
+                       });
+
+                       toastr.success(response.d, "Drug List");
+                   },
+                   error: function (response) {
+                       alert(response.d);
+                       toastr.error(response.d, "Drug List Error");
+                   }
+               });
+               
+       }
    
 </script>
     
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </asp:Content>
