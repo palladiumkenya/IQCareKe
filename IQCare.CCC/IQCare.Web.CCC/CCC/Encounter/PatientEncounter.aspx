@@ -1311,11 +1311,10 @@
                                                                <%-- </div>--%>
                              </div><%-- panel body--%>
                         </div>     
-                    </div>
-                         .     
+                    
                      <div class="col-md-12"><hr/></div>
-                     <div class="col-md-7"></div>
-                     <div class="col-md-5">
+                             <div class="col-md-7"></div>
+                             <div class="col-md-5">
                                              <div class="col-md-3">    
                                                  <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
@@ -1329,13 +1328,13 @@
                                                  <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
+             </div>
+                         .     
+                     
                                    
                             <%--</div>--%>
                         
-                      
-              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
-                  
-               <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
                      <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
                           </div>
@@ -1429,12 +1428,16 @@
                                 </div><%-- .panel--%>
 
                           </div><%-- .col-md-12--%>
-                      </div><!-- .pharmacy-->
+                </div><!-- .pharmacy-->
+                      
+              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
+                  
+              
 
                        <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
                        </div>--%><!-- .history-->
-                 </div><!-- .tab-content-->
+                 <%--</div>--%><!-- .tab-content-->
            </div> 
 
     <!-- ajax begin -->
