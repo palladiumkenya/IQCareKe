@@ -8,7 +8,7 @@ namespace IQCare.CCC.UILogic.Baseline
 {
     public class PatientFamilyTestingManager
     {
-        private readonly IPatientHivTestingManager _hivTestingManager = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivTestingManager, BusinessProcess.CCC.Baseline");
+        private readonly IPatientHivTestingManager _hivTestingManager = (IPatientHivTestingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivTestingManager, BusinessProcess.CCC");
         private readonly IPersonManager _personManager = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
         private readonly IPersonRelationshipManager _personRelationshipManager = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
 
@@ -43,7 +43,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 ReferredToCare = p.CccReferal,
                 CccNumber = p.CccReferaalNumber
             };
-            return _hivTestingManager.AddPatientHivTesting(familyTesting);
+            int hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
+            return hivTestingId;
         }
 
         public PatientHivTesting GetPatientFamilyTestings(int id)
@@ -88,7 +89,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 ReferredToCare = p.CccReferal,
                 CccNumber = p.CccReferaalNumber
             };
-            return _hivTestingManager.UpdatePatientHivTesting(familyTesting);
+            int hivTestingId = _hivTestingManager.UpdatePatientHivTesting(familyTesting);
+            return hivTestingId;
         }
     }
 }

@@ -118,6 +118,11 @@ namespace BusinessProcess.CCC
             LookupFacilityRepository lookupFacilityRepository = new LookupFacilityRepository();
             return lookupFacilityRepository.GetFacility();
         }
-       
+        public LookupItemView GetPatientGender(int genderID)
+
+        {
+            LookupRepository lookupGender = new LookupRepository();
+            return lookupGender.GetPatientGender(genderID);
+        }
     }
 }

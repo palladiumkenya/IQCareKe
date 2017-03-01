@@ -6,7 +6,7 @@
 
 
         <uc:PatientDetails ID="PatientSummary" runat="server" />
-
+        <asp:LinkButton runat="server" ID="btn_open_modal" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg">View Patient Family Members</asp:LinkButton>
 
 
 
@@ -50,7 +50,7 @@
                                 <label class="control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="Relationship" class="form-control input-sm" type="text" runat="server" required="true"/>
+                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -464,9 +464,34 @@
     </div>
     <%--.container-fluid--%>
 
+    <div class="modal fade bs-example-modal-lg" id="ViewFamilyModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-primary">Family Members</div>
+                <table class="table table-hover" id="tableFamilymembers" clientidmode="Static" runat="server">
+                    <thead>
+                        <tr>
+                            <th class="text-primary">#</th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Name(s)</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Relationship</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Baserline HIV Status</i> </th>
+                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Baseline HIV Status Date</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">HIV Testing Results</i> </th>
+                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">HIV Testing Results Date</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">CCC Referal</i></th>
+                            <th><span class="fa fa-times text-danger text-primary pull-right">Action</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
-        var familyMembers = [];
         $(document).ready(function () {
+            var familyMembers = [];
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
@@ -482,8 +507,6 @@
 
             $("#btnAdd").click(function (e) {
                 if ($('#FamilyTestingForm').parsley().validate()) {
-                    var patientId = <%=PatientId%>;
-                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
                     var firstName = $("#<%=FirstName.ClientID%>").val();
                     var middleName = $("#<%=MiddleName.ClientID%>").val();
                     var lastName = $("#<%=LastName.ClientID%>").val();
@@ -494,14 +517,14 @@
                     var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
                     var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
                     var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
-                    var hivTestingResultsDate = $("#<%=HIVTestingDate.ClientID%>").val();
+                    var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
-                    var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationship + "</td><td align='left'>" + baselineHivStatus + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingResults + "</td><td align='left'>" + hivTestingResultsDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
+                    var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationshipId + "</td><td align='left'>" + baselineHivStatusId + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingresultId + "</td><td align='left'>" + hivTestingresultDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblFamilyTesting>tbody:first").append('' + table + '');
-                    var testing = { patientId: patientId, patientMasterVisitId: patientMasterVisitId, firstName: firstName, middleName: middleName, lastName: lastName, sex: sex, dob: dob,  relationshipId: relationshipId, baselineHivStatusId: baselineHivStatusId, baselineHivStatusDate: baselineHivStatusDate, hivTestingresultId: hivTestingresultId, hivTestingresultDate: hivTestingresultDate, cccreferal: cccreferal, cccReferalNumber: cccReferalNumber};
-                    familyMembers.append(testing);
+                    var testing = { firstName: firstName, middleName: middleName, lastName: lastName, sex: sex, dob: dob,  relationshipId: relationshipId, baselineHivStatusId: baselineHivStatusId, baselineHivStatusDate: baselineHivStatusDate, hivTestingresultId: hivTestingresultId, hivTestingresultDate: hivTestingresultDate, cccreferal: cccreferal, cccReferalNumber: cccReferalNumber};                
+                    familyMembers.push(testing);
                     resetElements();
-                    debugger;
                     e.preventDefault();
                 } else {
                     return false;
@@ -509,14 +532,32 @@
                 
             });
 
-            $("#btnClose").click(function () {
-                window.location.href = '/CCC/patient/patientHome.aspx';
+            $("#btnSave").click(function () {
+                if (familyMembers.length < 1) {
+                    toastr.error("error", "Please insert at least One(1) family member");
+                    return false;
+                }
+                for (var i = 0, len = familyMembers.length; i < len; i++) {
+                    addFamilyTesting(familyMembers[i]);
+                }
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
+
+            $("#btnClose").click(function () {
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                
+            });
+
             $("#tblFamilyTesting").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();
             });
+
             $("#btnReset").click(function () {
                 resetElements();
+            });
+
+            $("#btn_open_modal").click(function(event) {
+                $('#ViewFamilyModal').modal('show');
             });
         });
 
@@ -524,29 +565,29 @@
             $(".input-sm").val("");
         }
 
-        function addFamilyTesting() {
-            var firstName = $("#<%=FirstName.ClientID%>").val();
-            var middleName = $("#<%=MiddleName.ClientID%>").val();
-            var lastName = $("#<%=LastName.ClientID%>").val();
-            var sex = $("#<%=Sex.ClientID%>").val();
-            var dob = $("#<%=Dob.ClientID%>").val();
-            var relationshipId = $("#<%=Relationship.ClientID%>").val();
-            var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
-            var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
-            var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
-            var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
-            var cccreferal = $("#<%=CccReferal.ClientID%>").val();
+        function addFamilyTesting(testing) {
+            var firstName = testing.firstName;
+            var middleName = testing.middleName;
+            var lastName = testing.lastName;
+            var sex = testing.sex;
+            var dob = testing.dob;
+            var relationshipId = testing.relationshipId;
+            var baselineHivStatusId = testing.baselineHivStatusId;
+            var baselineHivStatusDate = testing.baselineHivStatusDate;
+            var hivTestingresultId = testing.hivTestingresultId;
+            var hivTestingresultDate = testing.hivTestingresultDate;
+            var cccreferal = testing.cccreferal;
+            var cccReferalNumber = testing.cccReferalNumber;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientFamilyTesting",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresult': '" + hivTestingresultId + "','hivStatusresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber +"'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Family testing saved successfully");
-                    resetElements();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Family testing not saved");
@@ -560,7 +601,6 @@
             } else {
                 $("#<%=cccNumber.ClientID%>").disabled = 'false';
             }
-            debugger;
         }
 
     </script>

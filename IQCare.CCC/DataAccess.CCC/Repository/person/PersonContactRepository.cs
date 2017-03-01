@@ -33,14 +33,14 @@ namespace DataAccess.CCC.Repository.person
         public List<PersonContact> GetCurrentPersonContact(int personId)
         {
             IPersonContactRepository personContactRepository=new PersonContactRepository();
-            var personContactList= personContactRepository.GetAll().Where(x => x.PersonId == personId & x.DeleteFlag==false).OrderBy(x=>x.Id);
+            var personContactList= personContactRepository.GetAll().Where(x => x.PersonId == personId && x.DeleteFlag==false).OrderBy(x=>x.Id);
             return personContactList.ToList();
         }
 
         public List<PersonContact> GetAllPersonContact(int personId)
         {
             IPersonContactRepository personContactRepository = new PersonContactRepository();
-            var personContactList = personContactRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag == false);
+            var personContactList = personContactRepository.FindBy(x => x.PersonId == personId && x.DeleteFlag == false);
             return personContactList.ToList();
         }
     }

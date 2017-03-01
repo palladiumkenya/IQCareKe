@@ -18,6 +18,6 @@ namespace Entities.PatientCore
         [ForeignKey("PersonId")]
         public virtual Person Person { get; set; }
         public int SupporterId {get;set;}
-        public int MobileContact { get; set; }
+        public string MobileContact { get; set; }
     }
 }

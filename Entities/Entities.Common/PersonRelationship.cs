@@ -9,9 +9,9 @@ namespace Entities.Common
     {
         [Key]
         public int Id { get; set; }
-       [ForeignKey("Person")]
+        [ForeignKey("Person")]
         public int PersonId { get; set; }
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
         public int RelatedTo { get; set; }
         public int RelationshipTypeId { get; set; }
     }

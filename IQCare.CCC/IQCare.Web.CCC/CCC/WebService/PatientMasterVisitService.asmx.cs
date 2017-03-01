@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Visit;
 
@@ -39,24 +36,23 @@ namespace IQCare.Web.CCC.WebService
             return result;
         }
 
-        //[WebMethod(EnableSession = true)]
-        //public int PatientCheckout(int visitSchedule, int visitBy, int visitType, DateTime visitDate)
-        //{
-        //    int result = 0;
-        //    try
-        //    {
-        //        int patientId = Convert.ToInt32(Session["patientId"]);
-        //        PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
-        //        result = patientMasterVisit.PatientMasterVisitCheckout(patientId, visitSchedule, visitBy, visitType,
-        //            visitDate);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message + ' ' + e.InnerException);
-        //    }
+        [WebMethod(EnableSession = true)]
+        public int PatientCheckout(int id,int visitSchedule, int visitBy, int visitType, DateTime visitDate)
+        {
+            int result = 0;
+            try
+            {
+                int patientId = Convert.ToInt32(Session["patientId"]);
+                PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
+                result = patientMasterVisit.PatientMasterVisitCheckout(id,patientId,visitSchedule,visitBy,visitType,visitDate);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message + ' ' + e.InnerException);
+            }
 
-        //    return result;
+            return result;
 
-        //}
+        }
     }
 }

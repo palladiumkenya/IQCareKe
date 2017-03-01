@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -9,7 +8,7 @@ using Interface.CCC.Baseline;
 
 namespace BusinessProcess.CCC.Baseline
 {
-    public class BPatientBaselineAssessment:ProcessBase,IPatientBaselineAssessmentManager
+    public class BPatientBaselineAssessmentManager:ProcessBase,IPatientBaselineAssessmentManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
 

@@ -1098,14 +1098,10 @@
                 </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                            <%--<div class="col-md-12" style="padding-top: 1%">
-                              <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
-                            </div>    -->--%>
-                            
-                       
+                                               
                            
-                        <div class="col-md-6">  
-                         <div class="col-md-12 bs-callout bs-callout-danger">
+                     <div class="col-md-6 col-sx-12 col-sm-12">  
+                          <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
@@ -1122,9 +1118,8 @@
                                                 </table>
                             </div>    
         
-                
 
-                <div class="col-md-12 bs-callout bs-callout-info">
+                         <div class="col-md-12 bs-callout bs-callout-info">
                          <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
@@ -1149,21 +1144,21 @@
 
                        </div>
                            
-                       <div class="col-md-6">
-                         <div class="col-md-12">
-                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                              <div class="panel-heading"></div>
-                                              <div class="panel-body">
+                     <div class="col-md-6 col-xs-12 col-sm-12 form-group">
+                         
+                         <div class="col-md-12 bs-callout bs-callout-success">
+<%--                              <div class="panel panel-default" style="margin-top:2%">
+                                              
+                                              <div class="panel-body">--%>
+                                                 <div class="col-md-12 form-group"><label class="control-label pull-left text-primary">Order Lab Test(s)</label></div>
+                                                  <div class="col-md-12"><hr style="margin-top: 2px" /></div>
                                                   <div class="col-md-12 form-group">
                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
-                                                      <div class="col-md-8">
-                                                          
-                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
-                                                                                                              
-                                                             </div>
+                                                      <div class="col-md-8">                               
+                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>                                                      
+                                                      </div>
                                                   </div>
+
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Reason</label></div>
                                                       <div class="col-md-8">
@@ -1173,14 +1168,13 @@
                                                          <asp:ListItem Text="Confirmatory" Value="4" />
                                                          <asp:ListItem Text="Suspected drug resistance" Value="5" />
                                                          <asp:ListItem Text="Other" Value="5" />
-                                                    </asp:DropDownList>
+                                                        </asp:DropDownList>
                                                       </div>
                                                   </div>
                                                   
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
                                                       <div class="col-md-8">
-                                                         
                                                           <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
@@ -1190,7 +1184,7 @@
                                         <div class="col-md-4">
                                             <label class="control-label pull-left">Date</label>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
@@ -1287,7 +1281,7 @@
             
 
                                  
-                                                  <div class="col-md-12">
+                                                  <div class="col-md-12 form-group">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
                                             <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
@@ -1314,17 +1308,15 @@
                                             </div>
                                                               
    
-                                                                </div>
-                                                        </div>
-                                                    </div>     
-                                                   </div>
-                                             </div>
-                           
-                                        <div class="col-md-12"><hr/></div>
-                                        <div class="col-md-7"></div>
-                                         <div class="col-md-5">
-                                             <div class="col-md-3">
-                                                 
+                                                               <%-- </div>--%>
+                             </div><%-- panel body--%>
+                        </div>     
+                    </div>
+                         .     
+                     <div class="col-md-12"><hr/></div>
+                     <div class="col-md-7"></div>
+                     <div class="col-md-5">
+                                             <div class="col-md-3">    
                                                  <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
@@ -1341,7 +1333,7 @@
                             <%--</div>--%>
                         
                       
-                      </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
+              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
                   
                <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
                      <div class="col-md-12" style="padding-top: 1%">
@@ -1449,14 +1441,16 @@
    <script type="text/javascript">
        var patientId = <%=PatientId%>;
        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-        var genderId = <%=genderID%>;
+       var genderId = <%=genderID%>;
+       var gender = "<%=gender%>";
 
      $(document).ready(function () {     
            
 
-         console.log(patientId);
-         console.log(patientMasterVisitId);
-         console.log(genderId);
+         //console.log(patientId);
+         //console.log(patientMasterVisitId);
+         //console.log(genderId);
+         //console.log(gender);
 
      $("#LabDatePicker").datepicker({
            //date: null,
@@ -1678,20 +1672,24 @@
                    lorderDate.push("" + labOrderDate + "");
                    lorderNotes.push("" + labOrderNotes + "");
 
-                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td></tr>";
+                   var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
                   
                }
 
                e.preventDefault();
-     });
-        // $("#tblAddLabs").on('click', '.btnCancelOrder', function () {
+            });
+
+        $("#tblAddLabs").on('click', '.btnDelete', function () {
+             $(this).closest('tr').remove();
+             var x = $(this).closest('tr').find('td').eq(0).html();
+
+             //identifierList.splice($.inArray(x, identifierList), 1);
+             //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+         });
+       
          $("#btnCancelOrder").click(function (e) {
-
-
-            
              $("#tblAddLabs td").parent().remove();
-           
          });
       
          $("#btnResetOrder").click(function (e) {   
@@ -1704,6 +1702,8 @@
              $("#labNotes").val("");
              $("#LabDate").val("");
          }
+        
+
            // Save lab order
       $("#btnSaveLab").click(function (e) {
                var _fp = [];
@@ -1733,7 +1733,7 @@
            });
 
 
-           function addLabOrder(_fp) {
+        function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
               // console.log(patientId);
                //console.log(labOrder);
@@ -1866,7 +1866,47 @@
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             
-            ////////////////////////////////////////////////////////////////////////////////////////////
+         ////////////////////////////////////////////////////////////////////////////////////////////
+         //Gender validations
+            var male = "Male";
+            if (gender == male) {
+                
+                $("#lmp").val("");
+                $("#examinationPregnancyStatus").val("");
+                $("#ExpectedDateOfChildBirth").val("");
+                $("#cacxscreening").val("");
+
+                $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
+                } else {
+                $("#<%=lmp.ClientID%>").prop('disabled', false);
+                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
+
+                }
+         //.gender validation
+         //pregnancy validations
+        // var pregnancy = "";
+         var pregnant = "Pregnant";
+
+         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
+         //console.log(patientId);
+         //console.log(pregnancy);
+
+         if (pregnancy != pregnant) {
+                
+              $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+               
+                } else {
+                
+                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+              
+
+                }
+         //.pregnancy validation
             var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
                     type: "POST",
@@ -2115,6 +2155,9 @@
                         });
 
             function savePatientEncounterPresentingComplaint() {
+
+             
+
                 var visitDate = $("#<%=VisitDate.ClientID%>").val();
                 //var visitScheduled = $('input[name="Scheduled"]:checked').val();
                 ////////////////////////////////////////
@@ -2154,7 +2197,7 @@
 
                     //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
                 }
-
+           
                 if (ANCProfile == undefined)
                 {
                     ANCProfile = "99";

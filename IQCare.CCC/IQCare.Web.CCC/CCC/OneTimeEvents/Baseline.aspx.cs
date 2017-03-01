@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -47,9 +44,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (ms != null && ms.Count > 0)
             {
                 WHOStageAtEnrollment.Items.Add(new ListItem("select", "0"));
+                bwhoStage.Items.Add(new ListItem("select", "0"));
                 foreach (var k in ms)
                 {
                     WHOStageAtEnrollment.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    bwhoStage.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                 }
             }
 
@@ -58,9 +57,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (lookupItem != null && lookupItem.Count > 0)
             {
                 regimenCategory.Items.Add(new ListItem("select", "0"));
+                InitiationRegimen.Items.Add(new ListItem("select", "0"));
                 foreach (var k in lookupItem)
                 {
                     regimenCategory.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    InitiationRegimen.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 
