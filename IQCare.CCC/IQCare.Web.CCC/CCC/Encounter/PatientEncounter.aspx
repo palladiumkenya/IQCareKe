@@ -1097,14 +1097,10 @@
                 </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                            <%--<div class="col-md-12" style="padding-top: 1%">
-                              <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
-                            </div>    -->--%>
-                            
-                       
+                                               
                            
-                        <div class="col-md-6">  
-                         <div class="col-md-12 bs-callout bs-callout-danger">
+                     <div class="col-md-6 col-sx-12 col-sm-12">  
+                          <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
@@ -1121,9 +1117,8 @@
                                                 </table>
                             </div>    
         
-                
 
-                <div class="col-md-12 bs-callout bs-callout-info">
+                         <div class="col-md-12 bs-callout bs-callout-info">
                          <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
@@ -1148,21 +1143,21 @@
 
                        </div>
                            
-                       <div class="col-md-6">
-                         <div class="col-md-12">
-                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                              <div class="panel-heading"></div>
-                                              <div class="panel-body">
+                     <div class="col-md-6 col-xs-12 col-sm-12 form-group">
+                         
+                         <div class="col-md-12 bs-callout bs-callout-success">
+<%--                              <div class="panel panel-default" style="margin-top:2%">
+                                              
+                                              <div class="panel-body">--%>
+                                                 <div class="col-md-12 form-group"><label class="control-label pull-left text-primary">Order Lab Test(s)</label></div>
+                                                  <div class="col-md-12"><hr style="margin-top: 2px" /></div>
                                                   <div class="col-md-12 form-group">
                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
-                                                      <div class="col-md-8">
-                                                          
-                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
-                                                                                                              
-                                                             </div>
+                                                      <div class="col-md-8">                               
+                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>                                                      
+                                                      </div>
                                                   </div>
+
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Reason</label></div>
                                                       <div class="col-md-8">
@@ -1172,14 +1167,13 @@
                                                          <asp:ListItem Text="Confirmatory" Value="4" />
                                                          <asp:ListItem Text="Suspected drug resistance" Value="5" />
                                                          <asp:ListItem Text="Other" Value="5" />
-                                                    </asp:DropDownList>
+                                                        </asp:DropDownList>
                                                       </div>
                                                   </div>
                                                   
                                                   <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
                                                       <div class="col-md-8">
-                                                         
                                                           <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
@@ -1189,7 +1183,7 @@
                                         <div class="col-md-4">
                                             <label class="control-label pull-left">Date</label>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
@@ -1286,7 +1280,7 @@
             
 
                                  
-                                                  <div class="col-md-12">
+                                                  <div class="col-md-12 form-group">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
                                             <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
@@ -1313,17 +1307,15 @@
                                             </div>
                                                               
    
-                                                                </div>
-                                                        </div>
-                                                    </div>     
-                                                   </div>
-                                             </div>
-                           
-                                        <div class="col-md-12"><hr/></div>
-                                        <div class="col-md-7"></div>
-                                         <div class="col-md-5">
-                                             <div class="col-md-3">
-                                                 
+                                                               <%-- </div>--%>
+                             </div><%-- panel body--%>
+                        </div>     
+                    </div>
+                         .     
+                     <div class="col-md-12"><hr/></div>
+                     <div class="col-md-7"></div>
+                     <div class="col-md-5">
+                                             <div class="col-md-3">    
                                                  <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
@@ -1340,7 +1332,7 @@
                             <%--</div>--%>
                         
                       
-                      </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
+              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
                   
                <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
                      <div class="col-md-12" style="padding-top: 1%">
