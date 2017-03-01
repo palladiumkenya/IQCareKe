@@ -752,7 +752,7 @@
                                  <div class="col-md-2 col-xs-12">
                                      <div class="col-md-12 col-xs-12 col-sm-12"><label class="control-label pull-left">CD4 Count </label></div> 
                                      <div class="col-md-12">
-                                          <asp:TextBox runat="server" CssClass="form-control input-sm" ID="bCd4Count" placeholder="cd4 count"  ClientIDMode="Static"></asp:TextBox>
+                                          <asp:TextBox runat="server" CssClass="form-control input-sm" ID="bCd4Count" placeholder="cd4 count"  ClientIDMode="Static" data-parsley-type="digits"></asp:TextBox>
                                      </div>
                                  </div>
 
@@ -802,25 +802,25 @@
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblMUAC">MUAC </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineMUAC" CssClass="form-control input-sm" placeholder="MUAC" data-parsley-required="true"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineMUAC" CssClass="form-control input-sm" placeholder="MUAC" data-parsley-type="digits"></asp:TextBox>
                                       </div>
                                  </div>
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblWeight">Weight (Kgs) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley-required="true" data-aprsley-type="number" data-parsley-min="2"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineWeight" CssClass="form-control input-sm" placeholder="0.0 kgs" data-parsley-required="true" data-aprsley-type="digits" data-parsley-min="2"></asp:TextBox>
                                       </div>
                                  </div>
                                  <div class="col-md-3">
                                       <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblheight">Height (cm) </asp:label></div>
                                       <div class="col-md-12">
-                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true" data-parsley-type="number" data-parsley-min="5"></asp:TextBox>
+                                          <asp:TextBox runat="server" ClientIDMode="Static" ID="BaselineHeight" CssClass="form-control input-sm" placeholder="0.00 cms" data-parsley-required="true" data-parsley-type="digits" data-parsley-min="5"></asp:TextBox>
                                       </div>
                                 </div>
                                  <div class="col-md-3">
                                      <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblBMI">BMI </asp:label></div>
                                      <div class="col-md-12">
-                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineBMI" ClientIDMode="Static" ReadOnly="True"></asp:TextBox>
+                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineBMI" ClientIDMode="Static" ReadOnly="True" data-parsley-type="digits"></asp:TextBox>
                                      </div>
                                 </div>
                             </div>                             

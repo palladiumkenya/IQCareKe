@@ -519,7 +519,7 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 treatmentSupporter[0].PersonId = personId;
                                 treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
-                                treatmentSupporter[0].MobileContact = mobileContact;
+                                treatmentSupporter[0].MobileContact =Convert.ToInt32(mobileContact);
 
                                 treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
 
@@ -766,8 +766,7 @@ namespace IQCare.Web.CCC.WebService
                             patientDetails.tsMiddleName = _utility.Decrypt(supporter[0].MiddleName);
                             patientDetails.tsLastName = _utility.Decrypt(supporter[0].LastName);
                             patientDetails.tsGender = supporter[0].Sex;
-                            patientDetails.ISContacts =
-                                patientTreatmentSupporter[0].MobileContact;
+                            patientDetails.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
                         }
                         
                     }
