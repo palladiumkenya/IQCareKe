@@ -199,7 +199,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0" ReadOnly="True"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -1197,6 +1197,35 @@
                         }
                     });
                 }
+
+                $( "#personAge" ).keyup(function() {
+                    var personAge = $("#personAge").val();
+                    if (personAge != null && personAge != "") {
+                        var today = new Date();
+                        today.setFullYear(today.getFullYear() - personAge);
+                        var month = (today.getMonth() + 1);
+                        var day = today.getDate();
+                        if (month < 10) {
+                            month = "0" + month;
+                        }
+                        if (day < 10) {
+                            day = "0" + day;
+                        }
+                        var dob = today.getFullYear() + "-" + month + "-"+ day;
+                        
+
+                        var formatter = new Intl.DateTimeFormat("en", { month: "short" }),
+                        month2 = formatter.format(new Date(dob));
+
+                        dob = day + "-" + month2 + "-" + today.getFullYear();
+                        $('#MyDateOfBirth').datepicker('setDate', dob);
+                        personAgeRule();
+                        //console.log(dob);
+                    } else {
+                        $("#PersonDoB").val("");
+                    }
+                    
+                });
 
             });
 
