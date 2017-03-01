@@ -82,6 +82,7 @@
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
     <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
+    <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
     <Compile Include="Patient\IPatientManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
@@ -89,9 +90,7 @@
     <Compile Include="Visit\IPatientLabOrderManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OneTimeEvent\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
       <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>

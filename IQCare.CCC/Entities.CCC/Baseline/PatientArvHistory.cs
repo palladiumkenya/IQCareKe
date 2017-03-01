@@ -17,7 +17,7 @@ namespace Entities.CCC.Baseline
 
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
-        public virtual PatientEntity Patient { get; set; }
+        public virtual PatientEntity PatientEntity { get; set; }
         public int PatientMasterVisitId { get; set; }        
         public string TreatmentType { get; set; }
         public string Purpose { get; set; }

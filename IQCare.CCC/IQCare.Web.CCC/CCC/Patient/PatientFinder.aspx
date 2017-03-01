@@ -57,10 +57,10 @@
 
               </div><%-- .col-md-12--%>
               <div class="col-md-12"><hr/></div>
-              <div class="col-md-12">
-                              <div class="col-md-4"></div>
-                              <div class="col-md-4"></div> 
-                              <div class="col-md-4">
+              <div class="col-md-12 col-xs-12 col-sm-12">
+                              <div class="col-md-4 col-xs-12 col-sm-12"></div>
+                              <div class="col-md-4 col-xs-12 col-sm-12"></div> 
+                              <div class="col-md-4 col-xs-12 col-sm-12">
                                    <div class="col-md-4 col-xs-12 col-sm-12">
                                         <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
                                     </div>
@@ -88,7 +88,7 @@
          <div class="col-md-12 form-group" id="PatientSearch">
       
 
-             <table id="tblFindPatient" class="display" width="100%">
+             <table id="tblFindPatient" class="display" style="cursor:pointer" width="100%">
                  <thead>
                     <tr>
       	                <th>PatientId</th>
@@ -164,6 +164,10 @@
                     });
             });
 
+            $("#btnClose").click(function() {
+                window.location.href="<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
+            });
+
             $("#PatientSearch").hide();
             $("#infoGrid").hide();
 
@@ -171,21 +175,28 @@
             //    .datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
             //$("#RegDate").datepicker('setDate','',{ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
 
+            /*--change cursor to hand during selection*/
+           // $("#tblFindPatient tr").css('cursor', 'hand');
+
+            var table = null;
             $("#btnFindPatient").click(function (e) {
 
-                $("#tblFindPatient").dataTable({
+            table=    $("#tblFindPatient").dataTable({
                     "oLanguage": {
                         "sZeroRecords": "No records to display",
                         "sSearch": "Search from all Records"
                     },
                     "bProcessing": true,
                     "bServerSide": true,
+                    "ordering": true,
+                    "searching": true,
+                    "info": true,
                     "bDestroy": true,
                     "sAjaxSource": "../WebService/PatientLookupService.asmx/GetPatientSearchx",
                     "sPaginationType": "full_numbers",
                     "bDeferRender": true,
                     "responsive":true,
-                    "bPaginate": true,
+                    "sPaginate": true,
                     "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
                     "aoColumns":
                                 [
@@ -237,109 +248,8 @@
                  
              });
 
-
-            //$('#tblFindPatient tfoot th').each(function () {
-            //    var title = $(this).text();
-            //    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            //});
-
-            /*$('#example').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": "../Webservice/datatable.txt"
-               // "ajax": "../Webservice/datatable.txt"
-            });*/
-
-
-<%--            $("#btnFindPatient").click(function(e) {
-
-                var table = $("#tblFindPatient").dataTable({
-                    bAutoWidth: false,
-                    //debug:true,
-                   bDestroy: true,
-                    bJQuieryUI: true,
-                    aaSorting: [],
-                    Processing: true,
-                    ServerSide: true,
-                    columns: [
-                        { "data": "EnrollmentNumber" },
-                        { "data": "PatientIndex" },
-                        { "data": "FirstName" },
-                        { "data": "MiddleName" },
-                        { "data": "LastName" },
-                        { "data": "DateOfBirth" },
-                        { "data": "Sex" },
-                        { "data": "DateOfBirth" },
-                        { "data": "LastName" }
-                    ],
-                    /*
-                    "aocolumns": [
-                        { "mData": "EnrollmentNumber"},
-                        { "mData": "PatientIndex" },
-                        { "mData": "FirstName" },
-                        { "mData": "MiddleName" },
-                        { "mData": "LastName" },
-                        { "mData": "DateOfBirth" },
-                        { "mData": "Sex" },
-                        { "mData": "RegistrationDate" },
-                        { "mData": "PatientStatus" }
-                    ],*/
-                    "aoColumns": [
-                        { "mDataProp": "EnrollmentNumber", "sTitle": "Enrollment Number" },
-                        { "mDataProp": "PatientIndex", "sTitle": "Patient Index" },
-                        { "mDataProp": "FirstName", "sTitle": "First Name" },
-                        { "mDataProp": "MiddleName", "sTitle": "Middle Name" },
-                        { "mDataProp": "LastName", "sTitle": "Last Name" },
-                        { "mDataProp": "DateOfBirth", "sTitle": "Date of Birth" },
-                        { "mDataProp": "Sex", "sTitle": "Gender" },
-                        { "mDataProp": "RegistrationDate", "sTitle": "Registration Date" },
-                        { "mDataProp": "PatientStatus", "sTitle": "Patient Status" }
-
-                        //this name should exist in your JSON response
-                        //"render": function ( data, type, full, meta ) {
-                        //    return '<span class="label label-danger">'+data+'</span>';
-                        //}
-                    ],
-
-                    "sAjaxSource": "../WebService/PatientLookupService.asmx/FindPatient",
-                    "fnServerData":function(sSource, aoData, fnCallback, oSettings) {
-                        aoData.push({ "name": "patientId", "value": ""+$("#<%=PatientNumber.ClientID%>").val()+"" });
-                        aoData.push({ "name": "firstName", "value": ""+$("#<%=FirstName.ClientID%>").val()+"" });
-                        aoData.push({ "name": "middleName", "value": ""+$("#<%=MiddleName.ClientID%>").val()+"" });
-                        aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
-                        aoData.push({ "name": "DateOfBirth", "value": "" + moment($("#SearchDoB").datepicker('getDate')).format('DD-MMM-YYYY') + "" });
-                        aoData.push({ "name": "gender", "value": ""+$("#<%=Sex.ClientID%>").find(":selected").text()+"" });
-                        aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").text()+"" });
-                        aoData.push({ "name": "registrationDate", "value": ""+moment($("#RegDate").datepicker('getDate')).format('DD-MMM-YYYY') +"" });
-                        oSettings.jqXHR = $.ajax({
-                            "dataType": 'json',
-                            "type": 'POST',
-                            "contentType": 'application/json; charset=utf-8',
-                            "url": sSource,
-                            "data": JSON.stringify({ dataPayLoad: aoData }),
-                            "dataSrc": "data",
-                            "success": function (response) { var json = jQuery.parseJSON(response.d);
-                                alert(json); fnCallback(json);
-                                $("#PatientSearch").slideDown('fast', function () { $("#searchGrid").slideUp('fast') });
-                            },
-                            "error":function (xhr,errorType,exception) {
-                                var jsonError = jQuery.parseJSON(xhr.responseText);
-                                toastr.error("" + xhr.status + "" + jsonError.Message+" "+jsonError.StackTrace+" "+jsonError.ExceptionType, "Patient Finder Method");
-                                return false;
-                            }
-                        });
-                    },
-                   "sAjaxDataProp": "",
-                    "responsive":true,
-                    "bPaginate": true,
-                    "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
-                });
-            });--%>
-
-
-
             //row selection
-          $('#tblFindPatient').on('click', 'tbody tr', function () {
+          $('#tblFindPatient').on('dblclick', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
 
@@ -347,8 +257,9 @@
              // alert(rowIndex);
           });
 
-          // Apply the search
-          //$("#tblFindPatient").columns().every(function () {
+
+            // Apply the search
+          //table.columns().every(function () {
           //    var that = this;
 
           //    $('input', this.footer()).on('keyup change', function () {
@@ -360,10 +271,10 @@
           //    });
           //});
 
-          $("#tblFindPatient tbody tr").on('click', function (event) {
-              $("#tblFindPatient tbody tr").removeClass('row_selected');
-              $(this).addClass('row_selected');
-          });
+          //$("#tblFindPatient tbody tr").on('click', function (event) {
+          //    $("#tblFindPatient tbody tr").removeClass('row_selected');
+          //    $(this).addClass('row_selected');
+          //});
 
       //      $('#tblFindPatient tbody')
       //.on('mouseenter', 'td', function () {

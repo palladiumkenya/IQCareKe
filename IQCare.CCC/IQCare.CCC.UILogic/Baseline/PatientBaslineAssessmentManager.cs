@@ -10,7 +10,7 @@ namespace IQCare.CCC.UILogic.Baseline
     {
         private readonly IPatientBaselineAssessmentManager _patientBaselineAssessment = (IPatientBaselineAssessmentManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientBaselineAssessmentManager, BusinessProcess.CCC");
 
-        public int AddArtInitiationbaseline(int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
+        public int AddArtInitiationbaseline(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
         {
             var patientArtInitiationBaselinesInsert= new PatientBaselineAssessment()
                 {
@@ -30,7 +30,7 @@ namespace IQCare.CCC.UILogic.Baseline
           return   _patientBaselineAssessment.AddPatientBaselineAssessment(patientArtInitiationBaselinesInsert);
         }
 
-        public int UpdateArtInitiationbaseline(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, int cd4Count, decimal muac, decimal weight, decimal height,int userId)
+        public int UpdateArtInitiationbaseline(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
         {
             var patientArtInitiationBaselinesUPdate = new PatientBaselineAssessment()
             {

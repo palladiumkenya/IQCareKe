@@ -218,7 +218,7 @@
                 resetFields();
             });
             $("#btnCancel").click(function () {
-                window.location.href = '/CCC/patient/patientHome.aspx';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
         });
 

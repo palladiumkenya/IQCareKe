@@ -44,7 +44,7 @@ namespace IQCare.CCC.UILogic
 
                     for (int i = 0; i < data.Count; i++)
                     {
-                        PatientLabTracker LabTracker = new PatientLabTracker()
+                        PatientLabTracker labTracker = new PatientLabTracker()
                         {
                             PatientId = patient_ID,
                             PatientMasterVisitId = patientMasterVisitId,
@@ -54,9 +54,9 @@ namespace IQCare.CCC.UILogic
                             SampleDate = data[i].labOrderDate
 
                         };
-                        returnValue = _mgr.AddPatientLabTracker(LabTracker);
+                        returnValue = _mgr.AddPatientLabTracker(labTracker);
 
-                        LabOrderEntity LabOrder = new LabOrderEntity()
+                        LabOrderEntity labOrder = new LabOrderEntity()
                         {
                             Ptn_pk = patient_ID,
                             LocationId = facilityID,
@@ -68,7 +68,7 @@ namespace IQCare.CCC.UILogic
                             //ClinicalOrderNotes = data[i].results,       
                             //LocationId = data[i].orderReason,
                         };
-                        returnLabOrderSuccess = _mgr.AddPatientLabOrder(LabOrder);
+                        returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
 
                       
                         //Populate lab details
