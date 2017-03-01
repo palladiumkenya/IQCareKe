@@ -427,7 +427,7 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 treatmentSupporter[0].PersonId = personId;
                                 treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
-                                treatmentSupporter[0].MobileContact =Convert.ToInt32(mobileContact);
+                                treatmentSupporter[0].MobileContact = mobileContact;
 
                                 treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
 
