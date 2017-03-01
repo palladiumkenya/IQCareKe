@@ -6,7 +6,7 @@
 
 
         <uc:PatientDetails ID="PatientSummary" runat="server" />
-
+        <asp:LinkButton runat="server" ID="btn_open_modal" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg">View Patient Family Members</asp:LinkButton>
 
 
 
@@ -50,7 +50,7 @@
                                 <label class="control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="Relationship" class="form-control input-sm" type="text" runat="server" required="true"/>
+                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -464,6 +464,31 @@
     </div>
     <%--.container-fluid--%>
 
+    <div class="modal fade bs-example-modal-lg" id="ViewFamilyModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-primary">Family Members</div>
+                <table class="table table-hover" id="tableFamilymembers" clientidmode="Static" runat="server">
+                    <thead>
+                        <tr>
+                            <th class="text-primary">#</th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Name(s)</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Relationship</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Baserline HIV Status</i> </th>
+                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Baseline HIV Status Date</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">HIV Testing Results</i> </th>
+                            <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">HIV Testing Results Date</i> </th>
+                            <th><i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">CCC Referal</i></th>
+                            <th><span class="fa fa-times text-danger text-primary pull-right">Action</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
             var familyMembers = [];
@@ -515,10 +540,12 @@
                 for (var i = 0, len = familyMembers.length; i < len; i++) {
                     addFamilyTesting(familyMembers[i]);
                 }
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
 
             $("#btnClose").click(function () {
-                window.location.href = '/CCC/patient/patientHome.aspx';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                
             });
 
             $("#tblFamilyTesting").on('click', '.btnDelete', function () {
@@ -527,6 +554,10 @@
 
             $("#btnReset").click(function () {
                 resetElements();
+            });
+
+            $("#btn_open_modal").click(function(event) {
+                $('#ViewFamilyModal').modal('show');
             });
         });
 
@@ -557,7 +588,6 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Family testing saved successfully");
-                    resetElements();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Family testing not saved");
@@ -571,7 +601,6 @@
             } else {
                 $("#<%=cccNumber.ClientID%>").disabled = 'false';
             }
-            debugger;
         }
 
     </script>
