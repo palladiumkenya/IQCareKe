@@ -14,6 +14,7 @@ namespace IQCare.Web
             Application.Remove("AppEmployee");
             Session["SelectedData"] = null;
             Session.Remove("SelectedData");
+            Session["EncounterStatusId"] = 0;
 
 
             #endregion
