@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Entities.CCC.Visit;
 
 namespace Interface.CCC.Visit
 {
-   public interface IPatientMasterVisitManager
+    public interface IPatientMasterVisitManager
    {
        int AddPatientmasterVisit(PatientMasterVisit patientMasterVisit);
        int UpdatePatientMasterVisit(PatientMasterVisit patientMasterVisit);
        int DeletePatientVisit(int id);
        List<PatientMasterVisit> GetPatientVisits(int patientId);
        List<PatientMasterVisit> GetPatientCurrentVisit(int patientId, DateTime visitDate);
-       int PatienMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit);
+       int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit);
        int PatientMasterVisitCheckout(int patientId,PatientMasterVisit patientMasterVisit);
+       int PatientMasterVisitCheckout(int patientId, int masterVisitId, int visitSchedule, int visitBy, int visitType, DateTime visitDate);
 
    }
 }
