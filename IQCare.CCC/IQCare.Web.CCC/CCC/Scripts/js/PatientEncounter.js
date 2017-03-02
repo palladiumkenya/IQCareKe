@@ -39,6 +39,11 @@ function AddAdverseReaction() {
     //    alert("Already exits in the table.");
     //}
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
+
+    $("#adverseEvent").val("");
+    $("#AdverseEventCause").val("");
+    $('#ddlAdverseEventSeverity').val("0");
+    $("#AdverseEventAction").val("");
 }
 
 
@@ -70,6 +75,11 @@ function AddChronicIllness() {
         //    alert("Already exits in the table.");
         //}
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
+
+        $('#ChronicIllnessName').val("0");
+        $("#illnessTreatment").val("");
+        $('#treatmentDose').val("");
+        $('#treatmentDuration').val("");
     }
     
 }
@@ -112,6 +122,10 @@ function AddVaccine() {
     //    alert("Already exits in the table.");
     //}
     DrawDataTable("dtlVaccines", arrVaccineUI);
+
+    $('#ddlVaccine').val("0");
+    $('#ddlVaccineStage').val("0");
+    $('#txtVaccinationDate').val("");
 }
 
 function AddPhysicalExam() {
@@ -142,6 +156,10 @@ function AddPhysicalExam() {
     //    alert("Already exits in the table.");
     //}
     DrawDataTable("dtlPhysicalExam", arrPhysicalExamUI);
+
+    $('#ddlExaminationType').val("0");
+    $('#ddlExamination').val("0");
+    $('#txtExamFindings').val("");
 }
 
 function AddDiagnosis() {
@@ -163,7 +181,10 @@ function AddDiagnosis() {
     //else {
     //    alert("Already exits in the table.");
     //}
-    DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+        DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+
+        $('#Diagnosis').val("");
+        $('#DiagnosisTreatment').val("");
 }
 
 function showHideFPControls()

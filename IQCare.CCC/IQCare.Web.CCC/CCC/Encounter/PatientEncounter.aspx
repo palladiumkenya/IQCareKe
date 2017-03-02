@@ -2129,7 +2129,15 @@
                             //}
                         }
                         else if (data.step === 4) {
-                            savePatientPatientManagement();
+                            $.when(savePatientPatientManagement()).then(function() {
+                                setTimeout(function() {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                                },
+                                    2000);
+                            });
+
+                            //savePatientPatientManagement();
+                            //
                             //if ($("#datastep2").parsley().validate()) {
 
                             //} else {
