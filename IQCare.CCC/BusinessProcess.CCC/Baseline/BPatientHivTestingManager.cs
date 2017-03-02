@@ -1,4 +1,6 @@
-﻿using DataAccess.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Baseline;
@@ -36,6 +38,12 @@ namespace BusinessProcess.CCC.Baseline
             _unitOfWork.PatientHivTestingRepository.Update(p);
             _result = _unitOfWork.Complete();
             return _result;
+        }
+
+        public List<PatientHivTesting> GetAll()
+        {
+            List<PatientHivTesting> hivTestings = _unitOfWork.PatientHivTestingRepository.GetAll().ToList();
+            return hivTestings;
         }
     }
 }

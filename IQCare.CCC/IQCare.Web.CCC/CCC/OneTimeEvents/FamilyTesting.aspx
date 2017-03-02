@@ -540,6 +540,8 @@
                 for (var i = 0, len = familyMembers.length; i < len; i++) {
                     addFamilyTesting(familyMembers[i]);
                 }
+
+                //Todo: clear table instead of redirect
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
 
@@ -557,6 +559,7 @@
             });
 
             $("#btn_open_modal").click(function(event) {
+                LoadFamilyTesting();
                 $('#ViewFamilyModal').modal('show');
             });
         });
@@ -601,6 +604,35 @@
             } else {
                 $("#<%=cccNumber.ClientID%>").disabled = 'false';
             }
+        }
+
+        function LoadFamilyTesting() {
+            var patientId ="<%=PatientId%>";
+            jQuery.support.cors = true;
+            $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetFamilyTestings",
+                data: "{'patientId':'" + patientId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    var itemList = response.d;
+                    var table = '';
+                    itemList.forEach(function (item, i) {
+                        var n = i + 1;
+                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.Name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + moment(item.HivStatusResultDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.CccReferal + '</td></tr>';
+                    });
+                   
+                    $('#tableFamilymembers').append(table);
+
+                },
+
+                error: function (msg) {
+                    alert(msg.responseText);
+                }
+            });
         }
 
     </script>
