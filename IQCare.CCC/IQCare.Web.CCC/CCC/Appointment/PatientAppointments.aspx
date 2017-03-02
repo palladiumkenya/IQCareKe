@@ -59,7 +59,7 @@
                 }
             });
             $("#btnClose").click(function () {
-                window.location.href = '/CCC/Home.aspx';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
         })
 
