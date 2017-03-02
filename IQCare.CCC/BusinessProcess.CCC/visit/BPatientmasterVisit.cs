@@ -62,7 +62,7 @@ namespace BusinessProcess.CCC.visit
                     x =>
                         x.PatientId == patientId & DbFunctions.AddHours(x.Start,24) < DateTime.Now &
                         x.Status == 1 & !x.Active & !x.DeleteFlag & x.End==null).Select(x=> x.Id).FirstOrDefault();
-            if (visitId < 1)
+            if (visitId < 0)
             {
                 _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
                 _unitOfWork.Complete();
