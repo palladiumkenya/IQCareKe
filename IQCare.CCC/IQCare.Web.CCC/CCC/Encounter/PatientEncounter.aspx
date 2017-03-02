@@ -1883,13 +1883,13 @@
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
-                } else {
+            } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
                  $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
-                }
+            }
          //.gender validation
          //pregnancy validations
         // var pregnancy = "";
