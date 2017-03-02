@@ -226,12 +226,22 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            
+            var startEncounter=0; /* starts encounter flags starts at false */
+            var stopEncounter=0; /* starts encounter flags starts at false */
 
-            var startEncounter = 0; /* starts encounter flags starts at false */
-            var stopEncounter = 0; /* starts encounter flags starts at false */
             var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
 
-            var patientId = <%=PatientId%>;
+            var encounterStatusId = <%=EncounterStatusId%>;
+
+            if (patientId<1) {
+                encounterStatusId = 0;
+
+            }
+
+            if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
+
             $("#menuStartEncounter").click(function() {
 
                 if (patientId < 1) {
@@ -245,7 +255,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(response) {
-                                if (startEncounter > 0) {
+                             
+                        if (encounterStatusId > 0) {
                                     toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
                                     return false;
                                 } else {
@@ -275,23 +286,18 @@
                     return false;
                 }
 
+                var today = moment(new Date()).format('DD-MMM-YYYY');
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientMasterVisitService.asmx/PatientCheckout",
-                    data: "{}",
+                    data: "{'id':'"+patientMasterVisitId+"','visitSchedule':'"+ 0 +"','visitBy':'"+ 0 +"','visitType':'"+ 0 +"','visitDate':'"+ today+"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(response) {
-                        if (startEncounter > 0) {
-                            toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
-                            return false;
-                        } else {
                             encounterStopped();
                             $("#menuStartEncounter").show();
-                            startEncounter = 0; /* denotes an active encounter */
-                            stopEncounter = 1;
-                            toastr.info("Patient Service Checkedin successfully!");
-                        }
+                        window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
+                        toastr.info("Patient Service Checkedout successfully!");
                     },
                     error:function(xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -302,27 +308,6 @@
 
                     
             });
-
-            //$("#menuStopEncounter").click(function() {
-
-                
-            //    if (startEncounter < 0) {
-            //        toastr.error("No Active Encounter to Stop,", "Encounter Stop Alert");
-            //        return false;
-            //    } else {
-            //        toastr.error("Encounter Stop Activated", "Encounter Stop Alert");
-            //        encounterStopped();
-            //        stopEncounter = 1;
-            //        startEncounter = 0;
-            //        toastr.info("Encounter Stopped Successfully", "Encounter Start Alert");
-            //    };       
-            //});
-
-            if(startEncounter===0 & stopEncounter===0){   encounterStopped();}
-            else if (startEncounter > 0 & patientId > 0) {
-                //encounterStopped();
-                encounterStarted();
-            }
 
             function encounterStopped() {
 
@@ -338,7 +323,8 @@
                 $("#menuCaptureVitals").hide();
                 $("#menuNewEncounter").hide();
                 $("#menuPatientVitals").hide();
-				$("#LinkButton2").hide();
+                $("#LinkButton2").hide();
+                $("#menuStartEncounter").show();
                 <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
             }
 
@@ -354,6 +340,7 @@
                 $("#menuScheduleAppointments").show();
                 $("#menuCaptureVitals").show();
                 $("#menuNewEncounter").show();
+                $("#menuStartEncounter").hide();
                 startEncounter = 1;
                 stopEncounter = 0;
                 $("#menuStopEncounter").show();

@@ -54,14 +54,14 @@ namespace BusinessProcess.CCC.visit
             return Result = _unitOfWork.Complete();
         }
 
-        public int PatienMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
+        public int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
         {
             /* for status column 1=checkedin 2=checkedout 3=systemcheckout*/
             var visitId =
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
                     x =>
                         x.PatientId == patientId & DbFunctions.AddHours(x.Start,24) < DateTime.Now &
-                        x.Status == 1 & !x.Active & !x.DeleteFlag).Select(x=> x.Id).FirstOrDefault();
+                        x.Status == 1 & !x.Active & !x.DeleteFlag & x.End==null).Select(x=> x.Id).FirstOrDefault();
             if (visitId < 1)
             {
                 _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
@@ -74,20 +74,43 @@ namespace BusinessProcess.CCC.visit
 
         public int PatientMasterVisitCheckout(int patientId,PatientMasterVisit patientMasterVisit)
         {
-            var visitId =
+            var patientVisit =
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
-                    x => x.PatientId == patientId & x.Status == 1 & !x.DeleteFlag).Select(x => x.Id).SingleOrDefault();
-            if (visitId > 0)
+                    x => x.PatientId == patientId & x.Status == 1 & !x.DeleteFlag & x.End == null & !x.Active).FirstOrDefault();
+            if (patientVisit != null)
             {
-                //var pmVisit=new PatientMasterVisit {Id = visitId,End =Convert.ToDateTime(DateTime.Now.TimeOfDay),ServiceId = 1,status = 2};
+                patientVisit.Status = 2;
+                patientVisit.End = patientMasterVisit.End;
+                patientVisit.VisitDate = patientMasterVisit.VisitDate;
+                patientVisit.VisitScheduled = patientMasterVisit.VisitScheduled;
+                patientVisit.VisitType = patientMasterVisit.VisitType;
+                patientVisit.VisitBy = patientMasterVisit.VisitBy;
+                patientVisit.Patient = null;
+                //call the update function here....
                 _unitOfWork.PatientMasterVisitRepository.Update(patientMasterVisit);
                 Result = _unitOfWork.Complete();
             }
-            else
+            return Result;
+        }
+
+        public int PatientMasterVisitCheckout(int patientId, int masterVisitId,int visitSchedule, int visitBy,int visitType,DateTime visitDate)
+        {
+            var patientVisit = _unitOfWork.PatientMasterVisitRepository.GetById(masterVisitId);
+            if (null != patientVisit)
             {
-                Result = 0;
+                patientVisit.Status = 2;
+                patientVisit.End = DateTime.Now;
+                patientVisit.Active = true;
+                patientVisit.VisitDate = visitDate;
+                patientVisit.VisitScheduled = visitSchedule;
+                patientVisit.VisitBy = visitBy;
+                patientVisit.VisitType = visitType;
+
+                _unitOfWork.PatientMasterVisitRepository.Update(patientVisit);
+                Result = _unitOfWork.Complete();
             }
             return Result;
+
         }
     }
 }

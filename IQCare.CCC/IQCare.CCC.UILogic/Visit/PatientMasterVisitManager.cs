@@ -34,12 +34,13 @@ namespace IQCare.CCC.UILogic.Visit
                 ServiceId = 1,
                 Status = 1,
                 Start = DateTime.Now,
+                VisitDate = DateTime.Now,
                 CreatedBy =userId
             };
 
             if (patientId > 0)
             {
-                _result = _patientMasterVisitManager.PatienMasterVisitCheckin(patientId,objPpatientMasterVisit);
+                _result = _patientMasterVisitManager.PatientMasterVisitCheckin(patientId,objPpatientMasterVisit);
             }
 
             return _result> 0 ?_result:0;
@@ -47,20 +48,7 @@ namespace IQCare.CCC.UILogic.Visit
 
         public int PatientMasterVisitCheckout(int id,int patientId, int visitSchedule, int visitBy, int visitType, DateTime visitDate)
         {
-            var objPatientMasterVisit = new PatientMasterVisit
-            {
-                Id = id,
-                PatientId = patientId,
-                Status = 2,
-                VisitScheduled = visitSchedule,
-                VisitBy = visitBy,
-                VisitType = visitBy,
-                VisitDate = visitDate
-            };
-            if (patientId > 0)
-            {
-                _result = _patientMasterVisitManager.UpdatePatientMasterVisit(objPatientMasterVisit);
-            }
+            _result = _patientMasterVisitManager.PatientMasterVisitCheckout(patientId, id,visitSchedule,visitBy,visitType,visitDate);
             return _result > 0 ? _result : 0;
         }
     }

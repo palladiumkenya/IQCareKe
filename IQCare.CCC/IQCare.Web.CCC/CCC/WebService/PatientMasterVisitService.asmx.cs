@@ -27,8 +27,9 @@ namespace IQCare.Web.CCC.WebService
                 result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId);
 
                 /* Assign to patientMsterVisitId session*/
-                if(result>0)
-                    Session["PatientMasterVisitId"] = result;
+                Session["EncounterStatusId"] = 1;
+                Session["PatientMasterVisitId"] = result;
+
             }
             catch (Exception e)
             {
@@ -44,8 +45,10 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 int patientId = Convert.ToInt32(Session["patientId"]);
+                int visitId = Convert.ToInt32(Session["patientMasterVisitId"]);
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
-                result = patientMasterVisit.PatientMasterVisitCheckout(id,patientId,visitSchedule,visitBy,visitType,visitDate);
+                result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
+                Session["EncounterStatusId"] = 0;
             }
             catch (Exception e)
             {
