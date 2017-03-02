@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message + ' ' + e.InnerException);
+                throw new Exception(e.Message);
             }
             return result;
         }
