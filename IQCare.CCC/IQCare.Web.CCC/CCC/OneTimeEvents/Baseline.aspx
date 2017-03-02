@@ -616,7 +616,7 @@
                              <div class="col-md-3">
                                 <div class="col-md-12"><label class="control-label pull-left">Regimen</label></div>
                                 <div class="col-md-12">
-                                     <asp:TextBox runat="server" ID="HistoryRegimen" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                                     <asp:TextBox runat="server" ID="HistoryRegimen" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -1101,6 +1101,27 @@
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
 
+            $("#<%=BaselineWeight.ClientID%>").on('change',
+                function() {
+                    var weight = $(this).val();
+                    var height = $("#<%=BaselineHeight.ClientID%>").val();
+                    var bmi = 0;
+                    if (height > 1) {
+                        bmi = (weight / (height / 100));
+                        $("#<%=BaselineBMI.ClientID%>").text(bmi);
+                    }
+                });
+             $("#<%=BaselineWeight.ClientID%>").on('change',
+                function() {
+                    var weight = $(this).val();
+                    var height = $("#<%=BaselineHeight.ClientID%>").val();
+                    var bmi = 0;
+                    if (height > 1) {
+                        bmi = (weight / (height / 100));
+                        $("#<%=BaselineBMI.ClientID%>").text(bmi);
+                    }
+                });
+
             /*-- check for future dates -- check if ART start Date >TI Date */
             $('#TIARTStartDate').on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
 
@@ -1127,7 +1148,7 @@
             $('#TIDate').on('changed.fu.datepicker dateClicked.fu.datepicker',
                 function(event, date) {
                     var tiDate= $('#TIDate').datepicker('getDate');
-                    var futureDate=moment(tiDate).isAfter(today)
+                    var futureDate = moment(tiDate).isAfter(today);
                     if (futureDate) {
                         toastr.error("future dates NOT allowed !");
                         return false;
