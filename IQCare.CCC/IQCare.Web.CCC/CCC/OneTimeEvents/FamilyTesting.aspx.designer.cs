@@ -22,6 +22,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
+        /// btn_open_modal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btn_open_modal;
+        
+        /// <summary>
         /// FirstName control.
         /// </summary>
         /// <remarks>
@@ -55,7 +64,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Relationship;
+        protected global::System.Web.UI.WebControls.DropDownList Relationship;
         
         /// <summary>
         /// Sex control.
@@ -173,5 +182,14 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnClose;
+        
+        /// <summary>
+        /// tableFamilymembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tableFamilymembers;
     }
 }

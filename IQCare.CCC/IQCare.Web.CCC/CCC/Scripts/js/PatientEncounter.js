@@ -93,12 +93,20 @@ function AddVaccine() {
         return;
     }
         
-    //var chkData = $.grep(arrVaccine, function (e) { return e.vaccine == vaccineID; });
-    
     arrVaccineUI = [];
+    var chkData = $.grep(arrVaccineUI, function (e) { return e.vaccineID == vaccineID; });
+    
     //if (jQuery.isEmptyObject(chkData) == true) {
     //    arrVaccine.push({ vaccine: vaccineID, vaccineStage: vaccineStageID, vaccinationDate: vaccinationDate });
-    arrVaccineUI.push([vaccineID, vaccineStageID, vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    if (jQuery.isEmptyObject(chkData) == true)
+    {
+        arrVaccineUI.push([vaccineID, vaccineStageID, vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    }
+    else {
+        alert("Already exits in the table.");
+    }
+    //alert([vaccineID, vaccineStageID, vaccine].includes(vaccineID));
+    //alert([1, 2, 3].includes(2));
     //}
     //else {
     //    alert("Already exits in the table.");
@@ -174,4 +182,40 @@ function showHideFPControls()
         $('#ddlNoFP').val("0");
     }
         
+}
+
+function EnableDisableEDD()
+{
+
+    var pregStatus = $('#examinationPregnancyStatus').find(":selected").text();
+    
+    if (pregStatus != "Pregnant")
+    {
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = "";
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").setAttribute('disabled', true);
+    }
+    else {
+        var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
+        var lmpJSDate = new Date(lmpDate);
+        var edd = new Date(lmpJSDate.getTime() + 24192000000);
+ 
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").removeAttribute('disabled');
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = DateFormat(edd);
+    }
+    
+}
+
+function DateFormat(date)
+{
+    var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
+
+    //var d = new Date();
+    var curr_date = date.getDate();
+    var curr_month = date.getMonth();
+    var curr_year = date.getFullYear();
+    if (curr_date < 10)
+        curr_date = "0" + curr_date
+    var result = curr_date + "-" + m_names[curr_month] + "-" + curr_year;
+    
+    return result;
 }
