@@ -11,7 +11,7 @@ namespace Interface.CCC
         int AddPersonRelationship(PersonRelationship personRelationship);
         int UpdatePersonRelationship(PersonRelationship personRelationship);
         int DeletePersonRelationship(int id);
-        List<PersonRelationship> GetAllPersonRelationship(int personId);
+        List<PersonRelationship> GetAllPersonRelationship(int patientId);
 
     }
 }

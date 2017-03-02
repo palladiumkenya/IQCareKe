@@ -26,11 +26,11 @@ namespace BusinessProcess.CCC
             return _result = _unitOfWork.Complete();
         }
 
-        public List<PersonRelationship> GetAllPersonRelationship(int personId)
+        public List<PersonRelationship> GetAllPersonRelationship(int patientId)
         {
            
             var myList =
-                _unitOfWork.PersonRelationshipRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag == false);
+                _unitOfWork.PersonRelationshipRepository.FindBy(x => x.RelatedTo == patientId & x.DeleteFlag == false);
             return myList.ToList();
         }
 
