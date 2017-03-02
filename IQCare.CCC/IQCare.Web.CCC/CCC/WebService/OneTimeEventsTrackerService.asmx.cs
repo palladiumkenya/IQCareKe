@@ -75,22 +75,22 @@ namespace IQCare.Web.CCC.WebService
                 }
 
 
-                if (Stage1DateValue != null)
+                if (!String.IsNullOrWhiteSpace(Stage1DateValue))
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage1", DateTime.Parse(Stage1DateValue));
                 }
 
-                if (Stage2DateValue != null)
+                if (!String.IsNullOrWhiteSpace(Stage2DateValue))
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage2", DateTime.Parse(Stage2DateValue));
                 }
 
-                if (Stage3DateValue != null)
+                if (!String.IsNullOrWhiteSpace(Stage3DateValue))
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage3", DateTime.Parse(Stage3DateValue));
                 }
 
-                if (SexPartnerDateValue != null)
+                if (!String.IsNullOrWhiteSpace(SexPartnerDateValue))
                 {
                     disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "SexPartner", DateTime.Parse(SexPartnerDateValue));
                 }

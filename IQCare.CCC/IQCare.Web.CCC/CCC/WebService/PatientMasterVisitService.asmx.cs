@@ -27,7 +27,8 @@ namespace IQCare.Web.CCC.WebService
                 result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId);
 
                 /* Assign to patientMsterVisitId session*/
-                Session["PatientMasterVisitId"] = result;
+                if(result>0)
+                    Session["PatientMasterVisitId"] = result;
             }
             catch (Exception e)
             {
