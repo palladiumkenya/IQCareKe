@@ -19,7 +19,7 @@ namespace IQCare.CCC.UILogic
                 {
                    PersonId = personId,
                    SupporterId = supporterId,
-                   MobileContact =Convert.ToInt32(mobileConatct),
+                   MobileContact = mobileConatct,
                    CreatedBy = userId
                 };
 

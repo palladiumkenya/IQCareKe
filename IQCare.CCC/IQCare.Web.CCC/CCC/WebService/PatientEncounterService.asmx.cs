@@ -164,5 +164,23 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDrugList(string regimenLine)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyDrugList(regimenLine);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["Drug_pk"].ToString(), row["DrugName"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
     }
 }

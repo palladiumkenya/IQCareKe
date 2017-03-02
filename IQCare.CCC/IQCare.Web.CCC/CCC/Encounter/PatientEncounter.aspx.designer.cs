@@ -508,13 +508,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.DropDownList drugCategory;
         
         /// <summary>
-        /// regimLine control.
+        /// regimenLine control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList regimLine;
+        protected global::System.Web.UI.WebControls.DropDownList regimenLine;
+        
+        /// <summary>
+        /// txtSelectDrug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSelectDrug;
         
         /// <summary>
         /// Dose control.

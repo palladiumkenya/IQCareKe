@@ -86,10 +86,16 @@ namespace IQCare.CCC.UILogic
             return patientEncounter.getPatientEncounterDiagnosis(PatientMasterVisitID, PatientID);
         }
 
-        public void EncounterHistory(TreeView TreeViewEncounterHistory)
+        public DataTable getPharmacyDrugList(string regimenLine)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
-            DataTable theDT = patientEncounter.getPatientEncounterHistory("1");
+            return patientEncounter.getPharmacyDrugList(regimenLine);
+        }
+
+        public void EncounterHistory(TreeView TreeViewEncounterHistory, string patientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            DataTable theDT = patientEncounter.getPatientEncounterHistory(patientID);
 
             int tmpYear = 0;
             int tmpMonth = 0;
