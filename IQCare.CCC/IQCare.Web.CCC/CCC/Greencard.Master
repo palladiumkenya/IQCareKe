@@ -179,11 +179,9 @@
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>-->
                                 <a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
-                                    <span class="fa fa-calendar-check-o fa-2x pull-left"></span> Patient Appointments <span class="badge">8</span>
+                                    <span class="fa fa-calendar-check-o fa-2x pull-left"></span> Patient Appointments <span class="badge">0</span>
                                 </a>
-                                <a href='<%=ResolveClientUrl("~/CCC/Appointment/ScheduleAppointment.aspx") %>' class="list-group-item" id="menuScheduleAppointments">
-                                    <span class="fa fa-calendar fa-2x pull-left"></span>Schedule Appointment <span class="badge">8</span>
-                                </a>
+
                           </div>
                      </div>
 
@@ -235,9 +233,12 @@
 
             var encounterStatusId = <%=EncounterStatusId%>;
 
-            if (patientId<1) {
+            if (patientId < 1) {
                 encounterStatusId = 0;
 
+            } else {
+                $("#menuPatientHome").show();
+                $("#LinkButton2").show();
             }
 
             if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
