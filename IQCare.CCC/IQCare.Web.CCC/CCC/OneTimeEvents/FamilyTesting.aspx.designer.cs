@@ -22,15 +22,6 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
-        /// btn_open_modal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_open_modal;
-        
-        /// <summary>
         /// FirstName control.
         /// </summary>
         /// <remarks>
@@ -94,24 +85,6 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.HtmlControls.HtmlSelect BaselineHIVStatus;
         
         /// <summary>
-        /// hivtestingresult control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList hivtestingresult;
-        
-        /// <summary>
-        /// CccReferal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CccReferal;
-        
-        /// <summary>
         /// BaselineHIVStatusDate control.
         /// </summary>
         /// <remarks>
@@ -121,6 +94,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.TextBox BaselineHIVStatusDate;
         
         /// <summary>
+        /// hivtestingresult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList hivtestingresult;
+        
+        /// <summary>
         /// HIVTestingDate control.
         /// </summary>
         /// <remarks>
@@ -128,6 +110,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox HIVTestingDate;
+        
+        /// <summary>
+        /// CccReferal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CccReferal;
         
         /// <summary>
         /// cccNumber control.
@@ -191,5 +182,14 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tableFamilymembers;
+        
+        /// <summary>
+        /// FamilyAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton FamilyAdd;
     }
 }
