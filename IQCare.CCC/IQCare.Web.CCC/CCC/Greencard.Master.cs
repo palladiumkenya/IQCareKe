@@ -47,6 +47,16 @@ namespace IQCare.Web.CCC
             get { return Convert.ToInt32(Session["patientId"]); }
         }
 
+        protected int PatientMasterVisitId
+        {
+            get { return Convert.ToInt32(Session["PatientMasterVisitId"]); }
+        }
+
+        protected int EncounterStatusId
+        {
+            get { return Convert.ToInt32(Session["EncounterStatusId"]); }
+        }
+
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -164,7 +174,7 @@ namespace IQCare.Web.CCC
 
         protected void New_Encounter_Click(object sender, EventArgs e)
         {
-            Session["PatientMasterVisitId"] = "0";
+            //Session["PatientMasterVisitId"] = "0";
             Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
         }
 

@@ -8,9 +8,9 @@ namespace IQCare.CCC.UILogic.Baseline
 {
     public class PatientArvHistoryManager
     {
-        private readonly IPatientArvHistoryManager _patientArtUseHistoryManager = (IPatientArvHistoryManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientArvManager, BusinessProcess.CCC");
+        private readonly IPatientArvHistoryManager _patientArtUseHistoryManager = (IPatientArvHistoryManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientArvHistoryManager, BusinessProcess.CCC");
 
-        public int AddPatientArtUseHistory(int patientId,int patientMasterVisitId,string treatmentType,string purpose,string regimen,DateTime dateLastUsed,int userId)
+        public int AddPatientArtUseHistory(int id,int patientId,int patientMasterVisitId,string treatmentType,string purpose,string regimen,DateTime dateLastUsed,int userId)
         {
             var patientArtUseHistoryInsert=new PatientArvHistory()
             {

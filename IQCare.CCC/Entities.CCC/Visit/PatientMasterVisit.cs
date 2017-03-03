@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Entities.Common;
 using Entities.CCC.Enrollment;
+using Entities.Common;
 
 namespace Entities.CCC.Visit
 {
@@ -12,10 +12,8 @@ namespace Entities.CCC.Visit
     public class PatientMasterVisit : BaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; }  
         public int PatientId { get; set; }
-        [ForeignKey("PatientId")]
-        public virtual PatientEntity Patient { get; set; }
         public int ServiceId { get; set; }
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
@@ -25,5 +23,7 @@ namespace Entities.CCC.Visit
         public DateTime? VisitDate { get; set; }
         public bool Active { get; set; }
         public int Status { get; set; }
+        [ForeignKey("PatientId")]
+        public virtual PatientEntity Patient { get; set; }
     }
 }

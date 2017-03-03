@@ -1,11 +1,10 @@
-﻿using DataAccess.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
-using Entities.CCC.Encounter;
-using Interface.CCC.Baseline;
-using System;
-using System.Collections.Generic;
 using Entities.CCC.Baseline;
+using Interface.CCC.Baseline;
 
 namespace BusinessProcess.CCC.Baseline
 {
@@ -13,6 +12,7 @@ namespace BusinessProcess.CCC.Baseline
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
+
         public int AddPatientHivTesting(PatientHivTesting p)
         {
             _unitOfWork.PatientHivTestingRepository.Add(p);
@@ -38,6 +38,12 @@ namespace BusinessProcess.CCC.Baseline
             _unitOfWork.PatientHivTestingRepository.Update(p);
             _result = _unitOfWork.Complete();
             return _result;
+        }
+
+        public List<PatientHivTesting> GetAll()
+        {
+            List<PatientHivTesting> hivTestings = _unitOfWork.PatientHivTestingRepository.GetAll().ToList();
+            return hivTestings;
         }
     }
 }

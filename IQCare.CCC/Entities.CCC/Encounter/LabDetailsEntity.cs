@@ -22,7 +22,6 @@ namespace Entities.CCC.Encounter
             public string TestNotes { get; set; }
             public int IsParent { get; set; }
             public int ParentTestId { get; set; }
-            public int DeleteFlag { get; set; }
             public string ResultNotes { get; set; }
             public int ResultBy { get; set; }
             public DateTime ResultDate { get; set; }
