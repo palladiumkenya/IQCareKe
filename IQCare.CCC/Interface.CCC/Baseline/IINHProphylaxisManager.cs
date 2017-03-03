@@ -11,5 +11,6 @@ namespace Interface.CCC.Baseline
         int AddINHProphylaxis(INHProphylaxis iNHProphylaxis);
         int UpdateINHProphylaxis(INHProphylaxis iNHProphylaxis);
         int DeleteINHProphylaxis(int id);
+        List<INHProphylaxis> GetPatientProphylaxes(int patientId);
     }
 }

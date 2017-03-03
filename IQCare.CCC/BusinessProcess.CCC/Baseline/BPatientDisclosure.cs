@@ -4,6 +4,8 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using System;
 using DataAccess.Base;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC.Baseline
 {
@@ -25,21 +27,18 @@ namespace BusinessProcess.CCC.Baseline
             return Result = _unitOfWork.Complete();
         }
 
-        /*public List<PatientDisclosure> GetPatientDisclosureAll(int patientId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<PatientDisclosure> GetPatientDisclosures(int patientId, DateTime visitDate)
-        {
-            _unitOfWork.PatientEncounterRepository.Update(patientEncounter);
-            return Result = _unitOfWork.Complete();
-        }*/
-
         public int UpdatePatientDisclosure(PatientDisclosure patientDisclosure)
         {
             _unitOfWork.PatientDisclosureRepository.Update(patientDisclosure);
             return Result = _unitOfWork.Complete();
+        }
+
+        public List<PatientDisclosure> GetPatientDisclosures(int patientId, string category, string disclosureStage)
+        {
+            return
+                _unitOfWork.PatientDisclosureRepository.FindBy(
+                        x => x.PatientId == patientId && x.Category == category && x.DisclosureStage == disclosureStage)
+                    .ToList();
         }
     }
 }
