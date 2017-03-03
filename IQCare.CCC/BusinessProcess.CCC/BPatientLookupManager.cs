@@ -88,11 +88,11 @@ namespace BusinessProcess.CCC
 
             return totalCount;
         }
-        public PatientLookup GetGender(int patientId)
+        public PatientLookup GetGenderID(int patientId)
 
         {
             PatientLookupRepository lookupGender = new PatientLookupRepository();
-            return lookupGender.GetGender(patientId);
+            return lookupGender.GetGenderID(patientId);
         }
     }
 }
