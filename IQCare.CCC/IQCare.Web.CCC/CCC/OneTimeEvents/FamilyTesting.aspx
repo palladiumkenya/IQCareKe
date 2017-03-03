@@ -690,7 +690,20 @@
                     var table = '';
                     itemList.forEach(function (item, i) {
                         var n = i + 1;
-                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.Name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + moment(item.HivStatusResultDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.CccReferal + '</td></tr>';
+                        var baselineDate = item.BaseLineHivStatusDate;
+                        if (baselineDate != null) {
+                            baselineDate = moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY');
+                        } else {
+                            baselineDate = "";
+                        }
+
+                        var testingDate = item.HivStatusResultDate;
+                        if (testingDate != null) {
+                            testingDate = moment(item.HivStatusResultDate).format('DD-MMM-YYYY');
+                        } else {
+                            testingDate = "";
+                        }
+                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.Name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + '</td></tr>';
                     });
                    
                     $('#tableFamilymembers').append(table);
