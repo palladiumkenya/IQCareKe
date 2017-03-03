@@ -19,8 +19,8 @@ namespace Entities.CCC.Baseline
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int BaselineResult { get; set; }
-        public DateTime BaselineDate { get; set; }
-        public DateTime TestingDate { get; set; }
+        public DateTime ? BaselineDate { get; set; }
+        public DateTime ? TestingDate { get; set; }
         public int TestingResult { get; set; }
         public bool ReferredToCare { get; set; }
         public string CccNumber { get; set; }

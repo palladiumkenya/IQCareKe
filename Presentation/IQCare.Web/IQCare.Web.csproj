@@ -277,6 +277,8 @@
     <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
     <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\js\parsley-fields-comparison-validators.js" />
     <Content Include="Content\noty\css\animate.css" />
     <Content Include="Content\noty\css\buttons.css" />
     <Content Include="Content\noty\js\jquery.noty.packaged.js" />

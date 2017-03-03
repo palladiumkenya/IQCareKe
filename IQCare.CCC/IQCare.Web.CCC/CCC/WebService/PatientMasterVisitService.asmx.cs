@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Visit;
 
@@ -30,33 +27,36 @@ namespace IQCare.Web.CCC.WebService
                 result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId);
 
                 /* Assign to patientMsterVisitId session*/
+                Session["EncounterStatusId"] = 1;
                 Session["PatientMasterVisitId"] = result;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return result;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int PatientCheckout(int id,int visitSchedule, int visitBy, int visitType, DateTime visitDate)
+        {
+            int result = 0;
+            try
+            {
+                int patientId = Convert.ToInt32(Session["patientId"]);
+                int visitId = Convert.ToInt32(Session["patientMasterVisitId"]);
+                PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
+                result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
+                Session["EncounterStatusId"] = 0;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message + ' ' + e.InnerException);
             }
+
             return result;
+
         }
-
-        //[WebMethod(EnableSession = true)]
-        //public int PatientCheckout(int visitSchedule, int visitBy, int visitType, DateTime visitDate)
-        //{
-        //    int result = 0;
-        //    try
-        //    {
-        //        int patientId = Convert.ToInt32(Session["patientId"]);
-        //        PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
-        //        result = patientMasterVisit.PatientMasterVisitCheckout(patientId, visitSchedule, visitBy, visitType,
-        //            visitDate);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message + ' ' + e.InnerException);
-        //    }
-
-        //    return result;
-
-        //}
     }
 }

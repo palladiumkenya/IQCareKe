@@ -71,7 +71,7 @@ namespace DataAccess.CCC.Repository
         private IPatientTransferInRepository _patientTransferInRepository;
         private IPatientBaselineAssessmentRepository _patientBaselineAssessmentRepository;
         private IPatientVaccinationRepository _patientVaccinationRepository;
-        private IPatientHivTestingRepository _patientHivTestingRepository;
+        private IPatientHvTestingRepository _patientHivTestingRepository;
         private IPatientTreatmentInitiationRepository _patientTreatmentInitiationRepository;
 
         /*Appointment*/
@@ -300,7 +300,7 @@ namespace DataAccess.CCC.Repository
                            new PatientTreatmentInitiationRepository((GreencardContext) _context));
             }
         }
-        public IPatientHivTestingRepository PatientHivTestingRepository
+        public IPatientHvTestingRepository PatientHivTestingRepository
         {
             get {return _patientHivTestingRepository??(_patientHivTestingRepository = new PatientHivTestingRepository((GreencardContext)_context));}
         }

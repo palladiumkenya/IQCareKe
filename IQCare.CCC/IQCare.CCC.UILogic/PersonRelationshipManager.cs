@@ -42,9 +42,9 @@ namespace IQCare.CCC.UILogic
           return _result=  _mgr.DeletePersonRelationship(id);
         }
 
-        public List<PersonRelationship> GetAllPersonRelationship(int personId)
+        public List<PersonRelationship> GetAllPersonRelationship(int patientid)
         {
-            var myList = _mgr.GetAllPersonRelationship(personId);
+            var myList = _mgr.GetAllPersonRelationship(patientid);
             return myList;
         }
     }

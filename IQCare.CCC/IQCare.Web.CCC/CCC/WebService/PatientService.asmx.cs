@@ -3,16 +3,13 @@ using Entities.CCC.Appointment;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
-using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Services;
 using Entities.CCC.Baseline;
-using Entities.CCC.Encounter;
-using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 
 namespace IQCare.Web.CCC.WebService
@@ -62,7 +59,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                Msg = e.Message + ' ' + e.InnerException;
+                Msg = e.Message;
             }
             return Msg;
         }
@@ -92,7 +89,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                Msg = e.Message + ' ' + e.InnerException;
+                Msg = e.Message;
             }
             return Msg;
         }
@@ -128,10 +125,11 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                Msg = e.Message + ' ' + e.InnerException;
+                Msg = e.Message;
             }
             return Msg;
         }
+
 
         [WebMethod]
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
@@ -152,15 +150,76 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                Msg = e.Message + ' ' + e.InnerException;
+                Msg = e.Message;
             }
             return appointmentsDisplay;
+        }
+
+        [WebMethod]
+        public List<PatientFamilyDisplay> GetFamilyTestings(string patientId)
+        {
+            List<PatientFamilyDisplay> familyDisplays = new List<PatientFamilyDisplay>();
+            List<PatientFamilyTesting> familytestings = new List<PatientFamilyTesting>();
+            //try
+            //{
+                var patientFamily = new PatientFamilyTestingManager();
+                int id = Convert.ToInt32(patientId);
+                familytestings = patientFamily.GetPatienFamilyList(id);
+                foreach (var member in familytestings)
+                {
+                    PatientFamilyDisplay familyDisplay = MapMembers(member);
+                    familyDisplays.Add(familyDisplay);
+                }
+
+            /*}
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }*/
+            return familyDisplays;
+        }
+
+        private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            string relationship = "";
+            string baselineHivStatus = "";
+            string hivStatus = "";
+            List<LookupItemView> relationships = mgr.GetLookItemByGroup("Relationship");
+            var s = relationships.FirstOrDefault(n => n.ItemId == member.RelationshipId);
+            if (s != null)
+            {
+                relationship = s.ItemDisplayName;
+            }
+            List<LookupItemView> reasons = mgr.GetLookItemByGroup("BaseLineHivStatus");
+            var r = reasons.FirstOrDefault(n => n.ItemId == member.BaseLineHivStatusId);
+            if (r != null)
+            {
+                baselineHivStatus = r.ItemDisplayName;
+            }
+            List<LookupItemView> areas = mgr.GetLookItemByGroup("HivTestingResult");
+            var sa = areas.FirstOrDefault(n => n.ItemId == member.HivTestingResultsId);
+            if (sa != null)
+            {
+                hivStatus = sa.ItemDisplayName;
+            }
+
+            PatientFamilyDisplay familyMemberDisplay = new PatientFamilyDisplay()
+            {
+                Name = member.FirstName + ' ' + member.MiddleName + ' ' + member.LastName,
+                Relationship = relationship,
+                BaseLineHivStatus = baselineHivStatus,
+                BaseLineHivStatusDate = member.BaselineHivStatusDate,
+                HivStatusResult = hivStatus,
+                HivStatusResultDate = member.HivTestingResultsDate,
+                CccReferal = member.CccReferal.ToString()
+            };
+            return familyMemberDisplay;
         }
 
         private PatientAppointmentDisplay Mapappointments(PatientAppointment a)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
             string status = "";
             string reason = "";
             string serviceArea = "";
@@ -211,5 +270,16 @@ namespace IQCare.Web.CCC.WebService
         public string DifferentiatedCare { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
+    }
+
+    public class PatientFamilyDisplay
+    {
+        public string Name { get; set; }
+        public string Relationship { get; set; }
+        public string BaseLineHivStatus { get; set; }
+        public DateTime ? BaseLineHivStatusDate { get; set; }
+        public string HivStatusResult { get; set; }
+        public DateTime ? HivStatusResultDate { get; set; }
+        public string CccReferal { get; set; }
     }
 }

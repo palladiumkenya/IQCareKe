@@ -13,8 +13,7 @@ namespace Interface.CCC.Baseline
         int UpdatePatientDisclosure(PatientDisclosure patientDisclosure);
 
         int DeletePatientDisclosure(int id);
-
-        //List<PatientDisclosure> GetPatientDisclosures(int patientId, DateTime visitDate);
+        List<PatientDisclosure> GetPatientDisclosures(int patientId, string category, string disclosureStage);
         //List<PatientDisclosure> GetPatientDisclosureAll(int patientId);
     }
 }

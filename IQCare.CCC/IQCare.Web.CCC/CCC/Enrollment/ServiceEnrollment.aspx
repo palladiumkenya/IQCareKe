@@ -107,6 +107,12 @@
                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="col-md-12"><label class="control-label pull-left" for="entrypoint">Specify Entry Point</label></div>
+                <div class="col-sm-10">
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="SpecificEntryPoint" ClientIDMode="Static"/>
+                </div>
+            </div>
         </div>
         
         
@@ -254,8 +260,8 @@
                     var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
                     var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
 
-                    if (enrollmentNo.length < 5 || enrollmentNo.length > 5) {
-                        toastr.error("error", "Enrollment number should be more than Five Characters");
+                    if (identifier == "CCC Registration Number" && (enrollmentNo.length < 5 || enrollmentNo.length > 5)) {
+                        toastr.error("error", "Enrollment number should be Five Characters");
                         return false;
                     }
 

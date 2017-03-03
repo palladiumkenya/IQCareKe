@@ -28,5 +28,15 @@ namespace IQCare.CCC.UILogic
 
             return _retval = _mgr.AddPatientDisclosure(patientDisclosure);
         }
+
+        public int UpdatePatientDisclosure(PatientDisclosure patientDisclosure)
+        {
+            return _mgr.UpdatePatientDisclosure(patientDisclosure);
+        }
+
+        public List<PatientDisclosure> GetPatientDisclosure(int patientId, string category, string disclosureStage)
+        {
+            return _mgr.GetPatientDisclosures(patientId, category, disclosureStage);
+        }
     }
 }

@@ -52,7 +52,8 @@ namespace IQCare.Web.CCC.WebService
                 PersonId = int.Parse(Session["PersonId"].ToString());
                 var jss = new JavaScriptSerializer();
                 IList<ListEnrollment> data = jss.Deserialize<IList<ListEnrollment>>(enrollment);
-                
+                int userId = Convert.ToInt32(Session["AppUserId"]);
+
                 var patientManager = new PatientManager();
                 var patientMasterVisitManager = new PatientMasterVisitManager();
                 var patientEnrollmentManager = new PatientEnrollmentManager();
@@ -73,7 +74,10 @@ namespace IQCare.Web.CCC.WebService
                         ptn_pk = 0,
                         FacilityId = facilityId,
                         PatientIndex = datevalue.Year.ToString() + '-' + PersonId,
-                        Active = true
+                        Active = true,
+                        CreatedBy = userId,
+                        CreateDate = DateTime.Now,
+                        DeleteFlag = false
                     };
 
                     patientId = patientManager.AddPatient(patient);
@@ -89,21 +93,28 @@ namespace IQCare.Web.CCC.WebService
                             Active = true,
                             CreateDate = DateTime.Now,
                             DeleteFlag = false,
-                            VisitDate = DateTime.Now
+                            VisitDate = DateTime.Now,
+                            CreatedBy = userId
                         };
 
                         PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
                         {
                             PatientId = patientId,
                             ServiceAreaId = 1,
-                            EnrollmentDate = DateTime.Parse(enrollmentDate)
+                            EnrollmentDate = DateTime.Parse(enrollmentDate),
+                            CreatedBy = userId,
+                            CreateDate = DateTime.Now,
+                            DeleteFlag = false
                         };
 
                         PatientEntryPoint patientEntryPoint = new PatientEntryPoint
                         {
                             PatientId = patientId,
                             ServiceAreaId = 1,
-                            EntryPointId = entryPointId
+                            EntryPointId = entryPointId,
+                            CreatedBy = userId,
+                            CreateDate = DateTime.Now,
+                            DeleteFlag = false
                         };
 
                         patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(visit);

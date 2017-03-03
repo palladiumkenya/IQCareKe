@@ -4,6 +4,8 @@ using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC.Baseline
 {
@@ -26,7 +28,15 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdateINHProphylaxis(INHProphylaxis iNHProphylaxis)
         {
-            throw new NotImplementedException();
+            _unitOfWork.INHProphylaxisRepository.Update(iNHProphylaxis);
+            return _unitOfWork.Complete();
+        }
+
+        public List<INHProphylaxis> GetPatientProphylaxes(int patientId)
+        {
+            return
+                _unitOfWork.INHProphylaxisRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false)
+                    .ToList();
         }
     }
 }

@@ -3,11 +3,11 @@
         <div id="callout-labels-inline-block" class="col-md-12 col-xs-12 col-sm-10 well well-sm bs-callout bs-callout-primary" style="padding-bottom:1%">
              <div class="col-md-2">
                  <div class="col-md-12">
-                      <div class="col-md-12"><i class="fa fa-user fa-4x pull-left text-info" aria-hidden="true"></i></div>
-                      <div class="col-md-12">
-                           <small class="pull-left fa-2x"><asp:Label runat="server" CssClass=" label label-info" ID="lblEnrollmentDate">Visit</asp:Label></small>
-                      </div>
+                    <div class="col-md-12"><i class="fa fa-user fa-4x pull-left text-info" aria-hidden="true"></i></div>
+                    <div class="col-md-12">
+                        <small class="pull-left fa-lg"><asp:Label runat="server" CssClass=" label label-info" ID="lblEnrollmentDate">Visit</asp:Label></small>
                     </div>
+                </div>
             </div>
             <div class="col-md-10">
                  <div class="col-md-12 form-group">

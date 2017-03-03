@@ -19,5 +19,14 @@ namespace IQCare.CCC.UILogic.Baseline
             return _retval = _mgr.AddINHProphylaxis(iNHProphylaxis);
         }
 
+        public int updateINHProphylaxis(INHProphylaxis iNHProphylaxis)
+        {
+            return _mgr.UpdateINHProphylaxis(iNHProphylaxis);
+        }
+
+        public List<INHProphylaxis> GetPatientProphylaxes(int patientId)
+        {
+            return _mgr.GetPatientProphylaxes(patientId);
+        }
     }
 }

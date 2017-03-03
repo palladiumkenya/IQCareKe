@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-
     <div class="=col-md-12">
         
         <div class="col-md-12">
@@ -63,7 +62,7 @@
 		                     <div class="col-md-3">
 		                         <div class="form-group">
                                     <asp:HiddenField ID="hdnPersonId" ClientIDMode="Static" runat="Server" Value="" />
-                                    <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
+                                    <div class="col-md-12"><label for="personFname" class="required control-label pull-left">First Name</label></div>
                                     <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                     </div>
@@ -81,7 +80,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12"><label for="personLName" class="required control-label pull-left">Last Name</label></div>
                                     <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" data-parsley-length="[2,25]"></asp:TextBox>
                                     </div>
@@ -89,7 +88,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="col-md-12"><label for="Gender" class="control-label pull-left">Gender</label></div>
+                                <div class="col-md-12"><label for="Gender" class="required control-label pull-left">Gender</label></div>
                                 <div class="col-md-12">
                                     <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
                                 </div>
@@ -109,7 +108,7 @@
                                                
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Date of Birth</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Date of Birth</label></div>
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="MyDateOfBirth">
                                                     <div class="input-group">
@@ -199,7 +198,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0" ReadOnly="True"></asp:TextBox>
+                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +231,7 @@
 
                         <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                    <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
+                                    <div class="col-md-12"><label for="NationalId" class="required control-label pull-left">ID Number</label></div>
                                     <div class="col-md-12">
                                         <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[8,8]"  />
                                     </div>
@@ -294,7 +293,7 @@
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">County</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">County</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
                                         </div>
@@ -303,7 +302,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Sub-County</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1" />
                                         </div>
@@ -312,7 +311,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Ward</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
                                         </div>
@@ -345,14 +344,14 @@
                                </div>
 
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Landmark</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Landmark</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox runat="server" class="form-control input-sm" placeholder="landmark.." id="PatientLandmark" data-parsley-required="true" data-parsley-length="[2,100]" />
                                     </div>
                                </div>
                                
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Nearest Health Centre</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Nearest Health Centre</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
                                     </div>
@@ -370,21 +369,21 @@
                                 <div class="col-md-4">
                                      <div class="col-md-12"><label class="control-label pull-left">Postal Address</label></div>
                                      <div class="col-md-12">
-                                          <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-required="true" data-parsley-length="[8,100]" ClientIDMode="Static"/>
+                                          <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-length="[8,100]" ClientIDMode="Static"/>
                                      </div>     
                                 </div>
                                
                                <div class="col-md-2">
-                                    <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
+                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|+?255|+?256|+?252|+?211|+?251|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
                                     </div>         
                                </div>
                                
                                 <div class="col-md-2">
                                     <div class="col-md-12"><label class="control-label pull-left">Alt. Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox runat="server" type="text" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" placeholder="alternative mobile no..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
+                                         <asp:TextBox runat="server" type="text" id="PatientAlternativeMobile" name="PatientAlternativeMobile" class="form-control input-sm" data-parsley-trigger="keyup" placeholder="alternative mobile no..." ClientIDMode="Static" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientMobileNo" />
                                     </div>       
                               </div>
 
@@ -401,7 +400,7 @@
                             
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                              <div class="col-md-12"><label class="required control-label pull-left">First Name</label></div>
                                               <div class="col-md-12">
                                                    <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                                </div>
@@ -415,7 +414,7 @@
                                          </div>
 
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                              <div class="col-md-12"><label class="required control-label pull-left">Last Name</label></div>
                                               <div class="col-md-12">
                                                    <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                               </div>
@@ -423,7 +422,7 @@
 
                                 <div class="col-md-3">
                                               <div class="form-group">
-                                                  <div class="col-md-12"><label class="control-label pull-left">Gender </label></div>
+                                                  <div class="col-md-12"><label class="required control-label pull-left">Gender </label></div>
                                                   <div class="col-md-12">
                                                       <asp:DropDownList runat="server" ID="tsGender" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
                                                   </div>
@@ -441,7 +440,7 @@
                                  </div>-->
                                
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Mobile Contact.</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Mobile Contact.</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox  runat="server" type="text" id="TSContacts" class="form-control input-sm" placeholder="Mobile No..." data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
                                     </div>         
@@ -658,11 +657,27 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep4").parsley().validate()) {
-                                $.when(addPersonPopulation()).then(function() {
-                                    setTimeout(function(){
-                                        window.location.href ='<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                    }, 2000);
-                                });
+                                var sex = $("#Gender").find(":selected").text();
+                                var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
+
+                                if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
+                                    toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
+                                    return false;
+                                }
+                                else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
+                                    toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                                        "Person Population Error");
+                                    return false;
+                                } else {
+                                    $.when(addPersonPopulation()).then(function() {
+                                        setTimeout(function() {
+                                                window.location
+                                                    .href =
+                                                    '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                            },
+                                            2000);
+                                    });
+                                }
                             } else {
                                
                                 stepError = $('.parsley-error').length === 0;
@@ -994,33 +1009,19 @@
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
-                    var sex = $("#Gender").find(":selected").text();
-                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
-
-                    if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
-                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
-                        return false;
-                    }
-                    else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
-                        toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
-                            "Person Population Error");
-                        return false;
-                    } else {
-
-                        $.ajax({
-                            type: "POST",
-                            url: "../WebService/PersonService.asmx/AddPersonPopulation",
-                            data: "{'patientId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "'}",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                toastr.success(response.d, "Person Popuation");
-                            },
-                            error: function (response) {
-                                toastr.error(response.d, "Person Population Error");
-                            }
-                        });
-                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/AddPersonPopulation",
+                        data: "{'personId':'" + personId + "','populationtypeId':'" + populationType + "','populationCategory':'" + populationCategoryId + "','userId':'" + userId + "','patientId':'" + isPatientSet + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d, "Person Popuation");
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "Person Population Error");
+                        }
+                    });
                     //var personId = 0;
                 }
 
@@ -1195,6 +1196,35 @@
                         }
                     });
                 }
+
+                $( "#personAge" ).keyup(function() {
+                    var personAge = $("#personAge").val();
+                    if (personAge != null && personAge != "") {
+                        var today = new Date();
+                        today.setFullYear(today.getFullYear() - personAge);
+                        var month = (today.getMonth() + 1);
+                        var day = today.getDate();
+                        if (month < 10) {
+                            month = "0" + month;
+                        }
+                        if (day < 10) {
+                            day = "0" + day;
+                        }
+                        var dob = today.getFullYear() + "-" + month + "-"+ day;
+                        
+
+                        var formatter = new Intl.DateTimeFormat("en", { month: "short" }),
+                        month2 = formatter.format(new Date(dob));
+
+                        dob = day + "-" + month2 + "-" + today.getFullYear();
+                        $('#MyDateOfBirth').datepicker('setDate', dob);
+                        personAgeRule();
+                        //console.log(dob);
+                    } else {
+                        $("#PersonDoB").val("");
+                    }
+                    
+                });
 
             });
 

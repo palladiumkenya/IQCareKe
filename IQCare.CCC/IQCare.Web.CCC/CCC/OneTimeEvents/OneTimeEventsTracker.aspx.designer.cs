@@ -148,13 +148,13 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.LinkButton btnOneTimeEventsTracker;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// btnResetOneTimeEvent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton btnResetOneTimeEvent;
         
         /// <summary>
         /// btnClose control.

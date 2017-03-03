@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Baseline;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -15,140 +16,166 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientbaselineService : System.Web.Services.WebService
     {
-        internal string JsonMessage;
-        internal int Result;
+        private string _jsonMessage;
+        private int _result;
         private int _patientId;
         private int _patientMasterVisitId;
-       
+
 
         [WebMethod(EnableSession = true)]
         public string AddPatientTransferStatus(int patientId, int patientMastervisitId, int serviceAreaId,
             DateTime transferinDate,
             DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,
-            string transferInNotes,int userId)
+            string transferInNotes, int userId)
         {
             try
             {
                 _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-               _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
+                _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 PatientTransferInmanager patientTranfersInManager = new PatientTransferInmanager();
-                Result = patientTranfersInManager.AddpatientTransferIn(patientId, _patientMasterVisitId, serviceAreaId,
+                _result = patientTranfersInManager.AddpatientTransferIn(patientId, _patientMasterVisitId, serviceAreaId,
                     transferinDate, treatmentStartDate, currentTreatment, facilityFrom, mflCode, countyFrom,
-                    transferInNotes,userId);
-                if (Result > 0)
+                    transferInNotes, userId);
+                if (_result > 0)
                 {
-                    JsonMessage = "Patient TransferIn status captured successfully!";
+                    _jsonMessage = "Patient TransferIn status Complete!";
                 }
             }
             catch (Exception e)
             {
-                JsonMessage = e.Message + ' ' + e.InnerException;
+                _jsonMessage = e.Message + ' ' + e.InnerException;
             }
 
-            return JsonMessage;
+            return _jsonMessage;
 
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientArtUseHistory(int patientId, int patientMasterVisitId,string[][] artuseStrings, int userId)
+        public string ManagePatientHivDiagnosis(int id,int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,
+            DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, int userId)
         {
-
             try
             {
-                
-                PatientArvHistoryManager patientArtUseHistory=new PatientArvHistoryManager();
-                _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-                _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
-
-
-                for (int i=0;i<=artuseStrings.Length;i++)
+                var patientHivDiagnosis=new PatientHivDiagnosisManager();
+                if (id < 1)
                 {
-                    Result = patientArtUseHistory.AddPatientArtUseHistory(_patientId, _patientMasterVisitId, artuseStrings[i][i], artuseStrings[i][i], artuseStrings[i][i],Convert.ToDateTime(artuseStrings[i][i]),userId);
+                  _result=  patientHivDiagnosis.AddPatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,
+                        enrollmentDate, enrollmentWhoStage, artInitiationDate, userId);
                 }
-                
-                   
-                if (Result > 0)
+                else
                 {
-                    JsonMessage = "Patient ARV Use History Captured Successfully!";
+                    _result = patientHivDiagnosis.UpdatePatientHivDiagnosis(id, patientId, patientMasterVisitId,
+                        hivDiagnosisDate, enrollmentDate, enrollmentWhoStage, artInitiationDate);
+                }
+                if (_result > 0)
+                {
+                    _jsonMessage = "Patient HIV Diagnosis Complete!";
                 }
             }
             catch (Exception e)
             {
-                JsonMessage=e.Message+' '+e.InnerException;
-            }
-            return JsonMessage;
-        }
-
-        [WebMethod]
-        public string AddPatientHIVDiagnosis(int patientId,int patientMasterVisitId, DateTime dateOfHIVDiagnsosi,DateTime dateofEnrollment,int whoStage,DateTime dateofArtInitiation)
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                JsonMessage = e.Message + ' ' + e.InnerException;
+                _jsonMessage = e.Message + ' ' + e.InnerException;
             }
 
-            return JsonMessage;
+            return _jsonMessage;
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientHivDiagnosis(int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate, DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, bool artHistoryUse, bool hivRetest, int hivRetestTypeId, string reasonForNotRetest,int userId)
+        public string ManagePatientArvHistory(int id, int patientId, int patientMasterVisitId, dynamic artuseStrings, int userId)
         {
             try
             {
-                PatientHivEnrollmentBaselineManager patientHivEnrollmentBaseline = new PatientHivEnrollmentBaselineManager();
-                _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-                _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
+                dynamic artuse = JsonConvert.DeserializeObject(artuseStrings);
 
-                patientHivEnrollmentBaseline.AddHivEnrollmentBaseline(_patientId, _patientMasterVisitId,
-                    hivDiagnosisDate, enrollmentDate, enrollmentWhoStage, artInitiationDate, artHistoryUse, hivRetest,
-                    hivRetestTypeId, reasonForNotRetest,userId);
-                if (Result > 0)
+                var patientHivHistory=new PatientArvHistoryManager();
+                if (id < 1)
                 {
-                    JsonMessage = "Patient HIV Enrollment Baseline Information Captured successfully";
+                    foreach (var item in artuse)
+                    {
+                        _result = patientHivHistory.AddPatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment.ToString(),item.purpose.ToString(), item.regimen.ToString(),Convert.ToDateTime(item.dateLastUsed), userId);
+                    }   
+                }
+                else
+                {
+                    foreach (var item in artuse)
+                    {
+                        _result = patientHivHistory.UpdatePatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment, item.purpose, item.regimen, item.dateLastUsed, userId);
+                    }
+                }
+                if (_result > 0)
+                {
+                    _jsonMessage = "Patient ARV History Complete!";
                 }
             }
             catch (Exception e)
             {
-                JsonMessage = e.Message + ' ' + e.InnerException;
+                _jsonMessage = e.Message + ' ' + e.InnerException;
             }
-            return JsonMessage;
+           return _jsonMessage; 
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientArtUseInitiationBaseline(int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant,
-            bool tbInfected, int whoStage, bool breastfeeding, int cd4Count, decimal viralLoad, DateTime viralLoadDate,
-            decimal muac, decimal weight, decimal height, string artCohort, DateTime firstlineStartDate,
-            int startRegimen,int userId)
+        public string ManagePatientBaselineAssessment(int id, int patientId, int patientMasterVisitId, bool hbvInfected,
+            bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac,
+            decimal weight, decimal height, int userId)
         {
             try
             {
-                PatientBaslineAssessmentManager patientArtInitiationBasline=new PatientBaslineAssessmentManager();
-                _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-                _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
-                // Excess arguments provided
-                /*Result = patientArtInitiationBasline.AddArtInitiationbaseline(_patientId, _patientMasterVisitId,
-                    hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, viralLoad, viralLoadDate, muac,
-                    weight, height, artCohort, firstlineStartDate, startRegimen,userId);*/
-                Result = patientArtInitiationBasline.AddArtInitiationbaseline(_patientId, _patientMasterVisitId,
-                hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, muac,
-                weight, height, userId);
-                if (Result > 0)
+
+                var patientBaseline = new PatientBaslineAssessmentManager();
+                if (id < 1)
                 {
-                    JsonMessage = "Patient ART Initiation Baseline Captured Successfully!";
+                    _result = patientBaseline.AddArtInitiationbaseline(id, patientId, patientMasterVisitId, hbvInfected, pregnant,
+                         tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height, userId);
+                }
+                else
+                {
+                    _result = patientBaseline.UpdateArtInitiationbaseline(id, patientId, patientMasterVisitId,
+                        hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height,
+                        userId);
+                }
+                if (_result > 0)
+                {
+                    _jsonMessage = "Patient Baseline Assessment Complete!";
                 }
             }
             catch (Exception e)
             {
-                JsonMessage = e.Message + ' ' + e.InnerException;
+                _jsonMessage = e.Message + ' ' + e.InnerException;
+            }
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string ManagePatientTreatmentInitiation(int id, int patientId, int patientMasterVisitid,
+            DateTime dateStartedOnFirstLine, string cohort, int regimen, decimal baselineViralload,
+            DateTime baselineViralLoadDate, int userId)
+        {
+            try
+            {
+                var patientTreatment=new PatientTreatmentInitiationManager();
+                if (id < 1)
+                {
+                    patientTreatment.AddPatientTreatmentInititation(id, patientId, patientMasterVisitid,
+                        dateStartedOnFirstLine, cohort, regimen, baselineViralload, baselineViralLoadDate, userId);
+                }
+                else
+                {
+                    _result = patientTreatment.UpdatePatientTreatmentInititation(id, patientId, patientMasterVisitid,
+                        dateStartedOnFirstLine, cohort, regimen, baselineViralload, baselineViralLoadDate);
+                }
+                if (_result > 0)
+                {
+                    _jsonMessage = "PatientTreatment Initiation Complete!";
+                }
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message + ' ' + e.InnerException;
             }
 
-            return JsonMessage;
-
+            return _jsonMessage;
         }
     }
 }
