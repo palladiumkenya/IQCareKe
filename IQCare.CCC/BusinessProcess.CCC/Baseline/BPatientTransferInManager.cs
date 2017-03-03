@@ -31,7 +31,7 @@ namespace BusinessProcess.CCC.Baseline
                 patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
                 patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
                 patientTransfer.MflCode = patientTransferIn.MflCode;
-                patientTransfer.TransferInDate = patientTransferIn.TransferInDate;
+                patientTransfer.TransferInDate =Convert.ToDateTime(patientTransferIn.TransferInDate);
                 patientTransfer.TreatmentStartDate = patientTransferIn.TreatmentStartDate;
             }
             _unitOfWork.PatientTransferInRepository.Update(patientTransferIn);

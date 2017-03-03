@@ -23,7 +23,8 @@
              </div>
 
         </div>
-
+     </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
          <div class="wizard" data-initialize="wizard" id="myWizard">
               <div class="steps-container">
 	               <ul class="steps">
@@ -478,7 +479,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1"/>
                                   </div>
                              </div>
                          </div>
@@ -1039,8 +1040,8 @@
 
 
          </div><%-- .wizard--%>   
-
-    </div>
+</div>
+   
     <script type="text/javascript">
         $(document).ready(function(){
 
@@ -1105,24 +1106,22 @@
 
             $("#<%=BaselineWeight.ClientID%>").on('change',
                 function() {
-                    var weight = $(this).val();
-                    var height = $("#<%=BaselineHeight.ClientID%>").val();
-                    var bmi = 0;
-                    if (height > 1) {
-                        bmi = (weight / (height / 100));
-                        $("#<%=BaselineBMI.ClientID%>").text(bmi);
-                    }
+                    var bmi = calcBmi();
+                    $("<%=BaselineBMI.ClientID%>").text(bmi);
                 });
              $("#<%=BaselineWeight.ClientID%>").on('change',
-                function() {
-                    var weight = $(this).val();
-                    var height = $("#<%=BaselineHeight.ClientID%>").val();
-                    var bmi = 0;
-                    if (height > 1) {
-                        bmi = (weight / (height / 100));
-                        $("#<%=BaselineBMI.ClientID%>").text(bmi);
-                    }
+                function() {                
+                    var bmi = calcBmi();
+                    $("<%=BaselineBMI.ClientID%>").text(bmi);
                 });
+
+            function calcBmi()
+            {
+                var weight = document.getElementById('BaselineWeight').value;
+                var height = document.getElementById('BaselineHeight').value/100;
+                var bmi = (weight / (height * height)).toFixed(1); //BMI fomula
+                return bmi;
+            }
 
             /*-- check for future dates -- check if ART start Date >TI Date */
             $('#TIARTStartDate').on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
@@ -1154,6 +1153,26 @@
                     if (futureDate) {
                         toastr.error("future dates NOT allowed !");
                         return false;
+                    }
+                });
+
+            /* date last used disable future dates*/
+            $('#DLUsed').on('changed.fu.datepicker dateClicked.fu.datepicker',
+                function(event, date) {
+                    var dlDate = $('#DLUsed').datepicker('getDate');
+                    var futureDate = moment(dlDate).isAfter(today);
+                    if (futureDate) {
+                        toastr.error("Future dates NOT allowed on Date Last Used Entries!");
+                    }
+                });
+
+            /* limit future dates viralload baseline date*/
+            $("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',
+                function(event, date) {
+                    var dlDate = $('#BaselineViralloadDate').datepicker('getDate');
+                    var futureDate = moment(dlDate).isAfter(today);
+                    if (futureDate) {
+                        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
                     }
                 });
 
@@ -1364,6 +1383,12 @@
                 $("#<%=AddPriorHistory.ClientID%>").removeAttr("disabled");   
             }
 
+            $("#lblBVCoInfection").checkbox('uncheck');
+            $("#lblPregnancy").checkbox('uncheck');
+            $("#lblBreastFeeding").checkbox('uncheck');
+            $("#lblBHIV").checkbox('uncheck');
+            $("#lblTbInfection").checkbox('uncheck');
+
   $("#myWizard")
     .on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
@@ -1472,7 +1497,8 @@
         })
     .on('finished.fu.wizard',
         function (e) {
-            window.open.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');
+            toastr.success("Patient Baseline Assessment and ARV History Complete...");
+            window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');
         });
 
             /*filter regimens*/
@@ -1560,7 +1586,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientBaselineService.asmx/AddPatientTransferStatus",
+                    url: "../WebService/PatientBaselineService.asmx/ManagePatientTransferStatus",
                     data: "{'patientId':'" + ptnId +"','patientMastervisitId':'" +ptnmasterVisitId +"','transferinDate':'" +transferInDate +"','treatmentStartDate':'"+treatmentStartDate+"','serviceAreaId':'" +serviceAreaId +"','currentTreatment':'" +currentTreatment +"','facilityFrom':'" +
                         facilityFrom +"','mflCode':'" +mflCode +"','countyFrom':'" +countyFrom +"','transferInNotes':'" +transferInNotes +"','userId':'" +userId +"'}",
                     contentType: "application/json; charset=utf-8",
@@ -1589,7 +1615,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientBaselineService.asmx/managePatientHivDiagnosis",
+                    url: "../WebService/PatientBaselineService.asmx/ManagePatientHivDiagnosis",
                     data: "{'id':'" +id +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationDate':'" +artInitiationDate + "','userId':'" + userId +"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -1628,7 +1654,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientBaselineService.asmx/managePatientArvHistory",
+                    url: "../WebService/PatientBaselineService.asmx/ManagePatientArvHistory",
                     data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','artuseStrings':'" + jsonArtHistory + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",
@@ -1660,7 +1686,7 @@
                 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientBaselineService.asmx/managePatientBaselineAssessment",
+                    url: "../WebService/PatientBaselineService.asmx/ManagePatientBaselineAssessment",
                     data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitId':'" + ptnmasterVisitId + "','pregnant':'" + pregnancy + "','hbvInfected':'" + bVCoInfection + "','tbInfected':'" + tbInfection + "','whoStage':'" + whostage + "','breastfeeding':'" + breastfeeding + "','cd4Count':'" + cD4Count + "','muac':'" + muac + "','weight':'" + weight + "','height':'" + height + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",
@@ -1689,7 +1715,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientBaselineService.asmx/managePatientTreatmentInitiation",
+                    url: "../WebService/PatientBaselineService.asmx/ManagePatientTreatmentInitiation",
                     data: "{'id':'" + id + "','patientId':'" + ptnId + "','patientMasterVisitid':'" + ptnmasterVisitId + "','dateStartedOnFirstLine':'" + firstlineStartDate + "','cohort':'" + artCohort + "','regimen':'" + startRegimen + "','baselineViralload':'" + viralLoad + "','baselineViralLoadDate':'" + viralLoadDate + "','userId':'" + userId +
                         "'}",
                     contentType: "application/json; charset=utf-8",

@@ -51,10 +51,12 @@ namespace BusinessProcess.CCC.Baseline
 
         public int CheckIfDiagnosisExists(int patientId)
         {
+            int Id = 0;
             var recordExists =
                 _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .Select(x => x.Id);
-            return Convert.ToInt32(recordExists);
+                    .Select(x => x.Id).FirstOrDefault();
+            recordExists=(recordExists<1)?Id=recordExists:Id=0;
+            return Id;
         }
 
     }

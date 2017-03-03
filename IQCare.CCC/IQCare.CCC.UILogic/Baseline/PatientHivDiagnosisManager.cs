@@ -27,7 +27,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 ArtInitiationDate = artInitiationDate,
                 CreatedBy = userId
             };
-            result=(recordId>0)?_patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert):_patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert);
+            result=(recordId>0)? _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert) : _patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert);
             return result;
         }
 
