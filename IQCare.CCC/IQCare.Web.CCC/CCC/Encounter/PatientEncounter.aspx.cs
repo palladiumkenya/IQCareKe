@@ -20,9 +20,11 @@ namespace IQCare.Web.CCC.Encounter
         public string EDDval = "";
         public string nxtAppDateval = "";
         public int genderID = 0;
+        public string gender = "";
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+        private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,9 +38,12 @@ namespace IQCare.Web.CCC.Encounter
             }
 
             // Get Gender
-            PatientLookup gender = _patientLookupmanager.GetGender(PatientId);
-            genderID = gender.Sex;
+            PatientLookup genderId = _patientLookupmanager.GetGenderID(PatientId);
+            if(genderId != null)
+            genderID = genderId.Sex;
 
+            LookupItemView genderType = _lookupItemManager.GetPatientGender(genderID);
+            gender = genderType.ItemName;
 
             if (!IsPostBack)
             {
@@ -48,6 +53,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(onFP, "FPStatus");
                 lookUp.populateDDL(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
+                lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
