@@ -19,6 +19,15 @@ namespace IQCare.Web.CCC.OneTimeEvents
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             this.GetSessionDetails();
 
+            List<LookupItemView> relationship = mgr.GetLookItemByGroup("Relationship");
+            if (relationship != null && relationship.Count > 0)
+            {
+                Relationship.Items.Add(new ListItem("select", "0"));
+                foreach (var k in relationship)
+                {
+                    Relationship.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
 
             List<LookupItemView> sex = mgr.GetLookItemByGroup("Gender");
             if (sex != null && sex.Count > 0)

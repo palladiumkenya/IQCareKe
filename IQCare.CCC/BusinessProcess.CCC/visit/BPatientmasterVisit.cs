@@ -56,19 +56,19 @@ namespace BusinessProcess.CCC.visit
 
         public int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
         {
-            /* for status column 1=checkedin 2=checkedout 3=systemcheckout*/
+
             var visitId =
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
                     x =>
-                        x.PatientId == patientId & DbFunctions.AddHours(x.Start,24) < DateTime.Now &
-                        x.Status == 1 & !x.Active & !x.DeleteFlag & x.End==null).Select(x=> x.Id).FirstOrDefault();
-            if (visitId < 1)
+                          //x.PatientId == patientId & DbFunctions.AddHours(x.Start,-24) <= DateTime.Now &
+                          x.PatientId == patientId & DbFunctions.DiffHours(x.Start, DateTime.Now)<=24 &
+                        x.End==null & !x.Active & x.Status==1).Select(x=> x.Id).FirstOrDefault();
+            if (visitId == 0)
             {
                 _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
                 _unitOfWork.Complete();
                 visitId = patientMasterVisit.Id;
             }
-
             return visitId;
         }
 

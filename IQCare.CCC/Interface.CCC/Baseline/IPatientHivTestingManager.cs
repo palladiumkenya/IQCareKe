@@ -14,5 +14,7 @@ namespace Interface.CCC.Baseline
 
         int UpdatePatientHivTesting(PatientHivTesting p);
 
+        List<PatientHivTesting> GetAll();
+
     }
 }

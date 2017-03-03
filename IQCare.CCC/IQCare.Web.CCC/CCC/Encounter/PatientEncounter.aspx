@@ -1883,13 +1883,13 @@
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
-                } else {
+            } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
                  $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
-                }
+            }
          //.gender validation
          //pregnancy validations
         // var pregnancy = "";
@@ -2129,7 +2129,15 @@
                             //}
                         }
                         else if (data.step === 4) {
-                            savePatientPatientManagement();
+                            $.when(savePatientPatientManagement()).then(function() {
+                                setTimeout(function() {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                                },
+                                    2000);
+                            });
+
+                            //savePatientPatientManagement();
+                            //
                             //if ($("#datastep2").parsley().validate()) {
 
                             //} else {
