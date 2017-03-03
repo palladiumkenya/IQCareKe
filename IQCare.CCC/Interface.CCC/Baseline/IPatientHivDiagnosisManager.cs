@@ -9,5 +9,6 @@ namespace Interface.CCC.Baseline
         int UpdatePatientHivDiagnosis(PatientHivDiagnosis patientHivDiagnosis);
         int DeletePatientHivDiagnosis(int id);
         List<PatientHivDiagnosis> GetPatientHivDiagnosis(int patientId);
+        int CheckIfDiagnosisExists(int patientId);
     }
 }

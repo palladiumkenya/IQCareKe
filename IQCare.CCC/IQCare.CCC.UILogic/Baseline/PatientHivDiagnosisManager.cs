@@ -9,9 +9,13 @@ namespace IQCare.CCC.UILogic.Baseline
     public class PatientHivDiagnosisManager
     {
         private readonly IPatientHivDiagnosisManager _patientHivDiagnosisManager = (IPatientHivDiagnosisManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivDiagnosisManager, BusinessProcess.CCC");
+        private int recordId=0;
+        private int result = 0;
 
-        public int AddPatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,DateTime artInitiationDate,int userId)
+        public int ManagePatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,DateTime artInitiationDate,int userId)
         {
+            recordId = _patientHivDiagnosisManager.CheckIfDiagnosisExists(patientId);
+            
             var patienHivDiagnosisInsert = new PatientHivDiagnosis
             {
                 Id=0,
@@ -23,23 +27,23 @@ namespace IQCare.CCC.UILogic.Baseline
                 ArtInitiationDate = artInitiationDate,
                 CreatedBy = userId
             };
-
-            return _patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert);
+            result=(recordId>0)?_patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert):_patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert);
+            return result;
         }
 
-        public int UpdatePatientHivDiagnosis(int id, int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate)
-        {
-            var patientHivDiagnosisUpdate= new PatientHivDiagnosis
-            {
-                Id = id,
-                HivDiagnosisDate = hivDiagnosisDate,
-                EnrollmentDate = enrollmentDate,
-                EnrollmentWhoStage = enrollmentWhoStage,
-                ArtInitiationDate = artInitiationDate
-            };
+        //public int UpdatePatientHivDiagnosis(int id, int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate)
+        //{
+        //    var patientHivDiagnosisUpdate= new PatientHivDiagnosis
+        //    {
+        //        Id = id,
+        //        HivDiagnosisDate = hivDiagnosisDate,
+        //        EnrollmentDate = enrollmentDate,
+        //        EnrollmentWhoStage = enrollmentWhoStage,
+        //        ArtInitiationDate = artInitiationDate
+        //    };
 
-            return _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patientHivDiagnosisUpdate);
-        }
+        //    return _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patientHivDiagnosisUpdate);
+        //}
 
         public int DeletePatientHivDiagnosis(int id)
         {

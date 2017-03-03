@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.WebService
 
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientTransferStatus(int patientId, int patientMastervisitId, int serviceAreaId,
+        public string ManagePatientTransferStatus(int patientId, int patientMastervisitId, int serviceAreaId,
             DateTime transferinDate,
             DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,
             string transferInNotes, int userId)
@@ -33,10 +33,8 @@ namespace IQCare.Web.CCC.WebService
                 _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
                 _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
-                PatientTransferInmanager patientTranfersInManager = new PatientTransferInmanager();
-                _result = patientTranfersInManager.AddpatientTransferIn(patientId, _patientMasterVisitId, serviceAreaId,
-                    transferinDate, treatmentStartDate, currentTreatment, facilityFrom, mflCode, countyFrom,
-                    transferInNotes, userId);
+                var patientTranfersInManager = new PatientTransferInmanager();
+                _result = patientTranfersInManager.ManagePatientTransferIn(patientId, _patientMasterVisitId, serviceAreaId,transferinDate, treatmentStartDate, currentTreatment, facilityFrom, mflCode, countyFrom,transferInNotes, userId);
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient TransferIn status Complete!";
@@ -57,17 +55,9 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                var patientHivDiagnosis=new PatientHivDiagnosisManager();
-                if (id < 1)
-                {
-                  _result=  patientHivDiagnosis.AddPatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,
-                        enrollmentDate, enrollmentWhoStage, artInitiationDate, userId);
-                }
-                else
-                {
-                    _result = patientHivDiagnosis.UpdatePatientHivDiagnosis(id, patientId, patientMasterVisitId,
-                        hivDiagnosisDate, enrollmentDate, enrollmentWhoStage, artInitiationDate);
-                }
+                var patientHivDiagnosis = new PatientHivDiagnosisManager();
+
+                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationDate, userId);
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient HIV Diagnosis Complete!";
@@ -122,19 +112,12 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-
                 var patientBaseline = new PatientBaslineAssessmentManager();
-                if (id < 1)
-                {
-                    _result = patientBaseline.AddArtInitiationbaseline(id, patientId, patientMasterVisitId, hbvInfected, pregnant,
-                         tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height, userId);
-                }
-                else
-                {
-                    _result = patientBaseline.UpdateArtInitiationbaseline(id, patientId, patientMasterVisitId,
-                        hbvInfected, pregnant, tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height,
-                        userId);
-                }
+
+                _result = patientBaseline.ManageArtInitiationbaseline(id, patientId, patientMasterVisitId, hbvInfected,
+                    pregnant,
+                    tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height, userId);
+
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient Baseline Assessment Complete!";
@@ -154,17 +137,8 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                var patientTreatment=new PatientTreatmentInitiationManager();
-                if (id < 1)
-                {
-                    patientTreatment.AddPatientTreatmentInititation(id, patientId, patientMasterVisitid,
-                        dateStartedOnFirstLine, cohort, regimen, baselineViralload, baselineViralLoadDate, userId);
-                }
-                else
-                {
-                    _result = patientTreatment.UpdatePatientTreatmentInititation(id, patientId, patientMasterVisitid,
-                        dateStartedOnFirstLine, cohort, regimen, baselineViralload, baselineViralLoadDate);
-                }
+                var patientTreatment = new PatientTreatmentInitiationManager();
+                patientTreatment.ManagePatientTreatmentInititation(id, patientId, patientMasterVisitid,dateStartedOnFirstLine, cohort, regimen, baselineViralload, baselineViralLoadDate, userId);
                 if (_result > 0)
                 {
                     _jsonMessage = "PatientTreatment Initiation Complete!";

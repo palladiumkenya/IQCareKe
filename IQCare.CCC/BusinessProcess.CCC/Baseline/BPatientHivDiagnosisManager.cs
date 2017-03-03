@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -21,8 +22,19 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdatePatientHivDiagnosis(PatientHivDiagnosis patientHivDiagnosis)
         {
-           _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientHivDiagnosis);
-            return Result = _unitOfWork.Complete();
+            var patientDiagnosis =
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(
+                    x => x.PatientId == patientHivDiagnosis.PatientId & !x.DeleteFlag).FirstOrDefault();
+            if (patientDiagnosis != null)
+            {
+                patientDiagnosis.ArtInitiationDate = patientHivDiagnosis.ArtInitiationDate;
+                patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
+                patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
+                patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientHivDiagnosis);
+                Result = _unitOfWork.Complete();
+            }
+            return Result;
         }
 
         public int DeletePatientHivDiagnosis(int id)
@@ -36,5 +48,14 @@ namespace BusinessProcess.CCC.Baseline
         {
             return _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId).ToList();
         }
+
+        public int CheckIfDiagnosisExists(int patientId)
+        {
+            var recordExists =
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.Id);
+            return Convert.ToInt32(recordExists);
+        }
+
     }
 }
