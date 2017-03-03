@@ -71,7 +71,7 @@ namespace IQCare.Web.CCC.Encounter
 
                 lookUp.populateDDL(regimenLine, "CTXAdherence");
 
-                if (visitId > 0)
+                if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
 
 
@@ -86,7 +86,7 @@ namespace IQCare.Web.CCC.Encounter
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(visitId.ToString(), Session["PatientId"].ToString());
+            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientId"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;

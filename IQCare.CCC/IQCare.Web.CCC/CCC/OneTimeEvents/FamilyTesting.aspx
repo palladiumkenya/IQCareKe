@@ -170,7 +170,7 @@
                                 <label class="control-label pull-left">Baseline HIV Status</label>
                             </div>
                             <div class="col-md-12">
-                                <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" required="true"></select>
+                                <select runat="server" id="BaselineHIVStatus" class="form-control input-sm" required="true" ClientIDMode="Static" onChange="BaselineEnabled();" ></select>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -280,7 +280,7 @@
                                 <label class="control-label pull-left">HIV Testing Results</label>
                             </div>
                             <div class="col-md-12">
-                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
+                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" onChange="HivEnabled();" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -389,7 +389,7 @@
                                 <label class="control-label pull-left">CCC Referal</label>
                             </div>
                             <div class="col-md-12">
-                                <asp:DropDownList ID="CccReferal" runat="server" AutoPostBack="False" CssClass="form-control input-sm" onChange="CccEnabled();">
+                                <asp:DropDownList ID="CccReferal" runat="server" AutoPostBack="False" CssClass="form-control input-sm" onChange="CccEnabled();" ClientIDMode="Static">
                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                     <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                 </asp:DropDownList>
@@ -399,7 +399,7 @@
                             <div class="col-md-12">
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" id="cccnum">
                                 <input id="cccNumber" class="form-control input-sm" type="text" runat="server" enabled="False" />
                             </div>
                         </div>
@@ -523,12 +523,57 @@
                     var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
-                    var table = "<tr><td align='left'></td><td align='left'>" + name + "</td><td align='left'>" + relationship + "</td><td align='left'>" + baselineHivStatus + "</td><td align='left'>" + moment(baselineHivStatusDate).format('DD-MMM-YYYY') + "</td><td align='left'>" + hivTestingresult + "</td><td align='left'>" + hivTestingresultDate + "</td><td align='left'>" + cccreferal + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                    $("#tblFamilyTesting>tbody:first").append('' + table + '');
-                    var testing = { firstName: firstName, middleName: middleName, lastName: lastName, sex: sex, dob: dob,  relationshipId: relationshipId, baselineHivStatusId: baselineHivStatusId, baselineHivStatusDate: baselineHivStatusDate, hivTestingresultId: hivTestingresultId, hivTestingresultDate: hivTestingresultDate, cccreferal: cccreferal, cccReferalNumber: cccReferalNumber};                
-                    familyMembers.push(testing);
-                    resetElements();
-                    e.preventDefault();
+                    var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
+                    if (moment('' + dob + '').isAfter()) {
+                        toastr.error("Date of birth cannot be a future date.");
+                        return false;
+                    }
+                    if (moment('' + dob + '').isAfter(previousDate)) {
+                        toastr.error("Date of birth cannot be today.");
+                        return false;
+                    }
+                    if (moment('' + baselineHivStatusDate + '').isAfter()) {
+                        toastr.error("Baseline HIV status date cannot be a future date.");
+                        return false;
+                    }
+                    if (moment('' + hivTestingresultDate + '').isAfter()) {
+                        toastr.error("HIV testing result date cannot be a future date.");
+                        return false;
+                    } else {
+                        var table = "<tr><td align='left'></td><td align='left'>" +
+                            name +
+                            "</td><td align='left'>" +
+                            relationship +
+                            "</td><td align='left'>" +
+                            baselineHivStatus +
+                            "</td><td align='left'>" +
+                            moment(baselineHivStatusDate).format('DD-MMM-YYYY') +
+                            "</td><td align='left'>" +
+                            hivTestingresult +
+                            "</td><td align='left'>" +
+                            hivTestingresultDate +
+                            "</td><td align='left'>" +
+                            cccreferal +
+                            "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                        $("#tblFamilyTesting>tbody:first").append('' + table + '');
+                        var testing = {
+                            firstName: firstName,
+                            middleName: middleName,
+                            lastName: lastName,
+                            sex: sex,
+                            dob: dob,
+                            relationshipId: relationshipId,
+                            baselineHivStatusId: baselineHivStatusId,
+                            baselineHivStatusDate: baselineHivStatusDate,
+                            hivTestingresultId: hivTestingresultId,
+                            hivTestingresultDate: hivTestingresultDate,
+                            cccreferal: cccreferal,
+                            cccReferalNumber: cccReferalNumber
+                        };
+                        familyMembers.push(testing);
+                        resetElements();
+                        e.preventDefault();
+                    }
                 } else {
                     return false;
                 }
@@ -604,10 +649,26 @@
         }
 
         function CccEnabled() {
-            if ($("#<%=CccReferal.ClientID%>").val() === "False") {
-                $("#<%=cccNumber.ClientID%>").disabled = 'true';
+            if ($("#CccReferal").val() === 'False') {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
             } else {
-                $("#<%=cccNumber.ClientID%>").disabled = 'false';
+                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+            }
+        }
+
+        function BaselineEnabled() {
+            if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
+            } else {
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',false);
+            }
+        }
+
+        function HivEnabled() {
+            if ($("#hivtestingresult :selected").text() === "Never Tested") {
+                $("#<%=HIVTestingDate.ClientID%>").prop('disabled',true);
+            } else {
+                $("#<%=HIVTestingDate.ClientID%>").prop('disabled',false);
             }
         }
 
