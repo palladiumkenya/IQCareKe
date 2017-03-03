@@ -254,8 +254,8 @@
                     var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
                     var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
 
-                    if (enrollmentNo.length < 5 || enrollmentNo.length > 5) {
-                        toastr.error("error", "Enrollment number should be more than Five Characters");
+                    if (identifier == "CCC Registration Number" && (enrollmentNo.length < 5 || enrollmentNo.length > 5)) {
+                        toastr.error("error", "Enrollment number should be Five Characters");
                         return false;
                     }
 

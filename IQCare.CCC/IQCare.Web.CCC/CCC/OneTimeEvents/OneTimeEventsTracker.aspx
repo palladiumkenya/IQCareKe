@@ -17,7 +17,7 @@
                        </div>
 
                          <div class="col-md-12 form-group">
-                              <div class="col-md-2 label label-success"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                              <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                               <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                               <div class="col-md-7">
                                   <div class="col-md-12">
@@ -25,7 +25,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage1">
                                                <div class="input-group">
-                                                    <input  class="form-control input-sm" id="Stage1Date" type="text" data-parsley-required="true" runat="server" ClientIDMode="Static" />
+                                                    <input  class="form-control input-sm" id="Stage1Date" type="text" runat="server" ClientIDMode="Static" />
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -274,8 +274,14 @@
                                            </div>
                                        </div>
                                   </div>
-                                  
-                                  <div class="col-md-12">
+
+                              </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-1"><label class="control-label pull-left">Sex Partner</label></div>
+                            <div class="col-md-7">
+                                <div class="col-md-12">
                                        <div class="col-md-5"><label class="control-label pull-left">Sex Partner Disclose Date</label></div>
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="SexPartner">
@@ -359,24 +365,18 @@
                                            </div>
                                        </div>
                                   </div>
-
-                              </div><%-- .col-md-7--%>
-                              
-
+                            </div>
                             
-
-                  
-
-                        </div><%-- .col-md-12--%>
+                        </div>
 
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 label label-default" ><label class="pull-left"><small>INH Prophylaxis</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2" ><label class="pull-left"><small>INH Prophylaxis</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"><label class="control-label pull-left"> Prophylaxis</label></div>
                             <div class="col-md-7">
                                  <div class="col-md-12 form-group">
                                       <div class="col-md-5"><label class="control-label pull-left"> INH Start Date</label></div>
                                       <div class="col-md-7">
-                                          <div class="datepicker fuelux form-group" id="StartDate">
+                                          <div class="datepicker fuelux form-group" id="INHStartDate">
                                                <div class="input-group">
                                                                                   <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
                                                                                     <asp:TextBox runat="server" ID="INHStartDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
@@ -565,7 +565,7 @@
                         </div><%--.col-md-12--%>
 
                         <div class="col-md-12 form-group">
-                            <div class="col-md-2 label label-success" ><label class="pull-left"><small >Vaccination Adult</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
+                            <div class="col-md-2" ><label class="pull-left"><small >Vaccination Adult</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"></div>
                             <div class="col-md-7">
                                  <div class="col-md-12">
@@ -590,11 +590,6 @@
                                       </div>
                                  </div>
                             </div><%-- .col-md-7--%>
-                        </div><%-- .col-md-12--%>
-
-                        <div class="col-md-12 form-group">
-                            <div class="col-md-2 label label-success"><label class="pull-left"><small>Vaccination Child</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
-                            <div class="col-md-1"></div> 
                         </div><%-- .col-md-12--%>
                         
                       <div class="col-md-12">
@@ -665,14 +660,14 @@
             $('#Stage3').datepicker();
             $('#SexPartner').datepicker();*/
 
-            $('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
+            /*$('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
                 if ($('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val() == "CompletionYes") {
                     $("#ISCompletionDate").show();
                 } else {
                     $("#ISCompletionDate").hide();
                     $("#INHCompletionDate").val('');
                 }
-            });
+            });*/
 
             /*Lookup vaccines*/
             var vaccinesList = new Array();
@@ -814,6 +809,13 @@
                     var INHCompletion = null;
                     var INHCompletionDateValue = "";
 
+                    var Stage1 = $('#Stage1').datepicker('getDate');
+                    var Stage2 = $("#Stage2").datepicker('getDate');
+                    var Stage3 = $("#Stage3").datepicker('getDate');
+                    var SexPartner = $("#SexPartner").datepicker('getDate');
+                    var CompletionDate = $("#CompletionDate").datepicker('getDate');
+                    var INHStartDate = $("#INHStartDate").datepicker('getDate');
+
                     //alert(document.getElementById("CompletionNo").Value);
                     //alert(document.getElementById("CompletionYes").Value);
                     var INH = $('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val();
@@ -833,6 +835,37 @@
                     if ($("#vaccinationotheradult").val() != null) {
                         vaccineAdult.push($("#vaccinationotheradult").val());
                     }
+
+                    if (moment('' + Stage1 + '').isAfter()) {
+                        toastr.error("Stage1. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + Stage2 + '').isAfter()) {
+                        toastr.error("Stage2. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + Stage3 + '').isAfter()) {
+                        toastr.error("Stage3. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + SexPartner + '').isAfter()) {
+                        toastr.error("SexPartner. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + CompletionDate + '').isAfter()) {
+                        toastr.error("CompletionDate. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + INHStartDate + '').isAfter()) {
+                        toastr.error("INHStartDate. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
 
                     //console.log(vaccineAdult);
                     addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult);
@@ -857,28 +890,29 @@
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
-                        toastr.success(response.d, "Patient Enrollment");
+                        toastr.success(response.d, "One Time Events Tracker");
                     },
                     error: function (response) {
                         //generate('error', response.d);
-                        toastr.error(response.d, "Patient Enrollment");
+                        toastr.error(response.d, "One Time Events Tracker");
                     }
                 });
             }
         });
 
-        $('#Stage1').datepicker({
-            allowPastDates: true,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-        });
+            $('#Stage1').datepicker({
+                date: null,
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+                restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
 
-        $('#Stage2').datepicker({
-            date: null,
-            allowPastDates: true,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-        });
+            $('#Stage2').datepicker({
+                date: null,
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+                restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+            });
 
         $('#Stage3').datepicker({
             date: null,
@@ -894,7 +928,7 @@
             restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
-        $("#StartDate").datepicker({
+        $("#INHStartDate").datepicker({
             date: null,
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
