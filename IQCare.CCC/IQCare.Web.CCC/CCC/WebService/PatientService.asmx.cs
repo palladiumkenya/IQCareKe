@@ -277,9 +277,9 @@ namespace IQCare.Web.CCC.WebService
         public string Name { get; set; }
         public string Relationship { get; set; }
         public string BaseLineHivStatus { get; set; }
-        public DateTime BaseLineHivStatusDate { get; set; }
+        public DateTime ? BaseLineHivStatusDate { get; set; }
         public string HivStatusResult { get; set; }
-        public DateTime HivStatusResultDate { get; set; }
+        public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
     }
 }

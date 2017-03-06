@@ -53,6 +53,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(onFP, "FPStatus");
                 lookUp.populateDDL(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
+                lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");

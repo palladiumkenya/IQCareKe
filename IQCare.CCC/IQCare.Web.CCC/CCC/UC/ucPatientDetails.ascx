@@ -5,7 +5,7 @@
                  <div class="col-md-12">
                     <div class="col-md-12"><i class="fa fa-user fa-4x pull-left text-info" aria-hidden="true"></i></div>
                     <div class="col-md-12">
-                        <small class="pull-left fa-2x"><asp:Label runat="server" CssClass=" label label-info" ID="lblEnrollmentDate">Visit</asp:Label></small>
+                        <small class="pull-left fa-lg"><asp:Label runat="server" CssClass=" label label-info" ID="lblEnrollmentDate">Visit</asp:Label></small>
                     </div>
                 </div>
             </div>

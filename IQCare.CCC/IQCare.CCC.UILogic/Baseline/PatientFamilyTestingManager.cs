@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Common;
@@ -37,14 +38,21 @@ namespace IQCare.CCC.UILogic.Baseline
             };
             _personRelationshipManager.AddPersonRelationship(relationship);
 
+            DateTime ? baselineDate = p.BaselineHivStatusDate;
+            if (baselineDate == DateTime.MinValue)
+                baselineDate = null;
+            DateTime? testingDate = p.HivTestingResultsDate;
+            if (testingDate == DateTime.MinValue)
+                testingDate = null;
+
             PatientHivTesting familyTesting = new PatientHivTesting()
             {
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 BaselineResult = p.BaseLineHivStatusId,
-                BaselineDate = p.BaselineHivStatusDate,
+                BaselineDate = baselineDate,
                 TestingResult = p.HivTestingResultsId,
-                TestingDate = p.HivTestingResultsDate,
+                TestingDate = testingDate,
                 ReferredToCare = p.CccReferal,
                 CccNumber = p.CccReferaalNumber
             };
