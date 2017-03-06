@@ -39,7 +39,7 @@ namespace IQCare.CCC.UILogic
 
                     int returnValue;
                     int returnLabOrderSuccess;
-                    int returnLabDetailsSuccess;
+                    var pending = "Pending";
 
 
                     for (int i = 0; i < data.Count; i++)
@@ -49,9 +49,10 @@ namespace IQCare.CCC.UILogic
                             PatientId = patient_ID,
                             PatientMasterVisitId = patientMasterVisitId,
                             LabName = data[i].labType,
-                            Reasons = data[i].orderReason,                           
-                            Results = data[i].labNotes,
+                            Reasons = data[i].orderReason, 
+                            Results = pending,
                             SampleDate = data[i].labOrderDate
+                            //LabNotes =data[i].labNotes --take to clinical notes 
 
                         };
                         returnValue = _mgr.AddPatientLabTracker(labTracker);

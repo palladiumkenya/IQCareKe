@@ -248,6 +248,7 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
@@ -271,8 +272,12 @@
     <Content Include="Content\fuelux\js\fuelux.min.js" />
     <Content Include="Content\fuelux\js\npm.js" />
     <Content Include="Content\css\jquery.validate.css" />
+    <Content Include="Content\js\awesomplete.js" />
+    <Content Include="Content\js\highcharts.js" />
     <Content Include="Content\js\jquery.validate.js" />
     <Content Include="Content\js\bootstrap-datepicker.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
+    <Content Include="Content\js\vl_linegraph.js" />
     <Content Include="Content\js\parsley-fields-comparison-validators.js" />
     <Content Include="Content\noty\css\animate.css" />
     <Content Include="Content\noty\css\buttons.css" />

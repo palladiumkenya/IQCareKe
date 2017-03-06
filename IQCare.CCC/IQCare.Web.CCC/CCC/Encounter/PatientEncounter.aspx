@@ -4,15 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <script src="../Scripts/js/PatientEncounter.js"></script>
-       
-    <!--Using Awesomplete for auto complete  --->
-     <link href="../Scripts/css/awesomplete.css" rel="stylesheet" />
-     <script src="../Scripts/js/awesomplete.js"></script>  
   
-    <!-- Js for High charts   -->
-    <script src="../Scripts/js/highcharts.js"></script>
-    <script src="../Scripts/js/vl_linegraph.js"></script>
-   
      <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
             </div>
@@ -302,18 +294,12 @@
                                                             <div class="col-md-12"><hr /></div>
                                                          <div class="col-md-12">
                                                              <div class="col-md-4">
-                                                                 <div class="col-md-12 form-group">
-                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
-                                                                     <div class="col-md-12">
-                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" onChange="EnableDisableEDD();" />
-                                                                     </div>
-                                                                 </div>
                                                                   <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">Female LMP</label></div>
                                                                       <div class="col-md-12">
                                                                           <div class="datepicker fuelux" id="FemaleLMP">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" onkeyup="EnableDisableEDD();" onblur="EnableDisableEDD();" />
+                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -392,7 +378,12 @@
                                                                     </div>
                                                                       </div>
                                                                   </div>
-                                                                 
+                                                                 <div class="col-md-12 form-group">
+                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                     </div>
+                                                                 </div>
                                                                  <div class="col-md-12 form-group">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">EDD</label></div>
                                                                      <div class="col-md-12">
@@ -1057,9 +1048,9 @@
                                                 <thead>
                                                     <tr >
                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                         
                                                     </tr>
@@ -1075,9 +1066,9 @@
                                                 <thead>
                                                     <tr >
                                                           <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                         
                                                           
@@ -1098,18 +1089,22 @@
                 </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                                               
+                            <%--<div class="col-md-12" style="padding-top: 1%">
+                              <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
+                            </div>    -->--%>
+                            
+                       
                            
-                     <div class="col-md-6 col-sx-12 col-sm-12">  
-                          <div class="col-md-12 bs-callout bs-callout-danger">
+                        <div class="col-md-6">  
+                         <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
                                                     <tr >
                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Lab Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Order Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Order Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                          </tr>
                                                 </thead>
@@ -1118,8 +1113,9 @@
                                                 </table>
                             </div>    
         
+                
 
-                         <div class="col-md-12 bs-callout bs-callout-info">
+                <div class="col-md-12 bs-callout bs-callout-info">
                          <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
@@ -1144,37 +1140,32 @@
 
                        </div>
                            
-                     <div class="col-md-6 col-xs-12 col-sm-12 form-group">
-                         
-                         <div class="col-md-12 bs-callout bs-callout-success">
-<%--                              <div class="panel panel-default" style="margin-top:2%">
-                                              
-                                              <div class="panel-body">--%>
-                                                 <div class="col-md-12 form-group"><label class="control-label pull-left text-primary">Order Lab Test(s)</label></div>
-                                                  <div class="col-md-12"><hr style="margin-top: 2px" /></div>
+                       <div class="col-md-6">
+                         <div class="col-md-12">
+                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                              <div class="panel-heading"></div>
+                                              <div class="panel-body">
+                                               
                                                   <div class="col-md-12 form-group">
-                                                      <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
-                                                      <div class="col-md-8">                               
-                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>                                                      
-                                                      </div>
-                                                  </div>
-
-                                                  <div class="col-md-12 form-group">
-                                                       <div class="col-md-4"><label class="control-label pull-left">Reason</label></div>
+                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
                                                       <div class="col-md-8">
-                                                          <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
-                                                         <asp:ListItem Text="Baseline" Value="2" />
-                                                         <asp:ListItem Text="Routine" Value="3" />
-                                                         <asp:ListItem Text="Confirmatory" Value="4" />
-                                                         <asp:ListItem Text="Suspected drug resistance" Value="5" />
-                                                         <asp:ListItem Text="Other" Value="5" />
-                                                        </asp:DropDownList>
+                                                         
+                                                          <asp:TextBox runat="server" Width="200" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                       </div>
                                                   </div>
-                                                  
                                                   <div class="col-md-12 form-group">
+                                                                      <div class="col-md-4"><label class="control-label  pull-left">Reason</label></div>
+                                                                     <div class="col-md-8">
+                                                                         <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                     </div>
+                                                         </div>
+                                                  
+                                                 <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
                                                       <div class="col-md-8">
+                                                         
                                                           <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
@@ -1184,7 +1175,7 @@
                                         <div class="col-md-4">
                                             <label class="control-label pull-left">Date</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
@@ -1281,7 +1272,7 @@
             
 
                                  
-                                                  <div class="col-md-12 form-group">
+                                                  <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
                                             <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
@@ -1308,14 +1299,17 @@
                                             </div>
                                                               
    
-                                                               <%-- </div>--%>
-                             </div><%-- panel body--%>
-                        </div>     
-                    
-                     <div class="col-md-12"><hr/></div>
-                             <div class="col-md-7"></div>
-                             <div class="col-md-5">
-                                             <div class="col-md-3">    
+                                                                </div>
+                                                        </div>
+                                                    </div>     
+                                                   </div>
+                                             </div>
+                           
+                                        <div class="col-md-12"><hr/></div>
+                                        <div class="col-md-7"></div>
+                                         <div class="col-md-5">
+                                             <div class="col-md-3">
+                                                 
                                                  <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
@@ -1328,13 +1322,13 @@
                                                  <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
-             </div>
-                         .     
-                     
                                    
                             <%--</div>--%>
                         
-                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                      
+                      </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
+                  
+               <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
                      <div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
                           </div>
@@ -1373,7 +1367,7 @@
                                                              
                                                               <div class="col-md-4"><label class="control-label pull-left">Regimen Line </label></div>     
                                                               <div class="col-md-6  pull-right">
-                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static"  onchange="getPharmacyDrugList();"/>
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimLine" ClientIDMode="Static"/>
                                                               </div>
                                                               <div class="col-md-2 "></div>
                                                          </div>  
@@ -1384,7 +1378,7 @@
                                                                          
                                                                               <div class="col-md-3"><label class="control-label pull-left">Select Drug (s) </label></div>
                                                                               <div class="col-md-7">
-                                                                                  <input type="text" data-provide="typeahead" id="txtSelectDrug" class="form-control input-sm" placeholder="type to search...." runat="server" />
+                                                                                  <input type="text" class="form-control input-sm" placeholder="type to search...." runat="server" />
                                                                               </div>
                                                                              <div class="col-md-2">
                                                                                <asp:LinkButton runat="server" CssClass="btn btn-warning btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton> 
@@ -1428,16 +1422,12 @@
                                 </div><%-- .panel--%>
 
                           </div><%-- .col-md-12--%>
-                </div><!-- .pharmacy-->
-                      
-              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
-                  
-              
+                      </div><!-- .pharmacy-->
 
                        <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
                        </div>--%><!-- .history-->
-                 <%--</div>--%><!-- .tab-content-->
+                 </div><!-- .tab-content-->
            </div> 
 
     <!-- ajax begin -->
@@ -1460,7 +1450,7 @@
            allowPastDates: true,
            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
      });
-
+     var LabOrderList = new Array();
         
       $.ajax({
                type: "POST",
@@ -1560,7 +1550,7 @@
                        var sampleDate = day + "/" + month + "/" + year;
                        // alert(date);
 
-                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    });
 
                    $('#tblVL').append(table);
@@ -1597,7 +1587,7 @@
                     var sampleDate = day + "/" + month + "/" + year;
                     // alert(date);
 
-                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
+                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                 });
 
                 $('#tblVlpending').append(table);
@@ -1642,14 +1632,13 @@
            
         });
       
-       var lorderType= new Array();
-       var lorderReason= new Array();
-       var lorderDate= new Array();
-       var lorderNotes= new Array();
+      
          // Load lab order
        $("#btnAddLab").click(function (e) {
 
-           var labOrderDate = $("#<%=LabDate.ClientID%>").val();
+           var labOrderFound = 0;
+
+               var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
                var labOrderReason = $("#orderReason").find(":selected").text();
                var labOrderNotes = $("#labNotes").val();
@@ -1662,22 +1651,26 @@
                    toastr.error("Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
-                      
-               if (labOrderDate < 1) {
+
+               labOrderFound = $.inArray("" + labType + "", LabOrderList);
+
+           if (labOrderFound > -1) {
+
+               toastr.error("error", labType + " Lab selected already exists in the List");
+               return false; // message box herer
+           }
+           if (labOrderDate < 1) {
                    toastr.error("Please input a date for the lab order");
                    return false;
                }
 
                else {
 
-                   lorderType.push("" + labType + "");
-                   lorderReason.push("" + labOrderReason + "");
-                   lorderDate.push("" + labOrderDate + "");
-                   lorderNotes.push("" + labOrderNotes + "");
-
+                  
+               LabOrderList.push("" + labType + "");
                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
-                  
+                   resetLabOrder();
                }
 
                e.preventDefault();
@@ -1856,14 +1849,14 @@
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#NextAppDate').datepicker({
-                allowPastDates: false,
+                allowPastDates: true,
                 date: getNxtAppDateVal,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#vaccineDate').datepicker({
                 allowPastDates: true,
-                date: "",
+                date: 0,
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -1883,16 +1876,16 @@
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
-            } else {
+                } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
                  $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
-            }
+                }
          //.gender validation
          //pregnancy validations
-        // var pregnancy = "";
+       
          var pregnant = "Pregnant";
 
          var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
@@ -1910,7 +1903,7 @@
 
                 }
          //.pregnancy validation
-            var advEventsTable = $('#dtlAdverseEvents').DataTable({
+        var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
                     type: "POST",
                     url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
@@ -2129,15 +2122,7 @@
                             //}
                         }
                         else if (data.step === 4) {
-                            $.when(savePatientPatientManagement()).then(function() {
-                                setTimeout(function() {
-                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
-                                },
-                                    2000);
-                            });
-
-                            //savePatientPatientManagement();
-                            //
+                            savePatientPatientManagement();
                             //if ($("#datastep2").parsley().validate()) {
 
                             //} else {
@@ -2245,6 +2230,27 @@
                     }
                 }
                 catch (ex) {  }
+
+               // console.log(visitDate);--date
+               // console.log(visitScheduled);-->1
+               // console.log(visitBy);-->1119
+               // console.log(complaints);   -->headache
+               // console.log(tbscreening);  -->35
+                //console.log(nutritionscreening);-->38
+                //console.log(LMP);-->02-Mar-2017
+                //console.log(pregStatus);  -->92
+                //console.log(nutritionscreening); -->38
+               // console.log(EDD);-->02-Mar-2017
+                //console.log(ANCProfile); -->1
+               // console.log(onFP);-->1
+                console.log(FPMethod);
+                //console.log(CaCx);
+                //console.log(STIScreening);
+                //console.log(STIPartnerNotification);
+               // console.log(adverseEventsArray);
+
+
+
 
                     $.ajax({
                         type: "POST",
@@ -2399,8 +2405,6 @@
                 });
             }
 
-         
-
 
             function getCheckBoxListItemsChecked(elementId) {
                 var elementRef = document.getElementById(elementId);
@@ -2432,45 +2436,94 @@
          
   });
       
-       function getPharmacyDrugList() {
-           //var input = document.getElementById("txtSelectDrug");
-           //var awesomplete = new Awesomplete(input, {
-           //    minChars: 1,
-           //    autoFirst: true
-           //});
-             
-               $.ajax({
-                   type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/GetDrugList",
-                   data: "{'regimenLine':'" + 0 + "'}",
-                   contentType: "application/json; charset=utf-8",
-                   dataType: "json",
-                   success: function (response) {
-                       var drugListData = response.d;
-                       //alert(serverData.length);
-
-                       var drugList = [];
-                       for (var i = 0; i < drugListData.length; i++) {
-
-                           drugList.push(drugListData[i][1]);
-                           alert(drugListData[i][0] + " " + drugListData[i][1])
-                       }
-
-                       //awesomplete.list = drugList;
-                       $( "#ctl00_IQCareContentPlaceHolder_txtSelectDrug" ).autocomplete({
-                           source: drugList
-                       });
-
-                       toastr.success(response.d, "Drug List");
-                   },
-                   error: function (response) {
-                       alert(response.d);
-                       toastr.error(response.d, "Drug List Error");
-                   }
-               });
-               
-       }
    
 </script>
     
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </asp:Content>
