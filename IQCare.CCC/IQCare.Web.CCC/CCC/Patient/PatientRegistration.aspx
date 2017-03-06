@@ -376,7 +376,7 @@
                                <div class="col-md-2">
                                     <div class="col-md-12"><label class="required control-label pull-left">Mobile No.</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|+?255|+?256|+?252|+?211|+?251|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
+                                         <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
                                     </div>         
                                </div>
                                
@@ -396,8 +396,16 @@
                             </div> 
                                    
                            <div class="col-md-12"><label class=" control-label text-primary  pull-left">Treatment Supporter Information</label></div>
-                           <div class="col-md-12"><hr/></div>
-                            
+                            <div class="col-md-12 form-group">
+                                
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Is Guardian?</label></div>
+                                    <div class="col-md-12">
+                                        <asp:DropDownList ID="ISGuardian" CssClass="form-control input-sm"  runat="server" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                
+                            </div>
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
                                               <div class="col-md-12"><label class="required control-label pull-left">First Name</label></div>
@@ -564,6 +572,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
                     } else {
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
                         $("#<%=Inschool.ClientID%>").prop('disabled',false);
@@ -572,6 +581,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
                     }
                 };
 
@@ -723,6 +733,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
                     } else {
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
                         $("#<%=Inschool.ClientID%>").prop('disabled',false);
@@ -731,6 +742,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
                     }
                     return age;
                 }
@@ -842,20 +854,22 @@
                     });
                 }
 
-               function addPersonTreatmentSupporter() {
-                   var isPatientSet = $.urlParam('PatientId');
-
+                function addPersonTreatmentSupporter() {
+                    var isPatientSet = $.urlParam('PatientId');
+                    
                     var tFname = $("#<%=tsFname.ClientID%>").val();
                     var tMname = $("#<%=tsMiddleName.ClientID%>").val();
                     var tLname = $("#<%=tsLastName.ClientID%>").val();
-                   var tSex = $("#<%=tsGender.ClientID%>").val();
-                   var mobileContact = $("#<%=TSContacts.ClientID%>").val();
-                   var natId = 999999;
+                    var tSex = $("#<%=tsGender.ClientID%>").val();
+                    var mobileContact = $("#<%=TSContacts.ClientID%>").val();
+                    var natId = 999999;
+                    var supporterIsGuardian = $("#<%=ISGuardian.ClientID%>").find(":selected").text();
+
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
-                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "'}",
+                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "','supporterIsGuardian':'" + supporterIsGuardian +"'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1226,6 +1240,43 @@
                     
                 });
 
+                var $wizard = $('#myWizard').wizard();
+                var wizard = $wizard.data('fu.wizard');
+                $wizard.off('click', 'li.complete');
+                $wizard.on('click', 'li', $.proxy(wizard.stepclicked, wizard));
+
+
+                $("#ISGuardian").change(function() {
+                    console.log($(this).find(":selected").text());
+
+                    if ($(this).find(":selected").text() == 'Yes') {
+                        getGuardian();
+                    }
+
+                });
+
+                function getGuardian() {
+                    $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/GetGuardian",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                //var patientDetails = JSON.parse(response.d);
+
+                                $("#tsFname").val(patientDetails.FirstName);
+                                $("#tsMiddleName").val(patientDetails.MiddleName);
+                                $("#tsLastName").val(patientDetails.LastName);
+                                $("#tsGender").val(patientDetails.Gender);
+
+                                console.log(response);
+
+                            },
+                            error: function (response) {
+                                generate('error', response.d);
+                            }
+                        });
+                }
             });
 
     </script>

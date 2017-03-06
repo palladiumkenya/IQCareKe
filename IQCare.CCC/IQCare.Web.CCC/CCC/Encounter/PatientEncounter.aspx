@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientEncounter.aspx.cs" Inherits="IQCare.Web.CCC.Encounter.PatientEncounter" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <script src="../Scripts/js/PatientEncounter.js"></script>
@@ -1427,9 +1429,11 @@
                        <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
                        </div>--%><!-- .history-->
-                 </div><!-- .tab-content-->
-           </div> 
+                 <%--</div>--%><!-- .tab-content-->
+              <uc:ucExtruder runat="server" ID="ucExtruder" />
 
+           </div> 
+          </div>
     <!-- ajax begin -->
    <script type="text/javascript">
        var patientId = <%=PatientId%>;

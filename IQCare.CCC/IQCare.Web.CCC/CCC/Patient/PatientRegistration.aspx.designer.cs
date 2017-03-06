@@ -256,6 +256,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.TextBox PatientEmailAddress;
         
         /// <summary>
+        /// ISGuardian control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ISGuardian;
+        
+        /// <summary>
         /// tsFname control.
         /// </summary>
         /// <remarks>

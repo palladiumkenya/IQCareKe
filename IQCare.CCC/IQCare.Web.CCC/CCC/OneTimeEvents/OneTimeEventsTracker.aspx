@@ -21,7 +21,7 @@
                               <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                               <div class="col-md-7">
                                   <div class="col-md-12">
-                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 1 Disclosure Date</label></div>
+                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 1 Date</label></div>
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage1">
                                                <div class="input-group">
@@ -106,7 +106,7 @@
                                   </div>
                                   
                                   <div class="col-md-12">
-                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 2 Disclosure Date</label></div>
+                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 2 Date</label></div>
                                        <div class="col-md-7">
                                             <div class="datepicker fuelux form-group" id="Stage2">
                                                <div class="input-group">
@@ -191,7 +191,7 @@
                                   </div>
                                   
                                   <div class="col-md-12">
-                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 3 Disclosure Date</label></div>
+                                       <div class="col-md-5"><label class="control-label pull-left"> Stage 3 Date</label></div>
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage3">
                                                <div class="input-group">
@@ -282,7 +282,7 @@
                             <div class="col-md-1"><label class="control-label pull-left">Sex Partner</label></div>
                             <div class="col-md-7">
                                 <div class="col-md-12">
-                                       <div class="col-md-5"><label class="control-label pull-left">Sex Partner Disclose Date</label></div>
+                                       <div class="col-md-5"><label class="control-label pull-left">Date</label></div>
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="SexPartner">
                                                <div class="input-group">

@@ -1,0 +1,93 @@
+/*
+ * ******************************************************************************
+ *  jquery.mb.components
+ *  file: mbExtruder.css
+ *
+ *  Copyright (c) 2001-2014. Matteo Bicocchi (Pupunzi);
+ *  Open lab srl, Firenze - Italy
+ *  email: matteo@open-lab.com
+ *  site: 	http://pupunzi.com
+ *  blog:	http://pupunzi.open-lab.com
+ * 	http://open-lab.com
+ *
+ *  Licences: MIT, GPL
+ *  http://www.opensource.org/licenses/mit-license.php
+ *  http://www.gnu.org/licenses/gpl.html
+ *
+ *  last modified: 07/01/14 22.50
+ *  *****************************************************************************
+ */
+
+.extruder {
+  position: fixed;
+  cursor: default
+}
+
+.extruder *{
+  box-sizing: content-box;
+}
+
+.extruder .header {
+  height: 27px
+}
+
+.extruder .extruder-content {
+  display: none;
+  background: #EDEDED
+}
+
+.extruder.open .extruder-content {
+  -moz-box-shadow: 2px 0 5px #999;
+  -webkit-box-shadow: 2px 0 5px #999;
+  box-shadow: 2px 0 5px #999
+}
+
+.extruder.left {
+  height: 100%
+}
+
+.extruder.left.open .extruder-content {
+  -moz-box-shadow: 2px 0 5px #999;
+  -webkit-box-shadow: 2px 0 5px #999;
+  box-shadow: 2px 0 5px #999
+}
+
+.extruder.left .extruder-content {
+  border-right: 3px solid #000
+}
+
+.extruder.left .ext_wrapper {
+  height: 100%
+}
+
+.extruder.left .footer {
+  display: none
+}
+
+.extruder.left .flap {
+  font-size: 18px;
+  color: white;
+  top: 0;
+  padding: 10px 0 10px 10px;
+  margin-right: -37px;
+  background: #347AB6;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  -moz-border-radius: 0 8px 0 8px;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-bottom-right-radius: 8px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 8px;
+  -moz-box-shadow: 2px 0 5px #999;
+  -webkit-box-shadow: 2px 0 5px #999;
+  box-shadow: 2px 0 5px #999
+}
+
+.extruder.left .flap .flapLabel {
+  background: #347AB6
+}

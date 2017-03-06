@@ -318,6 +318,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
         [WebMethod(EnableSession = true)]
         public string AddPersonContact(int personId,string physicalAddress,string mobileNumber,string alternativeNumber,string emailAddress,int userId, string patientid)
         {
@@ -383,7 +384,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, string mobileContact, string patientid)
+        public string AddPersonTreatmentSupporter(string firstname, string middlename, string lastname, int gender ,string nationalId,int userId, string mobileContact, string patientid, string supporterIsGuardian)
         {
             try
             {
@@ -527,6 +528,34 @@ namespace IQCare.Web.CCC.WebService
             catch (SoapException e)
             {
                 Msg = e.Message+' '+ e.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetGuardian()
+        {
+            try
+            {
+                int guardianId = int.Parse(Session["PersonGuardianId"].ToString());
+                var personLookUpManager = new PersonLookUpManager();
+                var guardian = personLookUpManager.GetPersonById(guardianId);
+                if (guardian.Count > 0)
+                {
+                    PatientDetails patientDetails = new PatientDetails();
+                    patientDetails.FirstName = _utility.Decrypt(guardian[0].FirstName);
+                    patientDetails.MiddleName = _utility.Decrypt(guardian[0].MiddleName);
+                    patientDetails.LastName = _utility.Decrypt(guardian[0].LastName);
+                    patientDetails.Gender = guardian[0].Sex;
+
+
+                    return new JavaScriptSerializer().Serialize(patientDetails);
+                }
+
+            }
+            catch (SoapException e)
+            {
+                Msg = e.Message;
             }
             return Msg;
         }

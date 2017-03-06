@@ -59,10 +59,12 @@ namespace IQCare.Web.CCC.Patient
             {
                 Inschool.Items.Add(new ListItem("select", "0"));
                 ChildOrphan.Items.Add(new ListItem("select", "0"));
+                ISGuardian.Items.Add(new ListItem("select", "0"));
                 foreach (var k in lookItemByGroup)
                 {
                     Inschool.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                     ChildOrphan.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    ISGuardian.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                 }
             }
 
