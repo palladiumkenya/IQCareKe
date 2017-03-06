@@ -13,8 +13,8 @@
         <div class="col-md-12"><hr /></div>
         
         <div class="row">
-            <div class="col-md-3">
-                <div class="col-md-12"><label class="control-label pull-left">Enrollment Date </label></div>
+            <div class="col-md-4">
+                <div class="col-md-12"><label class="required control-label pull-left">Enrollment Date </label></div>
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="EnrollmentDate">
                         <div class="input-group">
@@ -101,14 +101,14 @@
         </div>
         
         <div class="row">
-            <div class="col-md-2">
-                <div class="col-md-12"><label class="control-label pull-left" for="entrypoint">Entry Point</label></div>
+            <div class="col-md-4">
+                <div class="col-md-12"><label class="required control-label pull-left" for="entrypoint">Entry Point</label></div>
                 <div class="col-sm-10">
                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="col-md-12"><label class="control-label pull-left" for="entrypoint">Specify Entry Point</label></div>
+            <div class="col-md-4">
+                <div class="col-md-12"><label class="control-label pull-left" for="otherentrypoint">Specify Other Entry Point</label></div>
                 <div class="col-sm-10">
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="SpecificEntryPoint" ClientIDMode="Static"/>
                 </div>
@@ -122,14 +122,14 @@
             
             
             <div class="col-md-3">
-                  <div class="col-md-12"><label class="pull-left control-label">Enrollment Identifier</label></div>
+                  <div class="col-md-12"><label class="required pull-left control-label">Enrollment Identifier</label></div>
                   <div class="col-md-12">
                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="IdentifierTypeId" ClientIDMode="Static" data-parsley-required="true"/>
                   </div>
              </div>
 
             <div class="col-md-6">
-                <div class="col-md-12"><label id="enrollmentLabel" class="pull-right  control-label">Enrollment No.#</label></div>
+                <div class="col-md-12"><label id="enrollmentLabel" class="required pull-right  control-label">Enrollment No.#</label></div>
                 <div id="AppPosID">
                     <div class="col-md-5" style="padding-right: 0;"><input type="text" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
                     <div class="col-md-1" style="padding: 0;">-</div>
