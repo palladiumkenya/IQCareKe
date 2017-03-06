@@ -1433,7 +1433,7 @@
               <uc:ucExtruder runat="server" ID="ucExtruder" />
 
            </div> 
-
+          </div>
     <!-- ajax begin -->
    <script type="text/javascript">
        var patientId = <%=PatientId%>;

@@ -70,7 +70,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
 
-                lookUp.populateDDL(regimenLine, "CTXAdherence");
+                //lookUp.populateDDL(regimenLine, "CTXAdherence");
 
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
