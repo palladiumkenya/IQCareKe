@@ -1152,7 +1152,7 @@
                                                        <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
                                                       <div class="col-md-8">
                                                          
-                                                          <asp:TextBox runat="server" Width="200" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" Width="230" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
@@ -2231,41 +2231,26 @@
                 }
                 catch (ex) {  }
 
-               // console.log(visitDate);--date
-               // console.log(visitScheduled);-->1
-               // console.log(visitBy);-->1119
-               // console.log(complaints);   -->headache
-               // console.log(tbscreening);  -->35
-                //console.log(nutritionscreening);-->38
-                //console.log(LMP);-->02-Mar-2017
-                //console.log(pregStatus);  -->92
-                //console.log(nutritionscreening); -->38
-               // console.log(EDD);-->02-Mar-2017
-                //console.log(ANCProfile); -->1
-               // console.log(onFP);-->1
-                console.log(FPMethod);
-                //console.log(CaCx);
-                //console.log(STIScreening);
-                //console.log(STIPartnerNotification);
-               // console.log(adverseEventsArray);
-
-
 
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        data: "{'PatientMasterVisitID':'" + patientMasterVisitId + "','PatientID':'" + patientId + "','VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
+                            
+                            console.log(response.d);
                             if (response.d > 0)
+                               
                                 toastr.success(response.d, "Presenting Complaints");
                             else
-                                toastr.error("Error occured while saving Presenting Complaints");
+                           
+                                toastr.error(response.d,"Error occured while saving Presenting Complaints");
                         },
                         error: function (response) {
-                            //alert(msg);
+                         
                             toastr.error(response.d, "Error occured while saving Presenting Complaints");
                         }
                     });

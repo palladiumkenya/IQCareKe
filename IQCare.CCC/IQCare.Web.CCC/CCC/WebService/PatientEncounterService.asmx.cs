@@ -1,8 +1,12 @@
-﻿using IQCare.CCC.UILogic;
+﻿using System;
+using IQCare.CCC.UILogic;
 using System.Collections;
 using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
+using Application.Presentation;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -16,17 +20,27 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientEncounterService : System.Web.Services.WebService
     {
-
+        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
-        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(int PatientMasterVisitID, int PatientID, string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
         {
-            string patientMasterVisitID = "0";
+                    if (PatientMasterVisitID == 0)
+                    {
+                        PatientMasterVisit visit = new PatientMasterVisit()
+                        {
+                            PatientId = PatientID,
+                            Start = DateTime.Now,
+                            Active = true,
+                        };
+                PatientMasterVisitID = _visitManager.AddPatientmasterVisit(visit);
+                    }
+            //string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+            //if (Session["PatientMasterVisitID"].ToString() != null)
+            //    patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            int val = patientEncounter.savePatientEncounterPresentingComplaints(patientMasterVisitID, Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy, Complaints,TBScreening,NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP,fpMethod, CaCx,STIScreening,STIPartnerNotification, adverseEvent);
-            Session["PatientMasterVisitID"] = val;
+            int val = patientEncounter.savePatientEncounterPresentingComplaints(PatientMasterVisitID.ToString(), PatientID.ToString(), "211",VisitDate,VisitScheduled,VisitBy,Complaints,TBScreening,NutritionalStatus,lmp,PregStatus,edd,ANC,OnFP,fpMethod,CaCx,STIScreening,STIPartnerNotification,adverseEvent);
+           // patientMasterVisitID = val;
             return val;
         }
 

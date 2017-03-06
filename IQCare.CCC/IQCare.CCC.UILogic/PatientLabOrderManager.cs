@@ -63,7 +63,7 @@ namespace IQCare.CCC.UILogic
                             LocationId = facilityID,
                             visitid = patientMasterVisitId,
                             ClinicalOrderNotes = data[i].labNotes,
-                            OrderStatus = data[i].results,
+                            OrderStatus = pending,
                             OrderDate = data[i].labOrderDate
                             //UserId = data[i].labType,
                             //ClinicalOrderNotes = data[i].results,       

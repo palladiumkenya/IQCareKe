@@ -94,7 +94,6 @@
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
-    <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\TestWebservice.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

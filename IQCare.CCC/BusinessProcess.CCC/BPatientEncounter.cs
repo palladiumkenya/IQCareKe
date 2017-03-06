@@ -18,6 +18,7 @@ namespace BusinessProcess.CCC
     {
         public int savePresentingComplaints(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, List<AdverseEvents> adverseEvents)
         {
+           
             try
             {
                 lock (this)
@@ -44,8 +45,8 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@STIPartnerNotification", SqlDbType.VarChar, STIPartnerNotification);
 
                     DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPresentingComplaints", ClsUtility.ObjectEnum.DataRow);
-                    int masterVisitID = Int32.Parse(dr[0].ToString());
-
+                   int masterVisitID = Int32.Parse(dr[0].ToString());      
+                   
                     //if(adverseEvents.Count > 0)
                     //{
                         ClsObject delAadvEvents = new ClsObject();
@@ -72,13 +73,17 @@ namespace BusinessProcess.CCC
                             int i = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterAdverseEvents", ClsUtility.ObjectEnum.ExecuteNonQuery);
                         }
                     }
-
+                   
                     return masterVisitID;
                 }
-            }
+           }
             catch //Exception ex)
             {
+
                 return 0;
+
+                //int masterVisitID = Int32.Parse(PatientMasterVisitID);
+                //return masterVisitID;
             }
         }
 
