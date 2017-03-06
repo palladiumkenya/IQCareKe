@@ -29,8 +29,8 @@ function AddAdverseReaction() {
     }
 
     //var chkData = $.grep(arrAdverseEvent, function (e) { return e.adverseEvent == adverseEvent; });
-    
     arrAdverseEventUI = [];
+
     //if (jQuery.isEmptyObject(chkData) == true) {
         //arrAdverseEvent.push({ adverseEvent: adverseEvent, medicineCausingAE: medicineCausingAE, adverseSeverity: adverseEventSeverityID, adverseAction: adverseEventAction });
     arrAdverseEventUI.push([adverseEventSeverityID,adverseEvent, medicineCausingAE, adverseEventSeverity, adverseEventAction, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
@@ -64,16 +64,9 @@ function AddChronicIllness() {
     }
     else
     {
-        //var chkData = $.grep(arrChronicIllness, function (e) { return e.chronicIllness == chronicIllnessID; });
-        
         arrChronicIllnessUI = [];
-        //if (jQuery.isEmptyObject(chkData) == true) {
-        //    arrChronicIllness.push({ chronicIllness: chronicIllnessID, treatment: illnessTreatment, dose: treatmentDose, duration: treatmentDuration });
         arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-        //}
-        //else {
-        //    alert("Already exits in the table.");
-        //}
+        
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
 
         $('#ChronicIllnessName').val("0");
@@ -81,7 +74,6 @@ function AddChronicIllness() {
         $('#treatmentDose').val("");
         $('#treatmentDuration').val("");
     }
-    
 }
 
 
@@ -106,8 +98,7 @@ function AddVaccine() {
     arrVaccineUI = [];
     var chkData = $.grep(arrVaccineUI, function (e) { return e.vaccineID == vaccineID; });
     
-    //if (jQuery.isEmptyObject(chkData) == true) {
-    //    arrVaccine.push({ vaccine: vaccineID, vaccineStage: vaccineStageID, vaccinationDate: vaccinationDate });
+    
     if (jQuery.isEmptyObject(chkData) == true)
     {
         arrVaccineUI.push([vaccineID, vaccineStageID, vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
@@ -115,12 +106,7 @@ function AddVaccine() {
     else {
         alert("Already exits in the table.");
     }
-    //alert([vaccineID, vaccineStageID, vaccine].includes(vaccineID));
-    //alert([1, 2, 3].includes(2));
-    //}
-    //else {
-    //    alert("Already exits in the table.");
-    //}
+    
     DrawDataTable("dtlVaccines", arrVaccineUI);
 
     $('#ddlVaccine').val("0");
@@ -145,16 +131,10 @@ function AddPhysicalExam() {
         return;
     }
 
-    //var chkData = $.grep(arrPhysicalExam, function (e) { return e.exam == examID; });
-    
     arrPhysicalExamUI = [];
-    //if (jQuery.isEmptyObject(chkData) == true) {
-    //    arrPhysicalExam.push({ examType: examTypeID, exam: examID, findings: findings });
+    
     arrPhysicalExamUI.push([examTypeID, examID, examType, exam, findings, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    //}
-    //else {
-    //    alert("Already exits in the table.");
-    //}
+    
     DrawDataTable("dtlPhysicalExam", arrPhysicalExamUI);
 
     $('#ddlExaminationType').val("0");
@@ -171,20 +151,14 @@ function AddDiagnosis() {
         return;
     }
 
-    //var chkData = $.grep(arrDiagnosis, function (e) { return e.diagnosis == diagnosis; });
-    
     arrDiagnosisUI = [];
-    //if (jQuery.isEmptyObject(chkData) == true) {
-        //arrDiagnosis.push({ diagnosis: diagnosis, treatment: treatment });
-        arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    //}
-    //else {
-    //    alert("Already exits in the table.");
-    //}
-        DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+    
+    arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+    
+    DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
-        $('#Diagnosis').val("");
-        $('#DiagnosisTreatment').val("");
+    $('#Diagnosis').val("");
+    $('#DiagnosisTreatment').val("");
 }
 
 function showHideFPControls()
