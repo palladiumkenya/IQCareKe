@@ -70,6 +70,10 @@ function AddAdverseReaction() {
    
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
 
+    $("#adverseEvent").val("");
+    $("#AdverseEventCause").val("");
+    $('#ddlAdverseEventSeverity').val("0");
+    $("#AdverseEventAction").val("");
 }
 
 var chronicIllnessList = new Array();
@@ -103,12 +107,15 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-       
         arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
-    }
 
+        $('#ChronicIllnessName').val("0");
+        $("#illnessTreatment").val("");
+        $('#treatmentDose').val("");
+        $('#treatmentDuration').val("");
+    }
 }
 
 var vaccineList = new Array();
@@ -197,6 +204,10 @@ function AddPhysicalExam() {
         ]);
         
         DrawDataTable("dtlPhysicalExam", arrPhysicalExamUI);
+
+        $('#ddlExaminationType').val("0");
+        $('#ddlExamination').val("0");
+        $('#txtExamFindings').val("");
     }
 }
 
@@ -209,17 +220,14 @@ function AddDiagnosis() {
         return;
     }
 
-    //var chkData = $.grep(arrDiagnosis, function (e) { return e.diagnosis == diagnosis; });
-
     arrDiagnosisUI = [];
-    //if (jQuery.isEmptyObject(chkData) == true) {
-    //arrDiagnosis.push({ diagnosis: diagnosis, treatment: treatment });
+    
     arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    //}
-    //else {
-    //    alert("Already exits in the table.");
-    //}
+    
     DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+
+    $('#Diagnosis').val("");
+    $('#DiagnosisTreatment').val("");
 }
 
 function showHideFPControls() {
@@ -234,5 +242,41 @@ function showHideFPControls() {
         document.getElementById('divNoFP').style.display = 'none';
         $('#ddlNoFP').val("0");
     }
+        
+}
 
+function EnableDisableEDD()
+{
+
+    var pregStatus = $('#examinationPregnancyStatus').find(":selected").text();
+    
+    if (pregStatus != "Pregnant")
+    {
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = "";
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").setAttribute('disabled', true);
+    }
+    else {
+        var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
+        var lmpJSDate = new Date(lmpDate);
+        var edd = new Date(lmpJSDate.getTime() + 24192000000);
+ 
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").removeAttribute('disabled');
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = DateFormat(edd);
+    }
+    
+}
+
+function DateFormat(date)
+{
+    var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
+
+    //var d = new Date();
+    var curr_date = date.getDate();
+    var curr_month = date.getMonth();
+    var curr_year = date.getFullYear();
+    if (curr_date < 10)
+        curr_date = "0" + curr_date
+    var result = curr_date + "-" + m_names[curr_month] + "-" + curr_year;
+    
+    return result;
 }
