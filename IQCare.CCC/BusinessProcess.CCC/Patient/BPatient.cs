@@ -2,11 +2,14 @@
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using Entities.PatientCore;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Common;
+using DataAccess.Entity;
 using Entities.CCC.Enrollment;
 
 namespace BusinessProcess.CCC.Patient
@@ -18,9 +21,29 @@ namespace BusinessProcess.CCC.Patient
 
         public int AddPatient(PatientEntity patient)
         {
-            _unitOfWork.PatientRepository.Add(patient);
+            int patientId = 0;
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@PersonId", SqlDbType.Int, patient.PersonId);
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, patient.ptn_pk);
+            ClsUtility.AddExtendedParameters("@PatientIndex", SqlDbType.VarChar, patient.PatientIndex);
+            ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, patient.DateOfBirth);
+            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarBinary, patient.NationalId);
+            ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
+            ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, patient.CreatedBy);
+            ClsUtility.AddExtendedParameters("@Active", SqlDbType.Bit, patient.Active);
+
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Patient_Insert", ClsUtility.ObjectEnum.DataTable);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                patientId = Convert.ToInt32(dt.Rows[0]["Id"]);
+            }
+
+            return patientId;
+            /*_unitOfWork.PatientRepository.Add(patient);
             Result = _unitOfWork.Complete();
-            return patient.Id;
+            return patient.Id;*/
         }
 
         public int DeletePatient(int id)

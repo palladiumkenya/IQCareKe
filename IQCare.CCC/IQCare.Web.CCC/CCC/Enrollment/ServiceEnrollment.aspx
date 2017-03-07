@@ -13,7 +13,99 @@
         <div class="col-md-12"><hr /></div>
         
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-xs-3">
+                <div class="col-md-12"><label class="required control-label pull-left">Date Of Birth</label></div>
+                <div class="col-md-12">
+                    <div class="datepicker fuelux form-group" id="DateOfBirth">
+                        <div class="input-group">
+                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB"></asp:TextBox>        
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                <span class="sr-only">Toggle Calendar</span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                    <div class="datepicker-calendar">
+                                        <div class="datepicker-calendar-header">
+                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                            <button type="button" class="title" data-month="11" data-year="2014">
+                                                <span class="month">
+                                                    <span data-month="0">January</span>
+                                                    <span data-month="1">February</span>
+                                                    <span data-month="2">March</span>
+                                                    <span data-month="3">April</span>
+                                                    <span data-month="4">May</span>
+                                                    <span data-month="5">June</span>
+                                                    <span data-month="6">July</span>
+                                                    <span data-month="7">August</span>
+                                                    <span data-month="8">September</span>
+                                                    <span data-month="9">October</span>
+                                                    <span data-month="10">November</span>
+                                                    <span data-month="11" class="current">December</span>
+                                                </span> <span class="year">2014</span>
+                                            </button>
+                                        </div>
+                                        <table class="datepicker-calendar-days">
+                                        <thead>
+                                        <tr>
+                                            <th>Su</th>
+                                            <th>Mo</th>
+                                            <th>Tu</th>
+                                            <th>We</th>
+                                            <th>Th</th>
+                                            <th>Fr</th>
+                                            <th>Sa</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        </table>
+                                        <div class="datepicker-calendar-footer">
+                                        <button type="button" class="datepicker-today">Today</button>
+                                        </div>
+                                    </div>
+                                    <div class="datepicker-wheels" aria-hidden="true">
+                                        <div class="datepicker-wheels-month">
+                                        <h2 class="header">Month</h2>
+                                        <ul>
+                                            <li data-month="0"><button type="button">Jan</button></li>
+                                            <li data-month="1"><button type="button">Feb</button></li>
+                                            <li data-month="2"><button type="button">Mar</button></li>
+                                            <li data-month="3"><button type="button">Apr</button></li>
+                                            <li data-month="4"><button type="button">May</button></li>
+                                            <li data-month="5"><button type="button">Jun</button></li>
+                                            <li data-month="6"><button type="button">Jul</button></li>
+                                            <li data-month="7"><button type="button">Aug</button></li>
+                                            <li data-month="8"><button type="button">Sep</button></li>
+                                            <li data-month="9"><button type="button">Oct</button></li>
+                                            <li data-month="10"><button type="button">Nov</button></li>
+                                            <li data-month="11"><button type="button">Dec</button></li>
+                                        </ul>
+                                        </div>
+                                        <div class="datepicker-wheels-year">
+                                        <h2 class="header">Year</h2>
+                                        <ul></ul>
+                                        </div>
+                                        <div class="datepicker-wheels-footer clearfix">
+                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-3">
+                <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
+                <div class="col-sm-10">
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
+                </div>
+            </div>
+
+            <div class="col-xs-3">
                 <div class="col-md-12"><label class="required control-label pull-left">Enrollment Date </label></div>
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="EnrollmentDate">
@@ -101,15 +193,18 @@
         </div>
         
         <div class="row">
-            <div class="col-md-4">
-                <div class="col-md-12"><label class="required control-label pull-left" for="entrypoint">Entry Point</label></div>
-                <div class="col-sm-10">
+            <div class="col-xs-3 form-group">
+                <div class="col-xs-12"><label class="required control-label pull-left" for="entrypoint">Entry Point</label></div>
+                <div class="col-md-12">
                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="entryPoint" ClientIDMode="Static" data-parsley-required="true"/>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="col-md-12"><label class="control-label pull-left" for="otherentrypoint">Specify Other Entry Point</label></div>
-                <div class="col-sm-10">
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-3 form-group" id="OtherSpecificEntryPoint">
+                <div class="col-xs-12"><label class="control-label pull-left" for="otherentrypoint">Specify Other Entry Point</label></div>
+                <div class="col-xs-12">
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="SpecificEntryPoint" ClientIDMode="Static"/>
                 </div>
             </div>
@@ -186,7 +281,18 @@
     </div>
     
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
+
+            $("#OtherSpecificEntryPoint").hide();
+
+            $("#entryPoint").change(function () {
+                $(this).find(":selected").text();
+                if ($(this).find(":selected").text() == 'Other') {
+                    $("#OtherSpecificEntryPoint").show();
+                } else {
+                    $("#OtherSpecificEntryPoint").hide();
+                }
+            });
 
             $('#EnrollmentDate').datepicker({
                 date:null,
@@ -195,48 +301,59 @@
                 restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
 
+            $("#DateOfBirth").datepicker({
+                date: null,
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            });
+
             var identifierList = new Array();
             var enrollmentNoList = new Array();
 
+            var personDOB = '<%=Session["PersonDob"]%>';
+            var nationalId = '<%=Session["NationalId"]%>';
+            $('#DateOfBirth').datepicker('setDate', moment(personDOB).format('DD-MMM-YYYY'));
+            $("#NationalId").val(nationalId);
+
             /*.. Load the list of identifiers */
             $.ajax({
-                        type: "POST",
-                        url: "../WebService/LookupService.asmx/GetLookUpItemByName",
-                        data: "{'itemName':'PatientIdentifier'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            var itemList = JSON.parse(response.d);
-                            $("#<%=IdentifierTypeId.ClientID%>").find('option').remove().end();
-                            $("#<%=IdentifierTypeId.ClientID%>").append('<option value="0">Select</option>');
-                            $.each(itemList, function (index, itemList) {
-                                $("#<%=IdentifierTypeId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + '</option>');
-                            }); 
-                        },
-                        error: function (msg) {
-                            alert(msg);
-                        }
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookUpItemByName",
+                data: "{'itemName':'PatientIdentifier'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $("#<%=IdentifierTypeId.ClientID%>").find('option').remove().end();
+                    $("#<%=IdentifierTypeId.ClientID%>").append('<option value="0">Select</option>');
+                    $.each(itemList, function (index, itemList) {
+                        $("#<%=IdentifierTypeId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + '</option>');
+                    }); 
+                },
+                error: function (msg) {
+                    alert(msg);
+                }
             });
 
 
             $.ajax({
-                        type: "POST",
-                        url: "../WebService/LookupService.asmx/GetLookUpItemByName",
-                        data: "{'itemName':'Entrypoint'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            var itemList = JSON.parse(response.d);
-                            console.log(itemList);
-                            $("#<%=entryPoint.ClientID%>").find('option').remove().end();
-                            $("#<%=entryPoint.ClientID%>").append('<option value="0">Select</option>');
-                            $.each(itemList, function (index, itemList) {
-                                $("#<%=entryPoint.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemName + '</option>');
-                            }); 
-                        },
-                        error: function (msg) {
-                            alert(msg);
-                        }
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookUpItemByName",
+                data: "{'itemName':'Entrypoint'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    console.log(itemList);
+                    $("#<%=entryPoint.ClientID%>").find('option').remove().end();
+                    $("#<%=entryPoint.ClientID%>").append('<option value="0">Select</option>');
+                    $.each(itemList, function (index, itemList) {
+                        $("#<%=entryPoint.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemName + '</option>');
+                    }); 
+                },
+                error: function (msg) {
+                    alert(msg);
+                }
             });
 
             $("#btnClose").click(function () {
@@ -339,6 +456,13 @@
                 });
                 _fp.shift();//first row will be empty -so remove
 
+                var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
+                console.log(cccRegNumber);
+                if (cccRegNumber == -1) {
+                    toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
+                    return false;
+                }
+
                 if ($.isEmptyObject(_fp)) {
                     toastr.error("error", "You have not added any identifiers");
                     return false;
@@ -348,7 +472,10 @@
                 } else {
                     var entryPointId = $("#entryPoint").val();
                     var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'));
+                    var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+                    var nationalId = $("#NationalId").val();
+
+                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId);
                 }
             });
 
@@ -364,6 +491,14 @@
                 });
                 _fp.shift();//first row will be empty -so remove
 
+
+                var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
+                console.log(cccRegNumber);
+                if (cccRegNumber == -1) {
+                    toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
+                    return false;
+                }
+
                 if ($.isEmptyObject(_fp)) {
                     toastr.error("error", "You have not added any identifiers");
                     return false;
@@ -373,19 +508,23 @@
                 } else {
                     var entryPointId = $("#entryPoint").val();
                     var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
-                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'));
+                    var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+                    var nationalId = $("#NationalId").val();
+
+                    console.log(_fp);
+                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId);
                 }
 
                 //addPatient(_fp);
             });
 
-            function addPatientRegister(_fp, entryPointId, enrollmentDate) {
+            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId) {
                 var enrollments = JSON.stringify(_fp);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "'}",
+                    data: "{'facilityId':'" + <%=Session["AppPosID"] %> + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -400,7 +539,7 @@
                 });
             }
 
-            function addPatient(_fp, entryPointId, enrollmentDate) {
+            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId) {
                 var enrollments = JSON.stringify(_fp);
 
                 console.log(enrollments);
@@ -408,7 +547,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'personid':'" + 1056 + "','facilityId':'" + 755 + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "'}",
+                    data: "{'facilityId':'" + <%=Session["AppPosID"] %> + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

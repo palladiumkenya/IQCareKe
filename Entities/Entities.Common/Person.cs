@@ -54,8 +54,8 @@ namespace Entities.Common
         }
         //  public int IdentificationType { get; set; }
         public int Sex { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public string NationalId { get; set; }
+        //public DateTime DateOfBirth { get; set; }
+        //public string NationalId { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

@@ -194,7 +194,7 @@
      </div><!-- .container-fluid -->
 
 
-    <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom" style="navigation">
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
          <div class="container-fluid">              
               <div class="row" style="padding-top:3px">
                       

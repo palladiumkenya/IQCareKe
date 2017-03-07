@@ -13,6 +13,24 @@ namespace IQCare.Web.CCC.Enrollment {
     public partial class ServiceEnrollment {
         
         /// <summary>
+        /// PersonDOB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PersonDOB;
+        
+        /// <summary>
+        /// NationalId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NationalId;
+        
+        /// <summary>
         /// DateOfEnrollment control.
         /// </summary>
         /// <remarks>
