@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucExtruder.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucExtruder" %>
 <%@ Register Src="~/CCC/UC/ucPatientVitalsExtruder.ascx" TagPrefix="IQ" TagName="ucPatientVitalsExtruder" %>
+<%@ Register Src="~/CCC/UC/ucPatientLabsExtruder.ascx" TagPrefix="IQ" TagName="ucPatientLabsExtruder" %>
+
 
 <script type="text/javascript">
 
@@ -18,7 +20,7 @@
 
             $("#extruderLeft1").buildMbExtruder({
                 position: "left",
-                width: 300,
+                width: 400,
                 extruderOpacity: .8,
                 hidePanelsOnClose: true,
                 accordionPanels: true,
@@ -29,7 +31,7 @@
 
             $("#extruderLeft2").buildMbExtruder({
                 position: "left",
-                width: 300,
+                width: 400,
                 extruderOpacity: .8,
                 hidePanelsOnClose: true,
                 accordionPanels: true,
@@ -50,8 +52,9 @@
         </div>
 
         <div id="extruderLeft1" class="{title:'Lab Results'}">
-
+            <IQ:ucPatientLabsExtruder runat="server" id="ucPatientLabsExtruder" />
         </div>
+
         <div id="extruderLeft2" class="{title:'Work Plan'}">
 
         </div>

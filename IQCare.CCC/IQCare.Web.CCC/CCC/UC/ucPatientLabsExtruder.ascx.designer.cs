@@ -10,24 +10,15 @@
 namespace IQCare.Web.CCC.UC {
     
     
-    public partial class ucExtruder {
+    public partial class ucPatientLabsExtruder {
         
         /// <summary>
-        /// ucPatientVitalsExtruder control.
+        /// tblPendingLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientVitalsExtruder ucPatientVitalsExtruder;
-        
-        /// <summary>
-        /// ucPatientLabsExtruder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientLabsExtruder ucPatientLabsExtruder;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblPendingLabs;
     }
 }
