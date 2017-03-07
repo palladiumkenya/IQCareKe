@@ -296,12 +296,18 @@
                                                             <div class="col-md-12"><hr /></div>
                                                          <div class="col-md-12">
                                                              <div class="col-md-4">
+                                                                 <div class="col-md-12 form-group">
+                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" onChange="EnableDisableEDD();" />
+                                                                     </div>
+                                                                 </div>
                                                                   <div class="col-md-12 form-group">
                                                                       <div class="col-md-12"><label class="control-label  pull-left">Female LMP</label></div>
                                                                       <div class="col-md-12">
                                                                           <div class="datepicker fuelux" id="FemaleLMP">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" />
+                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" onblur="EnableDisableEDD();" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -380,12 +386,7 @@
                                                                     </div>
                                                                       </div>
                                                                   </div>
-                                                                 <div class="col-md-12 form-group">
-                                                                      <div class="col-md-12"><label class="control-label  pull-left">Pregnancy Status</label></div>
-                                                                     <div class="col-md-12">
-                                                                         <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static"/>
-                                                                     </div>
-                                                                 </div>
+                                                                 
                                                                  <div class="col-md-12 form-group">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">EDD</label></div>
                                                                      <div class="col-md-12">
