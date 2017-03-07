@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Encounter {
+namespace IQCare.Web.CCC.UC {
     
     
-    public partial class EncounterHistory {
+    public partial class ucExtruder {
         
         /// <summary>
-        /// ucPatientDetails control.
+        /// ucPatientVitalsExtruder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails ucPatientDetails;
+        protected global::IQCare.Web.CCC.UC.ucPatientVitalsExtruder ucPatientVitalsExtruder;
         
         /// <summary>
-        /// TreeViewEncounterHistory control.
+        /// ucPatientLabsExtruder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView TreeViewEncounterHistory;
-        
-        /// <summary>
-        /// ucExtruder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
+        protected global::IQCare.Web.CCC.UC.ucPatientLabsExtruder ucPatientLabsExtruder;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using IQCare.CCC.UILogic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -176,8 +178,25 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[2] { row["Drug_pk"].ToString(), row["DrugName"].ToString()};
+                string[] i = new string[2] { row["val"].ToString(), row["DrugName"].ToString()};
                 rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDrugBatches(string DrugPk)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            List<DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            ArrayList rows = new ArrayList();
+
+            for(int i=0; i < lst.Count; i++)
+            {
+                string[] j = new string[2] { lst[i].id, lst[i].batch };
+                rows.Add(j);
             }
             return rows;
         }

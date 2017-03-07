@@ -517,48 +517,75 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.DropDownList regimenLine;
         
         /// <summary>
-        /// txtSelectDrug control.
+        /// txtDrugs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtSelectDrug;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDrugs;
         
         /// <summary>
-        /// Dose control.
+        /// ddlBatch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Dose;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBatch;
         
         /// <summary>
-        /// Frequency control.
+        /// txtDose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect Frequency;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDose;
         
         /// <summary>
-        /// Quantity control.
+        /// ddlFreq control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Quantity;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFreq;
         
         /// <summary>
-        /// Duration control.
+        /// txtDuration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Duration;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDuration;
+        
+        /// <summary>
+        /// txtQuantityPres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantityPres;
+        
+        /// <summary>
+        /// txtQuantityDisp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantityDisp;
+        
+        /// <summary>
+        /// ucExtruder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
     }
 }

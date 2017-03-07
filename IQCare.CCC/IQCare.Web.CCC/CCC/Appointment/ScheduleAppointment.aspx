@@ -158,7 +158,7 @@
                                     <label for="description" class="control-label pull-left">Description</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" required="true"/>
+                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" required="true" />
                                 </div>
                             </div>
                         </div>
@@ -200,6 +200,15 @@
         <asp:TextBox runat="server" ID="txtpatientId" ClientIDMode="Static" Visible="False" />
 
     </div>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content" id="ModalMessage" clientidmode="Static">
+                ...
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
             allowPastDates: false,
@@ -221,6 +230,35 @@
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
             });
         });
+
+        $("#AppointmentDate").change(function () {
+            AppointmentCount();
+        });
+
+        function AppointmentCount() {
+            jQuery.support.cors = true;
+            var date = $("#<%=AppointmentDate.ClientID%>").val();
+            $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
+                data: "{'date':'" + date + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function(response) {
+                    var count = response.d;
+                    var message = count + " appointment(s) scheduled on the chosen date.";
+                    document.getElementById("ModalMessage").innerHTML = message;
+                    $('#AlertModal').modal('show');
+                },
+
+                error: function(msg) {
+                    alert(msg.responseText);
+                }
+            });
+        }
+
 
         function addPatientAppointment() {
             var serviceArea = $("#<%=ServiceArea.ClientID%>").val();

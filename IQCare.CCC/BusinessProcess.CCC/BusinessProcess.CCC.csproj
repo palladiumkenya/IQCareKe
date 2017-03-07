@@ -91,6 +91,7 @@
     <Compile Include="BPatientAppointment.cs" />
     <Compile Include="BPatientEncounter.cs" />
     <Compile Include="BPatientLookupManager.cs" />
+    <Compile Include="BPatientPharmacy.cs" />
     <Compile Include="BPatientPopulationManager.cs" />
     <Compile Include="BPatientTreatmentSupporterManager.cs" />
     <Compile Include="BPatientVitals.cs" />

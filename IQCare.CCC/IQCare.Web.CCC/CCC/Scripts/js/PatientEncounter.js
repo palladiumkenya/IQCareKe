@@ -70,6 +70,10 @@ function AddAdverseReaction() {
    
     DrawDataTable("dtlAdverseEvents", arrAdverseEventUI);
 
+    $("#adverseEvent").val("");
+    $("#AdverseEventCause").val("");
+    $('#ddlAdverseEventSeverity').val("0");
+    $("#AdverseEventAction").val("");
 }
 
 var chronicIllnessList = new Array();
@@ -103,12 +107,15 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-       
         arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
-    }
 
+        $('#ChronicIllnessName').val("0");
+        $("#illnessTreatment").val("");
+        $('#treatmentDose').val("");
+        $('#treatmentDuration').val("");
+    }
 }
 
 var vaccineList = new Array();
@@ -197,6 +204,10 @@ function AddPhysicalExam() {
         ]);
         
         DrawDataTable("dtlPhysicalExam", arrPhysicalExamUI);
+
+        $('#ddlExaminationType').val("0");
+        $('#ddlExamination').val("0");
+        $('#txtExamFindings').val("");
     }
 }
 
@@ -209,17 +220,14 @@ function AddDiagnosis() {
         return;
     }
 
-    //var chkData = $.grep(arrDiagnosis, function (e) { return e.diagnosis == diagnosis; });
-
     arrDiagnosisUI = [];
-    //if (jQuery.isEmptyObject(chkData) == true) {
-    //arrDiagnosis.push({ diagnosis: diagnosis, treatment: treatment });
+    
     arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    //}
-    //else {
-    //    alert("Already exits in the table.");
-    //}
+    
     DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+
+    $('#Diagnosis').val("");
+    $('#DiagnosisTreatment').val("");
 }
 
 function showHideFPControls() {
@@ -234,5 +242,105 @@ function showHideFPControls() {
         document.getElementById('divNoFP').style.display = 'none';
         $('#ddlNoFP').val("0");
     }
+        
+}
 
+function EnableDisableEDD()
+{
+
+    var pregStatus = $('#examinationPregnancyStatus').find(":selected").text();
+    
+    if (pregStatus != "Pregnant")
+    {
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = "";
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").setAttribute('disabled', true);
+    }
+    else {
+        var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
+        var lmpJSDate = new Date(lmpDate);
+        var edd = new Date(lmpJSDate.getTime() + 24192000000);
+ 
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").removeAttribute('disabled');
+        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = DateFormat(edd);
+    }
+    
+}
+
+function DateFormat(date)
+{
+    var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
+
+    //var d = new Date();
+    var curr_date = date.getDate();
+    var curr_month = date.getMonth();
+    var curr_year = date.getFullYear();
+    if (curr_date < 10)
+        curr_date = "0" + curr_date
+    var result = curr_date + "-" + m_names[curr_month] + "-" + curr_year;
+    
+    return result;
+}
+
+var drugList = new Array();
+function AddDrugPrescription() {
+    var drug = $("#txtDrugs").val();
+    var batchText = $('#ddlBatch').find(":selected").text();
+    var batchVal = $('#ddlBatch').find(":selected").val();
+    var dose = $("#txtDose").val();
+    var freqTxt = $('#ddlFreq').find(":selected").text();
+    var freqVal = $('#ddlFreq').find(":selected").val();
+    var duration = $("#txtDuration").val();
+    var quantityPres = $("#txtQuantityPres").val();
+    var quantityDisp = $("#txtQuantityDisp").val();
+    //Validate duplication
+
+    var drugFound = 0;
+
+    if (drug == "") {
+        toastr.error("Error", "Please select drug");
+        return false;
+    }
+
+    if (dose == "") {
+        toastr.error("Error", "Please enter the dose");
+        return false;
+    }
+
+    if (freqVal == "0") {
+        toastr.error("Error", "Please enter the frequency");
+        return false;
+    }
+
+    if (duration == "0") {
+        toastr.error("Error", "Please enter the duration");
+        return false;
+    }
+
+    drugFound = $.inArray("" + drug + "", drugList);
+    
+    if (drugFound > -1) {
+        toastr.error("Error", drug + " already exists in the List");
+        return false; // message box herer
+    }
+    else {
+        //drugList.push("" + drug + "");
+
+
+        arrDrugPrescriptionUI = [];
+
+        arrDrugPrescriptionUI.push([
+            drug, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        ]);
+
+        DrawDataTable("dtlDrugPrescription", arrDrugPrescriptionUI);
+
+        $("#txtDrugs").val("");
+        $("#ddlBatch").val("");
+        $("#txtDose").val("");
+        $('#ddlFreq').val("0");
+        $("#txtDuration").val("0");
+        $("#txtQuantityPres").val("0");
+        $("#txtQuantityDisp").val("0");
+    }
 }
