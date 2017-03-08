@@ -258,13 +258,13 @@
                                   <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="Label1">Regimen Category </asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-minlength="1" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="0" data-parsley-required="true"/>
                                        </div>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblRegimen">Regimen</asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-minlength="1" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-min="0" data-parsley-required="true"/>
                                         </div>
                                   </div>
      
