@@ -239,7 +239,7 @@ namespace IQConnection
                 connectionString += "Integrated Security=false;";
                 connectionString += "User ID=" + sqlLogin + ";";
                 connectionString += "Password=" + sqlPassword + ";";
-                connectionString += "Persist Security Info=True;";
+                connectionString += "Persist Security Info=True;packet size=4128;Min Pool Size=3;Max Pool Size=200;";
                 strIQCareDB = databaseName;
 
                 XmlNode nodeIQCare = doc.SelectSingleNode("//appSettings/add[@key='ConnectionString']");
@@ -306,7 +306,7 @@ namespace IQConnection
                 connectionString += "Integrated Security=false;";
                 connectionString += "User ID=" + sqlLogin + ";";
                 connectionString += "Password=" + sqlPassword + ";";
-                connectionString += "Persist Security Info=True;MultipleActiveResultSets=true;";    
+                connectionString += "Persist Security Info=True;MultipleActiveResultSets=true;packet size=4128;Min Pool Size=3;Max Pool Size=200;";    
               strIQToolsDB = databaseName;
 
                 XmlNode nodeIQTools = doc.SelectSingleNode("//appSettings/add[@key='IQToolsConnectionString']");

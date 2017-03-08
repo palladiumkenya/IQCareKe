@@ -18,7 +18,7 @@
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
     <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
-     <FileUpgradeFlags>
+    <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
@@ -529,6 +529,9 @@
       <LastGenOutput>rptRevenueSummary.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Billing\Web.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -557,10 +560,10 @@
   </ProjectExtensions>
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
-	<Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
-	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />	
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

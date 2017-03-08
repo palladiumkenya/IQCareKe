@@ -985,7 +985,7 @@ FROM sys.tables AS t
 INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
 WHERE c.name LIKE 'SRNo' And system_type_id=TYPE_ID('int');
 Go
-Select * From #SrNo
+--Select * From #SrNo
 
 Declare @Query varchar(250)
 		, @command varchar(400)

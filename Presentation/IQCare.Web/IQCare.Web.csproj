@@ -1395,7 +1395,6 @@
     <Content Include="Pharmacy\frmDrugSelector.aspx" />
     <Content Include="Pharmacy\frmPharmacyForm.aspx" />
     <Content Include="Pharmacy\frmpharmacyselector.aspx" />
-    <Content Include="Pharmacy\PharmacyControl.ascx" />
     <Content Include="Pharmacy\Requests\FindPharmacyPrescription.aspx" />
     <Content Include="ProgressControl.ascx" />
     <Content Include="Queue\Home.aspx" />
@@ -2259,9 +2258,6 @@
     <Compile Include="Pharmacy\frmpharmacyselector.aspx.designer.cs">
       <DependentUpon>frmpharmacyselector.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pharmacy\PharmacyControl.ascx.designer.cs">
-      <DependentUpon>PharmacyControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="Pharmacy\Requests\FindPharmacyPrescription.aspx.designer.cs">
       <DependentUpon>FindPharmacyPrescription.aspx</DependentUpon>
     </Compile>
@@ -2751,10 +2747,6 @@
     </Compile>
     <Compile Include="Pharmacy\frmpharmacyselector.aspx.cs">
       <DependentUpon>frmpharmacyselector.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pharmacy\PharmacyControl.ascx.cs">
-      <DependentUpon>PharmacyControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pharmacy\Requests\FindPharmacyPrescription.aspx.cs">

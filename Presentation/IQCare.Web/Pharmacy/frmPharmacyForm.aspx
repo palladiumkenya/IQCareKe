@@ -444,6 +444,11 @@
                                                 </asp:Panel>
                                             </div>
                                             <br />
+                                             <div class="border pad5 whitebg" id="divVaccine" runat="server" visible="false" style="padding-bottom: 2%">
+                                                <asp:Panel ID="panelVaccine" runat="server" Height="100%" Width="100%" Wrap="true" CssClass="panel panel-default">
+                                                </asp:Panel>
+                                            </div>
+                                            <br />
                                             <div class="border" id="pnlOI" runat="server" visible="false">
                                                 <asp:Panel ID="PnlOIARV" runat="server" Height="100%" Width="100%" Wrap="true" Style="padding-bottom: 2%">
                                                 </asp:Panel>
