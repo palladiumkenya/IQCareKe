@@ -165,15 +165,18 @@ namespace IQCare.Web.CCC.WebService
                         vaccine = LookupLogic.GetLookUpMasterId(dataAdult[i].ToString());
                     }
 
-                    PatientVaccination patientVaccine = new PatientVaccination()
+                    if (dataAdult[i] != "")
                     {
-                        PatientId = patientId,
-                        PatientMasterVisitId = patientMasterVisitId,
-                        Vaccine = vaccine,
-                        VaccineStage = dataAdult[i].ToString()
-                    };
+                        PatientVaccination patientVaccine = new PatientVaccination()
+                        {
+                            PatientId = patientId,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            Vaccine = vaccine,
+                            VaccineStage = dataAdult[i].ToString()
+                        };
 
-                    patientVaccination.addPatientVaccination(patientVaccine);
+                        patientVaccination.addPatientVaccination(patientVaccine);
+                    }
                 }
 
                 Msg = "Successfully Added OnIime Event Tracker";

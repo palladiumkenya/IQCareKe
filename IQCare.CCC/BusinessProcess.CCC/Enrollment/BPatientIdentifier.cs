@@ -4,6 +4,8 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC.Enrollment
 {
@@ -27,6 +29,15 @@ namespace BusinessProcess.CCC.Enrollment
         public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
             throw new NotImplementedException();
+        }
+
+        public List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId, int identifierTypeId)
+        {
+            return
+                _unitOfWork.PatientIdentifierRepository.FindBy(
+                    x =>
+                        x.PatientId == patientId && x.PatientEnrollmentId == patientEnrollmentId &&
+                        x.IdentifierTypeId == identifierTypeId).ToList();
         }
     }
 }

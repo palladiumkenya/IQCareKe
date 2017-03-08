@@ -13,8 +13,7 @@ namespace IQCare.CCC.UILogic
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
         IPersonManager _mgr =  (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
 
-        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender,DateTime dateOfBirth, string nationalId,
-            int userId)
+        public int AddPersonUiLogic(string firstName, string midName, string lastName, int gender, int userId)
         {
             int retval;
 
@@ -26,8 +25,8 @@ namespace IQCare.CCC.UILogic
                     MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
                     LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
                     Sex = gender,
-                    DateOfBirth = dateOfBirth,
-                    NationalId = util.Encrypt(nationalId),
+                    //DateOfBirth = dateOfBirth,
+                    //NationalId = util.Encrypt(nationalId),
                     CreatedBy = userId
                 };
                 retval = _mgr.AddPerson(p);
@@ -42,8 +41,7 @@ namespace IQCare.CCC.UILogic
             return retval;
         }
 
-        public int AddPersonTreatmentSupporterUiLogic(string firstName, string midName, string lastName, int gender, string nationalId,
-    int userId)
+        public int AddPersonTreatmentSupporterUiLogic(string firstName, string midName, string lastName, int gender, int userId)
         {
             int retval;
 
@@ -55,9 +53,9 @@ namespace IQCare.CCC.UILogic
                     MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
                     LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
                     Sex = gender,
-                    NationalId = util.Encrypt(nationalId),
+                    //NationalId = util.Encrypt(nationalId),
                     CreatedBy = userId,
-                    DateOfBirth = DateTime.Now
+                    //DateOfBirth = DateTime.Now
                 };
                 retval = _mgr.AddPerson(p);
                 //HttpContext.Current.Session["PersonId"] = p.Id;
@@ -71,7 +69,7 @@ namespace IQCare.CCC.UILogic
             return retval;
         }
 
-        public void UpdatePerson(string firstname, string middlename, string lastname, int gender, string dateOfBirth, string nationalId, int userId, int id)
+        public void UpdatePerson(string firstname, string middlename, string lastname, int gender, int userId, int id)
         {
             Person person = new Person()
             {
@@ -79,8 +77,8 @@ namespace IQCare.CCC.UILogic
                 MidName = util.Encrypt(_textInfo.ToTitleCase(middlename)),
                 LastName = util.Encrypt(_textInfo.ToTitleCase(lastname)),
                 Sex = gender,
-                DateOfBirth = DateTime.Parse(dateOfBirth),
-                NationalId = util.Encrypt(nationalId),
+                //DateOfBirth = DateTime.Parse(dateOfBirth),
+                //NationalId = util.Encrypt(nationalId),
                 CreatedBy = userId
             };
 
@@ -101,7 +99,7 @@ namespace IQCare.CCC.UILogic
             p.FirstName = util.Decrypt(p.FirstName);
             p.MidName = util.Decrypt(p.MidName);
             p.LastName = util.Decrypt(p.LastName);
-            p.NationalId = util.Decrypt(p.NationalId);
+            //p.NationalId = util.Decrypt(p.NationalId);
             return p;
         }
     }
