@@ -201,7 +201,7 @@
 
     </div>
 
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
+    <div class="modal fade" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content" id="ModalMessage" clientidmode="Static">
                 ...
