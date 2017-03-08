@@ -53,6 +53,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(onFP, "FPStatus");
                 lookUp.populateDDL(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
+                lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
@@ -68,8 +69,11 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
+                lookUp.getPharmacyDrugFrequency(ddlFreq);
 
                 lookUp.populateDDL(regimenLine, "CTXAdherence");
+
+
 
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();

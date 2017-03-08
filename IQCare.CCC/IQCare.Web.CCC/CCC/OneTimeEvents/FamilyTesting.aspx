@@ -290,7 +290,7 @@
                             <div class="col-md-12">
                                 <div class="datepicker fuelux form-group" id="TestingDate">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate" required="true"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -514,12 +514,12 @@
                     var dob = $("#<%=Dob.ClientID%>").val();
                     var name = $("#<%=FirstName.ClientID%>").val() + ' ' + $("#<%=MiddleName.ClientID%>").val() + ' ' + $("#<%=LastName.ClientID%>").val();
                     var relationshipId = $("#<%=Relationship.ClientID%>").val();
-                    var relationship = $("#<%=Relationship.ClientID%>").text();
+                    var relationship = $("#Relationship :selected").text();
                     var baselineHivStatusId = $("#<%=BaselineHIVStatus.ClientID%>").val();
-                    var baselineHivStatus = $("#<%=BaselineHIVStatus.ClientID%>").text();
+                    var baselineHivStatus = $("#BaselineHIVStatus :selected").text();
                     var baselineHivStatusDate = $("#<%=BaselineHIVStatusDate.ClientID%>").val();
                     var hivTestingresultId = $("#<%=hivtestingresult.ClientID%>").val();
-                    var hivTestingresult = $("#<%=hivtestingresult.ClientID%>").text();
+                    var hivTestingresult = $("#hivtestingresult :selected").text();
                     var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
@@ -547,7 +547,7 @@
                             "</td><td align='left'>" +
                             baselineHivStatus +
                             "</td><td align='left'>" +
-                            moment(baselineHivStatusDate).format('DD-MMM-YYYY') +
+                            baselineHivStatusDate +
                             "</td><td align='left'>" +
                             hivTestingresult +
                             "</td><td align='left'>" +
@@ -570,6 +570,7 @@
                             cccreferal: cccreferal,
                             cccReferalNumber: cccReferalNumber
                         };
+                        debugger;
                         familyMembers.push(testing);
                         resetElements();
                         e.preventDefault();
@@ -589,8 +590,9 @@
                     addFamilyTesting(familyMembers[i]);
                 }
 
-                //Todo: clear table instead of redirect
-                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                //delay to show success message before redirect
+                setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                
             });
 
             $("#btnClose").click(function () {
@@ -688,7 +690,20 @@
                     var table = '';
                     itemList.forEach(function (item, i) {
                         var n = i + 1;
-                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.Name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + moment(item.HivStatusResultDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.CccReferal + '</td></tr>';
+                        var baselineDate = item.BaseLineHivStatusDate;
+                        if (baselineDate != null) {
+                            baselineDate = moment(item.BaseLineHivStatusDate).format('DD-MMM-YYYY');
+                        } else {
+                            baselineDate = "";
+                        }
+
+                        var testingDate = item.HivStatusResultDate;
+                        if (testingDate != null) {
+                            testingDate = moment(item.HivStatusResultDate).format('DD-MMM-YYYY');
+                        } else {
+                            testingDate = "";
+                        }
+                        table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.Name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + '</td></tr>';
                     });
                    
                     $('#tableFamilymembers').append(table);

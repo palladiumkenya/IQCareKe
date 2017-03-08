@@ -77,35 +77,72 @@ namespace IQCare.Web.CCC.WebService
 
                 if (!String.IsNullOrWhiteSpace(Stage1DateValue))
                 {
-                    disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage1", DateTime.Parse(Stage1DateValue));
+                    List<PatientDisclosure> patientDisclosures =  disclosure.GetPatientDisclosure(patientId, "Adolescents", "Stage1");
+                    if (patientDisclosures.Count > 0)
+                    {
+                        patientDisclosures[0].DisclosureDate = DateTime.Parse(Stage1DateValue);
+                        disclosure.UpdatePatientDisclosure(patientDisclosures[0]);
+                    }else
+                        disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage1", DateTime.Parse(Stage1DateValue));
                 }
 
                 if (!String.IsNullOrWhiteSpace(Stage2DateValue))
                 {
-                    disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage2", DateTime.Parse(Stage2DateValue));
+                    List<PatientDisclosure> patientDisclosures = disclosure.GetPatientDisclosure(patientId, "Adolescents", "Stage2");
+                    if (patientDisclosures.Count > 0)
+                    {
+                        patientDisclosures[0].DisclosureDate = DateTime.Parse(Stage2DateValue);
+                        disclosure.UpdatePatientDisclosure(patientDisclosures[0]);
+                    }
+                    else
+                        disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage2", DateTime.Parse(Stage2DateValue));
                 }
 
                 if (!String.IsNullOrWhiteSpace(Stage3DateValue))
                 {
-                    disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage3", DateTime.Parse(Stage3DateValue));
+                    List<PatientDisclosure> patientDisclosures = disclosure.GetPatientDisclosure(patientId, "Adolescents", "Stage3");
+                    if (patientDisclosures.Count > 0)
+                    {
+                        patientDisclosures[0].DisclosureDate = DateTime.Parse(Stage3DateValue);
+                        disclosure.UpdatePatientDisclosure(patientDisclosures[0]);
+                    }
+                    else
+                        disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage3", DateTime.Parse(Stage3DateValue));
                 }
 
                 if (!String.IsNullOrWhiteSpace(SexPartnerDateValue))
                 {
-                    disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "SexPartner", DateTime.Parse(SexPartnerDateValue));
+                    List<PatientDisclosure> patientDisclosures = disclosure.GetPatientDisclosure(patientId, "Adolescents", "SexPartner");
+                    if (patientDisclosures.Count > 0)
+                    {
+                        patientDisclosures[0].DisclosureDate = DateTime.Parse(SexPartnerDateValue);
+                        disclosure.UpdatePatientDisclosure(patientDisclosures[0]);
+                    }
+                    else
+                        disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "SexPartner", DateTime.Parse(SexPartnerDateValue));
                 }
 
-
-                INHProphylaxis prophylaxis = new INHProphylaxis()
+                List<INHProphylaxis> inhListsProphylaxes = inhProphylaxis.GetPatientProphylaxes(patientId);
+                if (inhListsProphylaxes.Count > 0)
                 {
-                    PatientId = patientId,
-                    PatientMasterVisitId = patientMasterVisitId,
-                    StartDate = IsINHStartDateValue,
-                    Complete = Boolean.Parse(INHCompletion),
-                    CompletionDate = IsCompletionDate
-                };
+                    inhListsProphylaxes[0].StartDate = IsINHStartDateValue;
+                    inhListsProphylaxes[0].CompletionDate = IsCompletionDate;
+                    inhListsProphylaxes[0].Complete = Boolean.Parse(INHCompletion);
+                    inhProphylaxis.updateINHProphylaxis(inhListsProphylaxes[0]);
+                }
+                else
+                {
+                    INHProphylaxis prophylaxis = new INHProphylaxis()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        StartDate = IsINHStartDateValue,
+                        Complete = Boolean.Parse(INHCompletion),
+                        CompletionDate = IsCompletionDate
+                    };
 
-                inhProphylaxis.addINHProphylaxis(prophylaxis);
+                    inhProphylaxis.addINHProphylaxis(prophylaxis);
+                }
 
                 for (var i = 0; i < data.Count; i++)
                 {
@@ -128,15 +165,18 @@ namespace IQCare.Web.CCC.WebService
                         vaccine = LookupLogic.GetLookUpMasterId(dataAdult[i].ToString());
                     }
 
-                    PatientVaccination patientVaccine = new PatientVaccination()
+                    if (dataAdult[i] != "")
                     {
-                        PatientId = patientId,
-                        PatientMasterVisitId = patientMasterVisitId,
-                        Vaccine = vaccine,
-                        VaccineStage = dataAdult[i].ToString()
-                    };
+                        PatientVaccination patientVaccine = new PatientVaccination()
+                        {
+                            PatientId = patientId,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            Vaccine = vaccine,
+                            VaccineStage = dataAdult[i].ToString()
+                        };
 
-                    patientVaccination.addPatientVaccination(patientVaccine);
+                        patientVaccination.addPatientVaccination(patientVaccine);
+                    }
                 }
 
                 Msg = "Successfully Added OnIime Event Tracker";

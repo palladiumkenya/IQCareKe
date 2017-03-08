@@ -160,8 +160,8 @@ namespace IQCare.Web.CCC.WebService
         {
             List<PatientFamilyDisplay> familyDisplays = new List<PatientFamilyDisplay>();
             List<PatientFamilyTesting> familytestings = new List<PatientFamilyTesting>();
-            //try
-            //{
+            try
+            {
                 var patientFamily = new PatientFamilyTestingManager();
                 int id = Convert.ToInt32(patientId);
                 familytestings = patientFamily.GetPatienFamilyList(id);
@@ -171,12 +171,30 @@ namespace IQCare.Web.CCC.WebService
                     familyDisplays.Add(familyDisplay);
                 }
 
-            /*}
+            }
             catch (Exception e)
             {
                 Msg = e.Message;
-            }*/
+            }
             return familyDisplays;
+        }
+
+        [WebMethod]
+        public int GetPatientAppointmentCount(DateTime date)
+        {
+            int count = 0;
+            List<PatientAppointment> appointments = new List<PatientAppointment>();
+            try
+            {
+                var appointment = new PatientAppointmentManager();
+                appointments = appointment.GetByDate(date);
+                count = appointments.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
         }
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
@@ -277,9 +295,9 @@ namespace IQCare.Web.CCC.WebService
         public string Name { get; set; }
         public string Relationship { get; set; }
         public string BaseLineHivStatus { get; set; }
-        public DateTime BaseLineHivStatusDate { get; set; }
+        public DateTime ? BaseLineHivStatusDate { get; set; }
         public string HivStatusResult { get; set; }
-        public DateTime HivStatusResultDate { get; set; }
+        public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
     }
 }

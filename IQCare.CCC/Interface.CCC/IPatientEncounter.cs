@@ -20,7 +20,7 @@ namespace Interface.CCC
         DataTable getPatientEncounterVaccines(string PatientMasterVisitID, string PatientID);
         DataTable getPatientEncounterPhysicalExam(string PatientMasterVisitID, string PatientID);
         DataTable getPatientEncounterDiagnosis(string PatientMasterVisitID, string PatientID);
-        DataTable getPharmacyDrugList(string regimenLine);
+        
 
     }
 }

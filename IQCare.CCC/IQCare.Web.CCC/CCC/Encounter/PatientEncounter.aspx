@@ -1,18 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientEncounter.aspx.cs" Inherits="IQCare.Web.CCC.Encounter.PatientEncounter" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <script src="../Scripts/js/PatientEncounter.js"></script>
-       
-    <!--Using Awesomplete for auto complete  --->
-     <link href="../Scripts/css/awesomplete.css" rel="stylesheet" />
-     <script src="../Scripts/js/awesomplete.js"></script>  
   
-    <!-- Js for High charts   -->
-    <script src="../Scripts/js/highcharts.js"></script>
-    <script src="../Scripts/js/vl_linegraph.js"></script>
-   
      <div class="col-md-12">
                 <uc:PatientDetails ID="PatientSummary" runat="server" />
             </div>
@@ -313,7 +307,7 @@
                                                                       <div class="col-md-12">
                                                                           <div class="datepicker fuelux" id="FemaleLMP">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" onkeyup="EnableDisableEDD();" onblur="EnableDisableEDD();" />
+                                                                              <input class="form-control input-sm" id="lmp" type="text" runat="server" onblur="EnableDisableEDD();" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1042,8 +1036,8 @@
                                  </div><%-- .wizard--%>
                              </div> <%--.col-md-12--%>
                          </div>
-                      </div><!-- .encounter-->
-                    </div>                     
+                         </div><!-- .encounter-->
+                      </div>                     
                
               <div  role="tabpanel"  class="tab-pane fade" id="vlTracker">
                     <!-- pw implementation of viral load tracker here-->
@@ -1055,12 +1049,12 @@
                            
                             <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
                                                 <thead>
-                                                    <tr >
+                                                    <tr>
                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
+                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
+                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
+                                                        <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
+                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                         
                                                     </tr>
                                                 </thead>
@@ -1075,9 +1069,9 @@
                                                 <thead>
                                                     <tr >
                                                           <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                         
                                                           
@@ -1098,18 +1092,22 @@
                 </div><!-- .viraload tracker-->
                     
              <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
-                                               
+                            <%--<div class="col-md-12" style="padding-top: 1%">
+                              <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
+                            </div>    -->--%>
+                            
+                       
                            
-                     <div class="col-md-6 col-sx-12 col-sm-12">  
-                          <div class="col-md-12 bs-callout bs-callout-danger">
+                        <div class="col-md-6">  
+                         <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                                 <thead>
                                                     <tr >
                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Lab Test</i> </th>
+                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Order Reason</i> </th>
+                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Order Date</i> </th>
                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
                                                          </tr>
                                                 </thead>
@@ -1118,8 +1116,9 @@
                                                 </table>
                             </div>    
         
+                
 
-                         <div class="col-md-12 bs-callout bs-callout-info">
+                <div class="col-md-12 bs-callout bs-callout-info">
                          <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
@@ -1144,37 +1143,32 @@
 
                        </div>
                            
-                     <div class="col-md-6 col-xs-12 col-sm-12 form-group">
-                         
-                         <div class="col-md-12 bs-callout bs-callout-success">
-<%--                              <div class="panel panel-default" style="margin-top:2%">
-                                              
-                                              <div class="panel-body">--%>
-                                                 <div class="col-md-12 form-group"><label class="control-label pull-left text-primary">Order Lab Test(s)</label></div>
-                                                  <div class="col-md-12"><hr style="margin-top: 2px" /></div>
+                       <div class="col-md-6">
+                         <div class="col-md-12">
+                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                              <div class="panel-heading"></div>
+                                              <div class="panel-body">
+                                               
                                                   <div class="col-md-12 form-group">
-                                                      <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
-                                                      <div class="col-md-8">                               
-                                                           <asp:TextBox runat="server" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>                                                      
-                                                      </div>
-                                                  </div>
-
-                                                  <div class="col-md-12 form-group">
-                                                       <div class="col-md-4"><label class="control-label pull-left">Reason</label></div>
+                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
                                                       <div class="col-md-8">
-                                                          <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static" >
-                                                         <asp:ListItem Text="Baseline" Value="2" />
-                                                         <asp:ListItem Text="Routine" Value="3" />
-                                                         <asp:ListItem Text="Confirmatory" Value="4" />
-                                                         <asp:ListItem Text="Suspected drug resistance" Value="5" />
-                                                         <asp:ListItem Text="Other" Value="5" />
-                                                        </asp:DropDownList>
+                                                         
+                                                          <asp:TextBox runat="server" Width="200" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                       </div>
                                                   </div>
-                                                  
                                                   <div class="col-md-12 form-group">
+                                                                      <div class="col-md-4"><label class="control-label  pull-left">Reason</label></div>
+                                                                     <div class="col-md-8">
+                                                                         <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                     </div>
+                                                         </div>
+                                                  
+                                                 <div class="col-md-12 form-group">
                                                        <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
                                                       <div class="col-md-8">
+                                                         
                                                           <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
                                                       </div>
                                                   </div>
@@ -1184,7 +1178,7 @@
                                         <div class="col-md-4">
                                             <label class="control-label pull-left">Date</label>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                         <div class="datepicker fuelux form-group" id="LabDatePicker">
                             <div class="input-group">
                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="LabDate" data-parsley-required="true"></asp:TextBox>
@@ -1281,7 +1275,7 @@
             
 
                                  
-                                                  <div class="col-md-12 form-group">
+                                                  <div class="col-md-12">
                                                       <div class="col-md-10"></div>
                                                       <div class="col-md-3 pull-right ">
                                             <asp:LinkButton runat="server" ID="btnAddLab"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
@@ -1308,14 +1302,17 @@
                                             </div>
                                                               
    
-                                                               <%-- </div>--%>
-                             </div><%-- panel body--%>
-                        </div>     
-                    
-                     <div class="col-md-12"><hr/></div>
-                             <div class="col-md-7"></div>
-                             <div class="col-md-5">
-                                             <div class="col-md-3">    
+                                                                </div>
+                                                        </div>
+                                                    </div>     
+                                                   </div>
+                                             </div>
+                           
+                                        <div class="col-md-12"><hr/></div>
+                                        <div class="col-md-7"></div>
+                                         <div class="col-md-5">
+                                             <div class="col-md-3">
+                                                 
                                                  <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
                                              </div>
                                              <div class="col-md-3">
@@ -1328,29 +1325,21 @@
                                                  <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
                                              </div>
                                          </div>
-             </div>
-                         .     
-                     
                                    
                             <%--</div>--%>
                         
-                      <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
-                     <div class="col-md-12" style="padding-top: 1%">
-                              <label class="control-label pull-left"> <i class="fa fa-tint fa-lg" aria-hidden="true"></i> Drup Prescription </label>
-                          </div>
-                          <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Dispensing </strong></h4>
-                            </div>
+                      
+                      </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
+                  
+               <div  role="tabpanel" class="tab-pane fade" id="Pharmacy">
+                     <div class="col-md-12 bs-callout bs-callout-danger">
+                        <h4 class="pull-left"> <strong>Pending Dispensing </strong></h4>
+                    </div>
                           <div class="col-md-12">
-                                <div class="panel panel-info">
+                                <%--<div class="panel panel-info">--%>
 
-                                    <div class="panel-body">
+                                    <%--<div class="panel-body">--%>
                                          <div class="col-md-12">
-                                              <div class="col-md-4">
-                                                  <div class="col-md-12"><label class="control-label pull-left"> Last Drug Prescription</label></div>
-                                                  <div class="col-md-12"><hr/></div>
-                                              </div>
-                                              <div class="col-md-8">
                                                   <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
                                                   <div class="col-md-12"><hr /></div>
 
@@ -1373,44 +1362,63 @@
                                                              
                                                               <div class="col-md-4"><label class="control-label pull-left">Regimen Line </label></div>     
                                                               <div class="col-md-6  pull-right">
-                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static"  onchange="getPharmacyDrugList();"/>
+                                                                   <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="drugList();"/>
                                                               </div>
                                                               <div class="col-md-2 "></div>
                                                          </div>  
                                                         
-                                                         <div class="col-md-12 bs-callout bs-callout-info">
+                                                         <div class="col-md-12">
                                                               <div class="row">
-                                                                    <div class="col-md-12">
-                                                                         
-                                                                              <div class="col-md-3"><label class="control-label pull-left">Select Drug (s) </label></div>
-                                                                              <div class="col-md-7">
-                                                                                  <input type="text" data-provide="typeahead" id="txtSelectDrug" class="form-control input-sm" placeholder="type to search...." runat="server" />
-                                                                              </div>
-                                                                             <div class="col-md-2">
-                                                                               <asp:LinkButton runat="server" CssClass="btn btn-warning btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton> 
-                                                                          </div>
-                                                                         
-                                                                    </div>
                                                                     <div class="col-md-12"><hr /></div>
                                                                     <div class="col-md-12">
-                                                                         <div class="col-md-4 pull-left"><label class="control-label pull-left"> Drug</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Dose</label></div>
-                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">  Frequency</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Quantity</label></div>
-                                                                         <div class="col-md-2 pull-left"><label class="control-label pull-left"> Duration</label></div>
+                                                                        <div class="col-md-3 pull-left"><label class="control-label pull-left">Drug</label></div>
+                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
+                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
                                                                     </div>  
+                                                                    <div class="col-md-12 panel-body">
+                                                                        <div class="col-md-3">
+                                                                           <input id="txtDrugs" type="text" class="form-control input-sm" ClientIDMode="Static" placeholder="type to search...." runat="server" style="width:100%" />
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                                                        </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                                                        </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1 pull-left">
+                                                                            <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="col-md-12">
-                                                                       <div class="col-md-4"><label class="control-label pull-left text-warning">--Selected drug--</label></div>
-                                                                        <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Dose" /> </div>
-                                                                        <div class="col-md-2"><select class="form-control input-sm" id="Frequency" runat="server"></select></div>
-                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Quantity" /> </div>
-                                                                       <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="Duration" /> </div>
+                                                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                            <table id="dtlDrugPrescription" class="table table-bordered table-striped">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th><span class="text-primary">Drug</span></th>
+                                                                                        <th><span class="text-primary">Batch</span></th>
+                                                                                        <th><span class="text-primary">Dose</span></th>
+                                                                                        <th><span class="text-primary">Frequency</span></th>
+                                                                                        <th><span class="text-primary">Duration</span></th>
+                                                                                        <th><span class="text-primary">Qty Prescribed</span></th>
+                                                                                        <th><span class="text-primary">Qty Dispensed</span></th>
+                                                                                        <th><span class="text-primary"></span></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody></tbody>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                  </div>
                                                          </div>            
-                                                     
-
-                                              </div>
                                          </div>
                                          
                                         <div class="col-md-12">
@@ -1423,23 +1431,21 @@
                                                 <div class="col-md-3"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
                                              </div>
                                         </div>
-                                    </div><%-- .panel-body--%>
+                                    <%--</div>--%><%-- .panel-body--%>
 
-                                </div><%-- .panel--%>
+                                <%--</div>--%><%-- .panel--%>
 
                           </div><%-- .col-md-12--%>
-                </div><!-- .pharmacy-->
-                      
-              </div><!-- .laboratory-->  <!--end pw implementation of  laboratory module here-->
-                  
-              
+                      </div><!-- .pharmacy-->
 
                        <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
                        </div>--%><!-- .history-->
                  <%--</div>--%><!-- .tab-content-->
-           </div> 
+              <uc:ucExtruder runat="server" ID="ucExtruder" />
 
+           </div> 
+          </div>
     <!-- ajax begin -->
    <script type="text/javascript">
        var patientId = <%=PatientId%>;
@@ -1447,22 +1453,22 @@
        var genderId = <%=genderID%>;
        var gender = "<%=gender%>";
 
-     $(document).ready(function () {     
+       $(document).ready(function () {     
            
 
-         //console.log(patientId);
-         //console.log(patientMasterVisitId);
-         //console.log(genderId);
-         //console.log(gender);
+           //console.log(patientId);
+           //console.log(patientMasterVisitId);
+           //console.log(genderId);
+           //console.log(gender);
 
-     $("#LabDatePicker").datepicker({
-           //date: null,
-           allowPastDates: true,
-           momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-     });
-
+           $("#LabDatePicker").datepicker({
+               //date: null,
+               allowPastDates: true,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+           });
+           var LabOrderList = new Array();
         
-      $.ajax({
+           $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
                data: "{'patient_ID':'" + patientId + "'}",
@@ -1470,7 +1476,7 @@
                dataType: "json",
                cache: false,
                success: function (response) {
-                  // console.log(response.d);
+                   // console.log(response.d);
                    var itemList = JSON.parse(response.d);
                    var table = '';
                    //itemList.forEach(function (item) {
@@ -1485,20 +1491,20 @@
                       
                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    
-               });
+                   });
                   
                    $('#tblPrevLabs').append(table);
                    $('#tblPrevLabs tr:not(:first-child').each(function(idx){
-                      $(this).children(":eq(0)").html(idx + 1);
+                       $(this).children(":eq(0)").html(idx + 1);
                    });
 
 
                },
 
-                 error: function (msg) {
+               error: function (msg) {
 
-                alert(msg.responseText);
-                }
+                   alert(msg.responseText);
+               }
            });
 
            $.ajax({
@@ -1531,14 +1537,14 @@
                        $(this).children(":eq(0)").html(idx + 1);
                    });
 
-                   },
+               },
 
                error: function (msg) {
 
                    alert(msg.responseText);
                }
            });
-        $.ajax({
+           $.ajax({
                type: "POST",
                url: "../WebService/LabService.asmx/GetvlTests",
                data: "{'patient_ID':'" + patientId + "'}",
@@ -1560,7 +1566,7 @@
                        var sampleDate = day + "/" + month + "/" + year;
                        // alert(date);
 
-                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    });
 
                    $('#tblVL').append(table);
@@ -1575,94 +1581,100 @@
                }
            });
 
-       $.ajax({
-            type: "POST",
-            url: "../WebService/LabService.asmx/GetPendingvlTests",
-            data: "{'patient_ID':'" + patientId + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            cache: false,
-            success: function (response) {
-               // console.log(response.d);
-                var itemList = JSON.parse(response.d);
-                var table = '';
-                //itemList.forEach(function (item) {
-                $.each(itemList, function (index, itemList) {
-
-                    var dateString = itemList.SampleDate.substr(6);
-                    var currentTime = new Date(parseInt(dateString));
-                    var month = currentTime.getMonth() + 1;
-                    var day = currentTime.getDate();
-                    var year = currentTime.getFullYear();
-                    var sampleDate = day + "/" + month + "/" + year;
-                    // alert(date);
-
-                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + sampleDate + '</td><td>' + itemList.Reasons + '</td><td>' + itemList.Results + '</td></tr>';
-                });
-
-                $('#tblVlpending').append(table);
-                $('#tblVlpending tr:not(:first-child').each(function(idx){
-                    $(this).children(":eq(0)").html(idx + 1);
-                });
-            },
-
-            error: function (msg) {
-
-                alert(msg.responseText);
-            }
-       });
-
-       var input = document.getElementById("labTestTypes");
-       var awesomplete = new Awesomplete(input, {
-           minChars: 1,
-           autoFirst: true
-       });
-
-       $("input").on("keyup", function () {
            $.ajax({
-               url: '../WebService/LookupService.asmx/GetLookupLabsList',
-               type: 'POST',
-               dataType: 'json',
-               data: "{}",
+               type: "POST",
+               url: "../WebService/LabService.asmx/GetPendingvlTests",
+               data: "{'patient_ID':'" + patientId + "'}",
                contentType: "application/json; charset=utf-8",
-           
-               success: function (data) {
-                   var serverData = JSON.parse(data.d);
-                   //console.log(serverData);
-                   var labtests = [];
-                   for (var i = 0; i < serverData.length; i++) {
+               dataType: "json",
+               cache: false,
+               success: function (response) {
+                   // console.log(response.d);
+                   var itemList = JSON.parse(response.d);
+                   var table = '';
+                   //itemList.forEach(function (item) {
+                   $.each(itemList, function (index, itemList) {
 
-                       labtests.push(serverData[i]["ParameterName"]);
+                       var dateString = itemList.SampleDate.substr(6);
+                       var currentTime = new Date(parseInt(dateString));
+                       var month = currentTime.getMonth() + 1;
+                       var day = currentTime.getDate();
+                       var year = currentTime.getFullYear();
+                       var sampleDate = day + "/" + month + "/" + year;
+                       // alert(date);
+
+                       table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                   });
+
+                   $('#tblVlpending').append(table);
+                   $('#tblVlpending tr:not(:first-child').each(function(idx){
+                       $(this).children(":eq(0)").html(idx + 1);
+                   });
+               },
+
+               error: function (msg) {
+
+                   alert(msg.responseText);
+               }
+           });
+
+           var input = document.getElementById("labTestTypes");
+           var awesomplete = new Awesomplete(input, {
+               minChars: 1,
+               autoFirst: true
+           });
+
+           $("input").on("keyup", function () {
+               $.ajax({
+                   url: '../WebService/LookupService.asmx/GetLookupLabsList',
+                   type: 'POST',
+                   dataType: 'json',
+                   data: "{}",
+                   contentType: "application/json; charset=utf-8",
+           
+                   success: function (data) {
+                       var serverData = JSON.parse(data.d);
+                       //console.log(serverData);
+                       var labtests = [];
+                       for (var i = 0; i < serverData.length; i++) {
+
+                           labtests.push(serverData[i]["ParameterName"]);
+                       }
+
+                       // console.log(labtests);
+                       awesomplete.list = labtests;
                    }
-
-                  // console.log(labtests);
-                   awesomplete.list = labtests;
-                      }
-                 });
+               });
            
-        });
+           });
       
-       var lorderType= new Array();
-       var lorderReason= new Array();
-       var lorderDate= new Array();
-       var lorderNotes= new Array();
-         // Load lab order
-       $("#btnAddLab").click(function (e) {
+      
+           // Load lab order
+           $("#btnAddLab").click(function (e) {
 
-           var labOrderDate = $("#<%=LabDate.ClientID%>").val();
+               var labOrderFound = 0;
+
+               var labOrderDate = $("#<%=LabDate.ClientID%>").val();
                var labType = $("#labTestTypes").val();
                var labOrderReason = $("#orderReason").find(":selected").text();
                var labOrderNotes = $("#labNotes").val();
 
                if (labType < 1) {
-                  toastr.error("Please select at least One(1) Lab Type from the List");
+                   toastr.error("Please select at least One(1) Lab Type from the List");
                    return false;
                }
                if (labOrderReason < 1) {
                    toastr.error("Please select at least One(1) Lab Order Reason from the List");
                    return false;
                }
-                      
+
+               labOrderFound = $.inArray("" + labType + "", LabOrderList);
+
+               if (labOrderFound > -1) {
+
+                   toastr.error("error", labType + " Lab selected already exists in the List");
+                   return false; // message box herer
+               }
                if (labOrderDate < 1) {
                    toastr.error("Please input a date for the lab order");
                    return false;
@@ -1670,45 +1682,42 @@
 
                else {
 
-                   lorderType.push("" + labType + "");
-                   lorderReason.push("" + labOrderReason + "");
-                   lorderDate.push("" + labOrderDate + "");
-                   lorderNotes.push("" + labOrderNotes + "");
-
+                  
+                   LabOrderList.push("" + labType + "");
                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                    $("#tblAddLabs>tbody:first").append('' + tr + '');
-                  
+                   resetLabOrder();
                }
 
                e.preventDefault();
-            });
+           });
 
-        $("#tblAddLabs").on('click', '.btnDelete', function () {
-             $(this).closest('tr').remove();
-             var x = $(this).closest('tr').find('td').eq(0).html();
+           $("#tblAddLabs").on('click', '.btnDelete', function () {
+               $(this).closest('tr').remove();
+               var x = $(this).closest('tr').find('td').eq(0).html();
 
-             //identifierList.splice($.inArray(x, identifierList), 1);
-             //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
-         });
+               //identifierList.splice($.inArray(x, identifierList), 1);
+               //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+           });
        
-         $("#btnCancelOrder").click(function (e) {
-             $("#tblAddLabs td").parent().remove();
-         });
+           $("#btnCancelOrder").click(function (e) {
+               $("#tblAddLabs td").parent().remove();
+           });
       
-         $("#btnResetOrder").click(function (e) {   
-             resetLabOrder();
-         });
+           $("#btnResetOrder").click(function (e) {   
+               resetLabOrder();
+           });
         
-         function resetLabOrder(parameters) {
-             $("#labTestTypes").val("");
-             $("#orderReason").val("");
-             $("#labNotes").val("");
-             $("#LabDate").val("");
-         }
+           function resetLabOrder(parameters) {
+               $("#labTestTypes").val("");
+               $("#orderReason").val("");
+               $("#labNotes").val("");
+               $("#LabDate").val("");
+           }
         
 
            // Save lab order
-      $("#btnSaveLab").click(function (e) {
+           $("#btnSaveLab").click(function (e) {
                var _fp = [];
                var data = $('#tblAddLabs tr').each(function (row, tr) {
 
@@ -1736,9 +1745,9 @@
            });
 
 
-        function addLabOrder(_fp) {
+           function addLabOrder(_fp) {
                var labOrder = JSON.stringify(_fp);
-              // console.log(patientId);
+               // console.log(patientId);
                //console.log(labOrder);
                $.ajax({
                    type: "POST",
@@ -1818,99 +1827,99 @@
 
            if (getNxtAppDateVal == '')
                getNxtAppDateVal = new Date();
-         //Date processing
+           //Date processing
            var today = new Date();
            var tomorrow = new Date();
            tomorrow.setDate(today.getDate() + 1);
 
-            $('#DateOfVisit').datepicker({
-                allowPastDates: true,
-                date: getVisitDateVal,
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#OnsetDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
+           $('#DateOfVisit').datepicker({
+               allowPastDates: true,
+               date: getVisitDateVal,
+               restricted: [{from: tomorrow, to: Infinity}],
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#OnsetDate').datepicker({
+               allowPastDates: true,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
            
-            $('#FemaleLMP').datepicker({
-                allowPastDates: true,
-                date: getFemaleLMPVal,
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+           $('#FemaleLMP').datepicker({
+               allowPastDates: true,
+               date: getFemaleLMPVal,
+               restricted: [{from: tomorrow, to: Infinity}],
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#EDCD').datepicker({
-                allowPastDates: true,
-                date: getEDDPVal,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#AntigenDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#NextAppDate').datepicker({
-                allowPastDates: false,
-                date: getNxtAppDateVal,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#vaccineDate').datepicker({
-                allowPastDates: true,
-                date: "",
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#EDCD').datepicker({
+               allowPastDates: true,
+               date: getEDDPVal,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#AntigenDate').datepicker({
+               allowPastDates: true,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#NextAppDate').datepicker({
+               allowPastDates: true,
+               date: getNxtAppDateVal,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#vaccineDate').datepicker({
+               allowPastDates: true,
+               date: 0,
+               restricted: [{from: tomorrow, to: Infinity}],
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
             
-         ////////////////////////////////////////////////////////////////////////////////////////////
-         //Gender validations
-            var male = "Male";
-            if (gender == male) {
+           ////////////////////////////////////////////////////////////////////////////////////////////
+           //Gender validations
+           var male = "Male";
+           if (gender == male) {
                 
-                $("#lmp").val("");
-                $("#examinationPregnancyStatus").val("");
-                $("#ExpectedDateOfChildBirth").val("");
-                $("#cacxscreening").val("");
+               $("#lmp").val("");
+               $("#examinationPregnancyStatus").val("");
+               $("#ExpectedDateOfChildBirth").val("");
+               $("#cacxscreening").val("");
 
-                $("#<%=lmp.ClientID%>").prop('disabled', true);
-                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
-                $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
-            } else {
-                $("#<%=lmp.ClientID%>").prop('disabled', false);
-                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
-                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
+               $("#<%=lmp.ClientID%>").prop('disabled', true);
+               $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
+               $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+               $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
+           } else {
+               $("#<%=lmp.ClientID%>").prop('disabled', false);
+               $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
+               $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+               $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
-            }
-         //.gender validation
-         //pregnancy validations
-        // var pregnancy = "";
-         var pregnant = "Pregnant";
+           }
+           //.gender validation
+           //pregnancy validations
+       
+           var pregnant = "Pregnant";
 
-         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
-         //console.log(patientId);
-         //console.log(pregnancy);
+           var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
+           //console.log(patientId);
+           //console.log(pregnancy);
 
-         if (pregnancy != pregnant) {
+           if (pregnancy != pregnant) {
                 
-              $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+               $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                
-                } else {
+           } else {
                 
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+               $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
               
 
                 }
          //.pregnancy validation
-            var advEventsTable = $('#dtlAdverseEvents').DataTable({
+        var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
                     type: "POST",
                     url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
@@ -2129,15 +2138,7 @@
                             //}
                         }
                         else if (data.step === 4) {
-                            $.when(savePatientPatientManagement()).then(function() {
-                                setTimeout(function() {
-                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
-                                },
-                                    2000);
-                            });
-
-                            //savePatientPatientManagement();
-                            //
+                            savePatientPatientManagement();
                             //if ($("#datastep2").parsley().validate()) {
 
                             //} else {
@@ -2170,100 +2171,122 @@
              
 
                 var visitDate = $("#<%=VisitDate.ClientID%>").val();
-                //var visitScheduled = $('input[name="Scheduled"]:checked').val();
-                ////////////////////////////////////////
-                var rblVS = '<%= rblVisitScheduled.ClientID %>';
-                var rblANC = '<%= rblANCProfile.ClientID %>';
+               //var visitScheduled = $('input[name="Scheduled"]:checked').val();
+               ////////////////////////////////////////
+               var rblVS = '<%= rblVisitScheduled.ClientID %>';
+               var rblANC = '<%= rblANCProfile.ClientID %>';
                 
-                var listVS = document.getElementById(rblVS); //Client ID of the radiolist
-                var listANC = document.getElementById(rblANC);
-                var inputsVS = listVS.getElementsByTagName("input");
-                var inputsANC = listANC.getElementsByTagName("input");
-                var visitScheduled;
-                var ANCProfile;
-                for (var i = 0; i < inputsVS.length; i++) {
-                    if (inputsVS[i].checked) {
-                        visitScheduled = inputsVS[i].value;
-                        break;
-                    }
-                }
+               var listVS = document.getElementById(rblVS); //Client ID of the radiolist
+               var listANC = document.getElementById(rblANC);
+               var inputsVS = listVS.getElementsByTagName("input");
+               var inputsANC = listANC.getElementsByTagName("input");
+               var visitScheduled;
+               var ANCProfile;
+               for (var i = 0; i < inputsVS.length; i++) {
+                   if (inputsVS[i].checked) {
+                       visitScheduled = inputsVS[i].value;
+                       break;
+                   }
+               }
 
-                for (var i = 0; i < inputsANC.length; i++) {
-                    if (inputsANC[i].checked) {
-                        ANCProfile = inputsANC[i].value;
-                        break;
-                    }
-                }
+               for (var i = 0; i < inputsANC.length; i++) {
+                   if (inputsANC[i].checked) {
+                       ANCProfile = inputsANC[i].value;
+                       break;
+                   }
+               }
 
 
-                /////////////////////////////////////////////
-                if (visitScheduled == undefined)
-                {
-                    alert("Kindly select if visit was scheduled.");
-                    var specificField = $(rblVS).parsley();
-                    // add the error
-                    window.ParsleyUI.addError(specificField, "myCustomError", 'this is a custom error message');
-                    // remove the error
-                    window.ParsleyUI.removeError(specificField, "myCustomError");
+               /////////////////////////////////////////////
+               if (visitScheduled == undefined)
+               {
+                   alert("Kindly select if visit was scheduled.");
+                   var specificField = $(rblVS).parsley();
+                   // add the error
+                   window.ParsleyUI.addError(specificField, "myCustomError", 'this is a custom error message');
+                   // remove the error
+                   window.ParsleyUI.removeError(specificField, "myCustomError");
 
-                    //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
-                }
+                   //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
+               }
            
-                if (ANCProfile == undefined)
-                {
-                    ANCProfile = "99";
-                }
+               if (ANCProfile == undefined)
+               {
+                   ANCProfile = "99";
+               }
                     
 
-                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-                var complaints = $("#<%=complaints.ClientID%>").val();
-                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-                var LMP = $("#<%=lmp.ClientID%>").val();
-                var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
-                var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
-                var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+               var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+               var complaints = $("#<%=complaints.ClientID%>").val();
+               var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+               var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+               var LMP = $("#<%=lmp.ClientID%>").val();
+               var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
+               var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
+               //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
+               var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
+               var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
 
-                var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
-                var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-                var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
+               var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
+               var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
+               var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
 
-                ///////////////////////////////////////////////////////
-                var rowCount = $('#dtlAdverseEvents tbody tr').length;
-                var adverseEventsArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        adverseEventsArray[i] = {
-                            "adverseSeverityID": advEventsTable.row(i).data()[0],
-                            "adverseEvent": advEventsTable.row(i).data()[1],
-                            "medicineCausingAE": advEventsTable.row(i).data()[2],
-                            "adverseSeverity": advEventsTable.row(i).data()[3],
-                            "adverseAction": advEventsTable.row(i).data()[4]
-                        }
-                    }
-                }
-                catch (ex) {  }
+               ///////////////////////////////////////////////////////
+               var rowCount = $('#dtlAdverseEvents tbody tr').length;
+               var adverseEventsArray = new Array();
+               try {
+                   for (var i = 0 ; i < rowCount; i++) {
+                       adverseEventsArray[i] = {
+                           "adverseSeverityID": advEventsTable.row(i).data()[0],
+                           "adverseEvent": advEventsTable.row(i).data()[1],
+                           "medicineCausingAE": advEventsTable.row(i).data()[2],
+                           "adverseSeverity": advEventsTable.row(i).data()[3],
+                           "adverseAction": advEventsTable.row(i).data()[4]
+                       }
+                   }
+               }
+               catch (ex) {  }
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            if (response.d > 0)
-                                toastr.success(response.d, "Presenting Complaints");
-                            else
-                                toastr.error("Error occured while saving Presenting Complaints");
-                        },
-                        error: function (response) {
-                            //alert(msg);
-                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                        }
-                    });
-            }
+               // console.log(visitDate);--date
+               // console.log(visitScheduled);-->1
+               // console.log(visitBy);-->1119
+               // console.log(complaints);   -->headache
+               // console.log(tbscreening);  -->35
+               //console.log(nutritionscreening);-->38
+               //console.log(LMP);-->02-Mar-2017
+               //console.log(pregStatus);  -->92
+               //console.log(nutritionscreening); -->38
+               // console.log(EDD);-->02-Mar-2017
+               //console.log(ANCProfile); -->1
+               // console.log(onFP);-->1
+               console.log(FPMethod);
+               //console.log(CaCx);
+               //console.log(STIScreening);
+               //console.log(STIPartnerNotification);
+               // console.log(adverseEventsArray);
+
+
+
+
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                   data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+                       if (response.d > 0)
+                           toastr.success(response.d, "Presenting Complaints");
+                       else
+                           toastr.error("Error occured while saving Presenting Complaints");
+                   },
+                   error: function (response) {
+                       //alert(msg);
+                       toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                   }
+               });
+           }
+
 
 
            function savePatientEncounterChronicIllness() {
@@ -2283,15 +2306,15 @@
                }
                catch (ex) { }
                ///////////////////////////////////////////
-                //var chronicIllnessTable = new Array();
-                //$("#dtlChronicIllness tr").each(function (row, tr) {
-                //    chronicIllnessTable[row] = {
-                //        "chronicIllness": $(tr).find('td:eq(0)').text(),
-                //        "treatment": $(tr).find('td:eq(1)').text(),
-                //        "dose": $(tr).find('td:eq(2)').text(),
-                //        "duration": $(tr).find('td:eq(3)').text()
-                //    }
-                //});
+               //var chronicIllnessTable = new Array();
+               //$("#dtlChronicIllness tr").each(function (row, tr) {
+               //    chronicIllnessTable[row] = {
+               //        "chronicIllness": $(tr).find('td:eq(0)').text(),
+               //        "treatment": $(tr).find('td:eq(1)').text(),
+               //        "dose": $(tr).find('td:eq(2)').text(),
+               //        "duration": $(tr).find('td:eq(3)').text()
+               //    }
+               //});
 
                ///////////////////////////////////////////////////////
                var rowCount = $('#dtlVaccines tbody tr').length;
@@ -2311,21 +2334,21 @@
                catch (ex) { }
                
 
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
-                    data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        toastr.success(response.d, "Chronic Illness");
-                    },
-                    error: function (response) {
-                        //alert(msg);
-                        toastr.error(response.d, "Chronic Illness Error");
-                    }
-                });
-            }
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
+                   data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+                       toastr.success(response.d, "Chronic Illness");
+                   },
+                   error: function (response) {
+                       //alert(msg);
+                       toastr.error(response.d, "Chronic Illness Error");
+                   }
+               });
+           }
 
            function savePatientPhysicalExams() {
                ///////////////////////////////////////////////////////
@@ -2345,130 +2368,169 @@
                }
                catch (ex) { }
 
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
-                    data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        toastr.success(response.d, "Physical Exam");
-                    },
-                    error: function (response) {
-                        //alert(msg);
-                        toastr.error(response.d, "Physical Exam Error");
-                    }
-                });
-            }
-
-
-            function savePatientPatientManagement() {
-                
-                var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
-                var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
-                var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
-                var nextAppDate = $("#<%=NextAppointmentDate.ClientID%>").val();
-                var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
-
-                var rowCount = $('#dtlDiagnosis tbody tr').length;
-                var diagnosisArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        diagnosisArray[i] = {
-                            "diagnosis": diagnosisTable.row(i).data()[0],
-                            "treatment": diagnosisTable.row(i).data()[1]
-                        }
-                    }
-                }
-                catch (ex) { }
-                
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
-                    data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        // alert("Saved");
-                        toastr.success(response.d, "Patient Management");
-                    },
-                    error: function (response) {
-                        //alert(msg);
-                        toastr.error(response.d, "Patient Management Error");
-                    }
-                });
-            }
-
-         
-
-
-            function getCheckBoxListItemsChecked(elementId) {
-                var elementRef = document.getElementById(elementId);
-                var checkBoxArray = elementRef.getElementsByTagName('input');
-                var checkedValues = '';
-
-                for (var i = 0; i < checkBoxArray.length; i++) {
-                    var checkBoxRef = checkBoxArray[i];
-
-                    if (checkBoxRef.checked == true) {
-                        var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
-
-                        if (labelArray.length > 0) {
-                            if (checkedValues.length > 0)
-                                checkedValues += ',';
-
-                            checkedValues += labelArray[0].innerHTML;
-                        }
-                    }
-                }
-
-                return checkedValues;
-            }
-
-
-
-           ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-         
-  });
-      
-       function getPharmacyDrugList() {
-           //var input = document.getElementById("txtSelectDrug");
-           //var awesomplete = new Awesomplete(input, {
-           //    minChars: 1,
-           //    autoFirst: true
-           //});
-             
                $.ajax({
                    type: "POST",
-                   url: "../WebService/PatientEncounterService.asmx/GetDrugList",
-                   data: "{'regimenLine':'" + 0 + "'}",
+                   url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
+                   data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "'}",
                    contentType: "application/json; charset=utf-8",
                    dataType: "json",
                    success: function (response) {
-                       var drugListData = response.d;
-                       //alert(serverData.length);
-
-                       var drugList = [];
-                       for (var i = 0; i < drugListData.length; i++) {
-
-                           drugList.push(drugListData[i][1]);
-                           alert(drugListData[i][0] + " " + drugListData[i][1])
-                       }
-
-                       //awesomplete.list = drugList;
-                       $( "#ctl00_IQCareContentPlaceHolder_txtSelectDrug" ).autocomplete({
-                           source: drugList
-                       });
-
-                       toastr.success(response.d, "Drug List");
+                       toastr.success(response.d, "Physical Exam");
                    },
                    error: function (response) {
-                       alert(response.d);
-                       toastr.error(response.d, "Drug List Error");
+                       //alert(msg);
+                       toastr.error(response.d, "Physical Exam Error");
                    }
                });
+           }
+
+
+           function savePatientPatientManagement() {
+                
+               var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
+               var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
+               var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
+               var nextAppDate = $("#<%=NextAppointmentDate.ClientID%>").val();
+               var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
+
+               var rowCount = $('#dtlDiagnosis tbody tr').length;
+               var diagnosisArray = new Array();
+               try {
+                   for (var i = 0 ; i < rowCount; i++) {
+                       diagnosisArray[i] = {
+                           "diagnosis": diagnosisTable.row(i).data()[0],
+                           "treatment": diagnosisTable.row(i).data()[1]
+                       }
+                   }
+               }
+               catch (ex) { }
+                
+               $.ajax({
+                   type: "POST",
+                   url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
+                   data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+                       // alert("Saved");
+                       toastr.success(response.d, "Patient Management");
+                   },
+                   error: function (response) {
+                       //alert(msg);
+                       toastr.error(response.d, "Patient Management Error");
+                   }
+               });
+           }
+
+
+           function getCheckBoxListItemsChecked(elementId) {
+               var elementRef = document.getElementById(elementId);
+               var checkBoxArray = elementRef.getElementsByTagName('input');
+               var checkedValues = '';
+
+               for (var i = 0; i < checkBoxArray.length; i++) {
+                   var checkBoxRef = checkBoxArray[i];
+
+                   if (checkBoxRef.checked == true) {
+                       var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
+
+                       if (labelArray.length > 0) {
+                           if (checkedValues.length > 0)
+                               checkedValues += ',';
+
+                           checkedValues += labelArray[0].innerHTML;
+                       }
+                   }
+               }
+
+               return checkedValues;
+           }
+
+})
+       //////////////////////////////////PHARMACY//////////////////////////////////////////////////////////////////////////////
+      var advDrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+                //ajax: {
+                //    type: "POST",
+                //    url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                //    dataSrc: 'd',
+                //    contentType: "application/json; charset=utf-8",
+                //    dataType: "json"
+                //},
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false
+                //columnDefs: [
+                //{
+                //    "targets": [0],
+                //    "visible": false,
+                //    "searchable": false
+                //}
+                //    ]
+            });
+
+           $("#dtlDrugPrescription").on('click',
+                '.btnDelete',
+                function () {
+                    advDrugPrescriptionTable
+                        .row($(this).parents('tr'))
+                        .remove()
+                        .draw();
+                });
+       
+           
+           function drugList() {
                
+               var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
+               var awesomplete = new Awesomplete(drugInput, {
+                   minChars: 1
+               });
+
+               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   getBatches(result[0]);
+                   this.value = result[1];
+               });
+        
+               $.ajax({
+                   url: '../WebService/PatientEncounterService.asmx/GetDrugList',
+                   type: 'POST',
+                   dataType: 'json',
+                   data: "{'regimenLine':''}",
+                   contentType: "application/json; charset=utf-8",
+           
+                   success: function (data) {
+                       var serverData = data.d;
+                       var drugList = [];
+                       for (var i = 0; i < serverData.length; i++) {
+                           //drugList.push(serverData[i][1]);
+                           drugList.push({ label: serverData[i][1], value: serverData[i][0] });
+                       }
+                       awesomplete.list = drugList;
+                   }
+               });    
+                
+           }
+
+       function getBatches(drugPk)
+       {
+           $.ajax({
+               url: '../WebService/PatientEncounterService.asmx/GetDrugBatches',
+               type: 'POST',
+               dataType: 'json',
+               data: "{'DrugPk':'" + drugPk + "'}",
+               contentType: "application/json; charset=utf-8",
+           
+               success: function (data) {
+                   var serverData = data.d;
+                   var batchList = [];
+                   $("#<%=ddlBatch.ClientID%>").find('option').remove().end();
+			       $("#<%=ddlBatch.ClientID%>").append('<option value="0">Select</option>');
+                   for (var i = 0; i < serverData.length; i++) {
+                      $("#<%=ddlBatch.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
+                   }
+               }
+           });
        }
    
 </script>

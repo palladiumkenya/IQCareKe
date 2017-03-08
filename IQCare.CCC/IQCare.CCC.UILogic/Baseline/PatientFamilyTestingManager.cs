@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Common;
@@ -25,7 +26,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 MidName = p.MiddleName,
                 LastName = p.LastName,
                 Sex = p.Sex,
-                DateOfBirth = p.DateOfBirth,
+                //DateOfBirth = p.DateOfBirth,
             };
             int personId = _personManager.AddPerson(person);
 
@@ -37,14 +38,21 @@ namespace IQCare.CCC.UILogic.Baseline
             };
             _personRelationshipManager.AddPersonRelationship(relationship);
 
+            DateTime ? baselineDate = p.BaselineHivStatusDate;
+            if (baselineDate == DateTime.MinValue)
+                baselineDate = null;
+            DateTime? testingDate = p.HivTestingResultsDate;
+            if (testingDate == DateTime.MinValue)
+                testingDate = null;
+
             PatientHivTesting familyTesting = new PatientHivTesting()
             {
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 BaselineResult = p.BaseLineHivStatusId,
-                BaselineDate = p.BaselineHivStatusDate,
+                BaselineDate = baselineDate,
                 TestingResult = p.HivTestingResultsId,
-                TestingDate = p.HivTestingResultsDate,
+                TestingDate = testingDate,
                 ReferredToCare = p.CccReferal,
                 CccNumber = p.CccReferaalNumber
             };
@@ -71,7 +79,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 MidName = p.MiddleName,
                 LastName = p.LastName,
                 Sex = p.Sex,
-                DateOfBirth = p.DateOfBirth,
+                //DateOfBirth = p.DateOfBirth,
             };
             int personId = _personManager.UpdatePerson(person, p.PersonId);
 
@@ -116,7 +124,7 @@ namespace IQCare.CCC.UILogic.Baseline
                             MiddleName = person.MiddleName,
                             LastName = person.LastName,
                             Sex = person.Sex,
-                            DateOfBirth = person.DateOfBirth,
+                            //DateOfBirth = person.DateOfBirth,
                             PersonId = relationship.PersonId,
                             RelationshipId = relationship.RelationshipTypeId,
                             BaseLineHivStatusId = hivTesting.BaselineResult,

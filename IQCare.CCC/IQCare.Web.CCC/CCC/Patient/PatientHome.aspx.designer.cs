@@ -94,6 +94,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label vitalsMUAC;
         
         /// <summary>
+        /// vitalBloodPressure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label vitalBloodPressure;
+        
+        /// <summary>
         /// vitalTemperature control.
         /// </summary>
         /// <remarks>
@@ -155,5 +164,14 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label enrollmentviralloaddate;
+        
+        /// <summary>
+        /// ucExtruder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
     }
 }

@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-
     <div class="=col-md-12">
         
         <div class="col-md-12">
@@ -63,7 +62,7 @@
 		                     <div class="col-md-3">
 		                         <div class="form-group">
                                     <asp:HiddenField ID="hdnPersonId" ClientIDMode="Static" runat="Server" Value="" />
-                                    <div class="col-md-12"><label for="personFname" class="control-label pull-left">First Name</label></div>
+                                    <div class="col-md-12"><label for="personFname" class="required control-label pull-left">First Name</label></div>
                                     <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="personFname" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                     </div>
@@ -81,7 +80,7 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="col-md-12"><label for="personLName" class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12"><label for="personLName" class="required control-label pull-left">Last Name</label></div>
                                     <div class="col-md-12">
                                             <asp:TextBox runat="server" ID="personLName" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" data-parsley-length="[2,25]"></asp:TextBox>
                                     </div>
@@ -89,7 +88,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="col-md-12"><label for="Gender" class="control-label pull-left">Gender</label></div>
+                                <div class="col-md-12"><label for="Gender" class="required control-label pull-left">Gender</label></div>
                                 <div class="col-md-12">
                                     <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
                                 </div>
@@ -109,7 +108,7 @@
                                                
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Date of Birth</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Date of Birth</label></div>
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="MyDateOfBirth">
                                                     <div class="input-group">
@@ -199,7 +198,11 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
-                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
+                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0" OnTextChanged="personAge_OnTextChanged" AutoPostBack="True"></asp:TextBox>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +235,7 @@
 
                         <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                    <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
+                                    <div class="col-md-12"><label for="NationalId" class="required control-label pull-left">ID Number</label></div>
                                     <div class="col-md-12">
                                         <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[8,8]"  />
                                     </div>
@@ -294,7 +297,7 @@
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">County</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">County</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="countyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
                                         </div>
@@ -303,7 +306,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Sub-County</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Sub-County</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="SubcountyId" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1" />
                                         </div>
@@ -312,7 +315,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <div class="col-md-12"><label class="control-label pull-left">Ward</label></div>
+                                        <div class="col-md-12"><label class="required control-label pull-left">Ward</label></div>
                                         <div class="col-md-12">
                                             <asp:DropDownList runat="server" ID="WardId" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
                                         </div>
@@ -345,14 +348,14 @@
                                </div>
 
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Landmark</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Landmark</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox runat="server" class="form-control input-sm" placeholder="landmark.." id="PatientLandmark" data-parsley-required="true" data-parsley-length="[2,100]" />
                                     </div>
                                </div>
                                
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Nearest Health Centre</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Nearest Health Centre</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
                                     </div>
@@ -370,12 +373,12 @@
                                 <div class="col-md-4">
                                      <div class="col-md-12"><label class="control-label pull-left">Postal Address</label></div>
                                      <div class="col-md-12">
-                                          <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-required="true" data-parsley-length="[8,100]" ClientIDMode="Static"/>
+                                          <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-length="[8,100]" ClientIDMode="Static"/>
                                      </div>     
                                 </div>
                                
                                <div class="col-md-2">
-                                    <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Mobile No.</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
                                     </div>         
@@ -397,11 +400,19 @@
                             </div> 
                                    
                            <div class="col-md-12"><label class=" control-label text-primary  pull-left">Treatment Supporter Information</label></div>
-                           <div class="col-md-12"><hr/></div>
-                            
+                            <div class="col-md-12 form-group">
+                                
+                                <div class="col-md-3">
+                                    <div class="col-md-12"><label class="control-label pull-left">Is Guardian?</label></div>
+                                    <div class="col-md-12">
+                                        <asp:DropDownList ID="ISGuardian" CssClass="form-control input-sm"  runat="server" ClientIDMode="Static" data-parsley-required="true"></asp:DropDownList>
+                                    </div>
+                                </div>
+                                
+                            </div>
                            <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                              <div class="col-md-12"><label class="required control-label pull-left">First Name</label></div>
                                               <div class="col-md-12">
                                                    <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                                </div>
@@ -415,7 +426,7 @@
                                          </div>
 
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                              <div class="col-md-12"><label class="required control-label pull-left">Last Name</label></div>
                                               <div class="col-md-12">
                                                    <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
                                               </div>
@@ -423,7 +434,7 @@
 
                                 <div class="col-md-3">
                                               <div class="form-group">
-                                                  <div class="col-md-12"><label class="control-label pull-left">Gender </label></div>
+                                                  <div class="col-md-12"><label class="required control-label pull-left">Gender </label></div>
                                                   <div class="col-md-12">
                                                       <asp:DropDownList runat="server" ID="tsGender" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
                                                   </div>
@@ -441,7 +452,7 @@
                                  </div>-->
                                
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="control-label pull-left">Mobile Contact.</label></div>
+                                    <div class="col-md-12"><label class="required control-label pull-left">Mobile Contact.</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox  runat="server" type="text" id="TSContacts" class="form-control input-sm" placeholder="Mobile No..." data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
                                     </div>         
@@ -543,39 +554,6 @@
                     getWardList();
                 });
 
-
-                
-                /* Business Rules setup */
-                function personAgeRule()
-                {
-                    personAge = $("#personAge").val();
-
-                    if (personAge >= 18) {
-                        $("#ChildOrphan").val("");
-                        $("#Inschool").val("");
-                        $("#GurdianFNames").val("");
-                        $("#GurdianMName").val("");
-                        $("#GurdianLName").val("");
-                        $("#GuardianGender").val("");
-
-                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
-                        $("#<%=Inschool.ClientID%>").prop('disabled', true);
-                        $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
-                        $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
-                        $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
-                        $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
-                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
-                    } else {
-                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
-                        $("#<%=Inschool.ClientID%>").prop('disabled',false);
-                        $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
-                        $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
-                        $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
-                        $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
-                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
-                    }
-                };
-
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
                         var currentStep = data.step;
@@ -597,17 +575,19 @@
                                         "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"});
                                 
                             /* add constraints based on age*/                                         
-                            if ($('#datastep1').parsley().validate()) {
-                                if (personAge >= 18) {
-                                    $.when(addPerson()).then(function(){});                                   
+                                if ($('#datastep1').parsley().validate()) {
+                                    //console.log($("#personAge").val());
+                                    personAge = $("#personAge").val();
+                                    if (personAge >= 18) {
+                                        $.when(addPerson()).then(function(){});                                   
+                                    } else {
+                                        $.when(addPerson()).then(function(){
+                                            setTimeout(function(){
+                                                addPersonGaurdian();
+                                            }, 2000);                            
+                                        });
+                                    }
                                 } else {
-                                    $.when(addPerson()).then(function(){
-                                        setTimeout(function(){
-                                            addPersonGaurdian();
-                                        }, 2000);                            
-                                    });
-                                }
-                            } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
                                 evt.preventDefault();
@@ -724,6 +704,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
                     } else {
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
                         $("#<%=Inschool.ClientID%>").prop('disabled',false);
@@ -732,6 +713,7 @@
                         $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
                     }
                     return age;
                 }
@@ -803,7 +785,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPerson",
-                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ",'dateOfBirth':'" + moment(dateOfBirth).format('DD-MMM-YYYY')  + "','nationalId':'" + natId + "', 'maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "', 'patientid': '" + isPatientSet + "'}",
+                        data: "{'firstname':'" + fname + "','middlename':'" + mname + "','lastname':'" + lname + "','gender':" + sex + ", 'maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','dob':'" + moment(dateOfBirth).format('DD-MMM-YYYY') + "','nationalId':'" + natId + "', 'patientid': '" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -831,7 +813,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonGuardian",
-                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','dateOfBirth':'" + "<%=DateTime.Now%>" + "' ,'nationalId':'" + natId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "', 'patientid':'" + isPatientSet + "'}",
+                        data: "{'firstname':'" + gfname + "','middlename':'" + gmname + "','lastname':'" + glname + "','gender': '" + gsex + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "', 'patientid':'" + isPatientSet + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -843,20 +825,22 @@
                     });
                 }
 
-               function addPersonTreatmentSupporter() {
-                   var isPatientSet = $.urlParam('PatientId');
-
+                function addPersonTreatmentSupporter() {
+                    var isPatientSet = $.urlParam('PatientId');
+                    
                     var tFname = $("#<%=tsFname.ClientID%>").val();
                     var tMname = $("#<%=tsMiddleName.ClientID%>").val();
                     var tLname = $("#<%=tsLastName.ClientID%>").val();
-                   var tSex = $("#<%=tsGender.ClientID%>").val();
-                   var mobileContact = $("#<%=TSContacts.ClientID%>").val();
-                   var natId = 999999;
+                    var tSex = $("#<%=tsGender.ClientID%>").val();
+                    var mobileContact = $("#<%=TSContacts.ClientID%>").val();
+                    var natId = 999999;
+                    var supporterIsGuardian = $("#<%=ISGuardian.ClientID%>").find(":selected").text();
+
 
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
-                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "'}",
+                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "','supporterIsGuardian':'" + supporterIsGuardian +"'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -1144,6 +1128,15 @@
                             $("#GurdianLName").val(patientDetails.GurdianLName);
                             $("#GuardianGender").val(patientDetails.GuardianGender);
 
+                            console.log(patientDetails.GuardianId);
+                            console.log(patientDetails.PatientTreatmentSupporterId);
+
+                            if (patientDetails.GuardianId == patientDetails.PatientTreatmentSupporterId) {
+                                $("#ISGuardian option:contains(Yes)").attr('selected', true);
+                            } else {
+                                $("#ISGuardian option:contains(No)").attr('selected', true);
+                            }
+
                             /*County*/
                             $("#countyId").val(patientDetails.CountyId);
                             $.when(getSubcountyList()).then(function() {
@@ -1198,36 +1191,101 @@
                     });
                 }
 
-                $( "#personAge" ).keyup(function() {
+                $( "#personAge").keyup(function() {
                     var personAge = $("#personAge").val();
                     if (personAge != null && personAge != "") {
-                        var today = new Date();
-                        today.setFullYear(today.getFullYear() - personAge);
-                        var month = (today.getMonth() + 1);
-                        var day = today.getDate();
-                        if (month < 10) {
-                            month = "0" + month;
-                        }
-                        if (day < 10) {
-                            day = "0" + day;
-                        }
-                        var dob = today.getFullYear() + "-" + month + "-"+ day;
-                        
-
-                        var formatter = new Intl.DateTimeFormat("en", { month: "short" }),
-                        month2 = formatter.format(new Date(dob));
-
-                        dob = day + "-" + month2 + "-" + today.getFullYear();
-                        $('#MyDateOfBirth').datepicker('setDate', dob);
                         personAgeRule();
-                        //console.log(dob);
                     } else {
                         $("#PersonDoB").val("");
                     }
                     
                 });
 
+                var $wizard = $('#myWizard').wizard();
+                var wizard = $wizard.data('fu.wizard');
+                $wizard.off('click', 'li.complete');
+                $wizard.on('click', 'li', $.proxy(wizard.stepclicked, wizard));
+
+                /*$('#myWizard').wizard('selectedItem', {
+                    step: 2
+                });*/
+
+
+                $("#ISGuardian").change(function() {
+                    console.log($(this).find(":selected").text());
+
+                    if ($(this).find(":selected").text() == 'Yes') {
+                        getGuardian();
+                    }
+
+                });
+
+                function getGuardian() {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PersonService.asmx/GetGuardian",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            var patientDetails = JSON.parse(response.d);
+
+                            $("#tsFname").val(patientDetails.FirstName);
+                            $("#tsMiddleName").val(patientDetails.MiddleName);
+                            $("#tsLastName").val(patientDetails.LastName);
+                            $("#tsGender").val(patientDetails.Gender);
+
+                            console.log(response);
+
+                        },
+                        error: function (response) {
+                            generate('error', response.d);
+                        }
+                    });
+                }
             });
+
+        /* Business Rules setup */
+        function personAgeRule()
+        {
+            personAge = $("#personAge").val();
+            //console.log(personAge);
+            if (personAge >= 18) {
+                $("#ChildOrphan").val("");
+                $("#Inschool").val("");
+                $("#GurdianFNames").val("");
+                $("#GurdianMName").val("");
+                $("#GurdianLName").val("");
+                $("#GuardianGender").val("");
+
+                $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+            } else {
+                $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
+                $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
+            }
+        };
+
+        //On UpdatePanel Refresh
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        if (prm != null) {
+            prm.add_endRequest(function (sender, e) {
+                if (sender._postBackSettings.panelsToUpdate != null) {
+                    personAgeRule();
+                }
+            });
+        };
 
     </script>
 </asp:Content>

@@ -26,5 +26,10 @@ namespace IQCare.CCC.UILogic.Enrollment
                 throw ex;
             }
         }
+
+        public List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId)
+        {
+            return _mgr.GetPatientEnrollmentByPatientId(patientId);
+        }
     }
 }

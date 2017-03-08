@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using System.Web.UI;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -59,10 +60,12 @@ namespace IQCare.Web.CCC.Patient
             {
                 Inschool.Items.Add(new ListItem("select", "0"));
                 ChildOrphan.Items.Add(new ListItem("select", "0"));
+                ISGuardian.Items.Add(new ListItem("select", "0"));
                 foreach (var k in lookItemByGroup)
                 {
                     Inschool.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                     ChildOrphan.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
+                    ISGuardian.Items.Add(new ListItem(k.ItemName, k.ItemId.ToString()));
                 }
             }
 
@@ -117,6 +120,27 @@ namespace IQCare.Web.CCC.Patient
             //        WardId.Items.Add(new ListItem(items.WardName, items.WardId.ToString()));
             //    }
             //}
+        }
+
+        protected void personAge_OnTextChanged(object sender, EventArgs e)
+        {
+            int personAge = 0;
+            if(this.personAge.Text!=null)
+                personAge = int.Parse(this.personAge.Text);
+            if (personAge > 0)
+            {
+                DateTime currentDate;
+
+                currentDate = Convert.ToDateTime("06-15-" + Convert.ToDateTime(DateTime.Now).Year);
+                DateTime birthdate = currentDate.AddYears(personAge * -1);
+                var dob = ((DateTime)birthdate).ToString(Session["AppDateFormat"].ToString());
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "$('#MyDateOfBirth').datepicker('setDate', '" + dob + "');", true);
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "", true);
+            }
+            else
+            {
+                this.PersonDoB.Text = null;
+            }
         }
     }
 }
