@@ -219,11 +219,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
                                         <div class="col-md-12">
-                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                <ContentTemplate>
-                                                    <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0" OnTextChanged="personAge_OnTextChanged" AutoPostBack="True"></asp:TextBox>
-                                                </ContentTemplate>
-                                            </asp:UpdatePanel>
+                                            <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -895,63 +891,6 @@
                     });
                }
 
-                function addPersonMaritalStatus() {
-
-                    var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
-                    var isPatientSet = $.urlParam('PatientId');
-
-                    var url = null;
-
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonMaritalStatus";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonMaritalStatus";
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: "{'personId':'" + personId + "','maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','patientid':'" + isPatientSet + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person Marital Status");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Marital Status Error");
-                        }
-                    });
-                }
-
-                function addPersonOvcStatus() {
-                    var isPatientSet = $.urlParam('PatientId');
-
-                    var personGuardianId = 0;
-                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
-                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
-                    var url = null;
-
-                    if (isPatientSet > 0) {
-                        url = "../WebService/PersonService.asmx/UpdatePersonOvcStatus";
-                    } else {
-                        url = "../WebService/PersonService.asmx/AddPersonOvcStatus";
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: "{'personId':'" +personId  + "','guardianId':'" + personGuardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person OVC Status");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "--- Person OVC Status Error ---");
-                        }
-                    });
-                }
-
                 function addPersonLocation() {
 
                     var isPatientSet = $.urlParam('PatientId');
@@ -1176,11 +1115,10 @@
                 $( "#personAge").keyup(function() {
                     var personAge = $("#personAge").val();
                     if (personAge != null && personAge != "") {
+
+                        $('#MyDateOfBirth').datepicker('setDate', estimateDob(personAge));
                         personAgeRule();
-                    } else {
-                        $("#PersonDoB").val("");
-                    }
-                    
+                    }               
                 });
 
                 /*var $wizard = $('#myWizard').wizard();
@@ -1283,18 +1221,11 @@
                     $("#<%=NationalId.ClientID%>").prop('disabled', true);
                 }
             }
-        };
+        }
 
-        //On UpdatePanel Refresh
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-        if (prm != null) {
-            prm.add_endRequest(function (sender, e) {
-                if (sender._postBackSettings.panelsToUpdate != null) {
-                    personAgeRule();
-                }
-            });
-        };
-
+        function estimateDob(personAge){
+            
+        }
     </script>
 </asp:Content>
 
