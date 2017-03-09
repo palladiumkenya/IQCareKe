@@ -1107,12 +1107,12 @@
             $("#<%=BaselineWeight.ClientID%>").on('change',
                 function() {
                     var bmi = calcBmi();
-                    $("<%=BaselineBMI.ClientID%>").text(bmi);
+                    document.getElementById("BaselineBMI").value = bmi;
                 });
-             $("#<%=BaselineWeight.ClientID%>").on('change',
+             $("#<%=BaselineHeight.ClientID%>").on('change',
                 function() {                
                     var bmi = calcBmi();
-                    $("<%=BaselineBMI.ClientID%>").text(bmi);
+                    document.getElementById("BaselineBMI").value = bmi;
                 });
 
             function calcBmi()
