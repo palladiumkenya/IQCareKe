@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="=col-md-12">
+    <div class="=col-md-12 col-sm-12 col-xs-12">
         
         <div class="col-md-12">
              <div class="bs-callout bs-callout-danger hidden">
@@ -16,7 +16,7 @@
              </div>
         </div>
         
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
                       
             <div class="wizard" data-initialize="wizard" id="myWizard">
                  <div class="steps-container">
@@ -931,8 +931,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person OVC Status");
                         },
-                        error: function (response) {
-                            toastr.error(response.d, "--- Person OVC Status Error ---");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                 }
@@ -958,8 +960,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Location");
                         },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Location Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                 }
@@ -982,8 +986,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Contact Information");
                         },
-                        error: function (response) {
-                            toastr.success(response.d, "Person Contact Information Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                 }
@@ -1003,8 +1009,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Popuation");
                         },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Population Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                     //var personId = 0;
@@ -1035,8 +1043,10 @@
                                         $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' ('+itemList.ItemName+')</option>');
                                     }); 
                                 },
-                                error: function (response) {
-                                    generate('error', response.d);
+                                error: function (xhr, errorType, exception) {
+                                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                                    return false;
                                 }
                             });
                         }
