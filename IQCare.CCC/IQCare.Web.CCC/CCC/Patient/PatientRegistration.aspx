@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientRegistration.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="=col-md-12">
+    <div class="=col-md-12 col-sm-12 col-xs-12">
         
         <div class="col-md-12">
              <div class="bs-callout bs-callout-danger hidden">
@@ -16,7 +16,7 @@
              </div>
         </div>
         
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12 col-sm-12">
                       
             <div class="wizard" data-initialize="wizard" id="myWizard">
                  <div class="steps-container">
@@ -895,6 +895,63 @@
                     });
                }
 
+                function addPersonMaritalStatus() {
+
+                    var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
+                    var isPatientSet = $.urlParam('PatientId');
+
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonMaritalStatus";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonMaritalStatus";
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: "{'personId':'" + personId + "','maritalStatusId':'" + maritalstatusId + "','userId':'" + userId + "','patientid':'" + isPatientSet + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d, "Person Marital Status");
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "Person Marital Status Error");
+                        }
+                    });
+                }
+
+                function addPersonOvcStatus() {
+                    var isPatientSet = $.urlParam('PatientId');
+
+                    var personGuardianId = 0;
+                    var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
+                    var inSchool = $("#<%=Inschool.ClientID%>").find(":selected").text();
+                    var url = null;
+
+                    if (isPatientSet > 0) {
+                        url = "../WebService/PersonService.asmx/UpdatePersonOvcStatus";
+                    } else {
+                        url = "../WebService/PersonService.asmx/AddPersonOvcStatus";
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: "{'personId':'" +personId  + "','guardianId':'" + personGuardianId + "','orphan':'" + orphan + "','inSchool':'" + inSchool + "','userId':'" + userId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d, "Person OVC Status");
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "--- Person OVC Status Error ---");
+                        }
+                    });
+                }
+
                 function addPersonLocation() {
 
                     var isPatientSet = $.urlParam('PatientId');
@@ -916,8 +973,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Location");
                         },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Location Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                 }
@@ -940,8 +999,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Contact Information");
                         },
-                        error: function (response) {
-                            toastr.success(response.d, "Person Contact Information Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                 }
@@ -961,8 +1022,10 @@
                         success: function (response) {
                             toastr.success(response.d, "Person Popuation");
                         },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Population Error");
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
                         }
                     });
                     //var personId = 0;
@@ -993,8 +1056,10 @@
                                         $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' ('+itemList.ItemName+')</option>');
                                     }); 
                                 },
-                                error: function (response) {
-                                    generate('error', response.d);
+                                error: function (xhr, errorType, exception) {
+                                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                                    return false;
                                 }
                             });
                         }
