@@ -581,7 +581,7 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                        <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple"/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group" id="divNoFP" style="display: none">
@@ -2542,7 +2542,7 @@
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
                 var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
-
+                debugger;
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();

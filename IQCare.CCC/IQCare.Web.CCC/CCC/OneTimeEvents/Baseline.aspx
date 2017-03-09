@@ -824,7 +824,7 @@
                                  <div class="col-md-3">
                                      <div class="col-md-12"><asp:label runat="server" class="control-label pull-left" id="lblBMI">BMI </asp:label></div>
                                      <div class="col-md-12">
-                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineBMI" ClientIDMode="Static" ReadOnly="True" data-parsley-type="digits"></asp:TextBox>
+                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineBMI" ClientIDMode="Static" ReadOnly="True" Type="Number"></asp:TextBox>
                                      </div>
                                 </div>
                             </div>                             
