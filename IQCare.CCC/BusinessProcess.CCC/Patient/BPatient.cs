@@ -32,6 +32,7 @@ namespace BusinessProcess.CCC.Patient
             ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, patient.CreatedBy);
             ClsUtility.AddExtendedParameters("@Active", SqlDbType.Bit, patient.Active);
+            ClsUtility.AddExtendedParameters("@PatientType", SqlDbType.Int, patient.PatientType);
 
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Patient_Insert", ClsUtility.ObjectEnum.DataTable);
