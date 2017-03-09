@@ -120,6 +120,7 @@
                                <IQ:ProgressControl ID="ProgressControl1" runat="server" />
                           </div>
                      </div>
+					 
                      <div class="col-md-2 col-xs-12 col-sm-12">
                           <div class="list-group">
                                
@@ -128,13 +129,13 @@
 								</i>--%>
 
                                 <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx") %>' class="list-group-item">
-                                    <span class="fa fa-search fa-2x pull-left text-warning"></span> Find Patients <span class="badge">
+                                    <span class="fa fa-search fa-2x pull-left text-warning"></span> <strong>Find Patients</strong> <span class="badge">
                                         <asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
                                
                                 </a>
                                 
                                 <a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx") %>' class="list-group-item">
-                                    <span class="fa fa-user-plus fa-2x pull-left text-warning"></span> Register Patient 
+                                    <span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">Register Patient </strong> 
                                 </a>
 
                                 <a href="#" class="list-group-item active" id="titlePatientBaseline">
@@ -142,13 +143,13 @@
                                 </a>
 
                               <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/Baseline.aspx") %>' class="list-group-item" id="menuBaseline">
-                                    <span class="fa fa-bar-chart fa-2x pull-left text-warning"></span> <strong>Treatment Baseline</strong>
+                                    <span class="fa fa-bar-chart fa-2x pull-left text-warning"></span> <strong class="text-warning">Treatment Baseline</strong>
                                 </a>
                               <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>' class="list-group-item" id="menuFamilyTesting">
-                                    <span class="fa fa-users fa-2x pull-left text-warning"></span> Family Testing <span class="badge">0</span>
+                                    <span class="fa fa-users fa-2x pull-left text-warning"></span><strong class="text-warning"> Family Testing </strong><span class="badge">0</span>
                                 </a>
                               <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/OneTimeEventsTracker.aspx") %>' class="list-group-item" id="MenuOneTimeEventsTracker">
-                                    <span class="fa fa-cubes fa-2x pull-left text-warning"></span> <strong>One Time Events Tracker </strong>
+                                    <span class="fa fa-cubes fa-2x pull-left text-warning"></span> <strong class="text-warning">One Time Events Tracker </strong>
                               </a>
 
                               <a href="#" class="list-group-item active" id="titlePatientEncounter">
@@ -156,11 +157,11 @@
                               </a> 
                               
                               <a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx") %>' class="list-group-item" id="menuPatientHome" >
-                                    <span class="fa fa-home fa-2x pull-left text-info"></span> Patient Home
+                                    <span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Patient Home</strong>
                                 </a>
                               
                                <a  href='<%=ResolveClientUrl("~/CCC/Encounter/VitalSigns.aspx") %>' class="list-group-item" id="menuPatientVitals" >
-                                    <span class="fa fa-heartbeat fa-2x pull-left text-info"></span>Patient Vital Signs
+                                    <span class="fa fa-heartbeat fa-2x pull-left text-info"></span><strong class="text-info">Patient Vital Signs</strong>
                                 </a>
 
 <%--                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
@@ -172,7 +173,7 @@
 
 								
                                <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
-                                  <span class="fa fa-user-md fa-2x pull-left text-info"></span>New Clinical Encounter</asp:LinkButton>
+                                  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
 
      
                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
@@ -181,17 +182,17 @@
 
 
                               <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
-                                  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span>Encounter History</asp:LinkButton>
+                                  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong></asp:LinkButton>
 
                                 <!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>-->
                                 <a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
-                                    <span class="fa fa-calendar fa-2x text-info pull-left"></span> Patient Appointments <span class="badge">0</span>
+                                    <span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info"> Patient Appointments </strong><span class="badge">0</span>
                                 </a>
 
                           </div>
-                     </div>
+
 
 
           </form>

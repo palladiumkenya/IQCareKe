@@ -9,5 +9,6 @@ namespace Interface.CCC.Baseline
         int UpdatePatientBaselineAssessment(PatientBaselineAssessment patientArtInitiationBaseline);
         int DeletePatientBaselineAssessment(int id);
         List<PatientBaselineAssessment> GetPatientBaselineAssessment(int patientId);
+        int CheckIfPatientBaselineExists(int patientId);
     }
 }

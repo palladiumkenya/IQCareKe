@@ -246,7 +246,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException ex)
             {
-                Msg = ex.Message + ' ' + ex.InnerException;
+                Msg = ex.Message ;
             }
 
             return Msg;

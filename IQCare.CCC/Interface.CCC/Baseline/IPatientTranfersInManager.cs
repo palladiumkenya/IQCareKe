@@ -9,5 +9,6 @@ namespace Interface.CCC.Baseline
         int UpdatePatientTransferIn(PatientTransferIn patientTransferIn);
         int DeletePatientTransferIn(int id);
         List<PatientTransferIn> GetPatientTransferIns(int patientId);
+        int CheckifPatientTransferExisits(int patientId);
     }
 }

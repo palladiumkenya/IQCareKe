@@ -557,9 +557,10 @@
                         toastr.success(response.d, "Patient Enrollment");
                         window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
                     },
-                    error: function (response) {
-                        //generate('error', response.d);
-                        toastr.error(response.d, "Patient Enrollment");
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
                     }
                 });
             }
