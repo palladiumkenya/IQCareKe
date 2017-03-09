@@ -1,0 +1,8 @@
+﻿.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.noneevents {
+    pointer-events: none;
+}

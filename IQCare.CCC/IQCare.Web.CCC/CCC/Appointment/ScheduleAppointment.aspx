@@ -218,6 +218,12 @@
         $(document).ready(function () {
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
+                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                    if (moment('' + appDate + '').isAfter(futureDate)) {
+                        toastr.error("Appointment date cannot be set to over 7 months");
+                        return false;
+                    }
                     addPatientAppointment();
                 } else {
                     return false;
@@ -232,6 +238,10 @@
         });
 
         $("#AppointmentDate").change(function () {
+            AppointmentCount();
+        });
+
+        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
             AppointmentCount();
         });
 

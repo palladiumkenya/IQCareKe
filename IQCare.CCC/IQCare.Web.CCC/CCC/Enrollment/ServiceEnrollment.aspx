@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="DateOfBirth">
                         <div class="input-group">
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB"></asp:TextBox>        
+                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" ReadOnly="True"></asp:TextBox>        
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -101,7 +101,7 @@
             <div class="col-xs-3">
                 <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" ReadOnly="True" />
                 </div>
             </div>
 
@@ -223,13 +223,19 @@
                   </div>
              </div>
 
-            <div class="col-md-6">
-                <div class="col-md-12"><label id="enrollmentLabel" class="required pull-right  control-label">Enrollment No.#</label></div>
+            <div class="col-md-3">
+                
                 <div id="AppPosID">
-                    <div class="col-md-5" style="padding-right: 0;"><input type="text" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
-                    <div class="col-md-1" style="padding: 0;">-</div>
-                </div>   
-                <div class="col-md-6" style="padding-left: 0;">
+                    <asp:HiddenField ID="PatientType" runat="server" ClientIDMode="Static" />
+                    <div class="col-md-12"><label id="AppPosID" class="required pull-left  control-label">MFL CODE</label></div>
+                    <div class="col-md-10" style="padding-right: 0;"><input type="text" id="txtAppPosID" value="<%=Session["AppPosID"] %>" class="form-control input-sm" readonly="readonly" /></div>
+                    <div class="col-md-2" style="padding: 0;">-</div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12"><label id="enrollmentLabel" class="required pull-left  control-label">Enrollment No.#</label></div>
+                <div class="col-md-12" style="padding-left: 0;">
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-min="5"></asp:TextBox>
                 </div>
             </div>
@@ -284,6 +290,7 @@
         $(document).ready(function () {
 
             $("#OtherSpecificEntryPoint").hide();
+            $("#DateOfBirth").addClass("noneevents");
 
             $("#entryPoint").change(function () {
                 $(this).find(":selected").text();
@@ -312,8 +319,12 @@
 
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
-            $('#DateOfBirth').datepicker('setDate', moment(personDOB).format('DD-MMM-YYYY'));
+            var patientType = '<%=Session["PatientType"]%>';
+            personDOB = new Date(personDOB);
+
+            $('#DateOfBirth').datepicker('setDate', moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
             $("#NationalId").val(nationalId);
+            $("#PatientType").val(patientType);
 
             /*.. Load the list of identifiers */
             $.ajax({
@@ -376,9 +387,15 @@
                     var identifierId = $("#<%=IdentifierTypeId.ClientID%>").find(':selected').val();
                     var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
                     var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
+                    var mflcode = $("#txtAppPosID").val();
 
                     if (identifier == "CCC Registration Number" && (enrollmentNo.length < 5 || enrollmentNo.length > 5)) {
                         toastr.error("error", "Enrollment number should be Five Characters");
+                        return false;
+                    }
+
+                    if (identifier == "CCC Registration Number" && (mflcode == "" || mflcode==null)) {
+                        toastr.error("error", "MFL CODE should not be blank");
                         return false;
                     }
 
@@ -474,8 +491,10 @@
                     var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
                     var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
                     var nationalId = $("#NationalId").val();
+                    var patientType = $("#PatientType").val();
+                    var mflCode = $('#txtAppPosID').val();
 
-                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId);
+                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode);
                 }
             });
 
@@ -510,21 +529,23 @@
                     var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
                     var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
                     var nationalId = $("#NationalId").val();
+                    var patientType = $("#PatientType").val();
+                    var mflCode = $('#txtAppPosID').val();
 
                     console.log(_fp);
-                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId);
+                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode);
                 }
 
                 //addPatient(_fp);
             });
 
-            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId) {
+            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode) {
                 var enrollments = JSON.stringify(_fp);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + <%=Session["AppPosID"] %> + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "'}",
+                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -539,7 +560,7 @@
                 });
             }
 
-            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId) {
+            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode) {
                 var enrollments = JSON.stringify(_fp);
 
                 console.log(enrollments);
@@ -547,7 +568,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + <%=Session["AppPosID"] %> + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "'}",
+                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -566,12 +587,19 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    $("#enrollmentLabel").removeClass("pull-left");
-                    $("#enrollmentLabel").addClass("pull-right");
+                    if ('<%=patType%>' == "Transit Patient") {
+                        $('#txtAppPosID').val("");
+                        $('#txtAppPosID').removeAttr('readonly');
+                    } else {
+                        $('#txtAppPosID').setAttribute('readonly');
+                    }
+                    //if()
+                    //$("#enrollmentLabel").removeClass("pull-left");
+                    //$("#enrollmentLabel").addClass("pull-right");
                 } else {
                     $("#AppPosID").css("display", "none");
-                    $("#enrollmentLabel").removeClass("pull-right");
-                    $("#enrollmentLabel").addClass("pull-left");
+                    //$("#enrollmentLabel").removeClass("pull-right");
+                    //$("#enrollmentLabel").addClass("pull-left");
                 }
             });
 

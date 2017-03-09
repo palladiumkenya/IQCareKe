@@ -655,12 +655,7 @@
         </div>
         
     </div><%-- .container-fluid--%>
-    <style type="text/css">
-        .noneevents {
-            pointer-events: none;
-        }
-    </style>
-        <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             /*$('#Stage1').datepicker();
             $('#Stage2').datepicker();

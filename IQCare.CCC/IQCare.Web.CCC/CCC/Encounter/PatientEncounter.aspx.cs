@@ -52,7 +52,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(tbscreeningstatus, "TBStatus");
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
                 lookUp.populateDDL(onFP, "FPStatus");
-                lookUp.populateDDL(fpMethod, "FPMethod");
+                lookUp.PopulateListBox(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
@@ -70,9 +70,9 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
-                lookUp.getPharmacyDrugFrequency(ddlFreq);
+                //lookUp.getPharmacyDrugFrequency(ddlFreq);
 
-                lookUp.populateDDL(regimenLine, "CTXAdherence");
+                //lookUp.populateDDL(regimenLine, "CTXAdherence");
 
 
 

@@ -82,7 +82,7 @@ namespace IQCare.Web.CCC.WebService
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType)
         {
             patientid = patientid == "null" ? null : patientid;
 
@@ -133,6 +133,12 @@ namespace IQCare.Web.CCC.WebService
                         Msg += "<p>Person Marital Status Updated Successfully!</p>";
                         Session["PersonDob"] = DateTime.Parse(dob);
                         Session["NationalId"] = nationalId;
+                        Session["PatientType"] = patientType;
+                        var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                        if (patType == "Transit Patient")
+                        {
+                            Session["NationalId"] = 99999999;
+                        }
                     }      
                 }
                 else
@@ -161,6 +167,12 @@ namespace IQCare.Web.CCC.WebService
                             Msg += "<p>Person Marital Status Added Successfully!</p>";
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit Patient")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
                         }
                     }
                 }
