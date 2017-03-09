@@ -134,6 +134,11 @@ namespace IQCare.Web.CCC.WebService
                         Session["PersonDob"] = DateTime.Parse(dob);
                         Session["NationalId"] = nationalId;
                         Session["PatientType"] = patientType;
+                        var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                        if (patType == "Transit Patient")
+                        {
+                            Session["NationalId"] = 99999999;
+                        }
                     }      
                 }
                 else
@@ -163,6 +168,11 @@ namespace IQCare.Web.CCC.WebService
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
                             Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit Patient")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
                         }
                     }
                 }

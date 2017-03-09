@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="DateOfBirth">
                         <div class="input-group">
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB"></asp:TextBox>        
+                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDOB" ReadOnly="True"></asp:TextBox>        
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -101,7 +101,7 @@
             <div class="col-xs-3">
                 <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" ReadOnly="True" />
                 </div>
             </div>
 
@@ -313,8 +313,9 @@
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
+            personDOB = new Date(personDOB);
 
-            $('#DateOfBirth').datepicker('setDate', moment(personDOB).format('DD-MMM-YYYY'));
+            $('#DateOfBirth').datepicker('setDate', moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
             $("#NationalId").val(nationalId);
 
             /*.. Load the list of identifiers */

@@ -605,9 +605,10 @@
                                     personAge = $("#personAge").val();
                                     var patientTypeId = $("#PatientTypeId").find(":selected").text();
                                     //console.log(PatientTypeId);
-                                    if(patientTypeId == "Transit Patient")
-                                    {
-                                        addPerson();
+                                    if(patientTypeId == "Transit Patient") {
+                                        $.when(addPerson()).then(function() {                                     
+                                            window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                        });
                                     }
                                     else{
                                         if (personAge >= 18) {
@@ -825,10 +826,6 @@
                         dataType: "json",
                         success: function (response) {
                             toastr.success(response.d, "Person Profile");
-
-                            if (patientType == "Transit Patient") {
-                                window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                            }
                         },
                         error: function (response) {
                             toastr.error(response.d, "Person Profile Error");
