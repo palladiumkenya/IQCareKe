@@ -1221,11 +1221,15 @@
                     $("#<%=NationalId.ClientID%>").prop('disabled', true);
                 }
             }
-        }
+        };
 
-        function estimateDob(personAge){
+        function estimateDob(personAge) {
+            var currentDate = new Date("06-15-" + new Date().getFullYear());
             
-        }
+            var estDob = moment(currentDate.toISOString());
+            var dob = estDob.add((personAge * -1), 'years');
+            return moment(dob).format('DD-MMM-YYYY');
+        };
     </script>
 </asp:Content>
 
