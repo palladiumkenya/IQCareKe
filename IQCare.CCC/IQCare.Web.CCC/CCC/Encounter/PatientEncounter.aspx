@@ -2766,8 +2766,22 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
+            $("#AppointmentDate").change(function () {
+                AppointmentCount();
+            });
+
+            $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+                AppointmentCount();
+            });
+
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
+                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                    if (moment('' + appDate + '').isAfter(futureDate)) {
+                        toastr.error("Appointment date cannot be set to over 7 months");
+                        return false;
+                    }
                     addPatientAppointment();
                 } else {
                     return false;
@@ -2808,6 +2822,30 @@
                 }
             });
         }
+
+        function AppointmentCount() {
+            jQuery.support.cors = true;
+            var date = $("#<%=AppointmentDate.ClientID%>").val();
+            $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
+                data: "{'date':'" + date + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function(response) {
+                    var count = response.d;
+                    var message = count + " appointment(s) scheduled on the chosen date.";
+                    alert(message);
+                },
+
+                error: function(msg) {
+                    alert(msg.responseText);
+                }
+            });
+        }
+
         function resetAppointmentFields(parameters) {
             $("#ServiceArea").val("");
             $("#Reason").val("");
