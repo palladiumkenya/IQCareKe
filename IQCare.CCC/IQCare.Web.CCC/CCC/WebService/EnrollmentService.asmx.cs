@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
+using Application.Common;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Enrollment;
@@ -46,10 +47,11 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId)
+        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType)
         {
             try
             {
+                Utility utility = new Utility();
                 PersonId = int.Parse(Session["PersonId"].ToString());
                 var jss = new JavaScriptSerializer();
                 IList<ListEnrollment> data = jss.Deserialize<IList<ListEnrollment>>(enrollment);
@@ -60,11 +62,12 @@ namespace IQCare.Web.CCC.WebService
                 var patientEnrollmentManager = new PatientEnrollmentManager();
                 var patientIdentifier = new PatientIdentifierManager();
                 var patientEntryPointManager = new PatientEntryPointManager();
+                var patientLookUpManager = new PatientLookupManager();
 
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
 
-                int isPersonEnrolled = patientManager.CheckPersonEnrolled(PersonId).Count;
+                int isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId).Count;
 
                 if (isPersonEnrolled == 0)
                 {
@@ -74,9 +77,10 @@ namespace IQCare.Web.CCC.WebService
                         PersonId = PersonId,
                         ptn_pk = 0,
                         FacilityId = facilityId,
+                        PatientType = patientType,
                         PatientIndex = datevalue.Year.ToString() + '-' + PersonId,
                         DateOfBirth = DateTime.Parse(personDateOfBirth),
-                        NationalId = nationalId,
+                        NationalId =utility.Encrypt(nationalId),
                         Active = true,
                         CreatedBy = userId,
                         CreateDate = DateTime.Now,
@@ -141,13 +145,13 @@ namespace IQCare.Web.CCC.WebService
                                 patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
                             }
 
-                            Msg = "Successfully enrolled patient";
+                            Msg += "<p>Successfully enrolled patient.</p>";
                         }
 
                     }
                     else
                     {
-                        Msg = " Error occurred in enrollment ";
+                        Msg = "<p>Error occurred in enrollment.</p>";
                     }
                 }
                 else
@@ -193,9 +197,6 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 for (int i = 0; i < data.Count; i++)
                                 {
-                                    /*List<PatientEntityIdentifier> patientEntityIdentifiers = patientIdentifier.GetPatientEntityIdentifiers(patient[0].Id, patientEnrollmentId,
-                                        patientEntryPointId);*/
-
                                     PatientEntityIdentifier patientidentifier = new PatientEntityIdentifier()
                                     {
                                         PatientId = patient[0].Id,
@@ -207,53 +208,36 @@ namespace IQCare.Web.CCC.WebService
                                     patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
                                 }
 
-                                Msg = "Successfully enrolled patient";
+                                Msg += "<p>Successfully enrolled patient.</p>";
                             }
                         }
                         else
                         {
-                            PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
-                            {
-                                PatientId = patient[0].Id,
-                                ServiceAreaId = 1,
-                                EnrollmentDate = DateTime.Parse(enrollmentDate),
-                                CreatedBy = userId,
-                                CreateDate = DateTime.Now,
-                                DeleteFlag = false
-                            };
-
-                            PatientEntryPoint patientEntryPoint = new PatientEntryPoint
-                            {
-                                PatientId = patient[0].Id,
-                                ServiceAreaId = 1,
-                                EntryPointId = entryPointId,
-                                CreatedBy = userId,
-                                CreateDate = DateTime.Now,
-                                DeleteFlag = false
-                            };
-
-
-                            patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
-                            patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
-
-                            //Session["PatientMasterVisitId"] = patientMasterVisitId;
-
                             if (patientMasterVisitId > 0)
                             {
                                 for (int i = 0; i < data.Count; i++)
                                 {
-                                    PatientEntityIdentifier patientidentifier = new PatientEntityIdentifier()
+                                    List<PatientEntityIdentifier> patientEntityIdentifiers = patientIdentifier.GetPatientEntityIdentifiers(patient[0].Id, entityEnrollment[0].Id,
+                                        int.Parse(data[i].identifierId));
+                                    if (patientEntityIdentifiers.Count > 0)
                                     {
-                                        PatientId = patient[0].Id,
-                                        PatientEnrollmentId = patientEnrollmentId,
-                                        IdentifierTypeId = int.Parse(data[i].identifierId),
-                                        IdentifierValue = data[i].enrollmentNo
-                                    };
+                                        Msg += "<p>" + data[i].enrollmentIdentifier + " is already enrolled.</p>";
+                                    }
+                                    else
+                                    {
+                                        PatientEntityIdentifier patientidentifier = new PatientEntityIdentifier()
+                                        {
+                                            PatientId = patient[0].Id,
+                                            PatientEnrollmentId = entityEnrollment[0].Id,
+                                            IdentifierTypeId = int.Parse(data[i].identifierId),
+                                            IdentifierValue = data[i].enrollmentNo
+                                        };
 
-                                    patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
+                                        patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
+                                    }
                                 }
 
-                                Msg = "Successfully enrolled patient";
+                                Msg += "<p>Successfully enrolled patient.</p>";
                             }
                         }
                     }

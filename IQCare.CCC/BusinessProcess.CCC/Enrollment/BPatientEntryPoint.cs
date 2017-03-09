@@ -4,6 +4,8 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC.Enrollment
 {
@@ -27,6 +29,12 @@ namespace BusinessProcess.CCC.Enrollment
         public int UpdatePatientEntryPoint(PatientEntryPoint patientEntryPoint)
         {
             throw new NotImplementedException();
+        }
+
+        public List<PatientEntryPoint> GetPatientEntryPoints(int patientId)
+        {
+            return
+                _unitOfWork.PatientEntryPointRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag).ToList();
         }
     }
 }

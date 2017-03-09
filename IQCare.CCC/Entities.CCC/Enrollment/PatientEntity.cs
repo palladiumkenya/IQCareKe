@@ -16,6 +16,7 @@ namespace Entities.CCC.Enrollment
         public int? ptn_pk { get; set; }
         public string PatientIndex { get; set; }
         public int FacilityId { get; set; }
+        public int PatientType { get; set; }
         public bool Active { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string NationalId { get; set; }

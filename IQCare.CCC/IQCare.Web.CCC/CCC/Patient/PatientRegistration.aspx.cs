@@ -89,6 +89,16 @@ namespace IQCare.Web.CCC.Patient
                     KeyPopulationCategoryId.Items.Add(new ListItem(item.ItemDisplayName,item.ItemId.ToString()));
                 }
             }
+
+            List<LookupItemView> patientTypes = mgr.GetLookItemByGroup("Patient Type");
+            if (patientTypes != null && patientTypes.Count > 0)
+            {
+                PatientTypeId.Items.Add(new ListItem("select", "0"));
+                foreach (var item in patientTypes)
+                {
+                    PatientTypeId.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                }
+            }
         }
 
         protected void countyId_SelectedIndexChanged(object sender, EventArgs e)

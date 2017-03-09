@@ -312,6 +312,8 @@
 
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
+            var patientType = '<%=Session["PatientType"]%>';
+
             $('#DateOfBirth').datepicker('setDate', moment(personDOB).format('DD-MMM-YYYY'));
             $("#NationalId").val(nationalId);
 
