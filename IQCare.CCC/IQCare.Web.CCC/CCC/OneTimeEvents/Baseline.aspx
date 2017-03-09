@@ -88,7 +88,7 @@
                                       <div class="col-md-12">
                                            <div class="datepicker fuelux" id="TIDate">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TransferInDate" type="text" />
+                                                    <input class="form-control input-sm" id="TransferInDate" type="text" data-parsley-required="true" />
                                                     <div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -173,7 +173,7 @@
                                        <div class="col-md-12">
                                             <div class="datepicker fuelux" Id="TIARTStartDate">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="StartDateART" type="text" />
+                                                                              <input class="form-control input-sm" id="StartDateART"  type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -286,7 +286,7 @@
                                 <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblcounty">County:</asp:Label></div>
                                       <div class="col-md-12">
-                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="0"/>
                                       </div>
                                  </div>
                             </div>
@@ -313,7 +313,7 @@
                                    <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DHID">
                                              <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -397,7 +397,7 @@
                                   <div class="col-md-12">
                                        <div class="datepicker fuelux" id="DOE">
                                             <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfEnrollment" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfEnrollment" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -479,7 +479,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
                                   </div>
                              </div>
                          </div>
@@ -489,7 +489,7 @@
                                    <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DARTI">
                                              <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfARTInitiation" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfARTInitiation" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -629,7 +629,7 @@
                                 <div class="col-md-12">
                                      <div class="datepicker fuelux" id="DLUsed">
                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" />
+                                                                              <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -772,11 +772,11 @@
                                       </label>
                                  </div>
                                 
-                                 <div class="col-md-2 col-xs-12">
+<%--                                 <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblBHIV">
                                             <input class="sr-only" type="checkbox" id="BHIV" value="true"> <span class="checkbox-label"> B/HIV</span>
                                       </label>
-                                 </div>
+                                 </div>--%>
 
                             </div>
 
@@ -841,7 +841,7 @@
                                      <div class="col-md-12">
                                          <div class="datepicker fuelux" id="DateStartedOn1stLine">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" /><div class="input-group-btn">
+                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" data-parsley-require="true" /><div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                                 <span class="sr-only">Toggle Calendar</span>
@@ -936,7 +936,7 @@
                                      <div class="col-md-12">
                                          <div class="datepicker fuelux" id="BaselineViralloadDate">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" />
+                                                    <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" />
                                                     <div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1063,37 +1063,44 @@
             var today = new Date();
 
             $('#TIARTStartDate').datepicker({
+               date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#TIDate').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#DHID').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#DOE').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#DARTI').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
 
             });
             $('#DLUsed').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#DateStartedOn1stLine').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
@@ -1133,7 +1140,9 @@
                 if (isAfter) {
                     toastr.error("ART Start Date CANNOT be greater than transferin Date",
                         "ART Start Date-Transfer in Validation");
-                    $("#TIDate").datepicker('setDate','');
+                    $('#TIARTStartDate').datepicker({
+                        date:null
+                    });
                     return false;
                 }
 
