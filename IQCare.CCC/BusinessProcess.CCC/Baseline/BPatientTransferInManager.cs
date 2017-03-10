@@ -27,7 +27,7 @@ namespace BusinessProcess.CCC.Baseline
                     .FirstOrDefault();
             if (patientTransfer != null)
             {
-                patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
+                //patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
                 patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
                 patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
                 patientTransfer.MflCode = patientTransferIn.MflCode;
