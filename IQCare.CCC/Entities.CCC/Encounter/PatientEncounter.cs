@@ -94,5 +94,18 @@ namespace Entities.CCC.Encounter
             public string id { get; set; }
             public string batch { get; set; }
         }
+
+        [Serializable]
+        public class DrugPrescription
+        {
+            public string DrugId { get; set; }
+            public string BatchId { get; set; }
+            public string FreqId { get; set; }
+            public string DrugAbbr { get; set; }
+            public string Dose { get; set; }
+            public string Duration { get; set; }
+            public string qtyPres { get; set; }
+            public string qtyDisp { get; set; }
+        }
     }
 }

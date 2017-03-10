@@ -201,5 +201,34 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDrugSwitchReasons(string TreatmentPlan)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int savePatientPharmacy(string TreatmentPlan, string TreatmentPlanReason, string RegimenLine, string drugPrescription)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
+                Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
+                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(),drugPrescription);
+            Session["PatientMasterVisitID"] = val;
+            return val;
+        }
+
     }
 }
