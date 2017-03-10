@@ -2525,7 +2525,6 @@
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
                 //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
                 var FPMethod = $('#fpMethod').val();
-                debugger;
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
@@ -2564,7 +2563,6 @@
                 //console.log(STIPartnerNotification);
                 // console.log(adverseEventsArray);
 
-                debugger;
                 for (var j = 0, len = FPMethod.length; j < len; j++) {
                     $.ajax({
                         type: "POST",
