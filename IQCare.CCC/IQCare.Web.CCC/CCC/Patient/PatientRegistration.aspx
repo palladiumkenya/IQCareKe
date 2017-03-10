@@ -1003,7 +1003,9 @@
                     });
 
                 $.urlParam = function(name){
-                    var results = new RegExp('[\?&]' + name.toLowerCase() + '=([^&#]*)').exec(window.location.href);
+                    //name = name.toLowerCase();
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    console.log(results);
                     if (results==null){
                         return null;
                     }
@@ -1013,6 +1015,7 @@
                 }
 
                 var PatientId = $.urlParam('PatientId');
+                console.log(PatientId);
 
                 if (PatientId > 0) {
                     $.ajax({

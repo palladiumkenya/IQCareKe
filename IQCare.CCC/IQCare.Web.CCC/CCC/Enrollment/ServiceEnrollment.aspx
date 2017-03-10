@@ -593,20 +593,13 @@
                     } else {
                         $('#txtAppPosID').setAttribute('readonly');
                     }
-                    //if()
-                    //$("#enrollmentLabel").removeClass("pull-left");
-                    //$("#enrollmentLabel").addClass("pull-right");
+                    
                 } else {
-                    $("#AppPosID").css("display", "none");
-                    //$("#enrollmentLabel").removeClass("pull-right");
-                    //$("#enrollmentLabel").addClass("pull-left");
+                    $("#AppPosID").css("display", 'none');
                 }
             });
 
         });
-
-        
-
     </script>
 
 </asp:Content>
