@@ -1,6 +1,7 @@
 ﻿using System;
 using IQCare.CCC.UILogic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -190,10 +191,56 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[2] { row["Drug_pk"].ToString(), row["DrugName"].ToString()};
+                string[] i = new string[2] { row["val"].ToString(), row["DrugName"].ToString()};
                 rows.Add(i);
             }
             return rows;
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDrugBatches(string DrugPk)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            List<DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            ArrayList rows = new ArrayList();
+
+            for(int i=0; i < lst.Count; i++)
+            {
+                string[] j = new string[2] { lst[i].id, lst[i].batch };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetDrugSwitchReasons(string TreatmentPlan)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int savePatientPharmacy(string TreatmentPlan, string TreatmentPlanReason, string RegimenLine, string drugPrescription)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
+                Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
+                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(),drugPrescription);
+            Session["PatientMasterVisitID"] = val;
+            return val;
         }
 
     }

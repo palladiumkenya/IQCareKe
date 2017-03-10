@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.Patient {
     public partial class PatientRegistration {
         
         /// <summary>
+        /// PatientTypeId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PatientTypeId;
+        
+        /// <summary>
         /// hdnPersonId control.
         /// </summary>
         /// <remarks>

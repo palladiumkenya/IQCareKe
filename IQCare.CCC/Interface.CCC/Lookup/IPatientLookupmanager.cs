@@ -8,9 +8,11 @@ namespace Interface.CCC.Lookup
     {
         List<PatientLookup> GetPatientSearchPayload();
         List<PatientLookup> GetPatientDetailsLookup(int id);
+        List<PatientLookup> GetPatientByPersonId(int personId);
         List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,int start,int length);
         int GetTotalpatientCount();
         PatientLookup GetGenderID(int patientId);
+       int GetPatientTypeId(int PatientId);
     }
 }
  

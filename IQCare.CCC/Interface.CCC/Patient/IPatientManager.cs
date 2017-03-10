@@ -13,5 +13,6 @@ namespace Interface.CCC.Patient
         int DeletePatient(int id);
         PatientEntity GetPatient(int id);
         List<PatientEntity> CheckPersonEnrolled(int persionId);
+        int GetPatientType(int patientId);
     }
 }

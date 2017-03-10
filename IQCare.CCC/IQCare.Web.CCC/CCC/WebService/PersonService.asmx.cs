@@ -48,6 +48,8 @@ namespace IQCare.Web.CCC.WebService
         public string tsMiddleName { get; internal set; }
         public string population { get; internal set; }
         public int PopulationCategoryId { get; internal set; }
+        public int GuardianId { get; set; }
+        public int PatientTreatmentSupporterId { get; set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -80,7 +82,7 @@ namespace IQCare.Web.CCC.WebService
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
-        public string AddPerson(string firstname, string middlename, string lastname, int gender,string dateOfBirth, string nationalId, int maritalStatusId, int userId, string patientid)
+        public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType)
         {
             patientid = patientid == "null" ? null : patientid;
 
@@ -108,7 +110,7 @@ namespace IQCare.Web.CCC.WebService
                         personId = patient[0].PersonId;
                     }
 
-                    personManager.UpdatePerson(firstname, middlename, lastname, gender, dateOfBirth, nationalId, userId , personId);
+                    personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId);
                     Session["PersonId"] = personId;
 
                     Msg = "<p>Person Updated successfully</p>";
@@ -129,15 +131,21 @@ namespace IQCare.Web.CCC.WebService
                     if (Result > 0)
                     {
                         Msg += "<p>Person Marital Status Updated Successfully!</p>";
-                    }
+                        Session["PersonDob"] = DateTime.Parse(dob);
+                        Session["NationalId"] = nationalId;
+                        Session["PatientType"] = patientType;
+                        var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                        if (patType == "Transit")
+                        {
+                            Session["NationalId"] = 99999999;
+                        }
+                    }      
                 }
                 else
                 {
                     var personLogic = new PersonManager();
-                    var dob = DateTime.Parse(dateOfBirth);
 
-                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dob, nationalId,
-                        userId);
+                    PersonId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId);
                     Session["PersonId"] = PersonId;
                     if (PersonId > 0)
                     {
@@ -157,6 +165,14 @@ namespace IQCare.Web.CCC.WebService
                         if (Result > 0)
                         {
                             Msg += "<p>Person Marital Status Added Successfully!</p>";
+                            Session["PersonDob"] = DateTime.Parse(dob);
+                            Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
                         }
                     }
                 }
@@ -170,7 +186,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender,DateTime dateOfBirth, string nationalId, string orphan, string inSchool, int userId, string patientid)
+        public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender, string orphan, string inSchool, int userId, string patientid)
         {
             patientid = patientid == "null" ? null : patientid;
 
@@ -219,7 +235,7 @@ namespace IQCare.Web.CCC.WebService
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
                         if (Guardian.Count > 0)
                         {
-                            personLogic.UpdatePerson(firstname, middlename, lastname, gender, dateOfBirth.ToString(), nationalId, userId, Guardian[0].Id);
+                            personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId, Guardian[0].Id);
                             Session["PersonGuardianId"] = Guardian[0].Id;
 
                             Msg = "<p>Updated Guardian Successfully</p>";
@@ -239,8 +255,7 @@ namespace IQCare.Web.CCC.WebService
                     }
                     else
                     {
-                        int guardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dateOfBirth, nationalId,
-                            userId);
+                        int guardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId);
                         var ovcStatus = new PersonOvcStatusManager();
                         var patientovc = ovcStatus.AddPatientOvcStatus(PersonId, guardianId, _orphan, _inSchool, userId);
 
@@ -253,8 +268,7 @@ namespace IQCare.Web.CCC.WebService
                 else
                 {
                     var personLogic = new PersonManager();
-                    PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, dateOfBirth,
-                        nationalId, userId);
+                    PersonGuardianId = personLogic.AddPersonUiLogic(firstname, middlename, lastname, gender, userId);
                     Session["PersonGuardianId"] = PersonGuardianId;
                     if (PersonGuardianId > 0)
                     {
@@ -416,7 +430,7 @@ namespace IQCare.Web.CCC.WebService
 
                     if (listPatientTreatmentSupporter.Count > 0)
                     {
-                        personLogic.UpdatePerson(firstname, middlename, lastname, gender, DateTime.Now.ToString(), nationalId, userId, listPatientTreatmentSupporter[0].SupporterId);
+                        personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId, listPatientTreatmentSupporter[0].SupporterId);
 
                         Session["PersonTreatmentSupporterId"] = listPatientTreatmentSupporter[0].SupporterId;
 
@@ -443,9 +457,18 @@ namespace IQCare.Web.CCC.WebService
                     PersonId = Convert.ToInt32(Session["PersonId"]);
 
                     var personLogic = new PersonManager();
-                    PersonTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstname, middlename,
-                        lastname, gender, nationalId, userId);
-                    Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+
+                    if (supporterIsGuardian == "Yes")
+                    {
+                        PersonTreatmentSupporterId = int.Parse(Session["PersonGuardianId"].ToString());
+                    }
+                    else
+                    {
+                        PersonTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstname,
+                            middlename,
+                            lastname, gender, userId);
+                        Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+                    }
 
                     if (PersonTreatmentSupporterId > 0)
                     {
@@ -634,6 +657,7 @@ namespace IQCare.Web.CCC.WebService
                         patientDetails.GurdianLName = _utility.Decrypt(Guardian[0].LastName);
 
                         patientDetails.GuardianGender = Guardian[0].Sex;
+                        patientDetails.GuardianId = Guardian[0].Id;
                     }
 
                     //Location
@@ -667,6 +691,7 @@ namespace IQCare.Web.CCC.WebService
                             patientDetails.tsLastName = _utility.Decrypt(supporter[0].LastName);
                             patientDetails.tsGender = supporter[0].Sex;
                             patientDetails.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
+                            patientDetails.PatientTreatmentSupporterId = supporter[0].Id;
                         }
                         
                     }
@@ -685,5 +710,6 @@ namespace IQCare.Web.CCC.WebService
                 return e.Message;
             }
         }
+
     }
 }

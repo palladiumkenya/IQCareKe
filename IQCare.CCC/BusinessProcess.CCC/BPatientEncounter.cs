@@ -1,15 +1,10 @@
 ﻿using DataAccess.Base;
 using DataAccess.Common;
 using DataAccess.Entity;
-using DataAccess.Context;
 using Interface.CCC;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Web;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace BusinessProcess.CCC
@@ -439,16 +434,6 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public DataTable getPharmacyDrugList(string regimenLine)
-        {
-            lock (this)
-            {
-                ClsObject PatientEncounter = new ClsObject();
-                ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@regimenLine", SqlDbType.Int, regimenLine);
-
-                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugList", ClsUtility.ObjectEnum.DataTable);
-            }
-        }
+        
     }
 }

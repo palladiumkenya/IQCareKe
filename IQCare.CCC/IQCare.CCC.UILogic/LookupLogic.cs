@@ -1,11 +1,13 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Lookup;
+using Interface.CCC;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
 {
@@ -139,16 +141,44 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public void PopulateListBox(ListBox lb, string groupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
+            //lb.Items.Add(new ListItem("Select", "0"));
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    lb.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
         public void populateCBL(CheckBoxList cbl, string groupName)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
-            //cbl.Items.Add(new ListItem("Select", "0"));
+            cbl.Items.Add(new ListItem("Select", "0"));
             if (vw != null && vw.Count > 0)
             {
                 foreach (var item in vw)
                 {
                     cbl.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
+        public void getPharmacyDrugFrequency(DropDownList ddl)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (drg != null && drg.Count > 0)
+            {
+                foreach (var item in drg)
+                {
+                    ddl.Items.Add(new ListItem(item.frequency, item.id));
                 }
             }
         }

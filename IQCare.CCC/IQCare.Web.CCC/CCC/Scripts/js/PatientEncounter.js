@@ -304,3 +304,69 @@ function DateFormat(date)
     
     return result;
 }
+
+var drugList = new Array();
+function AddDrugPrescription() {
+    var drugId = $("#drugID").val();
+    var drugAbbr = $("#drugAbbr").val();
+    var drugName = $("#txtDrugs").val();
+    var batchId = $('#ddlBatch').find(":selected").val();
+    var batchText = $('#ddlBatch').find(":selected").text();
+    var dose = $("#txtDose").val();
+    var freqId = $('#ddlFreq').find(":selected").val();
+    var freqTxt = $('#ddlFreq').find(":selected").text();
+    var duration = $("#txtDuration").val();
+    var quantityPres = $("#txtQuantityPres").val();
+    var quantityDisp = $("#txtQuantityDisp").val();
+    //Validate duplication
+
+    var drugFound = 0;
+
+    if (drugName == "") {
+        toastr.error("Error", "Please select drug");
+        return false;
+    }
+
+    if (dose == "") {
+        toastr.error("Error", "Please enter the dose");
+        return false;
+    }
+
+    if (freqId == "0") {
+        toastr.error("Error", "Please enter the frequency");
+        return false;
+    }
+
+    if (duration == "0") {
+        toastr.error("Error", "Please enter the duration");
+        return false;
+    }
+
+    drugFound = $.inArray("" + drugName + "", drugList);
+    
+    if (drugFound > -1) {
+        toastr.error("Error", drugName + " already exists in the List");
+        return false; // message box herer
+    }
+    else {
+        //drugList.push("" + drug + "");
+
+
+        arrDrugPrescriptionUI = [];
+
+        arrDrugPrescriptionUI.push([
+            drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        ]);
+
+        DrawDataTable("dtlDrugPrescription", arrDrugPrescriptionUI);
+
+        $("#txtDrugs").val("");
+        $("#ddlBatch").val("");
+        $("#txtDose").val("");
+        $('#ddlFreq').val("0");
+        $("#txtDuration").val("0");
+        $("#txtQuantityPres").val("0");
+        $("#txtQuantityDisp").val("0");
+    }
+}

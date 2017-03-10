@@ -26,7 +26,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 MidName = p.MiddleName,
                 LastName = p.LastName,
                 Sex = p.Sex,
-                DateOfBirth = p.DateOfBirth,
+                //DateOfBirth = p.DateOfBirth,
             };
             int personId = _personManager.AddPerson(person);
 
@@ -79,7 +79,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 MidName = p.MiddleName,
                 LastName = p.LastName,
                 Sex = p.Sex,
-                DateOfBirth = p.DateOfBirth,
+                //DateOfBirth = p.DateOfBirth,
             };
             int personId = _personManager.UpdatePerson(person, p.PersonId);
 
@@ -124,7 +124,7 @@ namespace IQCare.CCC.UILogic.Baseline
                             MiddleName = person.MiddleName,
                             LastName = person.LastName,
                             Sex = person.Sex,
-                            DateOfBirth = person.DateOfBirth,
+                            //DateOfBirth = person.DateOfBirth,
                             PersonId = relationship.PersonId,
                             RelationshipId = relationship.RelationshipTypeId,
                             BaseLineHivStatusId = hivTesting.BaselineResult,

@@ -25,6 +25,11 @@ namespace BusinessProcess.CCC
             return patientDetails;
         }
 
+        public List<PatientLookup> GetPatientByPersonId(int personId)
+        {
+            return _unitOfWork.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
+        }
+
         public List<PatientLookup> GetPatientSearchPayload()
         {
             var patientSearchDetails =_unitOfWork.PatientLookupRepository
@@ -89,10 +94,14 @@ namespace BusinessProcess.CCC
             return totalCount;
         }
         public PatientLookup GetGenderID(int patientId)
-
         {
             PatientLookupRepository lookupGender = new PatientLookupRepository();
             return lookupGender.GetGenderID(patientId);
+        }
+
+        public int GetPatientTypeId(int PatientId)
+        {
+            return _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == PatientId).Select(x => x.PatientType).FirstOrDefault();
         }
     }
 }

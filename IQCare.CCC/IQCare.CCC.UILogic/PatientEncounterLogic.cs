@@ -88,8 +88,45 @@ namespace IQCare.CCC.UILogic
 
         public DataTable getPharmacyDrugList(string regimenLine)
         {
-            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             return patientEncounter.getPharmacyDrugList(regimenLine);
+        }
+
+        public List<DrugBatch> getPharmacyDrugBatch(string drugPk)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyDrugBatch(drugPk);
+            
+        }
+
+        public DataTable getPharmacyDrugSwitchInterruptionReason(string treatmentPlan)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyDrugSubstitutionInterruptionReason(treatmentPlan);
+
+        }
+
+        public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
+            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string prescription)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var drugPrescription = parser.Deserialize<List<DrugPrescription>>(prescription);
+
+            string RegimenType = "";
+            for(int i=0; i < drugPrescription.Count; i++)
+            {
+                if(!RegimenType.ToUpper().Contains(drugPrescription[i].DrugAbbr.ToUpper()))
+                {
+                    if (drugPrescription[i].DrugAbbr != "")
+                        RegimenType += drugPrescription[i].DrugAbbr + "/";
+                }
+                
+            }
+
+            return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
+                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription);
+
         }
 
         public void EncounterHistory(TreeView TreeViewEncounterHistory, string patientID)

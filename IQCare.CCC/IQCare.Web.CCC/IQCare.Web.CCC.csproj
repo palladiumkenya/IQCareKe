@@ -87,6 +87,7 @@
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
+    <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
@@ -246,6 +247,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
       <DependentUpon>ucPatientDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientLabsExtruder.ascx.cs">
+      <DependentUpon>ucPatientLabsExtruder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientLabsExtruder.ascx.designer.cs">
+      <DependentUpon>ucPatientLabsExtruder.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientTriage.ascx.cs">
       <DependentUpon>ucPatientTriage.ascx</DependentUpon>

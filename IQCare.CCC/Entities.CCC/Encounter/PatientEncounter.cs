@@ -79,5 +79,33 @@ namespace Entities.CCC.Encounter
             public string nextAppointmentType { get; set; }
             public string[] phdp { get; set; }
         }
+
+        [Serializable]
+        public class DrugFrequency
+        {
+            public string id { get; set; }
+            public string frequency { get; set; }
+            public string multiplier { get; set; }
+        }
+
+        [Serializable]
+        public class DrugBatch
+        {
+            public string id { get; set; }
+            public string batch { get; set; }
+        }
+
+        [Serializable]
+        public class DrugPrescription
+        {
+            public string DrugId { get; set; }
+            public string BatchId { get; set; }
+            public string FreqId { get; set; }
+            public string DrugAbbr { get; set; }
+            public string Dose { get; set; }
+            public string Duration { get; set; }
+            public string qtyPres { get; set; }
+            public string qtyDisp { get; set; }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -22,8 +23,24 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdatePatientBaselineAssessment(PatientBaselineAssessment patientBaselineAssessment)
         {
-            _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaselineAssessment);
-            return Result = _unitOfWork.Complete();
+            var patientBaseline =
+                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(
+                    x => x.PatientId == patientBaselineAssessment.PatientId & !x.DeleteFlag).FirstOrDefault();
+            if (patientBaseline != null)
+            {
+                patientBaseline.Breastfeeding = patientBaselineAssessment.Breastfeeding;
+                patientBaseline.CD4Count = patientBaselineAssessment.CD4Count;
+                patientBaseline.HBVInfected = patientBaselineAssessment.HBVInfected;
+                patientBaseline.Height = patientBaselineAssessment.Height;
+                patientBaseline.MUAC = patientBaselineAssessment.MUAC;
+                patientBaseline.Pregnant = patientBaselineAssessment.Pregnant;
+                patientBaseline.TBInfected = patientBaselineAssessment.TBInfected;
+                patientBaseline.Weight = patientBaselineAssessment.Weight;
+                patientBaseline.WHOStage = patientBaselineAssessment.WHOStage;
+                _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaselineAssessment);
+                 Result = _unitOfWork.Complete();
+            }
+            return Result;
         }
 
         public int DeletePatientBaselineAssessment(int id)
@@ -42,6 +59,15 @@ namespace BusinessProcess.CCC.Baseline
                     .OrderByDescending(x => x.Id)
                     .ToList();
             return patientBaseline;
+        }
+
+        public int CheckIfPatientBaselineExists(int patientId)
+        {
+            var recordExists =
+                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.Id)
+                    .FirstOrDefault();
+            return Convert.ToInt32(recordExists);
         }
     }
 }

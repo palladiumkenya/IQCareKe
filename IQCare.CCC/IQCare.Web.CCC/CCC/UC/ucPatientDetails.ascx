@@ -34,7 +34,7 @@
                  </div>
                  <div class="col-md-12 form-group">
                      <div class="col-sm-4">
-                               <div class="col-md-4"> <small class="text-success  pull-left"><i>Gender:</i></small></div>
+                               <div class="col-md-4"> <small class="text-success  pull-left"><i> Gender:</i></small></div>
                                <div class="col-sm-8">
                                     <asp:Label runat="server" ClientIDMode="Static" id="lblGender" class="text-info pull-left"> m/f</asp:Label>
                                 </div>
