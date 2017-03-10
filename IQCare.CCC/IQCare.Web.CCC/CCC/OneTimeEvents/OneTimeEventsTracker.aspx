@@ -11,12 +11,13 @@
              <div class="panel panel-default">
                   <div class="panel-body" id="onetimeeventstracker" data-parsley-validate="true" data-show-errors="true">
                         
-                       <div class="col-md-12">
-                            <div class="col-md-12"><label class="control-label pull-left">Patient one time events tracker</label></div> 
-                            <div class="col-md-12"><hr/></div>
-                       </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12"><label class="control-label pull-left">Patient one time events tracker</label></div> 
+                        <div class="col-md-12"><hr/></div>
+                    </div>
 
-                         <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group">
+                        <asp:HiddenField ID="Age" runat="server" ClientIDMode="Static"></asp:HiddenField>
                               <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                               <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                               <div class="col-md-7">
@@ -277,7 +278,8 @@
 
                               </div>
                         </div>
-                        <div class="col-md-12 form-group">
+
+                    <div class="col-md-12 form-group">
                             <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"><label class="control-label pull-left">Sex Partner</label></div>
                             <div class="col-md-7">
@@ -369,7 +371,7 @@
                             
                         </div>
 
-                        <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group">
                             <div class="col-md-2" ><label class="pull-left"><small>INH Prophylaxis</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"><label class="control-label pull-left"> Prophylaxis</label></div>
                             <div class="col-md-7">
@@ -564,7 +566,7 @@
                             </div><%-- .col-md-7--%>
                         </div><%--.col-md-12--%>
 
-                        <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group">
                             <div class="col-md-2" ><label class="pull-left"><small >Vaccination Adult</small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                             <div class="col-md-1"></div>
                             <div class="col-md-7">
@@ -592,52 +594,52 @@
                             </div><%-- .col-md-7--%>
                         </div><%-- .col-md-12--%>
                         
-                      <div class="col-md-12">
-                          <div class="panel panel-primary">
-                                    <div class="panel-heading">Child Vaccination</div>
-                                    <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary">
+                                <div class="panel-heading">Child Vaccination</div>
+                                <div class="panel-body">
 
-                                        <div class="col-md-4">
-                                            <div class="col-md-12"><label class="pull-left control-label">Vaccine</label></div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineType" ClientIDMode="Static"/>
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-12"><label class="pull-left control-label">Vaccine</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineType" ClientIDMode="Static"/>
                                         </div>
-
-                                        <div class="col-md-4">
-                                            <div class="col-md-12"><label class="pull-left control-label">Vaccine Stage</label></div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineStage" ClientIDMode="Static"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
-                                            <div class="col-md-12 pull-right">
-                                                  <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Vaccine</asp:LinkButton>
-                                            </div>
-                                         </div>
-                                        
-                                        <div class="panel-body col-md-9 form-group">
-                                            <table class="table table-striped table-condensed form-group" id="tblVaccines" clientidmode="Static" runat="server">
-                                                <thead>
-                                                    <tr >
-                                                        <th>#</th>
-                                                        <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Vaccine</i> </th>
-                                                        <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Vaccine Stage</i> </th>
-                                                        <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>                               
                                     </div>
-                                    
-                                </div>
-                        </div>
 
-                        <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="col-md-12"><label class="pull-left control-label">Vaccine Stage</label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="VaccineStage" ClientIDMode="Static"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="col-md-12"><label class="control-label text-danger">Action</label></div>      
+                                        <div class="col-md-12 pull-right">
+                                                <asp:LinkButton runat="server" ID="btnAdd"  ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle"> Add Vaccine</asp:LinkButton>
+                                        </div>
+                                        </div>
+                                        
+                                    <div class="panel-body col-md-9 form-group">
+                                        <table class="table table-striped table-condensed form-group" id="tblVaccines" clientidmode="Static" runat="server">
+                                            <thead>
+                                                <tr >
+                                                    <th>#</th>
+                                                    <th><i class="fa fa-calendar-check-o text-primary" aria-hidden="true">Vaccine</i> </th>
+                                                    <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true">Vaccine Stage</i> </th>
+                                                    <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>                               
+                                </div>
+                                    
+                            </div>
+                    </div>
+
+                    <div class="col-md-12">
                             <div class="col-md-3"></div>
 
                             <div class="col-md-7">
@@ -653,7 +655,7 @@
         </div>
         
     </div><%-- .container-fluid--%>
-        <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             /*$('#Stage1').datepicker();
             $('#Stage2').datepicker();
@@ -668,6 +670,28 @@
                     $("#INHCompletionDate").val('');
                 }
             });*/
+
+            var Age = $("#Age").val();
+            if (Age > 14 || Age < 6) {
+                $("#<%=Stage1Date.ClientID%>").attr('disabled', 'disbaled');
+                $("#Stage1").addClass("noneevents");
+                $("#<%=Stage2Date.ClientID%>").attr('disabled', 'disbaled');
+                $("#Stage2").addClass("noneevents");
+                $("#<%=Stage3Date.ClientID%>").attr('disabled', 'disbaled');
+                $("#Stage3").addClass("noneevents");
+            }
+            if (Age <= 14) {
+                $("#<%=SexPartnerDate.ClientID%>").attr('disabled', 'disbaled');
+                $("#SexPartner").addClass("noneevents");
+                $("#HBV").prop("disabled", !this.checked);
+                $("#FluVaccine").prop("disabled", !this.checked);
+                $("#vaccinationotheradult").attr('disabled', 'disbaled');
+               
+            } else {
+                $("#VaccineType").attr('disabled', 'disbaled');
+                $("#VaccineStage").attr('disabled', 'disbaled');
+                $("#btnAdd").attr('disabled', 'disbaled');
+            }
 
             /*Lookup vaccines*/
             var vaccinesList = new Array();
@@ -824,6 +848,7 @@
                         INHCompletionDateValue = $("#INHCompletionDate").val();
                     } else if (INH == 'CompletionNo') {
                         INHCompletion = false;
+                        INHCompletionDateValue = $("#INHCompletionDate").val();
                     }
 
                     var vaccineAdult = [];

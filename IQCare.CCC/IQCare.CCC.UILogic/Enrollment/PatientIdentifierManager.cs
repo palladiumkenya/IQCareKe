@@ -19,5 +19,11 @@ namespace IQCare.CCC.UILogic.Enrollment
             returnValue = _mgr.AddPatientIdentifier(patientIdentifier);
             return returnValue;
         }
+
+        public List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId,
+            int identifierTypeId)
+        {
+            return _mgr.GetPatientEntityIdentifiers(patientId, patientEnrollmentId, identifierTypeId);
+        }
     }
 }

@@ -25,6 +25,11 @@ namespace BusinessProcess.CCC
             return patientDetails;
         }
 
+        public List<PatientLookup> GetPatientByPersonId(int personId)
+        {
+            return _unitOfWork.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
+        }
+
         public List<PatientLookup> GetPatientSearchPayload()
         {
             var patientSearchDetails =_unitOfWork.PatientLookupRepository

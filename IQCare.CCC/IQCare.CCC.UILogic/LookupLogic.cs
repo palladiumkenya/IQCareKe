@@ -141,6 +141,20 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public void PopulateListBox(ListBox lb, string groupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
+            lb.Items.Add(new ListItem("Select", "0"));
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    lb.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
         public void populateCBL(CheckBoxList cbl, string groupName)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

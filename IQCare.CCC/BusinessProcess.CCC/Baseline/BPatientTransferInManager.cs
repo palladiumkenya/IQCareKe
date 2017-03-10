@@ -22,6 +22,18 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdatePatientTransferIn(PatientTransferIn patientTransferIn)
         {
+            var patientTransfer =
+                _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientTransferIn.PatientId & !x.DeleteFlag)
+                    .FirstOrDefault();
+            if (patientTransfer != null)
+            {
+                patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
+                patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
+                patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
+                patientTransfer.MflCode = patientTransferIn.MflCode;
+                patientTransfer.TransferInDate =Convert.ToDateTime(patientTransferIn.TransferInDate);
+                patientTransfer.TreatmentStartDate = patientTransferIn.TreatmentStartDate;
+            }
             _unitOfWork.PatientTransferInRepository.Update(patientTransferIn);
             return Result = _unitOfWork.Complete();
         }
@@ -41,6 +53,16 @@ namespace BusinessProcess.CCC.Baseline
                     .Take(1)
                     .ToList();
             return patientTransferIn;
+        }
+
+        public int CheckifPatientTransferExisits(int patientId)
+        {
+            var patientTrnasferId =
+                _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.Id)
+                    .FirstOrDefault();
+            return Convert.ToInt32(patientTrnasferId);
+
         }
     }
 }

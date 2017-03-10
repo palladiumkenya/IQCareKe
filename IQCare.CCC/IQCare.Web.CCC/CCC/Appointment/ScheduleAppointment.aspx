@@ -201,7 +201,7 @@
 
     </div>
 
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
+    <div class="modal fade" tabindex="-1" role="dialog" ClientIDMode="Static" Id ="AlertModal">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content" id="ModalMessage" clientidmode="Static">
                 ...
@@ -218,6 +218,12 @@
         $(document).ready(function () {
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
+                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                    if (moment('' + appDate + '').isAfter(futureDate)) {
+                        toastr.error("Appointment date cannot be set to over 7 months");
+                        return false;
+                    }
                     addPatientAppointment();
                 } else {
                     return false;
@@ -232,6 +238,10 @@
         });
 
         $("#AppointmentDate").change(function () {
+            AppointmentCount();
+        });
+
+        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
             AppointmentCount();
         });
 

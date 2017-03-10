@@ -9,11 +9,16 @@ namespace IQCare.CCC.UILogic.Baseline
     public class PatientTreatmentInitiationManager
     {
         private readonly IPatientTreatmentInitiationManager _patientTreatmentInitiation = (IPatientTreatmentInitiationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientTreatmentInitiationManager, BusinessProcess.CCC");
+        private int Id = 0;
+        private int Result =0;
 
-        public int AddPatientTreatmentInititation(int id,int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
+        public int ManagePatientTreatmentInititation(int id,int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
         {
+            Id = _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
+
             var patientTreatmentInitiationInsert = new PatientTreatmentInitiation
             {
+                Id = 0,
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitid,
                 DateStartedOnFirstline = dateStartedOnFirstLine,
@@ -24,7 +29,9 @@ namespace IQCare.CCC.UILogic.Baseline
                 CreatedBy = userId
             };
 
-            return _patientTreatmentInitiation.AddPatientTreatmentInitiation(patientTreatmentInitiationInsert);
+            Result = (Id > 0)
+                ? _patientTreatmentInitiation.UpdatePatientTreatmentInitiation(patientTreatmentInitiationInsert): _patientTreatmentInitiation.AddPatientTreatmentInitiation(patientTreatmentInitiationInsert);
+            return Result;
         }
 
         public int UpdatePatientTreatmentInititation(int id,int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, decimal baselineViralload, DateTime baselineViralLoadDate)
@@ -49,6 +56,11 @@ namespace IQCare.CCC.UILogic.Baseline
         public List<PatientTreatmentInitiation> GetPatientTreatmentInitiationList(int patientId)
         {
             return _patientTreatmentInitiation.GetPatientTreatmentInitiation(patientId);
+        }
+
+        public int CheckIfTreatmentInitiationExists(int patientId)
+        {
+           return  _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
         }
     }
 }

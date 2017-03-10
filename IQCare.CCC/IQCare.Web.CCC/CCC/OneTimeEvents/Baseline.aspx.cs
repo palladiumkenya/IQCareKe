@@ -33,6 +33,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
 
             if (ct != null && ct.Count > 0)
             {
+                TransferFromCounty.Items.Add(new ListItem("select", "0"));
                 foreach (var item in ct)
                 {
                     TransferFromCounty.Items.Add(new ListItem(item.CountyName, item.CountyId.ToString()));

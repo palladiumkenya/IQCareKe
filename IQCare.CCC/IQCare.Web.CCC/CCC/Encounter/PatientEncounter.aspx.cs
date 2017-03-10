@@ -1,5 +1,6 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 using Application.Presentation;
@@ -30,11 +31,11 @@ namespace IQCare.Web.CCC.Encounter
         {
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
-                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+                //Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
             // Get Gender
@@ -51,7 +52,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(tbscreeningstatus, "TBStatus");
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
                 lookUp.populateDDL(onFP, "FPStatus");
-                lookUp.populateDDL(fpMethod, "FPMethod");
+                lookUp.PopulateListBox(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
@@ -77,6 +78,50 @@ namespace IQCare.Web.CCC.Encounter
                     loadPatientEncounter();
 
 
+            }
+
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            if (statuses != null && statuses.Count > 0)
+            {
+                status.Items.Add(new ListItem("select", "0"));
+                foreach (var k in statuses)
+                {
+                    status.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+                status.SelectedIndex = 1;
+                status.Enabled = false;
+            }
+
+            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
+            if (areas != null && areas.Count > 0)
+            {
+                ServiceArea.Items.Add(new ListItem("select", "0"));
+                foreach (var k in areas)
+                {
+                    ServiceArea.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
+
+            List<LookupItemView> reasons = mgr.GetLookItemByGroup("AppointmentReason");
+            if (reasons != null && reasons.Count > 0)
+            {
+                Reason.Items.Add(new ListItem("select", "0"));
+                foreach (var k in reasons)
+                {
+                    Reason.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+            }
+
+            List<LookupItemView> care = mgr.GetLookItemByGroup("DifferentiatedCare");
+            if (care != null && care.Count > 0)
+            {
+                DifferentiatedCare.Items.Add(new ListItem("select", "0"));
+                foreach (var k in care)
+                {
+                    DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
             }
         }
         private void GetSessionDetails()

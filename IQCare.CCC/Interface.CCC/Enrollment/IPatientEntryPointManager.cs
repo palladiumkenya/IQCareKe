@@ -11,5 +11,6 @@ namespace Interface.CCC.Enrollment
         int AddPatientEntryPoint(PatientEntryPoint patientEntryPoint);
         int UpdatePatientEntryPoint(PatientEntryPoint patientEntryPoint);
         int DeletePatientEntryPoint(int id);
+        List<PatientEntryPoint> GetPatientEntryPoints(int patientId);
     }
 }
