@@ -13,6 +13,24 @@ namespace IQCare.Web.CCC.Encounter {
     public partial class PatientEncounter {
         
         /// <summary>
+        /// drugID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField drugID;
+        
+        /// <summary>
+        /// drugAbbr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField drugAbbr;
+        
+        /// <summary>
         /// PatientSummary control.
         /// </summary>
         /// <remarks>
@@ -481,22 +499,22 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.LinkButton btnCancelOrder;
         
         /// <summary>
-        /// PrescriptionOption control.
+        /// ddlTreatmentPlan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PrescriptionOption;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentPlan;
         
         /// <summary>
-        /// drugCategory control.
+        /// ddlSwitchInterruptionReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drugCategory;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSwitchInterruptionReason;
         
         /// <summary>
         /// regimLine control.

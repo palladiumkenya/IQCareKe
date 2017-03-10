@@ -7,11 +7,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <script src="../Scripts/js/PatientEncounter.js"></script>
-
-    <div class="col-md-12">
-        <uc:PatientDetails ID="PatientSummary" runat="server" />
-    </div>
-    <div class="col-md-12 col-xs-12">
+    <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
+     <div class="col-md-12">
+                <uc:PatientDetails ID="PatientSummary" runat="server" />
+            </div>
+            <div class="col-md-12 col-xs-12">
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i>Clinical Encounter</a></li>
@@ -1443,142 +1444,115 @@
                 <div class="col-md-12">
                     <div class="panel panel-info">
 
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <div class="col-md-4">
-                                    <div class="col-md-12">
-                                        <label class="control-label pull-left">Last Drug Prescription</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <hr />
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="col-md-12">
-                                        <label class="control-label pull-left">Drup Prescription </label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <hr />
-                                    </div>
+                                    <%--<div class="panel-body">--%>
+                                         <div class="col-md-12">
+                                                  <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
+                                                  <div class="col-md-12"><hr /></div>
+                                                        <div class="col-md-12">
+                                                             <div class="col-md-4 form-group">  
+                                                                  <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
+                                                                  <div class="col-md-12 pull-right">
+                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);"/>
+                                                                   </div>
+                                                              
+                                                             </div>   
+                                                             <div class="col-md-4 form-group">
+                                                               <div class="col-md-12"><label class="control-label pull-left">Reason</label></div>
+                                                               <div class="col-md-12  pull-right">
+                                                                   <asp:DropDownList runat="server" id="ddlSwitchInterruptionReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                               </div>
+                                                           
+                                                             </div> <%--.col-md-12--%>
 
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-4">
-                                            <label class="control-label pull-left">Subsitututions/Switches/Interuptions </label>
+                                                             <div class="col-md-4 form-group">
+                                                             
+                                                                  <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
+                                                                  <div class="col-md-12  pull-right">
+                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="drugList();"/>
+                                                                  </div>
+                                                              
+                                                             </div>  
+                                                        </div>
+                                                         <div class="col-md-6">
+                                                                
+                                                         </div>
+                                                         <div class="col-md-12">
+                                                              <div class="row">
+                                                                    <div class="col-md-12"><hr /></div>
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-3 pull-left"><label class="control-label pull-left">Drug</label></div>
+                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
+                                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
+                                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
+                                                                    </div>  
+                                                                    <div class="col-md-12 panel-body">
+                                                                        <div class="col-md-3">
+                                                                           <input id="txtDrugs" type="text" class="form-control input-sm" ClientIDMode="Static" placeholder="type to search...." runat="server" style="width:100%" />
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                                                        </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                                                        </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" /> </div>
+                                                                        <div class="col-md-1 pull-left">
+                                                                            <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                                            <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th><span class="text-primary">DrugId</span></th>
+                                                                                        <th><span class="text-primary">BatchId</span></th>
+                                                                                        <th><span class="text-primary">FreqId</span></th>
+                                                                                        <th><span class="text-primary">DrugAbbr</span></th>
+                                                                                        <th><span class="text-primary">Drug</span></th>
+                                                                                        <th><span class="text-primary">Batch</span></th>
+                                                                                        <th><span class="text-primary">Dose</span></th>
+                                                                                        <th><span class="text-primary">Frequency</span></th>
+                                                                                        <th><span class="text-primary">Duration</span></th>
+                                                                                        <th><span class="text-primary">Qty Prescribed</span></th>
+                                                                                        <th><span class="text-primary">Qty Dispensed</span></th>
+                                                                                        <th><span class="text-primary"></span></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody></tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                 </div>
+                                                         </div>            
+                                         </div>
+                                         
+                                        <div class="col-md-12">
+                                             <div class="col-md-12"><hr/></div>
+                                             <div class="col-md-4"></div>
+                                            
+                                             <div class="col-md-8">
+                                                <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
+                                                 <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+                                                 <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
+                                                 <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                                                <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
+                                             </div>
+                                             
                                         </div>
-                                        <div class="col-md-6 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " ID="PrescriptionOption" ClientIDMode="Static" />
-                                        </div>
-                                        <div class="col-md-2"></div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-4">
-                                            <label class="control-label pull-left">Drug Classification </label>
-                                        </div>
-                                        <div class="col-md-6  pull-right">
-                                            <asp:DropDownList runat="server" ID="drugCategory" CssClass="form-control input-sm" ClientIDMode="Static" />
-                                        </div>
-                                        <div class="col-md-2"></div>
-                                    </div>
-                                    <%--.col-md-12--%>
+                                    <%--</div>--%><%-- .panel-body--%>
 
-                                    <div class="col-md-12 form-group">
+                                <%--</div>--%><%-- .panel--%>
 
-                                        <div class="col-md-4">
-                                            <label class="control-label pull-left">Regimen Line </label>
-                                        </div>
-                                        <div class="col-md-6  pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimLine" ClientIDMode="Static" />
-                                        </div>
-                                        <div class="col-md-2 "></div>
-                                    </div>
-
-                                    <div class="col-md-12 bs-callout bs-callout-info">
-                                        <div class="row">
-                                            <div class="col-md-12">
-
-                                                <div class="col-md-3">
-                                                    <label class="control-label pull-left">Select Drug (s) </label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control input-sm" placeholder="type to search...." runat="server" />
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <asp:LinkButton runat="server" CssClass="btn btn-warning btn-lg fa fa-plus-circle"> Add Drug</asp:LinkButton>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-12">
-                                                <hr />
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="col-md-4 pull-left">
-                                                    <label class="control-label pull-left">Drug</label>
-                                                </div>
-                                                <div class="col-md-2 pull-left">
-                                                    <label class="control-label pull-left">Dose</label>
-                                                </div>
-                                                <div class="col-md-2 pull-left">
-                                                    <label class="control-label pull-left">Frequency</label>
-                                                </div>
-                                                <div class="col-md-2 pull-left">
-                                                    <label class="control-label pull-left">Quantity</label>
-                                                </div>
-                                                <div class="col-md-2 pull-left">
-                                                    <label class="control-label pull-left">Duration</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="col-md-4">
-                                                    <label class="control-label pull-left text-warning">--Selected drug--</label>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" class="form-control input-sm" runat="server" id="Dose" />
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <select class="form-control input-sm" id="Frequency" runat="server"></select>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" class="form-control input-sm" runat="server" id="Quantity" />
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <input type="text" class="form-control input-sm" runat="server" id="Duration" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <hr />
-                                </div>
-                                <div class="col-md-6"></div>
-                                <div class="col-md-6">
-                                    <div class="col-md-3">
-                                        <asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle"> Save Prescription</asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- .panel-body--%>
-                    </div>
-                    <%-- .panel--%>
-                </div>
-                <%-- .col-md-12--%>
-            </div>
-            <!-- .pharmacy-->
+                          </div><%-- .col-md-12--%>
+                      </div><!-- .pharmacy-->
 
             <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
@@ -2167,32 +2141,32 @@
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#EDCD').datepicker({
-                allowPastDates: true,
-                date: getEDDPVal,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#AntigenDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#NextAppDate').datepicker({
-                allowPastDates: true,
-                date: getNxtAppDateVal,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#vaccineDate').datepicker({
-                allowPastDates: true,
-                date: 0,
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#EDCD').datepicker({
+               allowPastDates: true,
+               date: getEDDPVal,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#AntigenDate').datepicker({
+               allowPastDates: true,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#NextAppDate').datepicker({
+               //allowPastDates: true,
+               date: getNxtAppDateVal,
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
+           $('#vaccineDate').datepicker({
+               allowPastDates: true,
+               date: 0,
+               restricted: [{from: tomorrow, to: Infinity}],
+               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+           });
             
             ////////////////////////////////////////////////////////////////////////////////////////////
             //Gender validations
@@ -2454,7 +2428,15 @@
                             //}
                         }
                         else if (data.step === 4) {
-                            savePatientPatientManagement();
+                            //savePatientPatientManagement();
+                            $.when(savePatientPatientManagement()).then(function() {
+                                        setTimeout(function() {
+                                                window.location
+                                                    .href =
+                                                    '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                            },
+                                            2000);
+                                    });
                             //if ($("#datastep2").parsley().validate()) {
 
                             //} else {

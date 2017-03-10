@@ -70,11 +70,9 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
-                //lookUp.getPharmacyDrugFrequency(ddlFreq);
-
-                //lookUp.populateDDL(regimenLine, "CTXAdherence");
-
-
+                lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
+                lookUp.getPharmacyDrugFrequency(ddlFreq);
+                lookUp.populateDDL(regimenLine, "RegimenLines");
 
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
