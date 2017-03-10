@@ -283,12 +283,14 @@ function DateFormat(date)
 
 var drugList = new Array();
 function AddDrugPrescription() {
-    var drug = $("#txtDrugs").val();
+    var drugId = $("#drugID").val();
+    var drugAbbr = $("#drugAbbr").val();
+    var drugName = $("#txtDrugs").val();
+    var batchId = $('#ddlBatch').find(":selected").val();
     var batchText = $('#ddlBatch').find(":selected").text();
-    var batchVal = $('#ddlBatch').find(":selected").val();
     var dose = $("#txtDose").val();
+    var freqId = $('#ddlFreq').find(":selected").val();
     var freqTxt = $('#ddlFreq').find(":selected").text();
-    var freqVal = $('#ddlFreq').find(":selected").val();
     var duration = $("#txtDuration").val();
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
@@ -296,7 +298,7 @@ function AddDrugPrescription() {
 
     var drugFound = 0;
 
-    if (drug == "") {
+    if (drugName == "") {
         toastr.error("Error", "Please select drug");
         return false;
     }
@@ -306,7 +308,7 @@ function AddDrugPrescription() {
         return false;
     }
 
-    if (freqVal == "0") {
+    if (freqId == "0") {
         toastr.error("Error", "Please enter the frequency");
         return false;
     }
@@ -316,10 +318,10 @@ function AddDrugPrescription() {
         return false;
     }
 
-    drugFound = $.inArray("" + drug + "", drugList);
+    drugFound = $.inArray("" + drugName + "", drugList);
     
     if (drugFound > -1) {
-        toastr.error("Error", drug + " already exists in the List");
+        toastr.error("Error", drugName + " already exists in the List");
         return false; // message box herer
     }
     else {
@@ -329,7 +331,7 @@ function AddDrugPrescription() {
         arrDrugPrescriptionUI = [];
 
         arrDrugPrescriptionUI.push([
-            drug, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
 

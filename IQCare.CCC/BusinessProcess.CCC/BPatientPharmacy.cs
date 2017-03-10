@@ -13,6 +13,51 @@ namespace BusinessProcess.CCC
 {
     public class BPatientPharmacy : ProcessBase, IPatientPharmacy
     {
+        public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
+            string UserID, string RegimenType, string DispensedBy, string RegimenLine, string ModuleID, 
+            List<DrugPrescription> drugPrescription)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId);
+                ClsUtility.AddParameters("@LocationID", SqlDbType.VarChar, LocationID);
+                ClsUtility.AddParameters("@OrderedBy", SqlDbType.VarChar, OrderedBy);
+                ClsUtility.AddParameters("@UserID", SqlDbType.VarChar, UserID);
+                ClsUtility.AddParameters("@RegimenType", SqlDbType.VarChar, RegimenType);
+                ClsUtility.AddParameters("@DispensedBy", SqlDbType.VarChar, DispensedBy);
+                ClsUtility.AddParameters("@RegimenLine", SqlDbType.VarChar, RegimenLine);
+                ClsUtility.AddParameters("@ModuleID", SqlDbType.VarChar, ModuleID);
+
+                int ptn_pharmacy_pk = (int)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacy_GreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                foreach (var drg in drugPrescription)
+                {
+                    if (drg.DrugId != "")
+                    {
+                        ClsObject drugPres = new ClsObject();
+                        ClsUtility.Init_Hashtable();
+                        ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk.ToString());
+                        ClsUtility.AddParameters("@DrugId", SqlDbType.Int, drg.DrugId);
+                        ClsUtility.AddParameters("@BatchId", SqlDbType.Int, drg.BatchId);
+                        ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
+                        ClsUtility.AddParameters("@Dose", SqlDbType.VarChar, drg.Dose);
+                        ClsUtility.AddParameters("@Duration", SqlDbType.VarChar, drg.Duration);
+                        ClsUtility.AddParameters("@qtyPres", SqlDbType.VarChar, drg.qtyPres);
+                        ClsUtility.AddParameters("@qtyDisp", SqlDbType.VarChar, drg.qtyDisp);
+
+                        int j = (int)drugPres.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacyPrescription_GreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    }
+                }
+
+                return 0;
+            }
+
+            
+        }
+
         public DataTable getPharmacyDrugList(string regimenLine)
         {
             lock (this)
@@ -70,6 +115,19 @@ namespace BusinessProcess.CCC
                 }
 
                 return list;
+            }
+        }
+
+        public DataTable getPharmacyDrugSubstitutionInterruptionReason(string TreatmentPlan)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.Int, TreatmentPlan);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugSwitchSubReasons", ClsUtility.ObjectEnum.DataTable);
+
             }
         }
     }

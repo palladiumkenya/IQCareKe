@@ -400,7 +400,7 @@
                     }
 
                     if (identifier == "CCC Registration Number") {
-                        enrollmentNo = <%=Session["AppPosID"] %> + "-" + enrollmentNo;
+                        enrollmentNo = mflcode + "-" + enrollmentNo;
                     }
 
                     if (moment('' + enrollmentDate + '').isAfter()) {
@@ -587,7 +587,7 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit Patient") {
+                    if ('<%=patType%>' == "Transit") {
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {

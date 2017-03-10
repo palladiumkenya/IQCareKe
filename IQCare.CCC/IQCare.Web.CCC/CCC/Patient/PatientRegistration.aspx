@@ -605,7 +605,7 @@
                                     personAge = $("#personAge").val();
                                     var patientTypeId = $("#PatientTypeId").find(":selected").text();
                                     //console.log(PatientTypeId);
-                                    if(patientTypeId == "Transit Patient") {
+                                    if(patientTypeId == "Transit") {
                                         $.when(addPerson()).then(function() {                                     
                                             window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
                                         });
