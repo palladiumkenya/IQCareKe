@@ -145,7 +145,7 @@ namespace IQCare.CCC.UILogic
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
-            lb.Items.Add(new ListItem("Select", "0"));
+            //lb.Items.Add(new ListItem("Select", "0"));
             if (vw != null && vw.Count > 0)
             {
                 foreach (var item in vw)
@@ -159,7 +159,7 @@ namespace IQCare.CCC.UILogic
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
-            //cbl.Items.Add(new ListItem("Select", "0"));
+            cbl.Items.Add(new ListItem("Select", "0"));
             if (vw != null && vw.Count > 0)
             {
                 foreach (var item in vw)
