@@ -1,6 +1,7 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -21,6 +22,7 @@ namespace IQCare.Web.CCC.Encounter
         public string nxtAppDateval = "";
         public int genderID = 0;
         public string gender = "";
+        
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -30,11 +32,12 @@ namespace IQCare.Web.CCC.Encounter
         {
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
 
             if (Request.QueryString["visitId"] != null)
             {
                 visitId = int.Parse(Request.QueryString["visitId"].ToString());
-                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+               // Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
             // Get Gender
@@ -54,6 +57,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
+                lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
@@ -77,12 +81,9 @@ namespace IQCare.Web.CCC.Encounter
 
 
             }
+
         }
-        private void GetSessionDetails()
-        {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-        }
+        
 
         private void loadPatientEncounter()
         {

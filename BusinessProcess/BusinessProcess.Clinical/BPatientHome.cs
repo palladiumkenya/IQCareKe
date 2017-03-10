@@ -508,7 +508,7 @@ namespace BusinessProcess.Clinical
         public Patient GetPatientById(int id)
         {
             PatientRepository repo = new PatientRepository();
-           Patient p = repo.Get(id);
+            Patient p = repo.Get(id);
            return p;
         }
     }

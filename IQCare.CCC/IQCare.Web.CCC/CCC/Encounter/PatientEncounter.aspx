@@ -251,7 +251,8 @@
                                                                  <div class="col-md-2">
                                                                      <div class="col-md-12"><label class="control-label pull-left" >Action</label></div>
                                                                      <div class="col-md-12">
-                                                                         <asp:TextBox runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="action.."></asp:TextBox>
+                                                                          <asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static"  />
+                                                                        
                                                                      </div>
                                                                  </div>
                                                                 <div class="col-md-1">
@@ -494,12 +495,25 @@
                                                                           <asp:DropDownList runat="server" ID="onFP" ClientIDMode="Static" CssClass="form-control input-sm" onChange="showHideFPControls();" />
                                                                       </div>
                                                                  </div>
-                                                                 <div class="col-md-12 form-group" id="divOnFP">
+                                                               <div class="col-md-12 form-group" id="divOnFP">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">FP Method</label></div>
                                                                       <div class="col-md-12">
                                                                           <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm"/>
                                                                       </div>
                                                                  </div>
+                                                              <%--Implementing multiple select for fp method 
+                                                                  <div class="col-md-12 form-group" id="divOnFP">
+                                                                     <div class="col-md-12"><label class="control-label  pull-left">FP Method</label></div>
+                                                                      <div class="col-md-12">
+                                                                 <asp:ListBox runat="server"  ID="fpMethod" SelectionMode="Multiple" ClientIDMode="Static" CssClass="form-control input-sm">
+                                                                      <asp:ListItem Text="test1"></asp:ListItem>
+                                                                      <asp:ListItem Text="test2"></asp:ListItem>
+                                                                      <asp:ListItem Text="test3"></asp:ListItem>
+                                                                    </asp:ListBox>
+                                                                    </div>
+                                                                 </div>--%>
+                                                                 
+
                                                                  <div class="col-md-12 form-group" id="divNoFP" style="display:none">
                                                                      <div class="col-md-12"><label class="control-label  pull-left">Reason not on FP</label></div>
                                                                       <div class="col-md-12">
@@ -1047,16 +1061,16 @@
 
                            
                             <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
-                                                <thead>
-                                                    <tr >
-                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
-                                                        
-                                                    </tr>
-                                                </thead>
+                                                 <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">VL Test</span></th>
+                                                                    <th><span class="text-primary">Test Reason</span></th>
+                                                                    <th><span class="text-primary">Test Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
                                                 <tbody>                        
                                                 </tbody>                  
                                                 </table>
@@ -1065,17 +1079,18 @@
                          <div class="col-md-12 bs-callout bs-callout-info">
                                          <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
                                               <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
-                                                <thead>
-                                                    <tr >
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
-                                                        
-                                                          
-                                                          </tr>
-                                                     </thead>
+                                                
+                                                   <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">VL Test</span></th>
+                                                                    <th><span class="text-primary">Test Reason</span></th>
+                                                                    <th><span class="text-primary">Test Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                  
                                                    <tbody>                        
                                                   </tbody>                  
                                                 </table>
@@ -1086,7 +1101,7 @@
                                    
                              <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
                                                             
-
+            <%--       <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> --%>
                       <!-- pw .implementation of viral load tracker line graph here-->
                 </div><!-- .viraload tracker-->
                     
@@ -1101,15 +1116,19 @@
                          <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
-                                                <thead>
-                                                    <tr >
-                                                        <th> <i class="control-label text-warning pull-right" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true">Lab Test</i> </th>
-                                                          <th> <i class="control-label text-warning pull-right" aria-hidden="true">Order Reason</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right " aria-hidden="true">Order Date</i> </th>
-                                                         <th> <i class="control-label text-warning pull-right" aria-hidden="true"> Status </i></th>
-                                                         </tr>
-                                                </thead>
+                                    
+                                                           <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">Lab Test</span></th>
+                                                                    <th><span class="text-primary">Order Reason</span></th>
+                                                                    <th><span class="text-primary">Order Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                    
                                                 <tbody>                        
                                                 </tbody>                  
                                                 </table>
@@ -1123,16 +1142,18 @@
                                         
                                         <div class="col-md-12 form-group">
                                               <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">
-                                                <thead>
-                                                    <tr >
-                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> # </i> </th>
-                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Lab Test</i> </th>
-                                                         <th> <i class="control-label text-warning pull-left " aria-hidden="true"> Order Reason</i> </th>
-                                                        <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Date </i></th>
-                                                         <th> <i class="control-label text-warning pull-left" aria-hidden="true"> Order Status </i></th>
-                                                        
-                                                    </tr>
-                                                </thead>
+                                               
+                                                   <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">Lab Test</span></th>
+                                                                    <th><span class="text-primary">Order Reason</span></th>
+                                                                    <th><span class="text-primary">Order Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                  
                                                 <tbody>                        
                                                 </tbody>                  
                                                 </table>
@@ -1444,8 +1465,8 @@
      $(document).ready(function () {     
            
 
-         //console.log(patientId);
-         //console.log(patientMasterVisitId);
+         console.log(patientId);
+         console.log(patientMasterVisitId);
          //console.log(genderId);
          //console.log(gender);
 
@@ -2214,6 +2235,7 @@
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
                 var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+           
 
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();

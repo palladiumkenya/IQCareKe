@@ -177,7 +177,8 @@ namespace BusinessProcess.Laboratory
 
                 order = new LabOrder()
                 {
-                    Id = Convert.ToInt32(rowView["LabOrderId"]),
+
+                 Id = Convert.ToInt32(rowView["LabOrderId"]),
                     ClinicalNotes = rowView["ClinicalNotes"].ToString(),
                     CreateDate = Convert.ToDateTime(rowView["CreateDate"]),
                     DeleteFlag = Convert.ToBoolean(rowView["DeleteFlag"]),

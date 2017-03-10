@@ -109,7 +109,7 @@ namespace IQCare.Web.CCC.Encounter {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AdverseEventAction;
+        protected global::System.Web.UI.WebControls.DropDownList AdverseEventAction;
         
         /// <summary>
         /// lmp control.
