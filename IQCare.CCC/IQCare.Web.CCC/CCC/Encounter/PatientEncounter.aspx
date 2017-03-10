@@ -10,9 +10,9 @@
     <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
     <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
      <div class="col-md-12">
-                <uc:PatientDetails ID="PatientSummary" runat="server" />
-            </div>
-            <div class="col-md-12 col-xs-12">
+        <uc:PatientDetails ID="PatientSummary" runat="server" />
+    </div>
+    <div class="col-md-12 col-xs-12">
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i>Clinical Encounter</a></li>
@@ -1442,7 +1442,7 @@
                     <h4 class="pull-left"><strong>Pending Dispensing </strong></h4>
                 </div>
                 <div class="col-md-12">
-                    <div class="panel panel-info">
+                    <%--<div class="panel panel-info">--%>
 
                                     <%--<div class="panel-body">--%>
                                          <div class="col-md-12">
@@ -1551,8 +1551,8 @@
 
                                 <%--</div>--%><%-- .panel--%>
 
-                          </div><%-- .col-md-12--%>
-                      </div><!-- .pharmacy-->
+                </div><%-- .col-md-12--%>
+            </div><!-- .pharmacy-->
 
             <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
@@ -2835,94 +2835,182 @@
             $("#description").val("");
             $("#AppointmentDate").val("");
         }
-   
+
+      //////////////////////////////////PHARMACY//////////////////////////////////////////////////////////////////////////////
+      var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+                //ajax: {
+                //    type: "POST",
+                //    url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                //    dataSrc: 'd',
+                //    contentType: "application/json; charset=utf-8",
+                //    dataType: "json"
+                //},
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false,
+                columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [3],
+                    "visible": false,
+                    "searchable": false
+                }
+                    ]
+            });
+
+           $("#dtlDrugPrescription").on('click',
+                '.btnDelete',
+                function () {
+                    DrugPrescriptionTable
+                        .row($(this).parents('tr'))
+                        .remove()
+                        .draw();
+                });
+       
+              
+           function drugList() {
+               
+               var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
+               var awesomplete = new Awesomplete(drugInput, {
+                   minChars: 1
+               });
+
+               document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   getBatches(result[0]);
+                   this.value = result[2];
+                   $("#<%=drugID.ClientID%>").val(result[0]);
+                   $("#<%=drugAbbr.ClientID%>").val(result[1]);
+               });
+        
+               $.ajax({
+                   url: '../WebService/PatientEncounterService.asmx/GetDrugList',
+                   type: 'POST',
+                   dataType: 'json',
+                   data: "{'regimenLine':''}",
+                   contentType: "application/json; charset=utf-8",
+           
+                   success: function (data) {
+                       var serverData = data.d;
+                       var drugList = [];
+                       for (var i = 0; i < serverData.length; i++) {
+                           //drugList.push(serverData[i][1]);
+                           drugList.push({ label: serverData[i][1], value: serverData[i][0] });
+                       }
+                       awesomplete.list = drugList;
+                   }
+               });    
+                
+           }
+           
+
+       function getBatches(drugPk)
+       {
+           $.ajax({
+               url: '../WebService/PatientEncounterService.asmx/GetDrugBatches',
+               type: 'POST',
+               dataType: 'json',
+               data: "{'DrugPk':'" + drugPk + "'}",
+               contentType: "application/json; charset=utf-8",
+           
+               success: function (data) {
+                   var serverData = data.d;
+                   var batchList = [];
+                   $("#<%=ddlBatch.ClientID%>").find('option').remove().end();
+			       $("#<%=ddlBatch.ClientID%>").append('<option value="0">Select</option>');
+                   for (var i = 0; i < serverData.length; i++) {
+                      $("#<%=ddlBatch.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
+                   }
+               }
+           });
+       }
+
+       function drugSwitchInterruptionReason(treatmentPlan)
+       {
+           var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+           if(valSelected == "Continue Current Treatment" || valSelected == "Select")
+           {
+                $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
+           }
+           else{
+               $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
+           }
+           
+           $.ajax({
+               url: '../WebService/PatientEncounterService.asmx/GetDrugSwitchReasons',
+               type: 'POST',
+               dataType: 'json',
+               data: "{'TreatmentPlan':'" + treatmentPlan + "'}",
+               contentType: "application/json; charset=utf-8",
+               success: function (data) {
+                   var serverData = data.d;
+                   $("#<%=ddlSwitchInterruptionReason.ClientID%>").find('option').remove().end();
+			       $("#<%=ddlSwitchInterruptionReason.ClientID%>").append('<option value="0">Select</option>');
+                   for (var i = 0; i < serverData.length; i++) {
+                      $("#<%=ddlSwitchInterruptionReason.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
+                   }
+               }
+           });
+       }
+
+
+        function saveUpdatePharmacy()
+       {
+            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+
+            ///////////////////////////////////////////////////////////////////
+            var rowCount = $('#dtlDrugPrescription tbody tr').length;
+            var drugPrescriptionArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    drugPrescriptionArray[i] = {
+                        "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                        "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
+                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
+                        "Dose": DrugPrescriptionTable.row(i).data()[6],
+                        "Duration": DrugPrescriptionTable.row(i).data()[8],
+                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
+                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10]
+                    }
+                }
+            }
+            catch (ex) { }
+            //////////////////////////////////////////////////////////////////
+           
+           $.ajax({
+               url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+               type: 'POST',
+               dataType: 'json',
+               data: "{'TreatmentPlan':'" + treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" + regimenLine + "', 'drugPrescription':'" + JSON.stringify(drugPrescriptionArray) + "'}",
+               contentType: "application/json; charset=utf-8",
+               success: function (data) {
+                   toastr.success(data.d, "Saved successfully");
+               },
+               error: function (data) {
+                   toastr.error(data.d, "Error");
+               }
+           });
+       }
+
+
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </asp:Content>
