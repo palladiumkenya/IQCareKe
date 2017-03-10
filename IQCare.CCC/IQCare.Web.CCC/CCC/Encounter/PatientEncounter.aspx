@@ -2541,7 +2541,8 @@
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+                //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+                var FPMethod = $('#fpMethod').val();
                 debugger;
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
@@ -2581,26 +2582,26 @@
                 //console.log(STIPartnerNotification);
                 // console.log(adverseEventsArray);
 
-
-
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                    data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.d > 0)
-                            toastr.success(response.d, "Presenting Complaints");
-                        else
-                            toastr.error("Error occured while saving Presenting Complaints");
-                    },
-                    error: function (response) {
-                        //alert(msg);
-                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                    }
-                });
+                debugger;
+                for (var j = 0, len = FPMethod.length; j < len; j++) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod[j] + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.d > 0)
+                                toastr.success(response.d, "Presenting Complaints");
+                            else
+                                toastr.error("Error occured while saving Presenting Complaints");
+                        },
+                        error: function (response) {
+                            //alert(msg);
+                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                        }
+                    });
+                }
             }
 
 
