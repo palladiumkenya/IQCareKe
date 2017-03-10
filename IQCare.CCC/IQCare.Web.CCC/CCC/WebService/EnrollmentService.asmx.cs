@@ -65,7 +65,7 @@ namespace IQCare.Web.CCC.WebService
                 var patientLookUpManager = new PatientLookupManager();
 
                 String sDate = DateTime.Now.ToString();
-                DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
+                DateTime datevalue = Convert.ToDateTime(sDate);
 
                 int isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId).Count;
 
