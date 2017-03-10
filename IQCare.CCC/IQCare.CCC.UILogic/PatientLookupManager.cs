@@ -55,5 +55,10 @@ namespace IQCare.CCC.UILogic
         {
             return _patientLookupmanager.GetPatientByPersonId(personId);
         }
+
+        public string GetPatientTypeId(int patientId)
+        {
+          return  LookupLogic.GetLookupNameById(_patientLookupmanager.GetPatientTypeId(patientId));
+        }
     }
 }

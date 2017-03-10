@@ -94,10 +94,14 @@ namespace BusinessProcess.CCC
             return totalCount;
         }
         public PatientLookup GetGenderID(int patientId)
-
         {
             PatientLookupRepository lookupGender = new PatientLookupRepository();
             return lookupGender.GetGenderID(patientId);
+        }
+
+        public int GetPatientTypeId(int PatientId)
+        {
+            return _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == PatientId).Select(x => x.PatientType).FirstOrDefault();
         }
     }
 }

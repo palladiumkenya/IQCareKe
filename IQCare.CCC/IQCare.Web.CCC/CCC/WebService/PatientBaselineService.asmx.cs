@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic.Baseline;
 using Newtonsoft.Json;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -20,6 +21,8 @@ namespace IQCare.Web.CCC.WebService
         private int _result;
         private int _patientId;
         private int _patientMasterVisitId;
+        private int _patientTypeId;
+        private string _patinetType;
 
 
         [WebMethod(EnableSession = true)]
@@ -149,6 +152,21 @@ namespace IQCare.Web.CCC.WebService
                 _jsonMessage = e.Message + ' ' + e.InnerException;
             }
 
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession =true)]
+        public string GetPatientType(int patientId)
+        {
+            try {
+
+                var patientLookupManager = new PatientLookupManager();
+                _patinetType = patientLookupManager.GetPatientTypeId(patientId);
+                _jsonMessage = _patinetType;
+            }
+            catch(Exception e) {
+                _jsonMessage = e.Message;
+            }
             return _jsonMessage;
         }
     }

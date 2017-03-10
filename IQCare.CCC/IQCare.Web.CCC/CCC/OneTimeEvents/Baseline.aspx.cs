@@ -4,11 +4,13 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using Interface.CCC.Patient;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
     public partial class Baseline : System.Web.UI.Page
     {
+        
         protected int UserId
         {
             get { return Convert.ToInt32(Session["AppUserId"]); }
@@ -24,7 +26,16 @@ namespace IQCare.Web.CCC.OneTimeEvents
             get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
         }
 
+        protected string Gender
+        {
+            get { return Session["Gender"].ToString(); }
+        }
 
+        protected int Age
+        {
+            get { return Convert.ToInt32(Session["Age"]); }
+        } 
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
