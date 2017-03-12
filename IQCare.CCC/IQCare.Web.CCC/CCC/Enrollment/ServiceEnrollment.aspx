@@ -400,7 +400,7 @@
                     }
 
                     if (identifier == "CCC Registration Number") {
-                        enrollmentNo = <%=Session["AppPosID"] %> + "-" + enrollmentNo;
+                        enrollmentNo = mflcode + "-" + enrollmentNo;
                     }
 
                     if (moment('' + enrollmentDate + '').isAfter()) {
@@ -587,26 +587,19 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit Patient") {
+                    if ('<%=patType%>' == "Transit") {
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {
                         $('#txtAppPosID').setAttribute('readonly');
                     }
-                    //if()
-                    //$("#enrollmentLabel").removeClass("pull-left");
-                    //$("#enrollmentLabel").addClass("pull-right");
+                    
                 } else {
-                    $("#AppPosID").css("display", "none");
-                    //$("#enrollmentLabel").removeClass("pull-right");
-                    //$("#enrollmentLabel").addClass("pull-left");
+                    $("#AppPosID").css("display", 'none');
                 }
             });
 
         });
-
-        
-
     </script>
 
 </asp:Content>

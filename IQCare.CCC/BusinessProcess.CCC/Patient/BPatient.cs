@@ -68,5 +68,11 @@ namespace BusinessProcess.CCC.Patient
             List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
             return person;
         }
+
+        public int GetPatientType(int patientId)
+        {
+            var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag).Select(x => x.PatientType);  
+                return patientTypeId.FirstOrDefault();          
+        }
     }
 }

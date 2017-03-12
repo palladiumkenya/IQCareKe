@@ -254,57 +254,43 @@
                                             <div class="col-md-12">
                                                 <div class="panel panel-info">
 
-                                                    <div class="panel-body">
-                                                        <div class="col-md-12">
-                                                            <h1 class=" control-label pull-left"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Adverse Event(s)</h1>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <hr />
-                                                        </div>
-                                                        <div class="col-md-12 form-group">
-                                                            <div class="col-md-3">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label pull-left">Adverse event(s)</label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label">Medicine Causing A/E</label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label pull-left">Severity</label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label pull-left">Action</label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <asp:TextBox runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="action.."></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label pull-left"></label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <%--.panel-body--%>
+                                                        <div class="panel-body">
+                                                            <div class="col-md-12"><h1 class=" control-label pull-left"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Adverse Event(s)</h1></div>
+                                                            <div class="col-md-12"><hr /></div>
+                                                            <div class="col-md-12 form-group">
+                                                                 <div class="col-md-3">
+                                                                      <div class="col-md-12"><label class="control-label pull-left" >Adverse event(s)</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="col-md-3">
+                                                                     <div class="col-md-12"><label class="control-label" >Medicine Causing A/E</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="col-md-3">
+                                                                     <div class="col-md-12"><label class="control-label pull-left" >Severity</label></div>
+                                                                     <div class="col-md-12">
+                                                                         <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static"  />
+                                                                     </div>
+                                                                 </div>
+                                                                 <div class="col-md-2">
+                                                                     <div class="col-md-12"><label class="control-label pull-left" >Action</label></div>
+                                                                     <div class="col-md-12">
+                                                                          <asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static"  />
+                                                                        
+                                                                     </div>
+                                                                 </div>
+                                                                <div class="col-md-1">
+                                                                     <div class="col-md-12"><label class="control-label pull-left" ></label></div>
+                                                                     <div class="col-md-12">
+                                                                         <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
+                                                                     </div>
+                                                                 </div>
+                                                             </div>
+                                                        </div> <%--.panel-body--%>
 
                                                     <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
                                                         <table id="dtlAdverseEvents" class="table table-bordered table-striped">
@@ -1139,144 +1125,142 @@
                     <div class="col-md-12 bs-callout bs-callout-danger">
                         <h4 class="pull-left"><strong>Pending VL Test(s):</strong> </h4>
 
-
-                        <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
-                            <thead>
-                                <tr>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true"># </i></th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
-                                    <th><i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Status </i></th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="col-md-12 bs-callout bs-callout-info">
-                        <h4 class="pull-left"><strong>Complete VL Test(s):</strong> </h4>
-                        <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
-                            <thead>
-                                <tr>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true"># </i></th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">VL Test</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Test Reason</i> </th>
-                                    <th><i class="control-label text-warning pull-right " aria-hidden="true">Test Date</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Status </i></th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-
-                <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div>
-
-
-                <!-- pw .implementation of viral load tracker line graph here-->
-            </div>
-            <!-- .viraload tracker-->
-
-            <div role="tabpanel" class="tab-pane fade" id="Laboratory">
-                <%--<div class="col-md-12" style="padding-top: 1%">
+                           
+                            <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
+                                                 <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">VL Test</span></th>
+                                                                    <th><span class="text-primary">Test Reason</span></th>
+                                                                    <th><span class="text-primary">Test Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+                            </div>
+                      
+                         <div class="col-md-12 bs-callout bs-callout-info">
+                                         <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
+                                              <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
+                                                
+                                                   <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">VL Test</span></th>
+                                                                    <th><span class="text-primary">Test Reason</span></th>
+                                                                    <th><span class="text-primary">Test Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                  
+                                                   <tbody>                        
+                                                  </tbody>                  
+                                                </table>
+                                            </div> 
+                                               
+                                    </div>
+                       
+                                   
+                             <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
+                                                            
+            <%--       <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> --%>
+                      <!-- pw .implementation of viral load tracker line graph here-->
+                </div><!-- .viraload tracker-->
+                    
+             <div  role="tabpanel" class="tab-pane fade" id="Laboratory">
+                            <%--<div class="col-md-12" style="padding-top: 1%">
                               <label class="control-label pull-left"> <i class="fa fa-flask fa-lg" aria-hidden="true"></i> Laboratory Prescription </label>
                             </div>    -->--%>
+                            
+                       
+                           
+                        <div class="col-md-6">  
+                         <div class="col-md-12 bs-callout bs-callout-danger">
+                                <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
+                                <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
+                                    
+                                                           <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">Lab Test</span></th>
+                                                                    <th><span class="text-primary">Order Reason</span></th>
+                                                                    <th><span class="text-primary">Order Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                    
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
+                            </div>    
+        
+                
 
-
-
-                <div class="col-md-6">
-                    <div class="col-md-12 bs-callout bs-callout-danger">
-                        <h4 class="pull-left"><strong>Pending Labs:</strong> </h4>
-                        <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
-                            <thead>
-                                <tr>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true"># </i></th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Lab Test</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Order Reason</i> </th>
-                                    <th><i class="control-label text-warning pull-right " aria-hidden="true">Order Date</i> </th>
-                                    <th><i class="control-label text-warning pull-right" aria-hidden="true">Status </i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-                    <div class="col-md-12 bs-callout bs-callout-info">
-                        <h4 class="pull-left"><strong>Complete Labs:</strong> </h4>
-                        <!--pw implementation of previous labs laboratory module here  previous orders-->
-
-                        <div class="col-md-12 form-group">
-                            <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">
-                                <thead>
-                                    <tr>
-                                        <th><i class="control-label text-warning pull-left" aria-hidden="true"># </i></th>
-                                        <th><i class="control-label text-warning pull-left" aria-hidden="true">Lab Test</i> </th>
-                                        <th><i class="control-label text-warning pull-left " aria-hidden="true">Order Reason</i> </th>
-                                        <th><i class="control-label text-warning pull-left" aria-hidden="true">Order Date </i></th>
-                                        <th><i class="control-label text-warning pull-left" aria-hidden="true">Order Status </i></th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                <div class="col-md-12 bs-callout bs-callout-info">
+                         <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
+                      <!--pw implementation of previous labs laboratory module here  previous orders-->
+                                        
+                                        <div class="col-md-12 form-group">
+                                              <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">
+                                               
+                                                   <thead>
+                                                                <tr>
+                                                                    <th><span class="text-primary">#</span></th>
+                                                                    <th><span class="text-primary">Lab Test</span></th>
+                                                                    <th><span class="text-primary">Order Reason</span></th>
+                                                                    <th><span class="text-primary">Order Date</span></th>
+                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                  
+                                                <tbody>                        
+                                                </tbody>                  
+                                                </table>
 
                         </div>
                     </div>
 
-                </div>
-
-                <div class="col-md-6">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <label class="control-label pull-left">Order Lab Test(s)</label>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"></div>
-                                <div class="panel-body">
-
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-4">
-                                            <label class="control-label pull-left">Select Lab</label>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <asp:TextBox runat="server" Width="200" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-4">
-                                            <label class="control-label  pull-left">Reason</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-4">
-                                            <label class="control-label pull-left">Lab Notes</label>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <!--datepicker  -->
-
-                                    <div class="col-md-12 form-group">
+                       </div>
+                           
+                       <div class="col-md-6">
+                         <div class="col-md-12">
+                                        <div class="col-md-12"><label class="control-label pull-left">Order Lab Test(s)</label></div>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                              <div class="panel-heading"></div>
+                                              <div class="panel-body">
+                                               
+                                                  <div class="col-md-12 form-group">
+                                                       <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
+                                                      <div class="col-md-8">
+                                                         
+                                                          <asp:TextBox runat="server" Width="230" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-12 form-group">
+                                                                      <div class="col-md-4"><label class="control-label  pull-left">Reason</label></div>
+                                                                     <div class="col-md-8">
+                                                                         <asp:DropDownList runat="server" ID="orderReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                                                     </div>
+                                                         </div>
+                                                  
+                                                 <div class="col-md-12 form-group">
+                                                       <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
+                                                      <div class="col-md-8">
+                                                         
+                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                 <!--datepicker  -->
+                              
+                                   <div class="col-md-12 form-group">
                                         <div class="col-md-4">
                                             <label class="control-label pull-left">Date</label>
                                         </div>

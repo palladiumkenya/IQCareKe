@@ -15,8 +15,8 @@ namespace IQCare.CCC.UILogic.Baseline
         public int ManagePatientTransferIn(int patientId, int patientMastervisitId, int serviceAreaId, DateTime transferinDate, DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom, string transferInNotes,int userId)
         {
             Id = _patientTranfersIn.CheckifPatientTransferExisits(patientId);
-            
-            PatientTransferIn patientTransferIn=new PatientTransferIn()
+
+            PatientTransferIn patientTransferIn = new PatientTransferIn()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMastervisitId,
@@ -30,7 +30,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 TransferInNotes = transferInNotes,
                 CreatedBy = userId
             };
-            _result = (Id > 0)? _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn): _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+            //_result = (Id > 0)? _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn): _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+            _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
             return _result;
         }
 

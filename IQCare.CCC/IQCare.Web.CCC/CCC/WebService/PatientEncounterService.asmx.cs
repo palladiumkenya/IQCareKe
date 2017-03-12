@@ -1,10 +1,13 @@
-﻿using IQCare.CCC.UILogic;
+﻿using System;
+using IQCare.CCC.UILogic;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
-using static Entities.CCC.Encounter.PatientEncounter;
+using Application.Presentation;
+using Entities.CCC.Visit;
+using Interface.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -18,7 +21,7 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientEncounterService : System.Web.Services.WebService
     {
-
+        private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
         public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, string fpMethod, string ReasonNotOnFP, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
         {
@@ -201,17 +204,6 @@ namespace IQCare.Web.CCC.WebService
                 Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription);
             Session["PatientMasterVisitID"] = val;
             return val;
-        }
-
-        [WebMethod(EnableSession = true)]
-        public int getDrugFrequencyMultiplier(string freqID)
-        {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            string multiplier = patientEncounter.getPharmacyDrugMultiplier(freqID);
-            if (multiplier == "")
-                multiplier = "0";
-
-            return int.Parse(multiplier);
         }
 
     }

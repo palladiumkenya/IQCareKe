@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -60,6 +61,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.PopulateListBox(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
+                lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
@@ -128,12 +130,9 @@ namespace IQCare.Web.CCC.Encounter
                     DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
         }
-        private void GetSessionDetails()
-        {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-        }
+        
 
         private void loadPatientEncounter()
         {

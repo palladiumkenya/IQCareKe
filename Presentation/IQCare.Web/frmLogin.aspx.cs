@@ -63,6 +63,8 @@ namespace IQCare.Web
             Session.Add("PatientMasterVisitId","0");
             Session.Add("PatientId","0");
             Session.Add("EncounterStatusId",0);
+            Session.Add("Gender", "");
+            Session.Add("Age", 0);
             ////////////////////////////////////////
 
             lblDate.Text = "";

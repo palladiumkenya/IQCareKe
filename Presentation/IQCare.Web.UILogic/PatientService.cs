@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web;
 using Application.Presentation;
 using Entities.Administration;
 using Entities.FormBuilder;
@@ -18,7 +19,7 @@ namespace IQCare.Web.UILogic
         public string ReferenceId { get; private set; }
         public string FormName { get; private set; }
         public string Url { get; private set; }
-
+ 
         public static List<StaticFormMap> FormUrl
         {
             get
@@ -106,6 +107,8 @@ namespace IQCare.Web.UILogic
        
         public PatientService (int patientId)
         {
+            //patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+           
             IPatientHome pHome = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
             CurrentPatient= pHome.GetPatientById(patientId);
         }
@@ -114,7 +117,7 @@ namespace IQCare.Web.UILogic
             int locationId, userId;
 
             locationId = session.Facility.Id;
-
+            patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
             userId = session.User.Id;
             IPatientHome pHome = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
             this.CurrentPatient = pHome.GetPatientById(patientId);
@@ -171,7 +174,7 @@ namespace IQCare.Web.UILogic
             IPatientHome ptmhm = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
             List<StaticFormMap> formMap = StaticFormMap.FormUrl;
             DataTable dtForms = ptmhm.GetModuleForms(moduleId, locationId);
-
+           
             List<FormRule> formRules = ptmhm.GetModuleFormsBusinessRule(moduleId, null, null);
             DataTable dt = this.ApplyBusinessRuleOnFormSet(ref dtForms, ref formRules, patient.Age, patient.Sex);
             //dtForms.DefaultView.ToTable();

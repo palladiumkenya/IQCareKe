@@ -605,7 +605,7 @@
                                     personAge = $("#personAge").val();
                                     var patientTypeId = $("#PatientTypeId").find(":selected").text();
                                     //console.log(PatientTypeId);
-                                    if(patientTypeId == "Transit Patient") {
+                                    if(patientTypeId == "Transit") {
                                         $.when(addPerson()).then(function() {                                     
                                             window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
                                         });
@@ -1003,7 +1003,9 @@
                     });
 
                 $.urlParam = function(name){
-                    var results = new RegExp('[\?&]' + name.toLowerCase() + '=([^&#]*)').exec(window.location.href);
+                    //name = name.toLowerCase();
+                    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                    console.log(results);
                     if (results==null){
                         return null;
                     }
@@ -1013,6 +1015,7 @@
                 }
 
                 var PatientId = $.urlParam('PatientId');
+                console.log(PatientId);
 
                 if (PatientId > 0) {
                     $.ajax({
@@ -1193,7 +1196,7 @@
                 $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
                 $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
 
-                if (patientType == "Transit Patient") {
+                if (patientType == "Transit") {
                     $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                     $("#<%=NationalId.ClientID%>").prop('disabled', true);
                 }
@@ -1207,7 +1210,7 @@
                 $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                 $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
 
-                if (patientType == "Transit Patient") {
+                if (patientType == "Transit") {
                     $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
                     $("#<%=Inschool.ClientID%>").prop('disabled',true);
                     $("#<%=GurdianFNames.ClientID%>").prop('disabled',true);

@@ -25,6 +25,7 @@ namespace Entities.CCC.Lookup
         public DateTime DateOfBirth { get; set; }
         public string NationalId { get; set; }
         public int FacilityId { get; set; }
+        public int PatientType { get; set; }
         public bool PatientStatus { get; set; }
     }
 }

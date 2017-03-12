@@ -16,7 +16,7 @@ function AddAdverseReaction() {
     var medicineCausingAE = $("#AdverseEventCause").val();
     var adverseEventSeverity = $('#ddlAdverseEventSeverity').find(":selected").text();
     var adverseEventSeverityID = $('#ddlAdverseEventSeverity').find(":selected").val();
-    var adverseEventAction = $("#AdverseEventAction").val();
+    var adverseEventAction = $("#AdverseEventAction").find(":selected").text();
     //Validate duplication
    
     var reactionEventFound = 0;
@@ -211,23 +211,47 @@ function AddPhysicalExam() {
     }
 }
 
+var diagnosisList = new Array();
+var treatmentList = new Array();
+
 function AddDiagnosis() {
     var diagnosis = $('#Diagnosis').val();
     var treatment = $('#DiagnosisTreatment').val();
 
+    //Validate duplication
+    var diagnosisFound = 0;
+    var treatmentFound = 0;
+
     if (diagnosis == "") {
-        alert("Please enter Diagnosis");
-        return;
+        toastr.error("Error", "Please enter Diagnosis");
+        return false;
     }
 
-    arrDiagnosisUI = [];
-    
-    arrDiagnosisUI.push([diagnosis, treatment, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
-    
-    DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+    diagnosisFound = $.inArray("" + diagnosis + "", diagnosisList);
+    treatmentFound = $.inArray("" + treatment + "", treatmentList);
 
-    $('#Diagnosis').val("");
-    $('#DiagnosisTreatment').val("");
+    if ((diagnosisFound > -1) && (treatmentFound > -1)) {
+        toastr.error("Error", "Diagnosis and treatment already exists.");
+        return false;
+
+    } else {
+
+
+        diagnosisList.push("" + diagnosis + "");
+        treatmentList.push("" + treatment + "");
+
+        arrDiagnosisUI = [];
+
+        arrDiagnosisUI.push([
+            diagnosis, treatment,
+            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        ]);
+
+        DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
+
+        $('#Diagnosis').val("");
+        $('#DiagnosisTreatment').val("");
+    }
 }
 
 function showHideFPControls() {

@@ -51,16 +51,19 @@ namespace IQCare.Web.CCC.UC
                 if (x.Sex == 62)
                 {
                     lblGender.Text= femaleIcon + "<strong><i>"+_lookupManager.GetLookupNameFromId(x.Sex)+ "</i></strong>";
+                    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 }
                 if (x.Sex==61)
                 {
                     lblGender.Text = maleIcon + "<strong><i>" + _lookupManager.GetLookupNameFromId(x.Sex) + "</i></strong>";
+                    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 }
                 
 
                 lblOtherNames.Text = "<strong></i>"+_utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName)+"</i></strong>";
 
                 lblAge.Text ="<strong><i>"+ Convert.ToString(myDate - DoB.Year)+" Years " + Convert.ToString(myDateMonth-DoB.Month) + " Months </i></strong>";
+                Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 lblCCCReg.Text = x.EnrollmentNumber;
 
                 lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");

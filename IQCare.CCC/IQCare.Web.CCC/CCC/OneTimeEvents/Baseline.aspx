@@ -68,7 +68,7 @@
 
                              <div class="col-md-12 form-group">
                                   <div class="col-md-4">
-                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblTINA">Transfer In ?</asp:Label></div>                                
+                                       <%--<div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" ID="lblTINA">Transfer In ?</asp:Label></div>                                
                                            <div class="col-md-12">
                                                 <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblTransferInYes">
                                                        <input runat="server" class="sr-only pull-left" name="TransferIn" id="TransferInYes" type="checkbox" value="Yes" ClientIDMode="Static" /> <span class="checkbox-label pull-left"> <strong>Yes</strong> <i> [if patient from another Hospital]</i></span> />
@@ -79,7 +79,7 @@
                                                 <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblTransferInNo">
                                                       <input runat="server" class="sr-only" id="TransferInNo" name="TransferIn" type="checkbox" value="No" checked="checked"> <span class="checkbox-label"><strong> No</strong> <i> [ if patient has not enrolled before]</i></span> />
                                                 </label>
-                                           </div>
+                                           </div>--%>
                                   </div>
                                   
                                  <div class="col-md-4">
@@ -88,7 +88,7 @@
                                       <div class="col-md-12">
                                            <div class="datepicker fuelux" id="TIDate">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TransferInDate" type="text" />
+                                                    <input class="form-control input-sm" id="TransferInDate" type="text" data-parsley-required="true" />
                                                     <div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -173,7 +173,7 @@
                                        <div class="col-md-12">
                                             <div class="datepicker fuelux" Id="TIARTStartDate">
                                                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="StartDateART" type="text" />
+                                                                              <input class="form-control input-sm" id="StartDateART"  type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -286,7 +286,7 @@
                                 <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblcounty">County:</asp:Label></div>
                                       <div class="col-md-12">
-                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="0"/>
                                       </div>
                                  </div>
                             </div>
@@ -313,7 +313,7 @@
                                    <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DHID">
                                              <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -397,7 +397,7 @@
                                   <div class="col-md-12">
                                        <div class="datepicker fuelux" id="DOE">
                                             <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfEnrollment" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfEnrollment" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -479,7 +479,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
                                   </div>
                              </div>
                          </div>
@@ -489,7 +489,7 @@
                                    <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DARTI">
                                              <div class="input-group">
-                                                                              <input class="form-control input-sm" id="DateOfARTInitiation" type="text" />
+                                                                              <input class="form-control input-sm" id="DateOfARTInitiation" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -629,7 +629,7 @@
                                 <div class="col-md-12">
                                      <div class="datepicker fuelux" id="DLUsed">
                                           <div class="input-group">
-                                                                              <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" />
+                                                                              <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" data-parsley-required="true" />
                                                                               <div class="input-group-btn">
                                                                                  <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -772,11 +772,11 @@
                                       </label>
                                  </div>
                                 
-                                 <div class="col-md-2 col-xs-12">
+<%--                                 <div class="col-md-2 col-xs-12">
                                       <label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox"  id="lblBHIV">
                                             <input class="sr-only" type="checkbox" id="BHIV" value="true"> <span class="checkbox-label"> B/HIV</span>
                                       </label>
-                                 </div>
+                                 </div>--%>
 
                             </div>
 
@@ -841,7 +841,7 @@
                                      <div class="col-md-12">
                                          <div class="datepicker fuelux" id="DateStartedOn1stLine">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" /><div class="input-group-btn">
+                                                    <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" data-parsley-require="true" /><div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
                                                                 <span class="sr-only">Toggle Calendar</span>
@@ -936,7 +936,7 @@
                                      <div class="col-md-12">
                                          <div class="datepicker fuelux" id="BaselineViralloadDate">
                                                <div class="input-group">
-                                                    <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" />
+                                                    <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" />
                                                     <div class="input-group-btn">
                                                          <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1051,6 +1051,9 @@
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var transferIn = 0;
             var treatmentType = 0;
+            var patientType="";
+            var gender="<%=Gender%>";
+            var age="<%=Age%>";
 
             var whostage = '';
             var cD4Count='';
@@ -1063,41 +1066,55 @@
             var today = new Date();
 
             $('#TIARTStartDate').datepicker({
+               date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
             $('#TIDate').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
+            //dateof hiv diagnosis
             $('#DHID').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
             $('#DOE').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
             $('#DARTI').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
 
             });
+
             $('#DLUsed').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
             $('#DateStartedOn1stLine').datepicker({
+                date:null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                // restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
             });
+
             $('#BaselineViralloadDate').datepicker({
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
@@ -1107,12 +1124,12 @@
             $("#<%=BaselineWeight.ClientID%>").on('change',
                 function() {
                     var bmi = calcBmi();
-                    document.getElementById("BaselineBMI").value = bmi;
+                    $("#<%=BaselineBMI.ClientID%>").val(bmi);
                 });
              $("#<%=BaselineHeight.ClientID%>").on('change',
                 function() {                
                     var bmi = calcBmi();
-                    document.getElementById("BaselineBMI").value = bmi;
+                    $("#<%=BaselineBMI.ClientID%>").val(bmi);
                 });
 
             function calcBmi()
@@ -1123,6 +1140,9 @@
                 return bmi;
             }
 
+            /*Get Patient Type */
+            $(window).on("load",checkPatientStatus);
+
             /*-- check for future dates -- check if ART start Date >TI Date */
             $('#TIARTStartDate').on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
 
@@ -1131,17 +1151,18 @@
                 var isAfter=moment(artStartDate).isAfter(tiDate);              
                 var futureDate = moment(artStartDate).isAfter(today);
                 if (isAfter) {
-                    toastr.error("ART Start Date CANNOT be greater than transferin Date",
-                        "ART Start Date-Transfer in Validation");
-                    $("#TIDate").datepicker('setDate','');
+                    toastr.error("ART Start Date CANNOT be greater than transferin Date");
+                    $('#TIARTStartDate').val('');
                     return false;
                 }
 
                 if(futureDate)
                 {
+                    $('#TIARTStartDate').val('');
                     toastr.error("Future Dates NOT ALLOWED!");
                     return false;
                 }
+                $("DARTI").datepicker("setDate",artStartDate);
 
             });
 
@@ -1151,7 +1172,9 @@
                     var tiDate= $('#TIDate').datepicker('getDate');
                     var futureDate = moment(tiDate).isAfter(today);
                     if (futureDate) {
-                        toastr.error("future dates NOT allowed !");
+                        //$("#TIDate").datepicker();
+                        $("#TransferInDate").val('');
+                        toastr.error("future dates NOT allowed !"); 
                         return false;
                     }
                 });
@@ -1163,8 +1186,35 @@
                     var futureDate = moment(dlDate).isAfter(today);
                     if (futureDate) {
                         toastr.error("Future dates NOT allowed on Date Last Used Entries!");
+                        $("#RegimenDateLastUsed").val('');
+                        return false;
                     }
                 });
+
+            /* date of hiv diagnosis*/
+            $("#DHID").on('changed.fu.datepicker dateClicked.fu.datepicker', function(event, date) {
+                var dhid=$("#DHID").datepicker('getDate');
+                var tidate=$("#TIDate").datepicker('getDate');
+                var artStartDate = $('#TIARTStartDate').datepicker('getDate');
+                //validate dates
+
+                var futureDate = moment(dhid).isAfter(today);
+                if(futureDate){ $("#DateOfHIVDiagnosis").val();toastr.error("future dates NOT allowed");return false;}
+                futureDate=moment(dhid).isAfter(tidate);
+                if(futureDate){ $("#DateOfHIVDiagnosis").val();toastr.error("Date OF HIV Diagnosis CANNOT be after Enrollment Date");return false;}
+                futureDate=moment(dhid).isAfter(artStartDate);
+                if(futureDate){ $("#DateOfHIVDiagnosis").val();toastr.error("Date OF HIV Diagnosis CANNOT be after ART Start date");return false;}
+            });
+
+            /*DateOfEnrollment*/
+            $("#DOE").on('changed.fu.datepicker dateClicked.fu.datepicker',function(event,date){
+                var doe=$("#DOE").datepicker('getDate');
+                var futureDate = moment(doe).isAfter(today);
+                if(futureDate){ $("#DateOfEnrollment").val('');toastr("future dates NOT allowed");return false;}
+                var dhid=$("#DHID").datepicker('getDate');
+                var earlyDate=moment(doe).isBefore(dhid);
+                if(earlyDate){ $("#DateOfEnrollment").val(''); toastr("Enrollment Date CANNOT be before HIV Diagnosis Date");return false;}
+            });
 
             /* limit future dates viralload baseline date*/
             $("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',
@@ -1173,6 +1223,8 @@
                     var futureDate = moment(dlDate).isAfter(today);
                     if (futureDate) {
                         toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
+                        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+                        return false;
                     }
                 });
 
@@ -1187,20 +1239,20 @@
                 });
 
             /* clientside validation */
-            disableIfNotTransferIn();
+            //disableIfNotTransferIn();
             noneChecked();
 
-            $("#lblTransferInYes").checkbox('uncheck');
-            $("#lblTransferInNo").checkbox('check');
+           // $("#lblTransferInYes").checkbox('uncheck');
+           // $("#lblTransferInNo").checkbox('check');
             $("#lblNONE").checkbox('check');
 
-            $("#lblTransferInYes").on('checked.fu.checkbox',
-                function() {
-                    //uncheck No
-                    transferIn = 1;
-                    $("#lblTransferInNo").checkbox('uncheck');
-                    enableIfTransferIn();
-                });
+            //$("#lblTransferInYes").on('checked.fu.checkbox',
+            //    function() {
+            //        //uncheck No
+            //        transferIn = 1;
+            //        $("#lblTransferInNo").checkbox('uncheck');
+            //        enableIfTransferIn();
+            //    });
 
             //$("#lblTransferInYes").on('unchecked.fu.checkbox',
             //    function () {
@@ -1209,12 +1261,12 @@
             //        enableIfTransferIn();
             //    });
 
-            $("#lblTransferInNo").on("checked.fu.checkbox",
-                function() {
-                    transferIn = 0;
-                    $("#lblTransferInYes").checkbox('uncheck');
-                    disableIfNotTransferIn();
-                });
+            //$("#lblTransferInNo").on("checked.fu.checkbox",
+            //    function() {
+            //        transferIn = 0;
+            //        $("#lblTransferInYes").checkbox('uncheck');
+            //        disableIfNotTransferIn();
+            //    });
             //$("#lblTransferInNo").on("unchecked.fu.checkbox",
             //    function() {
             //        $("#lblTransferInYes").checkbox('uncheck');
@@ -1259,7 +1311,6 @@
                     $("#RegimenPurpose").val("");
                     noneChecked();
                 });
-
 
 
             $("#AddPriorHistory").click(function(e) {
@@ -1320,6 +1371,19 @@
             $("#lblBHIV").checkbox('uncheck');
             $("#lblTbInfection").checkbox('uncheck');
 
+            if(gender==='male'){
+                $("#lblPregnancy").checkbox('disable');
+                $("#lblBreastFeeding").checkbox('disable')
+            }else{
+                $("#lblPregnancy").checkbox('enable');
+                $("#lblBreastFeeding").checkbox('enable')
+            }
+
+            if(age<=2) {
+                $("#<%=BaselineMUAC.ClientID%>").prop('disabled',false);
+            }else{
+                $("#<%=BaselineMUAC.ClientID%>").prop('disabled',true);
+            }
             /* when checked */
            // $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });
            // $("#lblCD4Count").on('checked.fu.checkbox', function () { cD4Count = true; });
@@ -1348,7 +1412,7 @@
                 $("#TIARTStartDate").datepicker('enable');
                 $("#DateStartedOn1stLine").datepicker('enable');
                 $("#<%=RegimenId.ClientID%>").prop('disabled', false);
-                 $("#<%=regimenCategory.ClientID%>").prop('disabled', false);
+                $("#<%=regimenCategory.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', false);
                 $("#<%=FacilityMFLCode.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromCounty.ClientID%>").prop('disabled', false);
@@ -1413,7 +1477,7 @@
             /* add constraints based on age*/
             if ($('#datastep1').parsley().validate()) {
                 
-                if (transferIn > 0) {
+                if (transferIn >0) {
                     addPatientTransferIn();
                 } else {
                     toastr.info("Patient is NOT a transferIN", "PatientTransferIn status");
@@ -1592,11 +1656,11 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(response) {
-                        toastr.success(response.d, "PatientTransferIn Status");
+                        toastr.success(response.d);
                     },
                     error: function(xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
 
                     }
                 });
@@ -1624,7 +1688,7 @@
                     },
                     error: function(xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
 
                     }
                 });
@@ -1664,7 +1728,7 @@
                     },
                     error: function(xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
                     }
                 });
             }
@@ -1696,7 +1760,7 @@
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
                     }
                 });
             }
@@ -1725,9 +1789,32 @@
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
                     }
                 });
+            }
+
+            function checkPatientStatus()
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientBaselineService.asmx/GetPatientType",
+                    data: "{'patientId':"+patientId  +"}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        patientType=response.d;
+                       
+                        if(patientType==='TransferIn'){ transferIn=1; enableIfTransferIn(); } else { transferIn=0; disableIfNotTransferIn();}
+                       
+                    },
+                    error:function(xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                        return false;
+                    }
+                });
+
             }
 
         });
