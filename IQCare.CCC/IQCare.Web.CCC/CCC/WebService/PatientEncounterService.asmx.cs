@@ -166,7 +166,8 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            List<DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            List<Entities.CCC.Encounter.PatientEncounter.DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            
             ArrayList rows = new ArrayList();
 
             for(int i=0; i < lst.Count; i++)
