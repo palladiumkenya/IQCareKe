@@ -20,15 +20,12 @@ namespace IQCare.Web.CCC.WebService
     {
 
         [WebMethod(EnableSession = true)]
-        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, string fpMethod, string ReasonNotOnFP, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            int val = patientEncounter.savePatientEncounterPresentingComplaints(patientMasterVisitID, Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy, Complaints,TBScreening,NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP,fpMethod, CaCx,STIScreening,STIPartnerNotification, adverseEvent);
-            Session["PatientMasterVisitID"] = val;
+            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy, Complaints,TBScreening,NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP,fpMethod.TrimEnd(','), ReasonNotOnFP, CaCx,STIScreening,STIPartnerNotification, adverseEvent);
+            //Session["PatientMasterVisitID"] = val;
             return val;
         }
 
@@ -36,46 +33,34 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public void savePatientEncounterChronicIllness(string chronicIllness, string vaccines)
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            patientEncounter.savePatientEncounterChronicIllness(patientMasterVisitID, Session["PatientId"].ToString(), chronicIllness,vaccines);
+            patientEncounter.savePatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), chronicIllness,vaccines);
         }
 
         [WebMethod(EnableSession = true)]
         public void savePatientPhysicalExam(string physicalExam)
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            patientEncounter.savePatientEncounterPhysicalExam(patientMasterVisitID, Session["PatientId"].ToString(), physicalExam);
+            patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), physicalExam);
         }
 
         [WebMethod(EnableSession = true)]
         public void savePatientManagement(string phdp,string ARVAdherence,string CTXAdherence,string appointmentDate,string appointmentType,string diagnosis)
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            patientEncounter.savePatientManagement(patientMasterVisitID, Session["PatientId"].ToString(), ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
+            patientEncounter.savePatientManagement(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetAdverseEvents()
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(patientMasterVisitID, Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -90,12 +75,9 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetChronicIllness()
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterChronicIllness(patientMasterVisitID, Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -110,12 +92,9 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetVaccines()
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterVaccines(patientMasterVisitID, Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterVaccines(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -130,12 +109,9 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetPhysicalExam()
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(patientMasterVisitID, Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -150,12 +126,9 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDiagnosis()
         {
-            string patientMasterVisitID = "0";
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            if (Session["PatientMasterVisitID"].ToString() != null)
-                patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterDiagnosis(patientMasterVisitID, Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterDiagnosis(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -219,15 +192,26 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public int savePatientPharmacy(string TreatmentPlan, string TreatmentPlanReason, string RegimenLine, string drugPrescription)
+        public int savePatientPharmacy(string TreatmentPlan, string TreatmentPlanReason, string RegimenLine, string pmscm, string drugPrescription)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
                 Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
-                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(),drugPrescription);
+                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription);
             Session["PatientMasterVisitID"] = val;
             return val;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int getDrugFrequencyMultiplier(string freqID)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            string multiplier = patientEncounter.getPharmacyDrugMultiplier(freqID);
+            if (multiplier == "")
+                multiplier = "0";
+
+            return int.Parse(multiplier);
         }
 
     }

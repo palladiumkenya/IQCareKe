@@ -15,12 +15,13 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientEncounterLogic
     {
-        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string lmp, string PregStatus, string edd, string ANC, int OnFP, string fpMethod, string ReasonNotOnFP, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
-            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP, fpMethod, CaCx,STIScreening,STIPartnerNotification, advEvent);
+            string[] fpMethodArray = fpMethod.Split(',');
+            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP, fpMethodArray, ReasonNotOnFP, CaCx,STIScreening,STIPartnerNotification, advEvent);
             return val;
         }
 
@@ -106,8 +107,18 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public string getPharmacyDrugMultiplier(string frequencyID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<DrugFrequency> drg = patientEncounter.getPharmacyDrugFrequency();
+
+            List<DrugFrequency>  filteredList = drg.Where(x => x.id == frequencyID).ToList();
+
+            return filteredList[0].multiplier;
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
-            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string prescription)
+            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -125,7 +136,7 @@ namespace IQCare.CCC.UILogic
             }
 
             return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
-                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription);
+                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag);
 
         }
 

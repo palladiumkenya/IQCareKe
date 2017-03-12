@@ -69,7 +69,8 @@ namespace Entities.CCC.Encounter
             public string edd { get; set; }
             public string ancProfile { get; set; }
             public string onFP { get; set; }
-            public string fpMethod { get; set; }
+            public string[] fpMethod { get; set; }
+            public string reasonNotOnFP { get; set; }
             public string CaCX { get; set; }
             public string STIScreening { get; set; }
             public string STIPartnerNotification { get; set; }
