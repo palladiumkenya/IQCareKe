@@ -44,5 +44,29 @@ namespace IQCare.CCC.UILogic
             string patientType = LookupLogic.GetLookupNameById(patientTypeId);
             return patientType;
         }
+
+        public static string CalculateYourAge(DateTime Dob)
+        {
+            DateTime Now = DateTime.Now;
+            int Years = new DateTime(DateTime.Now.Subtract(Dob).Ticks).Year - 1;
+            DateTime PastYearDate = Dob.AddYears(Years);
+            int Months = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                if (PastYearDate.AddMonths(i) == Now)
+                {
+                    Months = i;
+                    break;
+                }
+                else if (PastYearDate.AddMonths(i) >= Now)
+                {
+                    Months = i - 1;
+                    break;
+                }
+            }
+            
+            return String.Format("Age: {0} Year(s) {1} Month(s)",
+            Years, Months);
+        }
     }
 }

@@ -399,6 +399,11 @@
                         return false;
                     }
 
+                    if (identifier == "CCC Registration Number" && (mflcode.length < 5 || mflcode.length > 5)) {
+                        toastr.error("error", "MFL CODE should be Five Characters");
+                        return false;
+                    }
+
                     if (identifier == "CCC Registration Number") {
                         enrollmentNo = mflcode + "-" + enrollmentNo;
                     }

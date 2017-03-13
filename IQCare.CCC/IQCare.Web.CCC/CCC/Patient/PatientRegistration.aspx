@@ -813,11 +813,11 @@
 
                     var isPatientSet = $.urlParam('PatientId');
 
-                    var fname = $("#<%=personFname.ClientID%>").val();
-                    var mname =  $("#<%=personMName.ClientID%>").val();
-                    var lname =  $("#<%=personLName.ClientID%>").val();
+                    var fname = escape($("#<%=personFname.ClientID%>").val());
+                    var mname = escape($("#<%=personMName.ClientID%>").val());
+                    var lname = escape($("#<%=personLName.ClientID%>").val());
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
-                    var natId = $("#<%=NationalId.ClientID%>").val();
+                    var natId = escape($("#<%=NationalId.ClientID%>").val());
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();

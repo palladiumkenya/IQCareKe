@@ -86,6 +86,8 @@ namespace IQCare.Web.CCC.WebService
         {
             patientid = patientid == "null" ? null : patientid;
 
+            firstname = Microsoft.JScript.GlobalObject.unescape(firstname);
+
             try
             {
                 int perId = 0;
