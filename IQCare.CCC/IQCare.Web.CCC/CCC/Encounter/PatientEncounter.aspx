@@ -568,8 +568,10 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple"/>
-                                                                    </div>
+                                                                      <asp:DropDownList runat="server" ID="fp_Method" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                                                      <!--  <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple"/>   -->
+                                                                   
+                                                                         </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group" id="divNoFP" style="display: none">
                                                                     <div class="col-md-12">
@@ -1730,10 +1732,10 @@
         $(document).ready(function () {     
            
 
-            //console.log(patientId);
-            //console.log(patientMasterVisitId);
+            console.log(patientId);
+            console.log(patientMasterVisitId);
             //console.log(genderId);
-            //console.log(gender);
+            console.log(gender);
 
             $("#LabDatePicker").datepicker({
                 //date: null,
@@ -2122,6 +2124,7 @@
             $('#FemaleLMP').datepicker({
                 allowPastDates: true,
                 date: getFemaleLMPVal,
+                date: 0,
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
@@ -2130,6 +2133,7 @@
            $('#EDCD').datepicker({
                allowPastDates: true,
                date: getEDDPVal,
+               date: 0,
                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
            });
@@ -2163,8 +2167,11 @@
                 $("#cacxscreening").val("");
 
                 $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#FemaleLMP").addClass('noevents');
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#EDCD").addClass('noevents');
+
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
             } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
@@ -2311,6 +2318,7 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
                     //$(this).closest('tr').remove();
                     //var y = $(this).closest('tr').find('td').eq(0).html();
                     //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
@@ -2507,8 +2515,8 @@
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
-                var FPMethod = $('#fpMethod').val();
+                var FPMethod = $("#<%=fp_Method.ClientID%>").find(":selected").val();
+                //var FPMethod = $('#fpMethod').val();
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
@@ -2529,29 +2537,11 @@
                 }
                 catch (ex) {  }
 
-                // console.log(visitDate);--date
-                // console.log(visitScheduled);-->1
-                // console.log(visitBy);-->1119
-                // console.log(complaints);   -->headache
-                // console.log(tbscreening);  -->35
-                //console.log(nutritionscreening);-->38
-                //console.log(LMP);-->02-Mar-2017
-                //console.log(pregStatus);  -->92
-                //console.log(nutritionscreening); -->38
-                // console.log(EDD);-->02-Mar-2017
-                //console.log(ANCProfile); -->1
-                // console.log(onFP);-->1
-                console.log(FPMethod);
-                //console.log(CaCx);
-                //console.log(STIScreening);
-                //console.log(STIPartnerNotification);
-                // console.log(adverseEventsArray);
-
-                for (var j = 0, len = FPMethod.length; j < len; j++) {
+            
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod[j] + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -2570,7 +2560,7 @@
                         }
                     });
                 }
-            }
+       
 
 
             function savePatientEncounterChronicIllness() {

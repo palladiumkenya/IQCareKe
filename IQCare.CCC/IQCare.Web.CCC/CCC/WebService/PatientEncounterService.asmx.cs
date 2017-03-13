@@ -8,6 +8,7 @@ using System.Web.Services;
 using Application.Presentation;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using PatientEncounter = Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -19,29 +20,20 @@ namespace IQCare.Web.CCC.WebService
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
+
     public class PatientEncounterService : System.Web.Services.WebService
     {
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
-        public int savePatientEncounterPresentingComplaints(int PatientMasterVisitID, int PatientID, string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus,string lmp, string PregStatus, string edd, string ANC, int OnFP, int fpMethod, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
         {
-                    if (PatientMasterVisitID == 0)
-                    {
-                        PatientMasterVisit visit = new PatientMasterVisit()
-                        {
-                            PatientId = PatientID,
-                            Start = DateTime.Now,
-                            Active = true,
-                        };
-                PatientMasterVisitID = _visitManager.AddPatientmasterVisit(visit);
-                    }
-            //string patientMasterVisitID = "0";
+                    
+            
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            //if (Session["PatientMasterVisitID"].ToString() != null)
-            //    patientMasterVisitID = Session["PatientMasterVisitID"].ToString();
+          
 
-            int val = patientEncounter.savePatientEncounterPresentingComplaints(PatientMasterVisitID.ToString(), PatientID.ToString(), "211",VisitDate,VisitScheduled,VisitBy,Complaints,TBScreening,NutritionalStatus,lmp,PregStatus,edd,ANC,OnFP,fpMethod,CaCx,STIScreening,STIPartnerNotification,adverseEvent);
-           // patientMasterVisitID = val;
+            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy,Complaints,TBScreening,NutritionalStatus,lmp,PregStatus,edd,ANC,OnFP,fpMethod,CaCx,STIScreening,STIPartnerNotification,adverseEvent);
+          
             return val;
         }
 
@@ -203,7 +195,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            List<DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
+            List<PatientEncounter.DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
             ArrayList rows = new ArrayList();
 
             for(int i=0; i < lst.Count; i++)
