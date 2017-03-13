@@ -842,9 +842,9 @@
 
                     var isPatientSet = $.urlParam('PatientId');
 					var returnValue=0;
-                    var gfname = $("#<%=GurdianFNames.ClientID%>").val();
-                    var gmname = $("#<%=GurdianMName.ClientID%>").val();
-                    var glname = $("#<%=GurdianLName.ClientID%>").val();
+                    var gfname = escape($("#<%=GurdianFNames.ClientID%>").val());
+                    var gmname = escape($("#<%=GurdianMName.ClientID%>").val());
+                    var glname = escape($("#<%=GurdianLName.ClientID%>").val());
                     var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
@@ -869,9 +869,9 @@
                 function addPersonTreatmentSupporter() {
                     var isPatientSet = $.urlParam('PatientId');
                     
-                    var tFname = $("#<%=tsFname.ClientID%>").val();
-                    var tMname = $("#<%=tsMiddleName.ClientID%>").val();
-                    var tLname = $("#<%=tsLastName.ClientID%>").val();
+                    var tFname = escape($("#<%=tsFname.ClientID%>").val());
+                    var tMname = escape($("#<%=tsMiddleName.ClientID%>").val());
+                    var tLname = escape($("#<%=tsLastName.ClientID%>").val());
                     var tSex = $("#<%=tsGender.ClientID%>").val();
                     var mobileContact = $("#<%=TSContacts.ClientID%>").val();
                     var natId = 999999;

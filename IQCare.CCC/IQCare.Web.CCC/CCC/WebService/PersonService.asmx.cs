@@ -10,6 +10,8 @@ using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
+using Microsoft.JScript;
+using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -86,7 +88,10 @@ namespace IQCare.Web.CCC.WebService
         {
             patientid = patientid == "null" ? null : patientid;
 
-            firstname = Microsoft.JScript.GlobalObject.unescape(firstname);
+            firstname = GlobalObject.unescape(firstname);
+            middlename = GlobalObject.unescape(middlename);
+            lastname = GlobalObject.unescape(lastname);
+            nationalId = GlobalObject.unescape(nationalId);
 
             try
             {
@@ -181,7 +186,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException e)
             {
-                Msg = e.Message+' '+ e.InnerException;
+                Msg = e.Message;
             }
             
             return Msg;
@@ -290,6 +295,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 Msg = e.Message;
             }
+
             return Msg;
         }
 
@@ -330,7 +336,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException e)
             {
-                Msg = e.Message+ ' ' + e.InnerException;
+                Msg = e.Message;
             }
             return Msg;
         }
@@ -396,6 +402,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 Msg = exception.Message;
             }
+
             return Msg;
         }
 
@@ -488,8 +495,9 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException e)
             {
-                Msg = e.Message + ' ' +e.InnerException;
+                Msg = e.Message;
             }
+
             return Msg;
         }
 
@@ -509,6 +517,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 Msg = e.Message;
             }
+
             return Msg;
         }
 
@@ -552,7 +561,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException e)
             {
-                Msg = e.Message+' '+ e.InnerException;
+                Msg = e.Message;
             }
             return Msg;
         }
