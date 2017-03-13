@@ -403,12 +403,12 @@
                         enrollmentNo = mflcode + "-" + enrollmentNo;
                     }
 
-                    if (moment('' + enrollmentDate + '').isAfter()) {
+                    if (moment('' + enrollmentDate.toISOString() + '').isAfter()) {
                         toastr.error("Future dates not allowed during the patient enrollment process.","Patient Enrollment");
                         return false;
                     }
 
-                    if (!moment('' + enrollmentDate + '').isValid()) {
+                    if (!moment('' + enrollmentDate.toISOString() + '').isValid()) {
                         toastr.error("error", "Please select an enrollment date");
                         return false;
                     }
@@ -591,7 +591,7 @@
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {
-                        $('#txtAppPosID').setAttribute('readonly');
+                        $('#txtAppPosID').attr('readonly');
                     }
                     
                 } else {

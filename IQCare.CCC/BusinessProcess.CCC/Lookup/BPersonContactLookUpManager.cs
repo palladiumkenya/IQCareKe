@@ -8,7 +8,7 @@ using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 
-namespace BusinessProcess.CCC.LookupLogic
+namespace BusinessProcess.CCC.Lookup
 {
     public class BPersonContactLookUpManager : ProcessBase, IPersonContactLookUpManager
     {

@@ -192,6 +192,10 @@
                                 <a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
                                     <span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info"> Patient Appointments </strong><span class="badge">0</span>
                                 </a>
+                              
+                                <a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="">
+                                    <span class="fa"></span><strong class="text-info">Care Ended</strong><span class="badge">0</span>
+                                </a>
 
                           </div>
 

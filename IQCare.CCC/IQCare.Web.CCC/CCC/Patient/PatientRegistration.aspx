@@ -1229,8 +1229,11 @@
         };
 
         function estimateDob(personAge) {
-            var currentDate = new Date("06-15-" + new Date().getFullYear());
-            
+            console.log(personAge);
+            var currentDate = new Date();
+            currentDate.setDate(15);
+            currentDate.setMonth(5);
+            console.log(currentDate);
             var estDob = moment(currentDate.toISOString());
             var dob = estDob.add((personAge * -1), 'years');
             return moment(dob).format('DD-MMM-YYYY');
