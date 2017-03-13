@@ -38,5 +38,11 @@ namespace IQCare.CCC.UILogic
             return _mgr.GetPatient(patientId);
         }
 
+        public string GetPatientType(int patientId)
+        {
+            int patientTypeId = _mgr.GetPatientType(patientId);
+            string patientType = LookupLogic.GetLookupNameById(patientTypeId);
+            return patientType;
+        }
     }
 }

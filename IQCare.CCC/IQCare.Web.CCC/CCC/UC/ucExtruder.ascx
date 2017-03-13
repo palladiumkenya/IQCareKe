@@ -55,7 +55,7 @@
             <IQ:ucPatientLabsExtruder runat="server" id="ucPatientLabsExtruder" />
         </div>
 
-        <div id="extruderLeft2" class="{title:'Work Plan'}">
+        <div id="extruderLeft2" class="{title:'Clinical Notes'}">
 
         </div>
     </div>

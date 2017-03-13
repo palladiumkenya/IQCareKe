@@ -46,7 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
@@ -102,7 +102,6 @@
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
-    <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\TestWebservice.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -336,6 +335,7 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
       <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DataAccess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DataAccess.CCC.dll</HintPath>
@@ -353,12 +353,24 @@
     <Reference Include="Entities.Common">
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Entities.Lab">
+      <HintPath>..\..\References\Entities.Lab.dll</HintPath>
+    </Reference>
     <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
     </Reference>
+    <Reference Include="Interface.Administration">
+      <HintPath>..\..\References\Interface.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.CCC">
       <HintPath>..\..\References\Interface.CCC.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Clinical">
+      <HintPath>..\..\References\Interface.Clinical.dll</HintPath>
+    </Reference>
+    <Reference Include="Interface.Laboratory">
+      <HintPath>..\..\References\Interface.Laboratory.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Scheduler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -385,6 +397,7 @@
       <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />

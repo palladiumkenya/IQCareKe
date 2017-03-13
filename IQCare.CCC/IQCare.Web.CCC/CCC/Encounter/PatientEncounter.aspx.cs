@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -22,6 +23,7 @@ namespace IQCare.Web.CCC.Encounter
         public string nxtAppDateval = "";
         public int genderID = 0;
         public string gender = "";
+        public string PMSCM = ""; 
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -29,13 +31,17 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //PEL.getPharmacyDrugMultiplier("BD");
+
+            if (Session["SCMModule"] != null)
+                PMSCM = Session["SCMModule"].ToString();
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
-                visitId = int.Parse(Request.QueryString["visitId"].ToString());
-                //Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
+                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
             // Get Gender
@@ -55,6 +61,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.PopulateListBox(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
+                lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
                 lookUp.populateDDL(cacxscreening, "CaCxScreening");
                 lookUp.populateDDL(stiScreening, "STIScreening");
                 lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
@@ -123,12 +130,9 @@ namespace IQCare.Web.CCC.Encounter
                     DifferentiatedCare.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
         }
-        private void GetSessionDetails()
-        {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-        }
+        
 
         private void loadPatientEncounter()
         {
@@ -149,7 +153,19 @@ namespace IQCare.Web.CCC.Encounter
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
             rblANCProfile.SelectedValue = pce.ancProfile;
             onFP.SelectedValue = pce.onFP;
-            fpMethod.SelectedValue = pce.fpMethod;
+
+            foreach (ListItem item in fpMethod.Items)
+            {
+                for (int i = 0; i < pce.fpMethod.Length; i++)
+                {
+                    if (item.Value == pce.fpMethod[i])
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+
+            ddlNoFP.SelectedValue = pce.reasonNotOnFP;
             //nofp
             cacxscreening.SelectedValue = pce.CaCX;
             stiScreening.SelectedValue = pce.STIScreening;

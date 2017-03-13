@@ -165,7 +165,7 @@ namespace IQCare.Web.CCC.WebService
                         vaccine = LookupLogic.GetLookUpMasterId(dataAdult[i].ToString());
                     }
 
-                    if (dataAdult[i] != "")
+                    if (dataAdult[i].ToString() != "")
                     {
                         PatientVaccination patientVaccine = new PatientVaccination()
                         {

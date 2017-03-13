@@ -15,7 +15,7 @@ namespace BusinessProcess.CCC
     {
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string RegimenType, string DispensedBy, string RegimenLine, string ModuleID, 
-            List<DrugPrescription> drugPrescription)
+            List<DrugPrescription> drugPrescription, string pmscmFlag)
         {
             lock (this)
             {
@@ -37,6 +37,9 @@ namespace BusinessProcess.CCC
                 {
                     if (drg.DrugId != "")
                     {
+                        if (drg.qtyDisp == "")
+                            drg.qtyDisp = "0";
+
                         ClsObject drugPres = new ClsObject();
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk.ToString());
@@ -47,6 +50,8 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@Duration", SqlDbType.VarChar, drg.Duration);
                         ClsUtility.AddParameters("@qtyPres", SqlDbType.VarChar, drg.qtyPres);
                         ClsUtility.AddParameters("@qtyDisp", SqlDbType.VarChar, drg.qtyDisp);
+                        ClsUtility.AddParameters("@pmscm", SqlDbType.VarChar, pmscmFlag);
+                        ClsUtility.AddParameters("@UserID", SqlDbType.VarChar, UserID);
 
                         int j = (int)drugPres.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacyPrescription_GreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
