@@ -2133,6 +2133,7 @@
             $('#FemaleLMP').datepicker({
                 allowPastDates: true,
                 date: getFemaleLMPVal,
+                date: 0,
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
@@ -2141,6 +2142,7 @@
            $('#EDCD').datepicker({
                allowPastDates: true,
                date: getEDDPVal,
+               date: 0,
                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
            });
@@ -2174,8 +2176,11 @@
                 $("#cacxscreening").val("");
 
                 $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#FemaleLMP").addClass('noevents');
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#EDCD").addClass('noevents');
+
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
             } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
@@ -2322,6 +2327,7 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
                     //$(this).closest('tr').remove();
                     //var y = $(this).closest('tr').find('td').eq(0).html();
                     //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
@@ -2564,6 +2570,7 @@
                 });
                 
             }
+
 
 
             function savePatientEncounterChronicIllness() {

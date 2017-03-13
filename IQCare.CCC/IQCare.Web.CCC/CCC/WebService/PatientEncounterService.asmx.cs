@@ -8,6 +8,7 @@ using System.Web.Services;
 using Application.Presentation;
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
+using PatientEncounter = Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -19,6 +20,7 @@ namespace IQCare.Web.CCC.WebService
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
+
     public class PatientEncounterService : System.Web.Services.WebService
     {
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
