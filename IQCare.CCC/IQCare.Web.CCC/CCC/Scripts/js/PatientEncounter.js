@@ -319,6 +319,8 @@ function AddDrugPrescription() {
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
     //Validate duplication
+    if (batchId == undefined)
+        batchId = 0;
 
     var drugFound = 0;
 

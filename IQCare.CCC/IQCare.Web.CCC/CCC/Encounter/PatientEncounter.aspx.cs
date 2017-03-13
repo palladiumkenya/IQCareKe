@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.Encounter
         public string nxtAppDateval = "";
         public int genderID;
         public string gender = "";
-        
+        public string PMSCM = ""; 
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -31,12 +31,16 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //PEL.getPharmacyDrugMultiplier("BD");
+
+            if (Session["SCMModule"] != null)
+                PMSCM = Session["SCMModule"].ToString();
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
            // PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
-                visitId = int.Parse(Request.QueryString["visitId"].ToString());
+                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
@@ -150,7 +154,19 @@ namespace IQCare.Web.CCC.Encounter
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
             rblANCProfile.SelectedValue = pce.ancProfile;
             onFP.SelectedValue = pce.onFP;
-            fpMethod.SelectedValue = pce.fpMethod;
+
+            foreach (ListItem item in fpMethod.Items)
+            {
+                for (int i = 0; i < pce.fpMethod.Length; i++)
+                {
+                    if (item.Value == pce.fpMethod[i])
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+
+            ddlNoFP.SelectedValue = pce.reasonNotOnFP;
             //nofp
             cacxscreening.SelectedValue = pce.CaCX;
             stiScreening.SelectedValue = pce.STIScreening;

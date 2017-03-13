@@ -399,16 +399,21 @@
                         return false;
                     }
 
+                    if (identifier == "CCC Registration Number" && (mflcode.length < 5 || mflcode.length > 5)) {
+                        toastr.error("error", "MFL CODE should be Five Characters");
+                        return false;
+                    }
+
                     if (identifier == "CCC Registration Number") {
                         enrollmentNo = mflcode + "-" + enrollmentNo;
                     }
 
-                    if (moment('' + enrollmentDate + '').isAfter()) {
+                    if (moment('' + enrollmentDate.toISOString() + '').isAfter()) {
                         toastr.error("Future dates not allowed during the patient enrollment process.","Patient Enrollment");
                         return false;
                     }
 
-                    if (!moment('' + enrollmentDate + '').isValid()) {
+                    if (!moment('' + enrollmentDate.toISOString() + '').isValid()) {
                         toastr.error("error", "Please select an enrollment date");
                         return false;
                     }
@@ -591,7 +596,7 @@
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {
-                        $('#txtAppPosID').setAttribute('readonly');
+                        $('#txtAppPosID').attr('readonly');
                     }
                     
                 } else {

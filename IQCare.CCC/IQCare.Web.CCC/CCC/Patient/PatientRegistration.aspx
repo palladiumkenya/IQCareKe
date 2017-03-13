@@ -606,8 +606,13 @@
                                     var patientTypeId = $("#PatientTypeId").find(":selected").text();
                                     //console.log(PatientTypeId);
                                     if(patientTypeId == "Transit") {
-                                        $.when(addPerson()).then(function() {                                     
-                                            window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                        $.when(addPerson()).then(function() {
+
+                                            setTimeout(function() {
+                                                window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                            },
+                                            2000);                                        
+                                            return evt.preventDefault();
                                         });
                                     }
                                     else{
@@ -808,11 +813,11 @@
 
                     var isPatientSet = $.urlParam('PatientId');
 
-                    var fname = $("#<%=personFname.ClientID%>").val();
-                    var mname =  $("#<%=personMName.ClientID%>").val();
-                    var lname =  $("#<%=personLName.ClientID%>").val();
+                    var fname = escape($("#<%=personFname.ClientID%>").val());
+                    var mname = escape($("#<%=personMName.ClientID%>").val());
+                    var lname = escape($("#<%=personLName.ClientID%>").val());
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
-                    var natId = $("#<%=NationalId.ClientID%>").val();
+                    var natId = escape($("#<%=NationalId.ClientID%>").val());
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
@@ -837,9 +842,9 @@
 
                     var isPatientSet = $.urlParam('PatientId');
 					var returnValue=0;
-                    var gfname = $("#<%=GurdianFNames.ClientID%>").val();
-                    var gmname = $("#<%=GurdianMName.ClientID%>").val();
-                    var glname = $("#<%=GurdianLName.ClientID%>").val();
+                    var gfname = escape($("#<%=GurdianFNames.ClientID%>").val());
+                    var gmname = escape($("#<%=GurdianMName.ClientID%>").val());
+                    var glname = escape($("#<%=GurdianLName.ClientID%>").val());
                     var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
@@ -864,9 +869,9 @@
                 function addPersonTreatmentSupporter() {
                     var isPatientSet = $.urlParam('PatientId');
                     
-                    var tFname = $("#<%=tsFname.ClientID%>").val();
-                    var tMname = $("#<%=tsMiddleName.ClientID%>").val();
-                    var tLname = $("#<%=tsLastName.ClientID%>").val();
+                    var tFname = escape($("#<%=tsFname.ClientID%>").val());
+                    var tMname = escape($("#<%=tsMiddleName.ClientID%>").val());
+                    var tLname = escape($("#<%=tsLastName.ClientID%>").val());
                     var tSex = $("#<%=tsGender.ClientID%>").val();
                     var mobileContact = $("#<%=TSContacts.ClientID%>").val();
                     var natId = 999999;
@@ -1224,8 +1229,11 @@
         };
 
         function estimateDob(personAge) {
-            var currentDate = new Date("06-15-" + new Date().getFullYear());
-            
+            console.log(personAge);
+            var currentDate = new Date();
+            currentDate.setDate(15);
+            currentDate.setMonth(5);
+            console.log(currentDate);
             var estDob = moment(currentDate.toISOString());
             var dob = estDob.add((personAge * -1), 'years');
             return moment(dob).format('DD-MMM-YYYY');

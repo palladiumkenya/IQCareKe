@@ -46,13 +46,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Patient\PatientCareEnded.aspx" />
+    <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
@@ -177,6 +179,13 @@
     </Compile>
     <Compile Include="CCC\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientCareEnded.aspx.cs">
+      <DependentUpon>PatientCareEnded.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientCareEnded.aspx.designer.cs">
+      <DependentUpon>PatientCareEnded.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
@@ -391,6 +400,7 @@
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\Newtonsoft.Json.dll</HintPath>
