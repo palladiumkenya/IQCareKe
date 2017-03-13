@@ -606,8 +606,13 @@
                                     var patientTypeId = $("#PatientTypeId").find(":selected").text();
                                     //console.log(PatientTypeId);
                                     if(patientTypeId == "Transit") {
-                                        $.when(addPerson()).then(function() {                                     
-                                            window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                        $.when(addPerson()).then(function() {
+
+                                            setTimeout(function() {
+                                                window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                            },
+                                            2000);                                        
+                                            return evt.preventDefault();
                                         });
                                     }
                                     else{

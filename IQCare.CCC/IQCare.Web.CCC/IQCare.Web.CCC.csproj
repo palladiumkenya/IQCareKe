@@ -53,6 +53,7 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
