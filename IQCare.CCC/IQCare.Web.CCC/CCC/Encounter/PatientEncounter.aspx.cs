@@ -40,7 +40,7 @@ namespace IQCare.Web.CCC.Encounter
            // PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
-                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
+                visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
@@ -59,7 +59,7 @@ namespace IQCare.Web.CCC.Encounter
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
                 lookUp.populateDDL(onFP, "FPStatus");
                 //lookUp.PopulateListBox(fpMethod, "FPMethod");
-                lookUp.populateDDL(fp_Method, "FPMethod");
+                lookUp.populateDDL(fpMethod, "FPMethod");
                 lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(orderReason, "LabOrderReason");
                 lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");

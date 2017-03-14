@@ -101,6 +101,7 @@
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
+    <Content Include="CCC\WebService\PatientVitals.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\TestWebservice.asmx" />
@@ -319,6 +320,9 @@
       <DependentUpon>PatientService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PatientVitals.asmx.cs">
+      <DependentUpon>PatientVitals.asmx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
     </Compile>
@@ -389,7 +393,7 @@
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\IQCare.CCC.UILogic\obj\Debug\IQCare.CCC.UILogic.dll</HintPath>
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -446,7 +450,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>23039</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

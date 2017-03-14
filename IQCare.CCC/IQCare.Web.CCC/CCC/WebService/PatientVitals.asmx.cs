@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using Application.Presentation;
+using Entities.CCC.Triage;
+using Interface.CCC;
+
+namespace IQCare.Web.CCC.WebService
+{
+    public class PatientDetailsVitals
+    {
+        public decimal Temperature { get; set; }
+        public decimal RespiratoryRate { get; set; }
+        public decimal HeartRate { get; set; }
+        public int Bpdiastolic { get; set; }
+        public int BpSystolic { get; set; }
+        public decimal Height { get; set; }
+        public decimal Weight { get; set; }
+        public decimal Muac { get; set; }
+        public decimal SpO2 { get; set; }
+        public decimal BMI { get; set; }
+        public decimal HeadCircumference { get; set; }
+        public int Month { get; set; }
+    }
+    /// <summary>
+    /// Summary description for PatientVitals
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    [System.Web.Script.Services.ScriptService]
+    public class PatientVitals : System.Web.Services.WebService
+    {
+        IPatientVitals _vitals =
+         (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
+
+        private int patientId;
+        private int month;
+        private int march_height;
+
+
+
+
+        [WebMethod]
+        public string HelloWorld()
+        {
+            return "Hello World";
+        }
+
+        [WebMethod(EnableSession = true)]
+        public List<PatientDetailsVitals> GetVitals()
+        {
+            patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+
+            List<PatientDetailsVitals> patientDetailsVitalses = new List<PatientDetailsVitals>();
+            List<PatientVital> list_vitals = _vitals.GetCurrentPatientVital(patientId);
+
+            if (list_vitals != null )
+            {
+                foreach (var item in list_vitals)
+                {
+                    PatientDetailsVitals vitals = new PatientDetailsVitals();
+                    vitals.Height = item.Height;
+                    vitals.Weight = item.Weight;
+                    vitals.Month = item.CreateDate.Month;
+
+                    patientDetailsVitalses.Add(vitals);
+                }
+            }
+            return patientDetailsVitalses;
+        }
+    }
+}
