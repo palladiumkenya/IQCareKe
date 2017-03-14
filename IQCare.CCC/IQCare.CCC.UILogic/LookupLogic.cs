@@ -1,12 +1,11 @@
-﻿using Application.Presentation;
-using Entities.CCC.Lookup;
+﻿using Entities.CCC.Lookup;
 using Interface.CCC;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
+using Application.Presentation;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -260,6 +259,23 @@ namespace IQCare.CCC.UILogic
             }
 
             return lookupName;
+        }
+
+        public static int GetRegimenCategory(int regimenId)
+        {
+            int id = 0;
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                id = lookupManager.GetRegimenCategory(regimenId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return id;
         }
 
         public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)

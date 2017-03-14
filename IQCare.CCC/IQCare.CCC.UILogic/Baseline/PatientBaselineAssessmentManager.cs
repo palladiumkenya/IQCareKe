@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Application.Presentation;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
-    public class PatientBaslineAssessmentManager
+    public class PatientBaselineAssessmentManager
     {
         private readonly IPatientBaselineAssessmentManager _patientBaselineAssessment = (IPatientBaselineAssessmentManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientBaselineAssessmentManager, BusinessProcess.CCC");
         private int Id = 0;
         private int Result = 0;
         
-        public int ManageArtInitiationbaseline(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
+        public int ManagePatientBaselineAssessment(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
         {
             Id = _patientBaselineAssessment.CheckIfPatientBaselineExists(patientId);
 
@@ -36,13 +35,10 @@ namespace IQCare.CCC.UILogic.Baseline
             return Result;
         }
 
-        public int UpdateArtInitiationbaseline(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
+        public int UpdatePatientBaselineAssessment(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
         {
-            var patientArtInitiationBaselinesUPdate = new PatientBaselineAssessment()
+            var patientBaseline = new PatientBaselineAssessment()
             {
-                Id = id,
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
                 HBVInfected = hbvInfected,
                 Pregnant = pregnant,
                 TBInfected = tbInfected,
@@ -52,9 +48,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 MUAC = muac,
                 Weight = weight,
                 Height = height,
-                CreatedBy = userId
             };
-            return _patientBaselineAssessment.UpdatePatientBaselineAssessment(patientArtInitiationBaselinesUPdate);
+            return _patientBaselineAssessment.UpdatePatientBaselineAssessment(patientBaseline);
         }
 
         public int DeletePatientArtInitiationbasline(int id)

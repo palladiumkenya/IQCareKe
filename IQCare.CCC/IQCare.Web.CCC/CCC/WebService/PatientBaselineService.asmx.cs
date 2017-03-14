@@ -4,6 +4,8 @@ using System.Web.Services;
 using IQCare.CCC.UILogic.Baseline;
 using Newtonsoft.Json;
 using IQCare.CCC.UILogic;
+using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -21,7 +23,7 @@ namespace IQCare.Web.CCC.WebService
         private int _result;
         private int _patientId;
         private int _patientMasterVisitId;
-        private int _patientTypeId;
+      //  private int _patientTypeId;
         private string _patinetType;
 
 
@@ -109,15 +111,15 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string ManagePatientBaselineAssessment(int id, int patientId, int patientMasterVisitId, bool hbvInfected,
-            bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac,
+        public string ManagePatientBaselineAssessment(int id, int patientId, int patientMasterVisitId, bool pregnant, bool hbvInfected
+           , bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac,
             decimal weight, decimal height, int userId)
         {
             try
             {
-                var patientBaseline = new PatientBaslineAssessmentManager();
+                var patientBaseline = new PatientBaselineAssessmentManager();
 
-                _result = patientBaseline.ManageArtInitiationbaseline(id, patientId, patientMasterVisitId, hbvInfected,
+                _result = patientBaseline.ManagePatientBaselineAssessment(id, patientId, patientMasterVisitId, hbvInfected,
                     pregnant,
                     tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height, userId);
 
@@ -167,6 +169,56 @@ namespace IQCare.Web.CCC.WebService
             catch(Exception e) {
                 _jsonMessage = e.Message;
             }
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public DateTime GetPatientEnrollmentDate(int patientId)
+        {
+            DateTime enrollmentDate = DateTime.Today;
+            try
+            {
+                var patientEnrollment =new PatientEnrollmentManager();
+                enrollmentDate = patientEnrollment.GetPatientEnrollmentDate(patientId);
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return enrollmentDate;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientBaseline(int patientId)
+        {
+            try
+            {
+                var patientBaseline=new PatientBaselineLookupManager();
+                var patientBaselineObject = patientBaseline.GetPatientBaseline(patientId);
+                _jsonMessage = JsonConvert.SerializeObject(patientBaselineObject);
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetRegimenCategory(int regimenId)
+        {
+            try
+            {
+                var lookupManager=new LookupLogic();
+                _jsonMessage = LookupLogic.GetRegimenCategory(regimenId).ToString();
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
             return _jsonMessage;
         }
     }

@@ -20,7 +20,7 @@ namespace IQCare.CCC.UILogic.Baseline
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMastervisitId,
-                ServiceAreaId = serviceAreaId,
+                ServiceAreaId = 1,
                 TransferInDate = transferinDate,
                 TreatmentStartDate = treatmentStartDate,
                 CurrentTreatment = currentTreatment,
@@ -30,8 +30,8 @@ namespace IQCare.CCC.UILogic.Baseline
                 TransferInNotes = transferInNotes,
                 CreatedBy = userId
             };
-            //_result = (Id > 0)? _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn): _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
-            _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+            _result = (Id > 0)? _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn): _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+           // _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
             return _result;
         }
 
@@ -42,9 +42,6 @@ namespace IQCare.CCC.UILogic.Baseline
         {
             PatientTransferIn patientTransferIn = new PatientTransferIn()
             {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMastervisitId,
-                ServiceAreaId = serviceAreaId,
                 TransferInDate = transferinDate,
                 TreatmentStartDate = treatmentStartDate,
                 CurrentTreatment = currentTreatment,
@@ -52,10 +49,9 @@ namespace IQCare.CCC.UILogic.Baseline
                 MflCode = mflCode,
                 CountyFrom = countyFrom,
                 TransferInNotes = transferInNotes,
-                CreatedBy = userId
-            };
+        };
 
-            return _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+            return _result = _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn);
         }
 
         public int DeletePatientTransferIn(int id)
