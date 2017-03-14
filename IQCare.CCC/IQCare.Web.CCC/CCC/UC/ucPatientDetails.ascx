@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientDetails.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientDetails" %>
 
         <div id="callout-labels-inline-block" class="col-md-12 col-xs-12 col-sm-10 well well-sm bs-callout bs-callout-primary" style="padding-bottom:1%">
-             <div class="col-md-2">
+            <div class="col-md-2">
                  <div class="col-md-12">
                     <div class="col-md-12"><i class="fa fa-user fa-4x pull-left text-info" aria-hidden="true"></i></div>
                     <div class="col-md-12">
