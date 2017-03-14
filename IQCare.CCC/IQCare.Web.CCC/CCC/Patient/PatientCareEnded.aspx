@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientCareEnded.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientCareEnded" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
+<div class="col-md-12">
+    <uc:PatientDetails runat="server" />
     <div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
         <div class="col-md-12 form-group">
             <div class="col-md-12">
@@ -155,6 +158,7 @@
             </div>
         </div>
     </div>
+</div>
     
     <script type="text/javascript">
         $(document).ready(function() {

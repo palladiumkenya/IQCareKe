@@ -38,11 +38,7 @@ namespace IQCare.Web.CCC.WebService
          (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
 
         private int patientId;
-        private int month;
-        private int march_height;
-
-
-
+     
 
         [WebMethod]
         public string HelloWorld()
@@ -65,6 +61,7 @@ namespace IQCare.Web.CCC.WebService
                     PatientDetailsVitals vitals = new PatientDetailsVitals();
                     vitals.Height = item.Height;
                     vitals.Weight = item.Weight;
+                    vitals.BMI = item.BMI;
                     vitals.Month = item.CreateDate.Month;
 
                     patientDetailsVitalses.Add(vitals);

@@ -89,49 +89,24 @@
     <IQ:ucExtruder runat="server" ID="ucExtruder" />
      <!-- ajax begin -->
     <script type="text/javascript">
-      
+       
+        var jan_height=0;
+        var march_height = 0;
+        var jan_weight = 0;
+        var march_weight = 0;
+        var jan_BMI= 0.0;
+        var march_BMI = 0.0;
 
+        window.onload = function() {
 
-     window.onload = function() {
-            <%-- var patientId = <%=patientId%>;
-            var march_height = <%=march_height%>;
-            console.log(patientId);
-            console.log(march_height);--%>
-            // drawGraph();
-            //};
-            // $(document).ready(function() {
-
-            $.ajax({
-                url: '../WebService/PatientVitals.asmx/GetVitals',
-                type: 'POST',
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                cache: false,
-                success: function(response) {
-                    console.log(response.d);
-                    var items = response.d;
-                    items.forEach(function(item, i) {
-                        console.log("Height: " + item.Height + "Month " + item.Month + " " + i);
-                        if (item.Month == 1) {
-
-                            var march_height = item.Month;
-                            console.log("This is jan height: " + item.Height + " ");
-                        }else if (item.Month == 1) {
-
-                            var jan_height = item.Month;
-                            console.log("This is Jan height: " + item.Height + " ");
-                        }
-
-                    });
-                    //var itemList = JSON.parse(response.d);
-
-                    //itemList.forEach(function (item) {
-
-                }
-
+            $.when(getVitals()).then(function () {
+                setTimeout(function () {
+                    vitals();
+                }, 2000);
+                
             });
 
-            $(function () {
+            $(function() {
                 $('#vl_container').highcharts({
                     title: {
                         text: 'Viral Load Trend',
@@ -176,55 +151,100 @@
                     ]
                 });
             });
-            $(function () {
-                $('#vitals_container').highcharts({
+
+        };
+
+        function getVitals() {
+            console.log("get vitals called");
+            $.ajax({
+                url: '../WebService/PatientVitals.asmx/GetVitals',
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                success: function (response) {
+                    console.log(response.d);
+                    var items = response.d;
+                    items.forEach(function (item, i) {
+                      
+                        if (item.Month == 1) {
+
+                            jan_height = item.Height;
+                            jan_weight = item.Weight;
+                            jan_BMI = item.BMI;
+                            console.log("This is jan height: " + jan_height + " ");
+                            console.log("This is jan weight: " + jan_weight + " ");
+                            console.log("This is jan BMI: " + jan_BMI + " ");
+
+                        } else if (item.Month == 3) {
+
+                            march_height = item.Height;
+                            march_weight = item.Weight;
+                            march_BMI = item.BMI;
+                            console.log("This is March height: " + march_height + " ");
+                            console.log("This is March weight: " + march_weight + " ");
+                            console.log("This is March BMI: " + march_BMI + " ");
+                        }
+
+                    });
+
+                }
+
+            });
+        }
+
+        function vitals() {
+            //var jan_height = $(".march_height").val();
+            //var march_height = $(".march_height").val();
+            console.log("vitals graph function called");
+           
+            $('#vitals_container').highcharts({
+                title: {
+                    text: 'Vitals',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                },
+                yAxis: {
                     title: {
-                        text: 'Vitals',
-                        x: -20 //center
+                        text: ''
                     },
-                    subtitle: {
-                        text: '',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
-                    },
-                    yAxis: {
-                        title: {
-                            text: ''
-                        },
-                        plotLines: [
-                            {
-                                value: 0,
-                                width: 1,
-                                color: '#808080'
-                            }
-                        ]
-                    },
-                    tooltip: {
-                        valueSuffix: ''
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [
+                    plotLines: [
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }
+                    ]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [
                         {
                             name: 'Height',
-                            data: [118, 120, 126, 127, 128, 128, 126]
+                            data: [jan_height, march_height, "","" , "", "", ""]
                         },
                         {
                             name: 'Weight',
-                            data: [80, 82, 88, 82, 80, 78, 76]
+                            data: [jan_weight, march_weight, "", "", "", "", ""]
                         },
                         {
                             name: 'BMI',
-                            data: [24.70, 26.80, 28.80, 30.70, 27.90, 26.20, 25.50]
+                            data: [jan_BMI, march_BMI, "", "", "", "", "",""]
                         }
-                    ]
-                });
+                ]
             });
         }
     </script>
