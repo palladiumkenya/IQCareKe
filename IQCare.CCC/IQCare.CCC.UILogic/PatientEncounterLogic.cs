@@ -87,6 +87,12 @@ namespace IQCare.CCC.UILogic
             return patientEncounter.getPatientEncounterDiagnosis(PatientMasterVisitID, PatientID);
         }
 
+        public DataTable loadPatientPharmacyPrescription(string PatientMasterVisitID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyPrescriptionDetails(PatientMasterVisitID);
+        }
+
         public DataTable getPharmacyDrugList(string regimenLine)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");

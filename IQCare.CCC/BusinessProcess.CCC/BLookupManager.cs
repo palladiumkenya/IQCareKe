@@ -58,9 +58,7 @@ namespace BusinessProcess.CCC
               
         {
             LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
-            return lookupLabRepository.GetLabs();
-
-           
+            return lookupLabRepository.GetLabs(); 
         }
       
         public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
@@ -123,6 +121,16 @@ namespace BusinessProcess.CCC
         {
             LookupRepository lookupGender = new LookupRepository();
             return lookupGender.GetPatientGender(genderID);
+        }
+
+        public int GetRegimenCategory(int regimenId)
+        {
+           
+            string masterName=_unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
+            return
+                _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
+                    .Select(x => x.ItemId)
+                    .FirstOrDefault();
         }
     }
 }

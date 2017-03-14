@@ -17,7 +17,7 @@ namespace BusinessProcess.CCC.Patient
     public class BPatient : ProcessBase, IPatientManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        internal int Result;
+        //internal int Result;
 
         public int AddPatient(PatientEntity patient)
         {

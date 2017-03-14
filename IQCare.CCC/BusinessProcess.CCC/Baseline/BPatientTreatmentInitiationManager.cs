@@ -33,7 +33,7 @@ namespace BusinessProcess.CCC.Baseline
                 patientTreatment.DateStartedOnFirstline = patientTreatmentInitiation.DateStartedOnFirstline;
                 patientTreatment.Regimen = patientTreatmentInitiation.Regimen;
 
-                _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatmentInitiation);
+                _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
                 Result = _unitOfWork.Complete();
             }
 

@@ -393,7 +393,7 @@
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\IQCare.CCC.UILogic\obj\Debug\IQCare.CCC.UILogic.dll</HintPath>
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -433,7 +433,12 @@
       <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
+      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
+      <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,5 +1,4 @@
-﻿using System;
-using DataAccess.Base;
+﻿using DataAccess.Base;
 using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using DataAccess.CCC.Repository;
@@ -23,13 +22,24 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int DeletePatientIdentifier(int id)
         {
-            throw new NotImplementedException();
+            var identifier = _unitOfWork.PatientIdentifierRepository.GetById(id);
+            _unitOfWork.PatientIdentifierRepository.Remove(identifier);
+          return  Result= _unitOfWork.Complete();
         }
 
         public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
-            throw new NotImplementedException();
+            var identifier=new PatientEntityIdentifier()
+            {
+                PatientEnrollmentId = patientIdentifier.PatientEnrollmentId,
+                IdentifierTypeId = patientIdentifier.IdentifierTypeId,
+                IdentifierValue = patientIdentifier.IdentifierValue
+            };
+
+            _unitOfWork.PatientIdentifierRepository.Update(identifier);
+            return _unitOfWork.Complete();
         }
+
 
         public List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId, int identifierTypeId)
         {

@@ -11,6 +11,8 @@ using Entities.CCC.Baseline;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
+using Microsoft.JScript;
+using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -97,6 +99,9 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
         {
+            firstName = GlobalObject.unescape(firstName);
+            middleName = GlobalObject.unescape(middleName);
+            lastName = GlobalObject.unescape(lastName);
             PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
             {
                 PatientId = patientId,

@@ -20,6 +20,7 @@ namespace DataAccess.CCC.Interface
         ILookupMasterRepository LookupMasterRepository { get; }
         IPatientLookupRepository PatientLookupRepository { get; }
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
+        IPatientBaselineLookupRepository PatientBaselineLookupRepository { get; }
 
         /* person and patient */
         IPersonRepository PersonRepository { get; }

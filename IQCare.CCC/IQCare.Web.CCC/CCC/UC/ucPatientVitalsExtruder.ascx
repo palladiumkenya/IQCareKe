@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientVitalsExtruder.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientVitalsExtruder" %>
 <div style="padding-top:20px">
-    <div style="align-content:center"><label class="control-label">Vital Signs as at : Date</label></div>
+    <div style="align-content:center"><asp:Label ID="lblVitalsDate" runat="server" clientidmode="Static" class="control-label text-primary">Vital Signs as at : Date</asp:Label></div>
     <div class="panel-body" style="border-left: solid gray 1px;">
          
         <div class="row">             
