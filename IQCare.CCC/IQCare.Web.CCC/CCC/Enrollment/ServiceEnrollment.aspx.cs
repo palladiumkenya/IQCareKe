@@ -8,7 +8,7 @@ namespace IQCare.Web.CCC.Enrollment
         public string patType { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["PatientType"].ToString() != null)
+            if (Session["PatientType"] !=null && Session["PatientType"].ToString() != null)
             {
                 var patientType = int.Parse(Session["PatientType"].ToString());
                 patType = LookupLogic.GetLookupNameById(patientType);

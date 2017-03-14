@@ -1,11 +1,11 @@
-﻿using Application.Presentation;
-using Entities.CCC.Lookup;
+﻿using Entities.CCC.Lookup;
 using Interface.CCC;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
+using Application.Presentation;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -158,7 +158,6 @@ namespace IQCare.CCC.UILogic
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
-            cbl.Items.Add(new ListItem("Select", "0"));
             if (vw != null && vw.Count > 0)
             {
                 foreach (var item in vw)

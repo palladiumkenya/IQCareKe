@@ -5,6 +5,7 @@ using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using Application.Common;
 using System.Web;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -62,14 +63,15 @@ namespace IQCare.Web.CCC.UC
 
                 lblOtherNames.Text = "<strong></i>"+_utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName)+"</i></strong>";
 
-                lblAge.Text ="<strong><i>"+ Convert.ToString(myDate - DoB.Year)+" Years " + Convert.ToString(myDateMonth-DoB.Month) + " Months </i></strong>";
+                var age = PatientManager.CalculateYourAge(DoB);
+
+                //lblAge.Text ="<strong><i>"+ Convert.ToString(myDate - DoB.Year)+" Years " + Convert.ToString(myDateMonth-DoB.Month) + " Months </i></strong>";
+                lblAge.Text = "<strong><i>" + age + "</i></strong>";
                 Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 lblCCCReg.Text = x.EnrollmentNumber;
 
                 lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
             }
-
-
         }
     }
 }
