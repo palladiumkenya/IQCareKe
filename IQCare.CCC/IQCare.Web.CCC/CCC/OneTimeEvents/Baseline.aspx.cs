@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
+using Interface.CCC.Enrollment;
 using Interface.CCC.Lookup;
 using Interface.CCC.Patient;
 
@@ -76,7 +77,6 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     InitiationRegimen.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
-
         }
     }
 }

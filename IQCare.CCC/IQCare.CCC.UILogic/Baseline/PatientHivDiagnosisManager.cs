@@ -31,19 +31,19 @@ namespace IQCare.CCC.UILogic.Baseline
             return result;
         }
 
-        //public int UpdatePatientHivDiagnosis(int id, int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate)
-        //{
-        //    var patientHivDiagnosisUpdate= new PatientHivDiagnosis
-        //    {
-        //        Id = id,
-        //        HivDiagnosisDate = hivDiagnosisDate,
-        //        EnrollmentDate = enrollmentDate,
-        //        EnrollmentWhoStage = enrollmentWhoStage,
-        //        ArtInitiationDate = artInitiationDate
-        //    };
+        public int UpdatePatientHivDiagnosis(int id, int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate, DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate)
+        {
+            var patientHivDiagnosisUpdate = new PatientHivDiagnosis
+            {
+                Id = id,
+                HivDiagnosisDate = hivDiagnosisDate,
+                EnrollmentDate = enrollmentDate,
+                EnrollmentWhoStage = enrollmentWhoStage,
+                ArtInitiationDate = artInitiationDate
+            };
 
-        //    return _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patientHivDiagnosisUpdate);
-        //}
+            return _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patientHivDiagnosisUpdate);
+        }
 
         public int DeletePatientHivDiagnosis(int id)
         {

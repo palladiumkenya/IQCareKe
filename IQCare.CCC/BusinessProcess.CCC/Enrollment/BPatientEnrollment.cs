@@ -23,7 +23,9 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int DeletePatientEnrollment(int id)
         {
-            throw new NotImplementedException();
+            var enrollment = _unitOfWork.PatientEnrollmentRepository.GetById(id);
+            _unitOfWork.PatientEnrollmentRepository.Remove(enrollment);
+            return _unitOfWork.Complete();
         }
 
         public int UpdatePatientEnrollment(PatientEntityEnrollment patientEnrollment)
@@ -41,6 +43,15 @@ namespace BusinessProcess.CCC.Enrollment
         public PatientEntityEnrollment GetPatientEntityEnrollment(int id)
         {
             return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.Id == id).First();
+        }
+
+        public DateTime GetPatientEnrollmentDate(int patientId)
+        {
+            DateTime enrollmentDate =
+                _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.EnrollmentDate)
+                    .FirstOrDefault();
+           return enrollmentDate; 
         }
     }
 }

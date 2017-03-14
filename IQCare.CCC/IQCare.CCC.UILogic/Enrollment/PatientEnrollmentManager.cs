@@ -3,9 +3,6 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.CCC.UILogic.Enrollment
 {
@@ -38,6 +35,11 @@ namespace IQCare.CCC.UILogic.Enrollment
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public DateTime GetPatientEnrollmentDate(int patientId)
+        {
+            return _mgr.GetPatientEnrollmentDate(patientId);
         }
 
         public List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId)

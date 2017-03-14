@@ -20,7 +20,7 @@
                     <label class="control-label pull-left"><small class="text-danger">*</small> Height </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10"></asp:TextBox>
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                     <label class="control-label pull-left"><small class="text-danger">*</small> Weight </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0"></asp:TextBox>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-6">
                     <%--<asp:Label runat="server"  ID ="bmi" Value = "" CssClass="control-label text-warning pull-left"></asp:Label>--%>
-                    <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi" Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi"></asp:TextBox>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Head Circumference (cm) </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>MUAC (cms) </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -75,12 +75,12 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Blood Pressure </label>
                 </div>
                 <div class="col-md-3">
-                    <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="sys.." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="sys.." Type="Number" data-parsley-range="[60, 200]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                 </div>
                 <%--<div class="col-md-2 clearfix">
                     <label class="control-label">/</label></div>--%>
                 <div class="col-md-3 clearfix">
-                    <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="di.." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="di.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Temperature </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="50" data-parsley-range="[25, 50]" data-parsley-range-message="Tempreture is out of reasonable range"></asp:TextBox>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Respiratory Rate </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="0"></asp:TextBox>
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Blood Oxygen Saturation </label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." Type="Number" Min="0" Max="100"></asp:TextBox>
                 </div>
             </div>
             <div class="col-md-12 form-group">
@@ -115,7 +115,7 @@
                     <label class="control-label pull-left"><small class="text-danger"></small>Heart Rate</label>
                 </div>
                 <div class="col-md-6">
-                    <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="0"></asp:TextBox>
                 </div>
             </div>
         </div>
@@ -159,11 +159,15 @@
     });
     $("#Heights").change(function () {
         var bmi = calcBMI();
-        document.getElementById("bmivalue").value = bmi;
+        var weight = '';
+        if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
+        document.getElementById("bmivalue").value = bmi+weight;
     });
     $("#weights").change(function () {
         var bmi = calcBMI();
-        document.getElementById("bmivalue").value = bmi;
+        var weight = '';
+        if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
+        document.getElementById("bmivalue").value = bmi+weight;
     });
     function calcBMI()
     {
@@ -176,7 +180,7 @@
     function addPatientVitals() {
         var height = $("#<%=Heights.ClientID%>").val();
         var weight = $("#<%=weights.ClientID%>").val();
-        var bmi = $("#<%=bmivalue.ClientID%>").val();
+        var bmi = calcBMI();
         if (bmi === '') { bmi = 0 }
         var headCircumference = $("#<%=circumference.ClientID%>").val();
         if (headCircumference === '') { headCircumference = 0 }
@@ -196,6 +200,7 @@
         if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
         if (boSaturation === '') { boSaturation = 0 }
+        debugger;
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/AddpatientVitals",

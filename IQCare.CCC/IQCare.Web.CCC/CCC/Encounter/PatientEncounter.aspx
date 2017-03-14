@@ -568,8 +568,8 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />
-                                                                        <%--<asp:CheckBoxList ID="fpMethod" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:CheckBoxList>--%>
+                                                                         <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                                       
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group" id="divNoFP" style="display: none">
@@ -1731,7 +1731,9 @@
         var pmscmFlag = "0";
 
         $(document).ready(function () {     
-           
+            console.log(patientId);
+            console.log(patientMasterVisitId);
+
             showHideFPControls();
             drugList();
        
@@ -2133,6 +2135,7 @@
             $('#FemaleLMP').datepicker({
                 allowPastDates: true,
                 date: getFemaleLMPVal,
+                date: 0,
                 restricted: [{from: tomorrow, to: Infinity}],
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
@@ -2141,6 +2144,7 @@
            $('#EDCD').datepicker({
                allowPastDates: true,
                date: getEDDPVal,
+               date: 0,
                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
            });
@@ -2162,8 +2166,8 @@
                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
            });
-            
-            ////////////////////////////////////////////////////////////////////////////////////////////
+          
+         ////////////////////////////////////////////////////////////////////////////////////////////
             //Gender validations
             var male = "Male";
             if (gender == male) {
@@ -2174,8 +2178,11 @@
                 $("#cacxscreening").val("");
 
                 $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#FemaleLMP").addClass('noevents');
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#EDCD").addClass('noevents');
+
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
             } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
@@ -2203,6 +2210,7 @@
               
 
             }
+
             //.pregnancy validation
             var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {
@@ -2322,6 +2330,7 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
                     //$(this).closest('tr').remove();
                     //var y = $(this).closest('tr').find('td').eq(0).html();
                     //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
@@ -2518,8 +2527,8 @@
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = getSelectedItemsList('fpMethod');
-                var NoFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
+                //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+                var FPMethod = $('#fpMethod').val();
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
@@ -2540,30 +2549,30 @@
                 }
                 catch (ex) {  }
 
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                    data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + 
-                        visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + 
-                        tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + 
-                        LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + 
-                        "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + NoFP + "','CaCx':'" + CaCx + "','STIScreening':'" + 
-                        STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + 
-                        JSON.stringify(adverseEventsArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.d > 0)
-                            toastr.success(response.d, "Presenting Complaints");
-                        else
-                            toastr.error("Error occured while saving Presenting Complaints");
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                    }
-                });
-                
-            }
+            
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            
+                            console.log(response.d);
+                            if (response.d > 0)
+                               
+                                toastr.success(response.d, "Presenting Complaints");
+                            else
+                           
+                                toastr.error(response.d,"Error occured while saving Presenting Complaints");
+                        },
+                        error: function (response) {
+                         
+                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                        }
+                    });
+                }
+       
 
 
             function savePatientEncounterChronicIllness() {
@@ -2716,7 +2725,6 @@
                                 checkedValues += ',';
 
                             checkedValues += labelArray[0].innerHTML;
-                            alert(labelArray[0].value);
                         }
                     }
                 }
@@ -2832,13 +2840,13 @@
 
       //////////////////////////////////PHARMACY//////////////////////////////////////////////////////////////////////////////
       var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
-                //ajax: {
-                //    type: "POST",
-                //    url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
-                //    dataSrc: 'd',
-                //    contentType: "application/json; charset=utf-8",
-                //    dataType: "json"
-                //},
+                ajax: {
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                    dataSrc: 'd',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                },
                 paging: false,
                 searching: false,
                 info: false,

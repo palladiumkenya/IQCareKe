@@ -50,6 +50,8 @@ namespace DataAccess.CCC.Repository
         private ILookupPreviousLabs _lookupPreviousLabsRepository;
         private IPersonLookUpRepository _personLookUpRepository;
         private IPersonContactLookUpRepository _personContactLookUpRepository;
+        private IPatientBaselineLookupRepository _patientBaselineLookupRepository;
+
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
@@ -316,6 +318,11 @@ namespace DataAccess.CCC.Repository
         public IPatientHvTestingRepository PatientHivTestingRepository
         {
             get {return _patientHivTestingRepository??(_patientHivTestingRepository = new PatientHivTestingRepository((GreencardContext)_context));}
+        }
+
+        public IPatientBaselineLookupRepository PatientBaselineLookupRepository
+        {
+            get { return _patientBaselineLookupRepository ?? (_patientBaselineLookupRepository = new PatientBaselineLookupRepository((LookupContext)_context)); }
         }
 
         public int Complete()
