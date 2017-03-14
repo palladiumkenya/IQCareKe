@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,10 @@ namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("PatientCareending")]
-   public class PatientCareEnding :BaseObject
+    public class PatientCareEnding : BaseEntity
     {
+        [Key]
+        public int Id { get; set; }
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
@@ -22,6 +25,7 @@ namespace Entities.CCC.Encounter
         public int PatientEnrollmentId { get; set; }
         public int ExitReason { get; set; }
         public DateTime ExitDate { get; set; }
-
+        public string CareEndingNotes { get; set; }
+        public bool Active { get; set; }
     }
 }

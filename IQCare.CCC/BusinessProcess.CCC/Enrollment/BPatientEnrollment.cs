@@ -30,21 +30,19 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int UpdatePatientEnrollment(PatientEntityEnrollment patientEnrollment)
         {
-            var enrollment=new PatientEntityEnrollment()
-            {
-                ServiceAreaId = patientEnrollment.ServiceAreaId,
-                EnrollmentDate = patientEnrollment.EnrollmentDate,
-                EnrollmentStatusId = patientEnrollment.EnrollmentStatusId,
-                TransferIn = patientEnrollment.TransferIn
-            };
-
-            _unitOfWork.PatientEnrollmentRepository.Update(enrollment);
-            return _unitOfWork.Complete();
+            _unitOfWork.PatientEnrollmentRepository.Update(patientEnrollment);
+            _unitOfWork.Complete();
+            return patientEnrollment.Id;
         }
 
         public List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId)
         {
-            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId).ToList();
+            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId && !x.CareEnded).ToList();
+        }
+
+        public PatientEntityEnrollment GetPatientEntityEnrollment(int id)
+        {
+            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.Id == id).First();
         }
 
         public DateTime GetPatientEnrollmentDate(int patientId)

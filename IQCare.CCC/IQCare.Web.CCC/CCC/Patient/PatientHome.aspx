@@ -34,8 +34,17 @@
         </div>--%>
         <!-- .col-lg-3 -->
     </div>
-    
-    <div class="col-md-12 col-xs-12 col-sm-12">
+    <div class="col-md-3 col-xs-3">
+       <div class="col-md-12"><label class="label label-danger pull-left fa-1x"><strong>Patient Data Entry Issue(s)</strong></label></div> 
+        <div class="col-md-12">
+            <div class="list-group">
+                <a class="list-group-item" href="#"><i class="fa fa-times text-danger fa-1x" aria-hidden="true"></i>&nbsp; Treatment Baseline</a>
+              <a class="list-group-item" href="#"><i class="fa fa-times text-danger fa-1x" aria-hidden="true"></i>&nbsp; Family Testing</a>
+              <a class="list-group-item" href="#"><i class="fa fa-times text-danger fa-1x" aria-hidden="true"></i>&nbsp; One Time Events Tracker</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-xs-8 col-sm-8">
       
         <ul class="nav nav-tabs">
 
