@@ -31,7 +31,8 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@RegimenLine", SqlDbType.VarChar, RegimenLine);
                 ClsUtility.AddParameters("@ModuleID", SqlDbType.VarChar, ModuleID);
 
-                int ptn_pharmacy_pk = (int)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacy_GreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                DataRow theDR = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacy_GreenCard", ClsUtility.ObjectEnum.DataRow);
+                string ptn_pharmacy_pk = theDR[0].ToString();
 
                 foreach (var drg in drugPrescription)
                 {
@@ -42,7 +43,7 @@ namespace BusinessProcess.CCC
 
                         ClsObject drugPres = new ClsObject();
                         ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk.ToString());
+                        ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk);
                         ClsUtility.AddParameters("@DrugId", SqlDbType.Int, drg.DrugId);
                         ClsUtility.AddParameters("@BatchId", SqlDbType.Int, drg.BatchId);
                         ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
@@ -132,6 +133,19 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.Int, TreatmentPlan);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugSwitchSubReasons", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
+        public DataTable getPharmacyPrescriptionDetails(string patientMasterVisitID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, patientMasterVisitID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientPharmacyPrescription", ClsUtility.ObjectEnum.DataTable);
 
             }
         }

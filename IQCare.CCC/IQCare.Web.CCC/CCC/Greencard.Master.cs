@@ -174,13 +174,12 @@ namespace IQCare.Web.CCC
 
         protected void New_Encounter_Click(object sender, EventArgs e)
         {
-            //Session["PatientMasterVisitId"] = "0";
             Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
         }
 
         protected void EncounterHistory_Click(object sender, EventArgs e)
         {
-            Session["PatientMasterVisitID"] = "0";
+            //Session["PatientMasterVisitID"] = "0";
             Response.Redirect("~/CCC/Encounter/EncounterHistory.aspx");
         }
 

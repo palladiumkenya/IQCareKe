@@ -2716,7 +2716,6 @@
                                 checkedValues += ',';
 
                             checkedValues += labelArray[0].innerHTML;
-                            alert(labelArray[0].value);
                         }
                     }
                 }
@@ -2832,13 +2831,13 @@
 
       //////////////////////////////////PHARMACY//////////////////////////////////////////////////////////////////////////////
       var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
-                //ajax: {
-                //    type: "POST",
-                //    url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
-                //    dataSrc: 'd',
-                //    contentType: "application/json; charset=utf-8",
-                //    dataType: "json"
-                //},
+                ajax: {
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                    dataSrc: 'd',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                },
                 paging: false,
                 searching: false,
                 info: false,
