@@ -592,7 +592,7 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit") {
+                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "TransferIn") {
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {

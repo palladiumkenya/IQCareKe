@@ -12,7 +12,7 @@ namespace Entities.CCC.Encounter
 {
     [Serializable]
     [Table("PatientCareending")]
-    public class PatientCareEnding : BaseObject
+    public class PatientCareEnding : BaseEntity
     {
         [Key]
         public int Id { get; set; }
@@ -26,5 +26,6 @@ namespace Entities.CCC.Encounter
         public int ExitReason { get; set; }
         public DateTime ExitDate { get; set; }
         public string CareEndingNotes { get; set; }
+        public bool Active { get; set; }
     }
 }

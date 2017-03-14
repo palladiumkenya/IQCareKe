@@ -20,20 +20,18 @@ namespace IQCare.Web.CCC.UC
         {
 
             var patientVitals = new PatientVitalsManager();
-            List<PatientVital> PatientTriage = new List<PatientVital> {patientVitals.GetPatientVitals(PatientId)};
-
-            foreach (var item in PatientTriage)
+            PatientVital patientTriage = patientVitals.GetPatientVitals(PatientId);
+            if (patientTriage!=null)
             {
-                lblVitalsDate.Text = "Vital Signs as at :" + item.CreateDate;
-                vitalHeight.Text =Convert.ToString(item.Height);
-                vitalsWeight.Text = item.Weight.ToString();
-                vitalsCircumference.Text = item.HeadCircumference.ToString();
-                vitalsMUAC.Text = item.Muac.ToString();
-                vitalBloodPressure.Text = item.Bpdiastolic.ToString() + '/' + item.BpSystolic.ToString();
-                vitalTemperature.Text = item.Temperature.ToString();
-                vitalRespiratoryRate.Text = item.RespiratoryRate.ToString();
-                vitalBloodPressure.Text = item.SpO2.ToString();
-
+                    lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate;
+                    vitalHeight.Text = Convert.ToString(patientTriage.Height);
+                    vitalsWeight.Text = patientTriage.Weight.ToString();
+                    vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
+                    vitalsMUAC.Text = patientTriage.Muac.ToString();
+                    vitalBloodPressure.Text = patientTriage.Bpdiastolic.ToString() + '/' + patientTriage.BpSystolic.ToString();
+                    vitalTemperature.Text = patientTriage.Temperature.ToString();
+                    vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
+                    vitalBloodPressure.Text = patientTriage.SpO2.ToString();
             }
         }
     }

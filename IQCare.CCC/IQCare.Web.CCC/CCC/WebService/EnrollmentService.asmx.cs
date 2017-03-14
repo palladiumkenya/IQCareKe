@@ -290,10 +290,12 @@ namespace IQCare.Web.CCC.WebService
                 }
                 else
                 {
-                    Msg = "Patient is already care ended";
+                    SoapException b = new SoapException();
+                    SoapException e = (SoapException)Activator.CreateInstance(b.GetType(), "Patient is already care ended", b);
+                    Msg = e.Message;
                 }
             }
-            catch (Exception e)
+            catch (SoapException e)
             {
                 Msg = e.Message;
             }
