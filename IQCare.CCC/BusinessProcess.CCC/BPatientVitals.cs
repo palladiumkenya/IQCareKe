@@ -21,7 +21,7 @@ namespace BusinessProcess.CCC
 
         public PatientVital GetPatientVitals(int id)
         {
-            PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
+            //PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
             return vital;
         }
 
