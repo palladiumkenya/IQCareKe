@@ -22,42 +22,6 @@ namespace IQCare.Web.CCC.Patient {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails ucPatientDetails;
         
         /// <summary>
-        /// lblviralload control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblviralload;
-        
-        /// <summary>
-        /// lblVLDueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVLDueDate;
-        
-        /// <summary>
-        /// lblCurARVRegimen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCurARVRegimen;
-        
-        /// <summary>
-        /// lblrecentCD4ValueDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblrecentCD4ValueDate;
-        
-        /// <summary>
         /// vitalHeight control.
         /// </summary>
         /// <remarks>

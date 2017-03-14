@@ -1,4 +1,5 @@
-﻿using Entities.CCC.Triage;
+﻿using System.Collections.Generic;
+using Entities.CCC.Triage;
 namespace Interface.CCC
 {
     public interface IPatientVitals
@@ -8,5 +9,6 @@ namespace Interface.CCC
         void DeletePatientVitals(int id);
         int UpdatePatientVitals(PatientVital p);
         PatientVital GetByPatientId(int patientId);
+        List<PatientVital> GetCurrentPatientVital(int patientId);
     }
 }

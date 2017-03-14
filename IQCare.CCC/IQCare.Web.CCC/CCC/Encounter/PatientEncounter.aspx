@@ -568,8 +568,8 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />
-                                                                        <%--<asp:CheckBoxList ID="fpMethod" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:CheckBoxList>--%>
+                                                                         <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                                       
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group" id="divNoFP" style="display: none">
@@ -1731,7 +1731,9 @@
         var pmscmFlag = "0";
 
         $(document).ready(function () {     
-           
+            console.log(patientId);
+            console.log(patientMasterVisitId);
+
             showHideFPControls();
             drugList();
        
@@ -2164,8 +2166,8 @@
                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
            });
-            
-            ////////////////////////////////////////////////////////////////////////////////////////////
+          
+         ////////////////////////////////////////////////////////////////////////////////////////////
             //Gender validations
             var male = "Male";
             if (gender == male) {
@@ -2208,6 +2210,7 @@
               
 
             }
+
             //.pregnancy validation
             var advEventsTable = $('#dtlAdverseEvents').DataTable({
                 ajax: {

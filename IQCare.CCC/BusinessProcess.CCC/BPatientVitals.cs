@@ -2,6 +2,8 @@
 using Entities.CCC.Triage;
 using Interface.CCC;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 
@@ -33,7 +35,20 @@ namespace BusinessProcess.CCC
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            _unitOfWork.PatientVitalsRepository.Update(p);
+            var vitals = new PatientVital()
+            {
+                Temperature = p.Temperature,
+                RespiratoryRate = p.RespiratoryRate,
+                HeartRate = p.HeartRate,
+                BpSystolic = p.BpSystolic,
+                Bpdiastolic = p.Bpdiastolic,
+                Height = p.Height,
+                Weight = p.Weight,
+                Muac = p.Muac,
+                SpO2 = p.SpO2
+
+            };
+            _unitOfWork.PatientVitalsRepository.Update(vitals);
             _result = _unitOfWork.Complete();
             return _result;
         }
@@ -42,6 +57,16 @@ namespace BusinessProcess.CCC
         {
             PatientVital vital = _unitOfWork.PatientVitalsRepository.GetByPatientId(patientId);
             return vital;
+        }
+
+        public List<PatientVital> GetCurrentPatientVital(int patientId)
+        {
+            var vitals =
+                    _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                        .OrderBy(x => x.Id)
+                        .ToList()
+                ;
+            return vitals;
         }
     }
 }
