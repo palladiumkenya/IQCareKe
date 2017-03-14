@@ -12,5 +12,6 @@ namespace Interface.CCC.Enrollment
         int UpdatePatientEnrollment(PatientEntityEnrollment patientEnrollment);
         int DeletePatientEnrollment(int id);
         List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId);
+        PatientEntityEnrollment GetPatientEntityEnrollment(int id);
     }
 }

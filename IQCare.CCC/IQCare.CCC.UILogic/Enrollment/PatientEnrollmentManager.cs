@@ -27,9 +27,27 @@ namespace IQCare.CCC.UILogic.Enrollment
             }
         }
 
+        public int updatePatientEnrollment(PatientEntityEnrollment patientEntityEnrollment)
+        {
+            try
+            {
+                return _mgr.UpdatePatientEnrollment(patientEntityEnrollment);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId)
         {
             return _mgr.GetPatientEnrollmentByPatientId(patientId);
+        }
+
+        public PatientEntityEnrollment GetPatientEntityEnrollment(int id)
+        {
+            return _mgr.GetPatientEntityEnrollment(id);
         }
     }
 }

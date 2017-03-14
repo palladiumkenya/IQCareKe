@@ -28,12 +28,19 @@ namespace BusinessProcess.CCC.Enrollment
 
         public int UpdatePatientEnrollment(PatientEntityEnrollment patientEnrollment)
         {
-            throw new NotImplementedException();
+            _unitOfWork.PatientEnrollmentRepository.Update(patientEnrollment);
+            _unitOfWork.Complete();
+            return patientEnrollment.Id;
         }
 
         public List<PatientEntityEnrollment> GetPatientEnrollmentByPatientId(int patientId)
         {
-            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId).ToList();
+            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId && !x.CareEnded).ToList();
+        }
+
+        public PatientEntityEnrollment GetPatientEntityEnrollment(int id)
+        {
+            return _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.Id == id).First();
         }
     }
 }

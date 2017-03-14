@@ -193,8 +193,8 @@
                                     <span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info"> Patient Appointments </strong><span class="badge">0</span>
                                 </a>
                               
-                                <a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="">
-                                    <span class="fa"></span><strong class="text-info">Care Ended</strong><span class="badge">0</span>
+                                <a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="menuPatientCareEnded">
+                                    <span class="fa fa-user-secret fa-2x pull-left text-danger"></span><strong class="text-info">Care Ended</strong>
                                 </a>
 
                           </div>
@@ -338,6 +338,7 @@
 
                // $("#menuPatientHome").hide();
                 $("#menuPatientAppointments").hide();
+                $("#menuPatientCareEnded").hide();
                 $("#menuScheduleAppointments").hide();
                 $("#menuCaptureVitals").hide();
                 $("#menuNewEncounter").hide();
@@ -356,6 +357,7 @@
                 $("#menuNewEncounter").hide();
                 $("#menuPatientHome").show();
                 $("#menuPatientAppointments").show();
+                $("#menuPatientCareEnded").show();
                 $("#menuScheduleAppointments").show();
                 $("#menuCaptureVitals").show();
                 $("#menuNewEncounter").show();
