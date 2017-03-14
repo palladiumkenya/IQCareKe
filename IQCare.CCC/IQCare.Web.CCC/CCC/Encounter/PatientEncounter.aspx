@@ -2524,8 +2524,8 @@
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
                 //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = getSelectedItemsList('fpMethod');
-                var NoFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
+                //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
+                var FPMethod = $('#fpMethod').val();
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
@@ -2546,31 +2546,30 @@
                 }
                 catch (ex) {  }
 
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                    data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + 
-                        visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + 
-                        tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + 
-                        LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + 
-                        "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + NoFP + "','CaCx':'" + CaCx + "','STIScreening':'" + 
-                        STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + 
-                        JSON.stringify(adverseEventsArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.d > 0)
-                            toastr.success(response.d, "Presenting Complaints");
-                        else
-                            toastr.error("Error occured while saving Presenting Complaints");
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                    }
-                });
-                
-            }
-
+            
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            
+                            console.log(response.d);
+                            if (response.d > 0)
+                               
+                                toastr.success(response.d, "Presenting Complaints");
+                            else
+                           
+                                toastr.error(response.d,"Error occured while saving Presenting Complaints");
+                        },
+                        error: function (response) {
+                         
+                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                        }
+                    });
+                }
+       
 
 
             function savePatientEncounterChronicIllness() {
