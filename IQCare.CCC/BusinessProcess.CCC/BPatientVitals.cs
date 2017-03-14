@@ -1,6 +1,7 @@
 ﻿using DataAccess.Base;
 using Entities.CCC.Triage;
 using Interface.CCC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
@@ -34,7 +35,7 @@ namespace BusinessProcess.CCC
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            var vitals=new PatientVital()
+            var vitals = new PatientVital()
             {
                 Temperature = p.Temperature,
                 RespiratoryRate = p.RespiratoryRate,
@@ -62,7 +63,7 @@ namespace BusinessProcess.CCC
         {
             var vitals =
                     _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                        .OrderBy(x => x.Id).Take(1)
+                        .OrderBy(x => x.Id)
                         .ToList()
                 ;
             return vitals;

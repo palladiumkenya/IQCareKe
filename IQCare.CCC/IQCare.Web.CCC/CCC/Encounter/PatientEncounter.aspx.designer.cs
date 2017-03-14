@@ -175,22 +175,13 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.DropDownList onFP;
         
         /// <summary>
-        /// fp_Method control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList fp_Method;
-        
-        /// <summary>
         /// fpMethod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox fpMethod;
+        protected global::System.Web.UI.WebControls.DropDownList fpMethod;
         
         /// <summary>
         /// ddlNoFP control.
