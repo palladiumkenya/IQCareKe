@@ -87,6 +87,7 @@
     <Compile Include="LookupLogic.cs" />
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientBaselineLookupManager.cs" />
+    <Compile Include="PatientCareEndingManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
