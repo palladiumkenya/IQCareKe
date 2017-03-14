@@ -289,6 +289,7 @@
                 success: function (response) {
                     toastr.success(response.d, "Appointment saved successfully");
                     resetFields();
+                    setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
                 },
                 error: function (response) {
                     toastr.error(response.d, "Appointment not saved");

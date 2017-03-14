@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Baseline;
 
 namespace IQCare.Web.CCC
 {
@@ -70,9 +71,11 @@ namespace IQCare.Web.CCC
         {
             //set menu count values
             PatientLookupManager patientLookup=new PatientLookupManager();
-
+            PatientFamilyTestingManager patientFamilyTesting = new PatientFamilyTestingManager();
+            PatientAppointmentManager patientAppointmentManager = new PatientAppointmentManager();
             lblPatientCount.Text = patientLookup.GetTotalpatientCount().ToString();
-
+            lblFamilyTesting.Text = patientFamilyTesting.GetPatienFamilyCount(PatientId).ToString();
+            lblAppointments.Text = patientAppointmentManager.GetCountByPatientId(PatientId).ToString();
             //check session coming from stopped encounter
             if (Request.QueryString["reset"] != null)
             {
