@@ -1,7 +1,6 @@
 ﻿using DataAccess.Base;
 using Entities.CCC.Triage;
 using Interface.CCC;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
