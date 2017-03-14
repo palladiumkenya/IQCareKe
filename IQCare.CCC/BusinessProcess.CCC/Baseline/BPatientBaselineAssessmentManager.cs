@@ -37,7 +37,7 @@ namespace BusinessProcess.CCC.Baseline
                 patientBaseline.TBInfected = patientBaselineAssessment.TBInfected;
                 patientBaseline.Weight = patientBaselineAssessment.Weight;
                 patientBaseline.WHOStage = patientBaselineAssessment.WHOStage;
-                _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaselineAssessment);
+                _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaseline);
                  Result = _unitOfWork.Complete();
             }
             return Result;
@@ -64,7 +64,7 @@ namespace BusinessProcess.CCC.Baseline
         public int CheckIfPatientBaselineExists(int patientId)
         {
             var recordExists =
-                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
                     .Select(x => x.Id)
                     .FirstOrDefault();
             return Convert.ToInt32(recordExists);

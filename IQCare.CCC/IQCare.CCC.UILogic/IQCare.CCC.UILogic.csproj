@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
-    <Compile Include="Baseline\PatientBaslineAssessmentManager.cs" />
+    <Compile Include="Baseline\PatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\PatientArvHistoryManager.cs" />
     <Compile Include="Baseline\PatientFamilyTestingManager.cs" />
     <Compile Include="Baseline\PatientHivDiagnosisManager.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="PatientAppointmentManager.cs" />
+    <Compile Include="PatientBaselineLookupManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientLookupManager.cs" />

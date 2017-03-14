@@ -103,6 +103,7 @@
     <Compile Include="Enrollment\BPatientEntryPoint.cs" />
     <Compile Include="Enrollment\BPatientIdentifier.cs" />
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
+    <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />

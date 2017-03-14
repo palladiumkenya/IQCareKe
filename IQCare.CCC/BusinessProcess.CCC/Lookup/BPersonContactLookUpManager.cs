@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 
-namespace BusinessProcess.CCC.LookupLogic
+namespace BusinessProcess.CCC.Lookup
 {
     public class BPersonContactLookUpManager : ProcessBase, IPersonContactLookUpManager
     {

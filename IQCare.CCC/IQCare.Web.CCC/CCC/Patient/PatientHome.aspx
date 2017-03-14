@@ -65,202 +65,65 @@
         <!-- .col-lg-3 -->
     </div>
     
-    <div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div role="tabpanel" class="panel panel-default" id="home">
-                    <div class="col-md-4" style="padding-left: 0px;">
-                        <div class="panel-heading bs-callout bs-callout-success">Today's Vital Signs</div>
-                        <div class="panel-body" style="border-left: solid gray 1px;">
-                        
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Height (cm)</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalHeight" CssClass="control-label text-success pull-left">0 cms</asp:Label>
-                                </div>
-                            </div>
+    <div class="col-md-12 col-xs-12 col-sm-12">
+        
+        
+<!-- Nav tabs -->
+<ul class="nav nav-tabs md-pills pills-ins" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#panel11" role="tab"><i class="fa fa-user"></i> Patient Baseline Summary </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel12" role="tab"><i class="fa fa-heart"></i> Follow</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel13" role="tab"><i class="fa fa-envelope"></i> Contact</a>
+    </li>
+</ul>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Weight (kg)</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalsWeight" CssClass="control-label text-success pull-left">0 Kgs</asp:Label>
-                                </div>
-                            </div>
+<!-- Tab panels -->
+<div class="tab-content">
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Head Circumference (cm)</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label text-success pull-left">0 cms</asp:Label>
-                                </div>
-                            </div>
+    <!--Panel 1-->
+    <div class="tab-pane fade in show active" id="panel11" role="tabpanel">
+        <br>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">MUAC (cm)</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label text-success pull-left">0 cms</asp:Label>
-                                </div>
-                            </div> 
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Blood Pressure </label></div>
-                                <div class="col-md-4"> 
-                                    <asp:Label runat="server" ID="vitalBloodPressure" CssClass="control-label text-success pull-left">0 </asp:Label>
-                                </div>
-                            </div> 
+    </div>
+    <!--/.Panel 1-->
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Temperature (0C)</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalTemperature" CssClass="control-label text-success pull-left">0 0C</asp:Label>
-                                </div>
-                            </div> 
+    <!--Panel 2-->
+    <div class="tab-pane fade" id="panel12" role="tabpanel">
+        <br>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Respiratory Rate</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="vitalRespiratoryRate" CssClass="control-label text-success pull-left">0 </asp:Label>
-                                </div>
-                            </div> 
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left">Blood Oxygen Saturation</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="lblOxygenSaturation" CssClass="control-label text-success pull-left">0 %</asp:Label>
-                                </div>
-                            </div>
+    </div>
+    <!--/.Panel 2-->
 
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        
-                        <div class="panel-heading bs-callout bs-callout-default">Laboratory Summary</div>
-                        <div class="panel-body" style="border-left: solid gray 1px;">
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="EnrollmentCD4" CssClass="control-label pull-left" ClientIDMode="Static">0</asp:Label>
-                                </div>
-                            </div>
+    <!--Panel 3-->
+    <div class="tab-pane fade" id="panel13" role="tabpanel">
+        <br>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment CD4 Date</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="EnrollmentCD4Date" CssClass="control-label pull-left" ClientIDMode="Static">00-00-0000</asp:Label>
-                                </div>
-                            </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viral Load</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="enrollmentViralload" CssClass="control-label pull-left" ClientIDMode="Static">0</asp:Label>
-                                </div>
-                            </div>
+    </div>
+    <!--/.Panel 3-->
 
-                            <div class="col-md-12">
-                                <div class="col-md-8"><label class="control-label pull-left text-default">Enrollment Viralload Date</label></div>
-                                <div class="col-md-4">
-                                    <asp:Label runat="server" ID="enrollmentviralloaddate" CssClass="control-label pull-left" ClientIDMode="Static">00-00-000</asp:Label>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                   &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
+    <!--Panel 4-->
+    <div class="tab-pane fade" id="panel14" role="tabpanel">
+        <br>
 
-                        </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
 
-                    </div>
-                    <div class="col-md-4">
-                        
-                        <div class="panel-heading bs-callout bs-callout-default">Diagnosis Summary</div>
-                        <div class="panel-body" style="border-left: solid gray 1px;">
-                            
-                             <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                   &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                             <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                   &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="col-md-8">&nbsp;</div>
-                                <div class="col-md-4">
-                                    &nbsp;
-                                </div>
-                            </div>
+    </div>
+    <!--/.Panel 4-->
 
-                        </div>
-                    </div>           
-                </div>
-            </div>
-        </div>
+</div>
+
     </div>
 
     <IQ:ucExtruder runat="server" ID="ucExtruder" />
