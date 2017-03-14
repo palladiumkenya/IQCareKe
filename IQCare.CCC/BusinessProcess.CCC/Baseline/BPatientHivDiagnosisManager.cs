@@ -31,7 +31,7 @@ namespace BusinessProcess.CCC.Baseline
                 patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
                 patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
                 patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;
-                _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientHivDiagnosis);
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientDiagnosis);
                 Result = _unitOfWork.Complete();
             }
             return Result;
@@ -51,12 +51,12 @@ namespace BusinessProcess.CCC.Baseline
 
         public int CheckIfDiagnosisExists(int patientId)
         {
-            int Id = 0;
+            int id = 0;
             var recordExists =
                 _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                     .Select(x => x.Id).FirstOrDefault();
-            recordExists=(recordExists<1)?Id=recordExists:Id=0;
-            return Id;
+            recordExists=(recordExists>1)?id=recordExists:id=0;
+            return id;
         }
 
     }

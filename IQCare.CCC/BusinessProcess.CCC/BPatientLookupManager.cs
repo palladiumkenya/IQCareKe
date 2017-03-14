@@ -99,9 +99,9 @@ namespace BusinessProcess.CCC
             return lookupGender.GetGenderID(patientId);
         }
 
-        public int GetPatientTypeId(int PatientId)
+        public int GetPatientTypeId(int patientId)
         {
-            return _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == PatientId).Select(x => x.PatientType).FirstOrDefault();
+            return _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId).Select(x => x.PatientType).FirstOrDefault();
         }
     }
 }

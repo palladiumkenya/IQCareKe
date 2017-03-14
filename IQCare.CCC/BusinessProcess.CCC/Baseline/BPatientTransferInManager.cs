@@ -27,14 +27,15 @@ namespace BusinessProcess.CCC.Baseline
                     .FirstOrDefault();
             if (patientTransfer != null)
             {
-                //patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
+                patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
                 patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
                 patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
                 patientTransfer.MflCode = patientTransferIn.MflCode;
                 patientTransfer.TransferInDate =Convert.ToDateTime(patientTransferIn.TransferInDate);
                 patientTransfer.TreatmentStartDate = patientTransferIn.TreatmentStartDate;
+                patientTransfer.TransferInNotes = patientTransferIn.TransferInNotes;
             }
-            _unitOfWork.PatientTransferInRepository.Update(patientTransferIn);
+            _unitOfWork.PatientTransferInRepository.Update(patientTransfer);
             return Result = _unitOfWork.Complete();
         }
 

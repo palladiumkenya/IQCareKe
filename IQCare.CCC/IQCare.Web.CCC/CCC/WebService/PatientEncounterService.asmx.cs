@@ -30,7 +30,6 @@ namespace IQCare.Web.CCC.WebService
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy, Complaints,TBScreening,NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP,fpMethod.TrimEnd(','), ReasonNotOnFP, CaCx,STIScreening,STIPartnerNotification, adverseEvent);
-            //Session["PatientMasterVisitID"] = val;
             return val;
         }
 
@@ -144,8 +143,29 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPharmacyPrescriptionDetails()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-        [WebMethod]
+            DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["PatientMasterVisitID"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[12] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDrugList(string regimenLine)
         {
@@ -162,7 +182,7 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDrugBatches(string DrugPk)
         {
@@ -180,7 +200,7 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDrugSwitchReasons(string TreatmentPlan)
         {
@@ -205,8 +225,14 @@ namespace IQCare.Web.CCC.WebService
             int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
                 Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
                 Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription);
-            Session["PatientMasterVisitID"] = val;
             return val;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string getDrugFrequencyMultiplier(string freqID)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            return patientEncounter.getPharmacyDrugMultiplier(freqID);
         }
 
     }

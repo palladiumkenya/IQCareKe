@@ -104,6 +104,7 @@
     <Compile Include="Lookup\LookupMaster.cs" />
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
+    <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Lookup\PersonContactLookUp.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />

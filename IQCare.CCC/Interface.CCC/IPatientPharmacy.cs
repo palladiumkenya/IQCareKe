@@ -16,5 +16,6 @@ namespace Interface.CCC
         List<DrugFrequency> getPharmacyDrugFrequency();
         List<DrugBatch> getPharmacyDrugBatch(string DrugPk);
         DataTable getPharmacyDrugSubstitutionInterruptionReason(string TreatmentPlan);
+        DataTable getPharmacyPrescriptionDetails(string patientMasterVisitID);
     }
 }
