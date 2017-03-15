@@ -13,9 +13,9 @@ namespace BusinessProcess.CCC
     public class BPersonLookUpManager : ProcessBase, IPersonLookUpManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
-        public List<PersonLookUp> GetPersonById(int id)
+        public PersonLookUp GetPersonById(int id)
         {
-            return _unitOfWork.PersonLookUpRepository.FindBy(x => x.Id == id).ToList();
+            return _unitOfWork.PersonLookUpRepository.GetById(id);
         }
     }
 }

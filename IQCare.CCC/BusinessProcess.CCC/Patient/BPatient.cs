@@ -33,6 +33,7 @@ namespace BusinessProcess.CCC.Patient
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, patient.CreatedBy);
             ClsUtility.AddExtendedParameters("@Active", SqlDbType.Bit, patient.Active);
             ClsUtility.AddExtendedParameters("@PatientType", SqlDbType.Int, patient.PatientType);
+            ClsUtility.AddExtendedParameters("@DobPrecision", SqlDbType.Bit, patient.DobPrecision);
 
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Patient_Insert", ClsUtility.ObjectEnum.DataTable);
@@ -58,9 +59,24 @@ namespace BusinessProcess.CCC.Patient
             return patientInfo;
         }
 
-        public int UpdatePatient(PatientEntity patient)
+        public int UpdatePatient(PatientEntity patient, int id)
         {
-            throw new NotImplementedException();
+            int patientId = -1;
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, patient.ptn_pk);
+            ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, patient.DateOfBirth);
+            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarBinary, patient.NationalId);
+            ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
+            ClsUtility.AddExtendedParameters("@Id", SqlDbType.Int, id);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Patient_Update", ClsUtility.ObjectEnum.DataTable);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                patientId = Convert.ToInt32(dt.Rows[0]["Id"]);
+            }
+            return patientId;
         }
 
         public List<PatientEntity> CheckPersonEnrolled(int persionId)

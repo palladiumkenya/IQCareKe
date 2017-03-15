@@ -71,6 +71,7 @@
     <Compile Include="Baseline\PatientHivEnrollmentBaseline.cs" />
     <Compile Include="Baseline\PatientTransferIn.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
+    <Compile Include="Consent\PatientConsent.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
     <Compile Include="Encounter\LabDetailsEntity.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />

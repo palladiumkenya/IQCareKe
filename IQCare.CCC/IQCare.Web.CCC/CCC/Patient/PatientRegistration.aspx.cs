@@ -25,6 +25,7 @@ namespace IQCare.Web.CCC.Patient
             Session["PersonTreatmentSupporterId"] = 0;
             Session["PersonContactId"] = 0;
             Session["PersonTreatmentSupporterId"] = 0;
+            Session["DobPrecision"] = false;
 
             if (!IsPostBack)
             {

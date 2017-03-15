@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
 using Entities.CCC.Baseline;
+using Entities.CCC.Consent;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
@@ -135,6 +136,42 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod]
+        public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
+        {
+            // Todo properly save service area. Remove hack
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            int serviceArea = 0;
+            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
+            var sa = areas.FirstOrDefault();
+            if (sa != null)
+            {
+                serviceArea = sa.ItemId;
+            }
+
+            PatientConsent patientConsent = new PatientConsent()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                ServiceAreaId = serviceArea,
+                ConsentType = consentType,
+                ConsentDate = consentDate
+            };
+            try
+            {
+                var consent = new PatientConsentManager();
+                Result = consent.AddPatientConsents(patientConsent);
+                if (Result > 0)
+                {
+                    Msg = "Patient consent added successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
 
         [WebMethod]
         public List<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
@@ -202,6 +239,30 @@ namespace IQCare.Web.CCC.WebService
             return count;
         }
 
+        [WebMethod]
+        public List<PatientConsentDisplay> GetpatientConsent(string patientId)
+        {
+            List<PatientConsentDisplay> consentDisplays = new List<PatientConsentDisplay>();
+            List<PatientConsent> consents = new List<PatientConsent>();
+            try
+            {
+                var patientConsent = new PatientConsentManager();
+                int id = Convert.ToInt32(patientId);
+                consents = patientConsent.GetByPatientId(id);
+                foreach (var consent in consents)
+                {
+                    PatientConsentDisplay consentDisplay = MapConsent(consent);
+                    consentDisplays.Add(consentDisplay);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return consentDisplays;
+        }
+
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -240,6 +301,25 @@ namespace IQCare.Web.CCC.WebService
             return familyMemberDisplay;
         }
 
+        private PatientConsentDisplay MapConsent(PatientConsent pc)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            string consentType = "";
+            List<LookupItemView> type = mgr.GetLookItemByGroup("ConsentType");
+            var s = type.FirstOrDefault(n => n.ItemId == pc.ConsentType);
+            if (s != null)
+            {
+                consentType = s.ItemDisplayName;
+            }
+
+            PatientConsentDisplay patientConsentDisplay = new PatientConsentDisplay()
+            {
+                ConsentDate = pc.ConsentDate,
+                ConsentType = consentType
+            };
+
+            return patientConsentDisplay;
+        }
         private PatientAppointmentDisplay Mapappointments(PatientAppointment a)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -304,5 +384,11 @@ namespace IQCare.Web.CCC.WebService
         public string HivStatusResult { get; set; }
         public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
+    }
+
+    public class PatientConsentDisplay
+    {
+        public string ConsentType { get; set; }
+        public DateTime ConsentDate { get; set; }
     }
 }

@@ -115,7 +115,7 @@ namespace IQCare.CCC.UILogic.Baseline
             foreach (var relationship in personRelationships)
             {
                 var hivTesting = _hivTestingManager.GetAll().FirstOrDefault(n => n.PersonId == relationship.PersonId);
-                PersonLookUp person = personLookUp.GetPersonById(relationship.PersonId).FirstOrDefault();
+                PersonLookUp person = personLookUp.GetPersonById(relationship.PersonId);
                 if (person != null)
                     if (hivTesting != null)
                         familyTesting = new PatientFamilyTesting()

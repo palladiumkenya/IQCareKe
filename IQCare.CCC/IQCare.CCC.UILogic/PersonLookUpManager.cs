@@ -15,7 +15,7 @@ namespace IQCare.CCC.UILogic
         readonly IPersonLookUpManager _personLookUpManager = (IPersonLookUpManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonLookUpManager, BusinessProcess.CCC");
         Utility _utility = new Utility();
 
-        public List<PersonLookUp> GetPersonById(int id)
+        public PersonLookUp GetPersonById(int id)
         {
             return _personLookUpManager.GetPersonById(id);
         }
