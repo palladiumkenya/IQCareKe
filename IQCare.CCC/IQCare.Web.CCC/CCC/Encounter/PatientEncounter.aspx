@@ -1727,7 +1727,7 @@
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
         var genderId = <%=genderID%>;
         var gender = "<%=gender%>";
-        var pmscm = "<%=PMSCM%>"
+        var pmscm = "<%=PMSCM%>";
         var pmscmFlag = "0";
 
         $(document).ready(function () {     

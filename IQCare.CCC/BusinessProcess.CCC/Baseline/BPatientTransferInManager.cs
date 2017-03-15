@@ -51,7 +51,6 @@ namespace BusinessProcess.CCC.Baseline
             var patientTransferIn =
                 _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                     .OrderByDescending(x => x.Id)
-                    .Take(1)
                     .ToList();
             return patientTransferIn;
         }
