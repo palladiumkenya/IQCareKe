@@ -8,6 +8,6 @@ namespace Interface.CCC.Lookup
 {
     public interface IPersonLookUpManager
     {
-        List<PersonLookUp> GetPersonById(int id);
+        PersonLookUp GetPersonById(int id);
     }
 }

@@ -136,6 +136,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack

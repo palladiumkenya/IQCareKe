@@ -1236,6 +1236,7 @@
             console.log(currentDate);
             var estDob = moment(currentDate.toISOString());
             var dob = estDob.add((personAge * -1), 'years');
+            <% Session["DobPrecision"] = "true"; %>;
             return moment(dob).format('DD-MMM-YYYY');
         };
     </script>

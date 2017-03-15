@@ -46,5 +46,10 @@ namespace IQCare.CCC.UILogic
         {
             return _mgr.GetFirstPatientMaritalStatus(personId);
         }
+
+        public PatientMaritalStatus GetCurrentPatientMaritalStatus(int personId)
+        {
+            return _mgr.GetCurrentPatientMaritalStatus(personId);
+        }
     }
 }

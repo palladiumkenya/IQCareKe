@@ -320,6 +320,8 @@
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
             var patientType = '<%=Session["PatientType"]%>';
+            
+
             personDOB = new Date(personDOB);
 
             $('#DateOfBirth').datepicker('setDate', moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
@@ -388,6 +390,7 @@
                     var identifier = $("#<%=IdentifierTypeId.ClientID%>").find(":selected").text();
                     var enrollmentNo = $("#<%=IdentifierValue.ClientID%>").val();
                     var mflcode = $("#txtAppPosID").val();
+                    
 
                     if (identifier == "CCC Registration Number" && (enrollmentNo.length < 5 || enrollmentNo.length > 5)) {
                         toastr.error("error", "Enrollment number should be Five Characters");
@@ -498,8 +501,9 @@
                     var nationalId = $("#NationalId").val();
                     var patientType = $("#PatientType").val();
                     var mflCode = $('#txtAppPosID').val();
+                    var dobPrecision = '<%=Session["DobPrecision"]%>';
 
-                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode);
+                    addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
                 }
             });
 
@@ -536,21 +540,22 @@
                     var nationalId = $("#NationalId").val();
                     var patientType = $("#PatientType").val();
                     var mflCode = $('#txtAppPosID').val();
+                    var dobPrecision = '<%=Session["DobPrecision"]%>';
 
                     console.log(_fp);
-                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode);
+                    addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
                 }
 
                 //addPatient(_fp);
             });
 
-            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode) {
+            function addPatientRegister(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision) {
                 var enrollments = JSON.stringify(_fp);
 
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "'}",
+                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -565,7 +570,7 @@
                 });
             }
 
-            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode) {
+            function addPatient(_fp, entryPointId, enrollmentDate, personDateOfBirth, nationalId, patientType, mflCode, dobPrecision) {
                 var enrollments = JSON.stringify(_fp);
 
                 console.log(enrollments);
@@ -573,7 +578,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/AddPatient",
-                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "'}",
+                    data: "{'facilityId':'" + mflCode + "','enrollment': '" + enrollments + "','entryPointId': '" + entryPointId + "','enrollmentDate':'" + enrollmentDate + "','personDateOfBirth':'" + personDateOfBirth + "', 'nationalId':'" + nationalId + "','patientType':'" + patientType + "','dobPrecision':'" + dobPrecision + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

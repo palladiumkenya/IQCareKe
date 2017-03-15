@@ -13,5 +13,6 @@ namespace Interface.CCC
        int DeletePatientMaritalStatus(int id);
        List<PatientMaritalStatus> GetAllMaritalStatuses(int personId);
        PatientMaritalStatus GetFirstPatientMaritalStatus(int personId);
+       PatientMaritalStatus GetCurrentPatientMaritalStatus(int personId);
    }
 }

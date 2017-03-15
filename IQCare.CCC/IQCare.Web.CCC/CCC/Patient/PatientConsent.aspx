@@ -196,18 +196,19 @@
 
             $("#btnAdd").click(function (e) {
                 if ($('#PatientConsentForm').parsley().validate()) {
-                    var consentType = $("#<%=ConsentType.ClientID%>").val();
+                    var consentTypeId = $("#<%=ConsentType.ClientID%>").val();
+                    var consentType = $("#ConsentType :selected").text();
                     var consentDate = $("#<%=ConsentDate.ClientID%>").val();
                         var table = "<tr><td align='left'></td><td align='left'>" +
                             consentType +
                             "</td><td align='left'>" +
                             consentDate +
                             "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                        $("#tblFamilyTesting>tbody:first").append('' + table + '');
+                        
+                        $("#tblPatientConsent>tbody:first").append('' + table + '');
                         var consent = {
-                            consentType: consentType,
-                            consentDate: consentDate,
-                            lastName: lastName
+                            consentType: consentTypeId,
+                            consentDate: consentDate
                         };
                         patientConsent.push(consent);
                         resetElements();
@@ -255,6 +256,7 @@
             var consentDate = consent.consentDate;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientConsent",
@@ -288,7 +290,7 @@
                             var table = '';
                             itemList.forEach(function (item, i) {
                                 var n = i + 1;
-                                table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.consentType + '</td><td style="text-align: left">' + item.consentDate + '</td></tr>';
+                                table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + item.ConsentType + '</td><td style="text-align: left">' + moment(item.ConsentDate).format('DD-MMM-YYYY') + '</td></tr>';
                             });
                    
                             $('#tablePatientConsent').append(table);

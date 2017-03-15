@@ -28,6 +28,21 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public int UpdatePatient(PatientEntity patient, int id)
+        {
+            int returnValue = 0;
+            try
+            {
+                returnValue = _mgr.UpdatePatient(patient, id);
+                return returnValue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
         public List<PatientEntity> CheckPersonEnrolled(int personId)
         {
             return _mgr.CheckPersonEnrolled(personId);

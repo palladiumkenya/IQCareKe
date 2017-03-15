@@ -9,7 +9,7 @@ namespace Interface.CCC.Patient
     public interface IPatientManager
     {
         int AddPatient(Entities.CCC.Enrollment.PatientEntity patient);
-        int UpdatePatient(Entities.CCC.Enrollment.PatientEntity patient);
+        int UpdatePatient(Entities.CCC.Enrollment.PatientEntity patient, int id);
         int DeletePatient(int id);
         PatientEntity GetPatient(int id);
         List<PatientEntity> CheckPersonEnrolled(int persionId);

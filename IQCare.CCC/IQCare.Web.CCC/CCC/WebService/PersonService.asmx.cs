@@ -217,7 +217,7 @@ namespace IQCare.Web.CCC.WebService
                     var patientLogic = new PatientLookupManager();
                     var personOvcStatusManager = new PersonOvcStatusManager();
                     var personLookUpManager = new PersonLookUpManager();
-                    var Guardian = new List<PersonLookUp>();
+                    PersonLookUp Guardian;
                     var patient = new List<PatientLookup>();
 
                     PersonId = Convert.ToInt32(Session["PersonId"]);
@@ -240,15 +240,15 @@ namespace IQCare.Web.CCC.WebService
                     if (personOVC != null)
                     {
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
-                        if (Guardian.Count > 0)
+                        if (Guardian != null)
                         {
-                            personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId, Guardian[0].Id);
-                            Session["PersonGuardianId"] = Guardian[0].Id;
+                            personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId, Guardian.Id);
+                            Session["PersonGuardianId"] = Guardian.Id;
 
                             Msg = "<p>Updated Guardian Successfully</p>";
 
                             var ovcStatus = new PersonOvcStatusManager();
-                            PatientOVCStatus patientOvcStatus = ovcStatus.GetOvcByPersonAndGuardian(PersonId, Guardian[0].Id);
+                            PatientOVCStatus patientOvcStatus = ovcStatus.GetOvcByPersonAndGuardian(PersonId, Guardian.Id);
                             if (patientOvcStatus != null)
                             {
                                 patientOvcStatus.Orphan = _orphan;
@@ -574,13 +574,13 @@ namespace IQCare.Web.CCC.WebService
                 int guardianId = int.Parse(Session["PersonGuardianId"].ToString());
                 var personLookUpManager = new PersonLookUpManager();
                 var guardian = personLookUpManager.GetPersonById(guardianId);
-                if (guardian.Count > 0)
+                if (guardian!=null)
                 {
                     PatientDetails patientDetails = new PatientDetails();
-                    patientDetails.FirstName = _utility.Decrypt(guardian[0].FirstName);
-                    patientDetails.MiddleName = _utility.Decrypt(guardian[0].MiddleName);
-                    patientDetails.LastName = _utility.Decrypt(guardian[0].LastName);
-                    patientDetails.Gender = guardian[0].Sex;
+                    patientDetails.FirstName = _utility.Decrypt(guardian.FirstName);
+                    patientDetails.MiddleName = _utility.Decrypt(guardian.MiddleName);
+                    patientDetails.LastName = _utility.Decrypt(guardian.LastName);
+                    patientDetails.Gender = guardian.Sex;
 
 
                     return new JavaScriptSerializer().Serialize(patientDetails);
@@ -605,8 +605,8 @@ namespace IQCare.Web.CCC.WebService
                 var personLookUpManager = new PersonLookUpManager();
                 var personMaritalStatus = new PersonMaritalStatusManager();
                 var lookupLogic = new LookupLogic();
-                var Guardian = new List<PersonLookUp>();
-                var supporter = new List<PersonLookUp>();
+                PersonLookUp Guardian = new PersonLookUp();
+                PersonLookUp supporter = new PersonLookUp();
                 var maritalsStatus = new List<PatientMaritalStatus>();
                 var personLocation = new PersonLocationManager();
                 var personContacts = new List<PersonContactLookUp>();
@@ -661,14 +661,14 @@ namespace IQCare.Web.CCC.WebService
                     if (maritalsStatus.Count > 0)
                         patientDetails.MaritalStatusId = maritalsStatus[0].MaritalStatusId;
 
-                    if (Guardian.Count > 0)
+                    if (Guardian !=null)
                     {
-                        patientDetails.GurdianFNames = _utility.Decrypt(Guardian[0].FirstName);
-                        patientDetails.GurdianMName = _utility.Decrypt(Guardian[0].MiddleName);
-                        patientDetails.GurdianLName = _utility.Decrypt(Guardian[0].LastName);
+                        patientDetails.GurdianFNames = _utility.Decrypt(Guardian.FirstName);
+                        patientDetails.GurdianMName = _utility.Decrypt(Guardian.MiddleName);
+                        patientDetails.GurdianLName = _utility.Decrypt(Guardian.LastName);
 
-                        patientDetails.GuardianGender = Guardian[0].Sex;
-                        patientDetails.GuardianId = Guardian[0].Id;
+                        patientDetails.GuardianGender = Guardian.Sex;
+                        patientDetails.GuardianId = Guardian.Id;
                     }
 
                     //Location
@@ -695,14 +695,14 @@ namespace IQCare.Web.CCC.WebService
                     if (patientTreatmentSupporter.Count > 0)
                     {
                         supporter = personLookUpManager.GetPersonById(patientTreatmentSupporter[0].SupporterId);
-                        if (supporter.Count > 0)
+                        if (supporter != null)
                         {
-                            patientDetails.tsFname = _utility.Decrypt(supporter[0].FirstName);
-                            patientDetails.tsMiddleName = _utility.Decrypt(supporter[0].MiddleName);
-                            patientDetails.tsLastName = _utility.Decrypt(supporter[0].LastName);
-                            patientDetails.tsGender = supporter[0].Sex;
+                            patientDetails.tsFname = _utility.Decrypt(supporter.FirstName);
+                            patientDetails.tsMiddleName = _utility.Decrypt(supporter.MiddleName);
+                            patientDetails.tsLastName = _utility.Decrypt(supporter.LastName);
+                            patientDetails.tsGender = supporter.Sex;
                             patientDetails.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
-                            patientDetails.PatientTreatmentSupporterId = supporter[0].Id;
+                            patientDetails.PatientTreatmentSupporterId = supporter.Id;
                         }
                         
                     }
