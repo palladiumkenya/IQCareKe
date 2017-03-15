@@ -1453,7 +1453,7 @@
                                                              
                                                                   <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                                                   <div class="col-md-12  pull-right">
-                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="drugList();"/>
+                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" />
                                                                   </div>
                                                               
                                                              </div>  
@@ -2736,7 +2736,7 @@
                 var selectedValues = '';
                 for (var i = 0; i < x.options.length; i++) {
                     if(x.options[i].selected){
-                        //alert(x.options[i].value);
+                        //alert(selectedValues);
                         selectedValues += x.options[i].value + ',';
                     }
                 }
