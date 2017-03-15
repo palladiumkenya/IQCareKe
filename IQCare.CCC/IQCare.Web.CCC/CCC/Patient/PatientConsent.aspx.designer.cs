@@ -7,90 +7,99 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC {
+namespace IQCare.Web.CCC.Patient {
     
     
-    public partial class ucPatientVitalsExtruder {
+    public partial class PatientConsent {
         
         /// <summary>
-        /// lblVitalsDate control.
+        /// PatientSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVitalsDate;
+        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
         
         /// <summary>
-        /// vitalHeight control.
+        /// ConsentType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalHeight;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect ConsentType;
         
         /// <summary>
-        /// vitalsWeight control.
+        /// ConsentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsWeight;
+        protected global::System.Web.UI.WebControls.TextBox ConsentDate;
         
         /// <summary>
-        /// vitalsCircumference control.
+        /// btnAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsCircumference;
+        protected global::System.Web.UI.WebControls.LinkButton btnAdd;
         
         /// <summary>
-        /// vitalsMUAC control.
+        /// tblPatientConsent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalsMUAC;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblPatientConsent;
         
         /// <summary>
-        /// vitalBloodPressure control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalBloodPressure;
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
         
         /// <summary>
-        /// vitalTemperature control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalTemperature;
+        protected global::System.Web.UI.WebControls.LinkButton btnReset;
         
         /// <summary>
-        /// vitalRespiratoryRate control.
+        /// btnClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label vitalRespiratoryRate;
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
         
         /// <summary>
-        /// lblOxygenSaturation control.
+        /// tablePatientConsent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOxygenSaturation;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tablePatientConsent;
+        
+        /// <summary>
+        /// PatientConsentAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PatientConsentAdd;
     }
 }

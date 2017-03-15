@@ -148,7 +148,7 @@
                                     <span class="fa fa-bar-chart fa-2x pull-left text-warning"></span> <strong class="text-warning">Treatment Baseline</strong>
                                 </a>
                               <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>' class="list-group-item" id="menuFamilyTesting">
-                                    <span class="fa fa-users fa-2x pull-left text-warning"></span><strong class="text-warning"> Family Testing </strong><span class="badge">0</span>
+                                    <span class="fa fa-users fa-2x pull-left text-warning"></span><strong class="text-warning"> Family Testing </strong><span class="badge"><asp:Label ID="lblFamilyTesting" runat="server">0</asp:Label></span>
                                 </a>
                               <a href='<%=ResolveClientUrl("~/CCC/OneTimeEvents/OneTimeEventsTracker.aspx") %>' class="list-group-item" id="MenuOneTimeEventsTracker">
                                     <span class="fa fa-cubes fa-2x pull-left text-warning"></span> <strong class="text-warning">One Time Events Tracker </strong>
@@ -190,11 +190,11 @@
                                     <span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
                                 </a>-->
                                 <a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
-                                    <span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info"> Patient Appointments </strong><span class="badge">0</span>
+                                    <span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
                                 </a>
                               
-                                <a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="">
-                                    <span class="fa"></span><strong class="text-info">Care Ended</strong><span class="badge">0</span>
+                                <a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="menuPatientCareEnded">
+                                    <span class="fa fa-user-secret fa-2x pull-left text-danger"></span><strong class="text-info">Care Ended</strong>
                                 </a>
 
                           </div>
@@ -338,6 +338,7 @@
 
                // $("#menuPatientHome").hide();
                 $("#menuPatientAppointments").hide();
+                $("#menuPatientCareEnded").hide();
                 $("#menuScheduleAppointments").hide();
                 $("#menuCaptureVitals").hide();
                 $("#menuNewEncounter").hide();
@@ -356,6 +357,7 @@
                 $("#menuNewEncounter").hide();
                 $("#menuPatientHome").show();
                 $("#menuPatientAppointments").show();
+                $("#menuPatientCareEnded").show();
                 $("#menuScheduleAppointments").show();
                 $("#menuCaptureVitals").show();
                 $("#menuNewEncounter").show();

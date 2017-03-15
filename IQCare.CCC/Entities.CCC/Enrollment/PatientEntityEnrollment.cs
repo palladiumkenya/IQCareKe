@@ -20,5 +20,6 @@ namespace Entities.CCC.Enrollment
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentStatusId { get; set; }
         public bool TransferIn { get; set; }
+        public bool CareEnded { get; set; }
     }
 }

@@ -46,12 +46,12 @@ namespace IQCare.CCC.UILogic
             return jsonObject;
         }
 
-        /* pw getlablist implementation   */
+       
         public static string GetLookupLabsListJson()
         {
             string jsonObject;
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            List<LookupLabs> lookuplabsList = lookupManager.GetLookupLabs();   //Interface ==>similar declaration
+            List<LookupLabs> lookuplabsList = lookupManager.GetLookupLabs();  
 
             if (lookuplabsList != null && lookuplabsList.Count > 0)
             {

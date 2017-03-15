@@ -20,10 +20,14 @@ namespace BusinessProcess.CCC
             return _result;
         }
 
-        public PatientVital GetPatientVitals(int id)
+        public PatientVital GetPatientVitals(int patientId)
         {
-            PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
-            return vital;
+            var vitals =
+         _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+             .OrderBy(x => x.Id)
+             .FirstOrDefault()
+            ;
+            return vitals;
         }
 
         public void DeletePatientVitals(int id)
@@ -35,7 +39,7 @@ namespace BusinessProcess.CCC
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            var vitals=new PatientVital()
+            var vitals = new PatientVital()
             {
                 Temperature = p.Temperature,
                 RespiratoryRate = p.RespiratoryRate,
@@ -63,7 +67,7 @@ namespace BusinessProcess.CCC
         {
             var vitals =
                     _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                        .OrderBy(x => x.Id).Take(1)
+                        .OrderBy(x => x.Id)
                         .ToList()
                 ;
             return vitals;

@@ -54,6 +54,7 @@
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
+    <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
@@ -101,6 +102,7 @@
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
+    <Content Include="CCC\WebService\PatientVitals.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\TestWebservice.asmx" />
@@ -186,6 +188,13 @@
     </Compile>
     <Compile Include="CCC\Patient\PatientCareEnded.aspx.designer.cs">
       <DependentUpon>PatientCareEnded.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientConsent.aspx.cs">
+      <DependentUpon>PatientConsent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientConsent.aspx.designer.cs">
+      <DependentUpon>PatientConsent.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
@@ -319,6 +328,9 @@
       <DependentUpon>PatientService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PatientVitals.asmx.cs">
+      <DependentUpon>PatientVitals.asmx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
     </Compile>
@@ -389,7 +401,7 @@
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\IQCare.CCC.UILogic\obj\Debug\IQCare.CCC.UILogic.dll</HintPath>
+      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -446,7 +458,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>23039</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

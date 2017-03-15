@@ -662,14 +662,15 @@
             $('#Stage3').datepicker();
             $('#SexPartner').datepicker();*/
 
-            /*$('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
+            $('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
                 if ($('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val() == "CompletionYes") {
-                    $("#ISCompletionDate").show();
+                    //$("#ISCompletionDate").show();
+                    $("#INHCompletionDate").val('');
                 } else {
-                    $("#ISCompletionDate").hide();
+                    //$("#ISCompletionDate").hide();
                     $("#INHCompletionDate").val('');
                 }
-            });*/
+            });
 
             var Age = $("#Age").val();
             if (Age > 14 || Age < 6) {
@@ -691,6 +692,7 @@
                 $("#VaccineType").attr('disabled', 'disbaled');
                 $("#VaccineStage").attr('disabled', 'disbaled');
                 $("#btnAdd").attr('disabled', 'disbaled');
+                $("#btnAdd").addClass("noneevents");
             }
 
             /*Lookup vaccines*/

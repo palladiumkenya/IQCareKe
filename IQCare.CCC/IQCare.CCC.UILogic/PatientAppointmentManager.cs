@@ -61,6 +61,12 @@ namespace IQCare.CCC.UILogic
             return appointment;
         }
 
+        public int GetCountByPatientId(int patientId)
+        {
+            var appointment = _appointment.GetByPatientId(patientId);
+            return appointment.Count;
+        }
+
         public List<PatientAppointment> GetByDate(DateTime date)
         {
             var appointment = _appointment.GetByDate(date);

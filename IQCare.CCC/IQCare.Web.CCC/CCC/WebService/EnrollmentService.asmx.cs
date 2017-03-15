@@ -8,14 +8,23 @@ using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
+using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Enrollment;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
+using Microsoft.JScript;
+using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
 {
+    public class CareEndingDetails
+    {
+        public DateTime ExitDate { get; set; }
+        public string ExitReason { get; set; }
+        public bool Status { get; set; }
+    }
     public class ListEnrollment
     {
         public string enrollmentIdentifier { get; set; }
@@ -250,6 +259,71 @@ namespace IQCare.Web.CCC.WebService
             }
 
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string EndPatientCare(string exitDate, int exitReason, string careEndingNotes)
+        {
+            try
+            {
+                PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
+                PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
+
+                patientId = int.Parse(Session["PatientId"].ToString());
+                patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
+                var enrollments = enrollmentManager.GetPatientEnrollmentByPatientId(patientId);
+                if (enrollments.Count > 0)
+                    patientEnrollmentId = enrollments[0].Id;
+
+                if (patientEnrollmentId > 0)
+                {
+                    careEndingManager.AddPatientCareEnding(patientId, patientMasterVisitId, patientEnrollmentId,
+                        exitReason,
+                        DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
+
+                    PatientEntityEnrollment entityEnrollment =
+                        enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
+                    entityEnrollment.CareEnded = true;
+                    enrollmentManager.updatePatientEnrollment(entityEnrollment);
+
+                    Msg = "Patient has been successfully care ended";
+                }
+                else
+                {
+                    SoapException b = new SoapException();
+                    SoapException e = (SoapException)Activator.CreateInstance(b.GetType(), "Patient is already care ended", b);
+                    Msg = e.Message;
+                }
+            }
+            catch (SoapException e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public List<CareEndingDetails> GetPatientCareEnded()
+        {
+            PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
+            List<CareEndingDetails> careEndingDetailses = new List<CareEndingDetails>();
+
+            patientId = int.Parse(Session["PatientId"].ToString());
+            var careEndings = careEndingManager.GetPatientCareEndings(patientId);
+            if (careEndings.Count > 0)
+            {
+                foreach (var item in careEndings)
+                {
+                    CareEndingDetails careEndingDetails = new CareEndingDetails();
+                    careEndingDetails.ExitDate = item.ExitDate;
+                    careEndingDetails.ExitReason = LookupLogic.GetLookupNameById(item.ExitReason);
+                    careEndingDetails.Status = item.Active;
+
+                    careEndingDetailses.Add(careEndingDetails);
+                }
+                
+            }
+            return careEndingDetailses;
         }
     }
 }

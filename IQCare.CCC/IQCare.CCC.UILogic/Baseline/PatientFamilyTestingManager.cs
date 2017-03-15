@@ -138,5 +138,13 @@ namespace IQCare.CCC.UILogic.Baseline
             }
             return patientFamilyTestings;
         }
+
+        public int GetPatienFamilyCount(int patientId)
+        {
+            List<PatientFamilyTesting> patientFamilyTestings = new List<PatientFamilyTesting>();
+            int personRelationshipsCount = _personRelationshipManager.GetAllPersonRelationship(patientId).Count;
+            
+            return personRelationshipsCount;
+        }
     }
 }

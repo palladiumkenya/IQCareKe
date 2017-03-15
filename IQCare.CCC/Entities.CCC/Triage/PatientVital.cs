@@ -2,15 +2,18 @@
 using Entities.CCC.Visit;
 using Entities.Common;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Triage 
 {
     [Serializable]
     [Table("PatientVitals")]
-    public class PatientVital  : BaseObject
+    public class PatientVital  : BaseEntity
     {
         [Column]
+        [Key]
+        public int Id { get; set; }
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
