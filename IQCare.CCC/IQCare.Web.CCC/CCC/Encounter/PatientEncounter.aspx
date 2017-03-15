@@ -2364,6 +2364,7 @@
                     if (index > -1) {
                         chronicIllnessList.splice(index, 1);
                     }
+
                 });
 
             ////dtlVaccines
