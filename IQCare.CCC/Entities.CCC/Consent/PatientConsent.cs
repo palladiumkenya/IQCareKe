@@ -1,9 +1,12 @@
 ﻿using Entities.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.CCC.Consent
 {
+    [Serializable]
+    [Table("PatientConsent")]
     public class PatientConsent : BaseEntity
     {
         [Key]
