@@ -73,7 +73,7 @@
                                         <div class="col-md-4">
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-12">
-                                                    <label class="control-label  pull-left">Visit Date</label>
+                                                    <label class="control-label  pull-left text-primary">*Visit Date</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="datepicker" id="DateOfVisit">
@@ -175,7 +175,7 @@
                                         <div class="col-md-4">
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-12">
-                                                    <label class="control-label  pull-left">Visit Scheduled?</label>
+                                                    <label class="control-label  pull-left text-primary">*Visit Scheduled?</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:RadioButtonList ID="rblVisitScheduled" runat="server" RepeatDirection="Horizontal" data-parsley-mincheck="1">
@@ -196,7 +196,7 @@
                                         <div class="col-md-4">
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-12">
-                                                    <label class="control-label  pull-left">Visit By</label>
+                                                    <label class="control-label  pull-left text-primary">*Visit By</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" data-parsley-min-message="Value Required" />
@@ -219,27 +219,27 @@
                                                 <%--<div class="col-md-12"><h1 class="text-primary pull-left"><small>Complaints & History of Complaints</small></h1></div>
                                                          <div class="col-md-12"><hr /></div>--%>
 
-                                                <label class="control-label pull-left" for="complaints">Complaints Today</label>
-                                                <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4"></textarea>
+                                                <label class="control-label pull-left text-primary" for="complaints">*Complaints Today</label>
+                                                <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4" data-parsley-required="true"></textarea>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <%--<div class="col-md-12"><small class="muted pull-left"><strong>TB Screening and Nutrition Status</strong></small></div><div class="col-md-12"><hr /> </div> --%>
                                                 <div class="col-md-12  form-group">
                                                     <div class="col-md-6">
-                                                        <label class="control-label pull-left input-sm" for="tbscreeningstatus">TB Screening</label>
+                                                        <label class="control-label pull-left input-sm text-primary" for="tbscreeningstatus">*TB Screening</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" />
+                                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-6">
-                                                        <label class="control-label pull-left input-sm" for="nutritionscreeningstatus">Nutrition Status</label>
+                                                        <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" />
+                                                        <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
 
                                                     </div>
                                                 </div>
@@ -735,7 +735,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="datepicker fuelux" id="vaccineDate">
                                                                     <div class="input-group">
-                                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" clientidmode="Static" />
+                                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" ClientIDMode="Static" />
                                                                         <div class="input-group-btn">
                                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -2336,7 +2336,13 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
+
+                    var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        reactionEventList.splice(index, 1);
+                    }
+
                     //$(this).closest('tr').remove();
                     //var y = $(this).closest('tr').find('td').eq(0).html();
                     //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
@@ -2353,6 +2359,11 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = chronicIllnessList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        chronicIllnessList.splice(index, 1);
+                    }
                 });
 
             ////dtlVaccines
@@ -2363,6 +2374,16 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = vaccineList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        vaccineList.splice(index, 1);
+                    }
+
+                    var index1 = vaccineStageList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                    if (index1 > -1) {
+                        vaccineStageList.splice(index1, 1);
+                    }
                    
                 });
 
@@ -2375,6 +2396,11 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = physicalExamList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                    if (index > -1) {
+                        physicalExamList.splice(index, 1);
+                    }
                     
                 });
 
@@ -2386,6 +2412,11 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        diagnosisList.splice(index, 1);
+                    }
                     
                 });
             
@@ -2447,18 +2478,6 @@
                                             },
                                             2000);
                                     });
-                            //if ($("#datastep2").parsley().validate()) {
-
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    if (totalError > 0) {
-                            //        $('.bs-callout-danger').toggleClass('hidden', f);
-                            //    }
-                            //    evt.preventDefault();
-                            //}
-                            ////var ok4 = $('.parsley-error').length === 0;
-                            ////$('.bs-callout-info').toggleClass('hidden', !ok4);
                         }
                     })
                     .on("changed.fu.wizard",

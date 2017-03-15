@@ -40,7 +40,7 @@ namespace IQCare.Web.CCC.Encounter
            // PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
-                visitId = int.Parse(Request.QueryString["visitId"].ToString());
+                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
