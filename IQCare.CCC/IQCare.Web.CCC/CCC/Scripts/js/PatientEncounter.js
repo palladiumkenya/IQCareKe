@@ -276,16 +276,16 @@ function EnableDisableEDD()
     
     if (pregStatus != "Pregnant")
     {
-        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = "";
-        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").setAttribute('disabled', true);
+        document.getElementById("ExpectedDateOfChildBirth").value = "";
+        document.getElementById("ExpectedDateOfChildBirth").setAttribute('disabled', true);
     }
     else {
         var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
         var lmpJSDate = new Date(lmpDate);
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  
-        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").removeAttribute('disabled');
-        document.getElementById("ctl00_IQCareContentPlaceHolder_ExpectedDateOfChildBirth").value = DateFormat(edd);
+        document.getElementById("ExpectedDateOfChildBirth").removeAttribute('disabled');
+        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat(edd);
     }
     
 }

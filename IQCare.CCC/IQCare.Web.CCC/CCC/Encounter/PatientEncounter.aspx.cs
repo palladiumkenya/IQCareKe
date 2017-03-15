@@ -85,7 +85,6 @@ namespace IQCare.Web.CCC.Encounter
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
 
-
             }
 
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
