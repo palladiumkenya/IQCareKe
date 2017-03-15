@@ -57,7 +57,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType)
+        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType, string dobPrecision)
         {
             try
             {
@@ -101,7 +101,8 @@ namespace IQCare.Web.CCC.WebService
                         Active = true,
                         CreatedBy = userId,
                         CreateDate = DateTime.Now,
-                        DeleteFlag = false
+                        DeleteFlag = false,
+                        DobPrecision = bool.Parse(dobPrecision)
                     };
 
                     patientId = patientManager.AddPatient(patient);
