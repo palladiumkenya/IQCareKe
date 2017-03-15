@@ -70,6 +70,7 @@
     <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
+    <Compile Include="IPatientConsent.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />
     <Compile Include="IPatientOVCStatusmanager.cs" />
     <Compile Include="IPatientPharmacy.cs" />

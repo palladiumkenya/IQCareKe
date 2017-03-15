@@ -599,7 +599,6 @@
             });
 
             $("#btnSave").click(function () {
-                debugger;
                 if (familyMembers.length < 1) {
                     toastr.error("error", "Please insert at least One(1) family member");
                     return false;
@@ -650,7 +649,6 @@
             var cccReferalNumber = testing.cccReferalNumber;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientFamilyTesting",

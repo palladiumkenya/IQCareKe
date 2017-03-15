@@ -340,7 +340,7 @@
                                                                             <div class="input-group">
                                                                                 <input class="form-control input-sm" id="lmp" type="text" runat="server" />
                                                                                 <div class="input-group-btn">
-                                                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                                    <button id="btnFemaleLMP" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                                                         <span class="sr-only">Toggle Calendar</span>
                                                                                     </button>
@@ -444,9 +444,9 @@
                                                                     <div class="col-md-12">
                                                                         <div class="datepicker fuelux" id="EDCD">
                                                                             <div class="input-group">
-                                                                                <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" />
+                                                                                <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" ClientIDMode="Static" />
                                                                                 <div class="input-group-btn">
-                                                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                                    <button id="btnEDD" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                                                         <span class="sr-only">Toggle Calendar</span>
                                                                                     </button>
@@ -568,7 +568,8 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                         <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />
+                                                                         <%--<asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />--%>
                                                                        
                                                                     </div>
                                                                 </div>
@@ -1453,7 +1454,7 @@
                                                              
                                                                   <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                                                   <div class="col-md-12  pull-right">
-                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="drugList();"/>
+                                                                       <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" />
                                                                   </div>
                                                               
                                                              </div>  
@@ -2178,16 +2179,21 @@
                 $("#cacxscreening").val("");
 
                 $("#<%=lmp.ClientID%>").prop('disabled', true);
+                $("#btnFemaleLMP").prop('disabled', true);
                 $("#FemaleLMP").addClass('noevents');
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+                $("#btnEDD").prop('disabled', true);
                 $("#EDCD").addClass('noevents');
-
+                $("#<%=rblANCProfile.ClientID %>").find('input').prop('disabled', true);
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
             } else {
                 $("#<%=lmp.ClientID%>").prop('disabled', false);
+                $("#btnFemaleLMP").prop('disabled', false);
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+                $("#btnEDD").prop('disabled', false);
+                $("#<%=rblANCProfile.ClientID %>").find('input').prop('disabled', false);
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
             }
@@ -2511,7 +2517,7 @@
 
                     //window.ParsleyUI.addError(rblVS, "Visit Scheduled", "required");
                 }
-           
+                
                 if (ANCProfile == undefined)
                 {
                     ANCProfile = "99";
@@ -2525,14 +2531,13 @@
                 var LMP = $("#<%=lmp.ClientID%>").val();
                 var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                //var ANCProfile = $('input[name="ANCProfile"]:checked').val();
                 var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                //var FPMethod = $("#<%=fpMethod.ClientID%>").find(":selected").val();
-                var FPMethod = $('#fpMethod').val();
+                var FPMethod = getSelectedItemsList('fpMethod');
+                var ReasonNotOnFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
                 var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
                 var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
                 var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
-
+                
                 ///////////////////////////////////////////////////////
                 var rowCount = $('#dtlAdverseEvents tbody tr').length;
                 var adverseEventsArray = new Array();
@@ -2553,7 +2558,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + ReasonNotOnFP + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
@@ -2738,7 +2743,7 @@
                 var selectedValues = '';
                 for (var i = 0; i < x.options.length; i++) {
                     if(x.options[i].selected){
-                        //alert(x.options[i].value);
+                        //alert(selectedValues);
                         selectedValues += x.options[i].value + ',';
                     }
                 }
