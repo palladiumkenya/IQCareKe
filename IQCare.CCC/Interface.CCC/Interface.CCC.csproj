@@ -67,6 +67,7 @@
     <Compile Include="Enrollment\IPatientEnrollmentManager.cs" />
     <Compile Include="Enrollment\IPatientEntryPointManager.cs" />
     <Compile Include="Enrollment\IPatientIdentifierManager.cs" />
+    <Compile Include="IMst_PatientInsert.cs" />
     <Compile Include="IPatientAppointment.cs" />
     <Compile Include="Baseline\IPatientHivTestingManager.cs" />
     <Compile Include="IPatientMaritalStatusManager.cs" />

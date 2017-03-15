@@ -291,5 +291,19 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
+
+        public LookupFacility GetFacility()
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetFacility();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
