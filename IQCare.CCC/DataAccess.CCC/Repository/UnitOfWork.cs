@@ -83,6 +83,9 @@ namespace DataAccess.CCC.Repository
         /*Encounter*/
         private IPatientCareEndingRepository _patientCareEndingRepository;
 
+        /*Consent*/
+        private IPatientConsentRepository _patientConsentRepository;
+
         public UnitOfWork(BaseContext context)
         {
             if (context == null)
@@ -325,6 +328,11 @@ namespace DataAccess.CCC.Repository
             get { return _patientBaselineLookupRepository ?? (_patientBaselineLookupRepository = new PatientBaselineLookupRepository((LookupContext)_context)); }
         }
 
+        public IPatientConsentRepository PatientConsentRepository
+        {
+            get {return  _patientConsentRepository ?? (_patientConsentRepository = new PatientConsentRepository((GreencardContext)_context));}
+        }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -334,7 +342,5 @@ namespace DataAccess.CCC.Repository
         {
             _context.Dispose();
         }
-
-        
     }
 }
