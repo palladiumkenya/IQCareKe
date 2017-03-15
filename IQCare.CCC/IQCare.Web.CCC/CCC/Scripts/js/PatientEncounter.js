@@ -284,7 +284,7 @@ function EnableDisableEDD()
         document.getElementById("ExpectedDateOfChildBirth").setAttribute('disabled', true);
     }
     else {
-        var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
+        var lmpDate = document.getElementById("lmp").value;
         var lmpJSDate = new Date(lmpDate);
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  

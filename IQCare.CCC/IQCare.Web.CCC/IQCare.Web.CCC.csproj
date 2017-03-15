@@ -89,10 +89,12 @@
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
+    <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
@@ -259,6 +261,13 @@
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalEncounter.ascx.cs">
+      <DependentUpon>ucPatientClinicalEncounter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalEncounter.ascx.designer.cs">
+      <DependentUpon>ucPatientClinicalEncounter.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucPatientDetails.ascx.cs">
       <DependentUpon>ucPatientDetails.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -286,6 +295,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientVitalsExtruder.ascx.designer.cs">
       <DependentUpon>ucPatientVitalsExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.cs">
+      <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.designer.cs">
+      <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucVisitDetails.ascx.cs">
       <DependentUpon>ucVisitDetails.ascx</DependentUpon>
