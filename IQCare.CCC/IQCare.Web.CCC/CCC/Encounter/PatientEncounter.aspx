@@ -568,7 +568,8 @@
                                                                         <label class="control-label  pull-left">FP Method</label>
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                         <asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                                        <asp:ListBox ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" runat="server"></asp:ListBox>
+                                                                         <%--<asp:DropDownList runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" />--%>
                                                                        
                                                                     </div>
                                                                 </div>
