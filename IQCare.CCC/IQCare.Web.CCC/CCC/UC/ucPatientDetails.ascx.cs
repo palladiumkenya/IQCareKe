@@ -36,6 +36,7 @@ namespace IQCare.Web.CCC.UC
             foreach (var x in patientLookups)
             {
                 DoB = Convert.ToDateTime(x.DateOfBirth);
+                Session["DateOfBirth"] = x.DateOfBirth.ToString("dd-MMM-yyyy");
 
                 lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.LastName)+"</i></strong>";
                 if (x.Active)

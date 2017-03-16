@@ -41,10 +41,10 @@
         <ul class="nav nav-tabs">
 
             <li class="active"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
-
+            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
             <li class="disabled"><a data-toggle="tab" href="#Diagnosis">Diagnosis & ARV HIstory </a></li>
         
-            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
+
         </ul>
     
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
@@ -53,7 +53,7 @@
                  <div id="EntryPoint" class="tab-pane fade in active">
                      <div class="col-md-12 col-xs-12">
                          
-                             <div class="col-md-4 col-xs-4 col-sm-4">
+                          <div class="col-md-4 col-xs-4 col-sm-4">
                                <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>TransferIn Status</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
@@ -138,10 +138,62 @@
 
                      </div>
                  </div>
+                 <div id="Baseline" class="tab-pane fade">
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                         <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>Baseline Assessment Summary</h6></label></div>
+                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                              <div class="col-md-12 form-group">
+                                   <div class="col-md-12"><label class="control-lable pull-left">HBV Infected</label></div>
+                                  <div class="col-md-12">
+                                       <div class="col-md-6">
+                                           <div class="" id="lblHbvInfectedYes">
+                                               <label class="checkbox-custom" data-initialize="checkbox">
+                                                <input class="sr-only" type="checkbox" value="">
+                                                <span class="checkbox-label"><b>Y</b></span>
+                                               </label>
+                                           </div>
+                                       </div>
+                                      <div class="col-md-6">
+                                          <div class="checkbox" id="hbvInfectedNo">
+                                              <label class="checkbox-custom" data-initialize="checkbox">
+                                                <input class="sr-only" type="checkbox" value="">
+                                                <span class="checkbox-label"><b>N</b></span>
+                                              </label>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+                                 
+                               <div class="col-md-12">
+                                   <div class="col-md-6"><label class="control-lable pull-left">TransferIn Date :</label></div>
+                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="Label2" ClientIDMode="Static"></asp:Label></div>
+                              </div>
+                              
+                             <div class="col-md-12">
+                                   <div class="col-md-6"><label class="control-lable pull-left">Treatment Start:</label></div>
+                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary" ID="Label3" ClientIDMode="Static"></asp:Label></div>
+                              </div>
+                              
+                              <div class="col-md-12">
+                                   <div class="col-md-4"><label class="control-lable pull-left">Regimen : </label></div>
+                                  <div class="col-md-8"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="Label4" ClientIDMode="Static"></asp:Label></div>
+                              </div>
+                            
+                              <div class="col-md-12">
+                                   <div class="col-md-5"><label class="control-lable pull-left">Facility From :</label></div>
+                                  <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="Label5" ClientIDMode="Static"></asp:Label></div>
+                              </div>
+
+                              
+
+                          </div>
+                      
+                 </div> <!-- diagnosis -->  
+
                  <div id="Diagnosis" class="tab-pane fade">
                      
-                 </div>
-                 <div id="Baseline" class="tab-pane fade"></div>       
+                 </div>    
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->
 

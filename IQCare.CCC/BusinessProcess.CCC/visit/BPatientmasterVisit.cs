@@ -56,6 +56,7 @@ namespace BusinessProcess.CCC.visit
 
         public int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
         {
+            PatientMasterVisitAutoClosure(patientId);
 
             var visitId =
                 _unitOfWork.PatientMasterVisitRepository.FindBy(
@@ -110,6 +111,30 @@ namespace BusinessProcess.CCC.visit
                 Result = _unitOfWork.Complete();
             }
             return Result;
+
+        }
+
+        public void PatientMasterVisitAutoClosure(int patientId)
+        {
+            List<PatientMasterVisit> patientMasterVisits =
+                _unitOfWork.PatientMasterVisitRepository.FindBy(x =>x.PatientId==patientId & x.End == null & DbFunctions.DiffHours(x.Start, DateTime.Now) > 24).OrderBy(x => x.Id).ToList();
+
+            if (patientMasterVisits.Count > 0)
+            {
+                foreach (var item in patientMasterVisits)
+                {
+                    item.Status = 3;
+                    item.End = DateTime.Now;
+                    item.Active = true;
+                    item.VisitDate = null;
+                    item.VisitScheduled = null;
+                    item.VisitBy = null;
+                    item.VisitType = null;
+
+                    _unitOfWork.PatientMasterVisitRepository.Update(item);
+                    Result = _unitOfWork.Complete();
+                }
+            }
 
         }
     }

@@ -35,7 +35,12 @@ namespace IQCare.Web.CCC.OneTimeEvents
         protected int Age
         {
             get { return Convert.ToInt32(Session["Age"]); }
-        } 
+        }
+
+        protected DateTime DateOfBirth
+        {
+            get { return Convert.ToDateTime(Session["DateOfBirth"]); }
+        }
        
         protected void Page_Load(object sender, EventArgs e)
         {

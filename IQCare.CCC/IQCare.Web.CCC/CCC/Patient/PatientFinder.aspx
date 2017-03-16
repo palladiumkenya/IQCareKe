@@ -168,6 +168,15 @@
                 window.location.href="<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
             });
 
+            $("#btnReset").click(function() {
+
+                $("#<%=PatientNumber.ClientID%>").val('');
+                $("#<%=FirstName.ClientID%>").val('');
+                $("#<%=MiddleName.ClientID%>").val('');
+                $("#<%=LastName.ClientID%>").val('');
+                $("#<%=Facility.ClientID%>").val('');
+            });
+
             $("#PatientSearch").hide();
             $("#infoGrid").hide();
 
