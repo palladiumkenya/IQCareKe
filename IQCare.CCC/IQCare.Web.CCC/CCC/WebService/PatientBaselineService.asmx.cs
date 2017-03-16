@@ -241,5 +241,21 @@ namespace IQCare.Web.CCC.WebService
             }
             return _jsonMessage;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientBaselineInfo(int patientId)
+        {
+            try
+            {
+                var patientBaseline = new PatientBaselineLookupManager();
+                _jsonMessage = JsonConvert.SerializeObject(patientBaseline.GetPatientBaseline(patientId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
     }
 }

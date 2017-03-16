@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.UC
         {
 
             var patientVitals = new PatientVitalsManager();
-            PatientVital patientTriage = patientVitals.GetPatientVitals(PatientId);
+            PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
             if (patientTriage != null)
             {
                 lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate;
@@ -32,7 +32,7 @@ namespace IQCare.Web.CCC.UC
                                           patientTriage.BpSystolic.ToString();
                 vitalTemperature.Text = patientTriage.Temperature.ToString();
                 vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
-                vitalBloodPressure.Text = patientTriage.SpO2.ToString();
+                lblOxygenSaturation.Text = patientTriage.SpO2.ToString();
             }
             else
             {

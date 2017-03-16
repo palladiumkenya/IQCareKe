@@ -41,8 +41,8 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="col-md-7"><label class="control-label pull-left">Blood Pressure </label></div>
-                <div class="col-md-2"> 
+                <div class="col-md-6"><label class="control-label pull-left">Blood Pressure </label></div>
+                <div class="col-md-3"> 
                     <asp:Label runat="server" ID="vitalBloodPressure" CssClass="control-label text-success pull-left">0 </asp:Label>
                 </div>
             </div> 
@@ -74,6 +74,7 @@
                 </div>
             </div>
         </div>
+        
 
     </div>
 

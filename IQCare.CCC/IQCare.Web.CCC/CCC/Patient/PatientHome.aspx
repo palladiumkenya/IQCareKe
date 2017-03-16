@@ -73,13 +73,13 @@
                               </div>
                               
                               <div class="col-md-12">
-                                   <div class="col-md-6"><label class="control-lable pull-left">Regimen : </label></div>
-                                  <div class="col-md-6"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="lblTIRegimen" ClientIDMode="Static"></asp:Label></div>
+                                   <div class="col-md-4"><label class="control-lable pull-left">Regimen : </label></div>
+                                  <div class="col-md-8"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="lblTIRegimen" ClientIDMode="Static"></asp:Label></div>
                               </div>
                             
                               <div class="col-md-12">
-                                   <div class="col-md-6"><label class="control-lable pull-left">Facility From :</label></div>
-                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFacilityFrom" ClientIDMode="Static"></asp:Label></div>
+                                   <div class="col-md-5"><label class="control-lable pull-left">Facility From :</label></div>
+                                  <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFacilityFrom" ClientIDMode="Static"></asp:Label></div>
                               </div>
 
                               
@@ -158,6 +158,39 @@
         $(document).ready(function() {
 
             var patientId = "<%=PatientId%>";
+            
+            /* populate patient baseline information */
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientBaselineService.asmx/GetPatientBaselineInfo",
+                data: "{'patientId':'" + patientId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $.each(itemList,
+                        function(index, itemList) {
+                            if (itemList.Id > 0) {
+                                
+                                /* transferin status */
+                                $("#<%=lblTransferinDate.ClientID%>").text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));
+                                $("#<%= lblTreatmentStartDate.ClientID%>").text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblTIRegimen.ClientID%>").text(itemList.CurrentTreatmentName);
+                                $("#<%=lblFacilityFrom.ClientID%>").text(itemList.FacilityFrom);
+
+                                /*patient Diagnosis */
+                                $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
+                                $("#<%=lblARTInitiationDate.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+                            }
+                        });
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message);
+                }
+            });
 
             $.ajax({
                 type: "POST",
