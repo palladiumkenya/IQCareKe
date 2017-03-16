@@ -32,6 +32,7 @@ namespace Entities.CCC.Lookup
         public DateTime DateStartedOnFirstline { get; set; }
         public string Cohort { get; set; }
         public int Regimen { get; set; }
+        public string RegimenName { get; set; }
         public decimal BaselineViralLoad { get; set; }
         public DateTime BaselineViralLoadDate { get; set; }
         public bool? HBVInfected { get; set; }

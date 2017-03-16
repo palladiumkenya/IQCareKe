@@ -20,7 +20,7 @@ namespace Entities.CCC.Appointment
         public string Description { get; set; }
         public int DifferentiatedCareId { get; set; }
         public int StatusId { get; set; }
-        public DateTime StatusDate { get; set; }
+        public DateTime? StatusDate { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
     }
