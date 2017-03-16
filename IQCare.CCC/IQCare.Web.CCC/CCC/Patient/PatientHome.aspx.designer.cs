@@ -22,6 +22,87 @@ namespace IQCare.Web.CCC.Patient {
         protected global::IQCare.Web.CCC.UC.ucPatientDetails ucPatientDetails;
         
         /// <summary>
+        /// lblEntryPoint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEntryPoint;
+        
+        /// <summary>
+        /// lblTransferinDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTransferinDate;
+        
+        /// <summary>
+        /// lblTreatmentStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTreatmentStartDate;
+        
+        /// <summary>
+        /// lblTIRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTIRegimen;
+        
+        /// <summary>
+        /// lblFacilityFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFacilityFrom;
+        
+        /// <summary>
+        /// lblDateOfHivDiagnosis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDateOfHivDiagnosis;
+        
+        /// <summary>
+        /// lblDateOfEnrollment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDateOfEnrollment;
+        
+        /// <summary>
+        /// lblWhoStage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWhoStage;
+        
+        /// <summary>
+        /// lblARTInitiationDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblARTInitiationDate;
+        
+        /// <summary>
         /// ucExtruder control.
         /// </summary>
         /// <remarks>

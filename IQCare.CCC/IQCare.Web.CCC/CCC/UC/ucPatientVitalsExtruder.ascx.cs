@@ -20,18 +20,23 @@ namespace IQCare.Web.CCC.UC
         {
 
             var patientVitals = new PatientVitalsManager();
-            PatientVital patientTriage = patientVitals.GetPatientVitals(PatientId);
-            if (patientTriage!=null)
+            PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
+            if (patientTriage != null)
             {
-                    lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate;
-                    vitalHeight.Text = Convert.ToString(patientTriage.Height);
-                    vitalsWeight.Text = patientTriage.Weight.ToString();
-                    vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
-                    vitalsMUAC.Text = patientTriage.Muac.ToString();
-                    vitalBloodPressure.Text = patientTriage.Bpdiastolic.ToString() + '/' + patientTriage.BpSystolic.ToString();
-                    vitalTemperature.Text = patientTriage.Temperature.ToString();
-                    vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
-                    vitalBloodPressure.Text = patientTriage.SpO2.ToString();
+                lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate;
+                vitalHeight.Text = Convert.ToString(patientTriage.Height);
+                vitalsWeight.Text = patientTriage.Weight.ToString();
+                vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
+                vitalsMUAC.Text = patientTriage.Muac.ToString();
+                vitalBloodPressure.Text = patientTriage.Bpdiastolic.ToString() + '/' +
+                                          patientTriage.BpSystolic.ToString();
+                vitalTemperature.Text = patientTriage.Temperature.ToString();
+                vitalRespiratoryRate.Text = patientTriage.RespiratoryRate.ToString();
+                lblOxygenSaturation.Text = patientTriage.SpO2.ToString();
+            }
+            else
+            {
+                lblVitalsDate.Text = "Vital Signs as at :" + DateTime.Now;
             }
         }
     }

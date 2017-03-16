@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web;
 using System.Web.Services;
+using Entities.CCC.Baseline;
 using IQCare.CCC.UILogic.Baseline;
 using Newtonsoft.Json;
 using IQCare.CCC.UILogic;
-using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
@@ -213,6 +213,42 @@ namespace IQCare.Web.CCC.WebService
             {
                 var lookupManager=new LookupLogic();
                 _jsonMessage = LookupLogic.GetRegimenCategory(regimenId).ToString();
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientPriorArvHistory(int patientId)
+        {
+            try
+            {
+                var patientArvHistory=new PatientArvHistoryManager();
+                var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
+                foreach (var item in arvHistory)
+                {
+                    _jsonMessage += "<tr> <td align='left'>" + item.Purpose + "</td> <td align='left'>" + item.Regimen + "</td> <td align='left'>" + item.DateLastUsed.ToString("dd-mmm-yyy") + "</td> </tr>";
+                }
+               // _jsonMessage=JsonConvert.SerializeObject(patientArvHistory.GetPatientArtUseHistory(patientId))
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientBaselineInfo(int patientId)
+        {
+            try
+            {
+                var patientBaseline = new PatientBaselineLookupManager();
+                _jsonMessage = JsonConvert.SerializeObject(patientBaseline.GetPatientBaseline(patientId));
             }
             catch (Exception e)
             {

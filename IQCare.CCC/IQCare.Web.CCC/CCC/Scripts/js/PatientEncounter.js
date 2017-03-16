@@ -49,7 +49,7 @@ function AddAdverseReaction() {
     reactionSeverityFound = $.inArray("" + adverseEventSeverityID + "", reactionSeverityList);
     reactionActionFound = $.inArray("" + adverseEventAction + "", reactionActionList);
 
-    if ((reactionEventFound > -1) && (reactionCauseFound > -1) && (reactionSeverityFound > -1) && (reactionActionFound > -1)){
+    if (reactionEventFound > -1){
     
         toastr.error("Error", adverseEvent + " Adverse Event already exists in the List");
         return false; // message box herer
@@ -160,6 +160,10 @@ function AddVaccine() {
     arrVaccineUI.push([vaccineID, vaccineStageID, vaccine, vaccineStage, vaccinationDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
     
     DrawDataTable("dtlVaccines", arrVaccineUI);
+
+    $('#ddlVaccine').val("0");
+    $("#ddlVaccineStage").val("0");
+    $('#txtVaccinationDate').val("");
    }
 }
 
@@ -230,7 +234,7 @@ function AddDiagnosis() {
     diagnosisFound = $.inArray("" + diagnosis + "", diagnosisList);
     treatmentFound = $.inArray("" + treatment + "", treatmentList);
 
-    if ((diagnosisFound > -1) && (treatmentFound > -1)) {
+    if (diagnosisFound > -1) {
         toastr.error("Error", "Diagnosis and treatment already exists.");
         return false;
 
@@ -280,7 +284,7 @@ function EnableDisableEDD()
         document.getElementById("ExpectedDateOfChildBirth").setAttribute('disabled', true);
     }
     else {
-        var lmpDate = document.getElementById("ctl00_IQCareContentPlaceHolder_lmp").value;
+        var lmpDate = document.getElementById("lmp").value;
         var lmpJSDate = new Date(lmpDate);
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  
