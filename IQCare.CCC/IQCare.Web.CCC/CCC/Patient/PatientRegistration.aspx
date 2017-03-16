@@ -66,7 +66,8 @@
 		                            <div class="form-group">
                                         <div class="col-md-12"><label for="personFname" class="required control-label pull-left">Patient Type</label></div>
                                         <div class="col-md-12">
-                                            <asp:DropDownList ID="PatientTypeId" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>         
+                                            <asp:RadioButtonList ID="PatientTypeId" runat="server" RepeatDirection="Horizontal" ClientIDMode="Static" data-parsley-required="true" data-parsley-multiple="radio" data-parsley-mincheck="1" data-parsley-error-message="Please choose at least 1"></asp:RadioButtonList>
+                                            <div class="errorBlock" style="color: red;">Please select one option</div>
                                         </div>
                                     </div>
                                 </div>
@@ -545,6 +546,8 @@
         $(document)
             .ready(function() {
 
+                $('.errorBlock').hide();
+
                 var personAge = 0;
                 var userId=<%=UserId%>;
                 var personId=0;
@@ -603,28 +606,40 @@
                                 if ($('#datastep1').parsley().validate()) {
                                     //console.log($("#personAge").val());
                                     personAge = $("#personAge").val();
-                                    var patientTypeId = $("#PatientTypeId").find(":selected").text();
-                                    //console.log(PatientTypeId);
-                                    if(patientTypeId == "Transit") {
-                                        $.when(addPerson()).then(function() {
+                                    var patientTypeId = $('#<%= PatientTypeId.ClientID %> input:checked').val();
+                                    //console.log(typeof patientTypeId);
+                                    $('.errorBlock').hide();
+                                    if (typeof patientTypeId == "undefined") {
+                                        console.log("error");
+                                        $('.errorBlock').show();
+                                        return false;
+                                    } else {
+                                        var checked_radio = $("[id*=PatientTypeId] input:checked");
+                                        var patientTypeId = checked_radio.closest("td").find("label").html();
 
-                                            setTimeout(function() {
-                                                window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                            },
-                                            2000);                                        
-                                            return evt.preventDefault();
-                                        });
-                                    }
-                                    else{
-                                        if (personAge >= 18) {
-                                            $.when(addPerson()).then(function() {});
-                                        } else {
+                                        //console.log(PatientTypeId);
+                                        if (patientTypeId == "Transit") {
                                             $.when(addPerson()).then(function() {
+
                                                 setTimeout(function() {
-                                                        addPersonGaurdian();
+                                                        window.location
+                                                            .href =
+                                                            '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
                                                     },
                                                     2000);
+                                                return evt.preventDefault();
                                             });
+                                        } else {
+                                            if (personAge >= 18) {
+                                                $.when(addPerson()).then(function() {});
+                                            } else {
+                                                $.when(addPerson()).then(function() {
+                                                    setTimeout(function() {
+                                                            addPersonGaurdian();
+                                                        },
+                                                        2000);
+                                                });
+                                            }
                                         }
                                     }
                                 } else {
@@ -821,7 +836,8 @@
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
-                    var patientType = $("#PatientTypeId").find(":selected").val();
+                    //var patientType = $("#PatientTypeId").find(":selected").val();
+                    var patientType = $('#<%= PatientTypeId.ClientID %> input:checked').val();
 
                     $.ajax({
                         type: "POST",
@@ -1171,6 +1187,11 @@
                         }
                     });
                 }
+
+                $('#PatientTypeId input').change(function () {
+                    $(".errorBlock").hide();
+                });
+
             });
 
         /* Business Rules setup */

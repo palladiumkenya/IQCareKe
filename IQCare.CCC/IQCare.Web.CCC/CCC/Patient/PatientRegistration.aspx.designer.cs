@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.Patient {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PatientTypeId;
+        protected global::System.Web.UI.WebControls.RadioButtonList PatientTypeId;
         
         /// <summary>
         /// hdnPersonId control.
