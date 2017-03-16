@@ -98,7 +98,6 @@ namespace IQCare.Web.CCC.Patient
                 List<LookupItemView> patientTypes = mgr.GetLookItemByGroup("PatientType");
                 if (patientTypes != null && patientTypes.Count > 0)
                 {
-                    PatientTypeId.Items.Add(new ListItem("select", "0"));
                     foreach (var item in patientTypes)
                     {
                         PatientTypeId.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
