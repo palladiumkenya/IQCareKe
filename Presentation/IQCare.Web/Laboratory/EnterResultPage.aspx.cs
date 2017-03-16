@@ -219,15 +219,15 @@ namespace IQCare.Web.Laboratory
             }
             if (!IsPostBack)
             {
-                //if (Session[SessionKey.SelectedLabTestOrder] == null)
-                //{
-                //    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
-                //    //Response.Redirect(theUrl);
-                //    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
-                //    Response.Redirect(theUrl, true);
-                //}
-                //else
-                //{
+                if (Session[SessionKey.SelectedLabTestOrder] == null)
+                {
+                    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
+                    //Response.Redirect(theUrl);
+                    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    Response.Redirect(theUrl, true);
+                }
+                else
+                {
                     LabOrderTest selectedLab = (LabOrderTest)Session[SessionKey.SelectedLabTestOrder];
                     this.LabTestId = selectedLab.TestId;
                     this.LabOrderTestId = selectedLab.Id;
@@ -235,7 +235,7 @@ namespace IQCare.Web.Laboratory
                     this.PopulateLabDetails(selectedLab);
                     this.BindDropdownResultBy() ;
                      txtlabReportedbyDate.Text =  DateTime.Now.ToString("dd-MMM-yyyy");
-                //}
+                }
                 
             }
         }

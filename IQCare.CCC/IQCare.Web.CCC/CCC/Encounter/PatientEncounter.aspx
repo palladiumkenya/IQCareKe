@@ -542,12 +542,11 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetLookupPreviousLabsList",
-                data: "{'patient_ID':'" + patientId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
                 success: function (response) {
-                    // console.log(response.d);
+                    //console.log(response.d);
                     var itemList = JSON.parse(response.d);
                     var table = '';
                     //itemList.forEach(function (item) {
