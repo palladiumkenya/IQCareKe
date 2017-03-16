@@ -48,6 +48,7 @@ namespace IQCare.Web.CCC.WebService
         private int patientIdentifierId { get; set; }
         private int patientEntryPointId { get; set; }
         private int PersonId { get; set; }
+        private int ptn_Pk { get; set; }
 
         [WebMethod]
         public string HelloWorld()
@@ -56,7 +57,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType)
+        public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType, string dobPrecision)
         {
             try
             {
@@ -72,6 +73,13 @@ namespace IQCare.Web.CCC.WebService
                 var patientIdentifier = new PatientIdentifierManager();
                 var patientEntryPointManager = new PatientEntryPointManager();
                 var patientLookUpManager = new PatientLookupManager();
+                var mstPatientLogic = new MstPatientLogic();
+                var personContactLookUpManager = new PersonContactLookUpManager();
+                var personContacts = new List<PersonContactLookUp>();
+                var personLookUp = new PersonLookUpManager();
+                var lookupLogic = new LookupLogic();
+
+
 
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
@@ -93,7 +101,8 @@ namespace IQCare.Web.CCC.WebService
                         Active = true,
                         CreatedBy = userId,
                         CreateDate = DateTime.Now,
-                        DeleteFlag = false
+                        DeleteFlag = false,
+                        DobPrecision = bool.Parse(dobPrecision)
                     };
 
                     patientId = patientManager.AddPatient(patient);
@@ -136,6 +145,43 @@ namespace IQCare.Web.CCC.WebService
                         patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(visit);
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
                         patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
+                        var patient_person_details = personLookUp.GetPersonById(PersonId);
+
+
+
+                        if (patient_person_details != null)
+                        {
+                            var maritalStatus = new PersonMaritalStatusManager().GetCurrentPatientMaritalStatus(PersonId);
+                            personContacts = personContactLookUpManager.GetPersonContactByPersonId(PersonId);
+                            var address = "";
+                            var phone = "";
+                            var facility = lookupLogic.GetFacility();
+
+                            if (personContacts.Count > 0)
+                            {
+                                address = personContacts[0].PhysicalAddress;
+                                phone = personContacts[0].MobileNumber;
+                            }
+
+                            ptn_Pk = mstPatientLogic.InsertMstPatient(
+                                utility.Decrypt(patient_person_details.FirstName), 
+                                utility.Decrypt(patient_person_details.LastName),
+                                utility.Decrypt(patient_person_details.MiddleName),
+                                facility.FacilityID,
+                                patientEnrollmentId, 
+                                patientEntryPointId,
+                                DateTime.Now, patient_person_details.Sex,
+                                patient.DateOfBirth,
+                                1, maritalStatus.MaritalStatusId,
+                                address, phone, userId, Session["AppPosID"].ToString(),
+                                203, patientEnrollment.EnrollmentDate, DateTime.Now);
+
+                            patient.ptn_pk = ptn_Pk;
+                            patientManager.UpdatePatient(patient, patientId);
+                        }
+
+                        
+
 
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
 
@@ -152,6 +198,7 @@ namespace IQCare.Web.CCC.WebService
                                 };
 
                                 patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
+                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, visit.Start, patientIdentifierId, userId, DateTime.Now, 203);
                             }
 
                             Msg += "<p>Successfully enrolled patient.</p>";

@@ -42,16 +42,16 @@ namespace IQCare.CCC.UILogic
                     var pending = "Pending";
 
 
-                    for (int i = 0; i < data.Count; i++)
+                    foreach (ListLabOrder t in data)
                     {
                         PatientLabTracker labTracker = new PatientLabTracker()
                         {
                             PatientId = patient_ID,
                             PatientMasterVisitId = patientMasterVisitId,
-                            LabName = data[i].labType,
-                            Reasons = data[i].orderReason, 
+                            LabName = t.labType,
+                            Reasons = t.orderReason, 
                             Results = pending,
-                            SampleDate = data[i].labOrderDate
+                            SampleDate = t.labOrderDate
                             //LabNotes =data[i].labNotes --take to clinical notes 
 
                         };
@@ -62,9 +62,9 @@ namespace IQCare.CCC.UILogic
                             Ptn_pk = patient_ID,
                             LocationId = facilityID,
                             visitid = patientMasterVisitId,
-                            ClinicalOrderNotes = data[i].labNotes,
+                            ClinicalOrderNotes = t.labNotes,
                             OrderStatus = pending,
-                            OrderDate = data[i].labOrderDate
+                            OrderDate = t.labOrderDate
                             //UserId = data[i].labType,
                             //ClinicalOrderNotes = data[i].results,       
                             //LocationId = data[i].orderReason,
@@ -93,7 +93,6 @@ namespace IQCare.CCC.UILogic
                         //    returnLabDetailsSuccess = _mgr.AddPatientLabDetails(LabDetails);
                         // }
                         return returnValue;
-
                     }
                 }
              }

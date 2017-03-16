@@ -20,6 +20,7 @@ namespace Entities.CCC.Enrollment
         public bool Active { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string NationalId { get; set; }
+        public bool DobPrecision { get; set; }
         public virtual Person Person { get; set; }
         /*public virtual PatientArtInitiationBaseline PatientArtInitiationBaseline { get; set; }
         public virtual PatientArtUseHistory PatientArtUseHistory { get; set; }

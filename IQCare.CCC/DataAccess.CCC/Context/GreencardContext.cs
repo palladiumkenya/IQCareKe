@@ -10,6 +10,7 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
+using Entities.CCC.Consent;
 using Entities.PatientCore;
 
 
@@ -91,7 +92,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
 
-
+        //Consent
+        public DbSet<Entities.CCC.Consent.PatientConsent> PatientConsents { get; set; }
 
     }
 }
