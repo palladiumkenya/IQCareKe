@@ -258,13 +258,13 @@
                                   <div class="col-md-4">
                                        <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="Label1">Regimen Category </asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="0" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" ID="regimenCategory" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" data-parsley-required="true"/>
                                        </div>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblRegimen">Regimen</asp:Label></div>
                                        <div class="col-md-12">
-                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-min="0" data-parsley-required="true"/>
+                                           <asp:DropDownList runat="server" ID="RegimenId" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-min="1" data-parsley-required="true"/>
                                         </div>
                                   </div>
      
@@ -286,7 +286,7 @@
                                 <div class="col-md-4">
                                       <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblcounty">County:</asp:Label></div>
                                       <div class="col-md-12">
-                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="0"/>
+                                           <asp:DropDownList runat="server" id ="TransferFromCounty" CssClass="form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
                                       </div>
                                  </div>
                             </div>
@@ -479,7 +479,7 @@
                              <div class="col-md-4">
                                   <div class="col-md-12"><asp:Label runat="server" CssClass="control-label pull-left" id="lblwhostage">WHO Stage at Enrollment</asp:Label></div>
                                   <div class="col-md-12">
-                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="0"/>
+                                       <asp:DropDownList runat="server" ID="WHOStageAtEnrollment" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1"/>
                                   </div>
                              </div>
                          </div>
@@ -1054,6 +1054,7 @@
             var patientType="";
             var gender="<%=Gender%>";
             var age="<%=Age%>";
+            var dob="#<%=DateOfBirth%>";
 
             var whostage = '';
             var cD4Count='';
@@ -1156,27 +1157,36 @@
 
                 var artStartDate = $('#TIARTStartDate').datepicker('getDate');
                 var tiDate= $('#TIDate').datepicker('getDate');
-                var doe= $('#doe').datepicker('getDate');
-                var isAfter=moment(artStartDate).isAfter(tiDate);              
-                var futureDate = moment(artStartDate).isAfter(today);
-                if (isAfter) {
-                    toastr.error("ART Start Date CANNOT be greater than transferin Date");
-                    $('#TIARTStartDate').val('');
-                    return false;
-                }
-                if (moment(artStartDate).isBefore(doe)) {
-                    $('#TIARTStartDate').val('');
-                    toastr.error('ART STart Date CANNOT be before enrollment');
-                    return false;
-                }
-
+                var doe= $('#DOE').datepicker('getDate');
+         
+                
+                var futureDate = moment(artStartDate).isAfter(today);/* -- validate future dates -- */   
                 if(futureDate)
                 {
-                    $('#TIARTStartDate').val('');
+                    $('#StartDateART').val('');
                     toastr.error("Future Dates NOT ALLOWED!");
                     return false;
                 }
+
+                /*-- validate art start date with transfrindate*/
+                var isAfter=moment(artStartDate).isAfter(tiDate);     
+                if (isAfter) {
+                    toastr.error("ART Start Date CANNOT be greater than transferin Date");
+                    $('#StartDateART').val('');
+                    return false;
+                }
+                if (moment(artStartDate).isAfter(doe)) {
+
+                } else {
+                    $('#StartDateART').val('');
+                    toastr.error('ART Start Date CANNOT be before Enrollment Date');
+                    return false;
+                }
+
                 $("#DARTI").datepicker("setDate",artStartDate);
+                var startMonth = artStartDate.format('MMM');
+                var startYear = artStartDate.getUTCFullYear();
+                $("#ARTCohort").val(startMonth + '-' + startYear);
 
             });
 
@@ -1210,11 +1220,16 @@
                 var dhid=$("#DHID").datepicker('getDate');
                 var tidate=$("#TIDate").datepicker('getDate');
                 var artStartDate = $('#TIARTStartDate').datepicker('getDate');
+                var doe= $('#doe').datepicker('getDate');
                 //validate dates
 
                 var futureDate = moment(dhid).isAfter(today);
                 if(futureDate){ $("#DateOfHIVDiagnosis").val('');toastr.error("future dates NOT allowed");return false;}
+                futureDate = moment(dhid).isBefore(dob);
+                if(futureDate){ $("#DateOfHIVDiagnosis").val('');toastr.error("Date OF HIV Diagnosis CANNOT be before Date of Birth");return false;}
                 futureDate=moment(dhid).isAfter(tidate);
+                if(futureDate){ $("#DateOfHIVDiagnosis").val('');toastr.error("Date OF HIV Diagnosis CANNOT be after Transferin Date");return false;}
+                futureDate=moment(dhid).isAfter(doe);
                 if(futureDate){ $("#DateOfHIVDiagnosis").val('');toastr.error("Date OF HIV Diagnosis CANNOT be after Enrollment Date");return false;}
                 futureDate=moment(dhid).isAfter(artStartDate);
                 if(futureDate){ $("#DateOfHIVDiagnosis").val('');toastr.error("Date OF HIV Diagnosis CANNOT be after ART Start date");return false;}
@@ -1440,7 +1455,7 @@
             function enableIfTransferIn() {
                 $("#TIDate").datepicker('enable');
                 $("#TIARTStartDate").datepicker('enable');
-                $("#DateStartedOn1stLine").datepicker('enable');
+                $("#DateStartedOn1stLine").datepicker('disabled');
                 $("#<%=RegimenId.ClientID%>").prop('disabled', false);
                 $("#<%=regimenCategory.ClientID%>").prop('disabled', false);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', false);
@@ -1454,7 +1469,7 @@
                 
                 $("#TIDate").datepicker('disable');
                 $("#TIARTStartDate").datepicker('disable');
-                $("#DateStartedOn1stLine").datepicker('disable');
+                $("#DateStartedOn1stLine").datepicker('enable');
                 $("#<%=RegimenId.ClientID%>").prop('disabled', true);
                 $("#<%=regimenCategory.ClientID%>").prop('disabled', true);
                 $("#<%=TransferFromFacility.ClientID%>").prop('disabled', true);
@@ -1741,7 +1756,10 @@
             });
             if ($("#datastep5").parsley().validate()) {
               if (transferIn > 0) {
-                    managePatientTreatmentInitiation();
+                  $.when(managePatientTreatmentInitiation()).then(function() {
+                      toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+                      window.location.href ='<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                  })  ;
               }
             } else {
                 stepError = $('.parsley-error').length === 0;

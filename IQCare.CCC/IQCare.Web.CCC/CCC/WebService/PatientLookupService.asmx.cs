@@ -112,10 +112,11 @@ namespace IQCare.Web.CCC.WebService
                     if (searchString!=null)
                     {
                         jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
-                                                       utility.Decrypt(x.FirstName).Contains(searchString) ||
-                                                       utility.Decrypt(x.MiddleName).Contains(searchString) ||
-                                                       utility.Decrypt(x.LastName).Contains(searchString) ||
-                                                       LookupLogic.GetLookupNameById(x.Sex).Contains(searchString))
+                                                       utility.Decrypt(x.FirstName).ToLower().Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.MiddleName).ToLower().Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.LastName).ToLower().Contains(searchString.ToLower()) ||
+                                                       LookupLogic.GetLookupNameById(x.Sex).Contains(searchString.ToLower())||
+                                                       x.EnrollmentNumber.Contains(searchString.ToString()))
                             .ToList();
                         filteredRecords = jsonData.Count();
                     }
@@ -124,14 +125,15 @@ namespace IQCare.Web.CCC.WebService
                     var skip = (displayLength * displayStart);
                     var ableToSkip = skip < displayLength;
                     //string patientStatus;
-                    jsonData = jsonData.Skip(skip).Take(displayLength).ToList();
+                    jsonData = jsonData.Skip(displayStart).Take(displayLength).ToList();
 
                     var json = new
                     {
                         draw = sEcho,
                         recordsTotal = jsonData.Count,
+                       // recordsFiltered= jsonData.Count,
                         recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count,
-                      
+
                         data = jsonData.Select(x => new string[]
                         {
                             

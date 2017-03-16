@@ -65,6 +65,7 @@ namespace IQCare.Web
             Session.Add("EncounterStatusId",0);
             Session.Add("Gender", "");
             Session.Add("Age", 0);
+            Session.Add("DateofBirth",0);
             ////////////////////////////////////////
 
             lblDate.Text = "";

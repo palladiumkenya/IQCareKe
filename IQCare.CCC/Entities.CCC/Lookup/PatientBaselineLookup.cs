@@ -19,6 +19,7 @@ namespace Entities.CCC.Lookup
         public DateTime TransferInDate { get; set; }
         public DateTime TreatmentStartDate { get; set; }
         public string CurrentTreatment { get; set; }
+        public string CurrentTreatmentName { get; set; }
         public string FacilityFrom { get; set; }
         public int mflcode { get; set; }
         public string CountyFrom { get; set; }
@@ -26,16 +27,19 @@ namespace Entities.CCC.Lookup
         public DateTime HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentWHOStage { get; set; }
+        public string EnrollmentWHOStageName { get; set; }
         public DateTime ARTInitiationDate { get; set; }
         public DateTime DateStartedOnFirstline { get; set; }
         public string Cohort { get; set; }
         public int Regimen { get; set; }
+        public string RegimenName { get; set; }
         public decimal BaselineViralLoad { get; set; }
         public DateTime BaselineViralLoadDate { get; set; }
         public bool? HBVInfected { get; set; }
         public bool? Pregnant { get; set; }
         public bool? TBinfected { get; set; }
         public int? WHOStage { get; set; }
+        public string WHOStageName { get; set; }
         public bool? BreastFeeding { get; set; }
         public decimal? CD4Count { get; set; }
         public decimal? MUAC { get; set; }
