@@ -96,6 +96,16 @@ Begin
   Alter table dbo.dtl_PatientPharmacyOrder Add Id int Not Null Identity(1,1)
 End
 Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_GRNote'))    
+Begin
+  Alter table dbo.Dtl_GRNote Add Id int Not Null Identity(1,1)
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_StockTransaction'))    
+Begin
+  Alter table dbo.Dtl_StockTransaction Add Id int Not Null Identity(1,1)
+End
+Go
 /****** Object:  Index [IDX_dtl_PatientPharmacyOrder_CL1]    Script Date: 6/20/2016 1:22:38 PM ******/
 If  Exists (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientPharmacyOrder]') AND name = N'IDX_dtl_PatientPharmacyOrder_CL1')   
 DROP INDEX [IDX_dtl_PatientPharmacyOrder_CL1] ON [dbo].[dtl_PatientPharmacyOrder] WITH ( ONLINE = OFF )
@@ -199,7 +209,24 @@ IF Exists (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Mst_La
 	Delete from lnk_parameterresult where Result Is Null
 End
 Go
+ If Not Exists (Select * From sys.columns Where Name = N'PONumber' And Object_ID = object_id(N'ord_PurchaseOrder')) Begin
+	Alter Table dbo.ord_PurchaseOrder Add PONumber varchar(36) 
+End
+Go
+Update ord_PurchaseOrder Set PONumber = OrderNo Where PONumber Is Null;
+Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_PurchaseItem'))    
+Begin
+  Alter table dbo.Dtl_PurchaseItem Add Id int Not Null Identity(1,1)
+End
+Go
+IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.Dtl_PurchaseItem') AND Name = 'PK_Dtl_PurchaseItem')
+   ALTER TABLE [dbo].[Dtl_PurchaseItem] ADD  CONSTRAINT [PK_Dtl_PurchaseItem] PRIMARY KEY CLUSTERED 
+	(
+	[Id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 
+GO
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Mst_ItemMaster]') AND name = N'NCI_ItemMaster_ItemTypeID')
 DROP INDEX [NCI_ItemMaster_ItemTypeID] ON [dbo].[Mst_ItemMaster] WITH ( ONLINE = OFF )
 GO
@@ -530,7 +557,11 @@ Begin
   Alter table dbo.Dtl_PatientPharmacyOrder Add WhyPartial  varchar(250) Null
 End
 Go
-
+ If Not Exists (Select * From sys.columns Where Name = N'ScheduleId' And Object_ID = Object_id(N'Dtl_PatientPharmacyOrder'))    
+Begin
+  Alter table dbo.Dtl_PatientPharmacyOrder Add ScheduleId  int Null
+End
+Go
 If Not Exists (Select * From sys.columns Where Name = N'ItemInstructions' And Object_ID = Object_id(N'Mst_ItemMaster'))    
 Begin
   Alter table dbo.Mst_ItemMaster Add ItemInstructions  varchar(250) Null
@@ -862,6 +893,12 @@ Update Mst_Store Set LocationId = (Select Top 1 F.FacilityId From mst_Facility F
 Go
 Alter table dbo.mst_Store Alter Column LocationId  int Not Null
 Go
+If  Exists (Select * From sys.columns Where Name = N'Comments' And Object_ID = Object_id(N'dtl_FollowupEducation')) Begin
+  Alter table dbo.dtl_FollowupEducation Alter Column Comments varchar(255) Null
+End
+If   Exists (Select * From sys.columns Where Name = N'OtherDetail' And Object_ID = Object_id(N'dtl_FollowupEducation'))  Begin
+  Alter table dbo.dtl_FollowupEducation Alter Column OtherDetail varchar(255) Null
+End
 If not Exists (Select * From sys.columns Where Name = N'Comments' And Object_ID = Object_id(N'dtl_FollowupEducation')) Begin
   Alter table dbo.dtl_FollowupEducation Add Comments varchar(255) Null
 End
@@ -969,7 +1006,7 @@ FROM sys.tables AS t
 INNER JOIN sys.columns c ON t.OBJECT_ID = c.OBJECT_ID
 WHERE c.name LIKE 'SRNo' And system_type_id=TYPE_ID('int');
 Go
-Select * From #SrNo
+--Select * From #SrNo
 
 Declare @Query varchar(250)
 		, @command varchar(400)

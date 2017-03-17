@@ -1843,6 +1843,8 @@ namespace IQCare.Web.Clinical
 
             DateTime temp, tempVisit, tempTCA;
 
+         
+
             #region Check Visit Date
 
             if (Session["RegDate"] != null && txtVisitDate.Text != "")
@@ -1884,7 +1886,7 @@ namespace IQCare.Web.Clinical
             }
 
             #endregion Check Visit Date
-
+            DateTime _visitDate = Convert.ToDateTime(txtVisitDate.Text);
             #region Date of next appointment
 
             if (txtdatenextappointment.Value.Trim() != "")
@@ -1925,7 +1927,7 @@ namespace IQCare.Web.Clinical
                     txtEDD.Focus();
                     validationCheck = false;
                 }
-                else if (theCurrentDate.Date >= Convert.ToDateTime(iQCareUtils.MakeDate(txtEDD.Value)))
+                else if (_visitDate > Convert.ToDateTime(iQCareUtils.MakeDate(txtEDD.Value)))
                 {
                     validateMessage += "-" + IQCareMsgBox.GetMessage("EDDDate", this) + "\\n";
                     txtEDD.Focus();
@@ -1945,7 +1947,7 @@ namespace IQCare.Web.Clinical
                     txtdatemiscarriage.Focus();
                     validationCheck = false;
                 }
-                else if (theCurrentDate.Date <= Convert.ToDateTime(iQCareUtils.MakeDate(txtdatemiscarriage.Value)))
+                else if (_visitDate <= Convert.ToDateTime(iQCareUtils.MakeDate(txtdatemiscarriage.Value)))
                 {
                     validateMessage += "-" + IQCareMsgBox.GetMessage("DateofMiscarriage", this) + "\\n";
                     txtdatemiscarriage.Focus();
@@ -1965,7 +1967,7 @@ namespace IQCare.Web.Clinical
                     txtdateinducedabortion.Focus();
                     validationCheck = false;
                 }
-                else if (Convert.ToDateTime(iQCareUtils.MakeDate(txtdateinducedabortion.Value)) >= theCurrentDate.Date)
+                else if (Convert.ToDateTime(iQCareUtils.MakeDate(txtdateinducedabortion.Value)) > _visitDate)
                 {
                     validateMessage += "-" + IQCareMsgBox.GetMessage("DateofInducedAbortion", this) + "\\n";
                     txtdateinducedabortion.Focus();
@@ -1985,7 +1987,7 @@ namespace IQCare.Web.Clinical
                     txttbstartdate.Focus();
                     validationCheck = false;
                 }
-                else if (theCurrentDate.Date < Convert.ToDateTime(iQCareUtils.MakeDate(txttbstartdate.Value)))
+                else if (_visitDate < Convert.ToDateTime(iQCareUtils.MakeDate(txttbstartdate.Value)))
                 {
                     validateMessage += "-" + IQCareMsgBox.GetMessage("TBTreatmentStartDate", this) + "\\n";
                     txttbstartdate.Focus();
@@ -2186,15 +2188,15 @@ namespace IQCare.Web.Clinical
             sbValues = new StringBuilder();
             strmultiselect = string.Empty;
             string strfName = string.Empty;
-            Boolean radioflag = false;
+            bool radioflag = false;
 
-            Int32 stpos = 0;
-            Int32 enpos = 0;
+            int stpos = 0;
+            int enpos = 0;
             if (ViewState["CustomFieldsData"] != null)
             {
                 foreach (Control x in Cntrl.Controls)
                 {
-                    if (x.GetType() == typeof(System.Web.UI.WebControls.TextBox))
+                    if (x.GetType() == typeof(TextBox))
                     {
                         if (x.ID.Substring(0, 16).ToString().ToUpper() == pnlName.ToUpper() + "TXT")
                         {
@@ -2242,7 +2244,7 @@ namespace IQCare.Web.Clinical
                             }
                         }
                     }
-                    if (x.GetType() == typeof(System.Web.UI.HtmlControls.HtmlInputRadioButton))
+                    if (x.GetType() == typeof(HtmlInputRadioButton))
                     {
                         if (x.ID.Substring(0, 19).ToString().ToUpper() == pnlName.ToUpper() + "RADIO1")
                         {
@@ -2274,7 +2276,7 @@ namespace IQCare.Web.Clinical
                             }
                         }
                     }
-                    if (x.GetType() == typeof(System.Web.UI.WebControls.DropDownList))
+                    if (x.GetType() == typeof(DropDownList))
                     {
                         if (x.ID.Substring(0, 23).ToString().ToUpper() == pnlName.ToUpper() + "SELECTLIST")
                         {
@@ -2299,7 +2301,7 @@ namespace IQCare.Web.Clinical
             {
                 foreach (Control x in Cntrl.Controls)
                 {
-                    if (x.GetType() == typeof(System.Web.UI.WebControls.TextBox))
+                    if (x.GetType() == typeof(TextBox))
                     {
                         if (x.ID.Substring(0, 16).ToString().ToUpper() == pnlName.ToUpper() + "TXT")
                         {
@@ -2335,7 +2337,7 @@ namespace IQCare.Web.Clinical
                             }
                         }
                     }
-                    if (x.GetType() == typeof(System.Web.UI.HtmlControls.HtmlInputRadioButton))
+                    if (x.GetType() == typeof(HtmlInputRadioButton))
                     {
                         if (x.ID.Substring(0, 19).ToString().ToUpper() == pnlName.ToUpper() + "RADIO1")
                         {
@@ -2359,7 +2361,7 @@ namespace IQCare.Web.Clinical
                             }
                         }
                     }
-                    if (x.GetType() == typeof(System.Web.UI.WebControls.DropDownList))
+                    if (x.GetType() == typeof(DropDownList))
                     {
                         if (x.ID.Substring(0, 23).ToString().ToUpper() == pnlName.ToUpper() + "SELECTLIST")
                         {
@@ -2379,7 +2381,7 @@ namespace IQCare.Web.Clinical
             {
                 foreach (Control x in Cntrl.Controls)
                 {
-                    if (x.GetType() == typeof(System.Web.UI.WebControls.CheckBoxList))
+                    if (x.GetType() == typeof(CheckBoxList))
                     {
                         if (x.ID.Substring(0, 28).ToString().ToUpper() == pnlName.ToUpper() + "MULTISELECTLIST")
                         {
@@ -2429,11 +2431,11 @@ namespace IQCare.Web.Clinical
             DataRow theDR;
             foreach (Control y in thePnl.Controls)
             {
-                if (y.GetType() == typeof(System.Web.UI.WebControls.Panel))
-                    GetCheckBoxListcheckedIDs((System.Web.UI.WebControls.Panel)y, FieldName, thetxtFieldName, 1);
+                if (y.GetType() == typeof(Panel))
+                    GetCheckBoxListcheckedIDs((Panel)y, FieldName, thetxtFieldName, 1);
                 else
                 {
-                    if (y.GetType() == typeof(System.Web.UI.WebControls.CheckBox))
+                    if (y.GetType() == typeof(CheckBox))
                     {
                         if (((CheckBox)y).Checked == true)
                         {
@@ -2452,11 +2454,11 @@ namespace IQCare.Web.Clinical
                             }
                         }
                     }
-                    if (y.GetType() == typeof(System.Web.UI.WebControls.TextBox))
+                    if (y.GetType() == typeof(TextBox))
                     {
                         if (thetxtFieldName != "")
                         {
-                            if (((System.Web.UI.WebControls.TextBox)y).ID.Contains("OtherTXT") == true)
+                            if (((TextBox)y).ID.Contains("OtherTXT") == true)
                             {
                                 theDR = DTCheckedIds.NewRow();
                                 string[] theControlId = ((TextBox)y).ID.ToString().Split('-');
@@ -2488,7 +2490,7 @@ namespace IQCare.Web.Clinical
             GenerateCustomFieldsValues(pnlCustomList);
             string sqlstr = string.Empty;
             string sqlselect;
-            Int32 visitID = 0;
+            int visitID = 0;
             DateTime visitdate = System.DateTime.Now;
             PatID = Convert.ToInt32(Request.QueryString["patientid"]);
             ICustomFields CustomFields;

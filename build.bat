@@ -55,6 +55,12 @@ echo "********** Building IQCare Management **********" >> %log%
 echo "********** Building IQCare.Release **********" >> %log%
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.Release.sln" >> %log%
 @echo "********** Completed building  devenv**********" >> %log%
+echo "********** Scripts **********" >> %log%
+XCOPY %BATDIR%\Scripts\* %BATDIR%\Release\Scripts /s /i >nul
+COPY %BATDIR%\batch.bat %BATDIR%\Release\batch.bat /Y > nul
 
+@echo "********** END OF BUILINDING & PACKAGING **********"
+
+echo
 
 

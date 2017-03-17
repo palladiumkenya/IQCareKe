@@ -67,6 +67,33 @@ namespace IQCare.Web {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FTEID;
         
         /// <summary>
+        /// textPhoneNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textPhoneNumber;
+        
+        /// <summary>
+        /// FTEPhnoe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender FTEPhnoe;
+        
+        /// <summary>
+        /// ddFacility control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddFacility;
+        
+        /// <summary>
         /// txtlastname control.
         /// </summary>
         /// <remarks>
@@ -83,24 +110,6 @@ namespace IQCare.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FTELName;
-        
-        /// <summary>
-        /// txtDOB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDOB;
-        
-        /// <summary>
-        /// ddFacility control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddFacility;
         
         /// <summary>
         /// lblmiddlename control.
@@ -130,24 +139,6 @@ namespace IQCare.Web {
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FTEMName;
         
         /// <summary>
-        /// textRegistrationDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textRegistrationDate;
-        
-        /// <summary>
-        /// ddlServices control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlServices;
-        
-        /// <summary>
         /// txtfirstname control.
         /// </summary>
         /// <remarks>
@@ -164,6 +155,33 @@ namespace IQCare.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.FilteredTextBoxExtender FTEFName;
+        
+        /// <summary>
+        /// txtDOB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDOB;
+        
+        /// <summary>
+        /// textRegistrationDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textRegistrationDate;
+        
+        /// <summary>
+        /// ddlServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlServices;
         
         /// <summary>
         /// ddSex control.

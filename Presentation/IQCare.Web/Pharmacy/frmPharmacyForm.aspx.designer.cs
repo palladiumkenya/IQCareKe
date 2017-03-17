@@ -274,6 +274,24 @@ namespace IQCare.Web.Pharmacy {
         protected global::System.Web.UI.WebControls.Panel pnlPedia;
         
         /// <summary>
+        /// divVaccine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVaccine;
+        
+        /// <summary>
+        /// panelVaccine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelVaccine;
+        
+        /// <summary>
         /// pnlOI control.
         /// </summary>
         /// <remarks>

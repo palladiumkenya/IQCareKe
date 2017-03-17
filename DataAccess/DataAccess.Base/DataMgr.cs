@@ -51,7 +51,15 @@ namespace DataAccess.Base
             OpenDecryptedSession(connection);
             return connection;
         }
-       
+       public static object GetConnection(string connectionName)
+        {
+            Utility objUtil = new Utility();
+            string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(connectionName));
+            SqlConnection connection = new SqlConnection(constr);
+            connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
+        }
         /// <summary>
         /// Gets the connection.
         /// </summary>
@@ -114,7 +122,7 @@ namespace DataAccess.Base
         /// <param name="connectionString">The connection string.</param>
         /// <param name="enncrypted">if set to <c>true</c> [enncrypted].</param>
         /// <returns></returns>
-         bool TestConnection(string connectionString,bool enncrypted=true)
+        public static bool TestConnection(string connectionString,bool enncrypted=true)
         {
             bool success = false;
             Utility objUtil = new Utility();

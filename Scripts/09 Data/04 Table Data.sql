@@ -1281,6 +1281,26 @@ Begin
 	Values('Ward Admission',202,8,0,1,Getdate());
 End
 Go
+update mst_Decode set DeleteFlag = 1 where id=332 and name='clinical' and codeid=1007
+update mst_Decode set DeleteFlag = 1 where id=333 and name='CD4 count/percent' and codeid=1007
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='Pregnancy') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('Pregnancy',1007,3,0,1,getdate(),1);
+End
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='Lactating') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('Lactating',1007,4,0,1,getdate(),1);
+End
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='Under 10 Years') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('Under 10 Years',1007,5,0,1,getdate(),1);
+End
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='Discordant Couple') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('Discordant Couple',1007,6,0,1,getdate(),1);
+End
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='HEI (Positive PCR)') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('HEI (Positive PCR)',1007,7,0,1,getdate(),1);
+End
+If Not Exists(Select 1 From mst_Decode where CodeID=1007 And Name='Hepatitis B+') Begin
+	Insert Into mst_Decode (Name,CodeID,SRNo,DeleteFlag,UserID,CreateDate,SystemId) Values('Hepatitis B+',1007,8,0,1,getdate(),1);
+End
 -- Update item type Drugs to Pharmaceuticals
 Update Mst_Decode Set Name = 'Pharmaceuticals' Where CodeID=202 And Name= 'Drugs';
 Go

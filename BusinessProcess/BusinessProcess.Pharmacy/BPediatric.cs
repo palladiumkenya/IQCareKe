@@ -313,7 +313,7 @@ namespace BusinessProcess.Pharmacy
                     ClsUtility.AddParameters("@flag", SqlDbType.Int, flag.ToString());
                     ClsUtility.AddParameters("@SCMflag", SqlDbType.Int, SCMFlag.ToString());
                     ClsUtility.AddParameters("@Prophylaxis", SqlDbType.Int, theDT.Rows[i]["Prophylaxis"].ToString());
-                    ClsUtility.AddParameters("@DrugSchedule", SqlDbType.Int, theDT.Rows[i]["DrugSchedule"].ToString());
+                    ClsUtility.AddParameters("@DrugSchedule", SqlDbType.Int, theDT.Rows[i]["ScheduleId"].ToString());
                     ClsUtility.AddParameters("@PrintPrescriptionStatus", SqlDbType.Int, theDT.Rows[i]["PrintPrescriptionStatus"].ToString());
                     ClsUtility.AddParameters("@PatientInstructions", SqlDbType.Int, theDT.Rows[i]["PatientInstructions"].ToString());
                     theRowAffected = (int)PediatricManager.ReturnObject(ClsUtility.theParams, "pr_Pharmacy_SavePatientPediatric_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
@@ -547,7 +547,7 @@ namespace BusinessProcess.Pharmacy
                     theQuery = theQuery.Replace("#55#", PharmacyID.ToString());
                     theQuery = theQuery.Replace("#44#", "'" + OrderedByDate.ToString() + "'");
                     ClsUtility.AddParameters("@QryString", SqlDbType.VarChar, theQuery);
-                    int RowsAffected = (Int32)PediatricManager.ReturnObject(ClsUtility.theParams, "pr_General_Dynamic_Insert", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    int RowsAffected = (int)PediatricManager.ReturnObject(ClsUtility.theParams, "pr_General_Dynamic_Insert", ClsUtility.ObjectEnum.ExecuteNonQuery);
                 }
 
                 DataMgr.CommitTransaction(this.Transaction);
