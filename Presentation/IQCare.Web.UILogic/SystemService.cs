@@ -123,20 +123,23 @@ namespace IQCare.Web.UILogic
         /// </summary>
         /// <param name="StateInfo">The state information.</param>
         public static void GenerateCache(object StateInfo)
-        {
-            string xmlPath = GblIQCare.GetXMLPath();
-            IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
-            DateTime theDTime = DateManager.SystemDate();
-            System.IO.FileInfo theFileInfo1 = new System.IO.FileInfo(xmlPath + "\\AllMasters.con");
-            System.IO.FileInfo theFileInfo2 = new System.IO.FileInfo(xmlPath + "\\DrugMasters.con");
-            System.IO.FileInfo theFileInfo3 = new System.IO.FileInfo(xmlPath + "\\LabMasters.con");
-            if (theFileInfo1.LastWriteTime.Date != theDTime.Date || theFileInfo2.LastWriteTime.Date != theDTime.Date || theFileInfo3.LastWriteTime.Date != theDTime.Date)
+        {try
             {
-                IIQCareSystem theCacheManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem,BusinessProcess.Security");
-                DataSet theMainDS = theCacheManager.GetSystemCache();
-                IQCareUtils.WriteCache(ref theMainDS, theDTime);
+                string xmlPath = GblIQCare.GetXMLPath();
+                IIQCareSystem DateManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem, BusinessProcess.Security");
+                DateTime theDTime = DateManager.SystemDate();
+                System.IO.FileInfo theFileInfo1 = new System.IO.FileInfo(xmlPath + "\\AllMasters.con");
+                System.IO.FileInfo theFileInfo2 = new System.IO.FileInfo(xmlPath + "\\DrugMasters.con");
+                System.IO.FileInfo theFileInfo3 = new System.IO.FileInfo(xmlPath + "\\LabMasters.con");
+                if (theFileInfo1.LastWriteTime.Date != theDTime.Date || theFileInfo2.LastWriteTime.Date != theDTime.Date || theFileInfo3.LastWriteTime.Date != theDTime.Date)
+                {
+                    IIQCareSystem theCacheManager = (IIQCareSystem)ObjectFactory.CreateInstance("BusinessProcess.Security.BIQCareSystem,BusinessProcess.Security");
+                    DataSet theMainDS = theCacheManager.GetSystemCache();
+                    IQCareUtils.WriteCache(ref theMainDS, theDTime);
 
+                }
             }
+            catch { }
         }
         public static void LogError(Exception lastError)
         {

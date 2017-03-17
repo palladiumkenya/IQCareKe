@@ -10,10 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAccess.Common</RootNamespace>
     <AssemblyName>DataAccess.Common</AssemblyName>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+  
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

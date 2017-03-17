@@ -31,6 +31,8 @@ namespace IQCare.SCM
         private string makeGridEditable = "";
         private string lastdispensedARV = "";
         private string ARVBeingDispensed = "";
+
+        private bool dispenseReady = false;
         /// <summary>
         /// The int process
         /// </summary>
@@ -66,17 +68,17 @@ namespace IQCare.SCM
         /// <summary>
         /// The current row
         /// </summary>
-        private Int32 theCurrentRow = 0;
+        private int theCurrentRow = 0;
 
         /// <summary>
         /// The disp current row
         /// </summary>
-        private Int32 theDispCurrentRow = -1;
+        private int theDispCurrentRow = -1;
 
         /// <summary>
         /// The dispensing unit
         /// </summary>
-        private Int32 theDispensingUnit = 0;
+        private int theDispensingUnit = 0;
 
         /// <summary>
         /// The dispensing unit name
@@ -96,7 +98,7 @@ namespace IQCare.SCM
         /// <summary>
         /// Dispensing Variables
         /// </summary>
-        private Int32 theFunded = 0;
+        private int theFunded = 0;
 
         /// <summary>
         /// The generic abb
@@ -106,12 +108,12 @@ namespace IQCare.SCM
         /// <summary>
         /// The item identifier
         /// </summary>
-        private Int32 theItemId = 0;
+        private int theItemId = 0;
 
         /// <summary>
         /// The item type
         /// </summary>
-        private Int32 theItemType = 0;
+        private int theItemType = 0;
 
         private int theItemTypeId = 0;
 
@@ -123,17 +125,17 @@ namespace IQCare.SCM
         /// <summary>
         /// The order identifier
         /// </summary>
-        private Int32 theOrderId = 0;
+        private int theOrderId = 0;
 
         /// <summary>
         /// The order status
         /// </summary>
-        private String theOrderStatus = "";
+        private string theOrderStatus = "";
 
         /// <summary>
         /// The patient identifier
         /// </summary>
-        private Int32 thePatientId = 0;
+        private int thePatientId = 0;
 
         /// <summary>
         /// The pharmacy master
@@ -877,6 +879,7 @@ namespace IQCare.SCM
                         //}
 
                         theDV[0]["PatientInstructions"] = txtPatientInstructions.Text;
+                        theDV[0]["Valid"] = true;
                     }
                     txtItemName.Enabled = true;
                     BindPharmacyDispenseGrid(theDT);
@@ -984,6 +987,8 @@ namespace IQCare.SCM
                             theDV[0]["PatientInstructions"] = txtPatientInstructions.Text;
 
                             lblPayAmount.Text = (Convert.ToDecimal(lblPayAmount.Text) + theBillAmt).ToString();
+                            dispenseReady = true;
+                            theDV[0]["Valid"] = true;
                         }
                         else
                         {
@@ -1011,7 +1016,7 @@ namespace IQCare.SCM
 
                             theDR["Dose"] = txtDose.Text;
                             theDR["Duration"] = txtDuration.Text;
-
+                            theDR["Valid"] = true;
                             theDR["DataStatus"] = "1";
 
                             //if (chkPrintPrescription.Checked)
@@ -1033,6 +1038,7 @@ namespace IQCare.SCM
 
                             //   grdDrugDispense.DataSource = theNewDT;
                             BindPharmacyDispenseGrid(theNewDT);
+                            dispenseReady = true;
                         }
                         theDT.AcceptChanges();
                         BindPharmacyDispenseGrid(theDT);
@@ -1064,7 +1070,7 @@ namespace IQCare.SCM
 
                         theDR["Dose"] = txtDose.Text;
                         theDR["Duration"] = txtDuration.Text;
-
+                        theDR["Valid"] = true;
                         theDR["DataStatus"] = "1";
 
                         //if (chkPrintPrescription.Checked)
@@ -1085,6 +1091,7 @@ namespace IQCare.SCM
                         theNewDT = theDT.Copy();
 
                         BindPharmacyDispenseGrid(theNewDT);
+                        dispenseReady = true;
                     }
                 }
 
@@ -1565,6 +1572,25 @@ namespace IQCare.SCM
                     //else
                     //    theProgId = 117;
 
+                    if (!dispenseReady)
+                    {
+                        MsgBuilder theBuilder = new MsgBuilder();
+                        theBuilder.DataElements["MessageText"] = "You cannot dispense this order. Ensure all fields are filled";
+                        IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
+                        return;
+                    }
+
+                    DateTime dispenseDate = Convert.ToDateTime(dtDispensedDate.Text);
+                    if (theOrderId > 0)
+                    {
+                        if(dispenseDate < Convert.ToDateTime(valuePrescriptionDate.Text))
+                        {
+                            IQCareWindowMsgBox.ShowWindow("PharmacyOrderDispenseDate", this);
+                            return;
+                        }
+                    }
+                  
+
                     int theOrderType = Convert.ToDateTime(this.dtDispensedDate.Text).Year - this.theDOB.Year <= 15 ? 117 : 116;
 
                     DataTable theUniqueDT = theDT.Copy();
@@ -1644,6 +1670,7 @@ namespace IQCare.SCM
 
                     theOrderId = 0;
                     theOrderStatus = "";
+                    dispenseReady = false;
                 }
 
                 else if (MainTab.TabPages["ReturnTab"].Focus() == true)
@@ -1732,6 +1759,7 @@ namespace IQCare.SCM
             theDT.Columns.Add("PrintPrescriptionStatus", Type.GetType("System.Int32"));
             theDT.Columns.Add("PatientInstructions", Type.GetType("System.String"));
             theDT.Columns.Add("WhyPartial", Type.GetType("System.String"));
+            theDT.Columns.Add("Valid", Type.GetType("System.Boolean")).DefaultValue=false;
             DataColumn[] thePkey = new DataColumn[3];
             thePkey[0] = theDT.Columns["ItemId"];
             thePkey[1] = theDT.Columns["BatchId"];
@@ -2152,7 +2180,7 @@ namespace IQCare.SCM
                     this.valuePrescriptionDate.Visible = this.labelPrescriptionDate.Visible = true;
                 }
             }
-            Decimal theBillAmount = new Decimal(0);
+            decimal theBillAmount = new decimal(0);
             theExistingDrugs = existingRecordDetails.Tables[0];
             foreach (DataRow theRow in (InternalDataCollectionBase)existingRecordDetails.Tables[0].Rows)
             {
@@ -2231,86 +2259,7 @@ namespace IQCare.SCM
                     }
                 }
             }
-             /*
-            if (existingRecordDetails.Tables[0].Rows.Count > 0)
-            {
-                for (int i = 0; i < existingRecordDetails.Tables[0].Rows.Count; ++i)
-                {
-                    Int32 ItemID = Convert.ToInt32(existingRecordDetails.Tables[0].Rows[i]["ItemId"].ToString());
-                    IDrug thePharmacyDetails = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
-                    DataSet drugTypeId = drugMgr.GetDrugTypeID(ItemID);
-                    if (drugTypeId.Tables[0].Rows.Count > 0)
-                    {
-                        string DrugID = drugTypeId.Tables[0].Rows[0]["DrugTypeID"].ToString();
-                        if (DrugID == "37")
-                        {
-                            int a = theOrderId;
-                            // btnART.Enabled = true;
-                            clearPopup();
-                            if (btnART.Enabled)
-                            {
-                                if (theOrderId > 0)
-                                {
-                                    IDrug thePharmacyManager1 = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
-                                    DataSet theDS1 = thePharmacyManager1.GetPharmacyDetailsByDespenced(theOrderId);
-                                    if (theDS1.Tables[0].Rows.Count > 0)
-                                    {
-                                        txtWeight.Text = theDS1.Tables[0].Rows[0]["Weight"].ToString();
-                                        txtHeight.Text = theDS1.Tables[0].Rows[0]["Height"].ToString();
-                                        if (txtWeight.Text != "" && txtHeight.Text != "")
-                                        {
-                                            Double calVal = (Convert.ToDouble(txtWeight.Text) * Convert.ToDouble(txtHeight.Text) / 3600);
-                                            calVal = (Double)Math.Sqrt(Convert.ToDouble(calVal));
-                                            txtBSA.Text = Math.Round(calVal, 2).ToString();
-                                        }
-
-                                        cmbprogram.SelectedValue = theDS1.Tables[0].Rows[0]["ProgID"].ToString();
-                                        if (theDS1.Tables[0].Rows[0]["PharmacyPeriodTaken"].ToString() != "")
-                                        {
-                                            cmdPeriodTaken.SelectedValue = theDS1.Tables[0].Rows[0]["PharmacyPeriodTaken"].ToString();
-                                        }
-                                        if (theDS1.Tables[0].Rows[0]["ProviderID"].ToString() != "")
-                                        {
-                                            cmbProvider.SelectedValue = theDS1.Tables[0].Rows[0]["ProviderID"].ToString();
-                                        }
-                                        if (theDS1.Tables[0].Rows[0]["RegimenLine"].ToString() != "")
-                                        {
-                                            cmbRegimenLine.SelectedValue = theDS1.Tables[0].Rows[0]["RegimenLine"].ToString();
-                                        }
-                                        if (theDS1.Tables[0].Rows[0]["AppDate"].ToString() != "")
-                                        {
-                                            NxtAppDate.Format = DateTimePickerFormat.Custom;
-                                            NxtAppDate.CustomFormat = "dd-MMM-yyyy";
-                                            NxtAppDate.Text = theDS1.Tables[0].Rows[0]["AppDate"].ToString();
-                                        }
-                                        else
-                                        {
-                                            // NxtAppDate.Format = DateTimePickerFormat.Custom;
-                                            NxtAppDate.CustomFormat = " ";
-                                        }
-                                        if (theDS1.Tables[0].Rows[0]["AppReason"].ToString() != "")
-                                        {
-                                            cmbReason.SelectedValue = theDS1.Tables[0].Rows[0]["AppReason"].ToString();
-                                        }
-
-                                        if (cmbprogram.SelectedValue.ToString() == "222")
-                                        {
-                                            int patientID = thePatientId;
-                                            DataSet GettheDS = thePharmacyManager1.SaveArtData(patientID, Convert.ToDateTime(dtDispensedDate.Text));
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            */
-            // todo
-            //if (theDS.Tables[0].Rows[0]["OrderedQuantity"].ToString() != null && theDS.Tables[0].Rows[0]["OrderedQuantity"].ToString() != "")
-            //{
-            //    thePrecribeAmt = Convert.ToDecimal(theDS.Tables[0].Rows[0]["OrderedQuantity"]);
-            //}
+            
             //Already Dispensed Order
             if (theOrderId > 0 && (theOrderStatus == "Already Dispensed Order" || theOrderStatus == "Partial Dispense"))
             {
@@ -2700,6 +2649,7 @@ namespace IQCare.SCM
                 this.theDispensingUnit = 0;
                 this.theBatchId = 0;
                 this.theCostPrice = 0;
+                dispenseReady = false;
                 this.theMargin = 0;
                 this.theBillAmt = 0;
                 this.theDispensingUnitName = "";
@@ -3008,8 +2958,8 @@ namespace IQCare.SCM
         {
             if (txtWeight.Text != "" && txtHeight.Text != "")
             {
-                Double calVal = (Convert.ToDouble(txtWeight.Text) * Convert.ToDouble(txtHeight.Text) / 3600);
-                calVal = (Double)Math.Sqrt(Convert.ToDouble(calVal));
+                double calVal = (Convert.ToDouble(txtWeight.Text) * Convert.ToDouble(txtHeight.Text) / 3600);
+                calVal = (double)Math.Sqrt(Convert.ToDouble(calVal));
                 txtBSA.Text = Math.Round(calVal, 2).ToString();
             }
         }
@@ -3018,7 +2968,7 @@ namespace IQCare.SCM
         /// Validates the drug dispense.
         /// </summary>
         /// <returns></returns>
-        private Boolean ValidateDrugDispense()
+        private bool ValidateDrugDispense()
         {
             if (txtItemName.Text.Trim() == "")
             {
@@ -3048,7 +2998,7 @@ namespace IQCare.SCM
                 IQCareWindowMsgBox.ShowWindowConfirm("BlankTextBox", theBuilder, this);
                 return false;
             }
-            if (txtQtyPrescribed.Text.Trim() == "")
+            if (txtQtyPrescribed.Text.Trim() == "" || int.Parse(txtQtyPrescribed.Text.Trim()) <= 0)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["Control"] = "Quantity Prescribed";
@@ -3062,7 +3012,7 @@ namespace IQCare.SCM
             //    IQCareWindowMsgBox.ShowWindowConfirm("BlankDropDown", theBuilder, this);
             //    return false;
             //}
-            if (txtQtyDispensed.Text.Trim() == "")
+            if (txtQtyDispensed.Text.Trim() == "" ||int.Parse(txtQtyDispensed.Text.Trim()) <=0)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["Control"] = "Quantity Dispensed";

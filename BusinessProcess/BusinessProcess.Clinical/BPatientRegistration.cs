@@ -290,7 +290,8 @@ namespace BusinessProcess.Clinical
             DateTime? registrationDate,
             int ModuleId = 999,
             int MaxRecords = 100,
-            string ruleFilter="")
+            string ruleFilter="",
+             string phoneNumber ="")
         {
             lock (this)
             {
@@ -318,7 +319,9 @@ namespace BusinessProcess.Clinical
                     ClsUtility.AddParameters("@status", SqlDbType.Int, status.ToString());
                 if (ModuleId > 0)
                     ClsUtility.AddParameters("@ModuleId", SqlDbType.Int, ModuleId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                if (!string.IsNullOrEmpty(phoneNumber))
+                    ClsUtility.AddParameters("@PhoneNumber", SqlDbType.VarChar, phoneNumber.Trim());
+               // ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 ClsUtility.AddExtendedParameters("@top", SqlDbType.Int, MaxRecords);
                 ClsUtility.AddExtendedParameters("@RuleFilter", SqlDbType.VarChar, ruleFilter);
                 ClsObject UserManager = new ClsObject();

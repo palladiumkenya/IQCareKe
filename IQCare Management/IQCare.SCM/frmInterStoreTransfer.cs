@@ -16,7 +16,7 @@ namespace IQCare.SCM
         DataSet dsPOItems = new DataSet();
         DataSet dsPOItemsDetail = new DataSet();
         public bool deletedGridByKey = false;
-
+        public Form PreviousForm;
         public ComboBox theGrdCombo;
      //   bool IsHandleAdded;
         DataTable dtOrdermaster;

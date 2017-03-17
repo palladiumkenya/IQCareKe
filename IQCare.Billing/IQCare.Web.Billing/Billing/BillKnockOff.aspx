@@ -18,37 +18,62 @@
         var allCheckBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxHeader"]:checkbox';
         var checkBoxSelector = '#<%=gridKO.ClientID%> input[id*="chkBxItem"]:checkbox:not(:disabled)';
         var textBoxSelector = '#<%=gridKO.ClientID%> input[id*="txtKOAmt"]:text';
+        var gridRow ='#<%=gridKO.ClientID%> > tbody > tr:not(:first)';
         function ToggleCheckUncheckAllOptionAsNeeded() {
             var totalCheckboxes = $(checkBoxSelector),
             checkedCheckboxes = totalCheckboxes.filter(":checked");
             noCheckboxesAreChecked = (checkedCheckboxes.length === 0),
             allCheckboxesAreChecked = (totalCheckboxes.length === checkedCheckboxes.length);
             $(allCheckBoxSelector).prop('checked', allCheckboxesAreChecked);
-            if (noCheckboxesAreChecked) { $('#<%=labeltotal.ClientID%>').html("Nothing selected"); }       
+            if (noCheckboxesAreChecked) { $('#<%=labeltotal.ClientID%>').html("Nothing selected"); }      
+         
 
-         }
+        }
+        function calculateSum() {
+
+
+            var totalPrice = 0.0;
+            var grid = document.getElementById('<%=gridKO.ClientID%>');
+            $(checkBoxSelector).change(function () {
+                $(gridRow).each(function () {
+
+                    if ($(this).find('input[id*="chkBxItem"]:checkbox').is(':checked')) {
+                        var ctrprice = $(this).find('input[id*="txtKOAmt"]');
+                        totalPrice += parseFloat(ctrprice.text().replace(/[^\d\.]/g, ''));
+                    }
+                });
+                $('#<%=labeltotal.ClientID%>').text("Total: " + totalPrice.toFixed(2));
+
+            });
+
+        }
                 $(document).ready(function () {
                     $(allCheckBoxSelector).on("click", "", function () {
                         $(checkBoxSelector).prop('checked', $(this).is(':checked'));
                         ToggleCheckUncheckAllOptionAsNeeded();
-
+                     
                     });
+                   
 
                     $(checkBoxSelector).on('click', "", ToggleCheckUncheckAllOptionAsNeeded);
                     ToggleCheckUncheckAllOptionAsNeeded();
 
                 });
                 var prm = Sys.WebForms.PageRequestManager.getInstance();
-                if (pm != null) {
-                    pm.add_endRequest(function (sender, e) {
+                if (prm != null) {
+                    prm.add_endRequest(function (sender, e) {
                         $(allCheckBoxSelector).on("click", "", function () {
                             $(checkBoxSelector).prop('checked', $(this).is(':checked'));
                             ToggleCheckUncheckAllOptionAsNeeded();
-
+                           
                         });
+                        $(checkBoxSelector).on("click", "", function () {
+                            $("tr:has(:checkbox:checked) td:nth-child()")
+                        })
 
                         $(checkBoxSelector).on('click', "", ToggleCheckUncheckAllOptionAsNeeded);
                         ToggleCheckUncheckAllOptionAsNeeded();
+                       
 
                     });
                 }
@@ -342,7 +367,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row" style="display: none">
+                                        <div class="row" >
                                             <div class="col-md-6">
                                             </div>
                                             <div class="form-group col-md-6">

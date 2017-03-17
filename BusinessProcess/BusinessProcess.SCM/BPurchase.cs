@@ -41,7 +41,7 @@ namespace BusinessProcess.SCM
                 PODetail.Connection = this.Connection;
                 PODetail.Transaction = this.Transaction;
                 int theRowAffected = 0;
-                int POID = 0;
+                int orderId = 0;
                 DataRow theDR;
 
                 ClsUtility.Init_Hashtable();
@@ -54,6 +54,10 @@ namespace BusinessProcess.SCM
                 ClsUtility.AddParameters("@DestinStoreID", SqlDbType.Int, DtMasterPO.Rows[0]["DestStore"].ToString());
                 ClsUtility.AddParameters("@UserID", SqlDbType.Int, DtMasterPO.Rows[0]["UserID"].ToString());
                 ClsUtility.AddParameters("@AuthorizedBy", SqlDbType.Int, DtMasterPO.Rows[0]["AthorizedBy"].ToString());
+                if (DtMasterPO.Rows[0]["PONumber"] != null && DtMasterPO.Rows[0]["PONumber"] != DBNull.Value)
+                {
+                    ClsUtility.AddParameters("@PONumber", SqlDbType.VarChar, DtMasterPO.Rows[0]["PONumber"].ToString());
+                }
                 if (isUpdate)
                 {
                     ClsUtility.AddParameters("@Poid", SqlDbType.Int, DtMasterPO.Rows[0]["POID"].ToString());
@@ -73,6 +77,7 @@ namespace BusinessProcess.SCM
                         {
                             ClsUtility.AddParameters("@Status", SqlDbType.Int, "2");
                         }
+                       
                     }
                 }
                 else
@@ -91,12 +96,12 @@ namespace BusinessProcess.SCM
                     (DataRow)
                     PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePurchaseOrderMaster_Futures",
                                           ClsUtility.ObjectEnum.DataRow);
-                POID = System.Convert.ToInt32(theDR[0].ToString());
+                orderId = System.Convert.ToInt32(theDR[0].ToString());
 
                 if (isUpdate)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@POId", SqlDbType.Int, POID.ToString());
+                    ClsUtility.AddExtendedParameters("@POId", SqlDbType.Int, orderId);
                     theRowAffected =
                         (int)
                         PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_DeletePurchaseOrderItem_Futures",
@@ -106,8 +111,9 @@ namespace BusinessProcess.SCM
                 for (int i = 0; i < dtPOItems.Rows.Count; i++)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@POId", SqlDbType.Int, POID.ToString());
-                    ClsUtility.AddParameters("@ItemId", SqlDbType.VarChar, dtPOItems.Rows[i]["ItemId"].ToString());
+                    ClsUtility.AddParameters("@POId", SqlDbType.Int, orderId.ToString());
+                    ClsUtility.AddParameters("@ItemId", SqlDbType.Int, dtPOItems.Rows[i]["ItemId"].ToString());
+                    ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
                     ClsUtility.AddParameters("@Quantity", SqlDbType.Int, dtPOItems.Rows[i]["Quantity"].ToString());
                     ClsUtility.AddParameters("@PurchasePrice", SqlDbType.Decimal, dtPOItems.Rows[i]["priceperunit"].ToString());
                     //  ClsUtility.AddParameters("@Unit", SqlDbType.Int,dtPOItems.Rows[i]["Units"].ToString());
@@ -117,6 +123,10 @@ namespace BusinessProcess.SCM
                     ClsUtility.AddParameters("@AvaliableQty", SqlDbType.Int, dtPOItems.Rows[i]["AvaliableQty"].ToString());
                     ClsUtility.AddParameters("@ExpiryDate", SqlDbType.DateTime, dtPOItems.Rows[i]["ExpiryDate"].ToString());
                     ClsUtility.AddParameters("@UnitQuantity", SqlDbType.Int, dtPOItems.Rows[i]["UnitQuantity"].ToString());
+                    if(dtPOItems.Rows[i]["SupplierId"] != DBNull.Value)
+                    {
+                        ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
+                    }
                     theRowAffected =
                         (int)
                         PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePurchaseOrderItem_Futures",
@@ -125,7 +135,7 @@ namespace BusinessProcess.SCM
 
                 DataMgr.CommitTransaction(this.Transaction);
                 DataMgr.ReleaseConnection(this.Connection);
-                return POID;
+                return orderId;
             }
             catch
             {
@@ -167,7 +177,7 @@ namespace BusinessProcess.SCM
         /// </summary>
         /// <param name="POId">The po identifier.</param>
         /// <returns></returns>
-        public DataSet GetPurchaseOrderDetailsByPoid(Int32 POId)
+        public DataSet GetPurchaseOrderDetailsByPoid(int POId)
         {
             lock (this)
             {

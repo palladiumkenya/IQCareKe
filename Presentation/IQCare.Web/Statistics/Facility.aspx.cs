@@ -184,11 +184,11 @@ namespace IQCare.Web.Statistics
                     Init_Form();
                     FacilityStats1.DataBind();
                     string theUrl;
-                    theUrl = string.Format("{0}&AppointmentStatus={1}", "./Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "All");
+                    theUrl = string.Format("{0}&AppointmentStatus={1}", "~/Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "All");
                     DirectScheduler.HRef = theUrl;
 
 
-                    theUrl = string.Format("{0}&AppointmentStatus={1}", "./Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "Missed");
+                    theUrl = string.Format("{0}&AppointmentStatus={1}", "~/Scheduler/frmScheduler_AppointmentMain.aspx?name=Add", "Missed");
                     MissedScheduler.HRef = theUrl;
                 }
 
@@ -313,7 +313,7 @@ namespace IQCare.Web.Statistics
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void hlTotalActivePatients_Click(object sender, EventArgs e)
         {
-            ShowReport(((System.Data.DataSet)ViewState["theDS"]).Tables[0], "ActivePatients");
+            ShowReport(((DataSet)ViewState["theDS"]).Tables[0], "ActivePatients");
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace IQCare.Web.Statistics
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void hlActiveNonARTPatients_Click(object sender, EventArgs e)
         {
-            ShowReport(((System.Data.DataSet)ViewState["theDS"]).Tables[1], "ActiveNonARTPatients");
+            ShowReport(((DataSet)ViewState["theDS"]).Tables[1], "ActiveNonARTPatients");
         }
 
         /// <summary>
