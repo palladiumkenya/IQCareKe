@@ -164,6 +164,25 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
 
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPharmacyPendingPrescriptions()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyPendingPrescriptions(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[7] { row["masterVisitID"].ToString(), row["Ptn_pk"].ToString(),
+                    row["identifiervalue"].ToString(),row["FirstName"].ToString(),row["MidName"].ToString(),
+                    row["LastName"].ToString(),row["prescribedBy"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]

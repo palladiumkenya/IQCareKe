@@ -10,8 +10,16 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucPharmacyPrescription : System.Web.UI.UserControl
     {
+        public string PMSCM = "";
+        public string PMSCMSAmePointDispense = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["SCMModule"] != null)
+                PMSCM = Session["SCMModule"].ToString();
+
+            if (Session["SCMSamePointDispense"] != null)
+                PMSCMSAmePointDispense = Session["SCMSamePointDispense"].ToString();
+
             LookupLogic lookUp = new LookupLogic();
             lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
             lookUp.populateDDL(regimenLine, "RegimenLines");

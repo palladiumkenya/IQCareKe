@@ -149,7 +149,7 @@
                                     <label class="control-label  pull-left text-primary">*Visit Scheduled?</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:RadioButtonList ID="rblVisitScheduled" runat="server" RepeatDirection="Horizontal" data-parsley-mincheck="1">
+                                    <asp:RadioButtonList ID="rblVisitScheduled" runat="server" RepeatDirection="Horizontal" ClientIDMode="Static" data-parsley-mincheck="1">
                                         <asp:ListItem Text="Yes" Value="1" />
                                         <asp:ListItem Text="No" Value="0" />
                                     </asp:RadioButtonList>
@@ -1091,24 +1091,12 @@
 <script type="text/javascript">
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
-    var pmscm = "<%=PMSCM%>";
-    var pmscmFlag = "0";
+    
+    
 
     $(document).ready(function () {
         showHideFPControls();
 
-        if(pmscm == "")
-        {
-            $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
-        }
-        else{
-            pmscmFlag = "1";
-            $("#ddlBatch").prop('disabled', false);
-            $("#txtQuantityDisp").prop('disabled', false);
-        }
-
-        /////////////////////////////////PATIENT ENCOUNTER////////////////////////////////////////////////
             var getVisitDateVal = "<%= this.visitdateval %>";
             var getFemaleLMPVal = "<%= this.LMPval %>";
             var getEDDPVal = "<%= this.EDDval %>";

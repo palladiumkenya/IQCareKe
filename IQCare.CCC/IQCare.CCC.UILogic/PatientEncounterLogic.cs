@@ -113,6 +113,13 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public DataTable getPharmacyPendingPrescriptions(string PatientMasterVisitID, string patientID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyPendingPrescriptions(PatientMasterVisitID,patientID);
+
+        }
+
         public string getPharmacyDrugMultiplier(string frequencyID)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");

@@ -18,22 +18,19 @@ namespace IQCare.Web.CCC.UC
         public string LMPval = "";
         public string EDDval = "";
         public string nxtAppDateval = "";
-        public string PMSCM = "";
         public int genderID;
         public string gender = "";
 
-        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SCMModule"] != null)
-                PMSCM = Session["SCMModule"].ToString();
+            
 
             if (Request.QueryString["visitId"] != null)
             {
-                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
