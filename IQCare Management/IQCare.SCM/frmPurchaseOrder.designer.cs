@@ -129,7 +129,7 @@
             this.dgwItemSubitemDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgwItemSubitemDetails.Location = new System.Drawing.Point(0, 107);
             this.dgwItemSubitemDetails.Name = "dgwItemSubitemDetails";
-            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(852, 273);
+            this.dgwItemSubitemDetails.Size = new System.Drawing.Size(928, 273);
             this.dgwItemSubitemDetails.TabIndex = 10;
             this.dgwItemSubitemDetails.Tag = "dgwDataGridView";
             this.dgwItemSubitemDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwItemSubitemDetails_CellEndEdit);
@@ -205,7 +205,7 @@
             this.panel1.Controls.Add(this.ddlPreparedBy);
             this.panel1.Location = new System.Drawing.Point(0, 399);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(852, 57);
+            this.panel1.Size = new System.Drawing.Size(940, 57);
             this.panel1.TabIndex = 20;
             this.panel1.Tag = "lblPanelSCM";
             // 
@@ -303,10 +303,9 @@
             // 
             // txtOrderNumber
             // 
-            this.txtOrderNumber.Enabled = false;
             this.txtOrderNumber.Location = new System.Drawing.Point(181, 13);
             this.txtOrderNumber.Name = "txtOrderNumber";
-            this.txtOrderNumber.Size = new System.Drawing.Size(168, 20);
+            this.txtOrderNumber.Size = new System.Drawing.Size(231, 20);
             this.txtOrderNumber.TabIndex = 4;
             this.txtOrderNumber.Tag = "txtTextBox";
             // 
@@ -355,7 +354,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 457);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(852, 47);
+            this.panel2.Size = new System.Drawing.Size(940, 47);
             this.panel2.TabIndex = 30;
             this.panel2.Tag = "pnlSubPanel";
             // 
@@ -451,7 +450,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(852, 504);
+            this.ClientSize = new System.Drawing.Size(940, 504);
             this.Controls.Add(this.lblTotalAmount);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);

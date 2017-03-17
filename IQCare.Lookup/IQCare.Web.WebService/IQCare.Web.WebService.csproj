@@ -15,10 +15,6 @@
     <AssemblyName>IQCare.Web.WebService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TrunkDir>..\..\</TrunkDir>
     <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
     <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
@@ -123,7 +119,8 @@
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(Content)" DestinationFolder="$(RedDir)\WebService" />
+    
+	<Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />	
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RedDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RedDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
   </Target>

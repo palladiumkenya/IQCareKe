@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using Entities.CCC.Visit;
@@ -66,11 +67,11 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string GetLookupPreviousLabsList(string patient_ID)
+        public string GetLookupPreviousLabsList()
         {
 
 
-            int patientId = Convert.ToInt32(patient_ID);
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
 
             string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
 

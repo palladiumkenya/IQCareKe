@@ -273,7 +273,7 @@ namespace BusinessProcess.Laboratory
             ClsUtility.Init_Hashtable();
             //  Decimal? nullDecimal = null;
             if (labOrder.Id > -1)
-                ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrder.Id);
+            ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrder.Id);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, UserId);
             ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, labOrder.PatientId);
             ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);

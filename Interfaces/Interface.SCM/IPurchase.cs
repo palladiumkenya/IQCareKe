@@ -9,6 +9,7 @@ namespace Interface.SCM
 {
     public interface IPurchase
     {
+
         int SavePurchaseOrder(DataTable DtMasterPO, DataTable dtPOItems, bool isUpdate);
         DataSet GetPurcaseOrderItem(int isPO, int UserID, int StoreID);
         DataSet GetPurchaseOrderDetailsByPoid(Int32 POId);

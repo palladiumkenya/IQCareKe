@@ -63,7 +63,7 @@ namespace BusinessProcess.CCC
             PatientVital vital =
                 _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                     .OrderByDescending(x => x.Id)
-                    .First();
+                    .FirstOrDefault();
             return vital;
         }
 

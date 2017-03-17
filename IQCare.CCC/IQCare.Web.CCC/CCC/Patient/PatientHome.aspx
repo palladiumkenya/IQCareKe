@@ -41,10 +41,10 @@
         <ul class="nav nav-tabs">
 
             <li class="active"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
-
+            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
             <li class="disabled"><a data-toggle="tab" href="#Diagnosis">Diagnosis & ARV HIstory </a></li>
         
-            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
+
         </ul>
     
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
@@ -53,7 +53,7 @@
                  <div id="EntryPoint" class="tab-pane fade in active">
                      <div class="col-md-12 col-xs-12">
                          
-                             <div class="col-md-4 col-xs-4 col-sm-4">
+                          <div class="col-md-4 col-xs-4 col-sm-4">
                                <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>TransferIn Status</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
@@ -73,13 +73,13 @@
                               </div>
                               
                               <div class="col-md-12">
-                                   <div class="col-md-6"><label class="control-lable pull-left">Regimen : </label></div>
-                                  <div class="col-md-6"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="lblTIRegimen" ClientIDMode="Static"></asp:Label></div>
+                                   <div class="col-md-4"><label class="control-lable pull-left">Regimen : </label></div>
+                                  <div class="col-md-8"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="lblTIRegimen" ClientIDMode="Static"></asp:Label></div>
                               </div>
                             
                               <div class="col-md-12">
-                                   <div class="col-md-6"><label class="control-lable pull-left">Facility From :</label></div>
-                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFacilityFrom" ClientIDMode="Static"></asp:Label></div>
+                                   <div class="col-md-5"><label class="control-lable pull-left">Facility From :</label></div>
+                                  <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFacilityFrom" ClientIDMode="Static"></asp:Label></div>
                               </div>
 
                               
@@ -138,10 +138,147 @@
 
                      </div>
                  </div>
+                 <div id="Baseline" class="tab-pane fade">
+                     <div class="col-md-4 col-xs-4 col-sm-4">
+                         <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>Baseline Assessment Summary</h6></label></div>
+                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                              <div class="col-md-12 form-group">
+                                   
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">HBV Infected</label></div>
+                                       <div class="col-md-3">
+                                            <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblHbvInfectedYes">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> Yes </span>
+                                            </label>
+                                       </div>
+                                      <div class="col-md-3">
+                                           <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblHbvInfectedNo">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> NO </span>
+                                            </label>
+                                      </div>
+                                  </div>
+                                                               
+                                  <div class="col-md-12 form-group">
+                                      <div class="col-md-6"><label class="control-lable pull-left">Pregnant </label></div>
+                                       <div class="col-md-3">
+                                            <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblPregnantYes">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> Yes </span>
+                                            </label>
+                                       </div>
+                                      <div class="col-md-3">
+                                           <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblPregnantNo">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> NO </span>
+                                            </label>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                      <div class="col-md-6"><label class="control-lable pull-left">TB Infected</label></div> 
+                                      <div class="col-md-3">
+                                            <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblTBInfectedYes">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> Yes </span>
+                                            </label>
+                                       </div>
+                                      <div class="col-md-3">
+                                           <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblTBInfectedNo">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> NO </span>
+                                            </label>
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                      <div class="col-md-6"><label class="control-lable pull-left">BreastFeeding</label></div> 
+                                      <div class="col-md-3">
+                                            <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblBreastfeedingYes">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> Yes </span>
+                                            </label>
+                                       </div>
+                                      <div class="col-md-3">
+                                           <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblBreastfeedingNo">
+                                                  <input class="sr-only" type="checkbox" value="option1"> <span class="checkbox-label pull-left"> NO </span>
+                                            </label>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">Who Stage</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblwhostage2" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                              
+                                  <div class="col-md-12 form-group">
+                                   <div class="col-md-6"><label class="control-lable pull-left">CD4 Count</label></div>
+                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary" ID="lblcd4" ClientIDMode="Static"></asp:Label></div>
+                              </div>
+                              
+
+                            </div>                      
+
+                          </div>
+                    
+                     <div class="col-md-4 col-xs-4 col-sm-4">
+                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6><strong>Patient Baseline Vitals</strong></h6> </label></div>
+                              <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
+                              <div class="col-md-12">
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">MUAC</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblmuac" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">Weight</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblweight" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">Height</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblheight" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">BMI</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblbmi" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+
+                              </div>
+                          </div>
+
+                      <div class="col-md-4 col-xs-4 col-sm-4">
+                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6><strong>Treatment Initiation </strong></h6> </label></div>
+                              <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
+                              <div class="col-md-12">
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-7"><label class="control-lable pull-left">Date Started Firstline:</label></div>
+                                     <div class="col-md-5"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFirstline" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">ART Cohort: </label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblcohort" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                  
+                                    <div class="col-md-12 form-group">
+                                       <div class="col-md-5"><label class="control-lable pull-left">Regimen: </label></div>
+                                     <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblRegimenName" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">Baseline ViralLoad :</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblbaselineVL" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                  
+                                  <div class="col-md-12 form-group">
+                                       <div class="col-md-6"><label class="control-lable pull-left">ViralLoad Date :</label></div>
+                                     <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblBlDate" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+
+                              </div>
+                          </div>
+                 </div> <!-- diagnosis -->  
+
                  <div id="Diagnosis" class="tab-pane fade">
                      
-                 </div>
-                 <div id="Baseline" class="tab-pane fade"></div>       
+                 </div>    
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->
 
@@ -158,6 +295,88 @@
         $(document).ready(function() {
 
             var patientId = "<%=PatientId%>";
+            
+            /* populate patient baseline information */
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientBaselineService.asmx/GetPatientBaselineInfo",
+                data: "{'patientId':'" + patientId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $.each(itemList,
+                        function(index, itemList) {
+                            if (itemList.Id > 0) {
+                                
+                                /* transferin status */
+                                $("#<%=lblTransferinDate.ClientID%>").text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));
+                                $("#<%= lblTreatmentStartDate.ClientID%>").text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblTIRegimen.ClientID%>").text(itemList.CurrentTreatmentName);
+                                $("#<%=lblFacilityFrom.ClientID%>").text(itemList.FacilityFrom);
+
+                                /*patient Diagnosis */
+                                $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
+                                $("#<%=lblARTInitiationDate.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
+                                $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
+                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                $("#<%=lblweight.ClientID%>").text(itemList.Weight);
+                                $("#<%=lblheight.ClientID%>").text(itemList.Height);
+                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+
+                                $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
+                                $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
+                                $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');
+                                $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
+                                
+                                /* patient baseline */
+                                if (!itemList.HBVInfected) {
+                                    $("#lblHbvInfectedNo").checkbox('check');
+                                    $("#lblHbvInfectedYes").checkbox('uncheck');
+                                } else {
+                                    $("#lblHbvInfectedNo").checkbox('uncheck');
+                                    $("#lblHbvInfectedYes").checkbox('check');
+                                }
+
+                                if (!itemList.Pregnant) {
+                                    $("#lblPregnantNo").checkbox('check');
+                                    $("#lblPregnantYes").checkbox('uncheck');
+                                } else {
+                                    $("#lblPregnantNo").checkbox('uncheck');
+                                    $("#lblPregnantYes").checkbox('check');
+                                }
+
+                                if (!itemList.TBinfected) {
+                                    $("#lblTBInfectedNo").checkbox('check');
+                                    $("#lblTBInfectedYes").checkbox('uncheck');
+                                } else {
+                                    $("#lblTBInfectedNo").checkbox('uncheck');
+                                    $("#lblTBInfectedYes").checkbox('check');
+                                }
+
+                                if (!itemList.BreastFeeding) {
+                                    $("#lblBreastfeedingNo").checkbox('check');
+                                    $("#lblBreastfeedingYes").checkbox('uncheck');
+                                } else {
+                                    $("#lblBreastfeedingNo").checkbox('uncheck');
+                                    $("#lblBreastfeedingYes").checkbox('check');
+                                }
+
+
+
+
+                            }
+                        });
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message);
+                }
+            });
 
             $.ajax({
                 type: "POST",

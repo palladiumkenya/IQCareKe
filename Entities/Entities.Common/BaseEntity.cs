@@ -12,7 +12,7 @@ namespace Entities.Common
         public bool DeleteFlag { get; set; }
         protected BaseEntity()
         {
-            CreateDate = Convert.ToDateTime(DateTime.Now.ToString("u"));
+            CreateDate = Convert.ToDateTime(DateTime.Now);
             //CreatedBy =Convert.ToInt16(HttpContext.Current.Session["AppUserId"].ToString());
             //Session["AppUserId"];
         }

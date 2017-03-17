@@ -65,7 +65,7 @@ namespace IQCare.Web.Billing
         }
 </script>";
             ClientScript.RegisterClientScriptBlock(this.GetType(), "calendarinMonths", script);
-            if (!CurrentSession.Current.HasFeaturePermission(ApplicationAccess.BillingFeature.Report))
+            if (CurrentSession.Current == null || !CurrentSession.Current.HasFeaturePermission(ApplicationAccess.BillingFeature.Report))
             {
                 CurrentSession.Logout();
 

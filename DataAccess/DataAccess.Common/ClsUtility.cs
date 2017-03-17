@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace DataAccess.Common
 {
@@ -12,7 +11,10 @@ namespace DataAccess.Common
 
         public enum ObjectEnum
         {
-            DataSet,DataTable,DataRow,ExecuteNonQuery
+            DataSet,
+            DataTable,
+            DataRow,
+            ExecuteNonQuery
         }
 
         public static void Init_Hashtable()
@@ -27,20 +29,20 @@ namespace DataAccess.Common
         /// <param name="FieldName">Name of the field.</param>
         /// <param name="FieldType">Type of the field.</param>
         /// <param name="FieldValue">The field value.</param>
-        public static void AddParameters(string FieldName,SqlDbType FieldType,string FieldValue, ParameterDirection Direction = ParameterDirection.Input)
+        public static void AddParameters(string FieldName, SqlDbType FieldType, string FieldValue, ParameterDirection Direction = ParameterDirection.Input)
         {
             Pkey = Pkey + 1;
             theParams.Add(Pkey, FieldName);
             Pkey = Pkey + 1;
             theParams.Add(Pkey, FieldType);
             Pkey = Pkey + 1;
-            
+
             if (FieldType == SqlDbType.DateTime)//conversion of string to date time...using ISO standard for datetime defination always
             {
                 DateTime dateValue;
-                if (DateTime.TryParse(FieldValue,out dateValue))
-                    FieldValue=dateValue.ToString("yyyyMMdd hh:mm:ss tt");
-             
+                if (DateTime.TryParse(FieldValue, out dateValue))
+                    FieldValue = dateValue.ToString("yyyyMMdd hh:mm:ss tt");
+
             }
             theParams.Add(Pkey, FieldValue);
         }

@@ -18,6 +18,7 @@ namespace Entities.Lab
         /// <value>
         /// The identifier.
         /// </value>
+        //[ForeignKey("LabOrderId")]
         public int Id { get; set; }
         /// <summary>
         /// Gets or sets the reference identifier.

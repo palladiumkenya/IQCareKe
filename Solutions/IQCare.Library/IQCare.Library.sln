@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.IQControl", "..\..\IQCare.Library\IQCare.IQControl\IQCare.IQControl.csproj", "{BC7FF893-A985-4A81-9DE9-BEF926FCADF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareCustomReportConfig", "..\..\IQCare.Library\IQCareReport\IQCareCustomReportConfig.csproj", "{9F4331B2-E623-48EC-AD04-7F7CFD8195E1}"

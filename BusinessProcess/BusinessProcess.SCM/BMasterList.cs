@@ -944,6 +944,18 @@ namespace BusinessProcess.SCM
              return (DataTable)obj.ReturnObject(ClsUtility.theParams, "SCM_GetItemsByStoreId", ClsUtility.ObjectEnum.DataTable);
 
         }
+
+        public DataTable GetItemsBySupplier(int supplierId, int? itemTypeId = default(int?))
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@SupplierId", SqlDbType.Int, supplierId);
+            if (itemTypeId.HasValue)
+            { 
+                ClsUtility.AddExtendedParameters("@ItemTypeId", SqlDbType.Int, itemTypeId.Value);
+            }
+            return (DataTable)obj.ReturnObject(ClsUtility.theParams, "SCM_GetItemBySupplier", ClsUtility.ObjectEnum.DataTable);
+        }
     }
 }
 

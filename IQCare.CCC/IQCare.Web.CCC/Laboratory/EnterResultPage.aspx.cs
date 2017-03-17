@@ -213,6 +213,9 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Service Orders Result Page";
             Master.ExecutePatientLevel = true;
+
+
+
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();

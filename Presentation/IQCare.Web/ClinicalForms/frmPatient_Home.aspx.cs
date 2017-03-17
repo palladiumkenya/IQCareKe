@@ -1781,11 +1781,11 @@ namespace IQCare.Web.Clinical
         {
             try
             {
-                EnrollmentService service = new EnrollmentService(this.PatientId);
-                service.ReActivatePatient(CurrentSession.Current, this.ModuleId);
-                Session["HIVPatientStatus"] = 0;
+                //EnrollmentService service = new EnrollmentService(this.PatientId);
+               // service.ReActivatePatient(CurrentSession.Current, this.ModuleId);
+               // Session["HIVPatientStatus"] = 0;
 
-                string Url = string.Format("{0}?PatientId={1}", "../ClinicalForms/frmPatient_Home.aspx", Session["PatientId"].ToString());
+                string Url = string.Format("{0}?mod={1}?PatientId={2}", "../Patient/AddTechnicalArea.aspx", CurrentSession.Current.CurrentServiceArea.Id, Session["PatientId"].ToString());
                 Response.Redirect(Url);
 
             }

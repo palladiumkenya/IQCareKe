@@ -2658,7 +2658,7 @@ namespace IQCare.Web.Patient
 
                     theDV = new DataView(theDSXML.Tables["Mst_Decode"]);
                     Session["SystemId"] = "1";
-                    theDV.RowFilter = "CodeID=12 and SystemID=" + Session["SystemId"] + " and DeleteFlag=0";
+                    theDV.RowFilter = "CodeID=12 and SystemID=1 and DeleteFlag=0";
                     theDT = theUtils.CreateTableFromDataView(theDV);
                     BindManager.BindCombo(ddmaritalStatus, theDT, "Name", "ID");
                     theDV.Dispose();
