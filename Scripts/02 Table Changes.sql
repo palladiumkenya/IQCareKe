@@ -96,6 +96,16 @@ Begin
   Alter table dbo.dtl_PatientPharmacyOrder Add Id int Not Null Identity(1,1)
 End
 Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_GRNote'))    
+Begin
+  Alter table dbo.Dtl_GRNote Add Id int Not Null Identity(1,1)
+End
+Go
+If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_StockTransaction'))    
+Begin
+  Alter table dbo.Dtl_StockTransaction Add Id int Not Null Identity(1,1)
+End
+Go
 /****** Object:  Index [IDX_dtl_PatientPharmacyOrder_CL1]    Script Date: 6/20/2016 1:22:38 PM ******/
 If  Exists (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientPharmacyOrder]') AND name = N'IDX_dtl_PatientPharmacyOrder_CL1')   
 DROP INDEX [IDX_dtl_PatientPharmacyOrder_CL1] ON [dbo].[dtl_PatientPharmacyOrder] WITH ( ONLINE = OFF )

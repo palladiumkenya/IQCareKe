@@ -400,7 +400,7 @@
                                             <div class="col-md-12">
                                                 <label class="control-label pull-left">Regimen:</label></div>
                                             <div class="col-md-1 pull-left" style="padding-left: 0%">
-                                                <asp:Button ID="btnthisRegimen" CssClass="btn btn-info" runat="server" Text="..." Enabled="False" /></div>
+                                                <asp:Button ID="btnthisRegimen" CssClass="btn btn-info" runat="server" Text="..." Enabled="False" OnClick="btnthisRegimen_Click" /></div>
                                             <div class="col-md-4 pull-left" style="padding-right: 0%">
                                                 <input id="txtthisregimen" class="form-control" size="16" name="thisregimen" readonly="readonly" runat="server" /></div>
                                         </div>

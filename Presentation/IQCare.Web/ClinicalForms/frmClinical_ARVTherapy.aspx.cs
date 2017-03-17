@@ -1363,6 +1363,11 @@ namespace IQCare.Web.Clinical
             }
         }
 
+        protected void btnthisRegimen_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// Validate_s the data_ quality.
         /// </summary>
