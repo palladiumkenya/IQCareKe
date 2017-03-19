@@ -83,14 +83,23 @@ namespace IQCare.Web.CCC.UC
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
+            if (pce.visitScheduled == "1")
+                vsYes.Checked = true;
+            else if (pce.visitScheduled == "0")
+                vsNo.Checked = true;
 
-            rblVisitScheduled.SelectedValue = pce.visitScheduled;
+            //rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
-            rblANCProfile.SelectedValue = pce.ancProfile;
+            //rblANCProfile.SelectedValue = pce.ancProfile;
+            if (pce.ancProfile == "1")
+                ancYes.Checked = true;
+            else if (pce.ancProfile == "0")
+                ancNo.Checked = true;
+
             onFP.SelectedValue = pce.onFP;
 
             foreach (ListItem item in fpMethod.Items)

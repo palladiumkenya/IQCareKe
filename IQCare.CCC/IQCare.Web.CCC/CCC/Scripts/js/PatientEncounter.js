@@ -118,6 +118,45 @@ function AddChronicIllness() {
     }
 }
 
+var AllergyList = new Array();
+function AddAllergy() {
+    var allergy = $('#txtAllergy').val();
+    var allergyResponse = $('#txtAllergyResponse').val();
+    var allergyDate = $("#txtAllergyDate").val();
+
+    //Validate duplication
+    var allergyFound = 0;
+
+    if (allergy == "") {
+        toastr.error("Error", "Please enter allergy");
+        return false;
+    }
+
+    allergyFound = $.inArray("" + allergy + "", AllergyList);
+
+
+    if (allergyFound > -1) {
+        toastr.error("Error", "Allergy already exists.");
+        return false;
+    }
+
+    else {
+
+        AllergyList.push("" + allergy + "");
+        arrAllergyUI = [];
+        arrAllergyUI.push([allergy, allergyResponse, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+
+        DrawDataTable("dtlAllergy", arrAllergyUI);
+
+        $('#txtAllergy').val("");
+        $("#txtAllergyResponse").val("");
+        $('#txtAllergyDate').val("");
+    }
+}
+
+
+
+
 var vaccineList = new Array();
 var vaccineStageList = new Array();
 function AddVaccine() {

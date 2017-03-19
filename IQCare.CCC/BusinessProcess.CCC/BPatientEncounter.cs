@@ -99,21 +99,18 @@ namespace BusinessProcess.CCC
         }
 
 
-        public int saveChronicIllness(string masterVisitID, string patientID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines)
+        public int saveChronicIllness(string masterVisitID, string patientID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines, List<Allergies> allergies)
         {
             try
             {
                 lock (this)
                 {
-                    //if (chronicIllness.Count > 0)
-                    //{
-                        ClsObject obj = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                    ClsObject obj = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                        int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                    //}
+                    int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var chrIll in chronicIllness)
                     {
@@ -129,15 +126,12 @@ namespace BusinessProcess.CCC
                         int i = (int)chrIllness.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
 
-                    //if (Vaccines.Count > 0)
-                    //{
-                        ClsObject objj = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                    ClsObject objj = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                        int b = (int)objj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterVaccines", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                    //}
+                    int b = (int)objj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterVaccines", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
                     foreach (var vacc in Vaccines)
                     {
@@ -150,6 +144,27 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@vaccineDate", SqlDbType.VarChar, vacc.vaccineDate);
 
                         int i = (int)vaccine.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterVaccines", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    }
+
+                    //allergies
+                    ClsObject objAllergy = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+
+                    int q = (int)objAllergy.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                    foreach (var all in allergies)
+                    {
+                        ClsObject allerg = new ClsObject();
+                        ClsUtility.Init_Hashtable();
+                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
+                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                        ClsUtility.AddParameters("@allergy", SqlDbType.VarChar, all.allergy);
+                        ClsUtility.AddParameters("@allergyResponse", SqlDbType.VarChar, all.allergyResponse);
+                        ClsUtility.AddParameters("@allergyDate", SqlDbType.VarChar, all.allergyDate);
+
+                        int i = (int)allerg.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
 
                     return 0;
@@ -410,6 +425,19 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterChronicIllness", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public DataTable getPatientEncounterAllergies(string PatientMasterVisitID, string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterAllergies", ClsUtility.ObjectEnum.DataTable);
             }
         }
 
