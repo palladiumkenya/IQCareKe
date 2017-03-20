@@ -122,8 +122,22 @@
 </div><%-- .col-md-12--%>
 
 <script type="text/javascript">
+    var pmscm = "<%=PMSCM%>";
+    var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
+    var pmscmFlag = "0";
+
     $(document).ready(function () {
         drugList();
+
+        if (pmscmSamePointDispense == "False") {
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+        }
+        else {
+            pmscmFlag = "1";
+            $("#ddlBatch").prop('disabled', false);
+            $("#txtQuantityDisp").prop('disabled', false);
+        }
     });
       var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
                 ajax: {

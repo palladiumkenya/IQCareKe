@@ -38,6 +38,15 @@ namespace Entities.CCC.Encounter
             public string dose { get; set; }
             public string duration { get; set; }
         }
+
+        [Serializable]
+        public class Allergies
+        {
+            public string allergy { get; set; }
+            public string allergyResponse { get; set; }
+            public string allergyDate { get; set; }
+        }
+
         [Serializable]
         public class PhysicalExamination
         {

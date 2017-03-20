@@ -22,13 +22,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox VisitDate;
         
         /// <summary>
-        /// rblVisitScheduled control.
+        /// vsYes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblVisitScheduled;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton vsYes;
+        
+        /// <summary>
+        /// vsNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton vsNo;
         
         /// <summary>
         /// ddlVisitBy control.
@@ -130,13 +139,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputText ExpectedDateOfChildBirth;
         
         /// <summary>
-        /// rblANCProfile control.
+        /// ancYes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblANCProfile;
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ancYes;
+        
+        /// <summary>
+        /// ancNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ancNo;
         
         /// <summary>
         /// onFP control.
@@ -227,6 +245,33 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox treatmentDuration;
+        
+        /// <summary>
+        /// txtAllergy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAllergy;
+        
+        /// <summary>
+        /// txtAllergyResponse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAllergyResponse;
+        
+        /// <summary>
+        /// txtAllergyDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAllergyDate;
         
         /// <summary>
         /// ddlVaccine control.

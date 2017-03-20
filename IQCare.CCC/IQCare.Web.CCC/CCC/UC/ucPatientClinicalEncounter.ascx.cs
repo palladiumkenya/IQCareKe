@@ -18,22 +18,19 @@ namespace IQCare.Web.CCC.UC
         public string LMPval = "";
         public string EDDval = "";
         public string nxtAppDateval = "";
-        public string PMSCM = "";
         public int genderID;
         public string gender = "";
 
-        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SCMModule"] != null)
-                PMSCM = Session["SCMModule"].ToString();
+            
 
             if (Request.QueryString["visitId"] != null)
             {
-                //visitId = int.Parse(Request.QueryString["visitId"].ToString());
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
             }
 
@@ -86,14 +83,23 @@ namespace IQCare.Web.CCC.UC
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
+            if (pce.visitScheduled == "1")
+                vsYes.Checked = true;
+            else if (pce.visitScheduled == "0")
+                vsNo.Checked = true;
 
-            rblVisitScheduled.SelectedValue = pce.visitScheduled;
+            //rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             examinationPregnancyStatus.SelectedValue = pce.pregStatus;
-            rblANCProfile.SelectedValue = pce.ancProfile;
+            //rblANCProfile.SelectedValue = pce.ancProfile;
+            if (pce.ancProfile == "1")
+                ancYes.Checked = true;
+            else if (pce.ancProfile == "0")
+                ancNo.Checked = true;
+
             onFP.SelectedValue = pce.onFP;
 
             foreach (ListItem item in fpMethod.Items)
