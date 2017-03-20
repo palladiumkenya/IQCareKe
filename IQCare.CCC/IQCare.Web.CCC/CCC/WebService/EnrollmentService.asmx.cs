@@ -1,14 +1,10 @@
 ﻿using IQCare.CCC.UILogic;
-using Entities.CCC;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
-using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Enrollment;
@@ -169,7 +165,7 @@ namespace IQCare.Web.CCC.WebService
                                 utility.Decrypt(patient_person_details.MiddleName),
                                 facility.FacilityID,
                                 patientEnrollmentId, 
-                                patientEntryPointId,
+                                patientEntryPointId ,
                                 DateTime.Now, patient_person_details.Sex,
                                 patient.DateOfBirth,
                                 1, maritalStatus.MaritalStatusId,
