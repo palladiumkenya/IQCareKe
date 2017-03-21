@@ -661,6 +661,12 @@ namespace IQCare.SCM
                 colWhyPartial.Width = 2;
                 colWhyPartial.Visible = false;
 
+                DataGridViewTextBoxColumn colValid = new DataGridViewTextBoxColumn();
+                colValid.HeaderText = "Valid";
+                colValid.Name = colValid.DataPropertyName = "Valid";
+                colValid.Width = 2;
+                colValid.Visible = false;
+
                 //DataGridViewImageColumn theCol22 = new DataGridViewImageColumn();
                 //theCol22.Width = 25;
                 //theCol22.Image = Image.FromFile(GblIQCare.GetPath() + "\\No_16x.ico");
@@ -694,6 +700,7 @@ namespace IQCare.SCM
                 grdDrugDispense.Columns.Add(colPrint);
                 grdDrugDispense.Columns.Add(colInstruction);
                 grdDrugDispense.Columns.Add(colWhyPartial);
+                grdDrugDispense.Columns.Add(colValid);
                 //grdDrugDispense.Columns.Add(theCol22);
                 grdDrugDispense.DataSource = theDT;
             }
@@ -3232,7 +3239,9 @@ namespace IQCare.SCM
                 IQCareWindowMsgBox.ShowWindowConfirm("BlankTextBox", theBuilder, this);
                 return false;
             }
-            if (txtQtyPrescribed.Text.Trim() == "" || int.Parse(txtQtyPrescribed.Text.Trim()) <= 0)
+          //  string strPrescribed = txtQtyPrescribed.Text.Trim();
+            //30.00
+            if (txtQtyPrescribed.Text.Trim() == "" || Convert.ToDecimal(txtQtyPrescribed.Text.Trim()) <= 0)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["Control"] = "Quantity Prescribed";
@@ -3246,7 +3255,7 @@ namespace IQCare.SCM
             //    IQCareWindowMsgBox.ShowWindowConfirm("BlankDropDown", theBuilder, this);
             //    return false;
             //}
-            if (txtQtyDispensed.Text.Trim() == "" ||int.Parse(txtQtyDispensed.Text.Trim()) <=0)
+            if (txtQtyDispensed.Text.Trim() == "" || Convert.ToDecimal(txtQtyDispensed.Text.Trim()) <=0)
             {
                 MsgBuilder theBuilder = new MsgBuilder();
                 theBuilder.DataElements["Control"] = "Quantity Dispensed";
