@@ -15,7 +15,8 @@ namespace IQCare.Web.CCC.Encounter
     {
         public int PatientId;
         public int visitId = 0;
-        public int PatientMasterVisitId; 
+        public int PatientMasterVisitId;
+        public int UserId;
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -25,6 +26,8 @@ namespace IQCare.Web.CCC.Encounter
         {
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            //UserId = Convert.ToInt32(HttpContext.Current.Session["UserId"]);
 
             if (!IsPostBack)
             {

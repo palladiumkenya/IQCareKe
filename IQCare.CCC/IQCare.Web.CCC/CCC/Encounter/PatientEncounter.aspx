@@ -111,9 +111,13 @@
                                                             </thead>
                                                             <tbody></tbody>
                                     
-                                                <tbody>                        
-                                                </tbody>                  
+                                                       <tbody>                        
+                                                  </tbody>                  
                                                 </table>
+                                         <div class="col-md-3 pull-right ">
+                                      <asp:LinkButton runat="server" ID="addResults" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Results</asp:LinkButton>
+
+                                        </div>
                             </div>    
         
                 
@@ -131,7 +135,7 @@
                                                                     <th><span class="text-primary">Lab Test</span></th>
                                                                     <th><span class="text-primary">Order Reason</span></th>
                                                                     <th><span class="text-primary">Order Date</span></th>
-                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    <th><span class="text-primary">Results</span></th>
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -525,11 +529,13 @@
     <script type="text/javascript">
         var patientId = <%=PatientId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
+       
         
 
         $(document).ready(function () {     
             console.log(patientId);
             console.log(patientMasterVisitId);
+           // console.log(userId);
 
 
             $("#LabDatePicker").datepicker({
@@ -720,6 +726,15 @@
       
       
             // Load lab order
+         
+            $("#addResults").click(function (e) {
+                //location.href = 'StartEncounter.aspx';?patient=5
+                location.href = 'http://localhost:2402/Laboratory/LabRecordEntry.aspx';
+                
+                //location.href = 'http://localhost:2402/Laboratory/LabRecordEntry.aspx?PatientID="<%= Session["patientId"].ToString()%>"';
+            });
+
+
             $("#btnAddLab").click(function (e) {
 
                 var labOrderFound = 0;

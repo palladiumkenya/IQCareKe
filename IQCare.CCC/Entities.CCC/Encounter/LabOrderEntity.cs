@@ -27,7 +27,9 @@ namespace Entities.CCC.Encounter
         public string OrderStatus { get; set; }
         public int UserId { get; set; }
         public int LocationId { get; set; }
-        public int visitid { get; set; }   
+        public int visitid { get; set; }
+        public int LabTestId { get; set; }
+        public int PatientMasterVisitId { get; set; }
         public int ModuleId { get; set; }
         public string OrderNumber { get; set; }
        

@@ -38,7 +38,13 @@ namespace DataAccess.CCC.Repository.Lookup
             return list.ToList();
         }
 
+        public LookupLabs GetLabTestId(string labType)
+        {
+            ILookupLabs labsRepository = new LookupLabsRepository();
+            var labTestId = labsRepository.FindBy(x => x.ParameterName == labType).FirstOrDefault();
+            return labTestId;
 
+        }
 
 
 

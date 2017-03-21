@@ -282,10 +282,6 @@
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->
 
-    
-
-
-
     </div> <!-- .col-md-12 col-xs-12 col-sm-12 -->
 
     <IQ:ucExtruder runat="server" ID="ucExtruder" />
@@ -394,12 +390,12 @@
             });
 
 
-            var jan_height = 0;
-            var march_height = 0;
-            var jan_weight = 0;
-            var march_weight = 0;
-            var jan_BMI = 0.0;
-            var march_BMI = 0.0;
+            var jan_height = "";
+            var march_height = "";
+            var jan_weight = "";
+            var march_weight = "";
+            var jan_BMI = "";
+            var march_BMI = "";
 
             window.onload = function() {
 

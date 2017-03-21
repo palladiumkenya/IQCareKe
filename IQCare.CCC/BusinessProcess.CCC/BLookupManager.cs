@@ -6,6 +6,8 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
+using DataAccess.CCC.Repository.Encounter;
+using Entities.CCC.Encounter;
 
 namespace BusinessProcess.CCC
 {
@@ -121,6 +123,12 @@ namespace BusinessProcess.CCC
         {
             LookupRepository lookupGender = new LookupRepository();
             return lookupGender.GetPatientGender(genderID);
+        }
+        public LookupLabs GetLabTestId(string labType)
+
+        {
+            LookupLabsRepository lookupTestId = new LookupLabsRepository();
+            return lookupTestId.GetLabTestId(labType);
         }
 
         public int GetRegimenCategory(int regimenId)

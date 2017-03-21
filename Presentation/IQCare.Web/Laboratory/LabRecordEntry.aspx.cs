@@ -20,8 +20,9 @@ namespace IQCare.Web.Laboratory
     {
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
         private ILabManager labMgr = (ILabManager)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabManager, BusinessProcess.Laboratory");
-        private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-
+        private string RedirectUrl = "http://localhost:23039/CCC/Encounter/PatientEncounter.aspx";
+        //private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+       
         protected string sOption
         {
             get
@@ -516,18 +517,14 @@ namespace IQCare.Web.Laboratory
                 return Convert.ToInt32(Session["PatientId"].ToString());
             }
         }
-
-        /// <summary>
-        /// Gets the user identifier.
-        /// </summary>
-        /// <value>
-        /// The user identifier.
-        /// </value>
+        
         private int UserId
         {
             get
             {
-                return Convert.ToInt32(Session["AppUserId"]);
+                int AppUserId = 1;
+                return AppUserId;
+                // return Convert.ToInt32(Session["AppUserId"]);
             }
         }
 

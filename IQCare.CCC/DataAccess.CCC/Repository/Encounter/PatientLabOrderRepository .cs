@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Encounter;
+using DataAccess.CCC.Interface.Lookup;
+using DataAccess.CCC.Repository.Lookup;
 using DataAccess.Context;
 using Entities.CCC.Encounter;
 

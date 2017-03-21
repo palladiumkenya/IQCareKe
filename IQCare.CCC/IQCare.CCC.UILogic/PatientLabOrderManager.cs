@@ -5,6 +5,8 @@ using Interface.CCC.Visit;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 
 
 namespace IQCare.CCC.UILogic
@@ -17,6 +19,7 @@ namespace IQCare.CCC.UILogic
         public string results { get; set; }
         public DateTime labOrderDate { get; set; }
         public int labOrderId { get; set; }
+        //public int labTestId { get; set; }
         public string labNotes { get; set; }
 
     }
@@ -24,8 +27,9 @@ namespace IQCare.CCC.UILogic
     {
         private string Msg { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+        ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
-       
+
         public int savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
            
@@ -34,7 +38,7 @@ namespace IQCare.CCC.UILogic
                 var jss = new JavaScriptSerializer();
             IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
 
-                 if (patient_ID > 0)
+                if (patient_ID > 0)
                 {
 
                     int returnValue;
@@ -43,59 +47,52 @@ namespace IQCare.CCC.UILogic
 
 
                     foreach (ListLabOrder t in data)
+
+
                     {
-                        PatientLabTracker labTracker = new PatientLabTracker()
+
+                        // Get LabID
+                        string labType = t.labType;
+                        if (labType != null)
                         {
-                            PatientId = patient_ID,
-                            PatientMasterVisitId = patientMasterVisitId,
-                            LabName = t.labType,
-                            Reasons = t.orderReason, 
-                            Results = pending,
-                            SampleDate = t.labOrderDate
-                            //LabNotes =data[i].labNotes --take to clinical notes 
+                            LookupLabs testId = _lookupTest.GetLabTestId(labType);
+                            int labTestId = testId.LabTestId;
 
-                        };
-                        returnValue = _mgr.AddPatientLabTracker(labTracker);
 
-                        LabOrderEntity labOrder = new LabOrderEntity()
-                        {
-                            Ptn_pk = patient_ID,
-                            LocationId = facilityID,
-                            visitid = patientMasterVisitId,
-                            ClinicalOrderNotes = t.labNotes,
-                            OrderStatus = pending,
-                            OrderDate = t.labOrderDate
-                            //UserId = data[i].labType,
-                            //ClinicalOrderNotes = data[i].results,       
-                            //LocationId = data[i].orderReason,
-                        };
-                        returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
 
-                      
-                        //Populate lab details
-                        //if (returnLabOrderSuccess > 0)
-                        //{
-                        
-                        //    LabDetailsEntity LabDetails = new LabDetailsEntity()
-                        //    {
-                        //        LabOrderId = labOrderId,
-                        //        LabTestId = facilityID,
-                        //        TestNotes = data[i].labNotes,
-                        //        //IsParent = data[i].labNotes,
-                        //        //ParentTestId = data[i].results,
-                        //        //ResultNotes = data[i].labOrderDate
-                        //        //ResultStatus = data[i].labType,
-                        //        //ResultDate = data[i].results,
-                        //       // UserId = data[i].orderReason,
-                        //        //StatusDate = data[i].orderReason,
-                        //    };
+                            PatientLabTracker labTracker = new PatientLabTracker()
+                            {
+                                PatientId = patient_ID,
+                                PatientMasterVisitId = patientMasterVisitId,
+                                LabName = t.labType,
+                                Reasons = t.orderReason,
+                                Results = pending,
+                                SampleDate = t.labOrderDate
+                                //LabNotes =data[i].labNotes --take to clinical notes 
 
-                        //    returnLabDetailsSuccess = _mgr.AddPatientLabDetails(LabDetails);
-                        // }
-                        return returnValue;
+                            };
+                            returnValue = _mgr.AddPatientLabTracker(labTracker);
+
+                            LabOrderEntity labOrder = new LabOrderEntity()
+                            {
+                                Ptn_pk = patient_ID,
+                                LocationId = facilityID,
+                                LabTestId = labTestId,
+                                PatientMasterVisitId = patientMasterVisitId,
+                                ClinicalOrderNotes = t.labNotes,
+                                OrderStatus = pending,
+                                OrderDate = t.labOrderDate
+                                //UserId = data[i].labType,
+                                //ClinicalOrderNotes = data[i].results,       
+                                //LocationId = data[i].orderReason,
+                            };
+                            returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
+
+                            return returnValue;
+                        }
                     }
                 }
-             }
+            }
             catch (Exception ex)
             {
                 Msg = ex.Message + ' ' + ex.InnerException;
