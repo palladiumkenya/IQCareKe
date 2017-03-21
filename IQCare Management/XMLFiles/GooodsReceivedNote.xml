@@ -1,0 +1,59 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="POId" type="xs:int" minOccurs="0" />
+              <xs:element name="LocationID" type="xs:int" minOccurs="0" />
+              <xs:element name="SupplierID" type="xs:int" minOccurs="0" />
+              <xs:element name="SupplierName" type="xs:string" minOccurs="0" />
+              <xs:element name="OrderDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AuthorizedBy" type="xs:int" minOccurs="0" />
+              <xs:element name="PreparedBy" type="xs:int" minOccurs="0" />
+              <xs:element name="Status" type="xs:int" minOccurs="0" />
+              <xs:element name="SourceStoreID" type="xs:int" minOccurs="0" />
+              <xs:element name="SourceStoreName" type="xs:string" minOccurs="0" />
+              <xs:element name="DestinStoreID" type="xs:int" minOccurs="0" />
+              <xs:element name="DestinationStoreName" type="xs:string" minOccurs="0" />
+              <xs:element name="UserID" type="xs:int" minOccurs="0" />
+              <xs:element name="OrderNo" type="xs:string" minOccurs="0" />
+              <xs:element name="RecievedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Freight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Tax" type="xs:decimal" minOccurs="0" />
+              <xs:element name="GRNId" type="xs:int" minOccurs="0" />
+              <xs:element name="AuthorizeName" type="xs:string" minOccurs="0" />
+              <xs:element name="PreparedName" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalAmount" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Table1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="POId" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemCode" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemId" type="xs:int" minOccurs="0" />
+              <xs:element name="ItemName" type="xs:string" minOccurs="0" />
+              <xs:element name="Price" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OrderQuantity" type="xs:int" minOccurs="0" />
+              <xs:element name="TotPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PurchaseDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="QtyPerPurchaseUnit" type="xs:int" minOccurs="0" />
+              <xs:element name="Units" type="xs:string" minOccurs="0" />
+              <xs:element name="RecievedQuantity" type="xs:int" minOccurs="0" />
+              <xs:element name="BatchNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpiryDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UserId" type="xs:int" minOccurs="0" />
+              <xs:element name="IssuedBy" type="xs:string" minOccurs="0" />
+              <xs:element name="ReceivedBy" type="xs:string" minOccurs="0" />
+              <xs:element name="ReceivedDate" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

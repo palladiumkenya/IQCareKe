@@ -23,9 +23,10 @@
     <!--<ItemName TableName="Batch" CategoryId="0" FormName="frmCommonItemMaster" ListName="Batch Number" FeatureID="150" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>-->
     <ItemName TableName="Decode" CategoryId="205" FormName="frmCommonItemMaster" ListName="Adjustment Reason" FeatureID="140" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="Decode" CategoryId="204" FormName="frmCommonItemMaster" ListName="Return Reason" FeatureID="139" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="Decode" CategoryId="213" FormName="frmCommonItemMaster" ListName="Billables" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+	<ItemName TableName="" CategoryId="" FormName="frmStockSummaryLine" ListName="Stock List" FeatureID="139" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <!--<ItemName TableName="Decode" CategoryId="213" FormName="frmCommonItemMaster" ListName="Billables" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
     <ItemName TableName="BillingType" CategoryId="0" FormName="frmBillingDetails" ListName="Billing Detail" FeatureID="173" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
-    <ItemName TableName="lnk_itemCostConfiguration" CategoryId="0" FormName="frmItemCostConfiguration" ListName="Price List" FeatureID="174" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>
+    <ItemName TableName="lnk_itemCostConfiguration" CategoryId="0" FormName="frmItemCostConfiguration" ListName="Price List" FeatureID="174" Update="0" SystemId="1" ModuleId="0" CountryID="99"/>-->
 
 
   </CUSTOMIZELIST>

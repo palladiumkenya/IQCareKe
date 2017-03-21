@@ -1229,6 +1229,8 @@ namespace IQCare.SCM
             this.txtBatchNo.Text = "";
             this.cmbFrequency.SelectedValue = "0";
             this.txtQtyDispensed.Text = "";
+           labelOrderValue.Text= textPrescriptionNote.Text = "";
+            textPrescriptionNote.ReadOnly = false;
             this.txtExpirydate.Text = "";
             this.txtSellingPrice.Text = "";
             this.txtDose.Text = "";
@@ -1617,6 +1619,7 @@ namespace IQCare.SCM
                     string strPeriod = cmdPeriodTaken.SelectedValue.ToString();
                     string strProvider = cmbProvider.SelectedValue.ToString();
                     string strRegimenLine= cmbRegimenLine.SelectedValue.ToString();
+                    string pharmacyNotes = textPrescriptionNote.Text.Trim();
 
                     double? weight = null;
                     if (txtWeight.Text != "")
@@ -1631,7 +1634,7 @@ namespace IQCare.SCM
                     int? periodTaken = null;
                     if(strPeriod != "") periodTaken = Convert.ToInt32(strPeriod);
 
-                    int? provider = null;
+                    int? provider = 3;
                     if (strProvider != "") provider = Convert.ToInt32(strProvider);
 
                     int? regimenLine = null;
@@ -1653,7 +1656,8 @@ namespace IQCare.SCM
                         regimenLine,
                         provider,
                         height,
-                        weight);
+                        weight,
+                        pharmacyNotes);
 
                     if (theRegimen !="")
                     {
@@ -1810,7 +1814,10 @@ namespace IQCare.SCM
             clsCssStyle theStyle = new clsCssStyle();
             theStyle.setStyle(this);
             Init_Form();
-            MainTab.SelectedTab = MainTab.TabPages["FindPatientTab"];
+            MainTab.SelectedTab = MainTab.TabPages["PendingTab"];
+            dtpFilterDate.Text = GblIQCare.CurrentDate;
+            //btnFindOrder_Click(btnFindOrder, null);
+            // MainTab.SelectedTab = MainTab.TabPages["FindPatientTab"];
             txtPatientIdentification.Select();
         }
 
@@ -2161,11 +2168,13 @@ namespace IQCare.SCM
             clearPopup();
            // this.chkPharmacyRefill.Checked = false;
             DataGridViewRow currentRow = grdExitingPharDisp.Rows[e.RowIndex];
-
+            this.dtDispensedDate.Text = GblIQCare.CurrentDate;
             this.theOrderId = Convert.ToInt32(currentRow.Cells["Ptn_Pharmacy_Pk"].Value);
            // this.theOrderId = Convert.ToInt32(grdExitingPharDisp.Rows[grdExitingPharDisp.CurrentRow.Index].Cells[2].Value);
          //   this.theOrderStatus = grdExitingPharDisp.Rows[grdExitingPharDisp.CurrentRow.Index].Cells[1].Value.ToString();
             this.theOrderStatus = currentRow.Cells["Status"].Value.ToString();
+            GetSelectedPrescription();
+            /*
             IDrug drugMgr = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             DataSet existingRecordDetails = drugMgr.GetPharmacyExistingRecordDetails(this.theOrderId);
             if (existingRecordDetails.Tables[0].Rows.Count > 0)
@@ -2198,6 +2207,9 @@ namespace IQCare.SCM
             else
                 this.makeGridEditable = "Yes";
 
+            textPrescriptionNote.ReadOnly = true;
+            textPrescriptionNote.Text = existingRecordDetails.Tables[1].Rows[0]["PharmacyNotes"].ToString();
+            labelOrderValue.Text = existingRecordDetails.Tables[1].Rows[0]["ReportingID"].ToString();
             BindPharmacyDispenseGrid(existingRecordDetails.Tables[0]);
 
             //btnART.Enabled = false;
@@ -2276,6 +2288,7 @@ namespace IQCare.SCM
             if (this.ARVBeingDispensed != "" && this.lastdispensedARV != "" && this.ARVBeingDispensed != this.lastdispensedARV)
                 IQCareWindowMsgBox.ShowWindow("RegimenChangeAlert", (Control)this);
             grpExistingRec.Visible = false;
+            */
         }
 
         /// <summary>
@@ -2289,6 +2302,220 @@ namespace IQCare.SCM
         private string removeRegimenDuplicates(string lastRegimen)
         {
             return Enumerable.Aggregate<string>(Enumerable.Distinct<string>((IEnumerable<string>)lastRegimen.Split('/')), (Func<string, string, string>)((current, next) => current + "/" + next));
+        }
+        void GetSelectedPrescription()
+        {
+            IDrug drugMgr = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            DataSet existingRecordDetails = drugMgr.GetPharmacyExistingRecordDetails(this.theOrderId);
+            if (existingRecordDetails.Tables[0].Rows.Count > 0)
+            {
+                if (existingRecordDetails.Tables[0].Rows[0].IsNull("DispensedByDate") == false)
+                    this.dtDispensedDate.Text = existingRecordDetails.Tables[0].Rows[0]["DispensedByDate"].ToString();
+                if (existingRecordDetails.Tables[0].Rows[0].IsNull("ProgId") == false)
+                    this.cmbprogram.SelectedValue = existingRecordDetails.Tables[0].Rows[0]["ProgId"].ToString();
+                if (existingRecordDetails.Tables[0].Rows[0].IsNull("OrderedByDate") == false)
+                {
+                    this.valuePrescriptionDate.Text = ((DateTime)existingRecordDetails.Tables[0].Rows[0]["OrderedByDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                    this.valuePrescriptionDate.Visible = this.labelPrescriptionDate.Visible = true;
+                }
+            }
+            decimal theBillAmount = new decimal(0);
+            theExistingDrugs = existingRecordDetails.Tables[0];
+            foreach (DataRow theRow in (InternalDataCollectionBase)existingRecordDetails.Tables[0].Rows)
+            {
+                if (theRow.IsNull("BillAmount") == false)
+                    theBillAmount = theBillAmount + Convert.ToDecimal(theRow["BillAmount"]);
+                else
+                    theBillAmount = theBillAmount + 0;
+            }
+            lblPayAmount.Text = theBillAmount.ToString();
+            if (this.theOrderId > 0 && (this.theOrderStatus == "Already Dispensed Order" || this.theOrderStatus == "Partial Dispense"))
+            {
+                this.makeGridEditable = "No";
+                this.dtRefillApp.CustomFormat = " ";
+            }
+            else
+                this.makeGridEditable = "Yes";
+
+            textPrescriptionNote.ReadOnly = true;
+            textPrescriptionNote.Text = existingRecordDetails.Tables[1].Rows[0]["PharmacyNotes"].ToString();
+            labelOrderValue.Text = existingRecordDetails.Tables[1].Rows[0]["ReportingID"].ToString();
+            BindPharmacyDispenseGrid(existingRecordDetails.Tables[0]);
+
+            //btnART.Enabled = false;
+            this.grpBoxLastDispense.Visible = true;
+            {
+
+                if (theOrderId > 0)
+                {
+                    //IDrug thePharmacyManager1 = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+                    DataSet theDS1 = drugMgr.GetPharmacyDetailsByDespenced(theOrderId);
+                    if (theDS1.Tables[0].Rows.Count > 0)
+                    {
+                        txtWeight.Text = theDS1.Tables[0].Rows[0]["Weight"].ToString();
+                        txtHeight.Text = theDS1.Tables[0].Rows[0]["Height"].ToString();
+                        if (txtWeight.Text != "" && txtHeight.Text != "")
+                        {
+                            Double calVal = (Convert.ToDouble(txtWeight.Text) * Convert.ToDouble(txtHeight.Text) / 3600);
+                            calVal = (Double)Math.Sqrt(Convert.ToDouble(calVal));
+                            txtBSA.Text = Math.Round(calVal, 2).ToString();
+                        }
+                        if (theDS1.Tables[0].Rows[0]["ProgID"].ToString() != "")
+                        {
+                            cmbprogram.SelectedValue = theDS1.Tables[0].Rows[0]["ProgID"].ToString();
+                        }
+
+                        if (theDS1.Tables[0].Rows[0]["PharmacyPeriodTaken"].ToString() != "")
+                        {
+                            cmdPeriodTaken.SelectedValue = theDS1.Tables[0].Rows[0]["PharmacyPeriodTaken"].ToString();
+                        }
+                        if (theDS1.Tables[0].Rows[0]["ProviderID"].ToString() != "")
+                        {
+                            cmbProvider.SelectedValue = theDS1.Tables[0].Rows[0]["ProviderID"].ToString();
+                        }
+                        if (theDS1.Tables[0].Rows[0]["RegimenLine"].ToString() != "")
+                        {
+                            cmbRegimenLine.SelectedValue = theDS1.Tables[0].Rows[0]["RegimenLine"].ToString();
+                        }
+                        if (theDS1.Tables[0].Rows[0]["AppDate"].ToString() != "")
+                        {
+                            NxtAppDate.Format = DateTimePickerFormat.Custom;
+                            NxtAppDate.CustomFormat = "dd-MMM-yyyy";
+                            NxtAppDate.Text = theDS1.Tables[0].Rows[0]["AppDate"].ToString();
+                        }
+                        else
+                        {
+                            // NxtAppDate.Format = DateTimePickerFormat.Custom;
+                            NxtAppDate.CustomFormat = " ";
+                        }
+                        if (theDS1.Tables[0].Rows[0]["AppReason"].ToString() != "")
+                        {
+                            cmbReason.SelectedValue = theDS1.Tables[0].Rows[0]["AppReason"].ToString();
+                        }
+
+                        if (cmbprogram.SelectedValue.ToString() == "222")
+                        {
+                            int patientID = thePatientId;
+                            //DataSet GettheDS = thePharmacyManager1.SaveArtData(patientID, Convert.ToDateTime(dtDispensedDate.Text));
+                        }
+                    }
+                }
+            }
+
+            //Already Dispensed Order
+            if (theOrderId > 0 && (theOrderStatus == "Already Dispensed Order" || theOrderStatus == "Partial Dispense"))
+            {
+                this.makeGridEditable = "No";
+                cmdSave.Enabled = false;
+                dtDispensedDate.Enabled = false;
+            }
+            else
+            {
+                this.cmdSave.Enabled = true;
+                this.makeGridEditable = "Yes";
+                dtDispensedDate.Enabled = true;
+            }
+            if (this.ARVBeingDispensed != "" && this.lastdispensedARV != "" && this.ARVBeingDispensed != this.lastdispensedARV)
+                IQCareWindowMsgBox.ShowWindow("RegimenChangeAlert", (Control)this);
+            grpExistingRec.Visible = false;
+        }
+            void GetSelectedPatient()
+        {
+            IDrug theDrugManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            this.thePharmacyMaster = theDrugManager.GetPharmacyDispenseMasters(this.thePatientId, GblIQCare.intStoreId);
+            if (this.thePharmacyMaster.Tables[0].Rows.Count > 0)
+            {
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("NextRefillDate"))
+                {
+                    this.NextRefillValue.Text = "";
+
+                }
+                else
+                {
+                    this.NextRefillValue.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["NextRefillDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("LastDispense"))
+                {
+
+                    this.LastDispenseDateValue.Text = "";
+                    this.lblReturnLstDispDate.Text = "";
+
+                }
+                else
+                {
+                    this.lblReturnLstDispDate.Text = this.LastDispenseDateValue.Text =
+                    ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["LastDispense"]).ToString(GblIQCare.AppDateFormat.ToString());
+                }
+                this.labelLastRegimenDate.Text = "";
+                if (!this.thePharmacyMaster.Tables[0].Rows[0].IsNull("CurrentRegimenDispenseDate"))
+                {
+                    this.labelLastRegimenDate.Text = ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["CurrentRegimenDispenseDate"]).ToString(GblIQCare.AppDateFormat.ToString());
+                }
+                this.lastRegimenValue.Text = "";
+                if (!this.thePharmacyMaster.Tables[0].Rows[0].IsNull("CurrentRegimen"))
+                {
+                    string regimenVale = this.removeRegimenDuplicates(this.thePharmacyMaster.Tables[0].Rows[0]["CurrentRegimen"].ToString());
+                    if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("CurrentRegimen") == false)
+                    {
+                        regimenVale = string.Format("{0} ( {1} )", regimenVale, this.thePharmacyMaster.Tables[0].Rows[0]["CurrentRegimenLine"].ToString());
+                    }
+                    this.lastRegimenValue.Text = regimenVale;
+
+                }
+
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("LastRegimen"))
+                {
+
+                    this.lblReturnLstRegimen.Text = "";
+                    this.lastdispensedARV = "";
+                }
+                else
+                {
+
+                    this.lblReturnLstRegimen.Text = this.thePharmacyMaster.Tables[0].Rows[0]["LastRegimen"].ToString();
+                    this.lastdispensedARV = this.removeRegimenDuplicates(this.thePharmacyMaster.Tables[0].Rows[0]["LastRegimen"].ToString()); ;
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("CurrentRegimen"))
+                {
+                    this.CurrentRegimenValue.Text = "N/A";
+                }
+                else
+                {
+                    string regimenVale = this.removeRegimenDuplicates(this.thePharmacyMaster.Tables[0].Rows[0]["CurrentRegimen"].ToString());
+                    if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("CurrentRegimen") == false)
+                    {
+                        regimenVale = string.Format("{0} ( {1} )", regimenVale, this.thePharmacyMaster.Tables[0].Rows[0]["CurrentRegimenLine"].ToString());
+                    }
+                    this.CurrentRegimenValue.Text = regimenVale;
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("RecentWeight") == false)
+                {
+                    txtWeight.Text = this.thePharmacyMaster.Tables[0].Rows[0]["RecentWeight"].ToString();
+                }
+                if (this.thePharmacyMaster.Tables[0].Rows[0].IsNull("RecentHeight") == false)
+                {
+                    txtHeight.Text = this.thePharmacyMaster.Tables[0].Rows[0]["RecentHeight"].ToString();
+                }
+            }
+            else
+            {
+                this.labelLastRegimenDate.Text = "";
+                this.lastRegimenValue.Text = "";
+                this.lblReturnLstRegimen.Text = "";
+                this.lblReturnLstDispDate.Text = "";
+                this.CurrentRegimenValue.Text = "N/A";
+            }
+
+
+            if (txtWeight.Text != "" && txtHeight.Text != "")
+            {
+                Double calVal = (Convert.ToDouble(txtWeight.Text) * Convert.ToDouble(txtHeight.Text) / 3600);
+                calVal = (Double)Math.Sqrt(Convert.ToDouble(calVal));
+                txtBSA.Text = Math.Round(calVal, 2).ToString();
+            }
+            DataTable theDT = this.CreatePharmacyDispenseTable();
+            this.BindPharmacyDispenseGrid(theDT);
+            this.txtItemName.Select();
         }
         /// <summary>
         /// Handles the CellMouseDoubleClick event of the grdResultView control.
@@ -2313,8 +2540,10 @@ namespace IQCare.SCM
             this.lblIQNumber.BackColor = this.BackColor;
             lblIQNumber.Text = currentRow.Cells["PatientFacilityId"].Value.ToString();
             this.lblReturnIQNumber.Text = currentRow.Cells["PatientFacilityId"].Value.ToString();
+            GetSelectedPatient();
             //this.grdResultView.Rows[rowIndex].Cells[2].Value.ToString();
-            IDrug theDrugManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+         /*
+          *   IDrug theDrugManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             this.thePharmacyMaster = theDrugManager.GetPharmacyDispenseMasters(this.thePatientId, GblIQCare.intStoreId);
             if (this.thePharmacyMaster.Tables[0].Rows.Count > 0)
             {
@@ -2336,10 +2565,6 @@ namespace IQCare.SCM
                 }
                 else
                 {
-                    //  lblDispenseLstRegimen
-                    //  this.lblLastDispDateValue.Text = ((DateTime)thePharmacyMaster.Tables[0].Rows[0]["LastDispense"]).ToString(GblIQCare.AppDateFormat.ToString());
-                    //  this.lblReturnLstDispDate.Text = ((DateTime)thePharmacyMaster.Tables[0].Rows[0]["LastDispense"]).ToString(GblIQCare.AppDateFormat.ToString());
-                    // this.labelLastRegimenDate.Text = 
                     this.lblReturnLstDispDate.Text = this.LastDispenseDateValue.Text =
                     ((DateTime)this.thePharmacyMaster.Tables[0].Rows[0]["LastDispense"]).ToString(GblIQCare.AppDateFormat.ToString());
                 }
@@ -2412,7 +2637,7 @@ namespace IQCare.SCM
             }
             DataTable theDT = this.CreatePharmacyDispenseTable();
             this.BindPharmacyDispenseGrid(theDT);
-            this.txtItemName.Select();
+            this.txtItemName.Select();*/
         }
 
         /// <summary>
@@ -2624,6 +2849,13 @@ namespace IQCare.SCM
         private void MainTab_SelectedIndexChanged(object sender, EventArgs e)
         {
             // btnART.Enabled = false;
+            if (MainTab.TabPages["PendingTab"].Focus() == true)
+            {
+                MainTab.SelectedTab = MainTab.TabPages["PendingTab"];
+                dtpFilterDate.Value = Convert.ToDateTime(GblIQCare.CurrentDate);
+                btnFindOrder_Click(btnFindOrder, null);
+                return;
+            }
             if ((MainTab.TabPages["DispenseTab"].Focus() == true || MainTab.TabPages["ReturnTab"].Focus() == true) && thePatientId < 1)
             {
                 IQCareWindowMsgBox.ShowWindow("PatientNotSelected", this);
@@ -2661,6 +2893,8 @@ namespace IQCare.SCM
                 this.txtSellingPrice.Text = "";
                 this.txtDose.Text = "";
                 this.txtDuration.Text = "";
+                textPrescriptionNote.ReadOnly = false;
+                textPrescriptionNote.Text = "";
                 this.Text = "Dispense Drugs";
                 if (this.theOrderId > 0 && (this.theOrderStatus == "Already Dispensed Order" || this.theOrderStatus == "Partial Dispense"))
                 {
@@ -3111,8 +3345,60 @@ namespace IQCare.SCM
 
         }
 
+        private void grpExistingRec_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                grpExistingRec.Visible = false;
+            }
+        }
 
+        private void btnCloseExisting_Click(object sender, EventArgs e)
+        {
+            grpExistingRec.Visible = false;
+        }
 
+        private void btnFindOrder_Click(object sender, EventArgs e)
+        {
+            DateTime filterDate = dtpFilterDate.Value;
+            IDrug obj = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            DataTable theDT = obj.GetPrescriptionList(GblIQCare.AppLocationId, filterDate, 1);
+            if (theDT.Rows.Count == 0)
+            {
+                MsgBuilder theBuilder = new MsgBuilder();
+                theBuilder.DataElements["MessageText"] = "No pending orders for the selected date";
+                IQCareWindowMsgBox.ShowWindowConfirm("#C1", theBuilder, this);
+                return;
+            }
+            gridPendingOrder.AutoGenerateColumns = false;
+            gridPendingOrder.DataSource = theDT;
+        }
 
+        private void gridPendingOrder_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+       
+        }
+
+        private void gridPendingOrder_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.clearPopup();
+            int rowIndex = this.gridPendingOrder.CurrentRow.Index;
+            DataGridViewRow currentRow = this.gridPendingOrder.CurrentRow;
+            this.thePatientId = Convert.ToInt32(currentRow.Cells["ptnPk"].Value);
+            this.theDOB = Convert.ToDateTime(currentRow.Cells["patDOB"].Value);
+            this.dtDispensedDate.Text = GblIQCare.CurrentDate;
+            this.theOrderId = Convert.ToInt32(currentRow.Cells["OrderId"].Value);
+            this.theOrderStatus = currentRow.Cells["pStatus"].Value.ToString();
+
+            this.MainTab.SelectedTab = this.MainTab.TabPages["DispenseTab"];
+            string patientName = string.Format("{0} {1} {2}", currentRow.Cells["pFirstName"].Value, currentRow.Cells["pMiddleName"].Value, currentRow.Cells["pLastName"].Value);
+            this.lblPatientName.Text = patientName;
+            this.lblReturnPatName.Text = patientName;
+            this.lblIQNumber.BackColor = this.BackColor;
+            lblIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            this.lblReturnIQNumber.Text = currentRow.Cells["P_PatientFacilityId"].Value.ToString();
+            GetSelectedPatient();
+            GetSelectedPrescription();
+        }
     }
 }

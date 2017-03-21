@@ -1,3 +1,48 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_StockSummaryLineList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SCM_StockSummaryLineList]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		JN
+-- Create date: 
+-- Description:	Simple Stock Summary Line lines
+-- =============================================
+CREATE PROCEDURE [dbo].[SCM_StockSummaryLineList] 
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select	Drug_pk
+		,	nullif(DrugId,'')									ItemCode
+		,	DrugName
+		,	dbo.fn_GetDrugTypeName_futures(Drug_pk) ItemType
+		,	PurchaseUnitPrice
+		,	QtyPerPurchaseUnit
+		,	U.Name									As PurchaseUnit
+		,	(Select
+				Isnull(Convert(varchar, Sum(ST.Quantity)), 0) As QuantityAvailable
+			From Dtl_StockTransaction As ST
+			Where D.Drug_pk = ST.ItemId
+			) Quantity	
+	From Mst_Drug D
+	Inner Join Mst_DispensingUnit U On D.PurchaseUnit = U.Id
+	Where D.DeleteFlag = 0 Order By D.DrugName
+END
+
+GO
+
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures]
 GO
@@ -94,11 +139,6 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]
 GO
-/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNItems_Futures]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[pr_SCM_SaveGRNItems_Futures]
-GO
-
  IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_GetItemsByStoreId]') AND type in (N'P', N'PC'))
  DROP PROCEDURE [dbo].[SCM_GetItemsByStoreId]
 GO
@@ -127,7 +167,7 @@ BEGIN
 	From lnk_StoreItem As L
 	Inner Join Mst_Drug As D On L.ItemId = D.Drug_pk
 	And L.ItemTypeID = D.ItemTypeID
-	Where (L.StoreID = 002)
+	Where (L.StoreID = @StoreId)
 	Group By	L.StoreID
 			,	D.Drug_pk
 			,	D.DrugName
@@ -619,6 +659,62 @@ Order By PO.POId Desc;
 End' 
 END
 GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNMaster_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveGRNMaster_Futures]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNMaster_Futures]    Script Date: 20-Mar-2017 9:17:25 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure [dbo].[pr_SCM_SaveGRNMaster_Futures]        
+@POId int ,
+@LocationID  int,
+@RecievedStoreID int ,
+@Freight   decimal(9,2),  
+@Tax  decimal(9,2), 
+@UserID int     
+as         
+begin 
+        
+declare @GRNId int        
+
+Insert Into Ord_GRNote (
+		POId
+	,	LocationID
+	,	RecievedDate
+	,	RecievedStoreID
+	,	Freight
+	,	Tax
+	,	RecievedBy
+	,	UserId
+	,	CreateDate)
+Values (
+		@POId
+	,	@LocationID
+	,	getdate()
+	,	@RecievedStoreID
+	,	@Freight
+	,	@Tax
+	,	@UserID
+	,	@UserID
+	,	getdate())
+
+Select scope_identity();
+
+      
+end
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNItems_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveGRNItems_Futures]
+GO
 /****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
 SET ANSI_NULLS ON
 GO
@@ -842,7 +938,7 @@ CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]
 	@DispensedBy int,                
 	@DispensedByDate datetime,                
 	@OrderType int,                
-	@ProgramId int,                
+	@ProgramId int=225,                
 	@StoreId int,            
 	@Regimen varchar(50),                
 	@UserId int,        
@@ -853,7 +949,8 @@ CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]
 	@RegimenLine int = null,
 	@ProviderId int =null,
 	@Height numeric(8,2)= null,
-	@Weight numeric(8,2)= null
+	@Weight numeric(8,2)= null,
+	@PharmacyNotes varchar(250) =''
 As             
 Begin
 	Declare @VisitId int,@ARTStartDate datetime;
@@ -950,8 +1047,9 @@ Begin
 			RegimenLine,
 			Signature,
 			Height,
-			Weight
-			)
+			Weight,
+			PharmacyNotes
+		)
 		Values (
 			@Ptn_Pk, 
 			@VisitId, 
@@ -971,7 +1069,8 @@ Begin
 			@RegimenLine,
 			@UserId,
 			@Height,
-			@Weight);
+			@Weight,
+			@PharmacyNotes);
 
 		Select @OrderId = SCOPE_IDENTITY();
 		Update ord_PatientPharmacyOrder Set
@@ -1010,9 +1109,109 @@ Begin
 End
 
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_GetPurchaseOrderItems]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SCM_GetPurchaseOrderItems]
+GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]    Script Date: 05/29/2015 07:26:35 ******/
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]    Script Date: 01/14/2016 14:17:22 ******/
+/****** Object:  StoredProcedure [dbo].[SCM_GetGRNItems_Print]    Script Date: 20-Mar-2017 9:42:55 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Joseph Njung'e
+-- Create date: 2017-Mar-20
+-- Description:	Get purchase order items
+-- =============================================
+CREATE PROCEDURE [dbo].[SCM_GetPurchaseOrderItems] 
+	-- Add the parameters for the stored procedure here
+	@PoId int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select	a.POId
+		,	a.LocationID
+		,	a.SupplierID
+		,	sup.SupplierName
+		,	a.OrderDate
+		,	a.AuthorizedBy
+		,	a.PreparedBy
+		,	a.Status
+		,	a.SourceStoreID
+		,	str1.Name								As SourceStoreName
+		,	a.DestinStoreID
+		,	str2.Name								As DestinationStoreName
+		,	a.UserID
+		,	Isnull(a.PONumber, a.OrderNo)			As OrderNo
+		,	b.RecievedDate
+		,	b.Freight
+		,	b.Tax
+		,	b.GRNId
+		,	emp1.FirstName + ' ' + emp1.LastName	As AuthorizeName
+		,	emp2.FirstName + ' ' + emp2.LastName	As PreparedName
+		,	(Select sum(D.Quantity * D.PurchasePrice) From Dtl_PurchaseItem D Where (D.POId =  A.POId)) TotalAmount
+	From ord_PurchaseOrder As a
+	Left Outer Join Ord_GRNote As b On b.POId = a.POId
+	Left Outer Join Mst_Supplier As sup On a.SupplierID = sup.Id
+	Left Outer Join Mst_Store As str1 On str1.Id = a.SourceStoreID
+	Left Outer Join Mst_Store As str2 On str2.Id = a.DestinStoreID
+	Left Outer Join mst_Employee As emp1 On emp1.EmployeeID = a.AuthorizedBy
+	Left Outer Join mst_Employee As emp2 On emp2.EmployeeID = a.PreparedBy
+	Where (a.POId = @PoId)  ;
+
+	;With Rec as (Select	O.POId
+		,	D.GRNId
+		,	D.ItemId
+		,	D.RecievedQuantity
+		,	D.FreeRecievedQuantity
+		,	D.PurchasePrice
+		,	D.TotPurchasePrice
+		,	B.Name	BatchNumber
+		,	B.ExpiryDate
+		,	R.UserFirstName + ' ' + R.UserLastName ReceivedBy
+		,	D.CreateDate ReceivedDate
+	From Dtl_GRNote D
+	Inner Join Ord_GRNote O On D.GRNId = O.GRNId
+	Inner Join Mst_Batch B On B.ID = D.BatchID
+	Left Outer Join mst_User As R On D.UserId = R.UserID
+	Where B.DeleteFlag = 0	And O.POId = @PoId
+	)
+	Select	I.POId
+		,	D.DrugID								As ItemCode
+		,	I.ItemId
+		,	D.DrugName								As ItemName
+		,	I.PurchasePrice							As Price
+		,	I.Quantity								As OrderQuantity
+		,	I.Quantity * I.PurchasePrice			As TotPrice
+		,	I.CreateDate	PurchaseDate
+		,	D.QtyPerPurchaseUnit
+		,	U.Name									As Units
+		,	Rec.RecievedQuantity
+		,	Rec.BatchNumber
+		,	Rec.ExpiryDate
+		,	I.UserId
+		,	R.UserFirstName + ' ' + R.UserLastName	As IssuedBy
+		,	Rec.ReceivedBy
+		,	Rec.ReceivedDate
+	From Dtl_PurchaseItem I
+	Left Outer Join Mst_Drug D On I.ItemId = D.Drug_pk
+	Left Outer Join Mst_DispensingUnit As U On D.PurchaseUnit = U.Id
+	Left Outer Join mst_User As R On I.UserId = R.UserID
+	Left Outer Join Rec On rec.POId = I.POId And rec.ItemId = I.ItemId
+	Where I.POId = @PoId
+
+END
+
+GO
+
+
+
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]
 GO
@@ -2467,7 +2666,9 @@ As Begin
 End
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]    Script Date: 5/12/2016 5:17:58 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]
+GO
 SET ANSI_NULLS ON
 GO
 
@@ -2521,6 +2722,14 @@ Where a.ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
 --Where ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk
 
 
+Select	O.Ptn_pk
+	,	O.VisitID
+	,	O.PharmacyPeriodTaken
+	,	O.ReportingID
+	,	O.orderstatus
+	,	nullif(O.PharmacyNotes,'') PharmacyNotes
+From ord_PatientPharmacyOrder O
+Where O.ptn_pharmacy_pk = @Ptn_Pharmacy_Pk
 
 
 End

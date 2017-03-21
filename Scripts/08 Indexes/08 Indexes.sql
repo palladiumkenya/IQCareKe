@@ -7,6 +7,17 @@ CREATE NONCLUSTERED INDEX [NCI_Dtl_PurchaseItem_POIDItemId] ON [dbo].[Dtl_Purcha
 
 End
 Go
+IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Dtl_GRNote]') AND name = N'NCI_Dtl_GRNote_GrnId_ItemId_BatchId') Begin
+CREATE NONCLUSTERED INDEX [NCI_Dtl_GRNote_GrnId_ItemId_BatchId] ON [dbo].[Dtl_GRNote]
+(
+	[GRNId] ASC,
+	[BatchID] ASC,
+	[ItemId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientClinicalStatus]') AND name = N'IX_PatientClinicalStatus_VisitPk_Inc')
  DROP INDEX [IX_PatientClinicalStatus_VisitPk_Inc] ON [dbo].[dtl_PatientClinicalStatus]
 GO

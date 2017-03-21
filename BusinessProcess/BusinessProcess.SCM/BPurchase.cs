@@ -693,8 +693,16 @@ namespace BusinessProcess.SCM
             }
         }
 
-
-
+        public DataSet GetPurchaseOrderItems(int purchaseOrderId)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject objPOdetails = new ClsObject();
+            ClsUtility.AddExtendedParameters("@PoId", SqlDbType.Int, purchaseOrderId);
+            return
+                (DataSet)
+                objPOdetails.ReturnObject(ClsUtility.theParams, "SCM_GetPurchaseOrderItems",
+                                          ClsUtility.ObjectEnum.DataSet);
+        }
     }
 
 }

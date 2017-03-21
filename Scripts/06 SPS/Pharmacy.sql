@@ -1310,9 +1310,7 @@ select distinct r.ID,r.SRNo[TBRegimenID],r.Name,r.TreatmentTime,r.userID,l.Gener
                                                   
 --24                                                                                      
 Select Top 1 VisitType, VisitDate,Visit_Id from ord_Visit where ptn_pk=@PatientID and VisitType = 11 order by VisitDate desc     
---Select null VisitType, null VisitDate, null Visit_Id --from ord_Visit where ptn_pk=@PatientID and VisitType = 11 order by VisitDate desc                                         
-                                    
-     
+--Select null VisitType, null VisitDate, null Visit_Id --from ord_Visit where ptn_pk=@PatientID and VisitType = 11 order by VisitDate desc      
 --25                                      
 select a.ID, a.Name, b.DrugId from mst_drugschedule a inner join lnk_drugschedule b on a.ID=b.ScheduleId                  
                                     
@@ -1339,8 +1337,7 @@ select ID,Name, DeleteFlag, SRNO from dbo.Mst_RegimenLine order by SRNO
 			drugname [FixedDrug],
 			GenericAbbreviation [GenericAbbrevation],
 			DrugTypeId [drugtypeid]
-	From @Drug;
-  
+	From @Drug;  
 --30  
 Select Top 1 PV.Height, OV.VisitDate from dtl_patientvitals PV inner join ord_visit OV on PV.Visit_pk=OV.Visit_Id  
 where PV.ptn_pk=@PatientID and PV.Height IS NOT NULL order by  OV.VisitDate desc                
@@ -1351,5 +1348,64 @@ where PV.ptn_pk=@PatientID and PV.Weight IS NOT NULL and OV.VisitDate between da
                                                  
 end
 
-
 Go
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pharmacy_GetPrescription]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pharmacy_GetPrescription]
+GO
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Joseph
+-- Create date: 
+-- Description:	Get pending pharmacy prescriptions
+-- =============================================
+CREATE PROCEDURE [dbo].[Pharmacy_GetPrescription] 
+	-- Add the parameters for the stored procedure here
+	@PrescriptionDate datetime , 
+	@LocationId int,
+	@PrescriptionStatus int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	Declare @StartDate datetime, @EndDate datetime;
+
+	Select @StartDate = dateadd(second, 0, dateadd(day, datediff(day, 0, @PrescriptionDate), 0)) ,	@EndDate = dateadd(second, -1, dateadd(day, datediff(day, 0, @PrescriptionDate)+1, 0))
+    -- Insert statements for procedure here
+	Select	PV.Ptn_pk
+		,	PatientFacilityId
+		,	ptn_pharmacy_pk	OrderId
+		,	ReportingID		PrescriptionNumber
+		,	FirstName
+		,	MiddleName
+		,	LastName
+		,	DOB
+		,	Sex
+		,	OrderedByDate
+		,	Case
+				When PO.OrderStatus = 1 Then 'New Order'
+				When PO.OrderStatus = 3 Then 'Partial Dispense'
+				Else 'Already Dispensed Order'
+			End [Status]
+		,  PO.CreateDate
+		,	cast(datediff(Hour, PO.CreateDate, getdate()) As varchar) + ' hrs ' + cast(datediff(Minute, PO.CreateDate, getdate()) % 60 As varchar) + ' mins' Duration
+		,	(
+			Select UserFirstName + ' ' + UserLastName
+			From mst_User U
+			Where U.UserId = PO.OrderedBy
+			)				
+			PrescribedBy
+	From ord_PatientPharmacyOrder PO
+	Inner Join PatientView PV On PV.Ptn_Pk = PO.Ptn_pk 
+	Where orderstatus = @PrescriptionStatus
+	And PO.DeleteFlag = 0 And PV.DeleteFlag = 0 And OrderedByDate Between @StartDate And @EndDate
+	And PO.LocationId = @LocationId
+END
+
+GO
+

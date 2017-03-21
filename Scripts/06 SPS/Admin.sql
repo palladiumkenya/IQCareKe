@@ -1,4 +1,60 @@
-/****** Object:  StoredProcedure [dbo].[pr_Admin_FindItemByName]    Script Date: 02/02/2015 12:20:13 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Admin_UpdateBackupSetup_Constella]') AND type in (N'P', N'PC')
+DROP PROCEDURE [dbo].[Pr_Admin_UpdateBackupSetup_Constella]
+GO
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[Pr_Admin_UpdateBackupSetup_Constella]    
+@BackupDrive varchar(10),    
+@BackUpTime datetime    
+    
+as    
+    
+begin
+   if (@BackUpTime <> '1900-01-01' and @BackupTime Is Not Null)begin
+	Update mst_Facility Set
+			BackupDrive = @BackupDrive
+		,	BackupTime = @BackUpTime;
+	Update ScheduledTask Set
+			NextRunDate = @BackupTime
+		,	Active = 1
+	Where TaskName = 'Database.Backup'
+	End
+	Else Begin
+		Update mst_Facility Set
+				BackupDrive = @BackupDrive
+			,	BackupTime = Null
+		Update ScheduledTask Set
+				NextRunDate = Null
+			,	Active = 0
+		Where TaskName = 'Database.Backup'
+	End
+End
+GO
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SystemAdmin_GetBackupTime_Constella]') AND type in (N'P', N'PC')
+DROP PROCEDURE [dbo].[pr_SystemAdmin_GetBackupTime_Constella]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SystemAdmin_GetBackupTime_Constella]    Script Date: 21-Mar-2017 1:24:23 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[pr_SystemAdmin_GetBackupTime_Constella]        
+as      
+select BackupTime,BackupDrive from  mst_Facility where backuptime is not null And DeleteFlag = 0
+
+GO
+
+
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Admin_FindItemByName]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_Admin_FindItemByName]
 GO
