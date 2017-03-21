@@ -7,6 +7,7 @@ using Application.Common;
 using Application.Presentation;
 using CrystalDecisions.CrystalReports.Engine;
 using Interface.SCM;
+using System.Text;
 
 namespace IQCare.SCM
 {
