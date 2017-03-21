@@ -25,13 +25,14 @@ namespace IQCare.CCC.UILogic
             return val;
         }
 
-        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string chronicIllness, string Vaccines)
+        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string chronicIllness, string Vaccines, string Allergies)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var chrIllness = parser.Deserialize<List<ChronicIlness>>(chronicIllness);
             var vacc = parser.Deserialize<List<Vaccines>>(Vaccines);
-            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, chrIllness, vacc);
+            var allergy = parser.Deserialize<List<Allergies>>(Allergies);
+            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, chrIllness, vacc, allergy);
         }
 
         public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string physicalExam)
@@ -67,6 +68,12 @@ namespace IQCare.CCC.UILogic
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             return patientEncounter.getPatientEncounterChronicIllness(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterAllergies(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterAllergies(PatientMasterVisitID, PatientID);
         }
 
         public DataTable loadPatientEncounterVaccines(string PatientMasterVisitID, string PatientID)
@@ -110,6 +117,13 @@ namespace IQCare.CCC.UILogic
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             return patientEncounter.getPharmacyDrugSubstitutionInterruptionReason(treatmentPlan);
+
+        }
+
+        public DataTable getPharmacyPendingPrescriptions(string PatientMasterVisitID, string patientID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyPendingPrescriptions(PatientMasterVisitID,patientID);
 
         }
 

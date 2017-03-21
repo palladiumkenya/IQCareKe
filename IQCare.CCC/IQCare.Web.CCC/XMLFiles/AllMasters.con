@@ -118063,6 +118063,11 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
+    <ModuleID>20</ModuleID>
+    <ModuleName>PM/SCM With Same point dispense</ModuleName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Module>
+  <Mst_Module>
     <ModuleID>201</ModuleID>
     <ModuleName>PM/SCM</ModuleName>
     <DeleteFlag>false</DeleteFlag>

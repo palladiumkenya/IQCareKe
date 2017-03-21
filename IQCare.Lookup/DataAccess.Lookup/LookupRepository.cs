@@ -10,25 +10,29 @@ namespace DataAccess.Lookup
     public class LookupRepository : BaseRepository<LookupItem>
     {
 
-        private readonly BaseContext _lookupContext;
+        private readonly LookupContext _lookupContext;
 
         public LookupRepository() : base()
         {
+            _lookupContext = new LookupContext();
+            _lookupContext.Set<LookupItem>();
         }
         //public LookupRepository(): this(new LookupContext())
         //{
         //    _lookupContext = new LookupContext();
         //}
-        public LookupRepository(BaseContext context) : base(context)
+        public LookupRepository(LookupContext context) : base(context)
         {
             _lookupContext = context;
+            _lookupContext.Set<LookupItem>();
         }
-        public override IQueryable<LookupItem> Filter(Expression<Func<LookupItem, bool>> filter)
-        {
-            return base.Filter(filter);
-        }
+        //public override IQueryable<LookupItem> Filter(Expression<Func<LookupItem, bool>> filter)
+        //{
+        //    return base.Filter(filter);
+        //}
         public override IEnumerable<LookupItem> GetAll()
         {
+
             return base.GetAll();
         }
         public override void Add(LookupItem entity)
@@ -38,6 +42,11 @@ namespace DataAccess.Lookup
         public IEnumerable<LookupItem> GetAll(string lookname, string lookcategory)
         {
             return Filter(lk => lk.LookupName == lookname && lk.Category == lookcategory);
+        }
+        public override IQueryable<LookupItem> Filter(Expression<Func<LookupItem, bool>> filter)
+        {
+           return _lookupContext.Item.Where(filter);
+           // return base.Filter(filter);
         }
         public LookupItem Find(int id, string lookupname, string lookupcategory)
         {

@@ -15,6 +15,9 @@
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
+    <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -22,10 +25,6 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -368,6 +367,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
+    <Reference Include="BusinessProcess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\BusinessProcess.CCC.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
       <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
@@ -457,12 +460,6 @@
       <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
-      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
-      <Name>BusinessProcess.CCC</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -495,4 +492,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
+  </Target>
 </Project>

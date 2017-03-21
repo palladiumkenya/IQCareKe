@@ -1043,7 +1043,8 @@ Begin
 				Prophylaxis,
 				SingleDose,
 				PrintPrescriptionStatus,
-				PatientInstructions)
+				PatientInstructions,
+				ScheduleId)
 			Values (
 				@ptn_pharmacy_pk,
 				@Drug_Pk,
@@ -1061,7 +1062,8 @@ Begin
 				@Prophylaxis,
 				@SingleDose,
 				@PrintPrescriptionStatus,
-				@PatientInstructions);
+				@PatientInstructions,
+				@DrugSchedule);
 		End
 	End
 
@@ -1136,7 +1138,8 @@ Select	a.ptn_pharmacy_pk,
 		a.PharmacyNotes,
 		a.Height,
 		a.Weight,
-		b.SingleDose
+		b.SingleDose,
+		b.ScheduleId
 From ord_patientpharmacyorder a
 	Join dtl_patientpharmacyorder b On a.ptn_pharmacy_pk = b.ptn_pharmacy_pk
 Where a.ptn_pharmacy_pk = @PharmacyID

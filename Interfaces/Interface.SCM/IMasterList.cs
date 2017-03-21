@@ -20,9 +20,9 @@ namespace Interface.SCM
         /// Saves the program list.
         /// </summary>
         /// <param name="dtProgramList">The dt program list.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveProgramList(DataTable dtProgramList, int UserID);
+        int SaveProgramList(DataTable dtProgramList, int userId);
         /// <summary>
         /// Gets the supplier list.
         /// </summary>
@@ -32,9 +32,9 @@ namespace Interface.SCM
         /// Saves the supplier list.
         /// </summary>
         /// <param name="dtSupplierList">The dt supplier list.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveSupplierList(DataTable dtSupplierList, int UserID);
+        int SaveSupplierList(DataTable dtSupplierList, int userId);
         /// <summary>
         /// Gets the type of the item.
         /// </summary>
@@ -72,36 +72,36 @@ namespace Interface.SCM
         /// </summary>
         /// <param name="tdrugType">Type of the tdrug.</param>
         /// <param name="ItemID">The item identifier.</param>
-        /// <param name="userid">The userid.</param>
+        /// <param name="userId">The userId.</param>
         /// <returns></returns>
-        int SaveSubItemList(ArrayList tdrugType, int ItemID, int userid);
+        int SaveSubItemList(ArrayList tdrugType, int ItemID, int userId);
         /// <summary>
         /// Saves the item list.
         /// </summary>
         /// <param name="dtItemList">The dt item list.</param>
         /// <param name="itematypeID">The itematype identifier.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <param name="ProgramID">The program identifier.</param>
         /// <returns></returns>
-        int SaveItemList(DataTable dtItemList, int itematypeID, int UserID, int ProgramID);
+        int SaveItemList(DataTable dtItemList, int itematypeID, int userId, int ProgramID);
         /// <summary>
         /// Saves the supplier item list.
         /// </summary>
         /// <param name="dtItemList">The dt item list.</param>
         /// <param name="itematypeID">The itematype identifier.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <param name="supplierID">The supplier identifier.</param>
         /// <returns></returns>
-        int SaveSupplierItemList(DataTable dtItemList, int itematypeID, int UserID, int supplierID);
+        int SaveSupplierItemList(DataTable dtItemList, int itematypeID, int userId, int supplierID);
         /// <summary>
         /// Saves the update item list.
         /// </summary>
         /// <param name="dtItemList">The dt item list.</param>
         /// <param name="CategoryID">The category identifier.</param>
         /// <param name="TableName">Name of the table.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveUpdateItemList(DataTable dtItemList, string CategoryID, string TableName, int UserID);
+        int SaveUpdateItemList(DataTable dtItemList, string CategoryID, string TableName, int userId);
         /// <summary>
         /// Gets the donor list.
         /// </summary>
@@ -111,9 +111,9 @@ namespace Interface.SCM
         /// Saves the donor list.
         /// </summary>
         /// <param name="dtDonorList">The dt donor list.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveDonorList(DataTable dtDonorList, int UserID);
+        int SaveDonorList(DataTable dtDonorList, int userId);
         /// <summary>
         /// Gets the program donor LNK.
         /// </summary>
@@ -130,16 +130,16 @@ namespace Interface.SCM
         /// <param name="dtItemList">The dt item list.</param>
         /// <param name="CategoryID">The category identifier.</param>
         /// <param name="TableName">Name of the table.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
         int SaveUpdateStore(DataTable dtItemList,  int userId, int locationId);
         /// <summary>
         /// Saves the program donor LNK.
         /// </summary>
         /// <param name="dtProgramDonorLnk">The dt program donor LNK.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveProgramDonorLnk(DataTable dtProgramDonorLnk, int UserID);
+        int SaveProgramDonorLnk(DataTable dtProgramDonorLnk, int userId);
         //DataTable GetItemListSupplier(int itemTypeId, int Subtypeid);
         /// <summary>
         /// Gets the item list supplier.
@@ -165,9 +165,9 @@ namespace Interface.SCM
         /// </summary>
         /// <param name="dtStoreList">The dt store list.</param>
         /// <param name="TableName">Name of the table.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        int SaveUpdateStoreLinking(DataTable dtStoreList, string TableName, int UserID);
+        int SaveUpdateStoreLinking(DataTable dtStoreList, string TableName, int userId);
         /// <summary>
         /// Saves the update item master.
         /// </summary>
@@ -191,9 +191,9 @@ namespace Interface.SCM
         /// <summary>
         /// Gets the store by user.
         /// </summary>
-        /// <param name="UserId">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <returns></returns>
-        DataTable GetStoreByUser(int UserId);
+        DataTable GetStoreByUser(int userId);
         /// <summary>
         /// Gets the item by store identifier.
         /// </summary>
@@ -210,19 +210,19 @@ namespace Interface.SCM
         /// Saves the store item list.
         /// </summary>
         /// <param name="dtItemList">The dt item list.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <param name="StoreID">The store identifier.</param>
         /// <returns></returns>
-        int SaveStoreItemList(DataTable dtItemList, int UserID, int StoreID);
+        int SaveStoreItemList(DataTable dtItemList, int userId, int StoreID);
         /// <summary>
         /// Saves the name of the batch.
         /// </summary>
         /// <param name="BatchName">Name of the batch.</param>
-        /// <param name="UserId">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <param name="itemID">The item identifier.</param>
         /// <param name="expiryDatetime">The expiry datetime.</param>
         /// <returns></returns>
-        DataSet SaveBatchName(string BatchName, int UserId, string itemID, string expiryDatetime);
+        DataSet SaveBatchName(string BatchName, int userId, string itemID, string expiryDatetime);
         /// <summary>
         /// Gets the item list store_ filtered.
         /// </summary>
@@ -235,11 +235,13 @@ namespace Interface.SCM
         /// Saves the store item list_ filtered.
         /// </summary>
         /// <param name="dtItemList">The dt item list.</param>
-        /// <param name="UserID">The user identifier.</param>
+        /// <param name="userId">The user identifier.</param>
         /// <param name="StoreID">The store identifier.</param>
         /// <param name="itemtypeID">The itemtype identifier.</param>
         /// <returns></returns>
-        int SaveStoreItemList_Filtered(DataTable dtItemList, int UserID, int StoreID, int itemtypeID);
+        int SaveStoreItemList_Filtered(DataTable dtItemList, int userId, int storeId, int itemtypeId);
+
+        DataTable GetItemsBySupplier(int supplierId, int? itemTypeId = default(int?));
 
     }
 }

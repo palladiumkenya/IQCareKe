@@ -4949,11 +4949,11 @@ AS
 		Inner Join
 			dtl_PatientVitals dtl On dtl.visit_pk = ord.Visit_Id
 		Where ord.ptn_pk = @patientID
-		And dtl.Height Is Not Null
+		And dtl.Height > 0
 		Order By Abs(Datediff(Day, Ord.VisitDate, @ClosestARVDate));
 	End 
 	Else Begin
-		Select '' [Height];
+		Select Null [Height];
 	End
 
 --3 Weight                             
@@ -4963,11 +4963,11 @@ AS
 		Inner Join
 			dtl_PatientVitals As dtl On dtl.Visit_pk = ord.Visit_Id
 		Where (ord.Ptn_Pk = @patientID)
-		And (dtl.[Weight] Is Not Null)
+		And (dtl.[Weight] > 0)
 		Order By Abs(Datediff(Day, ord.VisitDate, @ClosestARVDate));
 	End 
 	Else Begin
-		Select '' [Weight]
+		Select Null [Weight]
 	End
 --4 Previous                 
 
@@ -5067,7 +5067,7 @@ AS
 	--order by abs(DATEDIFF(DAY,Ord.OrderedbyDate,@ClosestARVDate))        
 	End 
 	Else Begin
-		Select '' [CD4]
+		Select Null [CD4]
 	End
 --7 CD4 Percent                            
 	If (@artstart != '' Or @artstart Is Not Null) Begin
@@ -5083,7 +5083,7 @@ AS
 	--order by abs(DATEDIFF(DAY,Ord.OrderedbyDate,@ClosestARVDate))                            
 	End 
 	Else Begin
-		Select '' [CD4Percent]
+		Select Null [CD4Percent]
 	End
 
 ---8 First Line Art Regimen                                      

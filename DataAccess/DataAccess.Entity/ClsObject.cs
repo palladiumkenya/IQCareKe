@@ -145,6 +145,124 @@ namespace DataAccess.Entity
             }
 
         }
+        public object ReturnObject(Hashtable Params, string CommandText, ClsUtility.ObjectEnum Obj, string connectionName)
+        {
+            int i;
+            string cmdpara, cmdvalue, cmddbtype;
+            SqlCommand theCmd = new SqlCommand();
+            SqlTransaction theTran = (SqlTransaction)this.Transaction;
+            SqlConnection cnn;
+
+            if (null == this.Connection)
+            {
+                cnn = (SqlConnection)DataMgr.GetConnection(connectionName);
+            }
+            else
+            {
+                cnn = (SqlConnection)this.Connection;
+            }
+
+
+            if (null == this.Transaction)
+            {
+                theCmd = new SqlCommand(CommandText, cnn);
+            }
+            else
+            {
+                theCmd = new SqlCommand(CommandText, cnn, theTran);
+            }
+
+            for (i = 1; i < Params.Count;)
+            {
+                cmdpara = Params[i].ToString();
+                cmddbtype = Params[i + 1].ToString();
+                cmdvalue = Params[i + 2].ToString();
+                System.Data.Common.DbParameter p = theCmd.CreateParameter();
+                p.ParameterName = cmdpara;
+                p.Value = cmdvalue;
+
+
+
+
+                theCmd.Parameters.Add(cmdpara, cmddbtype).Value = cmdvalue;
+                i = i + 3;
+            }
+
+            theCmd.CommandType = CommandType.StoredProcedure;
+            theCmd.CommandTimeout = DataMgr.CommandTimeOut();
+            string theSubstring = CommandText.Substring(0, 6).ToUpper();
+            switch (theSubstring)
+            {
+                case "SELECT":
+                    theCmd.CommandType = CommandType.Text;
+                    break;
+                case "UPDATE":
+                    theCmd.CommandType = CommandType.Text;
+                    break;
+                case "INSERT":
+                    theCmd.CommandType = CommandType.Text;
+                    break;
+                case "DELETE":
+                    theCmd.CommandType = CommandType.Text;
+                    break;
+                case "TRUNCA":
+                    theCmd.CommandType = CommandType.Text;
+                    break;
+            }
+
+            theCmd.Connection = cnn;
+            try
+            {
+                if (Obj == ClsUtility.ObjectEnum.DataSet)
+                {
+
+                    SqlDataAdapter theAdpt = new SqlDataAdapter(theCmd);
+                    DataSet theDS = new DataSet();
+                    theAdpt.Fill(theDS);
+                    theAdpt.Dispose();
+                    return theDS;
+                }
+
+                if (Obj == ClsUtility.ObjectEnum.DataTable)
+                {
+                    SqlDataAdapter theAdpt = new SqlDataAdapter(theCmd);
+                    DataTable theDT = new DataTable();
+                    theAdpt.Fill(theDT);
+                    theAdpt.Dispose();
+                    return theDT;
+                }
+
+                if (Obj == ClsUtility.ObjectEnum.DataRow)
+                {
+                    SqlDataAdapter theAdpt = new SqlDataAdapter(theCmd);
+                    DataTable theDT = new DataTable();
+                    theAdpt.Fill(theDT);
+                    theAdpt.Dispose();
+                    return theDT.Rows[0];
+                }
+
+
+                if (Obj == ClsUtility.ObjectEnum.ExecuteNonQuery)
+                {
+                    int NoRowsAffected = theCmd.ExecuteNonQuery();
+                    return NoRowsAffected;
+                }
+                return 0;
+            }
+            catch (Exception err)
+            {
+
+
+                throw err;
+            }
+            finally
+            {
+                if (null != cnn)
+                    if (null == this.Connection)
+                        DataMgr.ReleaseConnection(cnn);
+            }
+
+        }
         public object ReturnObject(Hashtable Params,string CommandText,ClsUtility.ObjectEnum Obj)
         {
             int i;

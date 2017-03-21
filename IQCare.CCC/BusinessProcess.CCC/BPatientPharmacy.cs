@@ -149,5 +149,19 @@ namespace BusinessProcess.CCC
 
             }
         }
+
+        public DataTable getPharmacyPendingPrescriptions(string patientMasterVisitID, string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, patientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPendingPrescriptions", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
     }
 }

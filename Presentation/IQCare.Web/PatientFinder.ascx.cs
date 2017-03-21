@@ -29,7 +29,7 @@ namespace IQCare.Web
     ///     CancelFind : Occurs when the cancel button is clicked
     ///         
     /// </summary>
-    public partial class PatientFinder : System.Web.UI.UserControl
+    public partial class PatientFinder : UserControl
     {
         #region "Subscriber Properties"
         /// <summary>
@@ -517,7 +517,8 @@ namespace IQCare.Web
                     dateRegistration = Convert.ToDateTime(textRegistrationDate.Text);
                 DateTime? dateOfBirth = null;
                 if (!string.IsNullOrEmpty(txtDOB.Text.Trim())) dateOfBirth = Convert.ToDateTime(txtDOB.Text.Trim());
-               
+
+                string phoneNumber = textPhoneNumber.Text.Trim();
                 //PatientService pservice = new PatientService();
                 DataTable dt = PatientService.FindPatient(Convert.ToInt32(ddFacility.SelectedValue),
                         lName,
@@ -529,7 +530,7 @@ namespace IQCare.Web
                         dateOfBirth,
                         dateRegistration,
                         FilterByServiceLines ? Convert.ToInt32(ddlServices.SelectedValue) : (this.SelectedServiceLine > 0) ? this.SelectedServiceLine : 999,
-                        this.NumberOfRecords);
+                        this.NumberOfRecords,phoneNumber);
               
                 this.grdSearchResult.DataSource = dt;
                 this.grdSearchResult.DataBind();
@@ -723,9 +724,9 @@ namespace IQCare.Web
                 grdSearchResult.SelectedIndex = rowIndex;
                 patientId = int.Parse(grdSearchResult.SelectedDataKey.Values["patientid"].ToString());
                 locationId = int.Parse(grdSearchResult.SelectedDataKey.Values["locationid"].ToString());
-                var list = new List<KeyValuePair<string, Object>>();
+                var list = new List<KeyValuePair<string, object>>();
 
-                String FacilityID,FirstName, MiddleName, LastName, Gender, DOB, RegistrationDate;
+                string FacilityID,FirstName, MiddleName, LastName, Gender, DOB, RegistrationDate;
                 FacilityID = grdSearchResult.SelectedRow.Cells[1].Text;
                 FirstName = grdSearchResult.SelectedRow.Cells[2].Text;
                 MiddleName = grdSearchResult.SelectedRow.Cells[3].Text;

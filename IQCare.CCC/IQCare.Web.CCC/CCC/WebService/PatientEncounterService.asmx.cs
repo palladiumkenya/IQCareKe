@@ -35,11 +35,11 @@ namespace IQCare.Web.CCC.WebService
 
 
         [WebMethod(EnableSession = true)]
-        public void savePatientEncounterChronicIllness(string chronicIllness, string vaccines)
+        public void savePatientEncounterChronicIllness(string chronicIllness, string vaccines, string allergies)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), chronicIllness,vaccines);
+            patientEncounter.savePatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), chronicIllness,vaccines,allergies);
         }
 
         [WebMethod(EnableSession = true)]
@@ -87,6 +87,23 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow row in theDT.Rows)
             {
                 string[] i = new string[6] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["dose"].ToString(), row["duration"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetAllergies()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterAllergies(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[4] { row["Allergen"].ToString(), row["AllergyResponse"].ToString(), "21-Mar-2017", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
             }
             return rows;
@@ -159,6 +176,25 @@ namespace IQCare.Web.CCC.WebService
                     row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPharmacyPendingPrescriptions()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyPendingPrescriptions(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[7] { row["masterVisitID"].ToString(), row["Ptn_pk"].ToString(),
+                    row["identifiervalue"].ToString(),row["FirstName"].ToString(),row["MidName"].ToString(),
+                    row["LastName"].ToString(),row["prescribedBy"].ToString()};
                 rows.Add(i);
             }
             return rows;
