@@ -33,6 +33,7 @@ namespace IQCare.Web.CCC.WebService
         {
             String output=null;
             int filteredRecords = 0;
+            int totalCount = 0;
             Utility utility=new Utility();
             try
             {
@@ -109,30 +110,43 @@ namespace IQCare.Web.CCC.WebService
                     }
 
                     /*-- implement search -- */
-                    if (searchString!=null)
+                    if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
                     {
                         jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
-                                                       utility.Decrypt(x.FirstName).ToLower().Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.MiddleName).ToLower().Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.LastName).ToLower().Contains(searchString.ToLower()) ||
-                                                       LookupLogic.GetLookupNameById(x.Sex).Contains(searchString.ToLower())||
-                                                       x.EnrollmentNumber.Contains(searchString.ToString()))
+                                                       utility.Decrypt(x.FirstName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.MiddleName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.LastName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       LookupLogic.GetLookupNameById(x.Sex)
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.EnrollmentNumber.Contains(searchString.ToString())
+                            )
                             .ToList();
+                        filteredRecords = jsonData.Count();
+                    }
+                    else
+                    {
                         filteredRecords = jsonData.Count();
                     }
 
                     /*---- Perform paging based on request */
-                    var skip = (displayLength * displayStart);
-                    var ableToSkip = skip < displayLength;
+                  //  var skip = (displayLength * displayStart);
+                   // var ableToSkip = skip < displayLength;
                     //string patientStatus;
+                    totalCount = jsonData.Count();
                     jsonData = jsonData.Skip(displayStart).Take(displayLength).ToList();
 
                     var json = new
                     {
                         draw = sEcho,
-                        recordsTotal = jsonData.Count,
-                       // recordsFiltered= jsonData.Count,
-                        recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count,
+                        recordsTotal = totalCount,
+                        recordsFiltered= filteredRecords,
+                       // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
 
                         data = jsonData.Select(x => new string[]
                         {
@@ -144,7 +158,8 @@ namespace IQCare.Web.CCC.WebService
                             utility.Decrypt(x.LastName),
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
-                            x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                            //x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                             x.RegistrationDate.ToShortDateString(),
                             x.PatientStatus.ToString()
                         })
                     };

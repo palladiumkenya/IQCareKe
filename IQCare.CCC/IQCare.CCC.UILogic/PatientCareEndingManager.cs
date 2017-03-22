@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
             (IPatientCareEnding)
             ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientCareEnding, BusinessProcess.CCC");
 
-        public int AddPatientCareEnding(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string careEndingNotes)
+        public int AddPatientCareEnding(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate,string transferOutFacility,DateTime dateOfDeath, string careEndingNotes)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()
             {
@@ -21,15 +21,47 @@ namespace IQCare.CCC.UILogic
                 PatientEnrollmentId = patientEnrollmentId,
                 ExitReason = exitReason,
                 ExitDate = exitDate,
+                TransferOutFacility = transferOutFacility,
+                DateOfDeath = dateOfDeath,
                 CareEndingNotes = careEndingNotes
             };
 
             return mgr.AddPatientCareEnding(patientCareEnding);
         }
 
+        public int UpdatePatientCareEnding(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string transferOutFacility, DateTime dateOfDeath, string careEndingNotes)
+        {
+            PatientCareEnding patientCareEnding = new PatientCareEnding()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                PatientEnrollmentId = patientEnrollmentId,
+                ExitReason = exitReason,
+                ExitDate = exitDate,
+                TransferOutFacility = transferOutFacility,
+                DateOfDeath = dateOfDeath,
+                CareEndingNotes = careEndingNotes
+            };
+
+            return mgr.AddPatientCareEnding(patientCareEnding);
+        }
+
+        public int DeletePatientCareEnding(int id)
+        {
+            return mgr.DeletePatientCareEnding(id);
+        }
+
+
+
         public List<PatientCareEnding> GetPatientCareEndings(int patientId )
         {
             return mgr.GetPatientCareEndings(patientId);
+        }
+
+
+        public string PatientCareEndingStatus(int patientId)
+        {
+            return mgr.PatientCareEndingStatus(patientId);
         }
     }
 }
