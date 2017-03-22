@@ -24,7 +24,8 @@ namespace Interface.CCC.Lookup
         string GetLookupNameFromId(int id);
        List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName);
        int GetRegimenCategory(int regimenId);
-   }
+        LookupLabs GetLabTestId(string labType);
+    }
 
        
 
