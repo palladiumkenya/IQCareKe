@@ -58,9 +58,14 @@
               </div><%-- .col-md-12--%>
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12 col-xs-12 col-sm-12">
-                              <div class="col-md-4 col-xs-12 col-sm-12"></div>
-                              <div class="col-md-4 col-xs-12 col-sm-12"></div> 
-                              <div class="col-md-4 col-xs-12 col-sm-12">
+                              <div class="col-md-7 col-xs-7 col-sm-7">
+                                  <div class="col-md-12 pull-left" id="divAction" clientidmode="Static">
+                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw pull-left text-info"></i>
+                                     <span class="sr-only"></span><strong class="pull-left" id="divActionString" clientidmode="Static"> Fetching Patient data</strong>
+                                  </div>
+                              </div>
+                              <%--<div class="col-md-4 col-xs-4 col-sm-4"></div> --%>
+                              <div class="col-md-5 col-xs-5 col-sm-5">
                                    <div class="col-md-4 col-xs-12 col-sm-12">
                                         <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
                                     </div>
@@ -154,6 +159,8 @@
                 cache: false
             });
 
+            $("#divAction").hide("fast");
+
             $("#btnRemoveGrid").click(function() {
                 $("#infoGrid").slideUp("fast",
                     function() {
@@ -190,7 +197,10 @@
             var table = null;
             $("#btnFindPatient").click(function (e) {
 
-            table=    $("#tblFindPatient").dataTable({
+                $("#divAction").show("fast");
+                $("#divActionString").text("Consolidating table and data features..");
+
+                table = $("#tblFindPatient").dataTable({
                     "oLanguage": {
                         "sZeroRecords": "No records to display",
                         "sSearch": "Search from all Records"
@@ -226,6 +236,8 @@
                         aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
                         aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").val()+"" });
 
+                        $("#divActionString").text("Data features and table preparating complete");
+
                         $.ajax({
                             "dataType": 'json',
                             "contentType": "application/json; charset=utf-8",
@@ -233,6 +245,8 @@
                             "url": sSource,
                             "data": JSON.stringify({dataPayLoad: aoData }),
                             "success": function (msg) {
+                                $("#divActionString").text("Rendering patients data...");
+
                                 var json = jQuery.parseJSON(msg.d);
                                 if (json === "null") {
                                     toastr.error("No records Found", "Patient Records Search");
@@ -241,14 +255,18 @@
                                     $("#PatientSearch")
                                         .slideDown("fast",
                                             function() {
+                                                $("#divAction").hide("fast");
                                                 $("#infoGrid")
                                                     .slideDown("fast", function() { $("#searchGrid").slideUp("fast") });
                                             });
                                 }
                             },
                             "error":function(xhr, errorType, exception) {
+                                $("#divAction").show("fast");
+                                
                                 var jsonError = jQuery.parseJSON(xhr.responseText);
-                                toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType, "Patient Finder Method");
+                                $("#divAction").text(jsonError.Message);
+                                toastr.error("" + xhr.status + "" + jsonError.Message + " ");
                                 return false;
                             }
                         });

@@ -31,13 +31,22 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.DropDownList Reason;
         
         /// <summary>
-        /// txtCareEndingNotes control.
+        /// Facility control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCareEndingNotes;
+        protected global::System.Web.UI.WebControls.TextBox Facility;
+        
+        /// <summary>
+        /// DeathDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DeathDate;
         
         /// <summary>
         /// AppointmentDate control.
@@ -47,6 +56,15 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        
+        /// <summary>
+        /// txtCareEndingNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCareEndingNotes;
         
         /// <summary>
         /// EndCare control.

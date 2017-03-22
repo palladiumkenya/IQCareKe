@@ -10,6 +10,7 @@
             <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
         </div>
     </div>
+
     <div class="col-md-12 form-group">
         <div class="col-md-6">
             
@@ -303,7 +304,7 @@
                     var itemList = JSON.parse(response.d);
                     $.each(itemList,
                         function(index, itemList) {
-                            if (itemList.Id > 0) {
+                            if (itemList.patientId > 0) {
                                 
                                 /* transferin status */
                                 $("#<%=lblTransferinDate.ClientID%>").text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));

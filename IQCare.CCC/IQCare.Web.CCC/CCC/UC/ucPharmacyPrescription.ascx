@@ -249,7 +249,7 @@
        function drugSwitchInterruptionReason(treatmentPlan)
        {
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
-           if(valSelected == "Continue Current Treatment" || valSelected == "Select")
+           if(valSelected === "Continue Current Treatment" || valSelected === "Select")
            {
                 $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
            }
