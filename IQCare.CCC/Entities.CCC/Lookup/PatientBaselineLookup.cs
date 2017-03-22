@@ -15,26 +15,26 @@ namespace Entities.CCC.Lookup
         public int Id { get; set; }
         public int patientId { get; set; }
         public int PatientMasterVisitId { get; set; }
-        public int ServiceAreaId { get; set; }
-        public DateTime TransferInDate { get; set; }
-        public DateTime TreatmentStartDate { get; set; }
+        public int? ServiceAreaId { get; set; }
+        public DateTime? TransferInDate { get; set; }
+        public DateTime? TreatmentStartDate { get; set; }
         public string CurrentTreatment { get; set; }
         public string CurrentTreatmentName { get; set; }
         public string FacilityFrom { get; set; }
-        public int mflcode { get; set; }
+        public int? mflcode { get; set; }
         public string CountyFrom { get; set; }
         public string TransferInNotes { get; set; }
-        public DateTime HivDiagnosisDate { get; set; }
-        public DateTime EnrollmentDate { get; set; }
-        public int EnrollmentWHOStage { get; set; }
+        public DateTime? HivDiagnosisDate { get; set; }
+        public DateTime? EnrollmentDate { get; set; }
+        public int? EnrollmentWHOStage { get; set; }
         public string EnrollmentWHOStageName { get; set; }
-        public DateTime ARTInitiationDate { get; set; }
-        public DateTime DateStartedOnFirstline { get; set; }
+        public DateTime? ARTInitiationDate { get; set; }
+        public DateTime? DateStartedOnFirstline { get; set; }
         public string Cohort { get; set; }
-        public int Regimen { get; set; }
+        public int? Regimen { get; set; }
         public string RegimenName { get; set; }
-        public decimal BaselineViralLoad { get; set; }
-        public DateTime BaselineViralLoadDate { get; set; }
+        public decimal? BaselineViralLoad { get; set; }
+        public DateTime? BaselineViralLoadDate { get; set; }
         public bool? HBVInfected { get; set; }
         public bool? Pregnant { get; set; }
         public bool? TBinfected { get; set; }

@@ -9,6 +9,9 @@ namespace Interface.CCC.Encounter
     public interface IPatientCareEnding
     {
         int AddPatientCareEnding(PatientCareEnding patientCareEnding);
+        int UpdatePatientCareEnding(PatientCareEnding patientCareEnding);
+        int DeletePatientCareEnding(int id);
         List<PatientCareEnding> GetPatientCareEndings(int patientId);
+        string PatientCareEndingStatus(int patientId);
     }
 }
