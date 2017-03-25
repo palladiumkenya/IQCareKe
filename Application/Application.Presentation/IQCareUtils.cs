@@ -1,23 +1,18 @@
 using System;
-using System.Data;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Collections;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+using System.IO;
 //using Excel = Microsoft.Office.Interop.Owc11;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Application.Presentation
-    {
+{
     public class IQCareUtils
     {
         #region "Constructor"
@@ -228,7 +223,7 @@ namespace Application.Presentation
             return thePic;                            
         }
 
-        public Boolean NumericValues(Int32 AsciiValue)
+        public bool NumericValues(Int32 AsciiValue)
         {
             if (AsciiValue == 8)
             {

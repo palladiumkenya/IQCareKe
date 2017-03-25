@@ -36,11 +36,14 @@ namespace Entities.Lab
         /// The lab test identifier.
         /// </value>
         public virtual LabTest Test { get; set; }
-        [Column("LabTestId")]
-        [ForeignKey("Test")]
+        //[Column("LabTestId")]
+        //[ForeignKey("Test")]
         public int TestId
         {
-            get;set;
+            get
+            {
+                return Test.Id;
+            }
         }
         [NotMapped]
         public string TestName

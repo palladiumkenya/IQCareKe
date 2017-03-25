@@ -95,6 +95,7 @@ namespace IQCare.SCM
             DataTable dtOrdermaster = new DataTable();
             dtOrdermaster.Columns.Add("IsPO", typeof(int));
             dtOrdermaster.Columns.Add("POID", typeof(int));
+            dtOrdermaster.Columns.Add("PONumber", typeof(string));
             dtOrdermaster.Columns.Add("OrderDate", typeof(DateTime));
             dtOrdermaster.Columns.Add("SupplierID", typeof(int));
             dtOrdermaster.Columns.Add("SrcStore", typeof(int));
@@ -218,8 +219,10 @@ namespace IQCare.SCM
                             string[] strarry = strItemId.Split('-');
                             theDRowItem["ItemID"] = Convert.ToInt32(strarry[0]);
                             theDRowItem["BatchID"] = Convert.ToInt32(strarry[1]);
-                            // theDRowItem["ExpiryDate"] = Convert.ToDateTime(String.Format(MM-strarry[1]);//String.Format("{0:dd-MMM-yyyy}",
-                           theDRowItem["ExpiryDate"]= Convert.ToDateTime(strarry[2]);
+                        // theDRowItem["ExpiryDate"] = Convert.ToDateTime(String.Format(MM-strarry[1]);//String.Format("{0:dd-MMM-yyyy}",
+                        string dateString = strarry[2];
+                       // DateTime expDate = new DateTime(Convert.ToInt32(dateString[2]), Convert.ToInt32(dateString[0]), Convert.ToInt32(dateString[1]));
+                        theDRowItem["ExpiryDate"] = Utility.GetDateFromMMDDYYY(dateString,'/');// expDate;
                            theDRowItem["AvaliableQty"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["AvailableQTY"].Value); ;
                         }
 

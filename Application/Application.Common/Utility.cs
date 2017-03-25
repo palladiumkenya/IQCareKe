@@ -51,6 +51,19 @@ namespace Application.Common
             HttpContext.Current.Session["ServiceLocationId"] = 0;
             HttpContext.Current.Session["LabId"] = 0;
         }
+        public static DateTime GetDateFromMMDDYYYY(string strDate, char separator='/')
+        {
+            int[] numArray = new int[3];
+            if (string.IsNullOrEmpty(strDate))
+            {
+                throw new Exception("Date is empty.");
+            }
+            strDate = strDate.Trim();
+
+            string[] dateString = strDate.Split(separator);
+            return new DateTime(Convert.ToInt32(dateString[2]), Convert.ToInt32(dateString[0]), Convert.ToInt32(dateString[1]));
+      
+        }
         /// <summary>
         /// Gets the date from ddmmyyyy.
         /// </summary>

@@ -130,8 +130,8 @@ namespace IQCare.Web.Laboratory
             }
             if (!IsPostBack)
             {
-                //this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
-                this.LabOrderId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
+                //this.LabOrderId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
                 if (LabOrderId > 0)
                 {
                     this.PopulateRequest(LabOrderId);
@@ -211,7 +211,7 @@ namespace IQCare.Web.Laboratory
             }
         
             int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, patientId);
+            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
             if (this.thisLabOrder.ModuleId <= 0)
             {
                 EnrollmentService es = new EnrollmentService(PatientId);

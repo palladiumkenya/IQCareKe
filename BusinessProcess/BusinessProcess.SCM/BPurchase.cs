@@ -113,20 +113,20 @@ namespace BusinessProcess.SCM
                     ClsUtility.Init_Hashtable();
                     ClsUtility.AddParameters("@POId", SqlDbType.Int, orderId.ToString());
                     ClsUtility.AddParameters("@ItemId", SqlDbType.Int, dtPOItems.Rows[i]["ItemId"].ToString());
-                    ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
+                    if(dtPOItems.Columns.Contains("ItemTypeId"))
+                            ClsUtility.AddParameters("@ItemTypeId", SqlDbType.Int, dtPOItems.Rows[i]["ItemTypeId"].ToString());
                     ClsUtility.AddParameters("@Quantity", SqlDbType.Int, dtPOItems.Rows[i]["Quantity"].ToString());
                     ClsUtility.AddParameters("@PurchasePrice", SqlDbType.Decimal, dtPOItems.Rows[i]["priceperunit"].ToString());
                     //  ClsUtility.AddParameters("@Unit", SqlDbType.Int,dtPOItems.Rows[i]["Units"].ToString());
                     ClsUtility.AddParameters("@UserID", SqlDbType.Int, DtMasterPO.Rows[0]["UserID"].ToString());
-
                     ClsUtility.AddParameters("@BatchID", SqlDbType.Int, dtPOItems.Rows[i]["BatchID"].ToString());
                     ClsUtility.AddParameters("@AvaliableQty", SqlDbType.Int, dtPOItems.Rows[i]["AvaliableQty"].ToString());
                     ClsUtility.AddParameters("@ExpiryDate", SqlDbType.DateTime, dtPOItems.Rows[i]["ExpiryDate"].ToString());
                     ClsUtility.AddParameters("@UnitQuantity", SqlDbType.Int, dtPOItems.Rows[i]["UnitQuantity"].ToString());
-                    if(dtPOItems.Rows[i]["SupplierId"] != DBNull.Value)
-                    {
-                        ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
-                    }
+                    //if(dtPOItems.Columns.Contains("SupplierId"))
+                    //{
+                    //    ClsUtility.AddParameters("@SupplierId", SqlDbType.Int, dtPOItems.Rows[i]["SupplierId"].ToString());
+                    //}
                     theRowAffected =
                         (int)
                         PODetail.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePurchaseOrderItem_Futures",
