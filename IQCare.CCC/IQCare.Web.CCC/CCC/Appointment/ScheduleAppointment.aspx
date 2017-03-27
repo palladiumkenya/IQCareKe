@@ -212,6 +212,7 @@
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
             allowPastDates: false,
+            Date: 0,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
 

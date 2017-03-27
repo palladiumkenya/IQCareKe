@@ -5907,15 +5907,15 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #fff;
+  background-color: #33ccff!important;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid #33ccff;
+  border: 1px solid rgba(3, 9, 9, .2);
   border-radius: 6px;
   outline: 0;
-  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
-          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 3px 9px rgba(4, 3, 9, .5)!important;
+          box-shadow: 0 3px 9px rgba(4, 5, 7, .5)!important;
 }
 .modal-backdrop {
   position: fixed;
@@ -5932,11 +5932,13 @@ button.close {
 }
 .modal-backdrop.in {
   filter: alpha(opacity=50);
-  opacity: .5;
+  opacity: .8;
+
 }
 .modal-header {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
+   background-color: #b3b3b3!important;
 }
 .modal-header .close {
   margin-top: -2px;
@@ -5948,11 +5950,13 @@ button.close {
 .modal-body {
   position: relative;
   padding: 15px;
+   background-color: #b3b3b3!important;
 }
 .modal-footer {
   padding: 15px;
   text-align: right;
   border-top: 1px solid #e5e5e5;
+   background-color: #b3b3b3!important;
 }
 .modal-footer .btn + .btn {
   margin-bottom: 0;

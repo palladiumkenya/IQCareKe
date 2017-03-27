@@ -351,7 +351,7 @@
 
         </div>
     </div>
-    <div class="modal fade"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
+    <div class="modal"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" >
                 <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
@@ -833,8 +833,8 @@
             function addLabOrder(_fp) {
                 var labOrder = JSON.stringify(_fp);
                 // console.log(patientId);
-                //console.log(labOrder);
-                $.ajax({
+               // console.log(labOrder);
+                    $.ajax({
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
@@ -845,10 +845,10 @@
 
                         toastr.success(response.d, "Lab order successful");
                     },
-                    error: function (response) {
-                        //generate('error', response.d);
-                        toastr.error(response.d, "Lab order unsuccessful");
-                    }
+                    //error: function (response) {
+                    //    //generate('error', response.d);
+                    //    toastr.error(response.d, "Lab order unsuccessful");
+                    //}
                 });
             };
             $(function () {

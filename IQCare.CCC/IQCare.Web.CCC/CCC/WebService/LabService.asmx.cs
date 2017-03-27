@@ -34,35 +34,19 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddLabOrder(int patient_ID, int patientMasterVisitId, string patientLabOrder)
         {
-            if (patientMasterVisitId == 0)
-            {
-                PatientMasterVisit visit = new PatientMasterVisit()
-                {
-                    PatientId = patient_ID,
-                    Start = DateTime.Now,
-                    Active = true,
-                };
-                patientMasterVisitId = _visitManager.AddPatientmasterVisit(visit);
-            }
-            // Get Facility ID service
+           
             LookupFacility facility = _lookupManager.GetFacility();
             facilityID = facility.FacilityID;
+            var labOrder = new PatientLabOrderManager();         
 
-            try
+            if (patient_ID > 0)
             {
-                //conversion error                 
-                // int patient_ID = 18;
-                var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patient_ID, facilityID, patientMasterVisitId, patientLabOrder);
-                if (Result > 0)
-                {
-                    Msg = "Patient Lab Order Recorded Successfully .";
-                }
+                labOrder.savePatientLabOrder(patient_ID, facilityID, patientMasterVisitId, patientLabOrder);
+                Msg = "Patient Lab Order Recorded Successfully .";
 
-            }
-            catch (Exception e)
-            {
-                Msg = "Error Message: " + e.Message + ' ' + " Exception: " + e.InnerException;
+            }else {          
+           
+                Msg = "Patient Lab Order Not Recorded Successfully .";
             }
             return Msg;
         }
