@@ -351,7 +351,7 @@
 
         </div>
     </div>
-    <div class="modal fade"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
+    <div class="modal"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" >
                 <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
