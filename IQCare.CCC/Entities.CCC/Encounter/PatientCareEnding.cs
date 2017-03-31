@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using Entities.Common;
 using Entities.CCC.Enrollment;
 using Entities.CCC.Visit;
@@ -25,6 +22,8 @@ namespace Entities.CCC.Encounter
         public int PatientEnrollmentId { get; set; }
         public int ExitReason { get; set; }
         public DateTime ExitDate { get; set; }
+        public string TransferOutFacility { get; set; }
+        public DateTime? DateOfDeath { get; set; }
         public string CareEndingNotes { get; set; }
         public bool Active { get; set; }
     }
