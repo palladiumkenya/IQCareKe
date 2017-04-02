@@ -13,15 +13,6 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucPatientTriage {
         
         /// <summary>
-        /// Heights control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Heights;
-        
-        /// <summary>
         /// weights control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox weights;
+        
+        /// <summary>
+        /// Heights control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Heights;
         
         /// <summary>
         /// bmivalue control.
@@ -40,15 +40,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox bmivalue;
         
         /// <summary>
-        /// circumference control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox circumference;
-        
-        /// <summary>
         /// muacs control.
         /// </summary>
         /// <remarks>
@@ -58,13 +49,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox muacs;
         
         /// <summary>
-        /// distolic control.
+        /// circumference control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox distolic;
+        protected global::System.Web.UI.WebControls.TextBox circumference;
+        
+        /// <summary>
+        /// Tempreture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Tempreture;
         
         /// <summary>
         /// systolic control.
@@ -76,13 +76,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox systolic;
         
         /// <summary>
-        /// Tempreture control.
+        /// distolic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Tempreture;
+        protected global::System.Web.UI.WebControls.TextBox distolic;
+        
+        /// <summary>
+        /// HeartRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox HeartRate;
         
         /// <summary>
         /// RespiratoryRate control.
@@ -101,15 +110,6 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox bosaturation;
-        
-        /// <summary>
-        /// HeartRate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox HeartRate;
         
         /// <summary>
         /// btnSaveTriage control.

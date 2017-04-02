@@ -27,5 +27,6 @@ namespace Entities.CCC.Lookup
         public int FacilityId { get; set; }
         public int PatientType { get; set; }
         public string PatientStatus { get; set; }
+        public string MobileNumber { get; set; }
     }
 }

@@ -1,39 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientHome.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientHome" %>
 
-<%@ Register Src="~/CCC/UC/ucPatientDetails.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>
+<%--<%@ Register Src="~/CCC/UC/ucPatientDetails.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>--%>
+
+<%--<%@ Register Src="~/CCC/UC/ucPatientDetails.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>--%>
+<%@ Register Src="~/CCC/UC/ucPatientBrief.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="IQ" TagName="ucExtruder" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div class="row">
-        <div class="col-md-12">
+      <%--  <div class="col-md-12 col-xs-12 col-sm-12" style="margin-top: 0%;padding-top: 0%">--%>
             <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
-        </div>
-    </div>
+        <%--</div>--%>
 
-    <div class="col-md-12 form-group">
-        <div class="col-md-6">
+    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+        <div class="col-md-6 col-xs-12 col-sm-6">
             
               <div id="vl_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
             <!-- .bs-component-->
         </div>
         <!-- .col-lg-3 -->
-        <div class="col-md-6">
-            
-
-            <div id="vitals_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
+        <div class="col-md-6 col-xs-12 col-sm-6">
+             <div id="vitals_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
             <!-- .bs-component-->
         </div>
-        <!-- .col-lg-3 -->
-        <%--<div class="col-md-3">
-            <div id="weight_container" style="min-width: 300px; height: 200px; margin: 0 auto"></div> 
-        </div>--%>
-        <!-- .col-lg-3 -->
-        <%--<div class="col-md-3">
-          <%--<div id="bmi_container" style="min-width: 300px; height: 200px; margin: 0 auto"></div> 
-            <!-- .bs-component-->
-        </div>--%>
-        <!-- .col-lg-3 -->
     </div>
     
 
@@ -41,9 +30,10 @@
       
         <ul class="nav nav-tabs">
 
+            <li class="disabled"><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
             <li class="active"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
             <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-            <li class="disabled"><a data-toggle="tab" href="#Diagnosis">Diagnosis & ARV HIstory </a></li>
+           
         
 
         </ul>
@@ -51,7 +41,8 @@
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
             <div class="col-md-12 form-group"></div> 
             <div class="tab-content">
-                 <div id="EntryPoint" class="tab-pane fade in active">
+                 <div id="Registration" class="tab-pane fade in active">  </div> 
+                 <div id="EntryPoint" class="tab-pane fade">
                      <div class="col-md-12 col-xs-12">
                          
                           <div class="col-md-4 col-xs-4 col-sm-4">
@@ -276,10 +267,7 @@
                               </div>
                           </div>
                  </div> <!-- diagnosis -->  
-
-                 <div id="Diagnosis" class="tab-pane fade">
-                     
-                 </div>    
+   
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->
 

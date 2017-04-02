@@ -96,7 +96,7 @@
              <table id="tblFindPatient" class="display" style="cursor:pointer" width="100%">
                  <thead>
                     <tr>
-      	                <th>PatientId</th>
+      	                <th style="width: 10px">PatientId</th>
                         <th>CCC Number</th>
       	                <th>First Name</th>
       	                <th>Middle Name</th>
@@ -105,20 +105,23 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
+                       
                     </tr>
                  </thead>
                  <tbody></tbody>
                  <tfoot>
                     <tr>
-      	                <th>EnrollmentNumber</th>
-                        <th>PatientIndex</th>
-      	                <th>FirstName</th>
-      	                <th>MiddleName</th>
-      	                <th>LastName</th>
-      	                <th>DateOfBirth</th>
+      	                <th style="width: 10px">PatientId</th>
+                        <th>CCC Number</th>
+      	                <th>First Name</th>
+      	                <th>Middle Name</th>
+      	                <th>Last Name</th>
+      	                <th>Date Of Birth</th>
       	                <th>Sex</th>
-      	                <th>RegistrationDate</th>
+      	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
+                       
+                        
                     </tr>
                  </tfoot>
 
@@ -236,7 +239,7 @@
                         aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
                         aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").val()+"" });
 
-                        $("#divActionString").text("Data features and table preparating complete");
+                        $("#divActionString").text("Data features and table preparation complete");
 
                         $.ajax({
                             "dataType": 'json',
