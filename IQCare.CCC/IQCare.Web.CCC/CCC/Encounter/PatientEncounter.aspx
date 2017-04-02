@@ -833,8 +833,8 @@
             function addLabOrder(_fp) {
                 var labOrder = JSON.stringify(_fp);
                 // console.log(patientId);
-                //console.log(labOrder);
-                $.ajax({
+               // console.log(labOrder);
+                    $.ajax({
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
@@ -845,10 +845,10 @@
 
                         toastr.success(response.d, "Lab order successful");
                     },
-                    error: function (response) {
-                        //generate('error', response.d);
-                        toastr.error(response.d, "Lab order unsuccessful");
-                    }
+                    //error: function (response) {
+                    //    //generate('error', response.d);
+                    //    toastr.error(response.d, "Lab order unsuccessful");
+                    //}
                 });
             };
             $(function () {

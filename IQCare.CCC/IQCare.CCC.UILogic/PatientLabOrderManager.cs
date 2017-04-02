@@ -30,35 +30,27 @@ namespace IQCare.CCC.UILogic
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
 
-        public int savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
+        public void savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
            
             try
             {
                 var jss = new JavaScriptSerializer();
-            IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+                IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
 
                 if (patient_ID > 0)
                 {
-
                     int returnValue;
                     int returnLabOrderSuccess;
                     var pending = "Pending";
-
-
                     foreach (ListLabOrder t in data)
-
-
                     {
-
-                        // Get LabID
-                        string labType = t.labType;
-                        if (labType != null)
-                        {
-                            LookupLabs testId = _lookupTest.GetLabTestId(labType);
-                            int labTestId = testId.LabTestId;
-
-
+                                // Get LabID
+                                string labType = t.labType;
+                                if (labType != null)
+                                {
+                                LookupLabs testId = _lookupTest.GetLabTestId(labType);
+                                int labTestId = testId.LabTestId;
 
                             PatientLabTracker labTracker = new PatientLabTracker()
                             {
@@ -71,7 +63,7 @@ namespace IQCare.CCC.UILogic
                                 //LabNotes =data[i].labNotes --take to clinical notes 
 
                             };
-                            returnValue = _mgr.AddPatientLabTracker(labTracker);
+                            _mgr.AddPatientLabTracker(labTracker);
 
                             LabOrderEntity labOrder = new LabOrderEntity()
                             {
@@ -86,9 +78,9 @@ namespace IQCare.CCC.UILogic
                                 //ClinicalOrderNotes = data[i].results,       
                                 //LocationId = data[i].orderReason,
                             };
-                            returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
+                            _mgr.AddPatientLabOrder(labOrder);
 
-                            return returnValue;
+                            //returnLabOrderSuccess;
                         }
                     }
                 }
@@ -98,7 +90,7 @@ namespace IQCare.CCC.UILogic
                 Msg = ex.Message + ' ' + ex.InnerException;
             }
 
-            return int.Parse(Msg);
+           // return int.Parse(Msg);
         }
     }
    }

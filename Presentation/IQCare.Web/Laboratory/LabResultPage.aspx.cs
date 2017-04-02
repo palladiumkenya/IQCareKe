@@ -130,8 +130,7 @@ namespace IQCare.Web.Laboratory
             }
             if (!IsPostBack)
             {
-                //this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
-                this.LabOrderId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
                 if (LabOrderId > 0)
                 {
                     this.PopulateRequest(LabOrderId);
