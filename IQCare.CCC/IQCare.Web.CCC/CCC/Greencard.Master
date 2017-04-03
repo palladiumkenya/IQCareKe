@@ -310,7 +310,7 @@
                                 success: function(response) {
                              
                                     if (encounterStatusId > 0) {
-                                        toastr.error("Please stop an existing encounter first", "Encounter Start Alert");
+                                        toastr.error("Please stop an existing encounter first");
                                         return false;
                                     } else {
                                         encounterStarted();
