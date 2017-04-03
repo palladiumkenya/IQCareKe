@@ -31,6 +31,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.HiddenField drugAbbr;
         
         /// <summary>
+        /// ddlTreatmentProgram control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentProgram;
+        
+        /// <summary>
+        /// ddlPeriodTaken control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPeriodTaken;
+        
+        /// <summary>
         /// ddlTreatmentPlan control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList regimenLine;
+        
+        /// <summary>
+        /// ddlRegimen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlRegimen;
         
         /// <summary>
         /// txtDrugs control.
@@ -119,5 +146,14 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantityDisp;
+        
+        /// <summary>
+        /// chkProphylaxis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkProphylaxis;
     }
 }

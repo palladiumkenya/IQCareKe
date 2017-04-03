@@ -51,6 +51,7 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@Duration", SqlDbType.VarChar, drg.Duration);
                         ClsUtility.AddParameters("@qtyPres", SqlDbType.VarChar, drg.qtyPres);
                         ClsUtility.AddParameters("@qtyDisp", SqlDbType.VarChar, drg.qtyDisp);
+                        ClsUtility.AddParameters("@prophylaxis", SqlDbType.VarChar, drg.prophylaxis);
                         ClsUtility.AddParameters("@pmscm", SqlDbType.VarChar, pmscmFlag);
                         ClsUtility.AddParameters("@UserID", SqlDbType.VarChar, UserID);
 
@@ -133,6 +134,19 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.Int, TreatmentPlan);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugSwitchSubReasons", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
+        public DataTable getPharmacyRegimens(string regimenLine)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@regimenLine", SqlDbType.Int, regimenLine);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyRegimens", ClsUtility.ObjectEnum.DataTable);
 
             }
         }
