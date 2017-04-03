@@ -10,7 +10,6 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
-using Entities.CCC.Consent;
 using Entities.PatientCore;
 
 
@@ -18,7 +17,7 @@ namespace DataAccess.CCC.Context
 {
     public class GreencardContext : BaseContext
     {
-        public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
+        public GreencardContext() : base((DbConnection) DataMgr.GetOrmConnectionString(), true)
         {
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
@@ -84,9 +83,6 @@ namespace DataAccess.CCC.Context
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
         public DbSet<LabOrderEntity> LabOrder { get; set; }
         public DbSet<LabDetailsEntity> LabDetails { get; set; }
-
-
-
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }

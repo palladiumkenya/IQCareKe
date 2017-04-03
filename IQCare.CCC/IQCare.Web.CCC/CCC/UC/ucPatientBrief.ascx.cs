@@ -75,7 +75,7 @@ namespace IQCare.Web.CCC.UC
                 Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = " (" + x.EnrollmentNumber+") ";
-                //    lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
+                lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
 
             }
 

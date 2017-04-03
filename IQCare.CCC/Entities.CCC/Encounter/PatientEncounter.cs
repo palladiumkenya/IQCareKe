@@ -116,6 +116,7 @@ namespace Entities.CCC.Encounter
             public string Duration { get; set; }
             public string qtyPres { get; set; }
             public string qtyDisp { get; set; }
+            public string prophylaxis { get; set; }
         }
     }
 }

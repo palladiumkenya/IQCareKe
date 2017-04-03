@@ -9,7 +9,7 @@ namespace DataAccess.CCC.Context
     public class LookupContext :BaseContext
     {
 
-        public LookupContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
+        public LookupContext() :  base((DbConnection)DataMgr.GetOrmConnectionString(), true) {
 
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);

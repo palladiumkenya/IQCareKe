@@ -18,5 +18,6 @@ namespace Interface.CCC
         DataTable getPharmacyDrugSubstitutionInterruptionReason(string TreatmentPlan);
         DataTable getPharmacyPrescriptionDetails(string patientMasterVisitID);
         DataTable getPharmacyPendingPrescriptions(string patientMasterVisitID, string PatientID);
+        DataTable getPharmacyRegimens(string regimenLine);
     }
 }
