@@ -180,10 +180,6 @@ namespace DataAccess.Entity
                 System.Data.Common.DbParameter p = theCmd.CreateParameter();
                 p.ParameterName = cmdpara;
                 p.Value = cmdvalue;
-
-
-
-
                 theCmd.Parameters.Add(cmdpara, cmddbtype).Value = cmdvalue;
                 i = i + 3;
             }

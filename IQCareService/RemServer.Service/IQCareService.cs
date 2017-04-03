@@ -342,9 +342,9 @@ namespace RemServer.Service
         public void DoDelayedTasks()
         {
             connectionEMR = new SqlConnection(_connectionStringEMR);
-            const Int32 iTIME_INTERVAL = 50000; //    ' 50 seconds.
+             int iTIME_INTERVAL = 120000; //    ' 2 minutes.
             TimerCallback timerDelegate = new TimerCallback(DBEntry);
-            oTimer = new System.Threading.Timer(timerDelegate, null, 0, iTIME_INTERVAL);
+            oTimer = new Timer(timerDelegate, null, 0, iTIME_INTERVAL);
         }
 
         /// <summary>
