@@ -52,6 +52,7 @@ namespace IQCare.Web.CCC.WebService
         public int PopulationCategoryId { get; internal set; }
         public int GuardianId { get; set; }
         public int PatientTreatmentSupporterId { get; set; }
+        public int PatientType { get; set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -605,7 +606,7 @@ namespace IQCare.Web.CCC.WebService
                 var personLookUpManager = new PersonLookUpManager();
                 var personMaritalStatus = new PersonMaritalStatusManager();
                 var lookupLogic = new LookupLogic();
-                PersonLookUp Guardian = new PersonLookUp();
+                //PersonLookUp Guardian = new PersonLookUp();
                 PersonLookUp supporter = new PersonLookUp();
                 var maritalsStatus = new List<PatientMaritalStatus>();
                 var personLocation = new PersonLocationManager();
@@ -624,6 +625,7 @@ namespace IQCare.Web.CCC.WebService
                     var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(Patient[0].PersonId);
                     var perLocation = personLocation.GetCurrentPersonLocation(Patient[0].PersonId);
 
+                    PersonLookUp Guardian = null;
                     if (personOVC != null)
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
                     maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(Patient[0].PersonId);
@@ -635,6 +637,7 @@ namespace IQCare.Web.CCC.WebService
                     patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
                     patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
                     patientDetails.LastName = _utility.Decrypt(Patient[0].LastName);
+                    patientDetails.PatientType = Patient[0].PatientType; 
 
                     patientDetails.Gender = Patient[0].Sex;
                     patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", Patient[0].DateOfBirth);
@@ -661,7 +664,7 @@ namespace IQCare.Web.CCC.WebService
                     if (maritalsStatus.Count > 0)
                         patientDetails.MaritalStatusId = maritalsStatus[0].MaritalStatusId;
 
-                    if (Guardian !=null)
+                    if (Guardian != null)
                     {
                         patientDetails.GurdianFNames = _utility.Decrypt(Guardian.FirstName);
                         patientDetails.GurdianMName = _utility.Decrypt(Guardian.MiddleName);

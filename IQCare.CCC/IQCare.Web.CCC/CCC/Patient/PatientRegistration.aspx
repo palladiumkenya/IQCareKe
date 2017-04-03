@@ -1035,7 +1035,8 @@
                     }
                 }
 
-                var PatientId = $.urlParam('PatientId');
+                var PatientId = '<%=Session["PatientEditId"]%>';
+                //$.urlParam('PatientId');
                 console.log(PatientId);
 
                 if (PatientId > 0) {
@@ -1048,6 +1049,19 @@
                         success: function (response) {
                             var patientDetails = JSON.parse(response.d);
                             //console.log(patientDetails);
+                            /*Patient Type*/
+                            //console.log(patientDetails.PatientType);
+
+                            var RBID = '<%=PatientTypeId.ClientID %>';
+                            var RB1 = document.getElementById(RBID);
+                            var radio = RB1.getElementsByTagName("input");
+ 
+                            for (var i = 0; i < radio.length; i++) {
+                                if (radio[i].value == patientDetails.PatientType) {
+                                    radio[i].checked = true;
+                                }
+                            } 
+
                             /*Patient Details*/
                             $("#personFname").val(patientDetails.FirstName);
                             $("#personMName").val(patientDetails.MiddleName);
