@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using Application.Common;
 namespace DataAccess.Base
@@ -93,11 +94,18 @@ namespace DataAccess.Base
         /// Gets the connection for ORM use.
         /// </summary>
         /// <returns></returns>
-        public static string GetOrmConnectionString()
+        public static DbConnection GetOrmConnectionString()
         {
             Utility objUtil = new Utility();
+            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
-            return constr;
+            //constr += ";connect timeout=" + CommandTimeOut().ToString();
+            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
+            constr += ";MultipleActiveResultSets = True; Pooling = True;";
+            SqlConnection connection = new SqlConnection(constr);
+           connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
         }
 
         /// <summary>
@@ -173,6 +181,7 @@ namespace DataAccess.Base
            // theCmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = ApplicationAccess.DBSecurity;
             theCmd.CommandType = CommandType.StoredProcedure;
             theCmd.Connection = (SqlConnection)connection;
+
             
             theCmd.ExecuteNonQuery();
         }

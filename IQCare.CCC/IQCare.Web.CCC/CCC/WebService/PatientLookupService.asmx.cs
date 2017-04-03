@@ -19,8 +19,6 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientLookupService : System.Web.Services.WebService
     {
-
-
         [WebMethod]
         public string HelloWorld()
         {
@@ -124,7 +122,8 @@ namespace IQCare.Web.CCC.WebService
                                                            .Contains(searchString.ToLower()) ||
                                                        LookupLogic.GetLookupNameById(x.Sex)
                                                            .Contains(searchString.ToLower()) ||
-                                                       x.EnrollmentNumber.Contains(searchString.ToString())
+                                                       x.EnrollmentNumber.Contains(searchString.ToString()) ||
+                                                       utility.Decrypt(x.MobileNumber).Contains(searchString)
                             )
                             .ToList();
                         filteredRecords = jsonData.Count();
@@ -159,8 +158,9 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
-                             x.RegistrationDate.ToShortDateString(),
+                             x.RegistrationDate.ToString("dd-MMM-yyyy"),
                             x.PatientStatus.ToString()
+                            //,utility.Decrypt(x.MobileNumber)
                         })
                     };
                     output = JsonConvert.SerializeObject(json);
@@ -168,8 +168,8 @@ namespace IQCare.Web.CCC.WebService
             }
           catch (Exception e)
             {
-                Console.WriteLine(e);
-                output = e.Message + ' ' + e.InnerException;
+
+                output = e.Message;
             }
             return output;
         }
@@ -263,7 +263,8 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("MMM-dd-yyyy"),
                             x.Sex.ToString(),
                             x.RegistrationDate.ToString("MMM-dd-yyyy"),
-                            x.PatientStatus.ToString()
+                            x.PatientStatus.ToString(),
+                            utility.Decrypt(x.MobileNumber.ToString())
                         })
                     };
                     patientList= json;

@@ -1308,7 +1308,7 @@
 
             var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
 
-            if (pregnancy != pregnant) {
+            if (pregnancy !== pregnant) {
                 
                 $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                

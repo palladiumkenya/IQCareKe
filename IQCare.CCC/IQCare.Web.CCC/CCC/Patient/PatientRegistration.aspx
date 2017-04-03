@@ -67,7 +67,7 @@
                                         <div class="col-md-12"><label for="personFname" class="required control-label pull-left">Patient Type</label></div>
                                         <div class="col-md-12">
                                             <asp:RadioButtonList ID="PatientTypeId" runat="server" RepeatDirection="Horizontal" ClientIDMode="Static" data-parsley-required="true" data-parsley-multiple="radio" data-parsley-mincheck="1" data-parsley-error-message="Please choose at least 1"></asp:RadioButtonList>
-                                            <div class="errorBlock" style="color: red;">Please select one option</div>
+                                            <div class="errorBlock" style="color: red;"> Please select one option </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1035,7 +1035,8 @@
                     }
                 }
 
-                var PatientId = $.urlParam('PatientId');
+                var PatientId = '<%=Session["PatientEditId"]%>';
+                //$.urlParam('PatientId');
                 console.log(PatientId);
 
                 if (PatientId > 0) {
@@ -1048,6 +1049,19 @@
                         success: function (response) {
                             var patientDetails = JSON.parse(response.d);
                             //console.log(patientDetails);
+                            /*Patient Type*/
+                            //console.log(patientDetails.PatientType);
+
+                            var RBID = '<%=PatientTypeId.ClientID %>';
+                            var RB1 = document.getElementById(RBID);
+                            var radio = RB1.getElementsByTagName("input");
+ 
+                            for (var i = 0; i < radio.length; i++) {
+                                if (radio[i].value == patientDetails.PatientType) {
+                                    radio[i].checked = true;
+                                }
+                            } 
+
                             /*Patient Details*/
                             $("#personFname").val(patientDetails.FirstName);
                             $("#personMName").val(patientDetails.MiddleName);
