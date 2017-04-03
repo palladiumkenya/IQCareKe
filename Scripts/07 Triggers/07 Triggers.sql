@@ -790,21 +790,7 @@ BEGIN
 
 	End
     
- --   Select @RegistrationDate = datepart(Year,I.RegistrationDate), @NewPtn_Pk=I.Ptn_Pk From INSERTED I;
-    
- --   Select @MaxFacilityID= max(Convert(varchar,Replace(PatientFacilityID,'-',''))) From 
-	--	mst_Patient Where  PatientFacilityID Like Convert(varchar,@RegistrationDate)+'-%'
-	--	--datepart(Year,RegistrationDate) = @RegistrationDate;
-    
- --   If(@MaxFacilityID Is Null)
-	--	Select @MaxFacilityID = Convert(varchar(4), @RegistrationDate)  + Replicate('0', 5) + Convert(varchar, 1);
-	--Else
-	--	Select @MaxFacilityID = Convert(int,@MaxFacilityID)+1;
-	
-	--Select @MaxFacilityID = Stuff(@MaxFacilityID,5,0,'-')	;	
 
-	
-	--Update mst_Patient Set PatientFacilityID = @MaxFacilityID Where Ptn_Pk =@NewPtn_Pk;
     
 END
 

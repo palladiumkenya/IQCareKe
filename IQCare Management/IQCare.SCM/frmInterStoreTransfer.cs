@@ -222,7 +222,7 @@ namespace IQCare.SCM
                         // theDRowItem["ExpiryDate"] = Convert.ToDateTime(String.Format(MM-strarry[1]);//String.Format("{0:dd-MMM-yyyy}",
                         string dateString = strarry[2];
                        // DateTime expDate = new DateTime(Convert.ToInt32(dateString[2]), Convert.ToInt32(dateString[0]), Convert.ToInt32(dateString[1]));
-                        theDRowItem["ExpiryDate"] = Utility.GetDateFromMMDDYYY(dateString,'/');// expDate;
+                        theDRowItem["ExpiryDate"] = Utility.GetDateFromMMDDYYYY(dateString,'/');// expDate;
                            theDRowItem["AvaliableQty"] = Convert.ToInt32(dgwItemSubitemDetails.Rows[i].Cells["AvailableQTY"].Value); ;
                         }
 

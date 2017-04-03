@@ -83,15 +83,15 @@ namespace IQCare.Web.Laboratory
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["Paperless"].ToString() == "1")
-            //{
-               
-            //        string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
-            //        //Response.Redirect(theUrl);
-            //        System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
-            //        Response.Redirect(theUrl, true);
-                
-            //}
+            if (Session["Paperless"].ToString() == "1")
+            {
+
+                string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
+                //Response.Redirect(theUrl);
+                System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                Response.Redirect(theUrl, true);
+
+            }
             txtlaborderedbydate.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");
             txtlaborderedbydate.Attributes.Add("onblur", "DateFormat(this,this.value,event,true,'3')");
             txtLabtobeDone.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");

@@ -10,7 +10,6 @@ using DataAccess.Entity;
 using Application.Common;
 using Interface.Clinical;
 
-
 namespace BusinessProcess.Clinical
 {
     public class BFamilyInfo : ProcessBase, IFamilyInfo
@@ -19,6 +18,7 @@ namespace BusinessProcess.Clinical
         {
             ClsObject FamilyInfo = new ClsObject();
             int retval = 0;
+
             try
             {
                 this.Connection = DataMgr.GetConnection();
@@ -45,13 +45,13 @@ namespace BusinessProcess.Clinical
                 ClsUtility.AddParameters("@DeleteFlag", SqlDbType.Int, DeleteFlag.ToString());
                 ClsUtility.AddParameters("@ReferenceId", SqlDbType.Int, ReferenceId.ToString());
                 ClsUtility.AddParameters("@RegistrationNo", SqlDbType.VarChar, RegistrationNo.ToString());
-                ClsUtility.AddParameters("@DBKey", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                //ClsUtility.AddParameters("@DBKey", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 if (RelationshipDate.DayOfYear != 1)
                 {
                     ClsUtility.AddParameters("@RelationshipDate", SqlDbType.DateTime, RelationshipDate.ToString());
                 }
                 retval = (int)FamilyInfo.ReturnObject(ClsUtility.theParams, "Pr_Clinical_SaveFamilyInfo_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                
+
                 DataMgr.CommitTransaction(this.Transaction);
                 DataMgr.ReleaseConnection(this.Connection);
             }
@@ -65,29 +65,31 @@ namespace BusinessProcess.Clinical
                 FamilyInfo = null;
                 if (this.Connection != null)
                     DataMgr.ReleaseConnection(this.Connection);
-
             }
             return retval;
         }
+
         public DataSet GetAllFamilyData(int PatientId)
         {
             lock (this)
             {
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@Ptn_pk", SqlDbType.Int, PatientId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                // ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+
                 ClsObject FamilyInfo = new ClsObject();
                 return (DataSet)FamilyInfo.ReturnObject(ClsUtility.theParams, "pr_Clinical_GetAllFamilyData_Constella", ClsUtility.ObjectEnum.DataSet);
             }
         }
-     
+
         public DataSet GetSearchFamilyInfo(int PatientId)
         {
             lock (this)
             {
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@Ptn_pk", SqlDbType.Int, PatientId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                //  ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+
                 ClsObject FamilyInfo = new ClsObject();
                 return (DataSet)FamilyInfo.ReturnObject(ClsUtility.theParams, "Pr_Clinical_GetFamilyInfo_Constella", ClsUtility.ObjectEnum.DataSet);
             }
@@ -98,12 +100,13 @@ namespace BusinessProcess.Clinical
             lock (this)
             {
                 ClsUtility.Init_Hashtable();
+
                 ClsObject GetDropDowns = new ClsObject();
                 return (DataSet)GetDropDowns.ReturnObject(ClsUtility.theParams, "pr_Clinical_GetDropDowns_Constella", ClsUtility.ObjectEnum.DataSet);
             }
         }
 
-        public int DeleteFamilyInfo(int Id,int @UserId)
+        public int DeleteFamilyInfo(int Id, int @UserId)
         {
             try
             {
@@ -121,7 +124,6 @@ namespace BusinessProcess.Clinical
 
                 theAffectedRows = (int)DeleteFamilyInfo.ReturnObject(ClsUtility.theParams, "Pr_Clinical_DeleteFamilyInfo_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
-
                 DataMgr.CommitTransaction(this.Transaction);
                 DataMgr.ReleaseConnection(this.Connection);
                 return theAffectedRows;
@@ -138,6 +140,5 @@ namespace BusinessProcess.Clinical
             }
         }
     }
-
 
 }
