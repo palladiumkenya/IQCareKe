@@ -84,6 +84,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
         public DbSet<LabOrderEntity> LabOrder { get; set; }
         public DbSet<LabDetailsEntity> LabDetails { get; set; }
+        public DbSet<LabResultsEntity> LabResults { get; set; }
 
 
 

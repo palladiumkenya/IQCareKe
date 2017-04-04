@@ -397,18 +397,55 @@
             var march_weight = "";
             var jan_BMI = "";
             var march_BMI = "";
+            var jan_vl = "";
+            var march_vl = "";
 
             window.onload = function() {
 
-                $.when(getVitals()).then(function() {
+              $.when(getVitals()).then(function() {
                     setTimeout(function() {
                             vitals();
                         },
                         2000);
-
                 });
+              $.when(getViralLoad()).then(function () {
+                    setTimeout(function () {
+                        viralLoadGraph();
+                    },
+                        2000);
+              });
+            };
+          function getViralLoad() {
+                    console.log("get viral load  called");
+                    $.ajax({
+                        url: '../WebService/LabService.asmx/GetViralLoad',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        cache: false,
+                        success: function (response) {
+                            console.log(response.d);
+                            var items = response.d;
+                            items.forEach(function (item, i) {
 
-                $(function() {
+                                if (item.Month == 1) {
+
+                                    jan_vl = item.ResultValue;
+                                   
+                                } else if (item.Month == 3) {
+
+                                    march_vl = item.ResultValue;                                   
+                                   
+                                }
+
+                            });
+
+                        }
+
+                    });
+                }
+          function viralLoadGraph() {
+            // $(function() {
                     $('#vl_container').highcharts({
                         title: {
                             text: 'Viral Load Trend',
@@ -445,16 +482,14 @@
                         series: [
                             {
                                 name: 'VL',
-                                data: [200, 300, 500, 1000, 750, 500, 400]
+                                data: [jan_vl, march_vl, "", "", "", "", ""]
                             }, {
                                 name: 'Threshold',
                                 data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
                             }
                         ]
                     });
-                });
-
-            };
+                };
 
             function getVitals() {
                 console.log("get vitals called");
@@ -473,19 +508,14 @@
 
                                 jan_height = item.Height;
                                 jan_weight = item.Weight;
-                                jan_BMI = item.BMI;
-                                console.log("This is jan height: " + jan_height + " ");
-                                console.log("This is jan weight: " + jan_weight + " ");
-                                console.log("This is jan BMI: " + jan_BMI + " ");
+                                jan_BMI = item.BMI;                               
 
                             } else if (item.Month == 3) {
 
                                 march_height = item.Height;
                                 march_weight = item.Weight;
                                 march_BMI = item.BMI;
-                                console.log("This is March height: " + march_height + " ");
-                                console.log("This is March weight: " + march_weight + " ");
-                                console.log("This is March BMI: " + march_BMI + " ");
+                              
                             }
 
                         });

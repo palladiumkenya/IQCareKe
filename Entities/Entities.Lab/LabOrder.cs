@@ -82,6 +82,7 @@ namespace Entities.Lab
         /// <value>
         /// The delete reason.
         /// </value>
+        [NotMapped]
         public string DeleteReason { get; set; }
         /// <summary>
         /// Gets or sets the order date.
@@ -125,6 +126,7 @@ namespace Entities.Lab
         /// <value>
         /// The deleted by.
         /// </value>
+        [NotMapped]
         public int? DeletedBy { get; set; }
         public virtual Patient Client { get; set; }
         /// <summary>

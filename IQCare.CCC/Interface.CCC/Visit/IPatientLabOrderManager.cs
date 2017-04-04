@@ -14,5 +14,7 @@ namespace Interface.CCC.Visit
         int DeletePatientLabOrder (int id);
         List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate);
         List<PatientLabTracker> GetPatientLabOrdersAll(int patientId);
+        LabOrderEntity GetPatientLabOrder(int Ptn_pk);
+        List<LabResultsEntity> GetPatientVL(int patientId);
     }
 }

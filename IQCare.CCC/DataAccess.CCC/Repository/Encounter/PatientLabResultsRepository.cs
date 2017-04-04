@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Interface.Lookup;
@@ -11,36 +12,31 @@ using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Repository.Encounter
 {
-    public class PatientLabOrderRepository : BaseRepository<LabOrderEntity>, IPatientLabOrderRepository
+    public class PatientLabResultsRepository : BaseRepository<LabResultsEntity>, IPatientLabResultsRepository
     {
         private GreencardContext _context;
-
-        public PatientLabOrderRepository() : this(new GreencardContext())
+        public PatientLabResultsRepository() : base(new GreencardContext())
         {
-
         }
 
-        public PatientLabOrderRepository(GreencardContext context) : base(context)
+        public PatientLabResultsRepository(GreencardContext context) : base(context)
         {
             _context = context;
         }
-
     }
 }
-
-
 namespace DataAccess.CCC.Repository.visit
 {
-    public class PatientLabOrderRepository : BaseRepository<LabOrderEntity>, IPatientLabOrderRepository
+    public class PatientLabResultsRepository : BaseRepository<LabResultsEntity>, IPatientLabResultsRepository
     {
         private readonly GreencardContext _context;
 
-        public PatientLabOrderRepository() : this(new GreencardContext())
+        public PatientLabResultsRepository() : this(new GreencardContext())
         {
 
         }
 
-        public PatientLabOrderRepository(GreencardContext context) : base(context)
+        public PatientLabResultsRepository(GreencardContext context) : base(context)
         {
             _context = context;
         }

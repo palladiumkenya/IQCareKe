@@ -63,6 +63,22 @@ namespace BusinessProcess.CCC.visit
                     .OrderByDescending(x => x.Id).Take(1).ToList();
             return patientLabOrders;
         }
+        public List<LabResultsEntity> GetPatientVL(int labOrderId)
+        {
+
+            return _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId).Where(x => x.LabTestId == 3)
+                .OrderBy(x => x.Id)
+                .ToList();
+
+
+        }
+
+        public LabOrderEntity GetPatientLabOrder(int Ptn_pk)
+
+        {
+            return _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == Ptn_pk).Where(x => x.LabTestId == 3).FirstOrDefault();
+
+        }
     }
 }
 

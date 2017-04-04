@@ -30,7 +30,7 @@ namespace IQCare.CCC.UILogic
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
 
-        public void savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
+        public void savePatientLabOrder(int patient_ID, int patient_Pk, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
            
             try
@@ -67,13 +67,16 @@ namespace IQCare.CCC.UILogic
 
                             LabOrderEntity labOrder = new LabOrderEntity()
                             {
-                                Ptn_pk = patient_ID,
+                                Ptn_pk = patient_Pk,
                                 LocationId = facilityID,
+                                ModuleId = 1,
+                                OrderedBy = 1,
                                 LabTestId = labTestId,
                                 PatientMasterVisitId = patientMasterVisitId,
                                 ClinicalOrderNotes = t.labNotes,
                                 OrderStatus = pending,
-                                OrderDate = t.labOrderDate
+                                OrderDate = t.labOrderDate,
+                                PreClinicLabDate = t.labOrderDate
                                 //UserId = data[i].labType,
                                 //ClinicalOrderNotes = data[i].results,       
                                 //LocationId = data[i].orderReason,

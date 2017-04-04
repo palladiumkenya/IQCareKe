@@ -17,9 +17,9 @@ namespace IQCare.Web.CCC.Patient
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var patientTransfer=new PatientTransferInmanager();
-            var patientDiagnosis=new PatientHivDiagnosisManager();
-            var patientEntryPoint=new PatientEntryPointManager();
+            var patientTransfer = new PatientTransferInmanager();
+            var patientDiagnosis = new PatientHivDiagnosisManager();
+            var patientEntryPoint = new PatientEntryPointManager();
 
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
@@ -42,7 +42,7 @@ namespace IQCare.Web.CCC.Patient
             //    lblTIRegimen.Text = "N/A";
             //    lblFacilityFrom.Text = "N/A";
             //}
-            
+
             //if (objDiagnosis.Count > 0)
             //{
             //    foreach (var item in objDiagnosis)
@@ -76,6 +76,6 @@ namespace IQCare.Web.CCC.Patient
             }
 
         }
-        
+
     }
 }

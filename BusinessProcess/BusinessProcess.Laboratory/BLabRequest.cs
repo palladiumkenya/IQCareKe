@@ -187,8 +187,7 @@ namespace BusinessProcess.Laboratory
                     OrderDate = Convert.ToDateTime(rowView["OrderDate"]),
                     OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                     OrderNumber = rowView["OrderNumber"].ToString(),
-                    PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-
+                    PreClinicDate = Convert.ToDateTime(rowView["PreClinicLabDate"]),
                     PatientId = Convert.ToInt32(rowView["PatientId"]),
                     Client = pt.GetPatient(Convert.ToInt32(rowView["PatientId"])),
                     UserId = Convert.ToInt32(rowView["UserId"]),
@@ -201,6 +200,7 @@ namespace BusinessProcess.Laboratory
             return order;
         }
         decimal? nullDecimal = null;
+
         public List<LabTestParameterResult> GetLabTestParameterResult(int LabTestOrderId)
         {
             ClsObject obj = new ClsObject();
