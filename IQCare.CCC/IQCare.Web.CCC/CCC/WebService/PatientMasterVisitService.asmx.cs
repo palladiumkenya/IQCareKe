@@ -32,7 +32,7 @@ namespace IQCare.Web.CCC.WebService
                 /* Assign to patientMsterVisitId session*/
                 Session["EncounterStatusId"] = 1;
                 Session["PatientMasterVisitId"] = result;
-
+                Session["PatientEditId"] = patientId;
             }
             catch (Exception e)
             {
@@ -52,6 +52,7 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
                 result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
                 Session["EncounterStatusId"] = 0;
+                Session["PatientEditId"] = 0;
             }
             catch (Exception e)
             {

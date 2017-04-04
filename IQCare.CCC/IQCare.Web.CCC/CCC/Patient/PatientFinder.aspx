@@ -58,45 +58,45 @@
               </div><%-- .col-md-12--%>
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12 col-xs-12 col-sm-12">
-                              <div class="col-md-7 col-xs-7 col-sm-7">
+                              <div class="col-md-6 col-xs-6 col-sm-6">
                                   <div class="col-md-12 pull-left" id="divAction" clientidmode="Static">
                                      <i class="fa fa-spinner fa-pulse fa-3x fa-fw pull-left text-info"></i>
                                      <span class="sr-only"></span><strong class="pull-left" id="divActionString" clientidmode="Static"> Fetching Patient data</strong>
                                   </div>
                               </div>
                               <%--<div class="col-md-4 col-xs-4 col-sm-4"></div> --%>
-                              <div class="col-md-5 col-xs-5 col-sm-5">
-                                   <div class="col-md-4 col-xs-12 col-sm-12">
-                                        <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg fa fa-search fa-1x"> Find Patient</asp:LinkButton>
+                              <div class="col-md-6 col-xs-12 col-sm-12">
+                                   <div class="col-md-4 col-xs-12 col-sm-4">
+                                        <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg  btn-block  fa fa-search"> Find Patient</asp:LinkButton>
                                     </div>
-                                   <div class="col-md-4 col-xs-12 col-sm-12">
-                                        <asp:LinkButton runat="server" ID="btnReset" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-warning btn-lg fa fa-refresh"> Reset Find</asp:LinkButton>
+                                   <div class="col-md-4 col-xs-12 col-sm-4">
+                                        <asp:LinkButton runat="server" ID="btnReset" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-warning btn-block btn-lg  fa fa-refresh"> Reset Find</asp:LinkButton>
 
                                   </div>
-                                   <div class="col-md-4 col-xs-12 col-sm-12">
-                                        <asp:LinkButton runat="server" ClientIDMode="Static" OnClientClick="return false" ID="btnClose" CssClass="btn btn-danger btn-lg fa fa-times"> Close Find </asp:LinkButton>
+                                   <div class="col-md-4 col-xs-12 col-sm-4">
+                                        <asp:LinkButton  runat="server" ClientIDMode="Static" OnClientClick="return false" ID="btnClose" CssClass="btn btn-danger btn-block btn-lg fa fa-times"> Close Find </asp:LinkButton>
                                    </div>
 
                                   
                               </div> 
                           </div>
          </div> 
-         <div class="col-md-12 bs-callout bs-callout-info" id="infoGrid">
+         <div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-info" id="infoGrid">
              <div class="col-md-6">
                  <label class="control-label pull-left text-warning fa fa-search-plus"> Patient Search Results </label>
              </div>
              <div class="col-md-6 pull-right">
-                 <button id="btnRemoveGrid" class="btn btn-warning btn-lg pull-right fa fa-arrow-circle-o-left" onclick="return false"> Back to Search</button>
+                 <button id="btnRemoveGrid" class="btn btn-warning btn-lg btn-sm pull-right fa fa-arrow-circle-o-left" onclick="return false"> Back to Search</button>
              </div>
          </div>
 
-         <div class="col-md-12 form-group" id="PatientSearch">
+         <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="PatientSearch">
       
 
              <table id="tblFindPatient" class="display" style="cursor:pointer" width="100%">
                  <thead>
                     <tr>
-      	                <th>PatientId</th>
+      	                <th style="width: 10px">PatientId</th>
                         <th>CCC Number</th>
       	                <th>First Name</th>
       	                <th>Middle Name</th>
@@ -105,20 +105,23 @@
       	                <th>Sex</th>
       	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
+                       
                     </tr>
                  </thead>
                  <tbody></tbody>
                  <tfoot>
                     <tr>
-      	                <th>EnrollmentNumber</th>
-                        <th>PatientIndex</th>
-      	                <th>FirstName</th>
-      	                <th>MiddleName</th>
-      	                <th>LastName</th>
-      	                <th>DateOfBirth</th>
+      	                <th style="width: 10px">PatientId</th>
+                        <th>CCC Number</th>
+      	                <th>First Name</th>
+      	                <th>Middle Name</th>
+      	                <th>Last Name</th>
+      	                <th>Date Of Birth</th>
       	                <th>Sex</th>
-      	                <th>RegistrationDate</th>
+      	                <th>Enrollment Date</th>
                         <th>PatientStatus</th>
+                       
+                        
                     </tr>
                  </tfoot>
 
@@ -236,7 +239,7 @@
                         aoData.push({ "name": "lastName", "value": ""+$("#<%=LastName.ClientID%>").val()+"" });
                         aoData.push({ "name": "facility", "value": ""+$("#<%=Facility.ClientID%>").find(":selected").val()+"" });
 
-                        $("#divActionString").text("Data features and table preparating complete");
+                        $("#divActionString").text("Data features and table preparation complete");
 
                         $.ajax({
                             "dataType": 'json',

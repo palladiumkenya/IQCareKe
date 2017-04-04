@@ -918,6 +918,7 @@
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
                         toastr.success(response.d, "One Time Events Tracker");
+                        window.location.href = '<%=ResolveClientUrl("~ CCC/Patient/PatientHome.aspx")%>';
                     },
                     error: function (response) {
                         //generate('error', response.d);

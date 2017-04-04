@@ -10,7 +10,7 @@ namespace DataAccess.Context
     public class PatientHomePageContext : DbContext
     {
         public PatientHomePageContext()
-            : base((DbConnection)DataMgr.GetConnection(), true)
+            : base((DbConnection)DataMgr.GetOrmConnectionString(), true)
         {
 
             Configuration.ProxyCreationEnabled = false;

@@ -17,51 +17,51 @@ namespace IQCare.Web.CCC.Patient
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var patientTransfer = new PatientTransferInmanager();
-            var patientDiagnosis = new PatientHivDiagnosisManager();
-            var patientEntryPoint = new PatientEntryPointManager();
+            var patientTransfer=new PatientTransferInmanager();
+            var patientDiagnosis=new PatientHivDiagnosisManager();
+            var patientEntryPoint=new PatientEntryPointManager();
 
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
             var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["patientId"]));
 
-            //if (objTransfer.Count > 0)
-            //{
-            //    foreach (var item in objTransfer)
-            //    {
-            //        lblTransferinDate.Text ="<h6>"+ item.TransferInDate.ToString("dd-MMM-yyyy")+"</h6>";
-            //        lblTreatmentStartDate.Text = "<h6>" + item.TreatmentStartDate.ToString("dd-MMM-yyyy") + "</h6>"; ;
-            //        lblTIRegimen.Text = "<h6>" + LookupLogic.GetLookupNameById(Convert.ToInt32(item.CurrentTreatment)).ToString() + "</h6>"; ;
-            //        lblFacilityFrom.Text = "<h6>" + item.FacilityFrom.ToString() + "</h6>"; ;
-            //    }
-            //}
-            //else
-            //{
-            //    lblTransferinDate.Text = "N/A";
-            //    lblTreatmentStartDate.Text = "N/A";
-            //    lblTIRegimen.Text = "N/A";
-            //    lblFacilityFrom.Text = "N/A";
-            //}
+            if (objTransfer.Count > 0)
+            {
+                foreach (var item in objTransfer)
+                {
+                    lblTransferinDate.Text = "<h6>" + item.TransferInDate.ToString("dd-MMM-yyyy") + "</h6>";
+                    lblTreatmentStartDate.Text = "<h6>" + item.TreatmentStartDate.ToString("dd-MMM-yyyy") + "</h6>"; ;
+                    lblTIRegimen.Text = "<h6>" + LookupLogic.GetLookupNameById(Convert.ToInt32(item.CurrentTreatment)).ToString() + "</h6>"; ;
+                    lblFacilityFrom.Text = "<h6>" + item.FacilityFrom.ToString() + "</h6>"; ;
+                }
+            }
+            else
+            {
+                lblTransferinDate.Text = "N/A";
+                lblTreatmentStartDate.Text = "N/A";
+                lblTIRegimen.Text = "N/A";
+                lblFacilityFrom.Text = "N/A";
+            }
 
-            //if (objDiagnosis.Count > 0)
-            //{
-            //    foreach (var item in objDiagnosis)
-            //    {
-            //        lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
-            //        lblDateOfEnrollment.Text = item.EnrollmentDate.ToString("dd-MMM-yyyy");
-            //       // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
-            //        lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
-            //        lblARTInitiationDate.Text = item.ArtInitiationDate.ToString("dd-MMM-yyyy");
-            //    }
+            if (objDiagnosis.Count > 0)
+            {
+                foreach (var item in objDiagnosis)
+                {
+                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    lblDateOfEnrollment.Text = item.EnrollmentDate.ToString("dd-MMM-yyyy");
+                    // lblWhoStage.Text = LookupLogic.GetLookupNameById(item.EnrollmentWhoStage).ToString();
+                    lblDateOfHivDiagnosis.Text = item.HivDiagnosisDate.ToString("dd-MMM-yyyy");
+                    lblARTInitiationDate.Text = item.ArtInitiationDate.ToString("dd-MMM-yyyy");
+                }
 
-            //}
-            //else
-            //{
-            //    lblDateOfHivDiagnosis.Text = "Missing";
-            //    lblDateOfEnrollment.Text = "Missing";
-            //    lblWhoStage.Text = "Missing";
-            //    lblARTInitiationDate.Text = "Missing";
-            //}
+            }
+            else
+            {
+                lblDateOfHivDiagnosis.Text = "Missing";
+                lblDateOfEnrollment.Text = "Missing";
+                lblWhoStage.Text = "Missing";
+                lblARTInitiationDate.Text = "Missing";
+            }
 
             if (objEntryPoint.Count > 0)
             {
@@ -76,6 +76,6 @@ namespace IQCare.Web.CCC.Patient
             }
 
         }
-
+        
     }
 }

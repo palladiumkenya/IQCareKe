@@ -59,6 +59,7 @@
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
+    <Content Include="CCC\Scripts\js\bootbox.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
@@ -87,7 +88,9 @@
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
+    <Content Include="CCC\TB\IntensifiedCaseFinding.aspx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
@@ -253,12 +256,26 @@
     <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
       <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\TB\IntensifiedCaseFinding.aspx.cs">
+      <DependentUpon>IntensifiedCaseFinding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\TB\IntensifiedCaseFinding.aspx.designer.cs">
+      <DependentUpon>IntensifiedCaseFinding.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
+      <DependentUpon>ucPatientBrief.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientBrief.ascx.designer.cs">
+      <DependentUpon>ucPatientBrief.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientClinicalEncounter.ascx.cs">
       <DependentUpon>ucPatientClinicalEncounter.ascx</DependentUpon>

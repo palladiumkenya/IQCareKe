@@ -1756,9 +1756,9 @@
             });
             if ($("#datastep5").parsley().validate()) {
               if (transferIn > 0) {
-                  $.when(managePatientTreatmentInitiation()).then(function() {
-                      toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+                  $.when(managePatientTreatmentInitiation()).then(function() {                   
                       window.location.href ='<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                      toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
                   })  ;
               }
             } else {

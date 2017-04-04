@@ -67,7 +67,7 @@
                                         <div class="col-md-12"><label for="personFname" class="required control-label pull-left">Patient Type</label></div>
                                         <div class="col-md-12">
                                             <asp:RadioButtonList ID="PatientTypeId" runat="server" RepeatDirection="Horizontal" ClientIDMode="Static" data-parsley-required="true" data-parsley-multiple="radio" data-parsley-mincheck="1" data-parsley-error-message="Please choose at least 1"></asp:RadioButtonList>
-                                            <div class="errorBlock" style="color: red;">Please select one option</div>
+                                            <div class="errorBlock" style="color: red;"> Please select one option </div>
                                         </div>
                                     </div>
                                 </div>
@@ -826,7 +826,7 @@
 
                 function addPerson() {
 
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
 
                     var fname = escape($("#<%=personFname.ClientID%>").val());
                     var mname = escape($("#<%=personMName.ClientID%>").val());
@@ -856,7 +856,8 @@
 
                 function addPersonGaurdian() {
 
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
+
 					var returnValue=0;
                     var gfname = escape($("#<%=GurdianFNames.ClientID%>").val());
                     var gmname = escape($("#<%=GurdianMName.ClientID%>").val());
@@ -883,7 +884,7 @@
                 }
 
                 function addPersonTreatmentSupporter() {
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
                     
                     var tFname = escape($("#<%=tsFname.ClientID%>").val());
                     var tMname = escape($("#<%=tsMiddleName.ClientID%>").val());
@@ -911,7 +912,8 @@
 
                 function addPersonLocation() {
 
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
+
                     var county = $("#<%=countyId.ClientID%>").find(":selected").val();
                     var subcounty=$("#<%=SubcountyId.ClientID%>").find(":selected").val();
                     var ward = $("#<%=WardId.ClientID%>").find(":selected").val();
@@ -939,7 +941,8 @@
                 }
 
                 function addPatientContact() {
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
+
                     var postalAddress =$("#<%=PatientPostalAddress.ClientID%>").val() ;
                     var mobileNumber = $("#<%=PatientMobileNo.ClientID%>").val();
                     var altMobile =$("#<%=PatientAlternativeMobile.ClientID%>").val() ;
@@ -965,7 +968,8 @@
                 }
 
                 function addPersonPopulation() {
-                    var isPatientSet = $.urlParam('PatientId');
+                    var isPatientSet = '<%=Session["PatientEditId"]%>';
+
                     var populationType = $("input[name='Population']:checked").val();
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
@@ -1023,7 +1027,7 @@
 
                     });
 
-                $.urlParam = function(name){
+                /*$.urlParam = function(name){
                     //name = name.toLowerCase();
                     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
                     console.log(results);
@@ -1033,9 +1037,10 @@
                     else{
                         return results[1] || 0;
                     }
-                }
+                }*/
 
-                var PatientId = $.urlParam('PatientId');
+                var PatientId = '<%=Session["PatientEditId"]%>';
+
                 console.log(PatientId);
 
                 if (PatientId > 0) {
@@ -1048,6 +1053,19 @@
                         success: function (response) {
                             var patientDetails = JSON.parse(response.d);
                             //console.log(patientDetails);
+                            /*Patient Type*/
+                            //console.log(patientDetails.PatientType);
+
+                            var RBID = '<%=PatientTypeId.ClientID %>';
+                            var RB1 = document.getElementById(RBID);
+                            var radio = RB1.getElementsByTagName("input");
+ 
+                            for (var i = 0; i < radio.length; i++) {
+                                if (radio[i].value == patientDetails.PatientType) {
+                                    radio[i].checked = true;
+                                }
+                            } 
+
                             /*Patient Details*/
                             $("#personFname").val(patientDetails.FirstName);
                             $("#personMName").val(patientDetails.MiddleName);
@@ -1198,8 +1216,12 @@
         function personAgeRule()
         {
             personAge = $("#personAge").val();
-            var patientType = $("#PatientTypeId").find(":selected").text();
-            //console.log(patientType);
+            //var patientType = $("#PatientTypeId").find(":selected").text();
+
+            var checked_radio = $("[id*=PatientTypeId] input:checked");
+            var patientType = checked_radio.closest("td").find("label").html();
+
+            console.log(patientType);
 
             //console.log(personAge);
 
