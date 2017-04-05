@@ -147,7 +147,7 @@ namespace IQCare.Web.CCC.WebService
             }
 
             LabOrderEntity labId = _lookupData.GetPatientLabOrder(Ptn_pk);
-            if (labId.Id != null)
+            if (labId != null)
             {
                 labOrderId = labId.Id;
             }
