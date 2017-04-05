@@ -22,8 +22,6 @@ namespace IQCare.Web.Laboratory
     /// <seealso cref="System.Web.UI.Page" />
     public partial class LabResultPage : System.Web.UI.Page
     {
-       
-       // public int PatientMasterVisitId = 0;
         /// <summary>
         /// The request MGR
         /// </summary>
@@ -122,8 +120,6 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Lab Result Page";
             Master.ExecutePatientLevel = true;
-
-          
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();
@@ -208,9 +204,7 @@ namespace IQCare.Web.Laboratory
 
                 Session["PatientInformation"] = theDS.Tables[0];
             }
-        
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, patientId);
+            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
             if (this.thisLabOrder.ModuleId <= 0)
             {
                 EnrollmentService es = new EnrollmentService(PatientId);
@@ -235,6 +229,7 @@ namespace IQCare.Web.Laboratory
             labelClinicalNotes.Text = this.thisLabOrder.ClinicalNotes; //dt.Rows[0]["ClinicalNotes"].ToString();
             //  labellaborderedbydate.Text = this.thisLabOrder.OrderDate.ToString("dd-MMM-yyyy");
             labelLabtobeDone.Text = this.thisLabOrder.PreClinicDate.HasValue ? this.thisLabOrder.PreClinicDate.Value.ToString("dd-MMM-yyyy") : "";
+
             labelOrderNumber.Text = string.Format("Order Number : {0}  | Status : {1} | Ordered by {2} on {3}",
                 thisLabOrder.OrderNumber,
                 thisLabOrder.OrderStatus,
@@ -536,8 +531,8 @@ namespace IQCare.Web.Laboratory
                 LabOrderTest rowView = (LabOrderTest)e.Item.DataItem;
                 string labOrderId = rowView.LabOrderId.ToString();
                 string labTestId = rowView.TestId.ToString();
-
-                int labOrdertestId = rowView.Id;
+                int labOrdertestId = rowView.TestId;
+                //pw. edit
                 Label labReportedbyDate = e.Item.FindControl("labReportedbyDate") as Label;
               //  Label labelReportedbyName = e.Item.FindControl("labelReportedbyName") as Label;
                 Button buttonResult = e.Item.FindControl("buttonResult") as Button;

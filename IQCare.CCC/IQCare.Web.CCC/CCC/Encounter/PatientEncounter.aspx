@@ -527,15 +527,19 @@
     </div>
     <!-- ajax begin -->
     <script type="text/javascript">
-        var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
-       
+        var patientId = '<%=PatientId%>';
+        var patientMasterVisitId = '<%=PatientMasterVisitId%>';    
+        var ptn_pk = '<%=Ptn_pk%>'; 
+        var locationId = '<%=locationId%>';
+        //console.log(patientId);
+        //console.log(patientMasterVisitId);
+        //console.log(ptn_pk);
+        //console.log(locationId);
+        var jan_vl = "";
+        var march_vl = "";
         
-
-        $(document).ready(function () {     
-            console.log(patientId);
-            console.log(patientMasterVisitId);
-           // console.log(userId);
+        $(document).ready(function () { 
+           
 
 
             $("#LabDatePicker").datepicker({
@@ -725,16 +729,8 @@
             });
       
       
-            // Load lab order
-         
-            $("#addResults").click(function (e) {
-                //location.href = 'StartEncounter.aspx';?patient=5
-                location.href = 'http://localhost:2402/Laboratory/LabRecordEntry.aspx';
-                
-                //location.href = 'http://localhost:2402/Laboratory/LabRecordEntry.aspx?PatientID="<%= Session["patientId"].ToString()%>"';
-            });
-
-
+            
+            // Load lab order   
             $("#btnAddLab").click(function (e) {
 
                 var labOrderFound = 0;
@@ -781,8 +777,7 @@
                 $(this).closest('tr').remove();
                 var x = $(this).closest('tr').find('td').eq(0).html();
 
-                //identifierList.splice($.inArray(x, identifierList), 1);
-                //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+               
             });
        
             $("#btnCancelOrder").click(function (e) {
@@ -832,69 +827,29 @@
 
             function addLabOrder(_fp) {
                 var labOrder = JSON.stringify(_fp);
-                // console.log(patientId);
-               // console.log(labOrder);
-                    $.ajax({
+              
+                $.ajax({
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
-                    data: "{'patient_ID':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
+                    data: "{'patient_ID':'" + patientId + "','patient_Pk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
                         toastr.success(response.d, "Lab order successful");
                     },
-                    //error: function (response) {
-                    //    //generate('error', response.d);
-                    //    toastr.error(response.d, "Lab order unsuccessful");
-                    //}
+                    
                 });
             };
-            $(function () {
-                $('#container').highcharts({
-                    title: {
-                        text: 'Viral Load Trend',
-                        x: -20 //center
-                    },
-                    subtitle: {
-                        text: 'VL cp/ml',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Viral Load cp/ml'
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    tooltip: {
-                        valueSuffix: 'cp/ml'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: 'VL',
-                        data: [200, 300, 500, 1000, 750, 500, 400]
-                    }, {
-                        name: 'Threshold',
-                        data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-                    }]
-                });
-            });
 
+            // Load lab results        
+            $("#addResults").click(function (e) {
+                window.location.href = '<%=ResolveClientUrl("~/laboratory/request/findlaborder.aspx")%>'; 
+              
+            });           
            
-            ///////////////////////////////////////////
+         
 
             $('#PersonAppointmentDate').datepicker({
                 allowPastDates: false,
@@ -926,12 +881,99 @@
             $("#AddAppointment").click(function () {
                 $('#AppointmentModal').modal('show');
             });
+            
+          
+            function getViralLoad() {
+                
+                console.log("get viral load  called");
+                $.ajax({
+                    url: '../WebService/LabService.asmx/GetViralLoad',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        console.log(response.d);
+                        var items = response.d;
+                        items.forEach(function (item, i) {
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (item.Month == 1) {
 
-         
+                                jan_vl = item.ResultValue;
+                                   
+                            } else if (item.Month == 3) {
+
+                                march_vl = item.ResultValue;                                   
+                                   
+                            }
+
+                        });
+
+                    }
+
+                });
+            }
+            // function viralLoadGraph() {
+            $(function() {
+                $.when(getViralLoad()).then(function () {
+                    setTimeout(function () {
+                        viralLoadGraph();
+                    },
+                                          2000);
+                });
+            });
+       
+            function viralLoadGraph() {
+              
+                console.log("encounter viral load  graph called")
+                console.log(march_vl);
+                $('#container').highcharts({
+                    title: {
+                        text: 'Viral Load Trend',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'VL cp/ml',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Viral Load cp/ml'
+                        },
+                        plotLines: [
+                            {
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }
+                        ]
+                    },
+                    tooltip: {
+                        valueSuffix: 'cp/ml'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [
+                        {
+                            name: 'VL',
+                            data: [180, march_vl, "","", "", "", ""]
+                        }, {
+                            name: 'Threshold',
+                            data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                        }
+                    ]
+                });
+            };
         });
-
+       
+        ////////////////////////////////////End doc ready///////////////////////////////////////////////////////////////////////////////
         function addPatientAppointment() {
             var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
             var reason = $("#<%=Reason.ClientID%>").val();
@@ -988,8 +1030,7 @@
             $("#description").val("");
             $("#AppointmentDate").val("");
         }
-
-      
+            
 
     </script>
 

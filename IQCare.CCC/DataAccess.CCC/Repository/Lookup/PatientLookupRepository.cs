@@ -27,6 +27,13 @@ namespace DataAccess.CCC.Repository.Lookup
             return genderId;
 
         }
+        public PatientLookup GetPatientPtn_pk(int PatientId)
+        {
+            IPatientLookupRepository patientRepository = new PatientLookupRepository();
+            var ptn_pk = patientRepository.FindBy(x => x.Id == PatientId).FirstOrDefault();
+            return ptn_pk;
+
+        }
 
 
     }
