@@ -9,7 +9,7 @@ namespace DataAccess.CCC.Repository.Baseline
     {
         private readonly GreencardContext _context;
 
-        public INHProphylaxisRepository()
+        public INHProphylaxisRepository():base(new GreencardContext())
         {
 
         }
