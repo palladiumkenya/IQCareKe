@@ -96,10 +96,11 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static DbConnection GetOrmConnectionString()
         {
+            Console.WriteLine("GetOrmConnectionString()");
             Utility objUtil = new Utility();
             //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
-            //constr += ";connect timeout=" + CommandTimeOut().ToString();
+            constr += ";connect timeout=" + CommandTimeOut().ToString();
             // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
             constr += ";MultipleActiveResultSets = True; Pooling = True;";
             SqlConnection connection = new SqlConnection(constr);

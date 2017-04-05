@@ -9,21 +9,21 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.Context;
 using Entities.CCC.Encounter;
 
+//namespace DataAccess.CCC.Repository.Encounter
+//{
+//    public class PatientLabOrderRepository : BaseRepository<LabOrderEntity>, IPatientLabOrderRepository
+//    {
+//    }
+//}
+
+
 namespace DataAccess.CCC.Repository.Encounter
-{
-    public class PatientLabOrderRepository : BaseRepository<LabOrderEntity>, IPatientLabOrderRepository
-    {
-    }
-}
-
-
-namespace DataAccess.CCC.Repository.visit
 {
     public class PatientLabOrderRepository : BaseRepository<LabOrderEntity>, IPatientLabOrderRepository
     {
         private readonly GreencardContext _context;
 
-        public PatientLabOrderRepository() : this(new GreencardContext())
+        public PatientLabOrderRepository() :base(new GreencardContext())
         {
 
         }

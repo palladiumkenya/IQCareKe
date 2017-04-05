@@ -129191,27 +129191,6 @@
   </VWDiseaseSymptom>
   <VW_ICDList>
     <FieldId>8888751</FieldId>
-    <SubBlockId>10</SubBlockId>
-    <CodeId>%0%10%0%0</CodeId>
-    <Name>A09 Diarrhoea and gastroenteritis of presumed infectious origin</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>28</SubBlockId>
-    <CodeId>%0%28%0%0</CodeId>
-    <Name>A33 Tetanus neonatorum</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>88</SubBlockId>
-    <CodeId>%0%88%0%0</CodeId>
-    <Name>B01 Varicella [chickenpox]</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
     <SubBlockId>92</SubBlockId>
     <CodeId>%0%92%0%0</CodeId>
     <Name>B05 Measles</Name>
@@ -129226,55 +129205,6 @@
   </VW_ICDList>
   <VW_ICDList>
     <FieldId>8888751</FieldId>
-    <SubBlockId>108</SubBlockId>
-    <CodeId>%0%108%0%0</CodeId>
-    <Name>B26 Mumps</Name>
-    <DeleteFlag>1</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>128</SubBlockId>
-    <CodeId>%0%128%0%0</CodeId>
-    <Name>B50 Plasmodium falciparum malaria</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>129</SubBlockId>
-    <CodeId>%0%129%0%0</CodeId>
-    <Name>B51 Plasmodium vivax malaria</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>130</SubBlockId>
-    <CodeId>%0%130%0%0</CodeId>
-    <Name>B52 Plasmodium malariae malaria</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>131</SubBlockId>
-    <CodeId>%0%131%0%0</CodeId>
-    <Name>B53 Other parasitologically confirmed malaria</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>132</SubBlockId>
-    <CodeId>%0%132%0%0</CodeId>
-    <Name>B54 Unspecified malaria</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
-    <SubBlockId>158</SubBlockId>
-    <CodeId>%0%158%0%0</CodeId>
-    <Name>B83 Other helminthiases</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888751</FieldId>
     <BlockId>2</BlockId>
     <CodeId>%2%0%0%0</CodeId>
     <Name>A15-A19 Tuberculosis</Name>
@@ -129286,6 +129216,62 @@
     <CodeId>%12%0%0%0</CodeId>
     <Name>B15-B19 Viral hepatitis</Name>
     <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888752</FieldId>
+    <SubBlockId>1351</SubBlockId>
+    <CodeId>%0%1351%0%0</CodeId>
+    <Name>R58 Haemorrhage, not elsewhere classified</Name>
+    <DeleteFlag>1</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888752</FieldId>
+    <SubBlockId>1352</SubBlockId>
+    <CodeId>%0%1352%0%0</CodeId>
+    <Name>R59 Enlarged lymph nodes</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888752</FieldId>
+    <SubBlockId>1353</SubBlockId>
+    <CodeId>%0%1353%0%0</CodeId>
+    <Name>R60 Oedema, not elsewhere classified</Name>
+    <DeleteFlag>1</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888752</FieldId>
+    <Id>5944</Id>
+    <CodeId>%0%0%5944%0</CodeId>
+    <Name>R68.0 Hypothermia, not associated with low environmental temperature</Name>
+    <DeleteFlag>1</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888752</FieldId>
+    <Id>5896</Id>
+    <CodeId>%0%0%5896%0</CodeId>
+    <Name>R45.0 Nervousness</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>28</SubBlockId>
+    <CodeId>%0%28%0%0</CodeId>
+    <Name>A33 Tetanus neonatorum</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>10</SubBlockId>
+    <CodeId>%0%10%0%0</CodeId>
+    <Name>A09 Diarrhoea and gastroenteritis of presumed infectious origin</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>1</SubBlockId>
+    <CodeId>%0%1%0%0</CodeId>
+    <Name>A00 Cholera</Name>
+    <DeleteFlag>1</DeleteFlag>
   </VW_ICDList>
   <VW_ICDList>
     <FieldId>8888751</FieldId>
@@ -129324,13 +129310,6 @@
   </VW_ICDList>
   <VW_ICDList>
     <FieldId>8888709</FieldId>
-    <SubBlockId>724</SubBlockId>
-    <CodeId>%0%724%0%0</CodeId>
-    <Name>J18 Pneumonia, organism unspecified</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888709</FieldId>
     <Id>1465</Id>
     <CodeId>%0%0%1465%0</CodeId>
     <Name>E10.5 Insulin-dependent diabetes mellitus: With peripheral circulatory complications</Name>
@@ -129351,39 +129330,11 @@
     <DeleteFlag>0</DeleteFlag>
   </VW_ICDList>
   <VW_ICDList>
-    <FieldId>8888752</FieldId>
-    <Id>5944</Id>
-    <CodeId>%0%0%5944%0</CodeId>
-    <Name>R68.0 Hypothermia, not associated with low environmental temperature</Name>
-    <DeleteFlag>1</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888752</FieldId>
-    <Id>5896</Id>
-    <CodeId>%0%0%5896%0</CodeId>
-    <Name>R45.0 Nervousness</Name>
+    <FieldId>8888709</FieldId>
+    <SubBlockId>724</SubBlockId>
+    <CodeId>%0%724%0%0</CodeId>
+    <Name>J18 Pneumonia, organism unspecified</Name>
     <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888752</FieldId>
-    <SubBlockId>1353</SubBlockId>
-    <CodeId>%0%1353%0%0</CodeId>
-    <Name>R60 Oedema, not elsewhere classified</Name>
-    <DeleteFlag>1</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888752</FieldId>
-    <SubBlockId>1352</SubBlockId>
-    <CodeId>%0%1352%0%0</CodeId>
-    <Name>R59 Enlarged lymph nodes</Name>
-    <DeleteFlag>0</DeleteFlag>
-  </VW_ICDList>
-  <VW_ICDList>
-    <FieldId>8888752</FieldId>
-    <SubBlockId>1351</SubBlockId>
-    <CodeId>%0%1351%0%0</CodeId>
-    <Name>R58 Haemorrhage, not elsewhere classified</Name>
-    <DeleteFlag>1</DeleteFlag>
   </VW_ICDList>
   <VW_ICDList>
     <FieldId>8888752</FieldId>
@@ -129450,10 +129401,59 @@
   </VW_ICDList>
   <VW_ICDList>
     <FieldId>8888751</FieldId>
-    <SubBlockId>1</SubBlockId>
-    <CodeId>%0%1%0%0</CodeId>
-    <Name>A00 Cholera</Name>
+    <SubBlockId>158</SubBlockId>
+    <CodeId>%0%158%0%0</CodeId>
+    <Name>B83 Other helminthiases</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>132</SubBlockId>
+    <CodeId>%0%132%0%0</CodeId>
+    <Name>B54 Unspecified malaria</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>131</SubBlockId>
+    <CodeId>%0%131%0%0</CodeId>
+    <Name>B53 Other parasitologically confirmed malaria</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>130</SubBlockId>
+    <CodeId>%0%130%0%0</CodeId>
+    <Name>B52 Plasmodium malariae malaria</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>129</SubBlockId>
+    <CodeId>%0%129%0%0</CodeId>
+    <Name>B51 Plasmodium vivax malaria</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>128</SubBlockId>
+    <CodeId>%0%128%0%0</CodeId>
+    <Name>B50 Plasmodium falciparum malaria</Name>
+    <DeleteFlag>0</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>108</SubBlockId>
+    <CodeId>%0%108%0%0</CodeId>
+    <Name>B26 Mumps</Name>
     <DeleteFlag>1</DeleteFlag>
+  </VW_ICDList>
+  <VW_ICDList>
+    <FieldId>8888751</FieldId>
+    <SubBlockId>88</SubBlockId>
+    <CodeId>%0%88%0%0</CodeId>
+    <Name>B01 Varicella [chickenpox]</Name>
+    <DeleteFlag>0</DeleteFlag>
   </VW_ICDList>
   <mst_RegimenLine>
     <ID>1</ID>

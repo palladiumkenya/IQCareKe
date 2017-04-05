@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.Encounter {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails ucPatientDetails;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief ucPatientDetails;
         
         /// <summary>
         /// TreeViewEncounterHistory control.

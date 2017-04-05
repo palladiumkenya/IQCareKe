@@ -8,7 +8,7 @@ namespace DataAccess.CCC.Repository.Baseline
     public class PatientArvHistoryRepository:BaseRepository<PatientArvHistory>,IPatientArvHistoryRepository
    {
 
-       private readonly GreencardContext _context;
+       private GreencardContext _context;
 
         public PatientArvHistoryRepository():this(new GreencardContext() )
        {
