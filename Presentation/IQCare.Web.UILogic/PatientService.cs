@@ -120,7 +120,7 @@ namespace IQCare.Web.UILogic
             patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
             userId = session.User.Id;
             IPatientHome pHome = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-            this.CurrentPatient = pHome.GetPatientById(patientId);
+            CurrentPatient = pHome.GetPatientById(patientId);
             CurrentServiceArea = session.Facility.Modules.Where(m => m.Id == moduleId).FirstOrDefault();
 
             if (CurrentServiceArea != null && CurrentServiceArea.Clinical)

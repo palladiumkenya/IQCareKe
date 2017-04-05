@@ -213,24 +213,21 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Service Orders Result Page";
             Master.ExecutePatientLevel = true;
-
-
-
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();
             }
             if (!IsPostBack)
             {
-                //if (Session[SessionKey.SelectedLabTestOrder] == null)
-                //{
-                //    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
-                //    //Response.Redirect(theUrl);
-                //    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
-                //    Response.Redirect(theUrl, true);
-                //}
-                //else
-                //{
+                if (Session[SessionKey.SelectedLabTestOrder] == null)
+                {
+                    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
+                    //Response.Redirect(theUrl);
+                    System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    Response.Redirect(theUrl, true);
+                }
+                else
+                {
                     LabOrderTest selectedLab = (LabOrderTest)Session[SessionKey.SelectedLabTestOrder];
                     this.LabTestId = selectedLab.TestId;
                     this.LabOrderTestId = selectedLab.Id;
@@ -238,7 +235,7 @@ namespace IQCare.Web.Laboratory
                     this.PopulateLabDetails(selectedLab);
                     this.BindDropdownResultBy() ;
                      txtlabReportedbyDate.Text =  DateTime.Now.ToString("dd-MMM-yyyy");
-                //}
+                }
                 
             }
         }

@@ -168,14 +168,31 @@ namespace IQCare.Web.CCC.WebService
 
             DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["PatientMasterVisitID"].ToString());
             ArrayList rows = new ArrayList();
-
+            string remove = "";
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[12] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                if (row["DispensedQuantity"].ToString() == "")
+                {
+                    remove = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
+                }
+                else
+                {
+                    if (Convert.ToDecimal(row["DispensedQuantity"].ToString()) == 0)
+                    {
+                        remove = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
+                    }
+                    else
+                    {
+                        remove = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' disabled> Remove</button>";
+                    }
+                }
+
+                string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
-                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    row["prophylaxis"].ToString(), remove
+                     };
                 rows.Add(i);
             }
             return rows;
@@ -243,6 +260,23 @@ namespace IQCare.Web.CCC.WebService
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)

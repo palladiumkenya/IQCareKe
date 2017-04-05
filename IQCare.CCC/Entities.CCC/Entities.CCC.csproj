@@ -74,6 +74,7 @@
     <Compile Include="Consent\PatientConsent.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
     <Compile Include="Encounter\LabDetailsEntity.cs" />
+    <Compile Include="Encounter\LabResultsEntity.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
     <Compile Include="Encounter\PatientCareEnding.cs" />
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />

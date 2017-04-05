@@ -75,7 +75,7 @@
         
                 <asp:ScriptManager ID="masterScriptManager" runat="server" EnablePageMethods="true" EnablePartialRendering="true" ScriptMode="Auto"> </asp:ScriptManager>
                 
-                <div class="row"  style="margin-bottom:1%">
+                <div class="row"  style="margin-bottom:1.5%">
                       <div class="col-md-12 navbar navbar-fixed-top navbar-static-top bg-primary">
                            <!-- Brand and toggle get grouped for better mobile display -->
                 

@@ -81,6 +81,7 @@
     <Compile Include="Interface\Encounter\IPatientCareEndingRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
+    <Compile Include="Interface\Encounter\IPatientLabResultsRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Repository\Encounter\PatientCareEndingRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />
+    <Compile Include="Repository\Encounter\PatientLabResultsRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />

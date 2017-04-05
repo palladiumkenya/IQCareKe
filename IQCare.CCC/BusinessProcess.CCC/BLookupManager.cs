@@ -14,11 +14,11 @@ namespace BusinessProcess.CCC
     public class BLookupManager : ProcessBase, ILookupManager
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
-
+       
         public List<LookupItemView> GetGenderOptions()
         {
             LookupRepository repo = new LookupRepository();
-           return repo.GetLookupItemViews("Gender");
+            return repo.GetLookupItemViews("Gender");
         }
 
         public List<LookupItemView> GetLookItemByGroup(string groupname)
@@ -29,7 +29,7 @@ namespace BusinessProcess.CCC
 
         public List<LookupCounty> GetLookupCounties()
         {
-           LookupCountyRepository lookupCountyRepository =new  LookupCountyRepository();
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetCounties();
         }
 
@@ -46,23 +46,23 @@ namespace BusinessProcess.CCC
 
         public List<LookupCounty> GetLookupSubcounty(string county)
         {
-            LookupCountyRepository lookupCountyRepository=new LookupCountyRepository();
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetSubCounties(county);
         }
 
         public List<LookupCounty> GetLookupWards(string subcounty)
         {
-            LookupCountyRepository lookupCountyRepository= new LookupCountyRepository();
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetWardsList(subcounty);
         }
         /* pw GetLookupLabs implementation   */
         public List<LookupLabs> GetLookupLabs()
-              
+
         {
             LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
-            return lookupLabRepository.GetLabs(); 
+            return lookupLabRepository.GetLabs();
         }
-      
+
         public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
 
         {
@@ -82,7 +82,7 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
 
         {
-            
+
             LookupPreviousLabsRepository lookupVllabsRepository = new LookupPreviousLabsRepository();
             return lookupVllabsRepository.GetVlLabs(patientId);
         }
@@ -96,8 +96,8 @@ namespace BusinessProcess.CCC
 
         public string GetLookupNameFromId(int id)
         {
-            LookupRepository lookupRepository=new LookupRepository();
-            var itemName = lookupRepository.FindBy(x => x.ItemId == id).Select(x=>x.ItemName).Single();
+            LookupRepository lookupRepository = new LookupRepository();
+            var itemName = lookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).Single();
             return itemName.ToString();
         }
 
@@ -124,6 +124,12 @@ namespace BusinessProcess.CCC
             LookupRepository lookupGender = new LookupRepository();
             return lookupGender.GetPatientGender(genderID);
         }
+        public PatientLookup GetPatientPtn_pk(int PatientId)
+
+        {
+            PatientLookupRepository lookupPtn = new PatientLookupRepository();
+            return lookupPtn.GetPatientPtn_pk(PatientId);
+        }
         public LookupLabs GetLabTestId(string labType)
 
         {
@@ -133,12 +139,13 @@ namespace BusinessProcess.CCC
 
         public int GetRegimenCategory(int regimenId)
         {
-           
-            string masterName=_unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
+
+            string masterName = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
             return
                 _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
                     .Select(x => x.ItemId)
                     .FirstOrDefault();
         }
+       
     }
 }

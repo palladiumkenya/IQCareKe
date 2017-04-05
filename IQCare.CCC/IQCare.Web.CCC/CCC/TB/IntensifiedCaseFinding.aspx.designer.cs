@@ -7,153 +7,126 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC {
+namespace IQCare.Web.CCC.TB {
     
     
-    public partial class ucPharmacyPrescription {
+    public partial class IntensifiedCaseFinding {
         
         /// <summary>
-        /// drugID control.
+        /// ICF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField drugID;
+        protected global::System.Web.UI.WebControls.DropDownList ICF;
         
         /// <summary>
-        /// drugAbbr control.
+        /// Result control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField drugAbbr;
+        protected global::System.Web.UI.WebControls.DropDownList Result;
         
         /// <summary>
-        /// ddlTreatmentProgram control.
+        /// IcfResultDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentProgram;
+        protected global::System.Web.UI.WebControls.TextBox IcfResultDate;
         
         /// <summary>
-        /// ddlPeriodTaken control.
+        /// AddIcf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPeriodTaken;
+        protected global::System.Web.UI.WebControls.LinkButton AddIcf;
         
         /// <summary>
-        /// ddlTreatmentPlan control.
+        /// tblIcf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTreatmentPlan;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblIcf;
         
         /// <summary>
-        /// ddlSwitchInterruptionReason control.
+        /// Action control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSwitchInterruptionReason;
+        protected global::System.Web.UI.WebControls.DropDownList Action;
         
         /// <summary>
-        /// regimenLine control.
+        /// ActionResult control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList regimenLine;
+        protected global::System.Web.UI.WebControls.DropDownList ActionResult;
         
         /// <summary>
-        /// ddlRegimen control.
+        /// ActionResultDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRegimen;
+        protected global::System.Web.UI.WebControls.TextBox ActionResultDate;
         
         /// <summary>
-        /// txtDrugs control.
+        /// AddAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDrugs;
+        protected global::System.Web.UI.WebControls.LinkButton AddAction;
         
         /// <summary>
-        /// ddlBatch control.
+        /// ActionTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBatch;
+        protected global::System.Web.UI.HtmlControls.HtmlTable ActionTable;
         
         /// <summary>
-        /// txtDose control.
+        /// btnSaveIcf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDose;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveIcf;
         
         /// <summary>
-        /// ddlFreq control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFreq;
+        protected global::System.Web.UI.WebControls.LinkButton btnReset;
         
         /// <summary>
-        /// txtDuration control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDuration;
-        
-        /// <summary>
-        /// txtQuantityPres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantityPres;
-        
-        /// <summary>
-        /// txtQuantityDisp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtQuantityDisp;
-        
-        /// <summary>
-        /// chkProphylaxis control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkProphylaxis;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
     }
 }
