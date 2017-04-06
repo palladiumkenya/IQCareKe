@@ -2,10 +2,8 @@
 using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
-using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using Entities.CCC.Encounter;
-using Interface.CCC.Encounter;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -39,28 +37,28 @@ namespace IQCare.Web.CCC.WebService
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
-        private int facilityID { get; set; }
-        private int patientId;
-        private int locationId;
-        private int labOrderId;
-        private String theUrl;
+        private int FacilityId { get; set; }
+        private int _patientId;
+        private int _locationId;
+        private int _labOrderId;
+       // private String theUrl;
         private string Msg { get; set; }
         private int Result { get; set; }
-        private int Ptn_pk;
+        private int _ptnPk;
 
 
 
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patient_ID, int patient_Pk, int patientMasterVisitId, string patientLabOrder)
+        public string AddLabOrder(int patientId, int patientPk, int patientMasterVisitId, string patientLabOrder)
         {
 
             LookupFacility facility = _lookupManager.GetFacility();
-            facilityID = facility.FacilityID;
+            FacilityId = facility.FacilityID;
             var labOrder = new PatientLabOrderManager();
 
-            if (patient_ID > 0)
+            if (patientId > 0)
             {
-                labOrder.savePatientLabOrder(patient_ID, patient_Pk, facilityID, patientMasterVisitId, patientLabOrder);
+                labOrder.savePatientLabOrder(patientId, patientPk, FacilityId, patientMasterVisitId, patientLabOrder);
                 Msg = "Patient Lab Order Recorded Successfully .";
 
             }
@@ -73,17 +71,17 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddResults(int PatientId)
+        public string AddResults(int patientId)
         {
             List<KeyValuePair<string, object>> param = new List<KeyValuePair<string, object>>();
-            PatientLookup patient = _lookupManager.GetPatientPtn_pk(PatientId);
-            patientId = patient.ptn_pk ?? 0;
+            PatientLookup patient = _lookupManager.GetPatientPtn_pk(patientId);
+            _patientId = patient.ptn_pk ?? 0;
 
             LookupFacility facility = _lookupManager.GetFacility();
-            locationId = facility.FacilityID;
+            _locationId = facility.FacilityID;
 
-            param.Add(new KeyValuePair<string, object>("PatientID", patientId));
-            param.Add(new KeyValuePair<string, object>("LocationID", locationId));
+            param.Add(new KeyValuePair<string, object>("PatientID", _patientId));
+            param.Add(new KeyValuePair<string, object>("LocationID", _locationId));
 
             Session[SessionKey.LabClient] = param;
 
@@ -105,7 +103,6 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string GetLookupPendingLabsList(string patient_ID)
         {
-
 
             int patientId = Convert.ToInt32(patient_ID);
             string jsonObject = LookupLogic.GetLookupPendingLabsListJson(patientId);
@@ -143,17 +140,17 @@ namespace IQCare.Web.CCC.WebService
             PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(PatientId);
             if (ptpk.ptn_pk != null)
             {
-                Ptn_pk = ptpk.ptn_pk.Value;
+                _ptnPk = ptpk.ptn_pk.Value;
             }
 
-            LabOrderEntity labId = _lookupData.GetPatientLabOrder(Ptn_pk);
+            LabOrderEntity labId = _lookupData.GetPatientLabOrder(_ptnPk);
             if (labId != null)
             {
-                labOrderId = labId.Id;
+                _labOrderId = labId.Id;
             }
 
             List<PatientViralLoad> patientViralDetails = new List<PatientViralLoad>();
-            List<LabResultsEntity> list_vl = _lookupData.GetPatientVL(labOrderId);
+            List<LabResultsEntity> list_vl = _lookupData.GetPatientVL(_labOrderId);
 
             if (list_vl != null)
             {

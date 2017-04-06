@@ -2,7 +2,6 @@
 using System.Linq;
 using DataAccess.CCC.Interface.person;
 using DataAccess.Context;
-using Entities.Common;
 using Entities.PatientCore;
 
 namespace DataAccess.CCC.Repository.person

@@ -18,14 +18,14 @@ using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.CCC.Repository.Encounter;
-using PatientLabOrderRepository = DataAccess.CCC.Repository.Encounter.PatientLabOrderRepository;
+//using PatientLabOrderRepository = DataAccess.CCC.Repository.Encounter.PatientLabOrderRepository;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
 
 namespace DataAccess.CCC.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly BaseContext _context;
+        private BaseContext _context;
 
         /* Person Interface */
         private IPersonRepository _personRepository;
@@ -348,9 +348,10 @@ namespace DataAccess.CCC.Repository
             return _context.SaveChanges();
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
+        //public void Dispose()
+        //{
+        //    _context.Dispose();
+        //}
 
         private bool _disposed = false;
 
