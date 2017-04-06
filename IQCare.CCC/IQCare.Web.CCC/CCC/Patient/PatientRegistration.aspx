@@ -992,6 +992,32 @@
                     //var personId = 0;
                 }
 
+                function getPopulationTypes() {
+                    var itemName = "KeyPopulation";
+                    $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', false);
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/LookupService.asmx/GetLookUpItemByName",
+                        data: "{'itemName':'" + itemName + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                                
+                            var itemList = JSON.parse(response.d);
+                            $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
+                            $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">Select</option>');
+                            $.each(itemList, function (index, itemList) {
+                                $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' ('+itemList.ItemName+')</option>');
+                            }); 
+                        },
+                        error: function (xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                            return false;
+                        }
+                    });
+                }
+
                 $("input[name='Population']").on("change",
                     function() {
                         var itemName=$(this).val();
@@ -1000,29 +1026,7 @@
                             $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
                             $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
                         } else {
-                            itemName = "KeyPopulation";
-                            $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', false);
-                            $.ajax({
-                                type: "POST",
-                                url: "../WebService/LookupService.asmx/GetLookUpItemByName",
-                                data: "{'itemName':'" + itemName + "'}",
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (response) {
-                                
-                                    var itemList = JSON.parse(response.d);
-                                    $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
-                                    $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">Select</option>');
-                                    $.each(itemList, function (index, itemList) {
-                                        $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="' + itemList.ItemId + '">' + itemList.ItemDisplayName + ' ('+itemList.ItemName+')</option>');
-                                    }); 
-                                },
-                                error: function (xhr, errorType, exception) {
-                                    var jsonError = jQuery.parseJSON(xhr.responseText);
-                                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                                    return false;
-                                }
-                            });
+                            getPopulationTypes();
                         }
 
                     });
@@ -1248,6 +1252,10 @@
                     $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                     $("#<%=NationalId.ClientID%>").prop('disabled', true);
                 }
+
+                getPopulationTypes();
+                $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', false);
+
             } else {
                 $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
                 $("#<%=Inschool.ClientID%>").prop('disabled',false);
@@ -1257,6 +1265,11 @@
                 $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
                 $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                 $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
+
+                $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', true);
+                $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
+                $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
+                $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
 
                 if (patientType == "Transit") {
                     $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);

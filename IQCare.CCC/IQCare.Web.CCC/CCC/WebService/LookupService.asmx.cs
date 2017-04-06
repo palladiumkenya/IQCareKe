@@ -27,6 +27,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookupSubcountyList(string county)
         {
+            Console.WriteLine("GetLookupSubcountyList");
            _jsonObject=  LookupLogic.GeSubCountyListJson(county);
             //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //List<LookupCounty> lookupCounties = lookupManager.GetLookupSubcounty(county);
@@ -44,6 +45,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookupWardList(string subcounty)
         {
+           // Console.WriteLine("GetLookupWardList");
             //string jsonObject;
             //ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //List<LookupCounty> lookupwardsList = lookupManager.GetLookupWards(subcounty);
@@ -65,6 +67,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookUpItemByName(string itemName)
         {
+           // Console.WriteLine("GetLookUpItemByName");
             try
             {
                 _jsonObject =LookupLogic.GetLookupItemByName(itemName);    
@@ -79,6 +82,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookUpItemViewByMasterName(string masterName)
         {
+            //Console.WriteLine("GetLookUpItemViewByMasterName");
             try
             {
                 _jsonObject = LookupLogic.GetLookUpItemViewByMasterName(masterName);
@@ -94,6 +98,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookUpItemViewByMasterId(int id)
         {
+           // Console.WriteLine("GetLookUpItemViewByMasterId");
             try
             {
                 _jsonObject = LookupLogic.GetLookUpItemViewByMasterId(id);
@@ -111,6 +116,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string GetLookupLabsList()
         {
+            Console.WriteLine("GetLookupLabsList");
             string jsonObject = LookupLogic.GetLookupLabsListJson();
 
             return jsonObject;

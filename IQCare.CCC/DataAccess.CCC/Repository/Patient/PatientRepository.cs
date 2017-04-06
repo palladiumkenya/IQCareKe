@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using System;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Patient;
 using DataAccess.Context;
 
@@ -15,7 +16,8 @@ namespace DataAccess.CCC.Repository.Patient
 
         public PatientRepository(GreencardContext context) : base(context)
         {
-            this._context = context;
+            _context = context;
         }
+
     }
 }

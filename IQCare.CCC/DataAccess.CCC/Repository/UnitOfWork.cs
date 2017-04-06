@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using DataAccess.CCC.Context;
 using DataAccess.Context;
 using DataAccess.Context.ModuleMaster;
@@ -17,14 +18,14 @@ using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.CCC.Repository.Encounter;
-using PatientLabOrderRepository = DataAccess.CCC.Repository.Encounter.PatientLabOrderRepository;
+//using PatientLabOrderRepository = DataAccess.CCC.Repository.Encounter.PatientLabOrderRepository;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
 
 namespace DataAccess.CCC.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly BaseContext _context;
+        private BaseContext _context;
 
         /* Person Interface */
         private IPersonRepository _personRepository;
@@ -92,10 +93,12 @@ namespace DataAccess.CCC.Repository
         {
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException("missing context");
             }
             _context = context;
         }
+
+        public DbContext Context { get { return _context; } }
 
         public IModuleRepository ModuleRepository
         {
@@ -105,6 +108,7 @@ namespace DataAccess.CCC.Repository
             }
         }
 
+     
         public ILookupRepository LookupRepository
         {
             get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext)_context)); }
@@ -344,9 +348,30 @@ namespace DataAccess.CCC.Repository
             return _context.SaveChanges();
         }
 
+        //public void Dispose()
+        //{
+        //    _context.Dispose();
+        //}
+
+        private bool _disposed = false;
+
         public void Dispose()
         {
-            _context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
+        protected void Dispose(bool disposing)
+        {
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    _context?.Dispose();
+                }
+            }
+            this._disposed = true;
         }
     }
 }

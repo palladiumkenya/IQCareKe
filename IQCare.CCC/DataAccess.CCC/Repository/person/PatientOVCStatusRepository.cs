@@ -1,5 +1,4 @@
 ﻿using DataAccess.CCC.Interface.person;
-using DataAccess.CCC.Repository.Patient;
 using DataAccess.Context;
 using Entities.PatientCore;
 

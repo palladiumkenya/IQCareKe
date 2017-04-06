@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="OneTimeEventsTracker.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.OneTimeEventsTracker" %>
-<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
         <div class="col-md-12">
@@ -918,7 +918,7 @@
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
                         toastr.success(response.d, "One Time Events Tracker");
-                        window.location.href = '<%=ResolveClientUrl("~ CCC/Patient/PatientHome.aspx")%>';
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
                     },
                     error: function (response) {
                         //generate('error', response.d);

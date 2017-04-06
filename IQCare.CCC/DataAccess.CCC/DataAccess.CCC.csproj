@@ -155,11 +155,9 @@
     <Compile Include="Repository\Patient\IPatientContactRepository.cs" />
     <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
     <Compile Include="Interface\person\IPatientPopulationRepository.cs" />
-    <Compile Include="Repository\ICCCPatientRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CCCPatientRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />

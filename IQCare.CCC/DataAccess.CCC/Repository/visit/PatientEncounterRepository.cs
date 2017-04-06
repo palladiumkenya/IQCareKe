@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.Context;
@@ -9,10 +6,10 @@ using Entities.CCC.Visit;
 
 namespace DataAccess.CCC.Repository.visit
 {
-   public class PatientEncounterRepository:BaseRepository<PatientEncounter>,IPatientEncounterRepository
+   public class PatientEncounterRepository:BaseRepository<PatientEncounter>,IPatientEncounterRepository,IDisposable
    {
 
-        private readonly GreencardContext _context;
+        private GreencardContext _context;
 
         public PatientEncounterRepository():this(new GreencardContext())
        {
@@ -23,6 +20,7 @@ namespace DataAccess.CCC.Repository.visit
        {
            _context = context;
        }
+
 
     }
 }

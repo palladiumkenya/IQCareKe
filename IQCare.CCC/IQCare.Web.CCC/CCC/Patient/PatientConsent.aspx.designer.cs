@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.Patient {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
         
         /// <summary>
         /// ConsentType control.

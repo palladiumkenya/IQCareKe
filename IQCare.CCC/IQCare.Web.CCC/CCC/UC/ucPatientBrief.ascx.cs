@@ -42,16 +42,16 @@ namespace IQCare.Web.CCC.UC
                                        _utility.Decrypt(x.MiddleName)+" ";
 
                 //    lblLastName.Text = "<strong><i>" + _utility.Decrypt(x.LastName) + "</i></strong>";
-                //    if (x.Active)
-                //    {
-                //        lblStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
-                //    }
-                //    else
-                //    {
-                //        lblStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
-                //    }
-               // string femaleIcon = "<i class='fa fa-female' aria-hidden='true'></i>";
-               // string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
+                if (x.Active)
+                {
+                    lblPatientStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
+                }
+                else
+                {
+                    lblPatientStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
+                }
+                // string femaleIcon = "<i class='fa fa-female' aria-hidden='true'></i>";
+                // string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
                 if (x.Sex == 62)
                 {
@@ -75,7 +75,7 @@ namespace IQCare.Web.CCC.UC
                 Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = " (" + x.EnrollmentNumber+") ";
-                lblEnrollmentDate.Text = "Enrollment Date :" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
+                lblEnrollmentDate.Text = "" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
 
             }
 
