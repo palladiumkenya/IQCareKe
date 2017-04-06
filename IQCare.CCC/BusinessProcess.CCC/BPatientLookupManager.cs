@@ -96,7 +96,7 @@ namespace BusinessProcess.CCC
         public PatientLookup GetGenderID(int patientId)
         {
             PatientLookupRepository lookupGender = new PatientLookupRepository();
-            return lookupGender.GetGenderID(patientId);
+            return lookupGender.GetGenderId(patientId);
         }
 
         public int GetPatientTypeId(int patientId)

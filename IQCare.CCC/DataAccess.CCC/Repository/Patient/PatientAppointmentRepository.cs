@@ -10,12 +10,15 @@ namespace DataAccess.CCC.Repository.Patient
 {
     public class PatientAppointmentRepository : BaseRepository<PatientAppointment>, IPatientAppointmentRepository
     {
-        public PatientAppointmentRepository(GreencardContext context) : base(context)
-        {
-        }
+        private GreencardContext _context;
 
         public PatientAppointmentRepository() : this(new GreencardContext())
         {
+        }
+
+        public PatientAppointmentRepository(GreencardContext context) : base(context)
+        {
+            _context = context;
         }
 
         public List<PatientAppointment> GetByPatientId(int patientId)
@@ -38,5 +41,6 @@ namespace DataAccess.CCC.Repository.Patient
             List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => p.AppointmentDate >= startDate && p.AppointmentDate<= endDate).ToList();
             return patientAppointment;
         }
+       
     }
 }

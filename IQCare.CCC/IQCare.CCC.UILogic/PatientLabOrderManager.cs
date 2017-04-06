@@ -14,13 +14,13 @@ namespace IQCare.CCC.UILogic
     public class ListLabOrder
     {
         
-        public string labType { get; set; }
-        public string orderReason { get; set; }
-        public string results { get; set; }
-        public DateTime labOrderDate { get; set; }
-        public int labOrderId { get; set; }
+        public string LabType { get; set; }
+        public string OrderReason { get; set; }
+        public string Results { get; set; }
+        public DateTime LabOrderDate { get; set; }
+        public int LabOrderId { get; set; }
         //public int labTestId { get; set; }
-        public string labNotes { get; set; }
+        public string LabNotes { get; set; }
 
     }
     public class PatientLabOrderManager
@@ -40,13 +40,13 @@ namespace IQCare.CCC.UILogic
 
                 if (patient_ID > 0)
                 {
-                    int returnValue;
-                    int returnLabOrderSuccess;
+                    //int returnValue;
+                   // int returnLabOrderSuccess;
                     var pending = "Pending";
                     foreach (ListLabOrder t in data)
                     {
                                 // Get LabID
-                                string labType = t.labType;
+                                string labType = t.LabType;
                                 if (labType != null)
                                 {
                                 LookupLabs testId = _lookupTest.GetLabTestId(labType);
@@ -56,10 +56,10 @@ namespace IQCare.CCC.UILogic
                             {
                                 PatientId = patient_ID,
                                 PatientMasterVisitId = patientMasterVisitId,
-                                LabName = t.labType,
-                                Reasons = t.orderReason,
+                                LabName = t.LabType,
+                                Reasons = t.OrderReason,
                                 Results = pending,
-                                SampleDate = t.labOrderDate
+                                SampleDate = t.LabOrderDate
                                 //LabNotes =data[i].labNotes --take to clinical notes 
 
                             };
@@ -73,10 +73,10 @@ namespace IQCare.CCC.UILogic
                                 OrderedBy = 1,
                                 LabTestId = labTestId,
                                 PatientMasterVisitId = patientMasterVisitId,
-                                ClinicalOrderNotes = t.labNotes,
+                                ClinicalOrderNotes = t.LabNotes,
                                 OrderStatus = pending,
-                                OrderDate = t.labOrderDate,
-                                PreClinicLabDate = t.labOrderDate
+                                OrderDate = t.LabOrderDate,
+                                PreClinicLabDate = t.LabOrderDate
                                 //UserId = data[i].labType,
                                 //ClinicalOrderNotes = data[i].results,       
                                 //LocationId = data[i].orderReason,

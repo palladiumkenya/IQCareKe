@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
@@ -45,10 +43,5 @@ namespace DataAccess.CCC.Repository.Lookup
             return labTestId;
 
         }
-
-
-
-
-
     }
 }

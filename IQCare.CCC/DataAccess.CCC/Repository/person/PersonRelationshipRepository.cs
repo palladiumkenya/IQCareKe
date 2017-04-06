@@ -1,5 +1,4 @@
-﻿using DataAccess.CCC.Interface;
-using DataAccess.CCC.Interface.person;
+﻿using DataAccess.CCC.Interface.person;
 using DataAccess.Context;
 using Entities.Common;
 

@@ -18,5 +18,6 @@ namespace DataAccess.CCC.Repository.Baseline
         {
             _context = context;
         }
+
     }
 }

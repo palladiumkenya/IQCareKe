@@ -7,7 +7,7 @@ namespace DataAccess.CCC.Repository.visit
 {
     public class PatientMasterVisitRepository : BaseRepository<PatientMasterVisit>, IPatientMasterVisitRepository
     {
-        private readonly GreencardContext _context;
+        private  GreencardContext _context;
 
         public PatientMasterVisitRepository() : this(new GreencardContext())
         {
@@ -18,5 +18,6 @@ namespace DataAccess.CCC.Repository.visit
         {
             _context = context;
         }
+
     }
 }

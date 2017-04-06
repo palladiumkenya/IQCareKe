@@ -17,7 +17,7 @@ namespace DataAccess.CCC.Context
 {
     public class GreencardContext : BaseContext
     {
-        public GreencardContext() : base((DbConnection) DataMgr.GetOrmConnectionString(), true)
+        public GreencardContext() : base((DbConnection)DataMgr.GetConnection(), true)
         {
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);

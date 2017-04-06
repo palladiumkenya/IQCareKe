@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
@@ -53,5 +51,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var list = myList.GroupBy(x => x.WardId).Select(x => x.First()).OrderBy(x => x.WardName);
             return list.Distinct().ToList();
         }
+
     }
+
 }

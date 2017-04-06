@@ -331,7 +331,6 @@
     </Compile>
     <Compile Include="CCC\WebService\LabService.asmx.cs">
       <DependentUpon>LabService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>

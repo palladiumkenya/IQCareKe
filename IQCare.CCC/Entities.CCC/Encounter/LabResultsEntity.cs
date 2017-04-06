@@ -1,6 +1,4 @@
 ﻿using System;
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Entities.Common;
 
@@ -28,9 +26,9 @@ namespace Entities.CCC.Encounter
         public bool Undetectable { get; set; }
         public decimal DetectionLimit { get; set; }
         public int UserId { get; set; }
-        public bool DeleteFlag { get; set; }
-        public DateTime CreateDate { get; set; }
-        public int CreatedBy { get; set; }
+        //public bool DeleteFlag { get; set; }
+        //public DateTime CreateDate { get; set; }
+        //public int CreatedBy { get; set; }
         public DateTime StatusDate { get; set; }
         public bool HasResult { get; set; }
 
