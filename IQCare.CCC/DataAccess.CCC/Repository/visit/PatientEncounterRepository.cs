@@ -6,7 +6,7 @@ using Entities.CCC.Visit;
 
 namespace DataAccess.CCC.Repository.visit
 {
-   public class PatientEncounterRepository:BaseRepository<PatientEncounter>,IPatientEncounterRepository,IDisposable
+   public class PatientEncounterRepository:BaseRepository<PatientEncounter>,IPatientEncounterRepository
    {
 
         private GreencardContext _context;

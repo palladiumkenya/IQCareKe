@@ -7,7 +7,7 @@ using Entities.CCC.Triage;
 
 namespace DataAccess.CCC.Repository.Patient
 {
-    public class PatientVitalsRepository : BaseRepository<PatientVital>, IPatientVitalsRepository,IDisposable
+    public class PatientVitalsRepository : BaseRepository<PatientVital>, IPatientVitalsRepository
     {
         private readonly GreencardContext _context;
 
