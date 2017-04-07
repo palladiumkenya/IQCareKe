@@ -590,7 +590,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetLookupPendingLabsList",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -627,7 +627,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetvlTests",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -664,7 +664,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetPendingvlTests",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -832,7 +832,7 @@
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
-                    data: "{'patient_ID':'" + patientId + "','patient_Pk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
+                    data: "{'patient_Pk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
