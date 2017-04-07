@@ -223,6 +223,42 @@
                                             <asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0" value="0"></asp:TextBox>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Modal -->
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                      <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Please check for duplicates</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              <table id="duplicateNames" class="table table-striped table-inverse">
+                                                  <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th style="display: none">&nbsp;</th>
+                                                        <th>First Name</th>
+                                                        <th>Middle Name</th>
+                                                        <th>Last Name</th>
+                                                        <th>DOB</th>
+                                                        <th>Sex</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody id="duplicateNamesBody">
+                                                  </tbody>
+                                                </table>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-md-3">
@@ -572,6 +608,7 @@
                     var x = $('#MyDateOfBirth').datepicker('getDate');
                     $('#<%=personAge.ClientID%>').val(getAge(x));
                     personAgeRule();
+                    duplicateCheck();
                 });
 
                 $('#<%=countyId.ClientID%>').on("change", function() {
@@ -581,6 +618,21 @@
                 $("#<%=SubcountyId.ClientID%>").on("change", function() {
                     getWardList();
                 });
+
+                $("#<%=personFname.ClientID%>").on("change", function() {
+                    duplicateCheck();
+                });
+
+                $("#<%=personMName.ClientID%>").on("change", function() {
+                    duplicateCheck();
+                });
+                
+                $("#<%=personLName.ClientID%>").on("change", function() {
+                    duplicateCheck();
+                });
+
+
+
 
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
@@ -1214,87 +1266,179 @@
                     $(".errorBlock").hide();
                 });
 
+                function duplicateCheck() {
+                    var personFname = $("#<%=personFname.ClientID%>").val();
+                    var personMName = $("#<%=personMName.ClientID%>").val();
+                    var personLName = $("#<%=personLName.ClientID%>").val();
+                    var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
+
+                    var dob = moment(dateOfBirth).format('DD-MMM-YYYY');
+                    console.log(dob);
+
+                    //console.log(personFname);
+                    //console.log(personMName);
+                    //console.log(personLName);
+
+                    if ((personFname != null && personFname != "") && (personLName != null && personLName != "")) {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/GetPatientSearchresults",
+                            contentType: "application/json; charset=utf-8",
+                            data: "{'firstName': '" + personFname + "', 'middleName': '"+ personMName +"', 'lastName':'" + personLName + "','dob':'" + dob + "'}",
+                            dataType: "json",
+                            success: function (response) {
+                                var patientDetails = JSON.parse(response.d);
+
+                                console.log(patientDetails);
+
+                                if (patientDetails.length > 0) {
+
+                                    var row, cell, text, r, c, count, cellid, rowid, 
+                                        prop = ['0', '1', '2', '3', '4', '5'],
+                                        table = document.getElementById("duplicateNamesBody"),
+                                        data = patientDetails;
+
+                                    $("#duplicateNames > tbody").html("");
+                                    count = 0;
+                                    for (r = 0; r < data.length; r++) {
+                                        row = document.createElement('tr');
+                                        count++;
+
+                                        cellid = document.createElement('td');
+                                        rowid = document.createTextNode(count);
+                                        cellid.appendChild(rowid);
+                                        row.appendChild(cellid);
+
+                                        for (c = 0; c < 6; c++) {
+                                            cell = document.createElement('td');
+                                            text = document.createTextNode(data[r][prop[c]]);
+                                            cell.appendChild(text);
+                                            if (c == 0) {
+                                                cell.style.cssText = "display:none";
+                                                console.log("here");
+                                            }
+                                            row.appendChild(cell);
+                                        }
+                                        table.appendChild(row);
+                                    }
+
+
+                                    $('#myModal').modal('show');
+                                }
+
+                            },
+                            error: function (response) {
+                                generate('error', response.d);
+                            }
+                        });
+                    }    
+                }
+
+                
+
+                /* Business Rules setup */
+                function personAgeRule()
+                {
+                    personAge = $("#personAge").val();
+                    //var patientType = $("#PatientTypeId").find(":selected").text();
+
+                    var checked_radio = $("[id*=PatientTypeId] input:checked");
+                    var patientType = checked_radio.closest("td").find("label").html();
+
+                    console.log(patientType);
+
+                    //console.log(personAge);
+
+                    $("#<%=NationalId.ClientID%>").prop('disabled', false);
+
+                    if (personAge >= 18) {
+                        $("#ChildOrphan").val("");
+                        $("#Inschool").val("");
+                        $("#GurdianFNames").val("");
+                        $("#GurdianMName").val("");
+                        $("#GurdianLName").val("");
+                        $("#GuardianGender").val("");
+
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                        $("#<%=Inschool.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+
+                        if (patientType == "Transit") {
+                            $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                            $("#<%=NationalId.ClientID%>").prop('disabled', true);
+                        }
+
+                        getPopulationTypes();
+                        $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', false);
+
+                    } else {
+                        $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
+                        $("#<%=Inschool.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
+                        $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
+                        $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
+                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
+
+                        $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', true);
+                        $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
+                        $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
+                        $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
+
+                        if (patientType == "Transit") {
+                            $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
+                            $("#<%=Inschool.ClientID%>").prop('disabled',true);
+                            $("#<%=GurdianFNames.ClientID%>").prop('disabled',true);
+                            $("#<%=GurdianMName.ClientID%>").prop('disabled',true);
+                            $("#<%=GurdianLName.ClientID%>").prop('disabled',true);
+                            $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
+                            $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                            $("#<%=NationalId.ClientID%>").prop('disabled', true);
+                        }
+                    }
+
+                    duplicateCheck();
+                };
+
+                function estimateDob(personAge) {
+                    console.log(personAge);
+                    var currentDate = new Date();
+                    currentDate.setDate(15);
+                    currentDate.setMonth(5);
+                    console.log(currentDate);
+                    var estDob = moment(currentDate.toISOString());
+                    var dob = estDob.add((personAge * -1), 'years');
+                    <% Session["DobPrecision"] = "true"; %>;
+                    return moment(dob).format('DD-MMM-YYYY');
+                };
+
+
+                $(".personrow").on("click", function() {
+                    alert(this);
+                });
+
+                //var $table = $('#duplicateNames').bootstrapTable({});
+                $('#duplicateNames').on('click', 'tbody > tr', function(e) {
+                    var _fp = [];
+                    _fp = {
+                        "PersonId": $($(this)).find('td:eq(1)').text(), 
+                        "FirstName": $($(this)).find('td:eq(2)').text(), 
+                        "MiddleName": $($(this)).find('td:eq(3)').text(),
+                        "LastName":$($(this)).find('td:eq(4)').text(),
+                        "Dob":$($(this)).find('td:eq(5)').text(),
+                        "Sex":$($(this)).find('td:eq(6)').text()
+                    }
+                    console.log(_fp);
+                });
+
             });
-
-        /* Business Rules setup */
-        function personAgeRule()
-        {
-            personAge = $("#personAge").val();
-            //var patientType = $("#PatientTypeId").find(":selected").text();
-
-            var checked_radio = $("[id*=PatientTypeId] input:checked");
-            var patientType = checked_radio.closest("td").find("label").html();
-
-            console.log(patientType);
-
-            //console.log(personAge);
-
-            $("#<%=NationalId.ClientID%>").prop('disabled', false);
-
-            if (personAge >= 18) {
-                $("#ChildOrphan").val("");
-                $("#Inschool").val("");
-                $("#GurdianFNames").val("");
-                $("#GurdianMName").val("");
-                $("#GurdianLName").val("");
-                $("#GuardianGender").val("");
-
-                $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
-                $("#<%=Inschool.ClientID%>").prop('disabled', true);
-                $("#<%=GurdianFNames.ClientID%>").prop('disabled', true);
-                $("#<%=GurdianMName.ClientID%>").prop('disabled', true);
-                $("#<%=GurdianLName.ClientID%>").prop('disabled', true);
-                $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
-                $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
-                $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
-
-                if (patientType == "Transit") {
-                    $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
-                    $("#<%=NationalId.ClientID%>").prop('disabled', true);
-                }
-
-                getPopulationTypes();
-                $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', false);
-
-            } else {
-                $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
-                $("#<%=Inschool.ClientID%>").prop('disabled',false);
-                $("#<%=GurdianFNames.ClientID%>").prop('disabled',false);
-                $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
-                $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
-                $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
-                $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
-                $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
-
-                $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', true);
-                $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
-                $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
-                $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
-
-                if (patientType == "Transit") {
-                    $("#<%=ChildOrphan.ClientID%>").prop('disabled',true);
-                    $("#<%=Inschool.ClientID%>").prop('disabled',true);
-                    $("#<%=GurdianFNames.ClientID%>").prop('disabled',true);
-                    $("#<%=GurdianMName.ClientID%>").prop('disabled',true);
-                    $("#<%=GurdianLName.ClientID%>").prop('disabled',true);
-                    $("#<%=GuardianGender.ClientID%>").prop('disabled',true);
-                    $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
-                    $("#<%=NationalId.ClientID%>").prop('disabled', true);
-                }
-            }
-        };
-
-        function estimateDob(personAge) {
-            console.log(personAge);
-            var currentDate = new Date();
-            currentDate.setDate(15);
-            currentDate.setMonth(5);
-            console.log(currentDate);
-            var estDob = moment(currentDate.toISOString());
-            var dob = estDob.add((personAge * -1), 'years');
-            <% Session["DobPrecision"] = "true"; %>;
-            return moment(dob).format('DD-MMM-YYYY');
-        };
     </script>
 </asp:Content>
 

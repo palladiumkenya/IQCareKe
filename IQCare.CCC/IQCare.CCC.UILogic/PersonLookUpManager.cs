@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,11 @@ namespace IQCare.CCC.UILogic
         public PersonLookUp GetPersonById(int id)
         {
             return _personLookUpManager.GetPersonById(id);
+        }
+
+        public List<PersonLookUp> GetPersonSearchResults(string firstName, string middleName, string lastName, string dob)
+        {
+            return _personLookUpManager.GetPatientSearchresults(firstName, middleName, lastName, dob);
         }
     }
 }

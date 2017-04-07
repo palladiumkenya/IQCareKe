@@ -18,7 +18,6 @@ using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.CCC.Repository.Encounter;
-//using PatientLabOrderRepository = DataAccess.CCC.Repository.Encounter.PatientLabOrderRepository;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
 
 namespace DataAccess.CCC.Repository
