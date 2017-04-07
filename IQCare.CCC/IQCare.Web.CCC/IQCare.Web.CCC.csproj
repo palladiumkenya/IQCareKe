@@ -95,6 +95,7 @@
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
+    <Content Include="CCC\UC\ucPatientTriageSummary.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
@@ -304,6 +305,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientTriage.ascx.designer.cs">
       <DependentUpon>ucPatientTriage.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriageSummary.ascx.cs">
+      <DependentUpon>ucPatientTriageSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriageSummary.ascx.designer.cs">
+      <DependentUpon>ucPatientTriageSummary.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientVitalsExtruder.ascx.cs">
       <DependentUpon>ucPatientVitalsExtruder.ascx</DependentUpon>

@@ -22,6 +22,15 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
         
         /// <summary>
+        /// ptnVitalSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPatientTriageSummary ptnVitalSummary;
+        
+        /// <summary>
         /// ptnVitalSigns control.
         /// </summary>
         /// <remarks>
