@@ -52,8 +52,7 @@ namespace BusinessProcess.CCC
         public PatientMaritalStatus GetCurrentPatientMaritalStatus(int personId)
         {
             return _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId && !x.DeleteFlag)
-                .OrderBy(x => x.Id)
-                .Take(1).First();
+                .OrderBy(x => x.Id).FirstOrDefault();
         }
     }
 }

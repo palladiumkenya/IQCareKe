@@ -245,6 +245,8 @@
                                                         <th>Last Name</th>
                                                         <th>DOB</th>
                                                         <th>Sex</th>
+                                                        <th style="display: none">&nbsp;</th>
+                                                        <th style="display: none">&nbsp;</th>
                                                     </tr>
                                                   </thead>
                                                   <tbody id="duplicateNamesBody">
@@ -252,7 +254,8 @@
                                                 </table>
                                           </div>
                                           <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" id="btnOk" class="btn btn-success" OnClientClick="return false;">OK</button>
+                                            <button type="button" id="btnModalClose" class="btn btn-default" data-dismiss="modal">Close</button>
                                           </div>
                                         </div>
 
@@ -577,6 +580,12 @@
         </div><%-- .col-md-12--%>
 
     </div><%--.col-md-12--%>
+    
+    <style type="text/css">
+        .table > thead > tr > td.active, .table > tbody > tr > td.active, .table > tfoot > tr > td.active, .table > thead > tr > th.active, .table > tbody > tr > th.active, .table > tfoot > tr > th.active, .table > thead > tr.active > td, .table > tbody > tr.active > td, .table > tfoot > tr.active > td, .table > thead > tr.active > th, .table > tbody > tr.active > th, .table > tfoot > tr.active > th {
+            background-color:red;
+        }
+    </style>
     
     <script type="text/javascript">
         $(document)
@@ -1295,7 +1304,7 @@
                                 if (patientDetails.length > 0) {
 
                                     var row, cell, text, r, c, count, cellid, rowid, 
-                                        prop = ['0', '1', '2', '3', '4', '5'],
+                                        prop = ['0', '1', '2', '3', '4', '5', '6', '7'],
                                         table = document.getElementById("duplicateNamesBody"),
                                         data = patientDetails;
 
@@ -1310,14 +1319,14 @@
                                         cellid.appendChild(rowid);
                                         row.appendChild(cellid);
 
-                                        for (c = 0; c < 6; c++) {
+                                        for (c = 0; c < 8; c++) {
                                             cell = document.createElement('td');
                                             text = document.createTextNode(data[r][prop[c]]);
                                             cell.appendChild(text);
-                                            if (c == 0) {
+                                            if (c == 0 || c == 6 || c == 7 ) {
                                                 cell.style.cssText = "display:none";
-                                                console.log("here");
                                             }
+
                                             row.appendChild(cell);
                                         }
                                         table.appendChild(row);
@@ -1418,23 +1427,55 @@
                     <% Session["DobPrecision"] = "true"; %>;
                     return moment(dob).format('DD-MMM-YYYY');
                 };
+                var _fp = [];
 
+                $("#btnOk").click(function() {
+                    console.log("here");
+                    console.log(_fp);
 
-                $(".personrow").on("click", function() {
-                    alert(this);
+                    if (Object.keys(_fp).length > 0) {
+                        if (_fp["IsPatient"] == 1) {
+                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx?patient=")%>' + _fp["PatientId"];
+                        } else {
+                            var personId = _fp["PersonId"];
+                            <%Session["PatientType"] = "1285"; %>;
+
+                            $.ajax({
+                                type: "POST",
+                                url: "../WebService/PersonService.asmx/SetSession",
+                                contentType: "application/json; charset=utf-8",
+                                data: "{'personId': '" + personId + "'}",
+                                dataType: "json",
+                                success: function (response) {
+                                    window.location.href = '<%=ResolveClientUrl("~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                },
+                                error: function (response) {
+                                    generate('error', response.d);
+                                }
+                            });
+                        }
+                    } else {
+                        toastr.error("Please Select one person from the list", "Patient Duplicates");
+                    }
+                    
                 });
 
                 //var $table = $('#duplicateNames').bootstrapTable({});
                 $('#duplicateNames').on('click', 'tbody > tr', function(e) {
-                    var _fp = [];
+                    
                     _fp = {
                         "PersonId": $($(this)).find('td:eq(1)').text(), 
                         "FirstName": $($(this)).find('td:eq(2)').text(), 
                         "MiddleName": $($(this)).find('td:eq(3)').text(),
                         "LastName":$($(this)).find('td:eq(4)').text(),
                         "Dob":$($(this)).find('td:eq(5)').text(),
-                        "Sex":$($(this)).find('td:eq(6)').text()
+                        "Sex":$($(this)).find('td:eq(6)').text(),
+                        "IsPatient":$($(this)).find('td:eq(7)').text(),
+                        "PatientId":$($(this)).find('td:eq(8)').text()
                     }
+                    $('#duplicateNames tr').removeClass("active");
+
+                    $(this).addClass("active");
                     console.log(_fp);
                 });
 
