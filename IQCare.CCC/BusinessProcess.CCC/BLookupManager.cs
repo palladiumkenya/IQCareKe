@@ -124,11 +124,11 @@ namespace BusinessProcess.CCC
             LookupRepository lookupGender = new LookupRepository();
             return lookupGender.GetPatientGender(genderID);
         }
-        public PatientLookup GetPatientPtn_pk(int PatientId)
+        public PatientLookup GetPatientPtn_pk(int patientId)
 
         {
             PatientLookupRepository lookupPtn = new PatientLookupRepository();
-            return lookupPtn.GetPatientPtn_pk(PatientId);
+            return lookupPtn.GetPatientPtn_pk(patientId);
         }
         public LookupLabs GetLabTestId(string labType)
 
