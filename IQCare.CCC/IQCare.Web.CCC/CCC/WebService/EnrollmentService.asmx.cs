@@ -159,6 +159,12 @@ namespace IQCare.Web.CCC.WebService
                                 phone = personContacts[0].MobileNumber;
                             }
 
+                            var MaritalStatusId = 0;
+                            if (maritalStatus != null)
+                            {
+                                MaritalStatusId = maritalStatus.MaritalStatusId;
+                            }
+
                             ptn_Pk = mstPatientLogic.InsertMstPatient(
                                 utility.Decrypt(patient_person_details.FirstName), 
                                 utility.Decrypt(patient_person_details.LastName),
@@ -168,7 +174,7 @@ namespace IQCare.Web.CCC.WebService
                                 patientEntryPointId ,
                                 DateTime.Now, patient_person_details.Sex,
                                 patient.DateOfBirth,
-                                1, maritalStatus.MaritalStatusId,
+                                1, MaritalStatusId,
                                 address, phone, userId, Session["AppPosID"].ToString(),
                                 203, patientEnrollment.EnrollmentDate, DateTime.Now);
 

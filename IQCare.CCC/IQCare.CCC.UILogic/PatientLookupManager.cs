@@ -60,5 +60,34 @@ namespace IQCare.CCC.UILogic
         {
           return  LookupLogic.GetLookupNameById(_patientLookupmanager.GetPatientTypeId(patientId));
         }
+
+        public string GetDobByPersonId(int personId)
+        {
+            var person = _patientLookupmanager.GetPatientByPersonId(personId);
+            if (person.Count > 0)
+            {
+                DateTime dob = person[0].DateOfBirth;
+                string stringDob = dob.ToString("dd-MMM-yyyy");
+                return stringDob;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public int isPatientExists(int personId)
+        {
+            var person = _patientLookupmanager.GetPatientByPersonId(personId);
+            var retVal = person.Count > 0 ? 1 : 0;
+            return retVal;
+        }
+
+        public int PatientId(int personId)
+        {
+            var person = _patientLookupmanager.GetPatientByPersonId(personId);
+            var retVal = person.Count > 0 ? person[0].Id : 0;
+            return retVal;
+        }
     }
 }

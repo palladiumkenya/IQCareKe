@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Web.Services;
 using Entities.CCC.Enrollment;
 using Entities.Common;
@@ -723,6 +725,47 @@ namespace IQCare.Web.CCC.WebService
             {
                 return e.Message;
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientSearchresults(string firstName,string middleName,string lastName, string dob)
+        {
+            try
+            {
+                var personLookUpManager = new PersonLookUpManager();
+                var dobb = "";
+
+                var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob);
+                var patientLookup = new PatientLookupManager();
+                
+                var newresults = results.Select(x => new string[]
+                   {
+                        x.Id.ToString(),
+                        _utility.Decrypt(x.FirstName),
+                        _utility.Decrypt(x.MiddleName),
+                        _utility.Decrypt(x.LastName),
+                        patientLookup.GetDobByPersonId(x.Id),
+                        LookupLogic.GetLookupNameById(x.Sex),
+                        patientLookup.isPatientExists(x.Id).ToString(),
+                        patientLookup.PatientId(x.Id).ToString()
+                   });
+
+                return new JavaScriptSerializer().Serialize(newresults);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SetSession(int personId)
+        {
+            if (personId > 0)
+            {
+                Session["PersonId"] = personId;
+            }
+            return Msg;
         }
 
     }
