@@ -16,29 +16,83 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientDisclosure(PatientDisclosure patientDisclosure)
         {
-            _unitOfWork.PatientDisclosureRepository.Add(patientDisclosure);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientDisclosureRepository.Add(patientDisclosure);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
 
         public int DeletePatientDisclosure(int id)
         {
-            var personEncounter = _unitOfWork.PatientDisclosureRepository.GetById(id);
-            _unitOfWork.PatientDisclosureRepository.Remove(personEncounter);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                var personEncounter = _unitOfWork.PatientDisclosureRepository.GetById(id);
+                _unitOfWork.PatientDisclosureRepository.Remove(personEncounter);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+            
         }
 
         public int UpdatePatientDisclosure(PatientDisclosure patientDisclosure)
         {
-            _unitOfWork.PatientDisclosureRepository.Update(patientDisclosure);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientDisclosureRepository.Update(patientDisclosure);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+       
         }
 
         public List<PatientDisclosure> GetPatientDisclosures(int patientId, string category, string disclosureStage)
         {
-            return
-                _unitOfWork.PatientDisclosureRepository.FindBy(
-                        x => x.PatientId == patientId && x.Category == category && x.DisclosureStage == disclosureStage)
-                    .ToList();
+            try
+            {
+                return
+                    _unitOfWork.PatientDisclosureRepository.FindBy(
+                            x =>
+                                x.PatientId == patientId && x.Category == category &&
+                                x.DisclosureStage == disclosureStage)
+                        .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
     }
 }

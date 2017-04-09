@@ -19,40 +19,109 @@ namespace BusinessProcess.CCC
 
         public int AddPatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter)
         {
-           _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
-           return _result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+    
         }
 
         public int UpdatePatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter)
         {
-            _unitOfWork.PatientTreatmentSupporterRepository.Update(patientTreatmentSupporter);
-            return _result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientTreatmentSupporterRepository.Update(patientTreatmentSupporter);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
 
         public int DeletePatientTreatmentSupporter(int id)
         {
-           _patienPersonTreatmentSupporter= _unitOfWork.PatientTreatmentSupporterRepository.GetById(id);
-           _unitOfWork.PatientTreatmentSupporterRepository.Remove(_patienPersonTreatmentSupporter);
-            return _result = _unitOfWork.Complete();
+            try
+            {
+                _patienPersonTreatmentSupporter = _unitOfWork.PatientTreatmentSupporterRepository.GetById(id);
+                _unitOfWork.PatientTreatmentSupporterRepository.Remove(_patienPersonTreatmentSupporter);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
 
         }
 
         public List<PatientTreatmentSupporter> GetCurrentTreatmentSupporter(int personId)
         {
-            List<PatientTreatmentSupporter> patientTreatmentSupporters=_unitOfWork.PatientTreatmentSupporterRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
-                .OrderByDescending(x => x.Id)
-                .Take(1)
-                .ToList();
-            return patientTreatmentSupporters;
+            try
+            {
+                List<PatientTreatmentSupporter> patientTreatmentSupporters =
+                    _unitOfWork.PatientTreatmentSupporterRepository.FindBy(
+                            x => x.PersonId == personId & x.DeleteFlag == false)
+                        .OrderByDescending(x => x.Id)
+                        .Take(1)
+                        .ToList();
+                return patientTreatmentSupporters;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public List<PatientTreatmentSupporter> GetAllTreatmentSupporter(int personId)
         {
-            List<PatientTreatmentSupporter> patientTreatmentSupporters = _unitOfWork.PatientTreatmentSupporterRepository.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
-            .OrderByDescending(x => x.Id)
-            .ToList();
+            try
+            {
+                List<PatientTreatmentSupporter> patientTreatmentSupporters =
+                    _unitOfWork.PatientTreatmentSupporterRepository.FindBy(
+                            x => x.PersonId == personId & x.DeleteFlag == false)
+                        .OrderByDescending(x => x.Id)
+                        .ToList();
 
-            return patientTreatmentSupporters;
+                return patientTreatmentSupporters;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -13,62 +14,130 @@ namespace BusinessProcess.CCC
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         public int AddPatientCareEnding(PatientCareEnding patientCareEnding)
         {
-            _unitOfWork.PatientCareEndingRepository.Add(patientCareEnding);
-            _unitOfWork.Complete();
-            return patientCareEnding.Id;
+            try
+            {
+                _unitOfWork.PatientCareEndingRepository.Add(patientCareEnding);
+                _unitOfWork.Complete();
+                return patientCareEnding.Id;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
 
         public List<PatientCareEnding> GetPatientCareEndings(int patientId)
         {
-            return _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId && !x.Active).ToList();
+            try
+            {
+                return
+                    _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId && !x.Active).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
 
         public int UpdatePatientCareEnding(PatientCareEnding patientCareEnding)
         {
-            var careEnding =
-                _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientCareEnding.PatientId & !x.DeleteFlag & !x.Active)
-                    .FirstOrDefault();
-            if (careEnding != null)
+            try
             {
-                careEnding.ExitReason = patientCareEnding.ExitReason;
-                careEnding.ExitDate = patientCareEnding.ExitDate;
-                careEnding.TransferOutFacility = patientCareEnding.TransferOutFacility;
-                careEnding.DateOfDeath = patientCareEnding.DateOfDeath;
-                careEnding.CareEndingNotes = patientCareEnding.CareEndingNotes;
+                var careEnding =
+                    _unitOfWork.PatientCareEndingRepository.FindBy(
+                            x => x.PatientId == patientCareEnding.PatientId & !x.DeleteFlag & !x.Active)
+                        .FirstOrDefault();
+                if (careEnding != null)
+                {
+                    careEnding.ExitReason = patientCareEnding.ExitReason;
+                    careEnding.ExitDate = patientCareEnding.ExitDate;
+                    careEnding.TransferOutFacility = patientCareEnding.TransferOutFacility;
+                    careEnding.DateOfDeath = patientCareEnding.DateOfDeath;
+                    careEnding.CareEndingNotes = patientCareEnding.CareEndingNotes;
+                }
+                _unitOfWork.PatientCareEndingRepository.Update(careEnding);
+                return _unitOfWork.Complete();
             }
-            _unitOfWork.PatientCareEndingRepository.Update(careEnding);
-            return _unitOfWork.Complete();
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public int DeletePatientCareEnding(int id)
         {
-            var careEnding = _unitOfWork.PatientCareEndingRepository.GetById(id);
-            _unitOfWork.PatientCareEndingRepository.Remove(careEnding);
-            return _unitOfWork.Complete();
+            try
+            {
+                var careEnding = _unitOfWork.PatientCareEndingRepository.GetById(id);
+                _unitOfWork.PatientCareEndingRepository.Remove(careEnding);
+                return _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+ 
         }
 
         public string PatientCareEndingStatus(int patientId)
         {
-
-           var careendingStatus = new PatientCareEnding();
-            var lookupManager = new BLookupManager();
-           var exitReason =
-                _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & !x.Active)
-                    .FirstOrDefault();
-            if (exitReason != null)
+            try
             {
-                careendingStatus.ExitReason =  exitReason.ExitReason;
-                careendingStatus.ExitDate = exitReason.ExitDate;
-                careendingStatus.TransferOutFacility = exitReason.TransferOutFacility;
-                careendingStatus.DateOfDeath = exitReason.DateOfDeath;
-                careendingStatus.CareEndingNotes = exitReason.CareEndingNotes;
+                var careendingStatus = new PatientCareEnding();
+                var lookupManager = new BLookupManager();
+                var exitReason =
+                    _unitOfWork.PatientCareEndingRepository.FindBy(
+                            x => x.PatientId == patientId & !x.DeleteFlag & !x.Active)
+                        .FirstOrDefault();
+                if (exitReason != null)
+                {
+                    careendingStatus.ExitReason = exitReason.ExitReason;
+                    careendingStatus.ExitDate = exitReason.ExitDate;
+                    careendingStatus.TransferOutFacility = exitReason.TransferOutFacility;
+                    careendingStatus.DateOfDeath = exitReason.DateOfDeath;
+                    careendingStatus.CareEndingNotes = exitReason.CareEndingNotes;
+                }
+                else
+                {
+                    careendingStatus.ExitReason = 0;
+                }
+
+                return careendingStatus.ToString();
             }
-            else
+            catch (Exception e)
             {
-                careendingStatus.ExitReason = 0;
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
             }
 
-            return careendingStatus.ToString();
+
         }
     }
 }

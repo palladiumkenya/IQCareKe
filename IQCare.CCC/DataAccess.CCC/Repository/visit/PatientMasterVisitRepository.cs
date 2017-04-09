@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using System;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.Context;
 using Entities.CCC.Visit;

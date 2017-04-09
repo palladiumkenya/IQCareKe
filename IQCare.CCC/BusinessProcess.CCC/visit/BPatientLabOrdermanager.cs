@@ -19,64 +19,171 @@ namespace BusinessProcess.CCC.visit
 
         public int AddPatientLabTracker(PatientLabTracker patientLabTracker)
         {
-            _unitOfWork.PatientLabTrackerRepository.Add(patientLabTracker);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientLabTrackerRepository.Add(patientLabTracker);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
         public int AddPatientLabOrder(LabOrderEntity labOrderEntity)
         {
-            _unitOfWork.PatientLabOrderRepository.Add(labOrderEntity);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientLabOrderRepository.Add(labOrderEntity);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
         public int UpdatePatientLabOrder(PatientLabTracker patientLabTracker)
         {
-            _unitOfWork.PatientLabTrackerRepository.Update(patientLabTracker);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientLabTrackerRepository.Update(patientLabTracker);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
 
         public int DeletePatientLabOrder(int id)
         {
-            var patientLabOrder = _unitOfWork.PatientLabTrackerRepository.GetById(id);
-            _unitOfWork.PatientLabTrackerRepository.Remove(patientLabOrder);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                var patientLabOrder = _unitOfWork.PatientLabTrackerRepository.GetById(id);
+                _unitOfWork.PatientLabTrackerRepository.Remove(patientLabOrder);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+       
         }
 
        
         public List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate)
         {
-            List<PatientLabTracker> patientLabOrders =
-                _unitOfWork.PatientLabTrackerRepository.FindBy(
-                        x =>
-                            x.PatientId == patientId &
-                            DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
-                            !x.DeleteFlag)
-                    .OrderByDescending(x => x.Id).Take(1).ToList();
-            return patientLabOrders;
+            try
+            {
+                List<PatientLabTracker> patientLabOrders =
+                    _unitOfWork.PatientLabTrackerRepository.FindBy(
+                            x =>
+                                x.PatientId == patientId &
+                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                                !x.DeleteFlag)
+                        .OrderByDescending(x => x.Id).Take(1).ToList();
+                return patientLabOrders;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
 
         public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
-            List<PatientLabTracker> patientLabOrders =
-                _unitOfWork.PatientLabTrackerRepository.FindBy(
-                        x =>
-                            x.PatientId == patientId &
-                            !x.DeleteFlag)
-                    .OrderByDescending(x => x.Id).Take(1).ToList();
-            return patientLabOrders;
+            try
+            {
+                List<PatientLabTracker> patientLabOrders =
+                    _unitOfWork.PatientLabTrackerRepository.FindBy(
+                            x =>
+                                x.PatientId == patientId &
+                                !x.DeleteFlag)
+                        .OrderByDescending(x => x.Id).Take(1).ToList();
+                return patientLabOrders;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
         public List<LabResultsEntity> GetPatientVL(int labOrderId)
         {
-
-            return _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId).Where(x => x.LabTestId == 3)
-                .OrderBy(x => x.Id)
-                .ToList();
+            try
+            {
+                return
+                    _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
+                        .Where(x => x.LabTestId == 3)
+                        .OrderBy(x => x.Id)
+                        .ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+    
 
 
         }
 
-        public LabOrderEntity GetPatientLabOrder(int Ptn_pk)
+        public LabOrderEntity GetPatientLabOrder(int ptnPk)
 
         {
-            return _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == Ptn_pk).Where(x => x.LabTestId == 3).FirstOrDefault();
+            try
+            {
+                return
+                    _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk)
+                        .Where(x => x.LabTestId == 3)
+                        .FirstOrDefault();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
 
         }
     }

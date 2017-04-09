@@ -16,49 +16,110 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            _unitOfWork.PatientTreatmentInitiationRepository.Add(patientTreatmentInitiation);
-            return _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientTreatmentInitiationRepository.Add(patientTreatmentInitiation);
+                return _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public int UpdatePatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            var patientTreatment =
-                _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
-                    x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
-            if (patientTreatment != null)
+            try
             {
-                patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
-                patientTreatment.BaselineViralloadDate = patientTreatmentInitiation.BaselineViralloadDate;
-                patientTreatment.Cohort = patientTreatmentInitiation.Cohort;
-                patientTreatment.DateStartedOnFirstline = patientTreatmentInitiation.DateStartedOnFirstline;
-                patientTreatment.Regimen = patientTreatmentInitiation.Regimen;
+                var patientTreatment =
+                    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
+                        x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
+                if (patientTreatment != null)
+                {
+                    patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
+                    patientTreatment.BaselineViralloadDate = patientTreatmentInitiation.BaselineViralloadDate;
+                    patientTreatment.Cohort = patientTreatmentInitiation.Cohort;
+                    patientTreatment.DateStartedOnFirstline = patientTreatmentInitiation.DateStartedOnFirstline;
+                    patientTreatment.Regimen = patientTreatmentInitiation.Regimen;
 
-                _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
-                Result = _unitOfWork.Complete();
+                    _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
+                    Result = _unitOfWork.Complete();
+                }
+
+                return Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
             }
 
-            return Result;
         }
 
         public int DeletePatientTreatmentInitiation(int id)
         {
-            var item = _unitOfWork.PatientTreatmentInitiationRepository.GetById(id);
-            _unitOfWork.PatientTreatmentInitiationRepository.Remove(item);
-            return _unitOfWork.Complete();
+            try
+            {
+                var item = _unitOfWork.PatientTreatmentInitiationRepository.GetById(id);
+                _unitOfWork.PatientTreatmentInitiationRepository.Remove(item);
+                return _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
 
         public List<PatientTreatmentInitiation> GetPatientTreatmentInitiation(int patientId)
         {
-           return  _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
+            try
+            {
+                return _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public int CheckIfPatientTreatmentExists(int patientId)
         {
-            var recordExists =
-                _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .Select(x => x.Id)
-                    .FirstOrDefault();
-            return Convert.ToInt32(recordExists);
+            try
+            {
+                var recordExists =
+    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+        .Select(x => x.Id)
+        .FirstOrDefault();
+                return Convert.ToInt32(recordExists);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally { _unitOfWork.Dispose();}
         }
     }
 }

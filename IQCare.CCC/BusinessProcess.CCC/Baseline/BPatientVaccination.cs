@@ -14,9 +14,22 @@ namespace BusinessProcess.CCC.Baseline
 
         public int addPatientVaccination(PatientVaccination patientVaccination)
         {
-            _unitOfWork.PatientVaccinationRepository.Add(patientVaccination);
-            Result = _unitOfWork.Complete();
-            return Result;
+            try
+            {
+                _unitOfWork.PatientVaccinationRepository.Add(patientVaccination);
+                Result = _unitOfWork.Complete();
+                return Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+    
         }
 
         public int DeletePatientVaccination(int id)

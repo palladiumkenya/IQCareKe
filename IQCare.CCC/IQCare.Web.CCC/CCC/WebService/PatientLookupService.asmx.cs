@@ -168,7 +168,7 @@ namespace IQCare.Web.CCC.WebService
             }
           catch (Exception e)
             {
-
+                Dispose();
                 output = e.Message;
             }
             return output;

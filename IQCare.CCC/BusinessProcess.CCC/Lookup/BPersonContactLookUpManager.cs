@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -13,7 +14,20 @@ namespace BusinessProcess.CCC.Lookup
         private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
         public List<PersonContactLookUp> GetPersonContactByPersonId(int personId)
         {
-            return _unitOfWork.PersonContactLookUpRepository.FindBy(x => x.PersonId == personId).ToList();
+            try
+            {
+                return _unitOfWork.PersonContactLookUpRepository.FindBy(x => x.PersonId == personId).ToList();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
     }
 }

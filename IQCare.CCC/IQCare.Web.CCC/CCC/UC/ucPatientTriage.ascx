@@ -411,15 +411,7 @@
                           
                           This page is temporarily disabled by the site administrator for some reason.
                       </div>--%> <!-- .panel-body-->
-                      <div class="panel-footer clearfix">
-                            <div class="pull-right">
 
-                                <a href="#" class="btn btn-primary">Learn More</a>
-
-                                <a href="#" class="btn btn-default">Go Back</a>
-
-                            </div>
-                      </div><!-- .panel-footer-->
                   </div><!-- .panel panel-default -->
              </div><!-- .col-md-12-->
         </div><!-- .col-md-12 col-xs-12 col-sm-12-->
@@ -429,9 +421,7 @@
     
     <%-- .col-md-11--%>
 
-    <div class="col-md-12">
-        <hr />
-    </div>
+
     <div class="col-md-12">
         <div class="col-md-8"></div>
         <div class="col-md-4">

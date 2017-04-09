@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -15,35 +16,100 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientHivTesting(PatientHivTesting p)
         {
-            _unitOfWork.PatientHivTestingRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PatientHivTestingRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+ 
         }
 
         public PatientHivTesting GetPatientHivTesting(int id)
         {
-            PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
-            return hivTesting;
+            try
+            {
+                PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
+                return hivTesting;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+            
         }
 
         public void DeletePatientHivTesting(int id)
         {
-            PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
-            _unitOfWork.PatientHivTestingRepository.Remove(hivTesting);
-            _unitOfWork.Complete();
+            try
+            {
+                PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
+                _unitOfWork.PatientHivTestingRepository.Remove(hivTesting);
+                _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+      
         }
 
         public int UpdatePatientHivTesting(PatientHivTesting p)
         {
-            _unitOfWork.PatientHivTestingRepository.Update(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PatientHivTestingRepository.Update(p);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+         
         }
 
         public List<PatientHivTesting> GetAll()
         {
-            List<PatientHivTesting> hivTestings = _unitOfWork.PatientHivTestingRepository.GetAll().ToList();
-            return hivTestings;
+            try
+            {
+                List<PatientHivTesting> hivTestings = _unitOfWork.PatientHivTestingRepository.GetAll().ToList();
+                return hivTestings;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
     }
 }

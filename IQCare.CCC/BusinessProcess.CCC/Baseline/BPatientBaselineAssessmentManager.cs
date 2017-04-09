@@ -17,57 +17,123 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientBaselineAssessment(PatientBaselineAssessment patientBaselineAssessment)
         {
-            _unitOfWork.PatientBaselineAssessmentRepository.Add(patientBaselineAssessment);
-            return Result=_unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientBaselineAssessmentRepository.Add(patientBaselineAssessment);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
 
         public int UpdatePatientBaselineAssessment(PatientBaselineAssessment patientBaselineAssessment)
         {
-            var patientBaseline =
-                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(
-                    x => x.PatientId == patientBaselineAssessment.PatientId & !x.DeleteFlag).FirstOrDefault();
-            if (patientBaseline != null)
+
+            try
             {
-                patientBaseline.Breastfeeding = patientBaselineAssessment.Breastfeeding;
-                patientBaseline.CD4Count = patientBaselineAssessment.CD4Count;
-                patientBaseline.HBVInfected = patientBaselineAssessment.HBVInfected;
-                patientBaseline.Height = patientBaselineAssessment.Height;
-                patientBaseline.MUAC = patientBaselineAssessment.MUAC;
-                patientBaseline.Pregnant = patientBaselineAssessment.Pregnant;
-                patientBaseline.TBInfected = patientBaselineAssessment.TBInfected;
-                patientBaseline.Weight = patientBaselineAssessment.Weight;
-                patientBaseline.WHOStage = patientBaselineAssessment.WHOStage;
-                _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaseline);
-                 Result = _unitOfWork.Complete();
+                var patientBaseline =
+                    _unitOfWork.PatientBaselineAssessmentRepository.FindBy(
+                        x => x.PatientId == patientBaselineAssessment.PatientId & !x.DeleteFlag).FirstOrDefault();
+                if (patientBaseline != null)
+                {
+                    patientBaseline.Breastfeeding = patientBaselineAssessment.Breastfeeding;
+                    patientBaseline.CD4Count = patientBaselineAssessment.CD4Count;
+                    patientBaseline.HBVInfected = patientBaselineAssessment.HBVInfected;
+                    patientBaseline.Height = patientBaselineAssessment.Height;
+                    patientBaseline.MUAC = patientBaselineAssessment.MUAC;
+                    patientBaseline.Pregnant = patientBaselineAssessment.Pregnant;
+                    patientBaseline.TBInfected = patientBaselineAssessment.TBInfected;
+                    patientBaseline.Weight = patientBaselineAssessment.Weight;
+                    patientBaseline.WHOStage = patientBaselineAssessment.WHOStage;
+                    _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaseline);
+                    Result = _unitOfWork.Complete();
+                }
+                return Result;
             }
-            return Result;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public int DeletePatientBaselineAssessment(int id)
         {
-            var patientArt = _unitOfWork.PatientBaselineAssessmentRepository.GetById(id);
-            _unitOfWork.PatientBaselineAssessmentRepository.Remove(patientArt);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                var patientArt = _unitOfWork.PatientBaselineAssessmentRepository.GetById(id);
+                _unitOfWork.PatientBaselineAssessmentRepository.Remove(patientArt);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+    
         }
 
         public List<PatientBaselineAssessment> GetPatientBaselineAssessment(int patientId)
         {
-            var patientBaseline =
-                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
-                    .Take(1)
-                    .Distinct()
-                    .OrderByDescending(x => x.Id)
-                    .ToList();
-            return patientBaseline;
+            try
+            {
+                var patientBaseline =
+                    _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
+                        .Take(1)
+                        .Distinct()
+                        .OrderByDescending(x => x.Id)
+                        .ToList();
+                return patientBaseline;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public int CheckIfPatientBaselineExists(int patientId)
         {
-            var recordExists =
-                _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
-                    .Select(x => x.Id)
-                    .FirstOrDefault();
-            return Convert.ToInt32(recordExists);
+            try
+            {
+                var recordExists =
+                    _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
+                        .Select(x => x.Id)
+                        .FirstOrDefault();
+                return Convert.ToInt32(recordExists);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
     }
 }

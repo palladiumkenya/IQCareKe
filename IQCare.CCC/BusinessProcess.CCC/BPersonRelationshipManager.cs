@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Repository;
@@ -15,29 +16,81 @@ namespace BusinessProcess.CCC
 
         public int AddPersonRelationship(PersonRelationship personRelationship)
         {
-           _unitOfWork.PersonRelationshipRepository.Add(personRelationship);
-           return _result= _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PersonRelationshipRepository.Add(personRelationship);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
 
         public int DeletePersonRelationship(int id)
         {
-            var personRelation = _unitOfWork.PersonRelationshipRepository.GetById(id);
-            _unitOfWork.PersonRelationshipRepository.Remove(personRelation);
-            return _result = _unitOfWork.Complete();
+            try
+            {
+                var personRelation = _unitOfWork.PersonRelationshipRepository.GetById(id);
+                _unitOfWork.PersonRelationshipRepository.Remove(personRelation);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+ 
         }
 
         public List<PersonRelationship> GetAllPersonRelationship(int patientId)
         {
-           
-            var myList =
-                _unitOfWork.PersonRelationshipRepository.FindBy(x => x.RelatedTo == patientId & x.DeleteFlag == false);
-            return myList.ToList();
+            try
+            {
+                var myList =
+                    _unitOfWork.PersonRelationshipRepository.FindBy(
+                        x => x.RelatedTo == patientId & x.DeleteFlag == false);
+                return myList.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public int UpdatePersonRelationship(PersonRelationship personRelationship)
         {
-            _unitOfWork.PersonRelationshipRepository.Update(personRelationship);
-            return _result=_unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PersonRelationshipRepository.Update(personRelationship);
+                return _result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+      
         }
     }
 }

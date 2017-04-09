@@ -49,13 +49,13 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label lblbloodpressure;
         
         /// <summary>
-        /// btnSaveTriage control.
+        /// btnLoadTriage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaveTriage;
+        protected global::System.Web.UI.WebControls.LinkButton btnLoadTriage;
         
         /// <summary>
         /// btnFemalVitals control.
