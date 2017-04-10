@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientClinicalEncounter.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientClinicalEncounter" %>
- <div class="col-md-12" style="padding-top: 20px">
+<div class="col-md-12" style="padding-top: 20px">
 
     <div class="col-md-12">
         <div class="wizard" data-initialize="wizard" id="myWizard">
@@ -149,14 +149,14 @@
                                     <label class="control-label  pull-left text-primary">*Visit Scheduled?</label>
                                 </div>
                                 <div class="col-md-12">
-           
-                                    <label class="pull-left" style="padding-right:10px">
-                                        <input id="vsYes" type="radio" name="Scheduled" value="1" ClientIDMode="Static" runat="server" />Yes
+
+                                    <label class="pull-left" style="padding-right: 10px">
+                                        <input id="vsYes" type="radio" name="Scheduled" value="1" clientidmode="Static" runat="server" />Yes
                                     </label>
-                                    <label class="pull-left" style="padding-right:10px">
-                                        <input id="vsNo" type="radio" name="Scheduled" value="0" ClientIDMode="Static" runat="server" data-parsley-required="true" />No
+                                    <label class="pull-left" style="padding-right: 10px">
+                                        <input id="vsNo" type="radio" name="Scheduled" value="0" clientidmode="Static" runat="server" data-parsley-required="true" />No
                                     </label>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -177,9 +177,60 @@
                     </div>
                     <%--to here--%>
 
+                    <div class="col-md-12 form-group">
+                            <div class="col-md-12">
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 form-group">
+                                            <label class="control-label pull-left">TB Intensified Case Findings(ICF)</label></div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">TB Infected?</label></div>
+                                                <div class="col-md-3">
+                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Cough</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label">Fever</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Noticable Weight Loss</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Night Sweats</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" ID="nightSweats" CssClass="form-control input-sm" ClientIDMode="Static" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
 
                     <div class="col-md-12 form-group">
                         <div class="col-md-12">
+                            <div class="panel panel-info">
+                                    <div class="panel-body">
                             <div class="col-md-6">
                                 <label class="control-label pull-left text-primary" for="complaints">*Complaints Today</label>
                                 <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4" data-parsley-required="true"></textarea>
@@ -206,6 +257,8 @@
                                 </div>
 
                             </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
 
@@ -214,62 +267,70 @@
                             <div class="col-md-12">
                                 <div class="panel panel-info">
 
-                                        <div class="panel-body">
-                                            <div class="col-md-12 form-group"><label class="control-label pull-left">Adverse Event(s)</label></div>
-                                            
-                                            <div class="col-md-12 form-group">
-                                                    <div class="col-md-3">
-                                                        <div class="col-md-12"><label class="control-label pull-left" >Adverse event</label></div>
-                                                        <div class="col-md-12">
-                                                            <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="col-md-12"><label class="control-label" >Medicine Causing A/E</label></div>
-                                                        <div class="col-md-12">
-                                                            <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="col-md-12"><label class="control-label pull-left" >Severity</label></div>
-                                                        <div class="col-md-12">
-                                                            <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static"  />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="col-md-12"><label class="control-label pull-left" >Action</label></div>
-                                                        <div class="col-md-12">
-                                                            <asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static"  />
-                                                                        
-                                                        </div>
-                                                    </div>
-                                                <div class="col-md-1">
-                                                        <div class="col-md-12"><label class="control-label pull-left" ></label></div>
-                                                        <div class="col-md-12">
-                                                            <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </div> <%--.panel-body--%>
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">Adverse Events</div>
-                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                                <table id="dtlAdverseEvents" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th><span class="text-primary">SeverityID</span></th>
-                                                            <th><span class="text-primary">Adverse Event</span></th>
-                                                            <th><span class="text-primary">Medicine Causing A/E</span></th>
-                                                            <th><span class="text-primary">Severity</span></th>
-                                                            <th><span class="text-primary">Action</span></th>
-                                                            <th><span class="text-primary"></span></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
+                                    <div class="panel-body">
+                                        <div class="col-md-12 form-group">
+                                            <label class="control-label pull-left">Adverse Event(s)</label></div>
 
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Adverse event</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label">Medicine Causing A/E</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Severity</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Action</label></div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" />
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left"></label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddMilestones" onclick="AddAdverseReaction();">Add</button>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <%--.panel-body--%>
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">Adverse Events</div>
+                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                            <table id="dtlAdverseEvents" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span class="text-primary">SeverityID</span></th>
+                                                        <th><span class="text-primary">Adverse Event</span></th>
+                                                        <th><span class="text-primary">Medicine Causing A/E</span></th>
+                                                        <th><span class="text-primary">Severity</span></th>
+                                                        <th><span class="text-primary">Action</span></th>
+                                                        <th><span class="text-primary"></span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <%--.panel--%>
@@ -299,7 +360,7 @@
                                                     <div class="col-md-12">
                                                         <div class="datepicker fuelux" id="FemaleLMP">
                                                             <div class="input-group">
-                                                                <input class="form-control input-sm" id="lmp" type="text" runat="server" ClientIDMode="Static" />
+                                                                <input class="form-control input-sm" id="lmp" type="text" runat="server" clientidmode="Static" />
                                                                 <div class="input-group-btn">
                                                                     <button id="btnFemaleLMP" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -405,7 +466,7 @@
                                                     <div class="col-md-12">
                                                         <div class="datepicker fuelux" id="EDCD">
                                                             <div class="input-group">
-                                                                <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" ClientIDMode="Static" />
+                                                                <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" clientidmode="Static" />
                                                                 <div class="input-group-btn">
                                                                     <button id="btnEDD" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -503,11 +564,11 @@
                                                         <label class="control-label  pull-left">ANC/PNC Profile</label>
                                                     </div>
                                                     <div class="col-md-12 pull-left">
-                                                        <label class="pull-left" style="padding-right:10px">
-                                                            <input id="ancYes" type="radio" name="ANC" value="1" ClientIDMode="Static"  runat="server" />Yes
+                                                        <label class="pull-left" style="padding-right: 10px">
+                                                            <input id="ancYes" type="radio" name="ANC" value="1" clientidmode="Static" runat="server" />Yes
                                                         </label>
-                                                        <label class="pull-left" style="padding-right:10px">
-                                                            <input id="ancNo" type="radio" name="ANC" value="0" ClientIDMode="Static" runat="server" />No
+                                                        <label class="pull-left" style="padding-right: 10px">
+                                                            <input id="ancNo" type="radio" name="ANC" value="0" clientidmode="Static" runat="server" />No
                                                         </label>
                                                     </div>
                                                 </div>
@@ -524,7 +585,7 @@
                                                         <label class="control-label  pull-left">FP Method</label>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />           
+                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 form-group" id="divNoFP" style="display: none">
@@ -689,7 +750,7 @@
                                             <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="AllergyDate">
                                                     <div class="input-group">
-                                                        <input class="form-control input-sm" id="txtAllergyDate" type="text" runat="server" ClientIDMode="Static" />
+                                                        <input class="form-control input-sm" id="txtAllergyDate" type="text" runat="server" clientidmode="Static" />
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -780,7 +841,7 @@
                                                 </div>
                                             </div>
                                         </div>
-   
+
 
                                         <div class="col-md-1">
                                             <div class="col-md-12">
@@ -845,7 +906,7 @@
                                             <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="vaccineDate">
                                                     <div class="input-group">
-                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" ClientIDMode="Static" />
+                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" clientidmode="Static" />
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1179,12 +1240,12 @@
                                         </div>
                                     </div>
 
-                                    
+
 
 
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -1193,7 +1254,8 @@
         </div>
         <%--.col-md-12--%>
     </div>
-</div><!-- .encounter-->
+</div>
+<!-- .encounter-->
 
 <script type="text/javascript">
     var genderId = <%=genderID%>;
@@ -1218,69 +1280,69 @@
 
         if (getNxtAppDateVal == '' || getVisitDateVal == '01-Jan-1900') 
             getNxtAppDateVal = 0;
-            //Date processing
-            var today = new Date();
-            var tomorrow = new Date();
-            tomorrow.setDate(today.getDate() + 1);
+        //Date processing
+        var today = new Date();
+        var tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
 
-            $('#DateOfVisit').datepicker({
-                allowPastDates: true,
-                date: getVisitDateVal,
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
-            $('#OnsetDate').datepicker({
-                allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-                //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-            });
+        $('#DateOfVisit').datepicker({
+            allowPastDates: true,
+            date: getVisitDateVal,
+            restricted: [{from: tomorrow, to: Infinity}],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#OnsetDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
            
-            $('#FemaleLMP').datepicker({
-                allowPastDates: true,
-                date: getFemaleLMPVal,
-                restricted: [{from: tomorrow, to: Infinity}],
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+        $('#FemaleLMP').datepicker({
+            allowPastDates: true,
+            date: getFemaleLMPVal,
+            restricted: [{from: tomorrow, to: Infinity}],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                 
-               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-           });
-           $('#EDCD').datepicker({
-               allowPastDates: true,
-               date: getEDDPVal,
-               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-           });
-           $('#AllergyDate').datepicker({
-               allowPastDates: true,
-               date: 0,
-               restricted: [{from: tomorrow, to: Infinity}],
-               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-           });
-           $('#AntigenDate').datepicker({
-               allowPastDates: true,
-               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-           });
-           $('#vaccineDate').datepicker({
-               allowPastDates: true,
-               date: 0,
-               restricted: [{from: tomorrow, to: Infinity}],
-               momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-               //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
-           });
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#EDCD').datepicker({
+            allowPastDates: true,
+            date: getEDDPVal,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#AllergyDate').datepicker({
+            allowPastDates: true,
+            date: 0,
+            restricted: [{from: tomorrow, to: Infinity}],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#AntigenDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        $('#vaccineDate').datepicker({
+            allowPastDates: true,
+            date: 0,
+            restricted: [{from: tomorrow, to: Infinity}],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
           
-         ////////////////////////////////////////////////////////////////////////////////////////////
-            //Gender validations
-            var male = "Male";
-            if (gender == "Male") {
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        //Gender validations
+        var male = "Male";
+        if (gender == "Male") {
                 
-                $("#lmp").val("");
-                $("#examinationPregnancyStatus").val("");
-                $("#ExpectedDateOfChildBirth").val("");
-                $("#cacxscreening").val("");
+            $("#lmp").val("");
+            $("#examinationPregnancyStatus").val("");
+            $("#ExpectedDateOfChildBirth").val("");
+            $("#cacxscreening").val("");
 
-                $("#<%=lmp.ClientID%>").prop('disabled', true);
+            $("#<%=lmp.ClientID%>").prop('disabled', true);
                 $("#btnFemaleLMP").prop('disabled', true);
                 $("#FemaleLMP").addClass('noevents');
                 $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
@@ -1301,12 +1363,12 @@
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
             }
-            //.gender validation
-            //pregnancy validations
+        //.gender validation
+        //pregnancy validations
        
-            var pregnant = "Pregnant";
+        var pregnant = "Pregnant";
 
-            var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
+        var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
 
             if (pregnancy !== pregnant) {
                 
@@ -1319,140 +1381,140 @@
 
             }
 
-            //.pregnancy validation
-            var advEventsTable = $('#dtlAdverseEvents').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                }
-                ]
-            });
+        //.pregnancy validation
+        var advEventsTable = $('#dtlAdverseEvents').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetAdverseEvents",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ]
+        });
 
 
-            var chronicTable = $('#dtlChronicIllness').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetChronicIllness",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                }
-                ]
-            });
+        var chronicTable = $('#dtlChronicIllness').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetChronicIllness",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ]
+        });
 
-            var allergyTable = $('#dtlAllergy').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetAllergies",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false
-            });
+        var allergyTable = $('#dtlAllergy').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetAllergies",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false
+        });
 
-            var vaccineTable = $('#dtlVaccines').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetVaccines",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [1],
-                    "visible": false,
-                    "searchable": false
-                }
-                ]
-            });
+        var vaccineTable = $('#dtlVaccines').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetVaccines",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            }
+            ]
+        });
 
-            var examTable = $('#dtlPhysicalExam').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetPhysicalExam",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [1],
-                    "visible": false,
-                    "searchable": false
-                }
-                ]
-            });
+        var examTable = $('#dtlPhysicalExam').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPhysicalExam",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            }
+            ]
+        });
 
-            var diagnosisTable = $('#dtlDiagnosis').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false
-            });
+        var diagnosisTable = $('#dtlDiagnosis').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false
+        });
 
-            var index;
+        var index;
 
-            $("#dtlAdverseEvents").on('click',
-                '.btnDelete',
-                function () {
-                    advEventsTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
-                    window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
+        $("#dtlAdverseEvents").on('click',
+            '.btnDelete',
+            function () {
+                advEventsTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
 
                     var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
                     if (index > -1) {
@@ -1467,151 +1529,151 @@
                     //}
                 });
 
-            ////dtlChronicIllness
-            $("#dtlChronicIllness").on('click',
-                '.btnDelete',
-                function () {
-                    chronicTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
+        ////dtlChronicIllness
+        $("#dtlChronicIllness").on('click',
+            '.btnDelete',
+            function () {
+                chronicTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
 
-                    var index = chronicIllnessList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        chronicIllnessList.splice(index, 1);
-                    }
+                var index = chronicIllnessList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    chronicIllnessList.splice(index, 1);
+                }
 
-                });
+            });
 
         ////dtlAllergy
-            $("#dtlAllergy").on('click',
-                '.btnDelete',
-                function () {
-                    allergyTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
+        $("#dtlAllergy").on('click',
+            '.btnDelete',
+            function () {
+                allergyTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
 
-                    var index = AllergyList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        AllergyList.splice(index, 1);
-                    }
+                var index = AllergyList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    AllergyList.splice(index, 1);
+                }
 
-                });
+            });
 
-            ////dtlVaccines
-            $("#dtlVaccines").on('click',
-                '.btnDelete',
-                function () {
-                    vaccineTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
+        ////dtlVaccines
+        $("#dtlVaccines").on('click',
+            '.btnDelete',
+            function () {
+                vaccineTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
 
-                    var index = vaccineList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        vaccineList.splice(index, 1);
-                    }
+                var index = vaccineList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    vaccineList.splice(index, 1);
+                }
 
-                    var index1 = vaccineStageList.indexOf($(this).parents('tr').find('td:eq(1)').text());
-                    if (index1 > -1) {
-                        vaccineStageList.splice(index1, 1);
-                    }
+                var index1 = vaccineStageList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                if (index1 > -1) {
+                    vaccineStageList.splice(index1, 1);
+                }
                    
-                });
+            });
 
 
-            ////dtlPhysicalExam
-            $("#dtlPhysicalExam").on('click',
-                '.btnDelete',
-                function () {
-                    examTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
+        ////dtlPhysicalExam
+        $("#dtlPhysicalExam").on('click',
+            '.btnDelete',
+            function () {
+                examTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
 
-                    var index = physicalExamList.indexOf($(this).parents('tr').find('td:eq(1)').text());
-                    if (index > -1) {
-                        physicalExamList.splice(index, 1);
-                    }
+                var index = physicalExamList.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                if (index > -1) {
+                    physicalExamList.splice(index, 1);
+                }
                     
-                });
+            });
 
-            ////dtlDiagnosis
-            $("#dtlDiagnosis").on('click',
-                '.btnDelete',
-                function () {
-                    diagnosisTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
+        ////dtlDiagnosis
+        $("#dtlDiagnosis").on('click',
+            '.btnDelete',
+            function () {
+                diagnosisTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
 
-                    var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        diagnosisList.splice(index, 1);
-                    }
+                var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    diagnosisList.splice(index, 1);
+                }
                     
-                });
+            });
             
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-            //$('#myWizard').wizard();
-            $("#myWizard")
-                    .on("actionclicked.fu.wizard", function (evt, data) {
-                        var currentStep = data.step;
-                        var nextStep = 0;
-                        var previousStep = 0;
-                        var totalError = 0;
-                        var stepError = 0;
-                        /*var form = $("form[name='form1']");*/
+        //$('#myWizard').wizard();
+        $("#myWizard")
+                .on("actionclicked.fu.wizard", function (evt, data) {
+                    var currentStep = data.step;
+                    var nextStep = 0;
+                    var previousStep = 0;
+                    var totalError = 0;
+                    var stepError = 0;
+                    /*var form = $("form[name='form1']");*/
 
-                        if (data.direction === 'next')
-                            nextStep = currentStep += 1;
-                        else
-                            previousStep = nextStep -= 1;
-                        if (data.step === 1) {
+                    if (data.direction === 'next')
+                        nextStep = currentStep += 1;
+                    else
+                        previousStep = nextStep -= 1;
+                    if (data.step === 1) {
 
-                            /* add constraints based on age*/
+                        /* add constraints based on age*/
 
-                            if ($('#datastep1').parsley().validate()) {
-                                savePatientEncounterPresentingComplaint();
-                            } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
-                            }
+                        if ($('#datastep1').parsley().validate()) {
+                            savePatientEncounterPresentingComplaint();
+                        } else {
+                            stepError = $('.parsley-error').length === 0;
+                            totalError += stepError;
+                            evt.preventDefault();
                         }
-                        else if (data.step === 2) {
-                            savePatientEncounterChronicIllness();
-                            //if ($("#datastep2").parsley().validate()) {
+                    }
+                    else if (data.step === 2) {
+                        savePatientEncounterChronicIllness();
+                        //if ($("#datastep2").parsley().validate()) {
 
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
-                        }
-                        else if (data.step === 3) {
-                            savePatientPhysicalExams();
-                            //if ($("#datastep3").parsley().validate()) {
+                        //} else {
+                        //    stepError = $('.parsley-error').length === 0;
+                        //    totalError += stepError;
+                        //    evt.preventDefault();
+                        //}
+                    }
+                    else if (data.step === 3) {
+                        savePatientPhysicalExams();
+                        //if ($("#datastep3").parsley().validate()) {
 
-                            //} else {
-                            //    stepError = $('.parsley-error').length === 0;
-                            //    totalError += stepError;
-                            //    evt.preventDefault();
-                            //}
-                        }
-                        else if (data.step === 4) {
-                            //savePatientPatientManagement();
-                            $.when(savePatientPatientManagement()).then(function() {
-                                        setTimeout(function() {
-                                                window.location
-                                                    .href =
-                                                    '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                            },
+                        //} else {
+                        //    stepError = $('.parsley-error').length === 0;
+                        //    totalError += stepError;
+                        //    evt.preventDefault();
+                        //}
+                    }
+                    else if (data.step === 4) {
+                        //savePatientPatientManagement();
+                        $.when(savePatientPatientManagement()).then(function() {
+                            setTimeout(function() {
+                                window.location
+                                    .href =
+                                    '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                        },
                                             2000);
-                                    });
-                        }
+                            });
+                                    }
                     })
                     .on("changed.fu.wizard",
                         function () {
@@ -1626,8 +1688,8 @@
 
                         });
 
-            function savePatientEncounterPresentingComplaint() {
-                var visitDate = $("#<%=VisitDate.ClientID%>").val();
+        function savePatientEncounterPresentingComplaint() {
+            var visitDate = $("#<%=VisitDate.ClientID%>").val();
                 //var visitScheduled = $('input[name="Scheduled"]:checked').val();
                 var visitScheduled = $("input[name$=Scheduled]:checked").val();
                 var ANCProfile = $("input[name$=ANC]:checked").val();      
@@ -1666,138 +1728,138 @@
                 catch (ex) {  }
 
             
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + ReasonNotOnFP + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                    data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + ReasonNotOnFP + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
                             
-                            console.log(response.d);
-                            if (response.d > 0)
+                        console.log(response.d);
+                        if (response.d > 0)
                                
-                                toastr.success(response.d, "Presenting Complaints");
-                            else
+                            toastr.success(response.d, "Presenting Complaints");
+                        else
                            
-                                toastr.error(response.d,"Error occured while saving Presenting Complaints");
-                        },
-                        error: function (response) {
+                            toastr.error(response.d,"Error occured while saving Presenting Complaints");
+                    },
+                    error: function (response) {
                          
-                            toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                        }
-                    });
-                }
+                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                    }
+                });
+            }
        
 
 
-            function savePatientEncounterChronicIllness() {
-                var rowCount = $('#dtlChronicIllness tbody tr').length;
-                var chronicIllnessArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        chronicIllnessArray[i] = {
-                            "chronicIllnessID": chronicTable.row(i).data()[0],
-                            "chronicIllness": chronicTable.row(i).data()[1],
-                            "treatment": chronicTable.row(i).data()[2],
-                            "dose": chronicTable.row(i).data()[3],
-                            "duration": chronicTable.row(i).data()[4],
-                        }
+        function savePatientEncounterChronicIllness() {
+            var rowCount = $('#dtlChronicIllness tbody tr').length;
+            var chronicIllnessArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    chronicIllnessArray[i] = {
+                        "chronicIllnessID": chronicTable.row(i).data()[0],
+                        "chronicIllness": chronicTable.row(i).data()[1],
+                        "treatment": chronicTable.row(i).data()[2],
+                        "dose": chronicTable.row(i).data()[3],
+                        "duration": chronicTable.row(i).data()[4],
                     }
                 }
-                catch (ex) { }
-                ///////////////////////////////////////////
-                //var chronicIllnessTable = new Array();
-                //$("#dtlChronicIllness tr").each(function (row, tr) {
-                //    chronicIllnessTable[row] = {
-                //        "chronicIllness": $(tr).find('td:eq(0)').text(),
-                //        "treatment": $(tr).find('td:eq(1)').text(),
-                //        "dose": $(tr).find('td:eq(2)').text(),
-                //        "duration": $(tr).find('td:eq(3)').text()
-                //    }
-                //});
-                ///////////////////////////////////////////////////////
-                var rowCount = $('#dtlAllergy tbody tr').length;
-                var AllergyArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        AllergyArray[i] = {
-                            "allergy": allergyTable.row(i).data()[0],
-                            "allergyResponse": allergyTable.row(i).data()[1],
-                            "allergyDate": allergyTable.row(i).data()[2]
-                        }
+            }
+            catch (ex) { }
+            ///////////////////////////////////////////
+            //var chronicIllnessTable = new Array();
+            //$("#dtlChronicIllness tr").each(function (row, tr) {
+            //    chronicIllnessTable[row] = {
+            //        "chronicIllness": $(tr).find('td:eq(0)').text(),
+            //        "treatment": $(tr).find('td:eq(1)').text(),
+            //        "dose": $(tr).find('td:eq(2)').text(),
+            //        "duration": $(tr).find('td:eq(3)').text()
+            //    }
+            //});
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlAllergy tbody tr').length;
+            var AllergyArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    AllergyArray[i] = {
+                        "allergy": allergyTable.row(i).data()[0],
+                        "allergyResponse": allergyTable.row(i).data()[1],
+                        "allergyDate": allergyTable.row(i).data()[2]
                     }
                 }
-                catch (ex) { }
-                ///////////////////////////////////////////////////////
-                var rowCount = $('#dtlVaccines tbody tr').length;
-                var vaccineArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        vaccineArray[i] = {
-                            "vaccineID": vaccineTable.row(i).data()[0],
-                            "vaccineStageID": vaccineTable.row(i).data()[1],
-                            "vaccine": vaccineTable.row(i).data()[2],
-                            "vaccineStage": vaccineTable.row(i).data()[3],
-                            "vaccineDate": vaccineTable.row(i).data()[4],
+            }
+            catch (ex) { }
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlVaccines tbody tr').length;
+            var vaccineArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    vaccineArray[i] = {
+                        "vaccineID": vaccineTable.row(i).data()[0],
+                        "vaccineStageID": vaccineTable.row(i).data()[1],
+                        "vaccine": vaccineTable.row(i).data()[2],
+                        "vaccineStage": vaccineTable.row(i).data()[3],
+                        "vaccineDate": vaccineTable.row(i).data()[4],
 
-                        }
                     }
                 }
-                catch (ex) { }
+            }
+            catch (ex) { }
                
 
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
-                    data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "','allergies':'" + JSON.stringify(AllergyArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        toastr.success(response.d, "Chronic Illness");
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Chronic Illness Error");
-                    }
-                });
-            }
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterChronicIllness",
+                data: "{'chronicIllness':'" + JSON.stringify(chronicIllnessArray) + "','vaccines':'" + JSON.stringify(vaccineArray) + "','allergies':'" + JSON.stringify(AllergyArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Chronic Illness");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Chronic Illness Error");
+                }
+            });
+        }
 
-            function savePatientPhysicalExams() {
-                var rowCount = $('#dtlPhysicalExam tbody tr').length;
-                var physicalExamArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        physicalExamArray[i] = {
-                            "examTypeID": examTable.row(i).data()[0],
-                            "examID": examTable.row(i).data()[1],
-                            "examType": examTable.row(i).data()[2],
-                            "exam": examTable.row(i).data()[3],
-                            "findings": examTable.row(i).data()[4],
+        function savePatientPhysicalExams() {
+            var rowCount = $('#dtlPhysicalExam tbody tr').length;
+            var physicalExamArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    physicalExamArray[i] = {
+                        "examTypeID": examTable.row(i).data()[0],
+                        "examID": examTable.row(i).data()[1],
+                        "examType": examTable.row(i).data()[2],
+                        "exam": examTable.row(i).data()[3],
+                        "findings": examTable.row(i).data()[4],
 
-                        }
                     }
                 }
-                catch (ex) { }
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
-                    data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        toastr.success(response.d, "Physical Exam");
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Physical Exam Error");
-                    }
-                });
             }
+            catch (ex) { }
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
+                data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Physical Exam");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Physical Exam Error");
+                }
+            });
+        }
 
 
-            function savePatientPatientManagement() {
+        function savePatientPatientManagement() {
                 
-                var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
+            var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
                 var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
                 var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
                 var nextAppDate = "";
@@ -1831,39 +1893,39 @@
             }
 
 
-            function getCheckBoxListItemsChecked(elementId) {
-                var elementRef = document.getElementById(elementId);
-                var checkBoxArray = elementRef.getElementsByTagName('input');
-                var checkedValues = '';
+        function getCheckBoxListItemsChecked(elementId) {
+            var elementRef = document.getElementById(elementId);
+            var checkBoxArray = elementRef.getElementsByTagName('input');
+            var checkedValues = '';
 
-                for (var i = 0; i < checkBoxArray.length; i++) {
-                    var checkBoxRef = checkBoxArray[i];
+            for (var i = 0; i < checkBoxArray.length; i++) {
+                var checkBoxRef = checkBoxArray[i];
 
-                    if (checkBoxRef.checked == true) {
-                        var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
+                if (checkBoxRef.checked == true) {
+                    var labelArray = checkBoxRef.parentNode.getElementsByTagName('label');
 
-                        if (labelArray.length > 0) {
-                            if (checkedValues.length > 0)
-                                checkedValues += ',';
+                    if (labelArray.length > 0) {
+                        if (checkedValues.length > 0)
+                            checkedValues += ',';
 
-                            checkedValues += labelArray[0].innerHTML;
-                        }
+                        checkedValues += labelArray[0].innerHTML;
                     }
                 }
-
-                return checkedValues;
             }
 
-            function getSelectedItemsList(elementId)
-            {
-                var x = document.getElementById(elementId);
-                var selectedValues = '';
-                for (var i = 0; i < x.options.length; i++) {
-                    if(x.options[i].selected){
-                        selectedValues += x.options[i].value + ',';
-                    }
+            return checkedValues;
+        }
+
+        function getSelectedItemsList(elementId)
+        {
+            var x = document.getElementById(elementId);
+            var selectedValues = '';
+            for (var i = 0; i < x.options.length; i++) {
+                if(x.options[i].selected){
+                    selectedValues += x.options[i].value + ',';
                 }
-                return selectedValues;
             }
+            return selectedValues;
+        }
     });
 </script>
