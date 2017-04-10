@@ -90,6 +90,7 @@
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\TB\IntensifiedCaseFinding.aspx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucFemaleVitals.ascx" />
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -270,6 +271,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucFemaleVitals.ascx.cs">
+      <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFemaleVitals.ascx.designer.cs">
+      <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
       <DependentUpon>ucPatientBrief.ascx</DependentUpon>

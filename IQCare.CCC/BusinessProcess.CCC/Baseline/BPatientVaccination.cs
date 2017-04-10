@@ -16,6 +16,7 @@ namespace BusinessProcess.CCC.Baseline
         {
             try
             {
+                //using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext())) { }
                 _unitOfWork.PatientVaccinationRepository.Add(patientVaccination);
                 Result = _unitOfWork.Complete();
                 return Result;

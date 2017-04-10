@@ -29,10 +29,10 @@ namespace BusinessProcess.CCC.visit
                 Console.WriteLine(e);
                 throw;
             }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
+            //finally
+            //{
+            //    _unitOfWork.Dispose();
+            //}
         }
         public int AddPatientLabOrder(LabOrderEntity labOrderEntity)
         {
@@ -88,10 +88,10 @@ namespace BusinessProcess.CCC.visit
             {
                 _unitOfWork.Dispose();
             }
-       
+
         }
 
-       
+
         public List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate)
         {
             try
@@ -129,9 +129,9 @@ namespace BusinessProcess.CCC.visit
                         .OrderByDescending(x => x.Id).Take(1).ToList();
                 return patientLabOrders;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw;
             }
             finally
@@ -144,11 +144,13 @@ namespace BusinessProcess.CCC.visit
         {
             try
             {
-                return
-                    _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
-                        .Where(x => x.LabTestId == 3)
-                        .OrderBy(x => x.Id)
-                        .ToList();
+                    return
+         _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
+             .Where(x => x.LabTestId == 3)
+             .OrderBy(x => x.Id)
+             .ToList();
+
+     
             }
             catch (Exception e)
             {
@@ -180,10 +182,10 @@ namespace BusinessProcess.CCC.visit
                 Console.WriteLine(e);
                 throw;
             }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
+            //finally
+            //{
+            //    _unitOfWork.Dispose();
+            //}
 
         }
     }
