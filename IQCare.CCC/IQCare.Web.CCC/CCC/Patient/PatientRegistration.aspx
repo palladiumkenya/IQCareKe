@@ -1156,7 +1156,7 @@
                             console.log(patientDetails.GuardianId);
                             console.log(patientDetails.PatientTreatmentSupporterId);
 
-                            if (patientDetails.GuardianId == patientDetails.PatientTreatmentSupporterId) {
+                            if ((patientDetails.GuardianId > 0  && patientDetails.PatientTreatmentSupporterId > 0) && patientDetails.GuardianId == patientDetails.PatientTreatmentSupporterId) {
                                 $("#ISGuardian option:contains(Yes)").attr('selected', true);
                             } else {
                                 $("#ISGuardian option:contains(No)").attr('selected', true);
@@ -1280,6 +1280,8 @@
                     var personMName = $("#<%=personMName.ClientID%>").val();
                     var personLName = $("#<%=personLName.ClientID%>").val();
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
+                    var PatientId = '<%=Session["PatientEditId"]%>';
+                    console.log(PatientId);
 
                     var dob = moment(dateOfBirth).format('DD-MMM-YYYY');
                     console.log(dob);
@@ -1288,7 +1290,7 @@
                     //console.log(personMName);
                     //console.log(personLName);
 
-                    if ((personFname != null && personFname != "") && (personLName != null && personLName != "")) {
+                    if ((PatientId == "" || PatientId == 0) && (personFname != null && personFname != "") && (personLName != null && personLName != "")) {
 
                         $.ajax({
                             type: "POST",

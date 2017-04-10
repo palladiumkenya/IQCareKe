@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
+using Application.Presentation;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
@@ -74,7 +79,6 @@ namespace IQCare.Web.CCC.Patient
             {
                 lblEntryPoint.Text = "missing";
             }
-
         }
         
     }
