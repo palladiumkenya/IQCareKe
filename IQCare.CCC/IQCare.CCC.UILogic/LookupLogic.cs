@@ -305,5 +305,47 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
+
+        public static string GetCountyByCountyId(int countyId)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetCountyByCountyId(countyId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public static string GetCountyNameBySubCountyId(int subCountyId)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetCountyNameBySubCountyId(subCountyId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public static string GetWardNameByWardId(int wardId)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetWardNameByWardId(wardId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

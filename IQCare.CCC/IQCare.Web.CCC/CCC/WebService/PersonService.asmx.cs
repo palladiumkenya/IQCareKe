@@ -90,6 +90,7 @@ namespace IQCare.Web.CCC.WebService
         public string AddPerson(string firstname, string middlename, string lastname, int gender, int maritalStatusId, int userId, string dob, string nationalId, string patientid, string patientType)
         {
             patientid = patientid == "null" ? null : patientid;
+            patientid = patientid == "" ? null : patientid;
 
             firstname = GlobalObject.unescape(firstname);
             middlename = GlobalObject.unescape(middlename);
@@ -199,6 +200,7 @@ namespace IQCare.Web.CCC.WebService
         public string AddPersonGuardian(string firstname, string middlename, string lastname, int gender, string orphan, string inSchool, int userId, string patientid)
         {
             patientid = patientid == "null" ? null : patientid;
+            patientid = patientid == "" ? null : patientid;
 
             bool _orphan;
             bool _inSchool;
@@ -348,7 +350,9 @@ namespace IQCare.Web.CCC.WebService
         public string AddPersonContact(int personId,string physicalAddress,string mobileNumber,string alternativeNumber,string emailAddress,int userId, string patientid)
         {
             patientid = patientid == "null" ? null : patientid;
-            
+            patientid = patientid == "" ? null : patientid;
+
+
             try
             {
                 int personContactId = 0;
@@ -387,6 +391,17 @@ namespace IQCare.Web.CCC.WebService
                         Session["PersonContactId"] = personContact.UpdatePatientContact(perContact);
                         Msg += "<p>Updated Person Contact Successfully.</p>";
                     }
+                    else
+                    {
+                        var Result = personContact.AddPersonContact(PersonId, physicalAddress,
+                            mobileNumber, alternativeNumber, emailAddress, userId);
+                        Session["PersonContactId"] = Result;
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Contact Updated successfully!</p>";
+                        }
+
+                    }
                 }
                 else
                 {
@@ -415,6 +430,8 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 patientid = patientid == "null" ? null : patientid;
+                patientid = patientid == "" ? null : patientid;
+
                 int supporterId = 0;
                 if (Session["PersonTreatmentSupporterId"] != null)
                 {
@@ -442,7 +459,8 @@ namespace IQCare.Web.CCC.WebService
 
                     if (listPatientTreatmentSupporter.Count > 0)
                     {
-                        personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId, listPatientTreatmentSupporter[0].SupporterId);
+                        personLogic.UpdatePerson(firstname, middlename, lastname, gender, userId,
+                            listPatientTreatmentSupporter[0].SupporterId);
 
                         Session["PersonTreatmentSupporterId"] = listPatientTreatmentSupporter[0].SupporterId;
 
@@ -462,6 +480,33 @@ namespace IQCare.Web.CCC.WebService
                             }
                         }
                         Msg += "<p>Person Treatment Supporter Updated Successfully.</p>";
+                    }
+                    else
+                    {
+                        if (supporterIsGuardian == "Yes")
+                        {
+                            PersonTreatmentSupporterId = int.Parse(Session["PersonGuardianId"].ToString());
+                        }
+                        else
+                        {
+                            PersonTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstname,
+                                middlename,
+                                lastname, gender, userId);
+                            Session["PersonTreatmentSupporterId"] = PersonTreatmentSupporterId;
+                        }
+
+                        if (PersonTreatmentSupporterId > 0)
+                        {
+                            Msg += "<p>New Treatment Supporter Person Added Successfully!</p>";
+
+                            var treatmentSupporter = new PatientTreatmentSupporterManager();
+                            Result = treatmentSupporter.AddPatientTreatmentSupporter(Convert.ToInt32(Session["PersonId"]), PersonTreatmentSupporterId,
+                                mobileContact, userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Treatement Supported Addeded Successfully!</p>";
+                            }
+                        }
                     }
                 }
                 else
@@ -530,6 +575,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 patientId = patientId == "null" ? null : patientId;
+                patientId = patientId == "" ? null : patientId;
 
                 //(patientId != null && int.Parse(patientId) > 0)
 

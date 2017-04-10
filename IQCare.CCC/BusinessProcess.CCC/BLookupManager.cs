@@ -6,6 +6,9 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
+using DataAccess.CCC.Repository.Encounter;
+using Entities.CCC.Encounter;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -162,6 +165,23 @@ namespace BusinessProcess.CCC
                     .Select(x => x.ItemId)
                     .FirstOrDefault();
         }
-       
+
+        public string GetCountyByCountyId(int countyId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetCountyByCountyId(countyId);
+        }
+
+        public string GetCountyNameBySubCountyId(int subCountyId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetSubCountyNameBySubCountyId(subCountyId);
+        }
+
+        public string GetWardNameByWardId(int wardId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetWardNameByWardId(wardId);
+        }
     }
 }
