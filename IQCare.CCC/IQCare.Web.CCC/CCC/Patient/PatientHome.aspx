@@ -514,7 +514,7 @@
             var jan_vl = "";
             var march_vl = "";
 
-            /*window.onload = function() {
+            window.onload = function() {
 
               $.when(getVitals()).then(function() {
                     setTimeout(function() {
@@ -528,7 +528,8 @@
                     },
                         2000);
               });
-            };*/
+            };
+
           function getViralLoad() {
                     console.log("get viral load  called");
                     $.ajax({
