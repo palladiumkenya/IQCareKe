@@ -81,14 +81,42 @@ namespace BusinessProcess.CCC.Patient
 
         public List<PatientEntity> CheckPersonEnrolled(int persionId)
         {
-            List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
-            return person;
+            try
+            {
+                List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
+                return person;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
 
         public int GetPatientType(int patientId)
         {
-            var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag).Select(x => x.PatientType);  
-                return patientTypeId.FirstOrDefault();          
+            try
+            {
+                var patientTypeId =
+                    _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
+                        .Select(x => x.PatientType);
+                return patientTypeId.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        
         }
     }
 }

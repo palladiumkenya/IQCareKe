@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Encounter {
+namespace IQCare.Web.CCC.UC {
     
     
-    public partial class VitalSigns {
+    public partial class ucPatientTriageSummary {
         
         /// <summary>
-        /// PatientSummary control.
+        /// lblAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
+        protected global::System.Web.UI.WebControls.Label lblAge;
         
         /// <summary>
-        /// ptnVitalSummary control.
+        /// lblWeight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientTriageSummary ptnVitalSummary;
+        protected global::System.Web.UI.WebControls.Label lblWeight;
         
         /// <summary>
-        /// ptnVitalSigns control.
+        /// lblBMI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientTriage ptnVitalSigns;
+        protected global::System.Web.UI.WebControls.Label lblBMI;
         
         /// <summary>
-        /// ptnFemaleVitals control.
+        /// lblbloodpressure control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucFemaleVitals ptnFemaleVitals;
+        protected global::System.Web.UI.WebControls.Label lblbloodpressure;
+        
+        /// <summary>
+        /// btnLoadTriage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnLoadTriage;
+        
+        /// <summary>
+        /// btnFemalVitals control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnFemalVitals;
     }
 }

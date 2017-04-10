@@ -16,47 +16,114 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientHivDiagnosis(PatientHivDiagnosis patientHivDiagnosis)
         {
-           _unitOfWork.PatientDiagnosisHivHistoryRepository.Add(patientHivDiagnosis);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.Add(patientHivDiagnosis);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+    
         }
 
         public int UpdatePatientHivDiagnosis(PatientHivDiagnosis patientHivDiagnosis)
         {
-            var patientDiagnosis =
-                _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(
-                    x => x.PatientId == patientHivDiagnosis.PatientId & !x.DeleteFlag).FirstOrDefault();
-            if (patientDiagnosis != null)
+            try
             {
-                patientDiagnosis.ArtInitiationDate = patientHivDiagnosis.ArtInitiationDate;
-                patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
-                patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
-                patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;
-                _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientDiagnosis);
-                Result = _unitOfWork.Complete();
+                var patientDiagnosis =
+                    _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(
+                        x => x.PatientId == patientHivDiagnosis.PatientId & !x.DeleteFlag).FirstOrDefault();
+                if (patientDiagnosis != null)
+                {
+                    patientDiagnosis.ArtInitiationDate = patientHivDiagnosis.ArtInitiationDate;
+                    patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
+                    patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
+                    patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;
+                    _unitOfWork.PatientDiagnosisHivHistoryRepository.Update(patientDiagnosis);
+                    Result = _unitOfWork.Complete();
+                }
+                return Result;
             }
-            return Result;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
+
         }
 
         public int DeletePatientHivDiagnosis(int id)
         {
-            var item=_unitOfWork.PatientDiagnosisHivHistoryRepository.GetById(id);
-            _unitOfWork.PatientDiagnosisHivHistoryRepository.Remove(item);
-            return Result=_unitOfWork.Complete();
+            try
+            {
+                var item = _unitOfWork.PatientDiagnosisHivHistoryRepository.GetById(id);
+                _unitOfWork.PatientDiagnosisHivHistoryRepository.Remove(item);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public List<PatientHivDiagnosis> GetPatientHivDiagnosis(int patientId)
         {
-            return _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId).ToList();
+            try
+            {
+                return _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId).ToList();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public int CheckIfDiagnosisExists(int patientId)
         {
-            int id = 0;
-            var recordExists =
-                _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .Select(x => x.Id).FirstOrDefault();
-            recordExists=(recordExists>1)?id=recordExists:id=0;
-            return id;
+            try
+            {
+                int id = 0;
+                var recordExists =
+                    _unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(
+                            x => x.PatientId == patientId & !x.DeleteFlag)
+                        .Select(x => x.Id).FirstOrDefault();
+                recordExists = (recordExists > 1) ? id = recordExists : id = 0;
+                return id;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
     }

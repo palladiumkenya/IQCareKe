@@ -1604,7 +1604,7 @@
 		    function enableIfTransferIn() {
 		        $("#TIDate").datepicker('enable');
 		        $("#TIARTStartDate").datepicker('enable');
-		        $("#DateStartedOn1stLine").datepicker('disabled');
+		        $("#DateStartedOn1stLine").datepicker('enable');
 		        $("#<%=RegimenId.ClientID%>").prop('disabled', false);
 				$("#<%=regimenCategory.ClientID%>").prop('disabled', false);
 			    $("#<%=TransferFromFacility.ClientID%>").prop('disabled', false);
@@ -1618,13 +1618,14 @@
 				
 		        $("#TIDate").datepicker('disable');
 		        $("#TIARTStartDate").datepicker('disable');
-		        $("#DateStartedOn1stLine").datepicker('enable');
+		        $("#DateStartedOn1stLine").datepicker('disabled');
 		        $("#<%=RegimenId.ClientID%>").prop('disabled', true);
 				$("#<%=regimenCategory.ClientID%>").prop('disabled', true);
 			    $("#<%=TransferFromFacility.ClientID%>").prop('disabled', true);
 			    $("#<%=FacilityMFLCode.ClientID%>").prop('disabled', true);
 			    $("#<%=TransferFromCounty.ClientID%>").prop('disabled', true);
-			    $("#<%=transferInNotes.ClientID%>").prop('disabled', true);
+		        $("#<%=transferInNotes.ClientID%>").prop('disabled', true);
+
 			}
 
 		    function noneChecked() {
@@ -1899,16 +1900,17 @@
                   }
                   else if (data.step === 5) {
                       $("#datastep5").parsley().destroy();
-                      $('#datastep4').parsley({
+                      $('#datastep5').parsley({
                           excluded:
                               "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                       });
                       if ($("#datastep5").parsley().validate()) {
+                          
                           if (transferIn > 0) {
                               $.when(managePatientTreatmentInitiation()).then(function() {                   
-                                  window.location.href ='<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-				      toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
-				  })  ;
+                                 window.location.href ='<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+				                 toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+				             });
               }
           } else {
               stepError = $('.parsley-error').length === 0;

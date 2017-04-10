@@ -20,33 +20,62 @@ namespace BusinessProcess.CCC
 
         public List<PersonLookUp> GetPatientSearchresults(string firstName, string middleName, string lastName, string dob)
         {
-            var results = _unitOfWork.PersonLookUpRepository.GetAll();
-            //List<PersonLookUp> filteredList = new List<PersonLookUp>();
-            //DateTime dobDateTime = DateTime.Parse(dob);
+            try
+            {
+                var results = _unitOfWork.PersonLookUpRepository.GetAll();
+                //List<PersonLookUp> filteredList = new List<PersonLookUp>();
+                //DateTime dobDateTime = DateTime.Parse(dob);
 
-            results = results.Where(x => _utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower())).ToList();
+                results =
+                    results.Where(x => _utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower())).ToList();
 
-            results = results.Where(x => _utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower())).ToList();
+                results =
+                    results.Where(x => _utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower())).ToList();
 
-            results = results.Where(x => _utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower())).ToList();
+                results =
+                    results.Where(x => _utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower())).ToList();
 
-            //foreach (var item in results)
-            //{
-            //    var dobResults = _unitOfWork.PatientLookupRepository.FindBy(
-            //        y => y.PersonId == item.Id && y.DateOfBirth == dobDateTime).ToList();
+                //foreach (var item in results)
+                //{
+                //    var dobResults = _unitOfWork.PatientLookupRepository.FindBy(
+                //        y => y.PersonId == item.Id && y.DateOfBirth == dobDateTime).ToList();
 
-            //    if (dobResults.Count > 0)
-            //    {
-            //        filteredList.Add(item);
-            //    }
-            //}
+                //    if (dobResults.Count > 0)
+                //    {
+                //        filteredList.Add(item);
+                //    }
+                //}
 
-            return results.ToList();
+                return results.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public PersonLookUp GetPersonById(int id)
         {
-            return _unitOfWork.PersonLookUpRepository.GetById(id);
+            try
+            {
+                return _unitOfWork.PersonLookUpRepository.GetById(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
     }
 }

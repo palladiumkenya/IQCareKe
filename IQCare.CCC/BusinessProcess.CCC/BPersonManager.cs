@@ -81,9 +81,22 @@ namespace BusinessProcess.CCC
 
         public void DeletePerson(int id)
         {
-            Person personInfo = _unitOfWork.PersonRepository.GetById(id);
-            _unitOfWork.PersonRepository.Remove(personInfo);
-            _unitOfWork.Complete();
+            try
+            {
+                Person personInfo = _unitOfWork.PersonRepository.GetById(id);
+                _unitOfWork.PersonRepository.Remove(personInfo);
+                _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
     }
 }

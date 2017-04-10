@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Repository;
@@ -15,23 +16,63 @@ namespace BusinessProcess.CCC
 
         public int AddPersonLocation(PersonLocation location)
         {
-            _unitOfWork.PersonLocationRepository.Add(location);
-           _result= _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PersonLocationRepository.Add(location);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
             // return location.Id;
         }
 
         public int DeletePersonLocation(int id)
         {
-          PersonLocation location=  _unitOfWork.PersonLocationRepository.GetById(id);
-          _unitOfWork.PersonLocationRepository.Remove(location);
-          _result=  _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                PersonLocation location = _unitOfWork.PersonLocationRepository.GetById(id);
+                _unitOfWork.PersonLocationRepository.Remove(location);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public List<PersonLocation> GetCurrentPersonLocation(int persoId)
         {
-            return _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == persoId && x.DeleteFlag == false).ToList();
+            try
+            {
+                return
+                    _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == persoId && x.DeleteFlag == false)
+                        .ToList();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
                 /*personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
                 .OrderBy(x => x.Id)
                 .FirstOrDefault();
@@ -41,15 +82,41 @@ namespace BusinessProcess.CCC
 
         public List<PersonLocation> GetPersonLocationAll(int personId)
         {
-            var mylist = _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == personId);
-            return mylist.ToList();
+            try
+            {
+                var mylist = _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == personId);
+                return mylist.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
 
         public  int UpdatePersonLocation(PersonLocation location)
         {
-           _unitOfWork.PersonLocationRepository.Update(location);
-           _result= _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PersonLocationRepository.Update(location);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
     }
 }

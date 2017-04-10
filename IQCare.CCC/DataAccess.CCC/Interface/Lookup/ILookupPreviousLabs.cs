@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using DataAccess.Context;
 using Entities.CCC.Lookup;
 namespace DataAccess.CCC.Interface.Lookup
@@ -10,6 +7,8 @@ namespace DataAccess.CCC.Interface.Lookup
     {
         List<LookupPreviousLabs> GetPreviousLabs(int patientId);
         List<LookupPreviousLabs> GetVlLabs(int patientId);
+        List<LookupPreviousLabs> GetPendingVlLabs(int patientId);
+        List<LookupPreviousLabs> GetPendingLabs(int patientId);
         // List<LookupPreviousLabs> FindBy(Func<LookupPreviousLabs, bool> p);
     }
 }

@@ -22,7 +22,7 @@ using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientL
 
 namespace DataAccess.CCC.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork,IDisposable
     {
         private BaseContext _context;
 
@@ -52,6 +52,8 @@ namespace DataAccess.CCC.Repository
         private IPersonLookUpRepository _personLookUpRepository;
         private IPersonContactLookUpRepository _personContactLookUpRepository;
         private IPatientBaselineLookupRepository _patientBaselineLookupRepository;
+        private ILookupCounty _lookupCounty;
+      
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -133,6 +135,14 @@ namespace DataAccess.CCC.Repository
             get
             {
                 return _lookupPreviousLabsRepository ?? (_lookupPreviousLabsRepository = new LookupPreviousLabsRepository((LookupContext)_context));
+            }
+        }
+
+        public ILookupCounty LookupCountyRepository
+        {
+            get
+            {
+                return _lookupCounty??(_lookupCounty=new LookupCountyRepository((LookupContext)_context));
             }
         }
         public IPersonRepository PersonRepository
@@ -347,30 +357,25 @@ namespace DataAccess.CCC.Repository
             return _context.SaveChanges();
         }
 
-        //public void Dispose()
-        //{
-        //    _context.Dispose();
-        //}
 
         private bool _disposed = false;
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-
-        protected void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!this._disposed)
             {
                 if (disposing)
                 {
-                    _context?.Dispose();
+                    _context.Dispose();
                 }
             }
             this._disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

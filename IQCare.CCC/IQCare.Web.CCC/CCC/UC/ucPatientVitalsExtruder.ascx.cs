@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.UC
             PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
             if (patientTriage != null)
             {
-                lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate;
+                lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate.ToString("DD-MMM-YYYY");
                 vitalHeight.Text = Convert.ToString(patientTriage.Height);
                 vitalsWeight.Text = patientTriage.Weight.ToString();
                 vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();

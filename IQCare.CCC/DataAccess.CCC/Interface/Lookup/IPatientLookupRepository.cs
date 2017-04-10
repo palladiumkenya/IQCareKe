@@ -8,5 +8,6 @@ namespace DataAccess.CCC.Interface.Lookup
     public interface IPatientLookupRepository : IRepository<PatientLookup>
     {
         PatientLookup GetGenderId(int patientId);
+        PatientLookup GetPatientPtn_pk(int patientId);
     }
 }

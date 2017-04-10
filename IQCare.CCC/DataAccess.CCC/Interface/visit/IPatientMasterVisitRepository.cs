@@ -9,6 +9,6 @@ namespace DataAccess.CCC.Interface.visit
 {
     public interface IPatientMasterVisitRepository:IRepository<PatientMasterVisit>
     {
-
+       
     }
 }

@@ -1,15 +1,13 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Collections; 
-using System.Collections.Specialized;
-using DataAccess.Common;            
-using DataAccess.Base; 
+using System.Collections;
+using DataAccess.Common;
+using DataAccess.Base;
 
-namespace DataAccess.Entity 
+namespace DataAccess.Entity
 {
-  
+
     public class ClsObject : ProcessBase  
     {
         #region "Constructor"

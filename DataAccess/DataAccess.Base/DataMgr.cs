@@ -41,16 +41,18 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static object GetConnection()
         {
+            Console.Write("GetConnection()");
             Utility objUtil = new Utility();
           //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
-            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;";
-            SqlConnection connection = new SqlConnection(constr);
-            connection.Open();
-            OpenDecryptedSession(connection);
-            return connection;
+            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;Pooling=true;";
+            SqlConnection connection = new SqlConnection(constr);   
+                connection.Open();
+                OpenDecryptedSession(connection);
+             return connection;
+
         }
        public static object GetConnection(string connectionName)
         {

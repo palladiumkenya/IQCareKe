@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -15,31 +16,82 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            _unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
-            return Result = _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+         
         }
 
         public int UpdatePatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            _unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
-            return Result=_unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+           
         }
 
         public int DeletePatientArvHistory(int id)
         {
-            var partArtHistory= _unitOfWork.PatientArvHistoryRepository.GetById(id);
-            _unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
-            return Result=_unitOfWork.Complete();
+            try
+            {
+                var partArtHistory = _unitOfWork.PatientArvHistoryRepository.GetById(id);
+                _unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
+                return Result = _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public List<PatientArvHistory> GetPatientArvHistory(int patientId)
         {
-            var patientArtHistory =
-                _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .OrderByDescending(x => x.Id)
-                    .Distinct()
-                    .ToList();
-            return patientArtHistory;
+            try
+            {
+                var patientArtHistory =
+                    _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                        .OrderByDescending(x => x.Id)
+                        .Distinct()
+                        .ToList();
+                return patientArtHistory;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
     }
 }

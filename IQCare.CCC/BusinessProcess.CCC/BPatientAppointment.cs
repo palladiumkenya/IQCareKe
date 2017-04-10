@@ -15,47 +15,139 @@ namespace BusinessProcess.CCC
 
         public int AddPatientAppointments(PatientAppointment p)
         {
-            _unitOfWork.PatientAppointmentRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PatientAppointmentRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+   
         }
 
         public PatientAppointment GetPatientAppointments(int id)
         {
-            PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-            return appointment;
+            try
+            {
+                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
+                return appointment;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
 
         public void DeletePatientAppointments(int id)
         {
-            PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-            _unitOfWork.PatientAppointmentRepository.Remove(appointment);
-            _unitOfWork.Complete();
+            try
+            {
+                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
+                _unitOfWork.PatientAppointmentRepository.Remove(appointment);
+                _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        
         }
 
         public int UpdatePatientAppointments(PatientAppointment p)
         {
-            _unitOfWork.PatientAppointmentRepository.Update(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            try
+            {
+                _unitOfWork.PatientAppointmentRepository.Update(p);
+                _result = _unitOfWork.Complete();
+                return _result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        
         }
 
         public List<PatientAppointment> GetByPatientId(int patientId)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
-            return appointments;
+            try
+            {
+                List<PatientAppointment> appointments =
+                    _unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
+                return appointments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
         public List<PatientAppointment> GetByDate(DateTime date)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDate(date);
-            return appointments;
+            try
+            {
+                List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDate(date);
+                return appointments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+          
         }
 
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
-            return appointments;
+            try
+            {
+                List<PatientAppointment> appointments =
+                    _unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
+                return appointments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
     }
 }

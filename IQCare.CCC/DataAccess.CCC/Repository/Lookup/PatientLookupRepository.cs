@@ -30,8 +30,8 @@ namespace DataAccess.CCC.Repository.Lookup
         public PatientLookup GetPatientPtn_pk(int patientId)
         {
             IPatientLookupRepository patientRepository = new PatientLookupRepository();
-            var ptn_pk = patientRepository.FindBy(x => x.Id == patientId).FirstOrDefault();
-            return ptn_pk;
+            var ptnPk = patientRepository.FindBy(x => x.Id == patientId).FirstOrDefault();
+            return ptnPk;
 
         }
     }
