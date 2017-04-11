@@ -47,7 +47,7 @@ namespace DataAccess.Base
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
-            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;Pooling=true;";
+            constr += ";packet size=4128;Min Pool Size=50;Max Pool Size=500;Pooling=true;MultipleActiveResultSets = True; ";
             SqlConnection connection = new SqlConnection(constr);   
                 connection.Open();
                 OpenDecryptedSession(connection);

@@ -614,7 +614,7 @@
 
                     $('#tblPendingLabs').append(table);
                     $('#tblPendingLabs tr:not(:first-child').each(function(idx){
-                        $(this).children(":eq(0)").html(idx + 1);
+                    $(this).children(":eq(0)").html(idx + 1);
                     });
 
                 },
@@ -799,16 +799,16 @@
             // Save lab order
             $("#btnSaveLab").click(function (e) {
                 var _fp = [];
+                var table  = "";              
                 var data = $('#tblAddLabs tr').each(function (row, tr) {
+                            _fp[row] = {
+                                "labType": $(tr).find('td:eq(1)').text()
+                              , "orderReason": $(tr).find('td:eq(2)').text()
+                              , "labOrderDate": $(tr).find('td:eq(3)').text()
+                             , "labNotes": $(tr).find('td:eq(4)').text()
 
-
-                    _fp[row] = {
-                        "labType": $(tr).find('td:eq(1)').text()
-                      , "orderReason": $(tr).find('td:eq(2)').text()
-                      , "labOrderDate": $(tr).find('td:eq(3)').text()
-                     , "labNotes": $(tr).find('td:eq(4)').text()
-
-                    }
+                            }                  
+                    
                 });
                 _fp.shift();
 
@@ -818,12 +818,33 @@
                     return false;
                 } else {
                   
-                    addLabOrder(_fp);
+                    addLabOrder(_fp);       
+                  
+                                      
+                    $('#tblAddLabs tr:first').remove();
+                    var data = $('#tblAddLabs tr').each(function (row, tr) {
+                        _fp[row] = {
+                            "labType": $(tr).find('td:eq(1)').text()
+                          , "orderReason": $(tr).find('td:eq(2)').text()
+                          , "labOrderDate": $(tr).find('td:eq(3)').text()
+                         , "labNotes": $(tr).find('td:eq(4)').text()
+
+                        }                      
+                    
+                        table ="<tr><td></td><td>" + $(tr).find('td:eq(1)').text() + "</td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" + "Pending" + "</td></tr>";
+                        $("#tblPendingLabs>tbody:first").append(table);              
+
+                        $('#tblPendingLabs tr:not(:first-child').each(function(idx){
+                            $(this).children("td:eq(0)").html(idx + 1);
+                        }); 
+
+                    }); 
+
                 }
 
+              
                 $("#tblAddLabs td").parent().remove();
             });
-
 
             function addLabOrder(_fp) {
                 var labOrder = JSON.stringify(_fp);
@@ -841,6 +862,7 @@
                     },
                     
                 });
+
             };
 
             // Load lab results        
