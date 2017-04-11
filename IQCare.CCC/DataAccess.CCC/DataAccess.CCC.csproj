@@ -101,6 +101,11 @@
     <Compile Include="Interface\Patient\IPatientConsentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfActionRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptOutcomeRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptWorkupRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -158,6 +163,11 @@
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Tb\PatientIcfActionRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIcfRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptOutcomeRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptWorkupRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
