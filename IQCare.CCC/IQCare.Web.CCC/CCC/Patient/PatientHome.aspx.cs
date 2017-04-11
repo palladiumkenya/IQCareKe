@@ -20,6 +20,11 @@ namespace IQCare.Web.CCC.Patient
             get { return Convert.ToInt32(Session["patientId"]); }
         }
 
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var patientTransfer=new PatientTransferInmanager();
@@ -79,7 +84,36 @@ namespace IQCare.Web.CCC.Patient
             {
                 lblEntryPoint.Text = "missing";
             }
-        }
-        
+
+            if (!IsPostBack)
+            {
+                ILookupManager mgr =
+                    (ILookupManager)
+                    ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+                List<LookupItemView> keyPopulationList = mgr.GetLookItemByGroup("PopulationType");
+                if (keyPopulationList != null && keyPopulationList.Count > 0)
+                {
+                    bioPatientPopulation.Items.Add(new ListItem("select", "0"));
+                    foreach (var item in keyPopulationList)
+                    {
+                        bioPatientPopulation.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                    }
+                }
+
+                List<LookupCounty> ct = mgr.GetLookupCounties();
+
+                if (ct != null && ct.Count > 0)
+                {
+                    smrCounty.Items.Add(new ListItem("select", "0"));
+                    foreach (var item in ct)
+                    {
+                        smrCounty.Items.Add(new ListItem(item.CountyName, item.CountyId.ToString()));
+                    }
+                }
+
+
+            }       
+        }      
     }
 }

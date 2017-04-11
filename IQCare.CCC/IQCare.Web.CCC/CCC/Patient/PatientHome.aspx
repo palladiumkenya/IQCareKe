@@ -75,9 +75,75 @@
                                  </div>
                              </div>
                              
+                             <!-- Modal -->
+                             <div id="patientBioModal" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                             <h4 class="modal-title">Edit Patient Bio</h4>
+
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="row">
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     <div class="col-md-3"><label class="control-label pull-left">First Name:</label></div>
+                                                     <div class="col-md-6">                     
+                                                         <asp:TextBox ID="bioFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                     </div>
+                                                 </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     <div class="col-md-3"><label class="control-label pull-left">Middle Name:</label></div>
+                                                     <div class="col-md-6">                     
+                                                         <asp:TextBox ID="bioMiddleName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                     </div>
+                                                 </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     <div class="col-md-3"><label class="control-label pull-left">Last Name:</label></div>
+                                                     <div class="col-md-6">                     
+                                                         <asp:TextBox ID="bioLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                     </div>
+                                                 </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     <div class="col-md-3"><label class="control-label pull-left">Patient Population:</label></div>
+                                                     <div class="col-md-6">
+                                                         <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control"></asp:DropDownList>
+                                                     </div>
+                                                 </div>
+
+                                             </div>                                        
+                                         </div>
+                                         <div class="modal-footer">
+                                             <div class="col-md-12 form-group">
+                                                 
+                                                <div class="col-md-6">
+                                                    <button type="button" id="btnSaveBio" class="btn btn-default" OnClientClick="return false;">Save</button>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <button type="button" id="btnCancelBio" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+
+                                            </div>
+
+                                             
+
+                                         </div>
+
+                                     </div>
+
+                                 </div>
+
+                             </div>
+                             
                              
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Edit Patient Bio</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientBioModal">Edit Patient Bio</button>
                              </div>
 
                          </div>
@@ -114,8 +180,113 @@
                                  </div>
                              </div>
                              
+                             <!-- Modal -->
+                             <div id="patientLocationModal" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                             <h4 class="modal-title">Add Patient Location</h4>
+
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="row">
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">County:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:DropDownList ID="smrCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Sub-Location:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="smrSubLocation" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                    
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Sub-County:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:DropDownList ID="smrSubCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Village:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="smrVillage" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Ward:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:DropDownList ID="smrWard" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Landmark:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="smrLandmark" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Location:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="smrLocation" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Nearest Health Center:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="smrNearestHealthCenter" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+
+                                             </div>
+                                             
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button id="btnAddLocation" type="button" class="btn btn-default" OnClientClick="return false;">Add Location</button>
+                                             <button id="btnAddLocationCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                         </div>
+
+                                     </div>
+
+                                 </div>
+
+                             </div>
+                             
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Patient Location</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientLocationModal">Add Patient Location</button>
                              </div>
 
                          </div>
@@ -139,8 +310,74 @@
                                  </div>
                              </div>
                              
+                            <!-- Modal -->
+                             <div id="patientContactModal" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                             <h4 class="modal-title">Edit Patient Contacts</h4>
+
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="row">
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Postal Address:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="patPostalAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Email Address:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="patEmailAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Alternative Mobile:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="patAlternativeMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+
+                                             </div>
+                                             
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button id="btnEditPatientContacts" type="button" class="btn btn-default" OnClientClick="return false;">Edit Patient Contacts</button>
+                                             <button id="btnEditPatientContactsCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                         </div>
+
+                                     </div>
+
+                                 </div>
+
+                             </div>
+                             
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Edit Patient Contacts</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientContactModal">Edit Patient Contacts</button>
                              </div>
                              
                              <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
@@ -160,8 +397,87 @@
                                  </div>
                              </div>
                              
+                             <!-- Modal -->
+                             <div id="treatmentSupporterModal" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                             <h4 class="modal-title">Add Patient Treatment Supporter</h4>
+
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="row">
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">First Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Gender:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Middle Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtMiddleName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Last Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     
+                                                </div>
+
+                                             </div>
+                                             
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Add Patient Treatment Supporter</button>
+                                             <button id="btnAddPatientTreatmentSupporterCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                         </div>
+
+                                     </div>
+
+                                 </div>
+
+                             </div>
+                             
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Patient Supporter</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Add Patient Supporter</button>
                              </div>
 
                          </div>
@@ -707,9 +1023,29 @@
                         console.log(patientDetails);
 
                         $("#<%=txtFirstName.ClientID%>").text(patientDetails.FirstName);
+                        $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
+
                         $("#<%=txtMiddleName.ClientID%>").text(patientDetails.MiddleName);
+                        $("#<%=bioMiddleName.ClientID%>").val(patientDetails.MiddleName);
+
                         $("#<%=txtLastName.ClientID%>").text(patientDetails.LastName);
+                        $("#<%=bioLastName.ClientID%>").val(patientDetails.LastName);
+
                         $("#<%=drpPatientPopulation.ClientID%>").text(patientDetails.population);
+                        var populationType = 0;
+                        if (patientDetails.population == "General Population") {
+                            populationType = 74;
+                        }
+                        else if (patientDetails.population == "Key Population") {
+                            populationType = 75;
+                        }
+                        $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
+
+
+                        /*bioFirstName
+                        bioMiddleName
+                        bioLastName
+                        bioPatientPopulation*/
 
                         var names = null;
                         names = patientDetails.tsFname +
@@ -729,8 +1065,11 @@
                         var village = "";
                         var nearestHealthCentre = "";
 
-                        $.when(GetLookupNameById(patientDetails.CountyId)).then();
-                        $.when(GetWardNameByWardId(patientDetails.Ward)).then();
+                        if(patientDetails.CountyId > 0)
+                            $.when(GetLookupNameById(patientDetails.CountyId)).then();
+                        if(patientDetails.Ward>0)
+                            $.when(GetWardNameByWardId(patientDetails.Ward)).then();
+
 
                         if (patientDetails.Village != "" && patientDetails.Village != null) {
                             village = patientDetails.Village;
@@ -754,13 +1093,154 @@
                             MobileNumber = patientDetails.MobileNumber;
                         }
                         $("#<%=txtMobile.ClientID%>").text(MobileNumber);
+
+                        $("#<%=patPostalAddress.ClientID%>").val(PatientPostalAddress);
+                        $("#<%=patMobile.ClientID%>").val(MobileNumber);
+                        $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
+                        $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
+
                     },
                     error: function (response) {
                         toastr.error(response.d, "Error Getting Person Details");
                     }
                 });
             }
+
+            $("#btnSaveBio").click(function() {
+                var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val());
+                var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val());
+                var bioLastName = escape($("#<%=bioLastName.ClientID%>").val());
+                var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").val();
+                var userId = <%=UserId%>;
+
+                console.log(bioFirstName);
+                console.log(bioMiddleName);
+                console.log(bioLastName);
+                console.log(bioPatientPopulation);
+
+                if (patientId > 0) {
+                    updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation);
+                }            
+            });
+
+            $('#<%=smrCounty.ClientID%>').on("change", function() {
+                getSubcountyList(); /*call AJAX function */
+            });
+
+            $("#<%=smrSubCounty.ClientID%>").on("change", function() {
+                getWardList();
+            });
+
+            $("#btnAddLocation").click(function() {
+                var personId = 0;
+                var county = $("#<%=smrCounty.ClientID%>").val();
+                var subcounty = $("#<%=smrSubCounty.ClientID%>").val();
+                var ward = $("#<%=smrWard.ClientID%>").val();
+                var village = $("#<%=smrVillage.ClientID%>").val();
+                var location = $("#<%=smrLocation.ClientID%>").val();
+                var subLocation = $("#<%=smrLocation.ClientID%>").val();
+                var landmark = $("#<%=smrLandmark.ClientID%>").val();
+                var nearestHc = $("#<%=smrNearestHealthCenter.ClientID%>").val();
+                var userId = <%=UserId%>;
+
+
+                if (patientId > 0) {
+
+                    addNewLocation(personId, county, subcounty, ward, village, location, subLocation, landmark, nearestHc, userId);
+                }
+                
+            });
+
+            $("#btnEditPatientContacts").click(function() {
+                var personId = 0;
+                var physicalAddress = $("#<%=patPostalAddress.ClientID%>").val();
+                var mobileNumber = $("#<%=patMobile.ClientID%>").val();
+                var alternativeNumber = $("#<%=patAlternativeMobile.ClientID%>").val();
+                var emailAddress = $("#<%=patEmailAddress.ClientID%>").val();
+                var userId = <%=UserId%>;
+
+                if (patientId > 0) {
+                    editPatientContacts(personId, physicalAddress, mobileNumber, alternativeNumber, emailAddress, userId, patientId);
+                }             
+            });
+
+            $("#btnAddPatientTreatmentSupporter").click(function() {
+                var FirstName = $("#<%=trtFirstName.ClientID%>").val();
+                var MiddleName = $("#<%=trtMiddleName.ClientID%>").val();
+                var LastName = $("#<%=trtLastName.ClientID%>").val();
+                var Gender = $("#<%=trtGender.ClientID%>").val();
+                var Mobile = $("#<%=trtMobile.ClientID%>").val();
+
+                if (patientId > 0) {
+                    addPatientTreatmentSupporter(FirstName, MiddleName, LastName, Gender, Mobile);
+                }
+            });
+
         });
+
+        function addPatientTreatmentSupporter(firstName, middleName, lastName, gender, mobile) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientSummaryService.asmx/AddPatientTreatmentSupporter",
+                data: "{'firstName':'" + firstName + "', 'middleName':'" + middleName + "', 'lastName':'" + lastName + "', 'gender': '" + gender + "','mobile': '" + mobile + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Upating Patient Bio");
+                }
+            });
+        }
+
+        function editPatientContacts(personId, physicalAddress, mobileNumber, alternativeNumber, emailAddress, userId, patientid) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PersonService.asmx/AddPersonContact",
+                data: "{'personId':'" + personId + "','physicalAddress':'" + physicalAddress + "','mobileNumber':'" + mobileNumber + "','alternativeNumber':'" + alternativeNumber + "','emailAddress':'" + emailAddress + "','userId':'" + userId + "','patientid':'" + patientid + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Adding New Patient Location");
+                }
+            });
+        }
+
+        function addNewLocation(personId, county, subcounty, ward, village, location, subLocation, landmark, nearestHc, userId) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PersonService.asmx/AddPersonLocation",
+                data: "{'personId':'" + personId + "','county':'" + county + "','subcounty':'" + subcounty + "','ward':'" + ward + "','village':'" + village + "','location':'" + location + "','sublocation':'" + subLocation + "','landmark':'" + landmark + "','nearesthealthcentre':'" + nearestHc + "','userId':'" + userId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Adding New Patient Location");
+                }
+            });
+        }
+
+        function updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientSummaryService.asmx/UpdatePatientBio",
+                data: "{'patientId':'" + patientId + "', 'bioFirstName':'" + bioFirstName + "', 'bioMiddleName':'" + bioMiddleName + "', 'bioLastName': '" + bioLastName + "','userId': '" + userId + "','bioPatientPopulation':'" + bioPatientPopulation + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Upating Patient Bio");
+                }
+            });
+        }
 
         function GetLookupNameById(Id) {
             $.ajax({
@@ -773,7 +1253,7 @@
                     $("#<%=txtCounty.ClientID%>").text(response.d);
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Getting Person Details");
+                    toastr.error(response.d, "Error Getting County");
                 }
             });
         }
@@ -789,9 +1269,60 @@
                     $("#<%=txtWard.ClientID%>").text(response.d);
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Getting Person Details");
+                    toastr.error(response.d, "Error Getting Ward Name");
                 }
             });
+        }
+
+        function getSubcountyList()
+        {
+            var countyId = $("#<%=smrCounty.ClientID%>").find(":selected").text();
+            //alert(countyId);
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookupSubcountyList",
+                data: "{'county':'" + countyId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $("#<%=smrSubCounty.ClientID%>").find('option').remove().end();
+                    $("#<%=smrSubCounty.ClientID%>").append('<option value="0">Select</option>');
+                    $.each(itemList, function (index, itemList) {
+
+                        $("#<%=smrSubCounty.ClientID%>").append('<option value="' + itemList.SubcountyId + '">' + itemList.SubcountyName + '</option>');
+                    }); 
+                },
+                error: function (response) {
+                    toastr.error("Error in selecting the SubcountyList to Load "+ response.d, "Fetching subcounty List");
+                }
+            });
+        }
+
+        function getWardList()
+        {
+            var subcountyName = $("#<%=smrSubCounty.ClientID%>").find(":selected").text();
+            //alert(subcountyName);
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetLookupWardList",
+                data: "{'subcounty':'" + subcountyName + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+                    $("#<%=smrWard.ClientID%>").find('option').remove().end();
+                    $("#<%=smrWard.ClientID%>").append('<option value="0">Select</option>');
+                    $.each(itemList, function (index, itemList) {
+                        $("#<%=smrWard.ClientID%>").append('<option value="' + itemList.WardId + '">' + itemList.WardName + '</option>');
+                    }); 
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });     
         }
     </script>
 </asp:Content>
