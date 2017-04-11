@@ -1,4 +1,4 @@
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Admin_UpdateBackupSetup_Constella]') AND type in (N'P', N'PC')
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Admin_UpdateBackupSetup_Constella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_Admin_UpdateBackupSetup_Constella]
 GO
 SET ANSI_NULLS ON
@@ -36,11 +36,10 @@ End
 GO
 
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SystemAdmin_GetBackupTime_Constella]') AND type in (N'P', N'PC')
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SystemAdmin_GetBackupTime_Constella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SystemAdmin_GetBackupTime_Constella]
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_SystemAdmin_GetBackupTime_Constella]    Script Date: 21-Mar-2017 1:24:23 PM ******/
 SET ANSI_NULLS ON
 GO
 

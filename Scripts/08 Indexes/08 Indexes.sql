@@ -3,7 +3,7 @@ CREATE NONCLUSTERED INDEX [NCI_Dtl_PurchaseItem_POIDItemId] ON [dbo].[Dtl_Purcha
 (
 	[POId] ASC,
 	[ItemId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
 
 End
 Go
@@ -13,11 +13,17 @@ CREATE NONCLUSTERED INDEX [NCI_Dtl_GRNote_GrnId_ItemId_BatchId] ON [dbo].[Dtl_GR
 	[GRNId] ASC,
 	[BatchID] ASC,
 	[ItemId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)
+End
 GO
-
-
-
+IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ord_Visit]') AND name = N'NCI_Ord_Visit_VisitType_IX') Begin
+CREATE NONCLUSTERED INDEX [NCI_Ord_Visit_VisitType_IX] ON [dbo].[ord_Visit] ([VisitType]) INCLUDE ([Visit_Id],[Ptn_Pk],[LocationID],[VisitDate])
+End
+Go
+IF Not  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[ord_Visit]') AND name = N'NCI_Ord_Visit_VisitType_IXUserId') Begin
+CREATE NONCLUSTERED INDEX [NCI_Ord_Visit_VisitType_IXUser] ON [dbo].[ord_Visit] ([VisitType]) INCLUDE ([Visit_Id],[Ptn_Pk],[VisitDate],UserId)
+End
+Go
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientClinicalStatus]') AND name = N'IX_PatientClinicalStatus_VisitPk_Inc')
  DROP INDEX [IX_PatientClinicalStatus_VisitPk_Inc] ON [dbo].[dtl_PatientClinicalStatus]
 GO
@@ -59,6 +65,10 @@ CREATE NONCLUSTERED INDEX [IX_PatientAppointment_PtnPk_OT]
 ON [dbo].[dtl_PatientAppointment] ([Ptn_pk],[AppStatus],[DeleteFlag],[AppDate])
 
 GO
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientArvTherapy]') AND name = N'IDX_dtl_PatientArvTherapy_NC1')
+ DROP INDEX [IDX_dtl_PatientArvTherapy_NC1] ON [dbo].[dtl_PatientArvTherapy]
+GO
+
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientStage]') AND name = N'IX_PatientStage_WhoStage_Inc')
  DROP INDEX [IX_PatientStage_WhoStage_Inc] ON [dbo].[dtl_PatientStage]
 GO
@@ -67,8 +77,8 @@ ON [dbo].[dtl_PatientStage] ([WHOStage])
 INCLUDE ([Visit_Pk])
 Go
 
-IF  Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.dtl_PatientClinicalStatus') AND Name = 'PK_dtl_patient_therapy')
-   ALTER TABLE dbo.dtl_PatientClinicalStatus	DROP CONSTRAINT PK_dtl_patient_therapy
+IF  Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.dtl_PatientClinicalStatus') AND Name = 'PK_dtl_PatientClinicalStatus')
+   ALTER TABLE dbo.dtl_PatientClinicalStatus	DROP CONSTRAINT PK_dtl_PatientClinicalStatus
 GO
 
 IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.dtl_PatientClinicalStatus') AND Name = 'PK_dtl_PatientClinicalStatus')
@@ -77,7 +87,7 @@ IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_ob
 	Ptn_pk,
 	LocationID,
 	Visit_pk
-	)WITH( PAD_INDEX = OFF, FILLFACTOR = 80, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	)
 
 GO
 
