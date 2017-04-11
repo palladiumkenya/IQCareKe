@@ -43,10 +43,10 @@
             <div class="tab-content">
                  <div id="Registration" class="tab-pane fade in active">
                      <div class="col-md-12 col-xs-12">
-                         <div class="col-md-4 col-xs-4 col-sm-4">
-                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Bio</h6></label></div>
-                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
-                             
+                         <!--<div class="col-md-4 col-xs-4 col-sm-4">-->
+                             <!--<div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Bio</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>-->
+                             <!--
                              <div class="col-md-12 form-group">
                                  <div class="col-md-6"><label class="control-label pull-left">First Name:</label></div>
                                  <div class="col-md-6">                     
@@ -73,8 +73,27 @@
                                  <div class="col-md-6" style="padding: 0">                             
                                      <asp:Label ID="drpPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
+                             </div> -->
+                         <!--</div>-->
+                         <div class="col-md-4 col-xs-4 col-sm-4">
+                             
+                             
+                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Names:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
                              </div>
                              
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
                              <!-- Modal -->
                              <div id="patientBioModal" class="modal fade" role="dialog">
                                  <div class="modal-dialog">
@@ -142,12 +161,95 @@
                              </div>
                              
                              
-                             <div class="col-md-12 form-group">
+                             
+
+                             <!-- Modal -->
+                             <div id="treatmentSupporterModal" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                             <h4 class="modal-title">Add Patient Treatment Supporter</h4>
+
+                                         </div>
+                                         <div class="modal-body">
+                                             <div class="row">
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">First Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Gender:</label></div>
+                                                         <div class="col-md-12">                                                           
+                                                             <asp:DropDownList ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Middle Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtMiddleName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     
+                                                    <div class="col-md-6">
+                                                         <div class="col-md-12"><label class="control-label pull-left">Last Name:</label></div>
+                                                         <div class="col-md-12">
+                                                             <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+
+                                                         </div>
+                                                     </div>
+                                                     
+                                                     
+                                                </div>
+
+                                             </div>
+                                             
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Add Patient Treatment Supporter</button>
+                                             <button id="btnAddPatientTreatmentSupporterCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                         </div>
+
+                                     </div>
+
+                                 </div>
+
+                             </div>
+
+                             <div class="col-md-6 form-group">
                                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientBioModal">Edit Patient Bio</button>
                              </div>
 
+                             <div class="col-md-6 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Add Patient Supporter</button>
+                             </div>
+
                          </div>
-                         
                          <div class="col-md-4 col-xs-4 col-sm-4">
                              <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Location</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
@@ -290,7 +392,6 @@
                              </div>
 
                          </div>
-
                          <div class="col-md-4 col-xs-4 col-sm-4">
                              <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Contact</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
@@ -379,107 +480,8 @@
                              <div class="col-md-12 form-group">
                                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientContactModal">Edit Patient Contacts</button>
                              </div>
-                             
-                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
-                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Names:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div>
-                             
-                             <!-- Modal -->
-                             <div id="treatmentSupporterModal" class="modal fade" role="dialog">
-                                 <div class="modal-dialog">
-                                     <!-- Modal content-->
-                                     <div class="modal-content">
-                                         <div class="modal-header">
-                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Add Patient Treatment Supporter</h4>
-
-                                         </div>
-                                         <div class="modal-body">
-                                             <div class="row">
-                                                 
-                                                 <div class="col-md-12 form-group">
-                                                     
-                                                    <div class="col-md-6">
-                                                         <div class="col-md-12"><label class="control-label pull-left">First Name:</label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:TextBox ID="trtFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
-
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div class="col-md-6">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Gender:</label></div>
-                                                         <div class="col-md-12">                                                           
-                                                             <asp:DropDownList ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
-                                                         </div>
-                                                     </div>
-                                                </div>
-                                                 
-                                                 <div class="col-md-12 form-group">
-                                                     
-                                                    <div class="col-md-6">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Middle Name:</label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:TextBox ID="trtMiddleName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
-
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     <div class="col-md-6">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
-
-                                                         </div>
-                                                     </div>
-                                                </div>
-                                                 
-                                                 <div class="col-md-12 form-group">
-                                                     
-                                                    <div class="col-md-6">
-                                                         <div class="col-md-12"><label class="control-label pull-left">Last Name:</label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
-
-                                                         </div>
-                                                     </div>
-                                                     
-                                                     
-                                                </div>
-
-                                             </div>
-                                             
-                                         </div>
-                                         <div class="modal-footer">
-                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Add Patient Treatment Supporter</button>
-                                             <button id="btnAddPatientTreatmentSupporterCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                                         </div>
-
-                                     </div>
-
-                                 </div>
-
-                             </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Add Patient Supporter</button>
-                             </div>
-
                          </div>
+                         
 
                      </div>
                  </div> 
