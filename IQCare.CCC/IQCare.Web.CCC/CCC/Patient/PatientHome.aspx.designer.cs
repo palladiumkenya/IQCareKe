@@ -58,6 +58,42 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label drpPatientPopulation;
         
         /// <summary>
+        /// bioFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bioFirstName;
+        
+        /// <summary>
+        /// bioMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bioMiddleName;
+        
+        /// <summary>
+        /// bioLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox bioLastName;
+        
+        /// <summary>
+        /// bioPatientPopulation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList bioPatientPopulation;
+        
+        /// <summary>
         /// txtCounty control.
         /// </summary>
         /// <remarks>
@@ -94,6 +130,78 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label txtNearestHealthCentre;
         
         /// <summary>
+        /// smrCounty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList smrCounty;
+        
+        /// <summary>
+        /// smrSubLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox smrSubLocation;
+        
+        /// <summary>
+        /// smrSubCounty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList smrSubCounty;
+        
+        /// <summary>
+        /// smrVillage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox smrVillage;
+        
+        /// <summary>
+        /// smrWard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList smrWard;
+        
+        /// <summary>
+        /// smrLandmark control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox smrLandmark;
+        
+        /// <summary>
+        /// smrLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox smrLocation;
+        
+        /// <summary>
+        /// smrNearestHealthCenter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox smrNearestHealthCenter;
+        
+        /// <summary>
         /// txtPostalAddress control.
         /// </summary>
         /// <remarks>
@@ -112,6 +220,42 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label txtMobile;
         
         /// <summary>
+        /// patPostalAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox patPostalAddress;
+        
+        /// <summary>
+        /// patMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox patMobile;
+        
+        /// <summary>
+        /// patEmailAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox patEmailAddress;
+        
+        /// <summary>
+        /// patAlternativeMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox patAlternativeMobile;
+        
+        /// <summary>
         /// txtSupporterNames control.
         /// </summary>
         /// <remarks>
@@ -128,6 +272,51 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label txtSupporterMobile;
+        
+        /// <summary>
+        /// trtFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trtFirstName;
+        
+        /// <summary>
+        /// trtGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList trtGender;
+        
+        /// <summary>
+        /// trtMiddleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trtMiddleName;
+        
+        /// <summary>
+        /// trtMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trtMobile;
+        
+        /// <summary>
+        /// trtLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox trtLastName;
         
         /// <summary>
         /// lblEntryPoint control.
