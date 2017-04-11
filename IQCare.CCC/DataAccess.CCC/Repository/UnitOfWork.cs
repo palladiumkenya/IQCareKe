@@ -22,6 +22,7 @@ using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientL
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
+using DataAccess.Base;
 
 namespace DataAccess.CCC.Repository
 {
@@ -29,7 +30,7 @@ namespace DataAccess.CCC.Repository
     {
         private BaseContext _context;
 
-        /* Person Interface */
+                /* Person Interface */
         private IPersonRepository _personRepository;
         private IPersonLocationRepository _personLocationRepository;
         private IPersonContactRepository _personContactRepository;
@@ -421,7 +422,10 @@ namespace DataAccess.CCC.Repository
                     _context.Dispose();
                 }
             }
+
+            DataMgr.ReleaseConnection(DataMgr.GetConnection());
             this._disposed = true;
+
         }
 
         public void Dispose()

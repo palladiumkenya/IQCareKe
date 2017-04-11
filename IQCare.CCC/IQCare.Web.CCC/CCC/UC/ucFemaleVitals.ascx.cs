@@ -79,6 +79,18 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
+            List<LookupItemView> NoFPLookup = lookupManager.GetLookItemByGroup("NoFamilyPlanning");
+            if (NoFPLookup != null && NoFPLookup.Count > 0)
+            {
+                ddlNoFP.Items.Add(new ListItem("select", "0"));
+                foreach (var k in NoFPLookup)
+                {
+                    ddlNoFP.Items.Add(new ListItem(k.ItemDisplayName + "(" + k.ItemName + ")", k.ItemId.ToString()));
+                }
+            }
+
+            
+
 
 
 

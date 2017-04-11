@@ -214,6 +214,8 @@
             success: function (response) {
                 toastr.success(response.d, "Vitals saved successfully");
                 resetElements();
+                //redirect
+                window.location.href="<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>";
             },
             error: function (response) {
                 toastr.success(response.d, "Vitals not saved");

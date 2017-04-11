@@ -288,6 +288,28 @@
                                         </div>
                          
      </div><!-- .col-md-12-->
+        
+    <div class="col-md-12">
+        <hr />
+    </div>
+        <div class="col-md-12">
+             <div class="col-md-8"></div>
+             <div class="col-md-4">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save </asp:LinkButton>
+            </div>
+
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset </asp:LinkButton>
+            </div>
+
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close </asp:LinkButton>
+            </div>
+        </div>
+
+       </div> <!-- .col-md-12 -->
+
 </div><!-- .col-md-12 col-xs-12 col-sm-12-->
  <script type="text/javascript">
         $(document).ready(function(){
@@ -310,6 +332,11 @@
                     var lmp = $("#FemaleLMP").datepicker( 'getDate');
                     $("#EDCD").datepicker('setDate',moment(lmp).add(280,'days'));
                 });
+            $("#onFP").on('change', function () {
+                var fp = $(this).find(":selected").text();
+                if(fp==='No Family Planning(NOFP)'){ $("#divNoFP").show("fast");}else { $("#divNoFP").hide("fast"); }
+               
+            });
 
         });
  </script>

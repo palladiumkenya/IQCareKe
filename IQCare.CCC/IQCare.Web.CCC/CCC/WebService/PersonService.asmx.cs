@@ -790,7 +790,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var personLookUpManager = new PersonLookUpManager();
-                var dobb = "";
+                //var dobb = "";
 
                 var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob);
                 var patientLookup = new PatientLookupManager();

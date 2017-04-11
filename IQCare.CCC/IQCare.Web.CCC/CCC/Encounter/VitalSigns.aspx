@@ -9,7 +9,40 @@
     <div class="col-md-12 col-xs-12 col-sm-12">
          <uc:PatientDetails ID="PatientSummary" runat="server" />
          <uc:PatientTriageSummary ID="ptnVitalSummary" runat="server" />
-         <uc:PatientTriage ID="ptnVitalSigns" runat="server" />
+         
+        
+    </div>
+    <div class="col-md-12 col-xs-12 col-sm-12" id="PatientVitals">
+        <uc:PatientTriage ID="ptnVitalSigns" runat="server" />
+    </div>
+
+    <div class="col-md-12 col-xs-12" id="femaleVitals">
         <uc:FemalVitals ID="ptnFemaleVitals" runat="server" />
     </div>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        var Gender = "<%=Gender%>";
+
+        if (Gender === 'male') { $("#btnFemalVitals").attr("disabled", "disabled"); }
+        else {
+            $("#btnFemalVitals").removeAttr("disabled");
+        }
+        $("#femaleVitals").hide("fast");
+
+        
+         $("#btnFemalVitals").click(function () {
+
+             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast");})
+         });
+
+         $("#btnLoadTriage").click(function () {
+              $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast");});
+         });
+        
+    });
+    </script>
+
 </asp:Content>
+

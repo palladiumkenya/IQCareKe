@@ -2,6 +2,7 @@
 using System.Web;
 using Entities.CCC.Triage;
 using IQCare.CCC.UILogic;
+using Entities.CCC.Appointment;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -84,6 +85,21 @@ namespace IQCare.Web.CCC.UC
 
                 lblBMI.Text = Convert.ToString(patientTriage.BMI) + "Kg/M2" + " " + bmiAnalysis;
             }
+
+            var _patientAppointment = new PatientAppointmentManager();
+            var PA = _patientAppointment.GetByPatientId(PatientId);
+            if (PA!=null)
+            {
+                foreach (var item in PA)
+                {
+                    lblappointmentDate.Text =Convert.ToDateTime(item.AppointmentDate).ToString("DD-MMM-YYYY");
+                    lblAppointmentReason.Text = LookupLogic.GetLookupNameById(item.ReasonId);
+                    lblappointmentStatus.Text = LookupLogic.GetLookupNameById(item.StatusId);
+                    lblcareStatus.Text = LookupLogic.GetLookupNameById(item.DifferentiatedCareId);
+                }
+
+            }
+
 
 
         }
