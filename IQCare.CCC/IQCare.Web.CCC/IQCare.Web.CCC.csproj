@@ -90,6 +90,9 @@
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\TB\IntensifiedCaseFinding.aspx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucIpt.ascx" />
+    <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
+    <Content Include="CCC\UC\ucIptOutcome.ascx" />
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -269,6 +272,27 @@
     </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.designer.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.designer.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.designer.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
       <DependentUpon>ucPatientBrief.ascx</DependentUpon>

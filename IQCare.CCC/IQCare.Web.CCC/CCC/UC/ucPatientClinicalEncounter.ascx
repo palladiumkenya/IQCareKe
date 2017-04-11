@@ -1,4 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientClinicalEncounter.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientClinicalEncounter" %>
+
+<%@ Register Src="~/CCC/UC/ucIpt.ascx" TagPrefix="uc" TagName="Ipt" %>
+<%@ Register Src="~/CCC/UC/ucIptClientWorkup.ascx" TagPrefix="uc" TagName="IptClientWorkup" %>
+<%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <div class="col-md-12" style="padding-top: 20px">
 
     <div class="col-md-12">
@@ -178,87 +182,230 @@
                     <%--to here--%>
 
                     <div class="col-md-12 form-group">
-                            <div class="col-md-12">
-                                <div class="panel panel-info">
-                                    <div class="panel-body">
-                                        <div class="col-md-12 form-group">
-                                            <label class="control-label pull-left">TB Intensified Case Findings(ICF)</label></div>
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label pull-left">TB Intensified Case Findings(ICF)</label>
+                                    </div>
 
-                                        <div class="col-md-12 form-group">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-12">
                                             <div class="col-md-12">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left">TB Infected?</label></div>
-                                                <div class="col-md-3">
-                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" />
-                                                </div>
+                                                <label class="control-label pull-left">TB Infected?</label>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left">Cough</label></div>
-                                                <div class="col-md-12">
-                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" />
-                                                </div>
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="col-md-12">
-                                                    <label class="control-label">Fever</label></div>
-                                                <div class="col-md-12">
-                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" />
-                                                </div>
+                                        </div>
+                                        <div class="col-md-12" clientidmode="Static" id="IcfForm">
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Cough</label>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left">Noticable Weight Loss</label></div>
-                                                <div class="col-md-12">
-                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" />
-                                                </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="col-md-12">
-                                                    <label class="control-label pull-left">Night Sweats</label></div>
-                                                <div class="col-md-12">
-                                                    <asp:DropDownList runat="server" ID="nightSweats" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label">Fever</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Noticable Weight Loss</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Night Sweats</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                                </div>
+                    <div class="col-md-12 form-group" clientidmode="Static" id="IcfActionForm">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label pull-left">ICF Action Taken</label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Sputum Smear/ Gene Xpert</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Positive" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Negative" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label">Chest X-ray</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Normal" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Suggestive" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Start Anti-TB</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="antiTb" ClientIDMode="Static">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Invitation of Contacts</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="contactsInvitation" ClientIDMode="Static">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Evaluated for IPT</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptEvaluation" ClientIDMode="Static">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group" clientidmode="Static" id="iptform">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="col-md-12 form-group">
+                                        <label class="control-label pull-left">Isoniazad Preventive Therapy(IPT)</label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" onclick="IptWorkUp();"> IPT Client Workup</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" onclick="Ipt();"> IPT</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" onclick="IptOutcome();"> AddIPT Outcome</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptClientWorkupForm">
+                                        <uc:IptClientWorkup ID="IptCw" runat="server" />
+                                    </div>
+                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptDetailsForm">
+                                        <uc:Ipt ID="IptDetails" runat="server" />
+                                    </div>
+                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptOutcomeDetailsForm">
+                                        <uc:IptOutcome ID="IptOutcomeForm" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 form-group">
                         <div class="col-md-12">
                             <div class="panel panel-info">
-                                    <div class="panel-body">
-                            <div class="col-md-6">
-                                <label class="control-label pull-left text-primary" for="complaints">*Complaints Today</label>
-                                <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4" data-parsley-required="true"></textarea>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="col-md-12  form-group">
+                                <div class="panel-body">
                                     <div class="col-md-6">
-                                        <label class="control-label pull-left input-sm text-primary" for="tbscreeningstatus">*TB Screening</label>
+                                        <label class="control-label pull-left text-primary" for="complaints">*Complaints Today</label>
+                                        <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4" data-parsley-required="true"></textarea>
                                     </div>
+
                                     <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        <div class="col-md-12  form-group">
+                                            <div class="col-md-6">
+                                                <label class="control-label pull-left input-sm text-primary" for="tbscreeningstatus">*TB Screening</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6">
+                                                <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
-
-                                    </div>
-                                </div>
-
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
 
@@ -269,33 +416,38 @@
 
                                     <div class="panel-body">
                                         <div class="col-md-12 form-group">
-                                            <label class="control-label pull-left">Adverse Event(s)</label></div>
+                                            <label class="control-label pull-left">Adverse Event(s)</label>
+                                        </div>
 
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Adverse event</label></div>
+                                                    <label class="control-label pull-left">Adverse event</label>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="adverseEvent" ClientIDMode="Static" placeholder="adverse event.."></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label">Medicine Causing A/E</label></div>
+                                                    <label class="control-label">Medicine Causing A/E</label>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="AdverseEventCause" ClientIDMode="Static" placeholder="cause..."></asp:TextBox>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Severity</label></div>
+                                                    <label class="control-label pull-left">Severity</label>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlAdverseEventSeverity" ClientIDMode="Static" />
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left">Action</label></div>
+                                                    <label class="control-label pull-left">Action</label>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" ID="AdverseEventAction" CssClass="form-control input-sm" ClientIDMode="Static" />
 
@@ -1263,7 +1415,12 @@
 
     $(document).ready(function () {
         showHideFPControls();
-
+        $("#IcfActionForm").hide();
+        $("#iptform").hide();
+        $("#IcfForm").hide();
+        $("#IptClientWorkupForm").hide();
+        $("#IptDetailsForm").hide();
+        $("#IptOutcomeDetailsForm").hide();
         var getVisitDateVal = "<%= this.visitdateval %>";
         var getFemaleLMPVal = "<%= this.LMPval %>";
         var getEDDPVal = "<%= this.EDDval %>";
@@ -1343,26 +1500,26 @@
             $("#cacxscreening").val("");
 
             $("#<%=lmp.ClientID%>").prop('disabled', true);
-                $("#btnFemaleLMP").prop('disabled', true);
-                $("#FemaleLMP").addClass('noevents');
-                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
-                $("#btnEDD").prop('disabled', true);
-                $("#EDCD").addClass('noevents');
-                $("#ancYes").prop('disabled', true);
-                $("#ancNo").prop('disabled', true);
-                $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
-            } else {
-                $("#<%=lmp.ClientID%>").prop('disabled', false);
-                $("#btnFemaleLMP").prop('disabled', false);
-                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
-                $("#btnEDD").prop('disabled', false);
-                $("#ancYes").prop('disabled', false);
-                $("#ancNo").prop('disabled', false);
-                $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
+            $("#btnFemaleLMP").prop('disabled', true);
+            $("#FemaleLMP").addClass('noevents');
+            $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', true);
+            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+            $("#btnEDD").prop('disabled', true);
+            $("#EDCD").addClass('noevents');
+            $("#ancYes").prop('disabled', true);
+            $("#ancNo").prop('disabled', true);
+            $("#<%=cacxscreening.ClientID%>").prop('disabled', true);
+        } else {
+            $("#<%=lmp.ClientID%>").prop('disabled', false);
+            $("#btnFemaleLMP").prop('disabled', false);
+            $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
+            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+            $("#btnEDD").prop('disabled', false);
+            $("#ancYes").prop('disabled', false);
+            $("#ancNo").prop('disabled', false);
+            $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
-            }
+        }
         //.gender validation
         //pregnancy validations
        
@@ -1370,16 +1527,16 @@
 
         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
 
-            if (pregnancy !== pregnant) {
+        if (pregnancy !== pregnant) {
                 
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
+            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
                
-            } else {
+        } else {
                 
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
+            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
               
 
-            }
+        }
 
         //.pregnancy validation
         var advEventsTable = $('#dtlAdverseEvents').DataTable({
@@ -1516,18 +1673,18 @@
                     .draw();
                 window.location.href = '<%=ResolveClientUrl("~/CCC/Encounter/PatientEncounter.aspx") %>';
 
-                    var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        reactionEventList.splice(index, 1);
-                    }
+                var index = reactionEventList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    reactionEventList.splice(index, 1);
+                }
 
-                    //$(this).closest('tr').remove();
-                    //var y = $(this).closest('tr').find('td').eq(0).html();
-                    //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
-                    //if (index > -1) {
-                    //    arrAdverseEventUI.splice(index, 1);
-                    //}
-                });
+                //$(this).closest('tr').remove();
+                //var y = $(this).closest('tr').find('td').eq(0).html();
+                //index = arrAdverseEventUI.findIndex(x => x.adverseEvent == y);
+                //if (index > -1) {
+                //    arrAdverseEventUI.splice(index, 1);
+                //}
+            });
 
         ////dtlChronicIllness
         $("#dtlChronicIllness").on('click',
@@ -1670,11 +1827,11 @@
                                 window.location
                                     .href =
                                     '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                        },
+                            },
                                             2000);
-                            });
-                                    }
-                    })
+                        });
+                    }
+                })
                     .on("changed.fu.wizard",
                         function () {
 
@@ -1690,66 +1847,66 @@
 
         function savePatientEncounterPresentingComplaint() {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
-                //var visitScheduled = $('input[name="Scheduled"]:checked').val();
-                var visitScheduled = $("input[name$=Scheduled]:checked").val();
-                var ANCProfile = $("input[name$=ANC]:checked").val();      
-                if (ANCProfile == undefined)
-                {
-                    ANCProfile = "99";
-                }
-                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-                var complaints = $("#<%=complaints.ClientID%>").val();
-                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-                var LMP = $("#<%=lmp.ClientID%>").val();
-                var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
-                var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = getSelectedItemsList('fpMethod');
-                var ReasonNotOnFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
-                var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
-                var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-                var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
+            //var visitScheduled = $('input[name="Scheduled"]:checked').val();
+            var visitScheduled = $("input[name$=Scheduled]:checked").val();
+            var ANCProfile = $("input[name$=ANC]:checked").val();      
+            if (ANCProfile == undefined)
+            {
+                ANCProfile = "99";
+            }
+            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+            var complaints = $("#<%=complaints.ClientID%>").val();
+            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+            var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+            var LMP = $("#<%=lmp.ClientID%>").val();
+            var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
+            var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
+            var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
+            var FPMethod = getSelectedItemsList('fpMethod');
+            var ReasonNotOnFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
+            var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
+            var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
+            var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
                 
-                ///////////////////////////////////////////////////////
-                var rowCount = $('#dtlAdverseEvents tbody tr').length;
-                var adverseEventsArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        adverseEventsArray[i] = {
-                            "adverseSeverityID": advEventsTable.row(i).data()[0],
-                            "adverseEvent": advEventsTable.row(i).data()[1],
-                            "medicineCausingAE": advEventsTable.row(i).data()[2],
-                            "adverseSeverity": advEventsTable.row(i).data()[3],
-                            "adverseAction": advEventsTable.row(i).data()[4]
-                        }
+            ///////////////////////////////////////////////////////
+            var rowCount = $('#dtlAdverseEvents tbody tr').length;
+            var adverseEventsArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    adverseEventsArray[i] = {
+                        "adverseSeverityID": advEventsTable.row(i).data()[0],
+                        "adverseEvent": advEventsTable.row(i).data()[1],
+                        "medicineCausingAE": advEventsTable.row(i).data()[2],
+                        "adverseSeverity": advEventsTable.row(i).data()[3],
+                        "adverseAction": advEventsTable.row(i).data()[4]
                     }
                 }
-                catch (ex) {  }
+            }
+            catch (ex) {  }
 
             
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                    data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + ReasonNotOnFP + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','lmp':'" + LMP + "','PregStatus':'" + pregStatus + "','edd':'" + EDD + "','ANC':'" + ANCProfile + "', 'OnFP':'" + onFP + "','fpMethod':'" + FPMethod + "','ReasonNotOnFP':'" + ReasonNotOnFP + "','CaCx':'" + CaCx + "','STIScreening':'" + STIScreening + "','STIPartnerNotification':'" + STIPartnerNotification + "', 'adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
                             
-                        console.log(response.d);
-                        if (response.d > 0)
+                    console.log(response.d);
+                    if (response.d > 0)
                                
-                            toastr.success(response.d, "Presenting Complaints");
-                        else
+                        toastr.success(response.d, "Presenting Complaints");
+                    else
                            
-                            toastr.error(response.d,"Error occured while saving Presenting Complaints");
-                    },
-                    error: function (response) {
+                        toastr.error(response.d,"Error occured while saving Presenting Complaints");
+                },
+                error: function (response) {
                          
-                        toastr.error(response.d, "Error occured while saving Presenting Complaints");
-                    }
-                });
-            }
+                    toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                }
+            });
+        }
        
 
 
@@ -1860,37 +2017,37 @@
         function savePatientPatientManagement() {
                 
             var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
-                var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
-                var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
-                var nextAppDate = "";
-                var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
+            var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
+            var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
+            var nextAppDate = "";
+            var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
 
-                var rowCount = $('#dtlDiagnosis tbody tr').length;
-                var diagnosisArray = new Array();
-                try {
-                    for (var i = 0 ; i < rowCount; i++) {
-                        diagnosisArray[i] = {
-                            "diagnosis": diagnosisTable.row(i).data()[0],
-                            "treatment": diagnosisTable.row(i).data()[1]
-                        }
+            var rowCount = $('#dtlDiagnosis tbody tr').length;
+            var diagnosisArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    diagnosisArray[i] = {
+                        "diagnosis": diagnosisTable.row(i).data()[0],
+                        "treatment": diagnosisTable.row(i).data()[1]
                     }
                 }
-                catch (ex) { }
-                
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
-                    data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        toastr.success(response.d, "Patient Management");
-                    },
-                    error: function (response) {
-                        toastr.error(response.d, "Patient Management Error");
-                    }
-                });
             }
+            catch (ex) { }
+                
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
+                data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient Management");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient Management Error");
+                }
+            });
+        }
 
 
         function getCheckBoxListItemsChecked(elementId) {
@@ -1928,4 +2085,43 @@
             return selectedValues;
         }
     });
+
+    function tbInfectedChange() {
+        if ($("#tbInfected").val() === 'False') {
+            /*$("#IcfActionForm").show();*/
+            $("#iptform").show();
+            $("#IcfForm").show();
+        } else {
+            /*$("#IcfActionForm").hide();*/
+            $("#iptform").hide(); 
+            $("#IcfForm").hide();
+        }
+            
+    }
+
+    function IcfChange() {
+        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+            $("#IcfActionForm").show();
+        } else {
+            $("#IcfActionForm").hide();
+        }
+    }
+
+    function IptWorkUp() {
+        $("#IptClientWorkupForm").show();
+        $("#IptDetailsForm").hide();
+        $("#IptOutcomeDetailsForm").hide();
+    }
+
+    function Ipt() {
+        $("#IptClientWorkupForm").hide();
+        $("#IptDetailsForm").show();
+        $("#IptOutcomeDetailsForm").hide();
+    }
+
+    function IptOutcome() {
+        $("#IptOutcomeDetailsForm").show();
+        $("#IptClientWorkupForm").hide();
+        $("#IptDetailsForm").hide();
+    }
 </script>
