@@ -286,7 +286,7 @@
                 <div class="col-md-12 form-group">
                     <div class="col-md-4">
                         <div class="col-md-12">
-                            <label class="control-label pull-left">Adherance Measurement</label>
+                            <label class="control-label pull-left">Adherence Measurement</label>
                         </div>
                         <div class="col-md-12">
                             <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="adheranceMeasurement" ClientIDMode="Static" onChange="AdheranceMeasurementChange();" />
