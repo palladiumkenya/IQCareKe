@@ -11,66 +11,42 @@ namespace BusinessProcess.CCC
 {
     public class BPatientVitals : ProcessBase, IPatientVitals
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
         public int AddPatientVitals(PatientVital p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
+
                 _unitOfWork.PatientVitalsRepository.Add(p);
                 _result = _unitOfWork.Complete();
-                return _result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return _result;
             }
      
         }
 
         public PatientVital GetPatientVitals(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                        _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                            .OrderBy(x => x.Id)
-                            .FirstOrDefault()
-                    ;
-                return vitals;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                                .OrderBy(x => x.Id)
+                                .FirstOrDefault();
                 _unitOfWork.Dispose();
+                return vitals;
             }
 
         }
 
         public void DeletePatientVitals(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
                 _unitOfWork.PatientVitalsRepository.Remove(vital);
                 _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
             }
     
@@ -78,7 +54,7 @@ namespace BusinessProcess.CCC
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals = new PatientVital()
                 {
@@ -95,64 +71,37 @@ namespace BusinessProcess.CCC
                 };
                 _unitOfWork.PatientVitalsRepository.Update(vitals);
                 _result = _unitOfWork.Complete();
-                return _result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return _result;
             }
 
         }
 
         public PatientVital GetByPatientId(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientVital vital =
-                    _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id)
-                        .FirstOrDefault();
+                                        _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                                            .OrderByDescending(x => x.Id)
+                                            .FirstOrDefault();
+                _unitOfWork.Dispose();
                 return vital;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-            //PatientVital vital = _unitOfWork.PatientVitalsRepository.GetByPatientId(patientId);
       
         }
 
         public List<PatientVital> GetCurrentPatientVital(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                        _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                            .OrderBy(x => x.Id)
-                            .ToList()
-                    ;
+                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                                .OrderBy(x => x.Id)
+                                .ToList();
+                _unitOfWork.Dispose();
                 return vitals;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-   
         }
     }
 }
