@@ -9,7 +9,7 @@ namespace DataAccess.CCC.Repository.Enrollment
     {
         private readonly GreencardContext _context;
 
-        public PatientEnrollmentRepository() : base(new GreencardContext())
+        public PatientEnrollmentRepository() : this(new GreencardContext())
         {
             
         }

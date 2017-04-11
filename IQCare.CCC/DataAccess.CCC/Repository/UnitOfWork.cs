@@ -19,6 +19,9 @@ using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.CCC.Repository.Encounter;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
+using DataAccess.CCC.Interface.Triage;
+using DataAccess.CCC.Repository.Triage;
+using DataAccess.CCC.Repository.Screening;
 
 namespace DataAccess.CCC.Repository
 {
@@ -66,8 +69,16 @@ namespace DataAccess.CCC.Repository
         private IPatientEnrollmentRepository _patientEnrollmentRepository;
         private IPatientEntryPointRepository _patientEntryPointRepository;
         private IPatientIdentifierRepository _patientIdentifierRepository;
+
         /* Patient */
         private IPatientRepository _patientRepository;
+
+        /* Triage */
+        private IPatientFamilyPlanningMethodRepository _PatientFamilyPlanningMethodRepository;
+        private IPatientFamilyPlanningRepository _PatientFamilyPlanningRepository;
+        private IPatientPregnancyIndicatorRepository _PatientPregnancyIndicatorRepository;
+        private IPatientPregnancyRepository _PatientPregnancyRepository;
+        private IPatientScreeningRepository _PatientScreeningRepository;
 
         /*Baseline*/
         // private IPatientDisclosureRepository _patientDisclosureRepository;
@@ -350,6 +361,47 @@ namespace DataAccess.CCC.Repository
         public IPatientConsentRepository PatientConsentRepository
         {
             get { return _patientConsentRepository ?? (_patientConsentRepository = new PatientConsentRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientFamilyPlanningMethodRepository PatientFamilyPlanningMethodRepository
+        {
+            get
+            {
+                return _PatientFamilyPlanningMethodRepository ?? (_PatientFamilyPlanningMethodRepository = new PatientFamilyPlanningMethodRepsotory((GreencardContext)_context));
+            }
+        }
+
+
+        public IPatientFamilyPlanningRepository PatientFamilyPlanningRepository
+        {
+            get
+            {
+                return _PatientFamilyPlanningRepository ?? (_PatientFamilyPlanningRepository = new PatientFamilyPlanningRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientPregnancyIndicatorRepository PatientPregnanacyIndicatorRepository
+        {
+            get
+            {
+                return _PatientPregnancyIndicatorRepository ?? (_PatientPregnancyIndicatorRepository = new PatientPregnancyIndicatorRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientPregnancyRepository PatientPregnancyRepository
+        {
+            get
+            {
+                return _PatientPregnancyRepository ?? (_PatientPregnancyRepository = new PatientPregnancyRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientScreeningRepository PatientScreeningRepository
+        {
+            get
+            {
+                return _PatientScreeningRepository ?? (_PatientScreeningRepository = new PatientScreeningRepository((GreencardContext)_context));
+            }
         }
 
         public int Complete()

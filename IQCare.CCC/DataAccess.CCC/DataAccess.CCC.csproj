@@ -85,6 +85,7 @@
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
+    <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
@@ -101,6 +102,10 @@
     <Compile Include="Interface\Patient\IPatientConsentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientFamilyPlanningMethodRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientFamilyPlanningRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientPregnancyIndicatorRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientPregnancyRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -158,6 +163,11 @@
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
+    <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
+    <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />
+    <Compile Include="Repository\Triage\PatientPregnancyRepository.cs" />
+    <Compile Include="Repository\Triage\PatientPregnancyIndicatorRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />

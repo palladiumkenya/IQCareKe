@@ -44,6 +44,10 @@ namespace DataAccess.CCC.Context
         public DbSet<Entities.CCC.Triage.PatientAllergy> PatientAllergies { get; set; }
         public DbSet<PatientChronicIllness> PatientChronicIllnesses { get; set; }
         public DbSet<PatientVital> PatientVitals { get; set; }
+        public DbSet<Entities.CCC.Triage.PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
+            public DbSet<Entities.CCC.Triage.PatientFamilyPlanningManager> PatientFamilyPlanning { get; set; }
+            public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
+            public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
@@ -70,8 +74,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientCareEnding> PatientCareEnding { get; set; }
         public DbSet<PatientClinicalDiagnosis> PatientClinicalDiagnosis { get; set; }
         public DbSet<PatientClinicalNotes> PatientClinicalNotes { get; set; }
-        public DbSet<PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
-        public DbSet<PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
+        //public DbSet<PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
+        //public DbSet<PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
         public DbSet<PatientPhdp> PatientPhdp { get; set; }
         public DbSet<PatientProphylaxis> PatientProphylaxis { get; set; }
         public DbSet<PatientReferral> PatientReferral { get; set; }
