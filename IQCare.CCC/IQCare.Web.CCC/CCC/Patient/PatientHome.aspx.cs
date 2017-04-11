@@ -112,6 +112,17 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
+                List<LookupItemView> vw = mgr.GetGenderOptions();
+                if (vw != null && vw.Count > 0)
+                {
+                    trtGender.Items.Add(new ListItem("select", "0"));
+
+                    foreach (var item in vw)
+                    {
+                        trtGender.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
 
             }       
         }      

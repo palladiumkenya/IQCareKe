@@ -547,7 +547,7 @@ namespace IQCare.Web.CCC.WebService
                             mobileContact, userId);
                         if (Result > 0)
                         {
-                            Msg += "<p>Person Treatement Supported Addeded Successfully!</p>";
+                            Msg += "<p>Person Treatement Supported Added Successfully!</p>";
                         }
                     }
                 }

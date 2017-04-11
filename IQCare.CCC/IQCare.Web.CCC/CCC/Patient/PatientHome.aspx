@@ -422,9 +422,8 @@
                                                      
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Gender:</label></div>
-                                                         <div class="col-md-12">
-                                                             <asp:TextBox ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
-
+                                                         <div class="col-md-12">                                                           
+                                                             <asp:DropDownList ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
                                                          </div>
                                                      </div>
                                                 </div>
@@ -1170,23 +1169,25 @@
                 var LastName = $("#<%=trtLastName.ClientID%>").val();
                 var Gender = $("#<%=trtGender.ClientID%>").val();
                 var Mobile = $("#<%=trtMobile.ClientID%>").val();
+                var userId = <%=UserId%>;
 
                 if (patientId > 0) {
-                    addPatientTreatmentSupporter(FirstName, MiddleName, LastName, Gender, Mobile);
+                    addPatientTreatmentSupporter(patientId, FirstName, MiddleName, LastName, Gender, Mobile, userId);
                 }
             });
 
         });
 
-        function addPatientTreatmentSupporter(firstName, middleName, lastName, gender, mobile) {
+        function addPatientTreatmentSupporter(patientId, firstName, middleName, lastName, gender, mobile, userId) {
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientSummaryService.asmx/AddPatientTreatmentSupporter",
-                data: "{'firstName':'" + firstName + "', 'middleName':'" + middleName + "', 'lastName':'" + lastName + "', 'gender': '" + gender + "','mobile': '" + mobile + "'}",
+                data: "{'patientId':'"+ patientId + "','firstName':'" + firstName + "', 'middleName':'" + middleName + "', 'lastName':'" + lastName + "', 'gender': '" + gender + "','mobile': '" + mobile + "','userId':'" + userId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
+                    toastr.success(response.d, "add Patient Treatment Supporter");
                 },
                 error: function (response) {
                     toastr.error(response.d, "Error Upating Patient Bio");
@@ -1203,6 +1204,7 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
+                    toastr.success(response.d, "Edit Patient Contacts");
                 },
                 error: function (response) {
                     toastr.error(response.d, "Error Adding New Patient Location");
@@ -1219,6 +1221,7 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
+                    toastr.success(response.d, "add New Patient Location");
                 },
                 error: function (response) {
                     toastr.error(response.d, "Error Adding New Patient Location");
@@ -1235,6 +1238,7 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
+                    toastr.success(response.d, "Update Patient Bio");
                 },
                 error: function (response) {
                     toastr.error(response.d, "Error Upating Patient Bio");

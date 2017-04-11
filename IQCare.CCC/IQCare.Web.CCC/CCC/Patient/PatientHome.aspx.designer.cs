@@ -289,7 +289,7 @@ namespace IQCare.Web.CCC.Patient {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox trtGender;
+        protected global::System.Web.UI.WebControls.DropDownList trtGender;
         
         /// <summary>
         /// trtMiddleName control.

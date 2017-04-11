@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using Microsoft.JScript;
+using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -55,8 +56,41 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientTreatmentSupporter(string firstName , string middleName , string lastName , string gender , string mobile )
+        public string AddPatientTreatmentSupporter(int patientId, string firstName , string middleName , string lastName , int gender , string mobile, int userId )
         {
+            var patientLogic = new PatientLookupManager();
+            var patient = patientLogic.GetPatientDetailSummary(patientId);
+            var personId = patient[0].PersonId;
+
+
+            var personLogic = new PersonManager();
+
+            var personTreatmentSupporterId = personLogic.AddPersonTreatmentSupporterUiLogic(firstName,
+                    middleName,
+                    lastName, gender, userId);
+                Session["PersonTreatmentSupporterId"] = personTreatmentSupporterId;
+
+            if (personTreatmentSupporterId > 0)
+            {
+                msg += "<p>New Treatment Supporter Person Added Successfully!</p>";
+
+                var treatmentSupporter = new PatientTreatmentSupporterManager();
+                var treatment = treatmentSupporter.GetPatientTreatmentSupporter(personId);
+
+                if (treatment.Count > 0)
+                {
+                    treatment[0].DeleteFlag = true;
+                    treatmentSupporter.UpdatePatientTreatmentSupporter(treatment[0]);
+                }
+
+                var result = treatmentSupporter.AddPatientTreatmentSupporter(personId, personTreatmentSupporterId,
+                    mobile, userId);
+                if (result > 0)
+                {
+                    msg += "<p>Person Treatement Supported Added Successfully!</p>";
+                }
+            }
+
             return msg;
         }
     }
