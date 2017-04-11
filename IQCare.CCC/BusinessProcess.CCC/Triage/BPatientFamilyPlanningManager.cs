@@ -55,7 +55,24 @@ namespace BusinessProcess.CCC.Triage
                 _unitOfWork.Dispose();
             }
         }
-        public int DeleteFamilyPlanningStatus(int Id);
+        public int DeleteFamilyPlanningStatus(int Id)
+        {
+            try
+            {
+                var FP = _unitOfWork.PatientFamilyPlanningRepository.GetById(Id);
+                _unitOfWork.PatientFamilyPlanningRepository.Remove(FP);
+                return _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        }
     
         public int CheckFamilyPlanningExists(int patientId)
         {
@@ -94,6 +111,11 @@ namespace BusinessProcess.CCC.Triage
             {
                 _unitOfWork.Dispose();
             }
+        }
+
+        List<PatientFamilyPlanning> IpatientFamilyPlanningManager.GetPatientFamilyPlanningStatus(int patientId)
+        {
+            return _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
         }
     }
 }

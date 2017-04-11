@@ -7,7 +7,7 @@ namespace Interface.CCC.Triage
     {
         int AddPatientPregnancy(PatientPreganancy a);
         int UpdatePatientPreganacy(PatientPreganancy u);
-        int DeletePatientPregnancy(int Id);
+        int DeletePatientPregnancy(int id);
         List<PatientPreganancy> GetPatientPregnancy(int patientId);
         int CheckIfPatientPregnancyExisists(int patientId);
     }

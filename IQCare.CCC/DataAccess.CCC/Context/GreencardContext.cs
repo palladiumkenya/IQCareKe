@@ -45,7 +45,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientChronicIllness> PatientChronicIllnesses { get; set; }
         public DbSet<PatientVital> PatientVitals { get; set; }
         public DbSet<Entities.CCC.Triage.PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
-            public DbSet<Entities.CCC.Triage.PatientFamilyPlanningManager> PatientFamilyPlanning { get; set; }
+            public DbSet<Entities.CCC.Triage.PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
             public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
             public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
 
