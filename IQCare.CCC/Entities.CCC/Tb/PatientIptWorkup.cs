@@ -7,7 +7,7 @@ namespace Entities.CCC.Tb
 {
     [Serializable]
     [Table("PatientIptWorkup")]
-    internal class PatientIptWorkup : BaseEntity
+    public class PatientIptWorkup : BaseEntity
     {
         [Key]
         public int Id { get; set; }

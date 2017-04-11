@@ -16,8 +16,10 @@ using DataAccess.CCC.Repository.Patient;
 using DataAccess.CCC.Repository.visit;
 using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
+using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.CCC.Repository.Encounter;
+using DataAccess.CCC.Repository.Tb;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
 
 namespace DataAccess.CCC.Repository
@@ -87,6 +89,13 @@ namespace DataAccess.CCC.Repository
 
         /*Consent*/
         private IPatientConsentRepository _patientConsentRepository;
+
+        //TB ICF/IPT
+        private IPatientIcfRepository _patientIcfRepository;
+        private IPatientIcfActionRepository _patientIcfActionRepository;
+        private IPatientIptRepository _patientIptRepository;
+        private IPatientIptOutcomeRepository _patientIptOutcomeRepository;
+        private IPatientIptWorkupRepository _patientIptWorkupRepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -340,6 +349,27 @@ namespace DataAccess.CCC.Repository
         public IPatientConsentRepository PatientConsentRepository
         {
             get { return _patientConsentRepository ?? (_patientConsentRepository = new PatientConsentRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientIcfRepository PatientIcfRepository
+        {
+            get { return _patientIcfRepository ?? (_patientIcfRepository = new PatientIcfRepository((GreencardContext)_context)); }
+        }
+        public IPatientIcfActionRepository PatientIcfActionRepository
+        {
+            get { return _patientIcfActionRepository ?? (_patientIcfActionRepository = new PatientIcfActionRepository((GreencardContext)_context)); }
+        }
+        public IPatientIptRepository PatientIptRepository
+        {
+            get { return _patientIptRepository ?? (_patientIptRepository = new PatientIptRepository((GreencardContext)_context)); }
+        }
+        public IPatientIptOutcomeRepository PatientIptOutcomeRepository
+        {
+            get { return _patientIptOutcomeRepository ?? (_patientIptOutcomeRepository = new PatientIptOutcomeRepository((GreencardContext)_context)); }
+        }
+        public IPatientIptWorkupRepository PatientIptWorkupRepository
+        {
+            get { return _patientIptWorkupRepository ?? (_patientIptWorkupRepository = new PatientIptWorkupRepository((GreencardContext)_context)); }
         }
 
         public int Complete()

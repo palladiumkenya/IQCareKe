@@ -5,6 +5,7 @@ using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.Patient;
+using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Interface.visit;
 
 namespace DataAccess.CCC.Interface
@@ -60,5 +61,13 @@ namespace DataAccess.CCC.Interface
 
         /*Consent*/
         IPatientConsentRepository PatientConsentRepository { get; }
+
+        //TB ICF/IPT
+        IPatientIcfRepository PatientIcfRepository { get; }
+        IPatientIcfActionRepository PatientIcfActionRepository { get; }
+        IPatientIptRepository PatientIptRepository { get; }
+        IPatientIptOutcomeRepository PatientIptOutcomeRepository { get; }
+        IPatientIptWorkupRepository PatientIptWorkupRepository { get; }
+
     }
 }
