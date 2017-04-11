@@ -1,15 +1,13 @@
+using DataAccess.Base;
+using DataAccess.Common;
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Collections; 
-using System.Collections.Specialized;
-using DataAccess.Common;            
-using DataAccess.Base; 
 
-namespace DataAccess.Entity 
+namespace DataAccess.Entity
 {
-  
+
     public class ClsObject : ProcessBase , IDisposable 
     {
         #region "Constructor"
@@ -61,11 +59,7 @@ namespace DataAccess.Entity
                 cmdvalue = Params[i + 2].ToString();
                 System.Data.Common.DbParameter p = theCmd.CreateParameter();
                 p.ParameterName = cmdpara;
-                p.Value = cmdvalue;
-
-
-
-
+                p.Value = cmdvalue;                
                 theCmd.Parameters.Add(cmdpara, cmddbtype).Value = cmdvalue;
                 i = i + 3;
             }
@@ -139,8 +133,7 @@ namespace DataAccess.Entity
             }
             finally
             {
-                if (null != cnn)
-                    if (null == this.Connection)
+                
                         DataMgr.ReleaseConnection(cnn);
             }
 
@@ -371,9 +364,8 @@ namespace DataAccess.Entity
             }
             finally
             {
-                if (null != cnn)
-                    if (null == this.Connection)
-                        DataMgr.ReleaseConnection(cnn);
+              
+            DataMgr.ReleaseConnection(cnn);
             }
 
         }
