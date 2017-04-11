@@ -36,12 +36,32 @@ namespace DataAccess.CCC.Repository.Lookup
             return list.ToList();
         }
 
+        public string GetCountyByCountyId(int countyId)
+        {
+            ILookupCounty countyRepository = new LookupCountyRepository();
+            string countyName = countyRepository.FindBy(c => c.CountyId == countyId).Take(1).FirstOrDefault().CountyName;
+            return countyName;
+        }
+
         public List<LookupCounty> GetSubCounties(string county)
         {
            ILookupCounty lookupCountyRepository = new LookupCountyRepository();
             var myList = lookupCountyRepository.FindBy(s => s.CountyName == county);
             var list = myList.GroupBy(x => x.SubcountyId).Select(x => x.First()).OrderBy(x => x.SubcountyName);
             return list.ToList();
+        }
+
+        public string GetSubCountyNameBySubCountyId(int subCountyId)
+        {
+            ILookupCounty lookupCountyRepository = new LookupCountyRepository();
+            return
+                lookupCountyRepository.FindBy(c => c.SubcountyId == subCountyId).Take(1).FirstOrDefault().SubcountyName;
+        }
+
+        public string GetWardNameByWardId(int wardId)
+        {
+            ILookupCounty lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.FindBy(c => c.WardId == wardId).Take(1).FirstOrDefault().WardName;
         }
 
         public List<LookupCounty> GetWardsList(string subcounty)

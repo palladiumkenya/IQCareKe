@@ -121,7 +121,23 @@ namespace IQCare.Web.CCC.WebService
 
             return jsonObject;
         }
-       
-       
+
+        [WebMethod]
+        public string GetCountyByCountyId(int Id)
+        {
+            return LookupLogic.GetCountyByCountyId(Id);
+        }
+
+        [WebMethod]
+        public string GetCountyNameBySubCountyId(int subCountyId)
+        {
+            return LookupLogic.GetCountyNameBySubCountyId(subCountyId);
+        }
+
+        [WebMethod]
+        public string GetWardNameByWardId(int wardId)
+        {
+            return LookupLogic.GetWardNameByWardId(wardId);
+        }
     }
 }

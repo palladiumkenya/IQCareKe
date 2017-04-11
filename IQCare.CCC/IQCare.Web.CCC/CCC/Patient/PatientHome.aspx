@@ -41,7 +41,133 @@
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
             <div class="col-md-12 form-group"></div> 
             <div class="tab-content">
-                 <div id="Registration" class="tab-pane fade in active">  </div> 
+                 <div id="Registration" class="tab-pane fade in active">
+                     <div class="col-md-12 col-xs-12">
+                         <div class="col-md-4 col-xs-4 col-sm-4">
+                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Bio</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">First Name:</label></div>
+                                 <div class="col-md-6">                     
+                                     <asp:Label ID="txtFirstName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Middle Name:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtMiddleName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Last Name:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtLastName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6" style="padding: 0"><label class="control-label pull-left">Patient Population:</label></div>
+                                 <div class="col-md-6" style="padding: 0">                             
+                                     <asp:Label ID="drpPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             
+                             <div class="col-md-12 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Edit Patient Bio</button>
+                             </div>
+
+                         </div>
+                         
+                         <div class="col-md-4 col-xs-4 col-sm-4">
+                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Location</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">County:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Ward:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtWard" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                                       
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Village:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Nearest Health Centre:</label></div>
+                                 <div class="col-md-6" style="padding: 0;">
+                                     <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Patient Location</button>
+                             </div>
+
+                         </div>
+
+                         <div class="col-md-4 col-xs-4 col-sm-4">
+                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Contact</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Postal Adress:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtPostalAddress" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Edit Patient Contacts</button>
+                             </div>
+                             
+                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
+                             <div class="col-md-12"><hr style="margin-top:1%"/></div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Names:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6">
+                                     <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                 </div>
+                             </div>
+                             
+                             <div class="col-md-12 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add Patient Supporter</button>
+                             </div>
+
+                         </div>
+
+                     </div>
+                 </div> 
                  <div id="EntryPoint" class="tab-pane fade">
                      <div class="col-md-12 col-xs-12">
                          
@@ -403,6 +529,7 @@
                         2000);
               });
             };
+
           function getViralLoad() {
                     console.log("get viral load  called");
                     $.ajax({
@@ -567,6 +694,104 @@
                     ]
                 });
             }
-       });
+
+            if (patientId > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PersonService.asmx/GetPersonDetails",
+                    data: "{'PatientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var patientDetails = JSON.parse(response.d);
+                        console.log(patientDetails);
+
+                        $("#<%=txtFirstName.ClientID%>").text(patientDetails.FirstName);
+                        $("#<%=txtMiddleName.ClientID%>").text(patientDetails.MiddleName);
+                        $("#<%=txtLastName.ClientID%>").text(patientDetails.LastName);
+                        $("#<%=drpPatientPopulation.ClientID%>").text(patientDetails.population);
+
+                        var names = null;
+                        names = patientDetails.tsFname +
+                            " " +
+                            patientDetails.tsMiddleName +
+                            " " +
+                            patientDetails.tsLastName;
+
+                        var ISContacts = "";
+                        if (patientDetails.ISContacts != null && patientDetails.ISContacts != "") {
+                            ISContacts = patientDetails.ISContacts;
+                        }
+
+                        $("#<%=txtSupporterNames.ClientID%>").text(names);
+                        $("#<%=txtSupporterMobile.ClientID%>").text(ISContacts);
+
+                        var village = "";
+                        var nearestHealthCentre = "";
+
+                        $.when(GetLookupNameById(patientDetails.CountyId)).then();
+                        $.when(GetWardNameByWardId(patientDetails.Ward)).then();
+
+                        if (patientDetails.Village != "" && patientDetails.Village != null) {
+                            village = patientDetails.Village;
+                        }
+
+                        $("#<%=txtVillage.ClientID%>").text(village);
+
+                        if (patientDetails.NearestHealthCentre != "" && patientDetails.NearestHealthCentre != null) {
+                            nearestHealthCentre = patientDetails.NearestHealthCentre;
+                        }
+                        $("#<%=txtNearestHealthCentre.ClientID%>").text(nearestHealthCentre);
+
+                        var PatientPostalAddress = "";
+                        if (patientDetails.PatientPostalAddress != "" &&
+                            patientDetails.PatientPostalAddress != null) {
+                            PatientPostalAddress = patientDetails.PatientPostalAddress;
+                        }
+                        $("#<%=txtPostalAddress.ClientID%>").text(PatientPostalAddress);
+                        var MobileNumber = "";
+                        if (patientDetails.MobileNumber != "" && patientDetails.MobileNumber != null) {
+                            MobileNumber = patientDetails.MobileNumber;
+                        }
+                        $("#<%=txtMobile.ClientID%>").text(MobileNumber);
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "Error Getting Person Details");
+                    }
+                });
+            }
+        });
+
+        function GetLookupNameById(Id) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetCountyByCountyId",
+                data: "{'Id':'" + Id + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#<%=txtCounty.ClientID%>").text(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Getting Person Details");
+                }
+            });
+        }
+
+        function GetWardNameByWardId(Id) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/LookupService.asmx/GetWardNameByWardId",
+                data: "{'wardId':'" + Id + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $("#<%=txtWard.ClientID%>").text(response.d);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Error Getting Person Details");
+                }
+            });
+        }
     </script>
 </asp:Content>
