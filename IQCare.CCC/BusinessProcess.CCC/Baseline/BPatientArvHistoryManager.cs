@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -11,85 +10,55 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientArvHistoryManager:ProcessBase,IPatientArvHistoryManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-         
         }
 
         public int UpdatePatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
            
         }
 
         public int DeletePatientArvHistory(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var partArtHistory = _unitOfWork.PatientArvHistoryRepository.GetById(id);
                 _unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                 Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                    return Result;
             }
         }
 
         public List<PatientArvHistory> GetPatientArvHistory(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientArtHistory =
-                    _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id)
-                        .Distinct()
-                        .ToList();
-                return patientArtHistory;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                        _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                            .OrderByDescending(x => x.Id)
+                            .Distinct()
+                            .ToList();
                 _unitOfWork.Dispose();
+                return patientArtHistory;
             }
 
         }

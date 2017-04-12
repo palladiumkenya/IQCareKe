@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using Application.Common;
+using System.Data.Entity.ModelConfiguration.Conventions;
+
 namespace DataAccess.Base
 {
     /// <summary>
@@ -21,6 +23,11 @@ namespace DataAccess.Base
        
 
         protected string emrdatabase;
+        public static object _connec;
+        /// <summary>
+        /// Gets the connection.
+        /// </summary>
+        /// <returns></returns>
         protected string reportsdatabase;
         /// <summary>
         /// Initializes a new instance of the <see cref="DataMgr"/> class.
@@ -43,18 +50,25 @@ namespace DataAccess.Base
         {
             Console.Write("GetConnection()");
             Utility objUtil = new Utility();
-          //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
+            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
-           // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
-            constr += ";packet size=4128;Min Pool Size=50;Max Pool Size=500;Pooling=true;MultipleActiveResultSets = True; ";
-            SqlConnection connection = new SqlConnection(constr);   
-                connection.Open();
-                OpenDecryptedSession(connection);
-             return connection;
+            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
+            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=500;Pooling=true;MultipleActiveResultSets = True; ";
+            //using (SqlConnection connection = new SqlConnection(constr))
+            //{
+            //    connection.Open();
+            //    OpenDecryptedSession(connection);
+            //    return connection;
+            //}
+            SqlConnection connection = new SqlConnection(constr);
+            connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
 
         }
-       public static object GetConnection(string connectionName)
+
+        public static object GetConnection(string connectionName)
         {
             Utility objUtil = new Utility();
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(connectionName));

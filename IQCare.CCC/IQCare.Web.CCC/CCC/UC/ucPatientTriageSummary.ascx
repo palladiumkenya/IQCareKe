@@ -61,16 +61,16 @@
 
 </div>
 <div class="col-md-4 col-xs-4 col-sm-4">
-    <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server"> Known Allergies</asp:Label></h4></div>
+    <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server"> Patient Appointment </asp:Label></h4></div>
     <div class="col-md-12" style="padding-top:1% "><hr/></div>
     <div class="col-md-12 col-xs-12 col-sm-12">
               
-        <div class="list-group active">
+        <div class="list-group active col-md-12">
             <ul class="fa-ul">
-              <li><i class="fa-li fa fa-check-square"></i>List icons</li>
-              <li><i class="fa-li fa fa-check-square"></i>can be used</li>
-              <li><i class="fa-li fa fa-spinner fa-spin"></i>as bullets</li>
-              <li><i class="fa-li fa fa-square"></i>in lists</li>
+              <li class="col-md-12"><h6 class="pull-left">Appointment Date : </h6><asp:Label CssClass="text-info" ID="lblappointmentDate" runat="server" ClientIDMode="Static"></asp:Label></li>
+              <li class="col-md-12"><h6 class="pull-left">Appointment Status : </h6><asp:Label CssClass="text-danger" ID="lblappointmentStatus" runat="server" ClientIDMode="Static"></asp:Label></li>
+              <li class="col-md-12"><h6 class="pull-left">Care Status : </h6><asp:Label ID="lblcareStatus" CssClass="text-info" runat="server" ClientIDMode="Static"></asp:Label></li>
+              <li class="col-md-12"><h6 class="pull-left">Appointment Reason : </h6><asp:Label ID="lblAppointmentReason" runat="server" ClientIDMode="Static"></asp:Label></li>
             </ul>
         </div>
     </div>

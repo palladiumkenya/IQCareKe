@@ -9,6 +9,12 @@ namespace IQCare.Web.CCC.Encounter
 {
     public partial class VitalSigns : System.Web.UI.Page
     {
+        protected string Gender
+        {
+            get { return Session["Gender"].ToString(); }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
