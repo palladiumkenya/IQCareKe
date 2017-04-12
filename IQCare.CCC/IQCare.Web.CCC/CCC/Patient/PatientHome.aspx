@@ -12,7 +12,7 @@
             <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
         <%--</div>--%>
 
-    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+<%--    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
         <div class="col-md-6 col-xs-12 col-sm-6">
             
               <div id="vl_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
@@ -23,9 +23,35 @@
              <div id="vitals_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
             <!-- .bs-component-->
         </div>
+    </div>--%>
+    <div class="col-md-12 col-xs-12 col-sm-12">
+         <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="col-md-12">
+                      
+                      <div class="col-md-11">
+                           <div class="col-md-3">
+                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Last ViralLoad :</asp:Label></h5></div>
+                                 <div class="col-md-12">
+                                    <h6> <asp:Label runat="server" ID="lblVL" CssClass="text-info pull-left"> </asp:Label></h6>
+                                </div>
+                           </div>
+                          <div class="col-md-3">
+                               <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> VL Due Date :</asp:Label></h5></div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Current Regimen :</asp:Label></h5></div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Adherance Status :</asp:Label></h5></div>
+                          </div>
+                      </div>
+                  </div><!-- .col-md-12 -->
+                 
+              </div><!-- .panel- body-->
+         </div><!-- .panel-->
     </div>
     
-
     <div class="col-md-12 col-xs-12 col-sm-12">
       
         <ul class="nav nav-tabs">
@@ -33,8 +59,7 @@
             <li class="active"><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
             <li class="disabled"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
             <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-           
-        
+            <li class="disabled"><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>          
 
         </ul>
     
@@ -711,6 +736,17 @@
                               </div>
                           </div>
                  </div> <!-- diagnosis -->  
+                 <div id="Trending" class="tab-pane fade">
+                    
+                      <div class="col-md-6 col-xs-12 col-sm-12">
+                          <div id="vl_container" margin: 0 auto"></div>  
+                     </div>  <!-- .bs-component-->
+                     
+                     <div class="col-md-6 col-xs-12 col-sm-12">
+                          <div id="vitals_container" margin: 0 auto"></div>     
+                     </div><!-- .bs-component-->
+                        
+                </div><!-- .trending-->
    
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->

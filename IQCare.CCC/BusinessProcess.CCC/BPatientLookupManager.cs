@@ -118,8 +118,11 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return _unitOfWork.PatientLookupRepository.GetGenderId(patientId);
+                PatientLookup ptnLookup =_unitOfWork.PatientLookupRepository.GetGenderId(patientId);
+
                 _unitOfWork.Dispose();
+
+                return ptnLookup;
             }
         }
 
@@ -127,11 +130,12 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                        _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
+                int PatientTypeId= _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
                             .Select(x => x.PatientType)
                             .FirstOrDefault();
                 _unitOfWork.Dispose();
+
+                return PatientTypeId;
             }
         }
     }

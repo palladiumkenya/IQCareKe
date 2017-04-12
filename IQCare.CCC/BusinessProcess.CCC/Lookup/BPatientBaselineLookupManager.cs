@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DataAccess.Base;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
@@ -11,34 +10,24 @@ namespace BusinessProcess.CCC.Lookup
 {
     public class BPatientBaselineLookupManager : ProcessBase, IPatientBaselineLookupManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
 
         public List<PatientBaselineLookup> GetAllPatientBaseline(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                    _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId & x.Id > 0)
-                        .ToList();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var PatientBaselineList = _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId & x.Id > 0)
+                            .ToList();
                 _unitOfWork.Dispose();
+                return PatientBaselineList;
             }
         }
 
         public List<PatientBaselineLookup> GetPatientBaselineAssessment(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                    _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
+                var patientBaselineList = _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
                         .Select(x => new PatientBaselineLookup()
                         {
                             patientId = x.patientId,
@@ -50,15 +39,8 @@ namespace BusinessProcess.CCC.Lookup
                             CountyFrom = x.CountyFrom,
                             TransferInNotes = x.TransferInNotes
                         }).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return patientBaselineList;
             }
 
         }
@@ -66,91 +48,66 @@ namespace BusinessProcess.CCC.Lookup
 
         public List<PatientBaselineLookup> GetPatientHIVDiagnosis(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                    _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                        .Select(x => new PatientBaselineLookup()
-                        {
-                            patientId = x.patientId,
-                            HivDiagnosisDate = x.HivDiagnosisDate,
-                            EnrollmentDate = x.EnrollmentDate,
-                            EnrollmentWHOStage = x.EnrollmentWHOStage,
-                            ARTInitiationDate = x.ARTInitiationDate
-                        }).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var patientBaselineList = _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
+                            .Select(x => new PatientBaselineLookup()
+                            {
+                                patientId = x.patientId,
+                                HivDiagnosisDate = x.HivDiagnosisDate,
+                                EnrollmentDate = x.EnrollmentDate,
+                                EnrollmentWHOStage = x.EnrollmentWHOStage,
+                                ARTInitiationDate = x.ARTInitiationDate
+                            }).ToList();
                 _unitOfWork.Dispose();
+                return patientBaselineList;
             }
 
         }
 
         public List<PatientBaselineLookup> GetPatientTransferinStatus(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                    _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                        .Select(x => new PatientBaselineLookup()
-                        {
-                            patientId = x.patientId,
-                            HBVInfected = x.HBVInfected,
-                            Pregnant = x.Pregnant,
-                            TBinfected = x.TBinfected,
-                            WHOStage = x.WHOStage,
-                            BreastFeeding = x.BreastFeeding,
-                            CD4Count = x.CD4Count,
-                            MUAC = x.MUAC,
-                            Weight = x.Weight,
-                            Height = x.Height,
-                            BMI = x.BMI
-                        }).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var patientBaselineList = _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
+                            .Select(x => new PatientBaselineLookup()
+                            {
+                                patientId = x.patientId,
+                                HBVInfected = x.HBVInfected,
+                                Pregnant = x.Pregnant,
+                                TBinfected = x.TBinfected,
+                                WHOStage = x.WHOStage,
+                                BreastFeeding = x.BreastFeeding,
+                                CD4Count = x.CD4Count,
+                                MUAC = x.MUAC,
+                                Weight = x.Weight,
+                                Height = x.Height,
+                                BMI = x.BMI
+                            }).ToList();
                 _unitOfWork.Dispose();
+                return patientBaselineList;
             }
 
         }
 
         public List<PatientBaselineLookup> GetPatientTreatmentInitiation(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return
-                    _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
-                        .Select(x => new PatientBaselineLookup()
-                        {
-                            patientId = x.patientId,
-                            DateStartedOnFirstline = x.DateStartedOnFirstline,
-                            Cohort = x.Cohort,
-                            Regimen = x.Regimen,
-                            BaselineViralLoad = x.BaselineViralLoad,
-                            BaselineViralLoadDate = x.BaselineViralLoadDate
+                var patientBaselineList = _unitOfWork.PatientBaselineLookupRepository.FindBy(x => x.patientId == patientId)
+                            .Select(x => new PatientBaselineLookup()
+                            {
+                                patientId = x.patientId,
+                                DateStartedOnFirstline = x.DateStartedOnFirstline,
+                                Cohort = x.Cohort,
+                                Regimen = x.Regimen,
+                                BaselineViralLoad = x.BaselineViralLoad,
+                                BaselineViralLoadDate = x.BaselineViralLoadDate
 
-                        }).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                            }).ToList();
                 _unitOfWork.Dispose();
+                return patientBaselineList;
             }
-
         }
     }
 }

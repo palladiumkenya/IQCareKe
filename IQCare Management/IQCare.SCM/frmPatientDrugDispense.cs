@@ -1895,7 +1895,8 @@ namespace IQCare.SCM
 
                     foreach (DataRow dr in dt1.Rows)
                     {
-                        totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
+                        if(dr["QtyDisp"].ToString() != "")
+                            totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
                     }
                     //if (PresdispenceQty <= totalOqdQty)
                     //{
