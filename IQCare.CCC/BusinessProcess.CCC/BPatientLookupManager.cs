@@ -7,6 +7,7 @@ using Interface.CCC.Lookup;
 using Application.Common;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
+using DataAccess.CCC.Repository.Lookup;
 
 namespace BusinessProcess.CCC
 {
@@ -17,80 +18,54 @@ namespace BusinessProcess.CCC
 
         public List<PatientLookup> GetPatientDetailsLookup(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientDetails = _unitOfWork.PatientLookupRepository
-                    .FindBy(x => x.Id == id || (x.ptn_pk.Value == id & !x.Active))
-                    .Take(1).ToList();
+                .FindBy(x => x.Id == id || (x.ptn_pk.Value == id & !x.Active))
+                .Take(1).ToList();
 
                 return patientDetails;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
- 
+
         }
 
         public List<PatientLookup> GetPatientByPersonId(int personId)
         {
-            return _unitOfWork.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
+            using (UnitOfWork u = new UnitOfWork(new LookupContext()))
+            {
+                return u.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
+            }
         }
 
         public List<PatientLookup> GetPatientSearchPayload()
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientSearchDetails = _unitOfWork.PatientLookupRepository
                     .GetAll()
-                    //    .Select(x=> new PatientLookup 
-                    //{
-                    //    EnrollmentNumber = x.EnrollmentNumber,
-                    //    PatientIndex = x.PatientIndex,
-                    //    FirstName = x.FirstName,
-                    //    MiddleName = x.MiddleName,
-                    //    DateOfBirth = x.DateOfBirth,
-                    //    Sex = x.Sex,
-                    //    RegistrationDate = x.RegistrationDate,
-                    //    PatientStatus = x.PatientStatus
-                    //})
+                //    .Select(x=> new PatientLookup 
+                //{
+                //    EnrollmentNumber = x.EnrollmentNumber,
+                //    PatientIndex = x.PatientIndex,
+                //    FirstName = x.FirstName,
+                //    MiddleName = x.MiddleName,
+                //    DateOfBirth = x.DateOfBirth,
+                //    Sex = x.Sex,
+                //    RegistrationDate = x.RegistrationDate,
+                //    PatientStatus = x.PatientStatus
+                //})
                     .ToList();
 
                 return patientSearchDetails;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
             }
 
         }
 
         public List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,  int start, int length)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                return _unitOfWork.PatientLookupRepository.GetAll().ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-            //var result = _unitOfWork.PatientLookupRepository.GetAll();
+                var result = _unitOfWork.PatientLookupRepository.GetAll();
 
                 //if (!string.IsNullOrWhiteSpace(patientId))
                 //{
@@ -121,65 +96,41 @@ namespace BusinessProcess.CCC
                 //{
                 //    result = result.Where(x => x.FacilityId == facility);
                 //}
-
-                //return result.ToList();
+                _unitOfWork.Dispose();
+                return result.ToList();
+            }
         }
 
         public int GetTotalpatientCount()
         {
-            try
+            int totalCount = 0;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
+                totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
 
-                return totalCount;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+
             }
+            return totalCount;
 
         }
         public PatientLookup GetGenderID(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 return _unitOfWork.PatientLookupRepository.GetGenderId(patientId);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
             }
-            //PatientLookupRepository lookupGender = new PatientLookupRepository();
-            //return lookupGender.GetGenderId(patientId);
         }
 
         public int GetPatientTypeId(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 return
-                    _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
-                        .Select(x => x.PatientType)
-                        .FirstOrDefault();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                        _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
+                            .Select(x => x.PatientType)
+                            .FirstOrDefault();
                 _unitOfWork.Dispose();
             }
         }

@@ -423,9 +423,6 @@ namespace DataAccess.CCC.Repository
                 }
             }
 
-            DataMgr.ReleaseConnection(DataMgr.GetConnection());
-            this._disposed = true;
-
         }
 
         public void Dispose()
