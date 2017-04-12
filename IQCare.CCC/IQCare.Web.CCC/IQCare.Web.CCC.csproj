@@ -101,6 +101,7 @@
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
+    <Content Include="CCC\WebService\FacilityService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
@@ -108,6 +109,7 @@
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
+    <Content Include="CCC\WebService\PatientSummaryService.asmx" />
     <Content Include="CCC\WebService\PatientVitals.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
@@ -345,6 +347,10 @@
     <Compile Include="CCC\WebService\EnrollmentService.asmx.cs">
       <DependentUpon>EnrollmentService.asmx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\FacilityService.asmx.cs">
+      <DependentUpon>FacilityService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\LabService.asmx.cs">
       <DependentUpon>LabService.asmx</DependentUpon>
     </Compile>
@@ -373,6 +379,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientService.asmx.cs">
       <DependentUpon>PatientService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientSummaryService.asmx.cs">
+      <DependentUpon>PatientSummaryService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientVitals.asmx.cs">

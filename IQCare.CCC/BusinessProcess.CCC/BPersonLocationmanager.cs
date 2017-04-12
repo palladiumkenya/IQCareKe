@@ -71,7 +71,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
                 /*personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
                 .OrderBy(x => x.Id)
@@ -114,7 +114,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
    
         }

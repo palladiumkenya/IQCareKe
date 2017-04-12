@@ -310,34 +310,45 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
-                var personLocation = new PersonLocationManager();
+                var PatientId = Convert.ToInt32(Session["PatientId"]);
 
-                var currentLocation = personLocation.GetCurrentPersonLocation(PersonId);
-                if (currentLocation.Count > 0)
+                if (PersonId > 0 || PatientId > 0)
                 {
-                    currentLocation[0].PersonId = PersonId;
-                    currentLocation[0].County = county;
-                    currentLocation[0].SubCounty = subcounty;
-                    currentLocation[0].Ward = ward;
-                    currentLocation[0].Village = village;
-                    currentLocation[0].Location = location;
-                    currentLocation[0].SubLocation = sublocation;
-                    currentLocation[0].LandMark = landmark;
-                    currentLocation[0].NearestHealthCentre = nearesthealthcentre;
-
-                    personLocation.UpdatePersonLocation(currentLocation[0]);
-
-                    Msg += "<p>Person Location successfully updated</p>";
-                }
-                else
-                {
-                    Result = personLocation.AddPersonLocation(PersonId, county, subcounty, ward, village, location,
-                        sublocation, landmark, nearesthealthcentre, userId);
-                    if (Result > 0)
+                    var personLocation = new PersonLocationManager();
+                    if (PersonId == 0)
                     {
-                        Msg += "<p>Current Person Location Addedd successfully during !</p>";
+                        var patientLogic = new PatientLookupManager();
+                        var patient = patientLogic.GetPatientDetailSummary(PatientId);
+                        PersonId = patient[0].PersonId;
+                    }
+                    
+
+                    var currentLocation = personLocation.GetCurrentPersonLocation(PersonId);
+                    if (currentLocation.Count > 0)
+                    {
+                        /*Update old location*/
+                        currentLocation[0].DeleteFlag = true;
+                        personLocation.UpdatePersonLocation(currentLocation[0]);
+                        /*Add new location*/
+                        Result = personLocation.AddPersonLocation(PersonId, county, subcounty, ward, village, location,
+                            sublocation, landmark, nearesthealthcentre, userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Location successfully updated</p>";
+                        }
+                    }
+                    else
+                    {
+                        Result = personLocation.AddPersonLocation(PersonId, county, subcounty, ward, village, location,
+                            sublocation, landmark, nearesthealthcentre, userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Current Person Location Addedd successfully during !</p>";
+                        }
                     }
                 }
+                else
+                    Msg += "The current person was not updated";
             }
             catch (SoapException e)
             {
@@ -367,19 +378,26 @@ namespace IQCare.Web.CCC.WebService
                     var personContact = new PersonContactManager();
                     var personContactLookUp = new PersonContactLookUpManager();
 
-                    if (alternativeNumber != null)
+                    if (PersonId == 0)
                     {
-                        alternativeNumber = _utility.Encrypt(alternativeNumber);
-                    }
-                    if (emailAddress != null)
-                    {
-                        emailAddress = _utility.Encrypt(emailAddress);
+                        var patientLogic = new PatientLookupManager();
+                        var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
+                        PersonId = patient[0].PersonId;
                     }
 
                     var contacts = personContactLookUp.GetPersonContactByPersonId(PersonId);
 
                     if (contacts.Count > 0)
                     {
+                        if (alternativeNumber != null)
+                        {
+                            alternativeNumber = _utility.Encrypt(alternativeNumber);
+                        }
+                        if (emailAddress != null)
+                        {
+                            emailAddress = _utility.Encrypt(emailAddress);
+                        }
+
                         PersonContact perContact = new PersonContact();
                         perContact.Id = contacts[0].Id;
                         perContact.PersonId = contacts[0].PersonId;
@@ -536,7 +554,7 @@ namespace IQCare.Web.CCC.WebService
                             mobileContact, userId);
                         if (Result > 0)
                         {
-                            Msg += "<p>Person Treatement Supported Addeded Successfully!</p>";
+                            Msg += "<p>Person Treatement Supported Added Successfully!</p>";
                         }
                     }
                 }
@@ -779,7 +797,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var personLookUpManager = new PersonLookUpManager();
-                var dobb = "";
+                //var dobb = "";
 
                 var results = personLookUpManager.GetPersonSearchResults(firstName, middleName, lastName, dob);
                 var patientLookup = new PatientLookupManager();

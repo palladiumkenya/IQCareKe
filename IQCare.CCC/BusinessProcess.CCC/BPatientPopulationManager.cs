@@ -27,7 +27,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
   
         }
@@ -46,7 +46,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
         
         }
@@ -66,7 +66,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
    
         }
@@ -88,7 +88,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
    
         }
@@ -112,7 +112,7 @@ namespace BusinessProcess.CCC
             }
             finally
             {
-                _unitOfWork.Dispose();
+                //_unitOfWork.Dispose();
             }
    
         }
