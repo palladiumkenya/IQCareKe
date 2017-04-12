@@ -378,19 +378,26 @@ namespace IQCare.Web.CCC.WebService
                     var personContact = new PersonContactManager();
                     var personContactLookUp = new PersonContactLookUpManager();
 
-                    if (alternativeNumber != null)
+                    if (PersonId == 0)
                     {
-                        alternativeNumber = _utility.Encrypt(alternativeNumber);
-                    }
-                    if (emailAddress != null)
-                    {
-                        emailAddress = _utility.Encrypt(emailAddress);
+                        var patientLogic = new PatientLookupManager();
+                        var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
+                        PersonId = patient[0].PersonId;
                     }
 
                     var contacts = personContactLookUp.GetPersonContactByPersonId(PersonId);
 
                     if (contacts.Count > 0)
                     {
+                        if (alternativeNumber != null)
+                        {
+                            alternativeNumber = _utility.Encrypt(alternativeNumber);
+                        }
+                        if (emailAddress != null)
+                        {
+                            emailAddress = _utility.Encrypt(emailAddress);
+                        }
+
                         PersonContact perContact = new PersonContact();
                         perContact.Id = contacts[0].Id;
                         perContact.PersonId = contacts[0].PersonId;

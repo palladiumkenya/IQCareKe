@@ -255,29 +255,29 @@
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">County:</label></div>
-                                 <div class="col-md-6">
+                                 <div class="col-md-3"><label class="control-label pull-left">County:</label></div>
+                                 <div class="col-md-3">
                                      <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             </div>
+                             <!--</div>
                              
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Ward:</label></div>
-                                 <div class="col-md-6">
+                             <div class="col-md-12 form-group">-->
+                                 <div class="col-md-3"><label class="control-label pull-left">Ward:</label></div>
+                                 <div class="col-md-3">
                                      <asp:Label ID="txtWard" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
                                        
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Village:</label></div>
-                                 <div class="col-md-6">
+                                 <div class="col-md-3"><label class="control-label pull-left">Village:</label></div>
+                                 <div class="col-md-3">
                                      <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             </div>
+                             <!--</div>
 
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Nearest Health Centre:</label></div>
-                                 <div class="col-md-6" style="padding: 0;">
+                             <div class="col-md-12 form-group">-->
+                                 <div class="col-md-4" style="padding: 0;"><label class="control-label pull-left">Nearest H/C:</label></div>
+                                 <div class="col-md-2" style="padding: 0;">
                                      <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
@@ -397,8 +397,8 @@
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Postal Adress:</label></div>
-                                 <div class="col-md-6">
+                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Postal Address:</label></div>
+                                 <div class="col-md-6" style="padding: 0;">
                                      <asp:Label ID="txtPostalAddress" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
