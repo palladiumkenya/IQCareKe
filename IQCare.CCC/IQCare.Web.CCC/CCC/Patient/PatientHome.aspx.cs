@@ -7,6 +7,8 @@ using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
+using Interface.CCC.Encounter;
+using Interface.CCC.Visit;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -14,6 +16,9 @@ namespace IQCare.Web.CCC.Patient
     {
         public int PatientMasterVisitId;
         public decimal march_height;
+        protected int ptnPk=0;
+        protected Decimal vlValue=0;
+        protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
         protected int PatientId
         {
@@ -123,7 +128,47 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
+                // viral Load Alerts
+                PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
+                if (_patientlookup != null)
+                {
+                    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
+                }
+                if (ptnPk > 0) {
+                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(ptnPk);
+                        if (LabOrder != null)
+                        {
+                            vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
+                            switch (LabOrder.OrderStatus)
+                            {
+                                case "Pending":
+                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.OrderStatus + "/ Date: " + LabOrder.OrderDate.ToString("DD-MMM-YYY")+"</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
+                                    break;
+                                case "Complete":
+                                    if (vlValue > 1000)
+                                    {
+                                    lblVL.Text = "<span class='label label-danger'>"+ vlValue +"</span>";
+                                        lblvlDueDate.Text = LabOrder.OrderDate.AddMonths(3).ToString("DD-MMM-YYYY");
+                                    }
+                                    else
+                                    {
+                                        lblvlDueDate.Text = LabOrder.OrderDate.AddMonths(6).ToString("DD-MMM-YYYY");
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            lblVL.Text = LabOrder.LabTestId.ToString()+" Date: "+ LabOrder.OrderDate.ToString("DD-MMM-YYY");
 
+                        }else
+                        {
+                            lblVL.Text = "Not Done/Pending";
+                        }
+                }else
+                {
+                    lblVL.Text = "<span class='label label-danger'>Patient Not Referenced</span>";
+                }
             }       
         }      
     }

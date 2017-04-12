@@ -12,5 +12,6 @@ namespace Interface.CCC.Encounter
         int DeletePatientLabOrder(int id);
         List<LabOrderEntity> GetPatientCurrentLabOrders(int patientId, DateTime visitDate);
         List<LabOrderEntity> GetPatientLabOrdersAll(int patientId);
+      
     }
 }
