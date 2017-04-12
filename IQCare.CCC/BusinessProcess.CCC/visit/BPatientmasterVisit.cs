@@ -279,5 +279,23 @@ namespace BusinessProcess.CCC.visit
             }
 
         }
+
+        public List<PatientMasterVisit> GetByDate(DateTime date)
+        {
+            try
+            {
+                List<PatientMasterVisit> patientVisitList =_unitOfWork.PatientMasterVisitRepository.GetByDate(date);
+                return patientVisitList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+        }
     }
 }

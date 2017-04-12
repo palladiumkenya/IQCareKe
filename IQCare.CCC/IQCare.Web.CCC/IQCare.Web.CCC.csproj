@@ -441,6 +441,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Interface.Administration">
       <HintPath>..\..\References\Interface.Administration.dll</HintPath>
     </Reference>
