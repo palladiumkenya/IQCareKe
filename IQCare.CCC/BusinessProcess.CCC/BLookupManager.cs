@@ -110,7 +110,7 @@ namespace BusinessProcess.CCC
 
         public string GetLookupNameFromId(int id)
         {
-            return _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).SingleOrDefault();
+            return _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).OrderBy(c=>c.MasterId).Take(1).Select(x => x.ItemName).SingleOrDefault();
             //LookupRepository lookupRepository = new LookupRepository();
             //return  lookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).SingleOrDefault();
             //return itemName.ToString();
