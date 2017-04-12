@@ -12,124 +12,85 @@ namespace BusinessProcess.CCC.visit
 {
     public class BPatientmasterVisit : ProcessBase, IPatientMasterVisitManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientmasterVisit(PatientMasterVisit patientMasterVisit)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientMasterVisitRepository.Add(patientMasterVisit);
                 Result = _unitOfWork.Complete();
-                return patientMasterVisit.Id;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return patientMasterVisit.Id;
             }
 
         }
 
         public int DeletePatientVisit(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientmasterVisit = _unitOfWork.PatientMasterVisitRepository.GetById(id);
                 _unitOfWork.PatientMasterVisitRepository.Remove(patientmasterVisit);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                 Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
 
         }
 
         public List<PatientMasterVisit> GetPatientCurrentVisit(int patientId, DateTime visitDate)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientMasterVisit> patientMasterVisitList =
-                    _unitOfWork.PatientMasterVisitRepository.FindBy(
-                            x =>
-                                x.PatientId == patientId &
-                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
-                                x.DeleteFlag)
-                        .OrderByDescending(x => x.Id).Take(1).ToList();
-                return patientMasterVisitList;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
+                _unitOfWork.PatientMasterVisitRepository.FindBy(
+                        x =>
+                            x.PatientId == patientId &
+                            DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                            x.DeleteFlag)
+                    .OrderByDescending(x => x.Id).Take(1).ToList();
+                            _unitOfWork.Dispose();
+                            return patientMasterVisitList;
             }
 
         }
 
         public List<PatientMasterVisit> GetPatientVisits(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientMasterVisit> patientVisitList =
-                    _unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id).ToList();
-                return patientVisitList;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+    _unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+        .OrderByDescending(x => x.Id).ToList();
                 _unitOfWork.Dispose();
+                return patientVisitList;
             }
 
         }
 
         public int UpdatePatientMasterVisit(PatientMasterVisit patientMasterVisit)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientMasterVisitRepository.Update(patientMasterVisit);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return Result = _unitOfWork.Complete();
             }
 
         }
 
         public int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientMasterVisitAutoClosure(patientId);
 
                 var visitId =
                     _unitOfWork.PatientMasterVisitRepository.FindBy(
                         x =>
-                            //x.PatientId == patientId & DbFunctions.AddHours(x.Start,-24) <= DateTime.Now &
+                                //x.PatientId == patientId & DbFunctions.AddHours(x.Start,-24) <= DateTime.Now &
                                 x.PatientId == patientId & DbFunctions.DiffHours(x.Start, DateTime.Now) <= 24 &
                                 x.End == null & !x.Active & x.Status == 1).Select(x => x.Id).FirstOrDefault();
                 if (visitId == 0)
@@ -138,23 +99,15 @@ namespace BusinessProcess.CCC.visit
                     _unitOfWork.Complete();
                     visitId = patientMasterVisit.Id;
                 }
+
+                _unitOfWork.Dispose();
                 return visitId;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
         }
 
         public int PatientMasterVisitCheckout(int patientId,PatientMasterVisit patientMasterVisit)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientVisit =
                     _unitOfWork.PatientMasterVisitRepository.FindBy(
@@ -173,23 +126,15 @@ namespace BusinessProcess.CCC.visit
                     _unitOfWork.PatientMasterVisitRepository.Update(patientMasterVisit);
                     Result = _unitOfWork.Complete();
                 }
-                return Result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return Result;
             }
 
         }
 
         public int PatientMasterVisitCheckout(int patientId, int masterVisitId,int visitSchedule, int visitBy,int visitType,DateTime visitDate)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientVisit = _unitOfWork.PatientMasterVisitRepository.GetById(masterVisitId);
                 if (null != patientVisit)
@@ -205,29 +150,17 @@ namespace BusinessProcess.CCC.visit
                     _unitOfWork.PatientMasterVisitRepository.Update(patientVisit);
                     Result = _unitOfWork.Complete();
                 }
+                _unitOfWork.Dispose();
                 return Result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
-
 
         }
 
         public void PatientMasterVisitAutoClosure(int patientId)
         {
-
-
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientMasterVisit> patientMasterVisits =_unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId & x.End == null & DbFunctions.DiffHours(x.Start, DateTime.Now) > 24).OrderBy(x => x.Id).ToList();
+                List<PatientMasterVisit> patientMasterVisits = _unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId & x.End == null & DbFunctions.DiffHours(x.Start, DateTime.Now) > 24).OrderBy(x => x.Id).ToList();
 
                 if (patientMasterVisits.Count > 0)
                 {
@@ -242,40 +175,27 @@ namespace BusinessProcess.CCC.visit
                         item.VisitType = null;
 
                         _unitOfWork.PatientMasterVisitRepository.Update(item);
+
                         Result = _unitOfWork.Complete();
+                        _unitOfWork.Dispose();
                     }
                 }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            //finally
-            //{
-            //    _unitOfWork.Dispose();
-            //}
 
         }
 
         public DateTime GetPatientLastVisitDate(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                Convert.ToDateTime(
+
+                
+              DateTime PatineLastVisitDate=   Convert.ToDateTime(
                     _unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId)
                         .OrderByDescending(x => x.Id)
                         .Select(x => x.Start));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return PatineLastVisitDate;
             }
 
         }

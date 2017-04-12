@@ -12,7 +12,7 @@
             <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
         <%--</div>--%>
 
-    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+<%--    <div class="col-md-12 col-xs-12 col-sm-12 form-group">
         <div class="col-md-6 col-xs-12 col-sm-6">
             
               <div id="vl_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
@@ -23,9 +23,35 @@
              <div id="vitals_container" style="min-width: 300px; height: 350px; margin: 0 auto"></div> 
             <!-- .bs-component-->
         </div>
+    </div>--%>
+    <div class="col-md-12 col-xs-12 col-sm-12">
+         <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="col-md-12">
+                      
+                      <div class="col-md-11">
+                           <div class="col-md-3">
+                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Last ViralLoad :</asp:Label></h5></div>
+                                 <div class="col-md-12">
+                                    <h6> <asp:Label runat="server" ID="lblVL" CssClass="text-info pull-left"> </asp:Label></h6>
+                                </div>
+                           </div>
+                          <div class="col-md-3">
+                               <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> VL Due Date :</asp:Label></h5></div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Current Regimen :</asp:Label></h5></div>
+                          </div>
+                          <div class="col-md-3">
+                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Adherance Status :</asp:Label></h5></div>
+                          </div>
+                      </div>
+                  </div><!-- .col-md-12 -->
+                 
+              </div><!-- .panel- body-->
+         </div><!-- .panel-->
     </div>
     
-
     <div class="col-md-12 col-xs-12 col-sm-12">
       
         <ul class="nav nav-tabs">
@@ -33,8 +59,7 @@
             <li class="active"><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
             <li class="disabled"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
             <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-           
-        
+            <li class="disabled"><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>          
 
         </ul>
     
@@ -94,8 +119,9 @@
                                      <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
+
                              <!-- Modal -->
-                             <div id="patientBioModal" class="modal fade" role="dialog">
+                             <div id="patientBioModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                                  <div class="modal-dialog">
                                      <!-- Modal content-->
                                      <div class="modal-content">
@@ -110,7 +136,7 @@
                                                  <div class="col-md-12 form-group">
                                                      <div class="col-md-3"><label class="control-label pull-left">First Name:</label></div>
                                                      <div class="col-md-6">                     
-                                                         <asp:TextBox ID="bioFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                         <asp:TextBox ID="bioFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                                      </div>
                                                  </div>
                                                  
@@ -124,14 +150,14 @@
                                                  <div class="col-md-12 form-group">
                                                      <div class="col-md-3"><label class="control-label pull-left">Last Name:</label></div>
                                                      <div class="col-md-6">                     
-                                                         <asp:TextBox ID="bioLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                         <asp:TextBox ID="bioLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
                                                      </div>
                                                  </div>
                                                  
                                                  <div class="col-md-12 form-group">
                                                      <div class="col-md-3"><label class="control-label pull-left">Patient Population:</label></div>
                                                      <div class="col-md-6">
-                                                         <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control"></asp:DropDownList>
+                                                         <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control" required="true" data-parsley-min="1"></asp:DropDownList>
                                                      </div>
                                                  </div>
 
@@ -164,7 +190,7 @@
                              
 
                              <!-- Modal -->
-                             <div id="treatmentSupporterModal" class="modal fade" role="dialog">
+                             <div id="treatmentSupporterModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                                  <div class="modal-dialog">
                                      <!-- Modal content-->
                                      <div class="modal-content">
@@ -181,7 +207,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">First Name:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="trtFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="trtFirstName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="first name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -189,7 +215,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Gender:</label></div>
                                                          <div class="col-md-12">                                                           
-                                                             <asp:DropDownList ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+                                                             <asp:DropDownList ID="trtGender" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" required="true" data-parsley-min="1"></asp:DropDownList>
                                                          </div>
                                                      </div>
                                                 </div>
@@ -207,7 +233,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -218,7 +244,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Last Name:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -283,12 +309,12 @@
                              </div>
                              
                              <!-- Modal -->
-                             <div id="patientLocationModal" class="modal fade" role="dialog">
+                             <div id="patientLocationModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                                  <div class="modal-dialog">
                                      <!-- Modal content-->
                                      <div class="modal-content">
                                          <div class="modal-header">
-                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                             <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
                                              <h4 class="modal-title">Add Patient Location</h4>
 
                                          </div>
@@ -300,7 +326,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">County:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:DropDownList ID="smrCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+                                                             <asp:DropDownList ID="smrCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" required="true" data-parsley-min="1"></asp:DropDownList>
 
                                                          </div>
                                                      </div>
@@ -320,7 +346,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Sub-County:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:DropDownList ID="smrSubCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+                                                             <asp:DropDownList ID="smrSubCounty" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" required="true" data-parsley-min="1"></asp:DropDownList>
 
                                                          </div>
                                                      </div>
@@ -339,7 +365,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Ward:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:DropDownList ID="smrWard" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:DropDownList>
+                                                             <asp:DropDownList ID="smrWard" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" required="true" data-parsley-min="1"></asp:DropDownList>
 
                                                          </div>
                                                      </div>
@@ -347,7 +373,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Landmark:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="smrLandmark" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="smrLandmark" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="landmark" data-parsley-required="true" type="text"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -366,7 +392,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Nearest Health Center:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="smrNearestHealthCenter" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="smrNearestHealthCenter" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="nearest health center" data-parsley-required="true" type="text"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -412,7 +438,7 @@
                              </div>
                              
                             <!-- Modal -->
-                             <div id="patientContactModal" class="modal fade" role="dialog">
+                             <div id="patientContactModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                                  <div class="modal-dialog">
                                      <!-- Modal content-->
                                      <div class="modal-content">
@@ -429,7 +455,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Postal Address:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patPostalAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="patPostalAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="postal address" data-parsley-length="[8,100]"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -437,7 +463,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="Mobile No..." data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patAlternativeMobile"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -448,7 +474,7 @@
                                                     <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Email Address:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patEmailAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="patEmailAddress" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-type="email"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -456,7 +482,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Alternative Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patAlternativeMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static"></asp:TextBox>
+                                                             <asp:TextBox ID="patAlternativeMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-trigger="keyup" placeholder="alternative mobile no..." data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patMobile"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -710,6 +736,17 @@
                               </div>
                           </div>
                  </div> <!-- diagnosis -->  
+                 <div id="Trending" class="tab-pane fade">
+                    
+                      <div class="col-md-6 col-xs-12 col-sm-12">
+                          <div id="vl_container" margin: 0 auto"></div>  
+                     </div>  <!-- .bs-component-->
+                     
+                     <div class="col-md-6 col-xs-12 col-sm-12">
+                          <div id="vitals_container" margin: 0 auto"></div>     
+                     </div><!-- .bs-component-->
+                        
+                </div><!-- .trending-->
    
              </div><!-- .tab-content -->
         </div> <!-- col-md-12 -->
@@ -1017,9 +1054,13 @@
             }
 
             $("#btnSaveBio").click(function() {
-                var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val());
-                var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val());
-                var bioLastName = escape($("#<%=bioLastName.ClientID%>").val());
+                if (!$('#patientBioModal').parsley().validate()) {
+                    //console.log("here");
+                    return false;
+                }
+                var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val().trim());
+                var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val().trim());
+                var bioLastName = escape($("#<%=bioLastName.ClientID%>").val().trim());
                 var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").val();
                 var userId = <%=UserId%>;
 
@@ -1042,6 +1083,9 @@
             });
 
             $("#btnAddLocation").click(function() {
+                if (!$('#patientLocationModal').parsley().validate()) {
+                    return false;
+                }
                 var personId = 0;
                 var county = $("#<%=smrCounty.ClientID%>").val();
                 var subcounty = $("#<%=smrSubCounty.ClientID%>").val();
@@ -1062,6 +1106,10 @@
             });
 
             $("#btnEditPatientContacts").click(function() {
+                if (!$('#patientContactModal').parsley().validate()) {
+                    return false;
+                }
+                
                 var personId = 0;
                 var physicalAddress = $("#<%=patPostalAddress.ClientID%>").val();
                 var mobileNumber = $("#<%=patMobile.ClientID%>").val();
@@ -1074,7 +1122,10 @@
                 }             
             });
 
-            $("#btnAddPatientTreatmentSupporter").click(function() {
+            $("#btnAddPatientTreatmentSupporter").click(function() {             
+                if (!$('#treatmentSupporterModal').parsley().validate()) {
+                    return false;
+                }
                 var FirstName = $("#<%=trtFirstName.ClientID%>").val();
                 var MiddleName = $("#<%=trtMiddleName.ClientID%>").val();
                 var LastName = $("#<%=trtLastName.ClientID%>").val();

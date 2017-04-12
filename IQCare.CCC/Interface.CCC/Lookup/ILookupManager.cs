@@ -30,6 +30,7 @@ namespace Interface.CCC.Lookup
         string GetCountyByCountyId(int countyId);
         string GetCountyNameBySubCountyId(int subCountyId);
         string GetWardNameByWardId(int wardId);
+
     }
 
 

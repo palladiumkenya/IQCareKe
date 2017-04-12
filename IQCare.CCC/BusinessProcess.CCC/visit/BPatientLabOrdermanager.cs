@@ -14,79 +14,51 @@ namespace BusinessProcess.CCC.visit
 {
     public class BPatientLabOrdermanager : ProcessBase, IPatientLabOrderManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientLabTracker(PatientLabTracker patientLabTracker)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientLabTrackerRepository.Add(patientLabTracker);
-                return Result = _unitOfWork.Complete();
+                 Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            //finally
-            //{
-            //    _unitOfWork.Dispose();
-            //}
         }
         public int AddPatientLabOrder(LabOrderEntity labOrderEntity)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientLabOrderRepository.Add(labOrderEntity);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
-            }
-           
+                return Result;
+            }           
         }
+
         public int UpdatePatientLabOrder(PatientLabTracker patientLabTracker)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientLabTrackerRepository.Update(patientLabTracker);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
            
         }
 
         public int DeletePatientLabOrder(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientLabOrder = _unitOfWork.PatientLabTrackerRepository.GetById(id);
                 _unitOfWork.PatientLabTrackerRepository.Remove(patientLabOrder);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
 
         }
@@ -94,99 +66,72 @@ namespace BusinessProcess.CCC.visit
 
         public List<PatientLabTracker> GetPatientCurrentLabOrders(int patientId, DateTime visitDate)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientLabTracker> patientLabOrders =
-                    _unitOfWork.PatientLabTrackerRepository.FindBy(
-                            x =>
-                                x.PatientId == patientId &
-                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
-                                !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id).Take(1).ToList();
-                return patientLabOrders;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                 _unitOfWork.PatientLabTrackerRepository.FindBy(
+                         x =>
+                             x.PatientId == patientId &
+                             DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                             !x.DeleteFlag)
+                     .OrderByDescending(x => x.Id).Take(1).ToList();
                 _unitOfWork.Dispose();
+                return patientLabOrders;
             }
    
         }
 
         public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientLabTracker> patientLabOrders =
-                    _unitOfWork.PatientLabTrackerRepository.FindBy(
-                            x =>
-                                x.PatientId == patientId &
-                                !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id).Take(1).ToList();
-                return patientLabOrders;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+    _unitOfWork.PatientLabTrackerRepository.FindBy(
+            x =>
+                x.PatientId == patientId &
+                !x.DeleteFlag)
+        .OrderByDescending(x => x.Id).Take(1).ToList();
                 _unitOfWork.Dispose();
+                return patientLabOrders;
             }
 
         }
         public List<LabResultsEntity> GetPatientVL(int labOrderId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                    return
-         _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
-             .Where(x => x.LabTestId == 3)
-             .OrderBy(x => x.Id)
-             .ToList();
+               var patientVL= _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
+                .Where(x => x.LabTestId == 3)
+                .OrderBy(x => x.Id)
+                .ToList();
 
-     
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return patientVL;
             }
-    
-
-
         }
 
         public LabOrderEntity GetPatientLabOrder(int ptnPk)
-
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                    _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk)
+               var labOrder= _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk)
                         .Where(x => x.LabTestId == 3)
                         .FirstOrDefault();
-
+                _unitOfWork.Dispose();
+                return labOrder;
             }
-            catch (Exception e)
+
+        }
+
+        public LabOrderEntity GetPatientCurrentviralLoadInfo(int ptnPk)
+        {
+ 
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                Console.WriteLine(e);
-                throw;
+                var vlInfo = _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk).OrderByDescending(x => x.Id).FirstOrDefault();
+                _unitOfWork.Dispose();
+                return vlInfo;
             }
-            //finally
-            //{
-            //    _unitOfWork.Dispose();
-            //}
-
         }
     }
 }
