@@ -27,7 +27,7 @@ namespace IQCare.CCC.UILogic
             return _appointment.AddPatientAppointments(appointment);
         }
 
-        public PatientAppointment GetPatientAppointments(int id)
+        public PatientAppointment GetPatientAppointment(int id)
         {
             var appointment = _appointment.GetPatientAppointments(id);
             return appointment;
