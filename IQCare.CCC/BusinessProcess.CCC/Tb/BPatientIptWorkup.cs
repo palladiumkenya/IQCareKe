@@ -45,3 +45,4 @@ namespace BusinessProcess.CCC.Tb
             return patientIptWorkups;
         }
     }
+}

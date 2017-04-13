@@ -23,7 +23,9 @@ namespace DataAccess.CCC.Repository.Tb
         public List<PatientIptWorkup> GetByPatientId(int patientId)
         {
             IPatientIptWorkupRepository patientIptWorkupRepository = new PatientIptWorkupRepository();
-            List<PatientIptWorkup> patientIptWorkup = patientIptWorkupRepository.FindBy(p => p.PatientId == patientId).ToList();
+            List<PatientIptWorkup> patientIptWorkup =
+                patientIptWorkupRepository.FindBy(p => p.PatientId == patientId).ToList();
             return patientIptWorkup;
         }
     }
+}

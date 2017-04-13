@@ -41,7 +41,9 @@ namespace BusinessProcess.CCC.Tb
 
         public List<PatientIptOutcome> GetByPatientId(int patientId)
         {
-            List<PatientIptOutcome> patientIptOutcomes = _unitOfWork.PatientIptOutcomeRepository.GetByPatientId(patientId);
+            List<PatientIptOutcome> patientIptOutcomes =
+                _unitOfWork.PatientIptOutcomeRepository.GetByPatientId(patientId);
             return patientIptOutcomes;
         }
     }
+}
