@@ -303,7 +303,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -322,18 +322,44 @@
         $("#<%=peripheralAction.ClientID%>").prop('disabled', true);
         $("#<%=rashAction.ClientID%>").prop('disabled', true);
         $("#<%=adheranceAction.ClientID%>").prop('disabled', true);
+
+        function addPatientIpt() {
+            var weight = $("#<%=weight.ClientID%>").val();
+            var hepatotoxicity = $("#<%=hepatotoxicity.ClientID%>").val();
+            var iptDateCollected = $("#<%=IptDateCollected.ClientID%>").val();
+            var iptDueDate = $("#<%=iptDuedate.ClientID%>").val();
+            var peripheralneoropathy = $("#<%=peripheralAction.ClientID%>").val();
+            var rash = $("#<%=rash.ClientID%>").val();
+            var adheranceMeasurement = $("#<%=adheranceAction.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIpt",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT saved successfully");
+                    resetAppointmentFields();
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT not saved");
+                }
+            });
+        }
     });
 
     function HepatotoxicityChange() {
         if ($("#hepatotoxicity").val() === 'False') {
             $("#<%=hepatotoxicityAction.ClientID%>").prop('disabled', true);
-        } else {
-            $("#<%=hepatotoxicityAction.ClientID%>").prop('disabled', false);
-        }
-    }
-    function PeripheralNeoropathyChange() {
-        if ($("#peripheralNeoropathy").val() === 'False') {
-            $("#<%=peripheralAction.ClientID%>").prop('disabled', true);
+                } else {
+                    $("#<%=hepatotoxicityAction.ClientID%>").prop('disabled', false);
+                }
+            }
+            function PeripheralNeoropathyChange() {
+                if ($("#peripheralNeoropathy").val() === 'False') {
+                    $("#<%=peripheralAction.ClientID%>").prop('disabled', true);
         } else {
             $("#<%=peripheralAction.ClientID%>").prop('disabled', false);
         }

@@ -20,6 +20,8 @@ namespace IQCare.Web.CCC.UC
         public string nxtAppDateval = "";
         public int genderID;
         public string gender = "";
+        public int PatientId;
+        public int PatientMasterVisitId;
 
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -27,8 +29,9 @@ namespace IQCare.Web.CCC.UC
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
 
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
                 Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();

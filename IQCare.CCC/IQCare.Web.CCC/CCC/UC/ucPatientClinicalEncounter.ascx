@@ -203,54 +203,54 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12" clientidmode="Static" id="IcfForm">
-                                        <div class="col-md-3">
-                                            <div class="col-md-12">
-                                                <label class="control-label pull-left">Cough</label>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Cough</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
-                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
-                                                </asp:DropDownList>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label">Fever</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12">
-                                                <label class="control-label">Fever</label>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Noticable Weight Loss</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
-                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
-                                                </asp:DropDownList>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Night Sweats</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
+                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12">
-                                                <label class="control-label pull-left">Noticable Weight Loss</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
-                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
-                                                </asp:DropDownList>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="col-md-12">
-                                                <label class="control-label pull-left">Night Sweats</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
-                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
-                                                </asp:DropDownList>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -346,17 +346,17 @@
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-4">
                                             <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" onclick="IptWorkUp();"> IPT Client Workup</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" onclick="IptWorkUp();">IPT Client Workup</button>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" onclick="Ipt();"> IPT</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" onclick="Ipt();">IPT</button>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" onclick="IptOutcome();"> AddIPT Outcome</button>
+                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" onclick="IptOutcome();">AddIPT Outcome</button>
                                             </div>
                                         </div>
                                     </div>
@@ -2048,6 +2048,54 @@
                 }
             });
         }
+
+        function addPatientIcf() {
+            var cough = $("#<%=cough.ClientID%>").val();
+            var weightLoss = $("#<%=weightLoss.ClientID%>").val();
+            var nightSweats = $("#<%=nightSweats.ClientID%>").val();
+            var fever = $("#<%=fever.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIcf",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss +  "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient ICF saved successfully");
+                    resetAppointmentFields();
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient ICF not saved");
+                }
+            });
+        }
+
+        function addPatientIcfAction() {
+            var chestXray = $("#<%=chest.ClientID%>").val();
+            var sputumSmear = $("#<%=sputum.ClientID%>").val();
+            var invitationOfContacts = $("#<%=contactsInvitation.ClientID%>").val();
+            var evaluatedForIpt = $("#<%=iptEvaluation.ClientID%>").val();
+            var startAntiTb = $("#<%=antiTb.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIcfAction",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','chestXray': '" + chestXray + "','evaluatedForIpt': '" + evaluatedForIpt + "','invitationOfContacts': '" + invitationOfContacts + "','sputumSmear': '" + sputumSmear +  "','startAntiTb': '" + startAntiTb + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient ICF Action saved successfully");
+                    resetAppointmentFields();
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient ICF Action not saved");
+                }
+            });
+        }
+
 
 
         function getCheckBoxListItemsChecked(elementId) {

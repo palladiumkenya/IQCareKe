@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using DataAccess.CCC.Repository.Tb;
-using Entities.CCC.Tb;
+﻿using Entities.CCC.Tb;
 using IQCare.CCC.UILogic.Tb;
+using System;
+using System.Web.Services;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -15,7 +11,7 @@ namespace IQCare.Web.CCC.WebService
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
     [System.Web.Script.Services.ScriptService]
     public class PatientTbService : System.Web.Services.WebService
     {
@@ -111,7 +107,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId,  bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests)
+        public string AddPatientIptWorkup(int patientId, int patientMasterVisitId, bool abdominalTenderness, bool numbness, bool yellowColouredUrine, bool yellownessOfEyes, string liverFunctionTests)
         {
             PatientIptWorkup patientIptWorkup = new PatientIptWorkup()
             {

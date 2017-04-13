@@ -34,6 +34,27 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+
+                function AddPatientIptOutcome() {
+            var iptEvent = $("#<%=iptEvent.ClientID%>").val();
+            var reasonForDiscontinuation = $("#<%=discontinuation.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT outcome saved successfully");
+                    resetAppointmentFields();
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT outcome not saved");
+                }
+            });
+        }
     });
 
 </script>
