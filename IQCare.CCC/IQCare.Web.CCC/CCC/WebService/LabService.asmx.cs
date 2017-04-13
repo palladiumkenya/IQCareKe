@@ -38,8 +38,8 @@ namespace IQCare.Web.CCC.WebService
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
         private int FacilityId { get; set; }
-        private int _patientId;
-        private int _locationId;
+        //private int _patientId;
+        //private int _locationId;
         private int _labOrderId;
        // private String theUrl;
         private string Msg { get; set; }

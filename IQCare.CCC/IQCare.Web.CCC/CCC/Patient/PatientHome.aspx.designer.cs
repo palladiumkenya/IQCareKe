@@ -31,6 +31,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label lblVL;
         
         /// <summary>
+        /// lblvlDueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblvlDueDate;
+        
+        /// <summary>
         /// txtFirstName control.
         /// </summary>
         /// <remarks>

@@ -134,6 +134,17 @@ namespace BusinessProcess.CCC.visit
                 return vlInfo;
             }
         }
+
+        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
 

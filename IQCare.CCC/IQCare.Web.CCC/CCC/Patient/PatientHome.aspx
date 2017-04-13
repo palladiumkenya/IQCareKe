@@ -33,13 +33,13 @@
                            <div class="col-md-3">
                                  <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Last ViralLoad :</asp:Label></h5></div>
                                  <div class="col-md-12">
-                                    <h6> <asp:Label runat="server" ID="lblVL" CssClass="text-info pull-left"> </asp:Label></h6>
+                                    <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblVL" CssClass="text-info pull-left"> </asp:Label></h6>
                                 </div>
                            </div>
                           <div class="col-md-3">
                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> VL Due Date :</asp:Label></h5></div>
                                <div class="col-md-12">
-                                    <h6> <asp:Label runat="server" ID="lblvlDueDate" CssClass="text-info pull-left"> </asp:Label></h6>
+                                    <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblvlDueDate" CssClass="text-info pull-left"> </asp:Label></h6>
                                 </div>
 
                           </div>
