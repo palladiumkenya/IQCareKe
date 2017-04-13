@@ -38,6 +38,10 @@
                            </div>
                           <div class="col-md-3">
                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> VL Due Date :</asp:Label></h5></div>
+                               <div class="col-md-12">
+                                    <h6> <asp:Label runat="server" ID="lblvlDueDate" CssClass="text-info pull-left"> </asp:Label></h6>
+                                </div>
+
                           </div>
                           <div class="col-md-3">
                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Current Regimen :</asp:Label></h5></div>
@@ -107,15 +111,15 @@
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-4" style="padding: 0;"><label class="control-label pull-left">Names:</label></div>
-                                 <div class="col-md-8" style="padding: 0;">
+                                 <div class="col-md-6"><label class="control-label pull-left">Names:</label></div>
+                                 <div class="col-md-6">
                                      <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-4" style="padding: 0;"><label class="control-label pull-left">Mobile:</label></div>
-                                 <div class="col-md-8" style="padding: 0;">
+                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6">
                                      <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
@@ -285,7 +289,7 @@
                                  <div class="col-md-5" style="padding: 0;">
                                      <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             <!--</div>
+                             </div>
                              
                              <div class="col-md-12 form-group">-->
                                  <div class="col-md-2" style="padding: 0;"><label class="control-label pull-left">Ward:</label></div>
@@ -299,11 +303,11 @@
                                  <div class="col-md-3" style="padding: 0;">
                                      <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             <!--</div>
+                             </div>
 
-                             <div class="col-md-12 form-group">-->
-                                 <div class="col-md-4" style="padding: 0;"><label class="control-label pull-left">Nearest H/C:</label></div>
-                                 <div class="col-md-2" style="padding: 0;">
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Nearest Health Centre:</label></div>
+                                 <div class="col-md-6" style="padding: 0;">
                                      <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
@@ -423,15 +427,15 @@
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Postal Address:</label></div>
-                                 <div class="col-md-6" style="padding: 0;">
+                                 <div class="col-md-6"><label class="control-label pull-left">Postal Adress:</label></div>
+                                 <div class="col-md-6">
                                      <asp:Label ID="txtPostalAddress" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
                              
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-6" style="padding: 0;"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
                                  <div class="col-md-6">
                                      <asp:Label ID="txtMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
@@ -1050,7 +1054,98 @@
             }
 
             if (patientId > 0) {
-                getPatientDetails(patientId);
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PersonService.asmx/GetPersonDetails",
+                    data: "{'PatientId':'" + patientId + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var patientDetails = JSON.parse(response.d);
+                        console.log(patientDetails);
+
+                        $("#<%=txtFirstName.ClientID%>").text(patientDetails.FirstName);
+                        $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
+
+                        $("#<%=txtMiddleName.ClientID%>").text(patientDetails.MiddleName);
+                        $("#<%=bioMiddleName.ClientID%>").val(patientDetails.MiddleName);
+
+                        $("#<%=txtLastName.ClientID%>").text(patientDetails.LastName);
+                        $("#<%=bioLastName.ClientID%>").val(patientDetails.LastName);
+
+                        $("#<%=drpPatientPopulation.ClientID%>").text(patientDetails.population);
+                        var populationType = 0;
+                        if (patientDetails.population == "General Population") {
+                            populationType = 74;
+                        }
+                        else if (patientDetails.population == "Key Population") {
+                            populationType = 75;
+                        }
+                        $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
+
+
+                        /*bioFirstName
+                        bioMiddleName
+                        bioLastName
+                        bioPatientPopulation*/
+
+                        var names = null;
+                        names = patientDetails.tsFname +
+                            " " +
+                            patientDetails.tsMiddleName +
+                            " " +
+                            patientDetails.tsLastName;
+
+                        var ISContacts = "";
+                        if (patientDetails.ISContacts != null && patientDetails.ISContacts != "") {
+                            ISContacts = patientDetails.ISContacts;
+                        }
+
+                        $("#<%=txtSupporterNames.ClientID%>").text(names);
+                        $("#<%=txtSupporterMobile.ClientID%>").text(ISContacts);
+
+                        var village = "";
+                        var nearestHealthCentre = "";
+
+                        if(patientDetails.CountyId > 0)
+                            $.when(GetLookupNameById(patientDetails.CountyId)).then();
+                        if(patientDetails.Ward>0)
+                            $.when(GetWardNameByWardId(patientDetails.Ward)).then();
+
+
+                        if (patientDetails.Village != "" && patientDetails.Village != null) {
+                            village = patientDetails.Village;
+                        }
+
+                        $("#<%=txtVillage.ClientID%>").text(village);
+
+                        if (patientDetails.NearestHealthCentre != "" && patientDetails.NearestHealthCentre != null) {
+                            nearestHealthCentre = patientDetails.NearestHealthCentre;
+                        }
+                        $("#<%=txtNearestHealthCentre.ClientID%>").text(nearestHealthCentre);
+
+                        var PatientPostalAddress = "";
+                        if (patientDetails.PatientPostalAddress != "" &&
+                            patientDetails.PatientPostalAddress != null) {
+                            PatientPostalAddress = patientDetails.PatientPostalAddress;
+                        }
+                        $("#<%=txtPostalAddress.ClientID%>").text(PatientPostalAddress);
+                        var MobileNumber = "";
+                        if (patientDetails.MobileNumber != "" && patientDetails.MobileNumber != null) {
+                            MobileNumber = patientDetails.MobileNumber;
+                        }
+                        $("#<%=txtMobile.ClientID%>").text(MobileNumber);
+
+                        $("#<%=patPostalAddress.ClientID%>").val(PatientPostalAddress);
+                        $("#<%=patMobile.ClientID%>").val(MobileNumber);
+                        $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
+                        $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
+
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "Error Getting Person Details");
+                    }
+                });
             }
 
             $("#btnSaveBio").click(function() {
@@ -1140,101 +1235,6 @@
 
         });
 
-        function getPatientDetails(patientId) {
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PersonService.asmx/GetPersonDetails",
-                data: "{'PatientId':'" + patientId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var patientDetails = JSON.parse(response.d);
-                    console.log(patientDetails);
-
-                    $("#<%=txtFirstName.ClientID%>").text(patientDetails.FirstName);
-                    $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
-
-                    $("#<%=txtMiddleName.ClientID%>").text(patientDetails.MiddleName);
-                    $("#<%=bioMiddleName.ClientID%>").val(patientDetails.MiddleName);
-
-                    $("#<%=txtLastName.ClientID%>").text(patientDetails.LastName);
-                    $("#<%=bioLastName.ClientID%>").val(patientDetails.LastName);
-
-                    $("#<%=drpPatientPopulation.ClientID%>").text(patientDetails.population);
-                    var populationType = 0;
-                    if (patientDetails.population == "General Population") {
-                        populationType = 74;
-                    }
-                    else if (patientDetails.population == "Key Population") {
-                        populationType = 75;
-                    }
-                    $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
-
-
-                    /*bioFirstName
-                    bioMiddleName
-                    bioLastName
-                    bioPatientPopulation*/
-
-                    var names = null;
-                    names = patientDetails.tsFname +
-                        " " +
-                        patientDetails.tsMiddleName +
-                        " " +
-                        patientDetails.tsLastName;
-
-                    var ISContacts = "";
-                    if (patientDetails.ISContacts != null && patientDetails.ISContacts != "") {
-                        ISContacts = patientDetails.ISContacts;
-                    }
-
-                    $("#<%=txtSupporterNames.ClientID%>").text(names);
-                    $("#<%=txtSupporterMobile.ClientID%>").text(ISContacts);
-
-                    var village = "";
-                    var nearestHealthCentre = "";
-
-                    if(patientDetails.CountyId > 0)
-                        $.when(GetLookupNameById(patientDetails.CountyId)).then();
-                    if(patientDetails.Ward>0)
-                        $.when(GetWardNameByWardId(patientDetails.Ward)).then();
-
-
-                    if (patientDetails.Village != "" && patientDetails.Village != null) {
-                        village = patientDetails.Village;
-                    }
-
-                    $("#<%=txtVillage.ClientID%>").text(village);
-
-                    if (patientDetails.NearestHealthCentre != "" && patientDetails.NearestHealthCentre != null) {
-                        nearestHealthCentre = patientDetails.NearestHealthCentre;
-                    }
-                    $("#<%=txtNearestHealthCentre.ClientID%>").text(nearestHealthCentre);
-
-                    var PatientPostalAddress = "";
-                    if (patientDetails.PatientPostalAddress != "" &&
-                        patientDetails.PatientPostalAddress != null) {
-                        PatientPostalAddress = patientDetails.PatientPostalAddress;
-                    }
-                    $("#<%=txtPostalAddress.ClientID%>").text(PatientPostalAddress);
-                    var MobileNumber = "";
-                    if (patientDetails.MobileNumber != "" && patientDetails.MobileNumber != null) {
-                        MobileNumber = patientDetails.MobileNumber;
-                    }
-                    $("#<%=txtMobile.ClientID%>").text(MobileNumber);
-
-                    $("#<%=patPostalAddress.ClientID%>").val(PatientPostalAddress);
-                    $("#<%=patMobile.ClientID%>").val(MobileNumber);
-                    $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
-                    $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
-
-                },
-                error: function (response) {
-                    toastr.error(response.d, "Error Getting Person Details");
-                }
-            });
-        }
-
         function addPatientTreatmentSupporter(patientId, firstName, middleName, lastName, gender, mobile, userId) {
             $.ajax({
                 type: "POST",
@@ -1244,8 +1244,6 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    var patientId = "<%=PatientId%>";
-                    getPatientDetails(patientId);
                     toastr.success(response.d, "add Patient Treatment Supporter");
                 },
                 error: function (response) {
@@ -1263,8 +1261,6 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    var patientId = "<%=PatientId%>";
-                    getPatientDetails(patientId);
                     toastr.success(response.d, "Edit Patient Contacts");
                 },
                 error: function (response) {
@@ -1282,8 +1278,6 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    var patientId = "<%=PatientId%>";
-                    getPatientDetails(patientId);
                     toastr.success(response.d, "add New Patient Location");
                 },
                 error: function (response) {
@@ -1301,7 +1295,6 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    getPatientDetails(patientId);
                     toastr.success(response.d, "Update Patient Bio");
                 },
                 error: function (response) {
