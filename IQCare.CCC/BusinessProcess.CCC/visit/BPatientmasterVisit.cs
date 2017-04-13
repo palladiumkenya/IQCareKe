@@ -202,19 +202,11 @@ namespace BusinessProcess.CCC.visit
 
         public List<PatientMasterVisit> GetByDate(DateTime date)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientMasterVisit> patientVisitList =_unitOfWork.PatientMasterVisitRepository.GetByDate(date);
-                return patientVisitList;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                List<PatientMasterVisit> patientVisitList = _unitOfWork.PatientMasterVisitRepository.GetByDate(date);
                 _unitOfWork.Dispose();
+                return patientVisitList;
             }
         }
     }
