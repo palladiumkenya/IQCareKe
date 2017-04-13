@@ -28,7 +28,7 @@ namespace IQCare.CCC.UILogic
         private string Msg { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-      
+
 
         public void savePatientLabOrder(int patient_ID, int patient_Pk, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
@@ -95,17 +95,5 @@ namespace IQCare.CCC.UILogic
 
            // return int.Parse(Msg);
         }
-
-        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
-        {
-            var pendingFacilityVl = _mgr.GetVlPendingCount(facilityId);
-            return pendingFacilityVl;
-        }
-        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
-        {
-            var completeFacilityVl = _mgr.GetVlCompleteCount(facilityId);
-            return completeFacilityVl;
-        }
-
     }
    }

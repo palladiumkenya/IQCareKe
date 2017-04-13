@@ -134,6 +134,7 @@ namespace BusinessProcess.CCC.visit
                 return vlInfo;
             }
         }
+
         public List<LabOrderEntity> GetVlPendingCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -152,7 +153,6 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.Dispose();
             }
 
-        }
         public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -171,7 +171,6 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.Dispose();
             }
 
-        }
     }
 }
 
