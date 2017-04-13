@@ -6,3 +6,7 @@
 .noneevents {
     pointer-events: none;
 }
+
+.modal-header, .modal-body, .modal-footer {
+    background-color: #FFFFFF !important;
+}

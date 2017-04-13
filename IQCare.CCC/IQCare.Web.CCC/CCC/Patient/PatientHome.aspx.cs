@@ -148,7 +148,7 @@ namespace IQCare.Web.CCC.Patient
                                 case "Complete":
                                     if (vlValue > 1000)
                                     {
-                                    lblVL.Text = "<span class='label label-danger'>"+ vlValue +"</span>";
+                                    lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
                                         lblvlDueDate.Text = LabOrder.OrderDate.AddMonths(3).ToString("DD-MMM-YYYY");
                                     }
                                     else
@@ -168,6 +168,7 @@ namespace IQCare.Web.CCC.Patient
                 }else
                 {
                     lblVL.Text = "<span class='label label-danger'>Patient Not Referenced</span>";
+                    lblvlDueDate.Text = "<span class='label label-danger'>Not Available</span>";
                 }
             }       
         }      
