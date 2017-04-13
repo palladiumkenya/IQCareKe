@@ -11,105 +11,60 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientHivTestingManager : ProcessBase, IPatientHivTestingManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
 
         public int AddPatientHivTesting(PatientHivTesting p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientHivTestingRepository.Add(p);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
- 
         }
 
         public PatientHivTesting GetPatientHivTesting(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
+                _unitOfWork.Dispose();
                 return hivTesting;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-            
         }
 
         public void DeletePatientHivTesting(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientHivTesting hivTesting = _unitOfWork.PatientHivTestingRepository.GetById(id);
                 _unitOfWork.PatientHivTestingRepository.Remove(hivTesting);
-                _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                _result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
             }
-      
         }
 
         public int UpdatePatientHivTesting(PatientHivTesting p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientHivTestingRepository.Update(p);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-         
         }
 
         public List<PatientHivTesting> GetAll()
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientHivTesting> hivTestings = _unitOfWork.PatientHivTestingRepository.GetAll().ToList();
-                return hivTestings;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
-            }
-           
+                return hivTestings;
+            } 
         }
     }
 }

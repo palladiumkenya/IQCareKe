@@ -145,6 +145,23 @@ namespace BusinessProcess.CCC.visit
             throw new NotImplementedException();
         }
 
+        //public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+        //{
+        //    using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+        //    {
+        //        List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
+        //        return facilityVlPending;
+        //    }
+        //}
+
+        //public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+        //{
+        //    using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+        //    {
+
+        //    }
+        //}
+
     }
 }
 

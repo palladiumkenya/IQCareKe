@@ -11,111 +11,79 @@ namespace BusinessProcess.CCC.Triage
     
     public class BPatientFamilyPlanningManager  :IpatientFamilyPlanningManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        private int Result=0;
 
         public int AddFamilyPlanningStatus(PatientFamilyPlanning a)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                 _unitOfWork.PatientFamilyPlanningRepository.Add(a);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                _unitOfWork.PatientFamilyPlanningRepository.Add(a);
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public int UpdateFamilyPlanningStatus(PatientFamilyPlanning u)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var FP = _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == u.PatientId & !x.DeleteFlag).FirstOrDefault();
-                
+
                 if (FP != null)
                 {
-                    FP.FamilyPlaningStatusId= u.FamilyPlaningStatusId;
+                    FP.FamilyPlaningStatusId = u.FamilyPlaningStatusId;
                     FP.ReasonNotOnFP = u.ReasonNotOnFP;
                 }
                 _unitOfWork.PatientFamilyPlanningRepository.Update(FP);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
         public int DeleteFamilyPlanningStatus(int Id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var FP = _unitOfWork.PatientFamilyPlanningRepository.GetById(Id);
                 _unitOfWork.PatientFamilyPlanningRepository.Remove(FP);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
     
         public int CheckFamilyPlanningExists(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var FP =
-           _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-               .Select(x => x.Id)
-               .FirstOrDefault();
-                return Convert.ToInt32(FP);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                var FP =_unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.Id)
+                    .FirstOrDefault();
                 _unitOfWork.Dispose();
+                    return Convert.ToInt32(FP);
             }
         }
 
         List<PatientFamilyPlanning> GetPatientFamilyPlanningStatus(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                     _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                var familyPlanningList = _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
                 _unitOfWork.Dispose();
+                return familyPlanningList;
             }
         }
 
         List<PatientFamilyPlanning> IpatientFamilyPlanningManager.GetPatientFamilyPlanningStatus(int patientId)
         {
-            return _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var familyPlanningList = _unitOfWork.PatientFamilyPlanningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
+                _unitOfWork.Dispose();
+                return familyPlanningList;
+            }
         }
     }
 }

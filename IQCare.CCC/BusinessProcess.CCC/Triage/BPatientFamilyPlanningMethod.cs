@@ -10,110 +10,71 @@ namespace BusinessProcess.CCC.Triage
 {
     public class BPatientFamilyPlanningMethod : IPatientFamilyPlanningMethodManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       private int Result=0;
 
         public int AddFamilyPlanningMethod(PatientFamilyPlanningMethod a)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientFamilyPlanningMethodRepository.Add(a);
-                return _unitOfWork.Complete();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-
         }
 
         public int UpdateFamilyPlanningMethod (PatientFamilyPlanningMethod u)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var FP =
-                   _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(
-                           x => x.PatientId == u.PatientId & !x.DeleteFlag)
-                       .FirstOrDefault();
+                  _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(
+                          x => x.PatientId == u.PatientId & !x.DeleteFlag)
+                      .FirstOrDefault();
                 if (FP != null)
                 {
                     FP.PatientFPId = u.PatientFPId;
                     FP.FPMethodId = u.FPMethodId;
                 }
                 _unitOfWork.PatientFamilyPlanningMethodRepository.Update(FP);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public int DeleteFamilyPlanningMethod(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var FP = _unitOfWork.PatientFamilyPlanningMethodRepository.GetById(id);
                 _unitOfWork.PatientFamilyPlanningMethodRepository.Remove(FP);
-                return  _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public List<PatientFamilyPlanningMethod> GetPatientFamilyPlanningMethod(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                var fpMethodList = _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
                 _unitOfWork.Dispose();
+                return fpMethodList;
             }
         }
 
         public int CheckIfPatientHasFamilyPlanningMethod(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var FP =
-                    _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                        .Select(x => x.Id)
-                        .FirstOrDefault();
-                return Convert.ToInt32(FP);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                var FP = _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                          .Select(x => x.Id)
+                          .FirstOrDefault();
                 _unitOfWork.Dispose();
+                            return Convert.ToInt32(FP);
             }
         }
     }

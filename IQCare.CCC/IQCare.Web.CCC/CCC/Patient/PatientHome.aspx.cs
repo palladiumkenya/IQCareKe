@@ -7,7 +7,6 @@ using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
-using Interface.CCC.Encounter;
 using Interface.CCC.Visit;
 
 namespace IQCare.Web.CCC.Patient
@@ -163,12 +162,12 @@ namespace IQCare.Web.CCC.Patient
 
                         }else
                         {
-                            lblVL.Text = "Not Done/Pending";
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
                         }
                 }else
                 {
                     lblVL.Text = "<span class='label label-danger'>Patient Not Referenced</span>";
-                    lblvlDueDate.Text = "<span class='label label-danger'>Not Available</span>";
+                    lblvlDueDate.Text = "<span class='label label-danger'><strong>Not Available</strong></span>";
                 }
             }       
         }      
