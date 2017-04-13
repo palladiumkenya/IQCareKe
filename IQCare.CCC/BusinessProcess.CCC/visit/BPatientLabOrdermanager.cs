@@ -9,12 +9,13 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 
 using DataAccess.Base;
+using DataAccess.CCC.Interface;
 
 namespace BusinessProcess.CCC.visit
 {
     public class BPatientLabOrdermanager : ProcessBase, IPatientLabOrderManager
     {
-       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientLabTracker(PatientLabTracker patientLabTracker)
@@ -132,6 +133,42 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.Dispose();
                 return vlInfo;
             }
+        }
+        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+        {
+            try
+            {
+                List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
+                return facilityVlPending;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
+        }
+        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+        {
+            try
+            {
+                List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
+                return facilityVlComplete;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
     }
 }

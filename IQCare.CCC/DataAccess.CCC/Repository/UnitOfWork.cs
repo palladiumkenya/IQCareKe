@@ -26,7 +26,7 @@ using DataAccess.Base;
 
 namespace DataAccess.CCC.Repository
 {
-    public class UnitOfWork : IUnitOfWork,IDisposable
+    public class UnitOfWork : _unitOfWork,IDisposable
     {
         private BaseContext _context;
 
