@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -26,9 +28,12 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var appointment = new PatientAppointmentManager();
+                var masterVisit = new PatientMasterVisitManager();
                 statistics.TotalAppointments = appointment.GetByDate(date).Count;
                 statistics.MetAppointments = appointment.GetByDate(date).Count(n => n.StatusId==1241);
                 statistics.MissedAppointments = appointment.GetByDate(date).Count(n => n.StatusId == 1240);
+                statistics.WalkIns = masterVisit.GetByDate(date).Count(n => n.VisitScheduled == 0); ;
+
             }
             catch (Exception e)
             {
