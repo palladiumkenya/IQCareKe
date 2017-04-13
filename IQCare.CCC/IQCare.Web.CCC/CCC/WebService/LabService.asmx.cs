@@ -37,7 +37,7 @@ namespace IQCare.Web.CCC.WebService
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
-        private int facilityId { get; set; }
+        private int FacilityId { get; set; }
         private int _patientId;
         private int _locationId;
         private int _labOrderId;
@@ -53,12 +53,12 @@ namespace IQCare.Web.CCC.WebService
         {
             
             LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
+            FacilityId = facility.FacilityID;
             var labOrder = new PatientLabOrderManager();
 
             if (patientId > 0)
             {
-                labOrder.savePatientLabOrder(patientId, patientPk, facilityId, patientMasterVisitId, patientLabOrder);
+                labOrder.savePatientLabOrder(patientId, patientPk, FacilityId, patientMasterVisitId, patientLabOrder);
                 Msg = "Patient Lab Order Recorded Successfully .";
 
             }
@@ -143,46 +143,7 @@ namespace IQCare.Web.CCC.WebService
             return patientViralDetails;
 
         }
-        [WebMethod(EnableSession = true)]
-        public int GetFacilityVLPendingCount()
-        {
-            int pendingVlcount = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
-          
-            List<LabOrderEntity> facilityVlPending = new List<LabOrderEntity>();
-            try
-            {
-                var facilityPendingVl = new PatientLabOrderManager();
-                facilityVlPending = facilityPendingVl.GetVlPendingCount(facilityId);
-                pendingVlcount = facilityVlPending.Count;
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return pendingVlcount;
-        }
-        [WebMethod(EnableSession = true)]
-        public int GetFacilityVLCompleteCount()
-        {
-            int completeVlcount = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
 
-            List<LabOrderEntity> facilityVlComplete = new List<LabOrderEntity>();
-            try
-            {
-                var facilityCompleteVl = new PatientLabOrderManager();
-                facilityVlComplete = facilityCompleteVl.GetVlCompleteCount(facilityId);
-                completeVlcount = facilityVlComplete.Count;
-            }
-            catch (Exception e)
-            {
-                Msg = e.Message;
-            }
-            return completeVlcount;
-        }
     }
 
 }
