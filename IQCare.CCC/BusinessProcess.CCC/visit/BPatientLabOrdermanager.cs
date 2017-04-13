@@ -9,12 +9,13 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 
 using DataAccess.Base;
+using DataAccess.CCC.Interface;
 
 namespace BusinessProcess.CCC.visit
 {
     public class BPatientLabOrdermanager : ProcessBase, IPatientLabOrderManager
     {
-       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientLabTracker(PatientLabTracker patientLabTracker)

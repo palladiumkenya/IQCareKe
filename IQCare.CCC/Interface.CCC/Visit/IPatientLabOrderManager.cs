@@ -18,5 +18,6 @@ namespace Interface.CCC.Visit
         List<LabResultsEntity> GetPatientVL(int patientId);
         List<LabOrderEntity> GetVlPendingCount(int facilityId);
         List<LabOrderEntity> GetVlCompleteCount(int facilityId);
+       int GetPatientCurrentviralLoadInfo(int ptnPk);
     }
 }
