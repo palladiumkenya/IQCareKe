@@ -15,7 +15,7 @@ namespace BusinessProcess.CCC.visit
 {
     public class BPatientLabOrdermanager : ProcessBase, IPatientLabOrderManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientLabTracker(PatientLabTracker patientLabTracker)
@@ -137,13 +137,39 @@ namespace BusinessProcess.CCC.visit
 
         public List<LabOrderEntity> GetVlPendingCount(int facilityId)
         {
-            throw new NotImplementedException();
-        }
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+                try
+            {
+                List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
+                return facilityVlPending;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
 
         public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
         {
-            throw new NotImplementedException();
-        }
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+                try
+            {
+                List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
+                return facilityVlComplete;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
 
         //public List<LabOrderEntity> GetVlPendingCount(int facilityId)
         //{
