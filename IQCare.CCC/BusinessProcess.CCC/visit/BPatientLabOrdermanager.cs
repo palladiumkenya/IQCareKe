@@ -139,38 +139,39 @@ namespace BusinessProcess.CCC.visit
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
                 try
-            {
-                List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
-                return facilityVlPending;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
+                {
+                    List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
+                    return facilityVlPending;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    _unitOfWork.Dispose();
+                }
+        }
 
         public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
                 try
-            {
-                List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
-                return facilityVlComplete;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
+                {
+                    List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
+                    return facilityVlComplete;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    _unitOfWork.Dispose();
+                }
+        }
     }
 }
 
