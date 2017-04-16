@@ -30,23 +30,23 @@
                   <div class="col-md-12">
                       
                       <div class="col-md-11">
-                           <div class="col-md-3">
-                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Last ViralLoad :</asp:Label></h5></div>
-                                 <div class="col-md-12">
+                           <div class="col-md-3 col-xs-12 col-sm-12">
+                                 <div class="col-md-12 col-xs-12 col-sm-12"><h5 class="pull-left"><asp:Label runat="server"> Last ViralLoad :</asp:Label></h5></div>
+                                 <div class="col-md-12 col-md-12 col-xs-12 col-sm-12">
                                     <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblVL" CssClass="text-info pull-left"> </asp:Label></h6>
                                 </div>
                            </div>
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-xs-12 col-sm-12">
                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> VL Due Date :</asp:Label></h5></div>
                                <div class="col-md-12">
                                     <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblvlDueDate" CssClass="text-info pull-left"> </asp:Label></h6>
                                 </div>
 
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-xs-12 col-sm-12">
                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Current Regimen :</asp:Label></h5></div>
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-3 col-xs-12 col-sm-12">
                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Adherance Status :</asp:Label></h5></div>
                           </div>
                       </div>
@@ -107,7 +107,7 @@
                          <div class="col-md-4 col-xs-4 col-sm-4">
                              
                              
-                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
+                             <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
@@ -129,7 +129,7 @@
                                  <div class="modal-dialog">
                                      <!-- Modal content-->
                                      <div class="modal-content">
-                                         <div class="modal-header">
+                                         <div class="modal-header bg-info">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
                                              <h4 class="modal-title">Edit Patient Bio</h4>
 
@@ -281,26 +281,26 @@
 
                          </div>
                          <div class="col-md-4 col-xs-4 col-sm-4">
-                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Location</h6></label></div>
+                             <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Location</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
                                  <div class="col-md-2" style="padding: 0;"><label class="control-label pull-left">County:</label></div>
-                                 <div class="col-md-5" style="padding: 0;">
+                                 <div class="col-md-10" style="padding: 0;">
                                      <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              <!--</div>
                              
-                             <div class="col-md-12 form-group">-->
+                             <div class="col-md-12 form-group">
                                  <div class="col-md-2" style="padding: 0;"><label class="control-label pull-left">Ward:</label></div>
-                                 <div class="col-md-3" style="padding: 0;">
+                                 <div class="col-md-10" style="padding: 0;">
                                      <asp:Label ID="txtWard" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
                                        
                              <div class="col-md-12 form-group">
                                  <div class="col-md-3" style="padding: 0;"><label class="control-label pull-left">Village:</label></div>
-                                 <div class="col-md-3" style="padding: 0;">
+                                 <div class="col-md-9" style="padding: 0;">
                                      <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              <!--</div>
@@ -423,7 +423,7 @@
 
                          </div>
                          <div class="col-md-4 col-xs-4 col-sm-4">
-                             <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Contact</h6></label></div>
+                             <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Contact</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
@@ -519,7 +519,7 @@
                      <div class="col-md-12 col-xs-12">
                          
                           <div class="col-md-4 col-xs-4 col-sm-4">
-                               <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>TransferIn Status</h6></label></div>
+                               <div class="col-md-12 label label-info"><label class="control-label"><h6>TransferIn Status</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                               <div class="col-md-12 form-group">
@@ -552,7 +552,7 @@
                           </div><!-- .col-md-4 -->
 
                           <div class="col-md-4 col-xs-12 col-sm-12">
-                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6>Patient Diagnosis Status</h6></label></div>
+                              <div class="col-md-12 label label-info"><label class="control-label"> <h6>Patient Diagnosis Status</h6></label></div>
                                <div class="col-md-12"><hr style="margin-top:1%"/></div>
                               
                                <div class="col-md-12 form-group">
@@ -580,7 +580,7 @@
                           </div><!-- .col-md-4 -->
 
                           <div class="col-md-4 col-xs-4 col-sm-4">
-                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6>ARV History Status</h6> </label></div>
+                              <div class="col-md-12 label label-info"><label class="control-label"> <h6>ARV History Status</h6> </label></div>
                               <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
                               <div class="col-md-12">
                                   <table class="table table-condensed" width="100%">
@@ -605,7 +605,7 @@
                  </div>
                  <div id="Baseline" class="tab-pane fade">
                      <div class="col-md-4 col-xs-4 col-sm-4">
-                         <div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong> <h6>Baseline Assessment Summary</h6></label></div>
+                         <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong> <h6>Baseline Assessment Summary</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                               <div class="col-md-12 form-group">
@@ -682,7 +682,7 @@
                           </div>
                     
                      <div class="col-md-4 col-xs-4 col-sm-4">
-                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6><strong>Patient Baseline Vitals</strong></h6> </label></div>
+                              <div class="col-md-12 label label-info"><label class="control-label"> <h6><strong>Patient Baseline Vitals</strong></h6> </label></div>
                               <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
                               <div class="col-md-12">
                                   <div class="col-md-12 form-group">
@@ -709,7 +709,7 @@
                           </div>
 
                       <div class="col-md-4 col-xs-4 col-sm-4">
-                              <div class="col-md-12 label label-info"><label class="control-label label label-info"> <h6><strong>Treatment Initiation </strong></h6> </label></div>
+                              <div class="col-md-12 label label-info"><label class="control-label"> <h6><strong>Treatment Initiation </strong></h6> </label></div>
                               <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
                               <div class="col-md-12">
                                   <div class="col-md-12 form-group">

@@ -2,7 +2,6 @@
 using Entities.CCC.Baseline;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
-using System;
 using DataAccess.Base;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,88 +10,54 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientDisclosure : ProcessBase, IPatientDisclosureManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientDisclosure(PatientDisclosure patientDisclosure)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientDisclosureRepository.Add(patientDisclosure);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                 Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-           
         }
 
         public int DeletePatientDisclosure(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var personEncounter = _unitOfWork.PatientDisclosureRepository.GetById(id);
                 _unitOfWork.PatientDisclosureRepository.Remove(personEncounter);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
-            }
-            
+                return Result;
+            }            
         }
 
         public int UpdatePatientDisclosure(PatientDisclosure patientDisclosure)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientDisclosureRepository.Update(patientDisclosure);
-                return Result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-       
         }
 
         public List<PatientDisclosure> GetPatientDisclosures(int patientId, string category, string disclosureStage)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                    _unitOfWork.PatientDisclosureRepository.FindBy(
-                            x =>
-                                x.PatientId == patientId && x.Category == category &&
-                                x.DisclosureStage == disclosureStage)
-                        .ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+              var patientDisclosureList=  _unitOfWork.PatientDisclosureRepository.FindBy( x =>
+                  x.PatientId == patientId && x.Category == category &&
+                  x.DisclosureStage == disclosureStage)
+                  .ToList();
                 _unitOfWork.Dispose();
+                return patientDisclosureList;
             }
-
         }
     }
 }

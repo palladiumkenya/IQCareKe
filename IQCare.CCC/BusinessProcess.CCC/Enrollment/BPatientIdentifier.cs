@@ -10,44 +10,63 @@ namespace BusinessProcess.CCC.Enrollment
 {
     public class BPatientIdentifier : ProcessBase, IPatientIdentifierManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
-            _unitOfWork.PatientIdentifierRepository.Add(patientIdentifier);
-            Result = _unitOfWork.Complete();
-            return patientIdentifier.Id;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientIdentifierRepository.Add(patientIdentifier);
+                Result = _unitOfWork.Complete();
+                var Id= patientIdentifier.Id;
+                _unitOfWork.Dispose();
+                return Id;
+            }
+
         }
 
         public int DeletePatientIdentifier(int id)
         {
-            var identifier = _unitOfWork.PatientIdentifierRepository.GetById(id);
-            _unitOfWork.PatientIdentifierRepository.Remove(identifier);
-          return  Result= _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifier = _unitOfWork.PatientIdentifierRepository.GetById(id);
+                _unitOfWork.PatientIdentifierRepository.Remove(identifier);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
         {
-            var identifier=new PatientEntityIdentifier()
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientEnrollmentId = patientIdentifier.PatientEnrollmentId,
-                IdentifierTypeId = patientIdentifier.IdentifierTypeId,
-                IdentifierValue = patientIdentifier.IdentifierValue
-            };
+                var identifier = new PatientEntityIdentifier()
+                {
+                    PatientEnrollmentId = patientIdentifier.PatientEnrollmentId,
+                    IdentifierTypeId = patientIdentifier.IdentifierTypeId,
+                    IdentifierValue = patientIdentifier.IdentifierValue
+                };
 
-            _unitOfWork.PatientIdentifierRepository.Update(identifier);
-            return _unitOfWork.Complete();
+                _unitOfWork.PatientIdentifierRepository.Update(identifier);
+                Result= _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
 
         public List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId, int identifierTypeId)
         {
-            return
-                _unitOfWork.PatientIdentifierRepository.FindBy(
-                    x =>
-                        x.PatientId == patientId && x.PatientEnrollmentId == patientEnrollmentId &&
-                        x.IdentifierTypeId == identifierTypeId).ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+              var IdentifierList=  _unitOfWork.PatientIdentifierRepository.FindBy(x =>
+                            x.PatientId == patientId && x.PatientEnrollmentId == patientEnrollmentId &&
+                            x.IdentifierTypeId == identifierTypeId).ToList();
+                _unitOfWork.Dispose();
+                return IdentifierList;
+            }
         }
     }
 }
