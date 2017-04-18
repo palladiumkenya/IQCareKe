@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -11,54 +10,41 @@ namespace BusinessProcess.CCC
 {
     public class BPatientCareEnding : ProcessBase, IPatientCareEnding
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        private int result;
         public int AddPatientCareEnding(PatientCareEnding patientCareEnding)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientCareEndingRepository.Add(patientCareEnding);
                 _unitOfWork.Complete();
-                return patientCareEnding.Id;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                int Id= patientCareEnding.Id;
                 _unitOfWork.Dispose();
+                return Id;
             }
-   
         }
 
         public List<PatientCareEnding> GetPatientCareEndings(int patientId)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                    _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId && !x.Active).ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+               var ptnCareending= _unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId && !x.Active).ToList();
                 _unitOfWork.Dispose();
+                return ptnCareending;
+
             }
-           
         }
 
         public int UpdatePatientCareEnding(PatientCareEnding patientCareEnding)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var careEnding =
-                    _unitOfWork.PatientCareEndingRepository.FindBy(
-                            x => x.PatientId == patientCareEnding.PatientId & !x.DeleteFlag & !x.Active)
-                        .FirstOrDefault();
+                   _unitOfWork.PatientCareEndingRepository.FindBy(
+                           x => x.PatientId == patientCareEnding.PatientId & !x.DeleteFlag & !x.Active)
+                       .FirstOrDefault();
                 if (careEnding != null)
                 {
                     careEnding.ExitReason = patientCareEnding.ExitReason;
@@ -68,43 +54,28 @@ namespace BusinessProcess.CCC
                     careEnding.CareEndingNotes = patientCareEnding.CareEndingNotes;
                 }
                 _unitOfWork.PatientCareEndingRepository.Update(careEnding);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return result;
             }
-
         }
 
         public int DeletePatientCareEnding(int id)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var careEnding = _unitOfWork.PatientCareEndingRepository.GetById(id);
                 _unitOfWork.PatientCareEndingRepository.Remove(careEnding);
-                return _unitOfWork.Complete();
+                result= _unitOfWork.Complete();
+                return result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
- 
         }
 
         public string PatientCareEndingStatus(int patientId)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var careendingStatus = new PatientCareEnding();
                 var lookupManager = new BLookupManager();
@@ -124,20 +95,9 @@ namespace BusinessProcess.CCC
                 {
                     careendingStatus.ExitReason = 0;
                 }
-
+                _unitOfWork.Dispose();
                 return careendingStatus.ToString();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
-
         }
     }
 }
