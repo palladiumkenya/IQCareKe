@@ -138,39 +138,26 @@ namespace BusinessProcess.CCC.visit
         public List<LabOrderEntity> GetVlPendingCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
-                try
-                {
+            { 
                     List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
-                    return facilityVlPending;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                finally
-                {
-                    _unitOfWork.Dispose();
-                }
+                   _unitOfWork.Dispose();
+                   return facilityVlPending;
+              
+                    
+             }
         }
 
         public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
-                try
+              
                 {
                     List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
-                    return facilityVlComplete;
+                     _unitOfWork.Dispose();
+                   return facilityVlComplete;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                finally
-                {
-                    _unitOfWork.Dispose();
-                }
+               
+           
         }
     }
 }
