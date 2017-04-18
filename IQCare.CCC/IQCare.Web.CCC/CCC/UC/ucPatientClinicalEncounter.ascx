@@ -1793,6 +1793,7 @@
                         /* add constraints based on age*/
 
                         if ($('#datastep1').parsley().validate()) {
+                            debugger;
                             savePatientEncounterPresentingComplaint();
                         } else {
                             stepError = $('.parsley-error').length === 0;
@@ -2088,7 +2089,6 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Patient ICF Action saved successfully");
-                    resetAppointmentFields();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Patient ICF Action not saved");
