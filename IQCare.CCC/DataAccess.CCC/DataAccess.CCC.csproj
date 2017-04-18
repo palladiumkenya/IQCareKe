@@ -78,6 +78,7 @@
     <Compile Include="Interface\Baseline\IPatientBaselineAssessmentRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientCareEndingRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Repository\Baseline\PatientBaselineAssessmentRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Repository\Encounter\PatientCareEndingRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />

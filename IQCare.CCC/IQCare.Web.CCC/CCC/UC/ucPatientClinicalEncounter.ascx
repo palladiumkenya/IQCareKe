@@ -1136,6 +1136,116 @@
                         <div class="col-md-12">
                             <hr />
                         </div>
+                        
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div id="adherenceAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info">
+                                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                        <h4 class="modal-title">Adherence Assessment</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                                 
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-9">Questions</div>
+                                                <div class="col-md-3">
+                                                    <div class="col-md-6">Yes</div>
+                                                    <div class="col-md-6">No</div>
+                                                </div>
+                                            </div>
+                                                 
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-9"><label class="control-label pull-left">Do you ever forget to take your medicine?</label></div>
+                                                <div class="col-md-3">
+                                                                     
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question1_Yes" runat="server" GroupName="Question1" ClientIDMode="Static" Value="1" />
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question1_No" runat="server" GroupName="Question1" ClientIDMode="Static" Value="0" />
+                                                    </div>
+                                                    
+                                                    <div class="errorBlock1" style="color: red;"> Please select one option </div>
+                                                </div>
+                                            </div>
+                                                 
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-9"><label class="control-label pull-left">Are you careless at times about taking your medicine?</label></div>
+                                                <div class="col-md-3">
+                                                                     
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question2_Yes" runat="server" GroupName="Question2" ClientIDMode="Static" Value="1" />
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question2_No" runat="server" GroupName="Question2" ClientIDMode="Static" Value="0" />
+                                                    </div>
+                                                    
+                                                    <div class="errorBlock2" style="color: red;"> Please select one option </div>
+                                                </div>
+                                            </div>
+                                                 
+                                                 
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-9"><label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label></div>
+                                                <div class="col-md-3">
+                                                                      
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question3_Yes" runat="server" GroupName="Question3" ClientIDMode="Static" Value="1" />
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question3_No" runat="server" GroupName="Question3" ClientIDMode="Static" Value="0" />
+                                                    </div>
+
+                                                    <div class="errorBlock3" style="color: red;"> Please select one option </div>
+                                                </div>
+                                            </div>
+                                                 
+                                                 
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-9"><label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label></div>
+                                                <div class="col-md-3">
+                                                                   
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question4_Yes" runat="server" GroupName="Question4" ClientIDMode="Static" Value="1" />
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <asp:RadioButton ID="Question4_No" runat="server" GroupName="Question4" ClientIDMode="Static" Value="0" />
+                                                    </div>
+
+                                                    <div class="errorBlock4" style="color: red;"> Please select one option </div>
+                                                </div>
+                                            </div>
+
+                                        </div>                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="col-md-12">
+                                            <button type="button" id="btnAdherenceAssessment" class="btn btn-default" OnClientClick="return false;">Save</button>
+                                            <button type="button" id="btnAdherenceAssessmentCancel" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+
                         <div class="col-md-12">
 
                             <div class="col-md-5">
@@ -1201,6 +1311,11 @@
     var gender = "<%=gender%>";
 
     $(document).ready(function () {
+        $('.errorBlock1').hide();
+        $('.errorBlock2').hide();
+        $('.errorBlock3').hide();
+        $('.errorBlock4').hide();
+
         showHideFPControls();
 
         var getVisitDateVal = "<%= this.visitdateval %>";
@@ -1866,5 +1981,54 @@
                 }
                 return selectedValues;
             }
+
+            $("#btnAdherenceAssessment").click(function() {
+                if (!$('#adherenceAssessmentModal').parsley().validate()) {
+                    return false;
+                }
+                var Question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
+                var Question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
+                var Question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
+                var Question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+
+                $('.errorBlock1').hide();
+                $('.errorBlock2').hide();
+                $('.errorBlock3').hide();
+                $('.errorBlock4').hide();
+
+                if (isNaN(Question1)) {
+                    $('.errorBlock1').show();
+                    return false;
+                }
+
+                if (isNaN(Question2)) {
+                    $('.errorBlock2').show();
+                    return false;
+                }
+
+                if (isNaN(Question3)) {
+                    $('.errorBlock3').show();
+                    return false;
+                }
+
+                if (isNaN(Question4)) {
+                    $('.errorBlock4').show();
+                    return false;
+                }
+
+                $('.errorBlock1').hide();
+                $('.errorBlock2').hide();
+                $('.errorBlock3').hide();
+                $('.errorBlock4').hide();
+
+                console.log(Question1);
+                console.log(Question2);
+                console.log(Question3);
+                console.log(Question4);
+
+                var adherenceScore = Question1 + Question2 + Question3 + Question4;
+
+                console.log(adherenceScore);
+            });
     });
 </script>

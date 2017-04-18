@@ -98,6 +98,7 @@ namespace DataAccess.CCC.Repository
         private IPatientAppointmentRepository _patientAppointmentRepository;
         /*Encounter*/
         private IPatientCareEndingRepository _patientCareEndingRepository;
+        private IPatientAdherenceAssessmentRepository _patientAdherenceAssessmentRepository;
 
         /*Consent*/
         private IPatientConsentRepository _patientConsentRepository;
@@ -253,6 +254,16 @@ namespace DataAccess.CCC.Repository
             {
                 return _patientCareEndingRepository ??
                        (_patientCareEndingRepository = new PatientCareEndingRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientAdherenceAssessmentRepository PatientAdherenceAssessmentRepository
+        {
+            get
+            {
+                return _patientAdherenceAssessmentRepository ??
+                       (_patientAdherenceAssessmentRepository =
+                           new PatientAdherenceAssessmentRepository((GreencardContext) _context));
             }
         }
 

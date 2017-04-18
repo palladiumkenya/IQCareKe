@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Repository;
@@ -11,110 +10,67 @@ namespace BusinessProcess.CCC
 {
     public class BPatientPopulationManager:ProcessBase,IPatientPopuationManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
         public int AddPatientPopulation(PatientPopulation patientPopulation)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PatientPopulationRepository.Add(patientPopulation);
-                return _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                 _result = _unitOfWork.Complete();
+                return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-  
         }
 
         public int UpdatePatientPopulation(PatientPopulation patientPopulation)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
+
                 _unitOfWork.PatientPopulationRepository.Update(patientPopulation);
-                return _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                _result = _unitOfWork.Complete();
+                return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-        
         }
 
         public int DeletePatientPopulation(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 PatientPopulation patientPopulation = _unitOfWork.PatientPopulationRepository.GetById(id);
                 _unitOfWork.PatientPopulationRepository.Remove(patientPopulation);
-                return _result = _unitOfWork.Complete();
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-   
         }
 
         public List<PatientPopulation> GetAllPatientPopulations(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                List<PatientPopulation> patientPopulations =
-                    _unitOfWork.PatientPopulationRepository.FindBy(x => x.PersonId == patientId & x.DeleteFlag == false)
-                        .OrderByDescending(x => x.Id)
-                        .ToList();
+                List<PatientPopulation> patientPopulations = _unitOfWork.PatientPopulationRepository.FindBy(x => x.PersonId == patientId & x.DeleteFlag == false)
+                                                .OrderByDescending(x => x.Id)
+                                                .ToList();
+                _unitOfWork.Dispose();
                 return patientPopulations;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-   
         }
 
         public List<PatientPopulation> GetCurrentPatientPopulations(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                List<PatientPopulation> patientPopulations =
-                    _unitOfWork.PatientPopulationRepository.FindBy(
-                            x => x.PersonId == patientId & x.Active & !x.DeleteFlag)
-                        .OrderByDescending(x => x.Id)
-                        .Take(1)
-                        .ToList();
+                List<PatientPopulation> patientPopulations = _unitOfWork.PatientPopulationRepository.FindBy(
+            x => x.PersonId == patientId & x.Active & !x.DeleteFlag)
+                            .OrderByDescending(x => x.Id)
+                            .Take(1)
+                            .ToList();
+                _unitOfWork.Dispose();
                 return patientPopulations;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-   
         }
     }
 }
