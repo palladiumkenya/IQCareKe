@@ -10,33 +10,28 @@ namespace BusinessProcess.CCC.Triage
 {
     public class PatientPregnancyIndicatorManager : IpatientPregnancyIndicatorManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        private int Result = 0;
 
         public int AddPregnancyIndicator(PatientPregnancyIndicator a)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientPregnanacyIndicatorRepository.Add(a);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public int UpdatePreganacyIndcator(PatientPregnancyIndicator u)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PG =
-         _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(
-                 x => x.PatientId == u.PatientId & !x.DeleteFlag)
-             .FirstOrDefault();
+                var PG = _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(
+                         x => x.PatientId == u.PatientId & !x.DeleteFlag)
+                         .FirstOrDefault();
                 if (PG != null)
                 {
                     PG.LMP = u.LMP;
@@ -46,69 +41,47 @@ namespace BusinessProcess.CCC.Triage
                     PG.PregnancyStatusId = u.PregnancyStatusId;
                 }
                 _unitOfWork.PatientPregnanacyIndicatorRepository.Update(PG);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public int DeletePregnancyIndicator(int Id)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PG = _unitOfWork.PatientPregnanacyIndicatorRepository.GetById(Id);
                 _unitOfWork.PatientPregnanacyIndicatorRepository.Remove(PG);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public List<PatientPregnancyIndicator> GetPregnancyIndicator(int patientId)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                var pgIndicatorList = _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
                 _unitOfWork.Dispose();
+                return pgIndicatorList;
             }
         }
 
         public int CheckIfPregnancyIndicatorExisists(int patientId)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientTrnasferId =
-                    _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                        .Select(x => x.Id)
-                        .FirstOrDefault();
-                return Convert.ToInt32(patientTrnasferId);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
+                   _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                       .Select(x => x.Id)
+                       .FirstOrDefault();
                 _unitOfWork.Dispose();
+                return Convert.ToInt32(patientTrnasferId);
             }
         }
     }

@@ -531,10 +531,12 @@
         var patientMasterVisitId = '<%=PatientMasterVisitId%>';    
         var ptn_pk = '<%=Ptn_pk%>'; 
         var locationId = '<%=locationId%>';
-        //console.log(patientId);
-        //console.log(patientMasterVisitId);
-        //console.log(ptn_pk);
-        //console.log(locationId);
+       <%-- var visitId = '<%=VisitId%>';
+        console.log(patientId);
+        console.log(patientMasterVisitId);
+        console.log(ptn_pk);
+        console.log(locationId);
+        console.log(visitId);--%>
         var jan_vl = "";
         var march_vl = "";
         
@@ -564,10 +566,12 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                       
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
                    
@@ -603,10 +607,12 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];                        
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
@@ -640,10 +646,12 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    ;
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
@@ -677,10 +685,12 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
@@ -718,7 +728,7 @@
                         var labtests = [];
                         for (var i = 0; i < serverData.length; i++) {
 
-                            labtests.push(serverData[i]["ParameterName"]);
+                            labtests.push(serverData[i]["Name"]);
                         }
 
                         // console.log(labtests);

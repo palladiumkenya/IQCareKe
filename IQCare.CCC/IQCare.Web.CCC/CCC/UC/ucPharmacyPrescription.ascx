@@ -3,7 +3,7 @@
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
 
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12" style="padding-top: 10px" id="PharmacySection" data-parsley-validate="true" data-show-errors="true">
     <%--<div class="panel panel-info">--%>
 
         <%--<div class="panel-body">--%>
@@ -13,7 +13,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Program</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" ClientIDMode="Static" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -26,7 +26,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);"/>
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -44,7 +44,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);"/>
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                     </div>                        
                                 </div> 
                                 <div class="col-md-3 form-group">                  
@@ -375,45 +375,112 @@
 
         function saveUpdatePharmacy()
         {
-            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
-            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
-            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+            if ($('#PharmacySection').parsley().validate()) {
 
-            ///////////////////////////////////////////////////////////////////
-            var rowCount = $('#dtlDrugPrescription tbody tr').length;
-            var drugPrescriptionArray = new Array();
-            try {
-                for (var i = 0 ; i < rowCount; i++) {
-                    drugPrescriptionArray[i] = {
-                        "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                        "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                        "Dose": DrugPrescriptionTable.row(i).data()[6],
-                        "Duration": DrugPrescriptionTable.row(i).data()[8],
-                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
-                        "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+                var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+                var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+                var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+                var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+                var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+                var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+
+                var allAbbr = "";
+                ///////////////////////////////////////////////////////////////////
+                var rowCount = $('#dtlDrugPrescription tbody tr').length;
+                var drugPrescriptionArray = new Array();
+                try {
+                    for (var i = 0 ; i < rowCount; i++) {
+                        drugPrescriptionArray[i] = {
+                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                            "FreqId": DrugPrescriptionTable.row(i).data()[2],
+                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
+                            "Dose": DrugPrescriptionTable.row(i).data()[6],
+                            "Duration": DrugPrescriptionTable.row(i).data()[8],
+                            "qtyPres": DrugPrescriptionTable.row(i).data()[9],
+                            "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
+                            "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                        }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
                     }
                 }
-            }
-            catch (ex) { }
-            //////////////////////////////////////////////////////////////////
-           
-            $.ajax({
-                url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
-                type: 'POST',
-                dataType: 'json',
-                data: "{'TreatmentPlan':'" + treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" + 
-                    regimenLine + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" + JSON.stringify(drugPrescriptionArray) + "'}",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    toastr.success(data.d, "Saved successfully");
-                },
-                error: function (data) {
-                    toastr.error(data.d, "Error");
+                catch (ex) { }
+                //////////////////////////////////////////////////////////////////
+                allAbbr = allAbbr.replace(/\/$/, "");
+                var sumAllAbbr = 0;
+                var sumSelectedRegimen = 0;
+                try {
+                    var regExp = /\(([^)]+)\)/;
+                    var matches = regExp.exec(regimenText);
+
+                    var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+
+                    for (var i = 0; i < allAbbr.length; i++) {
+                        sumAllAbbr += allAbbr.charCodeAt(i);
+                    }
+
+                    for (var i = 0; i < selectedRegimen.length; i++) {
+                        sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                    }
+
                 }
-            });
+                catch (err) { }
+
+                if (sumAllAbbr > 0) {
+                    if (sumAllAbbr != sumSelectedRegimen) {
+                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                                treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                                regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                                JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                toastr.success(data.d, "Saved successfully");
+                            },
+                            error: function (data) {
+                                toastr.error(data.d, "Error");
+                            }
+                        });
+                    }
+                }
+                else {
+                    $.ajax({
+                        url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                            regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            toastr.success(data.d, "Saved successfully");
+                        },
+                        error: function (data) {
+                            toastr.error(data.d, "Error");
+                        }
+                    });
+                }
+
+            }
+            else {
+                toastr.error("Please enter missing fields.");
+            }
+
+
+            
         }
 
         function CalculateQtyPrescribed() {

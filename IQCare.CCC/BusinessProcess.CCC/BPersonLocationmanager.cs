@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Repository;
@@ -11,67 +10,40 @@ namespace BusinessProcess.CCC
 {
     public class BPersonLocationmanager : ProcessBase,IPersonLocationManager
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+      //  private UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
 
         public int AddPersonLocation(PersonLocation location)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PersonLocationRepository.Add(location);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
-            // return location.Id;
         }
 
         public int DeletePersonLocation(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 PersonLocation location = _unitOfWork.PersonLocationRepository.GetById(id);
                 _unitOfWork.PersonLocationRepository.Remove(location);
                 _result = _unitOfWork.Complete();
-                return _result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
                 _unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public List<PersonLocation> GetCurrentPersonLocation(int persoId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                return
-                    _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == persoId && x.DeleteFlag == false)
+               var location= _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == persoId && x.DeleteFlag == false)
                         .ToList();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
+                _unitOfWork.Dispose();
+                return location;
             }
                 /*personLocation.FindBy(x => x.PersonId == personId & x.DeleteFlag == false)
                 .OrderBy(x => x.Id)
@@ -82,41 +54,23 @@ namespace BusinessProcess.CCC
 
         public List<PersonLocation> GetPersonLocationAll(int personId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var mylist = _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == personId);
-                return mylist.ToList();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var mylist = _unitOfWork.PersonLocationRepository.FindBy(x => x.PersonId == personId).ToList();
                 _unitOfWork.Dispose();
+                return mylist;
             }
-          
         }
 
         public  int UpdatePersonLocation(PersonLocation location)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PersonLocationRepository.Update(location);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-   
         }
     }
 }

@@ -1,43 +1,36 @@
-﻿using Interface.CCC.Screening;
+﻿using DataAccess.CCC.Context;
+using DataAccess.CCC.Repository;
+using Entities.CCC.Screening;
+using Interface.CCC.Screening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Entities.CCC.Screening;
-using DataAccess.CCC.Repository;
-using DataAccess.CCC.Context;
 
 namespace BusinessProcess.CCC.Screening
 {
     public class BPatientScreeningManager : IPatientScreeningManager
     {
-        private UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        // private UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        internal int Result = 0;
 
         public int AddPatientScreening(PatientScreening a)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientScreeningRepository.Add(a);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public int UpdatePatientScreening(PatientScreening u)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PS =
-         _unitOfWork.PatientScreeningRepository.FindBy(
-                 x => x.PatientId == u.PatientId & !x.DeleteFlag)
-             .FirstOrDefault();
+                var PS = _unitOfWork.PatientScreeningRepository.FindBy(
+                    x => x.PatientId == u.PatientId & !x.DeleteFlag)
+                    .FirstOrDefault();
                 if (PS != null)
                 {
                     PS.ScreeningTypeId = u.ScreeningTypeId;
@@ -48,77 +41,44 @@ namespace BusinessProcess.CCC.Screening
                     PS.Comment = u.Comment;
                 }
                 _unitOfWork.PatientScreeningRepository.Update(PS);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
-
         public int DeletePatientScreening(int Id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PS = _unitOfWork.PatientScreeningRepository.GetById(Id);
                 _unitOfWork.PatientScreeningRepository.Remove(PS);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
         }
 
         public List<PatientScreening> GetPatientScreening(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+                var screeningList = _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
                 _unitOfWork.Dispose();
+                return screeningList;
             }
         }
 
         public int CheckIfPatientScreeningExists(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PS =
-                 _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                     .Select(x => x.Id)
-                     .FirstOrDefault();
+                var PS = _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                      .Select(x => x.Id)
+                      .FirstOrDefault();
+                _unitOfWork.Dispose();
                 return Convert.ToInt32(PS);
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
         }
-
-
     }
 }

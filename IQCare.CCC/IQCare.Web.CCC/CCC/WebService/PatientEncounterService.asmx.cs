@@ -6,9 +6,7 @@ using System.Data;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
-using Entities.CCC.Visit;
 using Interface.CCC.Visit;
-using PatientEncounter = Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -288,13 +286,16 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public int savePatientPharmacy(string TreatmentPlan, string TreatmentPlanReason, string RegimenLine, string pmscm, string drugPrescription)
+        public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan, 
+            string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string drugPrescription,
+            string regimenText)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
                 Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
-                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription);
+                Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
+                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText);
             return val;
         }
 

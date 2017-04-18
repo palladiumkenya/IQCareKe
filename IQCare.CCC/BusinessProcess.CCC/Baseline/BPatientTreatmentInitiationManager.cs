@@ -11,35 +11,27 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientTreatmentInitiationManager:ProcessBase,IPatientTreatmentInitiationManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int Result = 0;
 
         public int AddPatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientTreatmentInitiationRepository.Add(patientTreatmentInitiation);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-
         }
 
         public int UpdatePatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientTreatment =
-                    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
-                        x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
+    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
+        x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
                 if (patientTreatment != null)
                 {
                     patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
@@ -51,75 +43,43 @@ namespace BusinessProcess.CCC.Baseline
                     _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
                     Result = _unitOfWork.Complete();
                 }
-
+                _unitOfWork.Dispose();
                 return Result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
         }
 
         public int DeletePatientTreatmentInitiation(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var item = _unitOfWork.PatientTreatmentInitiationRepository.GetById(id);
                 _unitOfWork.PatientTreatmentInitiationRepository.Remove(item);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                 _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-   
         }
 
         public List<PatientTreatmentInitiation> GetPatientTreatmentInitiation(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var patientInitiation = _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
                 _unitOfWork.Dispose();
+                return patientInitiation;
             }
         }
 
         public int CheckIfPatientTreatmentExists(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var recordExists =
-    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-        .Select(x => x.Id)
-        .FirstOrDefault();
+                var recordExists =_unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                    .Select(x => x.Id)
+                    .FirstOrDefault();
+                _unitOfWork.Dispose();
                 return Convert.ToInt32(recordExists);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally { _unitOfWork.Dispose();}
         }
     }
 }

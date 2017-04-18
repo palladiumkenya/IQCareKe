@@ -5,57 +5,40 @@ using Entities.PatientCore;
 using Interface.CCC;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace BusinessProcess.CCC
 {
     public class PatientMaritalStatusManager : ProcessBase, IPatientMaritalStatusManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int result;
 
         public int AddPatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PatientMaritalStatusRepository.Add(patientMarital);
-                return result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-       
+                result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return result;
+            }      
         }
 
         public int DeletePatientMaritalStatus(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 var patientmaritalstatus = _unitOfWork.PatientMaritalStatusRepository.GetById(id);
                 _unitOfWork.PatientMaritalStatusRepository.Remove(patientmaritalstatus);
-                return result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
-      
+                result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return result;
+            }      
         }
 
         public List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 List<PatientMaritalStatus> myList;
                 myList = _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId & !x.DeleteFlag)
@@ -63,72 +46,44 @@ namespace BusinessProcess.CCC
                     .ToList();
                 return myList;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
-            }
    
         }
 
         public int UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PatientMaritalStatusRepository.Update(patientMarital);
-                return result = _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
+                result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return result;
+
             }
         
         }
 
         public PatientMaritalStatus GetFirstPatientMaritalStatus(int personId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                return _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId)
-                    .OrderByDescending(o => o.CreateDate)
-                    .FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
+                var patientms= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId)
+             .OrderByDescending(o => o.CreateDate)
+             .FirstOrDefault();
+                _unitOfWork.Dispose();
+                return patientms;
             }
        
         }
 
         public PatientMaritalStatus GetCurrentPatientMaritalStatus(int personId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                return _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId && !x.DeleteFlag)
+                var patientms= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId && !x.DeleteFlag)
                     .OrderBy(x => x.Id).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                //_unitOfWork.Dispose();
+                _unitOfWork.Dispose();
+                return patientms;
+
             }
        
         }

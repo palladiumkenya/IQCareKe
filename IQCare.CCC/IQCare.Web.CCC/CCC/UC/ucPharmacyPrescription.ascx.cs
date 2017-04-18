@@ -14,18 +14,21 @@ namespace IQCare.Web.CCC.UC
         public string PMSCMSAmePointDispense = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["SCMModule"] != null)
-                PMSCM = Session["SCMModule"].ToString();
+            if (!IsPostBack)
+            {
+                if (Session["SCMModule"] != null)
+                    PMSCM = Session["SCMModule"].ToString();
 
-            if (Session["SCMSamePointDispense"] != null)
-                PMSCMSAmePointDispense = Session["SCMSamePointDispense"].ToString();
+                if (Session["SCMSamePointDispense"] != null)
+                    PMSCMSAmePointDispense = Session["SCMSamePointDispense"].ToString();
 
-            LookupLogic lookUp = new LookupLogic();
-            lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
-            lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
-            lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
-            lookUp.populateDDL(regimenLine, "RegimenLines");
-            lookUp.getPharmacyDrugFrequency(ddlFreq);
+                LookupLogic lookUp = new LookupLogic();
+                lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
+                lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
+                lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
+                lookUp.populateDDL(regimenLine, "RegimenLines");
+                lookUp.getPharmacyDrugFrequency(ddlFreq);
+            }
         }
     }
 }

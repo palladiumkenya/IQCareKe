@@ -16,8 +16,8 @@ namespace BusinessProcess.CCC.Patient
 {
     public class BPatient : ProcessBase, IPatientManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        //internal int Result;
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        internal int Result;
 
         public int AddPatient(PatientEntity patient)
         {
@@ -55,8 +55,13 @@ namespace BusinessProcess.CCC.Patient
 
         public PatientEntity GetPatient(int id)
         {
-            var patientInfo = _unitOfWork.PatientRepository.GetById(id);
-            return patientInfo;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientInfo = _unitOfWork.PatientRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return patientInfo;
+            }
+                
         }
 
         public int UpdatePatient(PatientEntity patient, int id)
@@ -81,42 +86,24 @@ namespace BusinessProcess.CCC.Patient
 
         public List<PatientEntity> CheckPersonEnrolled(int persionId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
+                _unitOfWork.Dispose();
                 return person;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-   
         }
 
         public int GetPatientType(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var patientTypeId =
-                    _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
-                        .Select(x => x.PatientType);
-                return patientTypeId.FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
+                                    .Select(x => x.PatientType).FirstOrDefault();
                 _unitOfWork.Dispose();
+                return patientTypeId;
+                //return patientTypeId.FirstOrDefault();
             }
-        
         }
     }
 }
