@@ -284,9 +284,10 @@
                                 <div class="panel panel-info">
 
                                     <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <h1 class=" control-label pull-left"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Presenting Complaints</h1>
-                                        </div>
+                                        <div class="col-md-12 form-group"><label class="control-label pull-left">Presenting Complaints</label></div>
+                                        <%--<div class="col-md-12">
+                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Presenting Complaints
+                                        </div>--%>
                                         <div class="col-md-12">
                                             <hr />
                                         </div>
