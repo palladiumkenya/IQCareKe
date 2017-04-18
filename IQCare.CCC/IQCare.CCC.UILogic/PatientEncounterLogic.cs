@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -145,7 +146,9 @@ namespace IQCare.CCC.UILogic
         }
 
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
-            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription)
+            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
+            string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
+            string regimenText)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -159,11 +162,12 @@ namespace IQCare.CCC.UILogic
                     if (drugPrescription[i].DrugAbbr != "")
                         RegimenType += drugPrescription[i].DrugAbbr + "/";
                 }
-                
+              
             }
 
             return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
-                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag);
+                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
+                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen);
 
         }
 
