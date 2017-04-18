@@ -57,6 +57,7 @@
     <Compile Include="Baseline\IPatientVaccinationManager.cs" />
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
+    <Compile Include="Encounter\IPatientAdherenceAssessessment.cs" />
     <Compile Include="Encounter\IPatientCareEnding.cs" />
     <Compile Include="Encounter\IPatientLabDetails.cs" />
     <Compile Include="Encounter\IPatientLabOrder.cs" />
