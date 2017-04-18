@@ -11,27 +11,18 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BINHProphylaxis : ProcessBase, IINHProphylaxisManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddINHProphylaxis(INHProphylaxis iNHProphylaxis)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.INHProphylaxisRepository.Add(iNHProphylaxis);
                 Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return Result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-    
         }
 
         public int DeleteINHProphylaxis(int id)
@@ -41,41 +32,24 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdateINHProphylaxis(INHProphylaxis iNHProphylaxis)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.INHProphylaxisRepository.Update(iNHProphylaxis);
-                return _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+                Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
+                return Result;
             }
-        
         }
 
         public List<INHProphylaxis> GetPatientProphylaxes(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                return
-                    _unitOfWork.INHProphylaxisRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false)
-                        .ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
+               var inhList= _unitOfWork.INHProphylaxisRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false)
+                       .ToList();
                 _unitOfWork.Dispose();
+                return inhList;
             }
-         
         }
     }
 }

@@ -199,5 +199,15 @@ namespace BusinessProcess.CCC.visit
             }
 
         }
+
+        public List<PatientMasterVisit> GetByDate(DateTime date)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientMasterVisit> patientVisitList = _unitOfWork.PatientMasterVisitRepository.GetByDate(date);
+                _unitOfWork.Dispose();
+                return patientVisitList;
+            }
+        }
     }
 }

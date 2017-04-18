@@ -50,7 +50,7 @@ namespace IQCare.CCC.UILogic
                                 if (labType != null)
                                 {
                                 LookupLabs testId = _lookupTest.GetLabTestId(labType);
-                                int labTestId = testId.LabTestId;
+                                int labTestId = testId.Id;
 
                             PatientLabTracker labTracker = new PatientLabTracker()
                             {
@@ -94,6 +94,16 @@ namespace IQCare.CCC.UILogic
             }
 
            // return int.Parse(Msg);
+        }
+        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+        {
+            var pendingLabs = _mgr.GetVlPendingCount(facilityId);
+            return pendingLabs;
+        }
+        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+        {
+            var completeLabs = _mgr.GetVlCompleteCount(facilityId);
+            return completeLabs;
         }
     }
    }

@@ -8,13 +8,12 @@ using System.Text;
 namespace Entities.CCC.Lookup
 {
     [Serializable]
-    [Table("[Mst_LabTestParameter]")]
+    [Table("[mst_LabTestMaster]")]
     public class LookupLabs
     {
-        public int Id { get; set; }       
-        public string ParameterName { get; set; }  
-        public int LabTestId { get; set; }   
-
+        public int Id { get; set; }
+        public string ReferenceId { get; set; }
+        public string Name { get; set; }
 
     }
 }

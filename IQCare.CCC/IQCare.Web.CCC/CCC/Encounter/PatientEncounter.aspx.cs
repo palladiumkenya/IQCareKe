@@ -14,7 +14,7 @@ namespace IQCare.Web.CCC.Encounter
     public partial class PatientEncounter : System.Web.UI.Page
     {
         public int PatientId;
-        public int visitId = 0;
+        public int VisitId;
         public int PatientMasterVisitId;
         public int UserId;
         public int Ptn_pk;
@@ -32,7 +32,7 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //VisitId = Convert.ToInt32(HttpContext.Current.Session["VisitId"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
 

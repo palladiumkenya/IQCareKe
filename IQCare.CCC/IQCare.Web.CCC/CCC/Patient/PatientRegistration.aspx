@@ -889,11 +889,11 @@
 
                     var isPatientSet = '<%=Session["PatientEditId"]%>';
 
-                    var fname = escape($("#<%=personFname.ClientID%>").val());
-                    var mname = escape($("#<%=personMName.ClientID%>").val());
-                    var lname = escape($("#<%=personLName.ClientID%>").val());
+                    var fname = escape($("#<%=personFname.ClientID%>").val().trim());
+                    var mname = escape($("#<%=personMName.ClientID%>").val().trim());
+                    var lname = escape($("#<%=personLName.ClientID%>").val().trim());
                     var sex =  $("#<%=Gender.ClientID%>").find(":selected").val();
-                    var natId = escape($("#<%=NationalId.ClientID%>").val());
+                    var natId = escape($("#<%=NationalId.ClientID%>").val().trim());
                     var userId = <%=UserId%>;
                     var dateOfBirth = $('#MyDateOfBirth').datepicker('getDate');
                     var maritalstatusId = $("#<%=MaritalStatusId.ClientID%>").find(":selected").val();
@@ -920,9 +920,9 @@
                     var isPatientSet = '<%=Session["PatientEditId"]%>';
 
 					var returnValue=0;
-                    var gfname = escape($("#<%=GurdianFNames.ClientID%>").val());
-                    var gmname = escape($("#<%=GurdianMName.ClientID%>").val());
-                    var glname = escape($("#<%=GurdianLName.ClientID%>").val());
+                    var gfname = escape($("#<%=GurdianFNames.ClientID%>").val().trim());
+                    var gmname = escape($("#<%=GurdianMName.ClientID%>").val().trim());
+                    var glname = escape($("#<%=GurdianLName.ClientID%>").val().trim());
                     var gsex = $("#<%=GuardianGender.ClientID%>").find(":selected").val();
                     var natId = 999999;
                     var orphan = $("#<%=ChildOrphan.ClientID%>").find(":selected").text();
@@ -947,9 +947,9 @@
                 function addPersonTreatmentSupporter() {
                     var isPatientSet = '<%=Session["PatientEditId"]%>';
                     
-                    var tFname = escape($("#<%=tsFname.ClientID%>").val());
-                    var tMname = escape($("#<%=tsMiddleName.ClientID%>").val());
-                    var tLname = escape($("#<%=tsLastName.ClientID%>").val());
+                    var tFname = escape($("#<%=tsFname.ClientID%>").val().trim());
+                    var tMname = escape($("#<%=tsMiddleName.ClientID%>").val().trim());
+                    var tLname = escape($("#<%=tsLastName.ClientID%>").val().trim());
                     var tSex = $("#<%=tsGender.ClientID%>").val();
                     var mobileContact = $("#<%=TSContacts.ClientID%>").val();
                     var natId = 999999;

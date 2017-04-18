@@ -24,7 +24,7 @@ namespace DataAccess.CCC.Repository.Lookup
         public List<LookupLabs> FindBy(Func<LookupLabs, bool> p)
         {
             var results = _context.LookupLaboratories.Where(p);
-            //  .Where(p).ToList<LookupCounty>();
+           
 
             return results.ToList();
         }
@@ -32,14 +32,14 @@ namespace DataAccess.CCC.Repository.Lookup
         public List<LookupLabs> GetLabs()
         {
             ILookupLabs labsRepository = new LookupLabsRepository();
-            var list = labsRepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.ParameterName);
+            var list = labsRepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.Name);
             return list.ToList();
         }
 
         public LookupLabs GetLabTestId(string labType)
         {
             ILookupLabs labsRepository = new LookupLabsRepository();
-            var labTestId = labsRepository.FindBy(x => x.ParameterName == labType).FirstOrDefault();
+            var labTestId = labsRepository.FindBy(x => x.Name == labType).FirstOrDefault();
             return labTestId;
 
         }

@@ -10,7 +10,7 @@ using DataAccess.CCC.Interface.Triage;
 
 namespace DataAccess.CCC.Interface
 {
-    public interface IUnitOfWork : IDisposable
+    public interface _unitOfWork : IDisposable
     {
         int Complete();
         
