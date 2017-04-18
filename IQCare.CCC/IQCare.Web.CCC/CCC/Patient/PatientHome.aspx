@@ -164,6 +164,13 @@
                                                          <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control" required="true" data-parsley-min="1"></asp:DropDownList>
                                                      </div>
                                                  </div>
+                                                 
+                                                 <div class="col-md-12 form-group">
+                                                     <div class="col-md-3"><label class="control-label pull-left">Select if Key.Pop:</label></div>
+                                                     <div class="col-md-6">
+                                                         <asp:DropDownList ID="bioPatientKeyPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control"></asp:DropDownList>
+                                                     </div>
+                                                 </div>
 
                                              </div>                                        
                                          </div>

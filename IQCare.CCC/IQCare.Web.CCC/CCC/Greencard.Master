@@ -148,7 +148,8 @@
 								</a>
 								
 								<a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx") %>' class="list-group-item">
-									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">Register Patient </strong> 
+									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">
+                                        <asp:Label ID="lblRegistration" runat="server" Text="Label"></asp:Label></strong> 
 								</a>
 
 								<a href="#" class="list-group-item active" id="titlePatientBaseline">
@@ -261,7 +262,10 @@
 			var patientId = <%=PatientId%>;
 			var patientMasterVisitId = <%=PatientMasterVisitId%>;
 
-			var encounterStatusId = <%=EncounterStatusId%>;
+		    var encounterStatusId = <%=EncounterStatusId%>;
+		    var linkText = "Register Patient";
+
+		    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 
 			if (patientId < 1) {
 				encounterStatusId = 0;
@@ -320,6 +324,7 @@
 										$("#menuStartEncounter").hide();
 										startEncounter = 1; /* denotes an active encounter */
 										stopEncounter = 0;
+                                        $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
 										toastr.info("Patient Service Checkedin successfully!");
 									}
 								},
@@ -372,10 +377,11 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(response) {
-							encounterStopped();
-							$("#menuStartEncounter").show();
+						encounterStopped();
+						$("#menuStartEncounter").show();
 						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
-						toastr.info("Patient Service Checkedout successfully!");
+					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+					    toastr.info("Patient Service Checkedout successfully!");
 					},
 					error:function(xhr, errorType, exception) {
 						var jsonError = jQuery.parseJSON(xhr.responseText);
