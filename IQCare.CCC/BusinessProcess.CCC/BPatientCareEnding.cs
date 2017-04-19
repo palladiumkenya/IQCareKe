@@ -68,6 +68,7 @@ namespace BusinessProcess.CCC
                 var careEnding = _unitOfWork.PatientCareEndingRepository.GetById(id);
                 _unitOfWork.PatientCareEndingRepository.Remove(careEnding);
                 result= _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return result;
             }
         }

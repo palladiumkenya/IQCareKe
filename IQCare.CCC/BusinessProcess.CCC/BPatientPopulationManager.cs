@@ -17,8 +17,8 @@ namespace BusinessProcess.CCC
             using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 _unitOfWork.PatientPopulationRepository.Add(patientPopulation);
-                _unitOfWork.Dispose();
                  _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
         }
@@ -28,9 +28,9 @@ namespace BusinessProcess.CCC
             using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
 
-                _unitOfWork.PatientPopulationRepository.Update(patientPopulation);
-                _unitOfWork.Dispose();
+                _unitOfWork.PatientPopulationRepository.Update(patientPopulation);              
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
         }
