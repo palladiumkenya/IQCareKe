@@ -185,5 +185,33 @@ namespace BusinessProcess.CCC
 
             }
         }
+
+        public List<PharmacyFields> getPharmacyFields(string patientMasterVisitID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, patientMasterVisitID);
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyFields", ClsUtility.ObjectEnum.DataTable);
+
+                List<PharmacyFields> list = new List<PharmacyFields>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    PharmacyFields drg = new PharmacyFields();
+                    drg.TreatmentProgram = theDT.Rows[i]["ProgID"].ToString();
+                    drg.PeriodTaken = theDT.Rows[i]["pharmacyPeriodTaken"].ToString();
+                    drg.TreatmentPlan = theDT.Rows[i]["TreatmentStatusId"].ToString();
+                    drg.TreatmentPlanReason = theDT.Rows[i]["TreatmentStatusReasonId"].ToString();
+                    drg.RegimenLine = theDT.Rows[i]["RegimenLineId"].ToString();
+                    drg.Regimen = theDT.Rows[i]["RegimenId"].ToString();
+                    list.Add(drg);
+                }
+
+                return list;
+            }
+        }
     }
 }

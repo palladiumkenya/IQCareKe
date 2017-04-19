@@ -145,6 +145,14 @@ namespace IQCare.CCC.UILogic
             return filteredList[0].multiplier;
         }
 
+        public List<PharmacyFields> getPharmacyFields(string PatientMasterVisitID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<PharmacyFields> drg = patientEncounter.getPharmacyFields(PatientMasterVisitID);
+
+            return drg;
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
