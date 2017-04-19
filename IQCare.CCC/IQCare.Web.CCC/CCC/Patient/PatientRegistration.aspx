@@ -754,6 +754,7 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep4").parsley().validate()) {
+
                                 var sex = $("#Gender").find(":selected").text();
                                 var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
 

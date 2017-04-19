@@ -364,6 +364,87 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
         
         /// <summary>
+        /// Question1_Yes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question1_Yes;
+        
+        /// <summary>
+        /// Question1_No control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question1_No;
+        
+        /// <summary>
+        /// Question2_Yes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question2_Yes;
+        
+        /// <summary>
+        /// Question2_No control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question2_No;
+        
+        /// <summary>
+        /// Question3_Yes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question3_Yes;
+        
+        /// <summary>
+        /// Question3_No control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question3_No;
+        
+        /// <summary>
+        /// Question4_Yes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question4_Yes;
+        
+        /// <summary>
+        /// Question4_No control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton Question4_No;
+        
+        /// <summary>
+        /// adherenceScore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label adherenceScore;
+        
+        /// <summary>
         /// arvAdherance control.
         /// </summary>
         /// <remarks>

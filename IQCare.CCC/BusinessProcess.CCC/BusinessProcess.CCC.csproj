@@ -89,6 +89,7 @@
     <Compile Include="Baseline\BPatientTransferInManager.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BMstPatientInsert.cs" />
+    <Compile Include="BPatientAdherenceAssessment.cs" />
     <Compile Include="BPatientAppointment.cs" />
     <Compile Include="BPatientCareEnding.cs" />
     <Compile Include="BPatientConsent.cs" />
