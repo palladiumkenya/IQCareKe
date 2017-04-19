@@ -12,7 +12,7 @@ namespace BusinessProcess.CCC.Enrollment
     public class BPatientEntryPoint : ProcessBase, IPatientEntryPointManager
     {
         //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        internal int Result;
+       // internal int Result;
 
         public int AddPatientEntryPoint(PatientEntryPoint patientEntryPoint)
         {

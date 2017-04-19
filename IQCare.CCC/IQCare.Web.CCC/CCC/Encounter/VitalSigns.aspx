@@ -25,10 +25,11 @@
 
         var Gender = "<%=Gender%>";
 
-        if (Gender === 'male') { $("#btnFemalVitals").attr("disabled", "disabled"); }
+        if (Gender === 'male') { $("#btnFemalVitals").prop("disabled",true); }
         else {
-            $("#btnFemalVitals").removeAttr("disabled");
+            $("#btnFemalVitals").prop("disabled",false);
         }
+
         $("#femaleVitals").hide("fast");
 
         
@@ -40,6 +41,8 @@
          $("#btnLoadTriage").click(function () {
               $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast");});
          });
+
+
         
     });
     </script>

@@ -256,7 +256,7 @@
                                                          <div class="col-md-12"><label class="control-label pull-left">Last Name:</label></div>
                                                          <div class="col-md-12">
                                                              <asp:TextBox ID="trtLastName" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="last name" data-parsley-required="true" type="text" data-parsley-length="[2,25]"></asp:TextBox>
-
+                                                             <asp:DropDownList ID="Gender" runat="server" ClientIDMode="Static"></asp:DropDownList>
                                                          </div>
                                                      </div>
                                                      
@@ -292,13 +292,13 @@
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
                              <div class="col-md-12 form-group">
-                                 <div class="col-md-2" style="padding: 0;"><label class="control-label pull-left">County:</label></div>
-                                 <div class="col-md-10" style="padding: 0;">
+                                 <div class="col-md-6"><label class="control-label pull-left">County:</label></div>
+                                 <div class="col-md-6">
                                      <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             <!--</div>
+                             </div>
                              
-                             <div class="col-md-12 form-group">
+                             <!--<div class="col-md-12 form-group">
                                  <div class="col-md-2" style="padding: 0;"><label class="control-label pull-left">Ward:</label></div>
                                  <div class="col-md-10" style="padding: 0;">
                                      <asp:Label ID="txtWard" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
@@ -310,11 +310,11 @@
                                  <div class="col-md-9" style="padding: 0;">
                                      <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
-                             <!--</div>
+                             <!--</div>-->
 
-                             <div class="col-md-12 form-group">-->
-                                 <div class="col-md-3" style="padding: 0;"><label class="control-label pull-left">Nearest H/C:</label></div>
-                                 <div class="col-md-3" style="padding: 0;">
+                             <div class="col-md-12 form-group">
+                                 <div class="col-md-6"><label class="control-label pull-left">Nearest H/C:</label></div>
+                                 <div class="col-md-6">
                                      <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              </div>
@@ -771,6 +771,7 @@
         $(document).ready(function() {
 
             var patientId = "<%=PatientId%>";
+            $("#<%=Gender.ClientID%>").hide();
             
             /* populate patient baseline information */
             $.ajax({
@@ -1147,6 +1148,9 @@
                         $("#<%=patMobile.ClientID%>").val(MobileNumber);
                         $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
                         $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
+                        $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId);
+                        $("#<%=Gender.ClientID%>").val(patientDetails.Gender);
+
 
                     },
                     error: function (response) {
@@ -1160,10 +1164,27 @@
                     //console.log("here");
                     return false;
                 }
+
+                var sex = $("#<%=Gender.ClientID%>").find('option:selected').text();
+                var optionType = $("#<%=bioPatientKeyPopulation.ClientID%>").find('option:selected').text();
+                console.log(sex);
+                console.log(optionType);
+
+                if (sex == "Male" && optionType=="Female Sex Worker") {
+                    toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
+                    return false;
+                }
+                else if (sex == "Female" && optionType == "Men having Sex with Men") {
+                    toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                        "Person Population Error");
+                    return false;
+                }
+
                 var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val().trim());
                 var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val().trim());
                 var bioLastName = escape($("#<%=bioLastName.ClientID%>").val().trim());
-                var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").val();
+                var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text();
+                var keyPop = $("#<%=bioPatientKeyPopulation.ClientID%>").val();
                 var userId = <%=UserId%>;
 
                 console.log(bioFirstName);
@@ -1172,7 +1193,7 @@
                 console.log(bioPatientPopulation);
 
                 if (patientId > 0) {
-                    updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation);
+                    updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation, keyPop);
                 }            
             });
 
@@ -1239,6 +1260,16 @@
                     addPatientTreatmentSupporter(patientId, FirstName, MiddleName, LastName, Gender, Mobile, userId);
                 }
             });
+            $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', true);
+            $("#<%=bioPatientPopulation.ClientID%>").on("change",function() {
+                console.log($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text());
+                if ($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
+                    $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', false);
+                } else {
+                    $("#<%=bioPatientKeyPopulation.ClientID%>").val("");
+                    $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', true);
+                }
+            });
 
         });
 
@@ -1293,11 +1324,11 @@
             });
         }
 
-        function updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation) {
+        function updatePatientBio(patientId, bioFirstName, bioMiddleName, bioLastName, userId, bioPatientPopulation, keyPop) {
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientSummaryService.asmx/UpdatePatientBio",
-                data: "{'patientId':'" + patientId + "', 'bioFirstName':'" + bioFirstName + "', 'bioMiddleName':'" + bioMiddleName + "', 'bioLastName': '" + bioLastName + "','userId': '" + userId + "','bioPatientPopulation':'" + bioPatientPopulation + "'}",
+                data: "{'patientId':'" + patientId + "', 'bioFirstName':'" + bioFirstName + "', 'bioMiddleName':'" + bioMiddleName + "', 'bioLastName': '" + bioLastName + "','userId': '" + userId + "','bioPatientPopulation':'" + bioPatientPopulation + "','keyPop':'" + keyPop + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

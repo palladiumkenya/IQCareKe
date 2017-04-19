@@ -3,6 +3,7 @@ using IQCare.CCC.UILogic;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
@@ -304,6 +305,53 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
             return patientEncounter.getPharmacyDrugMultiplier(freqID);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine)
+        {
+            PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
+            int adherenceScore = 0;
+            string adherenceRating = null;
+
+            int patientId = Convert.ToInt32(Session["PatientId"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
+            int createdBy = Convert.ToInt32(Session["AppUserId"].ToString());
+            bool feel_Better = Convert.ToBoolean(Convert.ToInt32(feelBetter));
+            bool careless_Medicine = Convert.ToBoolean(Convert.ToInt32(carelessAboutMedicine));
+            bool feel_Worse = Convert.ToBoolean(Convert.ToInt32(feelWorse));
+            bool forget_Medicine = Convert.ToBoolean(Convert.ToInt32(forgetMedicine));
+
+            adherenceScore = Convert.ToInt32(feelBetter) + Convert.ToInt32(carelessAboutMedicine) +
+                             Convert.ToInt32(feelWorse) + Convert.ToInt32(forgetMedicine);
+
+            if (adherenceScore == 0)
+            {
+                adherenceRating = "Good";
+            }else if (adherenceScore >= 1 || adherenceScore <= 2)
+            {
+                adherenceRating = "Fair";
+            }else if (adherenceScore >= 3 || adherenceScore <= 4)
+            {
+                adherenceRating = "Poor";
+            }
+
+            int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+            if (result > 0)
+            {
+                var lookUpLogic =  new LookupLogic();
+                var adherence = lookUpLogic.GetItemIdByGroupAndItemName("ARVAdherence", adherenceRating);
+                var itemId = 0;
+                var msg = "Successfully Saved Adherence Assessment";
+                if (adherence.Count > 0)
+                {
+                    itemId = adherence[0].ItemId;
+                }
+                string[] arr1 = new string[] { msg, itemId.ToString()};
+                return new JavaScriptSerializer().Serialize(arr1);
+            }
+            else
+                return "An error occured";
         }
 
     }

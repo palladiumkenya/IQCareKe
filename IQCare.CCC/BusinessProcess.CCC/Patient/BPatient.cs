@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using Entities.PatientCore;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Common;
@@ -17,7 +15,7 @@ namespace BusinessProcess.CCC.Patient
     public class BPatient : ProcessBase, IPatientManager
     {
         //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        internal int Result;
+       // internal int Result;
 
         public int AddPatient(PatientEntity patient)
         {
