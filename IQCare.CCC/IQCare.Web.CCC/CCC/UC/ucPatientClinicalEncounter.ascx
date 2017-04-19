@@ -1226,6 +1226,14 @@
                                                     <div class="errorBlock4" style="color: red;"> Please select one option </div>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="col-md-12 form-group" style="background-color: lightblue;">
+                                                <div class="col-md-9 pull-left">Total Score</div>
+                                                <div class="col-md-3 pull-left">
+                                                    <asp:Label ID="adherenceScore" runat="server"></asp:Label>
+
+                                                </div>
+                                            </div>
 
                                         </div>                                        
                                     </div>
@@ -1254,7 +1262,7 @@
                                         <label class="control-label pull-left">ARV Adherence</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                        <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
                                     </div>
                                 </div>
 
@@ -1263,7 +1271,7 @@
                                         <label class="control-label pull-left">CTX/Dapsone Adherence</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
                                     </div>
                                 </div>
                             </div>
@@ -1982,35 +1990,33 @@
             }
 
             $("#btnAdherenceAssessment").click(function() {
-                if (!$('#adherenceAssessmentModal').parsley().validate()) {
-                    return false;
-                }
-                var Question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
-                var Question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
-                var Question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
-                var Question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+
+                var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
+                var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
+                var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
+                var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
 
                 $('.errorBlock1').hide();
                 $('.errorBlock2').hide();
                 $('.errorBlock3').hide();
                 $('.errorBlock4').hide();
 
-                if (isNaN(Question1)) {
+                if (isNaN(question1)) {
                     $('.errorBlock1').show();
                     return false;
                 }
 
-                if (isNaN(Question2)) {
+                if (isNaN(question2)) {
                     $('.errorBlock2').show();
                     return false;
                 }
 
-                if (isNaN(Question3)) {
+                if (isNaN(question3)) {
                     $('.errorBlock3').show();
                     return false;
                 }
 
-                if (isNaN(Question4)) {
+                if (isNaN(question4)) {
                     $('.errorBlock4').show();
                     return false;
                 }
@@ -2020,14 +2026,83 @@
                 $('.errorBlock3').hide();
                 $('.errorBlock4').hide();
 
-                console.log(Question1);
-                console.log(Question2);
-                console.log(Question3);
-                console.log(Question4);
+                /*
+                console.log(question1);
+                console.log(question2);
+                console.log(question3);
+                console.log(question4);
+                */
 
-                var adherenceScore = Question1 + Question2 + Question3 + Question4;
+                var adherenceScore = question1 + question2 + question3 + question4;
 
-                console.log(adherenceScore);
+                //console.log(adherenceScore);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
+                    data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response.d);
+                        var returnValue = JSON.parse(response.d);
+                        toastr.success(returnValue[0], "Adherence Assessment");
+                        $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
+                        $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
+                        $('#adherenceAssessmentModal').modal('hide');
+                    },
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
             });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function() {
+            calculateAdherenceScore();
+        });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2"]').change(function() {
+            calculateAdherenceScore();
+        });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3"]').change(function() {
+            calculateAdherenceScore();
+        });
+
+        $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4"]').change(function() {
+            calculateAdherenceScore();
+        });
+
+
+        function calculateAdherenceScore() {
+            var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
+            var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
+            var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
+            var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+
+            var adherenceScore = 0;
+
+            if (!isNaN(question1)) {
+                adherenceScore = adherenceScore + question1;
+            }
+
+            if (!isNaN(question2)) {
+                adherenceScore = adherenceScore + question2;
+            }
+
+            if (!isNaN(question3)) {
+                adherenceScore = adherenceScore + question3;
+            }
+
+            if (!isNaN(question4)) {
+                adherenceScore = adherenceScore + question4;
+            }
+            //var adherenceScore = question1 + question2 + question3 + question4;
+            //console.log(adherenceScore);
+            $("#<%=adherenceScore.ClientID%>").text(adherenceScore + "/4");
+        }
+
     });
 </script>
