@@ -127,6 +127,16 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
+                if (vw != null && vw.Count > 0)
+                {
+                    Gender.Items.Add(new ListItem("select", "0"));
+
+                    foreach (var item in vw)
+                    {
+                        Gender.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
                 List<LookupItemView> keyPopList = mgr.GetLookItemByGroup("KeyPopulation");
                 if (keyPopList != null && keyPopList.Count > 0)
                 {
