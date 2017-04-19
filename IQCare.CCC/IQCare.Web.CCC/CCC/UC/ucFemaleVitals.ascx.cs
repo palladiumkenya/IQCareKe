@@ -12,6 +12,16 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucFemaleVitals : System.Web.UI.UserControl
     {
+        protected int PatientId
+        {
+            get { return Convert.ToInt32(Session["patientId"]); }
+        }
+
+        protected int PatientMasterVisitId
+        {
+            get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
