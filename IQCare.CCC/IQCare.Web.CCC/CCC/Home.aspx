@@ -312,7 +312,7 @@
                     $("#<%=lblbooked.ClientID%>").val("<span class='badge'>"+item.TotalAppointments+"3</span>");
                     $("#<%=lblvisited.ClientID%>").val( item.MetAppointments);
                     $("<%=lblpending.ClientID%>").val( item.MissedAppointments);
-                    $("<%=lblwalkins.ClientID%>").va(item.WalkIns);
+                    $("<%=lblwalkins.ClientID%>").val(item.WalkIns);
 
 <%--                    var table = '';
                     table += '<tr><td style="text-align: left">' +
