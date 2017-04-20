@@ -57,6 +57,7 @@ namespace DataAccess.CCC.Repository
         private IPersonContactLookUpRepository _personContactLookUpRepository;
         private IPatientBaselineLookupRepository _patientBaselineLookupRepository;
         private ILookupCounty _lookupCounty;
+        private IPatientServiceEnrollmentLookupRepository _patientServiceEnrollmentLookupRepository;
       
 
         /* visit */
@@ -126,6 +127,15 @@ namespace DataAccess.CCC.Repository
         public ILookupRepository LookupRepository
         {
             get { return _lookupRepository ?? (_lookupRepository = new LookupRepository((LookupContext)_context)); }
+        }
+
+        public IPatientServiceEnrollmentLookupRepository PatientServiceEnrollmentLookupRepository
+        {
+            get
+            {
+                return _patientServiceEnrollmentLookupRepository ??
+                       (_patientServiceEnrollmentLookupRepository = new PatientServiceEnrollmentLookupRepository((LookupContext) _context));
+            }
         }
 
         public ILookupMasterRepository LookupMasterRepository

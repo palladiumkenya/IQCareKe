@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-12">
-            <table class="table table-striped">
+            <table class="table table-striped" id="patientEnrollments">
                 <thead>
                     <tr>
                         <th>Service Name</th>
@@ -400,6 +400,8 @@
                 }
             });
 
+            getPatientEnrollments();
+
             $("#btnClose").click(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
             });
@@ -620,6 +622,43 @@
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
                         toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
+
+            function getPatientEnrollments() {
+                $.ajax(
+                {
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/GetPatientEnrollments",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function (response) {
+                        console.log(response.d);
+                        //$("#tblCareEnded > tbody").empty();
+                        //$('#patientEnrollments tr:not(:first)').remove();
+                        console.log(response.d);
+                        var itemList = response.d;
+                        var table = '';
+                        itemList.forEach(function (item, i) {
+                            n = i + 1;
+                            if (item.PatientId) {
+                                table += '<tr><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align:left">' + item.EnrollmentNumber + '</td><td style="text-align: left">' + moment(item.EnrollmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.PatientStatus + '</td></tr>';
+                            }
+                                
+                        });
+
+                        if (table != '') {
+                            $('#patientEnrollments tr:not(:first)').remove();
+                            $('#patientEnrollments').append(table);
+                        }
+                    },
+
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " ");
                         return false;
                     }
                 });
