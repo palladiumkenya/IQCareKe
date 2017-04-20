@@ -121,7 +121,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-12 form-group">
+                                                <div class="col-md-12 form-group" id="divEDD">
                                                     <div class="col-md-12">
                                                         <label class="control-label  pull-left">EDD</label>
                                                     </div>
@@ -267,7 +267,7 @@
                                                         <label class="control-label  pull-left">CaCX Screeing</label>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                        <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
@@ -275,7 +275,7 @@
                                                         <label class="control-label  pull-left">STI Screeing</label>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                                        <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
@@ -283,7 +283,7 @@
                                                         <label class="control-label  pull-left">STI Partner Notification</label>
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                                        <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,6 +319,10 @@
             var lmpDate;
             var eddDate;
             var pgStatus;
+            var fpId = 0;
+            var notOnFpId = 0;
+            var dateOfOutcome;
+            var ancProfileDate;
             var ancprofile=0;
             var patientId="<%=PatientId%>";
             var patientMasterVisitId = "<%=PatientMasterVisitId%>";
@@ -326,13 +330,13 @@
 
             $("#FemaleLMP").datepicker({
                   date: null,
-                  allowPastDates: true,
+                  allowPastDates: false,
                   momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
             $("#EDCD").datepicker({
                   date: null,
-                  allowPastDates: true,
+                  allowPastDates: false,
                   momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
@@ -372,16 +376,17 @@
             $("#<%=examinationPregnancyStatus.ClientID%>").on("change", function () {
                 pgStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 if ($(this).find(":selected").text() === 'Pregnant(PG)') {
-
+                    $("#divEDD").show("fast");
                     $("#divOnFP").hide("fast", function () { $("#FP").hide("fast");})
                 } else {
-                    $("#divOnFP").show("fast", function () { $("#FP").show("fast");})
+                    $("#divOnFP").show("fast", function () { $("#FP").show("fast"); })
+                     $("#divEDD").hide("fast");
                 }
             });
 
-            var fpId = $("#<%=onFP.ClientID%>").find(":selected").val();
+            fpId = $("#<%=onFP.ClientID%>").find(":selected").val();
             var fpName = $("#<%=onFP.ClientID%>").find(":selected").text();
-            var notOnFpId=$("#<%=ddlNoFP.ClientID%>").find(":selected").val();
+            notOnFpId=$("#<%=ddlNoFP.ClientID%>").find(":selected").val();
             var fpMethod=[];
             $("#<%=fpMethod.ClientID%>:selected").each(function (i, selected) {
                 fpMethod[i] = $(selected).val();
@@ -395,11 +400,12 @@
             function AddPregnancy() {
 
                 var eddDate = moment($("#EDCD").datepicker('getDate')).format("DD-MMM-YYYY");
-               // alert(eddDate);
+                if (dateOfOutcome == null) { dateOfOutcome = '15-Jun-1900'; }
+
                 $.ajax({
 		            type: "POST",
 		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancy",
-		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'null','parity':'null','outcome':'0','dateOfOutcome':'','userId':'0'}",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'null','parity':'null','outcome':'0','dateOfOutcome':'"+dateOfOutcome+"','userId':'0'}",
 		            contentType: "application/json; charset=utf-8",
 		            dataType: "json",
 		            success: function(response) {
@@ -418,7 +424,7 @@
                $.ajax({
 		            type: "POST",
 		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIndicator",
-		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','pregnancyStatusId':'"+pgStatus+"','ancProfile':'"+ancprofile+"','ancProfileDate':'','userId':'0'}",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','lmp':'" + lmpDate + "','edd':'" + eddDate + "','pregnancyStatusId':'"+pgStatus+"','ancProfile':'"+ancprofile+"','ancProfileDate':'"+lmpDate+"','userId':'0'}",
 		            contentType: "application/json; charset=utf-8",
 		            dataType: "json",
 		            success: function(response) {
@@ -432,6 +438,9 @@
             }
 
             function AddFamilyPlanning() {
+
+                fpId = $("#<%=onFP.ClientID%>").find(":selected").val();
+                notOnFpId=$("#<%=ddlNoFP.ClientID%>").find(":selected").val();
 
                 $.ajax({
 		            type: "POST",
@@ -474,31 +483,41 @@
 
             $("#btnSave").click(function () {
 
-                              
+                if ($('#FemaleVitals').parsley().validate()) {
+
+                    var fName = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").text();
+                    var fpOption = $("#<%=onFP.ClientID%>").find(":selected").text();
                     $.ajax({
-		                type: "POST",
-		                url: "../WebService/FemaleVitalsWebservice.asmx/PregnancyExists",
-		                data: "{'patientId':'" + patientId + "'}",
-		                contentType: "application/json; charset=utf-8",
-		                dataType: "json",
-		                success: function(response) {
-		                    /* check if patient already has pregagncy without outcome.*/
-		                    if (response.d > 0) {
-		                        AddPregnancyIndicator();
-		                    } else {  
-		                        //insert the preganacy indicator and check if preganant insert into pregnancy table
-		                        $.when(AddPregnancyIndicator()).then(AddPregnancy());
-		                    }
+                        type: "POST",
+                        url: "../WebService/FemaleVitalsWebservice.asmx/PregnancyExists",
+                        data: "{'patientId':'" + patientId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(response) {
+                            /* check if patient already has pregagncy without outcome.*/
+                            if (response.d > 0) {
+                                AddPregnancyIndicator();
+                            } else {  
+                                //insert the preganacy indicator and check if preganant insert into pregnancy table
+                                if (fName === 'Pregnant(PG)') {
+                                    $.when(AddPregnancyIndicator()).then(AddPregnancy());
+                                } else {
+                                    AddPregnancyIndicator();
+                                }
+		                        
+                            }
 		               
-		                },
-		                error: function(xhr, errorType, exception) {
-		                    var jsonError = jQuery.parseJSON(xhr.responseText);
-		                    toastr.error("" + xhr.status + "" + jsonError.Message);
-		                }
+                        },
+                        error: function(xhr, errorType, exception) {
+                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                            toastr.error("" + xhr.status + "" + jsonError.Message);
+                        }
                     });
-                /* save family planning */
+
+                    /* save family planning */
                     if (fpName !== 'Pregnant(PG)') {
-                        if (fpName == "No Family Planning(NOFP)") {
+                        
+                        if (fpName === "No Family Planning(NOFP)" ) {
                             AddFamilyPlanning();
                         } else {
 
@@ -506,10 +525,13 @@
                         }
                     }
 
-                /* patient screening*/
+                    /* patient screening*/
 
-
-            });/* -- end button */
+                   }else{
+                        return false;
+                    }
+                });/* -- end button */
+ 
 
         });
  </script>

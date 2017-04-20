@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using DataAccess.Base;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Triage;
 using Interface.CCC.Triage;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace BusinessProcess.CCC.Triage
 {
-    public class PatientPregnancyIndicatorManager : IpatientPregnancyIndicatorManager
+    public class PatientPregnancyIndicatorManager : ProcessBase, IpatientPregnancyIndicatorManager
     {
         //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int Result = 0;

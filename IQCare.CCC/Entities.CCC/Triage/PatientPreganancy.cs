@@ -28,10 +28,10 @@ namespace Entities.CCC.Triage
         public DateTime LMP { get; set; }
 
         [Required]
-        public DateTime EDD { get; set; }
+        public DateTime? EDD { get; set; }
         public string Gravidae { get; set; }
         public string parity { get; set; }
         public int Outcome { get; set; }
-        public DateTime DateOfOutcome { get; set; }
+        public DateTime? DateOfOutcome { get; set; }
     }
 }
