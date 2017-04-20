@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using DataAccess.Base;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Screening;
 using Interface.CCC.Screening;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace BusinessProcess.CCC.Screening
 {
-    public class BPatientScreeningManager : IPatientScreeningManager
+    public class BPatientScreeningManager : ProcessBase,IPatientScreeningManager
     {
         // private UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result = 0;

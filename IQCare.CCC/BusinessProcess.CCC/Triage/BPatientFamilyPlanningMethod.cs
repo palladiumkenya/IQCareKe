@@ -5,10 +5,11 @@ using System.Linq;
 using Entities.CCC.Triage;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
+using DataAccess.Base;
 
 namespace BusinessProcess.CCC.Triage
 {
-    public class BPatientFamilyPlanningMethod : IPatientFamilyPlanningMethodManager
+    public class BPatientFamilyPlanningMethod : ProcessBase, IPatientFamilyPlanningMethodManager
     {
        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
        private int Result=0;
