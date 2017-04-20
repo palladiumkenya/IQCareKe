@@ -381,5 +381,22 @@ namespace IQCare.Web.CCC.WebService
             }
             return careEndingDetailses;
         }
+
+        [WebMethod(EnableSession = true)]
+        public List<PatientServiceEnrollmentLookup> GetPatientEnrollments()
+        {
+            try
+            {
+                PersonId = int.Parse(Session["PersonId"].ToString());
+                var patientServiceEnrollment = new PatientServiceEnrollmentLookupManager();
+                var patientEnrollments = patientServiceEnrollment.GetPatientServiceEnrollments(PersonId);
+                return patientEnrollments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

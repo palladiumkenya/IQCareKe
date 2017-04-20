@@ -110,6 +110,7 @@
     <Compile Include="Enrollment\PatientEntity.cs" />
     <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
+    <Compile Include="Lookup\PatientServiceEnrollmentLookup.cs" />
     <Compile Include="Lookup\PersonContactLookUp.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
