@@ -5,10 +5,11 @@ using Entities.CCC.Triage;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
+using DataAccess.Base;
 
 namespace BusinessProcess.CCC.Triage
 {
-    public class BPatientPregnancyManager :IPatientPregnancyManager
+    public class BPatientPregnancyManager :ProcessBase, IPatientPregnancyManager
     {
         // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int result;
@@ -66,7 +67,7 @@ namespace BusinessProcess.CCC.Triage
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PG =
-                  _unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                  _unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & x.Outcome==0)
                       .Select(x => x.Id)
                       .FirstOrDefault();
                 _unitOfWork.Dispose();

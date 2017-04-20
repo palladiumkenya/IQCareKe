@@ -18,8 +18,8 @@ namespace IQCare.CCC.UILogic.Triage
                 {
                     PatientId=patientId,
                     PatientMasterVisitId= patientMasterVisitId,
-                    FamilyPlaningStatusId=FamilyPlanningStatusId,
-                    ReasonNotOnFP=ReasonNoOnFp,
+                    FamilyPlanningStatusId=FamilyPlanningStatusId,
+                    ReasonNotOnFPId=ReasonNoOnFp,
                     CreatedBy=userId
                 };
 
@@ -38,8 +38,8 @@ namespace IQCare.CCC.UILogic.Triage
                 var FPLoad = new PatientFamilyPlanning()
                 {
                     Id=id,
-                    FamilyPlaningStatusId = FamilyPlanningStatusId,
-                    ReasonNotOnFP = ReasonNoOnFp
+                    FamilyPlanningStatusId = FamilyPlanningStatusId,
+                    ReasonNotOnFPId = ReasonNoOnFp
                 };
 
                 return _PatientFamilyPlanning.UpdateFamilyPlanningStatus(FPLoad);

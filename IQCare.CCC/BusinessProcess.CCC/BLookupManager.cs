@@ -147,7 +147,7 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).SingleOrDefault();
+                var item = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
                 _unitOfWork.Dispose();
                 return item;
             }
