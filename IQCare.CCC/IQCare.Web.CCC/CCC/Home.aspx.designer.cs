@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC
-{
-
-
-    public partial class Home
-    {
-
+namespace IQCare.Web.CCC {
+    
+    
+    public partial class Home {
+        
         /// <summary>
         /// Date control.
         /// </summary>
@@ -22,40 +20,59 @@ namespace IQCare.Web.CCC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Date;
-
+        
         /// <summary>
-        /// tblAppointment control.
+        /// lblbooked control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblAppointment;
-    }
-    namespace IQCare.Web.CCC
-    {
-
-
-        public partial class Home
-        {
-
-            /// <summary>
-            /// pendingVL control.
-            /// </summary>
-            /// <remarks>
-            /// Auto-generated field.
-            /// To modify move field declaration from designer file to code-behind file.
-            /// </remarks>
-            protected global::System.Web.UI.WebControls.Label pendingVL;
-
-            /// <summary>
-            /// completeVL control.
-            /// </summary>
-            /// <remarks>
-            /// Auto-generated field.
-            /// To modify move field declaration from designer file to code-behind file.
-            /// </remarks>
-            protected global::System.Web.UI.WebControls.Label completeVL;
-        }
+        protected global::System.Web.UI.WebControls.Label lblbooked;
+        
+        /// <summary>
+        /// lblvisited control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblvisited;
+        
+        /// <summary>
+        /// lblpending control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblpending;
+        
+        /// <summary>
+        /// lblwalkins control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblwalkins;
+        
+        /// <summary>
+        /// pendingVL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label pendingVL;
+        
+        /// <summary>
+        /// completeVL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label completeVL;
     }
 }
