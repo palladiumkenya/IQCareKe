@@ -311,7 +311,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string EndPatientCare(string exitDate, int exitReason,string facilityOutTransfer,DateTime dateOfDeath, string careEndingNotes)
+        public string EndPatientCare(string exitDate, int exitReason,string facilityOutTransfer,string dateOfDeath, string careEndingNotes)
         {
             try
             {
@@ -326,8 +326,16 @@ namespace IQCare.Web.CCC.WebService
 
                 if (patientEnrollmentId > 0)
                 {
-                    careEndingManager.AddPatientCareEnding(patientId, patientMasterVisitId, patientEnrollmentId,
-                        exitReason, dateOfDeath, GlobalObject.unescape(facilityOutTransfer),DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
+                    if (!String.IsNullOrWhiteSpace(facilityOutTransfer))
+                    {
+                        careEndingManager.AddPatientCareEndingTransferOut(patientId, patientMasterVisitId,
+                            patientEnrollmentId,
+                            exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(facilityOutTransfer),
+                            GlobalObject.unescape(careEndingNotes));
+                    }
+                    else
+                        careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
+                        exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
 
                     PatientEntityEnrollment entityEnrollment =
                         enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
