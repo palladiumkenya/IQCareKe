@@ -11,7 +11,7 @@ namespace BusinessProcess.CCC
 {
     public class BPatientEncounter : ProcessBase, IPatientEncounter
     {
-        public int savePresentingComplaints(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string lmp, string PregStatus, string edd, string ANC, int OnFP, string[] fpMethod, string ReasonNotOnFP, string CaCx, string STIScreening, string STIPartnerNotification, List<AdverseEvents> adverseEvents)
+        public int savePresentingComplaints(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, List<AdverseEvents> adverseEvents)
         {
            
             try
@@ -29,19 +29,9 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@Complaints", SqlDbType.VarChar, Complaints);
                     ClsUtility.AddParameters("@TBScreening", SqlDbType.VarChar, TBScreening.ToString());
                     ClsUtility.AddParameters("@NutritionalStatus", SqlDbType.VarChar, NutritionalStatus.ToString());
-                    ClsUtility.AddParameters("@lmp", SqlDbType.VarChar, lmp);
-                    ClsUtility.AddParameters("@PregStatus", SqlDbType.VarChar, PregStatus);
-                    ClsUtility.AddParameters("@edd", SqlDbType.VarChar, edd);
-                    ClsUtility.AddParameters("@ANC", SqlDbType.VarChar, ANC);
-                    ClsUtility.AddParameters("@OnFP", SqlDbType.VarChar, OnFP.ToString());
-                    ClsUtility.AddParameters("@ReasonNotOnFPMethod", SqlDbType.VarChar, ReasonNotOnFP);
-                    ClsUtility.AddParameters("@CaCx", SqlDbType.VarChar, CaCx);
-                    ClsUtility.AddParameters("@STIScreening", SqlDbType.VarChar, STIScreening);
-                    ClsUtility.AddParameters("@STIPartnerNotification", SqlDbType.VarChar, STIPartnerNotification);
 
                     DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPresentingComplaints", ClsUtility.ObjectEnum.DataRow);
                     int masterVisitID = Int32.Parse(dr[0].ToString());
-                    string FPId = dr[1].ToString();
 
                     ClsObject delAadvEvents = new ClsObject();
                     ClsUtility.Init_Hashtable();
@@ -66,26 +56,6 @@ namespace BusinessProcess.CCC
 
                             int i = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterAdverseEvents", ClsUtility.ObjectEnum.ExecuteNonQuery);
                         }
-                    }
-
-                    ClsObject delFP = new ClsObject();
-                    ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@PatientID", SqlDbType.VarChar, PatientID);
-                    ClsUtility.AddParameters("@FPId", SqlDbType.VarChar, FPId);
-
-                    int Y = (int)delFP.ReturnObject(ClsUtility.theParams, "sp_deletePatientFamilyPlanningMethod", ClsUtility.ObjectEnum.ExecuteNonQuery);
-
-
-                    for (int i = 0; i < fpMethod.Length; i++)
-                    {
-                        ClsObject FP = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.VarChar, PatientID);
-                        ClsUtility.AddParameters("@FPId", SqlDbType.VarChar, FPId);
-                        ClsUtility.AddParameters("@fpMethod", SqlDbType.VarChar, fpMethod[i].ToString());
-
-                        int z = (int)FP.ReturnObject(ClsUtility.theParams, "sp_savePatientFamilyPlanningMethod", ClsUtility.ObjectEnum.ExecuteNonQuery);
-
                     }
 
                     return masterVisitID;

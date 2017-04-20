@@ -44,19 +44,12 @@ namespace IQCare.Web.CCC.UC
                 LookupLogic lookUp = new LookupLogic();
                 lookUp.populateDDL(tbscreeningstatus, "TBStatus");
                 lookUp.populateDDL(nutritionscreeningstatus, "NutritionStatus");
-                lookUp.populateDDL(onFP, "FPStatus");
-                lookUp.PopulateListBox(fpMethod, "FPMethod");
-                lookUp.populateDDL(examinationPregnancyStatus, "PregnancyStatus");
                 lookUp.populateDDL(AdverseEventAction, "AdverseEventsActions");
-                lookUp.populateDDL(cacxscreening, "CaCxScreening");
-                lookUp.populateDDL(stiScreening, "STIScreening");
-                lookUp.populateDDL(stiPartnerNotification, "STIPartnerNotification");
                 lookUp.populateDDL(ddlAdverseEventSeverity, "ADRSeverity");
                 lookUp.populateDDL(ddlVisitBy, "VisitBy");
                 lookUp.populateDDL(ChronicIllnessName, "ChronicIllness");
                 lookUp.populateDDL(ddlVaccine, "Vaccinations");
                 lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
-                lookUp.populateDDL(ddlNoFP, "NoFamilyPlanning");
                 lookUp.populateDDL(ddlExaminationType, "ExaminationType");
                 lookUp.populateDDL(ddlExamination, "PhysicalExamination");
                 lookUp.populateCBL(cblPHDP, "PHDP");
@@ -90,31 +83,7 @@ namespace IQCare.Web.CCC.UC
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
-            examinationPregnancyStatus.SelectedValue = pce.pregStatus;
-            //rblANCProfile.SelectedValue = pce.ancProfile;
-            if (pce.ancProfile == "1")
-                ancYes.Checked = true;
-            else if (pce.ancProfile == "0")
-                ancNo.Checked = true;
 
-            onFP.SelectedValue = pce.onFP;
-
-            foreach (ListItem item in fpMethod.Items)
-            {
-                for (int i = 0; i < pce.fpMethod.Length; i++)
-                {
-                    if (item.Value == pce.fpMethod[i])
-                    {
-                        item.Selected = true;
-                    }
-                }
-            }
-
-            ddlNoFP.SelectedValue = pce.reasonNotOnFP;
-            //nofp
-            cacxscreening.SelectedValue = pce.CaCX;
-            stiScreening.SelectedValue = pce.STIScreening;
-            stiPartnerNotification.SelectedValue = pce.STIPartnerNotification;
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)
