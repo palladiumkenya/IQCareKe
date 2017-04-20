@@ -134,6 +134,9 @@
                             <div class="col-md-12"><hr/></div>
                  
                         </div> <!-- .col-md-12 -->
+                        <div class="col-md-12">
+                           <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server" ID="lblcame"> 0</asp:Label></h4></div> 
+                        </div>
            
                     </div> <!-- .panel-body -->
                 </div>
@@ -146,20 +149,98 @@
             <div class="col-md-12"><hr /></div>
             <div class="col-md-12">
                 <div class="col-md-7"><label class="control-label pull-left">Pending VL Tests</label></div>
-                <div class="col-md-2">
+                <div class="col-md-5 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="pendingVL" CssClass="control-label text-success pull-right"></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr></div>
             <div class="col-md-12">
                  <div class="col-md-7"><label class="control-label pull-left">Complete VL Tests</label></div>
-                <div class="col-md-2">
+                <div class="col-md-5 pull-right">
                     <asp:Label runat="server" ClientIDMode="Static" ID="completeVL" CssClass="control-label text-success pull-right"></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server"> Results Percentage :</asp:Label></h5></div>
+                <div class="col-md-6 pull-right"><h5 class="pull-left"><asp:Label runat="server" ID="lblvl">0% </asp:Label></h5></div>
+            </div>
         </div>
     </div><!-- .col-md-12 -->
+
+    <div class="col-md-12 col-xs-12 col-sm-12">
+         <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="col-md-12 label label-info">
+                  <h5><label class="label label-info fa fa-bar-chart pull-left ">Facility Summary </label></h5>
+                </div>
+                <div class="col-md-12" style="padding-bottom:2%"></div>
+                <div class="col-md-12">
+                    <div class="col-md-7"><label class="control-label pull-left">Cumulative patients :</label></div>
+                    <div class="col-md-2 pull-right">
+                        <asp:Label runat="server" ClientIDMode="Static" ID="lblTotalPatients" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                    </div>
+                </div>           
+                <div class="col-md-12"><hr></div>
+
+                <div class="col-md-12">
+                    <div class="col-md-7"><label class="control-label pull-left">Total on ART :</label></div>
+                        <div class="col-md-5 pull-right">
+                            <asp:Label runat="server" ClientIDMode="Static" ID="lblOnART" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                        </div>
+                </div>
+                <div class="col-md-12"><hr></div>
+                
+                <div class="col-md-12">
+                    <div class="col-md-7"><label class="control-label pull-left">Total on CTX/Dapson :</label></div>
+                    <div class="col-md-5 pull-right">
+                        <asp:Label runat="server" ClientIDMode="Static" ID="lblctx" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                    </div>
+                </div>
+                <div class="col-md-12"><hr></div>
+         </div>
+         <div class="col-md-4 col-xs-12 col-sm-12">
+             <div class="col-md-12">
+                 <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <label class="control-lable pull-left fa fa-sort-amount-asc"> Care Ending Statistics</label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+
+                            <div class="col-md-12">
+                                <div class="col-md-7"><h5 class="pull-left"><asp:Label runat="server"> Total Transit</asp:Label></h5></div>
+                                <div class="col-md-3 pull-right">
+                                   <asp:Label runat="server" ID="lblTransit" CssClass="text-info pull-left"> <span class="badge">0</span></asp:Label>
+                                </div>
+                            </div>
+                        <div class="col-md-12"><hr/></div>
+                            <div class="col-md-12">
+                                <div class="col-md-7"><h5 class="pull-left"><asp:Label runat="server"> Total Transfer-ins :</asp:Label></h5></div>
+                                <div class="col-md-3 pull-right">
+                                    <asp:Label runat="server" ID="lbltransferins" CssClass="text-info pull-left"> <span class="badge"> 0 </span> </asp:Label>
+                                </div>
+                            </div>
+                        <div class="col-md-12"><hr/></div>
+                            <div class="col-md-12">
+                                <div class="col-md-7"><h5 class="pull-left"><asp:Label runat="server">Total Transfer-outs :</asp:Label></h5></div>
+                                <div class="col-md-3 pull-right">
+                                    <h6> <asp:Label runat="server" ID="lbltransferouts" CssClass="text-info pull-left"> <span class="badge"> 0 </span> </asp:Label></h6>
+                                </div>
+                            </div>
+                 
+
+           
+                    </div> <!-- .panel-body -->
+                </div>
+             </div>
+         </div>
+         <div class="col-md-4 col-xs-12 col-sm-12"></div>
+    </div> <!-- .col-md-12-->
     
     <%--<div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
         <div class="col-md-12 form-group">
@@ -277,8 +358,10 @@
         </div>
     </div>--%>
     <script type="text/javascript">
+    
         $(document).ready(function () {
 
+            var ptncame=0;
             $('#AppointmentDate').datepicker({
                 allowPastDates: true,
                 Date: 0,
@@ -286,35 +369,40 @@
             });
 
             AppointmentStatistics();
-        });
+        
 
-        $("#Date").change(function () {
-            AppointmentStatistics();
-        });
+            $("#Date").change(function () {
+                AppointmentStatistics();
+            });
 
-        $('#AppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
-            AppointmentStatistics();
-        });
+            $('#AppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+                AppointmentStatistics();
+            });
 
-        function AppointmentStatistics() {
-            jQuery.support.cors = true;
-            var date = $("#<%=Date.ClientID%>").val();
-            $.ajax(
-            {
-                type: "POST",
-                url: "WebService/FacilityService.asmx/GetAppointmentStatistics",
-                data: "{'date':'" + date + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function (response) {
-                    var item = response.d;
-                    $("#<%=lblbooked.ClientID%>").val("<span class='badge'>"+item.TotalAppointments+"3</span>");
-                    $("#<%=lblvisited.ClientID%>").val( item.MetAppointments);
-                    $("<%=lblpending.ClientID%>").val( item.MissedAppointments);
-                    $("<%=lblwalkins.ClientID%>").val(item.WalkIns);
+            function AppointmentStatistics() {
+                jQuery.support.cors = true;
+                var date = $("#<%=Date.ClientID%>").val();
+                $.ajax(
+                {
+                    type: "POST",
+                    url: "WebService/FacilityService.asmx/GetAppointmentStatistics",
+                    data: "{'date':'" + date + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function (response) {
+                        var item = response.d;
 
-<%--                    var table = '';
+                        $("#<%=lblbooked.ClientID%>").html("<span class='badge'>" + item.TotalAppointments + "</span>");
+                        $("#<%=lblvisited.ClientID%>").html("<span class='badge'>" + item.MetAppointments + "</span>");
+                        $("#<%=lblpending.ClientID%>").html("<span class='badge'>" + item.MissedAppointments + "</span>");
+                        $("#<%=lblwalkins.ClientID%>").html("<span class='badge'>" + item.WalkIns + "</span>");
+
+                        ptncame = (item.MetAppointments / (item.TotalAppointments) * 100);
+                        if(ptncame<1){ptncame=0}
+                        $("#<%=lblcame.ClientID%>").html("<span class='badge text-info'>"+ptncame+ " % </span> of <span class='badge'>"+item.TotalAppointments+"</span> patients booked, Honoured Appointment today!");
+
+                        <%--                    var table = '';
                     table += '<tr><td style="text-align: left">' +
                         item.TotalAppointments +
                         '</td><td style="text-align: left">' +
@@ -327,24 +415,18 @@
                    $('#<%=tblAppointment.ClientID%> tr').not(function(){ return !!$(this).has('th').length; }).remove();
                    $('#tblAppointment').append(table);--%>
 
-                },
+                    },
 
-                error: function (msg) {
-                    alert(msg.responseText);
-                }
-            });
-        }
+                    error: function (msg) {
+                        alert(msg.responseText);
+                    }
+                });
+            }
 
-    </script>
-  
-
-  <!-- ajax begin -->
-    <script type="text/javascript">
-      
-        $(document).ready(function () {  
-           
-
-            console.log("get viral load  called");            
+            console.log("get viral load  called");     
+            var pending=0;
+            var complete=0;
+            var percentage=0;       
 
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLPendingCount',
@@ -354,8 +436,8 @@
                 cache: false,
                 success: function (response) {
                     console.log(response.d);
-                  
-                    document.getElementById("pendingVL").innerHTML= "<span class='badge'>"+ response.d + "3</span>";
+                    pending = response.d;
+                    document.getElementById("pendingVL").innerHTML= "<span class='badge'>"+ response.d + "</span>";
 
                 }
 
@@ -369,13 +451,18 @@
                 cache: false,
                 success: function (response) {
                     console.log(response.d);
+                    complete=response.d
+                    document.getElementById("completeVL").innerHTML = "<span class='badge'> " + response.d + " </span>";
+                                percentage = ((complete / (pending + complete)) * 100);
+            $("#<%=lblvl.ClientID%>").html("Result Rate "+ percentage +" %");
 
-                    document.getElementById("completeVL").innerHTML = "<span class='badge'> "+response.d+" </span>";
 
                 }
 
             });
 
         });
-  </script>
+
+    </script>
+  
 </asp:Content>
