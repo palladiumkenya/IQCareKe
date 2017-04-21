@@ -14,7 +14,7 @@
                             <label class="control-label pull-left">Event</label>
                         </div>
                         <div class="col-md-12">
-                            <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptEvent" ClientIDMode="Static" />
+                            <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptEvent" ClientIDMode="Static" onclick="IptOutcomeEvent();"/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -34,26 +34,15 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<%=discontinuation.ClientID%>").prop('disabled', true);
-
-        function AddPatientIptOutcome() {
-            var iptEvent = $("#<%=iptEvent.ClientID%>").val();
-                    var reasonForDiscontinuation = $("#<%=discontinuation.ClientID%>").val();
-                    var patientId = <%=PatientId%>;
-                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Patient IPT outcome saved successfully");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Patient IPT outcome not saved");
-                        }
-                    });
-                }
     });
+
+    function IptOutcomeEvent() {
+        if ($("#iptEvent :selected").text() === "Discontinued")
+        {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', false);
+        } else {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+        }
+    }
 
 </script>

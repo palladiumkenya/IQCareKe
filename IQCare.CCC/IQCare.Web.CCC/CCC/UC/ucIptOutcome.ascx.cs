@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Application.Presentation;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -13,8 +16,18 @@ namespace IQCare.Web.CCC.UC
         public int PatientMasterVisitId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+            List<LookupItemView> statuses = mgr.GetLookItemByGroup("IptOutcome");
+            if (statuses != null && statuses.Count > 0)
+            {
+                iptEvent.Items.Add(new ListItem("select", "0"));
+                foreach (var k in statuses)
+                {
+                    iptEvent.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+                iptEvent.SelectedIndex = 0;
+            }
         }
     }
 }

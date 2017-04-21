@@ -13,8 +13,6 @@ namespace IQCare.Web.CCC.UC
         public int PatientMasterVisitId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
         }
     }
 }

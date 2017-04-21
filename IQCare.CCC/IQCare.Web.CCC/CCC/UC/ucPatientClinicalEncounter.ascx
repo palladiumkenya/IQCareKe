@@ -190,12 +190,24 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="col-md-12">
-                                                <label class="control-label pull-left">TB Infected?</label>
+                                                <label class="control-label pull-left">On Anti TB drugs?</label>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();">
+                                                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">On IPT?</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -209,9 +221,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
-                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -221,9 +232,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
-                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -233,9 +243,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
-                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -245,9 +254,8 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
-                                                        <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -272,7 +280,7 @@
                                                 <label class="control-label pull-left">Sputum Smear/ Gene Xpert</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="sputum" ClientIDMode="Static" onChange="IcfActionChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Positive" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="Negative" Value="False"></asp:ListItem>
@@ -281,13 +289,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="col-md-12">
-                                                <label class="control-label">Chest X-ray</label>
+                                                <label class="control-label pull-left">Chest X-ray</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="chest" ClientIDMode="Static" onChange="IcfActionChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Normal" Value="True"></asp:ListItem>
-                                                    <asp:ListItem Text="Suggestive" Value="False"></asp:ListItem>
+                                                    <asp:ListItem Text="Suggestive" Value="True"></asp:ListItem>
+                                                    <asp:ListItem Text="Normal" Value="False"></asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
@@ -296,7 +304,7 @@
                                                 <label class="control-label pull-left">Start Anti-TB</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="antiTb" ClientIDMode="Static">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="antiTb" ClientIDMode="Static" onChange="IcfActionChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -310,7 +318,7 @@
                                                 <label class="control-label pull-left">Invitation of Contacts</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="contactsInvitation" ClientIDMode="Static">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="contactsInvitation" ClientIDMode="Static" onChange="IcfActionChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -322,7 +330,7 @@
                                                 <label class="control-label pull-left">Evaluated for IPT</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptEvaluation" ClientIDMode="Static">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptEvaluation" ClientIDMode="Static" onChange="IcfActionChange();">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -335,7 +343,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 form-group" clientidmode="Static" id="iptform">
+                    <div class="col-md-12 form-group" clientidmode="Static" id="IptForm">
                         <div class="col-md-12">
                             <div class="panel panel-info">
                                 <div class="panel-body">
@@ -1793,7 +1801,17 @@
                         /* add constraints based on age*/
 
                         if ($('#datastep1').parsley().validate()) {
-                            debugger;
+                            if ($("#tbInfected").val() === 'False') {
+                                addPatientIcf();
+                                if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+                                    addPatientIcfAction();
+                                }
+                                if (($("#sputum").val() === 'False')&&($("#chest").val() === 'False')&&($("#antiTb").val() === 'False')&&($("#contactsInvitation").val() === 'False')&&($("#iptEvaluation").val() === 'False')) {
+                                    addPatientIptWorkup();
+                                    addIpt();
+                                    addPatientIptOutcome();
+                                }
+                            }
                             savePatientEncounterPresentingComplaint();
                         } else {
                             stepError = $('.parsley-error').length === 0;
@@ -2096,7 +2114,75 @@
             });
         }
 
+        function addIpt() {
+            var weight = $("#weight").val();
+            if (weight === '') { weight = 0 }
+            var hepatotoxicity = $("#hepatotoxicity").val();
+            var iptDateCollected = moment($("#IptDateCollected").val()).format('DD-MMM-YYYY');
+            var iptDueDate = moment($("#iptDuedate").val()).format('DD-MMM-YYYY');
+            var peripheralneoropathy = $("#peripheralNeoropathy").val();
+            var rash = $("#rash").val();
+            var adheranceMeasurement = $("#adheranceMeasurement").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddIpt",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT saved successfully");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT not saved");
+                }
+            });
+        }
 
+        function addPatientIptWorkup() {
+            var abdominalTenderness = $("#abdominalTenderness").val();
+            var yellownessOfEyes = $("#yellowEyes").val();
+            var yellowColouredUrine = $("#urineColour").val();
+            var numbness = $("#numbness").val();
+            var liverFunctionTests = $("#liverTest").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes +  "','liverFunctionTests': '" + liverFunctionTests +  "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT Workup saved successfully");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT Workup not saved");
+                }
+            });
+        }
+
+        function addPatientIptOutcome() {
+            var iptEvent = $("#iptEvent").val();
+                    var reasonForDiscontinuation = $("#discontinuation").val();
+                    var patientId = <%=PatientId%>;
+                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
+                    $.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
+                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            toastr.success(response.d, "Patient IPT outcome saved successfully");
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "Patient IPT outcome not saved");
+                        }
+                    });
+                }
 
         function getCheckBoxListItemsChecked(elementId) {
             var elementRef = document.getElementById(elementId);
@@ -2136,13 +2222,20 @@
 
     function tbInfectedChange() {
         if ($("#tbInfected").val() === 'False') {
-            /*$("#IcfActionForm").show();*/
             $("#iptform").show();
             $("#IcfForm").show();
         } else {
-            /*$("#IcfActionForm").hide();*/
             $("#iptform").hide(); 
             $("#IcfForm").hide();
+        }
+            
+    }
+
+    function onIptChange() {
+        if ($("#onIpt").val() === 'False') {
+            $("#btnAddIptWorkUp").prop("disabled",true);
+        } else {
+            $("#btnAddIptWorkUp").prop("disabled",false);
         }
             
     }
@@ -2152,6 +2245,18 @@
             $("#IcfActionForm").show();
         } else {
             $("#IcfActionForm").hide();
+        }
+    }
+
+    function IcfActionChange() {
+        if (($("#sputum").val() === 'True')||($("#chest").val() === 'True')||($("#antiTb").val() === 'True')||($("#contactsInvitation").val() === 'True')||($("#iptEvaluation").val() === 'True')) {
+            $("#btnAddIptWorkUp").prop("disabled",true);
+            $("#btnAddIpt").prop("disabled",true);
+            $("#tbscreeningstatus").val(34);
+        } else {
+            $("#btnAddIptWorkUp").prop("disabled",false);
+            $("#btnAddIpt").prop("disabled",false);
+            $("#tbscreeningstatus").val(35);
         }
     }
 

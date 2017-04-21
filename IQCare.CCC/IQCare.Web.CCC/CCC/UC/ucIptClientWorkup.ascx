@@ -77,30 +77,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-
-        function AddPatientIptWorkup() {
-            var abdominalTenderness = $("#<%=abdominalTenderness.ClientID%>").val();
-            var yellownessOfEyes = $("#<%=yellowEyes.ClientID%>").val();
-            var yellowColouredUrine = $("#<%=urineColour.ClientID%>").val();
-            var numbness = $("#<%=numbness.ClientID%>").val();
-            var liverFunctionTests = $("#<%=liverTest.ClientID%>").val();
-            var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PatientTbService.asmx/AddPatientIptWorkup",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','abdominalTenderness': '" + abdominalTenderness + "','numbness': '" + numbness + "','yellowColouredUrine': '" + yellowColouredUrine + "','yellownessOfEyes': '" + yellownessOfEyes +  "','liverFunctionTests': '" + liverFunctionTests +  "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    toastr.success(response.d, "Patient IPT Workup saved successfully");
-                    resetAppointmentFields();
-                },
-                error: function (response) {
-                    toastr.error(response.d, "Patient IPT Workup not saved");
-                }
-            });
-        }
     });
 
 </script>
