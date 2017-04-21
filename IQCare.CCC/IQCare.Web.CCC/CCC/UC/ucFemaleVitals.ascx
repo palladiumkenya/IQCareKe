@@ -5,7 +5,7 @@
      <div class="col-md-12" id="FemaleVitals">
 
           <div class="col-md-12">
-               <h2 class=" control-label pull-left"> Presenting Complaints |</h2> <h6><label class="control-label text-primary pull-left text-muted">Routine Female ONLY observations </label></h6>
+               <h2 class=" control-label pull-left"> Reproductive History |</h2> <h6><label class="control-label text-primary pull-left text-muted">Routine Female ONLY observations </label></h6>
           </div>
 
           <div class="col-md-12">
@@ -330,13 +330,13 @@
 
             $("#FemaleLMP").datepicker({
                   date: null,
-                  allowPastDates: false,
+                  allowPastDates: true,
                   momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
             $("#EDCD").datepicker({
                   date: null,
-                  allowPastDates: false,
+                  allowPastDates: true,
                   momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 

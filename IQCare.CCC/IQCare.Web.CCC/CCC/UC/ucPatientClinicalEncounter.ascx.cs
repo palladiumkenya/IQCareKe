@@ -50,7 +50,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ChronicIllnessName, "ChronicIllness");
                 lookUp.populateDDL(ddlVaccine, "Vaccinations");
                 lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
-                lookUp.populateDDL(ddlExaminationType, "ExaminationType");
+                lookUp.populateDDL(ddlExaminationType, "ReviewOfSystems");
                 lookUp.populateDDL(ddlExamination, "PhysicalExamination");
                 lookUp.populateCBL(cblPHDP, "PHDP");
                 lookUp.populateDDL(ddlReferredFor, "AppointmentType");

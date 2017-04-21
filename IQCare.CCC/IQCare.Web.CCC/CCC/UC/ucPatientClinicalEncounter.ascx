@@ -691,14 +691,12 @@
                         <hr />
                     </div>
                     <div class="col-md-12">
-                        <div class="col-md-1">
-                            <h4 class="pull-left text-warning"><i class="fa fa-search fa-5x" aria-hidden="true"></i></h4>
-                        </div>
-                        <div class="col-md-11">
+
+                        <div class="col-md-12">
                             <div class="col-md-12 form-group">
                                 <div class="col-md-3 form-group">
                                     <div class="col-md-12">
-                                        <label for="ChronicIllnessName" class="control-label pull-left">Examination Type</label>
+                                        <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
                                     </div>
                                     <div class="col-md-12">
                                         <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" />
@@ -707,7 +705,7 @@
 
                                 <div class="col-md-3 form-group">
                                     <div class="col-md-12">
-                                        <label class="control-label pull-left">Examination</label>
+                                        <label class="control-label pull-left">Findings</label>
                                     </div>
                                     <div class="col-md-12">
                                         <asp:DropDownList runat="server" ID="ddlExamination" CssClass="form-control input-sm" ClientIDMode="Static" />
@@ -716,7 +714,7 @@
 
                                 <div class="col-md-5 form-group">
                                     <div class="col-md-12">
-                                        <label class="control-label pull-left">Findings</label>
+                                        <label class="control-label pull-left">Findings Notes..</label>
                                     </div>
                                     <div class="col-md-12">
 
@@ -767,14 +765,12 @@
                         <hr />
                     </div>
 
-                    <div class="col-md-1">
-                        <h4 class="pull-left text-danger"><i class="fa fa-bed fa-5x" aria-hidden="true"></i></h4>
-                    </div>
-                    <div class="col-md-11">
+
+                    <div class="col-md-12">
                         <div class="col-md-12">
 
                             <div class="col-md-4">
-                                <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>
+                               <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
                                 <div class="col-md-12">
                                     <hr />
                                 </div>

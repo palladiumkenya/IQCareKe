@@ -208,7 +208,7 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[7] { row["masterVisitID"].ToString(), row["Ptn_pk"].ToString(),
+                string[] i = new string[7] { row["PatientMasterVisitID"].ToString(), row["Ptn_pk"].ToString(),
                     row["identifiervalue"].ToString(),row["FirstName"].ToString(),row["MidName"].ToString(),
                     row["LastName"].ToString(),row["prescribedBy"].ToString()};
                 rows.Add(i);
