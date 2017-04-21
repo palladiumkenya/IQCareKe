@@ -93,6 +93,11 @@
     <Compile Include="Triage\IpatientPregnancyIndicatorManager.cs" />
     <Compile Include="Triage\IPatientFamilyPlanningMethodManager.cs" />
     <Compile Include="Triage\IPatientPregnancyManager.cs" />
+    <Compile Include="Tb\IPateintIptOutcome.cs" />
+    <Compile Include="Tb\IPatientIcf.cs" />
+    <Compile Include="Tb\IPatientIpt.cs" />
+    <Compile Include="Tb\IPatientIptWorkup.cs" />
+    <Compile Include="Tb\IPatientIcfAction.cs" />
     <Compile Include="Visit\IPatientEncounterManager.cs" />
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />

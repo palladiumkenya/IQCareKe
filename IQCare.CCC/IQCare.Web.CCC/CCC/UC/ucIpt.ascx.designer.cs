@@ -7,126 +7,108 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.TB {
+namespace IQCare.Web.CCC.UC {
     
     
-    public partial class IntensifiedCaseFinding {
+    public partial class ucIpt {
         
         /// <summary>
-        /// ICF control.
+        /// iptDuedate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ICF;
+        protected global::System.Web.UI.WebControls.TextBox iptDuedate;
         
         /// <summary>
-        /// Result control.
+        /// IptDateCollected control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Result;
+        protected global::System.Web.UI.WebControls.TextBox IptDateCollected;
         
         /// <summary>
-        /// IcfResultDate control.
+        /// weight control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IcfResultDate;
+        protected global::System.Web.UI.WebControls.TextBox weight;
         
         /// <summary>
-        /// AddIcf control.
+        /// hepatotoxicity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddIcf;
+        protected global::System.Web.UI.WebControls.DropDownList hepatotoxicity;
         
         /// <summary>
-        /// tblIcf control.
+        /// hepatotoxicityAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblIcf;
+        protected global::System.Web.UI.WebControls.TextBox hepatotoxicityAction;
         
         /// <summary>
-        /// Action control.
+        /// peripheralNeoropathy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Action;
+        protected global::System.Web.UI.WebControls.DropDownList peripheralNeoropathy;
         
         /// <summary>
-        /// ActionResult control.
+        /// peripheralAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ActionResult;
+        protected global::System.Web.UI.WebControls.TextBox peripheralAction;
         
         /// <summary>
-        /// ActionResultDate control.
+        /// rash control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ActionResultDate;
+        protected global::System.Web.UI.WebControls.DropDownList rash;
         
         /// <summary>
-        /// AddAction control.
+        /// rashAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AddAction;
+        protected global::System.Web.UI.WebControls.TextBox rashAction;
         
         /// <summary>
-        /// ActionTable control.
+        /// adheranceMeasurement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable ActionTable;
+        protected global::System.Web.UI.WebControls.DropDownList adheranceMeasurement;
         
         /// <summary>
-        /// btnSaveIcf control.
+        /// adheranceAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaveIcf;
-        
-        /// <summary>
-        /// btnReset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnReset;
-        
-        /// <summary>
-        /// btnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCancel;
+        protected global::System.Web.UI.WebControls.TextBox adheranceAction;
     }
 }

@@ -278,59 +278,59 @@ namespace BusinessProcess.CCC
                     pce.complaints = theDS.Tables[1].Rows[0]["PresentingComplaint"].ToString();
                 }
 
-                if (theDS.Tables[2].Rows.Count > 0)
-                {
-                    string lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
-                    string edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
-                    if (lmp != "")
-                    {
-                        DateTime dtLmp = DateTime.Parse(lmp);
-                        pce.lmp = dtLmp.ToString("dd-MMM-yyyy");
-                    }
+                //if (theDS.Tables[2].Rows.Count > 0)
+                //{
+                //    string lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
+                //    string edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
+                //    if (lmp != "")
+                //    {
+                //        DateTime dtLmp = DateTime.Parse(lmp);
+                //        pce.lmp = dtLmp.ToString("dd-MMM-yyyy");
+                //    }
 
-                    if(edd != "")
-                    {
-                        DateTime dtEdd = DateTime.Parse(edd);
-                        pce.edd = dtEdd.ToString("dd-MMM-yyyy");
-                    }
+                //    if(edd != "")
+                //    {
+                //        DateTime dtEdd = DateTime.Parse(edd);
+                //        pce.edd = dtEdd.ToString("dd-MMM-yyyy");
+                //    }
                     
-                    pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
-                    //pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
-                    pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
-                    pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
-                }
+                //    pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
+                //    //pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
+                //    pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
+                //    pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
+                //}
 
-                if (theDS.Tables[3].Rows.Count > 0)
-                {
-                    pce.tbScreening = theDS.Tables[3].Rows[0]["ScreeningValueId"].ToString();
-                }
+                //if (theDS.Tables[3].Rows.Count > 0)
+                //{
+                //    pce.tbScreening = theDS.Tables[3].Rows[0]["ScreeningValueId"].ToString();
+                //}
 
-                if (theDS.Tables[4].Rows.Count > 0)
-                {
-                    pce.nutritionStatus = theDS.Tables[4].Rows[0]["ScreeningValueId"].ToString();
-                }
+                //if (theDS.Tables[4].Rows.Count > 0)
+                //{
+                //    pce.nutritionStatus = theDS.Tables[4].Rows[0]["ScreeningValueId"].ToString();
+                //}
 
-                if (theDS.Tables[5].Rows.Count > 0)
-                {
-                    pce.CaCX = theDS.Tables[5].Rows[0]["ScreeningValueId"].ToString();
-                }
+                //if (theDS.Tables[5].Rows.Count > 0)
+                //{
+                //    pce.CaCX = theDS.Tables[5].Rows[0]["ScreeningValueId"].ToString();
+                //}
 
-                if (theDS.Tables[6].Rows.Count > 0)
-                {
-                    pce.STIScreening = theDS.Tables[6].Rows[0]["ScreeningValueId"].ToString();
-                }
+                //if (theDS.Tables[6].Rows.Count > 0)
+                //{
+                //    pce.STIScreening = theDS.Tables[6].Rows[0]["ScreeningValueId"].ToString();
+                //}
 
-                if (theDS.Tables[7].Rows.Count > 0)
-                {
-                    pce.onFP = theDS.Tables[7].Rows[0]["FPStatusId"].ToString();
-                    pce.reasonNotOnFP = theDS.Tables[7].Rows[0]["ReasonNotOnFPId"].ToString();
-                }
+                //if (theDS.Tables[7].Rows.Count > 0)
+                //{
+                //    pce.onFP = theDS.Tables[7].Rows[0]["FPStatusId"].ToString();
+                //    pce.reasonNotOnFP = theDS.Tables[7].Rows[0]["ReasonNotOnFPId"].ToString();
+                //}
 
-                pce.fpMethod = new string[theDS.Tables[8].Rows.Count];
-                for (int k = 0; k < theDS.Tables[8].Rows.Count; k++)
-                {
-                    pce.fpMethod[k] = theDS.Tables[8].Rows[k]["FPMethodId"].ToString();
-                }
+                //pce.fpMethod = new string[theDS.Tables[8].Rows.Count];
+                //for (int k = 0; k < theDS.Tables[8].Rows.Count; k++)
+                //{
+                //    pce.fpMethod[k] = theDS.Tables[8].Rows[k]["FPMethodId"].ToString();
+                //}
 
                 if (theDS.Tables[9].Rows.Count > 0)
                 {
