@@ -15,7 +15,8 @@ namespace BusinessProcess.CCC
     {
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string RegimenType, string DispensedBy, string RegimenLine, string ModuleID, 
-            List<DrugPrescription> drugPrescription, string pmscmFlag)
+            List<DrugPrescription> drugPrescription, string pmscmFlag, string TreatmentProgram,
+            string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen)
         {
             lock (this)
             {
@@ -30,6 +31,13 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@DispensedBy", SqlDbType.VarChar, DispensedBy);
                 ClsUtility.AddParameters("@RegimenLine", SqlDbType.VarChar, RegimenLine);
                 ClsUtility.AddParameters("@ModuleID", SqlDbType.VarChar, ModuleID);
+
+                ClsUtility.AddParameters("@TreatmentProgram", SqlDbType.VarChar, TreatmentProgram);
+                ClsUtility.AddParameters("@PeriodTaken", SqlDbType.VarChar, PeriodTaken);
+                ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.VarChar, TreatmentPlan);
+                ClsUtility.AddParameters("@TreatmentPlanReason", SqlDbType.VarChar, TreatmentPlanReason);
+                ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, Regimen);
+
 
                 DataRow theDR = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacy_GreenCard", ClsUtility.ObjectEnum.DataRow);
                 string ptn_pharmacy_pk = theDR[0].ToString();
@@ -175,6 +183,34 @@ namespace BusinessProcess.CCC
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPendingPrescriptions", ClsUtility.ObjectEnum.DataTable);
 
+            }
+        }
+
+        public List<PharmacyFields> getPharmacyFields(string patientMasterVisitID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, patientMasterVisitID);
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyFields", ClsUtility.ObjectEnum.DataTable);
+
+                List<PharmacyFields> list = new List<PharmacyFields>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    PharmacyFields drg = new PharmacyFields();
+                    drg.TreatmentProgram = theDT.Rows[i]["ProgID"].ToString();
+                    drg.PeriodTaken = theDT.Rows[i]["pharmacyPeriodTaken"].ToString();
+                    drg.TreatmentPlan = theDT.Rows[i]["TreatmentStatusId"].ToString();
+                    drg.TreatmentPlanReason = theDT.Rows[i]["TreatmentStatusReasonId"].ToString();
+                    drg.RegimenLine = theDT.Rows[i]["RegimenLineId"].ToString();
+                    drg.Regimen = theDT.Rows[i]["RegimenId"].ToString();
+                    list.Add(drg);
+                }
+
+                return list;
             }
         }
     }

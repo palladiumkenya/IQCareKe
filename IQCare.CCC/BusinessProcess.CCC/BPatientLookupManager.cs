@@ -13,7 +13,7 @@ namespace BusinessProcess.CCC
 {
     public class BPatientLookupManager :ProcessBase, IPatientLookupmanager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
         private readonly Utility _utility = new Utility();
 
         public List<PatientLookup> GetPatientDetailsLookup(int id)

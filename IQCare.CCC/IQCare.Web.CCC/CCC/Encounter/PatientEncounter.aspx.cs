@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-using IQCare.Web.Laboratory;
 
 namespace IQCare.Web.CCC.Encounter
 {

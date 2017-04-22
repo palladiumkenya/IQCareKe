@@ -8,7 +8,7 @@ namespace IQCare.CCC.UILogic.Triage
 {
     public class PatientPregnancyIndicatorManager
     {
-        private IpatientPregnancyIndicatorManager _PregnancyIndicator = (IpatientPregnancyIndicatorManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientPregnancyIndicator, BusinessProcess.CCC");
+        private IpatientPregnancyIndicatorManager _PregnancyIndicator = (IpatientPregnancyIndicatorManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.PatientPregnancyIndicatorManager, BusinessProcess.CCC");
 
         public int AddPregnancyIndicator(int patientId,int patientMasterVisitId,DateTime lmp,DateTime edd,int pregnancyStatusId,bool ancProfile,DateTime ancProfileDate,int userId)
         {

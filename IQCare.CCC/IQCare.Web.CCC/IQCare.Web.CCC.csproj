@@ -88,9 +88,11 @@
     <Content Include="CCC\Scripts\js\jquery-ui-1.8.custom.min.js" />
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
-    <Content Include="CCC\TB\IntensifiedCaseFinding.aspx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFemaleVitals.ascx" />
+    <Content Include="CCC\UC\ucIpt.ascx" />
+    <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
+    <Content Include="CCC\UC\ucIptOutcome.ascx" />
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
@@ -110,10 +112,11 @@
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
     <Content Include="CCC\WebService\PatientSummaryService.asmx" />
+    <Content Include="CCC\WebService\PatientTbService.asmx" />
     <Content Include="CCC\WebService\PatientVitals.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
-    <Content Include="CCC\WebService\TestWebservice.asmx" />
+    <Content Include="CCC\WebService\FemaleVitalsWebservice.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -260,13 +263,6 @@
     <Compile Include="CCC\OneTimeEvents\OneTimeEventsTracker.aspx.designer.cs">
       <DependentUpon>OneTimeEventsTracker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\TB\IntensifiedCaseFinding.aspx.cs">
-      <DependentUpon>IntensifiedCaseFinding.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CCC\TB\IntensifiedCaseFinding.aspx.designer.cs">
-      <DependentUpon>IntensifiedCaseFinding.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CCC\UC\ucExtruder.ascx.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -280,6 +276,27 @@
     </Compile>
     <Compile Include="CCC\UC\ucFemaleVitals.ascx.designer.cs">
       <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.designer.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.designer.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.designer.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
       <DependentUpon>ucPatientBrief.ascx</DependentUpon>
@@ -385,14 +402,18 @@
       <DependentUpon>PatientSummaryService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PatientTbService.asmx.cs">
+      <DependentUpon>PatientTbService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\PatientVitals.asmx.cs">
       <DependentUpon>PatientVitals.asmx</DependentUpon>
     </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\WebService\TestWebservice.asmx.cs">
-      <DependentUpon>TestWebservice.asmx</DependentUpon>
+    <Compile Include="CCC\WebService\FemaleVitalsWebservice.asmx.cs">
+      <DependentUpon>FemaleVitalsWebservice.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

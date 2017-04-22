@@ -18,9 +18,9 @@ namespace BusinessProcess.CCC.Baseline
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientTransferInRepository.Add(patientTransferIn);
-                _unitOfWork.Dispose();
+                _unitOfWork.PatientTransferInRepository.Add(patientTransferIn);            
                  Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return Result;
             }        
         }

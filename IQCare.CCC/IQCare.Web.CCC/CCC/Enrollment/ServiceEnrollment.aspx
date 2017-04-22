@@ -7,6 +7,28 @@
     
     <div class="col-md-12 bs-callout bs-callout-info" id="enrollmentTab" data-parsley-validate="true" data-show-errors="true">
         <div class="col-md-12">
+            <label class="control-lable pull-left">Services Enrolled </label>
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-striped" id="patientEnrollments">
+                <thead>
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Enrollment Number</th>
+                        <th>Enrollment Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="no-data">
+                        <td colspan="4">No Enrollments Yet</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12">
             <label class="control-lable pull-left"> Patient Enrollment </label>
         </div>
         
@@ -101,6 +123,7 @@
             <div class="col-xs-3">
                 <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
+                    <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
                     <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
                 </div>
             </div>
@@ -290,6 +313,7 @@
         $(document).ready(function () {
 
             $("#OtherSpecificEntryPoint").hide();
+            $("#IsCCCEnrolled").val("");
             
 
             $("#entryPoint").change(function () {
@@ -377,6 +401,8 @@
                     alert(msg);
                 }
             });
+
+            getPatientEnrollments();
 
             $("#btnClose").click(function () {
                 window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
@@ -491,8 +517,10 @@
                 _fp.shift();//first row will be empty -so remove
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
+                var isCCCenrolled = $("#IsCCCEnrolled").val();
                 console.log(cccRegNumber);
-                if (cccRegNumber == -1) {
+                console.log(isCCCenrolled);
+                if (cccRegNumber == -1 && isCCCenrolled!="CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
                 }
@@ -530,8 +558,10 @@
 
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
+                var isCCCenrolled = $("#IsCCCEnrolled").val();
                 console.log(cccRegNumber);
-                if (cccRegNumber == -1) {
+                console.log(isCCCenrolled);
+                if (cccRegNumber == -1 && isCCCenrolled != "CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
                 }
@@ -598,6 +628,46 @@
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
                         toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                        return false;
+                    }
+                });
+            }
+
+            function getPatientEnrollments() {
+                $.ajax(
+                {
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/GetPatientEnrollments",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function (response) {
+                        console.log(response.d);
+                        //$("#tblCareEnded > tbody").empty();
+                        //$('#patientEnrollments tr:not(:first)').remove();
+                        console.log(response.d);
+                        var itemList = response.d;
+                        var table = '';
+                        itemList.forEach(function (item, i) {
+                            n = i + 1;
+                            if (item.PatientId) {
+                                table += '<tr><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align:left">' + item.EnrollmentNumber + '</td><td style="text-align: left">' + moment(item.EnrollmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.PatientStatus + '</td></tr>';
+                                if (item.ServiceArea == "CCC Registration Number") {
+                                    $("#IsCCCEnrolled").val("CCC");
+                                }                             
+                            }
+                                
+                        });
+
+                        if (table != '') {
+                            $('#patientEnrollments tr:not(:first)').remove();
+                            $('#patientEnrollments').append(table);
+                        }
+                    },
+
+                    error: function (xhr, errorType, exception) {
+                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                        toastr.error("" + xhr.status + "" + jsonError.Message + " ");
                         return false;
                     }
                 });
