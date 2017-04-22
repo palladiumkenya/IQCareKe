@@ -460,9 +460,9 @@
             var pending=0;
             var complete=0;
             var percentage=0;       
-    </script>
+   
   
-<div class="col-md-3">  
+<%--<div class="col-md-3">  
  <div class="row">             
             <div class="col-md-12">
                 <div class="col-md-7"><label class="control-label pull-left">Pending VL Tests</label></div>
@@ -482,9 +482,9 @@
         </div>
 
 
- </div>
-  <!-- ajax begin -->
-    <script type="text/javascript">
+ </div>--%>
+  //<!-- ajax begin -->
+  //  <script type="text/javascript">
       
         $(document).ready(function () {  
            
@@ -526,6 +526,7 @@
 
         });
 
+        });
     </script>
   
 </asp:Content>
