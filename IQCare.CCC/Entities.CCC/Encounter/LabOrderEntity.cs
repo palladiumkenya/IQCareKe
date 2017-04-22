@@ -21,7 +21,8 @@ namespace Entities.CCC.Encounter
 
         [Key]
         public int Id { get; set; }
-        public int Ptn_pk { get; set; }   //should use a patientID        
+        public int patientId { get; set; }          
+        public int Ptn_pk { get; set; }         
         public DateTime OrderDate { get; set; }
         public DateTime PreClinicLabDate { get; set; }
         public string ClinicalOrderNotes { get; set; }
@@ -34,7 +35,8 @@ namespace Entities.CCC.Encounter
         public int ModuleId { get; set; }
         public string OrderNumber { get; set; }
         public int OrderedBy { get; set; }
-
+        public string LabName { get; set; }
+        public string Reason { get; set; }
 
 
 

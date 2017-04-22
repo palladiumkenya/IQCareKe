@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+      <HintPath>..\IQCare.Web.CCC\Bin\DataAccess.Context.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

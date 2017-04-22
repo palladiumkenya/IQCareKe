@@ -7,7 +7,6 @@ using Entities.CCC.Encounter;
 using Interface.CCC.Visit;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
-
 using DataAccess.Base;
 using DataAccess.CCC.Interface;
 
@@ -101,8 +100,11 @@ namespace BusinessProcess.CCC.visit
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-               var patientVL= _unitOfWork.PatientLabResultsRepository.FindBy(x => x.LabOrderId == labOrderId)
-                .Where(x => x.LabTestId == 3)
+               var patientVL= _unitOfWork.PatientLabResultsRepository.FindBy(
+               x =>
+                 x.LabOrderId == labOrderId &
+                 x.LabTestId == 3 & 
+                 x.HasResult)                
                 .OrderBy(x => x.Id)
                 .ToList();
 

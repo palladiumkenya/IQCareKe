@@ -17,6 +17,8 @@ namespace Interface.CCC.Lookup
         int GetLookUpMasterId(string masterName);
         List<LookupLabs> GetLookupLabs();
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
+        List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId);
+        List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId);
         List<LookupPreviousLabs> GetLookupVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
