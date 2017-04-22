@@ -26,7 +26,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -145,14 +145,21 @@
     var pmscmFlag = "0";
     
     $(document).ready(function () {
-        drugList();
+        
         //alert(pmscmSamePointDispense);
         if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
+            drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
         }
+        else if (pmscm == "PM/SCM") {
+            drugList(1);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+        }
         else {
+            drugList(0);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
         }
@@ -256,13 +263,13 @@
                 });
        
               
-           function drugList() {
+           function drugList(pmscm) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
                    minChars: 1
                });
-
+               
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
                    var result = this.value.split("~");
                    getBatches(result[0]);
@@ -270,17 +277,18 @@
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
                });
-        
+               
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
                    type: 'POST',
                    dataType: 'json',
-                   data: "{'regimenLine':''}",
+                   data: "{'PMSCM':'" + pmscm + "'}",
                    contentType: "application/json; charset=utf-8",
-           
+                   
                    success: function (data) {
                        var serverData = data.d;
                        var drugList = [];
+                       
                        for (var i = 0; i < serverData.length; i++) {
                            //drugList.push(serverData[i][1]);
                            drugList.push({ label: serverData[i][1], value: serverData[i][0] });
@@ -319,7 +327,7 @@
        function drugSwitchInterruptionReason(treatmentPlan)
        {
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
-           if(valSelected === "Continue Current Treatment" || valSelected === "Select")
+           if (valSelected === "Continue current treatment" || valSelected === "Select")
            {
                 $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
            }
@@ -513,5 +521,38 @@
 
 
         }
+
+    function getCurrentRegimen() {
+        var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+        var treatmentPlanId = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+        
+
+        if (treatmentPlan == "Continue current treatment") {
+            $.ajax({
+                url: '../WebService/PatientEncounterService.asmx/GetCurrentRegimen',
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var serverData = data.d;
+                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                    selectRegimens(serverData[0][0]);
+
+                    function waitForRegimens(callback) {
+                        window.setTimeout(function () {  //acting like this is an Ajax call
+                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                        }, 1000);
+                    }
+
+                    waitForRegimens();
+
+                },
+                error: function (data) {
+                    //toastr.error(data.d, "Failed to get Multiplier");
+                }
+            });
+        }
+
+    }
 
 </script>

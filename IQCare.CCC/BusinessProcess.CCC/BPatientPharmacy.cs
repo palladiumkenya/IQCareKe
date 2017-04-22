@@ -73,15 +73,39 @@ namespace BusinessProcess.CCC
             
         }
 
-        public DataTable getPharmacyDrugList(string regimenLine)
+        public DataTable getPharmacyDrugList(string PMSCM)
         {
             lock (this)
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@regimenLine", SqlDbType.Int, regimenLine);
+                ClsUtility.AddParameters("@pmscm", SqlDbType.VarChar, PMSCM);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyDrugList", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public List<PharmacyFields> getPharmacyCurrentRegimen(string patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.VarChar, patientId);
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getCurrentRegimen", ClsUtility.ObjectEnum.DataTable);
+
+                List<PharmacyFields> lst = new List<PharmacyFields>();
+                if(theDT.Rows.Count > 0)
+                {
+                    PharmacyFields flds = new PharmacyFields();
+                    flds.RegimenLine = theDT.Rows[0]["RegimenLineId"].ToString();
+                    flds.Regimen = theDT.Rows[0]["RegimenId"].ToString();
+
+                    lst.Add(flds);
+                }
+
+                return lst;
             }
         }
 
