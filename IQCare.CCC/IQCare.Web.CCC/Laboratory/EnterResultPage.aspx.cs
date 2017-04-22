@@ -24,6 +24,7 @@ namespace IQCare.Web.Laboratory
             get
             {
                 Guid g = Guid.NewGuid();
+               // return "../CCC/Home.aspx?key="+g.ToString();
                 return "../Laboratory/LabResultPage.aspx?key="+g.ToString();
             }
         }
@@ -331,9 +332,7 @@ namespace IQCare.Web.Laboratory
         decimal? nullDecimal = null;
         protected void SaveResults(object sender, EventArgs e)
         {
-            
-
-         
+                     
             LabOrderTest thisTest = this.thisTestOrder;
             List<LabTestParameterResult> paramToSave = new List<LabTestParameterResult>(); 
            // testToSave.ParameterResults = new List<LabTestParameterResult>();

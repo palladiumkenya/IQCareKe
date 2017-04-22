@@ -460,6 +460,36 @@
             var pending=0;
             var complete=0;
             var percentage=0;       
+   
+  
+<%--<div class="col-md-3">  
+ <div class="row">             
+            <div class="col-md-12">
+                <div class="col-md-7"><label class="control-label pull-left">Pending VL Tests</label></div>
+                <div class="col-md-2">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="pendingVL" CssClass="control-label text-success pull-left"></asp:Label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-7"><label class="control-label pull-left">Complete VL Tests</label></div>
+                <div class="col-md-2">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="completeVL" CssClass="control-label text-success pull-left"></asp:Label>
+                </div>
+            </div>
+        </div>
+
+
+ </div>--%>
+  //<!-- ajax begin -->
+  //  <script type="text/javascript">
+      
+        $(document).ready(function () {  
+           
+
+            //console.log("get viral load  called");            
 
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLPendingCount',
@@ -496,6 +526,7 @@
 
         });
 
+        });
     </script>
   
 </asp:Content>

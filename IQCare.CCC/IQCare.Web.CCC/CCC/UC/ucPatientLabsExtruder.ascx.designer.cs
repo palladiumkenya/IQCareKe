@@ -13,12 +13,21 @@ namespace IQCare.Web.CCC.UC {
     public partial class ucPatientLabsExtruder {
         
         /// <summary>
-        /// tblPendingLabs control.
+        /// xtblPendingLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblPendingLabs;
+        protected global::System.Web.UI.HtmlControls.HtmlTable xtblPendingLabs;
+        
+        /// <summary>
+        /// xtblCompleteLabs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable xtblCompleteLabs;
     }
 }
