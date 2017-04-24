@@ -112,6 +112,26 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+        public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
+
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderCompleteLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
+        public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
+
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderPendingLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
         public List<LookupPreviousLabs> GetLookupPendingLabs(int patientId)
 
         {

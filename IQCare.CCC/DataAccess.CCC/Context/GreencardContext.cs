@@ -10,6 +10,7 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
+using Entities.CCC.Tb;
 using Entities.PatientCore;
 
 
@@ -96,6 +97,13 @@ namespace DataAccess.CCC.Context
 
         //Consent
         public DbSet<Entities.CCC.Consent.PatientConsent> PatientConsents { get; set; }
+
+        //TB ICF/IPT
+        public DbSet<PatientIcf> PatientIcfs { get; set; }
+        public DbSet<PatientIcfAction> PatientIcfActions { get; set; }
+        public DbSet<PatientIpt> PatientIpts { get; set; }
+        public DbSet<PatientIptOutcome> PatientIptOutcomes { get; set; }
+        public DbSet<PatientIptWorkup> PatientIptWorkups { get; set; }
 
     }
 }

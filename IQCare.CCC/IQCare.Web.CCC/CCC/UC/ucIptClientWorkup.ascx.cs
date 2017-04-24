@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace IQCare.Web.CCC.TB
+namespace IQCare.Web.CCC.UC
 {
-    public partial class IntensifiedCaseFinding : System.Web.UI.Page
+    public partial class ucIptClientWorkup : System.Web.UI.UserControl
     {
+        public int PatientId;
+        public int PatientMasterVisitId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

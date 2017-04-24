@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+      <HintPath>..\IQCare.Web.CCC\Bin\DataAccess.Context.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,6 +108,11 @@
     <Compile Include="Interface\Triage\IPatientFamilyPlanningRepository.cs" />
     <Compile Include="Interface\Triage\IPatientPregnancyIndicatorRepository.cs" />
     <Compile Include="Interface\Triage\IPatientPregnancyRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfActionRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptOutcomeRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptWorkupRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -172,6 +177,11 @@
     <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />
     <Compile Include="Repository\Triage\PatientPregnancyRepository.cs" />
     <Compile Include="Repository\Triage\PatientPregnancyIndicatorRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIcfActionRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIcfRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptOutcomeRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptWorkupRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />

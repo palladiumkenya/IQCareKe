@@ -3,6 +3,7 @@ using DataAccess.Context;
 using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
+using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
