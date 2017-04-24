@@ -18,7 +18,7 @@ namespace BusinessProcess.CCC.Lookup
             {
                 var serviceEnrollments =
                     unitOfWork.PatientServiceEnrollmentLookupRepository.FindBy(x => x.PersonId == personId).ToList();
-
+                unitOfWork.Dispose();
                 return serviceEnrollments;
             }
         }

@@ -1808,6 +1808,5 @@
             //console.log(adherenceScore);
             $("#<%=adherenceScore.ClientID%>").text(adherenceScore + "/4");
         }
-
     });
 </script>
