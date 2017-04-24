@@ -5,10 +5,13 @@
               <div class="col-md-12"><small class="pull-left"><strong><i class="fa fa-search fa-2x" aria-hidden="true"> Find Patient </i></strong></small></div>                                                  
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12">
-                             <div class="col-md-3 form-group">
+                  
+
+                             <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="patient number.." ClientIDMode="Static"></asp:TextBox>           
+                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="" ClientIDMode="Static"></asp:TextBox>  
+                                               
                                     </div>
                                 </div>
                               
@@ -36,8 +39,9 @@
               <div class="col-md-12">
                   <div class="col-md-3">
                                    <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
-                                   <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control input-sm"/>                
+                                   <div class="col-md-12 md-form">
+                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control input-sm"/>  
+                                               
                                    </div>
                              </div>          
                  
@@ -58,14 +62,14 @@
               </div><%-- .col-md-12--%>
               <div class="col-md-12"><hr/></div>
               <div class="col-md-12 col-xs-12 col-sm-12">
-                              <div class="col-md-6 col-xs-6 col-sm-6">
+                              <div class="col-md-4 col-xs-4 col-sm-4">
                                   <div class="col-md-12 pull-left" id="divAction" clientidmode="Static">
                                      <i class="fa fa-spinner fa-pulse fa-3x fa-fw pull-left text-info"></i>
                                      <span class="sr-only"></span><strong class="pull-left" id="divActionString" clientidmode="Static"> Fetching Patient data</strong>
                                   </div>
                               </div>
                               <%--<div class="col-md-4 col-xs-4 col-sm-4"></div> --%>
-                              <div class="col-md-6 col-xs-12 col-sm-12">
+                              <div class="col-md-8 col-xs-12 col-sm-12">
                                    <div class="col-md-4 col-xs-12 col-sm-4">
                                         <asp:LinkButton runat="server" ID="btnFindPatient" OnClientClick="return false" ClientIDMode="Static" CssClass="btn btn-info btn-lg  btn-block  fa fa-search"> Find Patient</asp:LinkButton>
                                     </div>

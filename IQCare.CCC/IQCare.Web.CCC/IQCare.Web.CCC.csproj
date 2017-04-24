@@ -54,9 +54,12 @@
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
+    <Content Include="CCC\Scripts\css\bootstrap.css" />
     <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
+    <Content Include="CCC\Scripts\css\mdb.css" />
+    <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\bootbox.js" />
@@ -65,6 +68,7 @@
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
     <Content Include="CCC\Scripts\js\jquery.mb.flipText.js" />
     <Content Include="CCC\Scripts\js\mbExtruder.js" />
+    <Content Include="CCC\Scripts\js\mdb.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
@@ -82,6 +86,7 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\tether.js" />
     <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.9.1.js" />
@@ -119,6 +124,27 @@
     </Content>
     <Content Include="CCC\Greencard.Master" />
     <Content Include="packages.config" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff2" />
+    <Content Include="CCC\Scripts\sass\mdb.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -510,6 +536,7 @@
       <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
