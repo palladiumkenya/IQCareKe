@@ -40,7 +40,7 @@ namespace Entities.Lab
         /// 
         [Column("Ptn_Pk")]
         [ForeignKey("Client")]
-        public int PatientId { get; set; }
+        public int PatientPk { get; set; }
         /// <summary>
         /// Gets or sets the location identifier.
         /// </summary>

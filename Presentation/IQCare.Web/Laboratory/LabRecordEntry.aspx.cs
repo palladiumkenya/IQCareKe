@@ -336,7 +336,7 @@ namespace IQCare.Web.Laboratory
 
                 LabOrder order = this.OrderedLabs;
                 order.LocationId = this.LocationId;
-                order.PatientId = this.PatientId;
+                order.PatientPk = this.PatientPk;
                 order.ModuleId = this.ModuleId;
                 order.DeleteFlag = false;
                 order.CreateDate = DateTime.Now;
@@ -508,7 +508,7 @@ namespace IQCare.Web.Laboratory
         /// <value>
         /// The patient identifier.
         /// </value>
-        private int PatientId
+        private int PatientPk
         {
             get
             {
@@ -541,7 +541,7 @@ namespace IQCare.Web.Laboratory
                     
                     return new LabOrder()
                     {
-                        PatientId = this.PatientId,
+                        PatientPk = this.PatientPk,
                         LocationId = this.LocationId,
                         UserId = this.UserId,
                         ModuleId = this.ModuleId

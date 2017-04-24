@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Application.Presentation;
+using Entities.Administration;
+using Interface.Clinical;
+using Interface.Scheduler;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Application.Presentation;
-using Entities.Administration;
-using Interface.Clinical;
-using Interface.Scheduler;
-using IQCare.IQControl;
 namespace IQCare.Web.Scheduler
 {
     public partial class PatientAppointmentControl : System.Web.UI.UserControl
