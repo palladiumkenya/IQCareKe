@@ -24,8 +24,8 @@ namespace Entities.CCC.Triage
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
         [Required]
-        public int FamilyPlaningStatusId { get; set; }
+        public int FamilyPlanningStatusId { get; set; }
 
-        public int ReasonNotOnFP { get; set; }
+        public int ReasonNotOnFPId { get; set; }
     }
 }

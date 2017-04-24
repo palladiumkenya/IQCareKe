@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
 
@@ -15,13 +16,13 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientEncounterLogic
     {
-        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string lmp, string PregStatus, string edd, string ANC, int OnFP, string fpMethod, string ReasonNotOnFP, string CaCx, string STIScreening, string STIPartnerNotification, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
-            string[] fpMethodArray = fpMethod.Split(',');
-            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, lmp,PregStatus,edd,ANC, OnFP, fpMethodArray, ReasonNotOnFP, CaCx,STIScreening,STIPartnerNotification, advEvent);
+            //string[] fpMethodArray = fpMethod.Split(',');
+            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, advEvent);
             return val;
         }
 
@@ -100,10 +101,17 @@ namespace IQCare.CCC.UILogic
             return patientEncounter.getPharmacyPrescriptionDetails(PatientMasterVisitID);
         }
 
-        public DataTable getPharmacyDrugList(string regimenLine)
+        public DataTable getPharmacyDrugList(string PMSCM)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
-            return patientEncounter.getPharmacyDrugList(regimenLine);
+            return patientEncounter.getPharmacyDrugList(PMSCM);
+        }
+
+        public List<PharmacyFields> getPharmacyCurrentRegimen(string patientId)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            return patientEncounter.getPharmacyCurrentRegimen(patientId);
+
         }
 
         public List<DrugBatch> getPharmacyDrugBatch(string drugPk)
@@ -144,8 +152,18 @@ namespace IQCare.CCC.UILogic
             return filteredList[0].multiplier;
         }
 
+        public List<PharmacyFields> getPharmacyFields(string PatientMasterVisitID)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<PharmacyFields> drg = patientEncounter.getPharmacyFields(PatientMasterVisitID);
+
+            return drg;
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
-            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription)
+            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
+            string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
+            string regimenText)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -159,11 +177,12 @@ namespace IQCare.CCC.UILogic
                     if (drugPrescription[i].DrugAbbr != "")
                         RegimenType += drugPrescription[i].DrugAbbr + "/";
                 }
-                
+              
             }
 
             return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
-                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag);
+                UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
+                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen);
 
         }
 

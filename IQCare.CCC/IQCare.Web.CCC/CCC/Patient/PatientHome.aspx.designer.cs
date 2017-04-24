@@ -130,6 +130,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.DropDownList bioPatientPopulation;
         
         /// <summary>
+        /// bioPatientKeyPopulation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList bioPatientKeyPopulation;
+        
+        /// <summary>
         /// trtFirstName control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,15 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox trtLastName;
+        
+        /// <summary>
+        /// Gender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Gender;
         
         /// <summary>
         /// txtCounty control.

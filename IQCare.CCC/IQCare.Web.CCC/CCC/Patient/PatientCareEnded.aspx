@@ -343,7 +343,6 @@
             /*careenging reason */
             $("#<%=Reason.ClientID%>").change(
                 function() {
-                    alert();
                     var reason = $(this).find(":selected").text();
                     if (reason === 'Transfer Out') {
                         $("#DaDeathDatete").val('');

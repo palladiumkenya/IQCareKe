@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using DataAccess.Base;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Triage;
 using Interface.CCC.Triage;
@@ -8,8 +9,8 @@ using System.Linq;
 
 namespace BusinessProcess.CCC.Triage
 {
-    
-    public class BPatientFamilyPlanningManager  :IpatientFamilyPlanningManager
+
+    public class BPatientFamilyPlanningManager : ProcessBase,IpatientFamilyPlanningManager
     {
         // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int Result=0;
@@ -33,8 +34,8 @@ namespace BusinessProcess.CCC.Triage
 
                 if (FP != null)
                 {
-                    FP.FamilyPlaningStatusId = u.FamilyPlaningStatusId;
-                    FP.ReasonNotOnFP = u.ReasonNotOnFP;
+                    FP.FamilyPlanningStatusId = u.FamilyPlanningStatusId;
+                    FP.ReasonNotOnFPId = u.ReasonNotOnFPId;
                 }
                 _unitOfWork.PatientFamilyPlanningRepository.Update(FP);
                 Result= _unitOfWork.Complete();

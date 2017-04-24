@@ -28,7 +28,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string UpdatePatientBio(int patientId, string bioFirstName, string bioMiddleName, string bioLastName, int userId, int bioPatientPopulation)
+        public string UpdatePatientBio(int patientId, string bioFirstName, string bioMiddleName, string bioLastName, int userId, string bioPatientPopulation, int keyPop)
         {
             int personId = 0;
             int gender = 0;
@@ -46,6 +46,28 @@ namespace IQCare.Web.CCC.WebService
 
                 personManager.UpdatePerson(bioFirstName, bioMiddleName, bioLastName, gender, userId, personId);
                 msg = "<p>Patient Bio Updated Successfully</p>";
+
+                var personPoulation = new PatientPopulationManager();
+                var population = personPoulation.GetCurrentPatientPopulations(personId);
+                if (population.Count > 0)
+                {
+                    population[0].PopulationCategory = keyPop;
+                    population[0].PopulationType = bioPatientPopulation;
+
+                    personPoulation.UpdatePatientPopulation(population[0]);
+
+                    msg += "<p>Person Population Edited Successfully.</p>";
+
+                }
+                else
+                {
+                    int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, keyPop, userId);
+                    if (Result > 0)
+                    {
+                        msg += "<p>Person Population Status Recorded Successfully!</p>";
+                    }
+                }
+
                 return msg;
             }
             catch (Exception e)

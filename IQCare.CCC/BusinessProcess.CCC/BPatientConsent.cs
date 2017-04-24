@@ -1,5 +1,4 @@
-﻿using System;
-using DataAccess.Base;
+﻿using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using Entities.CCC.Consent;
@@ -11,74 +10,47 @@ namespace BusinessProcess.CCC
 {
     public class BPatientConsent : ProcessBase, IPatientConsent
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
 
         public int AddPatientConsents(PatientConsent p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 _unitOfWork.PatientConsentRepository.Add(p);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
         }
 
         public PatientConsent GetPatientConsent(int id)
         {
-            try
+
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var consent =
-                    _unitOfWork.PatientConsentRepository.FindBy(x => x.PatientId == id)
-                        .OrderBy(x => x.Id)
-                        .FirstOrDefault();
+                var consent = _unitOfWork.PatientConsentRepository.FindBy(x => x.PatientId == id)
+                       .OrderBy(x => x.Id)
+                       .FirstOrDefault();
+                _unitOfWork.Dispose();
                 return consent;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-        
         }
 
         public void DeletePatientConsent(int id)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientConsent consent = _unitOfWork.PatientConsentRepository.GetById(id);
                 _unitOfWork.PatientConsentRepository.Remove(consent);
-                _unitOfWork.Complete();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
+               _result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
             }
-
         }
 
         public int UpdatePatientConsent(PatientConsent p)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientConsent consent = new PatientConsent()
                 {
@@ -88,37 +60,19 @@ namespace BusinessProcess.CCC
                 };
                 _unitOfWork.PatientConsentRepository.Update(consent);
                 _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
                 return _result;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-  
         }
 
         public List<PatientConsent> GetByPatientId(int patientId)
         {
-            try
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientConsent> consent = _unitOfWork.PatientConsentRepository.GetByPatientId(patientId);
+                _unitOfWork.Dispose();
                 return consent;
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-      
         }
     }
 }

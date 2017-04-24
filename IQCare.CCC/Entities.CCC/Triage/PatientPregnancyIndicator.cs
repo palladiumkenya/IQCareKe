@@ -29,7 +29,7 @@ namespace Entities.CCC.Triage
 
 
         [Required]
-        public DateTime EDD { get; set; }
+        public DateTime? EDD { get; set; }
 
         [Required]
         public int PregnancyStatusId { get; set; }
@@ -37,7 +37,7 @@ namespace Entities.CCC.Triage
         [Required]
         public bool ANCProfile { get; set; }
 
-        public DateTime ANCProfileDate { get; set; }
+        public DateTime? ANCProfileDate { get; set; }
 
 
     }

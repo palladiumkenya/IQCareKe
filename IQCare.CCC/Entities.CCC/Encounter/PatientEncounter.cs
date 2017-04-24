@@ -118,5 +118,16 @@ namespace Entities.CCC.Encounter
             public string qtyDisp { get; set; }
             public string prophylaxis { get; set; }
         }
+
+        [Serializable]
+        public class PharmacyFields
+        {
+            public string TreatmentProgram { get; set; }
+            public string PeriodTaken { get; set; }
+            public string TreatmentPlan { get; set; }
+            public string TreatmentPlanReason { get; set; }
+            public string RegimenLine { get; set; }
+            public string Regimen { get; set; }
+        }
     }
 }

@@ -131,26 +131,46 @@ namespace IQCare.Web.CCC.WebService
                     var maritalStatus = new PersonMaritalStatusManager();
                     var _matStatus = maritalStatus.GetInitialPatientMaritalStatus(personId);
 
-                    int matStatusId;
+                    int matStatusId = 0;
                     var lookUpLogic = new LookupLogic();
                     matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
 
-                    _matStatus.MaritalStatusId = matStatusId;
-                    _matStatus.CreatedBy = userId;
-
-                    Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
-                    if (Result > 0)
+                    if (_matStatus != null)
                     {
-                        Msg += "<p>Person Marital Status Updated Successfully!</p>";
-                        Session["PersonDob"] = DateTime.Parse(dob);
-                        Session["NationalId"] = nationalId;
-                        Session["PatientType"] = patientType;
-                        var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
-                        if (patType == "Transit")
+                        _matStatus.MaritalStatusId = matStatusId;
+                        _matStatus.CreatedBy = userId;
+
+                        Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
+                        if (Result > 0)
                         {
-                            Session["NationalId"] = 99999999;
+                            Msg += "<p>Person Marital Status Updated Successfully!</p>";
+                            Session["PersonDob"] = DateTime.Parse(dob);
+                            Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
                         }
-                    }      
+
+                    }
+                    else
+                    {
+                        Result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId, userId);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Marital Status Added Successfully!</p>";
+                            Session["PersonDob"] = DateTime.Parse(dob);
+                            Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
+                        }
+                    }                      
                 }
                 else
                 {

@@ -3,7 +3,7 @@
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
 
-<div class="col-md-12" style="padding-top: 10px">
+<div class="col-md-12" style="padding-top: 10px" id="PharmacySection" data-parsley-validate="true" data-show-errors="true">
     <%--<div class="panel panel-info">--%>
 
         <%--<div class="panel-body">--%>
@@ -13,7 +13,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Program</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" ClientIDMode="Static" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -26,7 +26,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);"/>
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -44,7 +44,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);"/>
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                     </div>                        
                                 </div> 
                                 <div class="col-md-3 form-group">                  
@@ -145,14 +145,21 @@
     var pmscmFlag = "0";
     
     $(document).ready(function () {
-        drugList();
+        
         //alert(pmscmSamePointDispense);
         if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
+            drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
         }
+        else if (pmscm == "PM/SCM") {
+            drugList(1);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+        }
         else {
+            drugList(0);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
         }
@@ -256,13 +263,13 @@
                 });
        
               
-           function drugList() {
+           function drugList(pmscm) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
                    minChars: 1
                });
-
+               
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
                    var result = this.value.split("~");
                    getBatches(result[0]);
@@ -270,17 +277,18 @@
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
                });
-        
+               
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
                    type: 'POST',
                    dataType: 'json',
-                   data: "{'regimenLine':''}",
+                   data: "{'PMSCM':'" + pmscm + "'}",
                    contentType: "application/json; charset=utf-8",
-           
+                   
                    success: function (data) {
                        var serverData = data.d;
                        var drugList = [];
+                       
                        for (var i = 0; i < serverData.length; i++) {
                            //drugList.push(serverData[i][1]);
                            drugList.push({ label: serverData[i][1], value: serverData[i][0] });
@@ -319,7 +327,7 @@
        function drugSwitchInterruptionReason(treatmentPlan)
        {
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
-           if(valSelected === "Continue Current Treatment" || valSelected === "Select")
+           if (valSelected === "Continue current treatment" || valSelected === "Select")
            {
                 $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
            }
@@ -375,45 +383,112 @@
 
         function saveUpdatePharmacy()
         {
-            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
-            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
-            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+            if ($('#PharmacySection').parsley().validate()) {
 
-            ///////////////////////////////////////////////////////////////////
-            var rowCount = $('#dtlDrugPrescription tbody tr').length;
-            var drugPrescriptionArray = new Array();
-            try {
-                for (var i = 0 ; i < rowCount; i++) {
-                    drugPrescriptionArray[i] = {
-                        "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                        "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                        "Dose": DrugPrescriptionTable.row(i).data()[6],
-                        "Duration": DrugPrescriptionTable.row(i).data()[8],
-                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
-                        "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+                var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+                var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+                var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+                var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+                var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+                var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+
+                var allAbbr = "";
+                ///////////////////////////////////////////////////////////////////
+                var rowCount = $('#dtlDrugPrescription tbody tr').length;
+                var drugPrescriptionArray = new Array();
+                try {
+                    for (var i = 0 ; i < rowCount; i++) {
+                        drugPrescriptionArray[i] = {
+                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                            "FreqId": DrugPrescriptionTable.row(i).data()[2],
+                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
+                            "Dose": DrugPrescriptionTable.row(i).data()[6],
+                            "Duration": DrugPrescriptionTable.row(i).data()[8],
+                            "qtyPres": DrugPrescriptionTable.row(i).data()[9],
+                            "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
+                            "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                        }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
                     }
                 }
-            }
-            catch (ex) { }
-            //////////////////////////////////////////////////////////////////
-           
-            $.ajax({
-                url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
-                type: 'POST',
-                dataType: 'json',
-                data: "{'TreatmentPlan':'" + treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" + 
-                    regimenLine + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" + JSON.stringify(drugPrescriptionArray) + "'}",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    toastr.success(data.d, "Saved successfully");
-                },
-                error: function (data) {
-                    toastr.error(data.d, "Error");
+                catch (ex) { }
+                //////////////////////////////////////////////////////////////////
+                allAbbr = allAbbr.replace(/\/$/, "");
+                var sumAllAbbr = 0;
+                var sumSelectedRegimen = 0;
+                try {
+                    var regExp = /\(([^)]+)\)/;
+                    var matches = regExp.exec(regimenText);
+
+                    var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+
+                    for (var i = 0; i < allAbbr.length; i++) {
+                        sumAllAbbr += allAbbr.charCodeAt(i);
+                    }
+
+                    for (var i = 0; i < selectedRegimen.length; i++) {
+                        sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                    }
+
                 }
-            });
+                catch (err) { }
+
+                if (sumAllAbbr > 0) {
+                    if (sumAllAbbr != sumSelectedRegimen) {
+                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                                treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                                regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                                JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                toastr.success(data.d, "Saved successfully");
+                            },
+                            error: function (data) {
+                                toastr.error(data.d, "Error");
+                            }
+                        });
+                    }
+                }
+                else {
+                    $.ajax({
+                        url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                            regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            toastr.success(data.d, "Saved successfully");
+                        },
+                        error: function (data) {
+                            toastr.error(data.d, "Error");
+                        }
+                    });
+                }
+
+            }
+            else {
+                toastr.error("Please enter missing fields.");
+            }
+
+
+            
         }
 
         function CalculateQtyPrescribed() {
@@ -446,5 +521,38 @@
 
 
         }
+
+    function getCurrentRegimen() {
+        var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+        var treatmentPlanId = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+        
+
+        if (treatmentPlan == "Continue current treatment") {
+            $.ajax({
+                url: '../WebService/PatientEncounterService.asmx/GetCurrentRegimen',
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var serverData = data.d;
+                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                    selectRegimens(serverData[0][0]);
+
+                    function waitForRegimens(callback) {
+                        window.setTimeout(function () {  //acting like this is an Ajax call
+                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                        }, 1000);
+                    }
+
+                    waitForRegimens();
+
+                },
+                error: function (data) {
+                    //toastr.error(data.d, "Failed to get Multiplier");
+                }
+            });
+        }
+
+    }
 
 </script>

@@ -127,6 +127,26 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
+                if (vw != null && vw.Count > 0)
+                {
+                    Gender.Items.Add(new ListItem("select", "0"));
+
+                    foreach (var item in vw)
+                    {
+                        Gender.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
+                List<LookupItemView> keyPopList = mgr.GetLookItemByGroup("KeyPopulation");
+                if (keyPopList != null && keyPopList.Count > 0)
+                {
+                    bioPatientKeyPopulation.Items.Add(new ListItem("select", "0"));
+                    foreach (var item in keyPopList)
+                    {
+                        bioPatientKeyPopulation.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                    }
+                }
+
                 // viral Load Alerts
                 PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
                 if (_patientlookup != null)

@@ -86,6 +86,7 @@
     <Compile Include="Enrollment\PatientIdentifierManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
+    <Compile Include="PatientAdherenceAssessmentManager.cs" />
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientBaselineLookupManager.cs" />
     <Compile Include="PatientCareEndingManager.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
+    <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
     <Compile Include="PatientVitalsManager.cs" />
     <Compile Include="PersonContactLookUpManager.cs" />
@@ -112,6 +114,11 @@
     <Compile Include="Triage\PatientFamilyPlanningMethodManager.cs" />
     <Compile Include="Triage\PatientPregnancyIndicatorManager.cs" />
     <Compile Include="Triage\PatientPregnancyManager.cs" />
+    <Compile Include="Tb\PatientIcfActionManager.cs" />
+    <Compile Include="Tb\PatientIcfManager.cs" />
+    <Compile Include="Tb\PatientIptManager.cs" />
+    <Compile Include="Tb\PatientIptOutcome.cs" />
+    <Compile Include="Tb\PatientIptWorkup.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
   </ItemGroup>
   <ItemGroup>
