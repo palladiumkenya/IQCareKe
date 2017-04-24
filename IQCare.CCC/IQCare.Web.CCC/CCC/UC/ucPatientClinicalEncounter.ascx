@@ -784,12 +784,6 @@
                                     </div>
                                     <%-- .panel-body--%>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
                 <%-- .data-step-1--%>
 
                 <div class="step-pane sample-pane" data-step="2">
@@ -1518,6 +1512,13 @@
 
                         </div>
                     </div>
+                </div>
+                
+                                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
 <script type="text/javascript">
