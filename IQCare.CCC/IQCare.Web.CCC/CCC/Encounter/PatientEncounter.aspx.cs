@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-using IQCare.Web.Laboratory;
 
 namespace IQCare.Web.CCC.Encounter
 {
@@ -35,6 +33,7 @@ namespace IQCare.Web.CCC.Encounter
             //VisitId = Convert.ToInt32(HttpContext.Current.Session["VisitId"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
 
             PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(PatientId);
             if (ptpk.ptn_pk != null)

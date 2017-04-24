@@ -68,6 +68,7 @@ namespace IQCare.CCC.UILogic
         {
             string jsonObject;
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
             List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetLookupPreviousLabs(patientId);  
             if (lookupprevlabsList != null && lookupprevlabsList.Count > 0)
             {
@@ -79,7 +80,38 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
+        public static string LookupExtruderCompleteLabs(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
+            List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetExtruderCompleteLabs(patientId);
+            if (lookupprevlabsList != null && lookupprevlabsList.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupprevlabsList);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
+        public static string LookupExtruderPendingLabs(int patientId)
+        {
+            string jsonObject;
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+            List<LookupPreviousLabs> lookupprevlabsList = lookupManager.GetExtruderPendingLabs(patientId);
+            if (lookupprevlabsList != null && lookupprevlabsList.Count > 0)
+            {
+                jsonObject = new JavaScriptSerializer().Serialize(lookupprevlabsList);
+            }
+            else
+            {
+                jsonObject = "[]";
+            }
+            return jsonObject;
+        }
         public static string GetLookupPendingLabsListJson(int patientId)
         {
             string jsonObject;

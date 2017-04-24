@@ -8,6 +8,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
 using Interface.CCC.Visit;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -208,7 +209,7 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[7] { row["masterVisitID"].ToString(), row["Ptn_pk"].ToString(),
+                string[] i = new string[7] { row["PatientMasterVisitID"].ToString(), row["Ptn_pk"].ToString(),
                     row["identifiervalue"].ToString(),row["FirstName"].ToString(),row["MidName"].ToString(),
                     row["LastName"].ToString(),row["prescribedBy"].ToString()};
                 rows.Add(i);
@@ -219,16 +220,35 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetDrugList(string regimenLine)
+        public ArrayList GetDrugList(string PMSCM)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyDrugList(regimenLine);
+            DataTable theDT = patientEncounter.getPharmacyDrugList(PMSCM);
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
                 string[] i = new string[2] { row["val"].ToString(), row["DrugName"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetCurrentRegimen()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            List<PharmacyFields> lst = new List<PharmacyFields>();
+            lst = patientEncounter.getPharmacyCurrentRegimen(Session["PatientId"].ToString());
+
+            ArrayList rows = new ArrayList();
+
+            if(lst.Count > 0)
+            {
+                string[] i = new string[2] { lst[0].RegimenLine , lst[0].Regimen };
                 rows.Add(i);
             }
             return rows;

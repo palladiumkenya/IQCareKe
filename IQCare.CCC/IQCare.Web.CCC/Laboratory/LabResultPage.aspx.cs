@@ -29,8 +29,8 @@ namespace IQCare.Web.Laboratory
        /// <summary>
         /// The redirect URL
         /// </summary>
-        private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-
+       // private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+        private string RedirectUrl = "../CCC/Home.aspx";
         /// The is error
         /// </summary>
         private bool isError = false;
@@ -369,7 +369,7 @@ namespace IQCare.Web.Laboratory
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            // this.BindLabTests();
+            this.BindLabTests();
             divError.Visible = isError;
             btnExitPage.OnClientClick = string.Format("javascript:window.location='{0}'; return false;", this.RedirectUrl);
         }

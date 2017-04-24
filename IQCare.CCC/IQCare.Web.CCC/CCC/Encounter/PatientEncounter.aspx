@@ -573,7 +573,7 @@
                         var year = currentTime.getFullYear();
                         var sampleDate = day + "-" + month + "-" + year;
                       
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
                    
                     });
                   
@@ -599,7 +599,7 @@
                 dataType: "json",
                 cache: false,
                 success: function (response) {
-                    // console.log(response.d);
+                   // console.log(response.d);
                     var itemList = JSON.parse(response.d);
                     var table = '';
                     //itemList.forEach(function (item) {
@@ -614,10 +614,12 @@
                         var year = currentTime.getFullYear();
                         var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
-
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        
+                            table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                     
                     });
 
+                  
                     $('#tblPendingLabs').append(table);
                     $('#tblPendingLabs tr:not(:first-child').each(function(idx){
                     $(this).children(":eq(0)").html(idx + 1);
@@ -654,7 +656,7 @@
                         var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
                     });
 
                     $('#tblVL').append(table);
@@ -917,7 +919,7 @@
           
             function getViralLoad() {
                 
-                console.log("get viral load  called");
+                //console.log("get viral load  called");
                 $.ajax({
                     url: '../WebService/LabService.asmx/GetViralLoad',
                     type: 'POST',
@@ -925,7 +927,7 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        console.log(response.d);
+                        //console.log(response.d);
                         var items = response.d;
                         items.forEach(function (item, i) {
 
@@ -933,7 +935,7 @@
 
                                 jan_vl = item.ResultValue;
                                    
-                            } else if (item.Month == 3) {
+                            } else if (item.Month == 4) {
 
                                 march_vl = item.ResultValue;                                   
                                    
@@ -957,8 +959,8 @@
        
             function viralLoadGraph() {
               
-                console.log("encounter viral load  graph called")
-                console.log(march_vl);
+               // console.log("encounter viral load  graph called")
+                //console.log(march_vl);
                 $('#container').highcharts({
                     title: {
                         text: 'Viral Load Trend',

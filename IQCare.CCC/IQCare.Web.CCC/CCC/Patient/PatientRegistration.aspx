@@ -1276,7 +1276,7 @@
                     $(".errorBlock").hide();
                 });
 
-                function duplicateCheck() {
+<%--                function duplicateCheck() {
                     var personFname = $("#<%=personFname.ClientID%>").val();
                     var personMName = $("#<%=personMName.ClientID%>").val();
                     var personLName = $("#<%=personLName.ClientID%>").val();
@@ -1345,7 +1345,7 @@
                             }
                         });
                     }    
-                }
+                }--%>
 
                 
 

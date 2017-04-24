@@ -374,6 +374,9 @@ function AddDrugPrescription() {
     var duration = $("#txtDuration").val();
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
+    batchText = batchText.substring(0, batchText.indexOf('~'));
+
+
     if ($('#chkProphylaxis').is(":checked")) {
         var prophylaxis = 1;
     }
