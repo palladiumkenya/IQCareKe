@@ -236,4 +236,11 @@
                 
         </div>
     </div>
+    <%--  <script type="text/javascript">
+      // Load lab results        
+          $("#btnExitPage").click(function (e) {
+                window.location.href = '<%=ResolveClientUrl("../CCC/Home.aspx")%>'; 
+              
+            });           
+      </script>      --%>
 </asp:Content>

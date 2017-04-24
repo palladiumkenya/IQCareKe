@@ -199,7 +199,7 @@
         $(document).ready(function () {  
            
 
-            console.log("get viral load  called");            
+            //console.log("get viral load  called");            
 
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLPendingCount',
@@ -208,7 +208,7 @@
                 contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function (response) {
-                    console.log(response.d);
+                   // console.log(response.d);
                   
                     document.getElementById("pendingVL").innerHTML= response.d;
 
@@ -223,7 +223,7 @@
                 contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
 
                     document.getElementById("completeVL").innerHTML = response.d;
 

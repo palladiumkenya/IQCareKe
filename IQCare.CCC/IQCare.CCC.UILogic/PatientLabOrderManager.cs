@@ -30,9 +30,9 @@ namespace IQCare.CCC.UILogic
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
 
-        public void savePatientLabOrder(int patient_ID, int patient_Pk, int facilityID, int patientMasterVisitId, string patientLabOrder)
+        public int savePatientLabOrder(int patient_ID, int patient_Pk, int userId, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
-           
+            int returnLabOrderSuccess = 0;
             try
             {
                 var jss = new JavaScriptSerializer();
@@ -40,60 +40,51 @@ namespace IQCare.CCC.UILogic
 
                 if (patient_ID > 0)
                 {
-                    //int returnValue;
-                   // int returnLabOrderSuccess;
+                   
+                  
                     var pending = "Pending";
                     foreach (ListLabOrder t in data)
                     {
-                                // Get LabID
+                                // Get LabTestID
                                 string labType = t.LabType;
                                 if (labType != null)
                                 {
                                 LookupLabs testId = _lookupTest.GetLabTestId(labType);
                                 int labTestId = testId.Id;
 
-                            PatientLabTracker labTracker = new PatientLabTracker()
-                            {
-                                PatientId = patient_ID,
-                                PatientMasterVisitId = patientMasterVisitId,
-                                LabName = t.LabType,
-                                Reasons = t.OrderReason,
-                                Results = pending,
-                                SampleDate = t.LabOrderDate
-                                //LabNotes =data[i].labNotes --take to clinical notes 
-
-                            };
-                            _mgr.AddPatientLabTracker(labTracker);
-
                             LabOrderEntity labOrder = new LabOrderEntity()
                             {
                                 Ptn_pk = patient_Pk,
                                 LocationId = facilityID,
-                                ModuleId = 1,
-                                OrderedBy = 1,
+                                ModuleId = 211,
+                                OrderedBy = userId,
                                 LabTestId = labTestId,
                                 PatientMasterVisitId = patientMasterVisitId,
                                 ClinicalOrderNotes = t.LabNotes,
                                 OrderStatus = pending,
                                 OrderDate = t.LabOrderDate,
-                                PreClinicLabDate = t.LabOrderDate
-                                //UserId = data[i].labType,
-                                //ClinicalOrderNotes = data[i].results,       
-                                //LocationId = data[i].orderReason,
+                                CreatedBy = userId,
+                                UserId = userId,
+                                PreClinicLabDate = t.LabOrderDate,
+                                LabName = t.LabType,
+                                patientId = patient_ID,
+                                Reason = t.OrderReason
                             };
-                            _mgr.AddPatientLabOrder(labOrder);
+                          returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
+                            return returnLabOrderSuccess;
 
-                            //returnLabOrderSuccess;
+
+
                         }
                     }
                 }
             }
             catch (Exception ex)
-            {
+             {
                 Msg = ex.Message + ' ' + ex.InnerException;
-            }
+             }
 
-           // return int.Parse(Msg);
+            return int.Parse(Msg);
         }
         public List<LabOrderEntity> GetVlPendingCount(int facilityId)
         {
