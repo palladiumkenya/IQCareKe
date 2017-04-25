@@ -222,7 +222,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -244,7 +244,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -255,7 +255,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -353,30 +353,91 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" onclick="IptWorkUp();">IPT Client Workup</button>
-                                            </div>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal">IPT Client Workup</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" onclick="Ipt();">IPT</button>
-                                            </div>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal">IPT</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" onclick="IptOutcome();">AddIPT Outcome</button>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal">IPT Outcome</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="IptClientWorkupModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy Client Work Up</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:IptClientWorkup ID="IptCw" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptWorkup" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptWorkup" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptClientWorkupForm">
-                                        <uc:IptClientWorkup ID="IptCw" runat="server" />
+
+                                    <div id="IptDetailsModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy(IPT)</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:Ipt ID="IptDetails" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptDetails" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptDetails" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptDetailsForm">
-                                        <uc:Ipt ID="IptDetails" runat="server" />
+
+                                    <div id="IptOutcomeModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy Outcome</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:IptOutcome ID="IptOutcomeForm" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptOutcome" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptOutcome" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptOutcomeDetailsForm">
-                                        <uc:IptOutcome ID="IptOutcomeForm" runat="server" />
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -499,7 +560,7 @@
                         <%--col-md-11--%>
                     </div>
 
-                                </div>
+                </div>
                 <%-- .data-step-1--%>
 
                 <div class="step-pane sample-pane" data-step="2">
@@ -990,7 +1051,7 @@
                         <div class="col-md-12">
 
                             <div class="col-md-4">
-                               <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
+                                <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
                                 <div class="col-md-12">
                                     <hr />
                                 </div>
@@ -1058,7 +1119,7 @@
                         <div class="col-md-12">
                             <hr />
                         </div>
-                        
+
                         <div class="col-md-12">
                             <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
                         </div>
@@ -1075,7 +1136,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                                 
+
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">Questions</div>
                                                 <div class="col-md-3">
@@ -1083,11 +1144,13 @@
                                                     <div class="col-md-6">No</div>
                                                 </div>
                                             </div>
-                                                 
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Do you ever forget to take your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Do you ever forget to take your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                     
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question1_Yes" runat="server" GroupName="Question1" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1095,15 +1158,17 @@
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question1_No" runat="server" GroupName="Question1" ClientIDMode="Static" Value="0" />
                                                     </div>
-                                                    
-                                                    <div class="errorBlock1" style="color: red;"> Please select one option </div>
+
+                                                    <div class="errorBlock1" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Are you careless at times about taking your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Are you careless at times about taking your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                     
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question2_Yes" runat="server" GroupName="Question2" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1111,16 +1176,18 @@
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question2_No" runat="server" GroupName="Question2" ClientIDMode="Static" Value="0" />
                                                     </div>
-                                                    
-                                                    <div class="errorBlock2" style="color: red;"> Please select one option </div>
+
+                                                    <div class="errorBlock2" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
-                                                 
+
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                      
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question3_Yes" runat="server" GroupName="Question3" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1129,15 +1196,17 @@
                                                         <asp:RadioButton ID="Question3_No" runat="server" GroupName="Question3" ClientIDMode="Static" Value="0" />
                                                     </div>
 
-                                                    <div class="errorBlock3" style="color: red;"> Please select one option </div>
+                                                    <div class="errorBlock3" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
-                                                 
+
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                   
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question4_Yes" runat="server" GroupName="Question4" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1146,10 +1215,10 @@
                                                         <asp:RadioButton ID="Question4_No" runat="server" GroupName="Question4" ClientIDMode="Static" Value="0" />
                                                     </div>
 
-                                                    <div class="errorBlock4" style="color: red;"> Please select one option </div>
+                                                    <div class="errorBlock4" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-12 form-group" style="background-color: lightblue;">
                                                 <div class="col-md-9 pull-left">Total Score</div>
                                                 <div class="col-md-3 pull-left">
@@ -1158,13 +1227,13 @@
                                                 </div>
                                             </div>
 
-                                        </div>                                        
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12">
-                                            <button type="button" id="btnAdherenceAssessment" class="btn btn-default" OnClientClick="return false;">Save</button>
+                                            <button type="button" id="btnAdherenceAssessment" class="btn btn-default" onclientclick="return false;">Save</button>
                                             <button type="button" id="btnAdherenceAssessmentCancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -1229,13 +1298,13 @@
                         </div>
                     </div>
                 </div>
-                
-                                            </div>
-                        </div>
-                    </div>
+
+            </div>
+        </div>
+    </div>
 
 
-                </div>
+</div>
 
 <script type="text/javascript">
     var genderId = <%=genderID%>;
@@ -1324,8 +1393,8 @@
           
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
-            var male = "Male";
-       <%--     if (gender == "Male") {
+        var male = "Male";
+        <%--     if (gender == "Male") {
                 
             $("#lmp").val("");
             $("#examinationPregnancyStatus").val("");
@@ -1352,8 +1421,8 @@
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
             }--%>
-            //.gender validation
-            //pregnancy validations
+        //.gender validation
+        //pregnancy validations
        
         <%--var pregnant = "Pregnant";
 
@@ -1606,6 +1675,24 @@
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //Save patient IPT client workup
+        $("#btnSaveIptWorkup").click(function() {
+            addPatientIptWorkup();
+            $('#IptClientWorkupModal').modal('hide');
+        });
+
+        //Save patient IPT Details
+        $("#btnSaveIptDetails").click(function() {
+            addIpt();
+            $('#IptDetailsModal').modal('hide');
+        });
+
+        //Save patient IPT Outcome
+        $("#btnSaveIptOutcome").click(function() {
+            addPatientIptOutcome();
+            $('#IptOutcomeModal').modal('hide');
+        });
+
         //$('#myWizard').wizard();
         $("#myWizard")
                 .on("actionclicked.fu.wizard", function (evt, data) {
@@ -1629,11 +1716,6 @@
                                 addPatientIcf();
                                 if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
                                     addPatientIcfAction();
-                                }
-                                if (($("#sputum").val() === 'False')&&($("#chest").val() === 'False')&&($("#antiTb").val() === 'False')&&($("#contactsInvitation").val() === 'False')&&($("#iptEvaluation").val() === 'False')) {
-                                    addPatientIptWorkup();
-                                    addIpt();
-                                    addPatientIptOutcome();
                                 }
                             }
                             savePatientEncounterPresentingComplaint();
@@ -1688,19 +1770,19 @@
 
                         });
 
-            function savePatientEncounterPresentingComplaint() {
-                var visitDate = $("#<%=VisitDate.ClientID%>").val();
-                //var visitScheduled = $('input[name="Scheduled"]:checked').val();
-                var visitScheduled = $("input[name$=Scheduled]:checked").val();
-                var ANCProfile = $("input[name$=ANC]:checked").val();      
-                if (ANCProfile == undefined)
-                {
-                    ANCProfile = "99";
-                }
-                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-                var complaints = $("#<%=complaints.ClientID%>").val();
-                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+        function savePatientEncounterPresentingComplaint() {
+            var visitDate = $("#<%=VisitDate.ClientID%>").val();
+            //var visitScheduled = $('input[name="Scheduled"]:checked').val();
+            var visitScheduled = $("input[name$=Scheduled]:checked").val();
+            var ANCProfile = $("input[name$=ANC]:checked").val();      
+            if (ANCProfile == undefined)
+            {
+                ANCProfile = "99";
+            }
+            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+            var complaints = $("#<%=complaints.ClientID%>").val();
+            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+            var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
                 <%--var LMP = $("#<%=lmp.ClientID%>").val();
                 var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
@@ -1728,13 +1810,13 @@
             catch (ex) {  }
 
             
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
                             
                     console.log(response.d);
                     if (response.d > 0)
@@ -1990,23 +2072,23 @@
 
         function addPatientIptOutcome() {
             var iptEvent = $("#iptEvent").val();
-                    var reasonForDiscontinuation = $("#discontinuation").val();
-                    var patientId = <%=PatientId%>;
-                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Patient IPT outcome saved successfully");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Patient IPT outcome not saved");
-                        }
-                    });
+            var reasonForDiscontinuation = $("#discontinuation").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT outcome saved successfully");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT outcome not saved");
                 }
+            });
+        }
 
         function getCheckBoxListItemsChecked(elementId) {
             var elementRef = document.getElementById(elementId);
@@ -2030,75 +2112,75 @@
             return checkedValues;
         }
 
-            $("#btnAdherenceAssessment").click(function() {
+        $("#btnAdherenceAssessment").click(function() {
 
-                var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
-                var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
-                var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
-                var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+            var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
+            var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
+            var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
+            var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
 
-                $('.errorBlock1').hide();
-                $('.errorBlock2').hide();
-                $('.errorBlock3').hide();
-                $('.errorBlock4').hide();
+            $('.errorBlock1').hide();
+            $('.errorBlock2').hide();
+            $('.errorBlock3').hide();
+            $('.errorBlock4').hide();
 
-                if (isNaN(question1)) {
-                    $('.errorBlock1').show();
+            if (isNaN(question1)) {
+                $('.errorBlock1').show();
+                return false;
+            }
+
+            if (isNaN(question2)) {
+                $('.errorBlock2').show();
+                return false;
+            }
+
+            if (isNaN(question3)) {
+                $('.errorBlock3').show();
+                return false;
+            }
+
+            if (isNaN(question4)) {
+                $('.errorBlock4').show();
+                return false;
+            }
+
+            $('.errorBlock1').hide();
+            $('.errorBlock2').hide();
+            $('.errorBlock3').hide();
+            $('.errorBlock4').hide();
+
+            /*
+            console.log(question1);
+            console.log(question2);
+            console.log(question3);
+            console.log(question4);
+            */
+
+            var adherenceScore = question1 + question2 + question3 + question4;
+
+            //console.log(adherenceScore);
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
+                data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                    var returnValue = JSON.parse(response.d);
+                    toastr.success(returnValue[0], "Adherence Assessment");
+                    $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
+                    $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
+                    $('#adherenceAssessmentModal').modal('hide');
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
                     return false;
                 }
-
-                if (isNaN(question2)) {
-                    $('.errorBlock2').show();
-                    return false;
-                }
-
-                if (isNaN(question3)) {
-                    $('.errorBlock3').show();
-                    return false;
-                }
-
-                if (isNaN(question4)) {
-                    $('.errorBlock4').show();
-                    return false;
-                }
-
-                $('.errorBlock1').hide();
-                $('.errorBlock2').hide();
-                $('.errorBlock3').hide();
-                $('.errorBlock4').hide();
-
-                /*
-                console.log(question1);
-                console.log(question2);
-                console.log(question3);
-                console.log(question4);
-                */
-
-                var adherenceScore = question1 + question2 + question3 + question4;
-
-                //console.log(adherenceScore);
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                    data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response.d);
-                        var returnValue = JSON.parse(response.d);
-                        toastr.success(returnValue[0], "Adherence Assessment");
-                        $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
-                        $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
-                        $('#adherenceAssessmentModal').modal('hide');
-                    },
-                    error: function (xhr, errorType, exception) {
-                        var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                        return false;
-                    }
-                });
             });
+        });
 
         $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function() {
             calculateAdherenceScore();
