@@ -5474,7 +5474,7 @@ begin
 			a.FacilityID,
 			b.ModuleID,
 			'Green Card (2016)' As DisplayName,
-			0 CanEnroll,
+			1 CanEnroll,
 			'CCC' As ModuleName,
 			1 As ModuleFlag,
 			M.PharmacyFlag,
