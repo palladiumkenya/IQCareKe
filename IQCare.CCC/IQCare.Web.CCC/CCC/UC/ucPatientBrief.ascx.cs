@@ -63,6 +63,7 @@ namespace IQCare.Web.CCC.UC
                     lblGender.Text =_lookupManager.GetLookupNameFromId(x.Sex);
                     Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 }
+                lblPatientType.Text = _lookupManager.GetLookupNameFromId(x.PatientType).ToUpper();
 
                 lblDOB.Text = x.DateOfBirth.ToString("dd-MMM-yyyy");
 

@@ -3,7 +3,7 @@
 <div class="ui-user col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%;margin-top: 0%">
 					<!-- Image -->
 					<div class="col-md-1 col-xs-1 col-sm-1" style="padding-right: 0%">
-					    <div class="col-md-12 md-form"><i class="fa fa-user fa-4x pull-left blue" aria-hidden="true"></i></div> 
+					    <div class="col-md-12 md-form"><i class="fa fa-user fa-4x pull-left " aria-hidden="true"></i></div> 
                         <div class="col-md-12">
                              <h6 class="pull-left"><asp:Label runat="server" ID="lblGender" CssClass="text-info pull-left"></asp:Label></h6>
                         </div>
@@ -26,7 +26,9 @@
                          <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">
                               <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Enrollment Date : </h6>  <h6 class=""><asp:Label runat="server" ID="lblEnrollmentDate" CssClass="text-info"></asp:Label></h6></div>
                           </div>
-                        
+                          <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">
+                              <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Patient Type : </h6>  <h6 class=""><asp:Label runat="server" ID="lblPatientType" CssClass="text-info"></asp:Label></h6></div>
+                          </div>
                           <div class="col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%">
                               <div class="col-md-11 col-xs-11 col-sm-11"><h6 class="pull-left">Patient Status: </h6>  <h6 class=""><asp:Label runat="server" ID="lblPatientStatus" CssClass="text-info"></asp:Label></h6></div>
                           </div>
