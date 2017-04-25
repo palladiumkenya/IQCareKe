@@ -6,6 +6,7 @@ using System.Web.Services;
 using Application.Presentation;
 using Entities.CCC.Triage;
 using Interface.CCC;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -68,6 +69,23 @@ namespace IQCare.Web.CCC.WebService
                 }
             }
             return patientDetailsVitalses;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public PatientVital GetPatientVitalsByMasterVisitId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
+            return patientVitalsManager.GetPatientVitalsByMasterVisitId(patient, patientMasterVisitId);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public PatientVital GetByPatientId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            return patientVitalsManager.GetByPatientId(patient);
         }
     }
 }

@@ -222,7 +222,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="cough" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -244,7 +244,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="weightLoss" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -255,7 +255,7 @@
                                                 <div class="col-md-12">
                                                     <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="nightSweats" ClientIDMode="Static" onChange="IcfChange();">
                                                         <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                                                        <asp:ListItem Text="No" Value="False"  Selected="True"></asp:ListItem>
+                                                        <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
@@ -353,30 +353,91 @@
 
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" onclick="IptWorkUp();">IPT Client Workup</button>
-                                            </div>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptWorkUp" data-toggle="modal" data-target="#IptClientWorkupModal">IPT Client Workup</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" onclick="Ipt();">IPT</button>
-                                            </div>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIpt" data-toggle="modal" data-target="#IptDetailsModal">IPT</button>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="col-md-12">
-                                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" onclick="IptOutcome();">AddIPT Outcome</button>
+                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddIptOutcome" data-toggle="modal" data-target="#IptOutcomeModal">IPT Outcome</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="IptClientWorkupModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy Client Work Up</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:IptClientWorkup ID="IptCw" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptWorkup" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptWorkup" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptClientWorkupForm">
-                                        <uc:IptClientWorkup ID="IptCw" runat="server" />
+
+                                    <div id="IptDetailsModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy(IPT)</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:Ipt ID="IptDetails" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptDetails" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptDetails" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptDetailsForm">
-                                        <uc:Ipt ID="IptDetails" runat="server" />
+
+                                    <div id="IptOutcomeModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h4 class="modal-title">Isoniazid Preventive Therapy Outcome</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <uc:IptOutcome ID="IptOutcomeForm" runat="server" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnSaveIptOutcome" class="btn btn-default" onclientclick="return false;">Save</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" id="btnCancelIptOutcome" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12 form-group" clientidmode="Static" id="IptOutcomeDetailsForm">
-                                        <uc:IptOutcome ID="IptOutcomeForm" runat="server" />
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -498,296 +559,6 @@
                         </div>
                         <%--col-md-11--%>
                     </div>
-
-
-                                    <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <h1 class=" control-label pull-left"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Presenting Complaints</h1>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <hr />
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-4">
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">Female LMP</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="datepicker fuelux" id="FemaleLMP">
-                                                            <div class="input-group">
-                                                                <input class="form-control input-sm" id="lmp" type="text" runat="server" clientidmode="Static" />
-                                                                <div class="input-group-btn">
-                                                                    <button id="btnFemaleLMP" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                        <span class="sr-only">Toggle Calendar</span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                        <div class="datepicker-calendar">
-                                                                            <div class="datepicker-calendar-header">
-                                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                                <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                    <span class="month">
-                                                                                        <span data-month="0">January</span>
-                                                                                        <span data-month="1">February</span>
-                                                                                        <span data-month="2">March</span>
-                                                                                        <span data-month="3">April</span>
-                                                                                        <span data-month="4">May</span>
-                                                                                        <span data-month="5">June</span>
-                                                                                        <span data-month="6">July</span>
-                                                                                        <span data-month="7">August</span>
-                                                                                        <span data-month="8">September</span>
-                                                                                        <span data-month="9">October</span>
-                                                                                        <span data-month="10">November</span>
-                                                                                        <span data-month="11" class="current">December</span>
-                                                                                    </span><span class="year">2014</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <table class="datepicker-calendar-days">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Su</th>
-                                                                                        <th>Mo</th>
-                                                                                        <th>Tu</th>
-                                                                                        <th>We</th>
-                                                                                        <th>Th</th>
-                                                                                        <th>Fr</th>
-                                                                                        <th>Sa</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody></tbody>
-                                                                            </table>
-                                                                            <div class="datepicker-calendar-footer">
-                                                                                <button type="button" class="datepicker-today">Today</button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels" aria-hidden="true">
-                                                                            <div class="datepicker-wheels-month">
-                                                                                <h2 class="header">Month</h2>
-                                                                                <ul>
-                                                                                    <li data-month="0">
-                                                                                        <button type="button">Jan</button></li>
-                                                                                    <li data-month="1">
-                                                                                        <button type="button">Feb</button></li>
-                                                                                    <li data-month="2">
-                                                                                        <button type="button">Mar</button></li>
-                                                                                    <li data-month="3">
-                                                                                        <button type="button">Apr</button></li>
-                                                                                    <li data-month="4">
-                                                                                        <button type="button">May</button></li>
-                                                                                    <li data-month="5">
-                                                                                        <button type="button">Jun</button></li>
-                                                                                    <li data-month="6">
-                                                                                        <button type="button">Jul</button></li>
-                                                                                    <li data-month="7">
-                                                                                        <button type="button">Aug</button></li>
-                                                                                    <li data-month="8">
-                                                                                        <button type="button">Sep</button></li>
-                                                                                    <li data-month="9">
-                                                                                        <button type="button">Oct</button></li>
-                                                                                    <li data-month="10">
-                                                                                        <button type="button">Nov</button></li>
-                                                                                    <li data-month="11">
-                                                                                        <button type="button">Dec</button></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-year">
-                                                                                <h2 class="header">Year</h2>
-                                                                                <ul></ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-footer clearfix">
-                                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">Pregnancy Status</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="examinationPregnancyStatus" CssClass="form-control input-sm" ClientIDMode="Static" onchange="EnableDisableEDD();" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">EDD</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="datepicker fuelux" id="EDCD">
-                                                            <div class="input-group">
-                                                                <input class="form-control input-sm" id="ExpectedDateOfChildBirth" type="text" runat="server" clientidmode="Static" />
-                                                                <div class="input-group-btn">
-                                                                    <button id="btnEDD" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                        <span class="sr-only">Toggle Calendar</span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                        <div class="datepicker-calendar">
-                                                                            <div class="datepicker-calendar-header">
-                                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                                <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                    <span class="month">
-                                                                                        <span data-month="0">January</span>
-                                                                                        <span data-month="1">February</span>
-                                                                                        <span data-month="2">March</span>
-                                                                                        <span data-month="3">April</span>
-                                                                                        <span data-month="4">May</span>
-                                                                                        <span data-month="5">June</span>
-                                                                                        <span data-month="6">July</span>
-                                                                                        <span data-month="7">August</span>
-                                                                                        <span data-month="8">September</span>
-                                                                                        <span data-month="9">October</span>
-                                                                                        <span data-month="10">November</span>
-                                                                                        <span data-month="11" class="current">December</span>
-                                                                                    </span><span class="year">2014</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <table class="datepicker-calendar-days">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Su</th>
-                                                                                        <th>Mo</th>
-                                                                                        <th>Tu</th>
-                                                                                        <th>We</th>
-                                                                                        <th>Th</th>
-                                                                                        <th>Fr</th>
-                                                                                        <th>Sa</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody></tbody>
-                                                                            </table>
-                                                                            <div class="datepicker-calendar-footer">
-                                                                                <button type="button" class="datepicker-today">Today</button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="datepicker-wheels" aria-hidden="true">
-                                                                            <div class="datepicker-wheels-month">
-                                                                                <h2 class="header">Month</h2>
-                                                                                <ul>
-                                                                                    <li data-month="0">
-                                                                                        <button type="button">Jan</button></li>
-                                                                                    <li data-month="1">
-                                                                                        <button type="button">Feb</button></li>
-                                                                                    <li data-month="2">
-                                                                                        <button type="button">Mar</button></li>
-                                                                                    <li data-month="3">
-                                                                                        <button type="button">Apr</button></li>
-                                                                                    <li data-month="4">
-                                                                                        <button type="button">May</button></li>
-                                                                                    <li data-month="5">
-                                                                                        <button type="button">Jun</button></li>
-                                                                                    <li data-month="6">
-                                                                                        <button type="button">Jul</button></li>
-                                                                                    <li data-month="7">
-                                                                                        <button type="button">Aug</button></li>
-                                                                                    <li data-month="8">
-                                                                                        <button type="button">Sep</button></li>
-                                                                                    <li data-month="9">
-                                                                                        <button type="button">Oct</button></li>
-                                                                                    <li data-month="10">
-                                                                                        <button type="button">Nov</button></li>
-                                                                                    <li data-month="11">
-                                                                                        <button type="button">Dec</button></li>
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-year">
-                                                                                <h2 class="header">Year</h2>
-                                                                                <ul></ul>
-                                                                            </div>
-                                                                            <div class="datepicker-wheels-footer clearfix">
-                                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">ANC/PNC Profile</label>
-                                                    </div>
-                                                    <div class="col-md-12 pull-left">
-                                                        <label class="pull-left" style="padding-right: 10px">
-                                                            <input id="ancYes" type="radio" name="ANC" value="1" clientidmode="Static" runat="server" />Yes
-                                                        </label>
-                                                        <label class="pull-left" style="padding-right: 10px">
-                                                            <input id="ancNo" type="radio" name="ANC" value="0" clientidmode="Static" runat="server" />No
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">On Family Planning</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="onFP" ClientIDMode="Static" CssClass="form-control input-sm" onChange="showHideFPControls();" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group" id="divOnFP">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">FP Method</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:ListBox runat="server" ID="fpMethod" ClientIDMode="Static" CssClass="form-control input-sm" SelectionMode="Multiple" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group" id="divNoFP" style="display: none">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">Reason not on FP</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="ddlNoFP" ClientIDMode="Static" CssClass="form-control input-sm" />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">CaCX Screeing</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="cacxscreening" ClientIDMode="Static" CssClass="form-control input-sm" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">STI Screeing</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="stiScreening" ClientIDMode="Static" CssClass="form-control input-sm" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 form-group">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label  pull-left">STI Partner Notification</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%-- .panel-body--%>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
                 <%-- .data-step-1--%>
@@ -1280,7 +1051,7 @@
                         <div class="col-md-12">
 
                             <div class="col-md-4">
-                               <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
+                                <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
                                 <div class="col-md-12">
                                     <hr />
                                 </div>
@@ -1348,7 +1119,7 @@
                         <div class="col-md-12">
                             <hr />
                         </div>
-                        
+
                         <div class="col-md-12">
                             <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
                         </div>
@@ -1365,7 +1136,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                                 
+
                                             <div class="col-md-12 form-group">
                                                 <div class="col-md-9">Questions</div>
                                                 <div class="col-md-3">
@@ -1373,11 +1144,13 @@
                                                     <div class="col-md-6">No</div>
                                                 </div>
                                             </div>
-                                                 
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Do you ever forget to take your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Do you ever forget to take your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                     
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question1_Yes" runat="server" GroupName="Question1" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1385,15 +1158,17 @@
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question1_No" runat="server" GroupName="Question1" ClientIDMode="Static" Value="0" />
                                                     </div>
-                                                    
-                                                    <div class="errorBlock1" style="color: red;"> Please select one option </div>
+
+                                                    <div class="errorBlock1" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Are you careless at times about taking your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Are you careless at times about taking your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                     
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question2_Yes" runat="server" GroupName="Question2" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1401,16 +1176,18 @@
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question2_No" runat="server" GroupName="Question2" ClientIDMode="Static" Value="0" />
                                                     </div>
-                                                    
-                                                    <div class="errorBlock2" style="color: red;"> Please select one option </div>
+
+                                                    <div class="errorBlock2" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
-                                                 
+
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">Sometimes if you feel worse when you take the medicine, do you stop taking it?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                      
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question3_Yes" runat="server" GroupName="Question3" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1419,15 +1196,17 @@
                                                         <asp:RadioButton ID="Question3_No" runat="server" GroupName="Question3" ClientIDMode="Static" Value="0" />
                                                     </div>
 
-                                                    <div class="errorBlock3" style="color: red;"> Please select one option </div>
+                                                    <div class="errorBlock3" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                                 
-                                                 
+
+
                                             <div class="col-md-12 form-group">
-                                                <div class="col-md-9"><label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label></div>
+                                                <div class="col-md-9">
+                                                    <label class="control-label pull-left">When you feel better do you sometimes stop taking your medicine?</label>
+                                                </div>
                                                 <div class="col-md-3">
-                                                                   
+
                                                     <div class="col-md-6">
                                                         <asp:RadioButton ID="Question4_Yes" runat="server" GroupName="Question4" ClientIDMode="Static" Value="1" />
                                                     </div>
@@ -1436,10 +1215,10 @@
                                                         <asp:RadioButton ID="Question4_No" runat="server" GroupName="Question4" ClientIDMode="Static" Value="0" />
                                                     </div>
 
-                                                    <div class="errorBlock4" style="color: red;"> Please select one option </div>
+                                                    <div class="errorBlock4" style="color: red;">Please select one option </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-12 form-group" style="background-color: lightblue;">
                                                 <div class="col-md-9 pull-left">Total Score</div>
                                                 <div class="col-md-3 pull-left">
@@ -1448,13 +1227,13 @@
                                                 </div>
                                             </div>
 
-                                        </div>                                        
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-md-12">
-                                            <button type="button" id="btnAdherenceAssessment" class="btn btn-default" OnClientClick="return false;">Save</button>
+                                            <button type="button" id="btnAdherenceAssessment" class="btn btn-default" onclientclick="return false;">Save</button>
                                             <button type="button" id="btnAdherenceAssessmentCancel" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -1519,6 +1298,13 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 <script type="text/javascript">
     var genderId = <%=genderID%>;
@@ -1607,8 +1393,8 @@
           
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
-            var male = "Male";
-       <%--     if (gender == "Male") {
+        var male = "Male";
+        <%--     if (gender == "Male") {
                 
             $("#lmp").val("");
             $("#examinationPregnancyStatus").val("");
@@ -1635,10 +1421,10 @@
                 $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
 
             }--%>
-            //.gender validation
-            //pregnancy validations
+        //.gender validation
+        //pregnancy validations
        
-        var pregnant = "Pregnant";
+        <%--var pregnant = "Pregnant";
 
         var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
 
@@ -1651,7 +1437,7 @@
             $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
               
 
-        }
+        }--%>
 
         //.pregnancy validation
         var advEventsTable = $('#dtlAdverseEvents').DataTable({
@@ -1889,6 +1675,24 @@
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //Save patient IPT client workup
+        $("#btnSaveIptWorkup").click(function() {
+            addPatientIptWorkup();
+            $('#IptClientWorkupModal').modal('hide');
+        });
+
+        //Save patient IPT Details
+        $("#btnSaveIptDetails").click(function() {
+            addIpt();
+            $('#IptDetailsModal').modal('hide');
+        });
+
+        //Save patient IPT Outcome
+        $("#btnSaveIptOutcome").click(function() {
+            addPatientIptOutcome();
+            $('#IptOutcomeModal').modal('hide');
+        });
+
         //$('#myWizard').wizard();
         $("#myWizard")
                 .on("actionclicked.fu.wizard", function (evt, data) {
@@ -1912,11 +1716,6 @@
                                 addPatientIcf();
                                 if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
                                     addPatientIcfAction();
-                                }
-                                if (($("#sputum").val() === 'False')&&($("#chest").val() === 'False')&&($("#antiTb").val() === 'False')&&($("#contactsInvitation").val() === 'False')&&($("#iptEvaluation").val() === 'False')) {
-                                    addPatientIptWorkup();
-                                    addIpt();
-                                    addPatientIptOutcome();
                                 }
                             }
                             savePatientEncounterPresentingComplaint();
@@ -1971,19 +1770,19 @@
 
                         });
 
-            function savePatientEncounterPresentingComplaint() {
-                var visitDate = $("#<%=VisitDate.ClientID%>").val();
-                //var visitScheduled = $('input[name="Scheduled"]:checked').val();
-                var visitScheduled = $("input[name$=Scheduled]:checked").val();
-                var ANCProfile = $("input[name$=ANC]:checked").val();      
-                if (ANCProfile == undefined)
-                {
-                    ANCProfile = "99";
-                }
-                var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-                var complaints = $("#<%=complaints.ClientID%>").val();
-                var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
-                var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
+        function savePatientEncounterPresentingComplaint() {
+            var visitDate = $("#<%=VisitDate.ClientID%>").val();
+            //var visitScheduled = $('input[name="Scheduled"]:checked').val();
+            var visitScheduled = $("input[name$=Scheduled]:checked").val();
+            var ANCProfile = $("input[name$=ANC]:checked").val();      
+            if (ANCProfile == undefined)
+            {
+                ANCProfile = "99";
+            }
+            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+            var complaints = $("#<%=complaints.ClientID%>").val();
+            var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
+            var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
                 <%--var LMP = $("#<%=lmp.ClientID%>").val();
                 var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
@@ -2011,13 +1810,13 @@
             catch (ex) {  }
 
             
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                        data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
                             
                     console.log(response.d);
                     if (response.d > 0)
@@ -2273,23 +2072,23 @@
 
         function addPatientIptOutcome() {
             var iptEvent = $("#iptEvent").val();
-                    var reasonForDiscontinuation = $("#discontinuation").val();
-                    var patientId = <%=PatientId%>;
-                    var patientMasterVisitId = <%=PatientMasterVisitId%>;
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Patient IPT outcome saved successfully");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Patient IPT outcome not saved");
-                        }
-                    });
+            var reasonForDiscontinuation = $("#discontinuation").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation +  "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient IPT outcome saved successfully");
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient IPT outcome not saved");
                 }
+            });
+        }
 
         function getCheckBoxListItemsChecked(elementId) {
             var elementRef = document.getElementById(elementId);
@@ -2313,75 +2112,75 @@
             return checkedValues;
         }
 
-            $("#btnAdherenceAssessment").click(function() {
+        $("#btnAdherenceAssessment").click(function() {
 
-                var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
-                var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
-                var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
-                var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
+            var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
+            var question2 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question2']:checked").val());
+            var question3 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question3']:checked").val());
+            var question4 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question4']:checked").val());
 
-                $('.errorBlock1').hide();
-                $('.errorBlock2').hide();
-                $('.errorBlock3').hide();
-                $('.errorBlock4').hide();
+            $('.errorBlock1').hide();
+            $('.errorBlock2').hide();
+            $('.errorBlock3').hide();
+            $('.errorBlock4').hide();
 
-                if (isNaN(question1)) {
-                    $('.errorBlock1').show();
+            if (isNaN(question1)) {
+                $('.errorBlock1').show();
+                return false;
+            }
+
+            if (isNaN(question2)) {
+                $('.errorBlock2').show();
+                return false;
+            }
+
+            if (isNaN(question3)) {
+                $('.errorBlock3').show();
+                return false;
+            }
+
+            if (isNaN(question4)) {
+                $('.errorBlock4').show();
+                return false;
+            }
+
+            $('.errorBlock1').hide();
+            $('.errorBlock2').hide();
+            $('.errorBlock3').hide();
+            $('.errorBlock4').hide();
+
+            /*
+            console.log(question1);
+            console.log(question2);
+            console.log(question3);
+            console.log(question4);
+            */
+
+            var adherenceScore = question1 + question2 + question3 + question4;
+
+            //console.log(adherenceScore);
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
+                data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                    var returnValue = JSON.parse(response.d);
+                    toastr.success(returnValue[0], "Adherence Assessment");
+                    $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
+                    $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
+                    $('#adherenceAssessmentModal').modal('hide');
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
                     return false;
                 }
-
-                if (isNaN(question2)) {
-                    $('.errorBlock2').show();
-                    return false;
-                }
-
-                if (isNaN(question3)) {
-                    $('.errorBlock3').show();
-                    return false;
-                }
-
-                if (isNaN(question4)) {
-                    $('.errorBlock4').show();
-                    return false;
-                }
-
-                $('.errorBlock1').hide();
-                $('.errorBlock2').hide();
-                $('.errorBlock3').hide();
-                $('.errorBlock4').hide();
-
-                /*
-                console.log(question1);
-                console.log(question2);
-                console.log(question3);
-                console.log(question4);
-                */
-
-                var adherenceScore = question1 + question2 + question3 + question4;
-
-                //console.log(adherenceScore);
-
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                    data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response.d);
-                        var returnValue = JSON.parse(response.d);
-                        toastr.success(returnValue[0], "Adherence Assessment");
-                        $("#<%=arvAdherance.ClientID%>").val(returnValue[1]);
-                        $("#<%=ctxAdherance.ClientID%>").val(returnValue[1]);
-                        $('#adherenceAssessmentModal').modal('hide');
-                    },
-                    error: function (xhr, errorType, exception) {
-                        var jsonError = jQuery.parseJSON(xhr.responseText);
-                        toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                        return false;
-                    }
-                });
             });
+        });
 
         $('input[type=radio][name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1"]').change(function() {
             calculateAdherenceScore();
@@ -2455,9 +2254,9 @@
 
     function onIptChange() {
         if ($("#onIpt").val() === 'False') {
-            $("#btnAddIptWorkUp").prop("disabled",true);
-        } else {
             $("#btnAddIptWorkUp").prop("disabled",false);
+        } else {
+            $("#btnAddIptWorkUp").prop("disabled",true);
         }
             
     }
