@@ -278,7 +278,7 @@ namespace IQCare.Web.UILogic
                     {
                         MenuName = s.DisplayName,
                         MenuId = s.Id,
-                        ClickAction = s.Clinical ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
+                        ClickAction = !s.ModuleFlag ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
                         ServiceAreaName = s.Name
                     });
                 }
@@ -348,6 +348,7 @@ namespace IQCare.Web.UILogic
                                             Name = Convert.ToString(row["ModuleName"]),
                                             DisplayName = Convert.ToString(row["DisplayName"]),
                                             EnrolFlag = Convert.ToBoolean(row["CanEnroll"]),
+                                            ModuleFlag = Convert.ToBoolean(row["ModuleFlag"]),
                                             Clinical = Convert.ToBoolean(row["CanEnroll"]),
                                             PublishFlag = (Convert.ToString(row["ModuleName"]) == "PM/SCM") ? false : true,
                                             DeleteFlag = false,

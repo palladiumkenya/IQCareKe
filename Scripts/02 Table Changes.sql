@@ -355,7 +355,13 @@ End
 Go
 Update mst_Module Set CanEnroll = Case When ModuleName In ('PM/SCM','Laboratory','Pharmacy','Records')  Then 0 Else 1 End Where CanEnroll Is Null
 Go
-
+If Not Exists (Select * From sys.columns Where Name = N'ModuleFlag' And Object_ID = Object_id(N'mst_module'))    
+Begin
+  Alter table dbo.mst_module Add ModuleFlag bit default 0 Not Null  
+ End
+ Go
+Update mst_Module Set ModuleFlag = Case When ModuleName In ('PM/SCM','Laboratory','Pharmacy','Records')  Then 1 Else 0 End 
+Go
 If Not Exists (Select * From sys.columns Where Name = N'DisplayName' And Object_ID = Object_id(N'mst_module'))    
 Begin
   Alter table dbo.mst_module Add DisplayName varchar(50) Null
