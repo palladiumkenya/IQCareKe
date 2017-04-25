@@ -108,6 +108,7 @@
     <Compile Include="Lookup\LookupMaster.cs" />
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
+    <Compile Include="Lookup\LookupTestParameter.cs" />
     <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Lookup\PatientServiceEnrollmentLookup.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Visit\PatientLabTracker.cs" />
     <Compile Include="Visit\PatientEncounter.cs" />
     <Compile Include="Visit\PatientMasterVisit.cs" />
+    <Compile Include="Visit\PatientVisit.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

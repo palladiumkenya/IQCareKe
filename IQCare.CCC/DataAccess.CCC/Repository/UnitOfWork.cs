@@ -14,6 +14,7 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Repository.Patient;
 using DataAccess.CCC.Repository.visit;
+using DataAccess.CCC.Repository.Encounter;
 using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Interface.Tb;
@@ -53,6 +54,7 @@ namespace DataAccess.CCC.Repository
         private ILookupMasterRepository _lookupMasterRepository;
         private IPatientLookupRepository _patientLookupRepository;
         private ILookupLabs _lookupLabsRepository;
+        private ILookupParameter _lookupParameterRepository;
         private ILookupFacility _lookupFacilityRepository;
         private ILookupPreviousLabs _lookupPreviousLabsRepository;
         private IPersonLookUpRepository _personLookUpRepository;
@@ -64,9 +66,11 @@ namespace DataAccess.CCC.Repository
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
+        private IPatientVisitRepository _patientVisitRepository;
         private IPatientEncounterRepository _patientEncounterRepository;
         private IPatientLabTrackerRepository _patientLabTrackerRepository;
         private IPatientLabOrderRepository _patientLabOrderRepository;
+        private IPatientLabDetailsRepository _patientLabDetailsRepository;
         private IPatientLabResultsRepository _patientLabResultsRepository;
 
         /* Enrollment */
@@ -158,6 +162,10 @@ namespace DataAccess.CCC.Repository
         {
             get { return _lookupLabsRepository ?? (_lookupLabsRepository = new LookupLabsRepository((LookupContext)_context)); }
         }
+        public ILookupParameter LookupParameterRepository
+        {
+            get { return _lookupParameterRepository ?? (_lookupParameterRepository = new LookupParameterRepository((LookupContext)_context)); }
+        }
         public ILookupFacility LookupFacilityRepository
         {
             get { return _lookupFacilityRepository ?? (_lookupFacilityRepository = new LookupFacilityRepository((LookupContext)_context)); }
@@ -234,7 +242,13 @@ namespace DataAccess.CCC.Repository
                 return _patientMasterVisitRepository ?? (_patientMasterVisitRepository = new PatientMasterVisitRepository((GreencardContext)_context));
             }
         }
-
+        public IPatientVisitRepository PatientVisitRepository
+        {
+            get
+            {
+                return _patientVisitRepository ?? (_patientVisitRepository = new PatientVisitRepository((GreencardContext)_context));
+            }
+        }
         public IPatientEncounterRepository PatientEncounterRepository
         {
             get { return _patientEncounterRepository ?? (_patientEncounterRepository = new PatientEncounterRepository((GreencardContext)_context)); }
@@ -246,6 +260,10 @@ namespace DataAccess.CCC.Repository
         public IPatientLabOrderRepository PatientLabOrderRepository
         {
             get { return _patientLabOrderRepository ?? (_patientLabOrderRepository = new PatientLabOrderRepository((GreencardContext)_context)); }
+        }
+        public IPatientLabDetailsRepository PatientLabDetailsRepository
+        {
+            get { return _patientLabDetailsRepository ?? (_patientLabDetailsRepository = new PatientLabDetailsRepository((GreencardContext)_context)); }
         }
         public IPatientLabResultsRepository PatientLabResultsRepository
         {

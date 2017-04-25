@@ -30,7 +30,7 @@ namespace Entities.CCC.Encounter
         //public DateTime CreateDate { get; set; }
         //public int CreatedBy { get; set; }
         public DateTime StatusDate { get; set; }
-        public bool HasResult { get; set; }
+        [NotMapped]public bool HasResult { get; set; }
 
 
     }

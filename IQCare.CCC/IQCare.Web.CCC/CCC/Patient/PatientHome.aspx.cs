@@ -8,6 +8,7 @@ using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
 using Interface.CCC.Visit;
+using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -16,6 +17,7 @@ namespace IQCare.Web.CCC.Patient
         public int PatientMasterVisitId;
         public decimal march_height;
         protected int ptnPk=0;
+        protected int labTestId = 0;
         protected Decimal vlValue=0;
         protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
@@ -148,37 +150,42 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 // viral Load Alerts
-                PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
-                if (_patientlookup != null)
+                //PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
+                //if (_patientlookup != null)
+                //{
+                //    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
+                //}
+                PatientLabTracker _vltestId = _lookupData.GetPatientLabTestId(PatientId);
+                if (_vltestId != null)
                 {
-                    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
+                    labTestId = _vltestId.LabTestId;
                 }
-                if (ptnPk > 0) {
-                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(ptnPk);
+                if (labTestId > 0) {
+                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(labTestId);
                         if (LabOrder != null)
                         {
                             vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
-                            switch (LabOrder.OrderStatus)
+                            switch (LabOrder.Results)
                             {
                                 case "Pending":
-                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.OrderStatus + "/ Date: " + LabOrder.OrderDate.ToString("DD-MMM-YYY")+"</span>";
+                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + LabOrder.SampleDate.ToString("DD-MMM-YYY")+"</span>";
                                     lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
                                     break;
                                 case "Complete":
                                     if (vlValue > 1000)
                                     {
                                     lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
-                                        lblvlDueDate.Text = LabOrder.OrderDate.AddMonths(3).ToString("DD-MMM-YYYY");
+                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(3).ToString("DD-MMM-YYYY");
                                     }
                                     else
                                     {
-                                        lblvlDueDate.Text = LabOrder.OrderDate.AddMonths(6).ToString("DD-MMM-YYYY");
+                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(6).ToString("DD-MMM-YYYY");
                                     }
                                     break;
                                 default:
                                     break;
                             }
-                            lblVL.Text = LabOrder.LabTestId.ToString()+" Date: "+ LabOrder.OrderDate.ToString("DD-MMM-YYY");
+                            lblVL.Text = LabOrder.LabTestId.ToString()+" Date: "+ LabOrder.SampleDate.ToString("DD-MMM-YYY");
 
                         }else
                         {

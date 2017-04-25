@@ -391,8 +391,9 @@
         </div>
     </div>--%>
     <script type="text/javascript">
+         var facilityId = '<%=AppLocationId%>';
     
-        $(document).ready(function () {
+        $(document).ready(function () {           
 
             var ptncame=0;
             $('#AppointmentDate').datepicker({
@@ -402,7 +403,7 @@
             });
 
             AppointmentStatistics();
-        });
+      
 
         $("#Date").change(function () {
             AppointmentStatistics();
@@ -460,31 +461,7 @@
             var pending=0;
             var complete=0;
             var percentage=0;       
-   
-  
-<%--<div class="col-md-3">  
- <div class="row">             
-            <div class="col-md-12">
-                <div class="col-md-7"><label class="control-label pull-left">Pending VL Tests</label></div>
-                <div class="col-md-2">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="pendingVL" CssClass="control-label text-success pull-left"></asp:Label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-7"><label class="control-label pull-left">Complete VL Tests</label></div>
-                <div class="col-md-2">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="completeVL" CssClass="control-label text-success pull-left"></asp:Label>
-                </div>
-            </div>
-        </div>
-
-
- </div>--%>
-  //<!-- ajax begin -->
-  //  <script type="text/javascript">
+ 
       
         $(document).ready(function () {  
            
@@ -493,6 +470,7 @@
 
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLPendingCount',
+                data: "{'facilityId':'" + facilityId + "'}",
                 type: 'POST',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
@@ -508,6 +486,7 @@
 
             $.ajax({
                 url: 'WebService/LabService.asmx/GetFacilityVLCompleteCount',
+                data: "{'facilityId':'" + facilityId + "'}",
                 type: 'POST',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
@@ -524,9 +503,10 @@
 
             });
 
+           });
         });
 
-        });
+       
     </script>
   
 </asp:Content>
