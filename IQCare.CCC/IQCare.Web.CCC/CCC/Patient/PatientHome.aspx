@@ -61,9 +61,9 @@
         <ul class="nav nav-tabs">
 
             <li class="active"><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
-            <li class="disabled"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
-            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-            <li class="disabled"><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>          
+            <li><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
+            <li><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
+            <li><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>          
 
         </ul>
     
