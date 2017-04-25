@@ -402,11 +402,11 @@
             });
 
             AppointmentStatistics();
-        
+        });
 
-            $("#Date").change(function () {
-                AppointmentStatistics();
-            });
+        $("#Date").change(function () {
+            AppointmentStatistics();
+        });
 
             $('#AppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
                 AppointmentStatistics();
