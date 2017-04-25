@@ -15,21 +15,21 @@
 
             <div class="col-md-12 col-xs-12 col-sm-12 form-group">
                
-                <div class="col-md-3 col-xs-12 col-sm-12">
+                <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger">*</small> Weight(kgs)</span>
                             <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0"></asp:TextBox>
                         </div>
                  </div>
 
-                <div class="col-md-3 col-xs-12 col-sm-12">
+                <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger">*</small> Height(cm)</span>
                             <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10"></asp:TextBox>
                         </div>
                     </div>
 
-                <div class="col-md-4 col-xs-12 col-sm-12">
+                <div id="divBMI" class="col-md-4 col-xs-12 col-sm-12">
                         <%--<asp:Label runat="server"  ID ="bmi" Value = "" CssClass="control-label text-warning pull-left"></asp:Label>--%>
                         <div class="input-group">
                             <span class="input-group-addon">BMI (kg/m2)</span>
@@ -37,33 +37,56 @@
                         </div>
                  </div>
                 
-                <div class="col-md-2 col-xs-12 col-sm-12">
+                
+  
+            </div> 
+
+            <div id="peadsZScores" class="col-md-12 col-xs-12 col-sm-12 form-group">
+                <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> BMIz</span>
+                            <asp:TextBox runat="server" ID="txtBMIz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+
+                <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Age</span>
+                            <asp:TextBox runat="server" ID="txtWAz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+
+                <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> Wieght for Height</span>
+                            <asp:TextBox runat="server" ID="txtWHz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+            </div>
+            
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
                              <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
                         </div>
                     </div>
-  
-            </div> 
-            
-            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
 
-                 <div class="col-md-3 col-xs-3 col-sm-3">
+                 <div class="col-md-4 col-xs-3 col-sm-3">
                          <div class="input-group">
                               <span class="input-group-addon"><small class="text-danger"></small>Head Circumference</span> 
                              <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
                          </div>
                      <p class="help-block pull-left"><strong>Normal 46.3528–52.44764 cm </strong></p>
                     </div>
-                 <div class="col-md-3 col-xs-12 col-sm-12">
+                 <div class="col-md-4 col-xs-12 col-sm-12">
                     <div class="input-group">
                         <span class="input-group-addon">Temperature (°C)</span>
                         <asp:TextBox runat="server" ID="Tempreture" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="50" data-parsley-range="[25, 50]" data-parsley-range-message="Tempreture is out of reasonable range"></asp:TextBox>
                     </div>
                     <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
                 </div>   
-                 <div class="col-md-3 col-xs-12 col-sm-12"></div>
-                <div class="col-md-3 col-xs-12 col-sm-12"></div>
+                 
 
             </div> <!-- .col-md-12 col-xs-12 col-sm-12 -->
         </div> <!-- .col-md-4 col-xs-4 col-sm-4-->
@@ -147,6 +170,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var age = "<%=patientAge%>";
+
+        if(age > 15)
+        {
+            document.getElementById('divBMI').style.display = 'block';
+            document.getElementById('peadsZScores').style.display = 'none';
+        }
+        else{
+            document.getElementById('divBMI').style.display = 'none';
+            document.getElementById('peadsZScores').style.display = 'block';
+        }
+
+
         $("#btnSaveTriage").click(function() {
             if ($('#vitalsform').parsley().validate()) {
                 addPatientVitals();
@@ -166,12 +202,14 @@
         var weight = '';
         if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
         document.getElementById("bmivalue").value = bmi+weight;
+        calcZScore();
     });
     $("#weights").change(function () {
         var bmi = calcBMI();
         var weight = '';
         if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
         document.getElementById("bmivalue").value = bmi+weight;
+        calcZScore();
     });
     function calcBMI()
     {
@@ -235,5 +273,27 @@
         $("#RespiratoryRate").val("");
         $("#HeartRate").val("");
         $("#bosaturation").val("");
+    }
+
+    function calcZScore()
+    {
+        var weight = document.getElementById('weights').value;
+        var height = document.getElementById('Heights').value;
+        $.ajax({
+            url: '../WebService/PatientEncounterService.asmx/getZScoreValues',
+            type: 'POST',
+            dataType: 'json',
+            data: "{'height':'" + height + "','weight':'" + weight + "'}",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var serverData = data.d;
+                for (var i = 0; i < serverData.length; i++) {
+                    $("#txtWAz").val(serverData[i][0]);
+                    $("#txtWHz").val(serverData[i][1]);
+                    $("#txtBMIz").val(serverData[i][2]);
+                       
+                }
+            }
+        });
     }
 </script>
