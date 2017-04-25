@@ -152,10 +152,12 @@ namespace IQCare.Web.Billing
         {
             base.OnInit(e);
             CurrentSession session = CurrentSession.Current;
+            string xc = base.Session["PatientId"].ToString();
             Master.PageScriptManager.AsyncPostBackError += new EventHandler<AsyncPostBackErrorEventArgs>(PageScriptManager_AsyncPostBackError);
             this.ReverseTransaction.ErrorOccurred += new CommandEventHandler(ReverseTransaction_ErrorOccurred);
             this.ReverseTransaction.IsApprovalMode = false;
             this.ReverseTransaction.NotifyCommand += new CommandEventHandler(ReverseTransaction_NotifyCommand);
+            session.SetCurrentPatient(Convert.ToInt16(base.Session["PatientId"].ToString()));
             this.ReverseTransaction.PatientId = session.CurrentPatient.Id;
             this.ReverseTransaction.LocationId = session.Facility.Id;
 

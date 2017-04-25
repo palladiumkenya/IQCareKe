@@ -204,6 +204,8 @@ namespace IQCare.Web.Laboratory
 
                 Session["PatientInformation"] = theDS.Tables[0];
             }
+        
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
             this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
             if (this.thisLabOrder.ModuleId <= 0)
             {
@@ -531,8 +533,8 @@ namespace IQCare.Web.Laboratory
                 LabOrderTest rowView = (LabOrderTest)e.Item.DataItem;
                 string labOrderId = rowView.LabOrderId.ToString();
                 string labTestId = rowView.TestId.ToString();
-                int labOrdertestId = rowView.TestId;
-                //pw. edit
+
+                int labOrdertestId = rowView.Id;
                 Label labReportedbyDate = e.Item.FindControl("labReportedbyDate") as Label;
               //  Label labelReportedbyName = e.Item.FindControl("labelReportedbyName") as Label;
                 Button buttonResult = e.Item.FindControl("buttonResult") as Button;

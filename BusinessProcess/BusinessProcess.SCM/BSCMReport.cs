@@ -157,5 +157,12 @@ namespace BusinessProcess.SCM
                 }
             }
         }
+
+        public DataTable GetStockSummaryLineList()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject objPOdetails = new ClsObject();
+             return   (DataTable) objPOdetails.ReturnObject(ClsUtility.theParams, "SCM_StockSummaryLineList",   ClsUtility.ObjectEnum.DataTable);
+        }
     }
 }
