@@ -27,20 +27,20 @@ namespace BusinessProcess.Laboratory
             }
         }
 
-        public List<LabOrder> GetLabOrders(int locationId, int? patientId)
+        public List<LabOrder> GetLabOrders(int locationId, int? patientPk)
         {
             ClsObject obj = new ClsObject();
             ClsUtility.Init_Hashtable();
-            if (patientId.HasValue)
+            if (patientPk.HasValue)
             {
-                ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientId.Value);
+                ClsUtility.AddExtendedParameters("@PatientPk", SqlDbType.Int, patientPk.Value);
             }
             ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
             DateTime? nullDate = null;
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Laboratory_GetLabOrder", ClsUtility.ObjectEnum.DataTable);
             ClsUtility.Init_Hashtable();
             obj = null;
-            IPatientService service = new BusinessProcess.PatientCore.PatientCoreServices();
+            IPatientService service = new PatientCore.PatientCoreServices();
             // (IPatientService)ObjectFactory.CreateInstance("BusinessProcess.SCM.BBilling, BusinessProcess.SCM");
             var result = (from rowView in dt.AsEnumerable()
                           select new LabOrder()
@@ -56,8 +56,8 @@ namespace BusinessProcess.Laboratory
                               OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                               OrderNumber = rowView["OrderNumber"].ToString(),
                               PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientId"])),
-                              PatientId = Convert.ToInt32(rowView["PatientId"]),
+                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
+                              PatientPk = Convert.ToInt32(rowView["PatientPk"]),
                               UserId = Convert.ToInt32(rowView["UserId"]),
                               VisitId = Convert.ToInt32(rowView["VisitId"]),
                               OrderStatus = rowView["OrderStatus"].ToString(),
@@ -102,8 +102,8 @@ namespace BusinessProcess.Laboratory
                               OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                               OrderNumber = rowView["OrderNumber"].ToString(),
                               PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
-                              PatientId = Convert.ToInt32(rowView["PatientId"]),
-                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientId"])),
+                              PatientPk = Convert.ToInt32(rowView["PatientPk"]),
+                              Client = service.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
                               UserId = Convert.ToInt32(rowView["UserId"]),
                               VisitId = Convert.ToInt32(rowView["VisitId"]),
                               OrderStatus = rowView["OrderStatus"].ToString(),
@@ -187,9 +187,9 @@ namespace BusinessProcess.Laboratory
                     OrderDate = Convert.ToDateTime(rowView["OrderDate"]),
                     OrderedBy = Convert.ToInt32(rowView["OrderedBy"]),
                     OrderNumber = rowView["OrderNumber"].ToString(),
-                    PreClinicDate = Convert.ToDateTime(rowView["PreClinicLabDate"]),
-                    PatientId = Convert.ToInt32(rowView["PatientId"]),
-                    Client = pt.GetPatient(Convert.ToInt32(rowView["PatientId"])),
+                    PreClinicDate = rowView["PreClinicLabDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(rowView["PreClinicLabDate"]),
+                    PatientPk = Convert.ToInt32(rowView["PatientPk"]),
+                    Client = pt.GetPatient(Convert.ToInt32(rowView["PatientPk"])),
                     UserId = Convert.ToInt32(rowView["UserId"]),
                     VisitId = Convert.ToInt32(rowView["VisitId"]),
                     OrderStatus = rowView["OrderStatus"].ToString(),
@@ -275,7 +275,7 @@ namespace BusinessProcess.Laboratory
             if (labOrder.Id > -1)
             ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrder.Id);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, UserId);
-            ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, labOrder.PatientId);
+            ClsUtility.AddExtendedParameters("@PatientPk", SqlDbType.Int, labOrder.PatientPk);
             ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
             ClsUtility.AddExtendedParameters("@OrderedBy", SqlDbType.Int, labOrder.OrderedBy);
             ClsUtility.AddExtendedParameters("@OrderDate", SqlDbType.DateTime, labOrder.OrderDate);

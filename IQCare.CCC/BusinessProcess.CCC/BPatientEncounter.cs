@@ -450,6 +450,45 @@ namespace BusinessProcess.CCC
             }
         }
 
-        
+        public ZScoresParameters GetZScoreValues(string PatientID, string gender, string height)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                ClsUtility.AddParameters("@sex", SqlDbType.VarChar, gender);
+                ClsUtility.AddParameters("@height", SqlDbType.VarChar, height);
+
+                DataSet ZScoreDS = (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getZScores", ClsUtility.ObjectEnum.DataSet);
+
+                ZScoresParameters zs = new ZScoresParameters();
+
+                if(ZScoreDS.Tables[0].Rows.Count > 0)
+                {
+                    zs.L_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["L"].ToString());
+                    zs.M_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["M"].ToString());
+                    zs.S_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["S"].ToString());
+                }
+
+                if (ZScoreDS.Tables[1].Rows.Count > 0)
+                {
+                    zs.L_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["L"].ToString());
+                    zs.M_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["M"].ToString());
+                    zs.S_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["S"].ToString());
+                }
+
+                if (ZScoreDS.Tables[2].Rows.Count > 0)
+                {
+                    zs.L_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["L"].ToString());
+                    zs.M_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["M"].ToString());
+                    zs.S_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["S"].ToString());
+                }
+
+                return zs;
+            }
+        }
+
+
     }
 }

@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Enrollment;
 using Microsoft.JScript;
 using Convert = System.Convert;
 
@@ -23,11 +24,17 @@ namespace IQCare.Web.CCC.WebService
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public int Gender { get; set; }
+        public string GenderString { get; set; }
         public string PersonDoB { get; set; }
+        public string EnrollmentNumber { get; set; }
+        public string EnrollmentDate { get; set; }
         public int ChildOrphan { get; set; }
+        public string ChildOrphanString { get; set; }
         public int Inschool { get; set; }
+        public string InschoolString { get; set; }
         public string NationalId { get; set; }
         public int MaritalStatusId { get; set; }
+        public string MaritalStatusString { get; set; }
         public string GurdianFNames { get; set; }
         public string GurdianMName { get; set; }
         public string GurdianLName { get; set; }
@@ -52,9 +59,12 @@ namespace IQCare.Web.CCC.WebService
         public string tsMiddleName { get; internal set; }
         public string population { get; internal set; }
         public int PopulationCategoryId { get; internal set; }
+        public string PopulationCategoryString { get; set; }
         public int GuardianId { get; set; }
         public int PatientTreatmentSupporterId { get; set; }
         public int PatientType { get; set; }
+        public string PatientTypeString { get; set; }
+        public string EntryPoint { get; set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -702,6 +712,8 @@ namespace IQCare.Web.CCC.WebService
                 var patientTreatmentSupporter = new List<PatientTreatmentSupporter>();
                 var keyPopulationManager = new PatientPopulationManager();
                 var keyPopulation = new List<PatientPopulation>();
+                var patientEntryPoint = new PatientEntryPointManager();
+                var entryPoints = new List<PatientEntryPoint>();
 
 
                 Patient = patientLookManager.GetPatientDetailSummary(PatientId);
@@ -719,14 +731,19 @@ namespace IQCare.Web.CCC.WebService
                     patientTreatmentSupporter =
                         patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(Patient[0].PersonId);
                     keyPopulation = keyPopulationManager.GetAllPatientPopulations(Patient[0].PersonId);
+                    entryPoints = patientEntryPoint.GetPatientEntryPoints(Patient[0].Id);
 
                     patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
                     patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
                     patientDetails.LastName = _utility.Decrypt(Patient[0].LastName);
-                    patientDetails.PatientType = Patient[0].PatientType; 
+                    patientDetails.PatientType = Patient[0].PatientType;
+                    patientDetails.PatientTypeString = LookupLogic.GetLookupNameById(Patient[0].PatientType);
+                    patientDetails.EnrollmentNumber = Patient[0].EnrollmentNumber;
 
                     patientDetails.Gender = Patient[0].Sex;
+                    patientDetails.GenderString = LookupLogic.GetLookupNameById(Patient[0].Sex);
                     patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", Patient[0].DateOfBirth);
+                    patientDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", Patient[0].EnrollmentDate);
                     patientDetails.Age = patientDetails.GetAge(Patient[0].DateOfBirth);
 
                     //OVC
@@ -734,21 +751,31 @@ namespace IQCare.Web.CCC.WebService
                     {
                         var item = lookupLogic.GetItemIdByGroupAndItemName("YesNo", "Yes");
                         patientDetails.ChildOrphan = item[0].ItemId;
+                        patientDetails.ChildOrphanString = "Yes";
                     }
                     else
                     {
                         var item = lookupLogic.GetItemIdByGroupAndItemName("YesNo", "No");
                         patientDetails.ChildOrphan = item[0].ItemId;
+                        patientDetails.ChildOrphanString = "No";
                     }
 
                     patientDetails.Inschool = (personOVC != null && personOVC.InSchool)
                         ? lookupLogic.GetItemIdByGroupAndItemName("YesNo", "Yes")[0].ItemId
                         : lookupLogic.GetItemIdByGroupAndItemName("YesNo", "No")[0].ItemId;
 
+                    patientDetails.InschoolString = (personOVC != null && personOVC.InSchool)
+                        ? "Yes"
+                        : "No";
+
                     patientDetails.NationalId = _utility.Decrypt(Patient[0].NationalId);
 
                     if (maritalsStatus.Count > 0)
+                    {
                         patientDetails.MaritalStatusId = maritalsStatus[0].MaritalStatusId;
+                        patientDetails.MaritalStatusString =
+                            LookupLogic.GetLookupNameById(maritalsStatus[0].MaritalStatusId);
+                    }
 
                     if (Guardian != null)
                     {
@@ -800,6 +827,13 @@ namespace IQCare.Web.CCC.WebService
                     {
                         patientDetails.population = keyPopulation[0].PopulationType;
                         patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
+                        patientDetails.PopulationCategoryString =
+                            LookupLogic.GetLookupNameById(keyPopulation[0].PopulationCategory);
+                    }
+                    //Entry Point
+                    if (entryPoints.Count > 0)
+                    {
+                        patientDetails.EntryPoint = LookupLogic.GetLookupNameById(entryPoints[0].EntryPointId);
                     }
                 }
 

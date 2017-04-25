@@ -103,5 +103,19 @@ namespace BusinessProcess.CCC
                 return vitals;
             }
         }
+
+        public PatientVital GetPatientVitalsByMasterVisitId(int patientId, int patientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                    unitOfWork.PatientVitalsRepository.FindBy(
+                            x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId)
+                        .OrderBy(x => x.Id)
+                        .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vitals;
+            }
+        }
     }
 }

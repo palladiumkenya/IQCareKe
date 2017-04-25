@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-6 pull-left">
                  <span id="Span1" class="text-capitalize pull-left glyphicon-text-size= fa-2x" runat="server">
-                            <i class="fa fa-calendar fa-2x" aria-hidden="true"></i> Appointments</i> </span>
+                            <i class="fa fa-calendar fa-2x" aria-hidden="true"></i> Appointments </span>
             </div>
         </div><!-- .row --><br />
 <%--        <h1 class="nomargin" style="padding-left: 10px;">
@@ -154,7 +154,7 @@
                         <ProgressTemplate>
                             <div style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; vertical-align: middle;">
                                 <table style="position: relative; top: 45%; left: 45%; border: solid 1px #808080;
-                                    background-color: #FFFFC0; width: 110px; height: 24px;" cellpadding="0" cellspacing="0">
+                                    background-color: #FFFFC0; width: 110px; height: 24px;">
                                     <tr>
                                         <td style="white-space: nowrap">
                                             <span style="white-space: nowrap">&nbsp;Processing....<asp:Image runat="server" ID="imggif"

@@ -9,40 +9,59 @@ namespace BusinessProcess.CCC.Tb
 {
     public class BPatientIcf : ProcessBase, IPatientIcf
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
 
         public int AddPatientIcf(PatientIcf p)
         {
-            _unitOfWork.PatientIcfRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientIcfRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
         }
 
         public PatientIcf GetPatientIcf(int id)
         {
-            PatientIcf patientIcf = _unitOfWork.PatientIcfRepository.GetById(id);
-            return patientIcf;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientIcf patientIcf = _unitOfWork.PatientIcfRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return patientIcf;
+            }
         }
 
         public void DeletePatientIcf(int id)
         {
-            PatientIcf icf = _unitOfWork.PatientIcfRepository.GetById(id);
-            _unitOfWork.PatientIcfRepository.Remove(icf);
-            _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientIcf icf = _unitOfWork.PatientIcfRepository.GetById(id);
+                _unitOfWork.PatientIcfRepository.Remove(icf);
+                _unitOfWork.Dispose();
+                _unitOfWork.Complete();
+            }
         }
 
         public int UpdatePatientIcf(PatientIcf p)
         {
-            _unitOfWork.PatientIcfRepository.Update(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientIcfRepository.Update(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
         }
 
         public List<PatientIcf> GetByPatientId(int patientId)
         {
-            List<PatientIcf> patientIcfs = _unitOfWork.PatientIcfRepository.GetByPatientId(patientId);
-            return patientIcfs;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientIcf> patientIcfs = _unitOfWork.PatientIcfRepository.GetByPatientId(patientId);
+                _unitOfWork.Dispose();
+                return patientIcfs;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using Application.Common;
 using Application.Presentation;
 using CrystalDecisions.CrystalReports.Engine;
 using Interface.SCM;
+using System.Text;
 
 namespace IQCare.SCM
 {
@@ -61,21 +62,54 @@ namespace IQCare.SCM
 
             this.Close();
         }
+        private void ExportToExcel(DataGridView dGV, string filename)
+        {
+            string stOutput = "";
+            // Export titles:
+            string sHeaders = "";
 
+            for (int j = 0; j < dGV.Columns.Count; j++)
+                sHeaders = sHeaders.ToString() + Convert.ToString(dGV.Columns[j].HeaderText) + "\t";
+            stOutput += sHeaders + "\r\n";
+            // Export data.
+            for (int i = 0; i < dGV.RowCount - 1; i++)
+            {
+                string stLine = "";
+                for (int j = 0; j < dGV.Rows[i].Cells.Count; j++)
+                    stLine = stLine.ToString() + Convert.ToString(dGV.Rows[i].Cells[j].Value) + "\t";
+                stOutput += stLine + "\r\n";
+            }
+            Encoding utf16 = Encoding.GetEncoding(1254);
+            byte[] output = utf16.GetBytes(stOutput);
+            FileStream fs = new FileStream(filename, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+            bw.Write(output, 0, output.Length); //write the encoded file
+            bw.Flush();
+            bw.Close();
+            fs.Close();
+        }
         private void btnExport_Click(object sender, EventArgs e)
         {
             try
             {
                 if (dgwStockSummary.RowCount > 0)
                 {
-                    IQCareUtils theUtil = new IQCareUtils();
-                    DataTable theDT = (DataTable)dgwStockSummary.DataSource;
-                    theDT.Columns.Remove("StoreId");
-                    //theDT.Columns.Remove("StoreName");
-                    theDT.Columns.Remove("ItemId");
-                    string theFilePath = System.Configuration.ConfigurationManager.AppSettings["ExcelFilesPath"];
-                    theFilePath = theFilePath + "StockSummary.xls";
-                    theUtil.ExportToExcel_Windows(theDT, theFilePath, "");
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "Excel Documents (*.xls)|*.xls";
+                    sfd.FileName = string.Format("StockSummary{0}.xls", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        //ToCsV(dataGridView1, @"c:\export.xls");
+                        ExportToExcel(dgwStockSummary, sfd.FileName); // Here dataGridview1 is your grid view name
+                    }
+                    //IQCareUtils theUtil = new IQCareUtils();
+                    //DataTable theDT = (DataTable)dgwStockSummary.DataSource;
+                    //theDT.Columns.Remove("StoreId");
+                    ////theDT.Columns.Remove("StoreName");
+                    //theDT.Columns.Remove("ItemId");
+                    //string theFilePath = System.Configuration.ConfigurationManager.AppSettings["ExcelFilesPath"];
+                    //theFilePath = theFilePath + "StockSummary.xls";
+                    //theUtil.ExportToExcel_Windows(theDT, theFilePath, "");
                 }
                 else
                 {

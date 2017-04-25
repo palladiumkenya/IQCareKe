@@ -78,6 +78,8 @@ namespace Entities.Administration
         /// </value>
         [NotMapped]
         public bool Clinical { get; set; }
+        [NotMapped]
+        public bool ModuleFlag { get; set; }
 
         /// <summary>
         /// Gets or sets the business rules.

@@ -10,7 +10,7 @@
                              <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Identification Number</label></div>
                                     <div class="col-md-12">
-                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="" ClientIDMode="Static"></asp:TextBox>  
+                                         <asp:TextBox runat="server" ID="PatientNumber" CssClass="form-control input-sm" placeholder="ccc number..." ClientIDMode="Static"></asp:TextBox>  
                                                
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                               <div class="col-md-3">
                                       <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
                                       <div class="col-md-12">
-                                           <asp:TextBox runat="server" ID="LastName" CssClass="form-control input-sm" placeholder="Last name.." ClientIDMode="Static"></asp:TextBox>
+                                           <asp:TextBox runat="server" ID="LastName" CssClass="form-control mdb-select input-sm" placeholder="Last name.." ClientIDMode="Static"></asp:TextBox>
                                       </div>
                                  </div>
                         </div><%-- .col-md-12--%>
@@ -40,14 +40,17 @@
                   <div class="col-md-3">
                                    <div class="col-md-12"><label class="control-label pull-left">Facility</label></div>
                                    <div class="col-md-12 md-form">
-                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control input-sm"/>  
+                                        <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control"/>  
                                                
                                    </div>
                              </div>          
                  
                    <div class="col-md-3">
 
-                              </div>
+                        
+
+            
+                  </div>
                                          
                    <div class="col-md-3">
 
@@ -165,6 +168,8 @@
             $.ajaxSetup({
                 cache: false
             });
+
+
 
             $("#divAction").hide("fast");
 

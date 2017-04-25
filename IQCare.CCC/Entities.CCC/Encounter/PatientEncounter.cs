@@ -129,5 +129,27 @@ namespace Entities.CCC.Encounter
             public string RegimenLine { get; set; }
             public string Regimen { get; set; }
         }
+
+        [Serializable]
+        public class ZScoresParameters
+        {
+            public double L_WA { get; set; }
+            public double M_WA { get; set; }
+            public double S_WA { get; set; }
+            public double L_WH { get; set; }
+            public double M_WH { get; set; }
+            public double S_WH { get; set; }
+            public double L_BMIz { get; set; }
+            public double M_BMIz { get; set; }
+            public double S_BMIz { get; set; }
+        }
+
+        [Serializable]
+        public class ZScores
+        {
+            public double weightForAge { get; set; }
+            public double weightForHeight { get; set; }
+            public double BMIz { get; set; }
+        }
     }
 }

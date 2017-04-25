@@ -256,7 +256,8 @@ namespace IQCare.SCM
                     if (dsPOItemsDetail.Tables[0].Rows.Count > 0)
                     {
                      
-                        dtpOrderDate.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString();
+                       // dtpOrderDat
+                        dtpOrderDate.Value = Convert.ToDateTime(dsPOItemsDetail.Tables[0].Rows[0]["OrderDate"].ToString());
                         dtpOrderDate.CustomFormat = "dd-MMM-yyyy";
                         dtpOrderDate.Enabled = false;
                         txtOrderNumber.Text = dsPOItemsDetail.Tables[0].Rows[0]["OrderNo"].ToString();
@@ -1494,13 +1495,16 @@ namespace IQCare.SCM
         private void btnprint_Click(object sender, EventArgs e)
         {
             ReportDocument objRptDoc = new ReportDocument();
-            DataSet dsPrintPOItemsDetail = new DataSet();
+          //  DataSet dsPrintPOItemsDetail = new DataSet();
 
             IPurchase objPOItem = (IPurchase)ObjectFactory.CreateInstance("BusinessProcess.SCM.BPurchase,BusinessProcess.SCM");
-            dsPrintPOItemsDetail = objPOItem.GetPurchaseOrderDetailsByPoidGRN(GblIQCare.PurchaseOrderID);
-            dsPrintPOItemsDetail.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
-            rptGRN rep = new rptGRN();
-            rep.SetDataSource(dsPrintPOItemsDetail);
+           // dsPrintPOItemsDetail = objPOItem.GetPurchaseOrderDetailsByPoidGRN(GblIQCare.PurchaseOrderID);
+           // dsPrintPOItemsDetail.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
+
+         DataSet ds =   objPOItem.GetPurchaseOrderItems(GblIQCare.PurchaseOrderID);
+            ds.WriteXmlSchema(GblIQCare.GetXMLPath() + "\\GooodsReceivedNote.xml");
+            rptGRNv2 rep = new rptGRNv2();
+            rep.SetDataSource(ds);
             //  rep.ParameterFields["FormDate","1"];
             rep.SetParameterValue("ModePurchaseOrder", GblIQCare.ModePurchaseOrder);
             rep.SetParameterValue("facilityname", GblIQCare.AppLocation);
