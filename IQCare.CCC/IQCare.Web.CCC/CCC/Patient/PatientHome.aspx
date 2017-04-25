@@ -521,6 +521,479 @@
                          
 
                      </div>
+                     <div class="col-md-12 col-xs-12">
+                         <div class="col-md-4 col-xs-4 col-sm-4">                       
+                             <div class="col-md-6 form-group">
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientSummaryModal">Patient Summary</button>
+                             </div>
+                         </div>
+                         
+                         <!-- Modal -->
+                        <div id="patientSummaryModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+                            <div class="modal-dialog" style="width: 90%">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Patient Summary</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h2 class="text-muted text-Warning pull-left"> Bio </h2>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Profile</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-2">
+                                                    CCC No
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-2">
+                                                    FirstName
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-2">
+                                                    Middle Name 
+                                                </div>
+
+                                                
+                                                
+                                                <div class="col-md-2">
+                                                    Last Name 
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    Sex
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    Date Of Birth
+                                                </div>
+
+                                                
+
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblCCC" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblFirstNameP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblMiddleNameP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblLastNameP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblSexP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblDobP" runat="server"></asp:Label>
+                                                </div>
+
+                                            </div>
+                                            
+                                            
+                                            
+                                            <div class="col-md-12" id="isChild">
+                                                
+                                                <div class="col-md-2">
+                                                    Parent/Guardian
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    Orphan?
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    In school?
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12" id="isChildP">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblParent_GuardianP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblOrphanP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblInSchoolP" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                &nbsp;
+                                            </div>
+                                            
+                                            <div class="col-md-12" id="isAdult">
+                                                
+                                                <div class="col-md-2">
+                                                    ID Number
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    Marital Status
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    Pop. Type
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    Key Pop. Type
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="col-md-12" id="isAdultP">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblIdNumber" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblMaritalStatus" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblPopulationTypeA" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblKeyPopType" runat="server"></asp:Label>
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div>
+                                                &nbsp;
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Entry Point & Transfer Status</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-2">
+                                                    Entry Point
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblEntryPointP" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                &nbsp;
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Diagnosis & ARV history</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-2">
+                                                    Date of HIV diagnosis
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    Date of enrollment
+                                                </div>
+                                                
+
+                                                <div class="col-md-2">
+                                                    WHO stage at enrollment
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    Date of ART initiation
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-2">
+                                                    History of ART use
+                                                </div>
+
+
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblDateOfHivDiagnosisA" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblEnrollmentDateP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblWHOStageAtEnrollment"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblDateOfARTInitiation"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                &nbsp;
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Baseline assessment & Treatment Initiation</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-2">
+                                                    HBV infected
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    TB Infected
+                                                </div>
+                                                
+
+                                                <div class="col-md-2">
+                                                    WHO stage
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    Pregnant?
+                                                </div>
+                                                
+                                                
+                                                <div class="col-md-2">
+                                                    Breastfeeding?
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    CD4 Count
+                                                </div>
+
+
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblHIVInfected" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblTBInfected" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblWHOStageNow"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblPregnant"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblBreastFeeding"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblCD4Count"></asp:Label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <h2 class="text-muted text-Warning pull-left"> Triage </h2>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-1">
+                                                    Weight
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-1">
+                                                    Height
+                                                </div>
+                                                
+
+                                                <div class="col-md-1">
+                                                    MUAC
+                                                </div>
+
+                                                <div class="col-md-1">
+                                                    Head Circumference
+                                                </div>
+                                                
+                                                <div class="col-md-1">
+                                                    Temperature (°C)
+                                                </div>
+
+                                            </div>
+                                                
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblWeightP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblHeightP" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="Label3" runat="server"></asp:Label>
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblHeadCircumference" runat="server"></asp:Label>
+                                                </div>
+
+                                                
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblTemperature" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                                &nbsp;
+                                            </div>
+ 
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Blood Pressure</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-1">
+                                                    Systolic
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-1">
+                                                    Diastolic
+                                                </div>
+
+                                                
+
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblSystolic" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblDiastolic" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                &nbsp;
+                                            </div>
+ 
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <label class="control-label text-primary pull-left text-muted">Pulse Rate/Respiratory/Oxygen Saturation</label>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                
+                                                <div class="col-md-1">
+                                                    Pulse Rate
+                                                </div>
+
+                                                
+
+                                                <div class="col-md-1">
+                                                    Respiration
+                                                </div>
+
+                                               
+                                                
+                                                <div class="col-md-3">
+                                                    Blood Oxygen Saturation
+                                                </div>
+
+                                                
+
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="col-md-1">
+                                                    <asp:Label ID="lblPulseRate" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                 <div class="col-md-1">
+                                                    <asp:Label ID="lblRespiration" runat="server"></asp:Label>
+                                                </div>
+                                                
+                                                <div class="col-md-3">
+                                                    <asp:Label ID="lblOxygenSat" runat="server"></asp:Label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>                                        
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                     </div>
                  </div> 
                  <div id="EntryPoint" class="tab-pane fade">
                      <div class="col-md-12 col-xs-12">
@@ -786,6 +1259,7 @@
                         function(index, itemList) {
                             if (itemList.patientId > 0) {
                                 
+                                console.log(itemList);
                                 /* transferin status */
                                 $("#<%=lblTransferinDate.ClientID%>").text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));
                                 $("#<%= lblTreatmentStartDate.ClientID%>").text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
@@ -794,14 +1268,24 @@
 
                                 /*patient Diagnosis */
                                 $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblDateOfHivDiagnosisA.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
+                                $("#<%=lblWHOStageAtEnrollment.ClientID%>").text(itemList.EnrollmentWHOStageName);
                                 $("#<%=lblARTInitiationDate.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+                                $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
                                 $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
                                 $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
                                 $("#<%=lblweight.ClientID%>").text(itemList.Weight);
                                 $("#<%=lblheight.ClientID%>").text(itemList.Height);
+                                $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
+                                $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
+                                $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
+                                $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
+                                $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
+                                $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
+
                                 $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
 
                                 $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
@@ -1072,16 +1556,18 @@
                         var patientDetails = JSON.parse(response.d);
                         console.log(patientDetails);
 
-                        $("#<%=txtFirstName.ClientID%>").text(patientDetails.FirstName);
+                        
                         $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
-
-                        $("#<%=txtMiddleName.ClientID%>").text(patientDetails.MiddleName);
+                        $("#<%=lblFirstNameP.ClientID%>").text(patientDetails.FirstName);
+                        
                         $("#<%=bioMiddleName.ClientID%>").val(patientDetails.MiddleName);
+                        $("#<%=lblMiddleNameP.ClientID%>").text(patientDetails.MiddleName);
 
-                        $("#<%=txtLastName.ClientID%>").text(patientDetails.LastName);
                         $("#<%=bioLastName.ClientID%>").val(patientDetails.LastName);
+                        $("#<%=lblLastNameP.ClientID%>").text(patientDetails.LastName);
 
-                        $("#<%=drpPatientPopulation.ClientID%>").text(patientDetails.population);
+                        $("#<%=lblCCC.ClientID%>").text(patientDetails.EnrollmentNumber);
+                        
                         var populationType = 0;
                         if (patientDetails.population == "General Population") {
                             populationType = 74;
@@ -1090,12 +1576,6 @@
                             populationType = 75;
                         }
                         $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
-
-
-                        /*bioFirstName
-                        bioMiddleName
-                        bioLastName
-                        bioPatientPopulation*/
 
                         var names = null;
                         names = patientDetails.tsFname +
@@ -1150,8 +1630,48 @@
                         $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
                         $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId);
                         $("#<%=Gender.ClientID%>").val(patientDetails.Gender);
+                        $("#<%=lblSexP.ClientID%>").text(patientDetails.GenderString);
+                        $("#<%=lblDobP.ClientID%>").text(patientDetails.PersonDoB);
 
 
+                        $("#<%=lblParent_GuardianP.ClientID%>").text(patientDetails.GurdianFNames + " " + patientDetails.GurdianMName + " " + patientDetails.GurdianLName);
+                        $("#<%=lblInSchoolP.ClientID%>").text(patientDetails.InschoolString);
+                        $("#<%=lblOrphanP.ClientID%>").text(patientDetails.ChildOrphanString);
+
+                        $("#<%=lblIdNumber.ClientID%>").text(patientDetails.NationalId);
+
+                        $("#<%=lblMaritalStatus.ClientID%>").text(patientDetails.MaritalStatusString);
+                        $("#<%=lblPopulationTypeA.ClientID%>").text(patientDetails.population);
+                        $("#<%=lblKeyPopType.ClientID%>").text(patientDetails.PopulationCategoryString);
+                        
+
+                        $("#<%=lblEntryPointP.ClientID%>").text(patientDetails.EntryPoint);
+
+                        $("#<%=lblEnrollmentDateP.ClientID%>").text(patientDetails.EnrollmentDate);
+
+
+
+                        $("#isChild").hide();
+                        $("#isChildP").hide();
+                        $("#isAdultP").hide();
+                        $("#isAdult").hide();
+
+
+                        if (patientDetails.Age <= 18) {
+                            $("#isChild").show();
+                            $("#isChildP").show();
+                        } else {
+                            $("#isAdultP").show();
+                            $("#isAdult").show()
+                        }
+
+                        if (patientDetails.PatientTypeString == "New") {
+                            
+                        }else if(patientDetails.PatientTypeString == "New") {
+                            
+                        }else if (patientDetails.PatientTypeString == "New") {
+                            
+                        }
                     },
                     error: function (response) {
                         toastr.error(response.d, "Error Getting Person Details");
@@ -1271,6 +1791,8 @@
                 }
             });
 
+            getPatientVitals();
+            //getPatientBaselinePreloadValues(patientId);
         });
 
         function addPatientTreatmentSupporter(patientId, firstName, middleName, lastName, gender, mobile, userId) {
@@ -1423,5 +1945,37 @@
                 }
             });     
         }
+
+        function getPatientVitals() {
+            console.log();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientVitals.asmx/GetByPatientId",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                    var patientVitals = response.d;
+                    //console.log("vitals");
+                    $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
+                    $("#<%=lblHeightP.ClientID%>").text(patientVitals.Height);
+                    $("#<%=lblmuac.ClientID%>").text(patientVitals.Muac);
+                    $("#<%=lblHeadCircumference.ClientID%>").text(patientVitals.HeadCircumference);
+                    $("#<%=lblTemperature.ClientID%>").text(patientVitals.Temperature);
+                    $("#<%=lblSystolic.ClientID%>").text(patientVitals.BpSystolic);
+                    $("#<%=lblDiastolic.ClientID%>").text(patientVitals.Bpdiastolic);
+                    $("#<%=lblPulseRate.ClientID%>").text(patientVitals.HeartRate);
+                    $("#<%=lblRespiration.ClientID%>").text(patientVitals.RespiratoryRate);
+                    $("#<%=lblOxygenSat.ClientID%>").text(patientVitals.SpO2);
+
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+        }
+
     </script>
 </asp:Content>

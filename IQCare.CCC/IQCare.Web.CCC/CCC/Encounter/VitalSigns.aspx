@@ -3,6 +3,8 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 <%@ Register TagPrefix="uc" TagName="FemalVitals" Src="~/CCC/UC/ucFemaleVitals.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriageSummary" Src="~/CCC/UC/ucPatientTriageSummary.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -19,6 +21,8 @@
     <div class="col-md-12 col-xs-12" id="femaleVitals">
         <uc:FemalVitals ID="ptnFemaleVitals" runat="server" />
     </div>
+
+    <uc:ucExtruder runat="server" ID="ucExtruder" />
 
     <script type="text/javascript">
     $(document).ready(function () {

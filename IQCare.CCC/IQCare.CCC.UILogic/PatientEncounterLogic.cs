@@ -335,5 +335,93 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public ZScores getZScores(string patientId, double age, string gender, double height, double weight)
+        {
+            double bmi = 0;
+       
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+
+            ZScoresParameters zsParam = new ZScoresParameters();
+            ZScores zsValues = new ZScores();
+
+            zsParam = patientEncounter.GetZScoreValues(patientId, gender, height.ToString());
+            
+            //////weight for Age//////////
+            if (age < 15)
+            {
+                if (zsParam != null)
+                {
+                    //Weight for age calculation
+                    if (zsParam.L_WA != 0 && weight != 0)
+                        zsValues.weightForAge = ((Math.Pow((weight / zsParam.M_WA), zsParam.L_WA)) - 1) / (zsParam.S_WA * zsParam.L_WA);
+                    else
+                        zsValues.weightForAge = (Math.Log(weight / zsParam.M_WA)) / zsParam.S_WA;
+
+                }
+                else
+                {
+                    //lblWAClassification.Text = "Out of range";
+                }
+            }
+            
+
+            ///////Weight for height calculation//////////////////////////////
+            if (age < 15)
+            {
+                if (height <= 120 && height >= 45)
+                {
+                    try
+                    {
+                        if (zsParam != null)
+                        {
+
+                            if (zsParam.L_WH != 0 && weight != 0)
+                                zsValues.weightForHeight = ((Math.Pow((weight / zsParam.M_WH), zsParam.L_WH)) - 1) / (zsParam.S_WH * zsParam.L_WH);
+                            else
+                                zsValues.weightForHeight = (Math.Log(weight / zsParam.M_WH)) / zsParam.S_WH;
+
+                        }
+                    }
+
+                    catch (Exception ex)
+                    {
+                    }
+                }
+            }
+
+            ////BMIz (Z-Score Calculation)////////////////////////////
+            if (age <= 15)
+            {
+                if (zsParam != null)
+                {
+                    
+                    if (height != 0 && weight != 0)
+                        bmi = weight / ((height / 100) * (height / 100));
+                    else
+                        bmi = 0;
+
+                    if (zsParam.L_BMIz != 0)
+                        zsValues.BMIz = ((Math.Pow((bmi / zsParam.M_BMIz), zsParam.L_BMIz)) - 1) / (zsParam.S_BMIz * zsParam.L_BMIz);
+                    else
+                        zsValues.BMIz = (Math.Log(bmi / zsParam.M_BMIz)) / zsParam.S_BMIz;
+
+                    //lblBMIz.Text = string.Format("{0:f2}", BMIz);
+
+                }
+                
+            }
+
+            return zsValues;
+            /////////////////////////////////////////////////////////
+
+            ///////Height for age calculation/////////////////////////////
+            //if (L != 0)
+            //    HAz = ((Math.Pow((heightInCm / M), L)) - 1) / (S * L);
+            //else
+            //    HAz = (Math.Log(heightInCm / M)) / S;
+
+            /////////////////////////////////////////////////////////////
+
+        }
     }
 }

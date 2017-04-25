@@ -21,6 +21,7 @@ namespace Interface.CCC
         DataTable getPatientEncounterPhysicalExam(string PatientMasterVisitID, string PatientID);
         DataTable getPatientEncounterDiagnosis(string PatientMasterVisitID, string PatientID);
         DataTable getPatientEncounterAllergies(string PatientMasterVisitID, string PatientID);
+        ZScoresParameters GetZScoreValues(string PatientID, string gender, string height);
 
 
 

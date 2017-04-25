@@ -328,6 +328,174 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public ArrayList getZScoreValues(string height, string weight)
+        {
+            ArrayList result = new ArrayList();
+            string weightForAgeResult="", weightForHeight="", BMIz = "";
+            if (height != "" && weight != "")
+            {
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+                ZScores zsValues = new ZScores();
+                zsValues = patientEncounter.getZScores(Session["PatientId"].ToString(), Convert.ToDouble(Session["Age"].ToString()), Session["Gender"].ToString(), Convert.ToDouble(height), Convert.ToDouble(weight));
+
+                if (zsValues != null)
+                {
+
+                    //weight for age
+                    if (zsValues.weightForAge >= 4)
+                    {
+                        weightForAgeResult = "4 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 3 && zsValues.weightForAge < 4)
+                    {
+                        weightForAgeResult = "3 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 2 && zsValues.weightForAge < 3)
+                    {
+                        weightForAgeResult = "2 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 1 && zsValues.weightForAge < 2)
+                    {
+                        weightForAgeResult = "1 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge > -1 && zsValues.weightForAge < 1)
+                    {
+                        weightForAgeResult = "0 (Normal)";
+                    }
+                    else if (zsValues.weightForAge <= -1 && zsValues.weightForAge > -2)
+                    {
+                        weightForAgeResult = "-1 (Mild)";
+                    }
+                    else if (zsValues.weightForAge <= -2 && zsValues.weightForAge > -3)
+                    {
+                        weightForAgeResult = "-2 (Moderate)";
+                    }
+                    else if (zsValues.weightForAge <= -3 && zsValues.weightForAge > -4)
+                    {
+                        weightForAgeResult = "-3 (Severe)";
+                    }
+                    else if (zsValues.weightForAge <= -4)
+                    {
+                        weightForAgeResult = "-4 (Severe)";
+                    }
+                    else
+                    {
+                        weightForAgeResult = "Out of Range";
+                    }
+
+                    //weight for height
+                    if (zsValues.weightForHeight >= 4)
+                    {
+                        weightForHeight = "4 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 3 && zsValues.weightForHeight < 4)
+                    {
+                        weightForHeight = "3 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 2 && zsValues.weightForHeight < 3)
+                    {
+                        weightForHeight = "2 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 1 && zsValues.weightForHeight < 2)
+                    {
+                        weightForHeight = "1 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight > -1 && zsValues.weightForHeight < 1)
+                    {
+                        weightForHeight = "0 (Normal)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -1 && zsValues.weightForHeight > -2)
+                    {
+                        weightForHeight = "-1 (Mild)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -2 && zsValues.weightForHeight > -3)
+                    {
+                        weightForHeight = "-2 (Moderate)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -3 && zsValues.weightForHeight > -4)
+                    {
+                        weightForHeight = "-3 (Severe)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -4)
+                    {
+                        weightForHeight = "-4 (Severe)";
+                        
+                    }
+                    else
+                    {
+                        weightForHeight = "Out of Range";
+                    }
+
+                    //BMIz
+                    if (zsValues.BMIz >= 4)
+                    {
+                        BMIz = "4 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 3 && zsValues.BMIz < 4)
+                    {
+                        BMIz = "3 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 2 && zsValues.BMIz < 3)
+                    {
+                        BMIz = "2 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 1 && zsValues.BMIz < 2)
+                    {
+                        BMIz = "1 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz > -1 && zsValues.BMIz < 1)
+                    {
+                        BMIz = "0 (Normal)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -1 && zsValues.BMIz > -2)
+                    {
+                        BMIz = "-1 (Mild)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -2 && zsValues.BMIz > -3)
+                    {
+                        BMIz = "-2 (Moderate)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -3 && zsValues.BMIz > -4)
+                    {
+                        BMIz = "-3 (Severe)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -4)
+                    {
+                        BMIz = "-4 (Severe)";
+                        
+                    }
+                    else
+                    {
+                        BMIz = "Out of Range";
+                    }
+
+
+
+                    string[] i = new string[3] { weightForAgeResult, weightForHeight, BMIz };
+                    result.Add(i);
+                }
+            }
+            return result;
+
+        }
+
+        [WebMethod(EnableSession = true)]
         public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine)
         {
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();

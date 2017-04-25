@@ -79,5 +79,13 @@ namespace IQCare.Web.CCC.WebService
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
             return patientVitalsManager.GetPatientVitalsByMasterVisitId(patient, patientMasterVisitId);
         }
+
+        [WebMethod(EnableSession = true)]
+        public PatientVital GetByPatientId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            return patientVitalsManager.GetByPatientId(patient);
+        }
     }
 }
