@@ -687,7 +687,8 @@
         }
 
         function editFamilyTesting() {
-            var familyTesting = itemList[0];
+            var rowIndex = row - 1;
+            var familyTesting = itemList[rowIndex];
         }
 
                 function resetElements(parameters) {
