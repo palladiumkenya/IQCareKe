@@ -59,18 +59,18 @@
     <div class="col-md-12 col-xs-12 col-sm-12">
       
         <ul class="nav nav-tabs">
-
-            <li class="active"><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
-            <li class="disabled"><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
-            <li class="disabled"><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
-            <li class="disabled"><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>          
+            <li class="active"><a data-toggle="tab" href="#Trending">Viral Load & BMI Trending </a></li>  
+            <li class=""><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
+            <li class=""><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
+            <li class=""><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
+                    
 
         </ul>
     
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
             <div class="col-md-12 form-group"></div> 
             <div class="tab-content">
-                 <div id="Registration" class="tab-pane fade in active">
+                 <div id="Registration" class="tab-pane fade">
                      <div class="col-md-12 col-xs-12">
                          <!--<div class="col-md-4 col-xs-4 col-sm-4">-->
                              <!--<div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Bio</h6></label></div>
@@ -747,7 +747,7 @@
                               </div>
                           </div>
                  </div> <!-- diagnosis -->  
-                 <div id="Trending" class="tab-pane fade">
+                 <div id="Trending" class="tab-pane fade fade in active">
                     
                       <div class="col-md-6 col-xs-12 col-sm-12">
                           <div id="vl_container" margin: 0 auto"></div>  

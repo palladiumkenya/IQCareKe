@@ -44,7 +44,7 @@ namespace IQCare.Web.CCC.Patient
         {
             try
             {
-                SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
+                SystemSetting.CurrentSystem.Facilities.Where(f => !f.DeleteFlag);
 
                 Facility.DataSource = SystemSetting.CurrentSystem.Facilities.OrderBy(f => f.Id);
                 Facility.DataTextField = "Name";
