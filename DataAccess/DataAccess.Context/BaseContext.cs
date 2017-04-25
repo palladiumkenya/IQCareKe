@@ -1,6 +1,4 @@
-﻿using System;
-using DataAccess.Base;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -17,11 +15,13 @@ namespace DataAccess.Context
 
         public BaseContext()
         {
+           
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
     }
 }

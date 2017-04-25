@@ -11,14 +11,20 @@ namespace BusinessProcess.CCC.Enrollment
 {
     public class BPatientEntryPoint : ProcessBase, IPatientEntryPointManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        internal int Result;
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // internal int Result;
 
         public int AddPatientEntryPoint(PatientEntryPoint patientEntryPoint)
         {
-            _unitOfWork.PatientEntryPointRepository.Add(patientEntryPoint);
-            Result = _unitOfWork.Complete();
-            return patientEntryPoint.Id;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientEntryPointRepository.Add(patientEntryPoint);
+                _unitOfWork.Complete();
+                var Id= patientEntryPoint.Id;
+                _unitOfWork.Dispose();
+                return Id;
+            }
+      
         }
 
         public int DeletePatientEntryPoint(int id)
@@ -33,8 +39,14 @@ namespace BusinessProcess.CCC.Enrollment
 
         public List<PatientEntryPoint> GetPatientEntryPoints(int patientId)
         {
-            return
-                _unitOfWork.PatientEntryPointRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag).ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var entryPointList= _unitOfWork.PatientEntryPointRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag).ToList();
+                _unitOfWork.Dispose();
+                return entryPointList;
+            }
+
+            
         }
     }
 }

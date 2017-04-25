@@ -20,15 +20,20 @@ namespace DataAccess.CCC.Repository.Lookup
             _context = context;
         }
 
-        public PatientLookup GetGenderID(int patientId)
+        public PatientLookup GetGenderId(int patientId)
         {
             IPatientLookupRepository patientRepository = new PatientLookupRepository();
             var genderId = patientRepository.FindBy(x => x.Id == patientId).FirstOrDefault();
             return genderId;
 
         }
+        public PatientLookup GetPatientPtn_pk(int patientId)
+        {
+            IPatientLookupRepository patientRepository = new PatientLookupRepository();
+            var ptnPk = patientRepository.FindBy(x => x.Id == patientId).FirstOrDefault();
+            return ptnPk;
 
-
+        }
     }
 
 }

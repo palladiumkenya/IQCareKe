@@ -10,7 +10,7 @@ using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
 using Entities.CCC.Appointment;
-using Entities.CCC.Consent;
+using Entities.CCC.Tb;
 using Entities.PatientCore;
 
 
@@ -18,7 +18,7 @@ namespace DataAccess.CCC.Context
 {
     public class GreencardContext : BaseContext
     {
-        public GreencardContext() : base((DbConnection) DataMgr.GetConnection(), true)
+        public GreencardContext() : base((DbConnection)DataMgr.GetConnection(), true)
         {
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
@@ -45,6 +45,10 @@ namespace DataAccess.CCC.Context
         public DbSet<Entities.CCC.Triage.PatientAllergy> PatientAllergies { get; set; }
         public DbSet<PatientChronicIllness> PatientChronicIllnesses { get; set; }
         public DbSet<PatientVital> PatientVitals { get; set; }
+        public DbSet<Entities.CCC.Triage.PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
+            public DbSet<Entities.CCC.Triage.PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
+            public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
+            public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
@@ -71,8 +75,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientCareEnding> PatientCareEnding { get; set; }
         public DbSet<PatientClinicalDiagnosis> PatientClinicalDiagnosis { get; set; }
         public DbSet<PatientClinicalNotes> PatientClinicalNotes { get; set; }
-        public DbSet<PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
-        public DbSet<PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
+        //public DbSet<PatientFamilyPlanning> PatientFamilyPlanning { get; set; }
+        //public DbSet<PatientFamilyPlanningMethod> PatientFamilyPlanningMethod { get; set; }
         public DbSet<PatientPhdp> PatientPhdp { get; set; }
         public DbSet<PatientProphylaxis> PatientProphylaxis { get; set; }
         public DbSet<PatientReferral> PatientReferral { get; set; }
@@ -84,9 +88,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
         public DbSet<LabOrderEntity> LabOrder { get; set; }
         public DbSet<LabDetailsEntity> LabDetails { get; set; }
-
-
-
+        public DbSet<LabResultsEntity> LabResults { get; set; }
+        public DbSet<PatientAdherenceAssessment> PatientAdherenceAssessments { get; set; }
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
@@ -94,6 +97,13 @@ namespace DataAccess.CCC.Context
 
         //Consent
         public DbSet<Entities.CCC.Consent.PatientConsent> PatientConsents { get; set; }
+
+        //TB ICF/IPT
+        public DbSet<PatientIcf> PatientIcfs { get; set; }
+        public DbSet<PatientIcfAction> PatientIcfActions { get; set; }
+        public DbSet<PatientIpt> PatientIpts { get; set; }
+        public DbSet<PatientIptOutcome> PatientIptOutcomes { get; set; }
+        public DbSet<PatientIptWorkup> PatientIptWorkups { get; set; }
 
     }
 }

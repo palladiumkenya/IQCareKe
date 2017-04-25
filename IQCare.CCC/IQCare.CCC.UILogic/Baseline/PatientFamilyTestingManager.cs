@@ -17,14 +17,15 @@ namespace IQCare.CCC.UILogic.Baseline
         private readonly IPersonManager _personManager = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
         private readonly IPersonRelationshipManager _personRelationshipManager = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
         PersonLookUpManager personLookUp = new PersonLookUpManager();
+        Utility _utility = new Utility();
 
         public int AddPatientFamilyTestings(PatientFamilyTesting p)
         {
             Person person = new Person()
             {
-                FirstName = p.FirstName,
-                MidName = p.MiddleName,
-                LastName = p.LastName,
+                FirstName = _utility.Encrypt(p.FirstName),
+                MidName = _utility.Encrypt(p.MiddleName),
+                LastName = _utility.Encrypt(p.LastName),
                 Sex = p.Sex,
                 //DateOfBirth = p.DateOfBirth,
             };
@@ -75,9 +76,9 @@ namespace IQCare.CCC.UILogic.Baseline
         {
             Person person = new Person()
             {
-                FirstName = p.FirstName,
-                MidName = p.MiddleName,
-                LastName = p.LastName,
+                FirstName = _utility.Encrypt(p.FirstName),
+                MidName = _utility.Encrypt(p.MiddleName),
+                LastName = _utility.Encrypt(p.LastName),
                 Sex = p.Sex,
                 //DateOfBirth = p.DateOfBirth,
             };
@@ -120,9 +121,9 @@ namespace IQCare.CCC.UILogic.Baseline
                     if (hivTesting != null)
                         familyTesting = new PatientFamilyTesting()
                         {
-                            FirstName = person.FirstName,
-                            MiddleName = person.MiddleName,
-                            LastName = person.LastName,
+                            FirstName = utility.Decrypt(person.FirstName),
+                            MiddleName = utility.Decrypt(person.MiddleName),
+                            LastName = utility.Decrypt(person.LastName),
                             Sex = person.Sex,
                             //DateOfBirth = person.DateOfBirth,
                             PersonId = relationship.PersonId,

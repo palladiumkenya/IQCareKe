@@ -75,6 +75,8 @@ namespace DataAccess.Context
              _baseContext.Database.ExecuteSqlCommand(procedureName,parameter);
 
         }
+
+
     }
 }
 

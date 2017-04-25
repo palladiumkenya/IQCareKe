@@ -1,4 +1,5 @@
-﻿using DataAccess.CCC.Context;
+﻿using System;
+using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Repository.Baseline;
 using DataAccess.Context;
@@ -8,12 +9,15 @@ namespace DataAccess.CCC.Repository.Baseline
 {
     public class PatientHivTestingRepository : BaseRepository<PatientHivTesting>, IPatientHvTestingRepository
     {
-        public PatientHivTestingRepository(GreencardContext context) : base(context)
+        private GreencardContext _context;
+
+ public PatientHivTestingRepository() : this(new GreencardContext())
         {
         }
 
-        public PatientHivTestingRepository() : this(new GreencardContext())
+        public PatientHivTestingRepository(GreencardContext context) : base(context)
         {
+            _context = context;
         }
     }
 }

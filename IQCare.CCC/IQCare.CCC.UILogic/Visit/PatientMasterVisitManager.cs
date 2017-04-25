@@ -2,6 +2,7 @@
 using Entities.CCC.Visit;
 using Interface.CCC.Visit;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.ModelBinding;
 
@@ -17,6 +18,18 @@ namespace IQCare.CCC.UILogic.Visit
             try
             {
                 return _result = _patientMasterVisitManager.AddPatientmasterVisit(patientMasterVisit);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<PatientMasterVisit> GetByDate(DateTime date)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetByDate(date);
             }
             catch (Exception ex)
             {

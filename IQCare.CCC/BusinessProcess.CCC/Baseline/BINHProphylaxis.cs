@@ -11,14 +11,18 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BINHProphylaxis : ProcessBase, IINHProphylaxisManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddINHProphylaxis(INHProphylaxis iNHProphylaxis)
         {
-            _unitOfWork.INHProphylaxisRepository.Add(iNHProphylaxis);
-            Result = _unitOfWork.Complete();
-            return Result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.INHProphylaxisRepository.Add(iNHProphylaxis);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public int DeleteINHProphylaxis(int id)
@@ -28,15 +32,24 @@ namespace BusinessProcess.CCC.Baseline
 
         public int UpdateINHProphylaxis(INHProphylaxis iNHProphylaxis)
         {
-            _unitOfWork.INHProphylaxisRepository.Update(iNHProphylaxis);
-            return _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.INHProphylaxisRepository.Update(iNHProphylaxis);
+                Result= _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public List<INHProphylaxis> GetPatientProphylaxes(int patientId)
         {
-            return
-                _unitOfWork.INHProphylaxisRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false)
-                    .ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+               var inhList= _unitOfWork.INHProphylaxisRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false)
+                       .ToList();
+                _unitOfWork.Dispose();
+                return inhList;
+            }
         }
     }
 }

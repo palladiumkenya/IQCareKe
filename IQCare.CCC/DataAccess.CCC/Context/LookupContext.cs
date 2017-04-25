@@ -3,13 +3,14 @@ using DataAccess.Context;
 using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
+using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
     public class LookupContext :BaseContext
     {
 
-        public LookupContext() :  base((DbConnection)DataMgr.GetConnection(), true) {
+        public LookupContext() : base((DbConnection)DataMgr.GetConnection(), true) {
 
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);
@@ -33,5 +34,6 @@ namespace DataAccess.CCC.Context
         public DbSet<PersonLookUp> PersonLookUps { get; set; }
         public DbSet<PersonContactLookUp> PersonContactLookUps { get; set; }
         public DbSet<PatientBaselineLookup> PatientBaselineLookups { get; set; }
+        public DbSet<PatientServiceEnrollmentLookup> PatientServiceEnrollmentLookups { get; set; }
     }
 }

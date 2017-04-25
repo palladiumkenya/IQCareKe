@@ -11,58 +11,81 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientTransferInManager:ProcessBase,IPatientTranfersInManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int AddPatientTranferIn(PatientTransferIn patientTransferIn)
         {
-            _unitOfWork.PatientTransferInRepository.Add(patientTransferIn);
-            return Result = _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientTransferInRepository.Add(patientTransferIn);            
+                 Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }        
         }
 
         public int UpdatePatientTransferIn(PatientTransferIn patientTransferIn)
         {
-            var patientTransfer =
-                _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientTransferIn.PatientId & !x.DeleteFlag)
-                    .FirstOrDefault();
-            if (patientTransfer != null)
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
-                patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
-                patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
-                patientTransfer.MflCode = patientTransferIn.MflCode;
-                patientTransfer.TransferInDate =Convert.ToDateTime(patientTransferIn.TransferInDate);
-                patientTransfer.TreatmentStartDate = patientTransferIn.TreatmentStartDate;
-                patientTransfer.TransferInNotes = patientTransferIn.TransferInNotes;
+                var patientTransfer =
+    _unitOfWork.PatientTransferInRepository.FindBy(
+            x => x.PatientId == patientTransferIn.PatientId & !x.DeleteFlag)
+        .FirstOrDefault();
+                if (patientTransfer != null)
+                {
+                    patientTransfer.CountyFrom = patientTransferIn.CountyFrom;
+                    patientTransfer.CurrentTreatment = patientTransferIn.CurrentTreatment;
+                    patientTransfer.FacilityFrom = patientTransferIn.FacilityFrom;
+                    patientTransfer.MflCode = patientTransferIn.MflCode;
+                    patientTransfer.TransferInDate = Convert.ToDateTime(patientTransferIn.TransferInDate);
+                    patientTransfer.TreatmentStartDate = patientTransferIn.TreatmentStartDate;
+                    patientTransfer.TransferInNotes = patientTransferIn.TransferInNotes;
+                }
+                _unitOfWork.PatientTransferInRepository.Update(patientTransfer);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
             }
-            _unitOfWork.PatientTransferInRepository.Update(patientTransfer);
-            return Result = _unitOfWork.Complete();
         }
 
         public int DeletePatientTransferIn(int id)
         {
-            var patientTransferIn = _unitOfWork.PatientTransferInRepository.GetById(id);
-            _unitOfWork.PatientTransferInRepository.Remove(patientTransferIn);
-            return Result=_unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientTransferIn = _unitOfWork.PatientTransferInRepository.GetById(id);
+                _unitOfWork.PatientTransferInRepository.Remove(patientTransferIn);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public List<PatientTransferIn> GetPatientTransferIns(int patientId)
         {
-            var patientTransferIn =
-                _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .OrderByDescending(x => x.Id)
-                    .ToList();
-            return patientTransferIn;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientTransferIn =
+    _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+        .OrderByDescending(x => x.Id)
+        .ToList();
+                _unitOfWork.Dispose();
+                return patientTransferIn;
+            }
         }
 
         public int CheckifPatientTransferExisits(int patientId)
         {
-            var patientTrnasferId =
-                _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .Select(x => x.Id)
-                    .FirstOrDefault();
-            return Convert.ToInt32(patientTrnasferId);
-
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientTrnasferId =
+    _unitOfWork.PatientTransferInRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+        .Select(x => x.Id)
+        .FirstOrDefault();
+                _unitOfWork.Dispose();
+                return Convert.ToInt32(patientTrnasferId);
+            }
         }
     }
 }

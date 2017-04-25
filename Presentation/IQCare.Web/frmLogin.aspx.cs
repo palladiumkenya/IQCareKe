@@ -331,6 +331,13 @@ namespace IQCare.Web
                     theSCMDV.RowFilter = "ModuleId=201";
                     if (theSCMDV.Count > 0)
                         Session["SCMModule"] = theSCMDV[0]["ModuleName"];
+
+                    DataView theSamePointDispenseDV = new DataView(theDS.Tables[3]);
+                    theSamePointDispenseDV.RowFilter = "ModuleId=20";
+                    if (theSamePointDispenseDV.Count > 0)
+                        Session["SCMSamePointDispense"] = theSamePointDispenseDV[0]["ModuleName"];
+
+
                     Session["BillingON"] = theDS.Tables[3].Select("ModuleName = 'Billing'").Length > 0;
                     Session["AdmissionWardsON"] = theDS.Tables[3].Select("ModuleName = 'Ward Admission'").Length > 0;
                     #endregion

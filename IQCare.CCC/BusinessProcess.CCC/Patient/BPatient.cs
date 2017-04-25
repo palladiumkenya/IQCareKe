@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using Entities.PatientCore;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Common;
@@ -16,8 +14,8 @@ namespace BusinessProcess.CCC.Patient
 {
     public class BPatient : ProcessBase, IPatientManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        //internal int Result;
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // internal int Result;
 
         public int AddPatient(PatientEntity patient)
         {
@@ -55,8 +53,13 @@ namespace BusinessProcess.CCC.Patient
 
         public PatientEntity GetPatient(int id)
         {
-            var patientInfo = _unitOfWork.PatientRepository.GetById(id);
-            return patientInfo;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientInfo = _unitOfWork.PatientRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return patientInfo;
+            }
+                
         }
 
         public int UpdatePatient(PatientEntity patient, int id)
@@ -81,14 +84,24 @@ namespace BusinessProcess.CCC.Patient
 
         public List<PatientEntity> CheckPersonEnrolled(int persionId)
         {
-            List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
-            return person;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
+                _unitOfWork.Dispose();
+                return person;
+            }
         }
 
         public int GetPatientType(int patientId)
         {
-            var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag).Select(x => x.PatientType);  
-                return patientTypeId.FirstOrDefault();          
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
+                                    .Select(x => x.PatientType).FirstOrDefault();
+                _unitOfWork.Dispose();
+                return patientTypeId;
+                //return patientTypeId.FirstOrDefault();
+            }
         }
     }
 }

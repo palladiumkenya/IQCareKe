@@ -1,8 +1,11 @@
 using System;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using Application.Common;
+using System.Data.Entity.ModelConfiguration.Conventions;
+
 namespace DataAccess.Base
 {
     /// <summary>
@@ -20,6 +23,11 @@ namespace DataAccess.Base
        
 
         protected string emrdatabase;
+        public static object _connec;
+        /// <summary>
+        /// Gets the connection.
+        /// </summary>
+        /// <returns></returns>
         protected string reportsdatabase;
         /// <summary>
         /// Initializes a new instance of the <see cref="DataMgr"/> class.
@@ -40,18 +48,27 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static object GetConnection()
         {
+            Console.Write("GetConnection()");
             Utility objUtil = new Utility();
-          //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
+            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
-           // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
-            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;";
+            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
+            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=500;Pooling=true;MultipleActiveResultSets = True;Connection Lifetime=0 ";
+            //using (SqlConnection connection = new SqlConnection(constr))
+            //{
+            //    connection.Open();
+            //    OpenDecryptedSession(connection);
+            //    return connection;
+            //}
             SqlConnection connection = new SqlConnection(constr);
             connection.Open();
             OpenDecryptedSession(connection);
             return connection;
+
         }
-       public static object GetConnection(string connectionName)
+
+        public static object GetConnection(string connectionName)
         {
             Utility objUtil = new Utility();
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get(connectionName));
@@ -93,11 +110,19 @@ namespace DataAccess.Base
         /// Gets the connection for ORM use.
         /// </summary>
         /// <returns></returns>
-        public static string GetOrmConnectionString()
+        public static DbConnection GetOrmConnectionString()
         {
+            Console.WriteLine("GetOrmConnectionString()");
             Utility objUtil = new Utility();
+            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
-            return constr;
+            constr += ";connect timeout=" + CommandTimeOut().ToString();
+            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
+            constr += ";MultipleActiveResultSets = True; Pooling = True;";
+            SqlConnection connection = new SqlConnection(constr);
+           connection.Open();
+            OpenDecryptedSession(connection);
+            return connection;
         }
 
         /// <summary>
@@ -173,6 +198,7 @@ namespace DataAccess.Base
            // theCmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = ApplicationAccess.DBSecurity;
             theCmd.CommandType = CommandType.StoredProcedure;
             theCmd.Connection = (SqlConnection)connection;
+
             
             theCmd.ExecuteNonQuery();
         }

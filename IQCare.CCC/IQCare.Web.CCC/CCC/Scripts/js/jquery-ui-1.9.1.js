@@ -9063,7 +9063,7 @@ $.widget("ui.dialog", {
 		maxWidth: false,
 		minHeight: 150,
 		minWidth: 150,
-		modal: false,
+		modal: true,
 		position: {
 			my: "center",
 			at: "center",

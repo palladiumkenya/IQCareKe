@@ -10,52 +10,88 @@ namespace BusinessProcess.CCC
 {
     public class BPatientAppointment : ProcessBase, IPatientAppointment
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
 
         public int AddPatientAppointments(PatientAppointment p)
         {
-            _unitOfWork.PatientAppointmentRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientAppointmentRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
+   
         }
 
         public PatientAppointment GetPatientAppointments(int id)
         {
-            PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-            return appointment;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return appointment;
+            }
+          
         }
 
         public void DeletePatientAppointments(int id)
         {
-            PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
-            _unitOfWork.PatientAppointmentRepository.Remove(appointment);
-            _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientAppointment appointment = _unitOfWork.PatientAppointmentRepository.GetById(id);
+                _unitOfWork.PatientAppointmentRepository.Remove(appointment);
+                _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+            }
+        
         }
 
         public int UpdatePatientAppointments(PatientAppointment p)
         {
-            _unitOfWork.PatientAppointmentRepository.Update(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientAppointmentRepository.Update(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
+        
         }
 
         public List<PatientAppointment> GetByPatientId(int patientId)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
-            return appointments;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientAppointment> appointments =
+                       _unitOfWork.PatientAppointmentRepository.GetByPatientId(patientId);
+                _unitOfWork.Dispose();
+                return appointments;
+            }
+
         }
 
         public List<PatientAppointment> GetByDate(DateTime date)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDate(date);
-            return appointments;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDate(date);
+                _unitOfWork.Dispose();
+                return appointments;
+            }
+          
         }
 
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
-            List<PatientAppointment> appointments = _unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
-            return appointments;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientAppointment> appointments =
+                        _unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
+                _unitOfWork.Dispose();
+                return appointments;
+            }
         }
     }
 }

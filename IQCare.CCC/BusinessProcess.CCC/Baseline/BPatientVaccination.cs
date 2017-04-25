@@ -9,14 +9,18 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientVaccination : ProcessBase, IPatientVaccinationManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         internal int Result;
 
         public int addPatientVaccination(PatientVaccination patientVaccination)
         {
-            _unitOfWork.PatientVaccinationRepository.Add(patientVaccination);
-            Result = _unitOfWork.Complete();
-            return Result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientVaccinationRepository.Add(patientVaccination);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public int DeletePatientVaccination(int id)

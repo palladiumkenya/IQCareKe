@@ -11,54 +11,75 @@ namespace BusinessProcess.CCC.Baseline
 {
     public class BPatientTreatmentInitiationManager:ProcessBase,IPatientTreatmentInitiationManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int Result = 0;
 
         public int AddPatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            _unitOfWork.PatientTreatmentInitiationRepository.Add(patientTreatmentInitiation);
-            return _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientTreatmentInitiationRepository.Add(patientTreatmentInitiation);
+                Result= _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public int UpdatePatientTreatmentInitiation(PatientTreatmentInitiation patientTreatmentInitiation)
         {
-            var patientTreatment =
-                _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
-                    x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
-            if (patientTreatment != null)
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
-                patientTreatment.BaselineViralloadDate = patientTreatmentInitiation.BaselineViralloadDate;
-                patientTreatment.Cohort = patientTreatmentInitiation.Cohort;
-                patientTreatment.DateStartedOnFirstline = patientTreatmentInitiation.DateStartedOnFirstline;
-                patientTreatment.Regimen = patientTreatmentInitiation.Regimen;
+                var patientTreatment =
+    _unitOfWork.PatientTreatmentInitiationRepository.FindBy(
+        x => x.PatientId == patientTreatmentInitiation.PatientId & !x.DeleteFlag).FirstOrDefault();
+                if (patientTreatment != null)
+                {
+                    patientTreatment.BaselineViralload = patientTreatmentInitiation.BaselineViralload;
+                    patientTreatment.BaselineViralloadDate = patientTreatmentInitiation.BaselineViralloadDate;
+                    patientTreatment.Cohort = patientTreatmentInitiation.Cohort;
+                    patientTreatment.DateStartedOnFirstline = patientTreatmentInitiation.DateStartedOnFirstline;
+                    patientTreatment.Regimen = patientTreatmentInitiation.Regimen;
 
-                _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
-                Result = _unitOfWork.Complete();
+                    _unitOfWork.PatientTreatmentInitiationRepository.Update(patientTreatment);
+                    Result = _unitOfWork.Complete();
+                }
+                _unitOfWork.Dispose();
+                return Result;
             }
-
-            return Result;
         }
 
         public int DeletePatientTreatmentInitiation(int id)
         {
-            var item = _unitOfWork.PatientTreatmentInitiationRepository.GetById(id);
-            _unitOfWork.PatientTreatmentInitiationRepository.Remove(item);
-            return _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var item = _unitOfWork.PatientTreatmentInitiationRepository.GetById(id);
+                _unitOfWork.PatientTreatmentInitiationRepository.Remove(item);
+                 _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
         }
 
         public List<PatientTreatmentInitiation> GetPatientTreatmentInitiation(int patientId)
         {
-           return  _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientInitiation = _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId).ToList();
+                _unitOfWork.Dispose();
+                return patientInitiation;
+            }
         }
 
         public int CheckIfPatientTreatmentExists(int patientId)
         {
-            var recordExists =
-                _unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var recordExists =_unitOfWork.PatientTreatmentInitiationRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                     .Select(x => x.Id)
                     .FirstOrDefault();
-            return Convert.ToInt32(recordExists);
+                _unitOfWork.Dispose();
+                return Convert.ToInt32(recordExists);
+            }
         }
     }
 }

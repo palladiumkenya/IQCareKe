@@ -22,8 +22,6 @@ namespace IQCare.Web.Laboratory
     /// <seealso cref="System.Web.UI.Page" />
     public partial class LabResultPage : System.Web.UI.Page
     {
-       
-       // public int PatientMasterVisitId = 0;
         /// <summary>
         /// The request MGR
         /// </summary>
@@ -31,8 +29,8 @@ namespace IQCare.Web.Laboratory
        /// <summary>
         /// The redirect URL
         /// </summary>
-        private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-
+       // private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+        private string RedirectUrl = "../CCC/Home.aspx";
         /// The is error
         /// </summary>
         private bool isError = false;
@@ -122,16 +120,13 @@ namespace IQCare.Web.Laboratory
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Result Page";
             (Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Lab Result Page";
             Master.ExecutePatientLevel = true;
-
-          
             if (Application["AppCurrentDate"] != null)
             {
                 hdappcurrentdate.Value = Application["AppCurrentDate"].ToString();
             }
             if (!IsPostBack)
             {
-                //this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
-                this.LabOrderId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                this.LabOrderId = Convert.ToInt32(Session["PatientVisitId"]);
                 if (LabOrderId > 0)
                 {
                     this.PopulateRequest(LabOrderId);
@@ -209,9 +204,7 @@ namespace IQCare.Web.Laboratory
 
                 Session["PatientInformation"] = theDS.Tables[0];
             }
-        
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
-            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, patientId);
+            this.thisLabOrder = requestMgr.GetLabOrder(this.LocationId, labOrderId);
             if (this.thisLabOrder.ModuleId <= 0)
             {
                 EnrollmentService es = new EnrollmentService(PatientId);
@@ -376,7 +369,7 @@ namespace IQCare.Web.Laboratory
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            // this.BindLabTests();
+            this.BindLabTests();
             divError.Visible = isError;
             btnExitPage.OnClientClick = string.Format("javascript:window.location='{0}'; return false;", this.RedirectUrl);
         }
@@ -538,7 +531,7 @@ namespace IQCare.Web.Laboratory
                 string labOrderId = rowView.LabOrderId.ToString();
                 string labTestId = rowView.TestId.ToString();
 
-                int labOrdertestId = rowView.Id;
+                int labOrdertestId = rowView.LabTestId;
                 Label labReportedbyDate = e.Item.FindControl("labReportedbyDate") as Label;
               //  Label labelReportedbyName = e.Item.FindControl("labelReportedbyName") as Label;
                 Button buttonResult = e.Item.FindControl("buttonResult") as Button;

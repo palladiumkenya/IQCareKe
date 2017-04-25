@@ -3,128 +3,220 @@
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
 
-<div class="col-md-12" style="padding-top: 1%">
-    <label class="control-label pull-left"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Drup Prescription </label>
-</div>
-<div class="col-md-12 bs-callout bs-callout-danger">
-    <h4 class="pull-left"><strong>Pending Dispensing </strong></h4>
-</div>
-<div class="col-md-12">
+<div class="col-md-12" style="padding-top: 10px" id="PharmacySection" data-parsley-validate="true" data-show-errors="true">
     <%--<div class="panel panel-info">--%>
 
-                    <%--<div class="panel-body">--%>
+        <%--<div class="panel-body">--%>
+                <div class="col-md-12">
+                    <div class="col-md-12"><hr /></div>
                             <div class="col-md-12">
-                                    <div class="col-md-12"><label class="control-label pull-left"> Drup Prescription </label></div>
-                                    <div class="col-md-12"><hr /></div>
-                                        <div class="col-md-12">
-                                                <div class="col-md-4 form-group">  
-                                                    <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
-                                                    <div class="col-md-12 pull-right">
-                                                        <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);"/>
-                                                    </div>
-                                                              
-                                                </div>   
-                                                <div class="col-md-4 form-group">
-                                                <div class="col-md-12"><label class="control-label pull-left">Reason</label></div>
-                                                <div class="col-md-12  pull-right">
-                                                    <asp:DropDownList runat="server" id="ddlSwitchInterruptionReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
-                                                </div>
-                                                           
-                                                </div> <%--.col-md-12--%>
+                                    <div class="col-md-3 form-group">  
+                                        <div class="col-md-12"><label class="control-label pull-left">Treatment Program</label></div>
+                                        <div class="col-md-12 pull-right">
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentProgram" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        </div>                    
+                                    </div>   
+                                    <div class="col-md-3 form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Period Taken</label></div>
+                                        <div class="col-md-12  pull-right">
+                                            <asp:DropDownList runat="server" id="ddlPeriodTaken" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                        </div>                  
+                                    </div>
 
-                                                <div class="col-md-4 form-group">
-                                                             
-                                                    <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
-                                                    <div class="col-md-12  pull-right">
-                                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" />
-                                                    </div>
-                                                              
-                                                </div>  
-                                        </div>
-                                            <div class="col-md-6">
-                                                                
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-12"><hr /></div>
-                                                    <div class="col-md-12">
-                                                        <div class="col-md-3 pull-left"><label class="control-label pull-left">Drug</label></div>
-                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
-                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
-                                                        <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
-                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
-                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
-                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
-                                                        <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
-                                                    </div>  
-                                                    <div class="col-md-12 panel-body">
-                                                        <div class="col-md-3">
-                                                            <input id="txtDrugs" type="text" class="form-control input-sm" ClientIDMode="Static" placeholder="type to search...." runat="server" style="width:100%" />
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
-                                                        </div>
-                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
-                                                        <div class="col-md-2">
-                                                            <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>
-                                                        </div>
-                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
-                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
-                                                        <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" /> </div>
-                                                        <div class="col-md-1 pull-left">
-                                                            <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                                            <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th><span class="text-primary">DrugId</span></th>
-                                                                        <th><span class="text-primary">BatchId</span></th>
-                                                                        <th><span class="text-primary">FreqId</span></th>
-                                                                        <th><span class="text-primary">DrugAbbr</span></th>
-                                                                        <th><span class="text-primary">Drug</span></th>
-                                                                        <th><span class="text-primary">Batch</span></th>
-                                                                        <th><span class="text-primary">Dose</span></th>
-                                                                        <th><span class="text-primary">Frequency</span></th>
-                                                                        <th><span class="text-primary">Duration</span></th>
-                                                                        <th><span class="text-primary">Qty Prescribed</span></th>
-                                                                        <th><span class="text-primary">Qty Dispensed</span></th>
-                                                                        <th><span class="text-primary"></span></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody></tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                            </div>            
+                                    <div class="col-md-3 form-group">  
+                                        <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
+                                        <div class="col-md-12 pull-right">
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        </div>                    
+                                    </div>   
+                                    <div class="col-md-3 form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Reason</label></div>
+                                        <div class="col-md-12  pull-right">
+                                            <asp:DropDownList runat="server" id="ddlSwitchInterruptionReason" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                        </div>                  
+                                    </div>
+
+                                    
+
+                                     
                             </div>
-                                         
-                        <div class="col-md-12">
-                                <div class="col-md-12"><hr/></div>
-                                <div class="col-md-4"></div>
-                                            
-                                <div class="col-md-8">
-                                <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
-                                    <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                                    <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
-                                    <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
-                                <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
-                                </div>
-                                             
-                        </div>
-                    <%--</div>--%><%-- .panel-body--%>
+                            <div class="col-md-12">
+                                <div class="col-md-3 form-group">                  
+                                    <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
+                                    <div class="col-md-12  pull-right">
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                    </div>                        
+                                </div> 
+                                <div class="col-md-3 form-group">                  
+                                    <div class="col-md-12"><label class="control-label pull-left">Regimen </label></div>     
+                                    <div class="col-md-12  pull-right">
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlRegimen" ClientIDMode="Static" />
+                                    </div>                        
+                                </div> 
+                            </div>
 
-                <%--</div>--%><%-- .panel--%>
+                            <div class="col-md-12"><hr /></div>
+                                <div class="col-md-12">
+                                    <div class="col-md-1 pull-left"><label class="control-label pull-left">Drug</label></div>
+                                    <div class="col-md-11">
+                                        <input id="txtDrugs" type="text" class="form-control input-sm" ClientIDMode="Static" runat="server" placeholder="Type to search..." style="width:100%" />
+                                    </div>                        
+                                </div>
+                                
+                                <div class="col-md-12" style="padding-top:10px">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-12">
+                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
+                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
+                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
+                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Prophylaxis</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
+                                        </div>  
+                                        <div class="col-md-12 panel-body">
+                                            <div class="col-md-2">
+                                                <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                            </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-2">
+                                                <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>
+                                            </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
+                                            <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> </div>
+                                            <div class="col-md-1"><input type="checkbox" runat="server" id="chkProphylaxis" ClientIDMode="Static" /> </div>
+                                            <div class="col-md-1 pull-left">
+                                                <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                                <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span class="text-primary">DrugId</span></th>
+                                                            <th><span class="text-primary">BatchId</span></th>
+                                                            <th><span class="text-primary">FreqId</span></th>
+                                                            <th><span class="text-primary">DrugAbbr</span></th>
+                                                            <th><span class="text-primary">Drug</span></th>
+                                                            <th><span class="text-primary">Batch</span></th>
+                                                            <th><span class="text-primary">Dose</span></th>
+                                                            <th><span class="text-primary">Frequency</span></th>
+                                                            <th><span class="text-primary">Duration</span></th>
+                                                            <th><span class="text-primary">Qty Prescribed</span></th>
+                                                            <th><span class="text-primary">Qty Dispensed</span></th>
+                                                            <th><span class="text-primary">Prophylaxis</span></th>
+                                                            <th><span class="text-primary"></span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        </div>
+                                </div>            
+                </div>
+                                         
+            <div class="col-md-12">
+                    <div class="col-md-12"><hr/></div>
+                    <div class="col-md-4"></div>
+                                            
+                    <div class="col-md-8">
+                    <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
+                        <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
+                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                    <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
+                    </div>
+                                             
+            </div>
+        <%--</div>--%><%-- .panel-body--%>
+
+    <%--</div>--%><%-- .panel--%>
 
 </div><%-- .col-md-12--%>
 
 <script type="text/javascript">
+    var pmscm = "<%=PMSCM%>";
+    var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
+    var pmscmFlag = "0";
+    
     $(document).ready(function () {
-        drugList();
+        
+        //alert(pmscmSamePointDispense);
+        if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
+            pmscmFlag = "1";
+            drugList(1);
+            $("#ddlBatch").prop('disabled', false);
+            $("#txtQuantityDisp").prop('disabled', false);
+        }
+        else if (pmscm == "PM/SCM") {
+            drugList(1);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+        }
+        else {
+            drugList(0);
+            $("#ddlBatch").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', true);
+        }
     });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtDose').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtDuration').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtQuantityPres').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtQuantityDisp').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
       var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
                 ajax: {
                     type: "POST",
@@ -171,13 +263,13 @@
                 });
        
               
-           function drugList() {
+           function drugList(pmscm) {
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
                    minChars: 1
                });
-
+               
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
                    var result = this.value.split("~");
                    getBatches(result[0]);
@@ -185,17 +277,18 @@
                    $("#<%=drugID.ClientID%>").val(result[0]);
                    $("#<%=drugAbbr.ClientID%>").val(result[1]);
                });
-        
+               
                $.ajax({
                    url: '../WebService/PatientEncounterService.asmx/GetDrugList',
                    type: 'POST',
                    dataType: 'json',
-                   data: "{'regimenLine':''}",
+                   data: "{'PMSCM':'" + pmscm + "'}",
                    contentType: "application/json; charset=utf-8",
-           
+                   
                    success: function (data) {
                        var serverData = data.d;
                        var drugList = [];
+                       
                        for (var i = 0; i < serverData.length; i++) {
                            //drugList.push(serverData[i][1]);
                            drugList.push({ label: serverData[i][1], value: serverData[i][0] });
@@ -217,7 +310,7 @@
                contentType: "application/json; charset=utf-8",
            
                success: function (data) {
-                   if(pmscm != "")
+                   if(pmscmFlag == "1")
                    {
                        var serverData = data.d;
                        var batchList = [];
@@ -227,7 +320,6 @@
                            $("#<%=ddlBatch.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
                        }
                    }
-                   
                }
            });
        }
@@ -235,7 +327,7 @@
        function drugSwitchInterruptionReason(treatmentPlan)
        {
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
-           if(valSelected == "Continue Current Treatment" || valSelected == "Select")
+           if (valSelected === "Continue current treatment" || valSelected === "Select")
            {
                 $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', true);
            }
@@ -260,47 +352,143 @@
            });
        }
 
+       function selectRegimens(regimenLine)
+       {
+           var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
+           if(valSelected === "Select")
+           {
+                $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
+           }
+           else{
+               $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
+           }
+           
+           $.ajax({
+               url: '../WebService/PatientEncounterService.asmx/GetRegimensBasedOnRegimenLine',
+               type: 'POST',
+               dataType: 'json',
+               data: "{'RegimenLine':'" + regimenLine + "'}",
+               contentType: "application/json; charset=utf-8",
+               success: function (data) {
+                   var serverData = data.d;
+                   $("#<%=ddlRegimen.ClientID%>").find('option').remove().end();
+			       $("#<%=ddlRegimen.ClientID%>").append('<option value="0">Select</option>');
+                   for (var i = 0; i < serverData.length; i++) {
+                      $("#<%=ddlRegimen.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
+                   }
+               }
+           });
+       }
+
 
         function saveUpdatePharmacy()
         {
-            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
-            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
-            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+            if ($('#PharmacySection').parsley().validate()) {
 
-            ///////////////////////////////////////////////////////////////////
-            var rowCount = $('#dtlDrugPrescription tbody tr').length;
-            var drugPrescriptionArray = new Array();
-            try {
-                for (var i = 0 ; i < rowCount; i++) {
-                    drugPrescriptionArray[i] = {
-                        "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                        "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                        "Dose": DrugPrescriptionTable.row(i).data()[6],
-                        "Duration": DrugPrescriptionTable.row(i).data()[8],
-                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10]
+                var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+                var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+                var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+                var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+                var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+                var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+                var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+
+                var allAbbr = "";
+                ///////////////////////////////////////////////////////////////////
+                var rowCount = $('#dtlDrugPrescription tbody tr').length;
+                var drugPrescriptionArray = new Array();
+                try {
+                    for (var i = 0 ; i < rowCount; i++) {
+                        drugPrescriptionArray[i] = {
+                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                            "FreqId": DrugPrescriptionTable.row(i).data()[2],
+                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
+                            "Dose": DrugPrescriptionTable.row(i).data()[6],
+                            "Duration": DrugPrescriptionTable.row(i).data()[8],
+                            "qtyPres": DrugPrescriptionTable.row(i).data()[9],
+                            "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
+                            "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                        }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
                     }
                 }
-            }
-            catch (ex) { }
-            //////////////////////////////////////////////////////////////////
-           
-            $.ajax({
-                url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
-                type: 'POST',
-                dataType: 'json',
-                data: "{'TreatmentPlan':'" + treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" + 
-                    regimenLine + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" + JSON.stringify(drugPrescriptionArray) + "'}",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    toastr.success(data.d, "Saved successfully");
-                },
-                error: function (data) {
-                    toastr.error(data.d, "Error");
+                catch (ex) { }
+                //////////////////////////////////////////////////////////////////
+                allAbbr = allAbbr.replace(/\/$/, "");
+                var sumAllAbbr = 0;
+                var sumSelectedRegimen = 0;
+                try {
+                    var regExp = /\(([^)]+)\)/;
+                    var matches = regExp.exec(regimenText);
+
+                    var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+
+                    for (var i = 0; i < allAbbr.length; i++) {
+                        sumAllAbbr += allAbbr.charCodeAt(i);
+                    }
+
+                    for (var i = 0; i < selectedRegimen.length; i++) {
+                        sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                    }
+
                 }
-            });
+                catch (err) { }
+
+                if (sumAllAbbr > 0) {
+                    if (sumAllAbbr != sumSelectedRegimen) {
+                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                                treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                                regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                                JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                toastr.success(data.d, "Saved successfully");
+                            },
+                            error: function (data) {
+                                toastr.error(data.d, "Error");
+                            }
+                        });
+                    }
+                }
+                else {
+                    $.ajax({
+                        url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                            regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            toastr.success(data.d, "Saved successfully");
+                        },
+                        error: function (data) {
+                            toastr.error(data.d, "Error");
+                        }
+                    });
+                }
+
+            }
+            else {
+                toastr.error("Please enter missing fields.");
+            }
+
+
+            
         }
 
         function CalculateQtyPrescribed() {
@@ -333,5 +521,38 @@
 
 
         }
+
+    function getCurrentRegimen() {
+        var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+        var treatmentPlanId = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+        
+
+        if (treatmentPlan == "Continue current treatment") {
+            $.ajax({
+                url: '../WebService/PatientEncounterService.asmx/GetCurrentRegimen',
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var serverData = data.d;
+                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                    selectRegimens(serverData[0][0]);
+
+                    function waitForRegimens(callback) {
+                        window.setTimeout(function () {  //acting like this is an Ajax call
+                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                        }, 1000);
+                    }
+
+                    waitForRegimens();
+
+                },
+                error: function (data) {
+                    //toastr.error(data.d, "Failed to get Multiplier");
+                }
+            });
+        }
+
+    }
 
 </script>

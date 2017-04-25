@@ -1835,7 +1835,7 @@ namespace IQCare.SCM
             {
                 IBilling bMgr = (IBilling)ObjectFactory.CreateInstance("BusinessProcess.Billing.BBilling,BusinessProcess.Billing");
                 itemPrice = bMgr.GetItemPrice(theItemId, itemTypeId, null);
-                theSellingPrice = itemPrice.Amount;
+                theSellingPrice = Convert.ToDecimal(itemPrice.Amount);
                 this.priceBundled = itemPrice.IsBundled;
             }
             catch
@@ -1895,7 +1895,8 @@ namespace IQCare.SCM
 
                     foreach (DataRow dr in dt1.Rows)
                     {
-                        totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
+                        if(dr["QtyDisp"].ToString() != "")
+                            totalOqdQty = totalOqdQty + Convert.ToDecimal(dr["QtyDisp"].ToString());
                     }
                     //if (PresdispenceQty <= totalOqdQty)
                     //{
@@ -2076,7 +2077,8 @@ namespace IQCare.SCM
                     }
                     // txtDose.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[7].Value).ToString();
                     //  txtDuration.Text = Convert.ToDecimal(grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[9].Value).ToString();
-                    cmbFrequency.SelectedValue = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
+                    //cmbFrequency.SelectedValue = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
+                    cmbFrequency.SelectedText = grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[17].Value.ToString();
 
                     if (grdDrugDispense.Rows[grdDrugDispense.CurrentRow.Index].Cells[11].Value.ToString() != "0.00")
                     {

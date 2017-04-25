@@ -5,6 +5,8 @@ using Interface.CCC.Visit;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 
 
 namespace IQCare.CCC.UILogic
@@ -12,96 +14,87 @@ namespace IQCare.CCC.UILogic
     public class ListLabOrder
     {
         
-        public string labType { get; set; }
-        public string orderReason { get; set; }
-        public string results { get; set; }
-        public DateTime labOrderDate { get; set; }
-        public int labOrderId { get; set; }
-        public string labNotes { get; set; }
+        public string LabType { get; set; }
+        public string OrderReason { get; set; }
+        public string Results { get; set; }
+        public DateTime LabOrderDate { get; set; }
+        public int LabOrderId { get; set; }
+        //public int labTestId { get; set; }
+        public string LabNotes { get; set; }
 
     }
     public class PatientLabOrderManager
     {
         private string Msg { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+        ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
-       
-        public int savePatientLabOrder(int patient_ID, int facilityID, int patientMasterVisitId, string patientLabOrder)
+
+        public int savePatientLabOrder(int patient_ID, int patient_Pk, int userId, int facilityID, int patientMasterVisitId, string patientLabOrder)
         {
-           
+            int returnLabOrderSuccess = 0;
             try
             {
                 var jss = new JavaScriptSerializer();
-            IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+                IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
 
-                 if (patient_ID > 0)
+                if (patient_ID > 0)
                 {
-
-                    int returnValue;
-                    int returnLabOrderSuccess;
+                   
+                  
                     var pending = "Pending";
-
-
                     foreach (ListLabOrder t in data)
                     {
-                        PatientLabTracker labTracker = new PatientLabTracker()
-                        {
-                            PatientId = patient_ID,
-                            PatientMasterVisitId = patientMasterVisitId,
-                            LabName = t.labType,
-                            Reasons = t.orderReason, 
-                            Results = pending,
-                            SampleDate = t.labOrderDate
-                            //LabNotes =data[i].labNotes --take to clinical notes 
+                                // Get LabTestID
+                                string labType = t.LabType;
+                                if (labType != null)
+                                {
+                                LookupLabs testId = _lookupTest.GetLabTestId(labType);
+                                int labTestId = testId.Id;
 
-                        };
-                        returnValue = _mgr.AddPatientLabTracker(labTracker);
+                            LabOrderEntity labOrder = new LabOrderEntity()
+                            {
+                                Ptn_pk = patient_Pk,
+                                LocationId = facilityID,
+                                ModuleId = 211,
+                                OrderedBy = userId,
+                                LabTestId = labTestId,
+                                PatientMasterVisitId = patientMasterVisitId,
+                                ClinicalOrderNotes = t.LabNotes,
+                                OrderStatus = pending,
+                                OrderDate = t.LabOrderDate,
+                                CreatedBy = userId,
+                                UserId = userId,
+                                PreClinicLabDate = t.LabOrderDate,
+                                LabName = t.LabType,
+                                patientId = patient_ID,
+                                Reason = t.OrderReason
+                            };
+                          returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
+                            return returnLabOrderSuccess;
 
-                        LabOrderEntity labOrder = new LabOrderEntity()
-                        {
-                            Ptn_pk = patient_ID,
-                            LocationId = facilityID,
-                            visitid = patientMasterVisitId,
-                            ClinicalOrderNotes = t.labNotes,
-                            OrderStatus = pending,
-                            OrderDate = t.labOrderDate
-                            //UserId = data[i].labType,
-                            //ClinicalOrderNotes = data[i].results,       
-                            //LocationId = data[i].orderReason,
-                        };
-                        returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
 
-                      
-                        //Populate lab details
-                        //if (returnLabOrderSuccess > 0)
-                        //{
-                        
-                        //    LabDetailsEntity LabDetails = new LabDetailsEntity()
-                        //    {
-                        //        LabOrderId = labOrderId,
-                        //        LabTestId = facilityID,
-                        //        TestNotes = data[i].labNotes,
-                        //        //IsParent = data[i].labNotes,
-                        //        //ParentTestId = data[i].results,
-                        //        //ResultNotes = data[i].labOrderDate
-                        //        //ResultStatus = data[i].labType,
-                        //        //ResultDate = data[i].results,
-                        //       // UserId = data[i].orderReason,
-                        //        //StatusDate = data[i].orderReason,
-                        //    };
 
-                        //    returnLabDetailsSuccess = _mgr.AddPatientLabDetails(LabDetails);
-                        // }
-                        return returnValue;
+                        }
                     }
                 }
-             }
-            catch (Exception ex)
-            {
-                Msg = ex.Message + ' ' + ex.InnerException;
             }
+            catch (Exception ex)
+             {
+                Msg = ex.Message + ' ' + ex.InnerException;
+             }
 
             return int.Parse(Msg);
+        }
+        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+        {
+            var pendingLabs = _mgr.GetVlPendingCount(facilityId);
+            return pendingLabs;
+        }
+        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+        {
+            var completeLabs = _mgr.GetVlCompleteCount(facilityId);
+            return completeLabs;
         }
     }
    }

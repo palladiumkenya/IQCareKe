@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Services;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Visit;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -14,6 +16,7 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientMasterVisitService : System.Web.Services.WebService
     {
+        private string _jsonMessage = "";
 
         [WebMethod(EnableSession = true)]
         public int PatientCheckin()
@@ -29,7 +32,7 @@ namespace IQCare.Web.CCC.WebService
                 /* Assign to patientMsterVisitId session*/
                 Session["EncounterStatusId"] = 1;
                 Session["PatientMasterVisitId"] = result;
-
+                Session["PatientEditId"] = patientId;
             }
             catch (Exception e)
             {
@@ -49,14 +52,31 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
                 result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
                 Session["EncounterStatusId"] = 0;
+                Session["PatientEditId"] = 0;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message + ' ' + e.InnerException);
+                throw new Exception(e.Message);
             }
 
             return result;
 
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string PatientCareEndingStatus()
+        {
+            try
+            {
+                int patientId = Convert.ToInt32(Session["patientId"]);
+                PatientCareEndingManager patientCareEnding=new PatientCareEndingManager();
+                _jsonMessage = JsonConvert.SerializeObject(patientCareEnding.GetPatientCareEndings(patientId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage=e.Message;
+            }
+            return _jsonMessage;
         }
     }
 }

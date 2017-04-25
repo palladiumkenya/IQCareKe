@@ -1,7 +1,7 @@
-﻿using DataAccess.Base;
+﻿using System;
+using DataAccess.Base;
 using Entities.CCC.Triage;
 using Interface.CCC;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
@@ -11,70 +11,111 @@ namespace BusinessProcess.CCC
 {
     public class BPatientVitals : ProcessBase, IPatientVitals
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
         public int AddPatientVitals(PatientVital p)
         {
-            _unitOfWork.PatientVitalsRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+
+                _unitOfWork.PatientVitalsRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
+     
         }
 
         public PatientVital GetPatientVitals(int patientId)
         {
-            var vitals =
-         _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-             .OrderBy(x => x.Id)
-             .FirstOrDefault()
-            ;
-            return vitals;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                                .OrderBy(x => x.Id)
+                                .FirstOrDefault();
+                _unitOfWork.Dispose();
+                return vitals;
+            }
+
         }
 
         public void DeletePatientVitals(int id)
         {
-            PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
-            _unitOfWork.PatientVitalsRepository.Remove(vital);
-            _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
+                _unitOfWork.PatientVitalsRepository.Remove(vital);
+                _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+            }
+    
         }
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            var vitals = new PatientVital()
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                Temperature = p.Temperature,
-                RespiratoryRate = p.RespiratoryRate,
-                HeartRate = p.HeartRate,
-                BpSystolic = p.BpSystolic,
-                Bpdiastolic = p.Bpdiastolic,
-                Height = p.Height,
-                Weight = p.Weight,
-                Muac = p.Muac,
-                SpO2 = p.SpO2
+                var vitals = new PatientVital()
+                {
+                    Temperature = p.Temperature,
+                    RespiratoryRate = p.RespiratoryRate,
+                    HeartRate = p.HeartRate,
+                    BpSystolic = p.BpSystolic,
+                    Bpdiastolic = p.Bpdiastolic,
+                    Height = p.Height,
+                    Weight = p.Weight,
+                    Muac = p.Muac,
+                    SpO2 = p.SpO2
 
-            };
-            _unitOfWork.PatientVitalsRepository.Update(vitals);
-            _result = _unitOfWork.Complete();
-            return _result;
+                };
+                _unitOfWork.PatientVitalsRepository.Update(vitals);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
+
         }
 
         public PatientVital GetByPatientId(int patientId)
         {
-            //PatientVital vital = _unitOfWork.PatientVitalsRepository.GetByPatientId(patientId);
-            PatientVital vital =
-                _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
-                    .OrderByDescending(x => x.Id)
-                    .FirstOrDefault();
-            return vital;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientVital vital =
+                                        _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                                            .OrderByDescending(x => x.Id)
+                                            .FirstOrDefault();
+                _unitOfWork.Dispose();
+                return vital;
+            }
+      
         }
 
         public List<PatientVital> GetCurrentPatientVital(int patientId)
         {
-            var vitals =
-                    _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                                .OrderBy(x => x.Id)
+                                .ToList();
+                _unitOfWork.Dispose();
+                return vitals;
+            }
+        }
+
+        public PatientVital GetPatientVitalsByMasterVisitId(int patientId, int patientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                    unitOfWork.PatientVitalsRepository.FindBy(
+                            x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId)
                         .OrderBy(x => x.Id)
-                        .ToList()
-                ;
-            return vitals;
+                        .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vitals;
+            }
         }
     }
 }

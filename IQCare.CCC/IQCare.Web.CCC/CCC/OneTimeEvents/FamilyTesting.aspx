@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="FamilyTesting.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.FamilyTesting" %>
 
-<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
 
@@ -489,12 +489,15 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var familyMembers = [];
+
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
+                date:0,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
             $('#TestingDate').datepicker({
                 allowPastDates: true,
+                date:0,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
             $('#DateOfBirth').datepicker({
@@ -525,6 +528,7 @@
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(15, 'years').format('DD-MMM-YYYY');
+                    //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
                         return false;
@@ -545,6 +549,10 @@
                         toastr.error("Baseline HIV status date cannot be before the date of birth.");
                         return false;
                     } 
+                    if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
+                        toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                        return false;
+                    }
                     if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
                         toastr.error("HIV testing result date cannot be before the date of birth.");
                         return false;
@@ -574,6 +582,7 @@
                             cccreferal +
                             "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                         $("#tblFamilyTesting>tbody:first").append('' + table + '');
+                       
                         var testing = {
                             firstName: firstName,
                             middleName: middleName,
@@ -667,21 +676,27 @@
         }
 
         function CccEnabled() {
-            if ($("#hivtestingresult :selected").text() === "Tested Negative") {
+            if (($("#hivtestingresult :selected").text() === "Tested Negative") || ($("#hivtestingresult :selected").text() === "Never Tested")) {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',true);
             }
             else if ($("#CccReferal").val() === 'False') {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
             } else {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',false);
             }
         }
-
+      
         function BaselineEnabled() {
             if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',true);
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
             } else {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',false);
             }
@@ -689,9 +704,11 @@
 
         function HivEnabled() {
             if ($("#hivtestingresult :selected").text() === "Never Tested") {
+              
                 $("#<%=HIVTestingDate.ClientID%>").prop('disabled',true);
                 $("#TestingDate").addClass('noneevents');
             } else {
+              
                 $("#<%=HIVTestingDate.ClientID%>").prop('disabled',false);
                 $("#TestingDate").removeClass('noneevents');
             }

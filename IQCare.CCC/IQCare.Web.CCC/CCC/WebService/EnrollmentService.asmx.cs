@@ -1,14 +1,10 @@
 ﻿using IQCare.CCC.UILogic;
-using Entities.CCC;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
-using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Enrollment;
@@ -163,16 +159,22 @@ namespace IQCare.Web.CCC.WebService
                                 phone = personContacts[0].MobileNumber;
                             }
 
+                            var MaritalStatusId = 0;
+                            if (maritalStatus != null)
+                            {
+                                MaritalStatusId = maritalStatus.MaritalStatusId;
+                            }
+
                             ptn_Pk = mstPatientLogic.InsertMstPatient(
                                 utility.Decrypt(patient_person_details.FirstName), 
                                 utility.Decrypt(patient_person_details.LastName),
                                 utility.Decrypt(patient_person_details.MiddleName),
                                 facility.FacilityID,
                                 patientEnrollmentId, 
-                                patientEntryPointId,
+                                patientEntryPointId ,
                                 DateTime.Now, patient_person_details.Sex,
                                 patient.DateOfBirth,
-                                1, maritalStatus.MaritalStatusId,
+                                1, MaritalStatusId,
                                 address, phone, userId, Session["AppPosID"].ToString(),
                                 203, patientEnrollment.EnrollmentDate, DateTime.Now);
 
@@ -309,7 +311,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string EndPatientCare(string exitDate, int exitReason, string careEndingNotes)
+        public string EndPatientCare(string exitDate, int exitReason,string facilityOutTransfer,string dateOfDeath, string careEndingNotes)
         {
             try
             {
@@ -324,9 +326,16 @@ namespace IQCare.Web.CCC.WebService
 
                 if (patientEnrollmentId > 0)
                 {
-                    careEndingManager.AddPatientCareEnding(patientId, patientMasterVisitId, patientEnrollmentId,
-                        exitReason,
-                        DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
+                    if (!String.IsNullOrWhiteSpace(facilityOutTransfer))
+                    {
+                        careEndingManager.AddPatientCareEndingTransferOut(patientId, patientMasterVisitId,
+                            patientEnrollmentId,
+                            exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(facilityOutTransfer),
+                            GlobalObject.unescape(careEndingNotes));
+                    }
+                    else
+                        careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
+                        exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
 
                     PatientEntityEnrollment entityEnrollment =
                         enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
@@ -371,6 +380,23 @@ namespace IQCare.Web.CCC.WebService
                 
             }
             return careEndingDetailses;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public List<PatientServiceEnrollmentLookup> GetPatientEnrollments()
+        {
+            try
+            {
+                PersonId = int.Parse(Session["PersonId"].ToString());
+                var patientServiceEnrollment = new PatientServiceEnrollmentLookupManager();
+                var patientEnrollments = patientServiceEnrollment.GetPatientServiceEnrollments(PersonId);
+                return patientEnrollments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

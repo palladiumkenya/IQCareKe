@@ -118,6 +118,45 @@ function AddChronicIllness() {
     }
 }
 
+var AllergyList = new Array();
+function AddAllergy() {
+    var allergy = $('#txtAllergy').val();
+    var allergyResponse = $('#txtAllergyResponse').val();
+    var allergyDate = $("#txtAllergyDate").val();
+
+    //Validate duplication
+    var allergyFound = 0;
+
+    if (allergy == "") {
+        toastr.error("Error", "Please enter allergy");
+        return false;
+    }
+
+    allergyFound = $.inArray("" + allergy + "", AllergyList);
+
+
+    if (allergyFound > -1) {
+        toastr.error("Error", "Allergy already exists.");
+        return false;
+    }
+
+    else {
+
+        AllergyList.push("" + allergy + "");
+        arrAllergyUI = [];
+        arrAllergyUI.push([allergy, allergyResponse, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+
+        DrawDataTable("dtlAllergy", arrAllergyUI);
+
+        $('#txtAllergy').val("");
+        $("#txtAllergyResponse").val("");
+        $('#txtAllergyDate').val("");
+    }
+}
+
+
+
+
 var vaccineList = new Array();
 var vaccineStageList = new Array();
 function AddVaccine() {
@@ -309,6 +348,19 @@ function DateFormat(date)
     return result;
 }
 
+function ChkQtyDispensed()
+{
+    var qtyPres = $("#txtQuantityPres").val();
+    var qtyDisp = $("#txtQuantityDisp").val();
+
+    if(qtyDisp > qtyPres)
+    {
+        $("#txtQuantityDisp").val("0");
+        document.getElementById("txtQuantityDisp").focus();
+        toastr.error("Error", "Quantity dispensed cannot be greater than quantity prescribed.");
+    }
+}
+
 var drugList = new Array();
 function AddDrugPrescription() {
     var drugId = $("#drugID").val();
@@ -322,6 +374,17 @@ function AddDrugPrescription() {
     var duration = $("#txtDuration").val();
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
+    batchText = batchText.substring(0, batchText.indexOf('~'));
+
+
+    if ($('#chkProphylaxis').is(":checked")) {
+        var prophylaxis = 1;
+    }
+    else
+    {
+        var prophylaxis = 0;
+    }
+    
     //Validate duplication
     if (batchId == undefined)
         batchId = 0;
@@ -362,6 +425,7 @@ function AddDrugPrescription() {
 
         arrDrugPrescriptionUI.push([
             drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            prophylaxis,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
 
@@ -374,5 +438,6 @@ function AddDrugPrescription() {
         $("#txtDuration").val("0");
         $("#txtQuantityPres").val("0");
         $("#txtQuantityDisp").val("0");
+        $('#chkProphylaxis').attr('checked', false);
     }
 }

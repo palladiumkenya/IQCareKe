@@ -15,6 +15,9 @@
     <AssemblyName>IQCare.Web.CCC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
+    <TrunkDir>..\..\</TrunkDir>
+    <RedDir Condition=" '$(RedDir)' == '' ">$(TrunkDir)package\web\</RedDir>
+    <RefDir Condition=" '$(RefDir)' == '' ">$(TrunkDir)References\</RefDir>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -51,16 +54,21 @@
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
+    <Content Include="CCC\Scripts\css\bootstrap.css" />
     <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
+    <Content Include="CCC\Scripts\css\mdb.css" />
+    <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
+    <Content Include="CCC\Scripts\js\bootbox.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
     <Content Include="CCC\Scripts\js\jquery.mb.flipText.js" />
     <Content Include="CCC\Scripts\js\mbExtruder.js" />
+    <Content Include="CCC\Scripts\js\mdb.js" />
     <Content Include="CCC\Scripts\js\PatientEncounter.js" />
     <Content Include="CCC\Home.aspx" />
     <Content Include="CCC\Encounter\PatientEncounter.aspx" />
@@ -78,6 +86,7 @@
     <Content Include="CCC\Scripts\css\jquery-ui.css" />
     <Content Include="CCC\Scripts\css\exporting.css" />
     <Content Include="CCC\Scripts\js\highcharts.js" />
+    <Content Include="CCC\Scripts\js\tether.js" />
     <Content Include="CCC\Scripts\js\typeahead.js" />
     <Content Include="CCC\Scripts\js\vl_linegraph.js" />
     <Content Include="CCC\Scripts\js\jquery-ui-1.9.1.js" />
@@ -85,14 +94,21 @@
     <Content Include="CCC\Scripts\js\linegraph1.js" />
     <Content Include="CCC\Scripts\js\PatientRegistration.js" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
+    <Content Include="CCC\UC\ucFemaleVitals.ascx" />
+    <Content Include="CCC\UC\ucIpt.ascx" />
+    <Content Include="CCC\UC\ucIptClientWorkup.ascx" />
+    <Content Include="CCC\UC\ucIptOutcome.ascx" />
+    <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
+    <Content Include="CCC\UC\ucPatientTriageSummary.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
+    <Content Include="CCC\WebService\FacilityService.asmx" />
     <Content Include="CCC\WebService\LabService.asmx" />
     <Content Include="CCC\WebService\OneTimeEventsTrackerService.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
@@ -100,15 +116,38 @@
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
     <Content Include="CCC\WebService\PatientService.asmx" />
+    <Content Include="CCC\WebService\PatientSummaryService.asmx" />
+    <Content Include="CCC\WebService\PatientTbService.asmx" />
     <Content Include="CCC\WebService\PatientVitals.asmx" />
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
-    <Content Include="CCC\WebService\TestWebservice.asmx" />
+    <Content Include="CCC\WebService\FemaleVitalsWebservice.asmx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="CCC\Greencard.Master" />
     <Content Include="packages.config" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Bold.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Light.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Medium.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Regular.woff2" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.eot" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.ttf" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff" />
+    <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff2" />
+    <Content Include="CCC\Scripts\sass\mdb.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -257,6 +296,41 @@
     <Compile Include="CCC\UC\ucExtruder.ascx.designer.cs">
       <DependentUpon>ucExtruder.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucFemaleVitals.ascx.cs">
+      <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucFemaleVitals.ascx.designer.cs">
+      <DependentUpon>ucFemaleVitals.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIpt.ascx.designer.cs">
+      <DependentUpon>ucIpt.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptClientWorkup.ascx.designer.cs">
+      <DependentUpon>ucIptClientWorkup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucIptOutcome.ascx.designer.cs">
+      <DependentUpon>ucIptOutcome.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientBrief.ascx.cs">
+      <DependentUpon>ucPatientBrief.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientBrief.ascx.designer.cs">
+      <DependentUpon>ucPatientBrief.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucPatientClinicalEncounter.ascx.cs">
       <DependentUpon>ucPatientClinicalEncounter.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -285,6 +359,13 @@
     <Compile Include="CCC\UC\ucPatientTriage.ascx.designer.cs">
       <DependentUpon>ucPatientTriage.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucPatientTriageSummary.ascx.cs">
+      <DependentUpon>ucPatientTriageSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientTriageSummary.ascx.designer.cs">
+      <DependentUpon>ucPatientTriageSummary.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucPatientVitalsExtruder.ascx.cs">
       <DependentUpon>ucPatientVitalsExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -309,9 +390,12 @@
     <Compile Include="CCC\WebService\EnrollmentService.asmx.cs">
       <DependentUpon>EnrollmentService.asmx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\WebService\FacilityService.asmx.cs">
+      <DependentUpon>FacilityService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\LabService.asmx.cs">
       <DependentUpon>LabService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\LookupService.asmx.cs">
       <DependentUpon>LookupService.asmx</DependentUpon>
@@ -340,14 +424,22 @@
       <DependentUpon>PatientService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\PatientSummaryService.asmx.cs">
+      <DependentUpon>PatientSummaryService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientTbService.asmx.cs">
+      <DependentUpon>PatientTbService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\PatientVitals.asmx.cs">
       <DependentUpon>PatientVitals.asmx</DependentUpon>
     </Compile>
     <Compile Include="CCC\WebService\PersonService.asmx.cs">
       <DependentUpon>PersonService.asmx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\WebService\TestWebservice.asmx.cs">
-      <DependentUpon>TestWebservice.asmx</DependentUpon>
+    <Compile Include="CCC\WebService\FemaleVitalsWebservice.asmx.cs">
+      <DependentUpon>FemaleVitalsWebservice.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -363,6 +455,10 @@
     <Reference Include="Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessProcess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\BusinessProcess.CCC.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
       <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -391,6 +487,10 @@
     <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.PatientCore.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Administration">
       <HintPath>..\..\References\Interface.Administration.dll</HintPath>
@@ -423,6 +523,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.JScript" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -453,12 +557,7 @@
       <HintPath>..\..\Library\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
-      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
-      <Name>BusinessProcess.CCC</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -491,4 +590,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RefDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(RedDir)\bin" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
+    <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
+  </Target>
 </Project>

@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="DataAccess.Context, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\DataAccess.Context.dll</HintPath>
+      <HintPath>..\IQCare.Web.CCC\Bin\DataAccess.Context.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -78,12 +78,16 @@
     <Compile Include="Interface\Baseline\IPatientBaselineAssessmentRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientTreatmentInitiationRepository.cs" />
     <Compile Include="Interface\Baseline\IPatientVaccinationRepository.cs" />
+    <Compile Include="Interface\Encounter\IPatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientCareEndingRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabDetailsRepository.cs" />
     <Compile Include="Interface\Encounter\IPatientLabOrderRepository .cs" />
+    <Compile Include="Interface\Encounter\IPatientLabResultsRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
+    <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
+    <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
     <Compile Include="Interface\Lookup\ILookupRepository.cs" />
@@ -100,6 +104,15 @@
     <Compile Include="Interface\Patient\IPatientConsentRepository.cs" />
     <Compile Include="Interface\person\IPatientTreatmentSupporterRepository.cs" />
     <Compile Include="Interface\Patient\IPatientRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientFamilyPlanningMethodRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientFamilyPlanningRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientPregnancyIndicatorRepository.cs" />
+    <Compile Include="Interface\Triage\IPatientPregnancyRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfActionRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIcfRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptOutcomeRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptRepository.cs" />
+    <Compile Include="Interface\Tb\IPatientIptWorkupRepository.cs" />
     <Compile Include="Interface\visit\IPatientEncounterRepository.cs" />
     <Compile Include="Interface\person\IPatientMaritalStatusRepository.cs" />
     <Compile Include="Interface\person\IPatientOVCStatusRepository.cs" />
@@ -119,14 +132,17 @@
     <Compile Include="Repository\Baseline\PatientBaselineAssessmentRepository.cs" />
     <Compile Include="Repository\Baseline\PatientTreatmentInitiationRepository.cs" />
     <Compile Include="Repository\Baseline\PatientVaccinationRepository.cs" />
+    <Compile Include="Repository\Encounter\PatientAdherenceAssessmentRepository.cs" />
     <Compile Include="Repository\Encounter\PatientCareEndingRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabDetailsRepository.cs" />
     <Compile Include="Repository\Encounter\PatientLabOrderRepository .cs" />
+    <Compile Include="Repository\Encounter\PatientLabResultsRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\PatientBaselineLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
+    <Compile Include="Repository\Lookup\PatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\OneTimeEvent\OneTimeEventTrackerRepository.cs" />
@@ -153,11 +169,19 @@
     <Compile Include="Repository\Patient\IPatientContactRepository.cs" />
     <Compile Include="Repository\Patient\IPatientLocationRepository.cs" />
     <Compile Include="Interface\person\IPatientPopulationRepository.cs" />
-    <Compile Include="Repository\ICCCPatientRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Context\GreencardContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CCCPatientRepository.cs" />
+    <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
+    <Compile Include="Repository\Triage\PatientFamilyPlanningMethodRepsotory.cs" />
+    <Compile Include="Repository\Triage\PatientFamilyPlanningRepository.cs" />
+    <Compile Include="Repository\Triage\PatientPregnancyRepository.cs" />
+    <Compile Include="Repository\Triage\PatientPregnancyIndicatorRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIcfActionRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIcfRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptOutcomeRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptRepository.cs" />
+    <Compile Include="Repository\Tb\PatientIptWorkupRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Repository\visit\PatientEncounterRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />

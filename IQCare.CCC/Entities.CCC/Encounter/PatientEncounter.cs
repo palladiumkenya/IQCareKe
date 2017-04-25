@@ -38,6 +38,15 @@ namespace Entities.CCC.Encounter
             public string dose { get; set; }
             public string duration { get; set; }
         }
+
+        [Serializable]
+        public class Allergies
+        {
+            public string allergy { get; set; }
+            public string allergyResponse { get; set; }
+            public string allergyDate { get; set; }
+        }
+
         [Serializable]
         public class PhysicalExamination
         {
@@ -107,6 +116,18 @@ namespace Entities.CCC.Encounter
             public string Duration { get; set; }
             public string qtyPres { get; set; }
             public string qtyDisp { get; set; }
+            public string prophylaxis { get; set; }
+        }
+
+        [Serializable]
+        public class PharmacyFields
+        {
+            public string TreatmentProgram { get; set; }
+            public string PeriodTaken { get; set; }
+            public string TreatmentPlan { get; set; }
+            public string TreatmentPlanReason { get; set; }
+            public string RegimenLine { get; set; }
+            public string Regimen { get; set; }
         }
     }
 }

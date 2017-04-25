@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientEncounter.aspx.cs" Inherits="IQCare.Web.CCC.Encounter.PatientEncounter" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientEncounter.aspx.cs" Inherits="IQCare.Web.CCC.Encounter.PatientEncounter" EnableEventValidation="false" %>
 
-<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientDetails.ascx" %>
+<%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
@@ -111,9 +111,13 @@
                                                             </thead>
                                                             <tbody></tbody>
                                     
-                                                <tbody>                        
-                                                </tbody>                  
+                                                       <tbody>                        
+                                                  </tbody>                  
                                                 </table>
+                                         <div class="col-md-3 pull-right ">
+                                      <asp:LinkButton runat="server" ID="addResults" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Results</asp:LinkButton>
+
+                                        </div>
                             </div>    
         
                 
@@ -131,7 +135,7 @@
                                                                     <th><span class="text-primary">Lab Test</span></th>
                                                                     <th><span class="text-primary">Order Reason</span></th>
                                                                     <th><span class="text-primary">Order Date</span></th>
-                                                                    <th><span class="text-primary">Status</span></th>
+                                                                    <th><span class="text-primary">Results</span></th>
                                                                     
                                                                 </tr>
                                                             </thead>
@@ -347,7 +351,7 @@
 
         </div>
     </div>
-    <div class="modal fade"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
+    <div class="modal"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" >
                 <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
@@ -523,13 +527,21 @@
     </div>
     <!-- ajax begin -->
     <script type="text/javascript">
-        var patientId = <%=PatientId%>;
-        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var patientId = '<%=PatientId%>';
+        var patientMasterVisitId = '<%=PatientMasterVisitId%>';    
+        var ptn_pk = '<%=Ptn_pk%>'; 
+        var locationId = '<%=locationId%>';
+       <%-- var visitId = '<%=VisitId%>';
+        console.log(patientId);
+        console.log(patientMasterVisitId);
+        console.log(ptn_pk);
+        console.log(locationId);
+        console.log(visitId);--%>
+        var jan_vl = "";
+        var march_vl = "";
         
-
-        $(document).ready(function () {     
-            console.log(patientId);
-            console.log(patientMasterVisitId);
+        $(document).ready(function () { 
+           
 
 
             $("#LabDatePicker").datepicker({
@@ -554,12 +566,14 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                       
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
                    
                     });
                   
@@ -580,12 +594,12 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetLookupPendingLabsList",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
                 success: function (response) {
-                    // console.log(response.d);
+                   // console.log(response.d);
                     var itemList = JSON.parse(response.d);
                     var table = '';
                     //itemList.forEach(function (item) {
@@ -593,18 +607,22 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];                        
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
-
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        
+                            table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                     
                     });
 
+                  
                     $('#tblPendingLabs').append(table);
                     $('#tblPendingLabs tr:not(:first-child').each(function(idx){
-                        $(this).children(":eq(0)").html(idx + 1);
+                    $(this).children(":eq(0)").html(idx + 1);
                     });
 
                 },
@@ -617,7 +635,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetvlTests",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -630,13 +648,15 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    ;
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
+                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
                     });
 
                     $('#tblVL').append(table);
@@ -654,7 +674,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetPendingvlTests",
-                data: "{'patient_ID':'" + patientId + "'}",
+                data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -667,10 +687,12 @@
 
                         var dateString = itemList.SampleDate.substr(6);
                         var currentTime = new Date(parseInt(dateString));
-                        var month = currentTime.getMonth() + 1;
+                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
+                        var month = monthNames[currentTime.getMonth()];    
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
-                        var sampleDate = day + "/" + month + "/" + year;
+                        var sampleDate = day + "-" + month + "-" + year;
                         // alert(date);
 
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
@@ -708,7 +730,7 @@
                         var labtests = [];
                         for (var i = 0; i < serverData.length; i++) {
 
-                            labtests.push(serverData[i]["ParameterName"]);
+                            labtests.push(serverData[i]["Name"]);
                         }
 
                         // console.log(labtests);
@@ -719,7 +741,8 @@
             });
       
       
-            // Load lab order
+            
+            // Load lab order   
             $("#btnAddLab").click(function (e) {
 
                 var labOrderFound = 0;
@@ -766,8 +789,7 @@
                 $(this).closest('tr').remove();
                 var x = $(this).closest('tr').find('td').eq(0).html();
 
-                //identifierList.splice($.inArray(x, identifierList), 1);
-                //enrollmentNoList.splice($.inArray(x, enrollmentNoList), 1);
+               
             });
        
             $("#btnCancelOrder").click(function (e) {
@@ -789,16 +811,16 @@
             // Save lab order
             $("#btnSaveLab").click(function (e) {
                 var _fp = [];
+                var table  = "";              
                 var data = $('#tblAddLabs tr').each(function (row, tr) {
+                            _fp[row] = {
+                                "labType": $(tr).find('td:eq(1)').text()
+                              , "orderReason": $(tr).find('td:eq(2)').text()
+                              , "labOrderDate": $(tr).find('td:eq(3)').text()
+                             , "labNotes": $(tr).find('td:eq(4)').text()
 
-
-                    _fp[row] = {
-                        "labType": $(tr).find('td:eq(1)').text()
-                      , "orderReason": $(tr).find('td:eq(2)').text()
-                      , "labOrderDate": $(tr).find('td:eq(3)').text()
-                     , "labNotes": $(tr).find('td:eq(4)').text()
-
-                    }
+                            }                  
+                    
                 });
                 _fp.shift();
 
@@ -808,78 +830,60 @@
                     return false;
                 } else {
                   
-                    addLabOrder(_fp);
+                    addLabOrder(_fp);       
+                  
+                                      
+                    $('#tblAddLabs tr:first').remove();
+                    var data = $('#tblAddLabs tr').each(function (row, tr) {
+                        _fp[row] = {
+                            "labType": $(tr).find('td:eq(1)').text()
+                          , "orderReason": $(tr).find('td:eq(2)').text()
+                          , "labOrderDate": $(tr).find('td:eq(3)').text()
+                         , "labNotes": $(tr).find('td:eq(4)').text()
+
+                        }                      
+                    
+                        table ="<tr><td></td><td>" + $(tr).find('td:eq(1)').text() + "</td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" + "Pending" + "</td></tr>";
+                        $("#tblPendingLabs>tbody:first").append(table);              
+
+                        $('#tblPendingLabs tr:not(:first-child').each(function(idx){
+                            $(this).children("td:eq(0)").html(idx + 1);
+                        }); 
+
+                    }); 
+
                 }
 
+              
                 $("#tblAddLabs td").parent().remove();
             });
 
-
             function addLabOrder(_fp) {
                 var labOrder = JSON.stringify(_fp);
-                // console.log(patientId);
-                //console.log(labOrder);
+              
                 $.ajax({
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
-                    data: "{'patient_ID':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
+                    data: "{'patientPk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
                         toastr.success(response.d, "Lab order successful");
                     },
-                    error: function (response) {
-                        //generate('error', response.d);
-                        toastr.error(response.d, "Lab order unsuccessful");
-                    }
+                    
                 });
-            };
-            $(function () {
-                $('#container').highcharts({
-                    title: {
-                        text: 'Viral Load Trend',
-                        x: -20 //center
-                    },
-                    subtitle: {
-                        text: 'VL cp/ml',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Viral Load cp/ml'
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    tooltip: {
-                        valueSuffix: 'cp/ml'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: 'VL',
-                        data: [200, 300, 500, 1000, 750, 500, 400]
-                    }, {
-                        name: 'Threshold',
-                        data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
-                    }]
-                });
-            });
 
+            };
+
+            // Load lab results        
+            $("#addResults").click(function (e) {
+                window.location.href = '<%=ResolveClientUrl("~/laboratory/request/findlaborder.aspx")%>'; 
+              
+            });           
            
-            ///////////////////////////////////////////
+         
 
             $('#PersonAppointmentDate').datepicker({
                 allowPastDates: false,
@@ -911,12 +915,99 @@
             $("#AddAppointment").click(function () {
                 $('#AppointmentModal').modal('show');
             });
+            
+          
+            function getViralLoad() {
+                
+                //console.log("get viral load  called");
+                $.ajax({
+                    url: '../WebService/LabService.asmx/GetViralLoad',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        //console.log(response.d);
+                        var items = response.d;
+                        items.forEach(function (item, i) {
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (item.Month == 1) {
 
-         
+                                jan_vl = item.ResultValue;
+                                   
+                            } else if (item.Month == 4) {
+
+                                march_vl = item.ResultValue;                                   
+                                   
+                            }
+
+                        });
+
+                    }
+
+                });
+            }
+            // function viralLoadGraph() {
+            $(function() {
+                $.when(getViralLoad()).then(function () {
+                    setTimeout(function () {
+                        viralLoadGraph();
+                    },
+                                          2000);
+                });
+            });
+       
+            function viralLoadGraph() {
+              
+               // console.log("encounter viral load  graph called")
+                //console.log(march_vl);
+                $('#container').highcharts({
+                    title: {
+                        text: 'Viral Load Trend',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'VL cp/ml',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Viral Load cp/ml'
+                        },
+                        plotLines: [
+                            {
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }
+                        ]
+                    },
+                    tooltip: {
+                        valueSuffix: 'cp/ml'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [
+                        {
+                            name: 'VL',
+                            data: [180, march_vl, "","", "", "", ""]
+                        }, {
+                            name: 'Threshold',
+                            data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                        }
+                    ]
+                });
+            };
         });
-
+       
+        ////////////////////////////////////End doc ready///////////////////////////////////////////////////////////////////////////////
         function addPatientAppointment() {
             var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
             var reason = $("#<%=Reason.ClientID%>").val();
@@ -973,8 +1064,7 @@
             $("#description").val("");
             $("#AppointmentDate").val("");
         }
-
-      
+            
 
     </script>
 

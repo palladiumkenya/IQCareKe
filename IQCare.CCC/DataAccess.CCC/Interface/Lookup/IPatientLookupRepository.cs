@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataAccess.Context;
 using Entities.CCC.Lookup;
 
@@ -6,6 +7,7 @@ namespace DataAccess.CCC.Interface.Lookup
 {
     public interface IPatientLookupRepository : IRepository<PatientLookup>
     {
-        PatientLookup GetGenderID(int patientId);
+        PatientLookup GetGenderId(int patientId);
+        PatientLookup GetPatientPtn_pk(int patientId);
     }
 }

@@ -12,5 +12,8 @@ namespace Interface.CCC.Encounter
         int DeletePatientLabOrder(int id);
         List<LabOrderEntity> GetPatientCurrentLabOrders(int patientId, DateTime visitDate);
         List<LabOrderEntity> GetPatientLabOrdersAll(int patientId);
+        List<LabOrderEntity> GetVlPendingCount(int facilityId);
+        List<LabOrderEntity> GetVlCompleteCount(int facilityId);
+
     }
 }

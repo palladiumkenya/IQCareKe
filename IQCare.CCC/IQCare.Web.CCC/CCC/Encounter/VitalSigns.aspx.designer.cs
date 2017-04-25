@@ -19,7 +19,16 @@ namespace IQCare.Web.CCC.Encounter {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
+        
+        /// <summary>
+        /// ptnVitalSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPatientTriageSummary ptnVitalSummary;
         
         /// <summary>
         /// ptnVitalSigns control.
@@ -29,5 +38,14 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientTriage ptnVitalSigns;
+        
+        /// <summary>
+        /// ptnFemaleVitals control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucFemaleVitals ptnFemaleVitals;
     }
 }

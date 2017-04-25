@@ -2,20 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-
 
 namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
         public int PatientId;
-        public int visitId = 0;
-        public int PatientMasterVisitId; 
+        public int VisitId;
+        public int PatientMasterVisitId;
+        public int UserId;
+        public int Ptn_pk;
+        public int patientId;
+        public int locationId;
+        public string Msg { get; set; }
+        public int Result { get; set; }
+      
+
+
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -23,8 +30,20 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //VisitId = Convert.ToInt32(HttpContext.Current.Session["VisitId"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+
+            PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(PatientId);
+            if (ptpk.ptn_pk != null)
+            {
+                Ptn_pk = ptpk.ptn_pk.Value;
+            }
+
+            LookupFacility facility = _lookupManager.GetFacility();
+            locationId = facility.FacilityID;
+            
 
             if (!IsPostBack)
             {

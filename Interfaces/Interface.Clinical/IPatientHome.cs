@@ -162,7 +162,7 @@ namespace Interface.Clinical
         /// <param name="patientId">The patient identifier.</param>
         /// <returns></returns>
         DataTable GetModuleReport(int moduleId,  int locationId);
-        Patient GetPatientById(int id);
+        Patient GetPatientById(int Id);
        
 
        

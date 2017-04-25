@@ -15,7 +15,8 @@ namespace BusinessProcess.CCC
 
     public class BPersonManager : ProcessBase, IPersonManager
     {
-        private readonly UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
+        //private readonly UnitOfWork _unitOfWork=new UnitOfWork(new PersonContext());
+        private int result;
 
        public int AddPerson(Person person)
        {
@@ -44,14 +45,24 @@ namespace BusinessProcess.CCC
 
         public Person GetPerson(int id)
         {
-           var personInfo = _unitOfWork.PersonRepository.GetById(id);
-           return personInfo;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            {
+                var personInfo = _unitOfWork.PersonRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return personInfo;
+            }
+                
         }
 
         public List<Person> GetPersonAll()
         {
-           var mylist= _unitOfWork.PersonRepository.GetAll();
-            return mylist.ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            {
+                var mylist = _unitOfWork.PersonRepository.GetAll().ToList();
+                _unitOfWork.Dispose();
+                return mylist;
+            }
+             
         }
 
 
@@ -81,9 +92,13 @@ namespace BusinessProcess.CCC
 
         public void DeletePerson(int id)
         {
-            Person personInfo = _unitOfWork.PersonRepository.GetById(id);
-            _unitOfWork.PersonRepository.Remove(personInfo);
-            _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            {
+                Person personInfo = _unitOfWork.PersonRepository.GetById(id);
+                _unitOfWork.PersonRepository.Remove(personInfo);
+               result= _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+            }
         }
     }
 }

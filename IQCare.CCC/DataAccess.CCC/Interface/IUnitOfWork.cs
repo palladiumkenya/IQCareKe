@@ -5,11 +5,13 @@ using DataAccess.CCC.Interface.enrollment;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.CCC.Interface.person;
 using DataAccess.CCC.Interface.Patient;
+using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Interface.visit;
+using DataAccess.CCC.Interface.Triage;
 
 namespace DataAccess.CCC.Interface
 {
-    public interface IUnitOfWork : IDisposable
+    public interface _unitOfWork : IDisposable
     {
         int Complete();
         
@@ -45,6 +47,14 @@ namespace DataAccess.CCC.Interface
 
         /*Triage*/
         IPatientVitalsRepository PatientVitalsRepository { get; }
+        IPatientFamilyPlanningMethodRepository PatientFamilyPlanningMethodRepository { get; }
+        IPatientFamilyPlanningRepository PatientFamilyPlanningRepository { get; }
+        IPatientPregnancyIndicatorRepository PatientPregnanacyIndicatorRepository { get; }
+        IPatientPregnancyRepository PatientPregnancyRepository { get;}
+
+
+        /* patient screening */
+        IPatientScreeningRepository PatientScreeningRepository { get; }
 
         /* Baseline */
         IPatientArvHistoryRepository PatientArvHistoryRepository { get;  }
@@ -60,5 +70,13 @@ namespace DataAccess.CCC.Interface
 
         /*Consent*/
         IPatientConsentRepository PatientConsentRepository { get; }
+
+        //TB ICF/IPT
+        IPatientIcfRepository PatientIcfRepository { get; }
+        IPatientIcfActionRepository PatientIcfActionRepository { get; }
+        IPatientIptRepository PatientIptRepository { get; }
+        IPatientIptOutcomeRepository PatientIptOutcomeRepository { get; }
+        IPatientIptWorkupRepository PatientIptWorkupRepository { get; }
+
     }
 }

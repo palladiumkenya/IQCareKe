@@ -9,8 +9,8 @@ namespace DataAccess.Context
 
     public class PersonContext :BaseContext
     {
-        
-        public PersonContext() : base((DbConnection) DataMgr.GetConnection(), true)
+
+        public PersonContext() : base((DbConnection)DataMgr.GetConnection(), true)
         {
             Configuration.ProxyCreationEnabled = false;
             // DataMgr.OpenDecryptedSession(base.Database.Connection);

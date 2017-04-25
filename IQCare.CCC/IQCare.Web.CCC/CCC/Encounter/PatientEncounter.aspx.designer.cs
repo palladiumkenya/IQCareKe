@@ -19,7 +19,7 @@ namespace IQCare.Web.CCC.Encounter {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientDetails PatientSummary;
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
         
         /// <summary>
         /// ucPatientClinicalEncounter control.
@@ -56,6 +56,15 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tblPendingLabs;
+        
+        /// <summary>
+        /// addResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton addResults;
         
         /// <summary>
         /// tblPrevLabs control.

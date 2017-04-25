@@ -19,8 +19,6 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientLookupService : System.Web.Services.WebService
     {
-
-
         [WebMethod]
         public string HelloWorld()
         {
@@ -33,110 +31,149 @@ namespace IQCare.Web.CCC.WebService
         {
             String output=null;
             int filteredRecords = 0;
+            int totalCount = 0;
             Utility utility=new Utility();
             try
             {
-                PatientLookupManager patientLookup=new PatientLookupManager();
+                PatientLookupManager patientLookup = new PatientLookupManager();
                 var jsonData = patientLookup.GetPatientSearchListPayload();
-               
+
 
                 if (jsonData.Count > 0)
                 {
                     var sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
-                    var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                    var displayLength =
+                        Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
                     var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
                     var patientId = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "patientId").value);
                     var firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
                     var middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
                     var lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
-                   // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
-                   // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
+                    // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
+                    // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
                     var facility = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "facility").value);
 
-                    var sortCol = Convert.ToInt32(dataPayLoad.FirstOrDefault(x=>x.name=="iSortCol_0").value);
+                    var sortCol = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iSortCol_0").value);
                     string sortDir = dataPayLoad.FirstOrDefault(x => x.name == "sSortDir_0").value;
-                    string searchString=dataPayLoad.FirstOrDefault(x=>x.name== "sSearch").value;
+                    string searchString = dataPayLoad.FirstOrDefault(x => x.name == "sSearch").value;
 
 
                     if (!string.IsNullOrWhiteSpace(patientId))
                     {
-                        jsonData = jsonData.Where(x=>x.EnrollmentNumber==patientId).ToList();
+                        jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
                     }
 
                     if (!string.IsNullOrWhiteSpace(firstName))
                     {
-                        jsonData = jsonData.Where(x =>utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower())).ToList();
+                        jsonData =
+                            jsonData.Where(x => utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower()))
+                                .ToList();
                     }
                     if (!string.IsNullOrWhiteSpace(lastName))
                     {
-                        jsonData = jsonData.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower())).ToList();
+                        jsonData =
+                            jsonData.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower()))
+                                .ToList();
                     }
                     if (!string.IsNullOrWhiteSpace(middleName))
                     {
-                        jsonData = jsonData.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower())).ToList();
+                        jsonData =
+                            jsonData.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower()))
+                                .ToList();
                     }
 
                     /*-- order columns based on payload received -- */
                     switch (sortCol)
                     {
                         case 0:
-                            jsonData = (sortDir == "desc") ? jsonData = jsonData.OrderByDescending(x => x.Id).ToList() : jsonData.OrderBy(x => x.Id).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.Id).ToList()
+                                : jsonData.OrderBy(x => x.Id).ToList();
 
                             break;
                         case 1:
-                            jsonData = (sortDir == "desc") ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentNumber).ToList() : jsonData.OrderBy(x => x.EnrollmentNumber).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentNumber).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentNumber).ToList();
                             break;
                         case 2:
-                            jsonData = (sortDir == "desc") ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.FirstName)).ToList() : jsonData.OrderBy(x => utility.Decrypt(x.FirstName)).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.FirstName)).ToList()
+                                : jsonData.OrderBy(x => utility.Decrypt(x.FirstName)).ToList();
                             break;
                         case 3:
-                            jsonData = (sortDir == "desc") ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.MiddleName)).ToList() : jsonData.OrderBy(x => utility.Decrypt(x.MiddleName)).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.MiddleName)).ToList()
+                                : jsonData.OrderBy(x => utility.Decrypt(x.MiddleName)).ToList();
                             break;
                         case 4:
-                            jsonData = (sortDir == "desc") ? jsonData.OrderBy(x => utility.Decrypt(x.LastName)).ToList() : jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.LastName)).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => utility.Decrypt(x.LastName)).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.LastName)).ToList();
                             break;
                         case 5:
-                            jsonData = (sortDir == "desc") ? jsonData.OrderBy(x => x.DateOfBirth).ToList() : jsonData = jsonData.OrderByDescending(x => x.DateOfBirth).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => x.DateOfBirth).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.DateOfBirth).ToList();
                             break;
                         case 6:
-                            jsonData = (sortDir == "desc") ? jsonData.OrderBy(x=>LookupLogic.GetLookupNameById(x.Sex)).ToList() : jsonData = jsonData.OrderByDescending(x => LookupLogic.GetLookupNameById(x.Sex)).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => LookupLogic.GetLookupNameById(x.Sex)).ToList()
+                                : jsonData =
+                                    jsonData.OrderByDescending(x => LookupLogic.GetLookupNameById(x.Sex)).ToList();
                             break;
                         case 7:
-                            jsonData = (sortDir == "desc") ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentDate).ToList() : jsonData.OrderBy(x => x.EnrollmentDate).ToList();
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentDate).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentDate).ToList();
                             break;
                         case 8:
                             break;
                     }
 
                     /*-- implement search -- */
-                    if (searchString!=null)
+                    if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
                     {
                         jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
-                                                       utility.Decrypt(x.FirstName).ToLower().Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.MiddleName).ToLower().Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.LastName).ToLower().Contains(searchString.ToLower()) ||
-                                                       LookupLogic.GetLookupNameById(x.Sex).Contains(searchString.ToLower())||
-                                                       x.EnrollmentNumber.Contains(searchString.ToString()))
+                                                       utility.Decrypt(x.FirstName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.MiddleName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       utility.Decrypt(x.LastName)
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       LookupLogic.GetLookupNameById(x.Sex)
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.EnrollmentNumber.Contains(searchString.ToString()) ||
+                                                       utility.Decrypt(x.MobileNumber).Contains(searchString)
+                            )
                             .ToList();
+                        filteredRecords = jsonData.Count();
+                    }
+                    else
+                    {
                         filteredRecords = jsonData.Count();
                     }
 
                     /*---- Perform paging based on request */
-                    var skip = (displayLength * displayStart);
-                    var ableToSkip = skip < displayLength;
+                    //  var skip = (displayLength * displayStart);
+                    // var ableToSkip = skip < displayLength;
                     //string patientStatus;
+                    totalCount = jsonData.Count();
                     jsonData = jsonData.Skip(displayStart).Take(displayLength).ToList();
 
                     var json = new
                     {
                         draw = sEcho,
-                        recordsTotal = jsonData.Count,
-                       // recordsFiltered= jsonData.Count,
-                        recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count,
+                        recordsTotal = totalCount,
+                        recordsFiltered = filteredRecords,
+                        // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
 
                         data = jsonData.Select(x => new string[]
                         {
-                            
+
                             x.Id.ToString(),
                             x.EnrollmentNumber.ToString(),
                             utility.Decrypt(x.FirstName),
@@ -144,17 +181,23 @@ namespace IQCare.Web.CCC.WebService
                             utility.Decrypt(x.LastName),
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
+                            //x.RegistrationDate.ToString("dd-MMM-yyyy"),
                             x.RegistrationDate.ToString("dd-MMM-yyyy"),
                             x.PatientStatus.ToString()
+                            //,utility.Decrypt(x.MobileNumber)
                         })
                     };
                     output = JsonConvert.SerializeObject(json);
-                }         
+                }
             }
-          catch (Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine(e);
-                output = e.Message + ' ' + e.InnerException;
+                //Dispose();
+                output = e.Message;
+            }
+            finally
+            {
+                Dispose();
             }
             return output;
         }
@@ -248,7 +291,8 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("MMM-dd-yyyy"),
                             x.Sex.ToString(),
                             x.RegistrationDate.ToString("MMM-dd-yyyy"),
-                            x.PatientStatus.ToString()
+                            x.PatientStatus.ToString(),
+                            utility.Decrypt(x.MobileNumber.ToString())
                         })
                     };
                     patientList= json;

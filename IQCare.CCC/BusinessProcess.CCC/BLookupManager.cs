@@ -6,131 +6,265 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
+using DataAccess.CCC.Repository.Encounter;
+using Entities.CCC.Encounter;
+using System;
 
 namespace BusinessProcess.CCC
 {
     public class BLookupManager : ProcessBase, ILookupManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
-
+      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+       
         public List<LookupItemView> GetGenderOptions()
         {
-            LookupRepository repo = new LookupRepository();
-           return repo.GetLookupItemViews("Gender");
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var gender = _unitOfWork.LookupRepository.GetLookupItemViews("Gender");
+                _unitOfWork.Dispose();
+                return gender;
+            }
         }
 
         public List<LookupItemView> GetLookItemByGroup(string groupname)
         {
-            LookupRepository repo = new LookupRepository();
-            return repo.GetLookupItemViews(groupname);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.GetLookupItemViews(groupname); ;
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public List<LookupCounty> GetLookupCounties()
         {
-           LookupCountyRepository lookupCountyRepository =new  LookupCountyRepository();
-            return lookupCountyRepository.GetCounties();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupCountyRepository.GetCounties();
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public List<LookupItemView> GetLookUpItemViewByMasterName(string masterName)
         {
-            List<LookupItemView> person = _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName).OrderBy(l => l.OrdRank).ToList();
-            return person;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item= _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName).OrderBy(l => l.OrdRank).ToList();
+                _unitOfWork.Dispose();
+                return item;
+
+            }
         }
 
         public int GetLookUpMasterId(string masterName)
         {
-            return _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName).FirstOrDefault().MasterId;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
+                    .Select(x => x.MasterId)
+                    .FirstOrDefault();
+                _unitOfWork.Dispose();
+
+                return item;
+            }                
         }
 
         public List<LookupCounty> GetLookupSubcounty(string county)
         {
-            LookupCountyRepository lookupCountyRepository=new LookupCountyRepository();
-            return lookupCountyRepository.GetSubCounties(county);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupCountyRepository.GetSubCounties(county);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public List<LookupCounty> GetLookupWards(string subcounty)
         {
-            LookupCountyRepository lookupCountyRepository= new LookupCountyRepository();
-            return lookupCountyRepository.GetWardsList(subcounty);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupCountyRepository.GetWardsList(subcounty);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
+
         /* pw GetLookupLabs implementation   */
         public List<LookupLabs> GetLookupLabs()
-              
+
         {
-            LookupLabsRepository lookupLabRepository = new LookupLabsRepository();
-            return lookupLabRepository.GetLabs(); 
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupLabsRepository.GetLabs();
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
-      
+
         public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
 
         {
-            LookupPreviousLabsRepository lookupLabprevRepository = new LookupPreviousLabsRepository();
-            return lookupLabprevRepository.GetPreviousLabs(patientId);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetPreviousLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
+        public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
 
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderCompleteLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
+        public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
 
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderPendingLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
         public List<LookupPreviousLabs> GetLookupPendingLabs(int patientId)
 
         {
-            LookupPreviousLabsRepository lookupPendingLabsRepository = new LookupPreviousLabsRepository();
-            return lookupPendingLabsRepository.GetPendingLabs(patientId);
-
-
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetPendingLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
         public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
 
         {
-            
-            LookupPreviousLabsRepository lookupVllabsRepository = new LookupPreviousLabsRepository();
-            return lookupVllabsRepository.GetVlLabs(patientId);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetVlLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
         public List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId)
 
         {
-
-            LookupPreviousLabsRepository lookupPendingVllabsRepository = new LookupPreviousLabsRepository();
-            return lookupPendingVllabsRepository.GetPendingVlLabs(patientId);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupPreviousLabsRepository.GetPendingVlLabs(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public string GetLookupNameFromId(int id)
         {
-            LookupRepository lookupRepository=new LookupRepository();
-            var itemName = lookupRepository.FindBy(x => x.ItemId == id).Select(x=>x.ItemName).Single();
-            return itemName.ToString();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public List<LookupItemView> GetLookUpItemViewByMasterId(int id)
         {
-            List<LookupItemView> lookupItem = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
-            return lookupItem;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
         {
-            return
-                _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName).ToList();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName).ToList();
+                _unitOfWork.Dispose();
+                return item;
+            }      
         }
+
         public LookupFacility GetFacility()
 
         {
-            LookupFacilityRepository lookupFacilityRepository = new LookupFacilityRepository();
-            return lookupFacilityRepository.GetFacility();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupFacilityRepository.GetFacility();
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
-        public LookupItemView GetPatientGender(int genderID)
+
+        public LookupItemView GetPatientGender(int genderId)
 
         {
-            LookupRepository lookupGender = new LookupRepository();
-            return lookupGender.GetPatientGender(genderID);
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupRepository.GetPatientGender(genderId);
+                _unitOfWork.Dispose();
+                    return item;
+            }
+        }
+        public PatientLookup GetPatientPtn_pk(int patientId)
+
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.PatientLookupRepository.GetPatientPtn_pk(patientId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
+        public LookupLabs GetLabTestId(string labType)
+
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupLabsRepository.GetLabTestId(labType);
+                _unitOfWork.Dispose();
+                return item;
+            }
         }
 
         public int GetRegimenCategory(int regimenId)
         {
-           
-            string masterName=_unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
-            return
-                _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
-                    .Select(x => x.ItemId)
-                    .FirstOrDefault();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                string masterName = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
+                 int RegmineId=   _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
+                        .Select(x => x.ItemId)
+                        .FirstOrDefault();
+                _unitOfWork.Dispose();
+                return RegmineId;
+            }
+    
+        }
+
+        public string GetCountyByCountyId(int countyId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetCountyByCountyId(countyId);
+        }
+
+        public string GetCountyNameBySubCountyId(int subCountyId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetSubCountyNameBySubCountyId(subCountyId);
+        }
+
+        public string GetWardNameByWardId(int wardId)
+        {
+            LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
+            return lookupCountyRepository.GetWardNameByWardId(wardId);
         }
     }
 }
