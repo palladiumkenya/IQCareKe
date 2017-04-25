@@ -17,6 +17,7 @@ namespace IQCare.Web.CCC.Encounter
         public int UserId;
         public int Ptn_pk;
         public int patientId;
+        public int AppLocationId;
         public int locationId;
         public string Msg { get; set; }
         public int Result { get; set; }
@@ -34,6 +35,7 @@ namespace IQCare.Web.CCC.Encounter
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+            AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
 
             PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(PatientId);
             if (ptpk.ptn_pk != null)

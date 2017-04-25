@@ -9,7 +9,7 @@ using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using IQCare.Web.Laboratory;
-
+using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -38,37 +38,37 @@ namespace IQCare.Web.CCC.WebService
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
-        private int facilityId { get; set; }      
-        private int _labOrderId;      
+      
+        private int _labTestId;      
         private string Msg { get; set; }
         private int Result { get; set; }
         private int _ptnPk;
 
         int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
         int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+        int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
 
 
         [WebMethod(EnableSession = true)]
         public string AddLabOrder(int patientPk, int patientMasterVisitId, string patientLabOrder)
         {
-            
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
 
-            try
+
+
+            var labOrder = new PatientLabOrderManager();
+            if (patientPk > 0)
             {
+                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, patientMasterVisitId, patientLabOrder);
 
-                var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, patientMasterVisitId, patientLabOrder);
-               if (Result > 0)
-                {
-                    Msg = "Patient Lab Order Recorded Successfully .";
-                }
+                Msg = "Patient Lab Order Recorded Successfully .";
+
 
             }
-            catch (Exception e)
+            else
             {
-                Msg = "Error Message: " + e.Message + ' ' + " Exception: " + e.InnerException;
+
+                Msg = "Patient Lab Order Not Recorded Successfully .";
+               
             }
             return Msg;
         }
@@ -124,21 +124,15 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientViralLoad> GetViralLoad()
         {
-           
-            PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(patientId);
-            if (ptpk.ptn_pk != null)
-            {
-                _ptnPk = ptpk.ptn_pk.Value;
-            }
 
-            LabOrderEntity labId = _lookupData.GetPatientLabOrder(_ptnPk);
-            if (labId != null)
+            PatientLabTracker TestId = _lookupData.GetPatientLabTestId(patientId);
+            if (TestId != null)
             {
-                _labOrderId = labId.Id;
+                _labTestId = TestId.LabTestId;
             }
 
             List<PatientViralLoad> patientViralDetails = new List<PatientViralLoad>();
-            List<LabResultsEntity> list_vl = _lookupData.GetPatientVL(_labOrderId);
+            List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(_labTestId);
 
             if (list_vl != null)
             {
@@ -146,7 +140,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     PatientViralLoad vl = new PatientViralLoad();
 
-                    vl.ResultValue = item.ResultValue;
+                    vl.ResultValue = item.ResultValues;
                     vl.Month = item.CreateDate.Month;
 
                     patientViralDetails.Add(vl);
@@ -156,13 +150,11 @@ namespace IQCare.Web.CCC.WebService
 
         }
         [WebMethod(EnableSession = true)]
-        public int GetFacilityVLPendingCount()
+        public int GetFacilityVLPendingCount(int facilityId)
         {
-            int count = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
+            int count = 0;        
 
-            List<LabOrderEntity> facilityVLPending = new List<LabOrderEntity>();
+            List<PatientLabTracker> facilityVLPending = new List<PatientLabTracker>();
             try
             {
                 var facilityPendingVL = new PatientLabOrderManager();
@@ -176,13 +168,11 @@ namespace IQCare.Web.CCC.WebService
             return count;
         }
         [WebMethod(EnableSession = true)]
-        public int GetFacilityVLCompleteCount()
+        public int GetFacilityVLCompleteCount(int facilityId)
         { 
-        int count = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
+        int count = 0;          
 
-            List<LabOrderEntity> facilityVLComplete = new List<LabOrderEntity>();
+            List<PatientLabTracker> facilityVLComplete = new List<PatientLabTracker>();
             try
             {
                 var facilityCompleteVL = new PatientLabOrderManager();

@@ -9,9 +9,10 @@ namespace IQCare.Web.CCC
 {
     public partial class Home : System.Web.UI.Page
     {
+        public int AppLocationId;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         }
     }
 }

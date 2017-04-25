@@ -26,7 +26,9 @@ namespace Entities.CCC.Lookup
         public string Reasons { get; set; }
         public string Results { get; set; }
         public decimal? ResultValues { get; set; }
-       
+        public int LabTestId { get; set; }
+        public int FacilityId { get; set; }
+
 
     }
 }

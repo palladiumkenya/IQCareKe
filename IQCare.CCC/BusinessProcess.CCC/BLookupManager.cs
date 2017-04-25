@@ -9,6 +9,7 @@ using System.Linq;
 using DataAccess.CCC.Repository.Encounter;
 using Entities.CCC.Encounter;
 using System;
+using Entities.CCC.Visit;
 
 namespace BusinessProcess.CCC
 {
@@ -224,6 +225,16 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+        public LookupTestParameter GetTestParameter(int LabTestId)
+
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = _unitOfWork.LookupParameterRepository.GetTestParameter(LabTestId);
+                _unitOfWork.Dispose();
+                return item;
+            }
+        }
         public LookupLabs GetLabTestId(string labType)
 
         {
@@ -265,6 +276,30 @@ namespace BusinessProcess.CCC
         {
             LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetWardNameByWardId(wardId);
+        }
+        public List<PatientLabTracker> GetVlPendingCount(int facilityId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientLabTracker> facilityVlPending = _unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
+                _unitOfWork.Dispose();
+                return facilityVlPending;
+
+
+            }
+        }
+
+        public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+
+            {
+                List<PatientLabTracker> facilityVlComplete = _unitOfWork.PatientLabTrackerRepository.GetVlCompleteCount(facilityId);
+                _unitOfWork.Dispose();
+                return facilityVlComplete;
+            }
+
+
         }
     }
 }

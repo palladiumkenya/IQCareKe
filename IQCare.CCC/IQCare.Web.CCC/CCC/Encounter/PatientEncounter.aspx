@@ -162,6 +162,7 @@
                                                       <div class="col-md-8">
                                                          
                                                           <asp:TextBox runat="server" Width="230" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                          
                                                       </div>
                                                   </div>
                                                   <div class="col-md-12 form-group">
@@ -529,19 +530,13 @@
     <script type="text/javascript">
         var patientId = '<%=PatientId%>';
         var patientMasterVisitId = '<%=PatientMasterVisitId%>';    
-        var ptn_pk = '<%=Ptn_pk%>'; 
-        var locationId = '<%=locationId%>';
-       <%-- var visitId = '<%=VisitId%>';
-        console.log(patientId);
-        console.log(patientMasterVisitId);
-        console.log(ptn_pk);
-        console.log(locationId);
-        console.log(visitId);--%>
+        var ptn_pk = '<%=Ptn_pk%>';        
+        var facilityId = '<%=AppLocationId%>';
+       
         var jan_vl = "";
         var march_vl = "";
         
-        $(document).ready(function () { 
-           
+        $(document).ready(function () {           
 
 
             $("#LabDatePicker").datepicker({
@@ -710,6 +705,7 @@
                 }
             });
 
+            var labtests = [];
             var input = document.getElementById("labTestTypes");
             var awesomplete = new Awesomplete(input, {
                 minChars: 1,
@@ -727,13 +723,20 @@
                     success: function (data) {
                         var serverData = JSON.parse(data.d);
                         //console.log(serverData);
-                        var labtests = [];
-                        for (var i = 0; i < serverData.length; i++) {
+                        
+                        var obj = [];
+                        obj[key] = val;
 
-                            labtests.push(serverData[i]["Name"]);
+                        //labtests.push(obj);
+                        
+                        for (var i = 0; i < serverData.length; i++) {
+                            var key = parseInt(serverData[i]["Id"]);
+                            var val = serverData[i]["Name"];
+
+                            labtests[key] = val;
                         }
 
-                        // console.log(labtests);
+                        console.log(labtests);
                         awesomplete.list = labtests;
                     }
                 });
@@ -741,18 +744,27 @@
             });
       
       
-            
+            function val2key (val, array){
+                for(var key in array){
+                    var this_val = array[key];
+                    if(this_val == val){
+                        return key;
+                        break;
+                    }
+                }
+            }
             // Load lab order   
             $("#btnAddLab").click(function (e) {
 
                 var labOrderFound = 0;
 
-                var labOrderDate = $("#<%=LabDate.ClientID%>").val();
-                var labType = $("#labTestTypes").val();
+                var labOrderDate = $("#<%=LabDate.ClientID%>").val();               
+                var labName = $("#labTestTypes").val();
+                var labNameId=val2key(labName, labtests);              
                 var labOrderReason = $("#orderReason").find(":selected").text();
                 var labOrderNotes = $("#labNotes").val();
 
-                if (labType < 1) {
+                if (labName < 1) {
                     toastr.error("Please select at least One(1) Lab Type from the List");
                     return false;
                 }
@@ -761,11 +773,11 @@
                     return false;
                 }
 
-                labOrderFound = $.inArray("" + labType + "", LabOrderList);
+                labOrderFound = $.inArray("" + labName + "", LabOrderList);
 
                 if (labOrderFound > -1) {
 
-                    toastr.error("error", labType + " Lab selected already exists in the List");
+                    toastr.error("error", labName + " Lab selected already exists in the List");
                     return false; // message box herer
                 }
                 if (labOrderDate < 1) {
@@ -776,8 +788,8 @@
                 else {
 
                   
-                    LabOrderList.push("" + labType + "");
-                    var tr = "<tr><td></td><td align='left'>" + labType + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    LabOrderList.push("" + labName + "");
+                    var tr = "<tr><td></td><td visibility: hidden>" + labNameId + "</td><td align='left'>" + labName + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblAddLabs>tbody:first").append('' + tr + '');
                     resetLabOrder();
                 }
@@ -813,11 +825,12 @@
                 var _fp = [];
                 var table  = "";              
                 var data = $('#tblAddLabs tr').each(function (row, tr) {
-                            _fp[row] = {
-                                "labType": $(tr).find('td:eq(1)').text()
-                              , "orderReason": $(tr).find('td:eq(2)').text()
-                              , "labOrderDate": $(tr).find('td:eq(3)').text()
-                             , "labNotes": $(tr).find('td:eq(4)').text()
+                    _fp[row] = {
+                                "labNameId": $(tr).find('td:eq(1)').text()
+                               , "labName": $(tr).find('td:eq(2)').text()
+                              , "orderReason": $(tr).find('td:eq(3)').text()
+                              , "labOrderDate": $(tr).find('td:eq(4)').text()
+                             , "labNotes": $(tr).find('td:eq(5)').text()
 
                             }                  
                     
@@ -836,14 +849,15 @@
                     $('#tblAddLabs tr:first').remove();
                     var data = $('#tblAddLabs tr').each(function (row, tr) {
                         _fp[row] = {
-                            "labType": $(tr).find('td:eq(1)').text()
-                          , "orderReason": $(tr).find('td:eq(2)').text()
-                          , "labOrderDate": $(tr).find('td:eq(3)').text()
-                         , "labNotes": $(tr).find('td:eq(4)').text()
+                                "labNameId": $(tr).find('td:eq(1)').text()
+                               , "labName": $(tr).find('td:eq(2)').text()
+                              , "orderReason": $(tr).find('td:eq(3)').text()
+                              , "labOrderDate": $(tr).find('td:eq(4)').text()
+                             , "labNotes": $(tr).find('td:eq(5)').text()
 
                         }                      
                     
-                        table ="<tr><td></td><td>" + $(tr).find('td:eq(1)').text() + "</td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" + "Pending" + "</td></tr>";
+                        table ="<tr><td></td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" + $(tr).find('td:eq(4)').text() + "</td><td>" + "Pending" + "</td></tr>";
                         $("#tblPendingLabs>tbody:first").append(table);              
 
                         $('#tblPendingLabs tr:not(:first-child').each(function(idx){

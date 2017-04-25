@@ -12,7 +12,7 @@ using DataAccess.Context;
 using Entities.CCC.Appointment;
 using Entities.CCC.Tb;
 using Entities.PatientCore;
-
+using Interface.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
@@ -52,6 +52,7 @@ namespace DataAccess.CCC.Context
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
+        public DbSet<Entities.CCC.Visit.PatientVisit> PatientVisit { get; set; }
         public DbSet<Entities.CCC.Visit.PatientEncounter> PatientEncounters { get; set; }
       
 
@@ -87,13 +88,14 @@ namespace DataAccess.CCC.Context
         public DbSet<Pregnancy> Pregnancies { get; set; }
         public DbSet<PregnancyIndicator> PregnancyIndicators { get; set; }
         public DbSet<LabOrderEntity> LabOrder { get; set; }
-        public DbSet<LabDetailsEntity> LabDetails { get; set; }
+       
         public DbSet<LabResultsEntity> LabResults { get; set; }
         public DbSet<PatientAdherenceAssessment> PatientAdherenceAssessments { get; set; }
 
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<PatientLabTracker> PatientLabTracker { get; set; }
+        public DbSet<LabDetailsEntity> PatientLabDetails { get; set; }
 
         //Consent
         public DbSet<Entities.CCC.Consent.PatientConsent> PatientConsents { get; set; }

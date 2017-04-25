@@ -8,6 +8,7 @@ using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Interface.Triage;
+using DataAccess.CCC.Interface.Encounter;
 
 namespace DataAccess.CCC.Interface
 {
@@ -38,7 +39,7 @@ namespace DataAccess.CCC.Interface
         IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
         IPatientEncounterRepository PatientEncounterRepository { get; }
         IPatientLabTrackerRepository PatientLabTrackerRepository { get; }
-       
+        IPatientLabDetailsRepository PatientLabDetailsRepository { get; }
 
         /* Enrollment */
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }
