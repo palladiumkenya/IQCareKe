@@ -5463,7 +5463,7 @@ begin
 			a.ExpPwdFlag,
 			a.ExpPwdDays
 		From mst_Facility a
-				Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID and b.ModuleID <> 203
+				Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID -- and b.ModuleID <> 203
 	) Z
 	Inner Join mst_module a On Z.ModuleID = a.ModuleID
 	Where a.Status = 2
