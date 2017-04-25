@@ -201,7 +201,7 @@ namespace IQCare.Web.Laboratory
 
                     return new LabOrder()
                     {
-                        PatientPk = this.PatientPk,
+                        PatientId = this.PatientPk,
                         LocationId = this.LocationId,
                         UserId = this.UserId,
                         ModuleId = this.ModuleId
@@ -368,7 +368,7 @@ namespace IQCare.Web.Laboratory
 
                 LabOrder order = this.OrderedLabs;
 
-                order.PatientPk = this.PatientPk;
+                order.PatientId = this.PatientPk;
                 order.LocationId = this.LocationId;
                 order.ModuleId = this.ModuleId;
                 order.DeleteFlag = false;
