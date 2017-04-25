@@ -101,6 +101,14 @@ Begin
   Alter table dbo.Dtl_GRNote Add Id int Not Null Identity(1,1)
 End
 Go
+IF Not Exists (SELECT * FROM sys.key_constraints WHERE type = 'PK' AND parent_object_id = OBJECT_ID('dbo.Dtl_GRNote') AND Name = 'PK_Dtl_GRNote')
+   ALTER TABLE [dbo].[Dtl_GRNote] ADD  CONSTRAINT [PK_Dtl_GRNote] PRIMARY KEY CLUSTERED 
+	(
+	[Id] ASC
+	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+GO
+
 If Not Exists (Select * From sys.columns Where Name = N'Id' And Object_ID = Object_id(N'Dtl_StockTransaction'))    
 Begin
   Alter table dbo.Dtl_StockTransaction Add Id int Not Null Identity(1,1)

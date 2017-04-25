@@ -1,3 +1,107 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_StockSummaryLineList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SCM_StockSummaryLineList]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		JN
+-- Create date: 
+-- Description:	Simple Stock Summary Line lines
+-- =============================================
+CREATE PROCEDURE [dbo].[SCM_StockSummaryLineList] 
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select	Drug_pk
+		,	nullif(DrugId,'')									ItemCode
+		,	DrugName
+		,	dbo.fn_GetDrugTypeName_futures(Drug_pk) ItemType
+		,	PurchaseUnitPrice
+		,	QtyPerPurchaseUnit
+		,	U.Name									As PurchaseUnit
+		,	(Select
+				Isnull(Convert(varchar, Sum(ST.Quantity)), 0) As QuantityAvailable
+			From Dtl_StockTransaction As ST
+			Where D.Drug_pk = ST.ItemId
+			) Quantity	
+	From Mst_Drug D
+	Inner Join Mst_DispensingUnit U On D.PurchaseUnit = U.Id
+	Where D.DeleteFlag = 0 Order By D.DrugName
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_StockSummaryLineList]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SavePurchaseOrderItem_Futures]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure [dbo].[pr_SCM_SavePurchaseOrderItem_Futures]  
+(    
+	@POId  int,      
+	@ItemId int ,  
+	@ItemTypeId int =null,    
+	@Quantity int ,      
+	@PurchasePrice decimal(9,2)= 0.0,      	 
+	@UserId int ,  
+	@BatchId int ,  
+	@AvaliableQty  int ,  
+	@ExpiryDate datetime   ,
+	@UnitQuantity int ,
+	@SupplierId int= null
+)
+as       
+begin
+
+	declare @rowCount int;
+	Insert Into Dtl_PurchaseItem (
+			POId
+		,	ItemId
+		,	Quantity
+		,	PurchasePrice
+		,	UserId
+		,	CreateDate
+		,	BatchID
+		,	AvaliableQty
+		,	ExpiryDate
+		,	UnitQuantity)
+	Values (
+			@POId
+		,	@ItemId
+		,	@Quantity
+		,	@PurchasePrice
+		,	@UserId
+		,	getdate()
+		,	@BatchID
+		,	@AvaliableQty
+		,	@ExpiryDate
+		,	@UnitQuantity);
+		If (@SupplierId Is Not Null) Begin
+			Select @rowCount = Count(*) From  Lnk_SupplierItem Where SupplierId = @SupplierId And ItemId=@ItemId And ItemTypeId=@ItemTypeId;
+			If(@rowCount = 0) Begin
+				Insert Into Lnk_SupplierItem(SupplierId,ItemId, ItemTypeId,UserId,CreateDate) Values(@SupplierId,@ItemId,@ItemTypeId,@UserId,getdate());
+			End
+		End
+
+End
+GO
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures]
 GO
@@ -94,11 +198,6 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_GetPurchaseDetailsForGRN_Futures]
 GO
-/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNItems_Futures]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[pr_SCM_SaveGRNItems_Futures]
-GO
-
  IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_GetItemsByStoreId]') AND type in (N'P', N'PC'))
  DROP PROCEDURE [dbo].[SCM_GetItemsByStoreId]
 GO
@@ -127,7 +226,7 @@ BEGIN
 	From lnk_StoreItem As L
 	Inner Join Mst_Drug As D On L.ItemId = D.Drug_pk
 	And L.ItemTypeID = D.ItemTypeID
-	Where (L.StoreID = 002)
+	Where (L.StoreID = @StoreId)
 	Group By	L.StoreID
 			,	D.Drug_pk
 			,	D.DrugName
@@ -251,9 +350,8 @@ Select 	a.ID	As ItemType
 	,	b.GenericID
 	,	b.GenericName
 	,	c.Drug_pk
-	,	c.DrugName
-	,	a.Name + '-' + s.DrugTypeName + '-' + convert(varchar, c.Drug_pk)
-		As ListId
+	,	isnull(c.DrugID+' - ','') + c.DrugName As DrugName
+	,	a.Name + '-' + s.DrugTypeName + '-' + convert(varchar, c.Drug_pk) As ListId
 From mst_Decode As a
 Inner Join Lnk_ItemDrugType As p On a.ID = p.ItemTypeId
 Inner Join mst_DrugType As s On p.DrugTypeId = s.DrugTypeID
@@ -287,7 +385,7 @@ CREATE Procedure [dbo].[Pr_SCM_GetPurchaseDetails_Futures]  (
 As Begin                          
                  
 Select	PO.POId
-	,	PO.OrderNo
+	,	Isnull(PONumber,PO.OrderNo) PONumber
 	,	PO.SupplierID
 	,	isnull(SP.SupplierName, '')					As SupplierName
 	,	convert(varchar(100), PO.OrderDate, 106)	As OrderDate
@@ -619,6 +717,62 @@ Order By PO.POId Desc;
 End' 
 END
 GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNMaster_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveGRNMaster_Futures]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNMaster_Futures]    Script Date: 20-Mar-2017 9:17:25 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure [dbo].[pr_SCM_SaveGRNMaster_Futures]        
+@POId int ,
+@LocationID  int,
+@RecievedStoreID int ,
+@Freight   decimal(9,2),  
+@Tax  decimal(9,2), 
+@UserID int     
+as         
+begin 
+        
+declare @GRNId int        
+
+Insert Into Ord_GRNote (
+		POId
+	,	LocationID
+	,	RecievedDate
+	,	RecievedStoreID
+	,	Freight
+	,	Tax
+	,	RecievedBy
+	,	UserId
+	,	CreateDate)
+Values (
+		@POId
+	,	@LocationID
+	,	getdate()
+	,	@RecievedStoreID
+	,	@Freight
+	,	@Tax
+	,	@UserID
+	,	@UserID
+	,	getdate())
+
+Select scope_identity();
+
+      
+end
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_SaveGRNItems_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_SaveGRNItems_Futures]
+GO
 /****** Object:  StoredProcedure [dbo].[pr_SCM_SaveGRNItems_Futures]    Script Date: 04/02/2015 13:54:20 ******/
 SET ANSI_NULLS ON
 GO
@@ -842,7 +996,7 @@ CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]
 	@DispensedBy int,                
 	@DispensedByDate datetime,                
 	@OrderType int,                
-	@ProgramId int,                
+	@ProgramId int=225,                
 	@StoreId int,            
 	@Regimen varchar(50),                
 	@UserId int,        
@@ -853,7 +1007,8 @@ CREATE procedure [dbo].[pr_SCM_SavePharmacyDispenseOrder_Futures]
 	@RegimenLine int = null,
 	@ProviderId int =null,
 	@Height numeric(8,2)= null,
-	@Weight numeric(8,2)= null
+	@Weight numeric(8,2)= null,
+	@PharmacyNotes varchar(250) =''
 As             
 Begin
 	Declare @VisitId int,@ARTStartDate datetime;
@@ -950,8 +1105,9 @@ Begin
 			RegimenLine,
 			Signature,
 			Height,
-			Weight
-			)
+			Weight,
+			PharmacyNotes
+		)
 		Values (
 			@Ptn_Pk, 
 			@VisitId, 
@@ -971,7 +1127,8 @@ Begin
 			@RegimenLine,
 			@UserId,
 			@Height,
-			@Weight);
+			@Weight,
+			@PharmacyNotes);
 
 		Select @OrderId = SCOPE_IDENTITY();
 		Update ord_PatientPharmacyOrder Set
@@ -1010,9 +1167,109 @@ Begin
 End
 
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCM_GetPurchaseOrderItems]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[SCM_GetPurchaseOrderItems]
+GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]    Script Date: 05/29/2015 07:26:35 ******/
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]    Script Date: 01/14/2016 14:17:22 ******/
+/****** Object:  StoredProcedure [dbo].[SCM_GetGRNItems_Print]    Script Date: 20-Mar-2017 9:42:55 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Joseph Njung'e
+-- Create date: 2017-Mar-20
+-- Description:	Get purchase order items
+-- =============================================
+CREATE PROCEDURE [dbo].[SCM_GetPurchaseOrderItems] 
+	-- Add the parameters for the stored procedure here
+	@PoId int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select	a.POId
+		,	a.LocationID
+		,	a.SupplierID
+		,	sup.SupplierName
+		,	a.OrderDate
+		,	a.AuthorizedBy
+		,	a.PreparedBy
+		,	a.Status
+		,	a.SourceStoreID
+		,	str1.Name								As SourceStoreName
+		,	a.DestinStoreID
+		,	str2.Name								As DestinationStoreName
+		,	a.UserID
+		,	Isnull(a.PONumber, a.OrderNo)			As OrderNo
+		,	b.RecievedDate
+		,	b.Freight
+		,	b.Tax
+		,	b.GRNId
+		,	emp1.FirstName + ' ' + emp1.LastName	As AuthorizeName
+		,	emp2.FirstName + ' ' + emp2.LastName	As PreparedName
+		,	(Select sum(D.Quantity * D.PurchasePrice) From Dtl_PurchaseItem D Where (D.POId =  A.POId)) TotalAmount
+	From ord_PurchaseOrder As a
+	Left Outer Join Ord_GRNote As b On b.POId = a.POId
+	Left Outer Join Mst_Supplier As sup On a.SupplierID = sup.Id
+	Left Outer Join Mst_Store As str1 On str1.Id = a.SourceStoreID
+	Left Outer Join Mst_Store As str2 On str2.Id = a.DestinStoreID
+	Left Outer Join mst_Employee As emp1 On emp1.EmployeeID = a.AuthorizedBy
+	Left Outer Join mst_Employee As emp2 On emp2.EmployeeID = a.PreparedBy
+	Where (a.POId = @PoId)  ;
+
+	;With Rec as (Select	O.POId
+		,	D.GRNId
+		,	D.ItemId
+		,	D.RecievedQuantity
+		,	D.FreeRecievedQuantity
+		,	D.PurchasePrice
+		,	D.TotPurchasePrice
+		,	B.Name	BatchNumber
+		,	B.ExpiryDate
+		,	R.UserFirstName + ' ' + R.UserLastName ReceivedBy
+		,	D.CreateDate ReceivedDate
+	From Dtl_GRNote D
+	Inner Join Ord_GRNote O On D.GRNId = O.GRNId
+	Inner Join Mst_Batch B On B.ID = D.BatchID
+	Left Outer Join mst_User As R On D.UserId = R.UserID
+	Where B.DeleteFlag = 0	And O.POId = @PoId
+	)
+	Select	I.POId
+		,	D.DrugID								As ItemCode
+		,	I.ItemId
+		,	D.DrugName								As ItemName
+		,	I.PurchasePrice							As Price
+		,	I.Quantity								As OrderQuantity
+		,	I.Quantity * I.PurchasePrice			As TotPrice
+		,	I.CreateDate	PurchaseDate
+		,	D.QtyPerPurchaseUnit
+		,	U.Name									As Units
+		,	Rec.RecievedQuantity
+		,	Rec.BatchNumber
+		,	Rec.ExpiryDate
+		,	I.UserId
+		,	R.UserFirstName + ' ' + R.UserLastName	As IssuedBy
+		,	Rec.ReceivedBy
+		,	Rec.ReceivedDate
+	From Dtl_PurchaseItem I
+	Left Outer Join Mst_Drug D On I.ItemId = D.Drug_pk
+	Left Outer Join Mst_DispensingUnit As U On D.PurchaseUnit = U.Id
+	Left Outer Join mst_User As R On I.UserId = R.UserID
+	Left Outer Join Rec On rec.POId = I.POId And rec.ItemId = I.ItemId
+	Where I.POId = @PoId
+
+END
+
+GO
+
+
+
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_SCM_SaveStockOrdAdjust_Futures]
 GO
@@ -1350,108 +1607,87 @@ End
 
 
 GO
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_SCM_GetPurcaseOrderItem]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_SCM_GetPurcaseOrderItem]
+GO
 
+/****** Object:  StoredProcedure [dbo].[Pr_SCM_GetPurcaseOrderItem]    Script Date: 21-Mar-2017 5:52:37 PM ******/
+SET ANSI_NULLS ON
+GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_SCM_GetPurcaseOrderItem]    Script Date: 12/02/2015 11:28:56 ******/
-Set Ansi_nulls On
-Go
+SET QUOTED_IDENTIFIER ON
+GO
 
-Set Quoted_identifier On
-Go
-ALTER Procedure [dbo].[Pr_SCM_GetPurcaseOrderItem]                                         
+CREATE Procedure [dbo].[Pr_SCM_GetPurcaseOrderItem] (                                        
 @isPO int =0,                            
 @UserID int,                        
-@StoreID int =0                                        
+@StoreID int =0  
+)                                      
 as                                          
                                           
 begin
                                           
 --0                                  
-if(@isPO =1) begin
-Select	a.Drug_Pk [ItemID],
-		a.DrugName [ItemName],
-		b.SupplierId
-From Mst_Drug a
-	Inner Join lnk_supplierItem b On a.Drug_pk = b.ItemId
-		And a.DeleteFlag = 0
-Group By	a.Drug_Pk,
-			a.DrugName,
-			b.SupplierId
-Order By a.DrugName Asc
-End Else If (@isPO = 2) Begin
+If(@isPO =1) begin
+	Select	a.Drug_Pk	[ItemID]
+		,	a.DrugName	[ItemName]
+		,  a.ItemTypeID
+		,	b.SupplierId
+	From Mst_Drug a
+	Inner Join lnk_supplierItem b On a.Drug_pk = b.ItemId and b.ItemTypeId=a.ItemTypeID
+	Where a.DeleteFlag = 0
+	Group By	a.Drug_Pk
+			,	a.DrugName
+			,	b.SupplierId
+			,	a.ItemTypeID
+	Order By a.DrugName Asc
+End 
+Else If (@isPO = 2) Begin
 Select	convert(varchar(100), a.Drug_Pk) + '-' + convert(varchar(100), Stock.BatchId) + '-' + convert(varchar, Stock.ExpiryDate, 101) [ItemID],
 		a.DrugName + ' - ' + Stock.BatchName + ' - ' + convert(varchar, Stock.ExpiryDate, 106) + ' - ' + Convert(varchar,Stock.AvailableQTY) ItemName,
-		--convert(varchar, dbo.fn_GetItemStock_Futures(a.Drug_Pk,Stock.BatchId, Stock.ExpiryDate, c.Id)) [ItemName],
+		
 		f.Name [DispensingUnit],
 		f.Id [UnitId],
 		isnull(Stock.BatchName, '') [Batch],
 		 [BatchId],
 		Stock.StoreID,
 		a.Drug_Pk [StockItemID],
-		--(
-		--	Select
-		--		sum(m.Quantity) [AvailableQTY]
-		--	From dbo.Mst_Drug x
-		--		Inner Join lnk_storeitem b On x.Drug_Pk = b.ItemId
-		--		Inner Join mst_Store c On b.StoreId = c.Id
-		--		Left Outer Join dtl_StockTransaction m On c.Id = m.StoreId
-		--			And x.Drug_Pk = m.ItemId
-		--	Where m.StoreId = @StoreID
-		--		And x.Drug_Pk = a.Drug_Pk
-		--		And m.BatchId = e.Id
-		--		And m.ExpiryDate = e.ExpiryDate
-		--)
+	
 		Stock.[AvailableQTY],
 		replace(convert(varchar, Stock.ExpiryDate, 106), ' ', '-') [ExpiryDate]
 From dbo.Mst_Drug a
-	--Inner Join lnk_storeitem b On a.Drug_Pk = b.ItemId
 	Inner Join
 		(
-			Select
-				sum(T.Quantity) As AvailableQTY,
-				SI.StoreID,
-				T. ItemId Drug_pk,
-				T.BatchId,
-				T.ExpiryDate,
-				Store.Name StoreName,
-				Mst_Batch.Name BatchName
+			Select	sum(T.Quantity)	As AvailableQTY
+				,	SI.StoreID
+				,	T.ItemId		As Drug_pk
+				,	T.BatchId
+				,	T.ExpiryDate
+				,	Store.Name		As StoreName
+				,	Mst_Batch.Name	As BatchName
 			From Dtl_StockTransaction As T
 			Inner Join lnk_StoreItem As SI On T.ItemId = SI.ItemId
 			Inner Join Mst_Store As Store On SI.StoreID = Store.Id
---Inner Join Dtl_StockTransaction As T On Store.Id = T.StoreId	And x.Drug_pk = T.ItemId
 			Inner Join Mst_Batch On Mst_Batch.ID = T.BatchId
-			Where T.StoreId = @StoreId
-			Group By	SI.StoreID,
-						T.ItemId,
-						T.BatchId,
-						T.ExpiryDate,
-						Store.Name,
-						Mst_Batch.Name
+			Where (T.StoreId = @StoreId)
+			Group By	SI.StoreID
+					,	T.ItemId
+					,	T.BatchId
+					,	T.ExpiryDate
+					,	Store.Name
+					,	Mst_Batch.Name
 			Having (sum(T.Quantity) > 0)
 		) Stock On  Stock.Drug_pk = a.Drug_pk
-	--Inner Join mst_Store c On b.StoreId = c.Id
-	--Left Outer Join dtl_StockTransaction d On c.Id = d.StoreId	And a.Drug_Pk = d.ItemId
-	--Left Outer Join Mst_Batch e On d.BatchId = e.Id		And a.Drug_Pk = e.itemid
 	Left Outer Join Mst_DispensingUnit f On a.DispensingUnit = f.Id
+	Where Stock.StoreId = @StoreID
 
-Where Stock.StoreId = @StoreID
-	--And e.itemid Is Not Null
-	--And (a.DrugName + ' - ' + Stock.BatchName + ' - ' + convert(varchar, ExpiryDate, 106) + ' - ' + convert(varchar, dbo.fn_GetItemStock_Futures(a.Drug_Pk, e.Id, e.ExpiryDate, c.Id))) Is Not Null
---Group By Stock.StoreID,
-			--a.Drug_Pk,
-			--a.DrugName,
-			--f.Name,
-			--f.ID,
-			--Stock.BatchName,
-			--BatchId ,
-			--ExpiryDate,
-			--e.itemid
 Order By [ItemName]
 End
 --1                                    
 
 Select	c.Drug_Pk,
 		DrugId,
+		c.ItemTypeID,
 		c.DrugName [ItemName],
 		dbo.fn_GetDrugGenericCommaSeprated(c.Drug_Pk) [GenericName],
 		dbo.fn_Drug_Abbrev_Constella(c.Drug_Pk) [GenAbbr],
@@ -1525,6 +1761,7 @@ End
 --- 4                       
 Select Distinct	c.Drug_Pk,
 				c.DrugName [ItemName],
+				c.ItemTypeID,
 				Case
 					When f.donorid > 0 Then 1
 					Else 0
@@ -1536,11 +1773,15 @@ From Mst_Drug c
 		And convert(datetime, convert(varchar, getdate(), 106)) <= convert(datetime, convert(varchar, FundingEndDate, 106))
 Group By	c.Drug_Pk,
 			c.DrugName,
-			f.donorid
+			f.donorid,
+			c.ItemTypeID
 
 End
 
-Go
+
+GO
+
+
 
 
 
@@ -2467,7 +2708,9 @@ As Begin
 End
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]    Script Date: 5/12/2016 5:17:58 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyOrderDetail_Futures]
+GO
 SET ANSI_NULLS ON
 GO
 
@@ -2511,7 +2754,8 @@ Select Distinct	a.Drug_Pk [ItemId]
 				,a.PrintPrescriptionStatus
 				,a.PatientInstructions,
 				a.DispensedByDate,
-				Isnull(ProgId,0) ProgId
+				Isnull(ProgId,0) ProgId,
+				Convert(bit, 1) Valid
 From vw_patientpharmacy a
 Where a.ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
 
@@ -2521,6 +2765,14 @@ Where a.ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk;
 --Where ptn_Pharmacy_Pk = @Ptn_Pharmacy_Pk
 
 
+Select	O.Ptn_pk
+	,	O.VisitID
+	,	O.PharmacyPeriodTaken
+	,	O.ReportingID
+	,	O.orderstatus
+	,	nullif(O.PharmacyNotes,'') PharmacyNotes
+From ord_PatientPharmacyOrder O
+Where O.ptn_pharmacy_pk = @Ptn_Pharmacy_Pk
 
 
 End
@@ -2765,99 +3017,193 @@ Where (p.OpeningQuantity Is Not Null Or Recq.RecQty Is Not Null Or r.IssQty Is N
 	And (Drg.Drug_pk = @ItemId Or @ItemId Is Null)
 Order By Drg.DrugName
 
---2 
-/*
-                                                 
-select Drg.Drug_Pk[ItemId],Drg.DrugName[ItemName],Unit.Name [DispensingUnit],P.OpeningQuantity[OpeningStock],                          
-Recq.RecQty[QtyRecieved], r.IssQty[QtyDispensed],s.InterStoreIssueQty,                          
-(isnull(P.OpeningQuantity,0)+isnull(Recq.RecQty,0)+isnull(t.AdjustmentQuantity,0))-isnull(R.IssQty,0) [ClosingQty],                          
-(Select Id from Mst_Store where Id = @StoreId)[StoreId],                          
-(Select Name from Mst_Store where Id = @StoreId)[StoreName],t.AdjustmentQuantity                          
-from Mst_Drug Drg Left Outer join Mst_DispensingUnit Unit on Drg.DispensingUnit = Unit.Id                           
-Left Outer Join                           
-(select tmp.drug_pk,tmp.drugname,tmp.dispensingunit,sum(openingquantity)[OpeningQuantity] from                         
-(select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(b.Quantity)[OpeningQuantity]                          
-from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                          
-Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                          
-where b.storeid = @StoreId and b.ItemId=@ItemId and b.ExpiryDate>=@FromDate and                         
-transactiondate>=@FromDate and transactiondate<@ToDate  and openingstock = 1                          
-group by a.drug_pk,a.drugname,c.name                        
-union                        
-select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], nullif(dbo.fn_GetItemOpeningStock(a.Drug_pk,@StoreId,@FromDate),0)[OpeningQuanitity]                        
-from mst_drug a Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                      
-and a.Drug_Pk=@ItemId                      
-union                      
-select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(b.Quantity)[OpeningQuantity]                          
-from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                          
-Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                          
-where b.storeid = @StoreId and b.ItemId=@ItemId and b.ExpiryDate>=@FromDate and                         
-transactiondate>=@FromDate and transactiondate<@ToDate  and POID IS NULL and                      
-GRNId IS NULL and DisposeId IS NULL and Ptn_Pharmacy_Pk IS NULL and PtnPk IS NULL                       
-and OpeningStock IS NULL                           
-group by a.drug_pk,a.drugname,c.name                        
-)tmp group by tmp.drug_pk,tmp.drugname,tmp.dispensingunit) p on Drg.Drug_Pk = P.Drug_pk                          
-Left Outer Join                          
-(select q.drug_pk,q.drugname,q.dispensingunit,sum(q.RecQty)[RecQty] from                
---(select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(Quantity)[RecQty]                        
--- from mst_drug a Left Outer join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                        
--- Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                        
--- where  b.Openingstock IS NULL and  b.AdjustId IS NULL  and b.storeid = @StoreId and b.ExpiryDate>=@FromDate and                       
--- transactiondate>=@FromDate and transactiondate<@ToDate                         
--- group by a.drug_pk,a.drugname,c.name  having sum(Quantity) >= 0       
--- union        
- (select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(Quantity)[RecQty]                         
- from mst_drug a Inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                        
- Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                        
- where b.Openingstock IS NULL and  b.AdjustId IS NULL and b.storeid = @StoreId and (b.GrnId is not null or b.GrnId > 0)                         
- and b.Quantity>0 and b.ExpiryDate>=@FromDate and                   
- b.transactiondate >=@FromDate and b.transactiondate<@ToDate                        
- group by a.drug_pk,a.drugname,c.name having sum(Quantity) >= 0 )q         
- group by q.drug_pk, q.drugname, q.dispensingunit) Recq on Drg.Drug_Pk = Recq.Drug_Pk         
-Left Outer Join                          
-(select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], abs(sum(Quantity)) [IssQty]                         
-from mst_drug a inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                        
-Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id and b.ItemId=@ItemId                     
-where b.storeid = @StoreId  and b.Ptn_Pharmacy_pk > 0                         
-and b.ExpiryDate>=@FromDate and b.transactiondate >=@FromDate and b.transactiondate<@ToDate                        
-group by b.StoreId, a.drug_pk,a.drugname,c.name
---select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(Quantity) [IssQty]                           
---from mst_drug a inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                          
---Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                          
---where b.storeid = @StoreId and b.ItemId=@ItemId and (b.Ptn_Pharmacy_pk is not null or b.Ptn_Pharmacy_pk > 0)                           
---and b.ExpiryDate>=@FromDate and b.transactiondate >=@FromDate and b.transactiondate<=@ToDate                          
---group by b.StoreId, a.drug_pk,a.drugname,c.name
-)r on Drg.Drug_Pk = r.Drug_Pk 
-                     
-Left Outer Join                    
-(select a.Drug_Pk,a.DrugName,c.Name [DispensingUnit], sum(abs(Quantity)) [InterStoreIssueQty]                           
-from mst_drug a inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                          
-Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id                          
-where b.storeid = @StoreId and b.ItemId=@ItemId and (b.GrnId is not null or b.GrnId > 0)                           
-and b.Quantity<0 and b.ExpiryDate>=@FromDate and b.transactiondate >=@FromDate and b.transactiondate<=@ToDate                          
-group by a.drug_pk,a.drugname,c.name)s on Drg.Drug_Pk = s.Drug_Pk                  
-Left Outer Join                    
-(
-select a.Drug_Pk,a.DrugName,c.Name[DispensingUnit], sum(b.Quantity)[AdjustmentQuantity]                         
-from mst_drug a Inner join dtl_stocktransaction b on a.Drug_Pk = b.ItemId                        
-Left Outer join Mst_DispensingUnit c on a.DispensingUnit = c.Id and b.ItemId=@ItemId                      
-where b.storeid = @StoreId and                           
-b.ExpiryDate>=@FromDate and b.AdjustId IS NOT NULL and                   
-b.transactiondate >=@FromDate and b.transactiondate<@ToDate                        
-group by a.drug_pk,a.drugname,c.name
---select a.Drug_Pk,a.DrugName,'' [DispensingUnit], '' [InterStoreIssueQty],sum(b.AdjustmentQuantity)[AdjustmentQuantity]                          
---from mst_drug a Inner join Dtl_AdjustStock b on a.Drug_Pk = b.ItemId                          
---Inner Join Ord_AdjustStock c on b.AdjustId = c.AdjustId                          
---where b.storeid = @StoreId                            
---and b.ExpiryDate>=@FromDate and                    
---c.Adjustmentdate >=@FromDate and c.Adjustmentdate<=@ToDate                          
---group by a.drug_pk,a.drugname,b.AdjustmentQuantity
-)t on Drg.Drug_Pk = t.Drug_Pk                       
-where (p.OpeningQuantity is not null or Recq.RecQty is not null or r.IssQty is not null                    
-or s.InterStoreIssueQty is not null)  
-ORDER BY Drg.DrugName     
-*/
+
 
 End
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]
+GO
+
+/****** Object:  StoredProcedure [dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures]    Script Date: 21-Mar-2017 6:33:31 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[pr_SCM_GetPurchaseOrderDetailsByPoid_Futures] @POid INT    
+AS     
+    BEGIN                                   
+                            
+		Select	ord.POId
+			,	ord.LocationID
+			,	ord.SupplierID
+			,	sup.SupplierName
+			,	convert(varchar(100), ord.OrderDate, 106)	As OrderDate
+			,	ord.AuthorizedBy
+			,	emp1.FirstName + ' ' + emp1.LastName		As AuthorizeName
+			,	ord.PreparedBy
+			,	emp2.FirstName + ' ' + emp2.LastName		As PreparedName
+			,	ord.Status
+			,	ord.SourceStoreID
+			,	str1.Name									As SourceStoreName
+			,	ord.DestinStoreID
+			,	str2.Name									As DestinationStoreName
+			,	ord.UserID
+			,	ord.OrderNo
+			,	IsNull(ord.PONumber, OrderNo) PONumber
+		From ord_PurchaseOrder As ord
+		Left Outer Join Mst_Supplier As sup On ord.SupplierID = sup.Id
+		Left Outer Join Mst_Store As str1 On str1.Id = ord.SourceStoreID
+		Left Outer Join Mst_Store As str2 On str2.Id = ord.DestinStoreID
+		Left Outer Join mst_Employee As emp1 On emp1.EmployeeID = ord.AuthorizedBy
+		Left Outer Join mst_Employee As emp2 On emp2.EmployeeID = ord.PreparedBy
+		Where (ord.POId = @POid)                           
+                            
+--select a.POId,b.DrugID [ItemCode],a.ItemId,a.Quantity [OrderQuantity],a.Quantity * a.PurchasePrice [TotPrice] ,a.PurchasePrice [Price],a.Unit[UnitID],c.Name[Units] ,a.UserId                           
+--from dtl_PurchaseItem a left outer join mst_drug b                          
+--on a.ItemId =b.Drug_pk left outer join mst_dispensingUnit c on b.PurchaseUnit= c.ID                          
+--where a.POId =@POid                         
+        DECLARE @ISTstoreID INT                       
+        SET @ISTstoreID = 0                      
+        SELECT  @ISTstoreID = SourceStoreID    
+        FROM    ord_PurchaseOrder    
+        WHERE   supplierid = 0    
+                AND destinStoreID > 0    
+                AND poid = @POid                      
+        IF ( @ISTstoreID > 0 )     
+            BEGIN                
+            
+                
+                SELECT  a.POId ,    
+                        b.DrugID [ItemCode] ,    
+                        CONVERT(VARCHAR(100), a.ItemId) + '-'    
+                        + CONVERT(VARCHAR(100), a.BatchID) + '-'    
+                        + CONVERT(VARCHAR, a.ExpiryDate, 101) [ItemID]              
+--a.ItemId,              
+                        ,    
+                        b.DrugName,    
+                        a.Quantity [OrderQuantity] ,    
+                        a.Quantity * a.PurchasePrice [TotPrice] ,    
+                        a.PurchasePrice [Price] ,    
+                        a.Unit [UnitID] ,    
+                        c.Name [Units] ,    
+                        a.UserId ,    
+                        a.UnitQuantity ,    
+                        z.[TotalAmount] ,    
+                        0 [Isfunded] ,    
+                        b.DrugName + '^' + e.Name + '^'    
+                        + REPLACE(CONVERT(VARCHAR, a.ExpiryDate, 106), ' ',    
+                                  '-') [ItemName] ,    
+                        a.BatchID ,    
+                        a.AvaliableQty ,    
+                        a.ExpiryDate ,    
+                        e.Name [BatchName] ,    
+                        a.AvaliableQty [AvailableQTY]    
+                FROM    dtl_PurchaseItem a    
+                        LEFT OUTER JOIN mst_drug b ON a.ItemId = b.Drug_pk    
+                        LEFT OUTER JOIN mst_dispensingUnit c ON b.PurchaseUnit = c.ID    
+                        LEFT OUTER JOIN lnk_storeitem ON b.Drug_Pk = lnk_storeitem.ItemId    
+                        LEFT OUTER JOIN mst_Store ON lnk_storeitem.StoreId = mst_Store.Id    
+                        LEFT OUTER JOIN dtl_StockTransaction d ON mst_Store.Id = d.StoreId    
+                                                              AND a.ItemId = d.ItemId    
+                                                              AND d.BatchId = a.BatchID    
+                                                              AND a.ExpiryDate = d.ExpiryDate    
+                        LEFT OUTER JOIN Mst_Batch e ON a.BatchId = e.Id    
+                        CROSS APPLY ( SELECT    SUM(a.Quantity    
+                                                    * a.PurchasePrice) [TotalAmount]    
+                                      FROM      dtl_PurchaseItem a    
+                                                LEFT OUTER JOIN mst_drug b ON a.ItemId = b.Drug_pk    
+                                                LEFT OUTER JOIN mst_dispensingUnit c ON b.PurchaseUnit = c.ID    
+                                      WHERE     a.POId = @POid    
+                                    ) z             
+------cross apply            
+------(select sum(m.Quantity)[AvailableQTY]                          
+------from dbo.Mst_Drug x inner join lnk_storeitem  lkitem on x.Drug_Pk = lkitem.ItemId                                    
+------Inner join mst_Store mstr on lkitem.StoreId = mstr.Id                           
+------Left Outer Join dtl_StockTransaction m on mstr.Id = m.StoreId and x.Drug_Pk = m.ItemId                             
+------where m.StoreId=@ISTstoreID  and x.Drug_Pk= b.Drug_Pk and m.BatchId=a.BatchID and m.ExpiryDate=a.ExpiryDate                                 
+------)y                        
+                WHERE   a.POId = @POid    
+                        AND mst_Store.Id = @ISTstoreID    
+                GROUP BY a.POId ,    
+                        b.DrugID ,    
+                        ( CONVERT(VARCHAR(100), a.ItemId) + '-'    
+                          + CONVERT(VARCHAR(100), a.BatchID) + '-'    
+                          + CONVERT(VARCHAR, a.ExpiryDate, 101) ) ,    
+                          b.DrugName,    
+                        a.Quantity ,    
+                        a.Quantity * a.PurchasePrice ,    
+                        a.PurchasePrice ,    
+                        a.Unit ,    
+                        c.Name ,    
+                        a.UserId ,    
+                        a.UnitQuantity                  
+--,z.[TotalAmount]              
+                        ,    
+                        b.DrugName + '^' + e.Name + '^'    
+                        + REPLACE(CONVERT(VARCHAR, a.ExpiryDate, 106), ' ',    
+                                  '-') ,    
+                        a.BatchID ,    
+                        a.AvaliableQty ,    
+                        a.ExpiryDate ,    
+                        e.Name ,    
+                        z.[TotalAmount]             
+--,y.[AvailableQTY]               
+                
+            END                 
+        ELSE     
+            BEGIN                
+                        
+                SELECT  a.POId ,    
+                        b.DrugID [ItemCode] ,    
+                        a.ItemId ,    
+                        b.DrugName,    
+                        a.Quantity [OrderQuantity] ,    
+                        a.Quantity * a.PurchasePrice [TotPrice] ,    
+                        a.PurchasePrice [Price] ,    
+                        a.Unit [UnitID] ,    
+                        c.Name [Units] ,    
+                        a.UserId ,    
+                        a.UnitQuantity ,    
+                        z.[TotalAmount] ,    
+                        ( SELECT DISTINCT    
+                                    CASE WHEN f.donorid > 0 THEN 1    
+                                         ELSE 0    
+                                    END [Isfunded]    
+                          FROM      Mst_Drug c    
+                                    INNER JOIN Lnk_ProgramItem e ON e.ItemId = c.Drug_Pk    
+                                    INNER JOIN Lnk_DonorProgram f ON f.ProgramId = e.ProgramId    
+                                                              AND CONVERT(DATETIME, CONVERT(VARCHAR, GETDATE(), 106)) >= CONVERT(DATETIME, CONVERT(VARCHAR, fundingstartdate, 106))    
+                                                              AND CONVERT(DATETIME, CONVERT(VARCHAR, GETDATE(), 106)) <= CONVERT(DATETIME, CONVERT(VARCHAR, FundingEndDate, 106))    
+                          WHERE     c.Drug_Pk = a.ItemId    
+                          GROUP BY  c.Drug_Pk ,    
+                                    f.donorid    
+                        ) [Isfunded]    
+                FROM    dtl_PurchaseItem a    
+                        LEFT OUTER JOIN mst_drug b ON a.ItemId = b.Drug_pk    
+                        LEFT OUTER JOIN mst_dispensingUnit c ON b.PurchaseUnit = c.ID    
+                        CROSS APPLY ( SELECT    SUM(a.Quantity    
+                                                    * a.PurchasePrice) [TotalAmount]    
+                                      FROM      dtl_PurchaseItem a    
+                                                LEFT OUTER JOIN mst_drug b ON a.ItemId = b.Drug_pk    
+                                                LEFT OUTER JOIN mst_dispensingUnit c ON b.PurchaseUnit = c.ID    
+                                      WHERE     a.POId = @POid    
+                                    ) z    
+                WHERE   a.POId = @POid                        
+                  
+            END                     
+                      
+--select distinct  c.Drug_Pk,                                       
+--case when f.donorid > 0 then 1 else 0 end [Isfunded]                                        
+--from Mst_Drug c inner Join Lnk_ProgramItem e on e.ItemId = c.Drug_Pk                      
+--inner Join Lnk_DonorProgram f on f.ProgramId = e.ProgramId and getdate()>=fundingstartdate and getdate()<= fundingenddate                      
+--group by  c.Drug_Pk,f.donorid                            
+                                
+    END
+
 GO
 
 

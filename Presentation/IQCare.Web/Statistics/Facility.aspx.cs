@@ -42,9 +42,9 @@ namespace IQCare.Web.Statistics
         /// </summary>
         private void Fill_Dropdown()
         {
-            IUser theLocationManager;
-            theLocationManager = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
-            DataTable theDT = theLocationManager.GetFacilityList();
+            IUser uMgr = (IUser)ObjectFactory.CreateInstance("BusinessProcess.Security.BUser, BusinessProcess.Security");
+            DataTable theDT = uMgr.GetFacilityList();
+            uMgr = null;
             ViewState["Facility"] = theDT;
             IQCareUtils theUtils = new IQCareUtils();
             DataView theDV = new DataView(theDT);
@@ -88,15 +88,13 @@ namespace IQCare.Web.Statistics
         private void Init_Form()
         {
 
-            IFacility FacilityManager;
-            // Double thePercent, theResultPercent, theTotalPateint, theTotalPMTCTPatient;
-            FacilityManager = (IFacility)ObjectFactory.CreateInstance("BusinessProcess.Security.BFacility, BusinessProcess.Security");
-            theDS = FacilityManager.GetFacilityStats(Convert.ToInt32(ddFacility.SelectedValue));
+            IFacility mgr = (IFacility)ObjectFactory.CreateInstance("BusinessProcess.Security.BFacility, BusinessProcess.Security");
+            theDS = mgr.GetFacilityStats(Convert.ToInt32(ddFacility.SelectedValue));
             panelPMTCT.Visible = false;//tblPMTCTCare.Visible = 
             panelHEI.Visible = false;//tblExpInfant.Visible =
             panelHIV.Visible = false;//tblHIVCare.Visible =
             ViewState["theDS"] = theDS;
-            FacilityManager = null;
+            mgr = null;
             DataTable dttecareas = new DataTable();
             dttecareas = theDS.Tables[10];
 

@@ -40,11 +40,11 @@
             this.crViewer.AutoSize = true;
             this.crViewer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.crViewer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.crViewer.Location = new System.Drawing.Point(11, 12);
+            this.crViewer.Location = new System.Drawing.Point(24, 12);
             this.crViewer.Name = "crViewer";
             this.crViewer.SelectionFormula = "";
             this.crViewer.ShowGroupTreeButton = false;
-            this.crViewer.Size = new System.Drawing.Size(827, 499);
+            this.crViewer.Size = new System.Drawing.Size(1036, 499);
             this.crViewer.TabIndex = 0;
             this.crViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             this.crViewer.ViewTimeSelectionFormula = "";
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 545);
+            this.ClientSize = new System.Drawing.Size(1072, 545);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.crViewer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

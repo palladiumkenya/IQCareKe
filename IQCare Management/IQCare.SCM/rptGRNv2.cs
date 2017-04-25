@@ -16,14 +16,14 @@ namespace IQCare.SCM {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptGRN : ReportClass {
+    public class rptGRNv2 : ReportClass {
         
-        public rptGRN() {
+        public rptGRNv2() {
         }
         
         public override string ResourceName {
             get {
-                return "rptGRN.rpt";
+                return "rptGRNv2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace IQCare.SCM {
         
         public override string FullResourceName {
             get {
-                return "IQCare.SCM.rptGRN.rpt";
+                return "IQCare.SCM.rptGRNv2.rpt";
             }
             set {
                 // Do nothing
@@ -122,9 +122,9 @@ namespace IQCare.SCM {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptGRN : Component, ICachedReport {
+    public class CachedrptGRNv2 : Component, ICachedReport {
         
-        public CachedrptGRN() {
+        public CachedrptGRNv2() {
         }
         
         [Browsable(false)]
@@ -161,7 +161,7 @@ namespace IQCare.SCM {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptGRN rpt = new rptGRN();
+            rptGRNv2 rpt = new rptGRNv2();
             rpt.Site = this.Site;
             return rpt;
         }

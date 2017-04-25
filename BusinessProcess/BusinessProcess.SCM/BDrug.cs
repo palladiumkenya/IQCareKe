@@ -134,6 +134,23 @@ namespace BusinessProcess.SCM
         }
 
         /// <summary>
+        /// Gets the prescription list.
+        /// </summary>
+        /// <param name="locationId">The location identifier.</param>
+        /// <param name="prescriptionDate">The prescription date.</param>
+        /// <param name="orderStatus">The order status.</param>
+        /// <returns></returns>
+        public DataTable GetPrescriptionList(int locationId, DateTime prescriptionDate, int orderStatus)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
+            ClsUtility.AddExtendedParameters("@PrescriptionStatus", SqlDbType.Int, orderStatus);
+            ClsUtility.AddExtendedParameters("@PrescriptionDate", SqlDbType.DateTime, prescriptionDate);
+            return (DataTable)obj.ReturnObject(ClsUtility.theParams, "Pharmacy_GetPrescription", ClsUtility.ObjectEnum.DataTable);
+        }
+
+        /// <summary>
         /// Saves the art data.
         /// </summary>
         /// <param name="patientId">The patient identifier.</param>
@@ -193,7 +210,8 @@ namespace BusinessProcess.SCM
             int? RegimeLine = null,
             int? ProviderId = null,
             double? Height = null,
-            double? Weight = null)
+            double? Weight = null,
+            string pharmacyNotes="")
         {
             DataTable dataTable = new DataTable();
             try
@@ -232,7 +250,10 @@ namespace BusinessProcess.SCM
                 {
                     ClsUtility.AddExtendedParameters("@Weight", SqlDbType.Decimal, Weight.Value);
                 }
-               
+                if (!string.IsNullOrEmpty(pharmacyNotes))
+                {
+                    ClsUtility.AddExtendedParameters("@PharmacyNotes", SqlDbType.VarChar, pharmacyNotes);
+                }
                 //if (PharmacyRefillDate.HasValue)
                 //    ClsUtility.AddExtendedParameters("@PharmacyRefillAppDate", SqlDbType.DateTime, PharmacyRefillDate.Value);
                 dataTable = (DataTable)clsObject.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyDispenseOrder_Futures", ClsUtility.ObjectEnum.DataTable);

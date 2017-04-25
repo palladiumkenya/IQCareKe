@@ -232,7 +232,7 @@ namespace BusinessProcess.IQReports
                 ClsObject ReportManager = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 string queryStatement;
-                DataMgr dataManager = new DataMgr();
+               // DataMgr dataManager = new DataMgr();
                 //  string sourceDB = dataManager.Reports_DatabaseName;
                 // string destinationDB = dataManager.EMR_DatabaseName;
 
@@ -289,7 +289,7 @@ namespace BusinessProcess.IQReports
                 ClsObject ReportManager = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 string queryStatement = "pr_IQTools_UpdateReport";
-                DataMgr dataManager = new DataMgr();
+               // DataMgr dataManager = new DataMgr();
                 ClsUtility.AddParameters("@reportID", SqlDbType.Int, reportId.ToString());
                 ClsUtility.AddExtendedParameters("@template", SqlDbType.VarBinary, (object)(buffer));
                 ClsUtility.AddParameters("@templateFileName", SqlDbType.VarChar, filename);
@@ -368,7 +368,7 @@ namespace BusinessProcess.IQReports
                 ClsObject ReportManager = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 string queryStatement;
-                DataMgr dataManager = new DataMgr();
+                //DataMgr dataManager = new DataMgr();
                 ClsUtility.AddParameters("@ReportID", SqlDbType.Int, reportId.ToString());
                 queryStatement = @"Select Distinct	Q.QryID QueryID,
 				                SB.sbCatID SubCategoryID,
@@ -700,7 +700,7 @@ namespace BusinessProcess.IQReports
                 ClsObject ReportManager = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 string queryStatement;
-                DataMgr dataManager = new DataMgr();
+               // DataMgr dataManager = new DataMgr();
                 queryStatement = @"Select  IQToolsCaTID ReportID,ReportName , 
                             Case  When ReportStylesheet Is Null Then 'No' Else 'Yes' End As HasTemplate,
                         FileName+'.'+FileExt FullFileName,
