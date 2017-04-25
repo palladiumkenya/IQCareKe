@@ -1861,7 +1861,8 @@
                           if($("#datastep1").parsley().validate()){
                                 
                               if(transferIn===1){
-                                   $.when(addPatientTransferIn()).$then(managePatientHivDiagnosis()).$then(managePatientArvHistory());
+                                  $.when(addPatientTransferIn()).$then(managePatientHivDiagnosis());
+                                  managePatientArvHistory();
                               }else if(transferIn===2){
                                           managePatientArvHistory();
                                }
@@ -2206,14 +2207,15 @@
 		            dataType: "json",
 		            success: function(response) {
 		                patientType=response.d;
-					   
-		                if(patientType==='TransferIn'){ transferIn=1; enableIfTransferIn(); } else if(patientType==='New') { transferIn=2; disableIfNotTransferIn();}else { transferIn=3;}
-                                    
-		                if(transferIn===1){
+		               
+		                if(patientType==='Transfer-In'){ transferIn=1; enableIfTransferIn(); } else if(patientType==='New') { transferIn=2; disableIfNotTransferIn();}else { transferIn=3;}
+                              
+		                if(transferIn===1) {
+		            
 		                    getPatientBaselinePreloadValues();
-                            getPatientEnrollmentDate
+		                    getPatientEnrollmentDate();
 		                }else if(transferIn===2){
-                             getPatientEnrollmentDate;
+                             getPatientEnrollmentDate();
 		                }
 		   
 		               
