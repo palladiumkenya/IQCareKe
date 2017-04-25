@@ -76,9 +76,9 @@ namespace IQCare.CCC.UILogic.Baseline
         {
             Person person = new Person()
             {
-                FirstName = p.FirstName,
-                MidName = p.MiddleName,
-                LastName = p.LastName,
+                FirstName = _utility.Encrypt(p.FirstName),
+                MidName = _utility.Encrypt(p.MiddleName),
+                LastName = _utility.Encrypt(p.LastName),
                 Sex = p.Sex,
                 //DateOfBirth = p.DateOfBirth,
             };

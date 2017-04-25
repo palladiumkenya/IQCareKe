@@ -1,4 +1,5 @@
-﻿using Application.Presentation;
+﻿using System;
+using Application.Presentation;
 using Entities.CCC.Triage;
 using Interface.CCC;
 
@@ -64,6 +65,19 @@ namespace IQCare.CCC.UILogic
         {
             var patientVitals = _vitals.GetByPatientId(patientId);
             return patientVitals;
+        }
+
+        public PatientVital GetPatientVitalsByMasterVisitId(int patientId, int patientMasterVisitId)
+        {
+            try
+            {
+                return _vitals.GetPatientVitalsByMasterVisitId(patientId, patientMasterVisitId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }           
         }
     }
 }
