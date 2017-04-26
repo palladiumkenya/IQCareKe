@@ -137,6 +137,45 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        {
+            firstName = GlobalObject.unescape(firstName);
+            middleName = GlobalObject.unescape(middleName);
+            lastName = GlobalObject.unescape(lastName);
+            PatientFamilyTesting patientAppointment = new PatientFamilyTesting()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                FirstName = firstName,
+                MiddleName = middleName,
+                LastName = lastName,
+                Sex = sex,
+                DateOfBirth = dob,
+                RelationshipId = relationshipId,
+                BaseLineHivStatusId = baselineHivStatusId,
+                BaselineHivStatusDate = baselineHivStatusDate,
+                HivTestingResultsDate = hivTestingresultDate,
+                HivTestingResultsId = hivTestingresultId,
+                CccReferal = cccreferal,
+                CccReferaalNumber = cccReferalNumber
+            };
+            try
+            {
+                var testing = new PatientFamilyTestingManager();
+                Result = testing.UpdatePatientFamilyTestings(patientAppointment);
+                if (Result > 0)
+                {
+                    Msg = "Patient family testing Updated Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack

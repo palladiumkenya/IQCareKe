@@ -531,6 +531,47 @@ Update F Set
  Where F.FeatureTypeId Is Null
 
 Go
+If Exists(Select 1 From Mst_code Where Name='Pharmacy Order Close Reason') Begin
+	  Insert Into Mst_Code(Name, DeleteFlag, UserId, CreateDate)	Values('Pharmacy Order Close Reason',0,1,getdate());
+End
+
+declare @featureTypeId int;
+Select @featureTypeId =	  CodeId From Mst_Code Where     Name = 'Pharmacy Order Close Reason';
+Insert Into Mst_Decode(Name, CodeId, Code, DeleteFlag, UserId, SystemId, SrNo, CreateDate)
+Select dx.Name
+	,	dx.CodeId
+	,	dx.Code
+	,	dx.DeleteFlag
+	,	dx.UserId
+	,	dx.SystemId
+	,	dx.SRNo
+	,	getdate() CreateDate
+From 
+(Select 'Stock not available' Name,
+		@featureTypeId CodeId,
+		'STOCK-OUT' Code,
+		0 DeleteFlag,	
+		1 UserId,
+		0 SystemId,
+		1 SRNo
+Union All
+Select 'Drug substitution' Name,
+		@featureTypeId CodeId,
+		'DRUG-SUBS' Code,
+		0 DeleteFlag,	
+		1 UserId,
+		0 SystemId,
+		2 SRNo
+Union All
+Select 'Client unable to pay' Name,
+		@featureTypeId CodeId,
+		'UNABLE-TO-PAY' Code,
+		0 DeleteFlag,	
+		1 UserId,
+		0 SystemId,
+		3 SRNo
+) dx  Where  Not Exists(Select 1 from mst_Decode where CodeId=@featureTypeId And Code= dx.Code);
+Go
 declare @featureTypeId int,@moduleId int;
 Select @moduleId=ModuleId From mst_Module Where ModuleName='Billing'  
 update mst_Feature Set ModuleId = @ModuleId where FeatureName like '%Billing%' And (ModuleId Is Null Or ModuleId=0)
@@ -1519,6 +1560,21 @@ Where RI > 1
 
 SET IDENTITY_INSERT dbo.Mst_ItemMaster Off 
 
+Go
+If Not Exists(Select 1 From ScheduledTask Where TaskName='Appointment.Update') Begin
+	Insert Into ScheduledTask(TaskName,LastRunDate,NextRunDate,Active)
+	Values('Appointment.Update',null,getdate(),1);
+End
+Go
+If Not Exists(Select 1 From ScheduledTask Where TaskName='Database.Backup') Begin
+	Insert Into ScheduledTask(TaskName,LastRunDate,NextRunDate,Active)
+	Values('Database.Backup',null,getdate(),1);;
+End
+Go
+If Not Exists(Select 1 From ScheduledTask Where TaskName='IQTools.Update') Begin
+	Insert Into ScheduledTask(TaskName,LastRunDate,NextRunDate,Active)
+	Values('IQTools.Update',null,getdate(),1);
+End
 Go
 Update Mst_Store Set StoreCategory =
 Case

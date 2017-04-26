@@ -9,5 +9,6 @@ namespace DataAccess.CCC.Interface.Encounter
 {
     public interface IPatientLabDetailsRepository : IRepository<LabDetailsEntity>
     {
+
     }
 }

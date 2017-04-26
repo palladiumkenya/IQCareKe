@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entities.CCC.Encounter;
+using Entities.CCC.Visit;
 
 namespace Interface.CCC.Encounter
 {
@@ -12,8 +13,7 @@ namespace Interface.CCC.Encounter
         int DeletePatientLabOrder(int id);
         List<LabOrderEntity> GetPatientCurrentLabOrders(int patientId, DateTime visitDate);
         List<LabOrderEntity> GetPatientLabOrdersAll(int patientId);
-        List<LabOrderEntity> GetVlPendingCount(int facilityId);
-        List<LabOrderEntity> GetVlCompleteCount(int facilityId);
+       
 
     }
 }

@@ -36,7 +36,8 @@ namespace Interface.SCM
             int? regimeLine = null,
             int? providerId = null,
             double? height =null,
-            double? weight = null
+            double? weight = null,
+            string pharmacyNotes = ""
             );
         /// <summary>
         /// 
@@ -51,6 +52,7 @@ namespace Interface.SCM
         DataSet GetDrugTypeID(int itemId);
         DataSet SaveArtData(int patientId, DateTime dispensedDate);
         DataSet CheckDispencedDate(int patientId, int locationId, DateTime dispDate, int orderId);
+        DataTable GetPrescriptionList(int locationId, DateTime prescriptionDate, int orderStatus);
         DataSet SaveHivTreatementPharmacyField(int orderId, string weight, string height, int program, int periodTaken, int provider, int regimenLine, DateTime nextAppDate, int reason);
         DataSet GetPharmacyPrescriptionDetails(int pharmacyId, int patientId, int IQCareFlag);
     }

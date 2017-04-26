@@ -261,13 +261,13 @@ namespace IQCare.Web.UILogic
                 }
             }
             //Manually add greencard menu
-            result.Add(new HomePageLandScape()
-            {
-                MenuName = "Green Card (2016)",
-                MenuId = -1,
-                ClickAction = RedirectAction.ModuleAction,
-                ServiceAreaName = "CCC"
-            });
+            //result.Add(new HomePageLandScape()
+            //{
+            //    MenuName = "Green Card (2016)",
+            //    MenuId = -1,
+            //    ClickAction = RedirectAction.ModuleAction,
+            //    ServiceAreaName = "CCC"
+            //});
             Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(o => o.Clinical).ThenBy(n => n.Name).ToList().ForEach(
             s =>
             {
@@ -278,7 +278,7 @@ namespace IQCare.Web.UILogic
                     {
                         MenuName = s.DisplayName,
                         MenuId = s.Id,
-                        ClickAction = s.Clinical ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
+                        ClickAction = !s.ModuleFlag ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
                         ServiceAreaName = s.Name
                     });
                 }
@@ -348,6 +348,7 @@ namespace IQCare.Web.UILogic
                                             Name = Convert.ToString(row["ModuleName"]),
                                             DisplayName = Convert.ToString(row["DisplayName"]),
                                             EnrolFlag = Convert.ToBoolean(row["CanEnroll"]),
+                                            ModuleFlag = Convert.ToBoolean(row["ModuleFlag"]),
                                             Clinical = Convert.ToBoolean(row["CanEnroll"]),
                                             PublishFlag = (Convert.ToString(row["ModuleName"]) == "PM/SCM") ? false : true,
                                             DeleteFlag = false,

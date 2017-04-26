@@ -86,6 +86,7 @@
     <Compile Include="Interface\enrollment\IPatientEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
+    <Compile Include="Interface\Lookup\ILookupParameter.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Interface\person\IPersonRelationshipRepository.cs" />
     <Compile Include="Interface\visit\IPatientLabTrackerRepository.cs" />
     <Compile Include="Interface\visit\IPatientMasterVisitRepository.cs" />
+    <Compile Include="Interface\visit\IPatientVisitRepository.cs" />
     <Compile Include="Repository\Baseline\INHProphylaxisRepository.cs" />
     <Compile Include="Repository\Baseline\PatientArvHistoryRepository.cs" />
     <Compile Include="Repository\Baseline\PatientHivDiagnosisRepository.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Repository\Enrollment\PatientEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupParameterRepository.cs" />
     <Compile Include="Repository\Lookup\PatientBaselineLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientServiceEnrollmentLookupRepository.cs" />
@@ -187,6 +190,7 @@
     <Compile Include="Repository\Enrollment\PatientIdentifierRepository.cs" />
     <Compile Include="Repository\visit\PatientLabTrackerRepository.cs" />
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
+    <Compile Include="Repository\visit\PatientVisitRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

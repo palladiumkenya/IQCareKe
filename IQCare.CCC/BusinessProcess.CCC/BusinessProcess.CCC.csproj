@@ -128,6 +128,7 @@
     <Compile Include="visit\BPatientIdentifierManager.cs" />
     <Compile Include="visit\BPatientLabOrdermanager.cs" />
     <Compile Include="visit\BPatientmasterVisit.cs" />
+    <Compile Include="visit\BPatientVisit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">

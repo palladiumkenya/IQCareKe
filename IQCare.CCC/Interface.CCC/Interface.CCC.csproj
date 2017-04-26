@@ -102,6 +102,7 @@
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
+    <Compile Include="Visit\IPatientVisitManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

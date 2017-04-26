@@ -221,7 +221,7 @@ namespace IQCare.Web.Laboratory
             {
                 if (Session[SessionKey.SelectedLabTestOrder] == null)
                 {
-                    string theUrl = string.Format("{0}", "~/Laboratory/Admin/LabTestMaster.aspx");
+                    string theUrl = string.Format("{0}", "~/Laboratory/LabRequestForm.aspx");
                     //Response.Redirect(theUrl);
                     System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
                     Response.Redirect(theUrl, true);
