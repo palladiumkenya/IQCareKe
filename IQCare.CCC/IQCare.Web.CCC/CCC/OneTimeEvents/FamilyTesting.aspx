@@ -280,7 +280,7 @@
                                 <label class="control-label pull-left">HIV Testing Results</label>
                             </div>
                             <div class="col-md-12">
-                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" onChange="HivEnabled();CccEnabled();" />
+                                <asp:DropDownList runat="server" ID="hivtestingresult" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="HivEnabled();CccEnabled();" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -765,7 +765,7 @@
                                             <label class="control-label pull-left">HIV Testing Results</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <asp:DropDownList runat="server" ID="testingStatusMod" ClientIDMode="Static" CssClass="form-control input-sm" onChange="HivEnabledMod();CccEnabledMod();" />
+                                            <asp:DropDownList runat="server" ID="testingStatusMod" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onChange="HivEnabledMod();CccEnabledMod();" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 form-group">
@@ -1109,7 +1109,7 @@
                             } else {
                                 testingDate = "";
                             }
-                            table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + "</td><td align='right'><button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'> Edit</button></td></tr>";
+                            table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + name + '</td><td style="text-align: left">' + item.Relationship + '</td><td style="text-align: left">' + item.BaseLineHivStatus + '</td><td style="text-align: left">' + baselineDate + '</td><td style="text-align: left">' + item.HivStatusResult + '</td><td style="text-align: left">' + testingDate + '</td><td style="text-align: left">' + item.CccReferal + "</td><td align='right'><button type='button' id= 'btnEditTesting' class='btn btn-link btn-sm pull-right' data-toggle='modal' data-target='#editFamilyTestingModal' onClick='editFamilyTesting(this)'> View/Edit</button></td></tr>";
                         });
                    
                         $('#tableFamilymembers').append(table);
@@ -1152,7 +1152,13 @@
                     break;
                 }
             }
-            $("#<%=bHivStatusDateMod.ClientID%>").val(moment(familyTesting.BaseLineHivStatusDate).format('DD-MMM-YYYY'));
+            var baselineDate = familyTesting.BaseLineHivStatusDate;
+            if (baselineDate != null) {
+                $("#<%=bHivStatusDateMod.ClientID%>").val(moment(familyTesting.BaseLineHivStatusDate).format('DD-MMM-YYYY'));
+
+            } else {
+                $("#<%=bHivStatusDateMod.ClientID%>").val("");                
+            }
             var dd = document.getElementById('testingStatusMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.HivStatusResult) {
@@ -1160,7 +1166,13 @@
                     break;
                 }
             }
-            $("#<%=testingStatusDateMod.ClientID%>").val(moment(familyTesting.HivStatusResultDate).format('DD-MMM-YYYY'));
+            var testingDate = familyTesting.HivStatusResultDate;
+            if (testingDate != null) {
+                $("#<%=testingStatusDateMod.ClientID%>").val(moment(familyTesting.HivStatusResultDate).format('DD-MMM-YYYY'));
+
+            } else {
+                $("#<%=testingStatusDateMod.ClientID%>").val("");                
+            }
             var dd = document.getElementById('cccReferalMod');
             for (var i = 0; i < dd.options.length; i++) {
                 if (dd.options[i].text === familyTesting.CccReferal) {
@@ -1231,7 +1243,6 @@
                     return false;
                 }
                 else {
-                    debugger;  
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientService.asmx/UpdatePatientFamilyTesting",
