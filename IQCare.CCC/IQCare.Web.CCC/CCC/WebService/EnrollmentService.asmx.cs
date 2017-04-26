@@ -106,6 +106,7 @@ namespace IQCare.Web.CCC.WebService
 
                     if (patientId > 0)
                     {
+                        //
                         PatientMasterVisit visit = new PatientMasterVisit
                         {
                             PatientId = patientId,
@@ -115,7 +116,8 @@ namespace IQCare.Web.CCC.WebService
                             CreateDate = DateTime.Now,
                             DeleteFlag = false,
                             VisitDate = DateTime.Now,
-                            CreatedBy = userId
+                            CreatedBy = userId,
+                            VisitType = 1340//To look up the visit type of enrollment
                         };
 
                         PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment

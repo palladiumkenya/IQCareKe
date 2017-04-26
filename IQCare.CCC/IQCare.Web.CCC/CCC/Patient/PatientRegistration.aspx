@@ -566,6 +566,7 @@
                                     <div class="col-md-12"><label class="control-label pull-left">Select if Key.Pop</label></div>
                                     <div class="col-md-12">
                                         <asp:DropDownList runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="KeyPopulationCategoryId" data-parsley-min="1"/>
+                                       
                                     </div>        
                                </div>
                                 
@@ -641,7 +642,7 @@
                 });
 
 
-
+                //$('#keyPopulationCategories').multiselect();
 
                 $("#myWizard")
                     .on("actionclicked.fu.wizard", function(evt, data) {
@@ -1276,7 +1277,7 @@
                     $(".errorBlock").hide();
                 });
 
-<%--                function duplicateCheck() {
+                function duplicateCheck() {
                     var personFname = $("#<%=personFname.ClientID%>").val();
                     var personMName = $("#<%=personMName.ClientID%>").val();
                     var personLName = $("#<%=personLName.ClientID%>").val();
@@ -1345,7 +1346,7 @@
                             }
                         });
                     }    
-                }--%>
+                }
 
                 
 
@@ -1482,7 +1483,7 @@
                     console.log(_fp);
                 });
 
-            });
+        });
     </script>
 </asp:Content>
 
