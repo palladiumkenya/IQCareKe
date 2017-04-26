@@ -23,9 +23,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (relationship != null && relationship.Count > 0)
             {
                 Relationship.Items.Add(new ListItem("select", "0"));
+                relationshipMod.Items.Add(new ListItem("select", "0"));
                 foreach (var k in relationship)
                 {
                     Relationship.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    relationshipMod.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 
@@ -33,9 +35,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (sex != null && sex.Count > 0)
             {
                 Sex.Items.Add(new ListItem("select", "0"));
+                sexMod.Items.Add(new ListItem("select", "0"));
                 foreach (var k in sex)
                 {
                     Sex.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    sexMod.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 
@@ -43,9 +47,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (baseline != null && baseline.Count > 0)
             {
                 BaselineHIVStatus.Items.Add(new ListItem("select", "0"));
+                bHivStatusMod.Items.Add(new ListItem("select", "0"));
                 foreach (var k in baseline)
                 {
                     BaselineHIVStatus.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    bHivStatusMod.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
 
@@ -53,9 +59,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
             if (hivtesting != null && hivtesting.Count > 0)
             {
                 hivtestingresult.Items.Add(new ListItem("select", "0"));
+                testingStatusMod.Items.Add(new ListItem("select", "0"));
                 foreach (var k in hivtesting)
                 {
                     hivtestingresult.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                    testingStatusMod.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
         }
