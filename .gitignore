@@ -221,3 +221,4 @@ _Pvt_Extensions/
 ModelManifest.xml
 */RemServer/app.config
 /*.con
+*aspnet_client
