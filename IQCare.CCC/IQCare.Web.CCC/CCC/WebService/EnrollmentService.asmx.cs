@@ -165,14 +165,33 @@ namespace IQCare.Web.CCC.WebService
                                 MaritalStatusId = maritalStatus.MaritalStatusId;
                             }
 
+                            var sex = 0;
+                            var enrollmentBlueCardId = "";
+
+                            if (LookupLogic.GetLookupNameById(patient_person_details.Sex) == "Male")
+                            {
+                                sex = 16;
+                            }else if (LookupLogic.GetLookupNameById(patient_person_details.Sex) == "Female")
+                            {
+                                sex = 17;
+                            }
+
+                            foreach (var item in data)
+                            {
+                                if (item.identifierId == "1248")
+                                {
+                                    enrollmentBlueCardId = item.enrollmentNo;
+                                }
+                            }
+
+
+
                             ptn_Pk = mstPatientLogic.InsertMstPatient(
                                 utility.Decrypt(patient_person_details.FirstName), 
                                 utility.Decrypt(patient_person_details.LastName),
                                 utility.Decrypt(patient_person_details.MiddleName),
-                                facility.FacilityID,
-                                patientEnrollmentId, 
-                                patientEntryPointId ,
-                                DateTime.Now, patient_person_details.Sex,
+                                facility.FacilityID, enrollmentBlueCardId, entryPointId,
+                                patientEnrollment.EnrollmentDate, sex,
                                 patient.DateOfBirth,
                                 1, MaritalStatusId,
                                 address, phone, userId, Session["AppPosID"].ToString(),
