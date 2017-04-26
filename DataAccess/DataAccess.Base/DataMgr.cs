@@ -202,8 +202,8 @@ namespace DataAccess.Base
         /// <param name="connection">The connection.</param>
         public static void ReleaseConnection(object connection)
         {
-            if (connection != null)
-            {
+            //if (connection != null)
+            //{
                 SqlConnection cnn = (SqlConnection)connection;
                 if (cnn != null)
                 {
@@ -213,10 +213,10 @@ namespace DataAccess.Base
                         cnn.Close();
                     }
                     cnn.Dispose();
-                    connection = null;
-                    cnn = null;
+                    //connection = null;
+                   // cnn = null;
                 }
-            }
+            //}
         }
 
         /// <summary>
@@ -232,10 +232,11 @@ namespace DataAccess.Base
         /// <summary>
         /// Commits the transaction.
         /// </summary>
-        /// <param name="Transation">The transation.</param>
-        public static void CommitTransaction(object Transation)
+        /// <param name="transation">The transation.</param>
+        public static void CommitTransaction(object transation)
         {
-            ((SqlTransaction)Transation).Commit();
+            ((SqlTransaction)transation).Commit();
+            ReleaseConnection(((SqlTransaction)transation).Connection);
         }
 
         /// <summary>

@@ -15,13 +15,13 @@ namespace BusinessProcess.Administration
         {
         }
         #endregion
-        public DataSet GetVisitTypeByID(int visitid)
+        public DataSet GetVisitTypeByID(int visitTypeId)
         {
             lock (this)
             {
                 ClsUtility.Init_Hashtable();
                 ClsObject VisitTypeManager = new ClsObject();
-                ClsUtility.AddParameters("@visittypeid", SqlDbType.Int, visitid.ToString());
+                ClsUtility.AddParameters("@visittypeid", SqlDbType.Int, visitTypeId.ToString());
                 return (DataSet)VisitTypeManager.ReturnObject(ClsUtility.theParams, "pr_Admin_SelectVisitTypesByID_Constella", ClsUtility.ObjectEnum.DataSet);
             }
         }
@@ -44,20 +44,18 @@ namespace BusinessProcess.Administration
                 return (DataSet)VisitTypeManager.ReturnObject(ClsUtility.theParams, "pr_Admin_DeleteVisitType_Constella", ClsUtility.ObjectEnum.DataSet);
             }
         }
-        public int SaveNewVisitType( string VisitName, int UserID)
+        public int SaveNewVisitType( string VisitName, int userId)
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                
 
                 ClsObject VisitTypeManager = new ClsObject();
-                VisitTypeManager.Connection = this.Connection;
-                VisitTypeManager.Transaction = this.Transaction;
+           
 
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@VisitName", SqlDbType.VarChar, VisitName);
-                ClsUtility.AddParameters("@UserId", SqlDbType.Int, UserID.ToString());
+                ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, userId);
 
                 DataRow theDR;
                 theDR = (DataRow)VisitTypeManager.ReturnObject(ClsUtility.theParams, "Pr_Admin_AddVisitType_Constella", ClsUtility.ObjectEnum.DataRow);
@@ -67,10 +65,7 @@ namespace BusinessProcess.Administration
                     theBL.DataElements["MessageText"] = "Error in Saving Visit type record. Try Again..";
                     AppException.Create("#C1", theBL);
                 }
-
-
-                DataMgr.CommitTransaction(this.Transaction);
-                DataMgr.ReleaseConnection(this.Connection);
+                
                 return Convert.ToInt32(theDR[0]);
             }
             catch
@@ -83,24 +78,20 @@ namespace BusinessProcess.Administration
                     DataMgr.ReleaseConnection(this.Connection);
             }
         }
-        public int UpdateVisitType(int VisitTypeID, string VisitName, int UserID)
+        public int UpdateVisitType(int visitTypeId, string visitName, int userId)
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
-
-                ClsObject VisitTypeManager = new ClsObject();
-                VisitTypeManager.Connection = this.Connection;
-                VisitTypeManager.Transaction = this.Transaction;
+                ClsObject mGr = new ClsObject();
+                
 
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@VisitTypeID", SqlDbType.Int, VisitTypeID.ToString());
-                ClsUtility.AddParameters("@VisitName", SqlDbType.VarChar, VisitName);
-                ClsUtility.AddParameters("@UserId", SqlDbType.Int, UserID.ToString());
+                ClsUtility.AddExtendedParameters("@VisitTypeID", SqlDbType.Int, visitTypeId);
+                ClsUtility.AddParameters("@VisitName", SqlDbType.VarChar, visitName);
+                ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, userId);
 
                 DataRow theDR;
-                theDR = (DataRow)VisitTypeManager.ReturnObject(ClsUtility.theParams, "Pr_Admin_UpdateVisitType_Constella", ClsUtility.ObjectEnum.DataRow);
+                theDR = (DataRow)mGr.ReturnObject(ClsUtility.theParams, "Pr_Admin_UpdateVisitType_Constella", ClsUtility.ObjectEnum.DataRow);
                 if (Convert.ToInt32(theDR[0]) == 0)
                 {
                     MsgBuilder theBL = new MsgBuilder();
@@ -108,9 +99,7 @@ namespace BusinessProcess.Administration
                     AppException.Create("#C1", theBL);
                 }
 
-
-                DataMgr.CommitTransaction(this.Transaction);
-                DataMgr.ReleaseConnection(this.Connection);
+                mGr = null;
                 return Convert.ToInt32(theDR[0]);
             }
             catch

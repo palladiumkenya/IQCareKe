@@ -114,11 +114,11 @@ namespace IQCare.Web.Laboratory.Request
             //DataTable theDT = (DataTable)grdPatienBill.DataSource;
             //  DataRow theDR = theDT.Rows[grdPatienBill.SelectedIndex];
             int orderId = int.Parse(grdPatienOrder.SelectedDataKey.Values["Id"].ToString());
-            int patientId = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientId"].ToString());
+            int patientPk = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientPk"].ToString());
             int moduleId = int.Parse(grdPatienOrder.SelectedDataKey.Values["ModuleId"].ToString());
             if(moduleId <= 0)
             {
-                EnrollmentService es = new EnrollmentService(patientId);
+                EnrollmentService es = new EnrollmentService(patientPk);
                List<PatientEnrollment> pe =  es.GetPatientEnrollment(CurrentSession.Current);
                 if(pe!= null)
                 {
@@ -130,7 +130,7 @@ namespace IQCare.Web.Laboratory.Request
                 base.Session["TechnicalAreaName"] = this.GetModuleName(moduleId);
             }
             // patientID = Int32.Parse(theDR.ItemArray[0].ToString());
-            base.Session["PatientId"] = patientId;
+            base.Session["PatientId"] = patientPk;
             base.Session["PatientVisitId"] = orderId;
             base.Session["TechnicalAreaId"] = moduleId;
           
@@ -218,7 +218,7 @@ namespace IQCare.Web.Laboratory.Request
             else
             {
                 List<KeyValuePair<string, object>> param = base.Session[SessionKey.LabClient] as List<KeyValuePair<string, object>>;
-                int patientId = (int)param.Find(l => l.Key == "PatientID").Value;
+                int patientPk = (int)param.Find(l => l.Key == "PatientID").Value;
                 int location = (int)param.Find(l => l.Key == "LocationID").Value;
                 lblname.Text = string.Format("{0} {1} {2}", (string)(param.Find(l => l.Key == "FirstName").Value.ToString())
                     , (string)(param.Find(l => l.Key == "MiddleName").Value.ToString())
@@ -239,7 +239,7 @@ namespace IQCare.Web.Laboratory.Request
                     DeleteFlag = false,
                     DateFrom = null,
                     DateTo = null,
-                    PatientId = patientId
+                    PatientId = patientPk
                 };
                 ILabRepo repoMgr = (ILabRepo)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
                 orders = repoMgr.GetAll(filter);
