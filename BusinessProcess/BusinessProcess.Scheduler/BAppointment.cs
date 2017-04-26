@@ -143,9 +143,9 @@ namespace BusinessProcess.Scheduler
                     SaveAppointment.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId.ToString());
-                    ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
-                    ClsUtility.AddParameters("@VisitId", SqlDbType.Int, VisitId.ToString());
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
+                    ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                    ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, VisitId);
 
                     theAffectedRows = (int)SaveAppointment.ReturnObject(ClsUtility.theParams, "pr_Scheduler_DeletePatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
@@ -183,8 +183,8 @@ namespace BusinessProcess.Scheduler
             {
                 ClsUtility.Init_Hashtable();
                 ClsObject aMGR = new ClsObject();
-                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                //ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 if (AppStatus.HasValue)
                     ClsUtility.AddExtendedParameters("@AppStatus", SqlDbType.Int, AppStatus.Value);
                 if (FromDate.HasValue)

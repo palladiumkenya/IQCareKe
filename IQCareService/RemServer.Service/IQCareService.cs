@@ -392,6 +392,7 @@ namespace RemServer.Service
 
                 DoDelayedTasks();
                 RemotingConfiguration.Configure(Config, false);
+                RemotingConfiguration.ApplicationName = "IQCAREEMR";
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(BusinessServerFactory), "BusinessProcess.rem", WellKnownObjectMode.Singleton);
                 theLog.WriteEntry(string.Format("{0} Started", theSRV_Name));
             }
