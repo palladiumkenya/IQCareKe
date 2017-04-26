@@ -14,7 +14,7 @@ namespace IQCare.CCC.UILogic
             (IMst_PatientInsert)
             ObjectFactory.CreateInstance("BusinessProcess.CCC.BMstPatientInsert, BusinessProcess.CCC");
 
-        public int InsertMstPatient(string firstName, string lastName, string middleName, int locationId, int patientEnrollmentId,
+        public int InsertMstPatient(string firstName, string lastName, string middleName, int locationId, string patientEnrollmentId,
             int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus, string address,
             string phone, int userId, string posId, int moduleId, DateTime startDate, DateTime createDate)
         {

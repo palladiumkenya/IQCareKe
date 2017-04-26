@@ -291,6 +291,11 @@ namespace IQCare.Web.Patient
             SavePatientRegistration();
             if (InsertUpdateIdentifiers() == true)
             {
+                int patientID = Convert.ToInt32(Session["PatientId"]);
+                IPatientRegistration pReg;
+                pReg = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
+                pReg.BlueCardToGreenCardSyncronise(patientID);
+
                 Session["status"] = "Add";
                 IQCareMsgBox.NotifyAction("Service Registration Form saved successfully.", "Patient Registration", false, this, string.Format("javascript:window.location.href='{0}'", this.RedirectUrl));
             }
