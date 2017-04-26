@@ -43,14 +43,16 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
         private int _ptnPk;
+        int moduleId = 203;
 
         int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
         int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
         int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
+        //int moduleId = Convert.ToInt32(HttpContext.Current.Session["ModuleId"]);
 
 
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patientPk, int patientMasterVisitId, string patientLabOrder)
+        public string AddLabOrder(int patientPk, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder)
         {
 
 
@@ -58,7 +60,7 @@ namespace IQCare.Web.CCC.WebService
             var labOrder = new PatientLabOrderManager();
             if (patientPk > 0)
             {
-                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, patientMasterVisitId, patientLabOrder);
+                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, moduleId, patientMasterVisitId, labOrderDate, orderNotes, patientLabOrder);
 
                 Msg = "Patient Lab Order Recorded Successfully .";
 

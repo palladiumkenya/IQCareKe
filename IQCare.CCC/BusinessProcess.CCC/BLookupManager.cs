@@ -215,12 +215,12 @@ namespace BusinessProcess.CCC
                     return item;
             }
         }
-        public PatientLookup GetPatientPtn_pk(int patientId)
+        public PatientLookup GetPatientById(int patientId)
 
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.PatientLookupRepository.GetPatientPtn_pk(patientId);
+                var item = _unitOfWork.PatientLookupRepository.GetPatientById(patientId);
                 _unitOfWork.Dispose();
                 return item;
             }

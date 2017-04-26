@@ -457,7 +457,7 @@
                 });
             }
 
-            console.log("get viral load  called");     
+            //console.log("get viral load  called");     
             var pending=0;
             var complete=0;
             var percentage=0;       

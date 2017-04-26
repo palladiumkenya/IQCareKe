@@ -173,13 +173,43 @@
                                                          </div>
                                                   
                                                  <div class="col-md-12 form-group">
-                                                       <div class="col-md-4"><label class="control-label pull-left">Lab Notes</label></div>
+                                                       <div class="col-md-4"><label class="control-label pull-left">Lab Test Notes</label></div>
                                                       <div class="col-md-8">
                                                          
-                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory notes...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" ID="labNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory test notes...."></asp:TextBox>
                                                       </div>
-                                                  </div>
-                                 <!--datepicker  -->
+                                                  </div>                         
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-10"></div>
+                                        <div class="col-md-3 pull-right ">
+                                            <asp:LinkButton runat="server" ID="btnAddLab" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
+
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                <div class="col-md-12 bs-callout bs-callout-info">
+                                    <div class="col-md-12 form-group">
+                                        <table class="table table-striped table-condensed" id="tblAddLabs" clientidmode="Static" runat="server">
+                                            <thead>
+
+                                                <tr>
+                                                    <th><i class="control-label text-warning pull-left" aria-hidden="true"># </i></th>
+                                                    <th><i class="control-label text-warning pull-left" aria-hidden="true">Lab Test</i> </th>
+                                                    <th><i class="control-label text-warning pull-left " aria-hidden="true">Order Reason</i> </th>
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                <!--here  -->                                        
+                                     <!--datepicker  -->
                               
                                    <div class="col-md-12 form-group">
                                         <div class="col-md-4">
@@ -279,36 +309,14 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-                                    <div class="col-md-12">
-                                        <div class="col-md-10"></div>
-                                        <div class="col-md-3 pull-right ">
-                                            <asp:LinkButton runat="server" ID="btnAddLab" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Lab</asp:LinkButton>
-
-                                        </div>
-                                        <div></div>
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <table class="table table-striped table-condensed" id="tblAddLabs" clientidmode="Static" runat="server">
-                                            <thead>
-
-                                                <tr>
-                                                    <th><i class="control-label text-warning pull-left" aria-hidden="true"># </i></th>
-                                                    <th><i class="control-label text-warning pull-left" aria-hidden="true">Lab Test</i> </th>
-                                                    <th><i class="control-label text-warning pull-left " aria-hidden="true">Order Reason</i> </th>
-                                                    <th><i class="control-label text-warning pull-left" aria-hidden="true">Order Date </i></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
+                                             <div class="col-md-12 form-group">
+                                                       <div class="col-md-4"><label class="control-label pull-left">Clinical Order Notes</label></div>
+                                                      <div class="col-md-8">
+                                                         
+                                                          <asp:TextBox runat="server" ID="orderNotes" Rows="4" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="laboratory order notes...."></asp:TextBox>
+                                                      </div>
+                                                  </div>
+                                <!-- to here  -->
                                 </div>
                             </div>
                         </div>
@@ -532,7 +540,8 @@
         var patientMasterVisitId = '<%=PatientMasterVisitId%>';    
         var ptn_pk = '<%=Ptn_pk%>';        
         var facilityId = '<%=AppLocationId%>';
-       
+        var moduleId = '<%=ModuleId%>';
+      
         var jan_vl = "";
         var march_vl = "";
         
@@ -758,7 +767,7 @@
 
                 var labOrderFound = 0;
 
-                var labOrderDate = $("#<%=LabDate.ClientID%>").val();               
+                //var labOrderDate = $("#<%=LabDate.ClientID%>").val();               
                 var labName = $("#labTestTypes").val();
                 var labNameId=val2key(labName, labtests);              
                 var labOrderReason = $("#orderReason").find(":selected").text();
@@ -780,18 +789,19 @@
                     toastr.error("error", labName + " Lab selected already exists in the List");
                     return false; // message box herer
                 }
-                if (labOrderDate < 1) {
-                    toastr.error("Please input a date for the lab order");
-                    return false;
-                }
+               
 
                 else {
 
                   
                     LabOrderList.push("" + labName + "");
-                    var tr = "<tr><td></td><td visibility: hidden>" + labNameId + "</td><td align='left'>" + labName + "</td><td align='left'>" + labOrderReason + "</td><td align='left'>" + labOrderDate + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
+                    var tr = "<tr><td></td><td visibility: hidden>" + labNameId + "</td><td align='left'>" + labName + "</td><td align='left'>" + labOrderReason + "</td><td visibility: hidden>" + labOrderNotes + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblAddLabs>tbody:first").append('' + tr + '');
                     resetLabOrder();
+
+                    $('#tblAddLabs tr:not(:first-child').each(function(idx){
+                        $(this).children("td:eq(0)").html(idx + 1);
+                    }); 
                 }
 
                 e.preventDefault();
@@ -815,22 +825,22 @@
             function resetLabOrder(parameters) {
                 $("#labTestTypes").val("");
                 $("#orderReason").val("");
-                $("#labNotes").val("");
-                $("#LabDate").val("");
+                $("#labNotes").val("");              
             }
         
 
             // Save lab order
             $("#btnSaveLab").click(function (e) {
+                var labOrderDate = $("#<%=LabDate.ClientID%>").val();   
+                var orderNotes = $("#orderNotes").val();
                 var _fp = [];
                 var table  = "";              
                 var data = $('#tblAddLabs tr').each(function (row, tr) {
                     _fp[row] = {
                                 "labNameId": $(tr).find('td:eq(1)').text()
                                , "labName": $(tr).find('td:eq(2)').text()
-                              , "orderReason": $(tr).find('td:eq(3)').text()
-                              , "labOrderDate": $(tr).find('td:eq(4)').text()
-                             , "labNotes": $(tr).find('td:eq(5)').text()
+                              , "orderReason": $(tr).find('td:eq(3)').text()                             
+                             , "labNotes": $(tr).find('td:eq(4)').text()
 
                             }                  
                     
@@ -843,7 +853,7 @@
                     return false;
                 } else {
                   
-                    addLabOrder(_fp);       
+                    addLabOrder(_fp,labOrderDate,orderNotes);       
                   
                                       
                     $('#tblAddLabs tr:first').remove();
@@ -851,13 +861,12 @@
                         _fp[row] = {
                                 "labNameId": $(tr).find('td:eq(1)').text()
                                , "labName": $(tr).find('td:eq(2)').text()
-                              , "orderReason": $(tr).find('td:eq(3)').text()
-                              , "labOrderDate": $(tr).find('td:eq(4)').text()
-                             , "labNotes": $(tr).find('td:eq(5)').text()
+                              , "orderReason": $(tr).find('td:eq(3)').text()                            
+                             , "labNotes": $(tr).find('td:eq(4)').text()
 
                         }                      
                     
-                        table ="<tr><td></td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" + $(tr).find('td:eq(4)').text() + "</td><td>" + "Pending" + "</td></tr>";
+                        table ="<tr><td></td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" +labOrderDate+ "</td><td>" + "Pending" + "</td></tr>";
                         $("#tblPendingLabs>tbody:first").append(table);              
 
                         $('#tblPendingLabs tr:not(:first-child').each(function(idx){
@@ -872,14 +881,15 @@
                 $("#tblAddLabs td").parent().remove();
             });
 
-            function addLabOrder(_fp) {
+            function addLabOrder(_fp,labOrderDate,orderNotes) {
                 var labOrder = JSON.stringify(_fp);
-              
+                //console.log(labOrderDate);
+                //console.log(orderNotes);
                 $.ajax({
                     type: "POST",
 
                     url: "../WebService/LabService.asmx/AddLabOrder",
-                    data: "{'patientPk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','patientLabOrder': '" + labOrder + "'}",
+                    data: "{'patientPk':'" + ptn_pk + "','patientMasterVisitId':'" + patientMasterVisitId + "','labOrderDate':'" + labOrderDate + "','orderNotes':'" + orderNotes + "','patientLabOrder': '" + labOrder + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
