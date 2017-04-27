@@ -7,8 +7,6 @@ using Interface.CCC.Lookup;
 using Application.Common;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
-using DataAccess.CCC.Repository.Lookup;
-using System.Linq.Expressions;
 
 namespace BusinessProcess.CCC
 {
@@ -17,13 +15,12 @@ namespace BusinessProcess.CCC
        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
         private readonly Utility _utility = new Utility();
 
-        public List<PatientLookup> GetPatientDetailsLookup(int id)
+        public PatientLookup GetPatientDetailsLookup(int id)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientDetails = _unitOfWork.PatientLookupRepository
-                .FindBy(x => x.Id == id || (x.ptn_pk.Value == id & !x.Active))
-                .Take(1).ToList();
+                .FindBy(x => x.Id == id ).DefaultIfEmpty(null).FirstOrDefault();
 
                 return patientDetails;
             }

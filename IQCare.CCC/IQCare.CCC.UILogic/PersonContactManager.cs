@@ -14,7 +14,16 @@ namespace IQCare.CCC.UILogic
 
         public int AddPersonContact(int personId, string physicalAddress, string mobileNumber,string alternativeNumber,string emailAddress,int userId)
         {
-            Utility x = new Utility();
+            //Utility x = new Utility();
+
+            //if (alternativeNumber != null)
+            //{
+            //    alternativeNumber = (alternativeNumber);
+            //}
+            //if (emailAddress != null)
+            //{
+            //    emailAddress = x.Encrypt(emailAddress);
+            //}
 
             PersonContact personContact = new PersonContact
             {

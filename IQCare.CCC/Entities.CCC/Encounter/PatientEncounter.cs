@@ -70,7 +70,7 @@ namespace Entities.CCC.Encounter
         }
 
         [Serializable]
-        public class PresentingComplaintsEntity
+        public class PresentingComplaintsEntity : ICF_IPT
         {
             public string visitDate { get; set; }
             public string visitScheduled { get; set; }
@@ -94,6 +94,40 @@ namespace Entities.CCC.Encounter
             public string nextAppointmentDate { get; set; }
             public string nextAppointmentType { get; set; }
             public string[] phdp { get; set; }
+            public string[] generalExams { get; set; }
+            
+            
+
+        }
+
+        [Serializable]
+        public class ICF_IPT
+        {
+            public string OnAntiTB { get; set; }
+            public string OnIPT { get; set; }
+            public string Cough { get; set; }
+            public string Fever { get; set; }
+            public string NoticeableWeightLoss { get; set; }
+            public string NightSweats { get; set; }
+            public string SputumSmear { get; set; }
+            public string ChestXray { get; set; }
+            public string startAntiTB { get; set; }
+            public string InvitationOfContacts { get; set; }
+            public string EvaluatedForIPT { get; set; }
+            public string IPTDueDate { get; set; }
+            public string IPTCollectedDate { get; set; }
+            public string Weight { get; set; }
+            public string Hepatoxicity { get; set; }
+            public string Peripheralneoropathy { get; set; }
+            public string Rash { get; set; }
+            public string AdherenceMeasurement { get; set; }
+            public string IPTEvent { get; set; }
+            public string ReasonForDiscontinuation { get; set; }
+            public string YellowColouredUrine { get; set; }
+            public string Numbness { get; set; }
+            public string YellownessOfEyes { get; set; }
+            public string AdominalTenderness { get; set; }
+            public string LiverFunctionTests { get; set; }
         }
 
         [Serializable]

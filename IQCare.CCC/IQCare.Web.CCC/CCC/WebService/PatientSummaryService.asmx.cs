@@ -41,8 +41,8 @@ namespace IQCare.Web.CCC.WebService
                 var personManager = new PersonManager();
                 var patientLogic = new PatientLookupManager();
                 var patient = patientLogic.GetPatientDetailSummary(patientId);
-                personId = patient[0].PersonId;
-                gender = patient[0].Sex;
+                personId = patient.PersonId;
+                gender = patient.Sex;
 
                 personManager.UpdatePerson(bioFirstName, bioMiddleName, bioLastName, gender, userId, personId);
                 msg = "<p>Patient Bio Updated Successfully</p>";
@@ -82,7 +82,7 @@ namespace IQCare.Web.CCC.WebService
         {
             var patientLogic = new PatientLookupManager();
             var patient = patientLogic.GetPatientDetailSummary(patientId);
-            var personId = patient[0].PersonId;
+            var personId = patient.PersonId;
 
 
             var personLogic = new PersonManager();

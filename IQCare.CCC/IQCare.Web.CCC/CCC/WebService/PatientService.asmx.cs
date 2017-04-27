@@ -138,7 +138,8 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+
             };
             try
             {
@@ -157,7 +158,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -177,7 +178,10 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+                PersonRelationshipId = personRelationshipId,
+                HivTestingId = hivTestingId,
+                PersonId = personId
             };
             try
             {
@@ -369,7 +373,9 @@ namespace IQCare.Web.CCC.WebService
                 HivStatusResultDate = member.HivTestingResultsDate,
                 CccReferal = member.CccReferal.ToString(),
                 CccReferalNumber = member.CccReferaalNumber,
-
+                PersonRelationshipId = member.PersonRelationshipId,
+                HivTestingId = member.HivTestingId,
+                PersonId = member.PersonId
             };
             return familyMemberDisplay;
         }
@@ -462,6 +468,9 @@ namespace IQCare.Web.CCC.WebService
         public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
         public string CccReferalNumber { get; set; }
+        public int PersonRelationshipId { get; set; }
+        public int HivTestingId { get; set; }
+        public int PersonId { get; set; }
     }
 
     public class PatientConsentDisplay

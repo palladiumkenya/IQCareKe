@@ -29,14 +29,15 @@
 
     <div class="col-md-12 col-xs-12">
 
-        <div class="tab-content">
+         <div class="tab-content">
 
             <div role="tabpanel" class="tab-pane active" id="encounter">
+               
                 <uc:ucPatientClinicalEncounter runat="server" id="ucPatientClinicalEncounter" />
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="vlTracker">
-                <!-- pw implementation of viral load tracker here-->
+
 
                 <div class="col-md-6">
                     <div class="col-md-12 bs-callout bs-callout-danger">
@@ -90,13 +91,13 @@
              <!-- uc  -laboratory -->   
             <div role="tabpanel" class="tab-pane fade" id="Laboratory">
                 <uc:ucPatientLabs runat="server" id="ucPatientLabs" />
-            </div>
+           <!--  </div> -->
            
              <!-- .uc  -laboratory -->    
 
-            <div role="tabpanel" class="tab-pane fade" id="Pharmacy">
-                <%--<uc:ucPharmacyPrescription runat="server" id="ucPharmacyPrescription" />--%>
-            </div><!-- .pharmacy-->
+           <%-- <div role="tabpanel" class="tab-pane fade" id="Pharmacy">
+               <uc:ucPharmacyPrescription runat="server" id="ucPharmacyPrescription" />
+            </div><!-- .pharmacy-->--%>
 
             <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
                            
