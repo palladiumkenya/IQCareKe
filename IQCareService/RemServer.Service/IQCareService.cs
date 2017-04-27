@@ -113,7 +113,7 @@ namespace RemServer.Service
         void UpdateNextRunDate(string taskName, int offSet)
         {
 
-            using (ClsObject obj = new ClsObject())
+            ClsObject obj = new ClsObject();
             {
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddExtendedParameters("@NextRunDate", SqlDbType.DateTime, DateTime.Now.AddMinutes(offSet));
@@ -121,6 +121,7 @@ namespace RemServer.Service
                 ClsUtility.AddParameters("@TaskName", SqlDbType.VarChar, taskName);
                 obj.ReturnObject(ClsUtility.theParams, "Schedule_UpdateTask", ClsUtility.ObjectEnum.ExecuteNonQuery);
             }
+            obj = null;
         }
 
         public void DBEntry(Object Message)
@@ -155,8 +156,7 @@ namespace RemServer.Service
                 //Get scheduled jobs
                 try
                 {
-                    using (ClsObject obj = new ClsObject())
-                    {
+                   ClsObject obj = new ClsObject();
                         ClsUtility.Init_Hashtable();
 
                         DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Schedule_GetTask", ClsUtility.ObjectEnum.DataTable);
@@ -171,7 +171,7 @@ namespace RemServer.Service
                             });
                         }
 
-                    };
+                    obj = null; 
                 }
                 catch (Exception ex)
                 {
