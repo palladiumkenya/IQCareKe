@@ -173,15 +173,30 @@
                                     <label class="control-label  pull-left text-primary">*Visit By</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                    <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control" data-parsley-min="1" data-parsley-min-message="Value Required" onchange="showHideVisitByTS();" />
                                 </div>
+                               
+                            </div>
+                        </div>
+                        
+                   </div>
+                    <div class="col-md 12 form-group">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                                <div id="divTreatmentSupporter" class="col-md-12">
+                                <button type="button" class="btn btn-info btn-lg fa" id="btnTreatmentSupporterVisit" onclick="savePatientEncounterTS();">Complete Encounter</button>
                             </div>
                         </div>
                     </div>
+
+                    
                     <div class="col-md-12">
                         <hr />
                     </div>
                     <%--to here--%>
+
+                   <div id="step1Div">
 
                      <div class="col-md-12 form-group"  style="height:100%">
                         <div class="col-md-12"  style="height:100%">
@@ -352,7 +367,7 @@
                                 <%--.panel--%>
                         </div>
                     </div>
-
+                     
                     <div class="col-md-12 form-group">
                         <div class="col-md-12">
                             <div class="panel panel-info">
@@ -760,7 +775,7 @@
                         </div>
                         <%--col-md-11--%>
                     </div>
-
+                    </div>
                 </div>
                 <%-- .data-step-1--%>
 
@@ -1629,14 +1644,14 @@
                     </div>
                 </div>
 
-                <div class="actions">
-                        <button type="button" class="btn btn-default btn-prev">
-                            <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-                        <button type="button" class="btn btn-primary btn-next" data-last="Complete">
-                            Next
-		                            <span class="glyphicon glyphicon-arrow-right"></span>
-                        </button>
-                    </div>
+                <div id="prevNextButton" class="actions">
+                    <button type="button" class="btn btn-default btn-prev">
+                        <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                    <button type="button" class="btn btn-primary btn-next" data-last="Complete">
+                        Next
+		                        <span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1674,7 +1689,9 @@
         loadAllergies();
         loadAllergyReactions();
         showHidePresentingComplaintsDivs();
-        if(Age > 15)
+        showHideVisitByTS();
+
+        if(Age > 14)
         {
             document.getElementById('divAntigenToday').style.display = 'none';
         }
@@ -2886,4 +2903,48 @@
             document.getElementById('presentingComplaintsNotes').style.display = 'none';
         }
     }
+
+    function showHideVisitByTS() { 
+        var visitByTS = $('#ddlVisitBy').find(":selected").text();
+
+        if(visitByTS == "Treatment Supporter")
+        {
+            document.getElementById('divTreatmentSupporter').style.display = 'block';
+            document.getElementById('step1Div').style.display = 'none';
+            document.getElementById('prevNextButton').style.display = 'none';
+        }
+        else{
+            document.getElementById('divTreatmentSupporter').style.display = 'none';
+            document.getElementById('step1Div').style.display = 'block';
+            document.getElementById('prevNextButton').style.display = 'block';
+        }
+    }
+
+    function savePatientEncounterTS() {
+            var visitDate = $("#<%=VisitDate.ClientID%>").val();
+            var visitScheduled = $("input[name$=Scheduled]:checked").val();
+            var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+        alert('here');
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                            
+                    console.log(response.d);
+                    if (response.d > 0)
+                               
+                        toastr.success(response.d, "Presenting Complaints");
+                    else
+                           
+                        toastr.error(response.d,"Error occured while saving Presenting Complaints");
+                },
+                error: function (response) {
+                         
+                    toastr.error(response.d, "Error occured while saving Presenting Complaints");
+                }
+            });
+        }
 </script>

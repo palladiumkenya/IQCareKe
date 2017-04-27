@@ -97,7 +97,35 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public int savePresentingComplaintsTS(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
+        {
 
+            try
+            {
+                lock (this)
+                {
+                    ClsObject PatientEncounter = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                    ClsUtility.AddParameters("@ServiceID", SqlDbType.Int, ServiceID);
+                    ClsUtility.AddParameters("@VisitDate", SqlDbType.VarChar, VisitDate);
+                    ClsUtility.AddParameters("@VisitScheduled", SqlDbType.VarChar, VisitScheduled);
+                    ClsUtility.AddParameters("@VisitBy", SqlDbType.VarChar, VisitBy);
+                    ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userId.ToString());
+
+                    DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterTS", ClsUtility.ObjectEnum.DataRow);
+                    int masterVisitID = Int32.Parse(dr[0].ToString());
+
+                    return masterVisitID;
+                }
+            }
+            catch //Exception ex)
+            {
+
+                return 0;
+            }
+        }
         public int saveChronicIllness(string masterVisitID, string patientID, string userID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines, List<Allergies> allergies)
         {
             try
