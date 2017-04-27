@@ -419,20 +419,11 @@ namespace IQCare.Web.CCC.WebService
 
                     if (contacts.Count > 0)
                     {
-                        if (alternativeNumber != null)
-                        {
-                            alternativeNumber = _utility.Encrypt(alternativeNumber);
-                        }
-                        if (emailAddress != null)
-                        {
-                            emailAddress = _utility.Encrypt(emailAddress);
-                        }
-
                         PersonContact perContact = new PersonContact();
                         perContact.Id = contacts[0].Id;
                         perContact.PersonId = contacts[0].PersonId;
-                        perContact.PhysicalAddress = _utility.Encrypt(physicalAddress);
-                        perContact.MobileNumber = _utility.Encrypt(mobileNumber);
+                        perContact.PhysicalAddress = physicalAddress;
+                        perContact.MobileNumber = mobileNumber;
                         perContact.AlternativeNumber = alternativeNumber;
                         perContact.EmailAddress = emailAddress;
 

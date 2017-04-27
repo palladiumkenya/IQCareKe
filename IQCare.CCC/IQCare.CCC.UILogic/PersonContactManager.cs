@@ -16,20 +16,11 @@ namespace IQCare.CCC.UILogic
         {
             Utility x = new Utility();
 
-            if (alternativeNumber != null)
-            {
-                alternativeNumber = x.Encrypt(alternativeNumber);
-            }
-            if (emailAddress != null)
-            {
-                emailAddress = x.Encrypt(emailAddress);
-            }
-
             PersonContact personContact = new PersonContact
             {
                 PersonId = personId,
-                PhysicalAddress = x.Encrypt(physicalAddress),
-                MobileNumber = x.Encrypt(mobileNumber),
+                PhysicalAddress = physicalAddress,
+                MobileNumber = mobileNumber,
                 AlternativeNumber = alternativeNumber,
                 EmailAddress = emailAddress,
                 CreatedBy = userId
