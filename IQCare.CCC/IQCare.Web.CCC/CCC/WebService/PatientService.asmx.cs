@@ -9,9 +9,11 @@ using System.Linq;
 using System.Web.Services;
 using Entities.CCC.Baseline;
 using Entities.CCC.Consent;
+using Entities.CCC.Screening;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
+using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
 
@@ -61,6 +63,22 @@ namespace IQCare.Web.CCC.WebService
                 {
                     Msg = "Patient Vitals Added Successfully!";
                 }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientScreening(int patientId, int patientMasterVisitid, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        {
+            try
+            {
+                var screening=new PatientScreeningManager();
+                Result = screening.AddPatientScreening(patientId, patientMasterVisitid,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
+                Msg = (Result > 0) ? "Patient Screening Added Successfully" : "";
             }
             catch (Exception e)
             {
@@ -303,6 +321,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return consentDisplays;
         }
+
 
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
