@@ -20,7 +20,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var patientDetails = _unitOfWork.PatientLookupRepository
-                .FindBy(x => x.Id == id && !x.Active).DefaultIfEmpty(null).FirstOrDefault();
+                .FindBy(x => x.Id == id ).DefaultIfEmpty(null).FirstOrDefault();
 
                 return patientDetails;
             }

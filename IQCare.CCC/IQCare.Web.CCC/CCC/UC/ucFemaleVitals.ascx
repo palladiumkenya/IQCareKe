@@ -477,11 +477,74 @@
                 });
             }
 
-            function AddPatientScreenig() {
+            //screening
 
+            /*-- CaCX Screening --*/
+           function addPatientScreeningcacx() {
+
+               var cacxId= $("#<%=cacxscreening.ClientID%>").val();
+               var screeningTypeId = 44;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientId + "','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+cacxId+"','comment':'','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
+           }
+
+           function addPatientScreeningSTI() {
+
+               var stiId= $("#<%=stiScreening.ClientID%>").val();
+               var screeningTypeId = 45;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientId + "','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+stiId+"','comment':'','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
+           }
+
+            function addPatientScreeningStiNotification() {
+
+               var stiNotificationId= $("#<%=stiPartnerNotification.ClientID%>").val();
+               var screeningTypeId = 87;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientId + "','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+stiNotificationId+"','comment':'home','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
             }
 
-            $("#btnSave").click(function () {
+
+            $("#btnSave").click(function() {
 
                 if ($('#FemaleVitals').parsley().validate()) {
 
@@ -494,19 +557,21 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function(response) {
+
                             /* check if patient already has pregagncy without outcome.*/
                             if (response.d > 0) {
                                 AddPregnancyIndicator();
-                            } else {  
+                            } else {
                                 //insert the preganacy indicator and check if preganant insert into pregnancy table
-                                if (fName === 'Pregnant(PG)') {
+                              
+                                if (fName ==='Pregnant(PG)') {
                                     $.when(AddPregnancyIndicator()).then(AddPregnancy());
                                 } else {
                                     AddPregnancyIndicator();
                                 }
-		                        
+
                             }
-		               
+
                         },
                         error: function(xhr, errorType, exception) {
                             var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -515,9 +580,10 @@
                     });
 
                     /* save family planning */
-                    if (fpName !== 'Pregnant(PG)') {
-                        
-                        if (fpName === "No Family Planning(NOFP)" ) {
+
+                    if (fName !== 'Pregnant(PG)') {
+
+                        if (fpName === "No Family Planning(NOFP)") {
                             AddFamilyPlanning();
                         } else {
 
@@ -526,11 +592,18 @@
                     }
 
                     /* patient screening*/
+                    $.when(addPatientScreeningcacx()).then(addPatientScreeningSTI());
+                    $.when(addPatientScreeningStiNotification()).then(function()
+                    {
+                        $("#FemaleVitals").hide("fast");
+                    });
 
-                   }else{
-                        return false;
-                    }
-                });/* -- end button */
+        }else{
+                        stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+             }
+        });/* -- end button */
  
 
         });

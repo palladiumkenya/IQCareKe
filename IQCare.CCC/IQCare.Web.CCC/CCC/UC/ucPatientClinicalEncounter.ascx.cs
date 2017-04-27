@@ -96,6 +96,16 @@ namespace IQCare.Web.CCC.UC
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
 
+            foreach (ListItem item in cblGeneralExamination.Items)
+            {
+                for (int i = 0; i < pce.generalExams.Length; i++)
+                {
+                    if (item.Value == pce.generalExams[i])
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)

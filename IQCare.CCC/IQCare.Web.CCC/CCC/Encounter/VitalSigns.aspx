@@ -33,8 +33,7 @@
         if (gender === 'male') {
             $("#divBtnVitals").hide("fast");
         } else if (gender === 'female') {
-            alert("am female");
-             $("#divBtnVitals").hide("show");
+             $("#divBtnVitals").show("fast");
         }
 
         $("#femaleVitals").hide("fast");
@@ -43,7 +42,7 @@
         
          $("#btnFemalVitals").click(function () {
 
-             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast");})
+             $("#PatientVitals").hide("fast", function() { $("#femaleVitals").show("fast"); });
          });
 
          $("#btnLoadTriage").click(function () {

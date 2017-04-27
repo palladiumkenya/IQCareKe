@@ -211,7 +211,7 @@
 								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong></asp:LinkButton>
 
                              		<a href='<%=ResolveClientUrl("~/ClinicalForms/frmPatient_History.aspx") %>' class="list-group-item" id="menuMoH257">
-									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">MoH 257 Encounters </strong>
+									<span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">MoH 257 Encounters </strong>
 								</a>
 
 								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
@@ -288,13 +288,13 @@
 				$("#menuPatientHome").hide();
 				$("#LinkButton2").hide();
 				$("#menuStartEncounter").hide();
-				
+				$("#menuMoH257").hide();
 
 			} else {
 				$("#menuPatientHome").show();
 				$("#LinkButton2").show();
 				$("#menuStartEncounter").show();
-				
+				$("#menuMoH257").show();
 			}
 
 			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }

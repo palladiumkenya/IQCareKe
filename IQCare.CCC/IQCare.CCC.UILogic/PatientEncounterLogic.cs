@@ -44,12 +44,13 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, userID, chrIllness, vacc, allergy);
         }
 
-        public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string physicalExam)
+        public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string userID, string physicalExam, string generalExam)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var phyExam = parser.Deserialize<List<PhysicalExamination>>(physicalExam);
-            int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, phyExam);
+            List<string> generalExamList = generalExam.Split(',').ToList();
+            int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, userID, phyExam, generalExamList);
         }
 
         public void savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, string phdp, string diagnosis)

@@ -12,6 +12,8 @@ namespace Entities.CCC.Tb
         [Key]
         public int Id { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public bool OnAntiTbDrugs { get; set; }
+        public bool OnIpt { get; set; }
         public int PatientId { get; set; }
         public bool Cough { get; set; }
         public bool Fever { get; set; }
