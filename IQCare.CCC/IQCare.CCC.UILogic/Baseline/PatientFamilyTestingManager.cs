@@ -121,9 +121,9 @@ namespace IQCare.CCC.UILogic.Baseline
                     if (hivTesting != null)
                         familyTesting = new PatientFamilyTesting()
                         {
-                            FirstName = utility.Decrypt(person.FirstName),
-                            MiddleName = utility.Decrypt(person.MiddleName),
-                            LastName = utility.Decrypt(person.LastName),
+                            FirstName = person.FirstName,
+                            MiddleName = person.MiddleName,
+                            LastName = person.LastName,
                             Sex = person.Sex,
                             //DateOfBirth = person.DateOfBirth,
                             PersonId = relationship.PersonId,

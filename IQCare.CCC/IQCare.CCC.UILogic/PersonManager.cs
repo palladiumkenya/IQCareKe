@@ -96,9 +96,9 @@ namespace IQCare.CCC.UILogic
             IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
             Person p = mgr.GetPerson(id);
             p.Id = p.Id;
-            p.FirstName = util.Decrypt(p.FirstName);
-            p.MidName = util.Decrypt(p.MidName);
-            p.LastName = util.Decrypt(p.LastName);
+            p.FirstName = p.FirstName;
+            p.MidName = p.MidName;
+            p.LastName = p.LastName;
             //p.NationalId = util.Decrypt(p.NationalId);
             return p;
         }
