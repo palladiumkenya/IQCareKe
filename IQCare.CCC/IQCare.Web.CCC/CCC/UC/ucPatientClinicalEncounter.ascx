@@ -1669,6 +1669,7 @@
         $("#IptClientWorkupForm").hide();
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
+        $("#onIpt").prop("disabled",true);
         //showHideFPControls();
         loadPresentingComplaints();
         loadAllergies();
@@ -2483,7 +2484,6 @@
             var adheranceMeasurement = $("#adheranceMeasurement").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddIpt",
@@ -2697,11 +2697,14 @@
         if ($("#tbInfected").val() === 'False') {
             $("#IptForm").show();
             $("#IcfForm").show();
+            $("#tbscreeningstatus").val(35);
+            $("#onIpt").prop("disabled",false);
         } else {
             $("#IptForm").hide(); 
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(37);
+            $("#onIpt").prop("disabled",true);
         }
             
     }
@@ -2720,6 +2723,7 @@
             $("#IcfActionForm").show();
         } else {
             $("#IcfActionForm").hide();
+            $("#tbscreeningstatus").val(35);
         }
     }
 
