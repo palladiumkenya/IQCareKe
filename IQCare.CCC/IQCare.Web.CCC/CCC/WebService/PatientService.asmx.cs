@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference)
+            decimal weight, decimal bmi, decimal headCircumference,DateTime visitDate)
         {
             try
             {
@@ -51,7 +51,9 @@ namespace IQCare.Web.CCC.WebService
                     Temperature = tempreture,
                     Weight = weight,
                     BMI = bmi,
-                    HeadCircumference = headCircumference
+                    HeadCircumference = headCircumference,
+                    VisitDate = visitDate
+                    
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital);

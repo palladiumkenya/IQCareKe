@@ -149,6 +149,54 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
+                // Get Patient Regimen Map:
+                ILookupManager regimenMap =(ILookupManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                var regimen = regimenMap.GetCurentPatientRegimen(PatientId);
+
+                if (regimen != null)
+                {
+                    if (regimen.RegimenId > 0)
+                    {
+                        lblCurrentRegimen.Text = regimen.RegimenId.ToString();
+                    }
+                    else
+                    {
+                        lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
+                    }
+                }
+                else
+                {
+                    lblCurrentRegimen.Text = "<span class='label label-danger'>Patient NOT on ARVs</span>";
+                }
+
+                //Get Adherance Status
+                ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+                var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId);
+                
+                if (adheranceStatus != null)
+                {
+                    string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
+                    switch (adheranceString)
+                    {
+                        case "Poor":
+                            lblAdheranceStatus.Text = "<span class='label label-danger'>Poor</span>";
+                            break;
+                        case "Good":
+                            lblAdheranceStatus.Text = "<span class='label labe-success'>Good </span>";
+                            break;
+                        case "Fair":
+                            lblAdheranceStatus.Text = "<span class='label label-warning'>Fair</span>";
+                            break;
+                    }
+                    
+                }
+                else
+                {
+                    lblAdheranceStatus.Text = "<span class='label label-danger'>Adherance Assessment Not Done</span>";
+                }
+               
+
                 // viral Load Alerts
                 //PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
                 //if (_patientlookup != null)

@@ -19,13 +19,11 @@ using DataAccess.CCC.Repository.Enrollment;
 using DataAccess.CCC.Interface.Baseline;
 using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Repository.Baseline;
-using DataAccess.CCC.Repository.Encounter;
 using DataAccess.CCC.Repository.Tb;
 using PatientLabResultsRepository = DataAccess.CCC.Repository.Encounter.PatientLabResultsRepository;
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
-using DataAccess.Base;
 
 namespace DataAccess.CCC.Repository
 {
@@ -62,6 +60,7 @@ namespace DataAccess.CCC.Repository
         private IPatientBaselineLookupRepository _patientBaselineLookupRepository;
         private ILookupCounty _lookupCounty;
         private IPatientServiceEnrollmentLookupRepository _patientServiceEnrollmentLookupRepository;
+
       
 
         /* visit */

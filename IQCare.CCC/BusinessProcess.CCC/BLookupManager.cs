@@ -15,8 +15,8 @@ namespace BusinessProcess.CCC
 {
     public class BLookupManager : ProcessBase, ILookupManager
     {
-      //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
-       
+        //  private readonly UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext());
+
         public List<LookupItemView> GetGenderOptions()
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
@@ -31,7 +31,8 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.GetLookupItemViews(groupname); ;
+                var item = _unitOfWork.LookupRepository.GetLookupItemViews(groupname);
+                ;
                 _unitOfWork.Dispose();
                 return item;
             }
@@ -51,7 +52,10 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item= _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName).OrderBy(l => l.OrdRank).ToList();
+                var item =
+                    _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
+                        .OrderBy(l => l.OrdRank)
+                        .ToList();
                 _unitOfWork.Dispose();
                 return item;
 
@@ -68,7 +72,7 @@ namespace BusinessProcess.CCC
                 _unitOfWork.Dispose();
 
                 return item;
-            }                
+            }
         }
 
         public List<LookupCounty> GetLookupSubcounty(string county)
@@ -92,6 +96,7 @@ namespace BusinessProcess.CCC
         }
 
         /* pw GetLookupLabs implementation   */
+
         public List<LookupLabs> GetLookupLabs()
 
         {
@@ -113,6 +118,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
 
         {
@@ -123,6 +129,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
 
         {
@@ -133,6 +140,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public List<LookupPreviousLabs> GetLookupPendingLabs(int patientId)
 
         {
@@ -143,6 +151,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
 
         {
@@ -153,6 +162,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId)
 
         {
@@ -168,7 +178,8 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
+                var item =
+                    _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
                 _unitOfWork.Dispose();
                 return item;
             }
@@ -188,10 +199,12 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName).ToList();
+                var item =
+                    _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName)
+                        .ToList();
                 _unitOfWork.Dispose();
                 return item;
-            }      
+            }
         }
 
         public LookupFacility GetFacility()
@@ -212,9 +225,10 @@ namespace BusinessProcess.CCC
             {
                 var item = _unitOfWork.LookupRepository.GetPatientGender(genderId);
                 _unitOfWork.Dispose();
-                    return item;
+                return item;
             }
         }
+
         public PatientLookup GetPatientPtn_pk(int patientId)
 
         {
@@ -225,6 +239,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public LookupTestParameter GetTestParameter(int LabTestId)
 
         {
@@ -235,6 +250,7 @@ namespace BusinessProcess.CCC
                 return item;
             }
         }
+
         public LookupLabs GetLabTestId(string labType)
 
         {
@@ -250,14 +266,17 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                string masterName = _unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId).Select(x => x.MasterName).FirstOrDefault();
-                 int RegmineId=   _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
-                        .Select(x => x.ItemId)
+                string masterName =
+                    _unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId)
+                        .Select(x => x.MasterName)
                         .FirstOrDefault();
+                int RegmineId = _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
+                    .Select(x => x.ItemId)
+                    .FirstOrDefault();
                 _unitOfWork.Dispose();
                 return RegmineId;
             }
-    
+
         }
 
         public string GetCountyByCountyId(int countyId)
@@ -277,11 +296,13 @@ namespace BusinessProcess.CCC
             LookupCountyRepository lookupCountyRepository = new LookupCountyRepository();
             return lookupCountyRepository.GetWardNameByWardId(wardId);
         }
+
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientLabTracker> facilityVlPending = _unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
+                List<PatientLabTracker> facilityVlPending =
+                    _unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
                 _unitOfWork.Dispose();
                 return facilityVlPending;
 
@@ -294,12 +315,40 @@ namespace BusinessProcess.CCC
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
 
             {
-                List<PatientLabTracker> facilityVlComplete = _unitOfWork.PatientLabTrackerRepository.GetVlCompleteCount(facilityId);
+                List<PatientLabTracker> facilityVlComplete =
+                    _unitOfWork.PatientLabTrackerRepository.GetVlCompleteCount(facilityId);
                 _unitOfWork.Dispose();
                 return facilityVlComplete;
             }
 
 
         }
+
+        public PatientRegimenLookup GetCurentPatientRegimen(int patientId)
+        {
+            LookupPatientRegimenMapRepository lookupPatientRegimen = new LookupPatientRegimenMapRepository();
+            return lookupPatientRegimen.GetPatientCurrentRegimen(patientId);
+        }
+
+        public List<PatientRegimenLookup> GetPatientRegimenList(int patientId)
+        {
+            LookupPatientRegimenMapRepository lookupPatientRegimen = new LookupPatientRegimenMapRepository();
+            return lookupPatientRegimen.GetPatientRegimenList(patientId);
+        }
+
+        public LookupPatientAdherence GetPatientAdherence(int patientId)
+        {
+            PatientLookupAdhereenceRepository patientLookupAdhereence=new PatientLookupAdhereenceRepository();
+            return patientLookupAdhereence.GetPatientAdherenceStatus(patientId);
+        }
+
+        //    public LookupPatientAdherence GetPatientAdherence(int patientId)
+        //    {
+        //        PatientLookupAdherenceRepository patientAdherence = new PatientLookupAdherenceRepository();
+
+
+
+        //    }
+        //}
     }
 }

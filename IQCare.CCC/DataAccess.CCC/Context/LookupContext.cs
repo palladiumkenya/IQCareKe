@@ -3,7 +3,6 @@ using DataAccess.Context;
 using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
-using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
@@ -36,5 +35,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PersonContactLookUp> PersonContactLookUps { get; set; }
         public DbSet<PatientBaselineLookup> PatientBaselineLookups { get; set; }
         public DbSet<PatientServiceEnrollmentLookup> PatientServiceEnrollmentLookups { get; set; }
+        public DbSet<PatientRegimenLookup> PatientRegimenLookups { get; set; }
+        public DbSet<LookupPatientAdherence> LookupPatientAdherence { get; set; }
     }
 }

@@ -42,11 +42,11 @@ namespace IQCare.Web.CCC.WebService
         private int _labTestId;      
         private string Msg { get; set; }
         private int Result { get; set; }
-        private int _ptnPk;
+        //private int _ptnPk;
 
-        int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-        int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
-        int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
+        readonly int _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+        readonly int _userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+        readonly int _facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
 
 
         [WebMethod(EnableSession = true)]
@@ -58,7 +58,7 @@ namespace IQCare.Web.CCC.WebService
             var labOrder = new PatientLabOrderManager();
             if (patientPk > 0)
             {
-                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, patientMasterVisitId, patientLabOrder);
+                labOrder.savePatientLabOrder(_patientId, patientPk, _userId, _facilityId, patientMasterVisitId, patientLabOrder);
 
                 Msg = "Patient Lab Order Recorded Successfully .";
 
@@ -77,7 +77,7 @@ namespace IQCare.Web.CCC.WebService
         public string GetLookupPreviousLabsList()
         {
            
-            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(patientId);
+            string jsonObject = LookupLogic.GetLookupPreviousLabsListJson(_patientId);
             return jsonObject;
         }
 
@@ -85,14 +85,14 @@ namespace IQCare.Web.CCC.WebService
         public string ExtruderCompleteLabsList()
         {
 
-            string jsonObject = LookupLogic.LookupExtruderCompleteLabs(patientId);
+            string jsonObject = LookupLogic.LookupExtruderCompleteLabs(_patientId);
             return jsonObject;
         }
         [WebMethod(EnableSession = true)]
         public string GetLookupPendingLabsList()
         {
                         
-            string jsonObject = LookupLogic.GetLookupPendingLabsListJson(patientId);
+            string jsonObject = LookupLogic.GetLookupPendingLabsListJson(_patientId);
             return jsonObject;
         }
 
@@ -100,7 +100,7 @@ namespace IQCare.Web.CCC.WebService
         public string ExtruderPendingLabsList()
         {
 
-            string jsonObject = LookupLogic.LookupExtruderPendingLabs(patientId);
+            string jsonObject = LookupLogic.LookupExtruderPendingLabs(_patientId);
             return jsonObject;
         }
         [WebMethod(EnableSession = true)]
@@ -108,7 +108,7 @@ namespace IQCare.Web.CCC.WebService
         {
 
     
-            string jsonObject = LookupLogic.GetvlTestsJson(patientId);
+            string jsonObject = LookupLogic.GetvlTestsJson(_patientId);
             return jsonObject;
         }
 
@@ -117,7 +117,7 @@ namespace IQCare.Web.CCC.WebService
         {
 
 
-            string jsonObject = LookupLogic.GetPendingvlTestsJson(patientId);
+            string jsonObject = LookupLogic.GetPendingvlTestsJson(_patientId);
             return jsonObject;
         }
 
@@ -125,7 +125,7 @@ namespace IQCare.Web.CCC.WebService
         public List<PatientViralLoad> GetViralLoad()
         {
 
-            PatientLabTracker TestId = _lookupData.GetPatientLabTestId(patientId);
+            PatientLabTracker TestId = _lookupData.GetPatientLabTestId(_patientId);
             if (TestId != null)
             {
                 _labTestId = TestId.LabTestId;
