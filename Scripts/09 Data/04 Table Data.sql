@@ -25,6 +25,8 @@ Delete from dtl_PatientTrackingCare Where Ptn_Pk = 0
 Delete From dtl_PatientTrackingCare Where Ptn_Pk = 0
 Go
 
+update Mst_PreDefinedFields set controlid=4 where PDFName='CouncellingTopicId'
+Go
 /****** Object:  Index [IX_mst_Patient]    Script Date: 12/11/2014 16:22:36 ******/
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[mst_Patient]') AND name = N'IX_mst_Patient')
 DROP INDEX [IX_mst_Patient] ON [dbo].[mst_Patient] WITH ( ONLINE = OFF )

@@ -36,6 +36,10 @@ namespace Interface.CCC.Lookup
         List<PatientLabTracker> GetVlPendingCount(int facilityId);
         List<PatientLabTracker> GetVlCompleteCount(int facilityId);
 
+        PatientRegimenLookup GetCurentPatientRegimen(int patientId);
+        List<PatientRegimenLookup> GetPatientRegimenList(int patientId);
+        LookupPatientAdherence GetPatientAdherence(int patientId);
+
     }
 
 

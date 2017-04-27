@@ -31,10 +31,10 @@ namespace BusinessProcess.Scheduler
         /// <param name="visitId">The visit identifier.</param>
         /// <param name="ModuleId">The module identifier.</param>
         /// <returns></returns>
-        public DataTable CheckAppointmentExistance(int patientPk, int locationId, DateTime AppDate, 
-            int reasonId, 
+        public DataTable CheckAppointmentExistance(int patientId, int locationId, DateTime AppDate, 
+            int ReasonId, 
             int visitId = 0, 
-            int?   moduleId = null)
+            int?   ModuleId = null)
         {
             //lock (this)
             //{
@@ -50,14 +50,14 @@ namespace BusinessProcess.Scheduler
                  //   obj.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientPk);
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientId);
                     ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, locationId);
                     ClsUtility.AddExtendedParameters("@AppDate", SqlDbType.DateTime, AppDate);
-                    ClsUtility.AddExtendedParameters("@ReasonId", SqlDbType.Int, reasonId);
+                    ClsUtility.AddExtendedParameters("@ReasonId", SqlDbType.Int, ReasonId);
                     ClsUtility.AddExtendedParameters("@visitId", SqlDbType.Int, visitId);
-                    if (moduleId.HasValue)
+                    if (ModuleId.HasValue)
                     {
-                        ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, moduleId.Value);
+                        ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, ModuleId.Value);
                     }
                     theDt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_CheckAppointmentExistance_Constella", ClsUtility.ObjectEnum.DataTable);
 
@@ -120,14 +120,71 @@ namespace BusinessProcess.Scheduler
                 }
             }
         }
-        public DataTable GetAppointmentList(int locationId, int? patientPk = null, int? moduleId = null, int? visitId = null, int? AppStatus = null, DateTime? FromDate = null, DateTime? ToDate = null, int? AppointmentReason = null)
+
+        /// <summary>
+        /// Deletes the patient appointment details.
+        /// </summary>
+        /// <param name="PatientId">The patient identifier.</param>
+        /// <param name="LocationId">The location identifier.</param>
+        /// <param name="VisitId">The visit identifier.</param>
+        /// <returns></returns>
+        public int DeletePatientAppointmentDetails(int PatientId, int LocationId, int VisitId)
+        {
+            lock (this)
+            {
+                try
+                {
+                    int theAffectedRows = 0;
+                    this.Connection = DataMgr.GetConnection();
+                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+
+                    ClsObject SaveAppointment = new ClsObject();
+                    SaveAppointment.Connection = this.Connection;
+                    SaveAppointment.Transaction = this.Transaction;
+
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
+                    ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                    ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, VisitId);
+
+                    theAffectedRows = (int)SaveAppointment.ReturnObject(ClsUtility.theParams, "pr_Scheduler_DeletePatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                    DataMgr.CommitTransaction(this.Transaction);
+                    DataMgr.ReleaseConnection(this.Connection);
+                    return theAffectedRows;
+                }
+                catch
+                {
+                    DataMgr.RollBackTransation(this.Transaction);
+                    throw;
+                }
+                finally
+                {
+                    if (this.Connection != null)
+                        DataMgr.ReleaseConnection(this.Connection);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the appointment grid.
+        /// </summary>
+        /// <param name="LocationId">The location identifier.</param>
+        /// <param name="PatientId">The patient identifier.</param>
+        /// <param name="VisitId">The visit identifier.</param>
+        /// <param name="AppStatus">The application status.</param>
+        /// <param name="FromDate">From date.</param>
+        /// <param name="ToDate">To date.</param>
+        /// <param name="AppointmentReason">The appointment reason.</param>
+        /// <returns></returns>
+        public DataTable GetAppointmentList(int LocationId, int? PatientId = null, int? ModuleId = null, int? VisitId = null, int? AppStatus = null, DateTime? FromDate = null, DateTime? ToDate = null, int? AppointmentReason = null)
         {
             lock (this)
             {
                 ClsUtility.Init_Hashtable();
                 ClsObject aMGR = new ClsObject();
-                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, locationId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                //ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 if (AppStatus.HasValue)
                     ClsUtility.AddExtendedParameters("@AppStatus", SqlDbType.Int, AppStatus.Value);
                 if (FromDate.HasValue)
@@ -136,12 +193,12 @@ namespace BusinessProcess.Scheduler
                     ClsUtility.AddExtendedParameters("@ToDate", SqlDbType.DateTime, ToDate.Value);
                 if (AppointmentReason.HasValue)
                     ClsUtility.AddExtendedParameters("@AppReason", SqlDbType.Int, AppointmentReason.Value);
-                if (patientPk.HasValue)
-                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, patientPk.Value);
-                if (moduleId.HasValue)
-                    ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, moduleId.Value);
-                if (visitId.HasValue)
-                    ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, visitId.Value);
+                if (PatientId.HasValue)
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId.Value);
+                if (ModuleId.HasValue)
+                    ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, ModuleId.Value);
+                if (VisitId.HasValue)
+                    ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, VisitId.Value);
                 return (DataTable)aMGR.ReturnObject(ClsUtility.theParams, "pr_Scheduler_AppointmentList_Constella", ClsUtility.ObjectEnum.DataTable);
             }
         }
@@ -201,27 +258,27 @@ namespace BusinessProcess.Scheduler
         /// <summary>
         /// Gets the patientppointment details.
         /// </summary>
-        /// <param name="patientPk">The patient identifier.</param>
-        /// <param name="locationId">The location identifier.</param>
-        /// <param name="visitId">The visit identifier.</param>
+        /// <param name="PatientId">The patient identifier.</param>
+        /// <param name="LocationId">The location identifier.</param>
+        /// <param name="VisitId">The visit identifier.</param>
         /// <returns></returns>
-        public DataSet GetPatientppointmentDetails(int patientPk, int locationId, int visitId)
+        public DataSet GetPatientppointmentDetails(int PatientId, int LocationId, int VisitId)
         {
             lock (this)
             {
                 try
                 {
-                    this.Connection = DataMgr.GetConnection();
-                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                     ClsObject obj = new ClsObject();
                     //obj.Connection = this.Connection;
                     //obj.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@PatientId", SqlDbType.Int, patientPk.ToString());
-                    ClsUtility.AddParameters("@LocationId", SqlDbType.Int, locationId.ToString());
-                    ClsUtility.AddParameters("@VisitId", SqlDbType.Int, visitId.ToString());
+                    ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId.ToString());
+                    ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
+                    ClsUtility.AddParameters("@VisitId", SqlDbType.Int, VisitId.ToString());
                     ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                     return (DataSet)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_GetPatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.DataSet);
                 }
@@ -230,14 +287,68 @@ namespace BusinessProcess.Scheduler
                     //  DataMgr.RollBackTransation(this.Transaction);
                     throw;
                 }
-                finally
-                {
-                    if (this.Connection != null)
-                        DataMgr.ReleaseConnection(this.Connection);
-                }
+              
             }
         }
-   /// <summary>
+
+        /// <summary>
+        /// Saves the appointment.
+        /// </summary>
+        /// <param name="PatientId">The patient identifier.</param>
+        /// <param name="LocationId">The location identifier.</param>
+        /// <param name="AppDate">The application date.</param>
+        /// <param name="AppReasonId">The application reason identifier.</param>
+        /// <param name="AppProviderId">The application provider identifier.</param>
+        /// <param name="UserId">The user identifier.</param>
+        /// <param name="CreateDate">The create date.</param>
+        /// <param name="ModuleId">The module identifier.</param>
+        /// <param name="AppNote">The application note.</param>
+        /// <returns></returns>
+        public int SaveAppointment(int PatientId, int LocationId, DateTime AppDate, int AppReasonId, int AppProviderId, int UserId, DateTime CreateDate, int? ModuleId = null, string AppNote = "")
+        {
+            lock (this)
+            {
+                try
+                {
+                    int theAffectedRows = 0;
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
+
+                    ClsObject obj = new ClsObject();
+                    //SaveAppointment.Connection = this.Connection;
+                    //SaveAppointment.Transaction = this.Transaction;
+
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
+                    ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                    ClsUtility.AddExtendedParameters("@AppDate", SqlDbType.DateTime, AppDate);
+                    ClsUtility.AddExtendedParameters("@AppReasonId", SqlDbType.Int, AppReasonId);
+                    ClsUtility.AddExtendedParameters("@AppProviderId", SqlDbType.Int, AppProviderId);
+                    ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, UserId);
+                    ClsUtility.AddExtendedParameters("@CreateDate", SqlDbType.DateTime, CreateDate);
+                    if (ModuleId.HasValue)
+                        ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, ModuleId.Value);
+                    if (AppNote != "")
+                    {
+                        ClsUtility.AddParameters("@AppNote", SqlDbType.VarChar, AppNote);
+                    }
+                    theAffectedRows = (int)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_SaveAppointment_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                    //DataMgr.CommitTransaction(this.Transaction);
+                    //DataMgr.ReleaseConnection(this.Connection);
+                    obj = null;
+                    return theAffectedRows;
+                }
+                catch
+                {
+                   // DataMgr.RollBackTransation(this.Transaction);
+                    throw;
+                }
+                
+            }
+        }
+
+        /// <summary>
         /// Saves the appointment.
         /// </summary>
         /// <param name="appointment">The appointment.</param>
@@ -308,26 +419,26 @@ namespace BusinessProcess.Scheduler
         /// </summary>
         /// <param name="LName">Name of the l.</param>
         /// <param name="FName">Name of the f.</param>
-        /// <param name="patientPk">The patient identifier.</param>
+        /// <param name="PatientID">The patient identifier.</param>
         /// <param name="HospitalID">The hospital identifier.</param>
         /// <param name="DOB">The dob.</param>
         /// <param name="Sex">The sex.</param>
         /// <param name="AppStatus">The application status.</param>
         /// <returns></returns>
-        public DataSet SearchPatientAppointment(string LName, string FName, int patientPk, string HospitalID, DateTime DOB, int Sex, int AppStatus)
+        public DataSet SearchPatientAppointment(string LName, string FName, int PatientID, string HospitalID, DateTime DOB, int Sex, int AppStatus)
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+               // this.Connection = DataMgr.GetConnection();
+              //  this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                 ClsObject SchedulerMgr = new ClsObject();
-                SchedulerMgr.Connection = this.Connection;
-                SchedulerMgr.Transaction = this.Transaction;
+                //SchedulerMgr.Connection = this.Connection;
+                //SchedulerMgr.Transaction = this.Transaction;
 
                 ClsUtility.AddParameters("@LastName", SqlDbType.VarChar, LName);
                 ClsUtility.AddParameters("@FirstName", SqlDbType.VarChar, FName);
-                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientPk.ToString());
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID.ToString());
                 ClsUtility.AddParameters("@HospitalID", SqlDbType.VarChar, HospitalID);
                 ClsUtility.AddParameters("@DOB", SqlDbType.DateTime, DOB.ToString());
                 ClsUtility.AddParameters("@Sex", SqlDbType.Int, Sex.ToString());
@@ -335,20 +446,14 @@ namespace BusinessProcess.Scheduler
 
                 DataSet SchedulerDR;
                 SchedulerDR = (DataSet)SchedulerMgr.ReturnObject(ClsUtility.theParams, "pr_Scheduler_Search_PatientAppointment_Constella", ClsUtility.ObjectEnum.DataSet);
-
+                SchedulerMgr = null;
                 return SchedulerDR;
             }
             catch
             {
                 throw;
             }
-            finally
-            {
-                if (this.Connection != null)
-                {
-                    DataMgr.ReleaseConnection(this.Connection);
-                }
-            }
+           
         }
 
         /// <summary>
@@ -375,12 +480,12 @@ namespace BusinessProcess.Scheduler
                     }
 
                     int theAffectedRows = 0;
-                    this.Connection = DataMgr.GetConnection();
-                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                     ClsObject obj = new ClsObject();
-                    obj.Connection = this.Connection;
-                    obj.Transaction = this.Transaction;
+                    //obj.Connection = this.Connection;
+                    //obj.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
                     ClsUtility.AddExtendedParameters("@AppointmentId", SqlDbType.Int, appointment.AppointmentId);
@@ -398,20 +503,17 @@ namespace BusinessProcess.Scheduler
                     ClsUtility.AddParameters("@AppNote", SqlDbType.VarChar, appointment.Notes);
                     theAffectedRows = (int)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_UpdatePatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
-                    DataMgr.CommitTransaction(this.Transaction);
-                    DataMgr.ReleaseConnection(this.Connection);
+                    obj = null;
+                    //DataMgr.CommitTransaction(this.Transaction);
+                    //DataMgr.ReleaseConnection(this.Connection);
                     return theAffectedRows;
                 }
                 catch
                 {
-                    DataMgr.RollBackTransation(this.Transaction);
+                  //  DataMgr.RollBackTransation(this.Transaction);
                     throw;
                 }
-                finally
-                {
-                    if (this.Connection != null)
-                        DataMgr.ReleaseConnection(this.Connection);
-                }
+               
             }
         }
 

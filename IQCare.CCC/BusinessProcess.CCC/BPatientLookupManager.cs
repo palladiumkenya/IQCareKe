@@ -8,6 +8,7 @@ using Application.Common;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository.Lookup;
+using System.Linq.Expressions;
 
 namespace BusinessProcess.CCC
 {
@@ -36,7 +37,7 @@ namespace BusinessProcess.CCC
                 return u.PatientLookupRepository.FindBy(x => x.PersonId == personId && x.Active).ToList();
             }
         }
-
+      
         public List<PatientLookup> GetPatientSearchPayload()
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))

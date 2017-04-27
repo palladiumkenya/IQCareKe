@@ -198,6 +198,9 @@
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
 
+                               <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
+								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
+
 	 
 							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
 									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
@@ -280,10 +283,14 @@
 				encounterStatusId = 0;
 				$("#menuPatientHome").hide();
 				$("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+				
 
 			} else {
 				$("#menuPatientHome").show();
 				$("#LinkButton2").show();
+				$("#menuStartEncounter").show();
+				
 			}
 
 			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
@@ -416,6 +423,7 @@
 				$("#menuScheduleAppointments").hide();
 				$("#menuCaptureVitals").hide();
 				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
 				$("#menuPatientVitals").hide();
 			   //$("#LinkButton2").hide();
 				$("#menuStartEncounter").show();
@@ -428,13 +436,15 @@
 				$("#menuFamilyTesting").show();
 				$("#MenuOneTimeEventsTracker").show();
 				$("#menuStopEncounter").show();
-				$("#menuNewEncounter").hide();
+				//$("#menuNewEncounter").hide();
 				$("#menuPatientHome").show();
 				$("#menuPatientAppointments").show();
 				$("#menuPatientCareEnded").show();
 				$("#menuScheduleAppointments").show();
 				$("#menuCaptureVitals").show();
 				$("#menuNewEncounter").show();
+				$("#menuPharmacyPrescription").show();
+				
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
 				stopEncounter = 0;

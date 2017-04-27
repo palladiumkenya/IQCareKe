@@ -27,12 +27,17 @@
     <script type="text/javascript">
     $(document).ready(function () {
 
-        var Gender = "<%=Gender%>";
+        var gender = "<%=Gender%>";
+  
 
-        if (Gender === 'male') { $("#btnFemalVitals").prop("disabled",true); }
-        else {
-            $("#btnFemalVitals").prop("disabled",false);
+        if (gender === 'male') {
+            alert("am male");
+            $("#divBtnVitals").hide("fast");
+        } else if (gender === 'female') {
+            alert("am female");
+             $("#divBtnVitals").hide("show");
         }
+         alert("i dontk know");
 
         $("#femaleVitals").hide("fast");
 

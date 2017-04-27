@@ -398,8 +398,11 @@ namespace IQCare.Web.Laboratory
                     thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
                     try
                     {
-                        thisParam.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
-
+                        thisParam.ResultUnit = null;
+                        if (ddlResultUnit.SelectedIndex > -1 && ddlResultUnit.SelectedValue != "")
+                        {
+                            thisParam.ResultUnit = new ResultUnit() { Id = Convert.ToInt32(ddlResultUnit.SelectedValue), Text = ddlResultUnit.SelectedItem.Text };
+                        }
                         ListItem item = ddlResultUnit.SelectedItem;
                         string min_value = item.Attributes["min"].ToString();
                         string max_value = item.Attributes["max"].ToString();

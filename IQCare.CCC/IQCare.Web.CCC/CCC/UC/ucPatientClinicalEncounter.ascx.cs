@@ -19,6 +19,7 @@ namespace IQCare.Web.CCC.UC
         public string gender = "";
         public int PatientId;
         public int PatientMasterVisitId;
+        public int age;
 
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -26,7 +27,7 @@ namespace IQCare.Web.CCC.UC
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
@@ -54,12 +55,14 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlVaccine, "Vaccinations");
                 lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
                 lookUp.populateDDL(ddlExaminationType, "ReviewOfSystems");
-                lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                //lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                lookUp.populateCBL(cblGeneralExamination, "GeneralExamination");
                 lookUp.populateCBL(cblPHDP, "PHDP");
                 lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
-
+                lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
+                
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
 
@@ -83,6 +86,12 @@ namespace IQCare.Web.CCC.UC
 
             //rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
+
+            if (pce.anyComplaint == "1")
+                rdAnyComplaintsYes.Checked = true;
+            else if (pce.anyComplaint == "0")
+                rdAnyComplaintsNo.Checked = true;
+
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;

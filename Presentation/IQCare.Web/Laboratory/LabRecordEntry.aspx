@@ -412,53 +412,7 @@
                     <asp:AsyncPostBackTrigger ControlID="textSelectLab" EventName="TextChanged" />
                 </Triggers>
             </asp:UpdatePanel>
-           <%-- <asp:UpdatePanel ID="divNotifyComponent" runat="server">
-                <ContentTemplate>
-                    <asp:Panel ID="pnNotify" runat="server" Style="display: none; width: 460px; border: solid 1px #808080;
-                        background-color: #E0E0E0; z-index: 15000">
-                        <asp:Panel ID="pnPopup_Title" runat="server" Style="border: solid 1px #808080; margin: 0px 0px 0px 0px;
-                            cursor: move; height: 18px">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; height: 18px">
-                                <tr>
-                                    <td style="width: 5px; height: 19px;">
-                                    </td>
-                                    <td style="width: 100%; height: 19px;">
-                                        <span style="font-weight: bold; color: White">
-                                            <asp:Label ID="lblNotice" runat="server">Add Editing Item</asp:Label></span>
-                                    </td>
-                                    <td style="width: 5px; height: 19px;">
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:Panel>
-                        <table border="0" cellpadding="15" cellspacing="0" style="width: 100%;">
-                            <tr>
-                                <td style="width: 48px" valign="middle" align="center">
-                                    <asp:Image ID="imgNotice" runat="server" ImageUrl="~/Images/mb_information.gif" Height="32px"
-                                        Width="32px" />
-                                </td>
-                                <td style="width: 100%;" valign="middle" align="center">
-                                    <asp:Label ID="lblNoticeInfo" runat="server" Font-Bold="True"></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                        <div style="background-color: #FFFFFF; border-top: solid 1px #808080; width: 100%;
-                            text-align: center; padding-top: 5px; padding-bottom: 5px">
-                            <asp:Button ID="btnOkAction" runat="server" Text="OK" Width="80px" Style="border: solid 1px #808080;"
-                                OnClick="btnOkAction_Click" CausesValidation="false" />
-                        </div>
-                    </asp:Panel>
-                    <asp:Button ID="btn" runat="server" Style="display: none" />
-                    <ajaxToolkit:ModalPopupExtender ID="notifyPopupExtender" runat="server" TargetControlID="btn"
-                        PopupControlID="pnNotify" BackgroundCssClass="modalBackground" DropShadow="True"
-                        BehaviorID="laborder_bhx" PopupDragHandleControlID="pnPopup_Title" Enabled="True"
-                        DynamicServicePath="">
-                    </ajaxToolkit:ModalPopupExtender>
-                </ContentTemplate>
-                <Triggers>
-                </Triggers>
-            </asp:UpdatePanel>--%>
-            <%--<uc1:progressControl ID="progressControl1" runat="server" />--%>
+         
         </div>
              </div><!-- .panel-body -->
         </div><!-- .panel-->

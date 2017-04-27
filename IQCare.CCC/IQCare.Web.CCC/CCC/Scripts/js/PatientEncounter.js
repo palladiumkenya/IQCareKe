@@ -82,18 +82,18 @@ function AddChronicIllness() {
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
     var treatmentDose = $('#treatmentDose').val();
-    var treatmentDuration = $('#treatmentDuration').val();
+    var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;
 
-    if (chronicIllness == "") {
+    if (chronicIllness == "" || chronicIllness == "Select") {
         toastr.error("Error", "Please enter chronic illness");
         return false;
     }
-   if (!IsNumeric(treatmentDose)) {
-       toastr.error("Error", "Treatment dose should be numeric.");
-       return false;
-   }
+   //if (!IsNumeric(treatmentDose)) {
+   //    toastr.error("Error", "Treatment dose should be numeric.");
+   //    return false;
+   //}
 
    chronicIllnessFound = $.inArray("" + chronicIllness + "", chronicIllnessList);
 
@@ -107,21 +107,26 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, onSet,
+            "<input type='checkbox' id='chkChronic" + chronicIllnessID + "' >", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
 
         $('#ChronicIllnessName').val("0");
         $("#illnessTreatment").val("");
         $('#treatmentDose').val("");
-        $('#treatmentDuration').val("");
+        $('#txtOnsetDate').val("");
     }
 }
 
 var AllergyList = new Array();
 function AddAllergy() {
+    var allergyID = $('#txtAllergyId').val();
     var allergy = $('#txtAllergy').val();
-    var allergyResponse = $('#txtAllergyResponse').val();
+    var allergyReactionID = $('#txtReactionTypeID').val();
+    var allergyReaction = $('#txtReactionType').val();
+    var severityId = $('#ddlAllergySeverity').find(":selected").val();
+    var severity = $('#ddlAllergySeverity').find(":selected").text();
     var allergyDate = $("#txtAllergyDate").val();
 
     //Validate duplication
@@ -144,12 +149,13 @@ function AddAllergy() {
 
         AllergyList.push("" + allergy + "");
         arrAllergyUI = [];
-        arrAllergyUI.push([allergy, allergyResponse, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+        arrAllergyUI.push([allergyID, allergyReactionID, severityId, allergy, allergyReaction, severity, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
 
         DrawDataTable("dtlAllergy", arrAllergyUI);
 
         $('#txtAllergy').val("");
-        $("#txtAllergyResponse").val("");
+        $("#txtReactionType").val("");
+        $("#ddlAllergySeverity").val("0");
         $('#txtAllergyDate').val("");
     }
 }
@@ -294,6 +300,46 @@ function AddDiagnosis() {
 
         $('#Diagnosis').val("");
         $('#DiagnosisTreatment').val("");
+    }
+}
+
+var PresentingComplaintsList = new Array();
+function AddPresentingComplaints() {
+    var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
+    
+    var presentingComplaints = $('#txtPresentingComplaints').val();
+    var onsetDate = $('#txtPCOnsetDate').val();
+
+    //Validate duplication
+    var presentingComplaintFound = 0;
+
+    if (presentingComplaints == "") {
+        toastr.error("Error", "Please enter Presenting Complaint");
+        return false;
+    }
+
+    presentingComplaintFound = $.inArray("" + presentingComplaints + "", PresentingComplaintsList);
+
+    if (presentingComplaintFound > -1) {
+        toastr.error("Error", "Presenting Complaint already exists.");
+        return false;
+
+    } else {
+
+
+        PresentingComplaintsList.push("" + presentingComplaints + "");
+
+        arrPresentingComplaintUI = [];
+
+        arrPresentingComplaintUI.push([
+            presentingComplaintsID, presentingComplaints,onsetDate,
+            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        ]);
+
+        DrawDataTable("dtlPresentingComplaints", arrPresentingComplaintUI);
+
+        $('#txtPresentingComplaints').val("");
+        $('#txtPCOnsetDate').val("");
     }
 }
 

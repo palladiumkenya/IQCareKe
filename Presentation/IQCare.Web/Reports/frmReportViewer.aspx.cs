@@ -70,7 +70,7 @@ namespace IQCare.Web.Reports
                 }
                 else
                 {
-                    thePatientId = 0;
+                    thePatientId = Convert.ToInt32(Session["PatientId"]);
                 }
 
 
@@ -295,7 +295,7 @@ namespace IQCare.Web.Reports
                 #endregion
                 IPatientHome PatientManager;
                 PatientManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
-                DataTable theDT = PatientManager.GetPatientVisitDetail(Convert.ToInt32(Request.QueryString["PatientId"]));
+                DataTable theDT = PatientManager.GetPatientVisitDetail(Convert.ToInt32(Session["PatientId"]));
 
 
                 if (theReportName != "ARVAdherence" && theReportName != "PatientProfile" && theReportName != "MisARVAppointment" && theReportName != "PatientARVPickup" && theReportName != "rptPotrait" && theReportName != "rptLandscape" && theReportName != "PharmacyPrescription")

@@ -45,7 +45,9 @@ namespace IQCare.Web.CCC.WebService
         private int _ptnPk;
         int moduleId = 203;
 
-        int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+        int patientPk = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+
+        int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
         int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
         int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         //int moduleId = Convert.ToInt32(HttpContext.Current.Session["ModuleId"]);

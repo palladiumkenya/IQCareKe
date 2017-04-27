@@ -26,7 +26,7 @@ namespace BusinessProcess.CCC.Patient
             ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, patient.ptn_pk);
             ClsUtility.AddExtendedParameters("@PatientIndex", SqlDbType.VarChar, patient.PatientIndex);
             ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, patient.DateOfBirth);
-            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarBinary, patient.NationalId);
+            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, patient.NationalId);
             ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
             ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, patient.CreatedBy);
             ClsUtility.AddExtendedParameters("@Active", SqlDbType.Bit, patient.Active);
@@ -70,7 +70,7 @@ namespace BusinessProcess.CCC.Patient
 
             ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, patient.ptn_pk);
             ClsUtility.AddExtendedParameters("@DateOfBirth", SqlDbType.DateTime, patient.DateOfBirth);
-            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarBinary, patient.NationalId);
+            ClsUtility.AddExtendedParameters("@NationalId", SqlDbType.VarChar, patient.NationalId);
             ClsUtility.AddExtendedParameters("@FacilityId", SqlDbType.Int, patient.FacilityId);
             ClsUtility.AddExtendedParameters("@Id", SqlDbType.Int, id);
 

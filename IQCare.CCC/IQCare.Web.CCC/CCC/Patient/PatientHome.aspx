@@ -45,9 +45,15 @@
                           </div>
                           <div class="col-md-3 col-xs-12 col-sm-12">
                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Current Regimen :</asp:Label></h5></div>
+                                <div class="col-md-12 col-md-12 col-xs-12 col-sm-12">
+                                    <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblCurrentRegimen" CssClass="text-info pull-left"> </asp:Label></h6>
+                                </div>
                           </div>
                           <div class="col-md-3 col-xs-12 col-sm-12">
                                 <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Adherance Status :</asp:Label></h5></div>
+                               <div class="col-md-12 col-md-12 col-xs-12 col-sm-12">
+                                    <h6> <asp:Label runat="server" ClientIDMode="Static" ID="lblAdheranceStatus" CssClass="text-info pull-left"> </asp:Label></h6>
+                                </div>
                           </div>
                       </div>
                   </div><!-- .col-md-12 -->

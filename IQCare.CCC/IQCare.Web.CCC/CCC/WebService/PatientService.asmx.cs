@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference)
+            decimal weight, decimal bmi, decimal headCircumference,DateTime visitDate)
         {
             try
             {
@@ -51,7 +51,9 @@ namespace IQCare.Web.CCC.WebService
                     Temperature = tempreture,
                     Weight = weight,
                     BMI = bmi,
-                    HeadCircumference = headCircumference
+                    HeadCircumference = headCircumference,
+                    VisitDate = visitDate
+                    
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital);
@@ -98,7 +100,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -123,7 +125,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.AddPatientFamilyTestings(patientAppointment);
+                Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Added Successfully!";
@@ -137,7 +139,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -162,7 +164,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.UpdatePatientFamilyTestings(patientAppointment);
+                Result = testing.UpdatePatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Updated Successfully!";
@@ -245,7 +247,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientFamily = new PatientFamilyTestingManager();
                 int id = Convert.ToInt32(patientId);
-                familytestings = patientFamily.GetPatienFamilyList(id);
+                familytestings = patientFamily.GetPatientFamilyList(id);
                 foreach (var member in familytestings)
                 {
                     PatientFamilyDisplay familyDisplay = MapMembers(member);
