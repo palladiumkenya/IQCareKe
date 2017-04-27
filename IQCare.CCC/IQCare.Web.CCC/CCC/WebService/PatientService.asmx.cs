@@ -100,7 +100,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -125,7 +125,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.AddPatientFamilyTestings(patientAppointment);
+                Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Added Successfully!";
@@ -139,7 +139,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -164,7 +164,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.UpdatePatientFamilyTestings(patientAppointment);
+                Result = testing.UpdatePatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Updated Successfully!";
