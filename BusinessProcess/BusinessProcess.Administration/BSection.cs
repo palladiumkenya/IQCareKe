@@ -69,10 +69,7 @@ namespace BusinessProcess.Administration
         public int UpdateSection(int SectionId,string SectionName, int UserID)
         {
             try
-            {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
-
+            {               
                 ClsObject SectionManager = new ClsObject();
                 SectionManager.Connection = this.Connection;
                 SectionManager.Transaction = this.Transaction;
@@ -90,10 +87,6 @@ namespace BusinessProcess.Administration
                     theBL.DataElements["MessageText"] = "Error in Saving Section record. Try Again..";
                     AppException.Create("#C1", theBL);
                 }
-
-
-                DataMgr.CommitTransaction(this.Transaction);
-                DataMgr.ReleaseConnection(this.Connection);
                 return Convert.ToInt32(theDR[0]);
             }
             catch
