@@ -16,6 +16,11 @@ namespace IQCare.Web.CCC.UC
         public string PMSCMSAmePointDispense = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString["visitId"] != null)
+            {
+                Session["PatientMasterVisitId"] = Request.QueryString["visitId"].ToString();
+            }
+
             if (!IsPostBack)
             {
                 if (Session["SCMModule"] != null)

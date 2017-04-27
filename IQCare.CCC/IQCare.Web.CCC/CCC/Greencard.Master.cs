@@ -74,8 +74,11 @@ namespace IQCare.Web.CCC
             PatientFamilyTestingManager patientFamilyTesting = new PatientFamilyTestingManager();
             PatientAppointmentManager patientAppointmentManager = new PatientAppointmentManager();
             lblPatientCount.Text = patientLookup.GetTotalpatientCount().ToString();
-            lblFamilyTesting.Text = patientFamilyTesting.GetPatienFamilyCount(PatientId).ToString();
+            lblFamilyTesting.Text = patientFamilyTesting.GetPatientFamilyCount(PatientId).ToString();
             lblAppointments.Text = patientAppointmentManager.GetCountByPatientId(PatientId).ToString();
+            patientLookup = null;
+            patientFamilyTesting = null;
+            patientAppointmentManager = null;
             //check session coming from stopped encounter
             if (Request.QueryString["reset"] != null)
             {
@@ -186,5 +189,9 @@ namespace IQCare.Web.CCC
             Response.Redirect("~/CCC/Encounter/EncounterHistory.aspx");
         }
 
+        protected void menuPharmacyPrescription_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Encounter/PharmacyPrescription.aspx");
+        }
     }
 }

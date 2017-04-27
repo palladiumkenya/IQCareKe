@@ -29,7 +29,7 @@ namespace Entities.CCC.Encounter
         //public bool DeleteFlag { get; set; }
         //public DateTime CreateDate { get; set; }
         //public int CreatedBy { get; set; }
-        public DateTime StatusDate { get; set; }
+        public DateTime? StatusDate { get; set; }
         [NotMapped]public bool HasResult { get; set; }
 
 

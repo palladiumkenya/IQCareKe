@@ -275,7 +275,7 @@ namespace IQCare.Web.MasterPage
                 if (mnuProfile != null)
                 {
                     g = Guid.NewGuid();
-                    mnuProfile.NavigateUrl = string.Format("~/Reports/frmReportViewer.aspx?name=Add&key={0}", g.ToString());
+                    mnuProfile.NavigateUrl = string.Format("~/Reports/frmReportViewer.aspx?name=Add&ReportName=PatientProfile&key={0}", g.ToString());
                 }
                 MenuItem mnuDebit = item.Where(mn => mn.Value == "mnuDebitNote").FirstOrDefault();
                 if (mnuDebit != null)

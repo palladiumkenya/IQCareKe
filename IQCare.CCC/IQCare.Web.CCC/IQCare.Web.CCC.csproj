@@ -52,6 +52,7 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap.css" />
@@ -185,6 +186,13 @@
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\PharmacyPrescription.aspx.cs">
+      <DependentUpon>PharmacyPrescription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\PharmacyPrescription.aspx.designer.cs">
+      <DependentUpon>PharmacyPrescription.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
       <DependentUpon>StartEncounter.aspx</DependentUpon>
@@ -515,7 +523,7 @@
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.CCC.UILogic">
-      <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
+      <HintPath>..\IQCare.CCC.UILogic\obj\Debug\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

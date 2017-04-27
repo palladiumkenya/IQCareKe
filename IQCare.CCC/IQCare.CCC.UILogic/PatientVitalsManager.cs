@@ -24,7 +24,9 @@ namespace IQCare.CCC.UILogic
                 Temperature = p.Temperature,
                 Weight = p.Weight,
                 BMI = p.BMI,
-                HeadCircumference = p.HeadCircumference
+                HeadCircumference = p.HeadCircumference,
+                VisitDate = p.VisitDate
+               
             };
             return _vitals.AddPatientVitals(patientVital);
         }
@@ -56,7 +58,8 @@ namespace IQCare.CCC.UILogic
                 Temperature = p.Temperature,
                 Weight = p.Weight,
                 BMI = p.BMI,
-                HeadCircumference = p.HeadCircumference
+                HeadCircumference = p.HeadCircumference,
+                VisitDate = p.VisitDate
             };
             return _vitals.UpdatePatientVitals(patientVital);
         }
