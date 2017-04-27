@@ -33,6 +33,15 @@ namespace IQCare.Web.CCC.WebService
             return val;
         }
 
+        [WebMethod(EnableSession = true)]
+        public int savePatientEncounterTS(string VisitDate, string VisitScheduled, string VisitBy)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            int val = patientEncounter.savePatientEncounterTS(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), "203", VisitDate, VisitScheduled, VisitBy, Convert.ToInt32(Session["AppUserId"].ToString()));
+            return val;
+        }
+
 
         [WebMethod(EnableSession = true)]
         public void savePatientEncounterChronicIllness(string chronicIllness, string vaccines, string allergies)

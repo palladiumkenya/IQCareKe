@@ -26,6 +26,14 @@ namespace IQCare.CCC.UILogic
             return val;
         }
 
+        public int savePatientEncounterTS(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+
+            int val = patientEncounter.savePresentingComplaintsTS(patientMasterVisitID, patientID, serviceID, VisitDate, VisitScheduled, VisitBy, userId);
+            return val;
+        }
+
         public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string userID, string chronicIllness, string Vaccines, string Allergies)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");

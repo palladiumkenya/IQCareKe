@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Collections;
 using Interface.Clinical;
 using DataAccess.Base;
 using DataAccess.Common;
 using DataAccess.Entity;
-using Application.Common;
 
 
-namespace BusinessProcess.Clinical 
+namespace BusinessProcess.Clinical
 {
     public class BCustomForm : ProcessBase, ICustomForm
     {

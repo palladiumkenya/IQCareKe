@@ -283,10 +283,14 @@
 				encounterStatusId = 0;
 				$("#menuPatientHome").hide();
 				$("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+				
 
 			} else {
 				$("#menuPatientHome").show();
 				$("#LinkButton2").show();
+				$("#menuStartEncounter").show();
+				
 			}
 
 			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
@@ -419,6 +423,7 @@
 				$("#menuScheduleAppointments").hide();
 				$("#menuCaptureVitals").hide();
 				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
 				$("#menuPatientVitals").hide();
 			   //$("#LinkButton2").hide();
 				$("#menuStartEncounter").show();
@@ -431,13 +436,15 @@
 				$("#menuFamilyTesting").show();
 				$("#MenuOneTimeEventsTracker").show();
 				$("#menuStopEncounter").show();
-				$("#menuNewEncounter").hide();
+				//$("#menuNewEncounter").hide();
 				$("#menuPatientHome").show();
 				$("#menuPatientAppointments").show();
 				$("#menuPatientCareEnded").show();
 				$("#menuScheduleAppointments").show();
 				$("#menuCaptureVitals").show();
 				$("#menuNewEncounter").show();
+				$("#menuPharmacyPrescription").show();
+				
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
 				stopEncounter = 0;

@@ -14,6 +14,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
     {
         public int PatientId;
         public int PatientMasterVisitId;
+        public int UserId;
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -72,6 +73,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
         }
     }
 }
