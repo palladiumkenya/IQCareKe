@@ -380,11 +380,11 @@ namespace IQCare.CCC.UILogic
             }
         }
 
-        public PatientLookup GetPatientPtn_pk(int patientId)
+        public PatientLookup GetPatientById(int patientId)
 
         {
             ILookupManager lookuplist = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
-            return lookuplist.GetPatientPtn_pk(patientId);
+            return lookuplist.GetPatientById(patientId);
         }
 
         public static string GetPatientCurrentRegimen(int patientId)

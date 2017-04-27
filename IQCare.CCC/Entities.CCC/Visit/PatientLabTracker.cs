@@ -22,7 +22,7 @@ namespace Entities.CCC.Visit
         public int PatientMasterVisitId { get; set; }
        //[ForeignKey("patientMasterVisitId")]
         //public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-        public DateTime SampleDate { get; set; }
+        public DateTime? SampleDate { get; set; }
         public string Reasons { get; set; }       
         public string Results  { get; set; }
         public int LabOrderId { get; set; }

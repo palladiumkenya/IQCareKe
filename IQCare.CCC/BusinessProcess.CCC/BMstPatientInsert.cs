@@ -12,7 +12,7 @@ namespace BusinessProcess.CCC
 {
     public class BMstPatientInsert : ProcessBase, IMst_PatientInsert
     {
-        public int AddMstPatient(string firstName, string lastName, string middleName, int locationID, int patientEnrollmentID, int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus, string address, string phone, int userID, string posId, int moduleId, DateTime startDate, DateTime createDate)
+        public int AddMstPatient(string firstName, string lastName, string middleName, int locationID, string patientEnrollmentID, int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus, string address, string phone, int userID, string posId, int moduleId, DateTime startDate, DateTime createDate)
         {
             int Ptn_Pk = 0;
             ClsObject obj = new ClsObject();
@@ -21,7 +21,7 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@LastName", SqlDbType.VarChar, lastName);
             ClsUtility.AddExtendedParameters("@MiddleName", SqlDbType.VarChar, middleName);
             ClsUtility.AddExtendedParameters("@LocationID", SqlDbType.Int, locationID);
-            ClsUtility.AddExtendedParameters("@PatientEnrollmentID", SqlDbType.Int, patientEnrollmentID);
+            ClsUtility.AddExtendedParameters("@PatientEnrollmentID", SqlDbType.VarChar, patientEnrollmentID);
             ClsUtility.AddExtendedParameters("@ReferredFrom", SqlDbType.Int, referredFrom);
             ClsUtility.AddExtendedParameters("@RegistrationDate", SqlDbType.DateTime, registrationDate);
             ClsUtility.AddExtendedParameters("@Sex", SqlDbType.Int, sex);

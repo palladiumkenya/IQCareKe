@@ -310,6 +310,7 @@ namespace IQCare.Web.CCC.WebService
             string relationship = "";
             string baselineHivStatus = "";
             string hivStatus = "";
+            string sex = "";
             List<LookupItemView> relationships = mgr.GetLookItemByGroup("Relationship");
             var s = relationships.FirstOrDefault(n => n.ItemId == member.RelationshipId);
             if (s != null)
@@ -328,16 +329,28 @@ namespace IQCare.Web.CCC.WebService
             {
                 hivStatus = sa.ItemDisplayName;
             }
+            List<LookupItemView> genders = mgr.GetLookItemByGroup("Gender");
+            var x = genders.FirstOrDefault(n => n.ItemId == member.Sex);
+            if (x != null)
+            {
+                sex = x.ItemDisplayName;
+            }
 
             PatientFamilyDisplay familyMemberDisplay = new PatientFamilyDisplay()
             {
-                Name = member.FirstName + ' ' + member.MiddleName + ' ' + member.LastName,
+                FirstName = member.FirstName,
+                MiddleName = member.MiddleName,
+                LastName = member.LastName,
+                Sex = sex,
+                DateOfBirth = member.DateOfBirth,
                 Relationship = relationship,
                 BaseLineHivStatus = baselineHivStatus,
                 BaseLineHivStatusDate = member.BaselineHivStatusDate,
                 HivStatusResult = hivStatus,
                 HivStatusResultDate = member.HivTestingResultsDate,
-                CccReferal = member.CccReferal.ToString()
+                CccReferal = member.CccReferal.ToString(),
+                CccReferalNumber = member.CccReferaalNumber,
+
             };
             return familyMemberDisplay;
         }
@@ -418,13 +431,18 @@ namespace IQCare.Web.CCC.WebService
 
     public class PatientFamilyDisplay
     {
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public string Relationship { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Sex { get; set; }
         public string BaseLineHivStatus { get; set; }
         public DateTime ? BaseLineHivStatusDate { get; set; }
         public string HivStatusResult { get; set; }
         public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
+        public string CccReferalNumber { get; set; }
     }
 
     public class PatientConsentDisplay

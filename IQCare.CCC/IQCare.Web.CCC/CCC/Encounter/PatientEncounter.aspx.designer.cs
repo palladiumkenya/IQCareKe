@@ -103,15 +103,6 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.WebControls.TextBox labNotes;
         
         /// <summary>
-        /// LabDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LabDate;
-        
-        /// <summary>
         /// btnAddLab control.
         /// </summary>
         /// <remarks>
@@ -128,6 +119,24 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tblAddLabs;
+        
+        /// <summary>
+        /// LabDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LabDate;
+        
+        /// <summary>
+        /// orderNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox orderNotes;
         
         /// <summary>
         /// btnSaveLab control.

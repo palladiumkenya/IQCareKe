@@ -107,7 +107,7 @@
                                                         <asp:GridView ID="grdPatienOrder" runat="server" AutoGenerateColumns="False" AllowSorting="true"
                                                             Width="100%" BorderColor="white" PageIndex="1" BorderWidth="1" GridLines="None"
                                                             CssClass="datatable" CellPadding="0" CellSpacing="0" OnSelectedIndexChanged="grdPatienOrder_SelectedIndexChanged"
-                                                            AutoGenerateSelectButton="False" DataKeyNames="Id,PatientId,ModuleId" OnRowDataBound="grdPatienOrder_RowDataBound"
+                                                            AutoGenerateSelectButton="False" DataKeyNames="Id,PatientPk,ModuleId" OnRowDataBound="grdPatienOrder_RowDataBound"
                                                             OnDataBound="grdPatienOrder_DataBound" OnRowCommand="grdPatienOrder_RowCommand">
                                                             <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
                                                             <RowStyle CssClass="gridrow" />
