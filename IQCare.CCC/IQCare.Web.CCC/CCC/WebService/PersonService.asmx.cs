@@ -739,7 +739,7 @@ namespace IQCare.Web.CCC.WebService
                     patientDetails.PatientTypeString = LookupLogic.GetLookupNameById(thisPatient.PatientType);
                     patientDetails.EnrollmentNumber = thisPatient.EnrollmentNumber;
 
-                    patientDetails.Gender = Patient[0].Sex;
+                    patientDetails.Gender = thisPatient.Sex;
                     patientDetails.GenderString = LookupLogic.GetLookupNameById(thisPatient.Sex);
                     patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", thisPatient.DateOfBirth);
                     patientDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", thisPatient.EnrollmentDate);
