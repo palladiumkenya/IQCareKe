@@ -31,5 +31,7 @@ namespace Entities.CCC.Triage
         public decimal SpO2 { get; set; }
         public decimal BMI { get; set; }
         public decimal HeadCircumference { get; set; }
+        public DateTime? VisitDate { get; set; }
      }
+
 }

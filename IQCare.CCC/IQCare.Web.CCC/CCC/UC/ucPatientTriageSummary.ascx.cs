@@ -16,6 +16,11 @@ namespace IQCare.Web.CCC.UC
             get { return Convert.ToInt32(Session["patientId"]); }
         }
 
+        protected string PatientGender
+        {
+            get { return Convert.ToString(Session["Gender"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             double bmi = 0.0;
@@ -86,11 +91,11 @@ namespace IQCare.Web.CCC.UC
                 lblBMI.Text = Convert.ToString(patientTriage.BMI) + "Kg/M2" + " " + bmiAnalysis;
             }
 
-            var _patientAppointment = new PatientAppointmentManager();
-            var PA = _patientAppointment.GetByPatientId(PatientId);
-            if (PA!=null)
+            var patientAppointment = new PatientAppointmentManager();
+            var pa = patientAppointment.GetByPatientId(PatientId);
+            if (pa!=null)
             {
-                foreach (var item in PA)
+                foreach (var item in pa)
                 {
                     lblappointmentDate.Text =Convert.ToDateTime(item.AppointmentDate).ToString("DD-MMM-YYYY");
                     lblAppointmentReason.Text = LookupLogic.GetLookupNameById(item.ReasonId);

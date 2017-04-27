@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientTriageSummary.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientTriageSummary" %>
+<%@ Import Namespace="Entities.CCC.Lookup" %>
+<%@ Import Namespace="Entities.PatientCore" %>
 <div class="col-md-8 col-xs-12 col-sm-12">
     
 
@@ -79,7 +81,7 @@
            <div class="col-md-6 col-xs-12 col-sm-12 ">
                 <asp:LinkButton runat="server" ID="btnLoadTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Add Patient Vitals</asp:LinkButton>
             </div>
-            <div class="col-md-6 col-xs-12 col-sm-12 ">
+            <div class="col-md-6 col-xs-12 col-sm-12" id="divBtnVitals">
                 <asp:LinkButton runat="server" ID="btnFemalVitals" CssClass="btn btn-success  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Female Patient Followup </asp:LinkButton>
             </div>
     </div>
@@ -104,8 +106,19 @@
         var diastolic = "<%=bpDiastolic%>";
         var systolic = "<%=bpSystloic%>";
 
+        var patientGender = "<%=PatientGender%>";
+
+
         $("#pgDiastolic").css('width', diastolic + '%').attr('aria-valuenow', diastolic);
-         $("#bgSystolic").css('width', systolic+'%').attr('aria-valuenow', systolic);
+        $("#bgSystolic").css('width', systolic + '%').attr('aria-valuenow', systolic);
+
+  
+        //if (patientGender === 'Male') { $("#btnFemalVitals").prop("disabled",false); }
+        //else if (patientGender === 'Female') {
+        //     $("#btnFemalVitals").prop("disabled",true);
+        //}
+       // alert(patientGender);
+
 
         //$("#btnFemalVitals").click(function() {
         //       var dialog = bootbox.dialog({

@@ -114,7 +114,7 @@ namespace IQCare.Web.Laboratory.Request
             //DataTable theDT = (DataTable)grdPatienBill.DataSource;
             //  DataRow theDR = theDT.Rows[grdPatienBill.SelectedIndex];
             int orderId = int.Parse(grdPatienOrder.SelectedDataKey.Values["Id"].ToString());
-            int patientId = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientId"].ToString());
+            int patientId = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientPk"].ToString());
             int moduleId = int.Parse(grdPatienOrder.SelectedDataKey.Values["ModuleId"].ToString());
             if(moduleId <= 0)
             {

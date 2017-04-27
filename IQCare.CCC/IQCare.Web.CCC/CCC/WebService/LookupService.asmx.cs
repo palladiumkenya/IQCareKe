@@ -1,6 +1,10 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Web.Services;
+using Application.Presentation;
+using Entities.CCC.Lookup;
+using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 
 
@@ -154,6 +158,23 @@ namespace IQCare.Web.CCC.WebService
             else
                 return "";
 
+        }
+
+        [WebMethod]
+        public List<LookupItemView> GetLookUpItemsByGroupName(string groupName)
+        {
+            ILookupManager mgr =
+                    (ILookupManager)
+                    ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            try
+            {
+                return mgr.GetLookItemByGroup("KeyPopulation");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }       
         }
     }
 }

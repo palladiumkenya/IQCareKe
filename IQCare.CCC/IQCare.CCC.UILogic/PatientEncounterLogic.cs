@@ -383,8 +383,9 @@ namespace IQCare.CCC.UILogic
                         }
                     }
 
-                    catch (Exception ex)
+                    catch (Exception )
                     {
+
                     }
                 }
             }
