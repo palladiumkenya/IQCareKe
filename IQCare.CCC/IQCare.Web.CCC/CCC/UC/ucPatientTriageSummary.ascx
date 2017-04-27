@@ -14,9 +14,9 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-12 col-sm-12">
-                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Weight :</asp:Label></h5></div>
+                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Temperature :</asp:Label></h5></div>
                     <div class="col-md-12">
-                         <h6><asp:Label runat="server" ID="lblWeight" CssClass="text-info pull-left"> 0 Kgs</asp:Label></h6>
+                         <h6><asp:Label runat="server" ID="lblTemperature" CssClass="text-info pull-left"> 0 °C</asp:Label></h6>
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-12 col-sm-12">

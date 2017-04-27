@@ -21,11 +21,11 @@
                     <div class="col-md-3 titletext" id="servicebutton" runat="server" style='padding-bottom: 20px;
                         background-color: <%# Eval("ResourceColor") %>'>
                         <asp:LinkButton ID="ButtonService" runat="server" CssClass="btn btn-info" Height="100"
-                            Width="100%" CommandName="LoadServiceCommand" CommandArgument='<%# Eval("ModuleId") %>'
+                            Width="100%" CommandName="LoadServiceCommand"  CommandArgument='<%# Eval("ModuleId") %>'
                             Text='<%# showIcon(Eval("IconFont").ToString()) + "  " + Eval("ResourceDescription") %>'
-                            OnCommand="LoadServiceCommand_OnCommand">
-                                   
+                            OnCommand="LoadServiceCommand_OnCommand">                                   
                         </asp:LinkButton>
+                        <asp:Label ID="linkUrl" Text='<%# Eval("ResourceUrl") %>' Visible="false" runat="server"></asp:Label>
                         <br />
                     </div>
                 </ItemTemplate>

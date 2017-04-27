@@ -42,10 +42,55 @@ namespace IQCare.Web.CCC.UC
 
 
                 lblAge.Text = Session["Age"].ToString() + "Years";
-                lblWeight.Text = Convert.ToString(patientTriage.Weight) + "Kgs";
+
+                if (patientTriage.Temperature > 0)
+                {
+
+                    if (patientTriage.Temperature > 40)
+                    {
+                        lblTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) +
+                                              "°C | Possible Hyperpyrexia‎";
+
+                    }
+                    else if (Convert.ToDouble(patientTriage.Temperature) > 36.5 &
+                             Convert.ToDouble(patientTriage.Temperature) < 37.5)
+                    {
+                        lblTemperature.Text = "<span class='label label-success'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Normal‎";
+
+                    }
+                    else if (Convert.ToDouble(patientTriage.Temperature) > 37.5 &
+                             Convert.ToDouble(patientTriage.Temperature) < 40.0)
+                    {
+                        lblTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) +
+                                              "°C | Possible Hyperpyrexia‎";
+                    }
+                    else if (patientTriage.Temperature < 32)
+                    {
+                        lblTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Medical Emergency‎";
+
+                    }
+                    else if (patientTriage.Temperature > 32 & patientTriage.Temperature < 36)
+                    {
+                        lblTemperature.Text = "<span class='label label-danger'>" +
+                                              Convert.ToString(patientTriage.Temperature) + "°C | Hypothermia ‎";
+
+                    }
+                }
+                else
+                {
+                    lblTemperature.Text = "<span class='label label-danger'>" +
+                       Convert.ToString(patientTriage.Temperature) + "NO Temperature Readings ‎";
+
+
+                }
+
                 if (diastolic < 1 & systolic < 1)
                 {
-                    lblbloodpressure.Text ="< span class='label label-danger'> NOT TAKEN </span>";
+                    lblbloodpressure.Text ="<span class='label label-danger'> NOT TAKEN </span>";
 
                 }
                 else
@@ -54,41 +99,41 @@ namespace IQCare.Web.CCC.UC
                
                     if (diastolic <= 80 & systolic <= 120)
                     {
-                        bpAnalysis = "<span class='label label-success'> Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg] |Normal </span>";
                     }
                     else if (diastolic>85 & systolic>140)
                     {
-                        bpAnalysis = "<span class='label label-success'> Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg]  | Normal </span>";
                     }else if (diastolic > 90 & systolic > 140)
                     {
-                        bpAnalysis = "<span class='label label-warning'>Border Line</span>";
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg]  | Border Line</span>";
                     }else if (diastolic > 90 & systolic > 160)
                     {
-                        bpAnalysis = "<span class='label label-danger'>Suspect Hypertension</span>";
+                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + " |mm[Hg]  Suspect Hypertension</span>";
                     }
 
-                    lblbloodpressure.Text = Convert.ToString(diastolic) + "/" + Convert.ToString(systolic)+ "mm[Hg] "+ bpAnalysis;
+                    lblbloodpressure.Text =bpAnalysis;
                 }
 
                 if (bmi < 18.5)
                 {
-                    bmiAnalysis = "<span class='label label-danger'> Under weight</span>";
+                    bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Under weight</span>";
                 }
                 else if (bmi >= 18.5 & bmi < 25.0)
                 {
-                    bmiAnalysis = "<span class='label label-success'> Normal weight</span>";
+                    bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Normal weight</span>";
                 }
                 else if (bmi >= 25 & bmi < 30.0)
                 {
-                    bmiAnalysis = "<span class='label label-warning'> Over weight<span>";
+                    bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Over weight<span>";
                 }
                 else
                 {
-                    bmiAnalysis = "<span class='label label-danger'> Obese<span>";
+                    bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Obese<span>";
                 }
 
 
-                lblBMI.Text = Convert.ToString(patientTriage.BMI) + "Kg/M2" + " " + bmiAnalysis;
+                lblBMI.Text = bmiAnalysis;
             }
 
             var patientAppointment = new PatientAppointmentManager();

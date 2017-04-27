@@ -13,17 +13,10 @@ namespace IQCare.CCC.UILogic
         readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         Utility _utility=new Utility();
         
-       public List<PatientLookup> GetPatientDetailSummary(int id)
+       public PatientLookup GetPatientDetailSummary(int id)
         {
             var patientDetails = _patientLookupmanager.GetPatientDetailsLookup(id);
-            if (patientDetails != null && patientDetails.Count > 0)
-            {
-                return patientDetails;
-            }
-            else
-            {
-                
-            }
+           // call invoke application decryption
             return patientDetails;
         }
 

@@ -58,42 +58,6 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label lblAdheranceStatus;
         
         /// <summary>
-        /// txtFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtFirstName;
-        
-        /// <summary>
-        /// txtMiddleName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtMiddleName;
-        
-        /// <summary>
-        /// txtLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtLastName;
-        
-        /// <summary>
-        /// drpPatientPopulation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label drpPatientPopulation;
-        
-        /// <summary>
         /// txtSupporterNames control.
         /// </summary>
         /// <remarks>

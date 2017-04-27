@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.Patient
             var patientTransfer=new PatientTransferInmanager();
             var patientDiagnosis=new PatientHivDiagnosisManager();
             var patientEntryPoint=new PatientEntryPointManager();
-
+            Session["TechnicalAreaId"] = 203;
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
             var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["patientId"]));
@@ -47,7 +47,7 @@ namespace IQCare.Web.CCC.Patient
                 {
                     lblTransferinDate.Text = "<h6>" + item.TransferInDate.ToString("dd-MMM-yyyy") + "</h6>";
                     lblTreatmentStartDate.Text = "<h6>" + item.TreatmentStartDate.ToString("dd-MMM-yyyy") + "</h6>"; ;
-                    lblTIRegimen.Text = "<h6>" + LookupLogic.GetLookupNameById(Convert.ToInt32(item.CurrentTreatment)).ToString() + "</h6>"; ;
+                    //lblTIRegimen.Text = "<h6>" + LookupLogic.GetLookupNameById(Convert.ToInt32(item.CurrentTreatment)).ToString() + "</h6>"; ;
                     lblFacilityFrom.Text = "<h6>" + item.FacilityFrom.ToString() + "</h6>"; ;
                 }
             }
@@ -157,7 +157,7 @@ namespace IQCare.Web.CCC.Patient
                 {
                     if (regimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text = regimen.RegimenId.ToString();
+                        lblCurrentRegimen.Text ="< span class='label label-success'>"+ regimen.RegimenType.ToString()+"</span>";
                     }
                     else
                     {
@@ -180,13 +180,13 @@ namespace IQCare.Web.CCC.Patient
                     switch (adheranceString)
                     {
                         case "Poor":
-                            lblAdheranceStatus.Text = "<span class='label label-danger'>Poor</span>";
+                            lblAdheranceStatus.Text = "<span class='label label-danger'> Poor [Offer Adherence Interventions]</span>";
                             break;
                         case "Good":
-                            lblAdheranceStatus.Text = "<span class='label labe-success'>Good </span>";
+                            lblAdheranceStatus.Text = "<span class='label labe-success'> Good </span>";
                             break;
                         case "Fair":
-                            lblAdheranceStatus.Text = "<span class='label label-warning'>Fair</span>";
+                            lblAdheranceStatus.Text = "<span class='label label-warning'> Fair [Consider Adherence Intervetion]</span>";
                             break;
                     }
                     
