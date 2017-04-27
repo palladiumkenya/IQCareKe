@@ -2378,6 +2378,7 @@
 
         function savePatientPhysicalExams() {
             var rowCount = $('#dtlPhysicalExam tbody tr').length;
+            var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
             var physicalExamArray = new Array();
             try {
                 for (var i = 0 ; i < rowCount; i++) {
@@ -2396,7 +2397,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientPhysicalExam",
-                data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "'}",
+                data: "{'physicalExam':'" + JSON.stringify(physicalExamArray) + "','generalExam':'" + generalExamination + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

@@ -52,11 +52,11 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void savePatientPhysicalExam(string physicalExam)
+        public void savePatientPhysicalExam(string physicalExam, string generalExam)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), physicalExam);
+            patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), Session["AppUserId"].ToString(), physicalExam, generalExam);
         }
 
         [WebMethod(EnableSession = true)]
