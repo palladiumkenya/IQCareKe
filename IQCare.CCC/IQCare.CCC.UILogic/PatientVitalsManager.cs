@@ -25,6 +25,9 @@ namespace IQCare.CCC.UILogic
                 Weight = p.Weight,
                 BMI = p.BMI,
                 HeadCircumference = p.HeadCircumference,
+                BMIZ = p.BMIZ,
+                WeightForHeight = p.WeightForHeight,
+                WeightForAge = p.WeightForAge,
                 VisitDate = p.VisitDate
                
             };

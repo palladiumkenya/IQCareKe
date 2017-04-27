@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference,DateTime visitDate)
+            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string AddPatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber,  int userId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -120,12 +120,13 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+
             };
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.AddPatientFamilyTestings(patientAppointment);
+                Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Added Successfully!";
@@ -139,7 +140,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -159,12 +160,15 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+                PersonRelationshipId = personRelationshipId,
+                HivTestingId = hivTestingId,
+                PersonId = personId
             };
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.UpdatePatientFamilyTestings(patientAppointment);
+                Result = testing.UpdatePatientFamilyTestings(patientAppointment, userId);
                 if (Result > 0)
                 {
                     Msg = "Patient family testing Updated Successfully!";
@@ -350,7 +354,9 @@ namespace IQCare.Web.CCC.WebService
                 HivStatusResultDate = member.HivTestingResultsDate,
                 CccReferal = member.CccReferal.ToString(),
                 CccReferalNumber = member.CccReferaalNumber,
-
+                PersonRelationshipId = member.PersonRelationshipId,
+                HivTestingId = member.HivTestingId,
+                PersonId = member.PersonId
             };
             return familyMemberDisplay;
         }
@@ -443,6 +449,9 @@ namespace IQCare.Web.CCC.WebService
         public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
         public string CccReferalNumber { get; set; }
+        public int PersonRelationshipId { get; set; }
+        public int HivTestingId { get; set; }
+        public int PersonId { get; set; }
     }
 
     public class PatientConsentDisplay

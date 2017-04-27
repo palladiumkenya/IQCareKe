@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Application.Common;
 using Application.Presentation;
 using Entities.CCC.Baseline;
@@ -20,10 +21,10 @@ namespace IQCare.CCC.UILogic.Baseline
         PersonLookUpManager personLookUp = new PersonLookUpManager();
         Utility _utility = new Utility();
 
-        public int AddPatientFamilyTestings(PatientFamilyTesting p)
+        public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
-            PersonManager pm = new PersonManager();           
-            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, CurrentSession.Current.User.Id);
+            PersonManager pm = new PersonManager();
+            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId);
             //Person person = new Person()
             //{
             //    FirstName = _utility.Encrypt(p.FirstName),
@@ -76,11 +77,11 @@ namespace IQCare.CCC.UILogic.Baseline
             _hivTestingManager.DeletePatientHivTesting(id);
         }
 
-        public int UpdatePatientFamilyTestings(PatientFamilyTesting p)
+        public int UpdatePatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
             PersonManager pm = new PersonManager();
             int personId = p.PersonId;
-            pm.UpdatePerson(p.FirstName, p.MiddleName, p.LastName, p.Sex, CurrentSession.Current.User.Id, p.PersonId);
+            pm.UpdatePerson(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.PersonId);
             //Person person = new Person()
             //{
             //    FirstName = _utility.Encrypt(p.FirstName),
@@ -93,6 +94,7 @@ namespace IQCare.CCC.UILogic.Baseline
 
             PersonRelationship relationship = new PersonRelationship()
             {
+                Id = p.PersonRelationshipId,
                 PersonId = personId,
                 RelatedTo = p.PatientId,
                 RelationshipTypeId = p.RelationshipId
@@ -101,6 +103,7 @@ namespace IQCare.CCC.UILogic.Baseline
 
             PatientHivTesting familyTesting = new PatientHivTesting()
             {
+                Id = p.HivTestingId,
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 BaselineResult = p.BaseLineHivStatusId,
@@ -142,7 +145,9 @@ namespace IQCare.CCC.UILogic.Baseline
                             HivTestingResultsId = hivTesting.TestingResult,
                             HivTestingResultsDate = hivTesting.TestingDate,
                             CccReferal = hivTesting.ReferredToCare,
-                            CccReferaalNumber = hivTesting.CccNumber
+                            CccReferaalNumber = hivTesting.CccNumber,
+                            PersonRelationshipId = relationship.Id,
+                            HivTestingId = hivTesting.Id
                         };
                 patientFamilyTestings.Add(familyTesting);
             }

@@ -67,6 +67,9 @@ namespace BusinessProcess.CCC
                     Weight = p.Weight,
                     Muac = p.Muac,
                     SpO2 = p.SpO2,
+                    BMIZ = p.BMIZ,
+                    WeightForAge = p.WeightForAge,
+                    WeightForHeight = p.WeightForHeight,
                     VisitDate = p.VisitDate
 
 
