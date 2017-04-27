@@ -622,8 +622,16 @@
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
-                        toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                        var messageResponse = JSON.parse(response.d);
+
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg , "Patient Enrollment");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Enrollment");
+                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                        }
+                        
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);

@@ -27,6 +27,12 @@ namespace IQCare.Web.CCC.WebService
         public string identifierId { get; set; }
         public string enrollmentNo { get; set; }
     }
+
+    public class ExMessage
+    {
+        public string msg { get; set; }
+        public int errorcode { get; set; }
+    }
     /// <summary>
     /// Summary description for EnrollmentService
     /// </summary>
@@ -55,8 +61,10 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatient(int facilityId, string enrollment, int entryPointId, string enrollmentDate, string personDateOfBirth, string nationalId, int patientType, string dobPrecision)
         {
+            ExMessage message = new ExMessage();
             try
             {
+                
                 Utility utility = new Utility();
                 PersonId = int.Parse(Session["PersonId"].ToString());
                 var jss = new JavaScriptSerializer();
@@ -66,7 +74,7 @@ namespace IQCare.Web.CCC.WebService
                 var patientManager = new PatientManager();
                 var patientMasterVisitManager = new PatientMasterVisitManager();
                 var patientEnrollmentManager = new PatientEnrollmentManager();
-                var patientIdentifier = new PatientIdentifierManager();
+                var patientIdentifierManager = new PatientIdentifierManager();
                 var patientEntryPointManager = new PatientEntryPointManager();
                 var patientLookUpManager = new PatientLookupManager();
                 var mstPatientLogic = new MstPatientLogic();
@@ -79,6 +87,20 @@ namespace IQCare.Web.CCC.WebService
 
                 String sDate = DateTime.Now.ToString();
                 DateTime datevalue = Convert.ToDateTime(sDate);
+
+                for(int i = 0; i < data.Count; i++)
+                {
+                    var identifierTypeId = int.Parse(data[i].identifierId);
+                    var identifierValue = data[i].enrollmentNo;
+
+                    var identifiers = patientIdentifierManager.CheckIfIdentifierNumberIsUsed(identifierValue, identifierTypeId);
+
+                    if (identifiers.Count > 0)
+                    {
+                        var exception = new SoapException("Another Patient in " + LookupLogic.GetLookupNameById(identifierTypeId) + " is already registered using the no: " + identifierValue, SoapException.ClientFaultCode);
+                        throw exception;
+                    }
+                }
 
                 int isPersonEnrolled = patientLookUpManager.GetPatientByPersonId(PersonId).Count;
 
@@ -220,17 +242,19 @@ namespace IQCare.Web.CCC.WebService
                                     IdentifierValue = data[i].enrollmentNo
                                 };
 
-                                patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
+                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientidentifier);
                                 mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, visit.Start, patientIdentifierId, userId, DateTime.Now, 203);
                             }
 
-                            Msg += "<p>Successfully enrolled patient.</p>";
+                            message.errorcode = 0;
+                            message.msg += "<p>Successfully enrolled patient.</p>";
                         }
 
                     }
                     else
                     {
-                        Msg = "<p>Error occurred in enrollment.</p>";
+                        message.errorcode = 1;
+                        message.msg += "<p>Error occurred in enrollment.</p>";
                     }
                 }
                 else
@@ -284,10 +308,11 @@ namespace IQCare.Web.CCC.WebService
                                         IdentifierValue = data[i].enrollmentNo
                                     };
 
-                                    patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
-                                }
+                                    patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientidentifier);
+                                }      
 
-                                Msg += "<p>Successfully enrolled patient.</p>";
+                                message.errorcode = 0;
+                                message.msg += "<p>Successfully enrolled patient.</p>";
                             }
                         }
                         else
@@ -296,7 +321,7 @@ namespace IQCare.Web.CCC.WebService
                             {
                                 for (int i = 0; i < data.Count; i++)
                                 {
-                                    List<PatientEntityIdentifier> patientEntityIdentifiers = patientIdentifier.GetPatientEntityIdentifiers(patient[0].Id, entityEnrollment[0].Id,
+                                    List<PatientEntityIdentifier> patientEntityIdentifiers = patientIdentifierManager.GetPatientEntityIdentifiers(patient[0].Id, entityEnrollment[0].Id,
                                         int.Parse(data[i].identifierId));
                                     if (patientEntityIdentifiers.Count > 0)
                                     {
@@ -312,11 +337,12 @@ namespace IQCare.Web.CCC.WebService
                                             IdentifierValue = data[i].enrollmentNo
                                         };
 
-                                        patientIdentifierId = patientIdentifier.addPatientIdentifier(patientidentifier);
+                                        patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientidentifier);
                                     }
                                 }
 
-                                Msg += "<p>Successfully enrolled patient.</p>";
+                                message.errorcode = 0;
+                                message.msg += "<p>Successfully enrolled patient.</p>";
                             }
                         }
                     }
@@ -325,10 +351,12 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (SoapException ex)
             {
-                Msg = ex.Message ;
+                message.errorcode = 1;
+                message.msg = ex.Message;
+                
             }
 
-            return Msg;
+            return Msg = new JavaScriptSerializer().Serialize(message);
         }
 
         [WebMethod(EnableSession = true)]

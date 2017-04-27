@@ -25,5 +25,18 @@ namespace IQCare.CCC.UILogic.Enrollment
         {
             return _mgr.GetPatientEntityIdentifiers(patientId, patientEnrollmentId, identifierTypeId);
         }
+
+        public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
+        {
+            try
+            {
+                return _mgr.CheckIfIdentifierNumberIsUsed(identifierValue, identifierTypeId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
