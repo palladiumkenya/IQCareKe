@@ -12,64 +12,21 @@ namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
-        public int PatientId;
-        public int VisitId;
+        public int PatientId;       
         public int PatientMasterVisitId;
-        public int UserId;
-        public int Ptn_pk;
-        public int patientId;
-        public int AppLocationId;
-        public int ModuleId;
-        public int locationId;
+        public int UserId;     
+        public int patientId;              
         public string Msg { get; set; }
         public int Result { get; set; }
 
 
-
-
-        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-        private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            //VisitId = Convert.ToInt32(HttpContext.Current.Session["VisitId"]);
+          
             PatientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
-            AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
-            //ModuleId = Convert.ToInt32(HttpContext.Current.Session["ModuleId"]);
-
-
-            PatientLookup thisPatient = _lookupManager.GetPatientById(PatientId);
-            if (thisPatient.ptn_pk != null)
-            {
-                Ptn_pk = thisPatient.ptn_pk.Value;
-                List<KeyValuePair<string, object>> list = new List<KeyValuePair<string, object>>();
-                list.Add(new KeyValuePair<string, object>("PatientID", Ptn_pk));
-                list.Add(new KeyValuePair<string, object>("LocationID", AppLocationId));
-                list.Add(new KeyValuePair<string, object>("FacilityID", thisPatient.FacilityId));
-                list.Add(new KeyValuePair<string, object>("FirstName", thisPatient.FirstName));
-                list.Add(new KeyValuePair<string, object>("MiddleName", thisPatient.MiddleName));
-                list.Add(new KeyValuePair<string, object>("LastName", thisPatient.LastName));
-                list.Add(new KeyValuePair<string, object>("DOB", thisPatient.DateOfBirth));
-                list.Add(new KeyValuePair<string, object>("Gender", thisPatient.Sex));
-                list.Add(new KeyValuePair<string, object>("RegistrationDate", thisPatient.RegistrationDate));
-                base.Session[SessionKey.LabClient] = list;
-            }
-
-
-
-            LookupFacility facility = _lookupManager.GetFacility();
-            locationId = facility.FacilityID;
-
-
-            if (!IsPostBack)
-            {
-                LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(orderReason, "LabOrderReason");
-
-            }
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);           
+           
 
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 

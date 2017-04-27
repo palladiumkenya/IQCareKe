@@ -7,135 +7,135 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.Encounter {
+namespace IQCare.Web.CCC.UC {
     
     
-    public partial class PatientEncounter {
+    public partial class ucPatientLabs {
         
         /// <summary>
-        /// PatientSummary control.
+        /// tblPendingLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblPendingLabs;
         
         /// <summary>
-        /// ucPatientClinicalEncounter control.
+        /// addResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientClinicalEncounter ucPatientClinicalEncounter;
+        protected global::System.Web.UI.WebControls.LinkButton addResults;
         
         /// <summary>
-        /// tblVlpending control.
+        /// tblPrevLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblVlpending;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblPrevLabs;
         
         /// <summary>
-        /// tblVL control.
+        /// labTestTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblVL;
+        protected global::System.Web.UI.WebControls.TextBox labTestTypes;
         
         /// <summary>
-        /// ucPatientLabs control.
+        /// orderReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
+        protected global::System.Web.UI.WebControls.DropDownList orderReason;
         
         /// <summary>
-        /// ucPharmacyPrescription control.
+        /// labNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucPharmacyPrescription ucPharmacyPrescription;
+        protected global::System.Web.UI.WebControls.TextBox labNotes;
         
         /// <summary>
-        /// ucExtruder control.
+        /// btnAddLab control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
+        protected global::System.Web.UI.WebControls.LinkButton btnAddLab;
         
         /// <summary>
-        /// AppointmentDate control.
+        /// tblAddLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblAddLabs;
         
         /// <summary>
-        /// ServiceArea control.
+        /// LabDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ServiceArea;
+        protected global::System.Web.UI.WebControls.TextBox LabDate;
         
         /// <summary>
-        /// Reason control.
+        /// orderNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Reason;
+        protected global::System.Web.UI.WebControls.TextBox orderNotes;
         
         /// <summary>
-        /// DifferentiatedCare control.
+        /// btnSaveLab control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DifferentiatedCare;
+        protected global::System.Web.UI.WebControls.LinkButton btnSaveLab;
         
         /// <summary>
-        /// description control.
+        /// btnPrintOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox description;
+        protected global::System.Web.UI.WebControls.LinkButton btnPrintOrder;
         
         /// <summary>
-        /// status control.
+        /// btnResetOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList status;
+        protected global::System.Web.UI.WebControls.LinkButton btnResetOrder;
         
         /// <summary>
-        /// btnSaveAppointment control.
+        /// btnCancelOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSaveAppointment;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelOrder;
     }
 }
