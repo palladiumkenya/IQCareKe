@@ -377,39 +377,7 @@ namespace DataAccess.Entity
         }
         #endregion
 
-        public bool CreateErrorLogs(Exception expOccured, Hashtable Params,string CommandText,ClsUtility.ObjectEnum Obj)
-        {
-            string fileName = @"c:\IQCare_Error_Logs_KNH.txt";
-            try{
-            if(System.IO.File.Exists(fileName))
-            {
-                //append
-                System.IO.File.Open(fileName, System.IO.FileMode.Append);
-                System.IO.File.WriteAllText(fileName, "Error occured - Object = " + Obj.ToString() + Environment.NewLine + 
-                " --- CommandText = " + Environment.NewLine + 
-                " --- Params = " + Params.Values.ToString() +  
-                "----- Exception Occured = " + expOccured.InnerException.ToString());
-
-            }
-            {
-                //create
-                System.IO.File.Create(fileName);
-                 //append
-                System.IO.File.Open(fileName, System.IO.FileMode.Append);
-                System.IO.File.WriteAllText(fileName, "Error occured - Object = " + Obj.ToString() + Environment.NewLine + 
-                " --- CommandText = " + Environment.NewLine + 
-                " --- Params = " + Params.Values.ToString() +  
-                "----- Exception Occured = " + expOccured.InnerException.ToString());
-            }
-                return true;
-            }
-        catch(Exception ex)
-            {
-            throw ex;
-        }
-            
-
-        }
+      
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

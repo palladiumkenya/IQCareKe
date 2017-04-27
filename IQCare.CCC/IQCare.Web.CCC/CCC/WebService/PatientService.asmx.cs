@@ -245,7 +245,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientFamily = new PatientFamilyTestingManager();
                 int id = Convert.ToInt32(patientId);
-                familytestings = patientFamily.GetPatienFamilyList(id);
+                familytestings = patientFamily.GetPatientFamilyList(id);
                 foreach (var member in familytestings)
                 {
                     PatientFamilyDisplay familyDisplay = MapMembers(member);

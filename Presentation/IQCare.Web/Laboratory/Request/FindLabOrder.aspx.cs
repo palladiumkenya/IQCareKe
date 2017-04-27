@@ -114,11 +114,11 @@ namespace IQCare.Web.Laboratory.Request
             //DataTable theDT = (DataTable)grdPatienBill.DataSource;
             //  DataRow theDR = theDT.Rows[grdPatienBill.SelectedIndex];
             int orderId = int.Parse(grdPatienOrder.SelectedDataKey.Values["Id"].ToString());
-            int patientId = int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientId"].ToString());
+            int patientPk= int.Parse(grdPatienOrder.SelectedDataKey.Values["PatientPk"].ToString());
             int moduleId = int.Parse(grdPatienOrder.SelectedDataKey.Values["ModuleId"].ToString());
             if(moduleId <= 0)
             {
-                EnrollmentService es = new EnrollmentService(patientId);
+                EnrollmentService es = new EnrollmentService(patientPk);
                List<PatientEnrollment> pe =  es.GetPatientEnrollment(CurrentSession.Current);
                 if(pe!= null)
                 {
@@ -130,7 +130,7 @@ namespace IQCare.Web.Laboratory.Request
                 base.Session["TechnicalAreaName"] = this.GetModuleName(moduleId);
             }
             // patientID = Int32.Parse(theDR.ItemArray[0].ToString());
-            base.Session["PatientId"] = patientId;
+            base.Session["PatientId"] = patientPk;
             base.Session["PatientVisitId"] = orderId;
             base.Session["TechnicalAreaId"] = moduleId;
           
