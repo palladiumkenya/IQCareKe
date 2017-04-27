@@ -5,6 +5,7 @@ using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace BusinessProcess.CCC.Enrollment
 {
@@ -66,6 +67,18 @@ namespace BusinessProcess.CCC.Enrollment
                             x.IdentifierTypeId == identifierTypeId).ToList();
                 _unitOfWork.Dispose();
                 return IdentifierList;
+            }
+        }
+
+        public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifiers =
+                    unitOfWork.PatientIdentifierRepository.FindBy(
+                        x => x.IdentifierValue == identifierValue && x.IdentifierTypeId == identifierTypeId).ToList();
+                unitOfWork.Dispose();
+                return identifiers;
             }
         }
     }

@@ -1,7 +1,5 @@
 ﻿using System;
 using IQCare.CCC.UILogic;
-using IQCare.CCC.UILogic.Baseline;
-using Entities.CCC.Baseline;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
@@ -11,11 +9,11 @@ namespace IQCare.Web.CCC.OneTimeEvents
         {
             try
             {
-                int patientId = int.Parse(Session["PatientId"].ToString());
+                int patientId = int.Parse(Session["patientId"].ToString());
 
                 var patientLookUpManager = new PatientLookupManager();
                 var patientlookup = patientLookUpManager.GetPatientDetailSummary(patientId);
-                DateTime dob = patientlookup[0].DateOfBirth;
+                DateTime dob = patientlookup.DateOfBirth;
                 int age = new DateTime(DateTime.Now.Subtract(dob).Ticks).Year - 1;
 
                 Age.Value = age.ToString();
