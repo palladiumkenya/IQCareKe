@@ -1658,8 +1658,13 @@
         $('.errorBlock2').hide();
         $('.errorBlock3').hide();
         $('.errorBlock4').hide();
-        $("#IcfActionForm").hide();
-        $("#iptform").hide();
+        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+            $("#IcfActionForm").show();
+        } else {
+            $("#IcfActionForm").hide();
+        }
+        /*$("#IcfActionForm").hide();*/
+        $("#IptForm").hide();
         $("#IcfForm").hide();
         $("#IptClientWorkupForm").hide();
         $("#IptDetailsForm").hide();
@@ -2690,11 +2695,13 @@
 
     function tbInfectedChange() {
         if ($("#tbInfected").val() === 'False') {
-            $("#iptform").show();
+            $("#IptForm").show();
             $("#IcfForm").show();
         } else {
-            $("#iptform").hide(); 
+            $("#IptForm").hide(); 
             $("#IcfForm").hide();
+            $("#IcfActionForm").hide();
+            $("#tbscreeningstatus").val(37);
         }
             
     }

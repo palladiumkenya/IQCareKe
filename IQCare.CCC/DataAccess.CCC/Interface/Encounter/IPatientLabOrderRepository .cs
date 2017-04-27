@@ -8,7 +8,6 @@ namespace DataAccess.CCC.Interface.Encounter
 {
     public interface IPatientLabOrderRepository : IRepository<LabOrderEntity>
     {
-        List<LabOrderEntity> GetVlPendingCount(int facilityId);
-        List<LabOrderEntity> GetVlCompleteCount(int facilityId);
+       
     }
 }

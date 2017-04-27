@@ -202,48 +202,7 @@ namespace IQCare.Web.CCC.WebService
             return output;
         }
 
-        //[WebMethod]
-        //public string PatientFinder()
-        //{
-        //    string patientList = null;
-
-        //    try
-        //    {
-        //        PatientLookupManager patientLookup = new PatientLookupManager();
-        //        var patientLookups = patientLookup.GetPatientSearchListPayload().ToList();
-
-        //        if (patientLookups.Count > 0)
-        //        {
-        //            var json = new
-        //            {
-
-        //                draw = 1,
-        //                recordsTotal = 1, // Convert.ToInt32(patientLookups.Count()),
-        //                recordsFiltered = 1, // Convert.ToInt32(patientLookups.Count()),
-        //                data = patientLookups.Select(x => new string[]
-        //                {
-        //                    x.Id.ToString(),
-        //                    x.PatientIndex.ToString(),
-        //                    x.FirstName,
-        //                    x.MiddleName,
-        //                    x.LastName,
-        //                    x.DateOfBirth.ToShortDateString(),
-        //                    x.Sex.ToString(),
-        //                    x.RegistrationDate.ToShortDateString(),
-        //                    x.PatientStatus.ToString()
-        //                })
-        //            };
-        //            patientList = json.ToString();
-        //        }
-        //    }
-        //    catch (Exception var )
-        //    {
-        //        Console.WriteLine(var );
-        //        throw;
-        //    }
-
-        //    return JsonConvert.SerializeObject(patientList);
-        //}
+        
         
 
         [WebMethod]

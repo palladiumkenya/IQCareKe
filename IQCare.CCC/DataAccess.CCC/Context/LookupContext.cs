@@ -3,7 +3,6 @@ using DataAccess.Context;
 using Entities.CCC.Lookup;
 using System.Data.Common;
 using DataAccess.Base;
-using Entities.CCC.Encounter;
 
 namespace DataAccess.CCC.Context
 {
@@ -29,11 +28,14 @@ namespace DataAccess.CCC.Context
         public DbSet<LookupCounty> LookupCounties { get; set; }
         public DbSet<LookupFacility> LookupFacility { get; set; }
         public DbSet<LookupLabs> LookupLaboratories { get; set; }
+        public DbSet<LookupTestParameter> LookupTestParameter { get; set; }
         public DbSet<LookupPreviousLabs> LookupPreviousLaboratories { get; set; }
         public DbSet<PatientLookup> PatientLookups { get; set; }
         public DbSet<PersonLookUp> PersonLookUps { get; set; }
         public DbSet<PersonContactLookUp> PersonContactLookUps { get; set; }
         public DbSet<PatientBaselineLookup> PatientBaselineLookups { get; set; }
         public DbSet<PatientServiceEnrollmentLookup> PatientServiceEnrollmentLookups { get; set; }
+        public DbSet<PatientRegimenLookup> PatientRegimenLookups { get; set; }
+        public DbSet<LookupPatientAdherence> LookupPatientAdherence { get; set; }
     }
 }

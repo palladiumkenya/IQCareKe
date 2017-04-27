@@ -1,3 +1,7 @@
+using Application.BusinessProcess;
+using Application.Common;
+using DataAccess.Common;
+using DataAccess.Entity;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,11 +13,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.ServiceProcess;
-
 //for auto backup service
 using System.Threading;
-using Application.BusinessProcess;
-using Application.Common;
 
 namespace RemServer.Service
 {
@@ -50,7 +51,7 @@ namespace RemServer.Service
         /// The CLS utility
         /// </summary>
         private Utility clsUtil;
-        bool inprogress = false;
+        bool backupInProgress = false;
         /// <summary>
         /// The connection emr
         /// </summary>
@@ -109,103 +110,230 @@ namespace RemServer.Service
             }
         }
 
+        void UpdateNextRunDate(string taskName, int offSet)
+        {
+
+            using (ClsObject obj = new ClsObject())
+            {
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddExtendedParameters("@NextRunDate", SqlDbType.DateTime, DateTime.Now.AddMinutes(offSet));
+                ClsUtility.AddExtendedParameters("@LastRunDate", SqlDbType.DateTime, DateTime.Now);
+                ClsUtility.AddParameters("@TaskName", SqlDbType.VarChar, taskName);
+                obj.ReturnObject(ClsUtility.theParams, "Schedule_UpdateTask", ClsUtility.ObjectEnum.ExecuteNonQuery);
+            }
+        }
+
         public void DBEntry(Object Message)
         {
-            
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            try
+
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            List<ScheduledTask> tasks = null;
+
+            DateTime? nullDate = null;
+            string appointmentTaskName = "Appointment.Update";
+            string backupTaskName = "Database.Backup";
+            string iqtoolTaskName = "IQTools.Update";
+
+            if (backupInProgress == false)
             {
-                DateTime dateNextRefreshDate;
-                if (ConfigurationManager.AppSettings["AppointmentNextUpdate"] != null)
+                //clean up the waiting list
+                try
                 {
-                    dateNextRefreshDate = Convert.ToDateTime(ConfigurationManager.AppSettings["AppointmentNextUpdate"]);
-                }
-                else
-                {
-                    dateNextRefreshDate = DateTime.Now.AddMinutes(15);
-                }
-                if (dateNextRefreshDate <= DateTime.Now)
-                {
-                    //update the AppointmentNextUpdate - to avoid run on subsequent poll
-                    config.AppSettings.Settings["AppointmentNextUpdate"].Value = DateTime.Now.AddMinutes(15).ToString("yyyy-MM-dd hh:mm:ss");
-                    config.Save(ConfigurationSaveMode.Modified);
-                    ConfigurationManager.RefreshSection("appSettings");
-                    //update appointment
-                    foreach (Facility f in FacilityList)
+                    //WaitingList_SystemCleanup
+                    using (SqlCommand command = new SqlCommand("WaitingList_SystemCleanup", connectionEMR))
                     {
-                        UpdateAppointment(f.ID, dateNextRefreshDate.ToString("yyyy-MMM-dd"));
+                        command.CommandType = CommandType.StoredProcedure;
+                        if (connectionEMR.State == ConnectionState.Closed)
+                            connectionEMR.Open();
+                        command.ExecuteNonQuery();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                theLog.WriteEntry(ex.Message + ex.StackTrace);
-            }
-            try
-            {
-                //WaitingList_SystemCleanup
-                using (SqlCommand command = new SqlCommand("WaitingList_SystemCleanup", connectionEMR))
+                catch (Exception ex)
                 {
-                    command.CommandType = CommandType.StoredProcedure;                    
-                    if (connectionEMR.State == ConnectionState.Closed)
-                        connectionEMR.Open();
-                    command.ExecuteNonQuery();
+                    theLog.WriteEntry(ex.Message + ex.StackTrace);
                 }
-            }
-            catch { }
-            try
-            {
-
-                if (inprogress == false)
+                //Get scheduled jobs
+                try
                 {
-                    inprogress = true;
-SqlCommand cmdTest;
-                cmdTest = new SqlCommand("pr_SystemAdmin_GetBackupTime_Constella", connectionEMR);
-                cmdTest.CommandType = CommandType.StoredProcedure;
-                //int theTimeOut = Convert.ToInt32(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["CommandTimeOut"]);
-                int theTimeOut = int.Parse(ConfigurationManager.AppSettings["CommandTimeOut"].ToString());
-                cmdTest.CommandTimeout = theTimeOut;
-                if (connectionEMR.State == ConnectionState.Closed)
-                    connectionEMR.Open();
-                using (SqlDataReader readerBackupDetail = cmdTest.ExecuteReader())
-                {
-                    if (readerBackupDetail.HasRows)
+                    using (ClsObject obj = new ClsObject())
                     {
-                        readerBackupDetail.Read();
-                        if (readerBackupDetail["BackupTime"].ToString() != "" || readerBackupDetail.IsDBNull(0) != true)
-                            dtBackupTime = (DateTime)readerBackupDetail["BackupTime"];
-                        if (readerBackupDetail["BackupDrive"].ToString() != "" || readerBackupDetail.IsDBNull(1) != true)
-                            strBackupDrive = (string)readerBackupDetail["BackupDrive"];
+                        ClsUtility.Init_Hashtable();
+
+                        DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Schedule_GetTask", ClsUtility.ObjectEnum.DataTable);
+                        tasks = new List<ScheduledTask>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            tasks.Add(new ScheduledTask
+                            {
+                                TaskName = row["TaskName"].ToString(),
+                                LastRunDate = row["LastRunDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(row["LastRunDate"]),
+                                NextRunDate = row["NextRunDate"] == DBNull.Value ? nullDate : Convert.ToDateTime(row["NextRunDate"]),
+                            });
+                        }
+
+                    };
+                }
+                catch (Exception ex)
+                {
+                    theLog.WriteEntry(ex.Message + ex.StackTrace);
+                }
+
+                //update appointments
+                try
+                {
+                    ScheduledTask appointmentTask = (tasks.FirstOrDefault(t => t.TaskName == appointmentTaskName));
+                    if (appointmentTask != null)
+                    {
+                        if (appointmentTask.NextRunDate == nullDate || appointmentTask.NextRunDate < DateTime.Now)
+                        {
+                            int appointmentOffset = 60;
+                            if (ConfigurationManager.AppSettings["AppointmentUpdateInterval"] != null)
+                            {
+                                appointmentOffset = Convert.ToInt32(ConfigurationManager.AppSettings["AppointmentUpdateInterval"]);
+                            }
+                            UpdateNextRunDate(appointmentTask.TaskName, appointmentOffset);
+                            Facility[] facilities = FacilityList.ToArray();
+
+                            ThreadPool.QueueUserWorkItem(UpdateAppointment, facilities);
+
+                        }
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    theLog.WriteEntry(ex.Message + ex.StackTrace);
+                }
+                //refresh iqtools
+                try
+                {
+                    ScheduledTask iQToolsTask = (tasks.FirstOrDefault(t => t.TaskName == iqtoolTaskName));
+
+                    if (iQToolsTask != null && (ConfigurationManager.AppSettings["IQToolsConnectionString"] != null))
+                    {
+                        if (iQToolsTask.NextRunDate == nullDate || iQToolsTask.NextRunDate < DateTime.Now)
+                        {
+                            int offset = 300;
+                            if (ConfigurationManager.AppSettings["IQToolsRefreshInterval"] != null)
+                            {
+                                offset = Convert.ToInt32(ConfigurationManager.AppSettings["IQToolsRefreshInterval"]);
+                            }
+                            UpdateNextRunDate(iQToolsTask.TaskName, offset);
+                            ThreadPool.QueueUserWorkItem(new WaitCallback(IQToolsRefresh));
+
+                        }
                     }
                 }
-                if (dtBackupTime.Value.ToString("hh:mm") == DateTime.Now.ToString("hh:mm"))
+                catch (Exception ex)
                 {
-                    //this.RequestAdditionalTime(50000);
-                    cmdTest = new SqlCommand("pr_SystemAdmin_Backup_Constella", connectionEMR);
-                    cmdTest.CommandType = CommandType.StoredProcedure;
-                    cmdTest.Parameters.Add(new SqlParameter("@FileName", SqlDbType.VarChar, 500));
-                    cmdTest.Parameters["@FileName"].Value = strBackupDrive + "\\IQCareDBBackup";
-                    cmdTest.Parameters.Add("@Deidentified", SqlDbType.Int).Value = 0;
-                    cmdTest.Parameters.Add("@LocationId", SqlDbType.Int).Value = 0;
-                    cmdTest.Parameters.Add("@dbKey", SqlDbType.VarChar).Value = ApplicationAccess.DBSecurity.ToString();
-                    cmdTest.CommandTimeout = theTimeOut;
-                    // connectionEMR.Open();
-                    cmdTest.ExecuteNonQuery();
+                    theLog.WriteEntry(ex.Message + ex.StackTrace);
                 }
-                connectionEMR.Close();
 
-                    inprogress = false;
+
+                //try
+                //{
+                //    DateTime dateNextRefreshDate;
+                //    if (ConfigurationManager.AppSettings["AppointmentNextUpdate"] != null)
+                //    {
+                //        dateNextRefreshDate = Convert.ToDateTime(ConfigurationManager.AppSettings["AppointmentNextUpdate"]);
+                //    }
+                //    else
+                //    {
+                //        dateNextRefreshDate = DateTime.Now.AddMinutes(15);
+                //    }
+                //    if (dateNextRefreshDate <= DateTime.Now)
+                //    {
+                //        //update the AppointmentNextUpdate - to avoid run on subsequent poll
+                //        config.AppSettings.Settings["AppointmentNextUpdate"].Value = DateTime.Now.AddMinutes(15).ToString("yyyy-MM-dd hh:mm:ss");
+                //        config.Save(ConfigurationSaveMode.Modified);
+                //        ConfigurationManager.RefreshSection("appSettings");
+                //        //update appointment
+                //        foreach (Facility f in FacilityList)
+                //        {
+                //            UpdateAppointment(f.ID, dateNextRefreshDate.ToString("yyyy-MMM-dd"));
+                //        }
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    theLog.WriteEntry(ex.Message + ex.StackTrace);
+                //}
+            }
+            //backup the database
+            try
+            {
+                ScheduledTask backupTask = (tasks.FirstOrDefault(t => t.TaskName == backupTaskName));
+                if (backupTask != null)
+                {
+                    if (backupTask.NextRunDate == nullDate || backupTask.NextRunDate < DateTime.Now)
+                    {
+                        int backupOffset = 720;
+                        if (ConfigurationManager.AppSettings["DatabaseBackupInterval"] != null)
+                        {
+                            backupOffset = Convert.ToInt32(ConfigurationManager.AppSettings["DatabaseBackupInterval"]);
+                        }
+                        if (backupInProgress == false)
+                        {
+                            backupInProgress = true;
+
+                            SqlCommand cmdTest;
+                            cmdTest = new SqlCommand("pr_SystemAdmin_GetBackupTime_Constella", connectionEMR);
+                            cmdTest.CommandType = CommandType.StoredProcedure;
+                            int theTimeOut = int.Parse(ConfigurationManager.AppSettings["CommandTimeOut"].ToString());
+                            cmdTest.CommandTimeout = theTimeOut;
+                            if (connectionEMR.State == ConnectionState.Closed)
+                                connectionEMR.Open();
+                            using (SqlDataReader readerBackupDetail = cmdTest.ExecuteReader())
+                            {
+                                if (readerBackupDetail.HasRows)
+                                {
+                                    readerBackupDetail.Read();
+                                    if (readerBackupDetail["BackupTime"].ToString() != "" || readerBackupDetail.IsDBNull(0) != true)
+                                        dtBackupTime = (DateTime)readerBackupDetail["BackupTime"];
+                                    if (readerBackupDetail["BackupDrive"].ToString() != "" || readerBackupDetail.IsDBNull(1) != true)
+                                        strBackupDrive = (string)readerBackupDetail["BackupDrive"];
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(strBackupDrive))
+                            {
+                                //this.RequestAdditionalTime(50000);
+                                theLog.WriteEntry("IQCare database backup started at " + DateTime.Now.ToLongDateString());
+                                cmdTest = new SqlCommand("pr_SystemAdmin_Backup_Constella", connectionEMR);
+                                cmdTest.CommandType = CommandType.StoredProcedure;
+                                cmdTest.Parameters.Add(new SqlParameter("@FileName", SqlDbType.VarChar, 500));
+                                cmdTest.Parameters["@FileName"].Value = strBackupDrive + "\\IQCareDBBackup";
+                                cmdTest.Parameters.Add("@Deidentified", SqlDbType.Int).Value = 0;
+                                cmdTest.Parameters.Add("@LocationId", SqlDbType.Int).Value = 0;
+                                cmdTest.Parameters.Add("@dbKey", SqlDbType.VarChar).Value = ApplicationAccess.DBSecurity.ToString();
+                                cmdTest.CommandTimeout = theTimeOut;
+                                // connectionEMR.Open();
+                                cmdTest.ExecuteNonQuery();
+                                theLog.WriteEntry("IQCare database backup completed at " + DateTime.Now.ToLongDateString());
+                            }
+                            connectionEMR.Close();
+                            UpdateNextRunDate(backupTaskName, backupOffset);
+                            backupInProgress = false;
+                        }
+                        //UpdateNextRunDate(backupTask.TaskName, backupOffset);
+
+
+                    }
                 }
+
 
                 ;
             }
             catch (Exception err)
             {
-                inprogress = false;
+                backupInProgress = false;
                 connectionEMR.Close();
                 theLog.WriteEntry(err.Message + err.StackTrace);
             }
-            ThreadPool.QueueUserWorkItem(new WaitCallback(IQToolsRefresh));
+       
+
+            //ThreadPool.QueueUserWorkItem(new WaitCallback(IQToolsRefresh));
         }
 
         /// <summary>
@@ -214,9 +342,9 @@ SqlCommand cmdTest;
         public void DoDelayedTasks()
         {
             connectionEMR = new SqlConnection(_connectionStringEMR);
-            const Int32 iTIME_INTERVAL = 50000; //    ' 50 seconds.
+             int iTIME_INTERVAL = 120000; //    ' 2 minutes.
             TimerCallback timerDelegate = new TimerCallback(DBEntry);
-            oTimer = new System.Threading.Timer(timerDelegate, null, 0, iTIME_INTERVAL);
+            oTimer = new Timer(timerDelegate, null, 0, iTIME_INTERVAL);
         }
 
         /// <summary>
@@ -264,6 +392,7 @@ SqlCommand cmdTest;
 
                 DoDelayedTasks();
                 RemotingConfiguration.Configure(Config, false);
+                RemotingConfiguration.ApplicationName = "IQCAREEMR";
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(BusinessServerFactory), "BusinessProcess.rem", WellKnownObjectMode.Singleton);
                 theLog.WriteEntry(string.Format("{0} Started", theSRV_Name));
             }
@@ -489,27 +618,27 @@ SqlCommand cmdTest;
                     isError = true;
                 }
 
-                try
-                {
-                    //XmlConvert.ToDateTime()
-                    dateNextRefreshDate = Convert.ToDateTime(ConfigurationManager.AppSettings["IQToolsNextRefreshDateTime"]);
-                }
-                catch (Exception e1)
-                {
-                    theLog.WriteEntry(e1.Message + e1.StackTrace + " IQToolsNextRefreshDateTime");
-                    isError = true;
-                }
+                //try
+                //{
+                //    //XmlConvert.ToDateTime()
+                //    dateNextRefreshDate = Convert.ToDateTime(ConfigurationManager.AppSettings["IQToolsNextRefreshDateTime"]);
+                //}
+                //catch (Exception e1)
+                //{
+                //    theLog.WriteEntry(e1.Message + e1.StackTrace + " IQToolsNextRefreshDateTime");
+                //    isError = true;
+                //}
                 if (isError) throw new Exception("Errocurred when parsing the config file");
 
-                if (dateNextRefreshDate <= DateTime.Now && strIQToolsConnection != "")
+                if (strIQToolsConnection != "")
                 {
-                    int refreshInterval = 300;
-                    int.TryParse(ConfigurationManager.AppSettings["IQToolsRefreshInterval"], out refreshInterval);
-                    string strIQToolsRefreshTime = (DateTime.Now.AddMinutes(refreshInterval)).ToString("yyyy-MM-dd hh:mm:ss");
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    config.AppSettings.Settings["IQToolsNextRefreshDateTime"].Value = strIQToolsRefreshTime;
-                    config.Save(ConfigurationSaveMode.Modified);
-                    ConfigurationManager.RefreshSection("appSettings");
+                    // int refreshInterval = 300;
+                    // int.TryParse(ConfigurationManager.AppSettings["IQToolsRefreshInterval"], out refreshInterval);
+                    // string strIQToolsRefreshTime = (DateTime.Now.AddMinutes(refreshInterval)).ToString("yyyy-MM-dd hh:mm:ss");
+                    //  Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    //config.AppSettings.Settings["IQToolsNextRefreshDateTime"].Value = strIQToolsRefreshTime;
+                    // config.Save(ConfigurationSaveMode.Modified);
+                    // ConfigurationManager.RefreshSection("appSettings");
 
                     SqlConnection connectionIQtools = new SqlConnection(strIQToolsConnection);
                     connectionIQtools.Open();
@@ -591,21 +720,32 @@ SqlCommand cmdTest;
         /// <summary>
         /// Updates the appointment.
         /// </summary>
-        private void UpdateAppointment(int facilityID, string _dateTime)
+        private void UpdateAppointment(object state)
         {
             //*******Update appointment status priviously missed, missed, careended and met from pending*******//pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella
-            using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella", connectionEMR))
+            Facility[] array = state as Facility[];
+            foreach (Facility facility in array)
             {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@locationid", facilityID));
-                command.Parameters.Add(new SqlParameter("@Currentdate", _dateTime));
-                if (connectionEMR.State == ConnectionState.Closed)
-                    connectionEMR.Open();
-                command.ExecuteNonQuery();
+                using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella", connectionEMR))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@locationid", facility.ID));
+                    command.Parameters.Add(new SqlParameter("@Currentdate", DateTime.Now));
+                    if (connectionEMR.State == ConnectionState.Closed)
+                        connectionEMR.Open();
+                    command.ExecuteNonQuery();
+                }
             }
+
+
         }
     }
-
+    internal class ScheduledTask
+    {
+        public string TaskName { get; set; }
+        public DateTime? LastRunDate { get; set; }
+        public DateTime? NextRunDate { get; set; }
+    }
     internal class Facility
     {
         /// <summary>

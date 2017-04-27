@@ -19,10 +19,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.WebService", "..\..\IQCare.Lookup\IQCare.Web.WebService\IQCare.Web.WebService.csproj", "{DFC70960-E4F4-41E4-B219-B80BA8635B5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web.CCC", "..\..\IQCare.CCC\IQCare.Web.CCC\IQCare.Web.CCC.csproj", "{1FD9CC7D-0CA8-4746-8565-AE446765410A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{DFC70960-E4F4-41E4-B219-B80BA8635B5B} = {DFC70960-E4F4-41E4-B219-B80BA8635B5B}
-		{D8CB5960-1D8C-49F6-93C3-8067F6A9BAA8} = {D8CB5960-1D8C-49F6-93C3-8067F6A9BAA8}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

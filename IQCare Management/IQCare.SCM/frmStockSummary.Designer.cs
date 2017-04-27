@@ -29,13 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStockSummary));
-            this.lblProgramID = new System.Windows.Forms.Label();
-            this.ddlStore = new System.Windows.Forms.ComboBox();
-            this.lblFrom = new System.Windows.Forms.Label();
-            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.lblItem = new System.Windows.Forms.Label();
-            this.lblTo = new System.Windows.Forms.Label();
-            this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dgwStockSummary = new System.Windows.Forms.DataGridView();
             this.lstSearch = new System.Windows.Forms.ListBox();
             this.txtItemName = new System.Windows.Forms.TextBox();
@@ -43,52 +37,15 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btn_Close = new System.Windows.Forms.Button();
+            this.lblProgramID = new System.Windows.Forms.Label();
+            this.ddlStore = new System.Windows.Forms.ComboBox();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.dtpFrom = new System.Windows.Forms.DateTimePicker();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.dtpTo = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgwStockSummary)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblProgramID
-            // 
-            this.lblProgramID.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblProgramID.Location = new System.Drawing.Point(12, 14);
-            this.lblProgramID.Name = "lblProgramID";
-            this.lblProgramID.Size = new System.Drawing.Size(42, 13);
-            this.lblProgramID.TabIndex = 94;
-            this.lblProgramID.Tag = "lblLabel";
-            this.lblProgramID.Text = "Store:";
-            this.lblProgramID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ddlStore
-            // 
-            this.ddlStore.BackColor = System.Drawing.Color.White;
-            this.ddlStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlStore.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ddlStore.Location = new System.Drawing.Point(60, 11);
-            this.ddlStore.Name = "ddlStore";
-            this.ddlStore.Size = new System.Drawing.Size(337, 21);
-            this.ddlStore.TabIndex = 93;
-            this.ddlStore.Tag = "ddlDropDownList";
-            this.ddlStore.SelectionChangeCommitted += new System.EventHandler(this.ddlStore_SelectionChangeCommitted);
-            // 
-            // lblFrom
-            // 
-            this.lblFrom.Location = new System.Drawing.Point(3, 57);
-            this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(53, 13);
-            this.lblFrom.TabIndex = 104;
-            this.lblFrom.Tag = "lblLabel";
-            this.lblFrom.Text = "From :";
-            this.lblFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpFrom
-            // 
-            this.dtpFrom.CustomFormat = "dd-MMM-yyyy";
-            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(60, 54);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(122, 20);
-            this.dtpFrom.TabIndex = 103;
-            this.dtpFrom.Tag = "txtTextBox";
             // 
             // lblItem
             // 
@@ -100,26 +57,6 @@
             this.lblItem.Tag = "lblLabel";
             this.lblItem.Text = "Items:";
             this.lblItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblTo
-            // 
-            this.lblTo.Location = new System.Drawing.Point(222, 57);
-            this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(47, 13);
-            this.lblTo.TabIndex = 108;
-            this.lblTo.Tag = "lblLabel";
-            this.lblTo.Text = "To:";
-            this.lblTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtpTo
-            // 
-            this.dtpTo.CustomFormat = "dd-MMM-yyyy";
-            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(273, 54);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(123, 20);
-            this.dtpTo.TabIndex = 107;
-            this.dtpTo.Tag = "txtTextBox";
             // 
             // dgwStockSummary
             // 
@@ -207,6 +144,69 @@
             this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
+            // lblProgramID
+            // 
+            this.lblProgramID.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblProgramID.Location = new System.Drawing.Point(12, 14);
+            this.lblProgramID.Name = "lblProgramID";
+            this.lblProgramID.Size = new System.Drawing.Size(42, 13);
+            this.lblProgramID.TabIndex = 94;
+            this.lblProgramID.Tag = "lblLabel";
+            this.lblProgramID.Text = "Store:";
+            this.lblProgramID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ddlStore
+            // 
+            this.ddlStore.BackColor = System.Drawing.Color.White;
+            this.ddlStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlStore.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ddlStore.Location = new System.Drawing.Point(60, 11);
+            this.ddlStore.Name = "ddlStore";
+            this.ddlStore.Size = new System.Drawing.Size(337, 21);
+            this.ddlStore.TabIndex = 93;
+            this.ddlStore.Tag = "ddlDropDownList";
+            this.ddlStore.SelectionChangeCommitted += new System.EventHandler(this.ddlStore_SelectionChangeCommitted);
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.Location = new System.Drawing.Point(3, 57);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(53, 13);
+            this.lblFrom.TabIndex = 104;
+            this.lblFrom.Tag = "lblLabel";
+            this.lblFrom.Text = "From :";
+            this.lblFrom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.CustomFormat = "dd-MMM-yyyy";
+            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFrom.Location = new System.Drawing.Point(60, 54);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(122, 20);
+            this.dtpFrom.TabIndex = 103;
+            this.dtpFrom.Tag = "txtTextBox";
+            // 
+            // lblTo
+            // 
+            this.lblTo.Location = new System.Drawing.Point(222, 57);
+            this.lblTo.Name = "lblTo";
+            this.lblTo.Size = new System.Drawing.Size(47, 13);
+            this.lblTo.TabIndex = 108;
+            this.lblTo.Tag = "lblLabel";
+            this.lblTo.Text = "To:";
+            this.lblTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.CustomFormat = "dd-MMM-yyyy";
+            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTo.Location = new System.Drawing.Point(273, 54);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(123, 20);
+            this.dtpTo.TabIndex = 107;
+            this.dtpTo.Tag = "txtTextBox";
+            // 
             // frmStockSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,14 +245,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblProgramID;
-        private System.Windows.Forms.ComboBox ddlStore;
-        private System.Windows.Forms.Label lblFrom;
-        private System.Windows.Forms.DateTimePicker dtpFrom;
         private System.Windows.Forms.Label lblItem;
-        private System.Windows.Forms.Label lblTo;
-        private System.Windows.Forms.DateTimePicker dtpTo;
         private System.Windows.Forms.DataGridView dgwStockSummary;
         private System.Windows.Forms.ListBox lstSearch;
         private System.Windows.Forms.TextBox txtItemName;
@@ -260,5 +253,11 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn_Close;
+        private System.Windows.Forms.Label lblProgramID;
+        private System.Windows.Forms.ComboBox ddlStore;
+        private System.Windows.Forms.Label lblFrom;
+        private System.Windows.Forms.DateTimePicker dtpFrom;
+        private System.Windows.Forms.Label lblTo;
+        private System.Windows.Forms.DateTimePicker dtpTo;
     }
 }

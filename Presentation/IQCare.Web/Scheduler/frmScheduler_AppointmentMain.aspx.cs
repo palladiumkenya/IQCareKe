@@ -212,9 +212,10 @@ namespace IQCare.Web.Scheduler
         {
             Appointment appointment = e.CommandArgument as Appointment;
             this.SchedulePatient.OpenMode = e.CommandName;
-            this.SchedulePatient.PatientId = appointment.PatientId;
+            SchedulePatient.PatientId = appointment.PatientId;
             this.SchedulePatient.SelectedAppointment = appointment;
             this.SchedulePatient.FacilityId = this.LocationId;
+            this.SchedulePatient.CurrentUser = new KeyValuePair<int, string>(this.UserID, Session["AppUserName"].ToString());
             this.Button1_Click(this.Button1, EventArgs.Empty);
             this.SchedulePatient.Rebind();
             

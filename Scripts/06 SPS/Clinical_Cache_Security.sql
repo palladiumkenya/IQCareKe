@@ -5450,6 +5450,7 @@ begin
 			a.DisplayName,
 			a.CanEnroll,
 			a.ModuleName,
+			isnull(a.ModuleFlag,0) ModuleFlag,
 			a.PharmacyFlag,
 			Z.StrongPassFlag,
 			Z.ExpPwdFlag,
@@ -5463,11 +5464,26 @@ begin
 			a.ExpPwdFlag,
 			a.ExpPwdDays
 		From mst_Facility a
-			Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID
+				Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID -- and b.ModuleID <> 203
 	) Z
 	Inner Join mst_module a On Z.ModuleID = a.ModuleID
 	Where a.Status = 2
-	And FacilityID = @LocationId                            
+	And FacilityID = @LocationId     
+	Union
+	Select
+			a.FacilityID,
+			b.ModuleID,
+			'Green Card (2016)' As DisplayName,
+			1 CanEnroll,
+			'CCC' As ModuleName,
+			1 As ModuleFlag,
+			M.PharmacyFlag,
+			a.StrongPassFlag,
+			a.ExpPwdFlag,
+			a.ExpPwdDays
+		From mst_Facility a
+			Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID  And a.FacilityID = @LocationId       and  b.ModuleID=203
+		Inner Join mst_module M On M.ModuleID=b.ModuleID and M.ModuleID=203 and M.Status=2                           
               
 --4                                
   Select GetDate()[CurrentDate]    
@@ -7232,14 +7248,307 @@ End
 				 
 
 GO
-					  
 
-/****** Object:  StoredProcedure [dbo].[Pr_Clinical_SaveFollowupEducation_Constella]    Script Date: 01/20/2016 11:13:32 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_SaveFamilyInfo_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Clinical_SaveFamilyInfo_Constella]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[Pr_Clinical_SaveFamilyInfo_Constella]                      
+(              
+	@Id int=null,        
+	@Ptn_Pk int,                      
+	@RFirstName varchar(50)=null,                      
+	@RLastName varchar(50)=null,                
+	@Sex int=null,                      
+	@AgeYear int=null,                 
+	@AgeMonth int=null,          
+	@RelationshipType int=null,                 
+	@HivStatus int=null,                     
+	@HivCareStatus int=null,          
+	@UserID int=null,        
+	@DeleteFlag int=null,      
+	@ReferenceId int=null,    
+	@RegistrationNo varchar(50)=null,  
+	@RelationshipDate DateTime =null,
+	@DBKey varchar(50)    =null      
+)                      
+As Begin
+                   
+
+--Declare @SymKey varchar(400)                              
+--Set @SymKey = 'Open symmetric key Key_CTC decryption by password='+ @DBKey + ''                                  
+--Exec(@SymKey) 
+
+if(@ReferenceId=-1)Set @ReferenceId = Null
+          
+if(@RegistrationNo='NON')Set @RegistrationNo = Null      
+      
+	if (@Id=-1) BEGIN
+		Insert Into dtl_FamilyInfo (
+				Ptn_Pk
+			,	RFirstName
+			,	RLastName
+			,	Sex
+			,	AgeYear
+			,	AgeMonth
+			,	RelationshipType
+			,	HivStatus
+			,	HivCareStatus
+			,	UserID
+			,	DeleteFlag
+			,	ReferenceId
+			,	RegistrationNo
+			,	RelationshipDate)
+		Values (
+				@Ptn_Pk
+			,	encryptbykey(key_guid('Key_CTC'), @RFirstName)
+			,	encryptbykey(key_guid('Key_CTC'), @RLastName)
+			,	@Sex
+			,	@AgeYear
+			,	@AgeMonth
+			,	@RelationshipType
+			,	@HivStatus
+			,	@HivCareStatus
+			,	@UserID
+			,	@DeleteFlag
+			,	@ReferenceId
+			,	@RegistrationNo
+			,	@RelationshipDate)
+	End
+	Else	Begin
+		Update dtl_FamilyInfo Set
+				Ptn_Pk = @Ptn_Pk
+			,	RFirstName = encryptbykey(key_guid('Key_CTC'), @RFirstName)
+			,	RLastName = encryptbykey(key_guid('Key_CTC'), @RLastName)
+			,	Sex = @Sex
+			,	AgeYear = @AgeYear
+			,	AgeMonth = @AgeMonth
+			,	RelationshipType = @RelationshipType
+			,	HivStatus = @HivStatus
+			,	HivCareStatus = @HivCareStatus
+			,	UserID = @UserID
+			,	DeleteFlag = @DeleteFlag
+			,	ReferenceId = @ReferenceId
+			,	RegistrationNo = @RegistrationNo
+			,	RelationshipDate = @RelationshipDate
+		Where Id = @Id
+	End
+--Close symmetric key Key_CTC       
+End
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_GetFamilyInfo_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Clinical_GetFamilyInfo_Constella]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[Pr_Clinical_GetFamilyInfo_Constella]                          
+(                            
+ @Ptn_Pk int=null,    
+ @password varchar(50)  = null              
+)                            
+as   BEGIN            
+Select	convert(varchar(50), decryptbykey(a.firstname))									[FirstName]
+	,	convert(varchar(50), decryptbykey(a.lastname))									[LastName]
+	,	a.CountryId + '-' + a.PosId + '-' + a.SatelliteId + '-' + a.PatientEnrollmentId	As RegistrationNo
+	,	a.Sex
+	,	a.PatientClinicID
+	,	datediff(yy, a.DOB, getdate())													AgeYear
+	,	datediff(yy, a.DOB, getdate()) % 12												AgeMonth
+	,	a.DeleteFlag
+	,	b.HivStatus
+	,	dbo.fn_GetHivCareStatus(@Ptn_Pk)												As HivCareStatus
+	,	dbo.fn_PatientDiedStatus(@Ptn_Pk)												As PatientDiedStatus
+From mst_Patient a
+Left Outer Join dtl_PatientHivOther b On a.Ptn_Pk = @Ptn_Pk
+And a.Ptn_Pk = b.Ptn_Pk
+Where a.ptn_pk = @Ptn_Pk             
+                   
+END
+
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Clinical_GetAllFamilyData_Constella]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Clinical_GetAllFamilyData_Constella]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[pr_Clinical_GetAllFamilyData_Constella]                                          
+(                                                
+ @Ptn_pk int=null,                    
+ @password varchar(50)    =null                                             
+)                                                
+as                                                
+BEGIN                                              
+--Declare @SymKey varchar(400)                        
+--Set @SymKey = 'Open symmetric key Key_CTC decryption by password='+ @password + ''                            
+--exec(@SymKey)                                           
+if exists(select ptn_pk from dtl_FamilyInfo where (deleteflag is null or deleteflag=0)and ptn_pk=@Ptn_pk) begin     
+	Select Distinct	f.Id
+				,	f.ptn_pk
+				,	convert(varchar(50), decryptbykey(f.RFirstName))					[RFirstName]
+				,	convert(varchar(50), decryptbykey(f.RLastName))						[RLastName]
+				,	s.ID																[SexId]
+				,	s.Name																[SexDesc]
+				,	f.AgeYear
+				,	f.AgeMonth
+				,	convert(varchar, f.relationshipdate, 101)							[RelationshipDate]
+				,	r.ID																[RelationshipTypeID]
+				,	r.Name																[RelationshipTypeDesc]
+				,	dbo.fn_GetPatientRegistrationNumber(f.ptn_pk, f.ReferenceId, f.Id)	[RegistrationNo]
+				,	dbo.fn_GetPatientClinicNumber(f.ptn_pk, f.ReferenceId, f.Id)		[FileNo]
+				,	f.FileNo
+				,	dbo.fn_GetHivStatus(f.ptn_pk, f.ReferenceId, f.Id)					[HivStatusID]
+				,	dbo.fn_GetHivStatusDesc(f.ptn_pk, f.ReferenceId, f.Id)				[HivStatusDesc]
+				,	f.HivCareStatus														[HivCareStatusID]
+				,	h.Name																[HivCareStatusDesc]
+				,	Case
+						When f.Referenceid Is Null Then 'No'
+						Else 'Yes'
+					End																	As [Registered?]
+					--,f.UserID,f.DeleteFlag                        
+				,	f.ReferenceId
+	From dtl_FamilyInfo f
+	Left Outer Join mst_RelationshipType r On r.ID = f.RelationshipType
+	Left Outer Join mst_decode s On s.ID = f.Sex
+	Left Outer Join Mst_HivCareStatus h On h.id = f.HivCareStatus
+	Where f.Ptn_pk = @Ptn_pk		And (f.DeleteFlag Is Null Or f.DeleteFlag = 0)                    
+ union              
+	Select	0																				[Id]
+		,	i.ParentPtnPk
+		,	convert(varchar(50), decryptbykey(p.FirstName))									[RFirstName]
+		,	convert(varchar(50), decryptbykey(p.LastName))									[RLastName]
+		,	s.ID																			[SexId]
+		,	s.Name																			[SexDesc]
+		,	datediff(Year, p.DOB, getdate())												[AgeYear]
+		,	datediff(Month, p.DOB, getdate()) / 12											[AgeMonth]
+		,	convert(varchar, i.CreateDate, 101)												[RelationshipDate]
+		,	3																				[RelationshipTypeID]
+		,	'Child'																			[RelationshipTypeDesc]
+		,	p.CountryId + '-' + p.PosId + '-' + p.SatelliteId + '-' + p.PatientEnrollmentId	[RegistrationNo]
+		,	p.PatientClinicID																[FileNo]
+		,	0																				[FileNo]
+		,	dbo.fn_GetHivStatus(0, i.ptn_pk, 0)												[HivStatusID]
+		,	dbo.fn_GetHivStatusDesc(0, i.ptn_pk
+			, 0)																			[HivStatusDesc]
+		,	dbo.fn_GetHivCareStatusID(0, i.ptn_pk, 0)										[HivCareStatusID]
+		,	dbo.fn_GetPatientProgramStatus_Constella(i.ptn_pk)								[HivCareStatusDesc]
+		,	'Yes'																			[Registered?]
+		,	i.ptn_pk																		[ReferenceId]
+	From mst_patient p
+	Inner Join dtl_InfantParent i On p.ptn_pk = i.ptn_pk
+	Left Outer Join mst_decode s On s.ID = p.Sex
+	Where i.parentPtnPk = @Ptn_pk               
+ union              
+	Select	0																				[Id]
+		,	i.ptn_pk
+		,	convert(varchar(50), decryptbykey(p.FirstName))									[RFirstName]
+		,	convert(varchar(50), decryptbykey(p.LastName))									[RLastName]
+		,	s.ID																			[SexId]
+		,	s.Name																			[SexDesc]
+		,	datediff(Year, p.DOB, getdate())												[AgeYear]
+		,	datediff(Month, p.DOB, getdate()) / 12											[AgeMonth]
+		,	convert(varchar, i.CreateDate, 101)												[RelationshipDate]
+		,	10																				[RelationshipTypeID]
+		,	'Parent'																		[RelationshipTypeDesc]
+		,	p.CountryId + '-' + p.PosId + '-' + p.SatelliteId + '-' + p.PatientEnrollmentId	[RegistrationNo]
+		,	p.PatientClinicID																[FileNo]
+		,	0																				[FileNo]
+		,	dbo.fn_GetHivStatus(0, i.parentptnpk, 0)										[HivStatusID]
+		,	dbo.fn_GetHivStatusDesc(0, i.parentptnpk, 0)									[HivStatusDesc]
+		,	dbo.fn_GetHivCareStatusID(0, i.parentptnpk, 0)									[HivCareStatusID]
+		,	dbo.fn_GetPatientProgramStatus_Constella(i.parentptnpk)							[HivCareStatusDesc]
+		,	'Yes'																			[Registered?]
+		,	i.parentptnpk																	[ReferenceId]
+	From mst_patient p
+	Inner Join dtl_InfantParent i On p.ptn_pk = i.parentptnpk
+	Left Outer Join mst_decode s On s.ID = p.Sex
+	Where i.ptn_pk = @Ptn_pk      
+ union    
+	Select	0																				[Id]
+		,	p.Ptn_Pk
+		,	convert(varchar(50), decryptbykey(p.FirstName))									[RFirstName]
+		,	convert(varchar(50), decryptbykey(p.LastName))									[RLastName]
+		,	s.ID																			[SexId]
+		,	s.Name																			[SexDesc]
+		,	datediff(Year, p.DOB, getdate())												[AgeYear]
+		,	datediff(Month, p.DOB, getdate()) / 12											[AgeMonth]
+		,	convert(varchar, p.CreateDate, 101)												[RelationshipDate]
+		,	dbo.fn_GetRelationshipTypeID(p.ptn_pk)											[RelationshipTypeID]
+		,	dbo.fn_GetRelationshipType(p.ptn_pk)											[RelationshipTypeDesc]
+		,	p.CountryId + '-' + p.PosId + '-' + p.SatelliteId + '-' + p.PatientEnrollmentId	[RegistrationNo]
+		,	p.PatientClinicID																[FileNo]
+		,	0																				[FileNo]
+		,	dbo.fn_GetHivStatus(0, p.ptn_pk, 0)												[HivStatusID]
+		,	dbo.fn_GetHivStatusDesc(0, p.ptn_pk, 0)											[HivStatusDesc]
+		,	dbo.fn_GetHivCareStatusID(0, p.ptn_pk, 0)										[HivCareStatusID]
+		,	dbo.fn_GetPatientProgramStatus_Constella(p.ptn_pk)								[HivCareStatusDesc]
+		,	'Yes'																			[Registered?]
+		,	p.ptn_pk																		[ReferenceId]
+	From mst_patient p
+	Left Outer Join mst_decode s On s.ID = p.Sex
+	Where p.Ptn_Pk In (
+		Select ptn_pk
+		From dtl_FamilyInfo
+		Where (deleteflag Is Null Or deleteflag = 0)
+			And referenceid = @Ptn_pk
+		)              
+     
+end      
+else  begin      
+	Select	0																				[Id]
+		,	p.Ptn_Pk
+		,	convert(varchar(50), decryptbykey(p.FirstName))									[RFirstName]
+		,	convert(varchar(50), decryptbykey(p.LastName))									[RLastName]
+		,	s.ID																			[SexId]
+		,	s.Name																			[SexDesc]
+		,	datediff(Year, p.DOB, getdate())												[AgeYear]
+		,	datediff(Month, p.DOB, getdate()) / 12											[AgeMonth]
+		,	convert(varchar, p.CreateDate, 101)												[RelationshipDate]
+		,	dbo.fn_GetRelationshipTypeID(p.ptn_pk)											[RelationshipTypeID]
+		,	dbo.fn_GetRelationshipType(p.ptn_pk)											[RelationshipTypeDesc]
+		,	p.CountryId + '-' + p.PosId + '-' + p.SatelliteId + '-' + p.PatientEnrollmentId	[RegistrationNo]
+		,	p.PatientClinicID																[FileNo]
+		,	0																				[FileNo]
+		,	dbo.fn_GetHivStatus(0, p.ptn_pk, 0)												[HivStatusID]
+		,	dbo.fn_GetHivStatusDesc(0, p.ptn_pk, 0)											[HivStatusDesc]
+		,	dbo.fn_GetHivCareStatusID(0, p.ptn_pk, 0)										[HivCareStatusID]
+		,	dbo.fn_GetPatientProgramStatus_Constella(p.ptn_pk)								[HivCareStatusDesc]
+		,	'Yes'																			[Registered?]
+		,	p.ptn_pk																		[ReferenceId]
+	From mst_patient p
+	Left Outer Join mst_decode s On s.ID = p.Sex
+	Where p.Ptn_Pk In (
+		Select ptn_pk
+		From dtl_FamilyInfo
+		Where (deleteflag Is Null Or deleteflag = 0)
+			And referenceid = @Ptn_pk
+		)             
+end                        
+END
+
+GO
+					  
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_SaveFollowupEducation_Constella]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[Pr_Clinical_SaveFollowupEducation_Constella]
 GO
 
-/****** Object:  StoredProcedure [dbo].[Pr_Clinical_SaveFollowupEducation_Constella]    Script Date: 01/20/2016 11:13:32 ******/
 SET ANSI_NULLS ON
 GO
 

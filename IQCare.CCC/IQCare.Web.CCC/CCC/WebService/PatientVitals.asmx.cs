@@ -38,7 +38,7 @@ namespace IQCare.Web.CCC.WebService
         IPatientVitals _vitals =
          (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
 
-        private int patientId;
+        private int _patientId;
      
 
         [WebMethod]
@@ -50,21 +50,21 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientDetailsVitals> GetVitals()
         {
-            patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
 
             List<PatientDetailsVitals> patientDetailsVitalses = new List<PatientDetailsVitals>();
-            List<PatientVital> list_vitals = _vitals.GetCurrentPatientVital(patientId);
+            List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
 
-            if (list_vitals != null )
+            if (listVitals != null )
             {
-                foreach (var item in list_vitals)
+                foreach (var item in listVitals)
                 {
                     PatientDetailsVitals vitals = new PatientDetailsVitals();
                     vitals.Height = item.Height;
                     vitals.Weight = item.Weight;
                     vitals.BMI = item.BMI;
                     vitals.Month = item.CreateDate.Month;
-
+                    
                     patientDetailsVitalses.Add(vitals);
                 }
             }
@@ -78,6 +78,14 @@ namespace IQCare.Web.CCC.WebService
             int patient = Convert.ToInt32(Session["PatientId"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
             return patientVitalsManager.GetPatientVitalsByMasterVisitId(patient, patientMasterVisitId);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public PatientVital GetByPatientId()
+        {
+            var patientVitalsManager = new PatientVitalsManager();
+            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            return patientVitalsManager.GetByPatientId(patient);
         }
     }
 }

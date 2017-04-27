@@ -19,11 +19,12 @@ namespace IQCare.CCC.UILogic
 
             try
             {
+                //disable double encryption
                 Person p = new Person()
                 {
-                    FirstName = util.Encrypt(_textInfo.ToTitleCase(firstName)),
-                    MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
-                    LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
+                    FirstName = (_textInfo.ToTitleCase(firstName)),
+                    MidName =(_textInfo.ToTitleCase(midName)),
+                    LastName = (_textInfo.ToTitleCase(lastName)),
                     Sex = gender,
                     //DateOfBirth = dateOfBirth,
                     //NationalId = util.Encrypt(nationalId),
@@ -49,9 +50,9 @@ namespace IQCare.CCC.UILogic
             {
                 Person p = new Person()
                 {
-                    FirstName = util.Encrypt(_textInfo.ToTitleCase(firstName)),
-                    MidName = util.Encrypt(_textInfo.ToTitleCase(midName)),
-                    LastName = util.Encrypt(_textInfo.ToTitleCase(lastName)),
+                    FirstName = (_textInfo.ToTitleCase(firstName)),
+                    MidName = (_textInfo.ToTitleCase(midName)),
+                    LastName = (_textInfo.ToTitleCase(lastName)),
                     Sex = gender,
                     //NationalId = util.Encrypt(nationalId),
                     CreatedBy = userId,
@@ -73,9 +74,9 @@ namespace IQCare.CCC.UILogic
         {
             Person person = new Person()
             {
-                FirstName = util.Encrypt(_textInfo.ToTitleCase(firstname)),
-                MidName = util.Encrypt(_textInfo.ToTitleCase(middlename)),
-                LastName = util.Encrypt(_textInfo.ToTitleCase(lastname)),
+                FirstName = (_textInfo.ToTitleCase(firstname)),
+                MidName = (_textInfo.ToTitleCase(middlename)),
+                LastName = (_textInfo.ToTitleCase(lastname)),
                 Sex = gender,
                 //DateOfBirth = DateTime.Parse(dateOfBirth),
                 //NationalId = util.Encrypt(nationalId),
@@ -96,9 +97,9 @@ namespace IQCare.CCC.UILogic
             IPersonManager mgr = (IPersonManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonManager, BusinessProcess.CCC");
             Person p = mgr.GetPerson(id);
             p.Id = p.Id;
-            p.FirstName = util.Decrypt(p.FirstName);
-            p.MidName = util.Decrypt(p.MidName);
-            p.LastName = util.Decrypt(p.LastName);
+            p.FirstName = (p.FirstName);
+            p.MidName = (p.MidName);
+            p.LastName =(p.LastName);
             //p.NationalId = util.Decrypt(p.NationalId);
             return p;
         }

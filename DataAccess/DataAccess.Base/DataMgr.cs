@@ -32,12 +32,13 @@ namespace DataAccess.Base
         /// <summary>
         /// Initializes a new instance of the <see cref="DataMgr"/> class.
         /// </summary>
-        public DataMgr()
+        protected DataMgr()
         {
         }
+       
         ~DataMgr()
         {
-
+            
         }
         #endregion
 
@@ -48,19 +49,11 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static object GetConnection()
         {
-            Console.Write("GetConnection()");
+
             Utility objUtil = new Utility();
-            //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
             constr += ";connect timeout=" + CommandTimeOut().ToString();
-            // constr += ";connect timeout=" + ((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["SessionTimeOut"].ToString();
-            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=500;Pooling=true;MultipleActiveResultSets = True;Connection Lifetime=0 ";
-            //using (SqlConnection connection = new SqlConnection(constr))
-            //{
-            //    connection.Open();
-            //    OpenDecryptedSession(connection);
-            //    return connection;
-            //}
+            constr += ";packet size=4128;Min Pool Size=3;Max Pool Size=200;";
             SqlConnection connection = new SqlConnection(constr);
             connection.Open();
             OpenDecryptedSession(connection);
@@ -112,7 +105,6 @@ namespace DataAccess.Base
         /// <returns></returns>
         public static DbConnection GetOrmConnectionString()
         {
-            Console.WriteLine("GetOrmConnectionString()");
             Utility objUtil = new Utility();
             //  string constr = objUtil.Decrypt(((NameValueCollection)ConfigurationSettings.GetConfig("appSettings"))["ConnectionString"]);
             string constr = objUtil.Decrypt(ConfigurationManager.AppSettings.Get("ConnectionString"));
@@ -230,15 +222,20 @@ namespace DataAccess.Base
         /// <param name="connection">The connection.</param>
         public static void ReleaseConnection(object connection)
         {
-            SqlConnection cnn = (SqlConnection)connection;
-            if (cnn != null)
+            if (connection != null)
             {
-                if (cnn.State != ConnectionState.Closed)
+                SqlConnection cnn = (SqlConnection)connection;
+                if (cnn != null)
                 {
-                    CloseDecryptedSession(connection);
-                    cnn.Close();
+                    if (cnn.State != ConnectionState.Closed)
+                    {
+                        CloseDecryptedSession(connection);
+                        cnn.Close();
+                    }
+                    cnn.Dispose();
+                    connection = null;
+                    cnn = null;
                 }
-                cnn.Dispose();
             }
         }
 

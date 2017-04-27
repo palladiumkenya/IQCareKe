@@ -12,25 +12,25 @@ namespace BusinessProcess.CCC.Triage
     public class BPatientFamilyPlanningMethod : ProcessBase, IPatientFamilyPlanningMethodManager
     {
        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-       private int Result=0;
+       private int _result=0;
 
         public int AddFamilyPlanningMethod(PatientFamilyPlanningMethod a)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientFamilyPlanningMethodRepository.Add(a);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                unitOfWork.PatientFamilyPlanningMethodRepository.Add(a);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public int UpdateFamilyPlanningMethod (PatientFamilyPlanningMethod u)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var FP =
-                  _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(
+                  unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(
                           x => x.PatientId == u.PatientId & !x.DeleteFlag)
                       .FirstOrDefault();
                 if (FP != null)
@@ -38,43 +38,43 @@ namespace BusinessProcess.CCC.Triage
                     FP.PatientFPId = u.PatientFPId;
                     FP.FPMethodId = u.FPMethodId;
                 }
-                _unitOfWork.PatientFamilyPlanningMethodRepository.Update(FP);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                unitOfWork.PatientFamilyPlanningMethodRepository.Update(FP);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public int DeleteFamilyPlanningMethod(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var FP = _unitOfWork.PatientFamilyPlanningMethodRepository.GetById(id);
-                _unitOfWork.PatientFamilyPlanningMethodRepository.Remove(FP);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                var FP = unitOfWork.PatientFamilyPlanningMethodRepository.GetById(id);
+                unitOfWork.PatientFamilyPlanningMethodRepository.Remove(FP);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public List<PatientFamilyPlanningMethod> GetPatientFamilyPlanningMethod(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var fpMethodList = _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-                _unitOfWork.Dispose();
+                var fpMethodList = unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
                 return fpMethodList;
             }
         }
 
         public int CheckIfPatientHasFamilyPlanningMethod(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var FP = _unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                var FP = unitOfWork.PatientFamilyPlanningMethodRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                           .Select(x => x.Id)
                           .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                             return Convert.ToInt32(FP);
             }
         }

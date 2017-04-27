@@ -8,7 +8,7 @@ using DataAccess.Base;
 namespace DataAccess.Entity
 {
 
-    public class ClsObject : ProcessBase  
+    public class ClsObject : ProcessBase , IDisposable 
     {
         #region "Constructor"
         public ClsObject()
@@ -178,10 +178,6 @@ namespace DataAccess.Entity
                 System.Data.Common.DbParameter p = theCmd.CreateParameter();
                 p.ParameterName = cmdpara;
                 p.Value = cmdvalue;
-
-
-
-
                 theCmd.Parameters.Add(cmdpara, cmddbtype).Value = cmdvalue;
                 i = i + 3;
             }
@@ -381,39 +377,42 @@ namespace DataAccess.Entity
         }
         #endregion
 
-        public bool CreateErrorLogs(Exception expOccured, Hashtable Params,string CommandText,ClsUtility.ObjectEnum Obj)
+      
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
         {
-            string fileName = @"c:\IQCare_Error_Logs_KNH.txt";
-            try{
-            if(System.IO.File.Exists(fileName))
+            if (!disposedValue)
             {
-                //append
-                System.IO.File.Open(fileName, System.IO.FileMode.Append);
-                System.IO.File.WriteAllText(fileName, "Error occured - Object = " + Obj.ToString() + Environment.NewLine + 
-                " --- CommandText = " + Environment.NewLine + 
-                " --- Params = " + Params.Values.ToString() +  
-                "----- Exception Occured = " + expOccured.InnerException.ToString());
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
 
-            }
-            {
-                //create
-                System.IO.File.Create(fileName);
-                 //append
-                System.IO.File.Open(fileName, System.IO.FileMode.Append);
-                System.IO.File.WriteAllText(fileName, "Error occured - Object = " + Obj.ToString() + Environment.NewLine + 
-                " --- CommandText = " + Environment.NewLine + 
-                " --- Params = " + Params.Values.ToString() +  
-                "----- Exception Occured = " + expOccured.InnerException.ToString());
-            }
-                return true;
-            }
-        catch(Exception ex)
-            {
-            throw ex;
-        }
-            
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
 
+                disposedValue = true;
+            }
         }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~ClsObject() {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
 
         //public string ConnectionsString(ConnectionMode mode)
         //{

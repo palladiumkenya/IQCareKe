@@ -1,4 +1,9 @@
-﻿using System;
+﻿using AjaxControlToolkit;
+using Application.Presentation;
+using Entities.Lab;
+using Interface.Laboratory;
+using IQCare.Web.UILogic;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -6,13 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AjaxControlToolkit;
-using Application.Presentation;
-using Entities.Lab;
-using Interface.Laboratory;
-using Interface.Security;
 using Telerik.Web.UI;
-using IQCare.Web.UILogic;
 
 namespace IQCare.Web.Laboratory
 {
@@ -337,7 +336,7 @@ namespace IQCare.Web.Laboratory
 
                 LabOrder order = this.OrderedLabs;
                 order.LocationId = this.LocationId;
-                order.PatientId = this.PatientId;
+                order.PatientPk = this.PatientPk;
                 order.ModuleId = this.ModuleId;
                 order.DeleteFlag = false;
                 order.CreateDate = DateTime.Now;
@@ -509,7 +508,7 @@ namespace IQCare.Web.Laboratory
         /// <value>
         /// The patient identifier.
         /// </value>
-        private int PatientId
+        private int PatientPk
         {
             get
             {
@@ -542,7 +541,7 @@ namespace IQCare.Web.Laboratory
                     
                     return new LabOrder()
                     {
-                        PatientId = this.PatientId,
+                        PatientPk = this.PatientPk,
                         LocationId = this.LocationId,
                         UserId = this.UserId,
                         ModuleId = this.ModuleId

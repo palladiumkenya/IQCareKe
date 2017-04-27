@@ -9,41 +9,60 @@ namespace BusinessProcess.CCC.Tb
 {
     public class BPatientIptOutcome : ProcessBase, IPatientIptOutcome
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
 
         public int AddPatientIptOutcome(PatientIptOutcome p)
         {
-            _unitOfWork.PatientIptOutcomeRepository.Add(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientIptOutcomeRepository.Add(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
         }
 
         public PatientIptOutcome GetPatientIptOutcome(int id)
         {
-            PatientIptOutcome patientIptOutcome = _unitOfWork.PatientIptOutcomeRepository.GetById(id);
-            return patientIptOutcome;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientIptOutcome patientIptOutcome = _unitOfWork.PatientIptOutcomeRepository.GetById(id);
+                _unitOfWork.Dispose();
+                return patientIptOutcome;
+            }
         }
 
         public void DeletePatientIptOutcome(int id)
         {
-            PatientIptOutcome icf = _unitOfWork.PatientIptOutcomeRepository.GetById(id);
-            _unitOfWork.PatientIptOutcomeRepository.Remove(icf);
-            _unitOfWork.Complete();
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                PatientIptOutcome icf = _unitOfWork.PatientIptOutcomeRepository.GetById(id);
+                _unitOfWork.PatientIptOutcomeRepository.Remove(icf);
+                _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+            }
         }
 
         public int UpdatePatientIptOutcome(PatientIptOutcome p)
         {
-            _unitOfWork.PatientIptOutcomeRepository.Update(p);
-            _result = _unitOfWork.Complete();
-            return _result;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientIptOutcomeRepository.Update(p);
+                _result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return _result;
+            }
         }
 
         public List<PatientIptOutcome> GetByPatientId(int patientId)
         {
-            List<PatientIptOutcome> patientIptOutcomes =
-                _unitOfWork.PatientIptOutcomeRepository.GetByPatientId(patientId);
-            return patientIptOutcomes;
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientIptOutcome> patientIptOutcomes =
+                 _unitOfWork.PatientIptOutcomeRepository.GetByPatientId(patientId);
+                _unitOfWork.Dispose();
+                return patientIptOutcomes;
+            }
         }
     }
 }

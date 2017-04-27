@@ -7,9 +7,9 @@ namespace Interface.CCC.Encounter
 {
     public interface IPatientLabDetails
     {
-        int AddPatientLabOrder(LabDetailsEntity labDetailsEntity);
-        int UpdatePatientLabOrder(LabDetailsEntity labDetailsEntity);
-        int DeletePatientLabOrder(int id);
+        int AddLabOrderDetails(LabDetailsEntity labDetailsEntity);
+        int UpdatePatientLabDetails(LabDetailsEntity labDetailsEntity);
+        int DeletePatientLabDetails(int id);
         List<LabDetailsEntity> GetPatientCurrentLabDetails(int patientId, DateTime visitDate);
         List<LabDetailsEntity> GetPatientLabDetailsAll(int patientId);
     }

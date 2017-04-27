@@ -11,7 +11,7 @@ namespace IQCare.Web.CCC.Encounter
     {
         protected string Gender
         {
-            get { return Session["Gender"].ToString(); }
+            get { return Convert.ToString(Session["Gender"]); }
         }
 
 

@@ -7,7 +7,7 @@ namespace Interface.CCC
 {
     public interface IMst_PatientInsert
     {
-        int AddMstPatient(string firstName, string lastName, string middleName, int locationID, int patientEnrollmentID,
+        int AddMstPatient(string firstName, string lastName, string middleName, int locationID, string patientEnrollmentID,
             int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus,
             string address, string phone, int userID, string posId, int moduleId, DateTime startDate, DateTime createDate);
 
