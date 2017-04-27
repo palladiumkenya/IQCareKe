@@ -44,7 +44,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" />
                                     </div>                        
                                 </div> 
                                 <div class="col-md-3 form-group">                  
@@ -393,6 +393,10 @@
                 var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
                 var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
                 var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+                
+                if (regimen === undefined)
+                    regimen = '0';
+                
 
                 var allAbbr = "";
                 ///////////////////////////////////////////////////////////////////
@@ -424,14 +428,17 @@
                 var sumAllAbbr = 0;
                 var sumSelectedRegimen = 0;
                 try {
+                    for (var i = 0; i < allAbbr.length; i++) {
+                        sumAllAbbr += allAbbr.charCodeAt(i);
+                    }
+                }
+                catch (err) { }
+
+                try {
                     var regExp = /\(([^)]+)\)/;
                     var matches = regExp.exec(regimenText);
 
                     var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
-
-                    for (var i = 0; i < allAbbr.length; i++) {
-                        sumAllAbbr += allAbbr.charCodeAt(i);
-                    }
 
                     for (var i = 0; i < selectedRegimen.length; i++) {
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
@@ -439,10 +446,18 @@
 
                 }
                 catch (err) { }
-
+           
+                
                 if (sumAllAbbr > 0) {
+                    if (regimenLine == "0")
+                    {
+                        toastr.error("Error", "Please select the Regimen Line");
+                        return;
+                    }
+                    
+
                     if (sumAllAbbr != sumSelectedRegimen) {
-                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                         return;
                     }
                     else {

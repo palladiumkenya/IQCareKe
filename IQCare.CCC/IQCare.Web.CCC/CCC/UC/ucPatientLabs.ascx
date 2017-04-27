@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientLabs.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientLabs" %>
-
+<div class="col-md-12">  
                         <div class="col-md-6">  
                          <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
@@ -228,10 +228,11 @@
                         </div>
                     </div>
                 </div>
-
+    </div>
                 <div class="col-md-12">
                     <hr />
                 </div>
+<div class="col-md-12">
                 <div class="col-md-7"></div>
                 <div class="col-md-5">
                     <div class="col-md-3">
@@ -245,7 +246,8 @@
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
                     <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
+                        <%--<asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>--%>
+                        <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
                     </div>
                 </div>
 

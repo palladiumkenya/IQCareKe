@@ -58,7 +58,6 @@ namespace IQCare.Web.CCC.UC
                 //lookUp.populateDDL(ddlExamination, "PhysicalExamination");
                 lookUp.populateCBL(cblGeneralExamination, "GeneralExamination");
                 lookUp.populateCBL(cblPHDP, "PHDP");
-                lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
@@ -95,7 +94,7 @@ namespace IQCare.Web.CCC.UC
             complaints.Value = pce.complaints;
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
-
+            txtWorkPlan.Text = pce.WorkPlan;
             foreach (ListItem item in cblGeneralExamination.Items)
             {
                 for (int i = 0; i < pce.generalExams.Length; i++)
@@ -121,7 +120,6 @@ namespace IQCare.Web.CCC.UC
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
-            ddlReferredFor.SelectedValue = pce.nextAppointmentType;
 
         }
     }

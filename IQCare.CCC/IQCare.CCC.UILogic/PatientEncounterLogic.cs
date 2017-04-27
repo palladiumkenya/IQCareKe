@@ -53,13 +53,13 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, userID, phyExam, generalExamList);
         }
 
-        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, string phdp, string diagnosis)
+        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string userID, string workplan, string ARVAdherence, string CTXAdherence, string phdp, string diagnosis)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var diag = parser.Deserialize<List<Diagnosis>>(diagnosis);
             List<string> PHDPList = phdp.Split(',').ToList();
-            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID,ARVAdherence,CTXAdherence,nextAppointment,appointmentType, PHDPList, diag);
+            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID, userID, workplan, ARVAdherence,CTXAdherence, PHDPList, diag);
         }
 
         public PresentingComplaintsEntity loadPatientEncounter(string PatientMasterVisitID, string PatientID)
