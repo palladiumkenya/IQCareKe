@@ -94,6 +94,7 @@ namespace IQCare.CCC.UILogic.Baseline
 
             PersonRelationship relationship = new PersonRelationship()
             {
+                Id = p.PersonRelationshipId,
                 PersonId = personId,
                 RelatedTo = p.PatientId,
                 RelationshipTypeId = p.RelationshipId
@@ -102,6 +103,7 @@ namespace IQCare.CCC.UILogic.Baseline
 
             PatientHivTesting familyTesting = new PatientHivTesting()
             {
+                Id = p.HivTestingId,
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 BaselineResult = p.BaseLineHivStatusId,
@@ -143,7 +145,9 @@ namespace IQCare.CCC.UILogic.Baseline
                             HivTestingResultsId = hivTesting.TestingResult,
                             HivTestingResultsDate = hivTesting.TestingDate,
                             CccReferal = hivTesting.ReferredToCare,
-                            CccReferaalNumber = hivTesting.CccNumber
+                            CccReferaalNumber = hivTesting.CccNumber,
+                            PersonRelationshipId = relationship.Id,
+                            HivTestingId = hivTesting.Id
                         };
                 patientFamilyTestings.Add(familyTesting);
             }

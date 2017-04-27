@@ -19,5 +19,7 @@ namespace Entities.CCC.Baseline
         public DateTime ? HivTestingResultsDate { get; set; }
         public bool CccReferal { get; set; }
         public string CccReferaalNumber { get; set; }
+        public int PersonRelationshipId { get; set; }
+        public int HivTestingId { get; set; }
     }
 }
