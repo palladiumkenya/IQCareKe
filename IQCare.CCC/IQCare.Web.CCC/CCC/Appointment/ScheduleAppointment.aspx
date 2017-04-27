@@ -158,7 +158,7 @@
                                     <label for="description" class="control-label pull-left">Description</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" required="true" />
+                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static"/>
                                 </div>
                             </div>
                         </div>

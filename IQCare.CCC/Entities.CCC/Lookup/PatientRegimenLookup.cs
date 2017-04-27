@@ -13,7 +13,7 @@ namespace Entities.CCC.Lookup
         public int PersonId { get; set; }
         public int FacilityId { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public int Drug_pk { get; set; }
+        public int? Drug_pk { get; set; }
         public string RegimenType { get; set; }
         public int RegimenId { get; set; }
         public int OrderID { get; set; }

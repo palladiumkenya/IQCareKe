@@ -99,7 +99,8 @@
                 
 
         </div><!-- .col-md-12 -->
-
+        
+        <div class="col-md-12"><div class="col-md-12"><hr/></div></div>
         <div class="col-md-12 col-xs-12 col-sm-12 form-group" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             
             <div class="col-md-12">
@@ -192,8 +193,8 @@
             
                   <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
-                         <span class="input-group-addon">Systolic</span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <span class="input-group-addon">Diastolic</span>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
                       <p class="help-block pull-left"><strong>Normal values: (140-80)</strong></p>
@@ -201,8 +202,8 @@
                 
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
-                         <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[60, 200]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                         <span class="input-group-addon">Systolic</span>
+                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[60, 200]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
                     <label class="help-block pull-left"><strong>Normal values: (140-80)</strong></label>
@@ -239,13 +240,8 @@
             </div><!-- .col-md-6 col-xs-12 col-sm-12-->
               
         </div>
-       
-    </div>
-    
-    <%-- .col-md-11--%>
-
-
-    <div class="col-md-12">
+        
+        <div class="col-md-12">
         <div class="col-md-8"></div>
         <div class="col-md-4">
             <div class="col-md-4 col-xs-12 col-sm-12">
@@ -259,6 +255,11 @@
             </div>
         </div>
     </div>
+       
+    </div> <%-- .col-md-11--%>
+
+
+    
 </div> <!-- .col-md-12 -->
 
 <script type="text/javascript">
@@ -335,6 +336,9 @@
         //$('#myVisitDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
         //            dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
         //       });
+        var bmiz = $("#<%=txtBMIz.ClientID%>").val();
+        var weightForAge = $("#<%=txtWAz%>").val();
+         var weightForHeight = $("#<%=txtWHz%>").val();
          var dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
         var bmi = calcBMI();
       
@@ -361,7 +365,7 @@
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/AddpatientVitals",
-            data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "','visitDate':'"+dateOfVisit+"'}", //todo Mwasi: add patient id and patientvistId
+            data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "','bmiz':'"+bmiz+"','weightForAge':'"+weightForAge+"','weightForHeight':'"+weightForHeight+"','visitDate':'"+dateOfVisit+"'}", //todo Mwasi: add patient id and patientvistId
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {

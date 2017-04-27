@@ -28,8 +28,8 @@ namespace IQCare.CCC.UILogic
             PersonContact personContact = new PersonContact
             {
                 PersonId = personId,
-                PhysicalAddress = (physicalAddress),
-                MobileNumber = (mobileNumber),
+                PhysicalAddress = physicalAddress,
+                MobileNumber = mobileNumber,
                 AlternativeNumber = alternativeNumber,
                 EmailAddress = emailAddress,
                 CreatedBy = userId

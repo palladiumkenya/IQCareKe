@@ -31,15 +31,14 @@
   
 
         if (gender === 'male') {
-            alert("am male");
             $("#divBtnVitals").hide("fast");
         } else if (gender === 'female') {
             alert("am female");
              $("#divBtnVitals").hide("show");
         }
-         alert("i dontk know");
 
         $("#femaleVitals").hide("fast");
+        $("#PatientVitals").hide("fast");
 
         
          $("#btnFemalVitals").click(function () {
