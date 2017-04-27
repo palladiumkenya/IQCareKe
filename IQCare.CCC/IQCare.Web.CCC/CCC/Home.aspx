@@ -171,8 +171,8 @@
             <div class="col-md-12"><hr></div>
 
             <div class="col-md-12">
-                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server"> Results Percentage :</asp:Label></h5></div>
-                <div class="col-md-6 pull-right"><h5 class="pull-left"><asp:Label runat="server" ID="lblvl">0% </asp:Label></h5></div>
+                
+                <div class="col-md-12 pull-right"><h5 class="pull-left"><asp:Label runat="server" ID="lblvl">0% </asp:Label></h5></div>
             </div>
         </div>
     </div><!-- .col-md-12 -->
@@ -192,7 +192,7 @@
                 <div class="col-md-12"><hr></div>
 
                 <div class="col-md-12">
-                    <div class="col-md-7"><label class="control-label pull-left">Total on ART :</label></div>
+                    <div class="col-md-7"><label class="control-label pull-left">Total Active on ART :</label></div>
                         <div class="col-md-5 pull-right">
                             <asp:Label runat="server" ClientIDMode="Static" ID="lblOnART" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                         </div>
