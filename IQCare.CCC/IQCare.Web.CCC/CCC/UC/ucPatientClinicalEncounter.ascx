@@ -2449,12 +2449,14 @@
             var weightLoss = $("#<%=weightLoss.ClientID%>").val();
             var nightSweats = $("#<%=nightSweats.ClientID%>").val();
             var fever = $("#<%=fever.ClientID%>").val();
+            var onIpt = $("#<%=onIpt.ClientID%>").val();
+            var onAntiTbDrugs = $("#<%=tbInfected.ClientID%>").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss +  "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
