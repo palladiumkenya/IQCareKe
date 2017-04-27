@@ -12,5 +12,6 @@ namespace Interface.CCC.Enrollment
         int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier);
         int DeletePatientIdentifier(int id);
         List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId, int identifierTypeId);
+        List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId);
     }
 }
