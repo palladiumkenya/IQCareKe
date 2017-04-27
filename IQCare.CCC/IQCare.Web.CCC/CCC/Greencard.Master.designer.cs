@@ -184,6 +184,15 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.LinkButton menuNewEncounter;
         
         /// <summary>
+        /// menuPharmacyPrescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuPharmacyPrescription;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>

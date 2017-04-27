@@ -186,5 +186,9 @@ namespace IQCare.Web.CCC
             Response.Redirect("~/CCC/Encounter/EncounterHistory.aspx");
         }
 
+        protected void menuPharmacyPrescription_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Encounter/PharmacyPrescription.aspx");
+        }
     }
 }

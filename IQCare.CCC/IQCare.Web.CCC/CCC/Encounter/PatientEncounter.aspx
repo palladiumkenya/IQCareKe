@@ -340,7 +340,7 @@
             <!--end pw implementation of  laboratory module here-->
 
             <div role="tabpanel" class="tab-pane fade" id="Pharmacy">
-                <uc:ucPharmacyPrescription runat="server" id="ucPharmacyPrescription" />
+                <%--<uc:ucPharmacyPrescription runat="server" id="ucPharmacyPrescription" />--%>
             </div><!-- .pharmacy-->
 
             <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">

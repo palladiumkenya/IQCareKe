@@ -36,15 +36,20 @@ namespace Entities.CCC.Encounter
             public string chronicIllness { get; set; }
             public string treatment { get; set; }
             public string dose { get; set; }
-            public string duration { get; set; }
+            public string OnsetDate { get; set; }
+            public string Active { get; set; }
         }
 
         [Serializable]
         public class Allergies
         {
+            public string allergyID { get; set; }
+            public string reactionID { get; set; }
+            public string severityID { get; set; }
             public string allergy { get; set; }
-            public string allergyResponse { get; set; }
-            public string allergyDate { get; set; }
+            public string reaction { get; set; }
+            public string severity { get; set; }
+            public string onsetDate { get; set; }
         }
 
         [Serializable]
@@ -70,6 +75,7 @@ namespace Entities.CCC.Encounter
             public string visitDate { get; set; }
             public string visitScheduled { get; set; }
             public string visitBy { get; set; }
+            public string anyComplaint { get; set; }
             public string complaints { get; set; }
             public string tbScreening { get; set; }
             public string nutritionStatus { get; set; }
@@ -150,6 +156,21 @@ namespace Entities.CCC.Encounter
             public double weightForAge { get; set; }
             public double weightForHeight { get; set; }
             public double BMIz { get; set; }
+        }
+
+        [Serializable]
+        public class KeyValue
+        {
+            public string ItemId { get; set; }
+            public string DisplayName { get; set; }
+        }
+
+        [Serializable]
+        public class PresentingComplaints
+        {
+            public string presentingComplaintID { get; set; }
+            public string presentingComplaint { get; set; }
+            public string onsetDate { get; set; }
         }
     }
 }

@@ -3,6 +3,8 @@
 <%@ Register Src="~/CCC/UC/ucIpt.ascx" TagPrefix="uc" TagName="Ipt" %>
 <%@ Register Src="~/CCC/UC/ucIptClientWorkup.ascx" TagPrefix="uc" TagName="IptClientWorkup" %>
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
+<%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
+
 <div class="col-md-12" style="padding-top: 20px">
 
     <div class="col-md-12">
@@ -31,14 +33,14 @@
                 </ul>
             </div>
 
-            <div class="actions">
+            <%--<div class="actions">
                 <button type="button" class="btn btn-default btn-prev">
                     <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
                 <button type="button" class="btn btn-primary btn-next" data-last="Complete">
                     Next
 		                    <span class="glyphicon glyphicon-arrow-right"></span>
                 </button>
-            </div>
+            </div>--%>
 
             <div class="step-content">
 
@@ -171,7 +173,7 @@
                                     <label class="control-label  pull-left text-primary">*Visit By</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                    <asp:DropDownList runat="server" ID="ddlVisitBy" ClientIDMode="Static" CssClass="form-control" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                 </div>
                             </div>
                         </div>
@@ -180,6 +182,176 @@
                         <hr />
                     </div>
                     <%--to here--%>
+
+                     <div class="col-md-12 form-group"  style="height:100%">
+                        <div class="col-md-12"  style="height:100%">
+                                <div class="panel panel-info" style="height:100%">
+
+                                    <div class="panel-body">
+                                        <div class="col-md-12 form-group">
+                                            <div>
+                                                <label class="control-label  pull-left text-primary">*Any Presenting Complaints</label>
+                                            </div>
+                                            <div>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server" onclick="showHidePresentingComplaintsDivs();" />Yes
+                                                </label>
+                                                <label class="pull-left" style="padding-right: 10px">
+                                                    <input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />No
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+                                        <div id="presentingComplaintsCtrls" class="col-md-12 form-group">
+                                            <div class="col-md-5">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left">Presenting Complaints</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox ID="txtPresentingComplaintsID" runat="server" ClientIDMode="Static"></asp:TextBox>
+                                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="txtPresentingComplaints" ClientIDMode="Static" placeholder="Presenting Complaints.."></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                            <div class="col-md-12">
+                                                <label class="control-label  pull-left">Onset Date</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                    <div class="datepicker" id="PCDateOfOnset">
+                                        <div class="input-group">
+                                            <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" ></asp:TextBox>
+                                            <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="sr-only">Toggle Calendar</span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                    <div class="datepicker-calendar">
+                                                        <div class="datepicker-calendar-header">
+                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                            <button type="button" class="title" data-month="11" data-year="2014">
+                                                                <span class="month">
+                                                                    <span data-month="0">January</span>
+                                                                    <span data-month="1">February</span>
+                                                                    <span data-month="2">March</span>
+                                                                    <span data-month="3">April</span>
+                                                                    <span data-month="4">May</span>
+                                                                    <span data-month="5">June</span>
+                                                                    <span data-month="6">July</span>
+                                                                    <span data-month="7">August</span>
+                                                                    <span data-month="8">September</span>
+                                                                    <span data-month="9">October</span>
+                                                                    <span data-month="10">November</span>
+                                                                    <span data-month="11" class="current">December</span>
+                                                                </span><span class="year">2014</span>
+                                                            </button>
+                                                        </div>
+                                                        <table class="datepicker-calendar-days">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Su</th>
+                                                                    <th>Mo</th>
+                                                                    <th>Tu</th>
+                                                                    <th>We</th>
+                                                                    <th>Th</th>
+                                                                    <th>Fr</th>
+                                                                    <th>Sa</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                        <div class="datepicker-calendar-footer">
+                                                            <button type="button" class="datepicker-today">Today</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="datepicker-wheels" aria-hidden="true">
+                                                        <div class="datepicker-wheels-month">
+                                                            <h2 class="header">Month</h2>
+                                                            <ul>
+                                                                <li data-month="0">
+                                                                    <button type="button">Jan</button></li>
+                                                                <li data-month="1">
+                                                                    <button type="button">Feb</button></li>
+                                                                <li data-month="2">
+                                                                    <button type="button">Mar</button></li>
+                                                                <li data-month="3">
+                                                                    <button type="button">Apr</button></li>
+                                                                <li data-month="4">
+                                                                    <button type="button">May</button></li>
+                                                                <li data-month="5">
+                                                                    <button type="button">Jun</button></li>
+                                                                <li data-month="6">
+                                                                    <button type="button">Jul</button></li>
+                                                                <li data-month="7">
+                                                                    <button type="button">Aug</button></li>
+                                                                <li data-month="8">
+                                                                    <button type="button">Sep</button></li>
+                                                                <li data-month="9">
+                                                                    <button type="button">Oct</button></li>
+                                                                <li data-month="10">
+                                                                    <button type="button">Nov</button></li>
+                                                                <li data-month="11">
+                                                                    <button type="button">Dec</button></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-year">
+                                                            <h2 class="header">Year</h2>
+                                                            <ul></ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-footer clearfix">
+                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        </div>
+                                            <div class="col-md-2">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left"></label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddPresentingComplaints" onclick="AddPresentingComplaints();">Add</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%--.panel-body--%>
+                                    <div id="presentingComplaintsTable" class="panel panel-primary">
+                                        <div class="panel-heading">Presenting Complaints</div>
+                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                            <table id="dtlPresentingComplaints" class="table table-bordered table-striped" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span class="text-primary">Presenting ComplaintsID</span></th>
+                                                        <th><span class="text-primary">Presenting Complaints</span></th>
+                                                        <th><span class="text-primary">Date of Onset</span></th>
+                                                        <th><span class="text-primary"></span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+
+                                            
+                                        </div>
+            
+                                    </div>
+                                    
+                                     <div id="presentingComplaintsNotes">
+                                        <label class="control-label pull-left text-primary" for="complaints">Presenting Complaints Notes :</label>
+                                        <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="3" ></textarea>
+                                    </div> 
+
+                                </div>
+                                <%--.panel--%>
+                        </div>
+                    </div>
 
                     <div class="col-md-12 form-group">
                         <div class="col-md-12">
@@ -447,13 +619,16 @@
                         <div class="col-md-12">
                             <div class="panel panel-info">
                                 <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left text-primary" for="complaints">*Complaints Today</label>
-                                        <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="4" data-parsley-required="true"></textarea>
-                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <div class="col-md-12 form-group">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>                        
 
-                                    <div class="col-md-6">
-                                        <div class="col-md-12  form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6  form-group">
                                             <div class="col-md-6">
                                                 <label class="control-label pull-left input-sm text-primary" for="tbscreeningstatus">*TB Screening</label>
                                             </div>
@@ -461,14 +636,40 @@
                                                 <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="tbscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                             </div>
                                         </div>
-
+                                        <div class="col-md-6  form-group"></div>
                                         <div class="col-md-12 form-group">
-                                            <div class="col-md-6">
-                                                <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left input-sm">Height</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left input-sm">Weight</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left input-sm">BMI</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="col-md-12">
+                                                    <label class="control-label pull-left input-sm text-primary" for="nutritionscreeningstatus">*Nutrition Status</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <asp:DropDownList runat="server" CssClass="form-control" ID="nutritionscreeningstatus" ClientIDMode="Static" data-parsley-min="1" data-parsley-min-message="Value Required" />
 
+                                                </div>
                                             </div>
                                         </div>
 
@@ -536,7 +737,7 @@
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">Adverse Events</div>
                                         <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlAdverseEvents" class="table table-bordered table-striped">
+                                            <table id="dtlAdverseEvents" class="table table-bordered table-striped" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th><span class="text-primary">SeverityID</span></th>
@@ -576,7 +777,7 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-3 form-group">
                                             <div class="col-md-12">
                                                 <label for="ChronicIllnessName" class="control-label pull-left">Illness</label>
                                             </div>
@@ -602,12 +803,104 @@
                                                 <asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.."></asp:TextBox>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 form-group">
+                                        <div class="col-md-3 form-group">
                                             <div class="col-md-12">
-                                                <label class="control-label pull-left">Duration</label>
+                                                <label class="control-label pull-left">Onset Date</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:TextBox runat="server" CssClass="form-control input-sm" ID="treatmentDuration" ClientIDMode="Static" placeholder="0"></asp:TextBox>
+                                                <div class="col-md-12">
+                                                <div class="datepicker fuelux" id="ChronicIllnessOnsetDate">
+                                                    <div class="input-group pull-left">
+                                                        <input class="form-control input-sm pull-left" id="txtOnsetDate" type="text" runat="server" clientidmode="Static" />
+                                                        <div class="input-group-btn">
+                                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                <span class="sr-only">Toggle Calendar</span>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                <div class="datepicker-calendar">
+                                                                    <div class="datepicker-calendar-header">
+                                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                                            <span class="month">
+                                                                                <span data-month="0">January</span>
+                                                                                <span data-month="1">February</span>
+                                                                                <span data-month="2">March</span>
+                                                                                <span data-month="3">April</span>
+                                                                                <span data-month="4">May</span>
+                                                                                <span data-month="5">June</span>
+                                                                                <span data-month="6">July</span>
+                                                                                <span data-month="7">August</span>
+                                                                                <span data-month="8">September</span>
+                                                                                <span data-month="9">October</span>
+                                                                                <span data-month="10">November</span>
+                                                                                <span data-month="11" class="current">December</span>
+                                                                            </span><span class="year">2014</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <table class="datepicker-calendar-days">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Su</th>
+                                                                                <th>Mo</th>
+                                                                                <th>Tu</th>
+                                                                                <th>We</th>
+                                                                                <th>Th</th>
+                                                                                <th>Fr</th>
+                                                                                <th>Sa</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody></tbody>
+                                                                    </table>
+                                                                    <div class="datepicker-calendar-footer">
+                                                                        <button type="button" class="datepicker-today">Today</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                                    <div class="datepicker-wheels-month">
+                                                                        <h2 class="header">Month</h2>
+                                                                        <ul>
+                                                                            <li data-month="0">
+                                                                                <button type="button">Jan</button></li>
+                                                                            <li data-month="1">
+                                                                                <button type="button">Feb</button></li>
+                                                                            <li data-month="2">
+                                                                                <button type="button">Mar</button></li>
+                                                                            <li data-month="3">
+                                                                                <button type="button">Apr</button></li>
+                                                                            <li data-month="4">
+                                                                                <button type="button">May</button></li>
+                                                                            <li data-month="5">
+                                                                                <button type="button">Jun</button></li>
+                                                                            <li data-month="6">
+                                                                                <button type="button">Jul</button></li>
+                                                                            <li data-month="7">
+                                                                                <button type="button">Aug</button></li>
+                                                                            <li data-month="8">
+                                                                                <button type="button">Sep</button></li>
+                                                                            <li data-month="9">
+                                                                                <button type="button">Oct</button></li>
+                                                                            <li data-month="10">
+                                                                                <button type="button">Nov</button></li>
+                                                                            <li data-month="11">
+                                                                                <button type="button">Dec</button></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-year">
+                                                                        <h2 class="header">Year</h2>
+                                                                        <ul></ul>
+                                                                    </div>
+                                                                    <div class="datepicker-wheels-footer clearfix">
+                                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
 
@@ -632,7 +925,8 @@
                                                             <th><span class="text-primary">Illness</span></th>
                                                             <th><span class="text-primary">Current Treatment</span></th>
                                                             <th><span class="text-primary">Dose</span></th>
-                                                            <th><span class="text-primary">Duration</span></th>
+                                                            <th><span class="text-primary">Onset Date</span></th>
+                                                            <th><span class="text-primary">Active</span></th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>
@@ -652,25 +946,36 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
-                                        <div class="col-md-4 form-group">
+                                        <div class="col-md-3 form-group">
                                             <div class="col-md-12">
-                                                <label for="AllergyName" class="control-label pull-left">Allergy</label>
+                                                <label for="AllergyName" class="control-label pull-left">Substance Causing Allergy</label>
                                             </div>
                                             <div class="col-md-12">
+                                                <asp:TextBox ID="txtAllergyId" Enabled="false" runat="server" ClientIDMode="Static"></asp:TextBox>
                                                 <asp:TextBox ID="txtAllergy" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="allergy.."></asp:TextBox>
                                             </div>
                                         </div>
 
                                         <div class="col-md-3 form-group">
                                             <div class="col-md-12">
-                                                <label class="control-label pull-left">Response</label>
+                                                <label class="control-label pull-left">Type of reaction</label>
                                             </div>
                                             <div class="col-md-12">
-                                                <asp:TextBox runat="server" ID="txtAllergyResponse" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="response.."></asp:TextBox>
+                                                <asp:TextBox ID="txtReactionTypeID" Enabled="false" runat="server" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="txtReactionType" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="reaction.."></asp:TextBox>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-2 form-group">
+                                            <div class="col-md-12">
+                                                <label class="control-label pull-left">Severity</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <asp:DropDownList ID="ddlAllergySeverity" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
                                             <div class="col-md-12">
                                                 <label class="control-label  pull-left">Allergy Date</label>
                                             </div>
@@ -787,8 +1092,12 @@
                                                 <table id="dtlAllergy" class="table table-bordered table-striped" width="100%">
                                                     <thead>
                                                         <tr>
+                                                            <th><span class="text-primary">AllergyID</span></th>
+                                                            <th><span class="text-primary">ReactionID</span></th>
+                                                            <th><span class="text-primary">severityID</span></th>
                                                             <th><span class="text-primary">Allergy</span></th>
-                                                            <th><span class="text-primary">Response</span></th>
+                                                            <th><span class="text-primary">Reaction Type</span></th>
+                                                            <th><span class="text-primary">Severity</span></th>
                                                             <th><span class="text-primary">Date</span></th>
                                                             <th></th>
                                                         </tr>
@@ -802,7 +1111,7 @@
                                 </div>
                             </div>
 
-                            <div class="panel panel-info">
+                            <div id="divAntigenToday" class="panel panel-info">
 
                                 <div class="panel-body">
                                     <div class="col-md-12 form-group">
@@ -963,6 +1272,7 @@
 
                     </div>
 
+
                 </div>
                 <%-- .data-step-2--%>
 
@@ -974,13 +1284,23 @@
                     <div class="col-md-12">
 
                         <div class="col-md-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">General Examination</div>
+                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden; text-align:left; padding-left:10px">
+                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-12"><hr /></div>
+
                             <div class="col-md-12 form-group">
                                 <div class="col-md-3 form-group">
                                     <div class="col-md-12">
                                         <label for="ChronicIllnessName" class="control-label pull-left">Review of Systems</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" />
+                                        <asp:DropDownList runat="server" ID="ddlExaminationType" CssClass="form-control input-sm" ClientIDMode="Static" onchange="loadSystemReviews();" />
                                     </div>
                                 </div>
 
@@ -1022,8 +1342,8 @@
                                                 <tr>
                                                     <th><span class="text-primary">ExaminationTypeID</span></th>
                                                     <th><span class="text-primary">ExaminationID</span></th>
-                                                    <th><span class="text-primary">Examination Type</span></th>
-                                                    <th><span class="text-primary">Examination</span></th>
+                                                    <th><span class="text-primary">Review of systems</span></th>
+                                                    <th><span class="text-primary">Findings</span></th>
                                                     <th><span class="text-primary">Findings</span></th>
                                                     <th></th>
                                                 </tr>
@@ -1048,80 +1368,73 @@
 
 
                     <div class="col-md-12">
+                        
+
+                    <div class="col-md-12">
+                        <div class="form-group col-md-12" style="text-align: left">
+                                <asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+
+                            </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <h1 class="col-md-12">Patient Diagnosis and Treatment</h1>
                         <div class="col-md-12">
-
-                            <div class="col-md-4">
-                                <%-- <h1 class="col-md-12">Positive Health,Dignity & Prevention (PHDP)</h1>--%>
-                                <div class="col-md-12">
-                                    <hr />
-                                </div>
-                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                    <ContentTemplate>
-                                        <div class="form-group col-md-12" style="text-align: left">
-                                            <asp:CheckBoxList ID="cblPHDP" runat="server"></asp:CheckBoxList>
-
-                                        </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <h1 class="col-md-12">Patient Diagnosis and Treatment</h1>
-                                <div class="col-md-12">
-                                    <hr />
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">Diagnosis (ICD 10 Codes)</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <label class="control-label pull-left">Treatment</label>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label class="control-label pull-left">Action</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-6 form-group">
-                                        <input type="text" id="Diagnosis" class="form-control input-sm" placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />
-                                    </div>
-
-                                    <div class="col-md-5 form-group">
-                                        <input type="text" id="DiagnosisTreatment" class="form-control input-sm" placeholder="treatment" runat="server" clientidmode="Static" />
-                                    </div>
-                                    <div class="col-md-1 form-group">
-                                        <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDiagnosis" onclick="AddDiagnosis();">Add</button>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 form-group">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">Diagnosis</div>
-                                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
-                                            <table id="dtlDiagnosis" class="table table-bordered table-striped" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th><span class="text-primary">Diagnosis</span></th>
-                                                        <th><span class="text-primary">Treatment</span></th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <hr />
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Diagnosis (ICD 10 Codes)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="control-label pull-left">Treatment</label>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="control-label pull-left">Action</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6 form-group">
+                                <input type="text" id="Diagnosis" class="form-control input-sm" placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />
+                            </div>
+
+                            <div class="col-md-5 form-group">
+                                <input type="text" id="DiagnosisTreatment" class="form-control input-sm" placeholder="treatment" runat="server" clientidmode="Static" />
+                            </div>
+                            <div class="col-md-1 form-group">
+                                <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDiagnosis" onclick="AddDiagnosis();">Add</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Diagnosis</div>
+                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                    <table id="dtlDiagnosis" class="table table-bordered table-striped" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="text-primary">Diagnosis</span></th>
+                                                <th><span class="text-primary">Treatment</span></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        
                         <div class="col-md-12">
                             <hr />
                         </div>
 
                         <div class="col-md-12">
                             <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal">Prescibe Drugs</button>
                         </div>
 
                         <!-- Modal -->
@@ -1241,6 +1554,23 @@
                             </div>
 
                         </div>
+
+                        <div id="pharmacyModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width:100%">
+                            <div class="modal-dialog" style="width:100%">
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width:100%">
+                                    <div class="modal-body" style="width:100%">
+                                        <div class="row">
+                                            <uc:ucPharmacyPrescription runat="server" ID="ucPharmacyPrescription" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                         <div class="col-md-12">
                             <hr />
                         </div>
@@ -1299,6 +1629,14 @@
                     </div>
                 </div>
 
+                <div class="actions">
+                        <button type="button" class="btn btn-default btn-prev">
+                            <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
+                        <button type="button" class="btn btn-primary btn-next" data-last="Complete">
+                            Next
+		                            <span class="glyphicon glyphicon-arrow-right"></span>
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -1309,6 +1647,11 @@
 <script type="text/javascript">
     var genderId = <%=genderID%>;
     var gender = "<%=gender%>";
+    var Age = "<%=age%>";
+    document.getElementById('txtPresentingComplaintsID').style.display = 'none';
+    document.getElementById('txtAllergyId').style.display = 'none';
+    document.getElementById('txtReactionTypeID').style.display = 'none';
+    
 
     $(document).ready(function () {
         $('.errorBlock1').hide();
@@ -1322,6 +1665,19 @@
         $("#IptDetailsForm").hide();
         $("#IptOutcomeDetailsForm").hide();
         //showHideFPControls();
+        loadPresentingComplaints();
+        loadAllergies();
+        loadAllergyReactions();
+        showHidePresentingComplaintsDivs();
+        if(Age > 15)
+        {
+            document.getElementById('divAntigenToday').style.display = 'none';
+        }
+        else
+        {
+            document.getElementById('divAntigenToday').style.display = 'block';
+        }
+
 
         var getVisitDateVal = "<%= this.visitdateval %>";
         var getFemaleLMPVal = "<%= this.LMPval %>";
@@ -1351,12 +1707,26 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
+        
+        $('#PCDateOfOnset').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            date: 0
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
         $('#OnsetDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
            
+        $('#ChronicIllnessOnsetDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            date: 0
+            //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+        
         $('#FemaleLMP').datepicker({
             allowPastDates: true,
             date: getFemaleLMPVal,
@@ -1494,7 +1864,24 @@
             paging: false,
             searching: false,
             info: false,
-            ordering: false
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [1],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [2],
+                "visible": false,
+                "searchable": false
+            }
+            ]
         });
 
         var vaccineTable = $('#dtlVaccines').DataTable({
@@ -1561,6 +1948,28 @@
             searching: false,
             info: false,
             ordering: false
+        });
+
+
+        var presentingComplaintsTable = $('#dtlPresentingComplaints').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/LoadComplaints",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ]
         });
 
         var index;
@@ -1672,6 +2081,22 @@
                 }
                     
             });
+
+        ////dtlPresentingComplaints
+        $("#dtlPresentingComplaints").on('click',
+            '.btnDelete',
+            function () {
+                presentingComplaintsTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = PresentingComplaintsList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    PresentingComplaintsList.splice(index, 1);
+                }
+                    
+            });
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1772,14 +2197,10 @@
 
         function savePatientEncounterPresentingComplaint() {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
-            //var visitScheduled = $('input[name="Scheduled"]:checked').val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
-            var ANCProfile = $("input[name$=ANC]:checked").val();      
-            if (ANCProfile == undefined)
-            {
-                ANCProfile = "99";
-            }
+            
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
+            var anyComplaints = $("input[name$=anyComplaints]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
@@ -1809,11 +2230,24 @@
             }
             catch (ex) {  }
 
+            var rowCount = $('#dtlPresentingComplaints tbody tr').length;
+            var presentingComplaintsArray = new Array();
+            try {
+                for (var i = 0 ; i < rowCount; i++) {
+                    presentingComplaintsArray[i] = {
+                        "presentingComplaintID": presentingComplaintsTable.row(i).data()[0],
+                        "presentingComplaint": presentingComplaintsTable.row(i).data()[1],
+                        "onsetDate": presentingComplaintsTable.row(i).data()[2]
+                    }
+                }
+            }
+            catch (ex) {  }
+
             
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientEncounterPresentingComplaints",
-                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "'}",
+                data: "{'VisitDate':'" + visitDate + "','VisitScheduled':'" + visitScheduled + "','VisitBy':'" + visitBy + "','anyComplaints':'" + anyComplaints + "','Complaints':'" + complaints + "','TBScreening':'" + tbscreening + "','NutritionalStatus':'" + nutritionscreening + "','adverseEvent':'" + JSON.stringify(adverseEventsArray) + "','presentingComplaints':'" + JSON.stringify(presentingComplaintsArray) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -1839,13 +2273,22 @@
             var rowCount = $('#dtlChronicIllness tbody tr').length;
             var chronicIllnessArray = new Array();
             try {
+                var active = 0;
                 for (var i = 0 ; i < rowCount; i++) {
+
+                    if ($('#chkChronic' + chronicTable.row(i).data()[0] + '').is(":checked"))
+                        active = 1;
+                    else
+                        active = 0;
+          
                     chronicIllnessArray[i] = {
                         "chronicIllnessID": chronicTable.row(i).data()[0],
                         "chronicIllness": chronicTable.row(i).data()[1],
                         "treatment": chronicTable.row(i).data()[2],
                         "dose": chronicTable.row(i).data()[3],
-                        "duration": chronicTable.row(i).data()[4],
+                        "OnsetDate": chronicTable.row(i).data()[4],
+                        "Active": active
+                        //"Active": chronicTable.row(i).checkboxes.selected()[5]
                     }
                 }
             }
@@ -1866,9 +2309,13 @@
             try {
                 for (var i = 0 ; i < rowCount; i++) {
                     AllergyArray[i] = {
-                        "allergy": allergyTable.row(i).data()[0],
-                        "allergyResponse": allergyTable.row(i).data()[1],
-                        "allergyDate": allergyTable.row(i).data()[2]
+                        "allergyID": allergyTable.row(i).data()[0],
+                        "reactionID": allergyTable.row(i).data()[1],
+                        "severityID": allergyTable.row(i).data()[2],
+                        "allergy": allergyTable.row(i).data()[3],
+                        "reaction": allergyTable.row(i).data()[4],
+                        "severity": allergyTable.row(i).data()[5],
+                        "onsetDate": allergyTable.row(i).data()[6]
                     }
                 }
             }
@@ -2297,5 +2744,139 @@
         $("#IptOutcomeDetailsForm").show();
         $("#IptClientWorkupForm").hide();
         $("#IptDetailsForm").hide();
+    }
+
+    function loadPresentingComplaints() {      
+        var pcInput = document.getElementById('<%= txtPresentingComplaints.ClientID %>');
+        var awesomplete = new Awesomplete(pcInput, {
+                   minChars: 1
+               });
+               
+               document.getElementById('<%= txtPresentingComplaints.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   $("#<%=txtPresentingComplaintsID.ClientID%>").val(result[0]);
+                   $("#<%=txtPresentingComplaints.ClientID%>").val(result[1]);
+               });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/GetPresentingComplaints",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+     
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+                       
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });    
+                
+    }
+
+    function loadAllergies() {      
+        var pcInput = document.getElementById('<%= txtAllergy.ClientID %>');
+        var awesomplete = new Awesomplete(pcInput, {
+                   minChars: 1
+               });
+               
+               document.getElementById('<%= txtAllergy.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   $("#<%=txtAllergyId.ClientID%>").val(result[0]);
+                   $("#<%=txtAllergy.ClientID%>").val(result[1]);
+               });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadAllergies",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+     
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+                       
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });    
+                
+    }
+
+    function loadAllergyReactions() {      
+        var pcInput = document.getElementById('<%= txtReactionType.ClientID %>');
+        var awesomplete = new Awesomplete(pcInput, {
+                   minChars: 1
+               });
+               
+               document.getElementById('<%= txtReactionType.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   $("#<%=txtReactionTypeID.ClientID%>").val(result[0]);
+                   $("#<%=txtReactionType.ClientID%>").val(result[1]);
+               });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadAllergyReactions",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+     
+            success: function (data) {
+                var serverData = data.d;
+                var PCList = [];
+                       
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    PCList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = PCList;
+            }
+        });    
+                
+    }
+
+    function loadSystemReviews() {
+        var systemReviewName = $('#ddlExaminationType').find(":selected").text();
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+            data: "{'masterName': '" + systemReviewName + "'}",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+     
+            success: function (data) {
+                var serverData = data.d;
+                var obj = $.parseJSON(serverData);
+                
+                $("#<%=ddlExamination.ClientID%>").find('option').remove().end();
+			    $("#<%=ddlExamination.ClientID%>").append('<option value="0">Select</option>');
+                for (var i = 0; i < obj.length; i++) {
+                    $("#<%=ddlExamination.ClientID%>").append('<option value="' + obj[i]["ItemId"] + '">' + obj[i]["DisplayName"] + '</option>');
+                }
+            }
+        });         
+    }
+
+    function showHidePresentingComplaintsDivs() { 
+        var anyComplaints = $("input[name$=anyComplaints]:checked").val();
+        if(anyComplaints == 1)
+        {
+            document.getElementById('presentingComplaintsCtrls').style.display = 'block';
+            document.getElementById('presentingComplaintsTable').style.display = 'block';
+            document.getElementById('presentingComplaintsNotes').style.display = 'block';
+        }
+        else{
+            document.getElementById('presentingComplaintsCtrls').style.display = 'none';
+            document.getElementById('presentingComplaintsTable').style.display = 'none';
+            document.getElementById('presentingComplaintsNotes').style.display = 'none';
+        }
     }
 </script>

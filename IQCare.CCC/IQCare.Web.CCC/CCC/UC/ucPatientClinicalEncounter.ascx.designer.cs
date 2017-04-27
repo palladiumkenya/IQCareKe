@@ -49,6 +49,60 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList ddlVisitBy;
         
         /// <summary>
+        /// rdAnyComplaintsYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyComplaintsYes;
+        
+        /// <summary>
+        /// rdAnyComplaintsNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyComplaintsNo;
+        
+        /// <summary>
+        /// txtPresentingComplaintsID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPresentingComplaintsID;
+        
+        /// <summary>
+        /// txtPresentingComplaints control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPresentingComplaints;
+        
+        /// <summary>
+        /// txtPCOnsetDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPCOnsetDate;
+        
+        /// <summary>
+        /// complaints control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea complaints;
+        
+        /// <summary>
         /// tbInfected control.
         /// </summary>
         /// <remarks>
@@ -175,15 +229,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::IQCare.Web.CCC.UC.ucIptOutcome IptOutcomeForm;
         
         /// <summary>
-        /// complaints control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea complaints;
-        
-        /// <summary>
         /// tbscreeningstatus control.
         /// </summary>
         /// <remarks>
@@ -191,6 +236,33 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList tbscreeningstatus;
+        
+        /// <summary>
+        /// txtHeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtHeight;
+        
+        /// <summary>
+        /// txtWeight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWeight;
+        
+        /// <summary>
+        /// txtBMI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBMI;
         
         /// <summary>
         /// nutritionscreeningstatus control.
@@ -265,13 +337,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox treatmentDose;
         
         /// <summary>
-        /// treatmentDuration control.
+        /// txtOnsetDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox treatmentDuration;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtOnsetDate;
+        
+        /// <summary>
+        /// txtAllergyId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAllergyId;
         
         /// <summary>
         /// txtAllergy control.
@@ -283,13 +364,31 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtAllergy;
         
         /// <summary>
-        /// txtAllergyResponse control.
+        /// txtReactionTypeID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAllergyResponse;
+        protected global::System.Web.UI.WebControls.TextBox txtReactionTypeID;
+        
+        /// <summary>
+        /// txtReactionType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReactionType;
+        
+        /// <summary>
+        /// ddlAllergySeverity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAllergySeverity;
         
         /// <summary>
         /// txtAllergyDate control.
@@ -328,6 +427,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtVaccinationDate;
         
         /// <summary>
+        /// cblGeneralExamination control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblGeneralExamination;
+        
+        /// <summary>
         /// ddlExaminationType control.
         /// </summary>
         /// <remarks>
@@ -353,15 +461,6 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
-        
-        /// <summary>
-        /// UpdatePanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
         /// cblPHDP control.
@@ -470,6 +569,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label adherenceScore;
+        
+        /// <summary>
+        /// ucPharmacyPrescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPharmacyPrescription ucPharmacyPrescription;
         
         /// <summary>
         /// arvAdherance control.

@@ -16,24 +16,24 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientEncounterLogic
     {
-        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
-            //string[] fpMethodArray = fpMethod.Split(',');
-            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, advEvent);
+            var pComplaints = parser.Deserialize<List<PresentingComplaints>>(presentingComplaints);
+            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, userId, advEvent, pComplaints);
             return val;
         }
 
-        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string chronicIllness, string Vaccines, string Allergies)
+        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string userID, string chronicIllness, string Vaccines, string Allergies)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var chrIllness = parser.Deserialize<List<ChronicIlness>>(chronicIllness);
             var vacc = parser.Deserialize<List<Vaccines>>(Vaccines);
             var allergy = parser.Deserialize<List<Allergies>>(Allergies);
-            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, chrIllness, vacc, allergy);
+            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, userID, chrIllness, vacc, allergy);
         }
 
         public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string physicalExam)
@@ -63,6 +63,12 @@ namespace IQCare.CCC.UILogic
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             return patientEncounter.getPatientEncounterAdverseEvents(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterComplaints(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterComplaints(PatientMasterVisitID, PatientID);
         }
 
         public DataTable loadPatientEncounterChronicIllness(string PatientMasterVisitID, string PatientID)
@@ -325,7 +331,16 @@ namespace IQCare.CCC.UILogic
                         //        theFrmRoot.SelectAction = TreeNodeSelectAction.None;
                         //    }
                         //}
-                        theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+
+                        if(theDR["VisitName"].ToString() == "Green Card")
+                        {
+                            theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+                        else if(theDR["VisitName"].ToString() == "Pharmacy")
+                        {
+                            theFrmRoot.NavigateUrl = "PharmacyPrescription.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+                        
                         theFrmRoot.Value = "";// Convert.ToInt32(PId) + "%" + theDR["OrderNo"].ToString() + "%" + theDR["LocationID"].ToString() + "%" + PtnARTStatus + "%" + theDR["Module"].ToString() + "%" + theDR["VisitName"].ToString();
                         theMRoot.ChildNodes.Add(theFrmRoot);
                     }
