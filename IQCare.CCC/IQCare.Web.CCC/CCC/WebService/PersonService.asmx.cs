@@ -419,20 +419,11 @@ namespace IQCare.Web.CCC.WebService
 
                     if (contacts.Count > 0)
                     {
-                        if (alternativeNumber != null)
-                        {
-                            alternativeNumber = _utility.Encrypt(alternativeNumber);
-                        }
-                        if (emailAddress != null)
-                        {
-                            emailAddress = _utility.Encrypt(emailAddress);
-                        }
-
                         PersonContact perContact = new PersonContact();
                         perContact.Id = contacts[0].Id;
                         perContact.PersonId = contacts[0].PersonId;
-                        perContact.PhysicalAddress = _utility.Encrypt(physicalAddress);
-                        perContact.MobileNumber = _utility.Encrypt(mobileNumber);
+                        perContact.PhysicalAddress = physicalAddress;
+                        perContact.MobileNumber = mobileNumber;
                         perContact.AlternativeNumber = alternativeNumber;
                         perContact.EmailAddress = emailAddress;
 
@@ -674,9 +665,9 @@ namespace IQCare.Web.CCC.WebService
                 if (guardian!=null)
                 {
                     PatientDetails patientDetails = new PatientDetails();
-                    patientDetails.FirstName = _utility.Decrypt(guardian.FirstName);
-                    patientDetails.MiddleName = _utility.Decrypt(guardian.MiddleName);
-                    patientDetails.LastName = _utility.Decrypt(guardian.LastName);
+                    patientDetails.FirstName = guardian.FirstName;
+                    patientDetails.MiddleName = guardian.MiddleName;
+                    patientDetails.LastName = guardian.LastName;
                     patientDetails.Gender = guardian.Sex;
 
 
@@ -733,9 +724,9 @@ namespace IQCare.Web.CCC.WebService
                     keyPopulation = keyPopulationManager.GetAllPatientPopulations(Patient[0].PersonId);
                     entryPoints = patientEntryPoint.GetPatientEntryPoints(Patient[0].Id);
 
-                    patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
-                    patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
-                    patientDetails.LastName = _utility.Decrypt(Patient[0].LastName);
+                    patientDetails.FirstName = Patient[0].FirstName;
+                    patientDetails.MiddleName = Patient[0].MiddleName;
+                    patientDetails.LastName = Patient[0].LastName;
                     patientDetails.PatientType = Patient[0].PatientType;
                     patientDetails.PatientTypeString = LookupLogic.GetLookupNameById(Patient[0].PatientType);
                     patientDetails.EnrollmentNumber = Patient[0].EnrollmentNumber;
@@ -768,7 +759,7 @@ namespace IQCare.Web.CCC.WebService
                         ? "Yes"
                         : "No";
 
-                    patientDetails.NationalId = _utility.Decrypt(Patient[0].NationalId);
+                    patientDetails.NationalId = Patient[0].NationalId;
 
                     if (maritalsStatus.Count > 0)
                     {
@@ -779,9 +770,9 @@ namespace IQCare.Web.CCC.WebService
 
                     if (Guardian != null)
                     {
-                        patientDetails.GurdianFNames = _utility.Decrypt(Guardian.FirstName);
-                        patientDetails.GurdianMName = _utility.Decrypt(Guardian.MiddleName);
-                        patientDetails.GurdianLName = _utility.Decrypt(Guardian.LastName);
+                        patientDetails.GurdianFNames = Guardian.FirstName;
+                        patientDetails.GurdianMName = Guardian.MiddleName;
+                        patientDetails.GurdianLName = Guardian.LastName;
 
                         patientDetails.GuardianGender = Guardian.Sex;
                         patientDetails.GuardianId = Guardian.Id;
@@ -802,10 +793,10 @@ namespace IQCare.Web.CCC.WebService
                     //Person Contacts
                     if (personContacts.Count > 0)
                     {
-                        patientDetails.PatientPostalAddress = _utility.Decrypt(personContacts[0].PhysicalAddress);
-                        patientDetails.MobileNumber = _utility.Decrypt(personContacts[0].MobileNumber);
-                        patientDetails.AlternativeNumber = _utility.Decrypt(personContacts[0].AlternativeNumber);
-                        patientDetails.EmailAddress = _utility.Decrypt(personContacts[0].EmailAddress);
+                        patientDetails.PatientPostalAddress = personContacts[0].PhysicalAddress;
+                        patientDetails.MobileNumber = personContacts[0].MobileNumber;
+                        patientDetails.AlternativeNumber = personContacts[0].AlternativeNumber;
+                        patientDetails.EmailAddress = personContacts[0].EmailAddress;
                     }
                     //Treatment Supporter
                     if (patientTreatmentSupporter.Count > 0)
@@ -813,9 +804,9 @@ namespace IQCare.Web.CCC.WebService
                         supporter = personLookUpManager.GetPersonById(patientTreatmentSupporter[0].SupporterId);
                         if (supporter != null)
                         {
-                            patientDetails.tsFname = _utility.Decrypt(supporter.FirstName);
-                            patientDetails.tsMiddleName = _utility.Decrypt(supporter.MiddleName);
-                            patientDetails.tsLastName = _utility.Decrypt(supporter.LastName);
+                            patientDetails.tsFname = supporter.FirstName;
+                            patientDetails.tsMiddleName = supporter.MiddleName;
+                            patientDetails.tsLastName = supporter.LastName;
                             patientDetails.tsGender = supporter.Sex;
                             patientDetails.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
                             patientDetails.PatientTreatmentSupporterId = supporter.Id;
@@ -859,9 +850,9 @@ namespace IQCare.Web.CCC.WebService
                 var newresults = results.Select(x => new string[]
                    {
                         x.Id.ToString(),
-                        _utility.Decrypt(x.FirstName),
-                        _utility.Decrypt(x.MiddleName),
-                        _utility.Decrypt(x.LastName),
+                        x.FirstName,
+                        x.MiddleName,
+                        x.LastName,
                         patientLookup.GetDobByPersonId(x.Id),
                         LookupLogic.GetLookupNameById(x.Sex),
                         patientLookup.isPatientExists(x.Id).ToString(),

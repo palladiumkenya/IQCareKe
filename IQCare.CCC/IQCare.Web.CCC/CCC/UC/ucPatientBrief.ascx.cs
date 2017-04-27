@@ -38,8 +38,8 @@ namespace IQCare.Web.CCC.UC
                 DoB = Convert.ToDateTime(x.DateOfBirth);
                 Session["DateOfBirth"] = x.DateOfBirth.ToString("dd-MMM-yyyy");
 
-                lblPatientNames.Text = _utility.Decrypt(x.LastName) + ", " + _utility.Decrypt(x.FirstName) + " " +
-                                       _utility.Decrypt(x.MiddleName)+" ";
+                lblPatientNames.Text = x.LastName + ", " + x.FirstName + " " +
+                                       x.MiddleName+" ";
 
                 //    lblLastName.Text = "<strong><i>" + _utility.Decrypt(x.LastName) + "</i></strong>";
                 if (x.Active)

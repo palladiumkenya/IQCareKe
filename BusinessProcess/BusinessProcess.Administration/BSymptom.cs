@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using Interface.Administration;
 using DataAccess.Base;
 using DataAccess.Common;
@@ -31,13 +30,9 @@ namespace BusinessProcess.Administration
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
-
+               
                 ClsObject SymptomManager = new ClsObject();
-                SymptomManager.Connection = this.Connection;
-                SymptomManager.Transaction = this.Transaction;
-
+               
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@SymptomCategoryID", SqlDbType.Int, SymptomCategoryID.ToString());
                 ClsUtility.AddParameters("@SymptomName", SqlDbType.VarChar, SymptomName);
@@ -51,10 +46,7 @@ namespace BusinessProcess.Administration
                     theBL.DataElements["MessageText"] = "Error in Saving Symptom record. Try Again..";
                     AppException.Create("#C1", theBL);
                 }
-
-
-                DataMgr.CommitTransaction(this.Transaction);
-                DataMgr.ReleaseConnection(this.Connection);
+                 SymptomManager = null;
                 return Convert.ToInt32(theDR[0]);
             }
             catch
@@ -72,13 +64,9 @@ namespace BusinessProcess.Administration
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
-
+              
                 ClsObject SymptomManager = new ClsObject();
-                SymptomManager.Connection = this.Connection;
-                SymptomManager.Transaction = this.Transaction;
-
+              
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@SymptomCategoryID", SqlDbType.Int, SymptomCategoryID.ToString());
                 ClsUtility.AddParameters("@SymptomName", SqlDbType.VarChar, SymptomName);
@@ -93,10 +81,7 @@ namespace BusinessProcess.Administration
                     theBL.DataElements["MessageText"] = "Error in Saving Symptom record. Try Again..";
                     AppException.Create("#C1", theBL);
                 }
-
-
-                DataMgr.CommitTransaction(this.Transaction);
-                DataMgr.ReleaseConnection(this.Connection);
+                SymptomManager = null;
                 return Convert.ToInt32(theDR[0]);
             }
             catch

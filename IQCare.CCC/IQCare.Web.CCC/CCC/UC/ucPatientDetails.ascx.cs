@@ -38,7 +38,7 @@ namespace IQCare.Web.CCC.UC
                 DoB = Convert.ToDateTime(x.DateOfBirth);
                 Session["DateOfBirth"] = x.DateOfBirth.ToString("dd-MMM-yyyy");
 
-                lblLastName.Text = "<strong><i>"+_utility.Decrypt(x.LastName)+"</i></strong>";
+                lblLastName.Text = "<strong><i>"+x.LastName+"</i></strong>";
                 if (x.Active)
                 {
                     lblStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
@@ -62,7 +62,7 @@ namespace IQCare.Web.CCC.UC
                 }
                 
 
-                lblOtherNames.Text = "<strong></i>"+_utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName)+"</i></strong>";
+                lblOtherNames.Text = "<strong></i>"+x.FirstName + ' ' + x.MiddleName+"</i></strong>";
 
                 var age = PatientManager.CalculateYourAge(DoB);
 
