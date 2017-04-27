@@ -78,38 +78,7 @@
             <div class="tab-content">
                  <div id="Registration" class="tab-pane">
                      <div class="col-md-12 col-xs-12">
-                         <!--<div class="col-md-4 col-xs-4 col-sm-4">-->
-                             <!--<div class="col-md-12 label label-info"><label class="control-label label label-info"><strong class="text-primary"></strong><h6>Patient Bio</h6></label></div>
-                             <div class="col-md-12"><hr style="margin-top:1%"/></div>-->
-                             <!--
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">First Name:</label></div>
-                                 <div class="col-md-6">                     
-                                     <asp:Label ID="txtFirstName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Middle Name:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtMiddleName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Last Name:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtLastName" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6" style="padding: 0"><label class="control-label pull-left">Patient Population:</label></div>
-                                 <div class="col-md-6" style="padding: 0">                             
-                                     <asp:Label ID="drpPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
-                                 </div>
-                             </div> -->
-                         <!--</div>-->
+                         
                          <div class="col-md-4 col-xs-4 col-sm-4">
                              
                              

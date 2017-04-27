@@ -93,7 +93,7 @@ namespace IQCare.Web.CCC.WebService
                         PatientType = patientType,
                         PatientIndex = datevalue.Year.ToString() + '-' + PersonId,
                         DateOfBirth = DateTime.Parse(personDateOfBirth),
-                        NationalId =utility.Encrypt(nationalId),
+                        NationalId =(nationalId),
                         Active = true,
                         CreatedBy = userId,
                         CreateDate = DateTime.Now,
@@ -189,9 +189,9 @@ namespace IQCare.Web.CCC.WebService
 
 
                             ptn_Pk = mstPatientLogic.InsertMstPatient(
-                                utility.Decrypt(patient_person_details.FirstName), 
-                                utility.Decrypt(patient_person_details.LastName),
-                                utility.Decrypt(patient_person_details.MiddleName),
+                                (patient_person_details.FirstName), 
+                                (patient_person_details.LastName),
+                                (patient_person_details.MiddleName),
                                 facility.FacilityID, enrollmentBlueCardId, entryPointId,
                                 patientEnrollment.EnrollmentDate, sex,
                                 patient.DateOfBirth,

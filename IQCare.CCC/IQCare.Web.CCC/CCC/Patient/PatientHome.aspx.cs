@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.Patient
             var patientTransfer=new PatientTransferInmanager();
             var patientDiagnosis=new PatientHivDiagnosisManager();
             var patientEntryPoint=new PatientEntryPointManager();
-
+            Session["TechnicalAreaId"] = 203;
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
             var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["patientId"]));

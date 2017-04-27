@@ -6,10 +6,10 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-md-12">
-                            <div class="col-md-4">
-                                <label class="control-lable pull-left fa fa-sort-amount-asc"> Filter by Date</label>
+                            <div class="col-md-6" style="padding:1px">
+                                <label class="control-label pull-left fa fa-sort-amount-asc">Filter by Date</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="datepicker fuelux form-group" id="AppointmentDate">
                                     <div class="input-group">
                                         <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Date"></asp:TextBox>
@@ -107,27 +107,27 @@
                             <hr />
                         </div>
                         <div class="col-md-12 col-xs-12 col-sm-12">
-                            <div class="col-md-3 col-xs-12 col-sm-12">
-                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Booked Today :</asp:Label></h5></div>
-                                <div class="col-md-12">
-                                    <h6> <asp:Label runat="server" ID="lblbooked" CssClass="text-info pull-left"> <span class="badge">0</span></asp:Label></h6>
+                            <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
+                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Booked:</asp:Label></h5></div>
+                                <div class="col-md-6">
+                                    <h6> <asp:Label runat="server" ID="lblbooked" CssClass="text-info pull-left"><span class="badge">0</span></asp:Label></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-xs-12 col-sm-12">
-                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Visited Today :</asp:Label></h5></div>
-                                <div class="col-md-12">
-                                     <h6><asp:Label runat="server" ID="lblvisited" CssClass="text-info pull-left"> <span class="badge"> 0 </span> </asp:Label></h6>
+                            <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
+                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Visited:</asp:Label></h5></div>
+                                <div class="col-md-6">
+                                     <h6><asp:Label runat="server" ID="lblvisited" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-xs-12 col-sm-12">
-                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server">Not Visited :</asp:Label></h5></div>
-                                <div class="col-md-12">
-                                    <h6> <asp:Label runat="server" ID="lblpending" CssClass="text-info pull-left"> <span class="badge"> 0 </span> </asp:Label></h6>
+                            <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
+                                <div class="col-md-8" ><h5 class="pull-left"><asp:Label runat="server">Not Visited :</asp:Label></h5></div>
+                                <div class="col-md-3">
+                                    <h6> <asp:Label runat="server" ID="lblpending" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-xs-12 col-sm-12">
-                                <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Walk-ins :</asp:Label></h5></div>
-                                <div class="col-md-12">
+                            <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
+                                <div class="col-md-8"><h5 class="pull-left"><asp:Label runat="server">Walk-ins :</asp:Label></h5></div>
+                                <div class="col-md-4">
                                     <h6> <asp:Label runat="server" ID="lblwalkins" CssClass="text-info pull-left"> <span class="badge"> 0 </span></asp:Label></h6>
                                 </div>
                             </div>
