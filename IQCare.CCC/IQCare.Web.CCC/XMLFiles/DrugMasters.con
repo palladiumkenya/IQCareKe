@@ -18,7 +18,7 @@
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNO" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SRNO" type="xs:int" minOccurs="0" />
                 <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
               </xs:sequence>
@@ -57,7 +57,7 @@
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNO" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SRNO" type="xs:int" minOccurs="0" />
                 <xs:element name="Deleteflag" type="xs:int" minOccurs="0" />
                 <xs:element name="multiplier" type="xs:int" minOccurs="0" />
               </xs:sequence>
@@ -68,7 +68,7 @@
               <xs:sequence>
                 <xs:element name="ID" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNO" type="xs:decimal" minOccurs="0" />
+                <xs:element name="SRNO" type="xs:int" minOccurs="0" />
                 <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="UserID" type="xs:int" minOccurs="0" />
                 <xs:element name="CreateDate" type="xs:dateTime" minOccurs="0" />
@@ -2823,43 +2823,43 @@
   <Mst_FrequencyUnits>
     <Id>1</Id>
     <Name>OD</Name>
-    <SRNO>1.00</SRNO>
+    <SRNO>1</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>2</Id>
     <Name>BD</Name>
-    <SRNO>2.00</SRNO>
+    <SRNO>2</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>3</Id>
     <Name>TD</Name>
-    <SRNO>3.00</SRNO>
+    <SRNO>3</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>4</Id>
     <Name>QD</Name>
-    <SRNO>4.00</SRNO>
+    <SRNO>4</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>5</Id>
     <Name>Weekly</Name>
-    <SRNO>5.00</SRNO>
+    <SRNO>5</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>6</Id>
     <Name>PRN</Name>
-    <SRNO>6.00</SRNO>
+    <SRNO>6</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_FrequencyUnits>
     <Id>7</Id>
     <Name>As directed</Name>
-    <SRNO>7.00</SRNO>
+    <SRNO>7</SRNO>
     <Deleteflag>0</Deleteflag>
   </Mst_FrequencyUnits>
   <Mst_Drug>
@@ -12659,217 +12659,217 @@
   <Mst_Frequency>
     <Id>1</Id>
     <Name>OD</Name>
-    <SRNO>1.00</SRNO>
+    <SRNO>1</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>1</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>2</Id>
     <Name>BD</Name>
-    <SRNO>2.00</SRNO>
+    <SRNO>2</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>2</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>3</Id>
     <Name>q4hr</Name>
-    <SRNO>3.00</SRNO>
+    <SRNO>3</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>4</Id>
     <Name>q6hr</Name>
-    <SRNO>4.00</SRNO>
+    <SRNO>4</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>5</Id>
     <Name>TID</Name>
-    <SRNO>5.00</SRNO>
+    <SRNO>5</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>3</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>6</Id>
     <Name>QID</Name>
-    <SRNO>6.00</SRNO>
+    <SRNO>6</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>4</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>7</Id>
     <Name>PRN</Name>
-    <SRNO>7.00</SRNO>
+    <SRNO>7</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>8</Id>
     <Name>TD</Name>
-    <SRNO>8.00</SRNO>
+    <SRNO>8</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>9</Id>
     <Name>5 times daily</Name>
-    <SRNO>9.00</SRNO>
+    <SRNO>9</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>5</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>10</Id>
     <Name>24 tabs over 60hrs</Name>
-    <SRNO>10.00</SRNO>
+    <SRNO>10</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>11</Id>
     <Name>BIW</Name>
-    <SRNO>11.00</SRNO>
+    <SRNO>11</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>12</Id>
     <Name>q8hrs</Name>
-    <SRNO>12.00</SRNO>
+    <SRNO>12</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>13</Id>
     <Name>q12hr</Name>
-    <SRNO>13.00</SRNO>
+    <SRNO>13</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>14</Id>
     <Name>3xweek</Name>
-    <SRNO>14.00</SRNO>
+    <SRNO>14</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>15</Id>
     <Name>1OD</Name>
-    <SRNO>15.00</SRNO>
+    <SRNO>15</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>16</Id>
     <Name>2OD</Name>
-    <SRNO>16.00</SRNO>
+    <SRNO>16</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>17</Id>
     <Name>q72hr</Name>
-    <SRNO>17.00</SRNO>
+    <SRNO>17</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>18</Id>
     <Name>q1hr</Name>
-    <SRNO>18.00</SRNO>
+    <SRNO>18</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>19</Id>
     <Name>q2hr</Name>
-    <SRNO>19.00</SRNO>
+    <SRNO>19</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>20</Id>
     <Name>AID</Name>
-    <SRNO>20.00</SRNO>
+    <SRNO>20</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>21</Id>
     <Name>As directed</Name>
-    <SRNO>21.00</SRNO>
+    <SRNO>21</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>22</Id>
     <Name>2-3 times a week</Name>
-    <SRNO>22.00</SRNO>
+    <SRNO>22</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>23</Id>
     <Name>X1</Name>
-    <SRNO>23.00</SRNO>
+    <SRNO>23</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>24</Id>
     <Name>Now</Name>
-    <SRNO>24.00</SRNO>
+    <SRNO>24</SRNO>
     <Deleteflag>0</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>25</Id>
     <Name>monthly</Name>
-    <SRNO>25.00</SRNO>
+    <SRNO>25</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>26</Id>
     <Name>qweek</Name>
-    <SRNO>26.00</SRNO>
+    <SRNO>26</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>27</Id>
     <Name>qmonth</Name>
-    <SRNO>27.00</SRNO>
+    <SRNO>27</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>28</Id>
     <Name>3OD</Name>
-    <SRNO>28.00</SRNO>
+    <SRNO>28</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>29</Id>
     <Name>1BD</Name>
-    <SRNO>29.00</SRNO>
+    <SRNO>29</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>30</Id>
     <Name>QHS</Name>
-    <SRNO>30.00</SRNO>
+    <SRNO>30</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>31</Id>
     <Name>bid</Name>
-    <SRNO>31.00</SRNO>
+    <SRNO>31</SRNO>
     <Deleteflag>1</Deleteflag>
     <multiplier>0</multiplier>
   </Mst_Frequency>
