@@ -222,3 +222,4 @@ ModelManifest.xml
 */RemServer/app.config
 /*.con
 /Presentation/aspnet_client
+*.zip

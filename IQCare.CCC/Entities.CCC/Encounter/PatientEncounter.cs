@@ -89,6 +89,7 @@ namespace Entities.CCC.Encounter
             public string CaCX { get; set; }
             public string STIScreening { get; set; }
             public string STIPartnerNotification { get; set; }
+            public string WorkPlan { get; set; }
             public string ARVAdherence { get; set; }
             public string CTXAdherence { get; set; }
             public string nextAppointmentDate { get; set; }
