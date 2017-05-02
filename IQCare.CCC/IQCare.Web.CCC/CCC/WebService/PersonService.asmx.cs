@@ -709,7 +709,8 @@ namespace IQCare.Web.CCC.WebService
                 var personContacts = new List<PersonContactLookUp>();
                 var personContactLookUpManager = new PersonContactLookUpManager();
                 var patientTreatmentSupporterManager = new PatientTreatmentSupporterManager();
-                var patientTreatmentSupporter = new List<PatientTreatmentSupporter>();
+                var patientTreatmentSupporterLookupManager = new PatientTreatmentSupporterLookupManager();
+                var patientTreatmentSupporter = new List<PatientTreatmentSupporterLookup>();
                 var keyPopulationManager = new PatientPopulationManager();
                 var keyPopulation = new List<PatientPopulation>();
                 var patientEntryPoint = new PatientEntryPointManager();
@@ -727,9 +728,10 @@ namespace IQCare.Web.CCC.WebService
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
                     maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(thisPatient.PersonId);
                     personContacts = personContactLookUpManager.GetPersonContactByPersonId(thisPatient.PersonId);
-                    patientTreatmentSupporter =
-                        patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(thisPatient.PersonId);
-                    keyPopulation = keyPopulationManager.GetAllPatientPopulations(thisPatient.PersonId);
+                    /*patientTreatmentSupporter =
+                        patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(thisPatient.PersonId);*/
+                    patientTreatmentSupporter = patientTreatmentSupporterLookupManager.GetAllPatientTreatmentSupporter(thisPatient.PersonId);
+                keyPopulation = keyPopulationManager.GetAllPatientPopulations(thisPatient.PersonId);
                     entryPoints = patientEntryPoint.GetPatientEntryPoints(thisPatient.Id);
 
                     patientDetails.FirstName = (thisPatient.FirstName);

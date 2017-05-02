@@ -437,7 +437,7 @@
                                     </div>
                                
                                    <div class="col-md-2">
-                                        <div class="col-md-12"><label class="required control-label pull-left">Mobile No.</label></div>
+                                        <div class="col-md-12"><label class="control-label pull-left">Mobile No.</label></div>
                                         <div class="col-md-12">
                                              <asp:TextBox  runat="server" type="text" id="PatientMobileNo" name="PatientMobileNo" class="form-control input-sm" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#PatientAlternativeMobile" />
                                         </div>         
@@ -515,7 +515,7 @@
                                  </div>-->
                                
                                <div class="col-md-3">
-                                    <div class="col-md-12"><label class="required control-label pull-left">Mobile Contact.</label></div>
+                                    <div class="col-md-12"><label class="control-label pull-left">Mobile Contact.</label></div>
                                     <div class="col-md-12">
                                          <asp:TextBox  runat="server" type="text" id="TSContacts" class="form-control input-sm" placeholder="Mobile No..." data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}/" />
                                     </div>         
