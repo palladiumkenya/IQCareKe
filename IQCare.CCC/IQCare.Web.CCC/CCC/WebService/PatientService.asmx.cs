@@ -9,9 +9,11 @@ using System.Linq;
 using System.Web.Services;
 using Entities.CCC.Baseline;
 using Entities.CCC.Consent;
+using Entities.CCC.Screening;
 using Interface.CCC.Visit;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Baseline;
+using IQCare.CCC.UILogic.Screening;
 using Microsoft.JScript;
 using Convert = System.Convert;
 
@@ -61,6 +63,22 @@ namespace IQCare.Web.CCC.WebService
                 {
                     Msg = "Patient Vitals Added Successfully!";
                 }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientScreening(int patientId, int patientMasterVisitid, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        {
+            try
+            {
+                var screening=new PatientScreeningManager();
+                Result = screening.AddPatientScreening(patientId, patientMasterVisitid,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
+                Msg = (Result > 0) ? "Patient Screening Added Successfully" : "";
             }
             catch (Exception e)
             {
@@ -120,7 +138,8 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+
             };
             try
             {
@@ -139,7 +158,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId)
+        public string UpdatePatientFamilyTesting(int patientId, int patientMasterVisitId, string firstName, string middleName, string lastName, int sex, DateTime dob, int relationshipId, int baselineHivStatusId, DateTime baselineHivStatusDate, int hivTestingresultId, DateTime hivTestingresultDate, bool cccreferal, string cccReferalNumber, int userId, int personRelationshipId, int hivTestingId, int personId)
         {
             firstName = GlobalObject.unescape(firstName);
             middleName = GlobalObject.unescape(middleName);
@@ -159,7 +178,10 @@ namespace IQCare.Web.CCC.WebService
                 HivTestingResultsDate = hivTestingresultDate,
                 HivTestingResultsId = hivTestingresultId,
                 CccReferal = cccreferal,
-                CccReferaalNumber = cccReferalNumber
+                CccReferaalNumber = cccReferalNumber,
+                PersonRelationshipId = personRelationshipId,
+                HivTestingId = hivTestingId,
+                PersonId = personId
             };
             try
             {
@@ -304,6 +326,7 @@ namespace IQCare.Web.CCC.WebService
             return consentDisplays;
         }
 
+
         private PatientFamilyDisplay MapMembers(PatientFamilyTesting member)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -350,7 +373,9 @@ namespace IQCare.Web.CCC.WebService
                 HivStatusResultDate = member.HivTestingResultsDate,
                 CccReferal = member.CccReferal.ToString(),
                 CccReferalNumber = member.CccReferaalNumber,
-
+                PersonRelationshipId = member.PersonRelationshipId,
+                HivTestingId = member.HivTestingId,
+                PersonId = member.PersonId
             };
             return familyMemberDisplay;
         }
@@ -443,6 +468,9 @@ namespace IQCare.Web.CCC.WebService
         public DateTime ? HivStatusResultDate { get; set; }
         public string CccReferal { get; set; }
         public string CccReferalNumber { get; set; }
+        public int PersonRelationshipId { get; set; }
+        public int HivTestingId { get; set; }
+        public int PersonId { get; set; }
     }
 
     public class PatientConsentDisplay

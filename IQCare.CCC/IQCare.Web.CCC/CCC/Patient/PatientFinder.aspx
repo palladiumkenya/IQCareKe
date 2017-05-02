@@ -291,7 +291,7 @@
           $('#tblFindPatient').on('dblclick', 'tbody tr', function () {
               // window.location.href = $(this).attr('href');
               var patientId = $(this).find('td').first().text();
-
+              PageMethods.SetSelectedPatient(patientId);
               window.location.href = "../patient/patientHome.aspx?patient="+patientId;
              // alert(rowIndex);
           });

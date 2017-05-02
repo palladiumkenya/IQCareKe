@@ -1049,10 +1049,13 @@
                     toastr.error("error", "Please insert at least One(1) family member");
                     return false;
                 }
+                debugger;
                 for (var i = 0, len = familyMembers.length; i < len; i++) {
                     addFamilyTesting(familyMembers[i]);
                 }
                 
+                //delay to show success message before redirect
+                setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
             });
 
             $("#btnClose").click(function () {
@@ -1126,7 +1129,7 @@
         function editFamilyTesting(x) {
             window.row = x.parentNode.parentNode.rowIndex;
             var rowIndex = row - 1;
-            var familyTesting = itemList[rowIndex];
+            window.familyTesting = itemList[rowIndex];
             $("#<%=fName.ClientID%>").val(familyTesting.FirstName);
             $("#<%=mName.ClientID%>").val(familyTesting.MiddleName);
             $("#<%=lName.ClientID%>").val(familyTesting.LastName);
@@ -1191,6 +1194,9 @@
             if ($('#editFamilyTestingModal').parsley().validate()) {
                 var patientId = <%=PatientId%>;
                 var patientMasterVisitId = <%=PatientMasterVisitId%>;
+                var hivTestingId = familyTesting.HivTestingId;
+                var personId = familyTesting.PersonId;
+                var personRelationshipId = familyTesting.PersonRelationshipId;
                 var userId = <%=UserId%>;
                 var firstName = escape($("#<%=fName.ClientID%>").val());
                 var middleName = escape($("#<%=mName.ClientID%>").val());
@@ -1247,13 +1253,11 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/PatientService.asmx/UpdatePatientFamilyTesting",
-                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId +"'}",
+                        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','firstName': '" + firstName + "','middleName': '" + middleName + "','lastName': '" + lastName + "','sex': '" + sex + "','dob': '" + dob + "','relationshipId': '" + relationshipId + "','baselineHivStatusId': '" + baselineHivStatusId + "','baselineHivStatusDate': '" + baselineHivStatusDate + "','hivTestingresultId': '" + hivTestingresultId + "','hivTestingresultDate': '" + hivTestingresultDate + "','cccreferal': '" + cccreferal + "','cccReferalNumber': '" + cccReferalNumber + "','userId': '" + userId + "','personRelationshipId': '" + personRelationshipId + "','hivTestingId': '" + hivTestingId + "','personId': '" + personId +"'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
                             toastr.success(response.d, "Family testing updated successfully");
-                            //delay to show success message before redirect
-                            setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/OneTimeEvents/FamilyTesting.aspx") %>'; }, 2500);
                         },
                         error: function (response) {
                             toastr.error(response.d, "Family testing not updated");
@@ -1302,19 +1306,20 @@
         function CccEnabled() {
             if (($("#hivtestingresult :selected").text() === "Tested Negative") || ($("#hivtestingresult :selected").text() === "Never Tested")) {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-                        $("#<%=CccReferal.ClientID%>").prop('disabled',true);
-                    }
-                    else if ($("#CccReferal").val() === 'False') {
-                        $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-            } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
-                $("#<%=CccReferal.ClientID%>").prop('disabled',false);
+                $("#<%=CccReferal.ClientID%>").val("False");
+                $("#<%=CccReferal.ClientID%>").prop('disabled',true);
             }
-    }
+            else if ($("#CccReferal").val() === 'False') {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                    } else {
+                        $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                        $("#<%=CccReferal.ClientID%>").prop('disabled',false);
+                    }
+            }
       
-    function BaselineEnabled() {
-        if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
-            $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+            function BaselineEnabled() {
+                if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
+                    $("#<%=cccNumber.ClientID%>").prop('disabled',true);
             $("#<%=CccReferal.ClientID%>").prop('disabled',true);
             $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
             $("#BaselineHIVStatusD").addClass('noneevents');
@@ -1338,10 +1343,11 @@
         }
     }
 
-        function CccEnabledMod() {
-            if (($("#testingStatusMod :selected").text() === "Tested Negative") || ($("#testingStatusMod :selected").text() === "Never Tested")) {
-                $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
-                $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
+    function CccEnabledMod() {
+        if (($("#testingStatusMod :selected").text() === "Tested Negative") || ($("#testingStatusMod :selected").text() === "Never Tested")) {
+            $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
+            $("#<%=CccReferal.ClientID%>").val("False");
+            $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
             }
             else if ($("#cccReferalMod").val() === 'False') {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
@@ -1349,11 +1355,11 @@
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',false);
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled',false);
             }
-        }
+    }
       
-        function BaselineEnabledMod() {
-            if ($("#bHivStatusMod :selected").text() === "Never Tested") {
-                $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
+    function BaselineEnabledMod() {
+        if ($("#bHivStatusMod :selected").text() === "Never Tested") {
+            $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
                 $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
                 $("#<%=bHivStatusDateMod.ClientID%>").prop('disabled',true);
                 $("#BaselineHIVStatusDMod").addClass('noneevents');

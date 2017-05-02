@@ -23,17 +23,17 @@ namespace BusinessProcess.CCC
                 personIdParameter.Value = personContact.PersonId;
 
                 SqlParameter physicalAdressParameter = new SqlParameter("physicalAddressParameter", SqlDbType.VarChar);
-                physicalAdressParameter.Value = Encoding.ASCII.GetBytes(personContact.PhysicalAddress);
+                physicalAdressParameter.Value =(personContact.PhysicalAddress);
 
                 SqlParameter mobileNumberParameter = new SqlParameter("mobileNumberParameter", SqlDbType.VarChar);
-                mobileNumberParameter.Value = Encoding.ASCII.GetBytes(personContact.MobileNumber);
+                mobileNumberParameter.Value = (personContact.MobileNumber);
 
                 SqlParameter alternativeNumberParameter = new SqlParameter("alternativeNumberParameter",
                     SqlDbType.VarChar);
-                alternativeNumberParameter.Value = Encoding.ASCII.GetBytes(personContact.AlternativeNumber);
+                alternativeNumberParameter.Value =(personContact.AlternativeNumber);
 
                 SqlParameter emailAddressParameter = new SqlParameter("emailAddressParameter", SqlDbType.VarChar);
-                emailAddressParameter.Value = Encoding.ASCII.GetBytes(personContact.EmailAddress);
+                emailAddressParameter.Value = (personContact.EmailAddress);
 
                 SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
                 userId.Value = personContact.CreatedBy;

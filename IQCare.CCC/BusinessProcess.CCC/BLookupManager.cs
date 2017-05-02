@@ -6,9 +6,6 @@ using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
-using DataAccess.CCC.Repository.Encounter;
-using Entities.CCC.Encounter;
-using System;
 using Entities.CCC.Visit;
 
 namespace BusinessProcess.CCC

@@ -193,5 +193,6 @@ namespace IQCare.Web.CCC
         {
             Response.Redirect("~/CCC/Encounter/PharmacyPrescription.aspx");
         }
+        
     }
 }

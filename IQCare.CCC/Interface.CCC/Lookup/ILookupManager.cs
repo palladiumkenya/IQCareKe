@@ -1,5 +1,4 @@
 ﻿using Entities.CCC.Lookup;
-using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
 using System.Collections.Generic;
 
