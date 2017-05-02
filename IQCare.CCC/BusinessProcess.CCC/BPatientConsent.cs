@@ -15,11 +15,11 @@ namespace BusinessProcess.CCC
 
         public int AddPatientConsents(PatientConsent p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientConsentRepository.Add(p);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientConsentRepository.Add(p);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
@@ -27,30 +27,30 @@ namespace BusinessProcess.CCC
         public PatientConsent GetPatientConsent(int id)
         {
 
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var consent = _unitOfWork.PatientConsentRepository.FindBy(x => x.PatientId == id)
+                var consent = unitOfWork.PatientConsentRepository.FindBy(x => x.PatientId == id)
                        .OrderBy(x => x.Id)
                        .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return consent;
             }
         }
 
         public void DeletePatientConsent(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientConsent consent = _unitOfWork.PatientConsentRepository.GetById(id);
-                _unitOfWork.PatientConsentRepository.Remove(consent);
-               _result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                PatientConsent consent = unitOfWork.PatientConsentRepository.GetById(id);
+                unitOfWork.PatientConsentRepository.Remove(consent);
+               _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
             }
         }
 
         public int UpdatePatientConsent(PatientConsent p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientConsent consent = new PatientConsent()
                 {
@@ -58,19 +58,19 @@ namespace BusinessProcess.CCC
                     ConsentDate = p.ConsentDate,
                     DeclineReason = p.DeclineReason
                 };
-                _unitOfWork.PatientConsentRepository.Update(consent);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientConsentRepository.Update(consent);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public List<PatientConsent> GetByPatientId(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientConsent> consent = _unitOfWork.PatientConsentRepository.GetByPatientId(patientId);
-                _unitOfWork.Dispose();
+                List<PatientConsent> consent = unitOfWork.PatientConsentRepository.GetByPatientId(patientId);
+                unitOfWork.Dispose();
                 return consent;
             }
         }

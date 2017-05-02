@@ -17,7 +17,7 @@ namespace BusinessProcess.CCC
 
         public int AddPersonContact(PersonContact personContact)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
                 personIdParameter.Value = personContact.PersonId;
@@ -38,51 +38,51 @@ namespace BusinessProcess.CCC
                 SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
                 userId.Value = personContact.CreatedBy;
 
-                _unitOfWork.PersonContactRepository.ExecuteProcedure(
+                unitOfWork.PersonContactRepository.ExecuteProcedure(
                     "exec PersonContact_Insert @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter,@UserId",
                     personIdParameter, physicalAdressParameter, mobileNumberParameter, alternativeNumberParameter,
                     emailAddressParameter, userId);
-               _result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+               _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public int DeletePersonContact(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                PersonContact personContact = _unitOfWork.PersonContactRepository.GetById(id);
-                _unitOfWork.PersonContactRepository.Remove(personContact);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                PersonContact personContact = unitOfWork.PersonContactRepository.GetById(id);
+                unitOfWork.PersonContactRepository.Remove(personContact);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public List<PersonContact> GetAllPersonContact(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var contacts = _unitOfWork.PersonContactRepository.GetAllPersonContact(personId);
-                _unitOfWork.Dispose();
+                var contacts = unitOfWork.PersonContactRepository.GetAllPersonContact(personId);
+                unitOfWork.Dispose();
                 return contacts;
             }
         }
 
         public List<PersonContact> GetCurrentPersonContacts(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var myList = _unitOfWork.PersonContactRepository.GetCurrentPersonContact(personId);
-                _unitOfWork.Dispose();
+                var myList = unitOfWork.PersonContactRepository.GetCurrentPersonContact(personId);
+                unitOfWork.Dispose();
                 return myList;
             }
         }
 
         public int UpdatePersonContact(PersonContact p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
                 personIdParameter.Value = p.PersonId;
@@ -100,15 +100,15 @@ namespace BusinessProcess.CCC
                 SqlParameter emailAddressParameter = new SqlParameter("emailAddressParameter", SqlDbType.VarBinary);
                 emailAddressParameter.Value = Encoding.ASCII.GetBytes(p.EmailAddress);
 
-                SqlParameter Id = new SqlParameter("Id", SqlDbType.Int);
-                Id.Value = p.Id;
+                SqlParameter id = new SqlParameter("Id", SqlDbType.Int);
+                id.Value = p.Id;
 
-                _unitOfWork.PersonContactRepository.ExecuteProcedure(
+                unitOfWork.PersonContactRepository.ExecuteProcedure(
                     "exec PersonContact_Update @personIdParameter,@physicalAddressParameter,@mobileNumberParameter,@alternativeNumberParameter,@emailAddressParameter, @Id",
                     personIdParameter, physicalAdressParameter, mobileNumberParameter, alternativeNumberParameter,
-                    emailAddressParameter, Id);
-                _result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                    emailAddressParameter, id);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }

@@ -53,10 +53,10 @@ namespace BusinessProcess.CCC.Patient
 
         public PatientEntity GetPatient(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var patientInfo = _unitOfWork.PatientRepository.GetById(id);
-                _unitOfWork.Dispose();
+                var patientInfo = unitOfWork.PatientRepository.GetById(id);
+                unitOfWork.Dispose();
                 return patientInfo;
             }
                 
@@ -84,21 +84,21 @@ namespace BusinessProcess.CCC.Patient
 
         public List<PatientEntity> CheckPersonEnrolled(int persionId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                List<PatientEntity> person = _unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
-                _unitOfWork.Dispose();
+                List<PatientEntity> person = unitOfWork.PatientRepository.FindBy(x => x.PersonId == persionId).ToList();
+                unitOfWork.Dispose();
                 return person;
             }
         }
 
         public int GetPatientType(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var patientTypeId = _unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
+                var patientTypeId = unitOfWork.PatientRepository.FindBy(x => x.Id == patientId & !x.DeleteFlag)
                                     .Select(x => x.PatientType).FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientTypeId;
                 //return patientTypeId.FirstOrDefault();
             }

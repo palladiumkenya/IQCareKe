@@ -18,65 +18,65 @@ namespace BusinessProcess.CCC
 
         public int AddPatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
 
-                _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public int UpdatePatientTreatmentSupporter(PatientTreatmentSupporter patientTreatmentSupporter)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
 
-                _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
-                 _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                 _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public int DeletePatientTreatmentSupporter(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                _patienPersonTreatmentSupporter = _unitOfWork.PatientTreatmentSupporterRepository.GetById(id);
-                _unitOfWork.PatientTreatmentSupporterRepository.Remove(_patienPersonTreatmentSupporter);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                _patienPersonTreatmentSupporter = unitOfWork.PatientTreatmentSupporterRepository.GetById(id);
+                unitOfWork.PatientTreatmentSupporterRepository.Remove(_patienPersonTreatmentSupporter);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
         }
 
         public List<PatientTreatmentSupporter> GetCurrentTreatmentSupporter(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 List<PatientTreatmentSupporter> patientTreatmentSupporters =
-                   _unitOfWork.PatientTreatmentSupporterRepository.FindBy(
+                   unitOfWork.PatientTreatmentSupporterRepository.FindBy(
                            x => x.PersonId == personId & x.DeleteFlag == false)
                        .OrderByDescending(x => x.Id)
                        .Take(1)
                        .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientTreatmentSupporters;
             }
         }
 
         public List<PatientTreatmentSupporter> GetAllTreatmentSupporter(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 List<PatientTreatmentSupporter> patientTreatmentSupporters =
-                _unitOfWork.PatientTreatmentSupporterRepository.FindBy(
+                unitOfWork.PatientTreatmentSupporterRepository.FindBy(
                         x => x.PersonId == personId & x.DeleteFlag == false)
                     .OrderByDescending(x => x.Id)
                     .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientTreatmentSupporters;
             }
         }
