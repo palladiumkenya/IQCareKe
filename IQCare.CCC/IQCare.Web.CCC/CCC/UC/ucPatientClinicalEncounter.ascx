@@ -2155,8 +2155,15 @@
 
         //Save patient IPT Details
         $("#btnSaveIptDetails").click(function() {
-            addIpt();
-            $('#IptDetailsModal').modal('hide');
+            var dob = $("#IptDateCollected").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Date collected cannot be a future date.");
+                    return false;
+                } 
+                else {
+                    addIpt();
+                    $('#IptDetailsModal').modal('hide');                   
+                }
         });
 
         //Save patient IPT Outcome
