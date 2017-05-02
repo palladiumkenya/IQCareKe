@@ -432,10 +432,12 @@
 				$("#menuPatientVitals").hide();
 			   //$("#LinkButton2").hide();
 				$("#menuStartEncounter").show();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 				<%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
 			}
 
-			function encounterStarted() {
+		    function encounterStarted() {
+                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
 				$("#titlePatientBaseline").show();
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();
