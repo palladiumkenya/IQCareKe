@@ -10,7 +10,7 @@ namespace IQCare.CCC.UILogic
     public class PersonContactManager
     {
         private int _result;
-        IPersonContactManager personContact =  (IPersonContactManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
+        IPersonContactManager _personContact =  (IPersonContactManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonContactManager, BusinessProcess.CCC");
 
         public int AddPersonContact(int personId, string physicalAddress, string mobileNumber,string alternativeNumber,string emailAddress,int userId)
         {
@@ -34,18 +34,18 @@ namespace IQCare.CCC.UILogic
                 EmailAddress = emailAddress,
                 CreatedBy = userId
             };
-            _result = this.personContact.AddPersonContact(personContact);
+            _result = this._personContact.AddPersonContact(personContact);
             return _result;
         }
 
         public int DeletePersonContact(int id)
         {
-            return _result = personContact.DeletePersonContact(id);
+            return _result = _personContact.DeletePersonContact(id);
         }
 
         public int UpdatePatientContact(PersonContact personContact)
         {
-            return _result = this.personContact.UpdatePersonContact(personContact);
+            return _result = this._personContact.UpdatePersonContact(personContact);
         }
 
         public List<PersonContact> GetPersonContactList(int personId)
@@ -53,7 +53,7 @@ namespace IQCare.CCC.UILogic
             List<PersonContact> myList=new List<PersonContact>();
             try
             {
-                myList = personContact.GetAllPersonContact(personId);
+                myList = _personContact.GetAllPersonContact(personId);
             }
             catch (Exception)
             {
