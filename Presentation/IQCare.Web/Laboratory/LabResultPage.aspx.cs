@@ -29,7 +29,8 @@ namespace IQCare.Web.Laboratory
        /// <summary>
         /// The redirect URL
         /// </summary>
-        private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+       // private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
+        private string RedirectUrl = "../CCC/Home.aspx";
 
         /// The is error
         /// </summary>

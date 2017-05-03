@@ -16,10 +16,10 @@ namespace IQCare.Web.CCC.Patient
     {
         public int PatientMasterVisitId;
         public decimal march_height;
-        protected int ptnPk=0;
+        protected int ptnPk = 0;
         protected int labTestId = 0;
-        protected Decimal vlValue=0;
-        protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+        protected Decimal vlValue = 0;
+        protected IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
         protected int PatientId
         {
@@ -33,9 +33,9 @@ namespace IQCare.Web.CCC.Patient
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var patientTransfer=new PatientTransferInmanager();
-            var patientDiagnosis=new PatientHivDiagnosisManager();
-            var patientEntryPoint=new PatientEntryPointManager();
+            var patientTransfer = new PatientTransferInmanager();
+            var patientDiagnosis = new PatientHivDiagnosisManager();
+            var patientEntryPoint = new PatientEntryPointManager();
             Session["TechnicalAreaId"] = 203;
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
@@ -150,14 +150,14 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 // Get Patient Regimen Map:
-                ILookupManager regimenMap =(ILookupManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                ILookupManager regimenMap = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 var regimen = regimenMap.GetCurentPatientRegimen(PatientId);
 
                 if (regimen != null)
                 {
                     if (regimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text ="< span class='label label-success'>"+ regimen.RegimenType.ToString()+"</span>";
+                        lblCurrentRegimen.Text = "< span class='label label-success'>" + regimen.RegimenType.ToString() + "</span>";
                     }
                     else
                     {
@@ -173,7 +173,7 @@ namespace IQCare.Web.CCC.Patient
                 ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
                 var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId);
-                
+
                 if (adheranceStatus != null)
                 {
                     string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
@@ -189,13 +189,13 @@ namespace IQCare.Web.CCC.Patient
                             lblAdheranceStatus.Text = "<span class='label label-warning'> Fair [Consider Adherence Intervetion]</span>";
                             break;
                     }
-                    
+
                 }
                 else
                 {
                     lblAdheranceStatus.Text = "<span class='label label-danger'>Adherance Assessment Not Done</span>";
                 }
-               
+
 
                 // viral Load Alerts
                 //PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
@@ -203,48 +203,53 @@ namespace IQCare.Web.CCC.Patient
                 //{
                 //    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
                 //}
-                PatientLabTracker _vltestId = _lookupData.GetPatientLabTestId(PatientId);
-                if (_vltestId != null)
+                //PatientLabTracker _vltestId = _lookupData.GetPatientLabTestId(PatientId);
+                //if (_vltestId != null)
+                //{
+                //    //gets latest  viral load llab results if exists
+                //    labTestId = _vltestId.LabTestId;
+                //}
+                if (PatientId > 0)
                 {
-                    labTestId = _vltestId.LabTestId;
-                }
-                if (labTestId > 0) {
-                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(labTestId);
-                        if (LabOrder != null)
+                    var VlLabTest = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);
+                    if (VlLabTest != null)
+                    {
+                       // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(VlLabTest.Id));
+                        switch (VlLabTest.Results)
                         {
-                            vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
-                            switch (LabOrder.Results)
-                            {
-                                case "Pending":
-                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + LabOrder.SampleDate.ToString("DD-MMM-YYY")+"</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
-                                    break;
-                                case "Complete":
-                                    if (vlValue > 1000)
-                                    {
-                                    lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
-                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(3).ToString("DD-MMM-YYYY");
-                                    }
-                                    else
-                                    {
-                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(6).ToString("DD-MMM-YYYY");
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                            lblVL.Text = LabOrder.LabTestId.ToString()+" Date: "+ LabOrder.SampleDate.ToString("DD-MMM-YYY");
-
-                        }else
-                        {
-                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
+                            case "Pending":
+                                lblVL.Text = "<span class='label label-warning'>" + VlLabTest.Results + "/ Date: " + ((DateTime)VlLabTest.SampleDate).ToString("DD-MMM-YYY") + "</span>";
+                                lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
+                                break;
+                            case "Complete":
+                                if (VlLabTest.ResultValues > 1000)
+                                {
+                                    lblVL.Text = "<span class='label label-danger'>" + vlValue + " copies/ml</span>";
+                                    lblvlDueDate.Text = ((DateTime)VlLabTest.SampleDate).AddMonths(3).ToString("DD-MMM-YYYY");
+                                }
+                                else
+                                {
+                                    lblvlDueDate.Text = ((DateTime)VlLabTest.SampleDate).AddMonths(6).ToString("DD-MMM-YYYY");
+                                }
+                                break;
+                            default:
+                                break;
                         }
-                }else
+                        lblVL.Text = VlLabTest.LabTestId.ToString() + " Date: " + ((DateTime)VlLabTest.SampleDate).ToString("DD-MMM-YYY");
+
+                    }
+                    else
+                    {
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
+                    }
+                }
+                else
                 {
                     lblVL.Text = "<span class='label label-danger'>Patient Not Referenced</span>";
                     lblvlDueDate.Text = "<span class='label label-danger'><strong>Not Available</strong></span>";
                 }
-            }       
-        }      
+
+            }
+        }
     }
 }

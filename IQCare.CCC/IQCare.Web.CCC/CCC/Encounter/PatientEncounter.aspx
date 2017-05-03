@@ -42,7 +42,8 @@
                 <div class="col-md-6">
                     <div class="col-md-12 bs-callout bs-callout-danger">
                         <h4 class="pull-left"><strong>Pending VL Test(s):</strong> </h4>
-
+                            <div class="col-md-12 form-group ">
+                                  <div id ="tblPendingVlScrollable" style="overflow: scroll; height:200px;"">   
                            
                             <table class="table table-striped table-condensed" id="tblVlpending" clientidmode="Static" runat="server">
                                                  <thead>
@@ -55,13 +56,16 @@
                                                                     
                                                                 </tr>
                                                             </thead>
-                                                <tbody>                        
+                                                    <tbody>                        
                                                 </tbody>                  
                                                 </table>
+                                      </div>
                             </div>
-                      
+                      </div>
                          <div class="col-md-12 bs-callout bs-callout-info">
-                                         <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4>    
+                                         <h4 class="pull-left"> <strong>Complete VL Test(s):</strong> </h4> 
+                                      <div class="col-md-12 form-group "> 
+                                             <div id ="tblCompleteVlScrollable" style="overflow: scroll; height:250px;"">    
                                               <table class="table table-striped table-condensed" id="tblVL" clientidmode="Static" runat="server">
                                                 
                                                    <thead>
@@ -79,12 +83,12 @@
                                                   </tbody>                  
                                                 </table>
                                             </div> 
-                                               
+                                         </div>      
                                     </div>
-                       
-                                   
-                             <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> 
-                                                            
+                         </div>
+                      <div class="col-md-6">              
+                             <div id="container" style="min-width: 700px; height: 500px; margin: 0"></div> 
+                       </div>                                    
             <%--       <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> --%>
                       <!-- pw .implementation of viral load tracker line graph here-->
                 </div><!-- .viraload tracker-->
@@ -288,8 +292,20 @@
        
       
         var jan_vl = "";
-        var march_vl = "";
-        
+        var feb_vl = "";
+        var mar_vl = "";
+        var apr_vl = "";
+        var may_vl = "";
+        var jun_vl = "";
+        var jul_vl = "";
+        var aug_vl = "";
+        var sep_vl = "";
+        var oct_vl = "";
+        var nov_vl = "";
+        var dec_vl = "";
+
+
+
         $(document).ready(function () {           
 
 
@@ -325,6 +341,9 @@
                     $('#tblVL tr:not(:first-child').each(function(idx){
                         $(this).children(":eq(0)").html(idx + 1);
                     });
+                    $('#tblCompleteVlScrollable').append(tblVL);
+                    $('#tblCompleteVlScrollable').scroll();
+
                 },
 
                 error: function (msg) {
@@ -364,6 +383,9 @@
                     $('#tblVlpending tr:not(:first-child').each(function(idx){
                         $(this).children(":eq(0)").html(idx + 1);
                     });
+
+                    $('#tblPendingVlScrollable').append(tblVlpending);
+                    $('#tblPendingVlScrollable').scroll();
                 },
 
                 error: function (msg) {
@@ -423,12 +445,50 @@
 
                                 jan_vl = item.ResultValue;
                                    
-                            } else if (item.Month == 4) {
+                            } else if (item.Month == 2) {
 
-                                march_vl = item.ResultValue;                                   
-                                   
+                                feb_vl = item.ResultValue;                                   
+                           
+                           } else if (item.Month == 3) {
+
+                                 mar_vl = item.ResultValue;                                   
                             }
+                           else if (item.Month == 4) {
 
+                               apr_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 5) {
+
+                               may_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 6) {
+
+                               jun_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 7) {
+
+                               jul_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 8) {
+
+                               aug_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 9) {
+
+                               sep_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 10) {
+
+                               oct_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 11) {
+
+                               nov_vl = item.ResultValue;                                   
+                           }
+                           else if (item.Month == 12) {
+
+                               dec_vl = item.ResultValue;                                   
+                           }
                         });
 
                     }
@@ -445,10 +505,15 @@
                 });
             });
        
-            function viralLoadGraph() {
+         function viralLoadGraph() {
               
                // console.log("encounter viral load  graph called")
-                //console.log(march_vl);
+                console.log(jan_vl);
+                console.log(feb_vl);
+                console.log(mar_vl);
+                console.log(apr_vl);
+                console.log(may_vl);               
+
                 $('#container').highcharts({
                     title: {
                         text: 'Viral Load Trend',
@@ -459,7 +524,8 @@
                         x: -20
                     },
                     xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                        //categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     },
                     yAxis: {
                         title: {
@@ -485,10 +551,10 @@
                     series: [
                         {
                             name: 'VL',
-                            data: [180, march_vl, "","", "", "", ""]
+                            data: [jan_vl, feb_vl, mar_vl, apr_vl, may_vl, jun_vl, jul_vl, aug_vl, sep_vl, oct_vl, nov_vl, dec_vl]
                         }, {
                             name: 'Threshold',
-                            data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                            data: [1000, 1000, 1000, 1000, 1000, 1000, 1000,1000, 1000, 1000, 1000, 1000]
                         }
                     ]
                 });

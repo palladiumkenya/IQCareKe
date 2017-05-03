@@ -1198,7 +1198,8 @@
                  <div id="Trending" class="tab-pane  fade in active">
                     
                       <div class="col-md-6 col-xs-12 col-sm-12">
-                          <div id="vl_container" margin: 0 auto"></div>  
+                          <div id="vl_container" style="min-width: 450px; height: 300px; margin: 0"></div> 
+                           <%-- <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div>  --%>
                      </div>  <!-- .bs-component-->
                      
                      <div class="col-md-6 col-xs-12 col-sm-12">
