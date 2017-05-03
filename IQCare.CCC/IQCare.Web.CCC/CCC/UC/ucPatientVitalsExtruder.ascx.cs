@@ -18,12 +18,13 @@ namespace IQCare.Web.CCC.UC
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
             var patientVitals = new PatientVitalsManager();
             PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
             if (patientTriage != null)
             {
-                lblVitalsDate.Text = "Vital Signs as at :" + patientTriage.CreateDate.ToString("DD-MMM-YYYY");
+
+                lblVitalsDate.Text = "<span class='label label-primary'>Date Taken :" + patientTriage.CreateDate.ToString("dd-MMM-yyyy")+"</span>";
                 vitalHeight.Text = Convert.ToString(patientTriage.Height);
                 vitalsWeight.Text = patientTriage.Weight.ToString();
                 vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
@@ -36,7 +37,7 @@ namespace IQCare.Web.CCC.UC
             }
             else
             {
-                lblVitalsDate.Text = "Vital Signs as at :" + DateTime.Now;
+                lblVitalsDate.Text = "<span class='label label-danger'> VITAL SIGNS NOT TAKEN </span>";
             }
         }
     }

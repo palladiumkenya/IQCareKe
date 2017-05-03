@@ -49,6 +49,33 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label lblbloodpressure;
         
         /// <summary>
+        /// lblPulseRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPulseRate;
+        
+        /// <summary>
+        /// lblRespiratoryRate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRespiratoryRate;
+        
+        /// <summary>
+        /// lblOxygenSaturation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOxygenSaturation;
+        
+        /// <summary>
         /// lblappointmentDate control.
         /// </summary>
         /// <remarks>
