@@ -1758,7 +1758,18 @@
             });
             $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', true);
             $("#<%=bioPatientPopulation.ClientID%>").on("change",function() {
+
                 console.log($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text());
+                var dob  = "<%=Session["DateOfBirth"]%>";
+                var today = new Date();
+                var birthDate = new Date(dob);
+                var age = today.getFullYear() - birthDate.getFullYear();
+
+                if (age <= 18 && $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
+                    $("#<%=bioPatientPopulation.ClientID%>").val(74);
+                    toastr.error("Under 18 should not be a key population", "Population Type");
+                    return false;
+                }
                 if ($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
                     $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', false);
                 } else {
