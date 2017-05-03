@@ -38,6 +38,7 @@ namespace Interface.CCC.Lookup
         PatientRegimenLookup GetCurentPatientRegimen(int patientId);
         List<PatientRegimenLookup> GetPatientRegimenList(int patientId);
         LookupPatientAdherence GetPatientAdherence(int patientId);
+        List<LookupFacilityStatistics> GetLookupFacilityStatistics();
 
     }
 

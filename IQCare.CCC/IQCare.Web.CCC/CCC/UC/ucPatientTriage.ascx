@@ -344,9 +344,10 @@
         //            dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
         //       });
         var bmiz = $("#<%=txtBMIz.ClientID%>").val();
-        var weightForAge = $("#<%=txtWAz%>").val();
-         var weightForHeight = $("#<%=txtWHz%>").val();
-         var dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
+        var weightForAge = $("#<%=txtWAz.ClientID%>").val();
+         var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
+        var dateOfVisit = $('#myVisitDate').datepicker('getDate');
+        dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
         var bmi = calcBMI();
       
         if (bmi === '') { bmi = 0 }

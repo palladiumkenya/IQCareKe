@@ -31,9 +31,10 @@ namespace IQCare.Web.CCC.UC
 
             var patientVitals = new PatientVitalsManager();
             PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
+            lblAge.Text = Session["Age"].ToString() + "Years";
             if (patientTriage != null)
             {
-                bmi =Convert.ToDouble(patientTriage.BMI);
+                bmi = Convert.ToDouble(patientTriage.BMI);
                 diastolic = Convert.ToDecimal(patientTriage.Bpdiastolic);
                 systolic = Convert.ToDecimal(patientTriage.BpSystolic);
 
@@ -41,7 +42,7 @@ namespace IQCare.Web.CCC.UC
                 bpSystloic = Convert.ToInt32(systolic);
 
 
-                lblAge.Text = Session["Age"].ToString() + "Years";
+
 
                 if (patientTriage.Temperature > 0)
                 {
@@ -53,7 +54,7 @@ namespace IQCare.Web.CCC.UC
                                               "°C | Possible Hyperpyrexia‎";
 
                     }
-                    else if (Convert.ToDouble(patientTriage.Temperature) > 36.5 &
+                    else if (Convert.ToDouble(patientTriage.Temperature) >= 36.0 &
                              Convert.ToDouble(patientTriage.Temperature) < 37.5)
                     {
                         lblTemperature.Text = "<span class='label label-success'>" +
@@ -83,57 +84,86 @@ namespace IQCare.Web.CCC.UC
                 else
                 {
                     lblTemperature.Text = "<span class='label label-danger'>" +
-                       Convert.ToString(patientTriage.Temperature) + "NO Temperature Readings ‎";
+                                          Convert.ToString(patientTriage.Temperature) + "NO Temperature Readings ‎";
 
 
                 }
 
                 if (diastolic < 1 & systolic < 1)
                 {
-                    lblbloodpressure.Text ="<span class='label label-danger'> NOT TAKEN </span>";
+                    lblbloodpressure.Text = "<span class='label label-danger'> NOT TAKEN </span>";
 
                 }
                 else
                 {
-                    
-               
+
+
                     if (diastolic <= 80 & systolic <= 120)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg] |Normal </span>";
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" +
+                                     Convert.ToString(systolic) + "mm[Hg] |Normal </span>";
                     }
-                    else if (diastolic>85 & systolic>140)
+                    else if (diastolic > 85 & systolic > 140)
                     {
-                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg]  | Normal </span>";
-                    }else if (diastolic > 90 & systolic > 140)
+                        bpAnalysis = "<span class='label label-success'>" + Convert.ToString(diastolic) + "/" +
+                                     Convert.ToString(systolic) + "mm[Hg]  | Normal </span>";
+                    }
+                    else if (diastolic > 90 & systolic > 140)
                     {
-                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + "mm[Hg]  | Border Line</span>";
-                    }else if (diastolic > 90 & systolic > 160)
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" +
+                                     Convert.ToString(systolic) + "mm[Hg]  | Border Line</span>";
+                    }
+                    else if (diastolic > 90 & systolic > 160)
                     {
-                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(diastolic) + "/" + Convert.ToString(systolic) + " |mm[Hg]  Suspect Hypertension</span>";
+                        bpAnalysis = "<span class='label label-danger'> " + Convert.ToString(diastolic) + "/" +
+                                     Convert.ToString(systolic) + " |mm[Hg]  Suspect Hypertension</span>";
+                    }
+                    else
+                    {
+                        bpAnalysis = "<span class='label label-warning'> " + Convert.ToString(diastolic) + "/" +
+                                     Convert.ToString(systolic) + " |mm[Hg]  </span>";
                     }
 
-                    lblbloodpressure.Text =bpAnalysis;
+                    lblbloodpressure.Text = bpAnalysis;
                 }
 
                 if (bmi < 18.5)
                 {
-                    bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Under weight</span>";
+                    bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
+                                  " | Under weight</span>";
                 }
                 else if (bmi >= 18.5 & bmi < 25.0)
                 {
-                    bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Normal weight</span>";
+                    bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
+                                  " | Normal weight</span>";
                 }
                 else if (bmi >= 25 & bmi < 30.0)
                 {
-                    bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Over weight<span>";
+                    bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
+                                  " | Over weight<span>";
                 }
                 else
                 {
-                    bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" + " | Obese<span>";
+                    bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
+                                  " | Obese<span>";
                 }
 
 
                 lblBMI.Text = bmiAnalysis;
+                lblPulseRate.Text = "<span class='label label-info'>"+patientTriage.HeartRate+" beats/min</span>";
+                lblOxygenSaturation.Text = "<span class='label label-info'>"+patientTriage.SpO2+" %</span>";
+                lblRespiratoryRate.Text = "<span class='label label-info'>"+patientTriage.RespiratoryRate+" breaths/min</span>";
+            }
+            else
+            {
+                string notTaken = "<span class='label label-danger'>Not Taken!</span>";
+                lblTemperature.Text = notTaken;
+                lblbloodpressure.Text = notTaken;
+                lblBMI.Text = notTaken;
+                lblPulseRate.Text = notTaken;
+                lblOxygenSaturation.Text = notTaken;
+                lblRespiratoryRate.Text = notTaken;
+
             }
 
             var patientAppointment = new PatientAppointmentManager();
@@ -142,10 +172,10 @@ namespace IQCare.Web.CCC.UC
             {
                 foreach (var item in pa)
                 {
-                    lblappointmentDate.Text =Convert.ToDateTime(item.AppointmentDate).ToString("DD-MMM-YYYY");
-                    lblAppointmentReason.Text = LookupLogic.GetLookupNameById(item.ReasonId);
-                    lblappointmentStatus.Text = LookupLogic.GetLookupNameById(item.StatusId);
-                    lblcareStatus.Text = LookupLogic.GetLookupNameById(item.DifferentiatedCareId);
+                    lblappointmentDate.Text = "<span class='pull-right'>"+Convert.ToDateTime(item.AppointmentDate).ToString("dd-MMM-yyyy")+"</span>";
+                    lblAppointmentReason.Text = "<span class='pull-right'>" + LookupLogic.GetLookupNameById(item.ReasonId) + "</span>";
+                    lblappointmentStatus.Text = "<span class='pull-right'>" + LookupLogic.GetLookupNameById(item.StatusId) + "</span>";
+                    lblcareStatus.Text = "<span class='pull-right'>" + LookupLogic.GetLookupNameById(item.DifferentiatedCareId) + "</span>";
                 }
 
             }

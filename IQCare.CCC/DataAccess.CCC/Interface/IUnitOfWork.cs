@@ -13,7 +13,7 @@ using DataAccess.CCC.Repository.person;
 
 namespace DataAccess.CCC.Interface
 {
-    public interface _unitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         int Complete();
         
@@ -25,6 +25,7 @@ namespace DataAccess.CCC.Interface
         IPatientLookupRepository PatientLookupRepository { get; }
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
         IPatientBaselineLookupRepository PatientBaselineLookupRepository { get; }
+        ILookupFacilityStatisticsRepository LookupFacilityStatisticsRepository { get; }
         //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
 
         /* person and patient */

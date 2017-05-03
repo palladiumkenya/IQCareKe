@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Application.Presentation;
+using DataAccess.CCC.Context;
+using DataAccess.CCC.Repository;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -403,6 +405,13 @@ namespace IQCare.CCC.UILogic
             var regimen = lookupManager.GetPatientRegimenList(patientId);
 
             return jsonObject = (regimen != null) ? new JavaScriptSerializer().Serialize(regimen) : jsonObject = "[]";
+        }
+
+        public List<LookupFacilityStatistics> GetLookupFacilityStatistics()
+        {
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            var facilityStats = lookupManager.GetLookupFacilityStatistics();
+            return facilityStats;
         }
     }
 }
