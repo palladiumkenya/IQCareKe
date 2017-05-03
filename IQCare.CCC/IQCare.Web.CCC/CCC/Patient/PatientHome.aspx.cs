@@ -212,7 +212,7 @@ namespace IQCare.Web.CCC.Patient
                     labTestId = _vltestId.LabTestId;
                 }
                 if (labTestId > 0) {
-                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(labTestId);
+                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);
 
                         if (LabOrder != null)
                         {
@@ -224,32 +224,32 @@ namespace IQCare.Web.CCC.Patient
                             switch (LabOrder.Results)
                             {
                                 case "Pending":
-                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + LabOrder.SampleDate.ToString("DD-MMM-YYY")+"</span>";
+                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + ((DateTime)LabOrder.SampleDate).ToString("DD-MMM-YYY")+"</span>";
                                     lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
                                     break;
                                 case "Complete":
                                     if (vlValue > 1000)
                                     {
                                     lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
-                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(3).ToString("dd-MMM-yyyy");
+                                        lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy");
                                     }
                                     else
                                     {
-                                    lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(6).ToString("dd-MMM-yyyy");
+                                    lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy");
                                     }
                                     break;
                                 default:
                                     break;
                             }
-                            DateTime sampleDate =Convert.ToDateTime(LabOrder.SampleDate.ToString("dd-MMM-yyyy"));
+                            DateTime sampleDate =Convert.ToDateTime(LabOrder.SampleDate.ToString());
                             if (sampleDate.Subtract(DateTime.Today).Days > 30)
                             {
-                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + LabOrder.SampleDate.ToString("dd-MMM-yyyy") + "</span>";
+                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
 
                         }
                         else
                             {
-                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + LabOrder.SampleDate.ToString("dd-MMM-yyyy") + "</span>";
+                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
 
                         }
 
