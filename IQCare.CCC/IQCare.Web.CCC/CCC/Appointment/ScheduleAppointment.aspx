@@ -158,7 +158,7 @@
                                     <label for="description" class="control-label pull-left">Description</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static"/>
+                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" minlength="5" data-parsley-minlength-message="Description cannot be less than 5 characters"/>
                                 </div>
                             </div>
                         </div>
@@ -217,6 +217,7 @@
         });
 
         $(document).ready(function () {
+            $("#AppointmentDate").val("");
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');

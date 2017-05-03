@@ -4,6 +4,8 @@
 <%@ Register Src="~/CCC/UC/ucIptClientWorkup.ascx" TagPrefix="uc" TagName="IptClientWorkup" %>
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
+<%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
+
 
 <div class="col-md-12" style="padding-top: 20px">
 
@@ -1384,20 +1386,50 @@
 
                     <div class="col-md-12">
                         
-
-                    <div class="col-md-12">
-                        <div class="form-group col-md-12" style="text-align: left">
-                                <asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
-
+                        <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label pull-left">Work Plan</label>
                             </div>
-                    </div>
-
-                    <div class="col-md-12">
-
-                        <h1 class="col-md-12">Patient Diagnosis and Treatment</h1>
+                            <div class="form-group col-md-12" style="text-align: left">
+                                <asp:TextBox ID="txtWorkPlan" CssClass ="form-control input-sm" ClientIDMode="Static" runat="server" TextMode="MultiLine" Rows="4" Width="100%"></asp:TextBox>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <hr />
                         </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 form-group">
+                            <label class="control-label pull-left">Select services offered from the list below</label>
+                        </div>
+                        <div class="form-group col-md-12" style="text-align: left">
+                            <asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+                        </div>
+                    </div>
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label pull-left">Lab Order</label>
+                            </div>
+                            <div class="form-group col-md-12" style="text-align: left">
+                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#labModal">Order Lab Tests</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <hr />
+                        </div>
+
+                    <div class="col-md-12">
+                        
+                        <div class="col-md-12 form-group">
+                            <label class="control-label pull-left">Patient Diagnosis and Treatment</label>
+                        </div>
+                       
+                        
 
                         <div class="col-md-12">
                             <div class="col-md-6">
@@ -1448,8 +1480,32 @@
                         </div>
 
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
-                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal">Prescibe Drugs</button>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#adherenceAssessmentModal">Adherence Assessment</button>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label pull-left">ARV Adherence</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-md-5">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label pull-left">CTX/Dapsone Adherence</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <!-- Modal -->
@@ -1579,11 +1635,21 @@
                                             <uc:ucPharmacyPrescription runat="server" ID="ucPharmacyPrescription" />
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
+                        </div>
 
+                        <div id="labModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width:100%">
+                            <div class="modal-dialog" style="width:100%">
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width:100%">
+                                    <div class="modal-body" style="width:100%">
+                                        <div class="row">
+                                            <uc:ucPatientLabs runat="server" ID="ucPatientLabs" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12">
@@ -1591,55 +1657,13 @@
                         </div>
 
                         <div class="col-md-12">
+                            <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#pharmacyModal">Prescibe Drugs</button>
+                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" data-toggle="modal" id="AddAppointment" onclientclick="return false">Add Appointment</button>
 
-                            <div class="col-md-5">
+                        </div>
 
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">ARV Adherence</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" ID="arvAdherance" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="False" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 form-group">
-                                    <div class="col-md-6">
-                                        <label class="control-label pull-left">CTX/Dapsone Adherence</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ctxAdherance" ClientIDMode="Static" Enabled="False" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-
-
-                                <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <div class="col-md-5">
-                                            <label class="control-label pull-left">Referred for </label>
-                                        </div>
-                                        <div class="col-md-7 form-group">
-                                            <asp:DropDownList ID="ddlReferredFor" runat="server" CssClass="form-control input-sm"></asp:DropDownList>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="col-md-5">
-                                            <label class="control-label pull-left">Next Appointment </label>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <button type="button" class="btn btn-info btn-lg fa fa-plus-circle" data-toggle="modal" id="AddAppointment" clientidmode="Static" onclientclick="return false">Add Appointment</button>
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-                            </div>
-
+                        <div class="col-md-12">
+                            <hr />
                         </div>
                     </div>
                 </div>
@@ -2131,8 +2155,15 @@
 
         //Save patient IPT Details
         $("#btnSaveIptDetails").click(function() {
-            addIpt();
-            $('#IptDetailsModal').modal('hide');
+            var dob = $("#IptDateCollected").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Date collected cannot be a future date.");
+                    return false;
+                } 
+                else {
+                    addIpt();
+                    $('#IptDetailsModal').modal('hide');                   
+                }
         });
 
         //Save patient IPT Outcome
@@ -2411,12 +2442,10 @@
 
 
         function savePatientPatientManagement() {
-                
+            var workPlan =  $("#<%=txtWorkPlan.ClientID%>").val();
             var phdp = getCheckBoxListItemsChecked('<%= cblPHDP.ClientID %>');
             var arvAdherence = $("#<%=arvAdherance.ClientID%>").find(":selected").val();
             var ctxAdherence = $("#<%=ctxAdherance.ClientID%>").find(":selected").val();
-            var nextAppDate = "";
-            var appointmentType = $("#<%=ddlReferredFor.ClientID%>").find(":selected").val();
 
             var rowCount = $('#dtlDiagnosis tbody tr').length;
             var diagnosisArray = new Array();
@@ -2433,7 +2462,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientManagement",
-                data: "{'phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','appointmentDate':'" + nextAppDate + "','appointmentType':'" + appointmentType + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
+                data: "{'workplan':'" + workPlan + "','phdp':'" + phdp + "','ARVAdherence':'" + arvAdherence + "','CTXAdherence':'" + ctxAdherence + "','diagnosis':'" + JSON.stringify(diagnosisArray) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

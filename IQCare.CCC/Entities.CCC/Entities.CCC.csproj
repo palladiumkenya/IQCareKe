@@ -99,6 +99,7 @@
     <Compile Include="Enrollment\PatientEntryPoint.cs" />
     <Compile Include="Encounter\LabOrderEntity.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
+    <Compile Include="Lookup\LookupFacilityStatistics.cs" />
     <Compile Include="Lookup\LookupPatientAdherence.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Lookup\PatientRegimenLookup.cs" />
     <Compile Include="Lookup\PatientServiceEnrollmentLookup.cs" />
+    <Compile Include="Lookup\PatientTreatmentSupporterLookup.cs" />
     <Compile Include="Lookup\PersonContactLookUp.cs" />
     <Compile Include="Lookup\PersonLookUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

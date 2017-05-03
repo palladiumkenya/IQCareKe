@@ -16,44 +16,44 @@ namespace BusinessProcess.CCC
 
         public List<LookupItemView> GetGenderOptions()
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var gender = _unitOfWork.LookupRepository.GetLookupItemViews("Gender");
-                _unitOfWork.Dispose();
+                var gender = unitOfWork.LookupRepository.GetLookupItemViews("Gender");
+                unitOfWork.Dispose();
                 return gender;
             }
         }
 
         public List<LookupItemView> GetLookItemByGroup(string groupname)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.GetLookupItemViews(groupname);
+                var item = unitOfWork.LookupRepository.GetLookupItemViews(groupname);
                 ;
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public List<LookupCounty> GetLookupCounties()
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupCountyRepository.GetCounties();
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupCountyRepository.GetCounties();
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public List<LookupItemView> GetLookUpItemViewByMasterName(string masterName)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item =
-                    _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
+                    unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
                         .OrderBy(l => l.OrdRank)
                         .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return item;
 
             }
@@ -61,12 +61,12 @@ namespace BusinessProcess.CCC
 
         public int GetLookUpMasterId(string masterName)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
+                var item = unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
                     .Select(x => x.MasterId)
                     .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
 
                 return item;
             }
@@ -74,20 +74,20 @@ namespace BusinessProcess.CCC
 
         public List<LookupCounty> GetLookupSubcounty(string county)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupCountyRepository.GetSubCounties(county);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupCountyRepository.GetSubCounties(county);
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public List<LookupCounty> GetLookupWards(string subcounty)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupCountyRepository.GetWardsList(subcounty);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupCountyRepository.GetWardsList(subcounty);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -97,10 +97,10 @@ namespace BusinessProcess.CCC
         public List<LookupLabs> GetLookupLabs()
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupLabsRepository.GetLabs();
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupLabsRepository.GetLabs();
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -108,10 +108,10 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetPreviousLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetPreviousLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -119,10 +119,10 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderCompleteLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetExtruderCompleteLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -130,10 +130,10 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetExtruderPendingLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetExtruderPendingLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -141,10 +141,10 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetLookupPendingLabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetPendingLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetPendingLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -152,10 +152,10 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetLookupVllabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetVlLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetVlLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -163,43 +163,43 @@ namespace BusinessProcess.CCC
         public List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupPreviousLabsRepository.GetPendingVlLabs(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupPreviousLabsRepository.GetPendingVlLabs(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public string GetLookupNameFromId(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item =
-                    _unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
-                _unitOfWork.Dispose();
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemId == id).Select(x => x.ItemName).FirstOrDefault();
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public List<LookupItemView> GetLookUpItemViewByMasterId(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupRepository.FindBy(x => x.MasterId == id).OrderBy(l => l.OrdRank).ToList();
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item =
-                    _unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName)
+                    unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.ItemName == itemName)
                         .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -207,10 +207,10 @@ namespace BusinessProcess.CCC
         public LookupFacility GetFacility()
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupFacilityRepository.GetFacility();
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupFacilityRepository.GetFacility();
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -218,20 +218,20 @@ namespace BusinessProcess.CCC
         public LookupItemView GetPatientGender(int genderId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupRepository.GetPatientGender(genderId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupRepository.GetPatientGender(genderId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
         public PatientLookup GetPatientById(int patientId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.PatientLookupRepository.GetPatientById(patientId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.PatientLookupRepository.GetPatientById(patientId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -239,10 +239,10 @@ namespace BusinessProcess.CCC
         public LookupTestParameter GetTestParameter(int LabTestId)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupParameterRepository.GetTestParameter(LabTestId);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupParameterRepository.GetTestParameter(LabTestId);
+                unitOfWork.Dispose();
                 return item;
             }
         }
@@ -250,27 +250,27 @@ namespace BusinessProcess.CCC
         public LookupLabs GetLabTestId(string labType)
 
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = _unitOfWork.LookupLabsRepository.GetLabTestId(labType);
-                _unitOfWork.Dispose();
+                var item = unitOfWork.LookupLabsRepository.GetLabTestId(labType);
+                unitOfWork.Dispose();
                 return item;
             }
         }
 
         public int GetRegimenCategory(int regimenId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 string masterName =
-                    _unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId)
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemId == regimenId)
                         .Select(x => x.MasterName)
                         .FirstOrDefault();
-                int RegmineId = _unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
+                int regmineId = unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
                     .Select(x => x.ItemId)
                     .FirstOrDefault();
-                _unitOfWork.Dispose();
-                return RegmineId;
+                unitOfWork.Dispose();
+                return regmineId;
             }
 
         }
@@ -295,11 +295,11 @@ namespace BusinessProcess.CCC
 
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 List<PatientLabTracker> facilityVlPending =
-                    _unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
-                _unitOfWork.Dispose();
+                    unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
+                unitOfWork.Dispose();
                 return facilityVlPending;
 
 
@@ -308,12 +308,12 @@ namespace BusinessProcess.CCC
 
         public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
 
             {
                 List<PatientLabTracker> facilityVlComplete =
-                    _unitOfWork.PatientLabTrackerRepository.GetVlCompleteCount(facilityId);
-                _unitOfWork.Dispose();
+                    unitOfWork.PatientLabTrackerRepository.GetVlCompleteCount(facilityId);
+                unitOfWork.Dispose();
                 return facilityVlComplete;
             }
 
@@ -337,6 +337,17 @@ namespace BusinessProcess.CCC
             PatientLookupAdhereenceRepository patientLookupAdhereence=new PatientLookupAdhereenceRepository();
             return patientLookupAdhereence.GetPatientAdherenceStatus(patientId);
         }
+
+        public List<LookupFacilityStatistics>  GetLookupFacilityStatistics()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+               var facilityStats= unitOfWork.LookupFacilityStatisticsRepository.GetFacilityStatistics();
+                unitOfWork.Dispose();
+                return facilityStats;
+            }
+        }
+
 
         //    public LookupPatientAdherence GetPatientAdherence(int patientId)
         //    {

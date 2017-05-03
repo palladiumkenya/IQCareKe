@@ -912,6 +912,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var familyMembers = [];
+            $("#<%=CccReferal.ClientID%>").val("False");
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
                 date:0,

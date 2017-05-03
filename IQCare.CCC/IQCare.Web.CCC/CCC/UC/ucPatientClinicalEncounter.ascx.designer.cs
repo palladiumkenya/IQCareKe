@@ -463,6 +463,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
         
         /// <summary>
+        /// txtWorkPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWorkPlan;
+        
+        /// <summary>
         /// cblPHDP control.
         /// </summary>
         /// <remarks>
@@ -488,6 +497,24 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
+        
+        /// <summary>
+        /// arvAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
+        
+        /// <summary>
+        /// ctxAdherance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
         
         /// <summary>
         /// Question1_Yes control.
@@ -580,30 +607,12 @@ namespace IQCare.Web.CCC.UC {
         protected global::IQCare.Web.CCC.UC.ucPharmacyPrescription ucPharmacyPrescription;
         
         /// <summary>
-        /// arvAdherance control.
+        /// ucPatientLabs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
-        
-        /// <summary>
-        /// ctxAdherance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
-        
-        /// <summary>
-        /// ddlReferredFor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReferredFor;
+        protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
     }
 }

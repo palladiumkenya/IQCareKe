@@ -15,33 +15,33 @@ namespace BusinessProcess.CCC
 
         public int AddPatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                _unitOfWork.PatientMaritalStatusRepository.Add(patientMarital);
-                result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientMaritalStatusRepository.Add(patientMarital);
+                result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return result;
             }      
         }
 
         public int DeletePatientMaritalStatus(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var patientmaritalstatus = _unitOfWork.PatientMaritalStatusRepository.GetById(id);
-                _unitOfWork.PatientMaritalStatusRepository.Remove(patientmaritalstatus);
-                result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var patientmaritalstatus = unitOfWork.PatientMaritalStatusRepository.GetById(id);
+                unitOfWork.PatientMaritalStatusRepository.Remove(patientmaritalstatus);
+                result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return result;
             }      
         }
 
         public List<PatientMaritalStatus> GetAllMaritalStatuses(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
                 List<PatientMaritalStatus> myList;
-                myList = _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId & !x.DeleteFlag)
+                myList = unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId & !x.DeleteFlag)
                     .OrderBy(x => x.Id)
                     .ToList();
                 return myList;
@@ -51,11 +51,11 @@ namespace BusinessProcess.CCC
 
         public int UpdatePatientMaritalStatus(PatientMaritalStatus patientMarital)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                _unitOfWork.PatientMaritalStatusRepository.Update(patientMarital);
-                result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientMaritalStatusRepository.Update(patientMarital);
+                result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return result;
 
             }
@@ -64,12 +64,12 @@ namespace BusinessProcess.CCC
 
         public PatientMaritalStatus GetFirstPatientMaritalStatus(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var patientms= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId)
+                var patientms= unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId)
              .OrderByDescending(o => o.CreateDate)
              .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientms;
             }
        
@@ -77,11 +77,11 @@ namespace BusinessProcess.CCC
 
         public PatientMaritalStatus GetCurrentPatientMaritalStatus(int personId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var patientms= _unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId && !x.DeleteFlag)
+                var patientms= unitOfWork.PatientMaritalStatusRepository.FindBy(x => x.PersonId == personId && !x.DeleteFlag)
                     .OrderBy(x => x.Id).FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientms;
 
             }

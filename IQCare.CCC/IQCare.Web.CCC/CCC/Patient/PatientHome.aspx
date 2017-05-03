@@ -106,7 +106,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header bg-info">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Edit Patient Bio</h4>
+                                             <h4 class="modal-title">Change Bio</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -182,7 +182,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Add Patient Treatment Supporter</h4>
+                                             <h4 class="modal-title">Change Supporter</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -219,7 +219,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/"></asp:TextBox>
+                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -242,7 +242,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Add Patient Treatment Supporter</button>
+                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Change Supporter</button>
                                              <button id="btnAddPatientTreatmentSupporterCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -254,11 +254,11 @@
                              </div>
 
                              <div class="col-md-6 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientBioModal">Edit Patient Bio</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientBioModal">Change Bio</button>
                              </div>
 
                              <div class="col-md-6 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Add Patient Supporter</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Change Supporter</button>
                              </div>
 
                          </div>
@@ -301,7 +301,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Add Patient Location</h4>
+                                             <h4 class="modal-title">Change Location</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -388,7 +388,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnAddLocation" type="button" class="btn btn-default" OnClientClick="return false;">Add Location</button>
+                                             <button id="btnAddLocation" type="button" class="btn btn-default" OnClientClick="return false;">Change Location</button>
                                              <button id="btnAddLocationCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -400,7 +400,7 @@
                              </div>
                              
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientLocationModal">Add Patient Location</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientLocationModal">Change Location</button>
                              </div>
 
                          </div>
@@ -430,7 +430,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Edit Patient Contacts</h4>
+                                             <h4 class="modal-title">Change Contacts</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -449,7 +449,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="Mobile No..." data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patAlternativeMobile"></asp:TextBox>
+                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="Mobile No..." data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patAlternativeMobile"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -478,7 +478,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnEditPatientContacts" type="button" class="btn btn-default" OnClientClick="return false;">Edit Patient Contacts</button>
+                                             <button id="btnEditPatientContacts" type="button" class="btn btn-default" OnClientClick="return false;">Change Contacts</button>
                                              <button id="btnEditPatientContactsCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -490,7 +490,7 @@
                              </div>
                              
                              <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientContactModal">Edit Patient Contacts</button>
+                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientContactModal">Change Contacts</button>
                              </div>
                          </div>
                          
@@ -1780,10 +1780,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "add Patient Treatment Supporter");
+                    toastr.success(response.d, "Changing Treatment Supporter");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Upating Patient Bio");
+                    toastr.error(response.d, "Error Changing Treatment Supporter");
                 }
             });
         }
@@ -1797,10 +1797,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "Edit Patient Contacts");
+                    toastr.success(response.d, "Change Contacts");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Adding New Patient Location");
+                    toastr.error(response.d, "Error Changing Contacts");
                 }
             });
         }
@@ -1814,10 +1814,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "add New Patient Location");
+                    toastr.success(response.d, "Change Location");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Adding New Patient Location");
+                    toastr.error(response.d, "Error Changing Location");
                 }
             });
         }
@@ -1831,10 +1831,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "Update Patient Bio");
+                    toastr.success(response.d, "Change Bio");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Upating Patient Bio");
+                    toastr.error(response.d, "Error Changing Bio");
                 }
             });
         }

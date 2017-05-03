@@ -11,7 +11,6 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <script src="../Scripts/js/PatientEncounter.js"></script>
     
      <div class="col-md-12">
         <uc:PatientDetails ID="PatientSummary" runat="server" />
@@ -94,7 +93,8 @@
                 </div><!-- .viraload tracker-->
              <!-- uc  -laboratory -->   
             <div role="tabpanel" class="tab-pane fade" id="Laboratory">
-                <uc:ucPatientLabs runat="server" id="ucPatientLabs" />
+                <%--<uc:ucPatientLabs runat="server" id="ucPatientLabs" />--%>
+            </div>
            <!--  </div> -->
            
              <!-- .uc  -laboratory -->    
@@ -107,10 +107,11 @@
                            
                        </div>--%><!-- .history-->
             <%--</div>--%><!-- .tab-content-->
-            <uc:ucExtruder runat="server" ID="ucExtruder" />
+            
 
         </div>
     </div>
+   <uc:ucExtruder runat="server" ID="ucExtruder" />
     <div class="modal"  id="AppointmentModal" tabindex="-1" role="dialog" aria-labelledby="Appointmentlabel" aria-hidden="true" clientidmode="Static">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" >
