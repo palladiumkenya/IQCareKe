@@ -144,11 +144,25 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var testing = new PatientFamilyTestingManager();
-                Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
-                if (Result > 0)
+                var fam =
+                    testing.GetPatientFamilyList(patientId)
+                        .Where(
+                            x =>
+                                x.FirstName == firstName && x.MiddleName == middleName && x.LastName == lastName &&
+                                x.RelationshipId == relationshipId);
+                if (!fam.Any())
                 {
-                    Msg = "Patient family testing Added Successfully!";
+                    Result = testing.AddPatientFamilyTestings(patientAppointment, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Patient family testing Added Successfully!";
+                    }
                 }
+                else
+                {
+                    Msg = "Not saved. Family member already exists!";
+                }
+                
             }
             catch (Exception e)
             {

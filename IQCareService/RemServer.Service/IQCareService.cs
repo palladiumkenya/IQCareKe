@@ -735,6 +735,16 @@ namespace RemServer.Service
                         connectionEMR.Open();
                     command.ExecuteNonQuery();
                 }
+
+                using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatus", connectionEMR))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@locationid", facility.ID));
+                    command.Parameters.Add(new SqlParameter("@Currentdate", DateTime.Now));
+                    if (connectionEMR.State == ConnectionState.Closed)
+                        connectionEMR.Open();
+                    command.ExecuteNonQuery();
+                }
             }
 
 
