@@ -912,6 +912,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var familyMembers = [];
+            $("#<%=CccReferal.ClientID%>").val("False");
             $('#BaselineHIVStatusD').datepicker({
                 allowPastDates: true,
                 date:0,
@@ -982,6 +983,14 @@
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
+                    if ((!moment('' + baselineHivStatusDate + '').isValid())&&(baselineHivStatusDate !=="")) {
+                        toastr.error("Baseline HIV status date invalid.");
+                        return false;
+                    }
+                    if ((!moment('' + hivTestingresultDate + '').isValid())&&(hivTestingresultDate !=="")) {
+                        toastr.error("HIV testing result date invalid.");
+                        return false;
+                    }
                     if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
                         toastr.error("Baseline HIV status date cannot be before the date of birth.");
                         return false;
@@ -1000,6 +1009,20 @@
                     }
                     if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")||($("#Relationship :selected").text() === "Partner")))  {
                         toastr.error("A child cannot have a spouse or partner.");
+                        return false;
+                    }
+                    var fam = familyMembers.filter(function(el) {
+                        return (el.firstName === firstName) &&
+                               (el.middleName === middleName) &&
+                               (el.lastName ===lastName) &&
+                               (el.dob ===dob) &&
+                               (el.relationshipId === relationshipId);
+                    });
+                    console.log(familyMembers);
+                    console.log(fam);
+                    debugger;
+                    if (fam.length > 0) {
+                        toastr.error("Family member already added!");
                         return false;
                     }
                     else {
@@ -1049,7 +1072,6 @@
                     toastr.error("error", "Please insert at least One(1) family member");
                     return false;
                 }
-                debugger;
                 for (var i = 0, len = familyMembers.length; i < len; i++) {
                     addFamilyTesting(familyMembers[i]);
                 }

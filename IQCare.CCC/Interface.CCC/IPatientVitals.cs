@@ -11,5 +11,6 @@ namespace Interface.CCC
         PatientVital GetByPatientId(int patientId);
         List<PatientVital> GetCurrentPatientVital(int patientId);
         PatientVital GetPatientVitalsByMasterVisitId(int patientId, int patientMasterVisitId);
+        PatientVital GetPatientBaselinePatientVital(int patientId);
     }
 }

@@ -27,7 +27,7 @@ using DataAccess.CCC.Repository.Screening;
 
 namespace DataAccess.CCC.Repository
 {
-    public class UnitOfWork : _unitOfWork,IDisposable
+    public class UnitOfWork : IUnitOfWork,IDisposable
     {
         private BaseContext _context;
 
@@ -61,6 +61,7 @@ namespace DataAccess.CCC.Repository
         private ILookupCounty _lookupCounty;
         private IPatientServiceEnrollmentLookupRepository _patientServiceEnrollmentLookupRepository;
         private IPatientTreatmentSupporterLookupRepository _patientTreatmentSupporterLookupRepository;
+        private ILookupFacilityStatisticsRepository _lookupFacilityStatisticsRepository;
 
       
 
@@ -195,6 +196,17 @@ namespace DataAccess.CCC.Repository
                 return _lookupCounty??(_lookupCounty=new LookupCountyRepository((LookupContext)_context));
             }
         }
+
+        public ILookupFacilityStatisticsRepository LookupFacilityStatisticsRepository
+        {
+            get
+            {
+                return _lookupFacilityStatisticsRepository ??
+                       (_lookupFacilityStatisticsRepository =
+                           new LookupFacilityStatisticsRepository((LookupContext) _context));
+            }
+        }
+
         public IPersonRepository PersonRepository
         {
             get { return _personRepository ?? (_personRepository = new PersonRepository((PersonContext)_context)); }

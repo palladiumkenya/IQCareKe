@@ -39,7 +39,8 @@ namespace IQCare.Web.CCC.WebService
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
       
-        private int _labTestId;      
+        private int _labTestId;
+        List<string>_vlResults;
         private string Msg { get; set; }
         private int Result { get; set; }
         private int _ptnPk;
@@ -128,15 +129,9 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientViralLoad> GetViralLoad()
         {
-
-            PatientLabTracker TestId = _lookupData.GetPatientLabTestId(patientId);
-            if (TestId != null)
-            {
-                _labTestId = TestId.LabTestId;
-            }
-
+                     
             List<PatientViralLoad> patientViralDetails = new List<PatientViralLoad>();
-            List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(_labTestId);
+            List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(patientId);
 
             if (list_vl != null)
             {
@@ -150,7 +145,7 @@ namespace IQCare.Web.CCC.WebService
                     patientViralDetails.Add(vl);
                 }
             }
-            return patientViralDetails;
+                   return patientViralDetails;
 
         }
         [WebMethod(EnableSession = true)]

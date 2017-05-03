@@ -40,7 +40,7 @@
                     <div class="col-md-4">
                         <div class="col-md-12">                           
                              <div class="progress">
-                                <div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="139"></div>
+                                <div class="progress-bar progress-bar-info" id="bgSystolic" style="width: 0;"aria-valuemax="200"></div>
                             </div>
                         </div>
                         <div class="col-md-12"><h6 class="pull-left"><asp:Label runat="server"> (Systolic)</asp:Label></h6></div>
@@ -48,13 +48,36 @@
                     <div class="col-md-4">
                         <div class="col-md-12" style="padding-bottom: 1%">
                             <div class="progress">
-                                <div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="89"></div>
+                                <div class="progress-bar progress-bar-info" id="pgDiastolic" style="width: 0;"aria-valuemax="110"></div>
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 1%"><h6 class="pull-left"><asp:Label runat="server"> (Diastolic)</asp:Label></h6></div>
                     </div>
                 </div>
                 <div class="col-md-12"><hr/></div>
+                <div class="col-md-12">
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Pulse Rate :</asp:Label></h5></div>
+                        <div class="col-md-12">
+                            <h6> <asp:Label runat="server" ID="lblPulseRate" CssClass="text-info pull-left"> 0 </asp:Label></h6>
+                        </div>
+                    </div>
+                
+                <div class="col-md-4 col-xs-12 col-sm-12">
+                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Respiratory Rate :</asp:Label></h5></div>
+                    <div class="col-md-12">
+                         <h6><asp:Label runat="server" ID="lblRespiratoryRate" CssClass="text-info pull-left"> 0 </asp:Label></h6>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-xs-12 col-sm-12">
+                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Oxygen Saturation :</asp:Label></h5></div>
+                    <div class="col-md-12">
+                        <h6> <asp:Label runat="server" ID="lblOxygenSaturation" CssClass="text-info pull-left"> 0 %</asp:Label></h6>
+                    </div>
+                </div>
+
+                </div>
             </div> <!-- .col-md-12 -->
            
         </div> <!-- .panel-body -->

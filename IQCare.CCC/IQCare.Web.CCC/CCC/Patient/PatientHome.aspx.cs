@@ -9,6 +9,7 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
 using Interface.CCC.Visit;
 using Entities.CCC.Visit;
+using Interface.CCC;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -20,6 +21,8 @@ namespace IQCare.Web.CCC.Patient
         protected int labTestId = 0;
         protected Decimal vlValue=0;
         protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+
+
 
         protected int PatientId
         {
@@ -209,33 +212,50 @@ namespace IQCare.Web.CCC.Patient
                     labTestId = _vltestId.LabTestId;
                 }
                 if (labTestId > 0) {
-                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(labTestId);
+                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);
+
                         if (LabOrder != null)
                         {
-                            vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
+                        foreach (var item in _lookupData.GetPatientVL(LabOrder.Id))
+                        {
+                            vlValue = item.ResultValues;
+                        }
+                           // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
                             switch (LabOrder.Results)
                             {
                                 case "Pending":
-                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + LabOrder.SampleDate.ToString("DD-MMM-YYY")+"</span>";
+                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + ((DateTime)LabOrder.SampleDate).ToString("DD-MMM-YYY")+"</span>";
                                     lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
                                     break;
                                 case "Complete":
                                     if (vlValue > 1000)
                                     {
                                     lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
-                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(3).ToString("DD-MMM-YYYY");
+                                        lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy");
                                     }
                                     else
                                     {
-                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(6).ToString("DD-MMM-YYYY");
+                                    lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy");
                                     }
                                     break;
                                 default:
                                     break;
                             }
-                            lblVL.Text = LabOrder.LabTestId.ToString()+" Date: "+ LabOrder.SampleDate.ToString("DD-MMM-YYY");
+                            DateTime sampleDate =Convert.ToDateTime(LabOrder.SampleDate.ToString());
+                            if (sampleDate.Subtract(DateTime.Today).Days > 30)
+                            {
+                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
 
-                        }else
+                        }
+                        else
+                            {
+                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+
+                        }
+
+
+                    }
+                    else
                         {
                         lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
                         }

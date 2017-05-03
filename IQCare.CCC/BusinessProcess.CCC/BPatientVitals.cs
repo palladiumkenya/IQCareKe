@@ -116,6 +116,19 @@ namespace BusinessProcess.CCC
                 var vitals =
                     unitOfWork.PatientVitalsRepository.FindBy(
                             x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId)
+                        .OrderByDescending(x => x.Id)
+                        .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vitals;
+            }
+        }
+
+        public PatientVital GetPatientBaselinePatientVital(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                    unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
                         .OrderBy(x => x.Id)
                         .FirstOrDefault();
                 unitOfWork.Dispose();
