@@ -162,7 +162,7 @@
         else {
             drugList(0);
             $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', false);
         }
     });
 

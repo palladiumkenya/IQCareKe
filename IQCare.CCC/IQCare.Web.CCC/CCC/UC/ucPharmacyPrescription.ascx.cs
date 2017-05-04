@@ -30,11 +30,14 @@ namespace IQCare.Web.CCC.UC
                     PMSCMSAmePointDispense = Session["SCMSamePointDispense"].ToString();
 
                 LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
+                //lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
                 lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
                 lookUp.populateDDL(regimenLine, "RegimenLines");
                 lookUp.getPharmacyDrugFrequency(ddlFreq);
+
+                PatientEncounterLogic pel = new PatientEncounterLogic();
+                pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);
 
                 loadExistingData();
             }
