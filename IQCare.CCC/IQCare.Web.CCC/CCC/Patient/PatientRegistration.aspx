@@ -473,46 +473,43 @@
                                 
                             </div>
                           
+                          <div class="col-md-12">
+                              <div class="errorTreatmentSupporter" style="color: red; float: left;"> Complete Treatment Supporter First Name, Last Name and Gender  </div>
+                          </div>
+                          
                           <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="required control-label pull-left">First Name</label></div>
-                                              <div class="col-md-12">
-                                                   <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
-                                               </div>
-                                         </div>
+                                    <div class="col-md-12"><label class="control-label pull-left">First Name</label></div>
+                                    <div class="col-md-12">
+                                        <asp:TextBox runat="server"  CssClass="form-control input-sm" placeholder="first name..." ID="tsFname" ClientIDMode="Static" data-parsley-length="[2,50]"></asp:TextBox>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-3">
-                                             <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
-                                             <div class="col-md-12">
-                                                  <asp:TextBox runat="server" ID="tsMiddleName" ClientIDMode="Static" CssClass="form-control input-sm"/>
-                                             </div>
-                                         </div>
+                                    <div class="col-md-12"><label class="control-label pull-left">Middle Name</label></div>
+                                    <div class="col-md-12">
+                                        <asp:TextBox runat="server" ID="tsMiddleName" ClientIDMode="Static" CssClass="form-control input-sm"/>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-3">
-                                              <div class="col-md-12"><label class="required control-label pull-left">Last Name</label></div>
-                                              <div class="col-md-12">
-                                                   <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-length="[2,50]"></asp:TextBox>
-                                              </div>
-                                         </div>
+                                    <div class="col-md-12"><label class="control-label pull-left">Last Name</label></div>
+                                    <div class="col-md-12">
+                                        <asp:TextBox runat="server" ID="tsLastName" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-length="[2,50]"></asp:TextBox>
+                                    </div>
+                                </div>
 
                                 <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <div class="col-md-12"><label class="required control-label pull-left">Gender </label></div>
-                                                  <div class="col-md-12">
-                                                      <asp:DropDownList runat="server" ID="tsGender" ClientIDMode="Static" CssClass="form-control input-sm" required="true" data-parsley-min="1"/>
-                                                  </div>
-                                              </div>
-                                         </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12"><label class="control-label pull-left">Gender </label></div>
+                                        <div class="col-md-12">
+                                            <asp:DropDownList runat="server" ID="tsGender" ClientIDMode="Static" CssClass="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                           
                           <div class="col-md-12 form-group">
-                               
-                                <!-- <div class="col-md-3">
-                                      <div class="col-md-12"><label class="control-label pull-left">Mobile Contact </label></div>
-                                      <div class="col-md-12">
-                                           <asp:TextBox runat="server" CssClass="form-control input-sm" id="TSContactsz" placeholder="mobile no.." data-parsley-required="true" data-parsley-length="[8,14]"></asp:TextBox>
-                                      </div>
-                                 </div>-->
                                
                                <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Mobile Contact.</label></div>
@@ -593,6 +590,7 @@
             .ready(function() {
 
                 $('.errorBlock').hide();
+                $(".errorTreatmentSupporter").hide();
 
                 var personAge = 0;
                 var userId=<%=UserId%>;
@@ -726,22 +724,17 @@
                         }
                         else if (data.step === 3) {
                             $('#datastep3').parsley().destroy();
+                            validateTreatmentSupporter();
                             $('#datastep3').parsley({
                                 excluded:
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
+                            
                             if ($("#datastep3").parsley().validate()) {
-                                //$.when(addPatientContact()).then(addPersonTreatmentSupporter());
                                 $.when(addPatientContact()).then(function() {
                                     $.when(addPersonTreatmentSupporter()).then(function() {
-                                        //addTreatmentSupporter();
-                                        /*setTimeout(function(){
-                                            addTreatmentSupporter();
-                                        }, 2000);*/
                                     });
-                                    //addPersonTreatmentSupporter();
-                                });
-                                //addTreatmentSupporter();
+                                });                             
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -958,20 +951,41 @@
                     var supporterIsGuardian = $("#<%=ISGuardian.ClientID%>").find(":selected").text();
 
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
-                        data: "{'firstname':'" + tFname + "','middlename':'" + tMname + "','lastname':'" + tLname + "','gender':" + tSex + ",'nationalId':'" + natId + "','userId':'" + userId + "', 'mobileContact':'" + mobileContact + "', 'patientid': '" + isPatientSet + "','supporterIsGuardian':'" + supporterIsGuardian +"'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person Treatment Supporter");
-                        },
-                        error: function (response) {
-                            toastr.error(response.d, "Person Treatment Supporter Error");
-                        }
-                    });
-               }
+                    if (tFname != "" && tLname != "" && tSex != "") {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/AddPersonTreatmentSupporter",
+                            data: "{'firstname':'" +
+                                tFname +
+                                "','middlename':'" +
+                                tMname +
+                                "','lastname':'" +
+                                tLname +
+                                "','gender':" +
+                                tSex +
+                                ",'nationalId':'" +
+                                natId +
+                                "','userId':'" +
+                                userId +
+                                "', 'mobileContact':'" +
+                                mobileContact +
+                                "', 'patientid': '" +
+                                isPatientSet +
+                                "','supporterIsGuardian':'" +
+                                supporterIsGuardian +
+                                "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(response) {
+                                toastr.success(response.d, "Person Treatment Supporter");
+                            },
+                            error: function(response) {
+                                toastr.error(response.d, "Person Treatment Supporter Error");
+                            }
+                        });
+                    }
+                }
 
                 function addPersonLocation() {
 
@@ -1419,6 +1433,37 @@
 
                     duplicateCheck();
                 };
+
+                function validateTreatmentSupporter() {
+                    var validate = false;
+                    var fName = $("#<%=tsFname.ClientID%>").val();
+                    var mName = $("#<%=tsMiddleName.ClientID%>").val();
+                    var lName = $("#<%=tsLastName.ClientID%>").val();
+                    var sex = $("#<%=tsGender.ClientID%>").val(); 
+
+                    if (fName != null && fName != "") {
+                        validate = true;
+                    }
+
+                    if (mName != null && mName != "") {
+                        validate = true;
+                    }
+
+                    if (lName != null && lName != "") {
+                        validate = true;
+                    }
+
+                    if (sex>0) {
+                        validate = true;
+                    }
+
+                    if (validate == true) {
+                        $("#<%=tsFname.ClientID%>").attr("data-parsley-required", "true");
+                        //mName.attr("data-parsley-required", "true");
+                        $("#<%=tsLastName.ClientID%>").attr("data-parsley-required", "true");
+                        $("#<%=tsGender.ClientID%>").attr("data-parsley-min", "1");
+                    } 
+                }
 
                 function estimateDob(personAge) {
                     console.log(personAge);
