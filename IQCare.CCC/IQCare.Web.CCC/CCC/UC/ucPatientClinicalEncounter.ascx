@@ -384,7 +384,7 @@
                                                 <label class="control-label pull-left">On Anti TB drugs?</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();" required="true" data-parsley-required="true">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -396,7 +396,7 @@
                                                 <label class="control-label pull-left">On IPT?</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -2191,12 +2191,10 @@
                         /* add constraints based on age*/
 
                         if ($('#datastep1').parsley().validate()) {
-                            if ($("#tbInfected").val() === 'False') {
                                 addPatientIcf();
                                 if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
                                     addPatientIcfAction();
                                 }
-                            }
                             savePatientEncounterPresentingComplaint();
                         } else {
                             stepError = $('.parsley-error').length === 0;
@@ -2483,6 +2481,7 @@
             var onAntiTbDrugs = $("#<%=tbInfected.ClientID%>").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
@@ -2491,7 +2490,6 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Patient ICF saved successfully");
-                    resetAppointmentFields();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Patient ICF not saved");
@@ -2754,6 +2752,7 @@
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(37);
             $("#onIpt").prop("disabled",true);
+            $("#onIpt").val("False");
         }
             
     }
