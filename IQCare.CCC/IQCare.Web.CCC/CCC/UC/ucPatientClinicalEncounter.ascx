@@ -1807,6 +1807,9 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
+        $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+            presentingComplaintsDateChange();
+        });
           
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
@@ -2529,12 +2532,17 @@
             var peripheralneoropathy = $("#peripheralNeoropathy").val();
             var rash = $("#rash").val();
             var adheranceMeasurement = $("#adheranceMeasurement").val();
+            var hepatotoxicityAction = $("#hepatotoxicityAction").val();
+            var peripheralneoropathyAction = $("#peripheralAction").val();
+            var rashAction = $("#rashAction").val();
+            var adheranceMeasurementAction = $("#adheranceAction").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddIpt",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "','hepatotoxicityAction': '" + hepatotoxicityAction + "','peripheralneoropathyAction': '" + peripheralneoropathyAction + "','rashAction': '" + rashAction + "','adheranceMeasurementAction': '" + adheranceMeasurementAction +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2981,5 +2989,15 @@
                     toastr.error(response.d, "Error occured while saving Presenting Complaints");
                 }
             });
+    }
+
+
+    function presentingComplaintsDateChange() {
+        var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
+        if (moment('' + pcDate + '').isAfter()) {
+            toastr.error("Presenting complaints date cannot be a future date.");
+            $("#<%=txtPCOnsetDate.ClientID%>").val("");
+            return false;
         }
+    }
 </script>

@@ -49,7 +49,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddIpt(int patientId, int patientMasterVisitId, int weight, DateTime iptDueDate, DateTime iptDateCollected, bool hepatotoxicity, bool peripheralneoropathy, bool rash, int adheranceMeasurement)
+        public string AddIpt(int patientId, int patientMasterVisitId, int weight, DateTime iptDueDate, DateTime iptDateCollected, bool hepatotoxicity, bool peripheralneoropathy, bool rash, int adheranceMeasurement, string hepatotoxicityAction, string peripheralneoropathyAction, string rashAction, string adheranceMeasurementAction)
         {
             PatientIpt patientIpt = new PatientIpt()
             {
@@ -62,6 +62,10 @@ namespace IQCare.Web.CCC.WebService
                 IptDueDate = iptDueDate,
                 Peripheralneoropathy = peripheralneoropathy,
                 Rash = rash,
+                HepatotoxicityAction = hepatotoxicityAction,
+                PeripheralneoropathyAction = peripheralneoropathyAction,
+                RashAction = rashAction,
+                AdheranceMeasurementAction = adheranceMeasurementAction,
             };
             try
             {
