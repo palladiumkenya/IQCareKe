@@ -268,9 +268,6 @@
         var facilityId = '<%=AppLocationId%>';
         var moduleId = '<%=ModuleId%>';
       
-        var jan_vl = "";
-        var march_vl = "";
-        
         $(document).ready(function () {           
 
 
