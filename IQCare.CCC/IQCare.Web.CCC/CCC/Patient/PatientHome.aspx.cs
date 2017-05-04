@@ -17,10 +17,10 @@ namespace IQCare.Web.CCC.Patient
     {
         public int PatientMasterVisitId;
         public decimal march_height;
-        protected int ptnPk=0;
+        protected int ptnPk = 0;
         protected int labTestId = 0;
-        protected Decimal vlValue=0;
-        protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+        protected Decimal vlValue = 0;
+        protected IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
 
 
@@ -153,14 +153,14 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 // Get Patient Regimen Map:
-                ILookupManager regimenMap =(ILookupManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                ILookupManager regimenMap = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 var regimen = regimenMap.GetCurentPatientRegimen(PatientId);
 
                 if (regimen != null)
                 {
                     if (regimen.RegimenId > 0)
                     {
-                        lblCurrentRegimen.Text ="< span class='label label-success'>"+ regimen.RegimenType.ToString()+"</span>";
+                        lblCurrentRegimen.Text = "< span class='label label-success'>" + regimen.RegimenType.ToString() + "</span>";
                     }
                     else
                     {
@@ -176,7 +176,7 @@ namespace IQCare.Web.CCC.Patient
                 ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
                 var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId);
-                
+
                 if (adheranceStatus != null)
                 {
                     string adheranceString = LookupLogic.GetLookupNameById(adheranceStatus.Score);
@@ -192,13 +192,13 @@ namespace IQCare.Web.CCC.Patient
                             lblAdheranceStatus.Text = "<span class='label label-warning'> Fair [Consider Adherence Intervetion]</span>";
                             break;
                     }
-                    
+
                 }
                 else
                 {
                     lblAdheranceStatus.Text = "<span class='label label-danger'>Adherance Assessment Not Done</span>";
                 }
-               
+
 
                 // viral Load Alerts
                 //PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
@@ -206,13 +206,18 @@ namespace IQCare.Web.CCC.Patient
                 //{
                 //    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
                 //}
-                PatientLabTracker _vltestId = _lookupData.GetPatientLabTestId(PatientId);
-                if (_vltestId != null)
+                //PatientLabTracker _vltestId = _lookupData.GetPatientLabTestId(PatientId);
+                //if (_vltestId != null)
+                //{
+                //    //gets latest  viral load llab results if exists
+                //    labTestId = _vltestId.LabTestId;
+                //}
+                if (PatientId > 0)
                 {
                     labTestId = _vltestId.LabTestId;
                 }
                 if (labTestId > 0) {
-                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);
+                        var LabOrder = _lookupData.GetPatientCurrentviralLoadInfo(labTestId);
 
                         if (LabOrder != null)
                         {
@@ -224,32 +229,32 @@ namespace IQCare.Web.CCC.Patient
                             switch (LabOrder.Results)
                             {
                                 case "Pending":
-                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + ((DateTime)LabOrder.SampleDate).ToString("DD-MMM-YYY")+"</span>";
+                                    lblVL.Text ="<span class='label label-warning'>"+ LabOrder.Results + "/ Date: " + LabOrder.SampleDate.ToString("DD-MMM-YYY")+"</span>";
                                     lblvlDueDate.Text = "<span class='label label-success'>N/A</span>";
                                     break;
                                 case "Complete":
                                     if (vlValue > 1000)
                                     {
                                     lblVL.Text = "<span class='label label-danger'>"+ vlValue +" copies/ml</span>";
-                                        lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy");
+                                        lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(3).ToString("dd-MMM-yyyy");
                                     }
                                     else
                                     {
-                                    lblvlDueDate.Text = ((DateTime)LabOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy");
+                                    lblvlDueDate.Text = LabOrder.SampleDate.AddMonths(6).ToString("dd-MMM-yyyy");
                                     }
                                     break;
                                 default:
                                     break;
                             }
-                            DateTime sampleDate =Convert.ToDateTime(LabOrder.SampleDate.ToString());
+                            DateTime sampleDate =Convert.ToDateTime(LabOrder.SampleDate.ToString("dd-MMM-yyyy"));
                             if (sampleDate.Subtract(DateTime.Today).Days > 30)
                             {
-                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + LabOrder.SampleDate.ToString("dd-MMM-yyyy") + "</span>";
 
                         }
                         else
                             {
-                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)LabOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + LabOrder.SampleDate.ToString("dd-MMM-yyyy") + "</span>";
 
                         }
 
@@ -258,13 +263,15 @@ namespace IQCare.Web.CCC.Patient
                     else
                         {
                         lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
-                        }
-                }else
+                    }
+                }
+                else
                 {
                     lblVL.Text = "<span class='label label-danger'>Patient Not Referenced</span>";
                     lblvlDueDate.Text = "<span class='label label-danger'><strong>Not Available</strong></span>";
                 }
-            }       
-        }      
+
+            }
+        }
     }
 }
