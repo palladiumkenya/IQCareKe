@@ -492,6 +492,7 @@ namespace IQCare.Web.CCC.WebService
                     var personLogic = new PersonManager();
                     var patientLogic = new PatientLookupManager();
                     var patientTreatmentSupporter = new PatientTreatmentSupporterManager();
+                    var patientTreatmentlookupManager = new PatientTreatmentSupporterLookupManager();
                     int personId = 0;
 
                     if (supporterId > 0)
@@ -504,7 +505,8 @@ namespace IQCare.Web.CCC.WebService
                         personId = patient.PersonId;
                     }
                     
-                    var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
+                    //var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
+                    var listPatientTreatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
 
                     if (listPatientTreatmentSupporter.Count > 0)
                     {
@@ -516,14 +518,25 @@ namespace IQCare.Web.CCC.WebService
                         if (listPatientTreatmentSupporter[0].SupporterId > 0)
                         {
                             var treatmentSupporterManager = new PatientTreatmentSupporterManager();
-                            var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                            //var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                            var treatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
                             if (treatmentSupporter.Count > 0)
                             {
-                                treatmentSupporter[0].PersonId = personId;
-                                treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
-                                treatmentSupporter[0].MobileContact = mobileContact;
+                                //treatmentSupporter[0].PersonId = personId;
+                                //treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
+                                //treatmentSupporter[0].MobileContact = mobileContact;
 
-                                treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
+                                PatientTreatmentSupporter supporter = new PatientTreatmentSupporter()
+                                {
+                                    Id = treatmentSupporter[0].Id,
+                                    PersonId = personId,
+                                    SupporterId = listPatientTreatmentSupporter[0].SupporterId,
+                                    MobileContact = mobileContact,
+                                    CreatedBy = treatmentSupporter[0].CreatedBy,
+                                    DeleteFlag = treatmentSupporter[0].DeleteFlag
+                                };
+
+                                treatmentSupporterManager.UpdatePatientTreatmentSupporter(supporter);
 
                                 Msg += "<p>Person Treatement Supported Updated Successfully</p>";
                             }
