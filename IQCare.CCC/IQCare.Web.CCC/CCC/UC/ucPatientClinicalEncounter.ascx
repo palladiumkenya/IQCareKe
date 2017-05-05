@@ -2664,7 +2664,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
+                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

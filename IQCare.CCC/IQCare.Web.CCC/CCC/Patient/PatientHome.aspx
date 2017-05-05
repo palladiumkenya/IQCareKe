@@ -1551,6 +1551,7 @@
                         else if (patientDetails.population == "Key Population") {
                             populationType = 75;
                         }
+                        console.log(populationType);
                         $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
 
                         var names = null;

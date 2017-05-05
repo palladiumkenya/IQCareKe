@@ -610,15 +610,24 @@ namespace IQCare.Web.CCC.WebService
             if (adherenceScore == 0)
             {
                 adherenceRating = "Good";
-            }else if (adherenceScore >= 1 || adherenceScore <= 2)
+            }else if (adherenceScore >= 1 && adherenceScore <= 2)
             {
                 adherenceRating = "Fair";
-            }else if (adherenceScore >= 3 || adherenceScore <= 4)
+            }else if (adherenceScore >= 3 && adherenceScore <= 4)
             {
                 adherenceRating = "Poor";
             }
 
+            var history = patientAdherenceAssessment.GetActiveAdherenceAssessment(patientId);
+
+            if (history.Count > 0)
+            {
+                history[0].DeleteFlag = true;
+                patientAdherenceAssessment.UpdateAdherenceAssessment(history[0]);
+            }
+
             int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+
             if (result > 0)
             {
                 var lookUpLogic =  new LookupLogic();

@@ -540,8 +540,14 @@
                                <div class="col-md-4">
                                                     
                                      <div class="form-group"><div class="col-md-12"><label class="control-label pull-left">Select Population type</label></div></div>
-
+                                   
+                                   
                                      <div class="col-md-12 radio">
+                                         <asp:RadioButtonList ID="PopulationType" runat="server" RepeatDirection="Horizontal" ClientIDMode="Static" data-parsley-required="true" data-parsley-multiple="radio" data-parsley-mincheck="1" data-parsley-error-message="Please choose at least 1"></asp:RadioButtonList>
+                                         <div class="errorBlockPatientType" style="color: red;"> Please select one option </div>
+		                            </div>
+
+                                     <!--<div class="col-md-12 radio">
                                          
                                           <label class="radio-custom  pull-left" data-initialize="radio" id="GenPopulation">
                                               <input type="radio" name="Population" value="General Population" class="sr-only" id="rdbGenPopulation" />
@@ -555,7 +561,7 @@
                                               
                                                 Key population
                                           </label>
-                                     </div>
+                                     </div>-->
 
                                 </div>
                                 
@@ -590,6 +596,7 @@
             .ready(function() {
 
                 $('.errorBlock').hide();
+                $('.errorBlockPatientType').hide();
                 $(".errorTreatmentSupporter").hide();
 
                 var personAge = 0;
@@ -748,6 +755,22 @@
                                     "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
                             if ($("#datastep4").parsley().validate()) {
+
+                                var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked').val();
+
+                                var checked_radio = $("[id*=PopulationType] input:checked");
+                                var populationType = checked_radio.closest("td").find("label").html();
+
+                                //console.log(typeof patientTypeId);
+                                $('.errorBlockPatientType').hide();
+                                if (typeof patientTypePopulationType == "undefined") {
+                                    $('.errorBlockPatientType').show();
+                                    return false;
+                                }
+
+                                if (populationType == "Key Population") {
+                                    
+                                }
 
                                 var sex = $("#Gender").find(":selected").text();
                                 var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
@@ -1027,27 +1050,54 @@
 
                     var url = null;
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../WebService/PersonService.asmx/AddPersonContact",
-                        data: "{'personId':'" + personId + "','physicalAddress':'" + postalAddress + "','mobileNumber':'" + mobileNumber + "','alternativeNumber':'" + altMobile + "','emailAddress':'" + emailAddress + "','userId':'" + userId + "','patientid':'" + isPatientSet + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            toastr.success(response.d, "Person Contact Information");
-                        },
-                        error: function (xhr, errorType, exception) {
-                            var jsonError = jQuery.parseJSON(xhr.responseText);
-                            toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
-                            return false;
-                        }
-                    });
+                    if (postalAddress != "" || mobileNumber != "") {
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../WebService/PersonService.asmx/AddPersonContact",
+                            data: "{'personId':'" +
+                                personId +
+                                "','physicalAddress':'" +
+                                postalAddress +
+                                "','mobileNumber':'" +
+                                mobileNumber +
+                                "','alternativeNumber':'" +
+                                altMobile +
+                                "','emailAddress':'" +
+                                emailAddress +
+                                "','userId':'" +
+                                userId +
+                                "','patientid':'" +
+                                isPatientSet +
+                                "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function(response) {
+                                toastr.success(response.d, "Person Contact Information");
+                            },
+                            error: function(xhr, errorType, exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" +
+                                    xhr.status +
+                                    "" +
+                                    jsonError.Message +
+                                    " " +
+                                    jsonError.StackTrace +
+                                    " " +
+                                    jsonError.ExceptionType);
+                                return false;
+                            }
+                        });
+                    }
                 }
 
                 function addPersonPopulation() {
                     var isPatientSet = '<%=Session["PatientEditId"]%>';
 
-                    var populationType = $("input[name='Population']:checked").val();
+                    //var populationType = $("input[name='Population']:checked").val();
+                    var checked_radio = $("[id*=PopulationType] input:checked");
+                    var populationType = checked_radio.closest("td").find("label").html();
+
                     //var populationType = $('input[name="Population"]').value;
                     var populationCategoryId = $("#<%=KeyPopulationCategoryId.ClientID%>").find(":selected").val();
 
@@ -1095,9 +1145,13 @@
                     });
                 }
 
-                $("input[name='Population']").on("change",
+                $("input[name='ctl00$IQCareContentPlaceHolder$PopulationType']").on("change",
                     function() {
-                        var itemName=$(this).val();
+                        var checked_radio = $("[id*=PopulationType] input:checked");
+                        var itemName = checked_radio.closest("td").find("label").html();
+
+                        //var itemName=$(this).val();
+                        console.log(itemName);
                         if (itemName === 'General Population') {
                             $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
                             $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
@@ -1133,7 +1187,7 @@
                         dataType: "json",
                         success: function (response) {
                             var patientDetails = JSON.parse(response.d);
-                            //console.log(patientDetails);
+                            console.log(patientDetails);
                             /*Patient Type*/
                             //console.log(patientDetails.PatientType);
 
@@ -1214,7 +1268,7 @@
                             //$('input[name="Population"]').value = patientDetails.population;
                             console.log(patientDetails.population);
 
-                            if (patientDetails.population == "General Population") {
+                            /*if (patientDetails.population == "General Population") {
                                 var d = document.getElementById("GenPopulation");
                                 d.className += " checked";
                             } else if(patientDetails.population == "Key Population") {
@@ -1222,9 +1276,32 @@
                                 d.className += " checked";
                             }
                             $('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
-                            $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
+                            */
 
+                            var RBID = '<%=PopulationType.ClientID %>';
+                            var RB1 = document.getElementById(RBID);
+                            var radio = RB1.getElementsByTagName("input");
+ 
+                            for (var i = 0; i < radio.length; i++) {
+                                if (radio[i].value == patientDetails.populationTypeId) {
+                                    radio[i].checked = true;
+                                }
+                            }
+
+                            
                             personAgeRule();
+                            
+                            if (patientDetails.population == "General Population") {
+                                //$('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', true);
+
+                                $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
+                                $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
+                                $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
+                            } else {
+                                setTimeout(function(){
+                                    $("#KeyPopulationCategoryId").val(patientDetails.PopulationCategoryId);
+                                }, 2000);                               
+                            }
                         },
                         error: function (response) {
                             toastr.error(response.d, "Error Getting Person Details");
@@ -1401,8 +1478,9 @@
                             $("#<%=NationalId.ClientID%>").prop('disabled', true);
                         }
 
+
                         getPopulationTypes();
-                        $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', false);
+                        $('#PopulationType_1').prop('disabled', false);
 
                     } else {
                         $("#<%=ChildOrphan.ClientID%>").prop('disabled',false);
@@ -1414,7 +1492,8 @@
                         $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
                         $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
 
-                        $('input:radio[name="Population"]').filter('[value="Key Population"]').prop('disabled', true);
+                        $('#PopulationType_1').prop('disabled', true);
+
                         $("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
                         $("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
                         $("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);

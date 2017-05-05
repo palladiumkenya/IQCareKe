@@ -75,7 +75,7 @@ namespace IQCare.Web.CCC.UC
                 // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
                 //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
-                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(patientId);
+                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(thisPatient.PersonId);
                 if (ptnMaritalStatus != null)
                 {
                     lblmstatus.Text =

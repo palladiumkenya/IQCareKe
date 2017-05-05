@@ -37,6 +37,19 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public int UpdateAdherenceAssessment(PatientAdherenceAssessment patientAdherenceAssessment)
+        {
+            try
+            {
+                return _patientAdherenceAssessessment.UpdateAdherenceAssessment(patientAdherenceAssessment);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public PatientAdherenceAssessment GetCurrentAdheranceStatus(int patientId)
         {
             return _patientAdherenceAssessessment.GetPatientCurrentAdheranceStatus(patientId);
@@ -45,6 +58,11 @@ namespace IQCare.CCC.UILogic
         public List<PatientAdherenceAssessment> GetPatientAdheranceHistory(int patientId)
         {
             return _patientAdherenceAssessessment.GetAdherenceAssessmentsList(patientId);
+        }
+
+        public List<PatientAdherenceAssessment> GetActiveAdherenceAssessment(int patientId)
+        {
+            return _patientAdherenceAssessessment.GetActiveAdherenceAssessment(patientId);
         }
 
     }

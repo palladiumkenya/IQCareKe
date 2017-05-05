@@ -58,6 +58,7 @@ namespace IQCare.Web.CCC.WebService
         public string tsLastName { get; internal set; }
         public string tsMiddleName { get; internal set; }
         public string population { get; internal set; }
+        public int populationTypeId { get; internal set; }
         public int PopulationCategoryId { get; internal set; }
         public string PopulationCategoryString { get; set; }
         public int GuardianId { get; set; }
@@ -836,6 +837,26 @@ namespace IQCare.Web.CCC.WebService
                         patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
                         patientDetails.PopulationCategoryString =
                             LookupLogic.GetLookupNameById(keyPopulation[0].PopulationCategory);
+
+                        if (keyPopulation[0].PopulationType == "General Population")
+                        {
+                            var items = lookupLogic.GetItemIdByGroupAndItemName("PopulationType",
+                                "Gen.Pop");
+                            if (items.Count > 0)
+                            {
+                                patientDetails.populationTypeId = items[0].ItemId;
+                            }
+                            
+                        }
+                        else
+                        {
+                            var items = lookupLogic.GetItemIdByGroupAndItemName("PopulationType",
+                                "Key.Pop");
+                            if (items.Count > 0)
+                            {
+                                patientDetails.populationTypeId = items[0].ItemId;
+                            }
+                        }
                     }
                     //Entry Point
                     if (entryPoints.Count > 0)
