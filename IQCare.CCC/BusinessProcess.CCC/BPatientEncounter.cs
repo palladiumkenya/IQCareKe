@@ -556,7 +556,7 @@ namespace BusinessProcess.CCC
                     zs.S_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["S"].ToString());
                 }
 
-                if (ZScoreDS.Tables[2].Rows.Count > 0)
+                //if (ZScoreDS.Tables[2].Rows.Count > 0)
                 {
                     zs.L_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["L"].ToString());
                     zs.M_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["M"].ToString());

@@ -384,7 +384,7 @@
                                                 <label class="control-label pull-left">On Anti TB drugs?</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="tbInfected" ClientIDMode="Static" onChange="tbInfectedChange();" required="true" data-parsley-required="true">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -396,7 +396,7 @@
                                                 <label class="control-label pull-left">On IPT?</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();">
+                                                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="onIpt" ClientIDMode="Static" onChange="onIptChange();" required="true" data-parsley-required="true">
                                                     <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                                                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
                                                     <asp:ListItem Text="No" Value="False"></asp:ListItem>
@@ -1807,6 +1807,9 @@
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
+        $('#PCDateOfOnset').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+            presentingComplaintsDateChange();
+        });
           
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
@@ -2191,12 +2194,10 @@
                         /* add constraints based on age*/
 
                         if ($('#datastep1').parsley().validate()) {
-                            if ($("#tbInfected").val() === 'False') {
                                 addPatientIcf();
                                 if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
                                     addPatientIcfAction();
                                 }
-                            }
                             savePatientEncounterPresentingComplaint();
                         } else {
                             stepError = $('.parsley-error').length === 0;
@@ -2483,6 +2484,7 @@
             var onAntiTbDrugs = $("#<%=tbInfected.ClientID%>").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatientIcf",
@@ -2491,7 +2493,6 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Patient ICF saved successfully");
-                    resetAppointmentFields();
                 },
                 error: function (response) {
                     toastr.error(response.d, "Patient ICF not saved");
@@ -2531,12 +2532,17 @@
             var peripheralneoropathy = $("#peripheralNeoropathy").val();
             var rash = $("#rash").val();
             var adheranceMeasurement = $("#adheranceMeasurement").val();
+            var hepatotoxicityAction = $("#hepatotoxicityAction").val();
+            var peripheralneoropathyAction = $("#peripheralAction").val();
+            var rashAction = $("#rashAction").val();
+            var adheranceMeasurementAction = $("#adheranceAction").val();
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddIpt",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','weight': '" + weight + "','iptDueDate': '" + iptDueDate + "','iptDateCollected': '" + iptDateCollected + "','hepatotoxicity': '" + hepatotoxicity +  "','peripheralneoropathy': '" + peripheralneoropathy + "','rash': '" + rash + "','adheranceMeasurement': '" + adheranceMeasurement + "','hepatotoxicityAction': '" + hepatotoxicityAction + "','peripheralneoropathyAction': '" + peripheralneoropathyAction + "','rashAction': '" + rashAction + "','adheranceMeasurementAction': '" + adheranceMeasurementAction +"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2664,7 +2670,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/SavePatientAdherenceAssessment",
-                data: "{'feelBetter': '" + question1 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question4 + "'}",
+                data: "{'feelBetter': '" + question4 + "', 'carelessAboutMedicine': '" + question2 + "', 'feelWorse': '" + question3 + "', 'forgetMedicine': '" + question1 + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -2754,6 +2760,7 @@
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(37);
             $("#onIpt").prop("disabled",true);
+            $("#onIpt").val("False");
         }
             
     }
@@ -2982,5 +2989,15 @@
                     toastr.error(response.d, "Error occured while saving Presenting Complaints");
                 }
             });
+    }
+
+
+    function presentingComplaintsDateChange() {
+        var pcDate = $("#<%=txtPCOnsetDate.ClientID%>").val();
+        if (moment('' + pcDate + '').isAfter()) {
+            toastr.error("Presenting complaints date cannot be a future date.");
+            $("#<%=txtPCOnsetDate.ClientID%>").val("");
+            return false;
         }
+    }
 </script>

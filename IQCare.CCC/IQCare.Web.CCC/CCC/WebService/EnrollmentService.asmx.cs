@@ -97,7 +97,7 @@ namespace IQCare.Web.CCC.WebService
 
                     if (identifiers.Count > 0)
                     {
-                        var exception = new SoapException("Another Patient in " + LookupLogic.GetLookupNameById(identifierTypeId) + " is already registered using the no: " + identifierValue, SoapException.ClientFaultCode);
+                        var exception = new SoapException("No: " + identifierValue + " already exists", SoapException.ClientFaultCode);
                         throw exception;
                     }
                 }

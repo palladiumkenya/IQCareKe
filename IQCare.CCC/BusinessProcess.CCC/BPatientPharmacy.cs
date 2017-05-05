@@ -237,5 +237,28 @@ namespace BusinessProcess.CCC
                 return list;
             }
         }
+
+        public List<KeyValue> getPharmacyTreatmentProgram()
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+
+                DataTable theDT = (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getTreatmentProgram", ClsUtility.ObjectEnum.DataTable);
+
+                List<KeyValue> list = new List<KeyValue>();
+
+                for (int i = 0; i < theDT.Rows.Count; i++)
+                {
+                    KeyValue kv = new KeyValue();
+                    kv.ItemId = theDT.Rows[i]["id"].ToString();
+                    kv.DisplayName = theDT.Rows[i]["name"].ToString();
+                    list.Add(kv);
+                }
+
+                return list;
+            }
+        }
     }
 }

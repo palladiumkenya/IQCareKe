@@ -48,7 +48,7 @@
                                 <label class="control-label pull-left">Relationship</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" />
+                                <asp:DropDownList runat="server" ID="Relationship" ClientIDMode="Static" CssClass="form-control input-sm" required="true" onchange=" RelationshipChanged();" />
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -911,6 +911,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            window.patientAge= <%=PatientAge%>;
+            var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
+            window.patientDateOfBirth= date;
             var familyMembers = [];
             $("#<%=CccReferal.ClientID%>").val("False");
             $('#BaselineHIVStatusD').datepicker({
@@ -965,7 +968,7 @@
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
                     var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
-                    var adult = moment().subtract(15, 'years').format('DD-MMM-YYYY');
+                    var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     //validations
                     if (moment('' + dob + '').isAfter()) {
                         toastr.error("Date of birth cannot be a future date.");
@@ -1013,14 +1016,11 @@
                     }
                     var fam = familyMembers.filter(function(el) {
                         return (el.firstName === firstName) &&
-                               (el.middleName === middleName) &&
-                               (el.lastName ===lastName) &&
-                               (el.dob ===dob) &&
-                               (el.relationshipId === relationshipId);
+                            (el.middleName === middleName) &&
+                            (el.lastName ===lastName) &&
+                            (el.dob ===dob) &&
+                            (el.relationshipId === relationshipId);
                     });
-                    console.log(familyMembers);
-                    console.log(fam);
-                    debugger;
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -1146,6 +1146,10 @@
                     }
                 });
             }
+
+            $('#DateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+                Dobchanged();
+            });
         });
 
         function editFamilyTesting(x) {
@@ -1271,6 +1275,21 @@
                     toastr.error("A child cannot have a spouse or partner.");
                     return false;
                 }
+                if (patientAge < 16 && (($("#Relationship :selected").text() === "Spouse"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("A child cannot have a spouse.");
+                    return false;
+                }
+                if (patientAge < 16 && (($("#Relationship :selected").text() === "Partner"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("A child cannot have a partner.");
+                    return false;
+                }
+                if (patientAge < 10 && (($("#Relationship :selected").text() === "Child"))) {
+                    $("#Relationship").val(0);
+                    toastr.error("A child cannot have a child.");
+                    return false;
+                }
                 else {
                     $.ajax({
                         type: "POST",
@@ -1316,8 +1335,6 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d, "Family testing saved successfully");
-                    //delay to show success message before redirect
-                    setTimeout(function() { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
                 },
                 error: function (response) {
                     toastr.error(response.d, "Family testing not saved");
@@ -1333,43 +1350,43 @@
             }
             else if ($("#CccReferal").val() === 'False') {
                 $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-                    } else {
-                        $("#<%=cccNumber.ClientID%>").prop('disabled',false);
-                        $("#<%=CccReferal.ClientID%>").prop('disabled',false);
-                    }
+            } else {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',false);
             }
+    }
       
-            function BaselineEnabled() {
-                if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
-                    $("#<%=cccNumber.ClientID%>").prop('disabled',true);
-            $("#<%=CccReferal.ClientID%>").prop('disabled',true);
-            $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
-            $("#BaselineHIVStatusD").addClass('noneevents');
-        } else {
-            $("#<%=cccNumber.ClientID%>").prop('disabled',false);
-            $("#<%=CccReferal.ClientID%>").prop('disabled',false);
-            $("#BaselineHIVStatusD").removeClass('noneevents');
-            $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',false);
+    function BaselineEnabled() {
+        if ($("#BaselineHIVStatus :selected").text() === "Never Tested") {
+            $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',true);
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',true);
+                $("#BaselineHIVStatusD").addClass('noneevents');
+            } else {
+                $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=CccReferal.ClientID%>").prop('disabled',false);
+                $("#BaselineHIVStatusD").removeClass('noneevents');
+                $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled',false);
+            }
         }
-    }
 
-    function HivEnabled() {
-        if ($("#hivtestingresult :selected").text() === "Never Tested") {
+        function HivEnabled() {
+            if ($("#hivtestingresult :selected").text() === "Never Tested") {
               
-            $("#<%=HIVTestingDate.ClientID%>").prop('disabled',true);
-            $("#TestingDate").addClass('noneevents');
-        } else {
+                $("#<%=HIVTestingDate.ClientID%>").prop('disabled',true);
+                $("#TestingDate").addClass('noneevents');
+            } else {
               
-            $("#<%=HIVTestingDate.ClientID%>").prop('disabled',false);
-            $("#TestingDate").removeClass('noneevents');
+                $("#<%=HIVTestingDate.ClientID%>").prop('disabled',false);
+                $("#TestingDate").removeClass('noneevents');
+            }
         }
-    }
 
-    function CccEnabledMod() {
-        if (($("#testingStatusMod :selected").text() === "Tested Negative") || ($("#testingStatusMod :selected").text() === "Never Tested")) {
-            $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
-            $("#<%=CccReferal.ClientID%>").val("False");
-            $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
+        function CccEnabledMod() {
+            if (($("#testingStatusMod :selected").text() === "Tested Negative") || ($("#testingStatusMod :selected").text() === "Never Tested")) {
+                $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
+                $("#<%=CccReferal.ClientID%>").val("False");
+                $("#<%=cccReferalMod.ClientID%>").prop('disabled',true);
             }
             else if ($("#cccReferalMod").val() === 'False') {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
@@ -1404,6 +1421,55 @@
                 $("#TestingDateMod").removeClass('noneevents');
             }
         }
+
+        function RelationshipChanged() {
+            if (patientAge < 10 && (($("#Relationship :selected").text() === "Spouse"))) {
+                $("#Relationship").val(0);
+                toastr.error("A child cannot have a spouse.");
+                return false;
+            }
+            if (patientAge < 10 && (($("#Relationship :selected").text() === "Partner"))) {
+                $("#Relationship").val(0);
+                toastr.error("A child cannot have a partner.");
+                return false;
+            }
+            if (patientAge < 10 && (($("#Relationship :selected").text() === "Child"))) {
+                $("#Relationship").val(0);
+                toastr.error("A child cannot have a child.");
+                return false;
+            }
+        }
+
+        function Dobchanged() {
+            var dob = $("#<%=Dob.ClientID%>").val();
+            var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
+            if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")))  {
+                toastr.error("A child cannot have a spouse.");
+                $("#Dob").val("");
+                return false;
+            }
+            if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Partner")))  {
+                toastr.error("A child cannot have a partner.");
+                $("#Dob").val("");
+                return false;
+            }
+            if ((moment(dob).isAfter(patientDateOfBirth)) && (($("#Relationship :selected").text() === "Parent")))  {
+                toastr.error("Parent cannot be younger than patient");
+                $("#Dob").val("");
+                return false;
+            }
+            if ((moment(dob).isAfter(patientDateOfBirth)) && (($("#Relationship :selected").text() === "Guardian")))  {
+                toastr.error("Guardian cannot be younger than patient");
+                $("#Dob").val("");
+                return false;
+            }
+            if ((moment(patientDateOfBirth).isAfter(dob)) && (($("#Relationship :selected").text() === "Child")))  {
+                toastr.error("Child cannot be older than patient");
+                $("#Dob").val("");
+                return false;
+            }
+        }
+
     </script>
 
 </asp:Content>

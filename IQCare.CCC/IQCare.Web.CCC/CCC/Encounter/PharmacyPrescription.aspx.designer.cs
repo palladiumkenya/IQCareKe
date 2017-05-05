@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.Encounter {
     public partial class PharmacyPrescription {
         
         /// <summary>
+        /// ucPatientBrief control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPatientBrief ucPatientBrief;
+        
+        /// <summary>
         /// ucPharmacyPrescription control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,14 @@ namespace IQCare.Web.CCC.Encounter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPharmacyPrescription ucPharmacyPrescription;
+        
+        /// <summary>
+        /// ucExtruder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucExtruder ucExtruder;
     }
 }
