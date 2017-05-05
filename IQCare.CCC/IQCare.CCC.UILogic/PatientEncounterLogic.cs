@@ -175,6 +175,21 @@ namespace IQCare.CCC.UILogic
             return drg;
         }
 
+        public void getPharmacyTreatmentProgram(DropDownList ddl)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<KeyValue> kv = patientEncounter.getPharmacyTreatmentProgram();
+
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (kv != null && kv.Count > 0)
+            {
+                foreach (var item in kv)
+                {
+                    ddl.Items.Add(new ListItem(item.DisplayName, item.ItemId));
+                }
+            }
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,

@@ -1203,7 +1203,8 @@
                      </div>  <!-- .bs-component-->
                      
                      <div class="col-md-6 col-xs-12 col-sm-12">
-                          <div id="vitals_container" margin: 0 auto"></div>     
+                        <%--  <div id="vitals_container" margin: 0 auto"></div>  --%>
+                           <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>    
                      </div><!-- .bs-component-->
                         
                 </div><!-- .trending-->
@@ -1221,6 +1222,7 @@
 
             var patientId = "<%=PatientId%>";
             $("#<%=Gender.ClientID%>").hide();
+           
             
             /* populate patient baseline information */
             $.ajax({
@@ -1331,14 +1333,35 @@
             });
 
 
-            var jan_height = "";
-            var march_height = "";
-            var jan_weight = "";
-            var march_weight = "";
-            var jan_BMI = "";
-            var march_BMI = "";
             var jan_vl = "";
-            var march_vl = "";
+            var feb_vl = "";
+            var mar_vl = "";
+            var apr_vl = "";
+            var may_vl = "";
+            var jun_vl = "";
+            var jul_vl = "";
+            var aug_vl = "";
+            var sep_vl = "";
+            var oct_vl = "";
+            var nov_vl = "";
+            var dec_vl = "";
+            var jan_height = "";
+            var feb_height = "";
+            var mar_height = "";
+            var apr_height = "";
+            var may_height = "";           
+            var jan_weight = "";
+            var feb_weight = "";
+            var mar_weight = "";
+            var apr_weight = "";
+            var may_weight = "";            
+            var jan_BMI = "";
+            var feb_BMI = "";
+            var mar_BMI = "";
+            var apr_BMI = "";
+            var may_BMI = "";
+            var jun_BMI = "";
+            var jul_BMI = "";           
 
             window.onload = function() {
 
@@ -1373,9 +1396,49 @@
 
                                     jan_vl = item.ResultValue;
                                    
+                                } else if (item.Month == 2) {
+
+                                    feb_vl = item.ResultValue;                                   
+                           
                                 } else if (item.Month == 3) {
 
-                                    march_vl = item.ResultValue;                                   
+                                    mar_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 4) {
+
+                                    apr_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 5) {
+
+                                    may_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 6) {
+
+                                    jun_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 7) {
+
+                                    jul_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 8) {
+
+                                    aug_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 9) {
+
+                                    sep_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 10) {
+
+                                    oct_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 11) {
+
+                                    nov_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month == 12) {
+
+                                    dec_vl = item.ResultValue;                                      
                                    
                                 }
 
@@ -1397,7 +1460,8 @@
                             x: -20
                         },
                         xAxis: {
-                            categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                            // categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                         },
                         yAxis: {
                             title: {
@@ -1423,10 +1487,10 @@
                         series: [
                             {
                                 name: 'VL',
-                                data: [jan_vl, march_vl, "", "", "", "", ""]
+                                data: [jan_vl, feb_vl, mar_vl, apr_vl, may_vl, jun_vl, jul_vl, aug_vl, sep_vl, oct_vl, nov_vl, dec_vl]
                             }, {
                                 name: 'Threshold',
-                                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000,1000, 1000, 1000, 1000, 1000]
                             }
                         ]
                     });
@@ -1451,13 +1515,32 @@
                                 jan_weight = item.Weight;
                                 jan_BMI = item.BMI;                               
 
+                            } else if (item.Month == 2) {
+
+                                feb_height = item.Height;
+                                feb_weight = item.Weight;
+                                feb_BMI = item.BMI;
+                              
                             } else if (item.Month == 3) {
 
-                                march_height = item.Height;
-                                march_weight = item.Weight;
-                                march_BMI = item.BMI;
+                                mar_height = item.Height;
+                                mar_weight = item.Weight;
+                                mar_BMI = item.BMI;
                               
+                            } else if (item.Month == 4) {
+
+                                apr_height = item.Height;
+                                apr_weight = item.Weight;
+                                apr_BMI = item.BMI;
+                                
+                            } else if (item.Month == 5) {
+
+                                may_height = item.Height;
+                                may_weight = item.Weight;
+                                may_BMI = item.BMI;
+                                
                             }
+
 
                         });
 
@@ -1467,8 +1550,7 @@
             }
 
             function vitals() {
-                //var jan_height = $(".march_height").val();
-                //var march_height = $(".march_height").val();
+         
                 console.log("vitals graph function called");
 
                 $('#vitals_container').highcharts({
@@ -1481,7 +1563,7 @@
                         x: -20
                     },
                     xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     },
                     yAxis: {
                         title: {
@@ -1507,15 +1589,15 @@
                     series: [
                         {
                             name: 'Height',
-                            data: [jan_height, march_height, "", "", "", "", ""]
+                            data: [jan_height, feb_height, mar_height, apr_height, may_height, "", "", "", "", "", "", ""]
                         },
                         {
                             name: 'Weight',
-                            data: [jan_weight, march_weight, "", "", "", "", ""]
+                            data: [jan_weight, feb_weight, mar_weight, apr_weight, may_weight, "", "", "", "", "", "", ""]
                         },
                         {
                             name: 'BMI',
-                            data: [jan_BMI, march_BMI, "", "", "", "", "", ""]
+                            data: [jan_BMI, feb_BMI, mar_BMI, apr_BMI, may_BMI, "", "","", "", "", "", ""]
                         }
                     ]
                 });
