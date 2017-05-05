@@ -311,7 +311,7 @@
                contentType: "application/json; charset=utf-8",
            
                success: function (data) {
-                   if(pmscmFlag == "1")
+                   if(pmscmFlag === "1")
                    {
                        var serverData = data.d;
                        var batchList = [];

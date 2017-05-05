@@ -22,8 +22,6 @@ namespace IQCare.Web.CCC.Patient
         protected Decimal vlValue=0;
         protected  IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
 
-
-
         protected int PatientId
         {
             get { return Convert.ToInt32(Session["patientId"]); }
@@ -32,6 +30,16 @@ namespace IQCare.Web.CCC.Patient
         protected int UserId
         {
             get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
+
+        protected string PatientType
+        {
+
+            get
+            {
+                var patientLookupManager = new PatientLookupManager();
+                return patientLookupManager.GetPatientTypeId(PatientId);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)

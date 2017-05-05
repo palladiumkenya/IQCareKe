@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="col-md-6"><label class="control-label pull-left">Height (cm)</label></div>
                 <div class="col-md-3">
-                    <asp:Label runat="server" ID="vitalHeight" CssClass="control-label text-success pull-left">Not Taken</asp:Label>
+                    <asp:Label runat="server" ID="vitalHeight" CssClass="control-label text-success pull-left"><span class="label label-danger">Not Taken</span></asp:Label>
                 </div>
             </div>
         </div>
