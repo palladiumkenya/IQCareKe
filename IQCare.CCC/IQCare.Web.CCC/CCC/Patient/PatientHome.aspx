@@ -1093,7 +1093,7 @@
                                          
                                   <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                                                         
-                                  <div class="col-md-12">
+                                  <div class="col-md-12" id="divPregnant">
                                       <div class="col-md-6"><label class="control-lable pull-left">Pregnant </label></div>
                                        <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblPregnantYes">
@@ -1107,7 +1107,7 @@
                                       </div>
                                   </div>
                                   
-                                  <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                                  <div class="col-md-12" id="divPGhr"><div class="col-md-12"><hr /></div></div>
 
                                   <div class="col-md-12">
                                       <div class="col-md-6"><label class="control-lable pull-left">TB Infected</label></div> 
@@ -1125,7 +1125,7 @@
                                   
                                   <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                                   
-                                  <div class="col-md-12">
+                                  <div class="col-md-12" id="divBreastFeeding">
                                       <div class="col-md-6"><label class="control-lable pull-left">BreastFeeding</label></div> 
                                       <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblBreastfeedingYes">
@@ -1139,7 +1139,7 @@
                                       </div>
                                   </div>
                                   
-                                  <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                                  <div class="col-md-12" id="divBFhr"><div class="col-md-12"><hr /></div></div>
 
                                   <div class="col-md-12">
                                      <div class="col-md-6"><label class="control-lable pull-left">Who Stage</label></div>
@@ -1179,7 +1179,7 @@
                               <div class="col-md-12"><hr></div>
                                   
                               <div class="col-md-12">
-                                       <div class="col-md-6"><label class="control-lable pull-left">BMI</label></div>
+                                     <div class="col-md-6"><label class="control-lable pull-left">BMI</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblbmi" ClientIDMode="Static"></asp:Label></div>
                                   </div>
 
@@ -1246,7 +1246,7 @@
             var patientId = "<%=PatientId%>";
             $("#<%=Gender.ClientID%>").hide();
             var patientType = '<%=PatientType%>';
-            
+            var gender = "<%=PatientGender%>";
 
             /* populate patient baseline information */
             $.ajax({
@@ -1295,17 +1295,50 @@
                                 $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
                                 $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
-                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
-                                $("#<%=lblweight.ClientID%>").text(itemList.Weight);
-                                $("#<%=lblheight.ClientID%>").text(itemList.Height);
+
+                                if (patientType === 'Transfer-In') {
+                                    /*check if patient patient is new or transferIN*/
+                                    $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                    $("#<%=lblweight.ClientID%>").text(itemList.Weight);
+                                    $("#<%=lblheight.ClientID%>").text(itemList.Height);
+                                    $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                }else if (patientType === 'New') {
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../WebService/PatientBaselineService.asmx/GetNewPatientBaselineVitals",
+                                        data: "{'patientId':'" + patientId + "'}",
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function(response) {
+                                            var itemList = JSON.parse(response.d);
+                                           
+                                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                                $("#<%=lblweight.ClientID%>").text(itemList.Weight+' kgs');
+                                                $("#<%=lblheight.ClientID%>").text(itemList.Height+' cms');
+                                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2)+' kg/M2');                                         
+                                        },
+                                        error: function(xhr, errorType, exception) {
+                                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                                            toastr.error("" + xhr.status + "" + jsonError.Message);
+                                        }
+                                    });
+
+                                }
+
                                 $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
                                 $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
                                 $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
-                                $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
-                                $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
+                                if (gender === 'Female') {
+                                    $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
+                                    $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
+                                }else if (gender === 'Male') {
+
+                                    $("#divBreastFeeding").hide('fast');$("#divBFhr").hide('fast');$("#divPregnant").hide('fast');$("#divPGhr").hide('fast');
+                                }
                                 $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
 
-                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                
 
                                 $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
                                 $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);

@@ -257,5 +257,20 @@ namespace IQCare.Web.CCC.WebService
 
             return _jsonMessage;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetNewPatientBaselineVitals(int patientId)
+        {
+            try
+            {
+                var vitalsBaseline=new PatientVitalsManager();
+                _jsonMessage = JsonConvert.SerializeObject(vitalsBaseline.GetPatientVitalsBaseline(patientId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+            return _jsonMessage;
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace IQCare.Web.CCC.UC
                 //lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
                 lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
-                lookUp.populateDDL(regimenLine, "RegimenLines");
+                lookUp.populateDDL(regimenLine, "RegimenClassification");//RegimenLines
                 lookUp.getPharmacyDrugFrequency(ddlFreq);
 
                 PatientEncounterLogic pel = new PatientEncounterLogic();
