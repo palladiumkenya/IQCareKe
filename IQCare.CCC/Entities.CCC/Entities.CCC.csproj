@@ -111,6 +111,7 @@
     <Compile Include="Lookup\LookupMasterItem.cs" />
     <Compile Include="Enrollment\PatientEntity.cs" />
     <Compile Include="Lookup\LookupTestParameter.cs" />
+    <Compile Include="Lookup\PatientArvTreamentTrackerLookup.cs" />
     <Compile Include="Lookup\PatientBaselineLookup.cs" />
     <Compile Include="Lookup\PatientLookup.cs" />
     <Compile Include="Lookup\PatientRegimenLookup.cs" />
