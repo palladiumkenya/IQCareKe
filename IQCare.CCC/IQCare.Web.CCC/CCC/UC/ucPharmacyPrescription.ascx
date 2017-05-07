@@ -127,8 +127,8 @@
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>--%>
+                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>--%>
                         <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
@@ -356,6 +356,7 @@
        function selectRegimens(regimenLine)
        {
            var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
+           
            if(valSelected === "Select")
            {
                 $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
@@ -363,12 +364,14 @@
            else{
                $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
            }
-           
+
+           valSelected = valSelected.replace(/\s/g, '');
+
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetRegimensBasedOnRegimenLine',
                type: 'POST',
                dataType: 'json',
-               data: "{'RegimenLine':'" + regimenLine + "'}",
+               data: "{'RegimenLine':'" + valSelected + "'}",
                contentType: "application/json; charset=utf-8",
                success: function (data) {
                    var serverData = data.d;
@@ -550,17 +553,21 @@
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    var serverData = data.d;
-                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
-                    selectRegimens(serverData[0][0]);
+                    try{
+                        var serverData = data.d;
+                        $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                        selectRegimens(serverData[0][0]);
 
-                    function waitForRegimens(callback) {
-                        window.setTimeout(function () {  //acting like this is an Ajax call
-                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
-                        }, 1000);
+                        function waitForRegimens(callback) {
+                            window.setTimeout(function () {  //acting like this is an Ajax call
+                                $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                            }, 1000);
+                        }
+
+                        waitForRegimens();
                     }
-
-                    waitForRegimens();
+                    catch(err){}
+                    
 
                 },
                 error: function (data) {

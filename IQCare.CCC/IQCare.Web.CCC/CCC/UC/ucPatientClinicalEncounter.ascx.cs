@@ -1,5 +1,6 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Lookup;
+using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using System;
@@ -61,7 +62,13 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
-                
+
+                var patientVitals = new PatientVitalsManager();
+                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientId"].ToString()));
+                txtWeight.Text = patientTriage.Weight.ToString();
+                txtHeight.Text = patientTriage.Height.ToString();
+                txtBMI.Text = patientTriage.BMI.ToString();
+
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
 
@@ -92,6 +99,9 @@ namespace IQCare.Web.CCC.UC
                 rdAnyComplaintsNo.Checked = true;
 
             complaints.Value = pce.complaints;
+            tbInfected.SelectedValue = pce.OnAntiTB;
+            onIpt.SelectedValue = pce.OnIPT;
+
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
@@ -105,6 +115,8 @@ namespace IQCare.Web.CCC.UC
                     }
                 }
             }
+
+            
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)

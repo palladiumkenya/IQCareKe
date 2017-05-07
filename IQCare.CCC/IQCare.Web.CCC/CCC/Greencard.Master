@@ -200,8 +200,8 @@
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
 
                                <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
-								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
-
+								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
+                             
 	 
 							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
 									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
