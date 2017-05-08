@@ -531,7 +531,7 @@
   
                                                 <div class="table">
     
-                                                <div class="row header blue">
+                                                <div class="rowa header blue">
                                                   <div class="cell">
                                                     CCC No
                                                   </div>
@@ -572,7 +572,7 @@
 
                                                 </div>
     
-                                                <div class="row">
+                                                <div class="rowa">
                                                   <div class="cell">
                                                       <asp:Label ID="lblCCC" runat="server"></asp:Label>
                                                   </div>
@@ -616,7 +616,7 @@
   
                                                 <div class="table" id="isAdult">
     
-                                                <div class="row header blue">
+                                                <div class="rowa header blue">
                                                   <div class="cell">
                                                     ID Number/National ID
                                                   </div>
@@ -632,7 +632,7 @@
 
                                                 </div>
     
-                                                <div class="row">
+                                                <div class="rowa">
                                                   <div class="cell">
                                                     <asp:Label ID="lblIdNumber" runat="server"></asp:Label>
                                                   </div>
@@ -657,7 +657,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="row header blue">
+                                                    <div class="rowa header blue">
                                                       <div class="cell">
                                                         Date of HIV diagnosis
                                                       </div>
@@ -678,7 +678,7 @@
 
                                                     </div>
                                                     
-                                                    <div class="row">
+                                                    <div class="rowa">
                                                         <div class="cell">
                                                             <asp:Label ID="lblDateOfHivDiagnosisA" runat="server"></asp:Label>
                                                         </div>
@@ -706,7 +706,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="row header blue">
+                                                    <div class="rowa header blue">
                                                       <div class="cell">
                                                         HBV infected
                                                       </div>
@@ -731,7 +731,7 @@
 
                                                     </div>
                                                     
-                                                    <div class="row">
+                                                    <div class="rowa">
                                                         <div class="cell">
                                                             <asp:Label ID="lblHIVInfected" runat="server"></asp:Label>
                                                         </div>
@@ -773,7 +773,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="row header blue">
+                                                    <div class="rowa header blue">
                                                       
                                                         <div class="cell">
                                                             Weight
@@ -797,7 +797,7 @@
 
                                                     </div>
 
-                                                    <div class="row">
+                                                    <div class="rowa">
                                                         <div class="cell">
                                                             <asp:Label ID="lblWeightP" runat="server"></asp:Label>
                                                         </div>
@@ -829,7 +829,7 @@
 
 
                                                  <div class="table">
-                                                    <div class="row header blue">
+                                                    <div class="rowa header blue">
                                                       
                                                         <div class="cell">
                                                             Systolic
@@ -841,7 +841,7 @@
 
                                                     </div>
 
-                                                     <div class="row">
+                                                     <div class="rowa">
                                                         <div class="cell">
                                                             <asp:Label ID="lblSystolic" runat="server"></asp:Label>
                                                         </div>
@@ -861,7 +861,7 @@
                                                 </div>
 
                                                 <div class="table">
-                                                    <div class="row header blue">
+                                                    <div class="rowa header blue">
                                                       
                                                         <div class="cell">
                                                             Pulse Rate
@@ -877,7 +877,7 @@
 
                                                     </div>
 
-                                                     <div class="row">
+                                                     <div class="rowa">
                                                         <div class="cell">
                                                             <asp:Label ID="lblPulseRate" runat="server"></asp:Label>
                                                         </div>

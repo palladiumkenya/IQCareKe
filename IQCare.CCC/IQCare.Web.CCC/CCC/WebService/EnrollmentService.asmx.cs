@@ -128,6 +128,13 @@ namespace IQCare.Web.CCC.WebService
 
                     if (patientId > 0)
                     {
+                        var visitTypes = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment");
+                        var visitType = 0;
+                        if (visitTypes.Count > 0)
+                        {
+                            visitType = visitTypes[0].ItemId;
+                        }
+
                         //
                         PatientMasterVisit visit = new PatientMasterVisit
                         {
@@ -139,7 +146,7 @@ namespace IQCare.Web.CCC.WebService
                             DeleteFlag = false,
                             VisitDate = DateTime.Now,
                             CreatedBy = userId,
-                            VisitType = 1340//To look up the visit type of enrollment
+                            VisitType = visitType
                         };
 
                         PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
