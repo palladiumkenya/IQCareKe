@@ -102,6 +102,13 @@ namespace BusinessProcess.SCM
             return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetExistingPharmacyDispense_Futures", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable GetPharmacyRegimenClassification()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject theManager = new ClsObject();
+            return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "sp_getRegimenClassification", ClsUtility.ObjectEnum.DataTable);
+        }
+
         /// <summary>
         /// Gets the pharmacy existing record details.
         /// </summary>
