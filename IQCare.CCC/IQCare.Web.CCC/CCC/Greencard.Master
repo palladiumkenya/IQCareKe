@@ -40,6 +40,7 @@
     <link href="<%# ResolveUrl("~/CCC/Scripts/css/style.css") %>" rel="stylesheet" type="text/css" />--%>
     
     <link href="<%# ResolveUrl("~/CCC/Scripts/css/chosen.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/patientSummary.css") %>" rel="stylesheet" type="text/css" />
     
 
 	<script src="<%# ResolveUrl("~/Incl/jquery-1.9.1.js")%>" type="text/javascript" ></script>

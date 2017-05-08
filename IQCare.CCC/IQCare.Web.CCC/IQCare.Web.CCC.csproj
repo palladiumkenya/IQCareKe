@@ -61,6 +61,7 @@
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\mdb.css" />
+    <Content Include="CCC\Scripts\css\patientSummary.css" />
     <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
