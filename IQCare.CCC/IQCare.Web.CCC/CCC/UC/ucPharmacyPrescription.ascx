@@ -148,13 +148,13 @@
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
-        if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
+        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
             drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
         }
-        else if (pmscm == "PM/SCM") {
+        else if (pmscm === "PM/SCM") {
             drugList(1);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
