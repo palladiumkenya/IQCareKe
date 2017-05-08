@@ -16,7 +16,7 @@ namespace RemServer
             s = s + ".config";
              
             string Config = @"RemServer.exe.config";
-             RemotingConfiguration.Configure(Config,false);
+            RemotingConfiguration.Configure(Config,false);
             RemotingConfiguration.ApplicationName = "IQCAREEMR";
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(BusinessServerFactory), "BusinessProcess.rem", WellKnownObjectMode.Singleton);
        

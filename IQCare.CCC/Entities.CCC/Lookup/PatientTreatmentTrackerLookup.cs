@@ -9,7 +9,7 @@ namespace Entities.CCC.Lookup
 {
     [Serializable]
     [Table("ARVTreatmentTracker")]
-    class PatientArvTreamentTrackerLookup
+    public class PatientTreamentTrackerLookup
     {
         [Key]
         public int Id { get; set; }
@@ -25,6 +25,8 @@ namespace Entities.CCC.Lookup
         public DateTime? RegimenStatusDate { get; set; }
         public int TreatmentStatusId { get; set; }
         public int TreatmentStatusReasonId { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime CreateDate { get; set; }
 
     }
 }

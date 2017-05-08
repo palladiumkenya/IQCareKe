@@ -6,7 +6,6 @@
 <%@ Register Src="~/CCC/UC/ucPatientBrief.ascx" TagPrefix="IQ" TagName="ucPatientDetails" %>
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="IQ" TagName="ucExtruder" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
       <%--  <div class="col-md-12 col-xs-12 col-sm-12" style="margin-top: 0%;padding-top: 0%">--%>
             <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
@@ -527,438 +526,370 @@
                                                 </div>
                                                 
                                             </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-2">
+
+                                            <div class="wrapper" style="padding-bottom:0px !important;">
+  
+                                                <div class="table">
+    
+                                                <div class="row header blue">
+                                                  <div class="cell">
                                                     CCC No
-                                                </div>
+                                                  </div>
+                                                  <div class="cell">
+                                                    First Name
+                                                  </div>
+                                                  <div class="cell">
+                                                    Middle Name
+                                                  </div>
 
-                                                
-
-                                                <div class="col-md-2">
-                                                    FirstName
-                                                </div>
-
-                                                
-
-                                                <div class="col-md-2">
-                                                    Middle Name 
-                                                </div>
-
-                                                
-                                                
-                                                <div class="col-md-2">
-                                                    Last Name 
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  <div class="cell">
+                                                    Last Name
+                                                  </div>
+                                                  
+                                                  <div class="cell">
                                                     Sex
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    Date Of Birth
-                                                </div>
+                                                  </div>
 
-                                                
+                                                  <div class="cell">
+                                                    DOB
+                                                  </div>
 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblCCC" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblFirstNameP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblMiddleNameP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblLastNameP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblSexP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblDobP" runat="server"></asp:Label>
-                                                </div>
-
-                                            </div>
-                                            
-                                            
-                                            
-                                            <div class="col-md-12" id="isChild">
-                                                
-                                                <div class="col-md-2">
+                                                  <div class="cell">
                                                     Parent/Guardian
-                                                </div>
+                                                  </div>
 
-                                                <div class="col-md-2">
+                                                  <div class="cell">
                                                     Orphan?
+                                                  </div>
+
+                                                  <div class="cell">
+                                                    In School?
+                                                  </div>
+
+                                                  <div class="cell">
+                                                      Entry Point
+                                                  </div>
+
+                                                </div>
+    
+                                                <div class="row">
+                                                  <div class="cell">
+                                                      <asp:Label ID="lblCCC" runat="server"></asp:Label>
+                                                  </div>
+                                                  <div class="cell">
+                                                    <asp:Label ID="lblFirstNameP" runat="server"></asp:Label>
+                                                  </div>
+                                                  <div class="cell">
+                                                    <asp:Label ID="lblMiddleNameP" runat="server"></asp:Label>
+                                                  </div>
+                                                  <div class="cell">
+                                                    <asp:Label ID="lblLastNameP" runat="server"></asp:Label>
+                                                  </div>
+
+                                                  <div class="cell">
+                                                      <asp:Label ID="lblSexP" runat="server"></asp:Label>
+                                                  </div>
+
+                                                  <div class="cell">
+                                                      <asp:Label ID="lblDobP" runat="server"></asp:Label>
+                                                  </div>
+
+                                                    <div class="cell">
+                                                        <asp:Label ID="lblParent_GuardianP" runat="server"></asp:Label>
+                                                    </div>
+
+                                                    <div class="cell">
+                                                        <asp:Label ID="lblOrphanP" runat="server"></asp:Label>
+                                                    </div>
+
+                                                    <div class="cell">
+                                                        <asp:Label ID="lblInSchoolP" runat="server"></asp:Label>
+                                                    </div>
+
+                                                    <div class="cell">
+                                                        <asp:Label ID="lblEntryPointP" runat="server"></asp:Label>
+                                                    </div>
+
                                                 </div>
 
-                                                <div class="col-md-2">
-                                                    In school?
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12" id="isChildP">
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblParent_GuardianP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblOrphanP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblInSchoolP" runat="server"></asp:Label>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                                &nbsp;
-                                            </div>
-                                            
-                                            <div class="col-md-12" id="isAdult">
-                                                
-                                                <div class="col-md-2">
-                                                    ID Number
-                                                </div>
-
-                                                <div class="col-md-2">
+                                              </div>
+  
+                                                <div class="table" id="isAdult">
+    
+                                                <div class="row header blue">
+                                                  <div class="cell">
+                                                    ID Number/National ID
+                                                  </div>
+                                                  <div class="cell">
                                                     Marital Status
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  </div>
+                                                  <div class="cell">
                                                     Pop. Type
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  </div>
+                                                  <div class="cell">
                                                     Key Pop. Type
-                                                </div>
+                                                  </div>
 
-                                            </div>
-                                            
-                                            <div class="col-md-12" id="isAdultP">
-                                                <div class="col-md-2">
+                                                </div>
+    
+                                                <div class="row">
+                                                  <div class="cell">
                                                     <asp:Label ID="lblIdNumber" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  </div>
+                                                  <div class="cell">
                                                     <asp:Label ID="lblMaritalStatus" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  </div>
+                                                  <div class="cell">
                                                     <asp:Label ID="lblPopulationTypeA" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
+                                                  </div>
+                                                  <div class="cell">
                                                     <asp:Label ID="lblKeyPopType" runat="server"></asp:Label>
+                                                  </div>
                                                 </div>
+    
+                                              </div>
 
-                                            </div>
-                                            
-                                            <div>
-                                                &nbsp;
-                                            </div>
-
-                                            <div class="col-md-12">
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Entry Point & Transfer Status</label>
-                                                </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">Diagnosis & ARV history</label>
+                                                    </div>
                                                 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-2">
-                                                    Entry Point
                                                 </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblEntryPointP" runat="server"></asp:Label>
+
+                                                <div class="table">
+                                                    <div class="row header blue">
+                                                      <div class="cell">
+                                                        Date of HIV diagnosis
+                                                      </div>
+                                                      <div class="cell">
+                                                        Date of Enrollment
+                                                      </div>
+                                                      <div class="cell">
+                                                        WHO stage at Enrollment
+                                                      </div>
+
+                                                      <div class="cell">
+                                                        Date of ART Initiation
+                                                      </div>
+                                                  
+                                                      <div class="cell">
+                                                        History of ART Use
+                                                      </div>
+
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblDateOfHivDiagnosisA" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblEnrollmentDateP" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblWHOStageAtEnrollment"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblDateOfARTInitiation"></asp:Label>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-                                            <div>
-                                                &nbsp;
-                                            </div>
-                                            
-                                            <div class="col-md-12">
+
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Diagnosis & ARV history</label>
-                                                </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">Baseline assessment & Treatment Initiation</label>
+                                                    </div>
                                                 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-2">
-                                                    Date of HIV diagnosis
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    Date of enrollment
-                                                </div>
-                                                
-
-                                                <div class="col-md-2">
-                                                    WHO stage at enrollment
                                                 </div>
 
-                                                <div class="col-md-2">
-                                                    Date of ART initiation
-                                                </div>
-                                                
-                                                
-                                                <div class="col-md-2">
-                                                    History of ART use
-                                                </div>
+                                                <div class="table">
+                                                    <div class="row header blue">
+                                                      <div class="cell">
+                                                        HBV infected
+                                                      </div>
+                                                      <div class="cell">
+                                                        TB Infected
+                                                      </div>
+                                                      <div class="cell">
+                                                        WHO stage
+                                                      </div>
 
+                                                      <div class="cell">
+                                                        Pregnant?
+                                                      </div>
+                                                  
+                                                      <div class="cell">
+                                                        Breastfeeding?
+                                                      </div>
 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblDateOfHivDiagnosisA" runat="server"></asp:Label>
-                                                </div>
+                                                      <div class="cell">
+                                                          CD4 Count
+                                                      </div>
+
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblHIVInfected" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblTBInfected" runat="server"></asp:Label>
+                                                            
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblWHOStageNow"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblPregnant"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblBreastFeeding"></asp:Label>
+                                                        </div>
                                                 
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblEnrollmentDateP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblWHOStageAtEnrollment"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblDateOfARTInitiation"></asp:Label>
+                                                        <div class="cell">
+                                                            <asp:Label runat="server" ID="lblCD4Count"></asp:Label>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                            
-                                            <div>
-                                                &nbsp;
-                                            </div>
-                                            
-                                            <div class="col-md-12">
+
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Baseline assessment & Treatment Initiation</label>
+                                                    <h2 class="text-muted text-Warning pull-left"> Triage </h2>
                                                 </div>
-                                                
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-2">
-                                                    HBV infected
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    TB Infected
-                                                </div>
-                                                
-
-                                                <div class="col-md-2">
-                                                    WHO stage
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    Pregnant?
-                                                </div>
-                                                
-                                                
-                                                <div class="col-md-2">
-                                                    Breastfeeding?
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    CD4 Count
-                                                </div>
-
-
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblHIVInfected" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label ID="lblTBInfected" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblWHOStageNow"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblPregnant"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblBreastFeeding"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-2">
-                                                    <asp:Label runat="server" ID="lblCD4Count"></asp:Label>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <h2 class="text-muted text-Warning pull-left"> Triage </h2>
-                                            </div>
-                                            
-                                            <div class="col-md-12">
+                                            <div class="wrapper">
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label>
-                                                </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label>
+                                                    </div>
                                                 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-1">
-                                                    Weight
                                                 </div>
 
-                                                
+                                                <div class="table">
+                                                    <div class="row header blue">
+                                                      
+                                                        <div class="cell">
+                                                            Weight
+                                                        </div>
 
-                                                <div class="col-md-1">
-                                                    Height
-                                                </div>
-                                                
+                                                        <div class="cell">
+                                                            Height
+                                                        </div>
 
-                                                <div class="col-md-1">
-                                                    MUAC
+                                                        <div class="cell">
+                                                            MUAC
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Head Circumference
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Temperature (°C)
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblWeightP" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblHeightP" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="Label3" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblHeadCircumference" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblTemperature" runat="server"></asp:Label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-md-1">
-                                                    Head Circumference
-                                                </div>
-                                                
-                                                <div class="col-md-1">
-                                                    Temperature (°C)
-                                                </div>
-
-                                            </div>
-                                                
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblWeightP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblHeightP" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="Label3" runat="server"></asp:Label>
-                                                </div>
-
-                                                
-
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblHeadCircumference" runat="server"></asp:Label>
-                                                </div>
-
-                                                
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblTemperature" runat="server"></asp:Label>
-                                                </div>
-                                            </div>
-                                            
-                                            <div>
-                                                &nbsp;
-                                            </div>
- 
-                                            <div class="col-md-12">
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Blood Pressure</label>
-                                                </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">Blood Pressure</label>
+                                                    </div>
                                                 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-1">
-                                                    Systolic
                                                 </div>
 
-                                                
 
-                                                <div class="col-md-1">
-                                                    Diastolic
+                                                 <div class="table">
+                                                    <div class="row header blue">
+                                                      
+                                                        <div class="cell">
+                                                            Systolic
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Diastolic
+                                                        </div>
+
+                                                    </div>
+
+                                                     <div class="row">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblSystolic" runat="server"></asp:Label>
+                                                        </div>
+
+                                                         <div class="cell">
+                                                             <asp:Label ID="lblDiastolic" runat="server"></asp:Label>
+                                                         </div>
+                                                     </div>
                                                 </div>
 
-                                                
 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblSystolic" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblDiastolic" runat="server"></asp:Label>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                &nbsp;
-                                            </div>
- 
-                                            <div class="col-md-12">
                                                 <div class="col-md-12">
-                                                    <label class="control-label text-primary pull-left text-muted">Pulse Rate/Respiratory/Oxygen Saturation</label>
-                                                </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">Pulse Rate/Respiratory/Oxygen Saturation</label>
+                                                    </div>
                                                 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                
-                                                <div class="col-md-1">
-                                                    Pulse Rate
                                                 </div>
 
-                                                
+                                                <div class="table">
+                                                    <div class="row header blue">
+                                                      
+                                                        <div class="cell">
+                                                            Pulse Rate
+                                                        </div>
 
-                                                <div class="col-md-1">
-                                                    Respiration
-                                                </div>
+                                                        <div class="cell">
+                                                            Respiration
+                                                        </div>
 
-                                               
-                                                
-                                                <div class="col-md-3">
-                                                    Blood Oxygen Saturation
-                                                </div>
+                                                        <div class="cell">
+                                                            Blood Oxygen Saturation
+                                                        </div>
 
-                                                
+                                                    </div>
 
-                                            </div>
-                                            
-                                            <div class="col-md-12">
-                                                <div class="col-md-1">
-                                                    <asp:Label ID="lblPulseRate" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                 <div class="col-md-1">
-                                                    <asp:Label ID="lblRespiration" runat="server"></asp:Label>
-                                                </div>
-                                                
-                                                <div class="col-md-3">
-                                                    <asp:Label ID="lblOxygenSat" runat="server"></asp:Label>
+                                                     <div class="row">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblPulseRate" runat="server"></asp:Label>
+                                                        </div>
+
+                                                         <div class="cell">
+                                                             <asp:Label ID="lblRespiration" runat="server"></asp:Label>
+                                                         </div>
+
+                                                         <div class="cell">
+                                                             <asp:Label ID="lblOxygenSat" runat="server"></asp:Label>
+                                                         </div>
+                                                     </div>
                                                 </div>
                                             </div>
                                             

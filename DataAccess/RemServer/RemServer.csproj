@@ -11,7 +11,10 @@
     <RootNamespace>RemServer</RootNamespace>
     <AssemblyName>RemServer</AssemblyName>
     <StartupObject>RemServer.StartPoint</StartupObject>
-  
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
