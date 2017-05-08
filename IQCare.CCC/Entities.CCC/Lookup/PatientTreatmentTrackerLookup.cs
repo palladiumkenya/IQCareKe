@@ -9,7 +9,7 @@ namespace Entities.CCC.Lookup
 {
     [Serializable]
     [Table("ARVTreatmentTracker")]
-    class PatientArvTreamentTrackerLookup
+    public class PatientTreamentTrackerLookup
     {
         [Key]
         public int Id { get; set; }
