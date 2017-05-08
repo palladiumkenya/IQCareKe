@@ -123,7 +123,7 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public PatientVital GetPatientBaselinePatientVital(int patientId)
+        public PatientVital GetPatientVitalsBaseline(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {

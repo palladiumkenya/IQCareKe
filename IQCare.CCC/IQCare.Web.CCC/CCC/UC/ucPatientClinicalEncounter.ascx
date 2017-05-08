@@ -200,15 +200,16 @@
 
                    <div id="step1Div">
 
-                     <div class="col-md-12 form-group"  style="height:100%">
-                        <div class="col-md-12"  style="height:100%">
-                                <div class="panel panel-info" style="height:100%">
+                     <div class="col-md-12 form-group" <%-- style="height:100%"--%>>
+                        <div class="col-md-12"  <%--style="height:100%"--%>>
+                                <div class="panel panel-info"<%-- style="height:100%"--%>>
 
                                     <div class="panel-body">
                                         <div class="col-md-12 form-group">
                                             <div>
                                                 <label class="control-label  pull-left text-primary">*Any Presenting Complaints</label>
                                             </div>
+
                                             <div>
                                                 <label class="pull-left" style="padding-right: 10px">
                                                     <input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server" onclick="showHidePresentingComplaintsDivs();" />Yes
@@ -231,104 +232,104 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
-                                            <div class="col-md-12">
-                                                <label class="control-label  pull-left">Onset Date</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                    <div class="datepicker" id="PCDateOfOnset">
-                                        <div class="input-group">
-                                            <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" ></asp:TextBox>
-                                            <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                    <span class="sr-only">Toggle Calendar</span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                    <div class="datepicker-calendar">
-                                                        <div class="datepicker-calendar-header">
-                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                            <button type="button" class="title" data-month="11" data-year="2014">
-                                                                <span class="month">
-                                                                    <span data-month="0">January</span>
-                                                                    <span data-month="1">February</span>
-                                                                    <span data-month="2">March</span>
-                                                                    <span data-month="3">April</span>
-                                                                    <span data-month="4">May</span>
-                                                                    <span data-month="5">June</span>
-                                                                    <span data-month="6">July</span>
-                                                                    <span data-month="7">August</span>
-                                                                    <span data-month="8">September</span>
-                                                                    <span data-month="9">October</span>
-                                                                    <span data-month="10">November</span>
-                                                                    <span data-month="11" class="current">December</span>
-                                                                </span><span class="year">2014</span>
-                                                            </button>
+                                                <div class="col-md-12">
+                                                    <label class="control-label  pull-left">Onset Date</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                        <div class="datepicker" id="PCDateOfOnset">
+                                            <div class="input-group">
+                                                <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" ></asp:TextBox>
+                                                <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                        <span class="sr-only">Toggle Calendar</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                        <div class="datepicker-calendar">
+                                                            <div class="datepicker-calendar-header">
+                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                <button type="button" class="title" data-month="11" data-year="2014">
+                                                                    <span class="month">
+                                                                        <span data-month="0">January</span>
+                                                                        <span data-month="1">February</span>
+                                                                        <span data-month="2">March</span>
+                                                                        <span data-month="3">April</span>
+                                                                        <span data-month="4">May</span>
+                                                                        <span data-month="5">June</span>
+                                                                        <span data-month="6">July</span>
+                                                                        <span data-month="7">August</span>
+                                                                        <span data-month="8">September</span>
+                                                                        <span data-month="9">October</span>
+                                                                        <span data-month="10">November</span>
+                                                                        <span data-month="11" class="current">December</span>
+                                                                    </span><span class="year">2014</span>
+                                                                </button>
+                                                            </div>
+                                                            <table class="datepicker-calendar-days">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Su</th>
+                                                                        <th>Mo</th>
+                                                                        <th>Tu</th>
+                                                                        <th>We</th>
+                                                                        <th>Th</th>
+                                                                        <th>Fr</th>
+                                                                        <th>Sa</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                            <div class="datepicker-calendar-footer">
+                                                                <button type="button" class="datepicker-today">Today</button>
+                                                            </div>
                                                         </div>
-                                                        <table class="datepicker-calendar-days">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Su</th>
-                                                                    <th>Mo</th>
-                                                                    <th>Tu</th>
-                                                                    <th>We</th>
-                                                                    <th>Th</th>
-                                                                    <th>Fr</th>
-                                                                    <th>Sa</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody></tbody>
-                                                        </table>
-                                                        <div class="datepicker-calendar-footer">
-                                                            <button type="button" class="datepicker-today">Today</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="datepicker-wheels" aria-hidden="true">
-                                                        <div class="datepicker-wheels-month">
-                                                            <h2 class="header">Month</h2>
-                                                            <ul>
-                                                                <li data-month="0">
-                                                                    <button type="button">Jan</button></li>
-                                                                <li data-month="1">
-                                                                    <button type="button">Feb</button></li>
-                                                                <li data-month="2">
-                                                                    <button type="button">Mar</button></li>
-                                                                <li data-month="3">
-                                                                    <button type="button">Apr</button></li>
-                                                                <li data-month="4">
-                                                                    <button type="button">May</button></li>
-                                                                <li data-month="5">
-                                                                    <button type="button">Jun</button></li>
-                                                                <li data-month="6">
-                                                                    <button type="button">Jul</button></li>
-                                                                <li data-month="7">
-                                                                    <button type="button">Aug</button></li>
-                                                                <li data-month="8">
-                                                                    <button type="button">Sep</button></li>
-                                                                <li data-month="9">
-                                                                    <button type="button">Oct</button></li>
-                                                                <li data-month="10">
-                                                                    <button type="button">Nov</button></li>
-                                                                <li data-month="11">
-                                                                    <button type="button">Dec</button></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="datepicker-wheels-year">
-                                                            <h2 class="header">Year</h2>
-                                                            <ul></ul>
-                                                        </div>
-                                                        <div class="datepicker-wheels-footer clearfix">
-                                                            <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                            <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                        <div class="datepicker-wheels" aria-hidden="true">
+                                                            <div class="datepicker-wheels-month">
+                                                                <h2 class="header">Month</h2>
+                                                                <ul>
+                                                                    <li data-month="0">
+                                                                        <button type="button">Jan</button></li>
+                                                                    <li data-month="1">
+                                                                        <button type="button">Feb</button></li>
+                                                                    <li data-month="2">
+                                                                        <button type="button">Mar</button></li>
+                                                                    <li data-month="3">
+                                                                        <button type="button">Apr</button></li>
+                                                                    <li data-month="4">
+                                                                        <button type="button">May</button></li>
+                                                                    <li data-month="5">
+                                                                        <button type="button">Jun</button></li>
+                                                                    <li data-month="6">
+                                                                        <button type="button">Jul</button></li>
+                                                                    <li data-month="7">
+                                                                        <button type="button">Aug</button></li>
+                                                                    <li data-month="8">
+                                                                        <button type="button">Sep</button></li>
+                                                                    <li data-month="9">
+                                                                        <button type="button">Oct</button></li>
+                                                                    <li data-month="10">
+                                                                        <button type="button">Nov</button></li>
+                                                                    <li data-month="11">
+                                                                        <button type="button">Dec</button></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="datepicker-wheels-year">
+                                                                <h2 class="header">Year</h2>
+                                                                <ul></ul>
+                                                            </div>
+                                                            <div class="datepicker-wheels-footer clearfix">
+                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                        </div>
+                                            </div>
                                             <div class="col-md-2">
                                                 <div class="col-md-12">
                                                     <label class="control-label pull-left"></label>
@@ -340,8 +341,9 @@
                                         </div>
                                     </div>
                                     <%--.panel-body--%>
-                                    <div id="presentingComplaintsTable" class="panel panel-primary">
-                                        <div class="panel-heading">Presenting Complaints</div>
+                                    <div class="col-md-12">
+                                       <div id="presentingComplaintsTable" class="panel panel-primary">
+                                       <div class="panel-heading">Presenting Complaints</div>
                                         <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
                                             <table id="dtlPresentingComplaints" class="table table-bordered table-striped" style="width:100%">
                                                 <thead>
@@ -359,8 +361,8 @@
                                         </div>
             
                                     </div>
-                                    
-                                     <div id="presentingComplaintsNotes">
+                                    </div>
+                                    <div id="presentingComplaintsNotes">
                                         <label class="control-label pull-left text-primary" for="complaints">Presenting Complaints Notes :</label>
                                         <textarea runat="server" clientidmode="Static" id="complaints" class="form-control input-sm" placeholder="complaints...." rows="3" ></textarea>
                                     </div> 
@@ -657,7 +659,7 @@
                                         <div class="col-md-12 form-group">
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left input-sm">Height</label>
+                                                    <label class="control-label pull-left input-sm">Height (cm)</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:TextBox ID="txtHeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
@@ -665,7 +667,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="col-md-12">
-                                                    <label class="control-label pull-left input-sm">Weight</label>
+                                                    <label class="control-label pull-left input-sm">Weight (Kg)</label>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <asp:TextBox ID="txtWeight" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
@@ -1293,7 +1295,7 @@
                 </div>
                 <%-- .data-step-2--%>
 
-                <div class="step-pane sample-pane" data-step="3">
+                <div class="step-pane sample-pane" id="datastep3" data-step="3">
                     <div class="col-md-12"><small class="muted pull-left"><strong>PATIENT Examination</strong></small></div>
                     <div class="col-md-12">
                         <hr />
@@ -1304,7 +1306,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading">General Examination</div>
                                 <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden; text-align:left; padding-left:10px">
-                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
+                                    <asp:CheckBoxList ID="cblGeneralExamination" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%" ClientIDMode="Static" ></asp:CheckBoxList>
                                 </div>
                             </div>
 
@@ -1444,6 +1446,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="col-md-6 form-group">
+                                <asp:TextBox ID="txtDiagnosisID" Enabled="false" runat="server" ClientIDMode="Static"></asp:TextBox>
                                 <input type="text" id="Diagnosis" class="form-control input-sm" placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />
                             </div>
 
@@ -1462,6 +1465,7 @@
                                     <table id="dtlDiagnosis" class="table table-bordered table-striped" width="100%">
                                         <thead>
                                             <tr>
+                                                <th><span class="text-primary">DiagnosisID</span></th>
                                                 <th><span class="text-primary">Diagnosis</span></th>
                                                 <th><span class="text-primary">Treatment</span></th>
                                                 <th></th>
@@ -1690,6 +1694,7 @@
     document.getElementById('txtPresentingComplaintsID').style.display = 'none';
     document.getElementById('txtAllergyId').style.display = 'none';
     document.getElementById('txtReactionTypeID').style.display = 'none';
+    document.getElementById('txtDiagnosisID').style.display = 'none';
     
 
     $(document).ready(function () {
@@ -1713,6 +1718,7 @@
         loadPresentingComplaints();
         loadAllergies();
         loadAllergyReactions();
+        loadDiagnosis();
         showHidePresentingComplaintsDivs();
         showHideVisitByTS();
 
@@ -1758,19 +1764,22 @@
         $('#PCDateOfOnset').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: 0
+            date: 0,
+            restricted: [{from: tomorrow, to: Infinity}]
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
         $('#OnsetDate').datepicker({
             allowPastDates: true,
-            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{from: tomorrow, to: Infinity}],
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
            
         $('#ChronicIllnessOnsetDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: 0
+            date: 0,
+            restricted: [{from: tomorrow, to: Infinity}],
             //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
         
@@ -1997,7 +2006,14 @@
             paging: false,
             searching: false,
             info: false,
-            ordering: false
+            ordering: false,
+            columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+            ]
         });
 
 
@@ -2216,7 +2232,8 @@
                         //}
                     }
                     else if (data.step === 3) {
-                        savePatientPhysicalExams();
+                            savePatientPhysicalExams();
+                        
                         //if ($("#datastep3").parsley().validate()) {
 
                         //} else {
@@ -2411,6 +2428,12 @@
         function savePatientPhysicalExams() {
             var rowCount = $('#dtlPhysicalExam tbody tr').length;
             var generalExamination = getCheckBoxListItemsChecked('<%= cblGeneralExamination.ClientID %>');
+            if(generalExamination == "")
+            {
+                toastr.error(generalExamination, "Please check at least one General Examination.");
+                evt.preventDefault();
+                return false;
+            }
             var physicalExamArray = new Array();
             try {
                 for (var i = 0 ; i < rowCount; i++) {
@@ -2454,7 +2477,7 @@
                 for (var i = 0 ; i < rowCount; i++) {
                     diagnosisArray[i] = {
                         "diagnosis": diagnosisTable.row(i).data()[0],
-                        "treatment": diagnosisTable.row(i).data()[1]
+                        "treatment": diagnosisTable.row(i).data()[2]
                     }
                 }
             }
@@ -2904,6 +2927,38 @@
                     PCList.push({ label: serverData[i][1], value: serverData[i][0] });
                 }
                 awesomplete.list = PCList;
+            }
+        });    
+                
+    }
+
+    function loadDiagnosis() {      
+        var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
+        var awesomplete = new Awesomplete(diagnosisInput, {
+                   minChars: 1
+               });
+               
+               document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete',function(){
+                   var result = this.value.split("~");
+                   $("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
+                   $("#<%=Diagnosis.ClientID%>").val(result[1]);
+               });
+
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+     
+            success: function (data) {
+                var serverData = data.d;
+                var DiagnosisList = [];
+                       
+                for (var i = 0; i < serverData.length; i++) {
+                    //drugList.push(serverData[i][1]);
+                    DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
+                }
+                awesomplete.list = DiagnosisList;
             }
         });    
                 

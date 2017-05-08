@@ -481,6 +481,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.CheckBoxList cblPHDP;
         
         /// <summary>
+        /// txtDiagnosisID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDiagnosisID;
+        
+        /// <summary>
         /// Diagnosis control.
         /// </summary>
         /// <remarks>

@@ -87,7 +87,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
             }
 
             /* Get patientBaseline Vitals */
-            var ptnVitals = patientVitals.GetPatientBaselinePatientVital(PatientId);
+            var ptnVitals = patientVitals.GetPatientVitalsBaseline(PatientId);
             if (ptnVitals != null)
             {
                 BaselineWeight.Text = Convert.ToString(ptnVitals.Weight);

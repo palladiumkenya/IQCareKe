@@ -274,11 +274,12 @@ namespace IQCare.SCM
             DataTable theDTProvider = theDV.ToTable();
             theBindManager.Win_BindCombo(cmbProvider, theDTProvider, "Name", "Id");
 
-            theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
-            theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
-            DataTable theDTRegimenLine = theDV.ToTable();
-            theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
-
+            //theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
+            //theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
+            //DataTable theDTRegimenLine = theDV.ToTable();
+            //theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
+            IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
 
             theDV = new DataView(XMLDS.Tables["mst_Decode"]);
             theDV.RowFilter = "CodeId = 26 and (DeleteFlag =0 or DeleteFlag is null)";

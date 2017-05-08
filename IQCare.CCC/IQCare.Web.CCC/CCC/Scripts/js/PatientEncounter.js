@@ -264,6 +264,7 @@ var diagnosisList = new Array();
 var treatmentList = new Array();
 
 function AddDiagnosis() {
+    var diagnosisID = $('#txtDiagnosisID').val();
     var diagnosis = $('#Diagnosis').val();
     var treatment = $('#DiagnosisTreatment').val();
 
@@ -276,7 +277,7 @@ function AddDiagnosis() {
         return false;
     }
 
-    diagnosisFound = $.inArray("" + diagnosis + "", diagnosisList);
+    diagnosisFound = $.inArray("" + diagnosisID + "", diagnosisList);
     treatmentFound = $.inArray("" + treatment + "", treatmentList);
 
     if (diagnosisFound > -1) {
@@ -286,20 +287,22 @@ function AddDiagnosis() {
     } else {
 
 
-        diagnosisList.push("" + diagnosis + "");
+        diagnosisList.push("" + diagnosisID + "");
         treatmentList.push("" + treatment + "");
 
         arrDiagnosisUI = [];
 
         arrDiagnosisUI.push([
-            diagnosis, treatment,
+            diagnosisID, diagnosis, treatment,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
 
         DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
+        $('#txtDiagnosisID').val("");
         $('#Diagnosis').val("");
         $('#DiagnosisTreatment').val("");
+        
     }
 }
 
