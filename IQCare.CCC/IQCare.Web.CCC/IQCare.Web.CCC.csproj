@@ -52,6 +52,7 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Encounter\LabOrder.aspx" />
     <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
@@ -180,6 +181,13 @@
     </Compile>
     <Compile Include="CCC\Encounter\EncounterHistory.aspx.designer.cs">
       <DependentUpon>EncounterHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\LabOrder.aspx.cs">
+      <DependentUpon>LabOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\LabOrder.aspx.designer.cs">
+      <DependentUpon>LabOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>

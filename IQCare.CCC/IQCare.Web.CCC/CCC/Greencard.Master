@@ -201,6 +201,9 @@
 
                                <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
 								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuLabOrder" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuLabOrder_Click" >
+								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
                              
 	 
 							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
@@ -429,6 +432,7 @@
 				$("#menuCaptureVitals").hide();
 				$("#menuNewEncounter").hide();
 				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
 				$("#menuPatientVitals").hide();
 			   //$("#LinkButton2").hide();
 				$("#menuStartEncounter").show();
@@ -451,6 +455,7 @@
 				$("#menuCaptureVitals").show();
 				$("#menuNewEncounter").show();
 				$("#menuPharmacyPrescription").show();
+				$("#menuLabOrder").show();
 				
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
