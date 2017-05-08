@@ -1338,13 +1338,20 @@
                                 }
                                 $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
 
-                                
 
-                                $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
-                                $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
-                                $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
-                                $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');
-                                $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
+                                if (patientType === 'Transfer-In') {
+                                    
+                                        $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                        $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
+                                        $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
+                                        $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');
+                                        $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
+                                }
+                                else if (patientType === 'New') {
+                                    
+
+                                }
+
                                 
                                 /* patient baseline */
                                 if (!itemList.HBVInfected) {

@@ -110,6 +110,7 @@
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
+    <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
