@@ -11,10 +11,6 @@
     <RootNamespace>RemServer</RootNamespace>
     <AssemblyName>RemServer</AssemblyName>
     <StartupObject>RemServer.StartPoint</StartupObject>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -63,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConnection.Designer.cs">
+      <DependentUpon>frmConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="StartPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +87,11 @@
       <Project>{B039AEFB-4059-4368-87BF-03545ACAB705}</Project>
       <Name>DataAccess.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmConnection.resx">
+      <DependentUpon>frmConnection.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

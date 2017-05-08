@@ -298,9 +298,6 @@
     <Content Include="Statistics\PMTCT.aspx" />
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
-    <Content Include="Billing.Report.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="clientaccesspolicy.xml" />
     <Content Include="ClinicalForms\CustomForm.aspx" />
     <Content Include="ClinicalForms\frmCalculateAgeCTC.aspx" />
@@ -2914,9 +2911,6 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Billing.Payment.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\datepicker.less" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -3039,6 +3033,12 @@
     <None Include="Reports\test.rpt" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="vwd.webinfo" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="XMLFiles\AllPatientARVPickup" />
   </ItemGroup>
   <ItemGroup>
