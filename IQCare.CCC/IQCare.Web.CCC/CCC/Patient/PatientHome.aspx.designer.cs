@@ -418,6 +418,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label lblInSchoolP;
         
         /// <summary>
+        /// lblEntryPointP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEntryPointP;
+        
+        /// <summary>
         /// lblIdNumber control.
         /// </summary>
         /// <remarks>
@@ -452,15 +461,6 @@ namespace IQCare.Web.CCC.Patient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblKeyPopType;
-        
-        /// <summary>
-        /// lblEntryPointP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEntryPointP;
         
         /// <summary>
         /// lblDateOfHivDiagnosisA control.
