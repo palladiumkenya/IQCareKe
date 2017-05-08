@@ -193,6 +193,10 @@ namespace IQCare.Web.CCC
         {
             Response.Redirect("~/CCC/Encounter/PharmacyPrescription.aspx");
         }
-        
+
+        protected void menuLabOrder_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Encounter/LabOrder.aspx");
+        }
     }
 }
