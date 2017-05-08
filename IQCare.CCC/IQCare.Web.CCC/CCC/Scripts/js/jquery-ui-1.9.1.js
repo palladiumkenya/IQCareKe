@@ -9805,7 +9805,8 @@ $.extend( $.ui.dialog.overlay, {
 			}
 		// handle "good" browsers
 		} else {
-			return $( document ).height() + "px";
+		    return $( document ).height() + "px";
+		   
 		}
 	},
 

@@ -465,12 +465,11 @@
                     identifierFound = $.inArray("" + identifier + "", identifierList);
                     enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);
 
+                    console.log(enrollmentNoList); 
+
                     if (identifierFound > -1) {
 
                         toastr.error("error", identifier + " Identifier already exists in the List");
-                        return false; // message box herer
-                    } else if (enrollmentNoFound > -1) {
-                        toastr.error("error", enrollmentNo + " Enrollment No already exists in the List");
                         return false; // message box herer
                     } else {
 

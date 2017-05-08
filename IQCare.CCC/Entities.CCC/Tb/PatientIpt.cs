@@ -20,6 +20,10 @@ namespace Entities.CCC.Tb
         public bool Peripheralneoropathy { get; set; }
         public bool Rash { get; set; }
         public int AdheranceMeasurement { get; set; }
+        public string HepatotoxicityAction { get; set; }
+        public string PeripheralneoropathyAction { get; set; }
+        public string RashAction { get; set; }
+        public string AdheranceMeasurementAction { get; set; }
 
     }
 }

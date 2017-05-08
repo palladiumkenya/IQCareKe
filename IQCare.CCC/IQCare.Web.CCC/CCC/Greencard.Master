@@ -62,7 +62,8 @@
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/mbExtruder.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/jquery.mb.flipText.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/bootbox.js")%>" type="text/javascript"></script>
-	
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/PatientEncounter.js")%>" type="text/javascript"></script>
+  
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/placeholder.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/respond.min.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/html5shiv.js")%>" type="text/javascript"></script>
@@ -199,8 +200,8 @@
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
 
                                <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
-								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
-
+								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy Prescription</strong></asp:LinkButton>
+                             
 	 
 							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
 									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
@@ -431,10 +432,12 @@
 				$("#menuPatientVitals").hide();
 			   //$("#LinkButton2").hide();
 				$("#menuStartEncounter").show();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 				<%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
 			}
 
-			function encounterStarted() {
+		    function encounterStarted() {
+                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
 				$("#titlePatientBaseline").show();
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();

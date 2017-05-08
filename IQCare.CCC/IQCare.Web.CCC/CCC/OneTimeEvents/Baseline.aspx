@@ -25,6 +25,7 @@
 
         </div>
     </div>
+    
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="wizard" data-initialize="wizard" id="myWizard">
             <div class="steps-container">
@@ -66,7 +67,7 @@
                  <div class="step-pane active sample-pane" id="datastep1" data-parsley-validate="true" data-show-errors="true" data-step="1">
                    
                      <div class="col-md-12" id="divTransferin">
-                        <div class="col-md-12"><small class="text-primary pull-left">1.Patient Transfer Status</small></div>
+                        <div class="col-md-12"><small class="text-primary pull-left"> Patient Transfer Status</small></div>
                         <div class="col-md-12">
                            <div class="col-md-12"><hr /></div>
                         </div>
@@ -343,7 +344,7 @@
 
                      <div class="col-md-12" id="divHivDiagnosis" data-parsley-validate="true" data-show-errors="true">
                           <div class="col-md-12">
-                              <div class="col-md-12"><small class="text-primary pull-left">2.Patient HIV Diagnosis</small></div>
+                              <div class="col-md-12"><small class="text-primary pull-left"> Patient HIV Diagnosis</small></div>
                           </div>
                           
                           <div class="col-md-12">
@@ -561,7 +562,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DARTI">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text" data-parsley-required="true" />
+                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text"  />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -661,7 +662,7 @@
 
                      <div class="col-md-12" id="divarvHistory" data-parsley-validate="true" data-show-errors="true">
                         <div class="col-md-12">
-                            <div class="col-md-12"><small class="text-primary pull-left">3.Patient ARV History</small></div>
+                            <div class="col-md-12"><small class="text-primary pull-left"> Patient ARV History</small></div>
                         </div>
 
                         <div class="col-md-12">
@@ -848,7 +849,7 @@
                     <div class="col-md-12 form-group">
 
                         <div class="col-md-12">
-                            <div class="col-md-12"><small class="text-primary pull-left">4.Baseline Assessment</small></div>
+                            <div class="col-md-12"><small class="text-primary pull-left"> Baseline Assessment</small></div>
                             <div class="col-md-12">
                                 <hr />
                             </div>
@@ -952,9 +953,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group" id="divTreatmentInitiation">
                         <div class="col-md-12">
-                            <div class="col-md-12"><small class="text-primary pull-left">4. Treatment Inititation</small></div>
+                            <div class="col-md-12"><small class="text-primary pull-left"> Treatment Inititation</small></div>
                             <div class="col-md-12">
                                <div class="col-md-12"> <hr /></div>
                             </div>
@@ -1191,9 +1192,9 @@
                     </div><!-- .form-group-->
                 </div> <%-- .data-step-2--%>
                
-                 <div class="step-pane sample-pane" id="datastep5" data-parsley-validate="true" data-show-errors="true" data-step="3">
+                <%-- <div class="step-pane sample-pane" id="datastep5" data-parsley-validate="true" data-show-errors="true" data-step="3">--%>
 
-                </div> <%-- .data-step-3--%>
+                <%-- </div> .data-step-3--%>
                
             </div><!-- .step-content -->
 
@@ -1677,7 +1678,7 @@
             function disableIfNotTransferIn() {
 
                 /*-- disable the DIVs not required --*/
-                $("#divTransferin").hide("fast", function() { $("#divHivDiagnosis").hide("fast"); });
+                $("#divTransferin").hide("fast", function() { $("#divHivDiagnosis").show("fast"); });
                 $("#divTreatmentInitiation").hide("fast");
 
                 $("#TIDate").datepicker('disable');
@@ -1934,7 +1935,8 @@
                                     $.when(addPatientTransferIn()).then(managePatientHivDiagnosis());
                                     managePatientArvHistory();
                                 } else if (transferIn === 2) {
-                                    managePatientArvHistory();
+                                   
+                                  $.when(managePatientHivDiagnosis()).then(managePatientArvHistory());
                                 }
 
                             } else {

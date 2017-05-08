@@ -85,20 +85,20 @@
                              <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Treatment Supporter</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
-                             <div class="col-md-12 form-group">
+                             <div class="col-md-12">
                                  <div class="col-md-6"><label class="control-label pull-left">Names:</label></div>
                                  <div class="col-md-6">
-                                     <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                     <asp:Label ID="txtSupporterNames" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
-                             
-                             <div class="col-md-12 form-group">
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                             <div class="col-md-12">
                                  <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
                                  <div class="col-md-6">
-                                     <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                                     <asp:Label ID="txtSupporterMobile" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
-
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                              <!-- Modal -->
                              <div id="patientBioModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
                                  <div class="modal-dialog">
@@ -106,7 +106,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header bg-info">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Edit Patient Bio</h4>
+                                             <h4 class="modal-title">Change Bio</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -182,7 +182,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Add Patient Treatment Supporter</h4>
+                                             <h4 class="modal-title">Change Supporter</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -219,7 +219,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/"></asp:TextBox>
+                                                             <asp:TextBox ID="trtMobile" runat="server" CssClass="pull-left form-control" placeholder="Mobile No..." ClientIDMode="Static" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -242,7 +242,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Add Patient Treatment Supporter</button>
+                                             <button id="btnAddPatientTreatmentSupporter" type="button" class="btn btn-default" OnClientClick="return false;">Change Supporter</button>
                                              <button id="btnAddPatientTreatmentSupporterCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -253,12 +253,12 @@
 
                              </div>
 
-                             <div class="col-md-6 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientBioModal">Edit Patient Bio</button>
+                             <div class="col-md-6 pull-left">
+                                 <button type="button" class="btn btn-info btn-sm pull-left fa fa-cog" data-toggle="modal" data-target="#patientBioModal"> Change Bio</button>
                              </div>
 
-                             <div class="col-md-6 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#treatmentSupporterModal">Add Patient Supporter</button>
+                             <div class="col-md-6 pull-right">
+                                 <button type="button" class="btn btn-info btn-sm pull-right fa fa-cog" data-toggle="modal" data-target="#treatmentSupporterModal"> Change Supporter</button>
                              </div>
 
                          </div>
@@ -266,10 +266,10 @@
                              <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Location</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">County:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                             <div class="col-md-12 ">
+                                 <div class="col-md-6 pull-left"><label class="control-label pull-left">County:</label></div>
+                                 <div class="col-md-6 pull-right">
+                                     <asp:Label ID="txtCounty" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
                              
@@ -286,11 +286,11 @@
                                      <asp:Label ID="txtVillage" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
                                  </div>
                              <!--</div>-->
-
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Nearest H/C:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                             <div class="col-md-12">
+                                 <div class="col-md-6 pull-left"><label class="control-label pull-left">Nearest H/C:</label></div>
+                                 <div class="col-md-6 pull-right">
+                                     <asp:Label ID="txtNearestHealthCentre" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
                              
@@ -301,7 +301,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Add Patient Location</h4>
+                                             <h4 class="modal-title">Change Location</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -388,7 +388,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnAddLocation" type="button" class="btn btn-default" OnClientClick="return false;">Add Location</button>
+                                             <button id="btnAddLocation" type="button" class="btn btn-default" OnClientClick="return false;">Change Location</button>
                                              <button id="btnAddLocationCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -398,9 +398,9 @@
                                  </div>
 
                              </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientLocationModal">Add Patient Location</button>
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                             <div class="col-md-12">
+                                 <button type="button" class="btn btn-info btn-sm pull-left fa fa-cog" data-toggle="modal" data-target="#patientLocationModal">Change Location</button>
                              </div>
 
                          </div>
@@ -408,18 +408,19 @@
                              <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong><h6>Patient Contact</h6></label></div>
                              <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Postal Adress:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtPostalAddress" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                             <div class="col-md-12">
+                                 <div class="col-md-6 pull-left"><label class="control-label pull-left">Postal Adress:</label></div>
+                                 <div class="col-md-6 col-xs-12 col-sm-12 pull-right">
+                                     <asp:Label ID="txtPostalAddress" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
                              
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                              
-                             <div class="col-md-12 form-group">
-                                 <div class="col-md-6"><label class="control-label pull-left">Mobile:</label></div>
-                                 <div class="col-md-6">
-                                     <asp:Label ID="txtMobile" runat="server" ClientIDMode="Static" CssClass="pull-left text-primary"></asp:Label>
+                             <div class="col-md-12">
+                                 <div class="col-md-6 pull-left"><label class="control-label pull-left">Mobile:</label></div>
+                                 <div class="col-md-6 pull-right">
+                                     <asp:Label ID="txtMobile" runat="server" ClientIDMode="Static" CssClass="pull-right text-primary"></asp:Label>
                                  </div>
                              </div>
                              
@@ -430,7 +431,7 @@
                                      <div class="modal-content">
                                          <div class="modal-header">
                                              <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                                             <h4 class="modal-title">Edit Patient Contacts</h4>
+                                             <h4 class="modal-title">Change Contacts</h4>
 
                                          </div>
                                          <div class="modal-body">
@@ -449,7 +450,7 @@
                                                      <div class="col-md-6">
                                                          <div class="col-md-12"><label class="control-label pull-left">Mobile:</label></div>
                                                          <div class="col-md-12">
-                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="Mobile No..." data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-required="true" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patAlternativeMobile"></asp:TextBox>
+                                                             <asp:TextBox ID="patMobile" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" placeholder="Mobile No..." data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid Kenyan mobile phone number. Format ((+2547XXXXXXXX) or (07XXXXXXXX))" data-parsley-pattern="/(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/" data-parsley-notequalto="#patAlternativeMobile"></asp:TextBox>
 
                                                          </div>
                                                      </div>
@@ -478,7 +479,7 @@
                                              
                                          </div>
                                          <div class="modal-footer">
-                                             <button id="btnEditPatientContacts" type="button" class="btn btn-default" OnClientClick="return false;">Edit Patient Contacts</button>
+                                             <button id="btnEditPatientContacts" type="button" class="btn btn-default" OnClientClick="return false;">Change Contacts</button>
                                              <button id="btnEditPatientContactsCancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                                          </div>
@@ -488,9 +489,12 @@
                                  </div>
 
                              </div>
-                             
-                             <div class="col-md-12 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientContactModal">Edit Patient Contacts</button>
+                             <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                             <div class="col-md-6 pull-left">
+                                 <button type="button" class="btn btn-info btn-sm fa fa-cog pull-left" data-toggle="modal" data-target="#patientContactModal"> Change Contacts</button>
+                             </div>
+                             <div class="col-md-6 pull-right">
+                                  <button type="button" class="btn btn-warning btn-sm fa fa-bar-chart pull-right" data-toggle="modal" data-target="#patientSummaryModal"> Patient Summary</button>
                              </div>
                          </div>
                          
@@ -498,9 +502,7 @@
                      </div>
                      <div class="col-md-12 col-xs-12">
                          <div class="col-md-4 col-xs-4 col-sm-4">                       
-                             <div class="col-md-6 form-group">
-                                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#patientSummaryModal">Patient Summary</button>
-                             </div>
+
                          </div>
                          
                          <!-- Modal -->
@@ -977,56 +979,67 @@
                                <div class="col-md-12 label label-info"><label class="control-label"><h6>TransferIn Status</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
-                              <div class="col-md-12 form-group">
+                              <div class="col-md-12">
                                    <div class="col-md-6"><label class="control-lable pull-left">Entry Point :</label></div>
                                   <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblEntryPoint" ClientIDMode="Static"></asp:Label></div>
                               </div>
                                  
-                               <div class="col-md-12">
+                              <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+
+                              <div class="col-md-12" id="divTransferInDate">
                                    <div class="col-md-6"><label class="control-lable pull-left">TransferIn Date :</label></div>
                                   <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblTransferinDate" ClientIDMode="Static"></asp:Label></div>
                               </div>
                               
-                             <div class="col-md-12">
+                              <div class="col-md-12" id="divHr1"><div class="col-md-12"><hr /></div></div>
+                              <div class="col-md-12" id="divTreatmentStart">
                                    <div class="col-md-6"><label class="control-lable pull-left">Treatment Start:</label></div>
                                   <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary" ID="lblTreatmentStartDate" ClientIDMode="Static"></asp:Label></div>
                               </div>
                               
-                              <div class="col-md-12">
+                              <div class="col-md-12" id="divHr2"><div class="col-md-12"><hr /></div></div>
+
+                              <div class="col-md-12" id="divRegimen">
                                    <div class="col-md-4"><label class="control-lable pull-left">Regimen : </label></div>
                                   <div class="col-md-8"><asp:Label runat="server" CssClass=" pull-right text-primary"  ID="lblTIRegimen" ClientIDMode="Static"></asp:Label></div>
                               </div>
                             
-                              <div class="col-md-12">
+                              <div class="col-md-12" id="divHr3"><div class="col-md-12"><hr /></div></div>
+
+                              <div class="col-md-12" id="divFacilityFrom">
                                    <div class="col-md-5"><label class="control-lable pull-left">Facility From :</label></div>
                                   <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFacilityFrom" ClientIDMode="Static"></asp:Label></div>
                               </div>
 
                               
-
                           </div><!-- .col-md-4 -->
 
                           <div class="col-md-4 col-xs-12 col-sm-12">
                               <div class="col-md-12 label label-info"><label class="control-label"> <h6>Patient Diagnosis Status</h6></label></div>
                                <div class="col-md-12"><hr style="margin-top:1%"/></div>
                               
-                               <div class="col-md-12 form-group">
+                               <div class="col-md-12">
                                     <div class="col-md-6"><label class="control-label pull-left">HIV Diagnosis Date :</label></div>
                                     <div class="col-md-6"><asp:Label runat="server" ID="lblDateOfHivDiagnosis" CssClass="text-info pull-right" ClientIDMode="Static"></asp:Label></div>
                                </div>
+                                
+                              <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                               
-                              <div class="col-md-12 form-group">
-                                    <div class="col-md-6"><label class="control-label pull-left">Date of Enrollmet  :</label></div>
+                               <div class="col-md-12 ">
+                                    <div class="col-md-6"><label class="control-label pull-left">Date of Enrollment  :</label></div>
                                     <div class="col-md-6"><asp:Label runat="server" ID="lblDateOfEnrollment" CssClass="text-info pull-right" ClientIDMode="Static"></asp:Label></div>
                                </div>
                               
-                               <div class="col-md-12 form-group">
-                                    <div class="col-md-6"><label class="control-label pull-left">WHO at Enrollmet  :</label></div>
+                              <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                              
+                               <div class="col-md-12">
+                                    <div class="col-md-6"><label class="control-label pull-left">WHO at Enrollment  :</label></div>
                                     <div class="col-md-6"><asp:Label runat="server" ID="lblWhoStage" CssClass="text-info pull-right" ClientIDMode="Static"></asp:Label></div>
                                </div>
                               
+                              <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                               
-                              <div class="col-md-12 form-group">
+                              <div class="col-md-12">
                                     <div class="col-md-6"><label class="control-label pull-left">ART Initiation Date :</label></div>
                                     <div class="col-md-6"><asp:Label runat="server" ID="lblARTInitiationDate" CssClass="text-info pull-right" ClientIDMode="Static"></asp:Label></div>
                                </div>
@@ -1063,9 +1076,8 @@
                          <div class="col-md-12 label label-info"><label class="control-label"><strong class="text-primary"></strong> <h6>Baseline Assessment Summary</h6></label></div>
                               <div class="col-md-12"><hr style="margin-top:1%"/></div>
                              
-                              <div class="col-md-12 form-group">
                                    
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">HBV Infected</label></div>
                                        <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblHbvInfectedYes">
@@ -1078,8 +1090,10 @@
                                             </label>
                                       </div>
                                   </div>
-                                                               
-                                  <div class="col-md-12 form-group">
+                                         
+                                  <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                                                        
+                                  <div class="col-md-12" id="divPregnant">
                                       <div class="col-md-6"><label class="control-lable pull-left">Pregnant </label></div>
                                        <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblPregnantYes">
@@ -1093,7 +1107,9 @@
                                       </div>
                                   </div>
                                   
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12" id="divPGhr"><div class="col-md-12"><hr /></div></div>
+
+                                  <div class="col-md-12">
                                       <div class="col-md-6"><label class="control-lable pull-left">TB Infected</label></div> 
                                       <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblTBInfectedYes">
@@ -1107,7 +1123,9 @@
                                       </div>
                                   </div>
                                   
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
+                                  
+                                  <div class="col-md-12" id="divBreastFeeding">
                                       <div class="col-md-6"><label class="control-lable pull-left">BreastFeeding</label></div> 
                                       <div class="col-md-3">
                                             <label class="checkbox-custom checkbox-inline" data-initialize="checkbox"  id="lblBreastfeedingYes">
@@ -1120,19 +1138,21 @@
                                             </label>
                                       </div>
                                   </div>
+                                  
+                                  <div class="col-md-12" id="divBFhr"><div class="col-md-12"><hr /></div></div>
 
-                                  <div class="col-md-12 form-group">
-                                       <div class="col-md-6"><label class="control-lable pull-left">Who Stage</label></div>
+                                  <div class="col-md-12">
+                                     <div class="col-md-6"><label class="control-lable pull-left">Who Stage</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblwhostage2" ClientIDMode="Static"></asp:Label></div>
                                   </div>
+                                  
+                                  <div class="col-md-12"><div class="col-md-12"><hr /></div></div>
                               
-                                  <div class="col-md-12 form-group">
-                                   <div class="col-md-6"><label class="control-lable pull-left">CD4 Count</label></div>
-                                  <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary" ID="lblcd4" ClientIDMode="Static"></asp:Label></div>
-                              </div>
-                              
-
-                            </div>                      
+                                  <div class="col-md-12">
+                                      <div class="col-md-6"><label class="control-lable pull-left">CD4 Count</label></div>
+                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary" ID="lblcd4" ClientIDMode="Static"></asp:Label></div>
+                                  </div>
+                                                 
 
                           </div>
                     
@@ -1140,69 +1160,74 @@
                               <div class="col-md-12 label label-info"><label class="control-label"> <h6><strong>Patient Baseline Vitals</strong></h6> </label></div>
                               <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
                               <div class="col-md-12">
-                                  <div class="col-md-12 form-group">
                                        <div class="col-md-6"><label class="control-lable pull-left">MUAC</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblmuac" ClientIDMode="Static"></asp:Label></div>
                                   </div>
+                         
+                              <div class="col-md-12"><hr></div>
 
-                                  <div class="col-md-12 form-group">
+                              <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">Weight</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblweight" ClientIDMode="Static"></asp:Label></div>
                                   </div>
+                              <div class="col-md-12"><hr></div>
                                   
-                                  <div class="col-md-12 form-group">
+                              <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">Height</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblheight" ClientIDMode="Static"></asp:Label></div>
                                   </div>
+                              <div class="col-md-12"><hr></div>
                                   
-                                  <div class="col-md-12 form-group">
-                                       <div class="col-md-6"><label class="control-lable pull-left">BMI</label></div>
+                              <div class="col-md-12">
+                                     <div class="col-md-6"><label class="control-lable pull-left">BMI</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblbmi" ClientIDMode="Static"></asp:Label></div>
                                   </div>
 
-                              </div>
+
                           </div>
 
                       <div class="col-md-4 col-xs-4 col-sm-4">
                               <div class="col-md-12 label label-info"><label class="control-label"> <h6><strong>Treatment Initiation </strong></h6> </label></div>
                               <div class="col-md-12"><hr style="margin-top:1%" class="bg-info"/></div>
-                              <div class="col-md-12">
-                                  <div class="col-md-12 form-group">
+                              
+                                  <div class="col-md-12">
                                        <div class="col-md-7"><label class="control-lable pull-left">Date Started Firstline:</label></div>
                                      <div class="col-md-5"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblFirstline" ClientIDMode="Static"></asp:Label></div>
-                                  </div>
+                                  </div><div class="col-md-12"><hr></div>
 
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">ART Cohort: </label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblcohort" ClientIDMode="Static"></asp:Label></div>
-                                  </div>
+                                  </div><div class="col-md-12"><hr></div>
                                   
-                                    <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
                                        <div class="col-md-5"><label class="control-lable pull-left">Regimen: </label></div>
                                      <div class="col-md-7"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblRegimenName" ClientIDMode="Static"></asp:Label></div>
-                                  </div>
+                                  </div><div class="col-md-12"><hr></div>
                                   
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">Baseline ViralLoad :</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblbaselineVL" ClientIDMode="Static"></asp:Label></div>
-                                  </div>
+                                  </div><div class="col-md-12"><hr></div>
                                   
-                                  <div class="col-md-12 form-group">
+                                  <div class="col-md-12">
                                        <div class="col-md-6"><label class="control-lable pull-left">ViralLoad Date :</label></div>
                                      <div class="col-md-6"><asp:Label runat="server" CssClass="pull-right text-primary"  ID="lblBlDate" ClientIDMode="Static"></asp:Label></div>
-                                  </div>
+                                  </div><div class="col-md-12"><hr></div>
 
-                              </div>
+                             
                           </div>
                  </div> <!-- diagnosis -->  
                  <div id="Trending" class="tab-pane  fade in active">
                     
                       <div class="col-md-6 col-xs-12 col-sm-12">
-                          <div id="vl_container" margin: 0 auto"></div>  
+                          <div id="vl_container" style="min-width: 450px; height: 300px; margin: 0"></div> 
+                           <%-- <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div>  --%>
                      </div>  <!-- .bs-component-->
                      
                      <div class="col-md-6 col-xs-12 col-sm-12">
-                          <div id="vitals_container" margin: 0 auto"></div>     
+                        <%--  <div id="vitals_container" margin: 0 auto"></div>  --%>
+                           <div id="vitals_container" style="min-width: 450px; height: 300px; margin: 0"></div>    
                      </div><!-- .bs-component-->
                         
                 </div><!-- .trending-->
@@ -1220,7 +1245,9 @@
 
             var patientId = "<%=PatientId%>";
             $("#<%=Gender.ClientID%>").hide();
-            
+            var patientType = '<%=PatientType%>';
+            var gender = "<%=PatientGender%>";
+
             /* populate patient baseline information */
             $.ajax({
                 type: "POST",
@@ -1229,6 +1256,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+                   
                     var itemList = JSON.parse(response.d);
                     $.each(itemList,
                         function(index, itemList) {
@@ -1236,10 +1264,26 @@
                                 
                                 console.log(itemList);
                                 /* transferin status */
-                                $("#<%=lblTransferinDate.ClientID%>").text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));
-                                $("#<%= lblTreatmentStartDate.ClientID%>").text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
-                                $("#<%=lblTIRegimen.ClientID%>").text(itemList.CurrentTreatmentName);
-                                $("#<%=lblFacilityFrom.ClientID%>").text(itemList.FacilityFrom);
+                              
+                                if (patientType === 'Transfer-In') {
+                                    
+                                    $("#<%=lblTransferinDate.ClientID%>")
+                                        .text(moment(itemList.TransferInDate).format("DD-MMM-YYYY"));
+                                    $("#<%= lblTreatmentStartDate.ClientID%>")
+                                        .text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
+                                    $("#<%=lblTIRegimen.ClientID%>").text(itemList.CurrentTreatmentName);
+                                    $("#<%=lblFacilityFrom.ClientID%>").text(itemList.FacilityFrom);
+                                } else {
+                                   
+                                    <%--$("#<%=lblTransferinDate.ClientID%>").text("N/A");
+                                    $("#<%= lblTreatmentStartDate.ClientID%>") .text("N/A");
+                                    $("#<%=lblTIRegimen.ClientID%>").text("N/A");
+                                    $("#<%=lblFacilityFrom.ClientID%>").text("nN/A");--%>
+                                    $("#divTransferInDate").hide("fast"); $("#divHr1").hide("fast");
+                                    $("#divTreatmentStart").hide("fast"); $("#divHr2").hide("fast");
+                                    $("#divRegimen").hide("fast"); $("#divHr3").hide("fast");
+                                    $("#divFacilityFrom").hide("fast");
+                                }
 
                                 /*patient Diagnosis */
                                 $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
@@ -1251,17 +1295,50 @@
                                 $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
                                 $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
-                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
-                                $("#<%=lblweight.ClientID%>").text(itemList.Weight);
-                                $("#<%=lblheight.ClientID%>").text(itemList.Height);
+
+                                if (patientType === 'Transfer-In') {
+                                    /*check if patient patient is new or transferIN*/
+                                    $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                    $("#<%=lblweight.ClientID%>").text(itemList.Weight);
+                                    $("#<%=lblheight.ClientID%>").text(itemList.Height);
+                                    $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                }else if (patientType === 'New') {
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../WebService/PatientBaselineService.asmx/GetNewPatientBaselineVitals",
+                                        data: "{'patientId':'" + patientId + "'}",
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function(response) {
+                                            var itemList = JSON.parse(response.d);
+                                           
+                                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                                $("#<%=lblweight.ClientID%>").text(itemList.Weight+' kgs');
+                                                $("#<%=lblheight.ClientID%>").text(itemList.Height+' cms');
+                                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2)+' kg/M2');                                         
+                                        },
+                                        error: function(xhr, errorType, exception) {
+                                            var jsonError = jQuery.parseJSON(xhr.responseText);
+                                            toastr.error("" + xhr.status + "" + jsonError.Message);
+                                        }
+                                    });
+
+                                }
+
                                 $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
                                 $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
                                 $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
-                                $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
-                                $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
+                                if (gender === 'Female') {
+                                    $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
+                                    $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
+                                }else if (gender === 'Male') {
+
+                                    $("#divBreastFeeding").hide('fast');$("#divBFhr").hide('fast');$("#divPregnant").hide('fast');$("#divPGhr").hide('fast');
+                                }
                                 $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
 
-                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                
 
                                 $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
                                 $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
@@ -1330,14 +1407,35 @@
             });
 
 
-            var jan_height = "";
-            var march_height = "";
-            var jan_weight = "";
-            var march_weight = "";
-            var jan_BMI = "";
-            var march_BMI = "";
             var jan_vl = "";
-            var march_vl = "";
+            var feb_vl = "";
+            var mar_vl = "";
+            var apr_vl = "";
+            var may_vl = "";
+            var jun_vl = "";
+            var jul_vl = "";
+            var aug_vl = "";
+            var sep_vl = "";
+            var oct_vl = "";
+            var nov_vl = "";
+            var dec_vl = "";
+            var jan_height = "";
+            var feb_height = "";
+            var mar_height = "";
+            var apr_height = "";
+            var may_height = "";           
+            var jan_weight = "";
+            var feb_weight = "";
+            var mar_weight = "";
+            var apr_weight = "";
+            var may_weight = "";            
+            var jan_BMI = "";
+            var feb_BMI = "";
+            var mar_BMI = "";
+            var apr_BMI = "";
+            var may_BMI = "";
+            var jun_BMI = "";
+            var jul_BMI = "";           
 
             window.onload = function() {
 
@@ -1368,13 +1466,53 @@
                             var items = response.d;
                             items.forEach(function (item, i) {
 
-                                if (item.Month == 1) {
+                                if (item.Month === 1) {
 
                                     jan_vl = item.ResultValue;
                                    
-                                } else if (item.Month == 3) {
+                                } else if (item.Month === 2) {
 
-                                    march_vl = item.ResultValue;                                   
+                                    feb_vl = item.ResultValue;                                   
+                           
+                                } else if (item.Month === 3) {
+
+                                    mar_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 4) {
+
+                                    apr_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 5) {
+
+                                    may_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 6) {
+
+                                    jun_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 7) {
+
+                                    jul_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 8) {
+
+                                    aug_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 9) {
+
+                                    sep_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 10) {
+
+                                    oct_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 11) {
+
+                                    nov_vl = item.ResultValue;                                   
+                                }
+                                else if (item.Month === 12) {
+
+                                    dec_vl = item.ResultValue;                                      
                                    
                                 }
 
@@ -1396,7 +1534,8 @@
                             x: -20
                         },
                         xAxis: {
-                            categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                            // categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                         },
                         yAxis: {
                             title: {
@@ -1422,10 +1561,10 @@
                         series: [
                             {
                                 name: 'VL',
-                                data: [jan_vl, march_vl, "", "", "", "", ""]
+                                data: [jan_vl, feb_vl, mar_vl, apr_vl, may_vl, jun_vl, jul_vl, aug_vl, sep_vl, oct_vl, nov_vl, dec_vl]
                             }, {
                                 name: 'Threshold',
-                                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000]
+                                data: [1000, 1000, 1000, 1000, 1000, 1000, 1000,1000, 1000, 1000, 1000, 1000]
                             }
                         ]
                     });
@@ -1444,19 +1583,38 @@
                         var items = response.d;
                         items.forEach(function(item, i) {
 
-                            if (item.Month == 1) {
+                            if (item.Month === 1) {
 
                                 jan_height = item.Height;
                                 jan_weight = item.Weight;
                                 jan_BMI = item.BMI;                               
 
-                            } else if (item.Month == 3) {
+                            } else if (item.Month === 2) {
 
-                                march_height = item.Height;
-                                march_weight = item.Weight;
-                                march_BMI = item.BMI;
+                                feb_height = item.Height;
+                                feb_weight = item.Weight;
+                                feb_BMI = item.BMI;
                               
+                            } else if (item.Month === 3) {
+
+                                mar_height = item.Height;
+                                mar_weight = item.Weight;
+                                mar_BMI = item.BMI;
+                              
+                            } else if (item.Month === 4) {
+
+                                apr_height = item.Height;
+                                apr_weight = item.Weight;
+                                apr_BMI = item.BMI;
+                                
+                            } else if (item.Month === 5) {
+
+                                may_height = item.Height;
+                                may_weight = item.Weight;
+                                may_BMI = item.BMI;
+                                
                             }
+
 
                         });
 
@@ -1466,8 +1624,7 @@
             }
 
             function vitals() {
-                //var jan_height = $(".march_height").val();
-                //var march_height = $(".march_height").val();
+         
                 console.log("vitals graph function called");
 
                 $('#vitals_container').highcharts({
@@ -1480,7 +1637,7 @@
                         x: -20
                     },
                     xAxis: {
-                        categories: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov', 'Dec']
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     },
                     yAxis: {
                         title: {
@@ -1506,15 +1663,15 @@
                     series: [
                         {
                             name: 'Height',
-                            data: [jan_height, march_height, "", "", "", "", ""]
+                            data: [jan_height, feb_height, mar_height, apr_height, may_height, "", "", "", "", "", "", ""]
                         },
                         {
                             name: 'Weight',
-                            data: [jan_weight, march_weight, "", "", "", "", ""]
+                            data: [jan_weight, feb_weight, mar_weight, apr_weight, may_weight, "", "", "", "", "", "", ""]
                         },
                         {
                             name: 'BMI',
-                            data: [jan_BMI, march_BMI, "", "", "", "", "", ""]
+                            data: [jan_BMI, feb_BMI, mar_BMI, apr_BMI, may_BMI, "", "","", "", "", "", ""]
                         }
                     ]
                 });
@@ -1544,12 +1701,13 @@
                         $("#<%=lblCCC.ClientID%>").text(patientDetails.EnrollmentNumber);
                         
                         var populationType = 0;
-                        if (patientDetails.population == "General Population") {
+                        if (patientDetails.population === "General Population") {
                             populationType = 74;
                         }
-                        else if (patientDetails.population == "Key Population") {
+                        else if (patientDetails.population === "Key Population") {
                             populationType = 75;
                         }
+                        console.log(populationType);
                         $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
 
                         var names = null;
@@ -1637,14 +1795,14 @@
                             $("#isChildP").show();
                         } else {
                             $("#isAdultP").show();
-                            $("#isAdult").show()
+                            $("#isAdult").show();
                         }
 
-                        if (patientDetails.PatientTypeString == "New") {
+                        if (patientDetails.PatientTypeString === "New") {
                             
-                        }else if(patientDetails.PatientTypeString == "New") {
+                        }else if(patientDetails.PatientTypeString === "New") {
                             
-                        }else if (patientDetails.PatientTypeString == "New") {
+                        }else if (patientDetails.PatientTypeString === "New") {
                             
                         }
                     },
@@ -1665,11 +1823,11 @@
                 console.log(sex);
                 console.log(optionType);
 
-                if (sex == "Male" && optionType=="Female Sex Worker") {
+                if (sex === "Male" && optionType==="Female Sex Worker") {
                     toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
                     return false;
                 }
-                else if (sex == "Female" && optionType == "Men having Sex with Men") {
+                else if (sex === "Female" && optionType === "Men having Sex with Men") {
                     toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
                         "Person Population Error");
                     return false;
@@ -1757,7 +1915,18 @@
             });
             $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', true);
             $("#<%=bioPatientPopulation.ClientID%>").on("change",function() {
+
                 console.log($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text());
+                var dob  = "<%=Session["DateOfBirth"]%>";
+                var today = new Date();
+                var birthDate = new Date(dob);
+                var age = today.getFullYear() - birthDate.getFullYear();
+
+                if (age <= 18 && $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
+                    $("#<%=bioPatientPopulation.ClientID%>").val(74);
+                    toastr.error("Under 18 should not be a key population", "Population Type");
+                    return false;
+                }
                 if ($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
                     $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', false);
                 } else {
@@ -1779,10 +1948,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "add Patient Treatment Supporter");
+                    toastr.success(response.d, "Changing Treatment Supporter");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Upating Patient Bio");
+                    toastr.error(response.d, "Error Changing Treatment Supporter");
                 }
             });
         }
@@ -1796,10 +1965,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "Edit Patient Contacts");
+                    toastr.success(response.d, "Change Contacts");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Adding New Patient Location");
+                    toastr.error(response.d, "Error Changing Contacts");
                 }
             });
         }
@@ -1813,10 +1982,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "add New Patient Location");
+                    toastr.success(response.d, "Change Location");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Adding New Patient Location");
+                    toastr.error(response.d, "Error Changing Location");
                 }
             });
         }
@@ -1830,10 +1999,10 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response.d);
-                    toastr.success(response.d, "Update Patient Bio");
+                    toastr.success(response.d, "Change Bio");
                 },
                 error: function (response) {
-                    toastr.error(response.d, "Error Upating Patient Bio");
+                    toastr.error(response.d, "Error Changing Bio");
                 }
             });
         }
@@ -1952,5 +2121,9 @@
             });
         }
 
+
     </script>
 </asp:Content>
+
+
+

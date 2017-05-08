@@ -300,7 +300,7 @@
         });
 
         $('#DateCollected').datepicker({
-            allowPastDates: false,
+            allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
 

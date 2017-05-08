@@ -3,6 +3,8 @@ using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using System;
 using System.Web;
+using Application.Presentation;
+using Interface.CCC;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -12,7 +14,7 @@ namespace IQCare.Web.CCC.UC
 
         //readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
-
+        protected IPatientMaritalStatusManager PatientMaritalStatusManager = (IPatientMaritalStatusManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
         protected void Page_Load(object sender, EventArgs e)
         {
             var myDate = DateTime.Now.Year;
@@ -69,9 +71,23 @@ namespace IQCare.Web.CCC.UC
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
                 //todo patientManagershould have the lookups resolved
-                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);//_lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
+                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.PatientType).ToUpper();
+                // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
-                lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(thisPatient.PersonId);
+                if (ptnMaritalStatus != null)
+                {
+                    lblmstatus.Text =
+                        LookupLogic.GetLookupNameById(ptnMaritalStatus.MaritalStatusId)
+                            .ToString()
+                            .ToUpper();
+                }
+                else
+                {
+                    lblmstatus.Text = "<span class='label label-danger'> N/A </span>";
+                }
+            
 
                 //    lblOtherNames.Text = "<strong></i>" + _utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName) + "</i></strong>";
 

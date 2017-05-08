@@ -60,11 +60,11 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void savePatientManagement(string phdp,string ARVAdherence,string CTXAdherence,string appointmentDate,string appointmentType,string diagnosis)
+        public void savePatientManagement(string workplan, string phdp,string ARVAdherence,string CTXAdherence,string diagnosis)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientManagement(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
+            patientEncounter.savePatientManagement(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), Session["AppUserId"].ToString(), workplan, ARVAdherence,CTXAdherence,phdp,diagnosis);
         }
 
         [WebMethod(EnableSession = true)]
@@ -190,7 +190,7 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[3] { row["Diagnosis"].ToString(), row["ManagementPlan"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                string[] i = new string[4] { row["Diagnosis"].ToString(), row["DisplayName"].ToString(), row["ManagementPlan"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
             }
             return rows;
@@ -331,6 +331,25 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList loadDiagnosis()
+        {
+            var result = LookupLogic.GetLookUpItemViewByMasterName("ICD10");
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var diagnosis = parser.Deserialize<List<KeyValue>>(result);
+
+            ArrayList rows = new ArrayList();
+
+            for (int i = 0; i < diagnosis.Count; i++)
+            {
+                string[] j = new string[2] { diagnosis[i].ItemId + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetCurrentRegimen()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
@@ -387,17 +406,33 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            //PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //ArrayList rows = new ArrayList();
+
+            //foreach (DataRow row in theDT.Rows)
+            //{
+            //    string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+            //    rows.Add(i);
+            //}
+            //return rows;
+
+            /////////////////////
+            var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var regimen = parser.Deserialize<List<KeyValue>>(result);
+
             ArrayList rows = new ArrayList();
 
-            foreach (DataRow row in theDT.Rows)
+            for (int i = 0; i < regimen.Count; i++)
             {
-                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
-                rows.Add(i);
+                string[] j = new string[2] { regimen[i].ItemId, regimen[i].DisplayName };
+                rows.Add(j);
             }
             return rows;
+
         }
 
         [WebMethod(EnableSession = true)]
@@ -610,15 +645,24 @@ namespace IQCare.Web.CCC.WebService
             if (adherenceScore == 0)
             {
                 adherenceRating = "Good";
-            }else if (adherenceScore >= 1 || adherenceScore <= 2)
+            }else if (adherenceScore >= 1 && adherenceScore <= 2)
             {
                 adherenceRating = "Fair";
-            }else if (adherenceScore >= 3 || adherenceScore <= 4)
+            }else if (adherenceScore >= 3 && adherenceScore <= 4)
             {
                 adherenceRating = "Poor";
             }
 
+            var history = patientAdherenceAssessment.GetActiveAdherenceAssessment(patientId);
+
+            if (history.Count > 0)
+            {
+                history[0].DeleteFlag = true;
+                patientAdherenceAssessment.UpdateAdherenceAssessment(history[0]);
+            }
+
             int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+
             if (result > 0)
             {
                 var lookUpLogic =  new LookupLogic();

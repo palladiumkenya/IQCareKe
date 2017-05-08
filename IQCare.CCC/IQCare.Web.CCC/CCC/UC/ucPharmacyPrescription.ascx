@@ -44,7 +44,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" />
                                     </div>                        
                                 </div> 
                                 <div class="col-md-3 form-group">                  
@@ -127,8 +127,8 @@
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>--%>
+                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>--%>
                         <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
@@ -148,13 +148,13 @@
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
-        if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
+        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
             drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
         }
-        else if (pmscm == "PM/SCM") {
+        else if (pmscm === "PM/SCM") {
             drugList(1);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
@@ -162,7 +162,7 @@
         else {
             drugList(0);
             $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', false);
         }
     });
 
@@ -311,7 +311,7 @@
                contentType: "application/json; charset=utf-8",
            
                success: function (data) {
-                   if(pmscmFlag == "1")
+                   if(pmscmFlag === "1")
                    {
                        var serverData = data.d;
                        var batchList = [];
@@ -356,6 +356,7 @@
        function selectRegimens(regimenLine)
        {
            var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
+           
            if(valSelected === "Select")
            {
                 $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
@@ -363,12 +364,14 @@
            else{
                $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
            }
-           
+
+           valSelected = valSelected.replace(/\s/g, '');
+
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetRegimensBasedOnRegimenLine',
                type: 'POST',
                dataType: 'json',
-               data: "{'RegimenLine':'" + regimenLine + "'}",
+               data: "{'RegimenLine':'" + valSelected + "'}",
                contentType: "application/json; charset=utf-8",
                success: function (data) {
                    var serverData = data.d;
@@ -393,6 +396,10 @@
                 var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
                 var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
                 var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+                
+                if (regimen === undefined)
+                    regimen = '0';
+                
 
                 var allAbbr = "";
                 ///////////////////////////////////////////////////////////////////
@@ -424,14 +431,17 @@
                 var sumAllAbbr = 0;
                 var sumSelectedRegimen = 0;
                 try {
+                    for (var i = 0; i < allAbbr.length; i++) {
+                        sumAllAbbr += allAbbr.charCodeAt(i);
+                    }
+                }
+                catch (err) { }
+
+                try {
                     var regExp = /\(([^)]+)\)/;
                     var matches = regExp.exec(regimenText);
 
                     var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
-
-                    for (var i = 0; i < allAbbr.length; i++) {
-                        sumAllAbbr += allAbbr.charCodeAt(i);
-                    }
 
                     for (var i = 0; i < selectedRegimen.length; i++) {
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
@@ -439,10 +449,18 @@
 
                 }
                 catch (err) { }
-
+           
+                
                 if (sumAllAbbr > 0) {
+                    if (regimenLine == "0")
+                    {
+                        toastr.error("Error", "Please select the Regimen Line");
+                        return;
+                    }
+                    
+
                     if (sumAllAbbr != sumSelectedRegimen) {
-                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                         return;
                     }
                     else {
@@ -535,17 +553,21 @@
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    var serverData = data.d;
-                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
-                    selectRegimens(serverData[0][0]);
+                    try{
+                        var serverData = data.d;
+                        $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                        selectRegimens(serverData[0][0]);
 
-                    function waitForRegimens(callback) {
-                        window.setTimeout(function () {  //acting like this is an Ajax call
-                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
-                        }, 1000);
+                        function waitForRegimens(callback) {
+                            window.setTimeout(function () {  //acting like this is an Ajax call
+                                $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                            }, 1000);
+                        }
+
+                        waitForRegimens();
                     }
-
-                    waitForRegimens();
+                    catch(err){}
+                    
 
                 },
                 error: function (data) {

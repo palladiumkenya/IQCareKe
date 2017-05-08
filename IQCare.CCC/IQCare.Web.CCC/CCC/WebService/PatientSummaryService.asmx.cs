@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using Entities.PatientCore;
 using IQCare.CCC.UILogic;
 using Microsoft.JScript;
 using Convert = System.Convert;
@@ -97,12 +98,22 @@ namespace IQCare.Web.CCC.WebService
                 msg += "<p>New Treatment Supporter Person Added Successfully!</p>";
 
                 var treatmentSupporter = new PatientTreatmentSupporterManager();
-                var treatment = treatmentSupporter.GetPatientTreatmentSupporter(personId);
+                //var treatment = treatmentSupporter.GetPatientTreatmentSupporter(personId);
 
-                if (treatment.Count > 0)
+                var treatmentSupporterLookup = new PatientTreatmentSupporterLookupManager();
+                var treatmentlookup = treatmentSupporterLookup.GetAllPatientTreatmentSupporter(personId);
+
+                if (treatmentlookup.Count > 0)
                 {
-                    treatment[0].DeleteFlag = true;
-                    treatmentSupporter.UpdatePatientTreatmentSupporter(treatment[0]);
+                    //treatmentlookup[0].DeleteFlag = true;
+                    PatientTreatmentSupporter treatment = new PatientTreatmentSupporter();
+                    treatment.DeleteFlag = true;
+                    treatment.Id = treatmentlookup[0].Id;
+                    treatment.MobileContact = treatmentlookup[0].MobileContact;
+                    treatment.SupporterId = treatmentlookup[0].SupporterId;
+                    treatment.PersonId = treatmentlookup[0].PersonId;
+
+                    treatmentSupporter.UpdatePatientTreatmentSupporter(treatment);
                 }
 
                 var result = treatmentSupporter.AddPatientTreatmentSupporter(personId, personTreatmentSupporterId,

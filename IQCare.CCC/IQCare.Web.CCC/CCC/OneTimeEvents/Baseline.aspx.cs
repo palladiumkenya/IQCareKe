@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
+using Interface.CCC;
 using Interface.CCC.Enrollment;
 using Interface.CCC.Lookup;
 using Interface.CCC.Patient;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
@@ -45,6 +47,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            IPatientVitals patientVitals  = (IPatientVitals)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientVitals, BusinessProcess.CCC");
 
             List<LookupCounty> ct = mgr.GetLookupCounties();
 
@@ -82,6 +85,18 @@ namespace IQCare.Web.CCC.OneTimeEvents
                     InitiationRegimen.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
                 }
             }
+
+            /* Get patientBaseline Vitals */
+            var ptnVitals = patientVitals.GetPatientVitalsBaseline(PatientId);
+            if (ptnVitals != null)
+            {
+                BaselineWeight.Text = Convert.ToString(ptnVitals.Weight);
+                BaselineMUAC.Text = Convert.ToString(ptnVitals.Muac);
+                BaselineHeight.Text = Convert.ToString(ptnVitals.Height);
+                BaselineBMI.Text = Convert.ToString(ptnVitals.BMI);
+
+            }
+
         }
     }
 }

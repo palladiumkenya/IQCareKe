@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.Context;
 using Entities.CCC.Lookup;
-using DataAccess.CCC.Repository.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {

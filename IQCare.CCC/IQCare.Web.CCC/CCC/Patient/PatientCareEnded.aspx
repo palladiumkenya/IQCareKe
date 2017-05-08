@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientCareEnded.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientCareEnded" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
     <uc:PatientDetails runat="server" />
@@ -52,7 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux form-group" id="DateOfDeath">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DeathDate"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DeathDates"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -289,7 +291,7 @@
 
     </div>
 
-    
+        <uc:ucExtruder runat="server" ID="ucExtruder" />
 </div>
     
     <script type="text/javascript">
@@ -314,31 +316,59 @@
 
          $("#DateOfDeath").datepicker('disable');
 
-         $('#DateOfDeath').on('changed.fu.datepicker', function (evt, date) {
 
+        /* validate future dates for date of death */
+
+         $('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
+        
              var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+            
              futuredate= moment(dateofDeath).isAfter(today);
              if (futuredate) {
-                 toastr.error("Future Dates NOT allowed!");
+                $('#DeathDates').val('');
+                 toastr.error("Future Dates not allowed !");                
                  return false;
              }
          });
 
-            $('#DateOfDeath').on('changed.fu.datepicker',function(evt, date) {
+            /* validate future dates for date of exit */
+         $('#CareEndDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
+        
+             var careEndDate = $('#CareEndDate').datepicker('getDate');
+             var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+            
+             futuredate= moment(careEndDate).isAfter(today);
+             if (futuredate) {
+               
+                 toastr.error("Future dates not allowed!");     $('#AppointmentDate').val('');            
+                 return false;
+             }
 
-                var exitDate = $("#CareEndDate").datepicker('getDate');
-                var dateofDeath = $('#DateOfDeath').datepicker('getDate');
-                futuredate= moment(exitDate).isAfter(today);
-                if (futuredate) {
-                    toastr.error("Future Dates NOT allowed!");
-                    return false;
-                }
-                futuredate= moment(exitDate).isBefore(dateofDeath);
-                if (futuredate) {
+             futuredate= moment(exitDate).isBefore(dateofDeath);
+             if (futuredate) {
+                  $('#AppointmentDate').val('');
                     toastr.error("Exit Date CANNOT be before date of death");
                     return false;
                 }
-            });
+         });
+
+         //$('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker',function(evt, date) {
+
+         //       var exitDate = $("#CareEndDate").datepicker('getDate');
+         //       var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+
+         //       futuredate= moment(dateofDeath).isAfter(today);
+         //       if (futuredate) {
+         //           $('#DateOfDeath').val('');
+         //           toastr.error("Future Dates NOT allowed for Date of Death!");
+         //           return false;
+         //       }
+         //       futuredate= moment(exitDate).isBefore(dateofDeath);
+         //       if (futuredate) {
+         //           toastr.error("Exit Date CANNOT be before date of death");
+         //           return false;
+         //       }
+         //   });
 
             /*careenging reason */
             $("#<%=Reason.ClientID%>").change(

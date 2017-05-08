@@ -19,14 +19,13 @@ namespace Entities.CCC.Lookup
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
         public string LabName { get; set; }
-        public int PatientMasterVisitId { get; set; }
-        //[ForeignKey("patientMasterVisitId")]
-        //public virtual PatientMasterVisit PatientMasterVisit { get; set; }
+        public int PatientMasterVisitId { get; set; }       
         public DateTime SampleDate { get; set; }
         public string Reasons { get; set; }
         public string Results { get; set; }
         public decimal? ResultValues { get; set; }
         public int LabTestId { get; set; }
+        public int LabOrderTestId { get; set; }
         public int FacilityId { get; set; }
 
 

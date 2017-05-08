@@ -30,9 +30,9 @@
         var gender = "<%=Gender%>";
   
 
-        if (gender === 'male') {
+        if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");
-        } else if (gender === 'female') {
+        } else if (gender === 'Female') {
              $("#divBtnVitals").show("fast");
         }
 

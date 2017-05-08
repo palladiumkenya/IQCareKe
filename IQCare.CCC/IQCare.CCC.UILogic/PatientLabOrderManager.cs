@@ -100,7 +100,8 @@ namespace IQCare.CCC.UILogic
                                             CreatedBy = userId,
                                             Results = pending,
                                             LabOrderId = orderId,
-                                            LabTestId = t.LabNameId,
+                                            LabTestId = t.LabNameId,  //parameter
+                                            LabOrderTestId = testId,  //uniquely identifies a particular test
                                             FacilityId = facilityID
                             };
 

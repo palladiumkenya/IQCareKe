@@ -44,8 +44,8 @@ namespace IQCare.Web.CCC.UC
                 {
                     lblStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
                 }
-                string femaleIcon= "<i class='fa fa-female' aria-hidden='true'></i>";
-                string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
+               // string femaleIcon= "<i class='fa fa-female' aria-hidden='true'></i>";
+                //string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
                 //if (x.Sex == 62)
                 //{

@@ -190,15 +190,6 @@
 
             <div class="col-md-6 col-xs-12 col-sm-12">
                  <div class="col-md-12  form-group"><label class="control-label text-primary pull-left text-muted">Blood Pressure</label></div>
-            
-                  <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
-                     <div class="input-group">
-                         <span class="input-group-addon">Diastolic</span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
-                         <span class="input-group-addon">mm[Hg]</span>
-                     </div>
-                      <p class="help-block pull-left"><strong>Normal values: (140-80)</strong></p>
-                  </div>
                 
                   <div class="col-md-12 col-xs-12 col-sm-12">
                     <div class="input-group">
@@ -206,9 +197,18 @@
                          <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." Type="Number" data-parsley-range="[60, 200]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
                          <span class="input-group-addon">mm[Hg]</span>
                     </div>
-                    <label class="help-block pull-left"><strong>Normal values: (140-80)</strong></label>
+                    <label class="help-block pull-left"><strong>Range: (60-200)</strong></label>
                  </div>
 
+                  <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
+                     <div class="input-group">
+                         <span class="input-group-addon">Diastolic</span>
+                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." Type="Number" data-parsley-range="[30, 110]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         <span class="input-group-addon">mm[Hg]</span>
+                     </div>
+                      <p class="help-block pull-left"><strong>Range: (30-110)</strong></p>
+                  </div>
+                
             </div> 
             
             <div class="col-md-6 col-xs-12 col-sm-12">
@@ -295,7 +295,14 @@
 
         $("#btnSaveTriage").click(function() {
             if ($('#vitalsform').parsley().validate()) {
-                addPatientVitals();
+                var dob = $("#<%=PersonDoB.ClientID%>").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Visit date cannot be a future date.");
+                    return false;
+                } 
+                else {
+                    addPatientVitals();                    
+                }
             } else {
                 return false;
             }
@@ -337,9 +344,10 @@
         //            dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
         //       });
         var bmiz = $("#<%=txtBMIz.ClientID%>").val();
-        var weightForAge = $("#<%=txtWAz%>").val();
-         var weightForHeight = $("#<%=txtWHz%>").val();
-         var dateOfVisit = moment($('#myVisitDate').datepicker('getDate').format('DD-MMM-YYYY'));
+        var weightForAge = $("#<%=txtWAz.ClientID%>").val();
+         var weightForHeight = $("#<%=txtWHz.ClientID%>").val();
+        var dateOfVisit = $('#myVisitDate').datepicker('getDate');
+        dateOfVisit = moment(dateOfVisit).format('DD-MMM-YYYY');
         var bmi = calcBMI();
       
         if (bmi === '') { bmi = 0 }

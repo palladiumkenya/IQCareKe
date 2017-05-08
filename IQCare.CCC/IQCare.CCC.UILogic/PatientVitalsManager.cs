@@ -85,5 +85,20 @@ namespace IQCare.CCC.UILogic
                 throw;
             }           
         }
+
+        public PatientVital GetPatientVitalsBaseline(int patientId)
+        {
+            try
+            {
+                var ptnVitals = _vitals.GetPatientVitalsBaseline(patientId);
+                return ptnVitals;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+              
+        }
     }
 }

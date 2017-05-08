@@ -1,8 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientLabs.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientLabs" %>
-
+<div class="col-md-12">  
                         <div class="col-md-6">  
                          <div class="col-md-12 bs-callout bs-callout-danger">
-                                <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                           
+                                <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4> 
+                             <div class="col-md-12 form-group ">
+                              <div id ="tblPendingLabsScrollable" style="overflow: scroll; height:150px;"">                          
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                     
                                                            <thead>
@@ -20,10 +22,13 @@
                                                        <tbody>                        
                                                   </tbody>                  
                                                 </table>
+                                             </div>
                                          <div class="col-md-3 pull-right ">
                                       <asp:LinkButton runat="server" ID="addResults" ClientIDMode="Static" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle "> Add Results</asp:LinkButton>
 
-                                        </div>
+                                        </div> 
+
+                            </div>    
                             </div>    
         
                 
@@ -32,9 +37,9 @@
                          <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>    
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
-                                        <div class="col-md-12 form-group">
-                                              <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">
-                                               
+                                        <div class="col-md-12 form-group ">
+                                               <div id ="tblCompleteLabsScrollable" style="overflow: scroll; height:200px;"">
+                                              <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">                                               
                                                    <thead>
                                                                 <tr>
                                                                     <th><span class="text-primary">#</span></th>
@@ -46,11 +51,13 @@
                                                                 </tr>
                                                             </thead>
                                                   
-                                                <tbody>                        
-                                                </tbody>                  
+                                                        <tbody> 
+                                                            
+                                                     </tbody>                       
                                                 </table>
+                                         </div>
 
-                        </div>
+                               </div>
                     </div>
 
                        </div>
@@ -67,7 +74,7 @@
                                                        <div class="col-md-4"><label class="control-label pull-left">Select Lab</label></div>
                                                       <div class="col-md-8">
                                                          
-                                                          <asp:TextBox runat="server" Width="230" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
+                                                          <asp:TextBox runat="server" Width="100%" ID="labTestTypes" data-provide="typeahead" CssClass="form-control input-sm pull-right" ClientIDMode="Static" placeholder="type to select...."></asp:TextBox>
                                                           
                                                       </div>
                                                   </div>
@@ -228,10 +235,11 @@
                         </div>
                     </div>
                 </div>
-
+    </div>
                 <div class="col-md-12">
                     <hr />
                 </div>
+<div class="col-md-12">
                 <div class="col-md-7"></div>
                 <div class="col-md-5">
                     <div class="col-md-3">
@@ -245,7 +253,8 @@
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
                     <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>
+                        <%--<asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>--%>
+                        <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
                     </div>
                 </div>
 
@@ -259,9 +268,6 @@
         var facilityId = '<%=AppLocationId%>';
         var moduleId = '<%=ModuleId%>';
       
-        var jan_vl = "";
-        var march_vl = "";
-        
         $(document).ready(function () {           
 
 
@@ -293,18 +299,20 @@
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
                         var sampleDate = day + "-" + month + "-" + year;
-                      
+                          
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
                    
                     });
-                  
+                               
+                    $("#tblPrevLabs td").parent().remove();
                     $('#tblPrevLabs').append(table);
                     $('#tblPrevLabs tr:not(:first-child').each(function(idx){
                         $(this).children(":eq(0)").html(idx + 1);
                     });
-
-
-                },
+                    $('#tblCompleteLabsScrollable').append(tblPrevLabs);
+                    $('#tblCompleteLabsScrollable').scroll();
+                   
+                    },
 
                 error: function (msg) {
 
@@ -340,96 +348,20 @@
                      
                     });
 
-                  
+                    $("#tblPendingLabs td").parent().remove();
                     $('#tblPendingLabs').append(table);
                     $('#tblPendingLabs tr:not(:first-child').each(function(idx){
                     $(this).children(":eq(0)").html(idx + 1);
                     });
-
+                    $('#tblPendingLabsScrollable').append(tblPendingLabs);
+                    $('#tblPendingLabsScrollable').scroll();
                 },
 
                 error: function (msg) {
 
                     alert(msg.responseText);
                 }
-            });
-            $.ajax({
-                type: "POST",
-                url: "../WebService/LabService.asmx/GetvlTests",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function (response) {
-                    //console.log(response.d);
-                    var itemList = JSON.parse(response.d);
-                    var table = '';
-                    //itemList.forEach(function (item) {
-                    $.each(itemList, function (index, itemList) {
-
-                        var dateString = itemList.SampleDate.substr(6);
-                        var currentTime = new Date(parseInt(dateString));
-                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
-                        var month = monthNames[currentTime.getMonth()];    ;
-                        var day = currentTime.getDate();
-                        var year = currentTime.getFullYear();
-                        var sampleDate = day + "-" + month + "-" + year;
-                        // alert(date);
-
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
-                    });
-
-                    $('#tblVL').append(table);
-                    $('#tblVL tr:not(:first-child').each(function(idx){
-                        $(this).children(":eq(0)").html(idx + 1);
-                    });
-                },
-
-                error: function (msg) {
-
-                    alert(msg.responseText);
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "../WebService/LabService.asmx/GetPendingvlTests",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                cache: false,
-                success: function (response) {
-                    // console.log(response.d);
-                    var itemList = JSON.parse(response.d);
-                    var table = '';
-                    //itemList.forEach(function (item) {
-                    $.each(itemList, function (index, itemList) {
-
-                        var dateString = itemList.SampleDate.substr(6);
-                        var currentTime = new Date(parseInt(dateString));
-                        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];                       
-                        var month = monthNames[currentTime.getMonth()];    
-                        var day = currentTime.getDate();
-                        var year = currentTime.getFullYear();
-                        var sampleDate = day + "-" + month + "-" + year;
-                        // alert(date);
-
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.Results + '</td></tr>';
-                    });
-
-                    $('#tblVlpending').append(table);
-                    $('#tblVlpending tr:not(:first-child').each(function(idx){
-                        $(this).children(":eq(0)").html(idx + 1);
-                    });
-                },
-
-                error: function (msg) {
-
-                    alert(msg.responseText);
-                }
-            });
+            });          
 
             var labtests = [];
             var input = document.getElementById("labTestTypes");
@@ -447,7 +379,7 @@
                     contentType: "application/json; charset=utf-8",
            
                     success: function (data) {
-                        var serverData = JSON.parse(data.d);
+                     var serverData = JSON.parse(data.d);
                         //console.log(serverData);
                         
                         var obj = [];

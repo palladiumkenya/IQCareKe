@@ -53,13 +53,13 @@ namespace IQCare.CCC.UILogic
             int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, userID, phyExam, generalExamList);
         }
 
-        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, string phdp, string diagnosis)
+        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string userID, string workplan, string ARVAdherence, string CTXAdherence, string phdp, string diagnosis)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var diag = parser.Deserialize<List<Diagnosis>>(diagnosis);
             List<string> PHDPList = phdp.Split(',').ToList();
-            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID,ARVAdherence,CTXAdherence,nextAppointment,appointmentType, PHDPList, diag);
+            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID, userID, workplan, ARVAdherence,CTXAdherence, PHDPList, diag);
         }
 
         public PresentingComplaintsEntity loadPatientEncounter(string PatientMasterVisitID, string PatientID)
@@ -173,6 +173,21 @@ namespace IQCare.CCC.UILogic
             List<PharmacyFields> drg = patientEncounter.getPharmacyFields(PatientMasterVisitID);
 
             return drg;
+        }
+
+        public void getPharmacyTreatmentProgram(DropDownList ddl)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<KeyValue> kv = patientEncounter.getPharmacyTreatmentProgram();
+
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (kv != null && kv.Count > 0)
+            {
+                foreach (var item in kv)
+                {
+                    ddl.Items.Add(new ListItem(item.DisplayName, item.ItemId));
+                }
+            }
         }
 
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
@@ -361,18 +376,19 @@ namespace IQCare.CCC.UILogic
 
         public ZScores getZScores(string patientId, double age, string gender, double height, double weight)
         {
-            double bmi = 0;
-       
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
 
             ZScoresParameters zsParam = new ZScoresParameters();
             ZScores zsValues = new ZScores();
 
-            zsParam = patientEncounter.GetZScoreValues(patientId, gender, height.ToString());
-            
-            //////weight for Age//////////
             if (age < 15)
             {
+                double bmi = 0;
+
+                zsParam = patientEncounter.GetZScoreValues(patientId, gender, height.ToString());
+
+                //////weight for Age//////////
+
                 if (zsParam != null)
                 {
                     //Weight for age calculation
@@ -386,12 +402,9 @@ namespace IQCare.CCC.UILogic
                 {
                     //lblWAClassification.Text = "Out of range";
                 }
-            }
-            
 
-            ///////Weight for height calculation//////////////////////////////
-            if (age < 15)
-            {
+                ///////Weight for height calculation//////////////////////////////
+
                 if (height <= 120 && height >= 45)
                 {
                     try
@@ -407,19 +420,17 @@ namespace IQCare.CCC.UILogic
                         }
                     }
 
-                    catch (Exception )
+                    catch (Exception)
                     {
 
                     }
                 }
-            }
 
-            ////BMIz (Z-Score Calculation)////////////////////////////
-            if (age <= 15)
-            {
+                ////BMIz (Z-Score Calculation)////////////////////////////
+
                 if (zsParam != null)
                 {
-                    
+
                     if (height != 0 && weight != 0)
                         bmi = weight / ((height / 100) * (height / 100));
                     else
@@ -433,10 +444,12 @@ namespace IQCare.CCC.UILogic
                     //lblBMIz.Text = string.Format("{0:f2}", BMIz);
 
                 }
-                
+
+
             }
 
             return zsValues;
+            
             /////////////////////////////////////////////////////////
 
             ///////Height for age calculation/////////////////////////////
