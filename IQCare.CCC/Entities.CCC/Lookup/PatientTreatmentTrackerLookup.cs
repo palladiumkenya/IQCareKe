@@ -8,7 +8,7 @@ using System.Text;
 namespace Entities.CCC.Lookup
 {
     [Serializable]
-    [Table("ARVTreatmentTracker")]
+    [Table("PatientTreatmentTrackerView")]
     public class PatientTreamentTrackerLookup
     {
         [Key]
@@ -24,7 +24,9 @@ namespace Entities.CCC.Lookup
         public int? DrugId { get; set; }
         public DateTime? RegimenStatusDate { get; set; }
         public int TreatmentStatusId { get; set; }
+        public string TreatmentStatus { get; set; }
         public int TreatmentStatusReasonId { get; set; }
+        public string TreatmentReason { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
 

@@ -10,6 +10,7 @@ using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
+using Interface.CCC.Lookup;
 
 namespace DataAccess.CCC.Interface
 {
@@ -26,6 +27,7 @@ namespace DataAccess.CCC.Interface
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
         IPatientBaselineLookupRepository PatientBaselineLookupRepository { get; }
         ILookupFacilityStatisticsRepository LookupFacilityStatisticsRepository { get; }
+        IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository { get; } 
         //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
 
         /* person and patient */

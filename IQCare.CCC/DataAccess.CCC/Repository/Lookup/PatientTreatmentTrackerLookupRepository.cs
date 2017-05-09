@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
 using DataAccess.Context;
@@ -13,33 +13,50 @@ namespace DataAccess.CCC.Repository.Lookup
 
         public PatientTreatmentTrackerLookupRepository() : this(new LookupContext())
         {
+
         }
 
         public PatientTreatmentTrackerLookupRepository(LookupContext context) : base(context)
        {
             _context = context;
 
-        }
+       }
 
         public PatientTreamentTrackerLookup GetCurrentPatientRegimen(int patientId)
         {
-            // var patientRegimen=_context.PatientTreamentTrackerLookups.Find(x=>x.)
-            throw new NotImplementedException();
+            
+            var patientRegimen =
+                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus =="StartTreatment")
+                    .OrderBy(x => x.Id)
+                    .FirstOrDefault();
+            return patientRegimen;
         }
 
         public List<PatientTreamentTrackerLookup> GetPatientTreatmentInterrupList(int patientId)
         {
-            throw new NotImplementedException();
+            var interruptions =
+                _context.PatientTreamentTrackerLookups.Where(
+                        x => x.PatientId == patientId & x.TreatmentStatus == "Drug Interactions")
+                    .OrderBy(x => x.Id)
+                    .ToList();
+            return interruptions;
         }
 
         public List<PatientTreamentTrackerLookup> GetPatientTreatmentSubstitutionList(int patientId)
         {
-            throw new NotImplementedException();
+            var substitution =
+                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Sub")
+                    .OrderBy(x => x.Id)
+                    .ToList();
+            return substitution;
         }
 
         public List<PatientTreamentTrackerLookup> GetPatientTreatmentSwitchesList(int patientId)
         {
-            throw new NotImplementedException();
+            var switches =
+                _context.PatientTreamentTrackerLookups.Where(
+                    x => x.PatientId == patientId & x.TreatmentStatus == "DrugSwitches").OrderBy(x => x.Id).ToList();
+            return switches;
         }
     }
 }
