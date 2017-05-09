@@ -259,7 +259,7 @@
             <div class="col-md-3">
                 <div class="col-md-12"><label id="enrollmentLabel" class="required pull-left  control-label">Enrollment No.#</label></div>
                 <div class="col-md-12" style="padding-left: 0;">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-min="5"></asp:TextBox>
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-minlength="5"></asp:TextBox>
                 </div>
             </div>
 
