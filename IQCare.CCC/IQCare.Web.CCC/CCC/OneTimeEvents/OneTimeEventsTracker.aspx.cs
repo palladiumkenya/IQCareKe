@@ -9,7 +9,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
         {
             try
             {
-                int patientId = int.Parse(Session["patientId"].ToString());
+                int patientId = int.Parse(Session["PatientPK"].ToString());
 
                 var patientLookUpManager = new PatientLookupManager();
                 var patientlookup = patientLookUpManager.GetPatientDetailSummary(patientId);

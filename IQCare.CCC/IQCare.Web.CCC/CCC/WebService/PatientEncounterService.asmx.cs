@@ -631,7 +631,7 @@ namespace IQCare.Web.CCC.WebService
             int adherenceScore = 0;
             string adherenceRating = null;
 
-            int patientId = Convert.ToInt32(Session["PatientId"].ToString());
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
             int createdBy = Convert.ToInt32(Session["AppUserId"].ToString());
             bool feel_Better = Convert.ToBoolean(Convert.ToInt32(feelBetter));

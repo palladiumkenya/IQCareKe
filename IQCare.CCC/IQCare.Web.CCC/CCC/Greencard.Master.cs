@@ -45,7 +45,7 @@ namespace IQCare.Web.CCC
 
         protected int PatientId
         {
-            get { return Convert.ToInt32(Session["patientId"]); }
+            get { return Convert.ToInt32(Session["PatientPK"]); }
         }
 
         protected int PatientMasterVisitId
@@ -83,7 +83,7 @@ namespace IQCare.Web.CCC
             if (Request.QueryString["reset"] != null)
             {
                 Response.Clear();
-                Session["patientId"] = 0;
+                Session["PatientPK"] = 0;
             }
             //Create New sessions:
             Page.Header.DataBind();

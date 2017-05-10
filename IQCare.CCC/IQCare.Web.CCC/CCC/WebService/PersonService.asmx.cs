@@ -341,7 +341,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
-                var PatientId = Convert.ToInt32(Session["patientId"]);
+                var PatientId = Convert.ToInt32(Session["PatientPK"]);
 
                 if (PersonId > 0 || PatientId > 0)
                 {

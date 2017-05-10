@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.UC
             var myDate = DateTime.Now.Year;
             var myDateMonth = DateTime.Now.Month;
 
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
