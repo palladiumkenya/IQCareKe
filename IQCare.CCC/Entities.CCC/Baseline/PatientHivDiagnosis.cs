@@ -22,7 +22,8 @@ namespace Entities.CCC.Baseline
         public DateTime HivDiagnosisDate { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public int EnrollmentWhoStage { get; set; }
-        public DateTime ArtInitiationDate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime? ArtInitiationDate { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
 

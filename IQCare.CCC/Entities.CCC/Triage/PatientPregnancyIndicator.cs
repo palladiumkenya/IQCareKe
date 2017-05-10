@@ -24,6 +24,7 @@ namespace Entities.CCC.Triage
         public int PatientMasterVisitId { get; set; }
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
+        public DateTime? VisitDate { get; set; }
         [Required]
         public DateTime LMP { get; set; }
 
@@ -35,9 +36,9 @@ namespace Entities.CCC.Triage
         public int PregnancyStatusId { get; set; }
 
         [Required]
-        public bool ANCProfile { get; set; }
+        public int AncProfile { get; set; }
 
-        public DateTime? ANCProfileDate { get; set; }
+        public DateTime? AncProfileDate { get; set; }
 
 
     }

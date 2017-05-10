@@ -18,9 +18,10 @@ namespace Entities.CCC.Screening
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
-        public int ScreeningTypeId { get; set; }
-        public int ScreeningDone { get; set; }
-        public DateTime ScreeningDate { get; set; }
+        public DateTime? VisitDate { get; set; }
+        public int? ScreeningTypeId { get; set; }
+        public int? ScreeningDone { get; set; }
+        public DateTime? ScreeningDate { get; set; }
         public int ScreeningCategoryId { get; set; }
         public int   ScreeningValueId { get; set; }
         public string Comment { get; set; }

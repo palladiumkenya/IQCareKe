@@ -73,7 +73,7 @@ namespace IQCare.Web.CCC.OneTimeEvents
 
         private void GetSessionDetails()
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             PatientAge = Convert.ToInt32(HttpContext.Current.Session["Age"]);

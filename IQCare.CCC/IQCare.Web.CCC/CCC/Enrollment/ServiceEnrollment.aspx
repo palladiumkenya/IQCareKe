@@ -124,7 +124,7 @@
                 <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
                     <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[7,8]" />
                 </div>
             </div>
 
@@ -259,7 +259,7 @@
             <div class="col-md-3">
                 <div class="col-md-12"><label id="enrollmentLabel" class="required pull-left  control-label">Enrollment No.#</label></div>
                 <div class="col-md-12" style="padding-left: 0;">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-min="5"></asp:TextBox>
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-minlength="5"></asp:TextBox>
                 </div>
             </div>
 
@@ -598,8 +598,15 @@
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
-                        toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx")%>';
+                        var messageResponse = JSON.parse(response.d);
+
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg , "Patient Enrollment");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Enrollment");
+                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx")%>';
+                        }
                     },
                     error: function (response) {
                         //generate('error', response.d);

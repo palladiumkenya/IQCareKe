@@ -8,10 +8,10 @@ namespace IQCare.CCC.UILogic.Screening
 {
     public class PatientScreeningManager 
     {
-        private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientScreeningManager, BusinessProcess.CCC");
+        private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
 
 
-        public int AddPatientScreening(int patientId,int patientMasterVisitid,int screeningTypeId,int screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
+        public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,int screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
         {
             try
             {
@@ -19,6 +19,7 @@ namespace IQCare.CCC.UILogic.Screening
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitid,
+                    VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
                     ScreeningDone = screeningDone,
                     ScreeningDate = screeningDate,
@@ -75,13 +76,14 @@ namespace IQCare.CCC.UILogic.Screening
             }
         }
 
-        public int UpdatePatientScreening(int Id, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
+        public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
             {
                 var PS = new PatientScreening()
                 {
-                    Id = Id,
+                    Id = id,
+                    VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
                     ScreeningDone = screeningDone,
                     ScreeningDate = screeningDate,

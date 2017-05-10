@@ -103,9 +103,11 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-12">
                             <hr />
                         </div>
+
                         <div class="col-md-12 col-xs-12 col-sm-12">
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
                                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Booked:</asp:Label></h5></div>
@@ -144,7 +146,7 @@
         </div><!-- .col-md-8 -->
         <div class="col-md-4 col-xs-12 col-xs-12">
             <div class="col-md-12 label label-info">
-                <label class="label label-info pull-left fa fa-line-chart"> Facility Viral Load Order/Results Tracker</label>
+               <h5><label class="label label-info pull-left fa fa-line-chart fa-2x"> Facility Viral Load Order/Results Tracker</label></h5> 
             </div>
             <div class="col-md-12"><hr /></div>
             <div class="col-md-12">
@@ -180,7 +182,7 @@
     <div class="col-md-12 col-xs-12 col-sm-12">
          <div class="col-md-4 col-xs-12 col-sm-12">
                 <div class="col-md-12 label label-info">
-                  <h5><label class="label label-info pull-left fa fa-bar-chart "> Facility Summary </label></h5>
+                  <h5><label class="label label-info pull-left fa fa-bar-chart fa-2x"> Facility Summary </label></h5>
                 </div>
                 <div class="col-md-12" style="padding-bottom:2%"></div>
                 <div class="col-md-12">
@@ -231,7 +233,7 @@
          
              <div class="col-md-4 col-xs-12 col-sm-12">
                 <div class="col-md-12 label label-info">
-                  <h5><label class="label label-info pull-left fa fa-pie-chart  fa-1x"> Care Ending Summary </label></h5>
+                  <h5><label class="label label-info pull-left fa fa-pie-chart fa-2x"> Care Ending Summary </label></h5>
                 </div>
                 <div class="col-md-12" style="padding-bottom:2%"></div>
                 <div class="col-md-12">

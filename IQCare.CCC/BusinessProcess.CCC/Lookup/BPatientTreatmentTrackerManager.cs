@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
@@ -14,6 +15,16 @@ namespace BusinessProcess.CCC.Lookup
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var regimen = unitOfWork.PatientTreatmentTrackerLookupRepository.GetCurrentPatientRegimen(patientId);
+                unitOfWork.Dispose();
+                return regimen;
+            }
+        }
+
+        public PatientTreamentTrackerLookup GetPatientBaselineRegimenLookup(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var regimen = unitOfWork.PatientTreatmentTrackerLookupRepository.GetPatientbaselineRegimenLookup(patientId);
                 unitOfWork.Dispose();
                 return regimen;
             }
@@ -52,5 +63,6 @@ namespace BusinessProcess.CCC.Lookup
 
             }
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Interface.Lookup;
@@ -26,9 +27,18 @@ namespace DataAccess.CCC.Repository.Lookup
         {
             
             var patientRegimen =
-                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus =="StartTreatment")
-                    .OrderBy(x => x.Id)
+                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus =="Start Treatment")
+                    .OrderByDescending(x => x.Id)
                     .FirstOrDefault();
+            return patientRegimen;
+        }
+
+        public PatientTreamentTrackerLookup GetPatientbaselineRegimenLookup(int patientId)
+        {
+            var patientRegimen =
+                 _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Start Treatment")
+                     .OrderBy(x => x.Id)
+                     .FirstOrDefault();
             return patientRegimen;
         }
 

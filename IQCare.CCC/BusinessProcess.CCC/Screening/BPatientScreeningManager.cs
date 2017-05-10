@@ -16,68 +16,69 @@ namespace BusinessProcess.CCC.Screening
 
         public int AddPatientScreening(PatientScreening a)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientScreeningRepository.Add(a);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientScreeningRepository.Add(a);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public int UpdatePatientScreening(PatientScreening u)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PS = _unitOfWork.PatientScreeningRepository.FindBy(
+                var ps = unitOfWork.PatientScreeningRepository.FindBy(
                     x => x.PatientId == u.PatientId & !x.DeleteFlag)
                     .FirstOrDefault();
-                if (PS != null)
+                if (ps != null)
                 {
-                    PS.ScreeningTypeId = u.ScreeningTypeId;
-                    PS.ScreeningDone = u.ScreeningDone;
-                    PS.ScreeningDate = u.ScreeningDate;
-                    PS.ScreeningCategoryId = u.ScreeningCategoryId;
-                    PS.ScreeningValueId = u.ScreeningValueId;
-                    PS.Comment = u.Comment;
+                    ps.VisitDate = u.VisitDate;
+                    ps.ScreeningTypeId = u.ScreeningTypeId;
+                    ps.ScreeningDone = u.ScreeningDone;
+                    ps.ScreeningDate = u.ScreeningDate;
+                    ps.ScreeningCategoryId = u.ScreeningCategoryId;
+                    ps.ScreeningValueId = u.ScreeningValueId;
+                    ps.Comment = u.Comment;
                 }
-                _unitOfWork.PatientScreeningRepository.Update(PS);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientScreeningRepository.Update(ps);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
-        public int DeletePatientScreening(int Id)
+        public int DeletePatientScreening(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PS = _unitOfWork.PatientScreeningRepository.GetById(Id);
-                _unitOfWork.PatientScreeningRepository.Remove(PS);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var ps = unitOfWork.PatientScreeningRepository.GetById(id);
+                unitOfWork.PatientScreeningRepository.Remove(ps);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public List<PatientScreening> GetPatientScreening(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var screeningList = _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-                _unitOfWork.Dispose();
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
                 return screeningList;
             }
         }
 
         public int CheckIfPatientScreeningExists(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PS = _unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                var PS = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                       .Select(x => x.Id)
                       .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return Convert.ToInt32(PS);
             }
         }
