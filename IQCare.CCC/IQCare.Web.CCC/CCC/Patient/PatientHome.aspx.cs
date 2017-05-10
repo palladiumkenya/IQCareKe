@@ -227,7 +227,7 @@ namespace IQCare.Web.CCC.Patient
                     {
                         lblDateOfARTInitiation.Text = "<span class='label label-danger'> NO dispensing</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
-                        lblCurrentRegimen.Text = "< span class='label label-danger'>PATIENT NOT ON ARVS</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVS</span>";
 
                     }
                 }
