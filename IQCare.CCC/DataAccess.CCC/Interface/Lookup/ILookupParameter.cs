@@ -8,7 +8,7 @@ namespace DataAccess.CCC.Interface.Lookup
 {
     public interface ILookupParameter
     {
-        LookupTestParameter GetTestParameter(int LabTestId);
+        List<LookupTestParameter>GetTestParameter(int LabTestId);
        List<LookupTestParameter> FindBy(Func<LookupTestParameter, bool> p);
     }
 }

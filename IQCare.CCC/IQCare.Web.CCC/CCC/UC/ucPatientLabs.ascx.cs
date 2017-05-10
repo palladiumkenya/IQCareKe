@@ -30,7 +30,7 @@ namespace IQCare.Web.CCC.UC
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
