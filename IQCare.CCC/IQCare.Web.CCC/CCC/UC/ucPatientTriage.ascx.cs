@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.UC
 
         protected void Page_Load(object sender, EventArgs e)
         {
-             PatientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
              PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             patientAge = Convert.ToDouble(Session["Age"].ToString());
             

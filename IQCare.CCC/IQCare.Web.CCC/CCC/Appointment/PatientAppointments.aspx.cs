@@ -12,7 +12,7 @@ namespace IQCare.Web.CCC.Appointment
         public int PatientId;
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
         }
     }
 }
