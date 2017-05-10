@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 var patientPreganancyIndicator = new PatientPregnancyIndicatorManager();
                // userId= Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 result = patientPreganancyIndicator.AddPregnancyIndicator(patientId, patientMasterVisitId, lmp, edd, pregnancyStatusId, ancProfile, ancProfileDate, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
@@ -55,7 +55,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var patientPregnancy = new PatientPregnancyManager();
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 result = patientPregnancy.AddPatientPregnancy(patientId, patientMasterVisitId, LMP, EDD, gravidae, parity, outcome, dateOfOutcome, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
@@ -74,7 +74,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var familyPlanning = new PatientFamilyPlanningManager();
@@ -94,7 +94,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var fpMethod = new PatientFamilyPlanningMethodManager();
@@ -113,7 +113,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var patientScreening = new PatientScreeningManager();
@@ -133,7 +133,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var patientPregnancy = new PatientPregnancyManager();
-                patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 result = patientPregnancy.CheckIfPatientPregnancyExisists(patientId);
             }
             catch (Exception e)
