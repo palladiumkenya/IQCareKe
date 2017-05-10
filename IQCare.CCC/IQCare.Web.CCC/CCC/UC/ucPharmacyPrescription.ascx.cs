@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
@@ -14,6 +15,8 @@ namespace IQCare.Web.CCC.UC
     {
         public string PMSCM = "";
         public string PMSCMSAmePointDispense = "";
+        public string prescriptionDate = "";
+        public string dispenseDate = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["visitId"] != null)
@@ -64,13 +67,26 @@ namespace IQCare.Web.CCC.UC
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "treatmentPlan", "drugSwitchInterruptionReason(" + ddlTreatmentPlan.SelectedValue + ");", true);
 
                 regimenLine.SelectedValue = lst[0].RegimenLine;
-                theDT = encounterLogic.getPharmacyRegimens(regimenLine.SelectedValue);
+                //////////////////////////////////////////////////////////////////////////////////////
+
+                //var masterName = Regex.Replace(regimenLine.SelectedItem.Text, @"\s+", "");
+                var masterName = regimenLine.SelectedItem.Text.Replace(" ", String.Empty);
+                var result = LookupLogic.GetLookUpItemViewByMasterName(masterName);
+
+                JavaScriptSerializer parser = new JavaScriptSerializer();
+                var regimen = parser.Deserialize<List<KeyValue>>(result);
                 ddlRegimen.Items.Add(new ListItem("Select", "0"));
-                for (int i = 0; i < theDT.Rows.Count; i++)
+                for (int i = 0; i < regimen.Count; i++)
                 {
-                    ddlRegimen.Items.Add(new ListItem(theDT.Rows[i]["DisplayName"].ToString(), theDT.Rows[i]["LookupItemId"].ToString()));
+                    ddlRegimen.Items.Add(new ListItem(regimen[i].DisplayName, regimen[i].ItemId));
                 }
+                /////////////////////////////////////////////////////////////////////////////////////////
                 ddlRegimen.SelectedValue = lst[0].Regimen;
+                txtPrescriptionDate.Text = lst[0].prescriptionDate;
+                txtPrescriptionDate.Text = lst[0].dispenseDate;
+
+                prescriptionDate = lst[0].prescriptionDate;
+                dispenseDate = lst[0].dispenseDate;
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "regimen", "selectRegimens(" + regimenLine.SelectedValue + ");", true);
             }
         }

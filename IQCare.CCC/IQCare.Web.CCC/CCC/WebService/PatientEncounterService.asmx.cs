@@ -437,15 +437,16 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan, 
-            string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string drugPrescription,
-            string regimenText)
+            string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string PrescriptionDate,
+            string DispensedDate, string drugPrescription, string regimenText)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
                 Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
                 Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
-                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText);
+                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText, PrescriptionDate,
+                DispensedDate);
             return val;
         }
 

@@ -193,7 +193,7 @@ namespace IQCare.CCC.UILogic
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
-            string regimenText)
+            string regimenText, string prescriptionDate, string dispensedDate)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -212,7 +212,8 @@ namespace IQCare.CCC.UILogic
 
             return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
                 UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
-                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen);
+                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, prescriptionDate,
+                dispensedDate);
 
         }
 
