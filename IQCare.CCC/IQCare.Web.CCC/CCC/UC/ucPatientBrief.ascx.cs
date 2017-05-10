@@ -38,6 +38,8 @@ namespace IQCare.Web.CCC.UC
             if (null != thisPatient)
             {
                 DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+                Session["PatientId"] = thisPatient.ptn_pk;
+                Session["SystemId"] = 1;
                 Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
                 //Don't decrypt at this level. the use Logic project for this
 

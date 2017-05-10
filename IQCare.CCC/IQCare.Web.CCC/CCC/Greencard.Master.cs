@@ -109,9 +109,9 @@ namespace IQCare.Web.CCC
             System.IO.FileInfo fileinfo = new System.IO.FileInfo(Request.Url.AbsolutePath);
             string pageName = fileinfo.Name;
 
-            if (Session["PatientID"] != null)
+            if (Session["PatientId"] != null)
             {
-                if (int.Parse(Session["PatientID"].ToString()) > 0)
+                if (int.Parse(Session["PatientId"].ToString()) > 0)
                 {
                     //VY added 2014-10-14 for changing level one navigation Menu depending on whether patient has been selected or not
                     if (Session["TechnicalAreaId"] != null)
