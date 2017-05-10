@@ -40,6 +40,8 @@ namespace IQCare.Web.CCC.UC
             {
                 Ptn_pk = thisPatient.ptn_pk.Value;
                 List<KeyValuePair<string, object>> list = new List<KeyValuePair<string, object>>();
+
+                list.Add(new KeyValuePair<string, object>("Patient", PatientId));
                 list.Add(new KeyValuePair<string, object>("PatientID", Ptn_pk));
                 list.Add(new KeyValuePair<string, object>("LocationID", AppLocationId));
                 list.Add(new KeyValuePair<string, object>("FacilityID", thisPatient.FacilityId));

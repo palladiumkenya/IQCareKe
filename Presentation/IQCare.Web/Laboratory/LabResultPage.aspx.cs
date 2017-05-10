@@ -22,15 +22,25 @@ namespace IQCare.Web.Laboratory
     /// <seealso cref="System.Web.UI.Page" />
     public partial class LabResultPage : System.Web.UI.Page
     {
+        private int Patient
+        {
+            get
+            {
+                return Convert.ToInt32(Session["patient"].ToString());
+            }
+        }
+
         /// <summary>
         /// The request MGR
         /// </summary>
         private ILabRequest requestMgr = (ILabRequest)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabRequest, BusinessProcess.Laboratory");
-       /// <summary>
+        /// <summary>
         /// The redirect URL
         /// </summary>
+      
        // private string RedirectUrl = "../ClinicalForms/frmPatient_Home.aspx";
-        private string RedirectUrl = "../CCC/Home.aspx";
+        private string RedirectUrl = "../CCC/patient/patientHome.aspx?patient=Patient";
+      
 
         /// The is error
         /// </summary>
