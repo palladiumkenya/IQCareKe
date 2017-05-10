@@ -5,6 +5,7 @@ namespace Interface.CCC.Lookup
 {
     public interface IPatientTreatmentTrackerManager
     {
+        PatientTreamentTrackerLookup GetPatientBaselineRegimenLookup(int patientId);
         PatientTreamentTrackerLookup GetCurrentPatientRegimen(int patientId);
         List<PatientTreamentTrackerLookup> GetPatientTreatmentSwitchesList(int patientId);
         List<PatientTreamentTrackerLookup> GetPatientTreatmentInterrupList(int patientId);

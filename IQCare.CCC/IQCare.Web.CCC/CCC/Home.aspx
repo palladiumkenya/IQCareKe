@@ -103,9 +103,11 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-12">
                             <hr />
                         </div>
+
                         <div class="col-md-12 col-xs-12 col-sm-12">
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
                                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Booked:</asp:Label></h5></div>

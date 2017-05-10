@@ -1308,7 +1308,7 @@
 
             /*Get Patient Type */
             $(window).on("load", checkPatientStatus);
-
+             $(window).on("load",getPatientBaselinePreloadValues);
             //Load Patient Baseline data
             //alert(transferIn);c
             //if(transferIn===1){
@@ -1786,11 +1786,8 @@
                                     //if (obj.TBinfected) {$("#lblTbInfected").checkbox('check');}else{ $("#lblTbInfected").checkbox('uncheck');}
                                     //if(obj.BreastFeeding){$("#lblBreastFeeding").checkbox('check')}else{$("#lblBreastFeeding").checkbox('uncheck')}
 
-                                    /* Treatment Initiation*/
-                                    $("#DateStartedOnFirstLine")
-                                        .datepicker('setDate',
-                                            moment(obj.DateStartedOnFirstline)
-                                            .format('DD-MMM-YYYY'));
+                                    
+                                    $("#DateStartedOnFirstLine").datepicker('setDate', moment(obj.DateStartedOnFirstline) .format('DD-MMM-YYYY'));
                                     $("#<%=ARTCohort.ClientID%>").val(obj.Cohort);
                                     $("#BaselineViralload").val(obj.BaselineViralLoad);
 
@@ -2102,7 +2099,8 @@
 		        var enrollmentWhoStage = $('#<%=WHOStageAtEnrollment.ClientID%>').find(":selected").val();
 				var ptnId = patientId;
 				var ptnmasterVisitId = patientMasterVisitId;
-
+		        if (artInitiationDate === 'Invalid date') {
+		            artInitiationDate = '';};
 				$.ajax({
 				    type: "POST",
 				    url: "../WebService/PatientBaselineService.asmx/ManagePatientHivDiagnosis",
@@ -2166,7 +2164,11 @@
 			    var weight= $("#<%=BaselineWeight.ClientID%>").val(); 
 			    var height= $("#<%=BaselineHeight.ClientID%>").val();
 			    whostage = $("#<%=bwhoStage.ClientID%>").find(":selected").val();
-			    cD4Count = $("#<%=bCd4Count.ClientID%>").val();
+		        cD4Count = $("#<%=bCd4Count.ClientID%>").val();
+                if (!cD4Count) {
+                    cD4Count = 0;
+                }
+
 			    var id = 0;
 			    if(muac<1){muac = 0;}
 			    if (weight < 1) {

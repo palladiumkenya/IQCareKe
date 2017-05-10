@@ -1483,7 +1483,10 @@
                                 $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
                                 $("#<%=lblWHOStageAtEnrollment.ClientID%>").text(itemList.EnrollmentWHOStageName);
-                                $("#<%=lblARTInitiationDate.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+                                if (patientType === 'Transfer-In') {
+                                    $("#<%=lblARTInitiationDate.ClientID%>")
+                                        .text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+                                }
                                 $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
                                 $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
