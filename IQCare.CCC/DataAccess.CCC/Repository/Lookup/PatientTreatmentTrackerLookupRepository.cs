@@ -26,7 +26,7 @@ namespace DataAccess.CCC.Repository.Lookup
         {
             
             var patientRegimen =
-                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus =="StartTreatment")
+                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus =="Start Treatment")
                     .OrderBy(x => x.Id)
                     .FirstOrDefault();
             return patientRegimen;
