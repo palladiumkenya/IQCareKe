@@ -228,7 +228,7 @@
                     "bDeferRender": true,
                     "responsive":true,
                     "sPaginate": true,
-                    "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                    "lengthMenu": [[10, 20, 50, -1], [10, 20, 50]],
                     "aoColumns":
                                 [
                                     null,
