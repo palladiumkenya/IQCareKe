@@ -236,7 +236,7 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public LookupTestParameter GetTestParameter(int LabTestId)
+        public List<LookupTestParameter> GetTestParameter(int LabTestId)
 
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))

@@ -67,7 +67,7 @@ namespace IQCare.Web.CCC.Appointment
 
         private void GetSessionDetails()
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
         }
     }
