@@ -1310,8 +1310,8 @@
                 }
 
                 $( "#personAge").keyup(function() {
-                    var personAge = $("#personAge").val();
-                    if (personAge != null && personAge != "") {
+                    var personAge = parseInt($("#personAge").val());
+                    if (personAge != null && personAge != "" && personAge > 0) {
 
                         $('#MyDateOfBirth').datepicker('setDate', estimateDob(personAge));
                         personAgeRule();
