@@ -50,7 +50,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientDetailsVitals> GetVitals()
         {
-            _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
 
             List<PatientDetailsVitals> patientDetailsVitalses = new List<PatientDetailsVitals>();
             List<PatientVital> listVitals = _vitals.GetCurrentPatientVital(_patientId);
@@ -75,7 +75,7 @@ namespace IQCare.Web.CCC.WebService
         public PatientVital GetPatientVitalsByMasterVisitId()
         {
             var patientVitalsManager = new PatientVitalsManager();
-            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
             return patientVitalsManager.GetPatientVitalsByMasterVisitId(patient, patientMasterVisitId);
         }
@@ -84,7 +84,7 @@ namespace IQCare.Web.CCC.WebService
         public PatientVital GetByPatientId()
         {
             var patientVitalsManager = new PatientVitalsManager();
-            int patient = Convert.ToInt32(Session["PatientId"].ToString());
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
             return patientVitalsManager.GetByPatientId(patient);
         }
     }

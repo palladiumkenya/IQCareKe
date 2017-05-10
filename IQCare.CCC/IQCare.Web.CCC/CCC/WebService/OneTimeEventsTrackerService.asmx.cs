@@ -52,7 +52,7 @@ namespace IQCare.Web.CCC.WebService
                 INHProphylaxisManager inhProphylaxis = new INHProphylaxisManager();
                 PatientVaccinationManager patientVaccination = new PatientVaccinationManager();
 
-                int patientId = int.Parse(HttpContext.Current.Session["PatientId"].ToString());
+                int patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
                 //int patientId = int.Parse(Session["PatientId"].ToString());
                 int patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
 

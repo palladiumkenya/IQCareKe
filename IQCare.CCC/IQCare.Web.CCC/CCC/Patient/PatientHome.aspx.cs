@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.Patient
 
         protected int PatientId
         {
-            get { return Convert.ToInt32(Session["patientId"]); }
+            get { return Convert.ToInt32(Session["PatientPK"]); }
         }
 
         protected int UserId
@@ -53,7 +53,7 @@ namespace IQCare.Web.CCC.Patient
             Session["TechnicalAreaId"] = 203;
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
-            var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["patientId"]));
+            var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["PatientPK"]));
 
             if (objTransfer.Count > 0)
             {

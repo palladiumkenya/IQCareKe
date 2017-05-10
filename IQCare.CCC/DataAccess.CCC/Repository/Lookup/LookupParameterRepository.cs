@@ -22,10 +22,10 @@ namespace DataAccess.CCC.Repository.Lookup
             _context = context;
         }
 
-        public LookupTestParameter GetTestParameter(int LabTestId)
+       public List<LookupTestParameter> GetTestParameter(int LabTestId)
         {
             ILookupParameter paramlookupRepository = new LookupParameterRepository();
-            var paramId = paramlookupRepository.FindBy(x => x.LabTestId == LabTestId).FirstOrDefault();
+            var paramId = paramlookupRepository.FindBy(x => x.LabTestId == LabTestId).ToList();
             return paramId;
 
         }
