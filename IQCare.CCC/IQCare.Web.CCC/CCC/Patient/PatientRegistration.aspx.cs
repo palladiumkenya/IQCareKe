@@ -103,6 +103,15 @@ namespace IQCare.Web.CCC.Patient
                         PatientTypeId.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
                     }
                 }
+
+                List<LookupItemView> popTypes = mgr.GetLookItemByGroup("PopulationType");
+                if (popTypes != null && popTypes.Count > 0)
+                {
+                    foreach (var item in popTypes)
+                    {
+                        PopulationType.Items.Add(new ListItem(item.DisplayName, item.ItemId.ToString()));
+                    }
+                }
             }
         }
 

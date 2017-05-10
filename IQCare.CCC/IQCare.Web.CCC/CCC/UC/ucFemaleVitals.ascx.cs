@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -14,12 +11,22 @@ namespace IQCare.Web.CCC.UC
     {
         protected int PatientId
         {
-            get { return Convert.ToInt32(Session["patientId"]); }
+            get { return Convert.ToInt32(Session["PatientPK"]); }
         }
 
         protected int PatientMasterVisitId
         {
             get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
+        }
+
+        protected string PatientGender
+        {
+            get { return Convert.ToString( Session["Gender"]); }
+        }
+
+        protected int PatientAge
+        {
+            get { return Convert.ToInt32(Session["Age"]); }
         }
 
         protected void Page_Load(object sender, EventArgs e)

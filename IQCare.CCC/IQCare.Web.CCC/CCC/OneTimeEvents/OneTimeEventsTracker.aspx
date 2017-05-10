@@ -18,6 +18,9 @@
 
                     <div class="col-md-12 form-group">
                         <asp:HiddenField ID="Age" runat="server" ClientIDMode="Static"></asp:HiddenField>
+                        <asp:HiddenField ID="dob" runat="server" ClientIDMode="Static" />
+                        <asp:HiddenField ID="enrollmentDate" runat="server" ClientIDMode="Static" />
+
                               <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                               <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                               <div class="col-md-7">
@@ -378,7 +381,7 @@
                                  <div class="col-md-12 form-group">
                                       <div class="col-md-5"><label class="control-label pull-left"> INH Start Date</label></div>
                                       <div class="col-md-7">
-                                          <div class="datepicker fuelux form-group" id="INHStartDate">
+                                          <div class="datepicker fuelux form-group" id="INHStartDatePicker">
                                                <div class="input-group">
                                                                                   <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
                                                                                     <asp:TextBox runat="server" ID="INHStartDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
@@ -482,86 +485,172 @@
                                       <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="CompletionDate">
                                                <div class="input-group">
-                                                                                  <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
-                                                                                    <asp:TextBox runat="server" ID="INHCompletionDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
-                                                                                  <div class="input-group-btn">
-                                                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
-                                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                                    <span class="sr-only">Toggle Calendar</span>
-                                                                                  </button>
-                                                                                  <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
-                                                                                    <div class="datepicker-calendar">
-                                                                                      <div class="datepicker-calendar-header">
-                                                                                           <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
-                                                                                           <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
-                                                                                           <button type="button" class="title" data-month="11" data-year="2014">
-                                                                                                <span class="month">
-                                                                                                  <span data-month="0">January</span>
-                                                                                                  <span data-month="1">February</span>
-                                                                                                  <span data-month="2">March</span>
-                                                                                                  <span data-month="3">April</span>
-                                                                                                  <span data-month="4">May</span>
-                                                                                                  <span data-month="5">June</span>
-                                                                                                  <span data-month="6">July</span>
-                                                                                                  <span data-month="7">August</span>
-                                                                                                  <span data-month="8">September</span>
-                                                                                                  <span data-month="9">October</span>
-                                                                                                  <span data-month="10">November</span>
-                                                                                                  <span data-month="11" class="current">December</span>
-                                                                                                </span> <span class="year">2014</span>
-                                                                                           </button>
-                                                                                      </div>
-                                                                                      <table class="datepicker-calendar-days">
-                                                                                        <thead>
-                                                                                        <tr>
-                                                                                          <th>Su</th>
-                                                                                          <th>Mo</th>
-                                                                                          <th>Tu</th>
-                                                                                          <th>We</th>
-                                                                                          <th>Th</th>
-                                                                                          <th>Fr</th>
-                                                                                          <th>Sa</th>
-                                                                                        </tr>
-                                                                                        </thead>
-                                                                                        <tbody></tbody>
-                                                                                      </table>
-                                                                                      <div class="datepicker-calendar-footer">
-                                                                                        <button type="button" class="datepicker-today">Today</button>
-                                                                                      </div>
-                                                                                    </div>
-                                                                                    <div class="datepicker-wheels" aria-hidden="true">
-                                                                                      <div class="datepicker-wheels-month">
-                                                                                        <h2 class="header">Month</h2>
-                                                                                        <ul>
-                                                                                          <li data-month="0"><button type="button">Jan</button></li>
-                                                                                          <li data-month="1"><button type="button">Feb</button></li>
-                                                                                          <li data-month="2"><button type="button">Mar</button></li>
-                                                                                          <li data-month="3"><button type="button">Apr</button></li>
-                                                                                          <li data-month="4"><button type="button">May</button></li>
-                                                                                          <li data-month="5"><button type="button">Jun</button></li>
-                                                                                          <li data-month="6"><button type="button">Jul</button></li>
-                                                                                          <li data-month="7"><button type="button">Aug</button></li>
-                                                                                          <li data-month="8"><button type="button">Sep</button></li>
-                                                                                          <li data-month="9"><button type="button">Oct</button></li>
-                                                                                          <li data-month="10"><button type="button">Nov</button></li>
-                                                                                          <li data-month="11"><button type="button">Dec</button></li>
-                                                                                        </ul>
-                                                                                      </div>
-                                                                                      <div class="datepicker-wheels-year">
-                                                                                        <h2 class="header">Year</h2>
-                                                                                        <ul></ul>
-                                                                                      </div>
-                                                                                      <div class="datepicker-wheels-footer clearfix">
-                                                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
-                                                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
-                                                                                      </div>
-                                                                                    </div>
-                                                                                  </div>
-                                                                                </div>
-                                                                              </div>
+                                                    <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
+                                                    <asp:TextBox runat="server" ID="INHCompletionDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="sr-only">Toggle Calendar</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                    <div class="datepicker-calendar">
+                                                        <div class="datepicker-calendar-header">
+                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                            <button type="button" class="title" data-month="11" data-year="2014">
+                                                                <span class="month">
+                                                                    <span data-month="0">January</span>
+                                                                    <span data-month="1">February</span>
+                                                                    <span data-month="2">March</span>
+                                                                    <span data-month="3">April</span>
+                                                                    <span data-month="4">May</span>
+                                                                    <span data-month="5">June</span>
+                                                                    <span data-month="6">July</span>
+                                                                    <span data-month="7">August</span>
+                                                                    <span data-month="8">September</span>
+                                                                    <span data-month="9">October</span>
+                                                                    <span data-month="10">November</span>
+                                                                    <span data-month="11" class="current">December</span>
+                                                                </span> <span class="year">2014</span>
+                                                            </button>
+                                                        </div>
+                                                        <table class="datepicker-calendar-days">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Su</th>
+                                                            <th>Mo</th>
+                                                            <th>Tu</th>
+                                                            <th>We</th>
+                                                            <th>Th</th>
+                                                            <th>Fr</th>
+                                                            <th>Sa</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                        </table>
+                                                        <div class="datepicker-calendar-footer">
+                                                        <button type="button" class="datepicker-today">Today</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="datepicker-wheels" aria-hidden="true">
+                                                        <div class="datepicker-wheels-month">
+                                                        <h2 class="header">Month</h2>
+                                                        <ul>
+                                                            <li data-month="0"><button type="button">Jan</button></li>
+                                                            <li data-month="1"><button type="button">Feb</button></li>
+                                                            <li data-month="2"><button type="button">Mar</button></li>
+                                                            <li data-month="3"><button type="button">Apr</button></li>
+                                                            <li data-month="4"><button type="button">May</button></li>
+                                                            <li data-month="5"><button type="button">Jun</button></li>
+                                                            <li data-month="6"><button type="button">Jul</button></li>
+                                                            <li data-month="7"><button type="button">Aug</button></li>
+                                                            <li data-month="8"><button type="button">Sep</button></li>
+                                                            <li data-month="9"><button type="button">Oct</button></li>
+                                                            <li data-month="10"><button type="button">Nov</button></li>
+                                                            <li data-month="11"><button type="button">Dec</button></li>
+                                                        </ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-year">
+                                                        <h2 class="header">Year</h2>
+                                                        <ul></ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-footer clearfix">
+                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
                                            </div>
                                       </div>
                                  </div>
+                                
+                                <div class="col-md-12" id="ISStopDate">
+                                    <div class="col-md-5"><label class="control-label pull-left">Stop Date</label></div>
+                                    <div class="col-md-7">
+                                          <div class="datepicker fuelux form-group" id="StopDate">
+                                               <div class="input-group">
+                                                    <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
+                                                    <asp:TextBox runat="server" ID="INHStopDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                    <span class="sr-only">Toggle Calendar</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                    <div class="datepicker-calendar">
+                                                        <div class="datepicker-calendar-header">
+                                                            <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                            <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                            <button type="button" class="title" data-month="11" data-year="2014">
+                                                                <span class="month">
+                                                                    <span data-month="0">January</span>
+                                                                    <span data-month="1">February</span>
+                                                                    <span data-month="2">March</span>
+                                                                    <span data-month="3">April</span>
+                                                                    <span data-month="4">May</span>
+                                                                    <span data-month="5">June</span>
+                                                                    <span data-month="6">July</span>
+                                                                    <span data-month="7">August</span>
+                                                                    <span data-month="8">September</span>
+                                                                    <span data-month="9">October</span>
+                                                                    <span data-month="10">November</span>
+                                                                    <span data-month="11" class="current">December</span>
+                                                                </span> <span class="year">2014</span>
+                                                            </button>
+                                                        </div>
+                                                        <table class="datepicker-calendar-days">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Su</th>
+                                                            <th>Mo</th>
+                                                            <th>Tu</th>
+                                                            <th>We</th>
+                                                            <th>Th</th>
+                                                            <th>Fr</th>
+                                                            <th>Sa</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                        </table>
+                                                        <div class="datepicker-calendar-footer">
+                                                        <button type="button" class="datepicker-today">Today</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="datepicker-wheels" aria-hidden="true">
+                                                        <div class="datepicker-wheels-month">
+                                                        <h2 class="header">Month</h2>
+                                                        <ul>
+                                                            <li data-month="0"><button type="button">Jan</button></li>
+                                                            <li data-month="1"><button type="button">Feb</button></li>
+                                                            <li data-month="2"><button type="button">Mar</button></li>
+                                                            <li data-month="3"><button type="button">Apr</button></li>
+                                                            <li data-month="4"><button type="button">May</button></li>
+                                                            <li data-month="5"><button type="button">Jun</button></li>
+                                                            <li data-month="6"><button type="button">Jul</button></li>
+                                                            <li data-month="7"><button type="button">Aug</button></li>
+                                                            <li data-month="8"><button type="button">Sep</button></li>
+                                                            <li data-month="9"><button type="button">Oct</button></li>
+                                                            <li data-month="10"><button type="button">Nov</button></li>
+                                                            <li data-month="11"><button type="button">Dec</button></li>
+                                                        </ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-year">
+                                                        <h2 class="header">Year</h2>
+                                                        <ul></ul>
+                                                        </div>
+                                                        <div class="datepicker-wheels-footer clearfix">
+                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                           </div>
+                                      </div>
+                                </div>
 
                             </div><%-- .col-md-7--%>
                         </div><%--.col-md-12--%>
@@ -662,13 +751,20 @@
             $('#Stage3').datepicker();
             $('#SexPartner').datepicker();*/
 
+            $("#ISCompletionDate").hide();
+            $("#ISStopDate").hide();
+
             $('input[name="ctl00$IQCareContentPlaceHolder$INH"]').on('change', function (e) {
                 if ($('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val() == "CompletionYes") {
-                    //$("#ISCompletionDate").show();
+                    $("#ISCompletionDate").show();
+                    $("#ISStopDate").hide();
                     $("#INHCompletionDate").val('');
+                    $("#INHStopDate").val('');
                 } else {
-                    //$("#ISCompletionDate").hide();
+                    $("#ISCompletionDate").hide();
+                    $("#ISStopDate").show();
                     $("#INHCompletionDate").val('');
+                    $("#INHStopDate").val('');
                 }
             });
 
@@ -800,6 +896,7 @@
                 $("#Stage3Date").val("");
                 $("#SexPartnerDate").val("");
                 $("#INHStartDate").val("");
+                $('#INHStartDatePicker').datepicker('setDate', "");
                 $("#CompletionYes").attr("checked", false);
                 $("#CompletionNo").attr("checked", false);
                 $("#lblCompletionNo").removeClass("checked");
@@ -810,6 +907,7 @@
                 $("#lblFluVaccine").removeClass("checked");
                 $("#vaccinationotheradult").val("");
                 $("#INHCompletionDate").val("");
+                $("#INHStopDate").val("");
 
                 $("#tblVaccines").find("tr:gt(0)").remove();
                 vaccinesList.length = 0;
@@ -840,17 +938,85 @@
                     var Stage3 = $("#Stage3").datepicker('getDate');
                     var SexPartner = $("#SexPartner").datepicker('getDate');
                     var CompletionDate = $("#CompletionDate").datepicker('getDate');
-                    var INHStartDate = $("#INHStartDate").datepicker('getDate');
+                    var StopDate = $("#StopDate").datepicker('getDate');
+                    var INHStartDate = $("#INHStartDatePicker").datepicker('getDate');
+                    var dob = $("#dob").val();
+                    var enrollmentDate = $("#enrollmentDate").val();
+                    dob = moment(dob);
 
+                    var isBeforeDobCompletionDate = moment(CompletionDate).isBefore(dob);
+                    var isBeforedobStopDate = moment(StopDate).isBefore(dob);
+                    var isBeforeINHStartDate = momentConfig(INHStartDate).isBefore(dob);
+
+                    var isBeforeStage1 = moment(Stage1).isBefore(dob);
+                    var isBeforeStage2 = moment(Stage2).isBefore(dob);
+                    var isBeforeStage3 = momentConfig(Stage3).isBefore(dob);
+                    var isBeforeSexPartner = momentConfig(SexPartner).isBefore(dob);
+
+                    //var isCompletionDateBeforeEnrollmentDate = moment(CompletionDate).isBefore(enrollmentDate);
+                    //var isStopDateBeforeEnrollmentDate = moment(StopDate).isBefore(enrollmentDate);
+                    //var isBeforeEnrollmentDate = moment(INHStartDate).isBefore(enrollmentDate);
+
+                    var isCompletionDateBeforeINHStartDate = moment(CompletionDate).isBefore(INHStartDate);
+                    var isStopDateBeforeINHStartDate = moment(CompletionDate).isBefore(INHStartDate);
+
+                    if (isBeforeStage1) {
+                        toastr.error("Disclosure stage 1 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeStage2) {
+                        toastr.error("Disclosure stage 2 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeStage3) {
+                        toastr.error("Disclosure stage 3 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeSexPartner) {
+                        toastr.error("Disclosure Sex Partner date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isCompletionDateBeforeINHStartDate) {
+                        toastr.error("Completion date should not before INH start date", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isStopDateBeforeINHStartDate) {
+                        toastr.error("Stop date should not before date INH start date", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeINHStartDate) {
+                        toastr.error("INH start date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeDobCompletionDate) {
+                        toastr.error("Completion Date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforedobStopDate) {
+                        toastr.error("Stop Date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    
                     //alert(document.getElementById("CompletionNo").Value);
                     //alert(document.getElementById("CompletionYes").Value);
                     var INH = $('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val();
                     if (INH == 'CompletionYes') {
                         INHCompletion = true;
-                        INHCompletionDateValue = $("#INHCompletionDate").val();
+                        //INHCompletionDateValue = $("#INHCompletionDate").val();
+                        INHCompletionDateValue = moment(CompletionDate).format("DD-MMM-YYYY");
                     } else if (INH == 'CompletionNo') {
                         INHCompletion = false;
-                        INHCompletionDateValue = $("#INHCompletionDate").val();
+                        //INHCompletionDateValue = $("#INHCompletionDate").val();
+                        INHCompletionDateValue = moment(StopDate).format("DD-MMM-YYYY");
                     }
 
                     var vaccineAdult = [];
@@ -885,6 +1051,11 @@
 
                     if (moment('' + CompletionDate + '').isAfter()) {
                         toastr.error("CompletionDate. Future dates not allowed.", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (moment('' + StopDate + '').isAfter()) {
+                        toastr.error("Stop Date. Future dates not allowed.", "One Time Event Tracker");
                         return false;
                     }
 
@@ -956,7 +1127,7 @@
             restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
 
-        $("#INHStartDate").datepicker({
+        $("#INHStartDatePicker").datepicker({
             date: null,
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
@@ -964,6 +1135,13 @@
         });
 
         $("#CompletionDate").datepicker({
+            date: null,
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+        });
+
+        $("#StopDate").datepicker({
             date: null,
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },

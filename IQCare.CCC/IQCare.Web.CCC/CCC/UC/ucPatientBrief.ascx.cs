@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.UC
             var myDate = DateTime.Now.Year;
             var myDateMonth = DateTime.Now.Month;
 
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
@@ -38,6 +38,8 @@ namespace IQCare.Web.CCC.UC
             if (null != thisPatient)
             {
                 DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+                Session["PatientId"] = thisPatient.ptn_pk;
+                Session["SystemId"] = 1;
                 Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
                 //Don't decrypt at this level. the use Logic project for this
 
@@ -75,7 +77,7 @@ namespace IQCare.Web.CCC.UC
                 // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
                 //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
-                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(patientId);
+                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(thisPatient.PersonId);
                 if (ptnMaritalStatus != null)
                 {
                     lblmstatus.Text =

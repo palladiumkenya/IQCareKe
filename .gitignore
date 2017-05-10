@@ -27,6 +27,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 aspnet_client/
+DataAccess/RemServer/app.config
 
 #logs
 [Ll]ogs/

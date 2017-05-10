@@ -107,6 +107,7 @@
     <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="PatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
+    <Compile Include="PatientTreatmentTrackerManager.cs" />
     <Compile Include="PatientVitalsManager.cs" />
     <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />

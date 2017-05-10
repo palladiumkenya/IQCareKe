@@ -562,7 +562,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DARTI">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text" data-parsley-required="true" />
+                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text"  />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>

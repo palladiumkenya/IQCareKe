@@ -225,7 +225,7 @@ namespace BusinessProcess.CCC
                     {
                         ClsObject PEObj = new ClsObject();
                         ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
+                        ClsUtility.AddParameters("@MasterVisitID", SqlDbType.Int, masterVisitID.ToString());
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
                         ClsUtility.AddParameters("@examType", SqlDbType.VarChar, pe.examTypeID);
                         ClsUtility.AddParameters("@exam", SqlDbType.VarChar, pe.examID);

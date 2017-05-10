@@ -11,86 +11,95 @@ namespace BusinessProcess.CCC
 {
     public class BPersonRelationshipManager :ProcessBase,IPersonRelationshipManager
     {
-        private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
+        //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext());
         private int _result;
 
         public int AddPersonRelationship(PersonRelationship personRelationship)
         {
-            try
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                _unitOfWork.PersonRelationshipRepository.Add(personRelationship);
-                return _result = _unitOfWork.Complete();
+                try
+                {
+                    unitOfWork.PersonRelationshipRepository.Add(personRelationship);
+                    return _result = unitOfWork.Complete();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-          
         }
 
         public int DeletePersonRelationship(int id)
         {
-            try
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var personRelation = _unitOfWork.PersonRelationshipRepository.GetById(id);
-                _unitOfWork.PersonRelationshipRepository.Remove(personRelation);
-                return _result = _unitOfWork.Complete();
+                try
+                {
+                    var personRelation = unitOfWork.PersonRelationshipRepository.GetById(id);
+                    unitOfWork.PersonRelationshipRepository.Remove(personRelation);
+                    return _result = unitOfWork.Complete();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
- 
         }
 
         public List<PersonRelationship> GetAllPersonRelationship(int patientId)
         {
-            try
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                var myList =
-                    _unitOfWork.PersonRelationshipRepository.FindBy(
-                        x => x.RelatedTo == patientId & x.DeleteFlag == false);
-                return myList.ToList();
+                try
+                {
+                    var myList =
+                        unitOfWork.PersonRelationshipRepository.FindBy(
+                            x => x.RelatedTo == patientId & x.DeleteFlag == false);
+                    return myList.ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-
         }
 
         public int UpdatePersonRelationship(PersonRelationship personRelationship)
         {
-            try
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
             {
-                _unitOfWork.PersonRelationshipRepository.Update(personRelationship);
-                return _result = _unitOfWork.Complete();
+                try
+                {
+                    unitOfWork.PersonRelationshipRepository.Update(personRelationship);
+                    return _result = unitOfWork.Complete();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
+
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
-      
         }
     }
 }

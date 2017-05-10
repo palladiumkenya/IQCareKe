@@ -124,10 +124,17 @@ namespace IQCare.Web.CCC.WebService
                     };
 
                     patientId = patientManager.AddPatient(patient);
-                    Session["PatientId"] = patientId;
+                    Session["PatientPK"] = patientId;
 
                     if (patientId > 0)
                     {
+                        var visitTypes = lookupLogic.GetItemIdByGroupAndItemName("VisitType", "Enrollment");
+                        var visitType = 0;
+                        if (visitTypes.Count > 0)
+                        {
+                            visitType = visitTypes[0].ItemId;
+                        }
+
                         //
                         PatientMasterVisit visit = new PatientMasterVisit
                         {
@@ -139,7 +146,7 @@ namespace IQCare.Web.CCC.WebService
                             DeleteFlag = false,
                             VisitDate = DateTime.Now,
                             CreatedBy = userId,
-                            VisitType = 1340//To look up the visit type of enrollment
+                            VisitType = visitType
                         };
 
                         PatientEntityEnrollment patientEnrollment = new PatientEntityEnrollment
@@ -264,7 +271,7 @@ namespace IQCare.Web.CCC.WebService
 
                     if (patient.Count > 0)
                     {
-                        Session["PatientId"] = patient[0].Id;
+                        Session["PatientPK"] = patient[0].Id;
 
                         int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient[0].Id, userId);
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
@@ -367,7 +374,7 @@ namespace IQCare.Web.CCC.WebService
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
 
-                patientId = int.Parse(Session["PatientId"].ToString());
+                patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
                 var enrollments = enrollmentManager.GetPatientEnrollmentByPatientId(patientId);
                 if (enrollments.Count > 0)
@@ -413,7 +420,7 @@ namespace IQCare.Web.CCC.WebService
             PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
             List<CareEndingDetails> careEndingDetailses = new List<CareEndingDetails>();
 
-            patientId = int.Parse(Session["PatientId"].ToString());
+            patientId = int.Parse(Session["PatientPK"].ToString());
             var careEndings = careEndingManager.GetPatientCareEndings(patientId);
             if (careEndings.Count > 0)
             {

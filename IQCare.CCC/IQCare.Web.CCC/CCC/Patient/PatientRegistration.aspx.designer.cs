@@ -319,6 +319,15 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.TextBox TSContacts;
         
         /// <summary>
+        /// PopulationType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList PopulationType;
+        
+        /// <summary>
         /// KeyPopulationCategoryId control.
         /// </summary>
         /// <remarks>

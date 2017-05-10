@@ -31,6 +31,24 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::System.Web.UI.WebControls.HiddenField Age;
         
         /// <summary>
+        /// dob control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField dob;
+        
+        /// <summary>
+        /// enrollmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField enrollmentDate;
+        
+        /// <summary>
         /// Stage1Date control.
         /// </summary>
         /// <remarks>
@@ -101,6 +119,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox INHCompletionDate;
+        
+        /// <summary>
+        /// INHStopDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox INHStopDate;
         
         /// <summary>
         /// vaccinationotheradult control.

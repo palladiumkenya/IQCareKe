@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientAppointments.aspx.cs" Inherits="IQCare.Web.CCC.Appointment.TodaysAppointments" %>
 
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="IQ" TagName="ucExtruder" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
 
     <%--    <div class="col-md-12">
@@ -31,6 +34,8 @@
         <div class="col-md-12">
                 <asp:LinkButton runat="server" ID="AddAppointment" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Appointment</asp:LinkButton>
             </div>
+
+        <IQ:ucExtruder runat="server" ID="ucExtruder" />
     </div>
     <script>
         $(document).ready(function () {

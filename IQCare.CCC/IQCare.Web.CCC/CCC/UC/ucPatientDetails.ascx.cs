@@ -16,11 +16,11 @@ namespace IQCare.Web.CCC.UC
             var myDate = DateTime.Now.Year;
             var myDateMonth= DateTime.Now.Month;
 
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             if (patientId== 0 && Request.QueryString["patient"] != null)
             {
                 patientId = Convert.ToInt32(Request.QueryString["patient"]);
-                Session["patientId"] = patientId;
+                Session["PatientPK"] = patientId;
             }
 
             DateTime DoB;
@@ -44,8 +44,8 @@ namespace IQCare.Web.CCC.UC
                 {
                     lblStatus.Text = "<i class=fa fa-user-o text-danger' aria-hidden='true'></i><strong> Inactive</strong>";
                 }
-                string femaleIcon= "<i class='fa fa-female' aria-hidden='true'></i>";
-                string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
+               // string femaleIcon= "<i class='fa fa-female' aria-hidden='true'></i>";
+                //string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
                 //if (x.Sex == 62)
                 //{

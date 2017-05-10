@@ -294,7 +294,7 @@
     <div class="col-md-12">
         <hr />
     </div>
-        <div class="col-md-12">
+   <div class="col-md-12" id="btnFemaleVitals">
              <div class="col-md-8"></div>
              <div class="col-md-4">
             <div class="col-md-4 col-xs-12 col-sm-12">
@@ -326,6 +326,12 @@
             var ancprofile=0;
             var patientId="<%=PatientId%>";
             var patientMasterVisitId = "<%=PatientMasterVisitId%>";
+
+            var patientGender = "<%=PatientGender%>";
+            var patientAge = "<%=PatientAge%>";
+
+            //alert(patientAge);
+            //alert(patientGender);
             $("#divNoFP").hide("fast");
 
             $("#FemaleLMP").datepicker({
@@ -349,9 +355,11 @@
                 });
 
 
-            $("#<%=ancYes.ClientID%>").on('click', function () {
-                ancprofile = "true";
-            })
+            $("#<%=ancYes.ClientID%>").on('click',
+                function() {
+                    ancprofile = "true";
+                });
+
             $("#<%=ancNo.ClientID%>").on('click', function () {
                 ancprofile = "false";
             });
