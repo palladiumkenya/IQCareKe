@@ -130,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" data-parsley-required="true"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -332,7 +332,8 @@
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
                         <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>--%>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
+                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>--%>
+                        <div class="col-md-2"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
                         <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
                                              
@@ -347,6 +348,14 @@
     var pmscm = "<%=PMSCM%>";
     var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
     var pmscmFlag = "0";
+    var prescriptionDate = "<%= this.prescriptionDate %>";
+    var dispenseDate = "<%= this.dispenseDate %>";
+
+    if (prescriptionDate == '' || prescriptionDate == '01-Jan-1900')
+        prescriptionDate = 0;
+
+    if (dispenseDate == '' || dispenseDate == '01-Jan-1900')
+        dispenseDate = 0;
     
     $(document).ready(function () {
         
@@ -371,13 +380,13 @@
         $('#PrescriptionDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: 0
+            date: prescriptionDate
         });
 
         $('#DispenseDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: 0
+            date: dispenseDate
         });
     });
 
@@ -515,6 +524,21 @@
                 
            }
            
+    function resetPharmacyForm()
+    {
+        $("#ddlTreatmentProgram").val("0");
+        $("#ddlPeriodTaken").val("0");
+        $("#ddlTreatmentPlan").val("0");
+        $("#ddlSwitchInterruptionReason").val("0");
+        $("#regimenLine").val("0");
+        $("#ddlRegimen").val("0");
+        $("#txtPrescriptionDate").val("");
+        $("#txtDateDispensed").val("");
+
+        DrugPrescriptionTable
+                    .clear()
+                    .draw();
+    }
 
        function getBatches(drugPk)
        {
@@ -611,6 +635,8 @@
                 var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
                 var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
                 var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+                var datePrescribed = $("#txtPrescriptionDate").val();
+                var dateDispensed = $("#txtDateDispensed").val();
                 
                 if (regimen === undefined)
                     regimen = '0';
@@ -643,6 +669,7 @@
                 catch (ex) { }
                 //////////////////////////////////////////////////////////////////
                 allAbbr = allAbbr.replace(/\/$/, "");
+                
                 var sumAllAbbr = 0;
                 var sumSelectedRegimen = 0;
                 try {
@@ -652,18 +679,20 @@
                 }
                 catch (err) { }
 
-                try {
-                    var regExp = /\(([^)]+)\)/;
-                    var matches = regExp.exec(regimenText);
-
-                    var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
-
+                //try {
+                    //var regExp = /\(([^)]+)\)/;
+                    //var matches = regExp.exec(regimenText);
+                    var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
+                    //alert(rmv);
+                    //alert(matches);
+                    //var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+                    //alert(selectedRegimen);
                     for (var i = 0; i < selectedRegimen.length; i++) {
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                     }
 
-                }
-                catch (err) { }
+                //}
+                //catch (err) { alert(err.message) }
            
                 
                 if (sumAllAbbr > 0) {
@@ -685,7 +714,8 @@
                             dataType: 'json',
                             data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
                                 treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                                regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                                regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                                datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
                                 JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
@@ -703,9 +733,10 @@
                         type: 'POST',
                         dataType: 'json',
                         data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
-                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                            regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
-                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                                treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                                regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                                datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
+                                JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             toastr.success(data.d, "Saved successfully");

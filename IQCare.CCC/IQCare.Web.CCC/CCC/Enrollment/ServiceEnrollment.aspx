@@ -121,10 +121,10 @@
             </div>
             
             <div class="col-xs-3">
-                <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
+                <div class="col-md-12"><label class="control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
                     <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[7,8]" />
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-length="[7,8]" />
                 </div>
             </div>
 
@@ -517,8 +517,20 @@
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
                 var isCCCenrolled = $("#IsCCCEnrolled").val();
-                console.log(cccRegNumber);
-                console.log(isCCCenrolled);
+                //console.log(cccRegNumber);
+                //console.log(isCCCenrolled);
+
+                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateBeforeDob) {
+                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
+                    return false;
+                }
+
+
                 if (cccRegNumber == -1 && isCCCenrolled!="CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
@@ -539,6 +551,10 @@
                     var mflCode = $('#txtAppPosID').val();
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
 
+                    if (nationalId == null || nationalId == '') {
+                        nationalId = 99999999;
+                    }
+
                     addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
                 }
             });
@@ -558,8 +574,18 @@
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
                 var isCCCenrolled = $("#IsCCCEnrolled").val();
-                console.log(cccRegNumber);
-                console.log(isCCCenrolled);
+                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+
+                //console.log(cccRegNumber);
+                //console.log(isCCCenrolled);
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateBeforeDob) {
+                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
+                    return false;
+                }
+
                 if (cccRegNumber == -1 && isCCCenrolled != "CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
@@ -579,6 +605,10 @@
                     var patientType = $("#PatientType").val();
                     var mflCode = $('#txtAppPosID').val();
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
+
+                    if (nationalId == null || nationalId == '') {
+                        nationalId = 99999999;
+                    }
 
                     console.log(_fp);
                     addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);

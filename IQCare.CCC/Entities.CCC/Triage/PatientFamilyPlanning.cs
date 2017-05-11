@@ -23,6 +23,7 @@ namespace Entities.CCC.Triage
         public int PatientMasterVisitId { get; set; }
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
 
+        public DateTime? VisitDate { get; set; }
         [Required]
         public int FamilyPlanningStatusId { get; set; }
 

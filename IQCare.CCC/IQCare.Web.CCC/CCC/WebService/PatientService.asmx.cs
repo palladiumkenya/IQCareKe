@@ -72,12 +72,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
                 var screening=new PatientScreeningManager();
-                Result = screening.AddPatientScreening(patientId, patientMasterVisitid,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
+                Result = screening.AddPatientScreening(patientId, patientMasterVisitid,visitDate,screeningTypeId,screeningDone, screeningDate,screeningCategoryId, screeningValueId,comment, userId);
                 Msg = (Result > 0) ? "Patient Screening Added Successfully" : "";
             }
             catch (Exception e)

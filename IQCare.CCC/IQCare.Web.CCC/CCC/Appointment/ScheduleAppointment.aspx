@@ -211,7 +211,7 @@
 
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
-            allowPastDates: false,
+            allowPastDates: true,
             Date: 0,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
@@ -240,10 +240,24 @@
         });
 
         $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
             AppointmentCount();
         });
 
         $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
             AppointmentCount();
         });
 

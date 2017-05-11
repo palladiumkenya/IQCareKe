@@ -8,12 +8,12 @@ namespace IQCare.CCC.UILogic.Baseline
     public class PatientBaselineAssessmentManager
     {
         private readonly IPatientBaselineAssessmentManager _patientBaselineAssessment = (IPatientBaselineAssessmentManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientBaselineAssessmentManager, BusinessProcess.CCC");
-        private int Id = 0;
-        private int Result = 0;
+        private int _id = 0;
+        private int _result = 0;
         
         public int ManagePatientBaselineAssessment(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)
         {
-            Id = _patientBaselineAssessment.CheckIfPatientBaselineExists(patientId);
+            _id = _patientBaselineAssessment.CheckIfPatientBaselineExists(patientId);
 
             var patientArtInitiationBaselinesInsert= new PatientBaselineAssessment()
                 {
@@ -24,15 +24,18 @@ namespace IQCare.CCC.UILogic.Baseline
                     TBInfected = tbInfected,
                     WHOStage = whoStage,
                     Breastfeeding = breastfeeding,
-                    CD4Count = cd4Count,
+                   // CD4Count = cd4Count,
                     MUAC = muac,
                     Weight = weight,
                     Height = height,
                     CreatedBy = userId
                 };
-            Result = (Id > 0)
+            if (cd4Count > 0)
+            {
+                patientArtInitiationBaselinesInsert.CD4Count = cd4Count;}
+            _result = (_id > 0)
                 ? _patientBaselineAssessment.UpdatePatientBaselineAssessment(patientArtInitiationBaselinesInsert): _patientBaselineAssessment.AddPatientBaselineAssessment(patientArtInitiationBaselinesInsert);
-            return Result;
+            return _result;
         }
 
         public int UpdatePatientBaselineAssessment(int id,int patientId, int patientMasterVisitId, bool hbvInfected, bool pregnant, bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac, decimal weight, decimal height,int userId)

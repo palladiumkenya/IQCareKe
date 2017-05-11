@@ -24,11 +24,23 @@ namespace IQCare.CCC.UILogic
            
         }
 
+        public PatientTreamentTrackerLookup GetPatientbaselineRegimenLookup(int patientId)
+        {
+            try
+            {
+                return _patientTreatmentTrackerManager.GetPatientBaselineRegimenLookup(patientId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         public List<PatientTreamentTrackerLookup> GetPatientTreatmentSwitchesList(int patientId)
         {
             try
             {
-                return GetPatientTreatmentSwitchesList(patientId);
+                return _patientTreatmentTrackerManager. GetPatientTreatmentSwitchesList(patientId);
             }
             catch (Exception e)
             {
@@ -42,7 +54,7 @@ namespace IQCare.CCC.UILogic
         {
             try
             {
-                return GetPatientTreatmentInterrupList(patientId);
+                return _patientTreatmentTrackerManager.GetPatientTreatmentInterrupList(patientId);
             }
             catch (Exception e)
             {
@@ -55,7 +67,7 @@ namespace IQCare.CCC.UILogic
         {
             try
             {
-                return GetPatientTreatmentSubstitutionList(patientId);
+                return _patientTreatmentTrackerManager.GetPatientTreatmentSubstitutionList(patientId);
             }
             catch (Exception e)
             {

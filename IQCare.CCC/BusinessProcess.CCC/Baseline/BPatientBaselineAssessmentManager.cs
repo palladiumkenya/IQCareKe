@@ -17,26 +17,26 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientBaselineAssessment(PatientBaselineAssessment patientBaselineAssessment)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientBaselineAssessmentRepository.Add(patientBaselineAssessment);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientBaselineAssessmentRepository.Add(patientBaselineAssessment);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }         
         }
 
         public int UpdatePatientBaselineAssessment(PatientBaselineAssessment patientBaselineAssessment)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientBaseline =
-                    _unitOfWork.PatientBaselineAssessmentRepository.FindBy(
+                    unitOfWork.PatientBaselineAssessmentRepository.FindBy(
                         x => x.PatientId == patientBaselineAssessment.PatientId & !x.DeleteFlag).FirstOrDefault();
                 if (patientBaseline != null)
                 {
                     patientBaseline.Breastfeeding = patientBaselineAssessment.Breastfeeding;
-                    patientBaseline.CD4Count = patientBaselineAssessment.CD4Count;
+                   if(patientBaselineAssessment.CD4Count>0) { patientBaseline.CD4Count = patientBaselineAssessment.CD4Count;}
                     patientBaseline.HBVInfected = patientBaselineAssessment.HBVInfected;
                     patientBaseline.Height = patientBaselineAssessment.Height;
                     patientBaseline.MUAC = patientBaselineAssessment.MUAC;
@@ -44,10 +44,10 @@ namespace BusinessProcess.CCC.Baseline
                     patientBaseline.TBInfected = patientBaselineAssessment.TBInfected;
                     patientBaseline.Weight = patientBaselineAssessment.Weight;
                     patientBaseline.WHOStage = patientBaselineAssessment.WHOStage;
-                    _unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaseline);
-                    Result = _unitOfWork.Complete();
+                    unitOfWork.PatientBaselineAssessmentRepository.Update(patientBaseline);
+                    Result = unitOfWork.Complete();
                 }
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return Result;
             }
 
@@ -55,12 +55,12 @@ namespace BusinessProcess.CCC.Baseline
 
         public int DeletePatientBaselineAssessment(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var patientArt = _unitOfWork.PatientBaselineAssessmentRepository.GetById(id);
-                _unitOfWork.PatientBaselineAssessmentRepository.Remove(patientArt);
-                 Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var patientArt = unitOfWork.PatientBaselineAssessmentRepository.GetById(id);
+                unitOfWork.PatientBaselineAssessmentRepository.Remove(patientArt);
+                 Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
     
@@ -68,16 +68,16 @@ namespace BusinessProcess.CCC.Baseline
 
         public List<PatientBaselineAssessment> GetPatientBaselineAssessment(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientBaseline =
-          _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
+          unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
               .Take(1)
               .Distinct()
               .OrderByDescending(x => x.Id)
               .ToList();
 
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientBaseline;
             }
 
@@ -85,14 +85,14 @@ namespace BusinessProcess.CCC.Baseline
 
         public int CheckIfPatientBaselineExists(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var recordExists =
-    _unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
+    unitOfWork.PatientBaselineAssessmentRepository.FindBy(x => x.PatientId == patientId)
         .Select(x => x.Id)
         .FirstOrDefault();
 
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return Convert.ToInt32(recordExists);
             }
         }
