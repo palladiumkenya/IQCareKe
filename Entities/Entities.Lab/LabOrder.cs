@@ -32,7 +32,7 @@ namespace Entities.Lab
         /// </value>
         public int Id { get; set; }
         /// <summary>
-        /// Gets or sets the patient identifier.
+        /// Gets or sets the patient identifier.This points to Ptn_Pk. PatientId used to refer to Id in Patient table
         /// </summary>
         /// <value>
         /// The patient identifier.
@@ -40,7 +40,7 @@ namespace Entities.Lab
         /// 
         [Column("Ptn_Pk")]
         [ForeignKey("Client")]
-        public int PatientId { get; set; }
+        public int PatientPk { get; set; }
         /// <summary>
         /// Gets or sets the location identifier.
         /// </summary>

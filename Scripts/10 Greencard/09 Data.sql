@@ -1,4 +1,5 @@
-
+Set Nocount on
+Go
 --Lookup master
 If Not Exists(Select 1 From LookupMaster where Name='FPMethod') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPMethod',null,0); End
 If Not Exists(Select 1 From LookupMaster where Name='Entrypoint') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Entrypoint',null,0); End
@@ -6134,3 +6135,8 @@ GO
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIV Negative',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIV Negative'  ) ItemId FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Go
+-- Move patient from mst_patient to patient
+DECLARE @RC int
+EXECUTE @RC = [dbo].[SP_mst_PatientToGreencardRegistration] 
