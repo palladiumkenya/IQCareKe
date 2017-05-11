@@ -112,15 +112,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.LinkButton btnSaveLab;
         
         /// <summary>
-        /// btnPrintOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPrintOrder;
-        
-        /// <summary>
         /// btnResetOrder control.
         /// </summary>
         /// <remarks>
@@ -128,5 +119,14 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnResetOrder;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
     }
 }
