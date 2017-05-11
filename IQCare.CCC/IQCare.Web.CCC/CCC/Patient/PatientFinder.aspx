@@ -87,7 +87,8 @@
                                   
                               </div> 
                           </div>
-         </div> 
+         </div>
+
          <div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-info" id="infoGrid">
              <div class="col-md-6">
                  <label class="control-label pull-left text-warning fa fa-search-plus"> Patient Search Results </label>
@@ -96,14 +97,16 @@
                  <button id="btnRemoveGrid" class="btn btn-warning btn-lg btn-sm pull-right fa fa-arrow-circle-o-left" onclick="return false"> Back to Search</button>
              </div>
          </div>
+        
+        <div class="col-md-12 col-xs-12 col-sm-12" style="padding: 5px; text-align: left;" id="infoGridMessage">
+            <strong><h4>Double Click To Select Patient</h4></strong>
+        </div>
 
          <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="PatientSearch">
-      
-
              <table id="tblFindPatient" class="display" style="cursor:pointer" width="100%">
                  <thead>
                     <tr>
-      	                <th style="width: 10px">PatientId</th>
+      	                <th style="width: 10px; display: none;">PatientId</th>
                         <th>CCC Number</th>
       	                <th>First Name</th>
       	                <th>Middle Name</th>
@@ -118,7 +121,7 @@
                  <tbody></tbody>
                  <tfoot>
                     <tr>
-      	                <th style="width: 10px">PatientId</th>
+      	                <th style="width: 10px;display: none;">PatientId</th>
                         <th>CCC Number</th>
       	                <th>First Name</th>
       	                <th>Middle Name</th>
@@ -159,7 +162,11 @@
         </tfoot>
     </table>
         </div>--%>
-            
+        <style type="text/css">
+            .sorting_1 {
+                display: none;
+            }
+        </style>
     </div><%--.col-md-12--%>
     
     <script type="text/javascript">
@@ -181,6 +188,7 @@
                                 $("#searchGrid").slideDown("fast");
                             });
                     });
+                $("#infoGridMessage").slideUp("fast");
             });
 
             $("#btnClose").click(function() {
@@ -198,6 +206,7 @@
 
             $("#PatientSearch").hide();
             $("#infoGrid").hide();
+            $("#infoGridMessage").hide();
 
             //$("#SearchDoB")
             //    .datepicker({ allowPastDates: true, momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' } });
@@ -269,7 +278,8 @@
                                             function() {
                                                 $("#divAction").hide("fast");
                                                 $("#infoGrid")
-                                                    .slideDown("fast", function() { $("#searchGrid").slideUp("fast") });
+                                                    .slideDown("fast", function () { $("#searchGrid").slideUp("fast") });
+                                                $("#infoGridMessage").slideDown("fast");
                                             });
                                 }
                             },
