@@ -3,12 +3,9 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using Interface.CCC.Visit;
-using Entities.CCC.Encounter;
 using Application.Presentation;
-using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
-using IQCare.Web.Laboratory;
 using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService

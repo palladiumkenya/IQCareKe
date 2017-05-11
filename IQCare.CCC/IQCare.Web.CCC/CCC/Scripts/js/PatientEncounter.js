@@ -407,6 +407,10 @@ function ChkQtyDispensed()
         $("#txtQuantityDisp").val("0");
         document.getElementById("txtQuantityDisp").focus();
         toastr.error("Error", "Quantity dispensed cannot be greater than quantity prescribed.");
+        $("#btnAddDrugs").prop('disabled', true);
+    }
+    else {
+        $("#btnAddDrugs").prop('disabled', false);
     }
 }
 

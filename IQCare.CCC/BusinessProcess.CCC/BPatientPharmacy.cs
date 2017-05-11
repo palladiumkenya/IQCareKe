@@ -16,7 +16,8 @@ namespace BusinessProcess.CCC
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string RegimenType, string DispensedBy, string RegimenLine, string ModuleID, 
             List<DrugPrescription> drugPrescription, string pmscmFlag, string TreatmentProgram,
-            string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen)
+            string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen, string prescriptionDate,
+            string dispensedDate)
         {
             lock (this)
             {
@@ -37,10 +38,20 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@TreatmentPlan", SqlDbType.VarChar, TreatmentPlan);
                 ClsUtility.AddParameters("@TreatmentPlanReason", SqlDbType.VarChar, TreatmentPlanReason);
                 ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, Regimen);
+                ClsUtility.AddParameters("@PrescribedDate", SqlDbType.VarChar, prescriptionDate);
+                ClsUtility.AddParameters("@DispensedDate", SqlDbType.VarChar, dispensedDate);
 
 
                 DataRow theDR = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveUpdatePharmacy_GreenCard", ClsUtility.ObjectEnum.DataRow);
                 string ptn_pharmacy_pk = theDR[0].ToString();
+
+                /////////////////////////////////////////////////
+                ClsObject deletePharm = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk);
+
+                int k = (int)deletePharm.ReturnObject(ClsUtility.theParams, "sp_DeletePharmacyPrescription_GreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                ////////////////////////////////////////////////
 
                 foreach (var drg in drugPrescription)
                 {
@@ -231,6 +242,8 @@ namespace BusinessProcess.CCC
                     drg.TreatmentPlanReason = theDT.Rows[i]["TreatmentStatusReasonId"].ToString();
                     drg.RegimenLine = theDT.Rows[i]["RegimenLineId"].ToString();
                     drg.Regimen = theDT.Rows[i]["RegimenId"].ToString();
+                    drg.prescriptionDate = theDT.Rows[i]["OrderedByDate"].ToString();
+                    drg.dispenseDate = theDT.Rows[i]["DispensedByDate"].ToString();
                     list.Add(drg);
                 }
 

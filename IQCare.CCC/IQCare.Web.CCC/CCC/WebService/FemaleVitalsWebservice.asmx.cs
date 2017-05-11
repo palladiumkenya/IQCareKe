@@ -30,7 +30,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession =true)]
-        public string AddPatientPregnancyIndicator(int patientId, int patientMasterVisitId, DateTime lmp, DateTime edd, int pregnancyStatusId, bool ancProfile, DateTime ancProfileDate, int userId)
+        public string AddPatientPregnancyIndicator(int patientId, int patientMasterVisitId,DateTime visitDate, DateTime lmp, DateTime edd, int pregnancyStatusId, int ancProfile, DateTime ancProfileDate, int userId)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace IQCare.Web.CCC.WebService
                 patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
-                result = patientPreganancyIndicator.AddPregnancyIndicator(patientId, patientMasterVisitId, lmp, edd, pregnancyStatusId, ancProfile, ancProfileDate, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                result = patientPreganancyIndicator.AddPregnancyIndicator(patientId, patientMasterVisitId,visitDate, lmp, edd, pregnancyStatusId, ancProfile, ancProfileDate, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage=(result>0)? "Pregnancy Indicator added successfully" : "";
             }
             catch (Exception e)
@@ -70,7 +70,7 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
 
-        public string AddPatientFamilyPlanning(int patientId, int patientMasterVisitId, int FamilyPlanningStatusId, int ReasonNoOnFp, int userId)
+        public string AddPatientFamilyPlanning(int patientId, int patientMasterVisitId, DateTime visitDate, int FamilyPlanningStatusId, int ReasonNoOnFp, int userId)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace IQCare.Web.CCC.WebService
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var familyPlanning = new PatientFamilyPlanningManager();
-                result = familyPlanning.AddFamilyPlanningStatus(patientId, patientMasterVisitId, FamilyPlanningStatusId, ReasonNoOnFp, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                result = familyPlanning.AddFamilyPlanningStatus(patientId, patientMasterVisitId,visitDate, FamilyPlanningStatusId, ReasonNoOnFp, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage = (result > 0) ? "Family planning status added successfuly" : "";
 
             }
@@ -109,7 +109,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientScreening(int patientId, int patientMasterVisitid, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
+        public string AddPatientScreening(int patientId, int patientMasterVisitid, DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace IQCare.Web.CCC.WebService
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var patientScreening = new PatientScreeningManager();
-                result = patientScreening.AddPatientScreening(patientId, patientMasterVisitId, screeningTypeId, screeningDone, screeningDate, screeningCategoryId, screeningValueId, comment, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                result = patientScreening.AddPatientScreening(patientId, patientMasterVisitId,visitDate, screeningTypeId, screeningDone, screeningDate, screeningCategoryId, screeningValueId, comment, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage = (result > 0) ? "Patient screening addedd successfully!" : "";
             }
             catch (Exception e)

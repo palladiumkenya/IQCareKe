@@ -169,6 +169,8 @@ namespace Entities.CCC.Encounter
             public string TreatmentPlanReason { get; set; }
             public string RegimenLine { get; set; }
             public string Regimen { get; set; }
+            public string prescriptionDate { get; set; }
+            public string dispenseDate { get; set; }
         }
 
         [Serializable]

@@ -215,19 +215,20 @@ namespace IQCare.Web.CCC.Patient
                 {
                     var patientTreatmentManager =new PatientTreatmentTrackerManager();
                     var ptnTreatmentInitiation = patientTreatmentManager.GetCurrentPatientRegimen(PatientId);
+                    var ptnTreatmentBaseline = patientTreatmentManager.GetPatientbaselineRegimenLookup(PatientId);
                     if (ptnTreatmentInitiation != null)
                     {
-                        lblFirstline.Text = ptnTreatmentInitiation.CreateDate.ToString("dd-MMM-yyyy");
-                        lblcohort.Text = ptnTreatmentInitiation.CreateDate.ToString("MMM")  + "-" + ptnTreatmentInitiation.CreateDate.Year;
+                        lblFirstline.Text = ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
+                        lblcohort.Text = ptnTreatmentBaseline.CreateDate.ToString("MMM")  + "-" + ptnTreatmentInitiation.CreateDate.Year;
                         lblRegimenName.Text = ptnTreatmentInitiation.Regimen.ToString();
-                        lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentInitiation.Regimen.ToString() + "</span>";
-
+                        lblCurrentRegimen.Text = "<span class='label label-success'>" + ptnTreatmentBaseline.Regimen.ToString() + "</span>";
+                        lblARTInitiationDate.Text= ptnTreatmentBaseline.CreateDate.ToString("dd-MMM-yyyy");
                     }
                     else
                     {
                         lblDateOfARTInitiation.Text = "<span class='label label-danger'> NO dispensing</span>";
                         lblcohort.Text = "<span class='label label-danger'>N/A</span>";
-                        lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVS</span>";
+                        lblCurrentRegimen.Text = "<span class='label label-danger'>PATIENT NOT ON ARVs</span>";
 
                     }
                 }
@@ -256,7 +257,7 @@ namespace IQCare.Web.CCC.Patient
                         // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
                         if (PatientType == "New")
                         {
-                            lblbaselineVL.Text = Convert.ToString(vlValue);
+                            //lblbaselineVL.Text = Convert.ToString(vlValue);
                             DateTime x = Convert.ToDateTime(labOrder.SampleDate);
                             lblBlDate.Text = x.ToString("dd-MMM-yyyy");
                         }
@@ -270,8 +271,10 @@ namespace IQCare.Web.CCC.Patient
                         {
                                
                             case "Pending":
-                                lblVL.Text = "<span class='label label-warning'>" + labOrder.Results + "/ Date: " + ((DateTime)labOrder.SampleDate).ToString("DD-MMM-YYY") + "</span>";
-                                lblvlDueDate.Text = "<span class='label label-success'> N/A </span>";
+                                var pendingDueDate =Convert.ToDateTime(labOrder.SampleDate);
+                                lblVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                lblbaselineVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                lblvlDueDate.Text = "<span class='label label-success'> "+pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") +" </span>";
                                 break;
                             case "Complete":
                                 if (vlValue > 1000)

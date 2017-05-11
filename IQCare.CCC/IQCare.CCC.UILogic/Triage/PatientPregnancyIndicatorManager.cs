@@ -10,23 +10,24 @@ namespace IQCare.CCC.UILogic.Triage
     {
         private IpatientPregnancyIndicatorManager _PregnancyIndicator = (IpatientPregnancyIndicatorManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.PatientPregnancyIndicatorManager, BusinessProcess.CCC");
 
-        public int AddPregnancyIndicator(int patientId,int patientMasterVisitId,DateTime lmp,DateTime edd,int pregnancyStatusId,bool ancProfile,DateTime ancProfileDate,int userId)
+        public int AddPregnancyIndicator(int patientId,int patientMasterVisitId,DateTime visitDate ,DateTime lmp,DateTime edd,int pregnancyStatusId,int ancProfile,DateTime ancProfileDate,int userId)
         {
             try
             {
-                var PG = new PatientPregnancyIndicator()
+                var pg = new PatientPregnancyIndicator()
                 {
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
+                    VisitDate = visitDate,
                     LMP = lmp,
                     EDD = edd,
                     PregnancyStatusId = pregnancyStatusId,
-                    ANCProfile = ancProfile,
-                    ANCProfileDate = ancProfileDate,
+                    AncProfile = ancProfile,
+                    AncProfileDate = ancProfileDate,
                     CreatedBy = userId
                 };
 
-                return _PregnancyIndicator.AddPregnancyIndicator(PG);
+                return _PregnancyIndicator.AddPregnancyIndicator(pg);
             }
             catch (Exception)
             {
@@ -40,9 +41,9 @@ namespace IQCare.CCC.UILogic.Triage
             return _PregnancyIndicator.CheckIfPregnancyIndicatorExisists(patientId);
         }
 
-        public int DeletePregnancyIndicator(int Id)
+        public int DeletePregnancyIndicator(int id)
         {
-            return _PregnancyIndicator.DeletePregnancyIndicator(Id);
+            return _PregnancyIndicator.DeletePregnancyIndicator(id);
         }
 
         public List<PatientPregnancyIndicator> GetPregnancyIndicator(int patientId)
@@ -58,20 +59,21 @@ namespace IQCare.CCC.UILogic.Triage
             }
         }
 
-        public int UpdatePreganacyIndcator(int Id,DateTime lmp, DateTime edd, int pregnancyStatusId, bool ancProfile, DateTime ancProfileDate)
+        public int UpdatePreganacyIndcator(int id,DateTime visitDate,DateTime lmp, DateTime edd, int pregnancyStatusId, int ancProfile, DateTime ancProfileDate)
         {
             try
             {
-                var PG = new PatientPregnancyIndicator()
+                var pg = new PatientPregnancyIndicator()
                 {
-                    Id = Id,
+                    Id = id,
+                    VisitDate = visitDate,
                     LMP = lmp,
                     EDD = edd,
                     PregnancyStatusId = pregnancyStatusId,
-                    ANCProfile = ancProfile,
-                    ANCProfileDate = ancProfileDate
+                    AncProfile = ancProfile,
+                    AncProfileDate = ancProfileDate
                 };
-                return _PregnancyIndicator.UpdatePreganacyIndcator(PG);
+                return _PregnancyIndicator.UpdatePreganacyIndcator(pg);
             }
             catch (Exception)
             {

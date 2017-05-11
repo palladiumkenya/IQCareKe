@@ -97,6 +97,7 @@ If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begi
 If Not Exists(Select 1 From LookupMaster where Name='Allergies') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Allergies',null,0); End
 If Not Exists(Select 1 From LookupMaster where Name='AdheranceMeasurement') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdheranceMeasurement',null,0); End
 If Not Exists(Select 1 From LookupMaster where Name='IptOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('IptOutcome',null,0); End
+If Not Exists(Select 1 From LookupMaster where Name='Unknown') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Unknown','Unknown',0); End
 
 
 --Lookup items
@@ -3278,5 +3279,2858 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Wants Family Planning',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='WFP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'No Family Planning',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='NOFP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Family Planning',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='FP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  )         ItemId  FROM LookupMaster  WHERE Name='Unknown') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+TRUNCATE TABLE [dbo].[County]
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1, 1, N'MOMBASA', 1, N'CHANGAMWE', 1, N'PORT REITZ')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (2, 1, N'MOMBASA', 1, N'CHANGAMWE', 2, N'KIPEVU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (3, 1, N'MOMBASA', 1, N'CHANGAMWE', 3, N'AIRPORT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (4, 1, N'MOMBASA', 1, N'CHANGAMWE', 4, N'CHANGAMWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (5, 1, N'MOMBASA', 1, N'CHANGAMWE', 5, N'CHAANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (6, 1, N'MOMBASA', 2, N'JOMVU', 6, N'JOMVU KUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (7, 1, N'MOMBASA', 2, N'JOMVU', 7, N'MIRITINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (8, 1, N'MOMBASA', 2, N'JOMVU', 8, N'MIKINDANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (9, 1, N'MOMBASA', 3, N'KISAUNI', 9, N'MJAMBERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (10, 1, N'MOMBASA', 3, N'KISAUNI', 10, N'JUNDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (11, 1, N'MOMBASA', 3, N'KISAUNI', 11, N'BAMBURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (12, 1, N'MOMBASA', 3, N'KISAUNI', 12, N'MWAKIRUNGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (13, 1, N'MOMBASA', 3, N'KISAUNI', 13, N'MTOPANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (14, 1, N'MOMBASA', 3, N'KISAUNI', 14, N'MAGOGONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (15, 1, N'MOMBASA', 3, N'KISAUNI', 15, N'SHANZU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (16, 1, N'MOMBASA', 4, N'NYALI', 16, N'FRERE TOWN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (17, 1, N'MOMBASA', 4, N'NYALI', 17, N'ZIWA LA NG''OMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (18, 1, N'MOMBASA', 4, N'NYALI', 18, N'MKOMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (19, 1, N'MOMBASA', 4, N'NYALI', 19, N'KONGOWEA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (20, 1, N'MOMBASA', 4, N'NYALI', 20, N'KADZANDANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (21, 1, N'MOMBASA', 5, N'LIKONI', 21, N'MTONGWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (22, 1, N'MOMBASA', 5, N'LIKONI', 22, N'SHIKA ADABU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (23, 1, N'MOMBASA', 5, N'LIKONI', 23, N'BOFU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (24, 1, N'MOMBASA', 5, N'LIKONI', 24, N'LIKONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (25, 1, N'MOMBASA', 5, N'LIKONI', 25, N'TIMBWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (26, 1, N'MOMBASA', 6, N'MVITA', 26, N'MJI WA KALE/MAKADARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (27, 1, N'MOMBASA', 6, N'MVITA', 27, N'TUDOR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (28, 1, N'MOMBASA', 6, N'MVITA', 28, N'TONONOKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (29, 1, N'MOMBASA', 6, N'MVITA', 29, N'SHIMANZI/GANJONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (30, 1, N'MOMBASA', 6, N'MVITA', 30, N'MAJENGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (31, 2, N'KWALE', 7, N'MSAMBWENI', 31, N'GOMBATOBONGWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (32, 2, N'KWALE', 7, N'MSAMBWENI', 32, N'UKUNDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (33, 2, N'KWALE', 7, N'MSAMBWENI', 33, N'KINONDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (34, 2, N'KWALE', 7, N'MSAMBWENI', 34, N'RAMISI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (35, 2, N'KWALE', 8, N'LUNGALUNGA', 35, N'PONGWEKIKONENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (36, 2, N'KWALE', 8, N'LUNGALUNGA', 36, N'DZOMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (37, 2, N'KWALE', 8, N'LUNGALUNGA', 37, N'MWERENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (38, 2, N'KWALE', 8, N'LUNGALUNGA', 38, N'VANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (39, 2, N'KWALE', 9, N'MATUGA', 39, N'TSIMBA GOLINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (40, 2, N'KWALE', 9, N'MATUGA', 40, N'WAA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (41, 2, N'KWALE', 9, N'MATUGA', 41, N'TIWI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (42, 2, N'KWALE', 9, N'MATUGA', 42, N'KUBO SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (43, 2, N'KWALE', 9, N'MATUGA', 43, N'MKONGANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (44, 2, N'KWALE', 10, N'KINANGO', 44, N'NADAVAYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (45, 2, N'KWALE', 10, N'KINANGO', 45, N'PUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (46, 2, N'KWALE', 10, N'KINANGO', 46, N'KINANGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (47, 2, N'KWALE', 10, N'KINANGO', 47, N'MACKINNON-ROAD')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (48, 2, N'KWALE', 10, N'KINANGO', 48, N'CHENGONI/SAMBURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (49, 2, N'KWALE', 10, N'KINANGO', 49, N'MWAVUMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (50, 2, N'KWALE', 10, N'KINANGO', 50, N'KASEMENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (51, 3, N'KILIFI', 11, N'KILIFI NORTH', 51, N'TEZO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (52, 3, N'KILIFI', 11, N'KILIFI NORTH', 52, N'SOKONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (53, 3, N'KILIFI', 11, N'KILIFI NORTH', 53, N'KIBARANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (54, 3, N'KILIFI', 11, N'KILIFI NORTH', 54, N'DABASO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (55, 3, N'KILIFI', 11, N'KILIFI NORTH', 55, N'MATSANGONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (56, 3, N'KILIFI', 11, N'KILIFI NORTH', 56, N'WATAMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (57, 3, N'KILIFI', 11, N'KILIFI NORTH', 57, N'MNARANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (58, 3, N'KILIFI', 12, N'KILIFI SOUTH', 58, N'JUNJU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (59, 3, N'KILIFI', 12, N'KILIFI SOUTH', 59, N'MWARAKAYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (60, 3, N'KILIFI', 12, N'KILIFI SOUTH', 60, N'SHIMO LA TEWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (61, 3, N'KILIFI', 12, N'KILIFI SOUTH', 61, N'CHASIMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (62, 3, N'KILIFI', 12, N'KILIFI SOUTH', 62, N'MTEPENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (63, 3, N'KILIFI', 13, N'KALOLENI', 63, N'MARIAKANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (64, 3, N'KILIFI', 13, N'KALOLENI', 64, N'KAYAFUNGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (65, 3, N'KILIFI', 13, N'KALOLENI', 65, N'KALOLENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (66, 3, N'KILIFI', 13, N'KALOLENI', 66, N'MWANAMWINGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (67, 3, N'KILIFI', 14, N'RABAI', 67, N'MWAWESA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (68, 3, N'KILIFI', 14, N'RABAI', 68, N'RURUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (69, 3, N'KILIFI', 14, N'RABAI', 69, N'KAMBE/RIBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (70, 3, N'KILIFI', 14, N'RABAI', 70, N'RABAI/KISURUTINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (71, 3, N'KILIFI', 15, N'GANZE', 71, N'GANZE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (72, 3, N'KILIFI', 15, N'GANZE', 72, N'BAMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (73, 3, N'KILIFI', 15, N'GANZE', 73, N'JARIBUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (74, 3, N'KILIFI', 15, N'GANZE', 74, N'SOKOKE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (75, 3, N'KILIFI', 16, N'MALINDI', 75, N'JILORE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (76, 3, N'KILIFI', 16, N'MALINDI', 76, N'KAKUYUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (77, 3, N'KILIFI', 16, N'MALINDI', 77, N'GANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (78, 3, N'KILIFI', 16, N'MALINDI', 78, N'MALINDI TOWN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (79, 3, N'KILIFI', 16, N'MALINDI', 79, N'SHELLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (80, 3, N'KILIFI', 17, N'MAGARINI', 80, N'MARAFA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (81, 3, N'KILIFI', 17, N'MAGARINI', 81, N'MAGARINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (82, 3, N'KILIFI', 17, N'MAGARINI', 82, N'GONGONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (83, 3, N'KILIFI', 17, N'MAGARINI', 83, N'ADU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (84, 3, N'KILIFI', 17, N'MAGARINI', 84, N'GARASHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (85, 3, N'KILIFI', 17, N'MAGARINI', 85, N'SABAKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (86, 4, N'TANA RIVER', 18, N'GARSEN', 86, N'KIPINI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (87, 4, N'TANA RIVER', 18, N'GARSEN', 87, N'GARSEN SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (88, 4, N'TANA RIVER', 18, N'GARSEN', 88, N'KIPINI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (89, 4, N'TANA RIVER', 18, N'GARSEN', 89, N'GARSEN CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (90, 4, N'TANA RIVER', 18, N'GARSEN', 90, N'GARSEN WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (91, 4, N'TANA RIVER', 18, N'GARSEN', 91, N'GARSEN NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (92, 4, N'TANA RIVER', 19, N'GALOLE', 92, N'KINAKOMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (93, 4, N'TANA RIVER', 19, N'GALOLE', 93, N'MIKINDUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (94, 4, N'TANA RIVER', 19, N'GALOLE', 94, N'CHEWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (95, 4, N'TANA RIVER', 19, N'GALOLE', 95, N'WAYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (96, 4, N'TANA RIVER', 20, N'BURA', 96, N'CHEWELE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (97, 4, N'TANA RIVER', 20, N'BURA', 97, N'BURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (98, 4, N'TANA RIVER', 20, N'BURA', 98, N'BANGALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (99, 4, N'TANA RIVER', 20, N'BURA', 99, N'SALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (100, 4, N'TANA RIVER', 20, N'BURA', 100, N'MADOGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (101, 5, N'LAMU', 21, N'LAMU EAST', 101, N'FAZA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (102, 5, N'LAMU', 21, N'LAMU EAST', 102, N'KIUNGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (103, 5, N'LAMU', 21, N'LAMU EAST', 103, N'BASUBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (104, 5, N'LAMU', 22, N'LAMU WEST', 104, N'SHELLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (105, 5, N'LAMU', 22, N'LAMU WEST', 105, N'MKOMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (106, 5, N'LAMU', 22, N'LAMU WEST', 106, N'HINDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (107, 5, N'LAMU', 22, N'LAMU WEST', 107, N'MKUNUMBI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (108, 5, N'LAMU', 22, N'LAMU WEST', 108, N'HONGWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (109, 5, N'LAMU', 22, N'LAMU WEST', 109, N'WITU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (110, 5, N'LAMU', 22, N'LAMU WEST', 110, N'BAHARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (111, 6, N'TAITA TAVETA', 23, N'TAVETA', 111, N'CHALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (112, 6, N'TAITA TAVETA', 23, N'TAVETA', 112, N'MAHOO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (113, 6, N'TAITA TAVETA', 23, N'TAVETA', 113, N'BOMENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (114, 6, N'TAITA TAVETA', 23, N'TAVETA', 114, N'MBOGHONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (115, 6, N'TAITA TAVETA', 23, N'TAVETA', 115, N'MATA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (116, 6, N'TAITA TAVETA', 24, N'WUNDANYI', 116, N'WUNDANYI/MBALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (117, 6, N'TAITA TAVETA', 24, N'WUNDANYI', 117, N'WERUGHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (118, 6, N'TAITA TAVETA', 24, N'WUNDANYI', 118, N'WUMINGU/KISHUSHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (119, 6, N'TAITA TAVETA', 24, N'WUNDANYI', 119, N'MWANDA/MGANGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (120, 6, N'TAITA TAVETA', 25, N'MWATATE', 120, N'RONG''E')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (121, 6, N'TAITA TAVETA', 25, N'MWATATE', 121, N'MWATATE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (122, 6, N'TAITA TAVETA', 25, N'MWATATE', 122, N'BURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (123, 6, N'TAITA TAVETA', 25, N'MWATATE', 123, N'CHAWIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (124, 6, N'TAITA TAVETA', 25, N'MWATATE', 124, N'WUSI/KISHAMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (125, 6, N'TAITA TAVETA', 26, N'VOI', 125, N'MBOLOLO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (126, 6, N'TAITA TAVETA', 26, N'VOI', 126, N'SAGALLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (127, 6, N'TAITA TAVETA', 26, N'VOI', 127, N'KALOLENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (128, 6, N'TAITA TAVETA', 26, N'VOI', 128, N'MARUNGU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (129, 6, N'TAITA TAVETA', 26, N'VOI', 129, N'KASIGAU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (130, 6, N'TAITA TAVETA', 26, N'VOI', 130, N'NGOLIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (131, 7, N'GARISSA', 27, N'GARISSA TOWNSHIP', 131, N'WABERI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (132, 7, N'GARISSA', 27, N'GARISSA TOWNSHIP', 132, N'GALBET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (133, 7, N'GARISSA', 27, N'GARISSA TOWNSHIP', 133, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (134, 7, N'GARISSA', 27, N'GARISSA TOWNSHIP', 134, N'IFTIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (135, 7, N'GARISSA', 28, N'BALAMBALA', 135, N'BALAMBALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (136, 7, N'GARISSA', 28, N'BALAMBALA', 136, N'DANYERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (137, 7, N'GARISSA', 28, N'BALAMBALA', 137, N'JARA JARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (138, 7, N'GARISSA', 28, N'BALAMBALA', 138, N'SAKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (139, 7, N'GARISSA', 28, N'BALAMBALA', 139, N'SANKURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (140, 7, N'GARISSA', 29, N'LAGDERA', 140, N'MODOGASHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (141, 7, N'GARISSA', 29, N'LAGDERA', 141, N'BENANE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (142, 7, N'GARISSA', 29, N'LAGDERA', 142, N'GOREALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (143, 7, N'GARISSA', 29, N'LAGDERA', 143, N'MAALIMIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (144, 7, N'GARISSA', 29, N'LAGDERA', 144, N'SABENA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (145, 7, N'GARISSA', 29, N'LAGDERA', 145, N'BARAKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (146, 7, N'GARISSA', 30, N'DADAAB', 146, N'DERTU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (147, 7, N'GARISSA', 30, N'DADAAB', 147, N'DADAAB')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (148, 7, N'GARISSA', 30, N'DADAAB', 148, N'LABASIGALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (149, 7, N'GARISSA', 30, N'DADAAB', 149, N'DAMAJALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (150, 7, N'GARISSA', 30, N'DADAAB', 150, N'LIBOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (151, 7, N'GARISSA', 30, N'DADAAB', 151, N'ABAKAILE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (152, 7, N'GARISSA', 31, N'FAFI', 152, N'BURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (153, 7, N'GARISSA', 31, N'FAFI', 153, N'DEKAHARIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (154, 7, N'GARISSA', 31, N'FAFI', 154, N'JARAJILA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (155, 7, N'GARISSA', 31, N'FAFI', 155, N'FAFI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (156, 7, N'GARISSA', 31, N'FAFI', 156, N'NANIGHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (157, 7, N'GARISSA', 32, N'IJARA', 157, N'HULUGHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (158, 7, N'GARISSA', 32, N'IJARA', 158, N'SANGAILU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (159, 7, N'GARISSA', 32, N'IJARA', 159, N'IJARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (160, 7, N'GARISSA', 32, N'IJARA', 160, N'MASALANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (161, 8, N'WAJIR', 33, N'WAJIR NORTH', 161, N'GURAR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (162, 8, N'WAJIR', 33, N'WAJIR NORTH', 162, N'BUTE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (163, 8, N'WAJIR', 33, N'WAJIR NORTH', 163, N'KORONDILE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (164, 8, N'WAJIR', 33, N'WAJIR NORTH', 164, N'MALKAGUFU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (165, 8, N'WAJIR', 33, N'WAJIR NORTH', 165, N'BATALU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (166, 8, N'WAJIR', 33, N'WAJIR NORTH', 166, N'DANABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (167, 8, N'WAJIR', 33, N'WAJIR NORTH', 167, N'GODOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (168, 8, N'WAJIR', 34, N'WAJIR EAST', 168, N'WAGBERI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (169, 8, N'WAJIR', 34, N'WAJIR EAST', 169, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (170, 8, N'WAJIR', 34, N'WAJIR EAST', 170, N'BARWAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (171, 8, N'WAJIR', 34, N'WAJIR EAST', 171, N'KHOROF/HARAR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (172, 8, N'WAJIR', 35, N'TARBAJ', 172, N'ELBEN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (173, 8, N'WAJIR', 35, N'TARBAJ', 173, N'SARMAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (174, 8, N'WAJIR', 35, N'TARBAJ', 174, N'TARBAJ')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (175, 8, N'WAJIR', 35, N'TARBAJ', 175, N'WARGADUD')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (176, 8, N'WAJIR', 36, N'WAJIR WEST', 176, N'ARBAJAHAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (177, 8, N'WAJIR', 36, N'WAJIR WEST', 177, N'HADADO/ATHIBOHOL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (178, 8, N'WAJIR', 36, N'WAJIR WEST', 178, N'ADEMASAJIDE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (179, 8, N'WAJIR', 36, N'WAJIR WEST', 179, N'WAGALLA/GANYURE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (180, 8, N'WAJIR', 37, N'ELDAS', 180, N'ELDAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (181, 8, N'WAJIR', 37, N'ELDAS', 181, N'DELLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (182, 8, N'WAJIR', 37, N'ELDAS', 182, N'LAKOLEY SOUTH/BASIR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (183, 8, N'WAJIR', 37, N'ELDAS', 183, N'ELNUR/TULA TULA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (184, 8, N'WAJIR', 38, N'WAJIR SOUTH', 184, N'BENANE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (185, 8, N'WAJIR', 38, N'WAJIR SOUTH', 185, N'BURDER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (186, 8, N'WAJIR', 38, N'WAJIR SOUTH', 186, N'DADAJA BULLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (187, 8, N'WAJIR', 38, N'WAJIR SOUTH', 187, N'HABASSWEIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (188, 8, N'WAJIR', 38, N'WAJIR SOUTH', 188, N'LAGBOGHOL SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (189, 8, N'WAJIR', 38, N'WAJIR SOUTH', 189, N'IBRAHIM URE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (190, 8, N'WAJIR', 38, N'WAJIR SOUTH', 190, N'DIIF')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (191, 9, N'MANDERA', 39, N'MANDERA WEST', 191, N'TAKABA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (192, 9, N'MANDERA', 39, N'MANDERA WEST', 192, N'TAKABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (193, 9, N'MANDERA', 39, N'MANDERA WEST', 193, N'LAG SURE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (194, 9, N'MANDERA', 39, N'MANDERA WEST', 194, N'DANDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (195, 9, N'MANDERA', 39, N'MANDERA WEST', 195, N'GITHER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (196, 9, N'MANDERA', 40, N'BANISSA', 196, N'BANISSA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (197, 9, N'MANDERA', 40, N'BANISSA', 197, N'DERKHALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (198, 9, N'MANDERA', 40, N'BANISSA', 198, N'GUBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (199, 9, N'MANDERA', 40, N'BANISSA', 199, N'MALKAMARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (200, 9, N'MANDERA', 40, N'BANISSA', 200, N'KILIWEHIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (201, 9, N'MANDERA', 41, N'MANDERA NORTH', 201, N'ASHABITO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (202, 9, N'MANDERA', 41, N'MANDERA NORTH', 202, N'GUTICHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (203, 9, N'MANDERA', 41, N'MANDERA NORTH', 203, N'MOROTHILE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (204, 9, N'MANDERA', 41, N'MANDERA NORTH', 204, N'RHAMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (205, 9, N'MANDERA', 41, N'MANDERA NORTH', 205, N'RHAMU-DIMTU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (206, 9, N'MANDERA', 42, N'MANDERA SOUTH', 206, N'WARGUDUD')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (207, 9, N'MANDERA', 42, N'MANDERA SOUTH', 207, N'KUTULO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (208, 9, N'MANDERA', 42, N'MANDERA SOUTH', 208, N'ELWAK SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (209, 9, N'MANDERA', 42, N'MANDERA SOUTH', 209, N'ELWAK NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (210, 9, N'MANDERA', 42, N'MANDERA SOUTH', 210, N'SHIMBIR FATUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (211, 9, N'MANDERA', 43, N'MANDERA EAST', 211, N'ARABIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (212, 9, N'MANDERA', 43, N'MANDERA EAST', 212, N'BULLA MPYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (213, 9, N'MANDERA', 43, N'MANDERA EAST', 213, N'KHALALIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (214, 9, N'MANDERA', 43, N'MANDERA EAST', 214, N'NEBOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (215, 9, N'MANDERA', 43, N'MANDERA EAST', 215, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (216, 9, N'MANDERA', 44, N'LAFEY', 216, N'LIBEHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (217, 9, N'MANDERA', 44, N'LAFEY', 217, N'FINO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (218, 9, N'MANDERA', 44, N'LAFEY', 218, N'LAFEY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (219, 9, N'MANDERA', 44, N'LAFEY', 219, N'WARANKARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (220, 9, N'MANDERA', 44, N'LAFEY', 220, N'ALUNGO GOF')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (221, 10, N'MARSABIT', 45, N'MOYALE', 221, N'BUTIYE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (222, 10, N'MARSABIT', 45, N'MOYALE', 222, N'SOLOLO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (223, 10, N'MARSABIT', 45, N'MOYALE', 223, N'HEILU-MANYATTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (224, 10, N'MARSABIT', 45, N'MOYALE', 224, N'GOLBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (225, 10, N'MARSABIT', 45, N'MOYALE', 225, N'MOYALE TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (226, 10, N'MARSABIT', 45, N'MOYALE', 226, N'URAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (227, 10, N'MARSABIT', 45, N'MOYALE', 227, N'OBBU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (228, 10, N'MARSABIT', 46, N'NORTH HORR', 232, N'ILLERET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (229, 10, N'MARSABIT', 46, N'NORTH HORR', 231, N'NORTH HORR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (230, 10, N'MARSABIT', 46, N'NORTH HORR', 228, N'DUKANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (231, 10, N'MARSABIT', 46, N'NORTH HORR', 229, N'MAIKONA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (232, 10, N'MARSABIT', 46, N'NORTH HORR', 230, N'TURBI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (233, 10, N'MARSABIT', 47, N'SAKU', 233, N'SAGANTE/JALDESA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (234, 10, N'MARSABIT', 47, N'SAKU', 234, N'KARARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (235, 10, N'MARSABIT', 47, N'SAKU', 235, N'MARSABIT CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (236, 10, N'MARSABIT', 48, N'LAISAMIS', 236, N'LOIYANGALANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (237, 10, N'MARSABIT', 48, N'LAISAMIS', 237, N'KARGI/SOUTH HORR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (238, 10, N'MARSABIT', 48, N'LAISAMIS', 238, N'KORR/NGURUNIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (239, 10, N'MARSABIT', 48, N'LAISAMIS', 239, N'LOG LOGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (240, 10, N'MARSABIT', 48, N'LAISAMIS', 240, N'LAISAMIS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (241, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 241, N'WABERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (242, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 242, N'BULLA PESA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (243, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 243, N'CHARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (244, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 244, N'CHERAB')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (245, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 245, N'NGARE MARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (246, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 246, N'BURAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (247, 11, N'ISIOLO', 49, N'ISIOLO NORTH', 247, N'OLDONYIRO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (248, 11, N'ISIOLO', 50, N'ISIOLO SOUTH', 248, N'GARBATULLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (249, 11, N'ISIOLO', 50, N'ISIOLO SOUTH', 249, N'KINNA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (250, 11, N'ISIOLO', 50, N'ISIOLO SOUTH', 250, N'SERICHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (251, 12, N'MERU', 51, N'IGEMBE SOUTH', 251, N'MAUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (252, 12, N'MERU', 51, N'IGEMBE SOUTH', 252, N'KIEGOI/ANTUBOCHIU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (253, 12, N'MERU', 51, N'IGEMBE SOUTH', 253, N'ATHIRU GAITI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (254, 12, N'MERU', 51, N'IGEMBE SOUTH', 254, N'AKACHIU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (255, 12, N'MERU', 51, N'IGEMBE SOUTH', 255, N'KANUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (256, 12, N'MERU', 52, N'IGEMBE CENTRAL', 256, N'AKIRANG''ONDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (257, 12, N'MERU', 52, N'IGEMBE CENTRAL', 257, N'ATHIRU RUUJINE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (258, 12, N'MERU', 52, N'IGEMBE CENTRAL', 258, N'IGEMBE EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (259, 12, N'MERU', 52, N'IGEMBE CENTRAL', 259, N'NJIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (260, 12, N'MERU', 52, N'IGEMBE CENTRAL', 260, N'KANGETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (261, 12, N'MERU', 53, N'IGEMBE NORTH', 261, N'ANTUAMBUI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (262, 12, N'MERU', 53, N'IGEMBE NORTH', 262, N'NTUNENE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (263, 12, N'MERU', 53, N'IGEMBE NORTH', 263, N'ANTUBETWE KIONGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (264, 12, N'MERU', 53, N'IGEMBE NORTH', 264, N'NAATHU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (265, 12, N'MERU', 53, N'IGEMBE NORTH', 265, N'AMWATHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (266, 12, N'MERU', 54, N'TIGANIA WEST', 266, N'ATHWANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (267, 12, N'MERU', 54, N'TIGANIA WEST', 267, N'AKITHII')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (268, 12, N'MERU', 54, N'TIGANIA WEST', 268, N'KIANJAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (269, 12, N'MERU', 54, N'TIGANIA WEST', 269, N'NKOMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (270, 12, N'MERU', 54, N'TIGANIA WEST', 270, N'MBEU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (271, 12, N'MERU', 55, N'TIGANIA EAST', 271, N'THANGATHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (272, 12, N'MERU', 55, N'TIGANIA EAST', 272, N'MIKINDURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (273, 12, N'MERU', 55, N'TIGANIA EAST', 273, N'KIGUCHWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (274, 12, N'MERU', 55, N'TIGANIA EAST', 274, N'MUTHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (275, 12, N'MERU', 55, N'TIGANIA EAST', 275, N'KARAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (276, 12, N'MERU', 56, N'NORTH IMENTI', 276, N'MUNICIPALITY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (277, 12, N'MERU', 56, N'NORTH IMENTI', 277, N'NTIMA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (278, 12, N'MERU', 56, N'NORTH IMENTI', 278, N'NTIMA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (279, 12, N'MERU', 56, N'NORTH IMENTI', 279, N'NYAKI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (280, 12, N'MERU', 56, N'NORTH IMENTI', 280, N'NYAKI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (281, 12, N'MERU', 57, N'BUURI', 281, N'TIMAU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (282, 12, N'MERU', 57, N'BUURI', 282, N'KISIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (283, 12, N'MERU', 57, N'BUURI', 283, N'KIIRUA/NAARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (284, 12, N'MERU', 57, N'BUURI', 284, N'RUIRI/RWARERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (285, 12, N'MERU', 57, N'BUURI', 289, N'KIBIRICHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (286, 12, N'MERU', 58, N'CENTRAL IMENTI', 285, N'MWANGANTHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (287, 12, N'MERU', 58, N'CENTRAL IMENTI', 286, N'ABOTHUGUCHI CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (288, 12, N'MERU', 58, N'CENTRAL IMENTI', 287, N'ABOTHUGUCHI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (289, 12, N'MERU', 58, N'CENTRAL IMENTI', 288, N'KIAGU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (290, 12, N'MERU', 59, N'SOUTH IMENTI', 290, N'MITUNGUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (291, 12, N'MERU', 59, N'SOUTH IMENTI', 291, N'IGOJI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (292, 12, N'MERU', 59, N'SOUTH IMENTI', 292, N'IGOJI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (293, 12, N'MERU', 59, N'SOUTH IMENTI', 293, N'ABOGETA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (294, 12, N'MERU', 59, N'SOUTH IMENTI', 294, N'ABOGETA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (295, 12, N'MERU', 59, N'SOUTH IMENTI', 295, N'NKUENE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (296, 13, N'THARAKA - NITHI', 60, N'MAARA', 296, N'MITHERU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (297, 13, N'THARAKA - NITHI', 60, N'MAARA', 297, N'MUTHAMBI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (298, 13, N'THARAKA - NITHI', 60, N'MAARA', 298, N'MWIMBI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (299, 13, N'THARAKA - NITHI', 60, N'MAARA', 299, N'GANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (300, 13, N'THARAKA - NITHI', 60, N'MAARA', 300, N'CHOGORIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (301, 13, N'THARAKA - NITHI', 61, N'CHUKA/IGAMBANG''OM', 301, N'MARIANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (302, 13, N'THARAKA - NITHI', 61, N'CHUKA/IGAMBANG''OM', 302, N'KARINGANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (303, 13, N'THARAKA - NITHI', 61, N'CHUKA/IGAMBANG''OM', 303, N'MAGUMONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (304, 13, N'THARAKA - NITHI', 61, N'CHUKA/IGAMBANG''OM', 304, N'MUGWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (305, 13, N'THARAKA - NITHI', 61, N'CHUKA/IGAMBANG''OM', 305, N'IGAMBANG''OMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (306, 13, N'THARAKA - NITHI', 62, N'THARAKA', 306, N'GATUNGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (307, 13, N'THARAKA - NITHI', 62, N'THARAKA', 307, N'MUKOTHIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (308, 13, N'THARAKA - NITHI', 62, N'THARAKA', 308, N'NKONDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (309, 13, N'THARAKA - NITHI', 62, N'THARAKA', 309, N'CHIAKARIGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (310, 13, N'THARAKA - NITHI', 62, N'THARAKA', 310, N'MARIMANTI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (311, 14, N'EMBU', 63, N'MANYATTA', 311, N'RUGURU/NGANDORI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (312, 14, N'EMBU', 63, N'MANYATTA', 312, N'KITHIMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (313, 14, N'EMBU', 63, N'MANYATTA', 313, N'NGINDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (314, 14, N'EMBU', 63, N'MANYATTA', 314, N'MBETI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (315, 14, N'EMBU', 63, N'MANYATTA', 315, N'KIRIMARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (316, 14, N'EMBU', 63, N'MANYATTA', 316, N'GATURI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (317, 14, N'EMBU', 64, N'RUNYENJES', 317, N'GATURI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (318, 14, N'EMBU', 64, N'RUNYENJES', 318, N'KAGAARI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (319, 14, N'EMBU', 64, N'RUNYENJES', 319, N'CENTRAL  WARD')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (320, 14, N'EMBU', 64, N'RUNYENJES', 320, N'KAGAARI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (321, 14, N'EMBU', 64, N'RUNYENJES', 321, N'KYENI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (322, 14, N'EMBU', 64, N'RUNYENJES', 322, N'KYENI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (323, 14, N'EMBU', 65, N'MBEERE SOUTH', 323, N'MWEA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (324, 14, N'EMBU', 65, N'MBEERE SOUTH', 324, N'MAKIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (325, 14, N'EMBU', 65, N'MBEERE SOUTH', 325, N'MBETI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (326, 14, N'EMBU', 65, N'MBEERE SOUTH', 326, N'MAVURIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (327, 14, N'EMBU', 65, N'MBEERE SOUTH', 327, N'KIAMBERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (328, 14, N'EMBU', 66, N'MBEERE NORTH', 328, N'NTHAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (329, 14, N'EMBU', 66, N'MBEERE NORTH', 329, N'MUMINJI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (330, 14, N'EMBU', 66, N'MBEERE NORTH', 330, N'EVURORE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (331, 15, N'KITUI', 67, N'MWINGI NORTH', 331, N'NGOMENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (332, 15, N'KITUI', 67, N'MWINGI NORTH', 332, N'KYUSO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (333, 15, N'KITUI', 67, N'MWINGI NORTH', 333, N'MUMONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (334, 15, N'KITUI', 67, N'MWINGI NORTH', 334, N'TSEIKURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (335, 15, N'KITUI', 67, N'MWINGI NORTH', 335, N'THARAKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (336, 15, N'KITUI', 68, N'MWINGI WEST', 336, N'KYOME/THAANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (337, 15, N'KITUI', 68, N'MWINGI WEST', 337, N'NGUUTANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (338, 15, N'KITUI', 68, N'MWINGI WEST', 338, N'MIGWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (339, 15, N'KITUI', 68, N'MWINGI WEST', 339, N'KIOMO/KYETHANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (340, 15, N'KITUI', 69, N'MWINGI CENTRAL', 340, N'CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (341, 15, N'KITUI', 69, N'MWINGI CENTRAL', 341, N'KIVOU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (342, 15, N'KITUI', 69, N'MWINGI CENTRAL', 342, N'NGUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (343, 15, N'KITUI', 69, N'MWINGI CENTRAL', 343, N'NUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (344, 15, N'KITUI', 69, N'MWINGI CENTRAL', 344, N'MUI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (345, 15, N'KITUI', 69, N'MWINGI CENTRAL', 345, N'WAITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (346, 15, N'KITUI', 70, N'KITUI WEST', 346, N'MUTONGUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (347, 15, N'KITUI', 70, N'KITUI WEST', 347, N'KAUWI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (348, 15, N'KITUI', 70, N'KITUI WEST', 348, N'MATINYANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (349, 15, N'KITUI', 70, N'KITUI WEST', 349, N'KWA MUTONGA/KITHUMULA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (350, 15, N'KITUI', 71, N'KITUI RURAL', 350, N'KISASI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (351, 15, N'KITUI', 71, N'KITUI RURAL', 351, N'MBITINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (352, 15, N'KITUI', 71, N'KITUI RURAL', 352, N'KWAVONZA/YATTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (353, 15, N'KITUI', 71, N'KITUI RURAL', 353, N'KANYANGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (354, 15, N'KITUI', 72, N'KITUI CENTRAL', 354, N'MIAMBANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (355, 15, N'KITUI', 72, N'KITUI CENTRAL', 355, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (356, 15, N'KITUI', 72, N'KITUI CENTRAL', 356, N'KYANGWITHYA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (357, 15, N'KITUI', 72, N'KITUI CENTRAL', 357, N'MULANGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (358, 15, N'KITUI', 72, N'KITUI CENTRAL', 358, N'KYANGWITHYA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (359, 15, N'KITUI', 73, N'KITUI EAST', 359, N'ZOMBE/MWITIKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (360, 15, N'KITUI', 73, N'KITUI EAST', 360, N'CHULUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (361, 15, N'KITUI', 73, N'KITUI EAST', 361, N'NZAMBANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (362, 15, N'KITUI', 73, N'KITUI EAST', 362, N'VOO/KYAMATU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (363, 15, N'KITUI', 73, N'KITUI EAST', 363, N'ENDAU/MALALANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (364, 15, N'KITUI', 73, N'KITUI EAST', 364, N'MUTITO/KALIKU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (365, 15, N'KITUI', 74, N'KITUI SOUTH', 365, N'IKANGA/KYATUNE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (366, 15, N'KITUI', 74, N'KITUI SOUTH', 366, N'MUTOMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (367, 15, N'KITUI', 74, N'KITUI SOUTH', 367, N'MUTHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (368, 15, N'KITUI', 74, N'KITUI SOUTH', 368, N'IKUTHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (369, 15, N'KITUI', 74, N'KITUI SOUTH', 369, N'KANZIKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (370, 15, N'KITUI', 74, N'KITUI SOUTH', 370, N'ATHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (371, 16, N'MACHAKOS', 75, N'MASINGA', 371, N'KIVAA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (372, 16, N'MACHAKOS', 75, N'MASINGA', 372, N'MASINGA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (373, 16, N'MACHAKOS', 75, N'MASINGA', 373, N'EKALAKALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (374, 16, N'MACHAKOS', 75, N'MASINGA', 374, N'MUTHESYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (375, 16, N'MACHAKOS', 75, N'MASINGA', 375, N'NDITHINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (376, 16, N'MACHAKOS', 76, N'YATTA', 376, N'NDALANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (377, 16, N'MACHAKOS', 76, N'YATTA', 377, N'MATUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (378, 16, N'MACHAKOS', 76, N'YATTA', 378, N'KITHIMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (379, 16, N'MACHAKOS', 76, N'YATTA', 379, N'IKOMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (380, 16, N'MACHAKOS', 76, N'YATTA', 380, N'KATANGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (381, 16, N'MACHAKOS', 77, N'KANGUNDO', 381, N'KANGUNDO NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (382, 16, N'MACHAKOS', 77, N'KANGUNDO', 382, N'KANGUNDO CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (383, 16, N'MACHAKOS', 77, N'KANGUNDO', 383, N'KANGUNDO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (384, 16, N'MACHAKOS', 77, N'KANGUNDO', 384, N'KANGUNDO WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (385, 16, N'MACHAKOS', 78, N'MATUNGULU', 385, N'TALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (386, 16, N'MACHAKOS', 78, N'MATUNGULU', 386, N'MATUNGULU NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (387, 16, N'MACHAKOS', 78, N'MATUNGULU', 387, N'MATUNGULU EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (388, 16, N'MACHAKOS', 78, N'MATUNGULU', 388, N'MATUNGULU WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (389, 16, N'MACHAKOS', 78, N'MATUNGULU', 389, N'KYELENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (390, 16, N'MACHAKOS', 79, N'KATHIANI', 390, N'MITABONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (391, 16, N'MACHAKOS', 79, N'KATHIANI', 391, N'KATHIANI CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (392, 16, N'MACHAKOS', 79, N'KATHIANI', 392, N'UPPER KAEWA/IVETI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (393, 16, N'MACHAKOS', 79, N'KATHIANI', 393, N'LOWER KAEWA/KAANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (394, 16, N'MACHAKOS', 80, N'MAVOKO', 394, N'ATHI RIVER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (395, 16, N'MACHAKOS', 80, N'MAVOKO', 395, N'KINANIE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (396, 16, N'MACHAKOS', 80, N'MAVOKO', 396, N'MUTHWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (397, 16, N'MACHAKOS', 80, N'MAVOKO', 397, N'SYOKIMAU/MULOLONGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (398, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 398, N'KALAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (399, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 399, N'MUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (400, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 400, N'MUTITUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (401, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 401, N'MACHAKOS CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (402, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 402, N'MUMBUNI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (403, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 403, N'MUVUTI/KIIMA-KIMWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (404, 16, N'MACHAKOS', 81, N'MACHAKOS TOWN', 404, N'KOLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (405, 16, N'MACHAKOS', 82, N'MWALA', 405, N'MBIUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (406, 16, N'MACHAKOS', 82, N'MWALA', 406, N'MAKUTANO/ MWALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (407, 16, N'MACHAKOS', 82, N'MWALA', 407, N'MASII')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (408, 16, N'MACHAKOS', 82, N'MWALA', 408, N'MUTHETHENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (409, 16, N'MACHAKOS', 82, N'MWALA', 409, N'WAMUNYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (410, 16, N'MACHAKOS', 82, N'MWALA', 410, N'KIBAUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (411, 17, N'MAKUENI', 83, N'MBOONI', 411, N'TULIMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (412, 17, N'MAKUENI', 83, N'MBOONI', 412, N'MBOONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (413, 17, N'MAKUENI', 83, N'MBOONI', 413, N'KITHUNGO/KITUNDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (414, 17, N'MAKUENI', 83, N'MBOONI', 414, N'KISAU/KITETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (415, 17, N'MAKUENI', 83, N'MBOONI', 415, N'WAIA/KAKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (416, 17, N'MAKUENI', 83, N'MBOONI', 416, N'KALAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (417, 17, N'MAKUENI', 84, N'KILOME', 417, N'KASIKEU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (418, 17, N'MAKUENI', 84, N'KILOME', 418, N'MUKAA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (419, 17, N'MAKUENI', 84, N'KILOME', 419, N'KIIMA KIU/KALANZONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (420, 17, N'MAKUENI', 85, N'KAITI', 420, N'UKIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (421, 17, N'MAKUENI', 85, N'KAITI', 421, N'KEE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (422, 17, N'MAKUENI', 85, N'KAITI', 422, N'KILUNGU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (423, 17, N'MAKUENI', 85, N'KAITI', 423, N'ILIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (424, 17, N'MAKUENI', 86, N'MAKUENI', 424, N'WOTE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (425, 17, N'MAKUENI', 86, N'MAKUENI', 425, N'MUVAU/KIKUUMINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (426, 17, N'MAKUENI', 86, N'MAKUENI', 426, N'MAVINDINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (427, 17, N'MAKUENI', 86, N'MAKUENI', 427, N'KITISE/KITHUKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (428, 17, N'MAKUENI', 86, N'MAKUENI', 428, N'KATHONZWENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (429, 17, N'MAKUENI', 86, N'MAKUENI', 429, N'NZAUI/KILILI/KALAMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (430, 17, N'MAKUENI', 86, N'MAKUENI', 430, N'MBITINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (431, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 431, N'MAKINDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (432, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 432, N'NGUUMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (433, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 433, N'KIKUMBULYU NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (434, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 434, N'KIKUMBULYU SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (435, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 435, N'NGUU/MASUMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (436, 17, N'MAKUENI', 87, N'KIBWEZI WEST', 436, N'EMALI/MULALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (437, 17, N'MAKUENI', 88, N'KIBWEZI EAST', 437, N'MASONGALENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (438, 17, N'MAKUENI', 88, N'KIBWEZI EAST', 438, N'MTITO ANDEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (439, 17, N'MAKUENI', 88, N'KIBWEZI EAST', 439, N'THANGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (440, 17, N'MAKUENI', 88, N'KIBWEZI EAST', 440, N'IVINGONI/NZAMBANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (441, 18, N'NYANDARUA', 89, N'KINANGOP', 441, N'ENGINEER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (442, 18, N'NYANDARUA', 89, N'KINANGOP', 442, N'GATHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (443, 18, N'NYANDARUA', 89, N'KINANGOP', 443, N'NORTH KINANGOP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (444, 18, N'NYANDARUA', 89, N'KINANGOP', 444, N'MURUNGARU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (445, 18, N'NYANDARUA', 89, N'KINANGOP', 445, N'NJABINI\KIBURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (446, 18, N'NYANDARUA', 89, N'KINANGOP', 446, N'NYAKIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (447, 18, N'NYANDARUA', 89, N'KINANGOP', 447, N'GITHABAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (448, 18, N'NYANDARUA', 89, N'KINANGOP', 448, N'MAGUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (449, 18, N'NYANDARUA', 90, N'KIPIPIRI', 449, N'WANJOHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (450, 18, N'NYANDARUA', 90, N'KIPIPIRI', 450, N'KIPIPIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (451, 18, N'NYANDARUA', 90, N'KIPIPIRI', 451, N'GETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (452, 18, N'NYANDARUA', 90, N'KIPIPIRI', 452, N'GITHIORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (453, 18, N'NYANDARUA', 91, N'OL KALOU', 453, N'KARAU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (454, 18, N'NYANDARUA', 91, N'OL KALOU', 454, N'KANJUIRI RIDGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (455, 18, N'NYANDARUA', 91, N'OL KALOU', 455, N'MIRANGINE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (456, 18, N'NYANDARUA', 91, N'OL KALOU', 456, N'KAIMBAGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (457, 18, N'NYANDARUA', 91, N'OL KALOU', 457, N'RURII')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (458, 18, N'NYANDARUA', 92, N'OL JOROK', 458, N'GATHANJI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (459, 18, N'NYANDARUA', 92, N'OL JOROK', 459, N'GATIMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (460, 18, N'NYANDARUA', 92, N'OL JOROK', 460, N'WERU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (461, 18, N'NYANDARUA', 92, N'OL JOROK', 461, N'CHARAGITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (462, 18, N'NYANDARUA', 93, N'NDARAGWA', 462, N'LESHAU PONDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (463, 18, N'NYANDARUA', 93, N'NDARAGWA', 463, N'KIRIITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (464, 18, N'NYANDARUA', 93, N'NDARAGWA', 464, N'CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (465, 18, N'NYANDARUA', 93, N'NDARAGWA', 465, N'SHAMATA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (466, 19, N'NYERI', 94, N'TETU', 466, N'DEDAN KIMANTHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (467, 19, N'NYERI', 94, N'TETU', 467, N'WAMAGANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (468, 19, N'NYERI', 94, N'TETU', 468, N'AGUTHI/GAAKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (469, 19, N'NYERI', 95, N'KIENI', 469, N'MWEIGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (470, 19, N'NYERI', 95, N'KIENI', 470, N'NAROMORU KIAMATHAGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (471, 19, N'NYERI', 95, N'KIENI', 471, N'MWIYOGO/ENDARASHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (472, 19, N'NYERI', 95, N'KIENI', 472, N'MUGUNDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (473, 19, N'NYERI', 95, N'KIENI', 473, N'GATARAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (474, 19, N'NYERI', 95, N'KIENI', 474, N'THEGU RIVER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (475, 19, N'NYERI', 95, N'KIENI', 475, N'KABARU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (476, 19, N'NYERI', 95, N'KIENI', 476, N'GAKAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (477, 19, N'NYERI', 96, N'MATHIRA', 477, N'RUGURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (478, 19, N'NYERI', 96, N'MATHIRA', 478, N'MAGUTU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (479, 19, N'NYERI', 96, N'MATHIRA', 479, N'IRIAINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (480, 19, N'NYERI', 96, N'MATHIRA', 480, N'KONYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (481, 19, N'NYERI', 96, N'MATHIRA', 481, N'KIRIMUKUYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (482, 19, N'NYERI', 96, N'MATHIRA', 482, N'KARATINA TOWN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (483, 19, N'NYERI', 97, N'OTHAYA', 483, N'MAHIGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (484, 19, N'NYERI', 97, N'OTHAYA', 484, N'IRIA-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (485, 19, N'NYERI', 97, N'OTHAYA', 485, N'CHINGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (486, 19, N'NYERI', 97, N'OTHAYA', 486, N'KARIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (487, 19, N'NYERI', 98, N'MUKURWEINI', 487, N'GIKONDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (488, 19, N'NYERI', 98, N'MUKURWEINI', 488, N'RUGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (489, 19, N'NYERI', 98, N'MUKURWEINI', 489, N'MUKURWE-INI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (490, 19, N'NYERI', 98, N'MUKURWEINI', 490, N'MUKURWE-INI CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (491, 19, N'NYERI', 99, N'NYERI TOWN', 491, N'KIGANJO/MATHARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (492, 19, N'NYERI', 99, N'NYERI TOWN', 492, N'RWARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (493, 19, N'NYERI', 99, N'NYERI TOWN', 493, N'GATITU/MURUGURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (494, 19, N'NYERI', 99, N'NYERI TOWN', 494, N'RURING''U')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (495, 19, N'NYERI', 99, N'NYERI TOWN', 495, N'KAMAKWA/MUKARO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (496, 20, N'KIRINYAGA', 100, N'MWEA', 496, N'MUTITHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (497, 20, N'KIRINYAGA', 100, N'MWEA', 497, N'KANGAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (498, 20, N'KIRINYAGA', 100, N'MWEA', 498, N'THIBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (499, 20, N'KIRINYAGA', 100, N'MWEA', 499, N'WAMUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (500, 20, N'KIRINYAGA', 100, N'MWEA', 500, N'NYANGATI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (501, 20, N'KIRINYAGA', 100, N'MWEA', 501, N'MURINDUKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (502, 20, N'KIRINYAGA', 100, N'MWEA', 502, N'GATHIGIRIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (503, 20, N'KIRINYAGA', 100, N'MWEA', 503, N'TEBERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (504, 20, N'KIRINYAGA', 101, N'GICHUGU', 504, N'KABARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (505, 20, N'KIRINYAGA', 101, N'GICHUGU', 505, N'BARAGWI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (506, 20, N'KIRINYAGA', 101, N'GICHUGU', 506, N'NJUKIINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (507, 20, N'KIRINYAGA', 101, N'GICHUGU', 507, N'NGARIAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (508, 20, N'KIRINYAGA', 101, N'GICHUGU', 508, N'KARUMANDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (509, 20, N'KIRINYAGA', 102, N'NDIA', 509, N'MUKURE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (510, 20, N'KIRINYAGA', 102, N'NDIA', 510, N'KIINE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (511, 20, N'KIRINYAGA', 102, N'NDIA', 511, N'KARITI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (512, 20, N'KIRINYAGA', 103, N'KIRINYAGA CENTRAL', 512, N'MUTIRA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (513, 20, N'KIRINYAGA', 103, N'KIRINYAGA CENTRAL', 513, N'KANYEKI-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (514, 20, N'KIRINYAGA', 103, N'KIRINYAGA CENTRAL', 514, N'KERUGOYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (515, 20, N'KIRINYAGA', 103, N'KIRINYAGA CENTRAL', 515, N'INOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (516, 21, N'MURANG''A', 104, N'KANGEMA', 516, N'KANYENYAINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (517, 21, N'MURANG''A', 104, N'KANGEMA', 517, N'MUGURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (518, 21, N'MURANG''A', 104, N'KANGEMA', 518, N'RWATHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (519, 21, N'MURANG''A', 105, N'MATHIOYA', 519, N'GITUGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (520, 21, N'MURANG''A', 105, N'MATHIOYA', 520, N'KIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (521, 21, N'MURANG''A', 105, N'MATHIOYA', 521, N'KAMACHARIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (522, 21, N'MURANG''A', 106, N'KIHARU', 522, N'WANGU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (523, 21, N'MURANG''A', 106, N'KIHARU', 523, N'MUGOIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (524, 21, N'MURANG''A', 106, N'KIHARU', 524, N'MBIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (525, 21, N'MURANG''A', 106, N'KIHARU', 525, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (526, 21, N'MURANG''A', 106, N'KIHARU', 526, N'MURARANDIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (527, 21, N'MURANG''A', 106, N'KIHARU', 527, N'GATURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (528, 21, N'MURANG''A', 107, N'KIGUMO', 528, N'KAHUMBU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (529, 21, N'MURANG''A', 107, N'KIGUMO', 529, N'MUTHITHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (530, 21, N'MURANG''A', 107, N'KIGUMO', 530, N'KIGUMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (531, 21, N'MURANG''A', 107, N'KIGUMO', 531, N'KANGARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (532, 21, N'MURANG''A', 107, N'KIGUMO', 532, N'KINYONA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (533, 21, N'MURANG''A', 108, N'MARAGWA', 533, N'KIMORORI/WEMPA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (534, 21, N'MURANG''A', 108, N'MARAGWA', 534, N'MAKUYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (535, 21, N'MURANG''A', 108, N'MARAGWA', 535, N'KAMBITI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (536, 21, N'MURANG''A', 108, N'MARAGWA', 536, N'KAMAHUHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (537, 21, N'MURANG''A', 108, N'MARAGWA', 537, N'ICHAGAKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (538, 21, N'MURANG''A', 108, N'MARAGWA', 538, N'NGINDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (539, 21, N'MURANG''A', 109, N'KANDARA', 539, N'NG''ARARIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (540, 21, N'MURANG''A', 109, N'KANDARA', 540, N'MURUKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (541, 21, N'MURANG''A', 109, N'KANDARA', 541, N'KAGUNDU-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (542, 21, N'MURANG''A', 109, N'KANDARA', 542, N'GAICHANJIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (543, 21, N'MURANG''A', 109, N'KANDARA', 543, N'ITHIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (544, 21, N'MURANG''A', 109, N'KANDARA', 544, N'RUCHU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (545, 21, N'MURANG''A', 110, N'GATANGA', 545, N'ITHANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (546, 21, N'MURANG''A', 110, N'GATANGA', 546, N'KAKUZI/MITUBIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (547, 21, N'MURANG''A', 110, N'GATANGA', 547, N'MUGUMO-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (548, 21, N'MURANG''A', 110, N'GATANGA', 548, N'KIHUMBU-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (549, 21, N'MURANG''A', 110, N'GATANGA', 549, N'GATANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (550, 21, N'MURANG''A', 110, N'GATANGA', 550, N'KARIARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (551, 22, N'KIAMBU', 111, N'GATUNDU SOUTH', 551, N'KIAMWANGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (552, 22, N'KIAMBU', 111, N'GATUNDU SOUTH', 552, N'KIGANJO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (553, 22, N'KIAMBU', 111, N'GATUNDU SOUTH', 553, N'NDARUGU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (554, 22, N'KIAMBU', 111, N'GATUNDU SOUTH', 554, N'NGENDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (555, 22, N'KIAMBU', 112, N'GATUNDU NORTH', 555, N'GITUAMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (556, 22, N'KIAMBU', 112, N'GATUNDU NORTH', 556, N'GITHOBOKONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (557, 22, N'KIAMBU', 112, N'GATUNDU NORTH', 557, N'CHANIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (558, 22, N'KIAMBU', 112, N'GATUNDU NORTH', 558, N'MANG''U')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (559, 22, N'KIAMBU', 113, N'JUJA', 559, N'MURERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (560, 22, N'KIAMBU', 113, N'JUJA', 560, N'THETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (561, 22, N'KIAMBU', 113, N'JUJA', 561, N'JUJA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (562, 22, N'KIAMBU', 113, N'JUJA', 562, N'WITEITHIE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (563, 22, N'KIAMBU', 113, N'JUJA', 563, N'KALIMONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (564, 22, N'KIAMBU', 114, N'THIKA TOWN', 564, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (565, 22, N'KIAMBU', 114, N'THIKA TOWN', 565, N'KAMENU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (566, 22, N'KIAMBU', 114, N'THIKA TOWN', 566, N'HOSPITAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (567, 22, N'KIAMBU', 114, N'THIKA TOWN', 567, N'GATUANYAGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (568, 22, N'KIAMBU', 114, N'THIKA TOWN', 568, N'NGOLIBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (569, 22, N'KIAMBU', 115, N'RUIRU', 569, N'GITOTHUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (570, 22, N'KIAMBU', 115, N'RUIRU', 570, N'BIASHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (571, 22, N'KIAMBU', 115, N'RUIRU', 571, N'GATONGORA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (572, 22, N'KIAMBU', 115, N'RUIRU', 572, N'KAHAWA SUKARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (573, 22, N'KIAMBU', 115, N'RUIRU', 573, N'KAHAWA WENDANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (574, 22, N'KIAMBU', 115, N'RUIRU', 574, N'KIUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (575, 22, N'KIAMBU', 115, N'RUIRU', 575, N'MWIKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (576, 22, N'KIAMBU', 115, N'RUIRU', 576, N'MWIHOKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (577, 22, N'KIAMBU', 116, N'GITHUNGURI', 577, N'GITHUNGURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (578, 22, N'KIAMBU', 116, N'GITHUNGURI', 578, N'GITHIGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (579, 22, N'KIAMBU', 116, N'GITHUNGURI', 579, N'IKINU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (580, 22, N'KIAMBU', 116, N'GITHUNGURI', 580, N'NGEWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (581, 22, N'KIAMBU', 116, N'GITHUNGURI', 581, N'KOMOTHAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (582, 22, N'KIAMBU', 117, N'KIAMBU', 582, N'TING''ANG''A')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (583, 22, N'KIAMBU', 117, N'KIAMBU', 583, N'NDUMBERI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (584, 22, N'KIAMBU', 117, N'KIAMBU', 584, N'RIABAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (585, 22, N'KIAMBU', 117, N'KIAMBU', 585, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (586, 22, N'KIAMBU', 118, N'KIAMBAA', 586, N'CIANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (587, 22, N'KIAMBU', 118, N'KIAMBAA', 587, N'KARURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (588, 22, N'KIAMBU', 118, N'KIAMBAA', 588, N'NDENDERU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (589, 22, N'KIAMBU', 118, N'KIAMBAA', 589, N'MUCHATHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (590, 22, N'KIAMBU', 118, N'KIAMBAA', 590, N'KIHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (591, 22, N'KIAMBU', 119, N'KABETE', 591, N'GITARU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (592, 22, N'KIAMBU', 119, N'KABETE', 592, N'MUGUGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (593, 22, N'KIAMBU', 119, N'KABETE', 593, N'NYADHUNA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (594, 22, N'KIAMBU', 119, N'KABETE', 594, N'KABETE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (595, 22, N'KIAMBU', 119, N'KABETE', 595, N'UTHIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (596, 22, N'KIAMBU', 120, N'KIKUYU', 596, N'KARAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (597, 22, N'KIAMBU', 120, N'KIKUYU', 597, N'NACHU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (598, 22, N'KIAMBU', 120, N'KIKUYU', 598, N'SIGONA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (599, 22, N'KIAMBU', 120, N'KIKUYU', 599, N'KIKUYU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (600, 22, N'KIAMBU', 120, N'KIKUYU', 600, N'KINOO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (601, 22, N'KIAMBU', 121, N'LIMURU', 601, N'BIBIRIONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (602, 22, N'KIAMBU', 121, N'LIMURU', 602, N'LIMURU CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (603, 22, N'KIAMBU', 121, N'LIMURU', 603, N'NDEIYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (604, 22, N'KIAMBU', 121, N'LIMURU', 604, N'LIMURU EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (605, 22, N'KIAMBU', 121, N'LIMURU', 605, N'NGECHA TIGONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (606, 22, N'KIAMBU', 122, N'LARI', 606, N'KINALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (607, 22, N'KIAMBU', 122, N'LARI', 607, N'KIJABE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (608, 22, N'KIAMBU', 122, N'LARI', 608, N'NYANDUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (609, 22, N'KIAMBU', 122, N'LARI', 609, N'KAMBURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (610, 22, N'KIAMBU', 122, N'LARI', 610, N'LARI/KIRENGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (611, 23, N'TURKANA', 123, N'TURKANA NORTH', 611, N'KAERIS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (612, 23, N'TURKANA', 123, N'TURKANA NORTH', 612, N'LAKE ZONE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (613, 23, N'TURKANA', 123, N'TURKANA NORTH', 613, N'LAPUR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (614, 23, N'TURKANA', 123, N'TURKANA NORTH', 614, N'KAALENG/KAIKOR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (615, 23, N'TURKANA', 123, N'TURKANA NORTH', 615, N'KIBISH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (616, 23, N'TURKANA', 123, N'TURKANA NORTH', 616, N'NAKALALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (617, 23, N'TURKANA', 124, N'TURKANA WEST', 617, N'KAKUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (618, 23, N'TURKANA', 124, N'TURKANA WEST', 618, N'LOPUR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (619, 23, N'TURKANA', 124, N'TURKANA WEST', 619, N'LETEA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (620, 23, N'TURKANA', 124, N'TURKANA WEST', 620, N'SONGOT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (621, 23, N'TURKANA', 124, N'TURKANA WEST', 621, N'KALOBEYEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (622, 23, N'TURKANA', 124, N'TURKANA WEST', 622, N'LOKICHOGGIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (623, 23, N'TURKANA', 124, N'TURKANA WEST', 623, N'NANAAM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (624, 23, N'TURKANA', 125, N'TURKANA CENTRAL', 624, N'KERIO DELTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (625, 23, N'TURKANA', 125, N'TURKANA CENTRAL', 625, N'KANG''ATOTHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (626, 23, N'TURKANA', 125, N'TURKANA CENTRAL', 626, N'KALOKOL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (627, 23, N'TURKANA', 125, N'TURKANA CENTRAL', 627, N'LODWAR TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (628, 23, N'TURKANA', 125, N'TURKANA CENTRAL', 628, N'KANAMKEMER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (629, 23, N'TURKANA', 126, N'LOIMA', 629, N'KOTARUK/LOBEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (630, 23, N'TURKANA', 126, N'LOIMA', 630, N'TURKWEL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (631, 23, N'TURKANA', 126, N'LOIMA', 631, N'LOIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (632, 23, N'TURKANA', 126, N'LOIMA', 632, N'LOKIRIAMA/LORENGIPPI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (633, 23, N'TURKANA', 127, N'TURKANA SOUTH', 633, N'KAPUTIR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (634, 23, N'TURKANA', 127, N'TURKANA SOUTH', 634, N'KATILU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (635, 23, N'TURKANA', 127, N'TURKANA SOUTH', 635, N'LOBOKAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (636, 23, N'TURKANA', 127, N'TURKANA SOUTH', 636, N'KALAPATA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (637, 23, N'TURKANA', 127, N'TURKANA SOUTH', 637, N'LOKICHAR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (638, 23, N'TURKANA', 128, N'TURKANA EAST', 638, N'KAPEDO/NAPEITOM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (639, 23, N'TURKANA', 128, N'TURKANA EAST', 639, N'KATILIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (640, 23, N'TURKANA', 128, N'TURKANA EAST', 640, N'LOKORI/KOCHODIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (641, 24, N'WEST POKOT', 129, N'KAPENGURIA', 641, N'RIWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (642, 24, N'WEST POKOT', 129, N'KAPENGURIA', 642, N'KAPENGURIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (643, 24, N'WEST POKOT', 129, N'KAPENGURIA', 643, N'MNAGEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (644, 24, N'WEST POKOT', 129, N'KAPENGURIA', 644, N'SIYOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (645, 24, N'WEST POKOT', 129, N'KAPENGURIA', 645, N'ENDUGH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (646, 24, N'WEST POKOT', 129, N'KAPENGURIA', 646, N'SOOK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (647, 24, N'WEST POKOT', 130, N'SIGOR', 647, N'SEKERR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (648, 24, N'WEST POKOT', 130, N'SIGOR', 648, N'MASOOL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (649, 24, N'WEST POKOT', 130, N'SIGOR', 649, N'LOMUT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (650, 24, N'WEST POKOT', 130, N'SIGOR', 650, N'WEIWEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (651, 24, N'WEST POKOT', 131, N'KACHELIBA', 651, N'SUAM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (652, 24, N'WEST POKOT', 131, N'KACHELIBA', 652, N'KODICH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (653, 24, N'WEST POKOT', 131, N'KACHELIBA', 653, N'KAPCKOK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (654, 24, N'WEST POKOT', 131, N'KACHELIBA', 654, N'KASEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (655, 24, N'WEST POKOT', 131, N'KACHELIBA', 655, N'KIWAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (656, 24, N'WEST POKOT', 131, N'KACHELIBA', 656, N'ALALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (657, 24, N'WEST POKOT', 132, N'POKOT SOUTH', 657, N'CHEPARERIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (658, 24, N'WEST POKOT', 132, N'POKOT SOUTH', 658, N'BATEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (659, 24, N'WEST POKOT', 132, N'POKOT SOUTH', 659, N'LELAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (660, 24, N'WEST POKOT', 132, N'POKOT SOUTH', 660, N'TAPACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (661, 25, N'SAMBURU', 133, N'SAMBURU WEST', 661, N'LODOKEJEK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (662, 25, N'SAMBURU', 133, N'SAMBURU WEST', 662, N'SUGUTA MARMAR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (663, 25, N'SAMBURU', 133, N'SAMBURU WEST', 663, N'MARALAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (664, 25, N'SAMBURU', 133, N'SAMBURU WEST', 664, N'LOOSUK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (665, 25, N'SAMBURU', 133, N'SAMBURU WEST', 665, N'PORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (666, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 666, N'EL-BARTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (667, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 667, N'NACHOLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (668, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 668, N'NDOTO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (669, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 669, N'NYIRO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (670, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 670, N'ANGATA NANYOKIE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (671, 25, N'SAMBURU', 134, N'SAMBURU NORTH', 671, N'BAAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (672, 25, N'SAMBURU', 135, N'SAMBURU EAST', 672, N'WASO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (673, 25, N'SAMBURU', 135, N'SAMBURU EAST', 673, N'WAMBA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (674, 25, N'SAMBURU', 135, N'SAMBURU EAST', 674, N'WAMBA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (675, 25, N'SAMBURU', 135, N'SAMBURU EAST', 675, N'WAMBA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (676, 26, N'TRANS NZOIA', 136, N'KWANZA', 676, N'KAPOMBOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (677, 26, N'TRANS NZOIA', 136, N'KWANZA', 677, N'KWANZA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (678, 26, N'TRANS NZOIA', 136, N'KWANZA', 678, N'KEIYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (679, 26, N'TRANS NZOIA', 136, N'KWANZA', 679, N'BIDII')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (680, 26, N'TRANS NZOIA', 137, N'ENDEBESS', 680, N'CHEPCHOINA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (681, 26, N'TRANS NZOIA', 137, N'ENDEBESS', 681, N'ENDEBESS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (682, 26, N'TRANS NZOIA', 137, N'ENDEBESS', 682, N'MATUMBEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (683, 26, N'TRANS NZOIA', 138, N'SABOTI', 683, N'KINYORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (684, 26, N'TRANS NZOIA', 138, N'SABOTI', 684, N'MATISI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (685, 26, N'TRANS NZOIA', 138, N'SABOTI', 685, N'TUWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (686, 26, N'TRANS NZOIA', 138, N'SABOTI', 686, N'SABOTI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (687, 26, N'TRANS NZOIA', 138, N'SABOTI', 687, N'MACHEWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (688, 26, N'TRANS NZOIA', 139, N'KIMININI', 688, N'KIMININI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (689, 26, N'TRANS NZOIA', 139, N'KIMININI', 689, N'WAITALUK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (690, 26, N'TRANS NZOIA', 139, N'KIMININI', 690, N'SIRENDE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (691, 26, N'TRANS NZOIA', 139, N'KIMININI', 691, N'HOSPITAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (692, 26, N'TRANS NZOIA', 139, N'KIMININI', 692, N'SIKHENDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (693, 26, N'TRANS NZOIA', 139, N'KIMININI', 693, N'NABISWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (694, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 694, N'SINYERERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (695, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 695, N'MAKUTANO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (696, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 696, N'KAPLAMAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (697, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 697, N'MOTOSIET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (698, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 698, N'CHERANGANY/SUWERWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (699, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 699, N'CHEPSIRO/KIPTOROR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (700, 26, N'TRANS NZOIA', 140, N'CHERANGANY', 700, N'SITATUNGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (701, 27, N'UASIN GISHU', 141, N'SOY', 701, N'MOI''S BRIDGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (702, 27, N'UASIN GISHU', 141, N'SOY', 702, N'KAPKURES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (703, 27, N'UASIN GISHU', 141, N'SOY', 703, N'ZIWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (704, 27, N'UASIN GISHU', 141, N'SOY', 704, N'SEGERO/BARSOMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (705, 27, N'UASIN GISHU', 141, N'SOY', 705, N'KIPSOMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (706, 27, N'UASIN GISHU', 141, N'SOY', 706, N'SOY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (707, 27, N'UASIN GISHU', 141, N'SOY', 707, N'KUINET/KAPSUSWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (708, 27, N'UASIN GISHU', 142, N'TURBO', 708, N'NGENYILEL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (709, 27, N'UASIN GISHU', 142, N'TURBO', 709, N'TAPSAGOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (710, 27, N'UASIN GISHU', 142, N'TURBO', 710, N'KAMAGUT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (711, 27, N'UASIN GISHU', 142, N'TURBO', 711, N'KIPLOMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (712, 27, N'UASIN GISHU', 142, N'TURBO', 712, N'KAPSAOS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (713, 27, N'UASIN GISHU', 142, N'TURBO', 713, N'HURUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (714, 27, N'UASIN GISHU', 143, N'MOIBEN', 714, N'TEMBELIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (715, 27, N'UASIN GISHU', 143, N'MOIBEN', 715, N'SERGOIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (716, 27, N'UASIN GISHU', 143, N'MOIBEN', 716, N'KARUNA/MEIBEKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (717, 27, N'UASIN GISHU', 143, N'MOIBEN', 717, N'MOIBEN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (718, 27, N'UASIN GISHU', 143, N'MOIBEN', 718, N'KIMUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (719, 27, N'UASIN GISHU', 144, N'AINABKOI', 719, N'KAPSOYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (720, 27, N'UASIN GISHU', 144, N'AINABKOI', 720, N'KAPTAGAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (721, 27, N'UASIN GISHU', 144, N'AINABKOI', 721, N'AINABKOI/OLARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (722, 27, N'UASIN GISHU', 145, N'KAPSERET', 722, N'SIMAT/KAPSERET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (723, 27, N'UASIN GISHU', 145, N'KAPSERET', 723, N'KIPKENYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (724, 27, N'UASIN GISHU', 145, N'KAPSERET', 724, N'NGERIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (725, 27, N'UASIN GISHU', 145, N'KAPSERET', 725, N'MEGUN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (726, 27, N'UASIN GISHU', 145, N'KAPSERET', 726, N'LANGAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (727, 27, N'UASIN GISHU', 146, N'KESSES', 727, N'RACECOURSE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (728, 27, N'UASIN GISHU', 146, N'KESSES', 728, N'CHEPTIRET/KIPCHAMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (729, 27, N'UASIN GISHU', 146, N'KESSES', 729, N'TULWET/CHUIYAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (730, 27, N'UASIN GISHU', 146, N'KESSES', 730, N'TARAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (731, 28, N'ELGEYO/MARAKWET', 147, N'MARAKWET EAST', 731, N'KAPYEGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (732, 28, N'ELGEYO/MARAKWET', 147, N'MARAKWET EAST', 732, N'SAMBIRIR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (733, 28, N'ELGEYO/MARAKWET', 147, N'MARAKWET EAST', 733, N'ENDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (734, 28, N'ELGEYO/MARAKWET', 147, N'MARAKWET EAST', 734, N'EMBOBUT / EMBULOT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (735, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 735, N'LELAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (736, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 736, N'SENGWER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (737, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 737, N'CHERANG''ANY/CHEBORORWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (738, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 738, N'MOIBEN/KUSERWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (739, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 739, N'KAPSOWAR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (740, 28, N'ELGEYO/MARAKWET', 148, N'MARAKWET WEST', 740, N'ARROR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (741, 28, N'ELGEYO/MARAKWET', 149, N'KEIYO NORTH', 742, N'EMSOO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (742, 28, N'ELGEYO/MARAKWET', 149, N'KEIYO NORTH', 741, N'KAMARINY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (743, 28, N'ELGEYO/MARAKWET', 149, N'KEIYO NORTH', 744, N'KAPCHEMUTWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (744, 28, N'ELGEYO/MARAKWET', 149, N'KEIYO NORTH', 743, N'TAMBACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (745, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 745, N'KAPTARAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (746, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 746, N'CHEPKORIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (747, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 747, N'SOY NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (748, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 748, N'SOY SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (749, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 749, N'KABIEMIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (750, 28, N'ELGEYO/MARAKWET', 150, N'KEIYO SOUTH', 750, N'METKEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (751, 29, N'NANDI', 151, N'TINDERET', 751, N'SONGHOR/SOBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (752, 29, N'NANDI', 151, N'TINDERET', 752, N'TINDIRET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (753, 29, N'NANDI', 151, N'TINDERET', 753, N'CHEMELIL/CHEMASE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (754, 29, N'NANDI', 151, N'TINDERET', 754, N'KAPSIMOTWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (755, 29, N'NANDI', 152, N'ALDAI', 755, N'KABWARENG')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (756, 29, N'NANDI', 152, N'ALDAI', 756, N'TERIK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (757, 29, N'NANDI', 152, N'ALDAI', 757, N'KEMELOI-MARABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (758, 29, N'NANDI', 152, N'ALDAI', 758, N'KOBUJOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (759, 29, N'NANDI', 152, N'ALDAI', 759, N'KAPTUMO-KABOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (760, 29, N'NANDI', 152, N'ALDAI', 760, N'KOYO-NDURIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (761, 29, N'NANDI', 153, N'NANDI HILLS', 761, N'NANDI HILLS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (762, 29, N'NANDI', 153, N'NANDI HILLS', 762, N'CHEPKUNYUK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (763, 29, N'NANDI', 153, N'NANDI HILLS', 763, N'OL''LESSOS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (764, 29, N'NANDI', 153, N'NANDI HILLS', 764, N'KAPCHORUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (765, 29, N'NANDI', 154, N'CHESUMEI', 765, N'CHEMUNDU/KAPNG''ETUNY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (766, 29, N'NANDI', 154, N'CHESUMEI', 766, N'KOSIRAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (767, 29, N'NANDI', 154, N'CHESUMEI', 767, N'LELMOKWO/NGECHEK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (768, 29, N'NANDI', 154, N'CHESUMEI', 768, N'KAPTEL/KAMOIYWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (769, 29, N'NANDI', 154, N'CHESUMEI', 769, N'KIPTUYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (770, 29, N'NANDI', 155, N'EMGWEN', 770, N'CHEPKUMIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (771, 29, N'NANDI', 155, N'EMGWEN', 771, N'KAPKANGANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (772, 29, N'NANDI', 155, N'EMGWEN', 772, N'KAPSABET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (773, 29, N'NANDI', 155, N'EMGWEN', 773, N'KILIBWONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (774, 29, N'NANDI', 156, N'MOSOP', 774, N'CHEPTERWAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (775, 29, N'NANDI', 156, N'MOSOP', 775, N'KIPKAREN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (776, 29, N'NANDI', 156, N'MOSOP', 776, N'KURGUNG/SURUNGAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (777, 29, N'NANDI', 156, N'MOSOP', 777, N'KABIYET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (778, 29, N'NANDI', 156, N'MOSOP', 778, N'NDALAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (779, 29, N'NANDI', 156, N'MOSOP', 779, N'KABISAGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (780, 29, N'NANDI', 156, N'MOSOP', 780, N'SANGALO/KEBULONIK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (781, 30, N'BARINGO', 157, N'TIATY', 781, N'TIRIOKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (782, 30, N'BARINGO', 157, N'TIATY', 782, N'KOLOWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (783, 30, N'BARINGO', 157, N'TIATY', 783, N'RIBKWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (784, 30, N'BARINGO', 157, N'TIATY', 784, N'SILALE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (785, 30, N'BARINGO', 157, N'TIATY', 785, N'LOIYAMOROCK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (786, 30, N'BARINGO', 157, N'TIATY', 786, N'TANGULBEI/KOROSSI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (787, 30, N'BARINGO', 157, N'TIATY', 787, N'CHURO/AMAYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (788, 30, N'BARINGO', 158, N'BARINGO  NORTH', 788, N'BARWESSA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (789, 30, N'BARINGO', 158, N'BARINGO  NORTH', 789, N'KABARTONJO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (790, 30, N'BARINGO', 158, N'BARINGO  NORTH', 790, N'SAIMO/KIPSARAMAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (791, 30, N'BARINGO', 158, N'BARINGO  NORTH', 791, N'SAIMO/SOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (792, 30, N'BARINGO', 158, N'BARINGO  NORTH', 792, N'BARTABWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (793, 30, N'BARINGO', 159, N'BARINGO CENTRAL', 793, N'KABARNET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (794, 30, N'BARINGO', 159, N'BARINGO CENTRAL', 794, N'SACHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (795, 30, N'BARINGO', 159, N'BARINGO CENTRAL', 795, N'TENGES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (796, 30, N'BARINGO', 159, N'BARINGO CENTRAL', 796, N'EWALEL CHAPCHAP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (797, 30, N'BARINGO', 159, N'BARINGO CENTRAL', 797, N'KAPROPITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (798, 30, N'BARINGO', 160, N'BARINGO SOUTH', 798, N'MARIGAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (799, 30, N'BARINGO', 160, N'BARINGO SOUTH', 799, N'ILCHAMUS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (800, 30, N'BARINGO', 160, N'BARINGO SOUTH', 800, N'MOCHONGOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (801, 30, N'BARINGO', 160, N'BARINGO SOUTH', 801, N'MUKUTANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (802, 30, N'BARINGO', 161, N'MOGOTIO', 802, N'MOGOTIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (803, 30, N'BARINGO', 161, N'MOGOTIO', 803, N'EMINING')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (804, 30, N'BARINGO', 161, N'MOGOTIO', 804, N'KISANANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (805, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 805, N'LEMBUS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (806, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 806, N'LEMBUS KWEN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (807, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 807, N'RAVINE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (808, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 808, N'MUMBERES/MAJI MAZURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (809, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 809, N'LEMBUS/PERKERRA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (810, 30, N'BARINGO', 162, N'ELDAMA RAVINE', 810, N'KOIBATEK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (811, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 811, N'OLMORAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (812, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 812, N'RUMURUTI TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (813, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 813, N'KINAMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (814, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 814, N'MARMANET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (815, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 815, N'IGWAMITI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (816, 31, N'LAIKIPIA', 163, N'LAIKIPIA WEST', 816, N'SALAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (817, 31, N'LAIKIPIA', 164, N'LAIKIPIA EAST', 817, N'NGOBIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (818, 31, N'LAIKIPIA', 164, N'LAIKIPIA EAST', 818, N'TIGITHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (819, 31, N'LAIKIPIA', 164, N'LAIKIPIA EAST', 819, N'THINGITHU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (820, 31, N'LAIKIPIA', 164, N'LAIKIPIA EAST', 820, N'NANYUKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (821, 31, N'LAIKIPIA', 164, N'LAIKIPIA EAST', 821, N'UMANDE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (822, 31, N'LAIKIPIA', 165, N'LAIKIPIA NORTH', 822, N'SOSIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (823, 31, N'LAIKIPIA', 165, N'LAIKIPIA NORTH', 823, N'SEGERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (824, 31, N'LAIKIPIA', 165, N'LAIKIPIA NORTH', 824, N'MUKOGONDO WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (825, 31, N'LAIKIPIA', 165, N'LAIKIPIA NORTH', 825, N'MUKOGONDO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (826, 32, N'NAKURU', 166, N'MOLO', 826, N'MARIASHONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (827, 32, N'NAKURU', 166, N'MOLO', 827, N'ELBURGON')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (828, 32, N'NAKURU', 166, N'MOLO', 828, N'TURI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (829, 32, N'NAKURU', 166, N'MOLO', 829, N'MOLO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (830, 32, N'NAKURU', 167, N'NJORO', 830, N'MAUNAROK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (831, 32, N'NAKURU', 167, N'NJORO', 831, N'MAUCHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (832, 32, N'NAKURU', 167, N'NJORO', 832, N'KIHINGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (833, 32, N'NAKURU', 167, N'NJORO', 833, N'NESSUIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (834, 32, N'NAKURU', 167, N'NJORO', 834, N'LARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (835, 32, N'NAKURU', 167, N'NJORO', 835, N'NJORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (836, 32, N'NAKURU', 168, N'NAIVASHA', 836, N'BIASHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (837, 32, N'NAKURU', 168, N'NAIVASHA', 837, N'HELLS GATE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (838, 32, N'NAKURU', 168, N'NAIVASHA', 838, N'LAKEVIEW')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (839, 32, N'NAKURU', 168, N'NAIVASHA', 839, N'MAAI-MAHIU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (840, 32, N'NAKURU', 168, N'NAIVASHA', 840, N'MAIELLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (841, 32, N'NAKURU', 168, N'NAIVASHA', 841, N'OLKARIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (842, 32, N'NAKURU', 168, N'NAIVASHA', 842, N'NAIVASHA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (843, 32, N'NAKURU', 168, N'NAIVASHA', 843, N'VIWANDANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (844, 32, N'NAKURU', 169, N'GILGIL', 844, N'GILGIL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (845, 32, N'NAKURU', 169, N'GILGIL', 845, N'ELEMENTAITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (846, 32, N'NAKURU', 169, N'GILGIL', 846, N'MBARUK/EBURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (847, 32, N'NAKURU', 169, N'GILGIL', 847, N'MALEWA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (848, 32, N'NAKURU', 169, N'GILGIL', 848, N'MURINDATI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (849, 32, N'NAKURU', 170, N'KURESOI SOUTH', 849, N'AMALO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (850, 32, N'NAKURU', 170, N'KURESOI SOUTH', 850, N'KERINGET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (851, 32, N'NAKURU', 170, N'KURESOI SOUTH', 851, N'KIPTAGICH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (852, 32, N'NAKURU', 170, N'KURESOI SOUTH', 852, N'TINET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (853, 32, N'NAKURU', 171, N'KURESOI NORTH', 853, N'KIPTORORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (854, 32, N'NAKURU', 171, N'KURESOI NORTH', 854, N'NYOTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (855, 32, N'NAKURU', 171, N'KURESOI NORTH', 855, N'SIRIKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (856, 32, N'NAKURU', 171, N'KURESOI NORTH', 856, N'KAMARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (857, 32, N'NAKURU', 172, N'SUBUKIA', 857, N'SUBUKIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (858, 32, N'NAKURU', 172, N'SUBUKIA', 858, N'WASEGES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (859, 32, N'NAKURU', 172, N'SUBUKIA', 859, N'KABAZI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (860, 32, N'NAKURU', 173, N'RONGAI', 860, N'MENENGAI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (861, 32, N'NAKURU', 173, N'RONGAI', 861, N'SOIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (862, 32, N'NAKURU', 173, N'RONGAI', 862, N'VISOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (863, 32, N'NAKURU', 173, N'RONGAI', 863, N'MOSOP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (864, 32, N'NAKURU', 173, N'RONGAI', 864, N'SOLAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (865, 32, N'NAKURU', 174, N'BAHATI', 865, N'DUNDORI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (866, 32, N'NAKURU', 174, N'BAHATI', 866, N'KABATINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (867, 32, N'NAKURU', 174, N'BAHATI', 867, N'KIAMAINA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (868, 32, N'NAKURU', 174, N'BAHATI', 868, N'LANET/UMOJA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (869, 32, N'NAKURU', 174, N'BAHATI', 869, N'BAHATI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (870, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 870, N'BARUT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (871, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 871, N'LONDON')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (872, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 872, N'KAPTEMBWO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (873, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 873, N'KAPKURES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (874, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 874, N'RHODA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (875, 32, N'NAKURU', 175, N'NAKURU TOWN WEST', 875, N'SHAABAB')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (876, 32, N'NAKURU', 176, N'NAKURU TOWN EAST', 876, N'BIASHARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (877, 32, N'NAKURU', 176, N'NAKURU TOWN EAST', 877, N'KIVUMBINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (878, 32, N'NAKURU', 176, N'NAKURU TOWN EAST', 878, N'FLAMINGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (879, 32, N'NAKURU', 176, N'NAKURU TOWN EAST', 879, N'MENENGAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (880, 32, N'NAKURU', 176, N'NAKURU TOWN EAST', 880, N'NAKURU EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (881, 33, N'NAROK', 177, N'KILGORIS', 881, N'KILGORIS CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (882, 33, N'NAROK', 177, N'KILGORIS', 882, N'KEYIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (883, 33, N'NAROK', 177, N'KILGORIS', 883, N'ANGATA BARIKOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (884, 33, N'NAROK', 177, N'KILGORIS', 884, N'SHANKOE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (885, 33, N'NAROK', 177, N'KILGORIS', 885, N'KIMINTET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (886, 33, N'NAROK', 177, N'KILGORIS', 886, N'LOLGORIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (887, 33, N'NAROK', 178, N'EMURUA DIKIRR', 887, N'ILKERIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (888, 33, N'NAROK', 178, N'EMURUA DIKIRR', 888, N'OLOlMASANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (889, 33, N'NAROK', 178, N'EMURUA DIKIRR', 889, N'MOGONDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (890, 33, N'NAROK', 178, N'EMURUA DIKIRR', 890, N'KAPSASIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (891, 33, N'NAROK', 179, N'NAROK NORTH', 891, N'OLPUSIMORU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (892, 33, N'NAROK', 179, N'NAROK NORTH', 892, N'OLOKURTO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (893, 33, N'NAROK', 179, N'NAROK NORTH', 893, N'NAROK TOWN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (894, 33, N'NAROK', 179, N'NAROK NORTH', 894, N'NKARETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (895, 33, N'NAROK', 179, N'NAROK NORTH', 895, N'OLORROPIL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (896, 33, N'NAROK', 179, N'NAROK NORTH', 896, N'MELILI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (897, 33, N'NAROK', 180, N'NAROK EAST', 897, N'MOSIRO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (898, 33, N'NAROK', 180, N'NAROK EAST', 898, N'ILDAMAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (899, 33, N'NAROK', 180, N'NAROK EAST', 899, N'KEEKONYOKIE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (900, 33, N'NAROK', 180, N'NAROK EAST', 900, N'SUSWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (901, 33, N'NAROK', 181, N'NAROK SOUTH', 901, N'MAJIMOTO/NAROOSURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (902, 33, N'NAROK', 181, N'NAROK SOUTH', 902, N'OLOLULUNG''A')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (903, 33, N'NAROK', 181, N'NAROK SOUTH', 903, N'MELELO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (904, 33, N'NAROK', 181, N'NAROK SOUTH', 904, N'LOITA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (905, 33, N'NAROK', 181, N'NAROK SOUTH', 905, N'SOGOO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (906, 33, N'NAROK', 181, N'NAROK SOUTH', 906, N'SAGAMIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (907, 33, N'NAROK', 182, N'NAROK WEST', 907, N'ILMOTIOK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (908, 33, N'NAROK', 182, N'NAROK WEST', 908, N'MARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (909, 33, N'NAROK', 182, N'NAROK WEST', 909, N'SIANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (910, 33, N'NAROK', 182, N'NAROK WEST', 910, N'NAIKARRA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (911, 34, N'KAJIADO', 183, N'KAJIADO NORTH', 911, N'OLKERI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (912, 34, N'KAJIADO', 183, N'KAJIADO NORTH', 912, N'ONGATA RONGAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (913, 34, N'KAJIADO', 183, N'KAJIADO NORTH', 913, N'NKAIMURUNYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (914, 34, N'KAJIADO', 183, N'KAJIADO NORTH', 914, N'OLOOLUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (915, 34, N'KAJIADO', 183, N'KAJIADO NORTH', 915, N'NGONG')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (916, 34, N'KAJIADO', 184, N'KAJIADO CENTRAL', 916, N'PURKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (917, 34, N'KAJIADO', 184, N'KAJIADO CENTRAL', 917, N'ILDAMAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (918, 34, N'KAJIADO', 184, N'KAJIADO CENTRAL', 918, N'DALALEKUTUK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (919, 34, N'KAJIADO', 184, N'KAJIADO CENTRAL', 919, N'MATAPATO NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (920, 34, N'KAJIADO', 184, N'KAJIADO CENTRAL', 920, N'MATAPATO SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (921, 34, N'KAJIADO', 185, N'KAJIADO EAST', 921, N'KAPUTIEI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (922, 34, N'KAJIADO', 185, N'KAJIADO EAST', 922, N'KITENGELA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (923, 34, N'KAJIADO', 185, N'KAJIADO EAST', 923, N'OLOOSIRKON/SHOLINKE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (924, 34, N'KAJIADO', 185, N'KAJIADO EAST', 924, N'KENYAWA-POKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (925, 34, N'KAJIADO', 185, N'KAJIADO EAST', 925, N'IMARORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (926, 34, N'KAJIADO', 186, N'KAJIADO WEST', 926, N'KEEKONYOKIE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (927, 34, N'KAJIADO', 186, N'KAJIADO WEST', 927, N'ILOODOKILANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (928, 34, N'KAJIADO', 186, N'KAJIADO WEST', 928, N'MAGADI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (929, 34, N'KAJIADO', 186, N'KAJIADO WEST', 929, N'EWUASO OoNKIDONG''I')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (930, 34, N'KAJIADO', 186, N'KAJIADO WEST', 930, N'MOSIRO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (931, 34, N'KAJIADO', 187, N'KAJIADO SOUTH', 931, N'ENTONET/LENKISIM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (932, 34, N'KAJIADO', 187, N'KAJIADO SOUTH', 932, N'MBIRIKANI/ESELENKEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (933, 34, N'KAJIADO', 187, N'KAJIADO SOUTH', 933, N'KUKU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (934, 34, N'KAJIADO', 187, N'KAJIADO SOUTH', 934, N'ROMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (935, 34, N'KAJIADO', 187, N'KAJIADO SOUTH', 935, N'KIMANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (936, 35, N'KERICHO', 188, N'KIPKELION EAST', 936, N'LONDIANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (937, 35, N'KERICHO', 188, N'KIPKELION EAST', 937, N'KEDOWA/KIMUGUL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (938, 35, N'KERICHO', 188, N'KIPKELION EAST', 938, N'CHEPSEON')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (939, 35, N'KERICHO', 188, N'KIPKELION EAST', 939, N'TENDENO/SORGET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (940, 35, N'KERICHO', 189, N'KIPKELION WEST', 940, N'KUNYAK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (941, 35, N'KERICHO', 189, N'KIPKELION WEST', 941, N'KAMASIAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (942, 35, N'KERICHO', 189, N'KIPKELION WEST', 942, N'KIPKELION')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (943, 35, N'KERICHO', 189, N'KIPKELION WEST', 943, N'CHILCHILA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (944, 35, N'KERICHO', 190, N'AINAMOI', 944, N'KAPSOIT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (945, 35, N'KERICHO', 190, N'AINAMOI', 945, N'AINAMOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (946, 35, N'KERICHO', 190, N'AINAMOI', 946, N'KAPKUGERWET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (947, 35, N'KERICHO', 190, N'AINAMOI', 947, N'KIPCHEBOR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (948, 35, N'KERICHO', 190, N'AINAMOI', 948, N'KIPCHIMCHIM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (949, 35, N'KERICHO', 190, N'AINAMOI', 949, N'KAPSAOS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (950, 35, N'KERICHO', 191, N'BURETI', 950, N'KISIARA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (951, 35, N'KERICHO', 191, N'BURETI', 951, N'TEBESONIK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (952, 35, N'KERICHO', 191, N'BURETI', 952, N'CHEBOIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (953, 35, N'KERICHO', 191, N'BURETI', 953, N'CHEMOSOT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (954, 35, N'KERICHO', 191, N'BURETI', 954, N'LITEIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (955, 35, N'KERICHO', 191, N'BURETI', 955, N'CHEPLANGET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (956, 35, N'KERICHO', 191, N'BURETI', 956, N'KAPKATET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (957, 35, N'KERICHO', 192, N'BELGUT', 957, N'WALDAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (958, 35, N'KERICHO', 192, N'BELGUT', 958, N'KABIANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (959, 35, N'KERICHO', 192, N'BELGUT', 959, N'CHEPTORORIET/SERETUT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (960, 35, N'KERICHO', 192, N'BELGUT', 960, N'CHAIK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (961, 35, N'KERICHO', 192, N'BELGUT', 961, N'KAPSUSER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (962, 35, N'KERICHO', 193, N'SIGOWET/SOIN', 962, N'SIGOWET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (963, 35, N'KERICHO', 193, N'SIGOWET/SOIN', 963, N'KAPLELARTET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (964, 35, N'KERICHO', 193, N'SIGOWET/SOIN', 964, N'SOLIAT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (965, 35, N'KERICHO', 193, N'SIGOWET/SOIN', 965, N'SOIN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (966, 36, N'BOMET', 194, N'SOTIK', 966, N'NDANAI/ABOSI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (967, 36, N'BOMET', 194, N'SOTIK', 967, N'CHEMAGEL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (968, 36, N'BOMET', 194, N'SOTIK', 968, N'KIPSONOI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (969, 36, N'BOMET', 194, N'SOTIK', 969, N'KAPLETUNDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (970, 36, N'BOMET', 194, N'SOTIK', 970, N'RONGENA/MANARET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (971, 36, N'BOMET', 195, N'CHEPALUNGU', 971, N'KONG''ASIS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (972, 36, N'BOMET', 195, N'CHEPALUNGU', 972, N'NYANGORES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (973, 36, N'BOMET', 195, N'CHEPALUNGU', 973, N'SIGOR')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (974, 36, N'BOMET', 195, N'CHEPALUNGU', 974, N'CHEBUNYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (975, 36, N'BOMET', 195, N'CHEPALUNGU', 975, N'SIONGIROI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (976, 36, N'BOMET', 196, N'BOMET EAST', 976, N'MERIGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (977, 36, N'BOMET', 196, N'BOMET EAST', 977, N'KEMBU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (978, 36, N'BOMET', 196, N'BOMET EAST', 978, N'LONGISA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (979, 36, N'BOMET', 196, N'BOMET EAST', 979, N'KIPRERES')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (980, 36, N'BOMET', 196, N'BOMET EAST', 980, N'CHEMANER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (981, 36, N'BOMET', 197, N'BOMET CENTRAL', 981, N'SILIBWET TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (982, 36, N'BOMET', 197, N'BOMET CENTRAL', 982, N'NDARAWETA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (983, 36, N'BOMET', 197, N'BOMET CENTRAL', 983, N'SINGORWET')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (984, 36, N'BOMET', 197, N'BOMET CENTRAL', 984, N'CHESOEN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (985, 36, N'BOMET', 197, N'BOMET CENTRAL', 985, N'MUTARAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (986, 36, N'BOMET', 198, N'KONOIN', 986, N'CHEPCHABAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (987, 36, N'BOMET', 198, N'KONOIN', 987, N'KIMULOT')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (988, 36, N'BOMET', 198, N'KONOIN', 988, N'MOGOGOSIEK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (989, 36, N'BOMET', 198, N'KONOIN', 989, N'BOITO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (990, 36, N'BOMET', 198, N'KONOIN', 990, N'EMBOMOS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (991, 37, N'KAKAMEGA', 199, N'LUGARI', 991, N'MAUTUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (992, 37, N'KAKAMEGA', 199, N'LUGARI', 992, N'LUGARI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (993, 37, N'KAKAMEGA', 199, N'LUGARI', 993, N'LUMAKANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (994, 37, N'KAKAMEGA', 199, N'LUGARI', 994, N'CHEKALINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (995, 37, N'KAKAMEGA', 199, N'LUGARI', 995, N'CHEVAYWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (996, 37, N'KAKAMEGA', 199, N'LUGARI', 996, N'LWANDETI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (997, 37, N'KAKAMEGA', 200, N'LIKUYANI', 997, N'LIKUYANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (998, 37, N'KAKAMEGA', 200, N'LIKUYANI', 998, N'SANGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (999, 37, N'KAKAMEGA', 200, N'LIKUYANI', 999, N'KONGONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1000, 37, N'KAKAMEGA', 200, N'LIKUYANI', 1000, N'NZOIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1001, 37, N'KAKAMEGA', 200, N'LIKUYANI', 1001, N'SINOKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1002, 37, N'KAKAMEGA', 201, N'MALAVA', 1002, N'WEST KABRAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1003, 37, N'KAKAMEGA', 201, N'MALAVA', 1003, N'CHEMUCHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1004, 37, N'KAKAMEGA', 201, N'MALAVA', 1004, N'EAST KABRAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1005, 37, N'KAKAMEGA', 201, N'MALAVA', 1005, N'BUTALI/CHEGULO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1006, 37, N'KAKAMEGA', 201, N'MALAVA', 1006, N'MANDA-SHIVANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1007, 37, N'KAKAMEGA', 201, N'MALAVA', 1007, N'SHIRUGU-MUGAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1008, 37, N'KAKAMEGA', 201, N'MALAVA', 1008, N'SOUTH KABRAS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1009, 37, N'KAKAMEGA', 202, N'LURAMBI', 1009, N'BUTSOTSO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1010, 37, N'KAKAMEGA', 202, N'LURAMBI', 1010, N'BUTSOTSO SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1011, 37, N'KAKAMEGA', 202, N'LURAMBI', 1011, N'BUTSOTSO CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1012, 37, N'KAKAMEGA', 202, N'LURAMBI', 1012, N'SHEYWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1013, 37, N'KAKAMEGA', 202, N'LURAMBI', 1013, N'MAHIAKALO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1014, 37, N'KAKAMEGA', 202, N'LURAMBI', 1014, N'SHIRERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1015, 37, N'KAKAMEGA', 203, N'NAVAKHOLO', 1015, N'INGOSTSE-MATHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1016, 37, N'KAKAMEGA', 203, N'NAVAKHOLO', 1016, N'SHINOYI-SHIKOMARI-')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1017, 37, N'KAKAMEGA', 203, N'NAVAKHOLO', 1017, N'BUNYALA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1018, 37, N'KAKAMEGA', 203, N'NAVAKHOLO', 1018, N'BUNYALA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1019, 37, N'KAKAMEGA', 203, N'NAVAKHOLO', 1019, N'BUNYALA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1020, 37, N'KAKAMEGA', 204, N'MUMIAS WEST', 1020, N'MUMIAS CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1021, 37, N'KAKAMEGA', 204, N'MUMIAS WEST', 1021, N'MUMIAS NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1022, 37, N'KAKAMEGA', 204, N'MUMIAS WEST', 1022, N'ETENJE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1023, 37, N'KAKAMEGA', 204, N'MUMIAS WEST', 1023, N'MUSANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1024, 37, N'KAKAMEGA', 205, N'MUMIAS EAST', 1024, N'LUBINU/LUSHEYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1025, 37, N'KAKAMEGA', 205, N'MUMIAS EAST', 1025, N'ISONGO/MAKUNGA/MALAHA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1026, 37, N'KAKAMEGA', 205, N'MUMIAS EAST', 1026, N'EAST WANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1027, 37, N'KAKAMEGA', 206, N'MATUNGU', 1027, N'KOYONZO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1028, 37, N'KAKAMEGA', 206, N'MATUNGU', 1028, N'KHOLERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1029, 37, N'KAKAMEGA', 206, N'MATUNGU', 1029, N'KHALABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1030, 37, N'KAKAMEGA', 206, N'MATUNGU', 1030, N'MAYONI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1031, 37, N'KAKAMEGA', 206, N'MATUNGU', 1031, N'NAMAMALI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1032, 37, N'KAKAMEGA', 207, N'BUTERE', 1032, N'MARAMA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1033, 37, N'KAKAMEGA', 207, N'BUTERE', 1033, N'MARAMA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1034, 37, N'KAKAMEGA', 207, N'BUTERE', 1034, N'MARENYO - SHIANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1035, 37, N'KAKAMEGA', 207, N'BUTERE', 1035, N'MARAMA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1036, 37, N'KAKAMEGA', 207, N'BUTERE', 1036, N'MARAMA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1037, 37, N'KAKAMEGA', 208, N'KHWISERO', 1037, N'KISA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1038, 37, N'KAKAMEGA', 208, N'KHWISERO', 1038, N'KISA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1039, 37, N'KAKAMEGA', 208, N'KHWISERO', 1039, N'KISA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1040, 37, N'KAKAMEGA', 208, N'KHWISERO', 1040, N'KISA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1041, 37, N'KAKAMEGA', 209, N'SHINYALU', 1041, N'ISUKHA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1042, 37, N'KAKAMEGA', 209, N'SHINYALU', 1042, N'MURHANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1043, 37, N'KAKAMEGA', 209, N'SHINYALU', 1043, N'ISUKHA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1044, 37, N'KAKAMEGA', 209, N'SHINYALU', 1044, N'ISUKHA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1045, 37, N'KAKAMEGA', 209, N'SHINYALU', 1045, N'ISUKHA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1046, 37, N'KAKAMEGA', 209, N'SHINYALU', 1046, N'ISUKHA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1047, 37, N'KAKAMEGA', 210, N'IKOLOMANI', 1047, N'IDAKHO SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1048, 37, N'KAKAMEGA', 210, N'IKOLOMANI', 1048, N'IDAKHO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1049, 37, N'KAKAMEGA', 210, N'IKOLOMANI', 1049, N'IDAKHO NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1050, 37, N'KAKAMEGA', 210, N'IKOLOMANI', 1050, N'IDAKHO CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1051, 38, N'VIHIGA', 211, N'VIHIGA', 1051, N'LUGAGA-WAMULUMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1052, 38, N'VIHIGA', 211, N'VIHIGA', 1052, N'SOUTH MARAGOLI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1053, 38, N'VIHIGA', 211, N'VIHIGA', 1053, N'CENTRAL MARAGOLI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1054, 38, N'VIHIGA', 211, N'VIHIGA', 1054, N'MUNGOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1055, 38, N'VIHIGA', 212, N'SABATIA', 1055, N'LYADUYWA/IZAVA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1056, 38, N'VIHIGA', 212, N'SABATIA', 1056, N'WEST SABATIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1057, 38, N'VIHIGA', 212, N'SABATIA', 1057, N'CHAVAKALI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1058, 38, N'VIHIGA', 212, N'SABATIA', 1058, N'NORTH MARAGOLI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1059, 38, N'VIHIGA', 212, N'SABATIA', 1059, N'WODANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1060, 38, N'VIHIGA', 212, N'SABATIA', 1060, N'BUSALI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1061, 38, N'VIHIGA', 213, N'HAMISI', 1061, N'SHIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1062, 38, N'VIHIGA', 213, N'HAMISI', 1065, N'MUHUDU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1063, 38, N'VIHIGA', 213, N'HAMISI', 1063, N'SHAMAKHOKHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1064, 38, N'VIHIGA', 213, N'HAMISI', 1062, N'GISAMBAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1065, 38, N'VIHIGA', 213, N'HAMISI', 1064, N'BANJA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1066, 38, N'VIHIGA', 213, N'HAMISI', 1066, N'TAMBUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1067, 38, N'VIHIGA', 213, N'HAMISI', 1067, N'JEPKOYAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1068, 38, N'VIHIGA', 214, N'LUANDA', 1068, N'LUANDA TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1069, 38, N'VIHIGA', 214, N'LUANDA', 1069, N'WEMILABI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1070, 38, N'VIHIGA', 214, N'LUANDA', 1070, N'MWIBONA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1071, 38, N'VIHIGA', 214, N'LUANDA', 1071, N'LUANDA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1072, 38, N'VIHIGA', 214, N'LUANDA', 1072, N'EMABUNGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1073, 38, N'VIHIGA', 215, N'EMUHAYA', 1073, N'NORTH EAST BUNYORE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1074, 38, N'VIHIGA', 215, N'EMUHAYA', 1074, N'CENTRAL BUNYORE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1075, 38, N'VIHIGA', 215, N'EMUHAYA', 1075, N'WEST BUNYORE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1076, 39, N'BUNGOMA', 216, N'MT.ELGON', 1076, N'CHEPTAIS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1077, 39, N'BUNGOMA', 216, N'MT.ELGON', 1077, N'CHESIKAKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1078, 39, N'BUNGOMA', 216, N'MT.ELGON', 1078, N'CHEPYUK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1079, 39, N'BUNGOMA', 216, N'MT.ELGON', 1079, N'KAPKATENY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1080, 39, N'BUNGOMA', 216, N'MT.ELGON', 1080, N'KAPTAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1081, 39, N'BUNGOMA', 216, N'MT.ELGON', 1081, N'ELGON')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1082, 39, N'BUNGOMA', 217, N'SIRISIA', 1082, N'NAMWELA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1083, 39, N'BUNGOMA', 217, N'SIRISIA', 1083, N'MALAKISI/SOUTH KULISIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1084, 39, N'BUNGOMA', 217, N'SIRISIA', 1084, N'LWANDANYI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1085, 39, N'BUNGOMA', 218, N'KABUCHAI', 1085, N'KABUCHAI/CHWELE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1086, 39, N'BUNGOMA', 218, N'KABUCHAI', 1086, N'WEST NALONDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1087, 39, N'BUNGOMA', 218, N'KABUCHAI', 1087, N'BWAKE/LUUYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1088, 39, N'BUNGOMA', 218, N'KABUCHAI', 1088, N'MUKUYUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1089, 39, N'BUNGOMA', 219, N'BUMULA', 1089, N'SOUTH BUKUSU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1090, 39, N'BUNGOMA', 219, N'BUMULA', 1090, N'BUMULA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1091, 39, N'BUNGOMA', 219, N'BUMULA', 1091, N'KHASOKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1092, 39, N'BUNGOMA', 219, N'BUMULA', 1092, N'KABULA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1093, 39, N'BUNGOMA', 219, N'BUMULA', 1093, N'KIMAETI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1094, 39, N'BUNGOMA', 219, N'BUMULA', 1094, N'WEST BUKUSU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1095, 39, N'BUNGOMA', 219, N'BUMULA', 1095, N'SIBOTI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1096, 39, N'BUNGOMA', 220, N'KANDUYI', 1096, N'BUKEMBE WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1097, 39, N'BUNGOMA', 220, N'KANDUYI', 1097, N'BUKEMBE EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1098, 39, N'BUNGOMA', 220, N'KANDUYI', 1098, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1099, 39, N'BUNGOMA', 220, N'KANDUYI', 1099, N'KHALABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1100, 39, N'BUNGOMA', 220, N'KANDUYI', 1100, N'MUSIKOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1101, 39, N'BUNGOMA', 220, N'KANDUYI', 1101, N'EAST SANG''ALO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1102, 39, N'BUNGOMA', 220, N'KANDUYI', 1102, N'MARAKARU/TUUTI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1103, 39, N'BUNGOMA', 220, N'KANDUYI', 1103, N'SANG''ALO WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1104, 39, N'BUNGOMA', 221, N'WEBUYE EAST', 1104, N'MIHUU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1105, 39, N'BUNGOMA', 221, N'WEBUYE EAST', 1105, N'NDIVISI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1106, 39, N'BUNGOMA', 221, N'WEBUYE EAST', 1106, N'MARAKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1107, 39, N'BUNGOMA', 222, N'WEBUYE WEST', 1107, N'MISIKHU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1108, 39, N'BUNGOMA', 222, N'WEBUYE WEST', 1108, N'SITIKHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1109, 39, N'BUNGOMA', 222, N'WEBUYE WEST', 1109, N'MATULO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1110, 39, N'BUNGOMA', 222, N'WEBUYE WEST', 1110, N'BOKOLI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1111, 39, N'BUNGOMA', 223, N'KIMILILI', 1111, N'KIMILILI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1112, 39, N'BUNGOMA', 223, N'KIMILILI', 1112, N'KIBINGEI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1113, 39, N'BUNGOMA', 223, N'KIMILILI', 1113, N'MAENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1114, 39, N'BUNGOMA', 223, N'KIMILILI', 1114, N'KAMUKUYWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1115, 39, N'BUNGOMA', 224, N'TONGAREN', 1115, N'MBAKALO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1116, 39, N'BUNGOMA', 224, N'TONGAREN', 1116, N'NAITIRI/KABUYEFWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1117, 39, N'BUNGOMA', 224, N'TONGAREN', 1117, N'MILIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1118, 39, N'BUNGOMA', 224, N'TONGAREN', 1118, N'NDALU/ TABANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1119, 39, N'BUNGOMA', 224, N'TONGAREN', 1119, N'TONGAREN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1120, 39, N'BUNGOMA', 224, N'TONGAREN', 1120, N'SOYSAMBU/ MITUA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1121, 40, N'BUSIA', 225, N'TESO NORTH', 1121, N'MALABA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1122, 40, N'BUSIA', 225, N'TESO NORTH', 1122, N'MALABA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1123, 40, N'BUSIA', 225, N'TESO NORTH', 1123, N'ANG''URAI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1124, 40, N'BUSIA', 225, N'TESO NORTH', 1124, N'ANG''URAI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1125, 40, N'BUSIA', 225, N'TESO NORTH', 1125, N'ANG''URAI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1126, 40, N'BUSIA', 225, N'TESO NORTH', 1126, N'MALABA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1127, 40, N'BUSIA', 226, N'TESO SOUTH', 1127, N'ANG''OROM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1128, 40, N'BUSIA', 226, N'TESO SOUTH', 1128, N'CHAKOL SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1129, 40, N'BUSIA', 226, N'TESO SOUTH', 1129, N'CHAKOL NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1130, 40, N'BUSIA', 226, N'TESO SOUTH', 1130, N'AMUKURA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1131, 40, N'BUSIA', 226, N'TESO SOUTH', 1131, N'AMUKURA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1132, 40, N'BUSIA', 226, N'TESO SOUTH', 1132, N'AMUKURA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1133, 40, N'BUSIA', 227, N'NAMBALE', 1133, N'NAMBALE TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1134, 40, N'BUSIA', 227, N'NAMBALE', 1134, N'BUKHAYO NORTH/WALTSI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1135, 40, N'BUSIA', 227, N'NAMBALE', 1135, N'BUKHAYO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1136, 40, N'BUSIA', 227, N'NAMBALE', 1136, N'BUKHAYO CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1137, 40, N'BUSIA', 228, N'MATAYOS', 1137, N'BUKHAYO WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1138, 40, N'BUSIA', 228, N'MATAYOS', 1138, N'MAYENJE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1139, 40, N'BUSIA', 228, N'MATAYOS', 1139, N'MATAYOS SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1140, 40, N'BUSIA', 228, N'MATAYOS', 1140, N'BUSIBWABO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1141, 40, N'BUSIA', 228, N'MATAYOS', 1141, N'BURUMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1142, 40, N'BUSIA', 229, N'BUTULA', 1142, N'MARACHI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1143, 40, N'BUSIA', 229, N'BUTULA', 1143, N'KINGANDOLE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1144, 40, N'BUSIA', 229, N'BUTULA', 1144, N'MARACHI CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1145, 40, N'BUSIA', 229, N'BUTULA', 1145, N'MARACHI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1146, 40, N'BUSIA', 229, N'BUTULA', 1146, N'MARACHI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1147, 40, N'BUSIA', 229, N'BUTULA', 1147, N'ELUGULU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1148, 40, N'BUSIA', 230, N'FUNYULA', 1148, N'NAMBOBOTO NAMBUKU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1149, 40, N'BUSIA', 230, N'FUNYULA', 1149, N'NANGINA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1150, 40, N'BUSIA', 230, N'FUNYULA', 1150, N'AGENG''A NANGUBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1151, 40, N'BUSIA', 230, N'FUNYULA', 1151, N'BWIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1152, 40, N'BUSIA', 231, N'BUDALANGI', 1152, N'BUNYALA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1153, 40, N'BUSIA', 231, N'BUDALANGI', 1153, N'BUNYALA NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1154, 40, N'BUSIA', 231, N'BUDALANGI', 1154, N'BUNYALA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1155, 40, N'BUSIA', 231, N'BUDALANGI', 1155, N'BUNYALA SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1156, 41, N'SIAYA', 232, N'UGENYA', 1156, N'WEST UGENYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1157, 41, N'SIAYA', 232, N'UGENYA', 1157, N'UKWALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1158, 41, N'SIAYA', 232, N'UGENYA', 1158, N'NORTH UGENYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1159, 41, N'SIAYA', 232, N'UGENYA', 1159, N'EAST UGENYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1160, 41, N'SIAYA', 233, N'UGUNJA', 1160, N'SIDINDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1161, 41, N'SIAYA', 233, N'UGUNJA', 1161, N'SIGOMERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1162, 41, N'SIAYA', 233, N'UGUNJA', 1162, N'UGUNJA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1163, 41, N'SIAYA', 234, N'ALEGO USONGA', 1163, N'USONGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1164, 41, N'SIAYA', 234, N'ALEGO USONGA', 1164, N'WEST ALEGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1165, 41, N'SIAYA', 234, N'ALEGO USONGA', 1165, N'CENTRAL ALEGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1166, 41, N'SIAYA', 234, N'ALEGO USONGA', 1166, N'SIAYA TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1167, 41, N'SIAYA', 234, N'ALEGO USONGA', 1167, N'NORTH ALEGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1168, 41, N'SIAYA', 234, N'ALEGO USONGA', 1168, N'SOUTH EAST ALEGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1169, 41, N'SIAYA', 235, N'GEM', 1169, N'NORTH GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1170, 41, N'SIAYA', 235, N'GEM', 1170, N'WEST GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1171, 41, N'SIAYA', 235, N'GEM', 1171, N'CENTRAL GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1172, 41, N'SIAYA', 235, N'GEM', 1172, N'YALA TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1173, 41, N'SIAYA', 235, N'GEM', 1173, N'EAST GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1174, 41, N'SIAYA', 235, N'GEM', 1174, N'SOUTH GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1175, 41, N'SIAYA', 236, N'BONDO', 1175, N'WEST YIMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1176, 41, N'SIAYA', 236, N'BONDO', 1176, N'CENTRAL SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1177, 41, N'SIAYA', 236, N'BONDO', 1177, N'SOUTH SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1178, 41, N'SIAYA', 236, N'BONDO', 1178, N'YIMBO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1179, 41, N'SIAYA', 236, N'BONDO', 1179, N'WEST SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1180, 41, N'SIAYA', 236, N'BONDO', 1180, N'NORTH SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1181, 41, N'SIAYA', 237, N'RARIEDA', 1181, N'EAST ASEMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1182, 41, N'SIAYA', 237, N'RARIEDA', 1182, N'WEST ASEMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1183, 41, N'SIAYA', 237, N'RARIEDA', 1183, N'NORTH UYOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1184, 41, N'SIAYA', 237, N'RARIEDA', 1184, N'SOUTH UYOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1185, 41, N'SIAYA', 237, N'RARIEDA', 1185, N'WEST UYOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1186, 42, N'KISUMU', 238, N'KISUMU EAST', 1186, N'KAJULU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1187, 42, N'KISUMU', 238, N'KISUMU EAST', 1187, N'KOLWA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1188, 42, N'KISUMU', 238, N'KISUMU EAST', 1188, N'MANYATTA ''B''')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1189, 42, N'KISUMU', 238, N'KISUMU EAST', 1189, N'NYALENDA ''A''')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1190, 42, N'KISUMU', 238, N'KISUMU EAST', 1190, N'KOLWA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1191, 42, N'KISUMU', 239, N'KISUMU WEST', 1191, N'SOUTH WEST KISUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1192, 42, N'KISUMU', 239, N'KISUMU WEST', 1192, N'CENTRAL KISUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1193, 42, N'KISUMU', 239, N'KISUMU WEST', 1193, N'KISUMU NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1194, 42, N'KISUMU', 239, N'KISUMU WEST', 1194, N'WEST KISUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1195, 42, N'KISUMU', 239, N'KISUMU WEST', 1195, N'NORTH WEST KISUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1196, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1196, N'RAILWAYS')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1197, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1197, N'MIGOSI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1198, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1198, N'SHAURIMOYO KALOLENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1199, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1199, N'MARKET MILIMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1200, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1200, N'KONDELE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1201, 42, N'KISUMU', 240, N'KISUMU CENTRAL', 1201, N'NYALENDA B')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1202, 42, N'KISUMU', 241, N'SEME', 1202, N'WEST SEME')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1203, 42, N'KISUMU', 241, N'SEME', 1203, N'CENTRAL SEME')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1204, 42, N'KISUMU', 241, N'SEME', 1204, N'EAST SEME')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1205, 42, N'KISUMU', 241, N'SEME', 1205, N'NORTH SEME')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1206, 42, N'KISUMU', 242, N'NYANDO', 1206, N'EAST KANO/WAWIDHI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1207, 42, N'KISUMU', 242, N'NYANDO', 1207, N'AWASI/ONJIKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1208, 42, N'KISUMU', 242, N'NYANDO', 1208, N'AHERO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1209, 42, N'KISUMU', 242, N'NYANDO', 1209, N'KABONYO/KANYAGWAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1210, 42, N'KISUMU', 242, N'NYANDO', 1210, N'KOBURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1211, 42, N'KISUMU', 243, N'MUHORONI', 1211, N'MIWANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1212, 42, N'KISUMU', 243, N'MUHORONI', 1212, N'OMBEYI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1213, 42, N'KISUMU', 243, N'MUHORONI', 1213, N'MASOGO/NYANG''OMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1214, 42, N'KISUMU', 243, N'MUHORONI', 1214, N'CHEMELIL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1215, 42, N'KISUMU', 243, N'MUHORONI', 1215, N'MUHORONI/KORU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1216, 42, N'KISUMU', 244, N'NYAKACH', 1216, N'SOUTH WEST NYAKACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1217, 42, N'KISUMU', 244, N'NYAKACH', 1217, N'NORTH NYAKACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1218, 42, N'KISUMU', 244, N'NYAKACH', 1218, N'CENTRAL NYAKACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1219, 42, N'KISUMU', 244, N'NYAKACH', 1219, N'WEST NYAKACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1220, 42, N'KISUMU', 244, N'NYAKACH', 1220, N'SOUTH EAST NYAKACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1221, 43, N'HOMA BAY', 245, N'KASIPUL', 1221, N'WEST KASIPUL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1222, 43, N'HOMA BAY', 245, N'KASIPUL', 1222, N'SOUTH KASIPUL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1223, 43, N'HOMA BAY', 245, N'KASIPUL', 1223, N'CENTRAL KASIPUL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1224, 43, N'HOMA BAY', 245, N'KASIPUL', 1224, N'EAST KAMAGAK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1225, 43, N'HOMA BAY', 245, N'KASIPUL', 1225, N'WEST KAMAGAK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1226, 43, N'HOMA BAY', 246, N'KABONDO KASIPUL', 1226, N'KABONDO EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1227, 43, N'HOMA BAY', 246, N'KABONDO KASIPUL', 1227, N'KABONDO WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1228, 43, N'HOMA BAY', 246, N'KABONDO KASIPUL', 1228, N'KOKWANYO/KAKELO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1229, 43, N'HOMA BAY', 246, N'KABONDO KASIPUL', 1229, N'KOJWACH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1230, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1230, N'WEST KARACHUONYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1231, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1231, N'NORTH KARACHUONYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1232, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1232, N'CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1233, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1233, N'KANYALUO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1234, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1234, N'KIBIRI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1235, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1235, N'WANGCHIENG')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1236, 43, N'HOMA BAY', 247, N'KARACHUONYO', 1236, N'KENDU BAY TOWN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1237, 43, N'HOMA BAY', 248, N'RANGWE', 1237, N'WEST GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1238, 43, N'HOMA BAY', 248, N'RANGWE', 1238, N'EAST GEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1239, 43, N'HOMA BAY', 248, N'RANGWE', 1239, N'KAGAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1240, 43, N'HOMA BAY', 248, N'RANGWE', 1240, N'KOCHIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1241, 43, N'HOMA BAY', 249, N'HOMA BAY TOWN', 1241, N'HOMA BAY CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1242, 43, N'HOMA BAY', 249, N'HOMA BAY TOWN', 1242, N'HOMA BAY ARUJO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1243, 43, N'HOMA BAY', 249, N'HOMA BAY TOWN', 1243, N'HOMA BAY WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1244, 43, N'HOMA BAY', 249, N'HOMA BAY TOWN', 1244, N'HOMA BAY EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1245, 43, N'HOMA BAY', 250, N'NDHIWA', 1245, N'KWABWAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1246, 43, N'HOMA BAY', 250, N'NDHIWA', 1246, N'KANYADOTO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1247, 43, N'HOMA BAY', 250, N'NDHIWA', 1247, N'KANYIKELA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1248, 43, N'HOMA BAY', 250, N'NDHIWA', 1248, N'NORTH KABUOCH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1249, 43, N'HOMA BAY', 250, N'NDHIWA', 1249, N'KABUOCH SOUTH/PALA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1250, 43, N'HOMA BAY', 250, N'NDHIWA', 1250, N'KANYAMWA KOLOGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1251, 43, N'HOMA BAY', 250, N'NDHIWA', 1251, N'KANYAMWA KOSEWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1252, 43, N'HOMA BAY', 251, N'MBITA', 1252, N'MFANGANO ISLAND')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1253, 43, N'HOMA BAY', 251, N'MBITA', 1253, N'RUSINGA ISLAND')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1254, 43, N'HOMA BAY', 251, N'MBITA', 1254, N'KASGUNGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1255, 43, N'HOMA BAY', 251, N'MBITA', 1255, N'GEMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1256, 43, N'HOMA BAY', 251, N'MBITA', 1256, N'LAMBWE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1257, 43, N'HOMA BAY', 252, N'SUBA', 1257, N'GWASSI SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1258, 43, N'HOMA BAY', 252, N'SUBA', 1258, N'GWASSI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1259, 43, N'HOMA BAY', 252, N'SUBA', 1259, N'KAKSINGRI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1260, 43, N'HOMA BAY', 252, N'SUBA', 1260, N'RUMA KAKSINGRI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1261, 44, N'MIGORI', 253, N'RONGO', 1261, N'NORTH KAMAGAMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1262, 44, N'MIGORI', 253, N'RONGO', 1262, N'CENTRAL KAMAGAMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1263, 44, N'MIGORI', 253, N'RONGO', 1263, N'EAST KAMAGAMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1264, 44, N'MIGORI', 253, N'RONGO', 1264, N'SOUTH KAMAGAMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1265, 44, N'MIGORI', 254, N'AWENDO', 1265, N'NORTH SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1266, 44, N'MIGORI', 254, N'AWENDO', 1266, N'SOUTH SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1267, 44, N'MIGORI', 254, N'AWENDO', 1267, N'WEST SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1268, 44, N'MIGORI', 254, N'AWENDO', 1268, N'CENTRAL SAKWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1269, 44, N'MIGORI', 255, N'SUNA EAST', 1269, N'GOD JOPE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1270, 44, N'MIGORI', 255, N'SUNA EAST', 1270, N'SUNA CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1271, 44, N'MIGORI', 255, N'SUNA EAST', 1271, N'KAKRAO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1272, 44, N'MIGORI', 255, N'SUNA EAST', 1272, N'KWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1273, 44, N'MIGORI', 256, N'SUNA WEST', 1273, N'WIGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1274, 44, N'MIGORI', 256, N'SUNA WEST', 1274, N'WASWETA II')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1275, 44, N'MIGORI', 256, N'SUNA WEST', 1275, N'RAGANA-ORUBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1276, 44, N'MIGORI', 256, N'SUNA WEST', 1276, N'WASIMBETE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1277, 44, N'MIGORI', 257, N'URIRI', 1277, N'WEST KANYAMKAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1278, 44, N'MIGORI', 257, N'URIRI', 1278, N'NORTH KANYAMKAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1279, 44, N'MIGORI', 257, N'URIRI', 1279, N'CENTRAL KANYAMKAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1280, 44, N'MIGORI', 257, N'URIRI', 1280, N'SOUTH KANYAMKAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1281, 44, N'MIGORI', 257, N'URIRI', 1281, N'EAST KANYAMKAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1282, 44, N'MIGORI', 258, N'NYATIKE', 1282, N'KACHIEN''G')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1283, 44, N'MIGORI', 258, N'NYATIKE', 1283, N'KANYASA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1284, 44, N'MIGORI', 258, N'NYATIKE', 1284, N'NORTH KADEM')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1285, 44, N'MIGORI', 258, N'NYATIKE', 1285, N'MACALDER/KANYARWANDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1286, 44, N'MIGORI', 258, N'NYATIKE', 1286, N'KALER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1287, 44, N'MIGORI', 258, N'NYATIKE', 1287, N'GOT KACHOLA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1288, 44, N'MIGORI', 258, N'NYATIKE', 1288, N'MUHURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1289, 44, N'MIGORI', 259, N'KURIA WEST', 1289, N'BUKIRA EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1290, 44, N'MIGORI', 259, N'KURIA WEST', 1290, N'BUKIRA CENTRL/IKEREGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1291, 44, N'MIGORI', 259, N'KURIA WEST', 1291, N'ISIBANIA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1292, 44, N'MIGORI', 259, N'KURIA WEST', 1292, N'MAKERERO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1293, 44, N'MIGORI', 259, N'KURIA WEST', 1293, N'MASABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1294, 44, N'MIGORI', 259, N'KURIA WEST', 1294, N'TAGARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1295, 44, N'MIGORI', 259, N'KURIA WEST', 1295, N'NYAMOSENSE/KOMOSOKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1296, 44, N'MIGORI', 260, N'KURIA EAST', 1296, N'GOKEHARAKA/GETAMBWEGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1297, 44, N'MIGORI', 260, N'KURIA EAST', 1297, N'NTIMARU WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1298, 44, N'MIGORI', 260, N'KURIA EAST', 1298, N'NTIMARU EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1299, 44, N'MIGORI', 260, N'KURIA EAST', 1299, N'NYABASI EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1300, 44, N'MIGORI', 260, N'KURIA EAST', 1300, N'NYABASI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1301, 45, N'KISII', 261, N'BONCHARI', 1301, N'BOMARIBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1302, 45, N'KISII', 261, N'BONCHARI', 1302, N'BOGIAKUMU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1303, 45, N'KISII', 261, N'BONCHARI', 1303, N'BOMORENDA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1304, 45, N'KISII', 261, N'BONCHARI', 1304, N'RIANA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1305, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1305, N'TABAKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1306, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1306, N'BOIKANG''A')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1307, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1307, N'BOGETENGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1308, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1308, N'BORABU / CHITAGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1309, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1309, N'MOTICHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1310, 45, N'KISII', 262, N'SOUTH MUGIRANGO', 1310, N'GETENGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1311, 45, N'KISII', 263, N'BOMACHOGE BORABU', 1311, N'BOMBABA BORABU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1312, 45, N'KISII', 263, N'BOMACHOGE BORABU', 1312, N'BOOCHI BORABU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1313, 45, N'KISII', 263, N'BOMACHOGE BORABU', 1313, N'BOKIMONGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1314, 45, N'KISII', 263, N'BOMACHOGE BORABU', 1314, N'MAGENCHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1315, 45, N'KISII', 264, N'BOBASI', 1315, N'MASIGE WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1316, 45, N'KISII', 264, N'BOBASI', 1316, N'MASIGE EAST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1317, 45, N'KISII', 264, N'BOBASI', 1317, N'BOBASI CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1318, 45, N'KISII', 264, N'BOBASI', 1318, N'NYACHEKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1319, 45, N'KISII', 264, N'BOBASI', 1319, N'BOBASI BOGETAORIO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1320, 45, N'KISII', 264, N'BOBASI', 1320, N'BOBASI CHACHE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1321, 45, N'KISII', 264, N'BOBASI', 1321, N'SAMETA/MOKWERERO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1322, 45, N'KISII', 264, N'BOBASI', 1322, N'BOBASI BOITANGARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1323, 45, N'KISII', 265, N'BOMACHOGE CHACHE', 1323, N'MAJOGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1324, 45, N'KISII', 265, N'BOMACHOGE CHACHE', 1324, N'BOOCHI/TENDERE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1325, 45, N'KISII', 265, N'BOMACHOGE CHACHE', 1325, N'BOSOTI/SENGERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1326, 45, N'KISII', 266, N'NYARIBARI MASABA', 1326, N'ICHUNI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1327, 45, N'KISII', 266, N'NYARIBARI MASABA', 1327, N'NYAMASIBI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1328, 45, N'KISII', 266, N'NYARIBARI MASABA', 1328, N'MASIMBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1329, 45, N'KISII', 266, N'NYARIBARI MASABA', 1329, N'GESUSU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1330, 45, N'KISII', 266, N'NYARIBARI MASABA', 1330, N'KIAMOKAMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1331, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1331, N'BOBARACHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1332, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1332, N'KISII CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1333, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1333, N'KEUMBU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1334, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1334, N'KIOGORO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1335, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1335, N'BIRONGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1336, 45, N'KISII', 267, N'NYARIBARI CHACHE', 1336, N'IBENO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1337, 45, N'KISII', 268, N'KITUTU CHACHE NORTH', 1337, N'MONYERERO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1338, 45, N'KISII', 268, N'KITUTU CHACHE NORTH', 1338, N'SENSI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1339, 45, N'KISII', 268, N'KITUTU CHACHE NORTH', 1339, N'MARANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1340, 45, N'KISII', 268, N'KITUTU CHACHE NORTH', 1340, N'KEGOGI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1341, 45, N'KISII', 269, N'KITUTU CHACHE SOUTH', 1341, N'BOGUSERO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1342, 45, N'KISII', 269, N'KITUTU CHACHE SOUTH', 1342, N'BOGEKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1343, 45, N'KISII', 269, N'KITUTU CHACHE SOUTH', 1343, N'NYAKOE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1344, 45, N'KISII', 269, N'KITUTU CHACHE SOUTH', 1344, N'KITUTU   CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1345, 45, N'KISII', 269, N'KITUTU CHACHE SOUTH', 1345, N'NYATIEKO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1346, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1346, N'RIGOMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1347, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1347, N'GACHUBA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1348, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1348, N'KEMERA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1349, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1349, N'MAGOMBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1350, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1350, N'MANGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1351, 46, N'NYAMIRA', 270, N'KITUTU MASABA', 1351, N'GESIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1352, 46, N'NYAMIRA', 271, N'WEST MUGIRANGO', 1352, N'NYAMAIYA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1353, 46, N'NYAMIRA', 271, N'WEST MUGIRANGO', 1353, N'BOGICHORA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1354, 46, N'NYAMIRA', 271, N'WEST MUGIRANGO', 1354, N'BOSAMARO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1355, 46, N'NYAMIRA', 271, N'WEST MUGIRANGO', 1355, N'BONYAMATUTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1356, 46, N'NYAMIRA', 271, N'WEST MUGIRANGO', 1356, N'TOWNSHIP')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1357, 46, N'NYAMIRA', 272, N'NORTH MUGIRANGO', 1357, N'ITIBO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1358, 46, N'NYAMIRA', 272, N'NORTH MUGIRANGO', 1358, N'BOMWAGAMO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1359, 46, N'NYAMIRA', 272, N'NORTH MUGIRANGO', 1359, N'BOKEIRA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1360, 46, N'NYAMIRA', 272, N'NORTH MUGIRANGO', 1360, N'MAGWAGWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1361, 46, N'NYAMIRA', 272, N'NORTH MUGIRANGO', 1361, N'EKERENYO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1362, 46, N'NYAMIRA', 273, N'BORABU', 1362, N'MEKENENE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1363, 46, N'NYAMIRA', 273, N'BORABU', 1363, N'KIABONYORU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1364, 46, N'NYAMIRA', 273, N'BORABU', 1364, N'NYANSIONGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1365, 46, N'NYAMIRA', 273, N'BORABU', 1365, N'ESISE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1366, 47, N'NAIROBI', 274, N'WESTLANDS', 1366, N'KITISURU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1367, 47, N'NAIROBI', 274, N'WESTLANDS', 1367, N'PARKLANDS/HIGHRIDGE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1368, 47, N'NAIROBI', 274, N'WESTLANDS', 1368, N'KARURA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1369, 47, N'NAIROBI', 274, N'WESTLANDS', 1369, N'KANGEMI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1370, 47, N'NAIROBI', 274, N'WESTLANDS', 1370, N'MOUNTAIN VIEW')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1371, 47, N'NAIROBI', 275, N'DAGORETTI NORTH', 1371, N'KILIMANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1372, 47, N'NAIROBI', 275, N'DAGORETTI NORTH', 1372, N'KAWANGWARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1373, 47, N'NAIROBI', 275, N'DAGORETTI NORTH', 1373, N'GATINA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1374, 47, N'NAIROBI', 275, N'DAGORETTI NORTH', 1374, N'KILELESHWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1375, 47, N'NAIROBI', 275, N'DAGORETTI NORTH', 1375, N'KABIRO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1376, 47, N'NAIROBI', 276, N'DAGORETTI SOUTH', 1376, N'MUTUINI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1377, 47, N'NAIROBI', 276, N'DAGORETTI SOUTH', 1377, N'NGANDO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1378, 47, N'NAIROBI', 276, N'DAGORETTI SOUTH', 1378, N'RIRUTA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1379, 47, N'NAIROBI', 276, N'DAGORETTI SOUTH', 1379, N'UTHIRU/RUTHIMITU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1380, 47, N'NAIROBI', 276, N'DAGORETTI SOUTH', 1380, N'WAITHAKA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1381, 47, N'NAIROBI', 277, N'LANGATA', 1381, N'KAREN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1382, 47, N'NAIROBI', 277, N'LANGATA', 1382, N'NAIROBI WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1383, 47, N'NAIROBI', 277, N'LANGATA', 1383, N'MUGUMO-INI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1384, 47, N'NAIROBI', 277, N'LANGATA', 1384, N'SOUTH-C')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1385, 47, N'NAIROBI', 277, N'LANGATA', 1385, N'NYAYO HIGHRISE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1386, 47, N'NAIROBI', 278, N'KIBRA', 1386, N'LAINI SABA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1387, 47, N'NAIROBI', 278, N'KIBRA', 1387, N'LINDI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1388, 47, N'NAIROBI', 278, N'KIBRA', 1388, N'MAKINA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1389, 47, N'NAIROBI', 278, N'KIBRA', 1389, N'WOODLEY/KENYATTA  GOLF')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1390, 47, N'NAIROBI', 278, N'KIBRA', 1390, N'SARANGOMBE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1391, 47, N'NAIROBI', 279, N'ROYSAMBU', 1391, N'GITHURAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1392, 47, N'NAIROBI', 279, N'ROYSAMBU', 1392, N'KAHAWA WEST')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1393, 47, N'NAIROBI', 279, N'ROYSAMBU', 1393, N'ZIMMERMAN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1394, 47, N'NAIROBI', 279, N'ROYSAMBU', 1394, N'ROYSAMBU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1395, 47, N'NAIROBI', 279, N'ROYSAMBU', 1395, N'KAHAWA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1396, 47, N'NAIROBI', 280, N'KASARANI', 1396, N'CLAYCITY')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1397, 47, N'NAIROBI', 280, N'KASARANI', 1397, N'MWIKI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1398, 47, N'NAIROBI', 280, N'KASARANI', 1398, N'KASARANI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1399, 47, N'NAIROBI', 280, N'KASARANI', 1399, N'NJIRU')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1400, 47, N'NAIROBI', 280, N'KASARANI', 1400, N'RUAI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1401, 47, N'NAIROBI', 281, N'RUARAKA', 1401, N'BABA DOGO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1402, 47, N'NAIROBI', 281, N'RUARAKA', 1402, N'UTALII')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1403, 47, N'NAIROBI', 281, N'RUARAKA', 1403, N'MATHARE NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1404, 47, N'NAIROBI', 281, N'RUARAKA', 1404, N'LUCKY SUMMER')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1405, 47, N'NAIROBI', 281, N'RUARAKA', 1405, N'KOROGOCHO')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1406, 47, N'NAIROBI', 282, N'EMBAKASI SOUTH', 1406, N'IMARA DAIMA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1407, 47, N'NAIROBI', 282, N'EMBAKASI SOUTH', 1407, N'KWA NJENGA')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1408, 47, N'NAIROBI', 282, N'EMBAKASI SOUTH', 1408, N'KWA REUBEN')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1409, 47, N'NAIROBI', 282, N'EMBAKASI SOUTH', 1409, N'PIPELINE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1410, 47, N'NAIROBI', 282, N'EMBAKASI SOUTH', 1410, N'KWARE')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1411, 47, N'NAIROBI', 283, N'EMBAKASI NORTH', 1411, N'KARIOBANGI NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1412, 47, N'NAIROBI', 283, N'EMBAKASI NORTH', 1412, N'DANDORA AREA I')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1413, 47, N'NAIROBI', 283, N'EMBAKASI NORTH', 1413, N'DANDORA AREA II')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1414, 47, N'NAIROBI', 283, N'EMBAKASI NORTH', 1414, N'DANDORA AREA III')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1415, 47, N'NAIROBI', 283, N'EMBAKASI NORTH', 1415, N'DANDORA AREA IV')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1416, 47, N'NAIROBI', 284, N'EMBAKASI CENTRAL', 1416, N'KAYOLE NORTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1417, 47, N'NAIROBI', 284, N'EMBAKASI CENTRAL', 1417, N'KAYOLE CENTRAL')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1418, 47, N'NAIROBI', 284, N'EMBAKASI CENTRAL', 1418, N'KAYOLE SOUTH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1419, 47, N'NAIROBI', 284, N'EMBAKASI CENTRAL', 1419, N'KOMAROCK')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1420, 47, N'NAIROBI', 284, N'EMBAKASI CENTRAL', 1420, N'MATOPENI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1421, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1421, N'UPPER SAVANNAH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1422, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1422, N'LOWER SAVANNAH')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1423, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1423, N'EMBAKASI')
+GO
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1424, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1424, N'UTAWALA')
+GO
+
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIV Negative',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIV Negative'  ) ItemId FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
