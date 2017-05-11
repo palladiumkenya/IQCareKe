@@ -245,16 +245,13 @@
                     <div class="col-md-3">
 
                         <asp:LinkButton runat="server" ID="btnSaveLab" OnClientClick="return false" CssClass="btn btn-info fa fa-plus-circle" ClientIDMode="Static"> Save Order</asp:LinkButton>
-                    </div>
-                    <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="btnPrintOrder" CssClass="btn btn-primary fa fa-print" ClientIDMode="Static"> Print Order</asp:LinkButton>
-                    </div>
+                    </div>                  
                     <div class="col-md-3">
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
                     <div class="col-md-3">
                         <%--<asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>--%>
-                        <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
+                       <asp:LinkButton runat="server" ID="btnClose" OnClientClick="return false" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal" ClientIDMode="Static">Close Lab Order</asp:LinkButton>
                     </div>
                 </div>
 
@@ -267,6 +264,8 @@
         var ptn_pk = '<%=Ptn_pk%>';        
         var facilityId = '<%=AppLocationId%>';
         var moduleId = '<%=ModuleId%>';
+        var enrollmentDate = '<%=EnrollmentDate%>';
+      
       
         $(document).ready(function () {           
 
@@ -411,11 +410,11 @@
                     }
                 }
             }
-            // Load lab order   
+            // Load lab order 
+           
             $("#btnAddLab").click(function (e) {
 
                 var labOrderFound = 0;
-
                 var labName = $("#labTestTypes").val();
                 var labNameId=val2key(labName, labtests);              
                 var labOrderReason = $("#orderReason").find(":selected").text();
@@ -449,7 +448,8 @@
 
                     $('#tblAddLabs tr:not(:first-child').each(function(idx){
                         $(this).children("td:eq(0)").html(idx + 1);
-                    }); 
+                    });
+                    
                 }
 
                 e.preventDefault();
@@ -458,7 +458,8 @@
             $("#tblAddLabs").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();
                 var x = $(this).closest('tr').find('td').eq(0).html();
-
+                LabOrderList=[];
+               //Allows reentry of removed test
                
             });
        
@@ -469,11 +470,38 @@
             $("#btnResetOrder").click(function (e) {   
                 resetLabOrder();
             });
-        
+
+            $("#btnClose").click(function (e) {
+               window.location.href = '<%=ResolveClientUrl("../Patient/patientHome.aspx") %>';
+            });
             function resetLabOrder(parameters) {
                 $("#labTestTypes").val("");
                 $("#orderReason").val("");
                 $("#labNotes").val("");              
+            }
+
+            function getFormattedDate(t_sdate) {
+                var sptdate = String(t_sdate).split("-");
+                var months = {};
+                months["Jan"] = "1";
+                months["Feb"] = "2";
+                months["Mar"] = "3";
+                months["Apr"] = "4";
+                months["May"] = "5";
+                months["Jun"] = "6";
+                months["Jul"] = "7";
+                months["Aug"] = "8";
+                months["Sep"] = "9";
+                months["Oct"] = "10";
+                months["Nov"] = "11";
+                months["Dec"] = "12";
+
+                var myMonth = sptdate[1];
+                var myDay = sptdate[0];
+                var myYear = sptdate[2];
+                var converted = months[myMonth];               
+                var combineDatestr = myDay + "/" + converted + "/" + myYear + " " + "00" + ":" + "00" + ":" + "00" + " " + "AM";
+                return combineDatestr;
             }
         
 
@@ -482,7 +510,13 @@
                 var labOrderDate = $("#<%=LabDate.ClientID%>").val();   
                 var orderNotes = $("#orderNotes").val();
                 var _fp = [];
-                var table  = "";              
+                var table = "";
+                var labDate = getFormattedDate(labOrderDate);
+              //using momentjs
+               enrollmentDate = moment(enrollmentDate);
+               var isBeforeEnrollmentDate = moment(labDate).isBefore(enrollmentDate);        
+
+              
                 var data = $('#tblAddLabs tr').each(function (row, tr) {
                     _fp[row] = {
                                 "labNameId": $(tr).find('td:eq(1)').text()
@@ -499,7 +533,13 @@
                     toastr.error("You have not added any lab order");
                  
                     return false;
-                } else {
+                } if (isBeforeEnrollmentDate) {
+                   
+                    toastr.error("You cannot make a lab order before enrollment. Kindly enroll to IQCare first");
+
+                    return false;
+                }
+                else {
                   
                     addLabOrder(_fp,labOrderDate,orderNotes);       
                   
