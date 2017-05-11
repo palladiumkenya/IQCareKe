@@ -1465,8 +1465,8 @@
                                         .text(moment(itemList.TreatmentStartDate).format("DD-MMM-YYYY"));
                                     $("#<%=lblTIRegimen.ClientID%>").text(itemList.CurrentTreatmentName);
                                     $("#<%=lblFacilityFrom.ClientID%>").text(itemList.FacilityFrom);
-                                } else {
-                                   
+                                } else if(patientType==='New') {
+                                    
                                     <%--$("#<%=lblTransferinDate.ClientID%>").text("N/A");
                                     $("#<%= lblTreatmentStartDate.ClientID%>") .text("N/A");
                                     $("#<%=lblTIRegimen.ClientID%>").text("N/A");
@@ -1947,20 +1947,20 @@
                         }
                         $("#<%=txtNearestHealthCentre.ClientID%>").text(nearestHealthCentre);
 
-                        var PatientPostalAddress = "";
-                        if (patientDetails.PatientPostalAddress != "" &&
+                        var patientPostalAddress = "";
+                        if (patientDetails.PatientPostalAddress !== "" &&
                             patientDetails.PatientPostalAddress != null) {
-                            PatientPostalAddress = patientDetails.PatientPostalAddress;
+                            patientPostalAddress = patientDetails.PatientPostalAddress;
                         }
-                        $("#<%=txtPostalAddress.ClientID%>").text(PatientPostalAddress);
-                        var MobileNumber = "";
-                        if (patientDetails.MobileNumber != "" && patientDetails.MobileNumber != null) {
-                            MobileNumber = patientDetails.MobileNumber;
+                        $("#<%=txtPostalAddress.ClientID%>").text(patientPostalAddress);
+                        var mobileNumber = "";
+                        if (patientDetails.MobileNumber !== "" && patientDetails.MobileNumber != null) {
+                            mobileNumber = patientDetails.MobileNumber;
                         }
-                        $("#<%=txtMobile.ClientID%>").text(MobileNumber);
+                        $("#<%=txtMobile.ClientID%>").text(mobileNumber);
 
-                        $("#<%=patPostalAddress.ClientID%>").val(PatientPostalAddress);
-                        $("#<%=patMobile.ClientID%>").val(MobileNumber);
+                        $("#<%=patPostalAddress.ClientID%>").val(patientPostalAddress);
+                        $("#<%=patMobile.ClientID%>").val(mobileNumber);
                         $("#<%=patEmailAddress.ClientID%>").val(patientDetails.EmailAddress);
                         $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
                         $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId);
@@ -2106,15 +2106,15 @@
                 if (!$('#treatmentSupporterModal').parsley().validate()) {
                     return false;
                 }
-                var FirstName = $("#<%=trtFirstName.ClientID%>").val();
-                var MiddleName = $("#<%=trtMiddleName.ClientID%>").val();
-                var LastName = $("#<%=trtLastName.ClientID%>").val();
+                var firstName = $("#<%=trtFirstName.ClientID%>").val();
+                var middleName = $("#<%=trtMiddleName.ClientID%>").val();
+                var lastName = $("#<%=trtLastName.ClientID%>").val();
                 var Gender = $("#<%=trtGender.ClientID%>").val();
-                var Mobile = $("#<%=trtMobile.ClientID%>").val();
+                var mobile = $("#<%=trtMobile.ClientID%>").val();
                 var userId = <%=UserId%>;
 
                 if (patientId > 0) {
-                    addPatientTreatmentSupporter(patientId, FirstName, MiddleName, LastName, Gender, Mobile, userId);
+                    addPatientTreatmentSupporter(patientId, firstName, middleName, lastName, Gender, mobile, userId);
                 }
             });
             $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', true);
@@ -2126,12 +2126,12 @@
                 var birthDate = new Date(dob);
                 var age = today.getFullYear() - birthDate.getFullYear();
 
-                if (age <= 18 && $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
+                if (age <= 18 && $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() === "Key Population") {
                     $("#<%=bioPatientPopulation.ClientID%>").val(74);
                     toastr.error("Under 18 should not be a key population", "Population Type");
                     return false;
                 }
-                if ($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() == "Key Population") {
+                if ($("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text() === "Key Population") {
                     $("#<%=bioPatientKeyPopulation.ClientID%>").prop('disabled', false);
                 } else {
                     $("#<%=bioPatientKeyPopulation.ClientID%>").val("");
@@ -2304,17 +2304,20 @@
                     success: function (response) {
                         console.log(response.d);
                         var patientVitals = response.d;
+                        if (patientVitals.length > 0) {
+                                $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
+                                $("#<%=lblHeightP.ClientID%>").text(patientVitals.Height);
+                                $("#<%=lblmuac.ClientID%>").text(patientVitals.Muac);
+                                $("#<%=lblHeadCircumference.ClientID%>").text(patientVitals.HeadCircumference);
+                                $("#<%=lblTemperature.ClientID%>").text(patientVitals.Temperature);
+                                $("#<%=lblSystolic.ClientID%>").text(patientVitals.BpSystolic);
+                                $("#<%=lblDiastolic.ClientID%>").text(patientVitals.Bpdiastolic);
+                                $("#<%=lblPulseRate.ClientID%>").text(patientVitals.HeartRate);
+                                $("#<%=lblRespiration.ClientID%>").text(patientVitals.RespiratoryRate);
+                                $("#<%=lblOxygenSat.ClientID%>").text(patientVitals.SpO2);
+                        }
                         //console.log("vitals");
-                        $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
-                    $("#<%=lblHeightP.ClientID%>").text(patientVitals.Height);
-                    $("#<%=lblmuac.ClientID%>").text(patientVitals.Muac);
-                    $("#<%=lblHeadCircumference.ClientID%>").text(patientVitals.HeadCircumference);
-                    $("#<%=lblTemperature.ClientID%>").text(patientVitals.Temperature);
-                    $("#<%=lblSystolic.ClientID%>").text(patientVitals.BpSystolic);
-                    $("#<%=lblDiastolic.ClientID%>").text(patientVitals.Bpdiastolic);
-                    $("#<%=lblPulseRate.ClientID%>").text(patientVitals.HeartRate);
-                    $("#<%=lblRespiration.ClientID%>").text(patientVitals.RespiratoryRate);
-                    $("#<%=lblOxygenSat.ClientID%>").text(patientVitals.SpO2);
+
 
                 },
                 error: function (xhr, errorType, exception) {

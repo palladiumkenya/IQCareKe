@@ -294,12 +294,15 @@
 				$("#LinkButton2").hide();
 				$("#menuStartEncounter").hide();
 				$("#menuMoH257").hide();
+				$("#titlePatientEncounter").hide();
+			    $('#menuStartEncounter').hide();
 
 			} else {
 				$("#menuPatientHome").show();
 				$("#LinkButton2").show();
 				$("#menuStartEncounter").show();
 				$("#menuMoH257").show();
+                $("#titlePatientEncounter").show();
 			}
 
 			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
@@ -390,7 +393,7 @@
 					return false;
 				}
 				if (startEncounter < 0) {
-					toastr.error("No Active Encounter to Stop,", "Encounter Stop Alert");
+					toastr.error("No Active Encounter to Stop");
 					return false;
 				}
 
@@ -402,8 +405,11 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(response) {
-						encounterStopped();
-						$("#menuStartEncounter").show();
+					    
+					    // encounterStatusId = 0;
+					    //encounterStopped();
+					    //$("#menuStartEncounter").show();
+					   // checkOut();
 						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
 					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 					    toastr.info("Patient Service Checkedout successfully!");
@@ -435,10 +441,11 @@
 				$("#menuPharmacyPrescription").hide();
 				$("#menuLabOrder").hide();
 				$("#menuPatientVitals").hide();
-			   //$("#LinkButton2").hide();
-				$("#menuStartEncounter").show();
+			  // $("#LinkButton2").show();
+				//$("#menuStartEncounter").show();
                 $('#<%=lblRegistration.ClientID%>').text("Register Patient");
-				<%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+			    <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+
 			}
 
 		    function encounterStarted() {
@@ -465,7 +472,29 @@
 				$("#menuPatientVitals").show();
 				$("#LinkButton2").show();
 
-			}
+		    }
+
+		    function checkOut() {
+		        
+                $("#titlePatientBaseline").hide();
+				$("#menuBaseline").hide();
+				$("#menuFamilyTesting").hide();
+				$("#MenuOneTimeEventsTracker").hide();
+				$("#menuStopEncounter").hide();
+		        $("#titlePatientEncounter").hide();
+			    $("#menuPatientHome").hide();
+				$("#menuPatientAppointments").hide();
+				$("#menuPatientCareEnded").hide();
+				$("#menuScheduleAppointments").hide();
+				$("#menuCaptureVitals").hide();
+				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
+				$("#menuPatientVitals").hide();
+			    $("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+		    }
 
 		});
 	</script>

@@ -231,7 +231,7 @@ namespace IQCare.Web.CCC.WebService
                 var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
                 foreach (var item in arvHistory)
                 {
-                    _jsonMessage += "<tr> <td align='left'>" + item.Purpose + "</td> <td align='left'>" + item.Regimen + "</td> <td align='left'>" + item.DateLastUsed.ToString("dd-mmm-yyy") + "</td> </tr>";
+                    _jsonMessage += "<tr> <td align='left'>" + item.Purpose + "</td> <td align='left'>" + item.Regimen + "</td> <td align='left'>" + item.DateLastUsed.ToString("dd-MMM-yyyy") + "</td> </tr>";
                 }
                // _jsonMessage=JsonConvert.SerializeObject(patientArvHistory.GetPatientArtUseHistory(patientId))
             }

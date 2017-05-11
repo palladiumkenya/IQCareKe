@@ -53,6 +53,7 @@ namespace IQCare.Web.CCC.WebService
                 result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
                 Session["EncounterStatusId"] = 0;
                 Session["PatientEditId"] = 0;
+                Session["PatientPK"] = 0;
             }
             catch (Exception e)
             {

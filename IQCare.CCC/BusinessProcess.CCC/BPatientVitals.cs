@@ -1,5 +1,4 @@
-﻿using System;
-using DataAccess.Base;
+﻿using DataAccess.Base;
 using Entities.CCC.Triage;
 using Interface.CCC;
 using System.Collections.Generic;

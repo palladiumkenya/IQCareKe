@@ -393,7 +393,7 @@
                 if ($("#CareEndedForm").parsley().validate()) {
                     $.when(endCare()).then(function() {
                         setTimeout(function() {
-                               $.when(getCareEnded()) .then (window.location.href=<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>);
+                                getCareEnded();
                             },
                             2000);
                     });
@@ -421,7 +421,10 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        toastr.success(response.d, "Care Ended");
+                         window.location.href = '<%=ResolveClientUrl( "~/CCC/Home.aspx")%>';
+                        toastr.success(response.d);
+                           <%-- window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';--%>
+                           
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);

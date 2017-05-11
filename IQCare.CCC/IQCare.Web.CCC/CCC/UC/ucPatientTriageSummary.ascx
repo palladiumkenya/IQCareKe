@@ -6,6 +6,10 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-12"><asp:Label runat="server" ID="lblDatetaken" CssClass="pull-left "> #</asp:Label></div>
+            </div>
+            <div class="col-md-12"><div class="col-md-12"><hr/></div></div>
             <div class="col-md-12 col-xs-12 col-sm-12">
                 <div class="col-md-3 col-xs-12 col-sm-12">
                     <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> Age :</asp:Label></h5></div>
@@ -126,8 +130,8 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        var diastolic = "<%=bpDiastolic%>";
-        var systolic = "<%=bpSystloic%>";
+        var systolic  = "<%=bpDiastolic%>";
+        var diastolic  = "<%=bpSystloic%>";
 
         var patientGender = "<%=PatientGender%>";
 
