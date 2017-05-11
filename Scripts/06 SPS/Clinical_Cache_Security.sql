@@ -1765,8 +1765,10 @@ CREATE PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
 	@Password varchar(50) = Null,    
 	@ModuleId int = 999,
 	@FilterByModuleId bit= 0,
+	@PhoneNumber varchar(50) = Null,
 	@top int = 100,
 	@RuleFilter varchar(400)=''
+	With Recompile
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -1798,6 +1800,7 @@ If  (@LastName Is Not Null) Select @LastName ='%' + @LastName + '%';
 
 Select @EnrollmentId = Convert(varchar,Nullif(Ltrim(Rtrim(@EnrollmentID)), ''));
 
+Select @PhoneNumber =Nullif(ltrim(rtrim(@PhoneNumber)),'');
 
 If (@EnrollmentId Is Not Null) 
 Begin
@@ -1815,8 +1818,8 @@ Begin
 End
 If(@ModuleID <> 999)
 Begin
-	Select @ByModule= ' Left Outer Join (Select	P.Ptn_pk,P.ModuleId,P.StartDate EnrollmentDate,	Case CT.CareEnded When 1 Then ''Care Ended'' When 0 Then ''Restarted''  Else ''Active'' End CareStatus,		
-		CT.PatientExitReasonName CareEndReason,	Isnull(CT.EnrollmentIndex,1)EnrollmentIndex From dbo.Lnk_PatientProgramStart As P
+	Select @ByModule= ' Left Outer Join (Select	P.Ptn_pk,P.ModuleId,P.StartDate EnrollmentDate,	Case CT.CareEnded When 1 Then ''Care Ended'' When 0 Then ''Active (Restarted)''  Else ''Active'' End CareStatus,		
+		Case CT.CareEnded When 1 Then CT.PatientExitReasonName Else Null End  CareEndReason,	Isnull(CT.EnrollmentIndex,1)EnrollmentIndex From dbo.Lnk_PatientProgramStart As P
 Left Outer Join (Select	CE.Ptn_Pk,	CE.CareEnded,	CE.PatientExitReason,	D.Name As PatientExitReasonName,CE.CareEndedDate,TC.TrackingID,
 TC.ModuleId	,Row_number() Over(Partition By TC.Ptn_Pk Order By TC.TrackingId Desc) EnrollmentIndex From dbo.dtl_PatientCareEnded As CE Inner Join	dbo.dtl_PatientTrackingCare As TC On TC.TrackingID = CE.TrackingId
 Inner Join	dbo.mst_Decode As D On D.ID = CE.PatientExitReason Where TC.ModuleId = @ModuleID ) As CT On CT.Ptn_Pk = P.Ptn_pk And CT.ModuleId = P.ModuleId Where P.ModuleID=@ModuleID ) CT On CT.Ptn_Pk=P.Ptn_Pk And CT.ModuleID=@ModuleID And EnrollmentIndex=1'
@@ -1834,6 +1837,7 @@ And Case When @FirstName Is  Null Or Convert(varchar(50), decryptbykey(P.FirstNa
 And Case When @LastName Is  Null Or Convert(varchar(50), decryptbykey(P.LastName)) Like  @LastName Then 1	Else 0 End = 1
 And Case When @MiddleName Is  Null Or Convert(varchar(50), decryptbykey(P.MiddleName)) Like  @MiddleName Then 1	Else 0 End = 1
 And (@DOB Is Null Or P.DOB = @DOB) And (@RegistrationDate Is Null Or P.RegistrationDate= @RegistrationDate) And (@Sex Is Null Or P.Sex = @Sex) And (@Status Is Null Or P.[Status] = @status)
+And Case When @PhoneNumber Is  Null Or Convert(varchar(50), decryptbykey(P.Phone)) =  @PhoneNumber Then 1	Else 0 End = 1
 And (@FacilityID Is Null Or P.LocationID=@FacilityID)' +@Identifiers + ') P '+ @RuleFilter  ;
 
 Set @Query = @Query + ' Order By [Status],P.RegistrationDate';
@@ -1849,13 +1853,15 @@ Set @ParamDefinition= N'@Sex int = Null,
 	@Status int = Null,
 	@Password varchar(50) = Null,    
 	@ModuleID int = 999,
+	@PhoneNumber varchar(50) = Null,
 	@top int=100 ';
 							 
 --Set @SymKey = 'Open symmetric key Key_CTC decryption by password=' + @password ;
 --Exec sp_executesql @SymKey ;
-Execute sp_Executesql @Query, @ParamDefinition, @Sex, @Firstname,@LastName,@MiddleName,@DOB,@RegistrationDate,@EnrollmentID,@FacilityID,@status,@password,@moduleId,@top;
+Execute sp_Executesql @Query, @ParamDefinition, @Sex, @Firstname,@LastName,@MiddleName,@DOB,@RegistrationDate,@EnrollmentID,@FacilityID,@status,@password,@moduleId,@PhoneNumber,@top;
 	 
 End	   
+  
 	  
 GO
 

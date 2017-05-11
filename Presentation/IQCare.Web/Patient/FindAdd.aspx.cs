@@ -7,10 +7,11 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Interface.Clinical;
+using IQCare.Web.UILogic;
 
 namespace IQCare.Web.Patient
 {
-    public partial class FindAdd : System.Web.UI.Page
+    public partial class FindAdd : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace IQCare.Web.Patient
             Session["PMTCTPatientStatus"] = 0;
             //SetEnrollmentCombo();
             Session["PatientId"] = 0;
+            SessionManager.PatientId = 0;
             Session["TechnicalAreaName"] = Request.QueryString["srvNm"];
             Session["TechnicalAreaId"] = Request.QueryString["mod"];
             base.Session["TechIdentifier"] = null;
@@ -84,7 +86,7 @@ namespace IQCare.Web.Patient
             patientId = (int)param.Find(l => l.Key == "PatientID").Value;
             locationId = (int)param.Find(l => l.Key == "LocationID").Value;
 
-            if (locationId == Convert.ToInt32(base.Session["AppLocationId"]))
+            if (locationId == SessionManager.PatientId)
             {
                 openPatientDetails(patientId);
             }
@@ -104,7 +106,8 @@ namespace IQCare.Web.Patient
             HttpContext.Current.Session["LabId"] = 0;
             HttpContext.Current.Session["PatientInformation"] = null;
 
-
+            SessionManager.PatientId = patientID;
+            SessionManager.VisitId = 0;
            
 
             string theUrl = "";
@@ -118,7 +121,7 @@ namespace IQCare.Web.Patient
             {
                 //Check if the patient is enrolled and go directly to patient home page if patient is enrolled
                 IPatientRegistration PatRegMgr = (IPatientRegistration)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientRegistration, BusinessProcess.Clinical");
-                DataSet theDS = PatRegMgr.GetFieldNames(int.Parse(Request.QueryString["mod"]), Convert.ToInt32(Session["PatientId"]));
+                DataSet theDS = PatRegMgr.GetFieldNames(int.Parse(Request.QueryString["mod"]), patientID);
                 if (theDS.Tables[3].Rows.Count > 0)//check if the patient was care ended for reenrolment
                 {
                     theUrl = string.Format("{0}?PatientId={1}&mod={2}", "./AddTechnicalArea.aspx", patientID, Request.QueryString["mod"]);
