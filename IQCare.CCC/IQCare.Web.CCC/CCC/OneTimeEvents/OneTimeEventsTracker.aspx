@@ -946,12 +946,12 @@
 
                     var isBeforeDobCompletionDate = moment(CompletionDate).isBefore(dob);
                     var isBeforedobStopDate = moment(StopDate).isBefore(dob);
-                    var isBeforeINHStartDate = momentConfig(INHStartDate).isBefore(dob);
+                    var isBeforeINHStartDate = moment(INHStartDate).isBefore(dob);
 
                     var isBeforeStage1 = moment(Stage1).isBefore(dob);
                     var isBeforeStage2 = moment(Stage2).isBefore(dob);
-                    var isBeforeStage3 = momentConfig(Stage3).isBefore(dob);
-                    var isBeforeSexPartner = momentConfig(SexPartner).isBefore(dob);
+                    var isBeforeStage3 = moment(Stage3).isBefore(dob);
+                    var isBeforeSexPartner = moment(SexPartner).isBefore(dob);
 
                     //var isCompletionDateBeforeEnrollmentDate = moment(CompletionDate).isBefore(enrollmentDate);
                     //var isStopDateBeforeEnrollmentDate = moment(StopDate).isBefore(enrollmentDate);

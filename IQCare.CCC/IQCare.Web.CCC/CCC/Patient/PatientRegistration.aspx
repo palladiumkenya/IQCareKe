@@ -112,7 +112,7 @@
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label for="Gender" class="required control-label pull-left">Gender</label></div>
                                     <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
+                                        <asp:DropDownList runat="server" ID="Gender" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Please select gender"/>
                                     </div>
                                 </div>
 
@@ -268,7 +268,7 @@
                                     <div class="form-group">
                                         <div class="col-md-12"><label for="ChildOrphan" class="control-label"> (<18yrs) Orphan</label></div>
                                         <div class="col-md-12">
-                                            <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>    
+                                            <asp:DropDownList runat="server" ID="ChildOrphan" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Please select Orphan?"/>    
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                     <div class="form-group">
                                             <div class="col-md-12"><label for="Inschool" class="control-label pull-left">In School ? </label></div>
                                             <div class="col-md-12">
-                                                <asp:DropDownList runat="server" ID="Inschool" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1"/>
+                                                <asp:DropDownList runat="server" ID="Inschool" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" data-parsley-min-message="Please select InSchool?"/>
                                             </div>
                                     </div>
                                 </div>
@@ -294,14 +294,14 @@
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label for="NationalId" class="required control-label pull-left">ID Number</label></div>
                                     <div class="col-md-12">
-                                        <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" required="true" data-parsley-required="true" data-parsley-length="[7,8]"  />
+                                        <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" data-parsley-length="[7,8]"  />
                                     </div>
                                 </div>
                                          
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label for="MaritalStatusId" class="control-label pull-left">Marital Status </label></div>
                                     <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
+                                        <asp:DropDownList runat="server" ID="MaritalStatusId" class="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Marital Status"></asp:DropDownList>
                                     </div>
                                 </div> 
                                 <div class="col-md-3"></div>
@@ -337,7 +337,7 @@
                                 <div class="col-md-3">
                                     <div class="col-md-12"><label class="control-label pull-left">Guardian Gender</label></div>
                                     <div class="col-md-12">
-                                        <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" />
+                                        <asp:DropDownList runat="server" ID="GuardianGender" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-min="1" data-parsley-min-message="Please select Guardian Gender" />
                                     </div>
                                 </div>
                             </div>           
@@ -432,7 +432,7 @@
                                     <div class="col-md-4">
                                          <div class="col-md-12"><label class="control-label pull-left">Postal Address</label></div>
                                          <div class="col-md-12">
-                                              <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-length="[8,100]" ClientIDMode="Static"/>
+                                              <asp:TextBox type="text" runat="server" id="PatientPostalAddress" name="PatientPostalAddress" class="form-control input-sm" placeholder="postal address" data-parsley-length="[4,100]" ClientIDMode="Static"/>
                                          </div>     
                                     </div>
                                
@@ -621,6 +621,19 @@
 
                 $('#MyDateOfBirth').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
                     var x = $('#MyDateOfBirth').datepicker('getDate');
+                    var age = getAge(x);
+                    console.log(age);
+
+                    if (age < 0) {
+                        $("#PersonDoB").val("");
+                        toastr.error("Patient Date of Birth should not be in the future", "Person Age");
+                        return false;
+                    }else if (age > 120) {
+                        $("#PersonDoB").val("");
+                        toastr.error("Patient should not be more than 120 years old", "Person Age");
+                        return false;
+                    }
+
                     $('#<%=personAge.ClientID%>').val(getAge(x));
                     personAgeRule();
                     duplicateCheck();
@@ -664,12 +677,16 @@
                         else
                             previousStep=nextStep -= 1;
                         if (data.step === 1) {
+                            if (data.direction === 'previous') {
+                                return;
+                            } else {
                                 $('#datastep1').parsley().destroy();
                                 $('#datastep1').parsley({
                                     excluded:
-                                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"});
-                                
-                            /* add constraints based on age*/                                         
+                                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                                });
+
+                                /* add constraints based on age*/
                                 if ($('#datastep1').parsley().validate()) {
                                     //console.log($("#personAge").val());
                                     personAge = $("#personAge").val();
@@ -710,100 +727,115 @@
                                         }
                                     }
                                 } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
+                                    stepError = $('.parsley-error').length === 0;
+                                    totalError += stepError;
+                                    evt.preventDefault();
+                                }
                             }
                         }
                         else if (data.step === 2) {
-                            $('#datastep2').parsley().destroy();
-                            $('#datastep2').parsley({
-                                excluded:
-                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-                            });
-                            if ($("#datastep2").parsley().validate()) {
-                                addPersonLocation();
+                            if (data.direction === 'previous') {
+                                return;
                             } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
+                                $('#datastep2').parsley().destroy();
+                                $('#datastep2').parsley({
+                                    excluded:
+                                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                                });
+                                if ($("#datastep2").parsley().validate()) {
+                                    addPersonLocation();
+                                } else {
+                                    stepError = $('.parsley-error').length === 0;
+                                    totalError += stepError;
+                                    evt.preventDefault();
+                                }
                             }
                         }
                         else if (data.step === 3) {
-                            $('#datastep3').parsley().destroy();
-                            validateTreatmentSupporter();
-                            $('#datastep3').parsley({
-                                excluded:
-                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-                            });
-                            
-                            if ($("#datastep3").parsley().validate()) {
-                                $.when(addPatientContact()).then(function() {
-                                    $.when(addPersonTreatmentSupporter()).then(function() {
-                                    });
-                                });                             
+                            if (data.direction === 'previous') {
+                                return;
                             } else {
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                evt.preventDefault();
+                                $('#datastep3').parsley().destroy();
+                                validateTreatmentSupporter();
+                                $('#datastep3').parsley({
+                                    excluded:
+                                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                                });
+
+                                if ($("#datastep3").parsley().validate()) {
+                                    $.when(addPatientContact()).then(function() {
+                                        $.when(addPersonTreatmentSupporter()).then(function() {
+                                        });
+                                    });
+                                } else {
+                                    stepError = $('.parsley-error').length === 0;
+                                    totalError += stepError;
+                                    evt.preventDefault();
+                                }
                             }
                         }
-                        else if (data.step===4) {
-                            $('#datastep4').parsley().destroy();
-                            $('#datastep4').parsley({
-                                excluded:
-                                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-                            });
-                            if ($("#datastep4").parsley().validate()) {
-
-                                var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked').val();
-
-                                var checked_radio = $("[id*=PopulationType] input:checked");
-                                var populationType = checked_radio.closest("td").find("label").html();
-
-                                //console.log(typeof patientTypeId);
-                                $('.errorBlockPatientType').hide();
-                                if (typeof patientTypePopulationType == "undefined") {
-                                    $('.errorBlockPatientType').show();
-                                    return false;
-                                }
-
-                                if (populationType == "Key Population") {
-                                    
-                                }
-
-                                var sex = $("#Gender").find(":selected").text();
-                                var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
-
-                                if (sex == "Male" && optionType=="Female Sex Worker (FSW)") {
-                                    toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
-                                    return false;
-                                }
-                                else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
-                                    toastr.error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
-                                        "Person Population Error");
-                                    return false;
-                                } else {
-                                    $.when(addPersonPopulation()).then(function() {
-                                        setTimeout(function() {
-                                                window.location
-                                                    .href =
-                                                    '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                            },
-                                            2000);
-                                    });
-                                }
+                        else if (data.step === 4) {
+                            if (data.direction === 'previous') {
+                                return;
                             } else {
-                               
-                                stepError = $('.parsley-error').length === 0;
-                                totalError += stepError;
-                                if (totalError > 0) {
-                                    $('.bs-callout-danger').toggleClass('hidden', f);
+                                $('#datastep4').parsley().destroy();
+                                $('#datastep4').parsley({
+                                    excluded:
+                                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                                });
+                                if ($("#datastep4").parsley().validate()) {
+
+                                    var patientTypePopulationType = $('#<%= PopulationType.ClientID %> input:checked')
+                                        .val();
+
+                                    var checked_radio = $("[id*=PopulationType] input:checked");
+                                    var populationType = checked_radio.closest("td").find("label").html();
+
+                                    //console.log(typeof patientTypeId);
+                                    $('.errorBlockPatientType').hide();
+                                    if (typeof patientTypePopulationType == "undefined") {
+                                        $('.errorBlockPatientType').show();
+                                        return false;
+                                    }
+
+                                    if (populationType == "Key Population") {
+
+                                    }
+
+                                    var sex = $("#Gender").find(":selected").text();
+                                    var optionType = $("#KeyPopulationCategoryId").find(":selected").text();
+
+                                    if (sex == "Male" && optionType == "Female Sex Worker (FSW)") {
+                                        toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person",
+                                            "Person Population Error");
+                                        return false;
+                                    } else if (sex == "Female" && optionType == "Men having Sex with Men (MSM)") {
+                                        toastr
+                                            .error("Cannot select 'Men having Sex with Men (MSM)' for a female person",
+                                                "Person Population Error");
+                                        return false;
+                                    } else {
+                                        $.when(addPersonPopulation()).then(function() {
+                                            setTimeout(function() {
+                                                    window.location
+                                                        .href =
+                                                        '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
+                                                },
+                                                2000);
+                                        });
+                                    }
+                                } else {
+
+                                    stepError = $('.parsley-error').length === 0;
+                                    totalError += stepError;
+                                    if (totalError > 0) {
+                                        $('.bs-callout-danger').toggleClass('hidden', f);
+                                    }
+                                    evt.preventDefault();
                                 }
-                                evt.preventDefault();
+                                //var ok4 = $('.parsley-error').length === 0;
+                                //$('.bs-callout-info').toggleClass('hidden', !ok4);
                             }
-                            //var ok4 = $('.parsley-error').length === 0;
-                            //$('.bs-callout-info').toggleClass('hidden', !ok4);
                         }
                     })
                     .on("changed.fu.wizard",
@@ -1311,21 +1343,23 @@
 
                 $( "#personAge").keyup(function() {
                     var personAge = parseInt($("#personAge").val());
-                    if (personAge != null && personAge != "" && personAge > 0) {
+
+                    if (personAge <= 0) {
+                        $("#PersonDoB").val("");
+                        toastr.error("Patient's Age should not be zero", "Person Age");
+                        return false;
+                    }else if (personAge > 120) {
+                        $("#PersonDoB").val("");
+                        toastr.error("Patient's Age should not be more 120 years", "Person Age");
+                        return false;
+                    }
+
+                    if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) {
 
                         $('#MyDateOfBirth').datepicker('setDate', estimateDob(personAge));
                         personAgeRule();
                     }               
                 });
-
-                /*var $wizard = $('#myWizard').wizard();
-                var wizard = $wizard.data('fu.wizard');
-                $wizard.off('click', 'li.complete');
-                $wizard.on('click', 'li', $.proxy(wizard.stepclicked, wizard));*/
-
-                /*$('#myWizard').wizard('selectedItem', {
-                    step: 2
-                });*/
 
 
                 $("#ISGuardian").change(function() {
@@ -1489,7 +1523,13 @@
                         $("#<%=GurdianMName.ClientID%>").prop('disabled',false);
                         $("#<%=GurdianLName.ClientID%>").prop('disabled',false);
                         $("#<%=GuardianGender.ClientID%>").prop('disabled',false);
-                        $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        if (personAge <= 10) {
+                            $("#<%=MaritalStatusId.ClientID%>").val("");
+                            $("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
+                        } else {
+                            $("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
+                        }
+                        
                         $("#<%=ISGuardian.ClientID%>").prop('disabled', false);
 
                         $('#PopulationType_1').prop('disabled', true);
