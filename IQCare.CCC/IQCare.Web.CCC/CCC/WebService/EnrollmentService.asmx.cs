@@ -389,6 +389,11 @@ namespace IQCare.Web.CCC.WebService
                             exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(facilityOutTransfer),
                             GlobalObject.unescape(careEndingNotes));
                     }
+                    else if (String.IsNullOrWhiteSpace(facilityOutTransfer) && String.IsNullOrWhiteSpace(dateOfDeath))
+                    {
+                        careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId, patientEnrollmentId,
+                            exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
+                    }
                     else
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
                         exitReason, DateTime.Parse(exitDate), DateTime.Parse(dateOfDeath),  GlobalObject.unescape(careEndingNotes));
