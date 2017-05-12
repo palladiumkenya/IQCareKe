@@ -2803,6 +2803,14 @@
         } else {
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(35);
+            $("#btnAddIptWorkUp").prop("disabled",false);
+            $("#btnAddIpt").prop("disabled",false);
+            $("#sputum").val("");
+            $("#chest").val("");
+            $("#antiTb").val("");
+            $("#contactsInvitation").val("");
+            $("#iptEvaluation").val("");
+
         }
     }
 
