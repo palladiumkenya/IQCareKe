@@ -1902,15 +1902,16 @@
 
                         $("#<%=lblCCC.ClientID%>").text(patientDetails.EnrollmentNumber);
                         
-                        var populationType = 0;
-                        if (patientDetails.population === "General Population") {
-                            populationType = 74;
-                        }
-                        else if (patientDetails.population === "Key Population") {
-                            populationType = 75;
-                        }
-                        console.log(populationType);
-                        $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
+                        //var populationType = 0;
+                        //if (patientDetails.population === "General Population") {
+                        //    populationType = 74;
+                        //}
+                        //else if (patientDetails.population === "Key Population") {
+                        //    populationType = 75;
+                        //}
+                        //console.log(populationType);
+
+                        $("#<%=bioPatientPopulation.ClientID%>").val(patientDetails.populationTypeId);
 
                         var names = null;
                         if (patientDetails.tsFname == null && patientDetails.tsLastName == null) {
@@ -2308,19 +2309,22 @@
                     success: function (response) {
                         console.log(response.d);
                         var patientVitals = response.d;
-                        //console.log("vitals");
-                        $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
-                    $("#<%=lblHeightP.ClientID%>").text(patientVitals.Height);
-                    $("#<%=lblmuac.ClientID%>").text(patientVitals.Muac);
-                    $("#<%=lblHeadCircumference.ClientID%>").text(patientVitals.HeadCircumference);
-                    $("#<%=lblTemperature.ClientID%>").text(patientVitals.Temperature);
-                    $("#<%=lblSystolic.ClientID%>").text(patientVitals.BpSystolic);
-                    $("#<%=lblDiastolic.ClientID%>").text(patientVitals.Bpdiastolic);
-                    $("#<%=lblPulseRate.ClientID%>").text(patientVitals.HeartRate);
-                    $("#<%=lblRespiration.ClientID%>").text(patientVitals.RespiratoryRate);
-                    $("#<%=lblOxygenSat.ClientID%>").text(patientVitals.SpO2);
+                        console.log(patientVitals);
 
-                },
+                        if (patientVitals != null) {
+                            $("#<%=lblWeightP.ClientID%>").text(patientVitals.Weight);
+                            $("#<%=lblHeightP.ClientID%>").text(patientVitals.Height);
+                            $("#<%=lblmuac.ClientID%>").text(patientVitals.Muac);
+                            $("#<%=lblHeadCircumference.ClientID%>").text(patientVitals.HeadCircumference);
+                            $("#<%=lblTemperature.ClientID%>").text(patientVitals.Temperature);
+                            $("#<%=lblSystolic.ClientID%>").text(patientVitals.BpSystolic);
+                            $("#<%=lblDiastolic.ClientID%>").text(patientVitals.Bpdiastolic);
+                            $("#<%=lblPulseRate.ClientID%>").text(patientVitals.HeartRate);
+                            $("#<%=lblRespiration.ClientID%>").text(patientVitals.RespiratoryRate);
+                            $("#<%=lblOxygenSat.ClientID%>").text(patientVitals.SpO2);
+                        }
+
+                    },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);
                     toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);

@@ -12,14 +12,14 @@ namespace IQCare.CCC.UILogic
 
         public int AddPatientMaritalStatus(int personId,int maritalStatusId,int userId)
         {
-            int maritalStatus;
-            var lookUpLogic = new LookupLogic();
-            maritalStatus = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Child")[0].ItemId;
+            //int maritalStatus;
+            //var lookUpLogic = new LookupLogic();
+            //maritalStatus = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Child")[0].ItemId;
 
             PatientMaritalStatus patientMaritalStatus=new PatientMaritalStatus()
             {
                 PersonId = personId,
-                MaritalStatusId = maritalStatus,
+                MaritalStatusId = maritalStatusId,
                 CreatedBy = userId,
                 Active = true  
             };
