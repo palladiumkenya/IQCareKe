@@ -108,7 +108,7 @@
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="DateCollected">
                         <div class="input-group">
-                            <asp:TextBox ID="IptDateCollected" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
+                            <asp:TextBox ClientIDMode="Static" ID="IptDateCollected" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
                             <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -339,4 +339,14 @@
             $("#<%=adheranceAction.ClientID%>").prop('disabled', false);
         }
     }
+
+    $('#DateCollected').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+        var iptDateCollected = moment($("#IptDateCollected").val()).format('DD-MMM-YYYY');
+        if (moment('' + iptDateCollected + '').isAfter()) {
+                toastr.error("Appointment date cannot be a future date");
+                $('#DateCollected').val("");
+                return false;
+            }
+        });
+
 </script>
