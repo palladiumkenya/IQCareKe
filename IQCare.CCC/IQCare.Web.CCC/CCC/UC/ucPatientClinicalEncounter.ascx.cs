@@ -65,9 +65,13 @@ namespace IQCare.Web.CCC.UC
 
                 var patientVitals = new PatientVitalsManager();
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
-                txtWeight.Text = patientTriage.Weight.ToString();
-                txtHeight.Text = patientTriage.Height.ToString();
-                txtBMI.Text = patientTriage.BMI.ToString();
+                if(patientTriage != null)
+                {
+                    txtWeight.Text = patientTriage.Weight.ToString();
+                    txtHeight.Text = patientTriage.Height.ToString();
+                    txtBMI.Text = patientTriage.BMI.ToString();
+                }
+                
 
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
