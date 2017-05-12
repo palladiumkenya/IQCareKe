@@ -7,7 +7,7 @@
                  <h4 class="fa fa-exclamation-circle"> VALIDATION ERROR(S)</h4>
                  <p>This form seems to be invalid :(</p>
              </div>
-        </div> 
+        </div>  
 
         <div class="col-md-12">
             <div class="bs-callout bs-callout-info hidden">
