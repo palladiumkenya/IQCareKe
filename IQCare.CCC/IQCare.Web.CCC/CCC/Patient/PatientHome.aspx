@@ -1493,10 +1493,12 @@
 
                                 if (patientType === 'Transfer-In') {
                                     /*check if patient patient is new or transferIN*/
-                                    $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
-                                    $("#<%=lblweight.ClientID%>").text(itemList.Weight);
-                                    $("#<%=lblheight.ClientID%>").text(itemList.Height);
-                                    $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                    if (itemList != null) {
+                                        $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                        $("#<%=lblweight.ClientID%>").text(itemList.Weight);
+                                        $("#<%=lblheight.ClientID%>").text(itemList.Height);
+                                        $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2));
+                                    }
                                 }else if (patientType === 'New') {
 
                                     $.ajax({
@@ -1507,11 +1509,15 @@
                                         dataType: "json",
                                         success: function(response) {
                                             var itemList = JSON.parse(response.d);
-                                           
-                                            $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
-                                            $("#<%=lblweight.ClientID%>").text(itemList.Weight+' kgs');
-                                            $("#<%=lblheight.ClientID%>").text(itemList.Height+' cms');
-                                            $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2)+' kg/M2');                                         
+
+                                            console.log(itemList);
+
+                                            if (itemList != null) {
+                                                $("#<%=lblmuac.ClientID%>").text(itemList.MUAC);
+                                                $("#<%=lblweight.ClientID%>").text(itemList.Weight + ' kgs');
+                                                $("#<%=lblheight.ClientID%>").text(itemList.Height + ' cms');
+                                                $("#<%=lblbmi.ClientID%>").text(itemList.BMI.toFixed(2) + ' kg/M2');
+                                            }
                                         },
                                         error: function(xhr, errorType, exception) {
                                             var jsonError = jQuery.parseJSON(xhr.responseText);
