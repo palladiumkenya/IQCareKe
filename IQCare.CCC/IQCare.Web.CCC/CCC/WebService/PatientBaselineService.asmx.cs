@@ -56,13 +56,12 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public string ManagePatientHivDiagnosis(int id,int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,
-            DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, int userId)
+            DateTime enrollmentDate, int enrollmentWhoStage, string artInitiationStr, int userId)
         {
             try
             {
-                var patientHivDiagnosis = new PatientHivDiagnosisManager();
-
-                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationDate, userId);
+                var patientHivDiagnosis = new PatientHivDiagnosisManager(); 
+                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationStr, userId);
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient HIV Diagnosis Complete!";

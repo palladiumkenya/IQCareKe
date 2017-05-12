@@ -328,8 +328,7 @@
             $('#EnrollmentDate').datepicker({
                 date:null,
                 allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-                restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
             $("#DateOfBirth").datepicker({
@@ -405,7 +404,7 @@
             getPatientEnrollments();
 
             $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
             });
 
 

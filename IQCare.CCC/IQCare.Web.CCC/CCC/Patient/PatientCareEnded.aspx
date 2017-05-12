@@ -322,6 +322,7 @@
          $('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
         
              var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+             var today = new Date();
             
              futuredate= moment(dateofDeath).isAfter(today);
              if (futuredate) {
@@ -336,15 +337,22 @@
         
              var careEndDate = $('#CareEndDate').datepicker('getDate');
              var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+
+             var dateVar = moment(dateofDeath, 'YYYY-MM-DD');
+             var reason = $(this).find(":selected").text();
+
+             if (!dateVar.isValid() && reason != "Death") {
+                 dateofDeath = '';
+             }
             
              futuredate= moment(careEndDate).isAfter(today);
              if (futuredate) {
-               
-                 toastr.error("Future dates not allowed!");     $('#AppointmentDate').val('');            
+                 toastr.error("Future dates not allowed!");     
+                 $('#AppointmentDate').val('');            
                  return false;
              }
 
-             futuredate= moment(exitDate).isBefore(dateofDeath);
+             futuredate = moment(careEndDate).isBefore(dateofDeath);
              if (futuredate) {
                   $('#AppointmentDate').val('');
                     toastr.error("Exit Date CANNOT be before date of death");
@@ -375,14 +383,19 @@
                 function() {
                     var reason = $(this).find(":selected").text();
                     if (reason === 'Transfer Out') {
-                        $("#DaDeathDatete").val('');
+                        $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('disable');
                         $("#Facility").val('');
                         $("#Facility").prop("disabled", false);
                     }
                     else if (reason === 'Death') {
-                        $("#DaDeathDatete").val('');
+                        $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('enable');
+                        $("#Facility").val('');
+                        $("#Facility").prop("disabled", true);
+                    } else {
+                        $("#DeathDates").val('');
+                        $("#DateOfDeath").datepicker('disable');
                         $("#Facility").val('');
                         $("#Facility").prop("disabled", true);
                     }
@@ -393,7 +406,7 @@
                 if ($("#CareEndedForm").parsley().validate()) {
                     $.when(endCare()).then(function() {
                         setTimeout(function() {
-                               $.when(getCareEnded()) .then (window.location.href=<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>);
+                               $.when(getCareEnded()) .then (window.location.href="<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>");
                             },
                             2000);
                     });
@@ -414,10 +427,16 @@
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
 
+                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {
+                    dateOfDeath = '';
+                } else {
+                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
+                }
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/EndPatientCare",
-                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility  + "','dateOfDeath':'" + moment(dateOfDeath).format('DD-MMM-YYYY') + "'}",
+                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility + "','dateOfDeath':'" + dateOfDeath + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

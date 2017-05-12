@@ -1025,7 +1025,7 @@
                         vaccineAdult.push($(this).val());
                     });
 
-                    if ($("#vaccinationotheradult").val() != null) {
+                    if ($("#vaccinationotheradult").val() != null && $("#vaccinationotheradult").val() != "") {
                         vaccineAdult.push($("#vaccinationotheradult").val());
                     }
 
@@ -1064,7 +1064,22 @@
                         return false;
                     }
 
+                    /*console.log(Stage1DateValue);
+                    console.log(Stage2DateValue);
+                    console.log(Stage3DateValue);
+                    console.log(SexPartnerDateValue);
+                    console.log(INHStartDateValue);
+                    console.log(INHCompletion);
+                    console.log(INHCompletionDateValue);
+                    console.log(_fp.length);
+                    console.log(vaccineAdult.length);
+                    console.log(vaccineAdult);*/
 
+                    if (_fp.length == 0 && Stage1DateValue == "" && Stage2DateValue == "" && Stage3DateValue == "" && SexPartnerDateValue == "" && INHStartDateValue == "" && INHCompletion == null && INHCompletionDateValue == "" && vaccineAdult.length == 0) {
+                        toastr.error("You submitted an empty form", "One Time Events Tracker");
+                        return false;
+                    }
+                    
                     //console.log(vaccineAdult);
                     addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult);
 

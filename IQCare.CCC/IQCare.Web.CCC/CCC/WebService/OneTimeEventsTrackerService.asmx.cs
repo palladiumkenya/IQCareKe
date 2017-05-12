@@ -56,6 +56,12 @@ namespace IQCare.Web.CCC.WebService
                 //int patientId = int.Parse(Session["PatientId"].ToString());
                 int patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
 
+                if (String.IsNullOrEmpty(INHCompletion) || String.IsNullOrWhiteSpace(INHCompletion) ||
+                    INHCompletion == "null")
+                {
+                    INHCompletion = "false";
+                }
+
                 if (String.IsNullOrEmpty(CompletionDate))
                 {
                     IsCompletionDate = null;

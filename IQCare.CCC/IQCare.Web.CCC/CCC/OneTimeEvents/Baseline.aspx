@@ -2104,7 +2104,7 @@
 				$.ajax({
 				    type: "POST",
 				    url: "../WebService/PatientBaselineService.asmx/ManagePatientHivDiagnosis",
-				    data: "{'id':'" +id +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationDate':'" +artInitiationDate + "','userId':'" + userId +"'}",
+				    data: "{'id':'" +id +"','patientId':'" +ptnId +"','patientMasterVisitId':'" + ptnmasterVisitId +"','hivDiagnosisDate':'" +hivDiagnosisDate +"','enrollmentDate':'" + enrollmentDate +"','enrollmentWhoStage':'" + enrollmentWhoStage +"','artInitiationStr':'" +artInitiationDate + "','userId':'" + userId +"'}",
 				    contentType: "application/json; charset=utf-8",
 				    dataType: "json",
 				    success: function(response) {

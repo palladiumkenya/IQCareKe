@@ -1,4 +1,5 @@
-
+Set Nocount on
+Go
 --Lookup master
 If Not Exists(Select 1 From LookupMaster where Name='FPMethod') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPMethod',null,0); End
 If Not Exists(Select 1 From LookupMaster where Name='Entrypoint') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Entrypoint',null,0); End
@@ -160,7 +161,7 @@ If Not Exists(Select 1 From LookupItem where Name='4') Begin INSERT INTO LookupI
 If Not Exists(Select 1 From LookupItem where Name='Married Monogamous') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Married Monogamous','Married Monogamous',0); End
 If Not Exists(Select 1 From LookupItem where Name='Single') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Single','Single',0); End
 If Not Exists(Select 1 From LookupItem where Name='Cohabiting') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Cohabiting','Cohabiting',0); End
-If Not Exists(Select 1 From LookupItem where Name='Married PolygamousMarried Polygamous') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Married PolygamousMarried Polygamous','Married Polygamous',0); End
+If Not Exists(Select 1 From LookupItem where Name='Married Polygamous') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Married Polygamous','Married Polygamous',0); End
 If Not Exists(Select 1 From LookupItem where Name='Separated') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Separated','Separated',0); End
 If Not Exists(Select 1 From LookupItem where Name='Divorced') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Divorced','Divorced',0); End
 If Not Exists(Select 1 From LookupItem where Name='Gen.Pop') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Gen.Pop','General Population',0); End
@@ -1819,6 +1820,7 @@ If Not Exists(Select 1 From LookupItem where Name='M9983/1') Begin INSERT INTO L
 If Not Exists(Select 1 From LookupItem where Name='M9984/1') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('M9984/1','Refractory anaemia with excess of blasts with transformation  ',0); End
 If Not Exists(Select 1 From LookupItem where Name='M9989/1') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('M9989/1','Myelodysplastic syndrome NOS  ',0); End
 If Not Exists(Select 1 From LookupItem where Name='HIV Negative') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('HIV Negative','HIV Negative',0); End
+If Not Exists(Select 1 From LookupItem where Name='Widowed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Widowed','Widowed',0); End
 
 
 --LookupMaster Item
@@ -3221,7 +3223,7 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'General Population',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Gen.Pop'  )         ItemId  FROM LookupMaster  WHERE Name='PopulationType') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',6 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Divorced'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',5 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Separated'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Married PolygamousMarried Polygamous'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Married Polygamous'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Cohabiting'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Single'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'NULL',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Married Monogamous'  )         ItemId  FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
@@ -6134,3 +6136,10 @@ GO
 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIV Negative',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIV Negative'  ) ItemId FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Widowed',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Widowed'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'IPD-Adult',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='IPD-Adult'  ) ItemId FROM LookupMaster  WHERE Name='Entrypoint') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+
+Go
+-- Move patient from mst_patient to patient
+DECLARE @RC int
+EXECUTE @RC = [dbo].[SP_mst_PatientToGreencardRegistration] 

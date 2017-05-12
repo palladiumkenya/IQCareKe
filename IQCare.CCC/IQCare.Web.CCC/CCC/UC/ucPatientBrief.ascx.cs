@@ -49,7 +49,7 @@ namespace IQCare.Web.CCC.UC
                 lblPatientNames.Text= (thisPatient.LastName) + ", " + (thisPatient.FirstName) + " " +  (thisPatient.MiddleName)+" ";
 
                 //    lblLastName.Text = "<strong><i>" + _utility.Decrypt(x.LastName) + "</i></strong>";
-                if (thisPatient.Active)
+                if (thisPatient.PatientStatus.Equals("Active"))
                 {
                     lblPatientStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
                 }

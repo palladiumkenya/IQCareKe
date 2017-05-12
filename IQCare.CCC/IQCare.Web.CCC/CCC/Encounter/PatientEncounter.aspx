@@ -307,11 +307,9 @@
 
 
 
-        $(document).ready(function () {           
+        $(document).ready(function () {
 
-
-           
-            $.ajax({
+           $.ajax({
                 type: "POST",
                 url: "../WebService/LabService.asmx/GetvlTests",
                 data: "{}",
@@ -425,6 +423,7 @@
 
             $("#AddAppointment").click(function () {
                 $('#AppointmentModal').modal('show');
+                $('#AppointmentDate').val('');
             });
             
           

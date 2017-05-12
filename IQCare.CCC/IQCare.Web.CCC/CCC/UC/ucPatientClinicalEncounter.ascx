@@ -2803,6 +2803,14 @@
         } else {
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(35);
+            $("#btnAddIptWorkUp").prop("disabled",false);
+            $("#btnAddIpt").prop("disabled",false);
+            $("#sputum").val("");
+            $("#chest").val("");
+            $("#antiTb").val("");
+            $("#contactsInvitation").val("");
+            $("#iptEvaluation").val("");
+
         }
     }
 
@@ -3022,7 +3030,7 @@
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-        alert('here');
+        
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",
