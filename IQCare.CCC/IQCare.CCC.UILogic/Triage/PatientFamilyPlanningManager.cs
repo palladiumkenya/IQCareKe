@@ -10,20 +10,21 @@ namespace IQCare.CCC.UILogic.Triage
     {
         private IpatientFamilyPlanningManager _PatientFamilyPlanning = (IpatientFamilyPlanningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientFamilyPlanningManager, BusinessProcess.CCC");
 
-        public int AddFamilyPlanningStatus(int patientId,int patientMasterVisitId,int FamilyPlanningStatusId,int ReasonNoOnFp,int userId )
+        public int AddFamilyPlanningStatus(int patientId,int patientMasterVisitId,DateTime visitDate,int familyPlanningStatusId,int reasonNoOnFp,int userId )
         {
             try
             {
-                var FPLoad = new PatientFamilyPlanning()
+                var fpLoad = new PatientFamilyPlanning()
                 {
                     PatientId=patientId,
                     PatientMasterVisitId= patientMasterVisitId,
-                    FamilyPlanningStatusId=FamilyPlanningStatusId,
-                    ReasonNotOnFPId=ReasonNoOnFp,
+                    VisitDate = visitDate,
+                    FamilyPlanningStatusId=familyPlanningStatusId,
+                    ReasonNotOnFPId=reasonNoOnFp,
                     CreatedBy=userId
                 };
 
-                return _PatientFamilyPlanning.AddFamilyPlanningStatus(FPLoad);
+                return _PatientFamilyPlanning.AddFamilyPlanningStatus(fpLoad);
             }
             catch (Exception ex)
             {
@@ -31,15 +32,16 @@ namespace IQCare.CCC.UILogic.Triage
             }
         }
 
-        public int UpdateFamilyPlanningStatus(int FamilyPlanningStatusId, int ReasonNoOnFp,int id)
+        public int UpdateFamilyPlanningStatus(DateTime visitDate,int familyPlanningStatusId, int reasonNoOnFp,int id)
         {
             try
             {
                 var FPLoad = new PatientFamilyPlanning()
                 {
                     Id=id,
-                    FamilyPlanningStatusId = FamilyPlanningStatusId,
-                    ReasonNotOnFPId = ReasonNoOnFp
+                    VisitDate = visitDate,
+                    FamilyPlanningStatusId = familyPlanningStatusId,
+                    ReasonNotOnFPId = reasonNoOnFp
                 };
 
                 return _PatientFamilyPlanning.UpdateFamilyPlanningStatus(FPLoad);
@@ -64,11 +66,11 @@ namespace IQCare.CCC.UILogic.Triage
             }
         }
 
-        public int DeleteFamilyPlanningStatus(int Id)
+        public int DeleteFamilyPlanningStatus(int id)
         {
             try
             {
-                return _PatientFamilyPlanning.DeleteFamilyPlanningStatus(Id);
+                return _PatientFamilyPlanning.DeleteFamilyPlanningStatus(id);
             }
             catch (Exception ex)
             {

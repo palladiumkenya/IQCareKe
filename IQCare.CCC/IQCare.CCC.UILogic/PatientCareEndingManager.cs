@@ -29,6 +29,23 @@ namespace IQCare.CCC.UILogic
             return mgr.AddPatientCareEnding(patientCareEnding);
         }
 
+        public int AddPatientCareEndingOther(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string careEndingNotes)
+        {
+            PatientCareEnding patientCareEnding = new PatientCareEnding()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                PatientEnrollmentId = patientEnrollmentId,
+                ExitReason = exitReason,
+                ExitDate = exitDate,
+                //TransferOutFacility = transferOutFacility,
+                //DateOfDeath = dateOfDeath,
+                CareEndingNotes = careEndingNotes
+            };
+
+            return mgr.AddPatientCareEnding(patientCareEnding);
+        }
+
         public int AddPatientCareEndingTransferOut(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string transferOutFacility, string careEndingNotes)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()

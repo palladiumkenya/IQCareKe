@@ -12,62 +12,63 @@ namespace BusinessProcess.CCC.Triage
     public class PatientPregnancyIndicatorManager : ProcessBase, IpatientPregnancyIndicatorManager
     {
         //private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
-        private int Result = 0;
+        private int _result = 0;
 
         public int AddPregnancyIndicator(PatientPregnancyIndicator a)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientPregnanacyIndicatorRepository.Add(a);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                unitOfWork.PatientPregnanacyIndicatorRepository.Add(a);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public int UpdatePreganacyIndcator(PatientPregnancyIndicator u)
         {
 
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PG = _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(
+                var pg = unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(
                          x => x.PatientId == u.PatientId & !x.DeleteFlag)
                          .FirstOrDefault();
-                if (PG != null)
+                if (pg != null)
                 {
-                    PG.LMP = u.LMP;
-                    PG.EDD = u.EDD;
-                    PG.ANCProfile = u.ANCProfile;
-                    PG.ANCProfileDate = u.ANCProfileDate;
-                    PG.PregnancyStatusId = u.PregnancyStatusId;
+                    pg.VisitDate = u.VisitDate;
+                    pg.LMP = u.LMP;
+                    pg.EDD = u.EDD;
+                    pg.AncProfile = u.AncProfile;
+                    pg.AncProfileDate = u.AncProfileDate;
+                    pg.PregnancyStatusId = u.PregnancyStatusId;
                 }
-                _unitOfWork.PatientPregnanacyIndicatorRepository.Update(PG);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                unitOfWork.PatientPregnanacyIndicatorRepository.Update(pg);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
-        public int DeletePregnancyIndicator(int Id)
+        public int DeletePregnancyIndicator(int id)
         {
 
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PG = _unitOfWork.PatientPregnanacyIndicatorRepository.GetById(Id);
-                _unitOfWork.PatientPregnanacyIndicatorRepository.Remove(PG);
-                Result= _unitOfWork.Complete();
-                _unitOfWork.Dispose();
-                return Result;
+                var pg = unitOfWork.PatientPregnanacyIndicatorRepository.GetById(id);
+                unitOfWork.PatientPregnanacyIndicatorRepository.Remove(pg);
+                _result= unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return _result;
             }
         }
 
         public List<PatientPregnancyIndicator> GetPregnancyIndicator(int patientId)
         {
 
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var pgIndicatorList = _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
-                _unitOfWork.Dispose();
+                var pgIndicatorList = unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
                 return pgIndicatorList;
             }
         }
@@ -75,13 +76,13 @@ namespace BusinessProcess.CCC.Triage
         public int CheckIfPregnancyIndicatorExisists(int patientId)
         {
 
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientTrnasferId =
-                   _unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                   unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                        .Select(x => x.Id)
                        .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return Convert.ToInt32(patientTrnasferId);
             }
         }

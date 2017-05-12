@@ -3,12 +3,9 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using Interface.CCC.Visit;
-using Entities.CCC.Encounter;
 using Application.Presentation;
-using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
-using IQCare.Web.Laboratory;
 using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
@@ -47,8 +44,7 @@ namespace IQCare.Web.CCC.WebService
         int moduleId = 203;
 
         int patientPk = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-
-        int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+        int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
         int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
         int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
         //int moduleId = Convert.ToInt32(HttpContext.Current.Session["ModuleId"]);

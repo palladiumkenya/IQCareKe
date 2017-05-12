@@ -18,7 +18,7 @@ namespace IQCare.Web.CCC.UC
     {
         protected int patientId
         {
-            get { return Convert.ToInt32(Session["patientId"]); }
+            get { return Convert.ToInt32(Session["PatientPK"]); }
         }
 
       

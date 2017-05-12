@@ -218,15 +218,19 @@ namespace IQCare.Web.Laboratory.Request
             else
             {
                 List<KeyValuePair<string, object>> param = base.Session[SessionKey.LabClient] as List<KeyValuePair<string, object>>;
+                int patient = (int)param.Find(l => l.Key == "Patient").Value;
                 int patientPk = (int)param.Find(l => l.Key == "PatientID").Value;
                 int location = (int)param.Find(l => l.Key == "LocationID").Value;
                 lblname.Text = string.Format("{0} {1} {2}", (string)(param.Find(l => l.Key == "FirstName").Value.ToString())
                     , (string)(param.Find(l => l.Key == "MiddleName").Value.ToString())
                     , (string)(param.Find(l => l.Key == "LastName").Value.ToString()));
+                //set session Greencard patient_Id
+                Session["patient"] = patient;
 
                 //calculate age
                 DateTime now = DateTime.Today;
                 int age = now.Year - (Convert.ToDateTime(param.Find(l => l.Key == "DOB").Value).Year);
+                
                 
 
                 lbldob.Text = Convert.ToDateTime(param.Find(l => l.Key == "DOB").Value.ToString()).ToString("dd-MMM-yyyy");

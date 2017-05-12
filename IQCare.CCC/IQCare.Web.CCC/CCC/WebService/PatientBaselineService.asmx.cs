@@ -35,7 +35,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var patientTranfersInManager = new PatientTransferInmanager();

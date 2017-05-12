@@ -423,6 +423,12 @@ Begin
   Alter table dbo.mst_Patient Add PatientFacilityId  varchar(50) Null
 End
 Go
+If Not Exists (Select * From sys.columns Where Name = N'MovedToPatientTable' And Object_ID = Object_id(N'mst_Patient'))    
+Begin
+  Alter table dbo.mst_Patient Add MovedToPatientTable  bit not null Constraint DF_mst_Patient_MovedToPatientTable Default 0
+End
+Go
+
 If Not Exists (Select * From sys.columns Where Name = N'Integrated' And Object_ID = Object_id(N'mst_Facility'))    
 Begin
   Alter table dbo.mst_Facility Add Integrated  bit not null Constraint DF_mst_facility_Integrated Default 0

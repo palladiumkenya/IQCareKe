@@ -23,14 +23,18 @@ namespace IQCare.Web.CCC.UC
         public int AppLocationId;
         public int ModuleId;
         public int locationId;
+        public int genderID;
+        public string Gender = "";
+        public DateTime EnrollmentDate;
         public string Msg { get; set; }
         public int Result { get; set; }
 
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
+       
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
@@ -39,7 +43,16 @@ namespace IQCare.Web.CCC.UC
             if (thisPatient.ptn_pk != null)
             {
                 Ptn_pk = thisPatient.ptn_pk.Value;
+
+                genderID = thisPatient.Sex;
+                EnrollmentDate = thisPatient.EnrollmentDate;
+                LookupItemView genderType = _lookupManager.GetPatientGender(genderID);
+                Gender = genderType.ItemName;
+
+
                 List<KeyValuePair<string, object>> list = new List<KeyValuePair<string, object>>();
+
+                list.Add(new KeyValuePair<string, object>("Patient", PatientId));
                 list.Add(new KeyValuePair<string, object>("PatientID", Ptn_pk));
                 list.Add(new KeyValuePair<string, object>("LocationID", AppLocationId));
                 list.Add(new KeyValuePair<string, object>("FacilityID", thisPatient.FacilityId));
@@ -47,7 +60,7 @@ namespace IQCare.Web.CCC.UC
                 list.Add(new KeyValuePair<string, object>("MiddleName", thisPatient.MiddleName));
                 list.Add(new KeyValuePair<string, object>("LastName", thisPatient.LastName));
                 list.Add(new KeyValuePair<string, object>("DOB", thisPatient.DateOfBirth));
-                list.Add(new KeyValuePair<string, object>("Gender", thisPatient.Sex));
+                list.Add(new KeyValuePair<string, object>("Gender", Gender));
                 list.Add(new KeyValuePair<string, object>("RegistrationDate", thisPatient.RegistrationDate));
                 base.Session[SessionKey.LabClient] = list;
             }

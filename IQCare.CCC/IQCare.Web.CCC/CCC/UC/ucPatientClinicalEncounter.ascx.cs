@@ -29,7 +29,7 @@ namespace IQCare.Web.CCC.UC
         protected void Page_Load(object sender, EventArgs e)
         {
             age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
@@ -37,7 +37,7 @@ namespace IQCare.Web.CCC.UC
             }
 
             // Get Gender
-            PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientId"]));
+            PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientPK"]));
             if (genderId != null)
                 genderID = genderId.Sex;
 
@@ -64,7 +64,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
 
                 var patientVitals = new PatientVitalsManager();
-                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientId"].ToString()));
+                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
                 txtWeight.Text = patientTriage.Weight.ToString();
                 txtHeight.Text = patientTriage.Height.ToString();
                 txtBMI.Text = patientTriage.BMI.ToString();
@@ -78,7 +78,7 @@ namespace IQCare.Web.CCC.UC
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientId"].ToString());
+            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientPK"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;

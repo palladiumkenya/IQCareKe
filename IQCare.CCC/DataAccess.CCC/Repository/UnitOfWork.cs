@@ -62,6 +62,7 @@ namespace DataAccess.CCC.Repository
         private IPatientServiceEnrollmentLookupRepository _patientServiceEnrollmentLookupRepository;
         private IPatientTreatmentSupporterLookupRepository _patientTreatmentSupporterLookupRepository;
         private ILookupFacilityStatisticsRepository _lookupFacilityStatisticsRepository;
+        private IPatientTreatmentTrackerLookupRepository _patientTreatmentTrackerLookupRepository;
 
       
 
@@ -488,6 +489,14 @@ namespace DataAccess.CCC.Repository
             get
             {
                 return _PatientScreeningRepository ?? (_PatientScreeningRepository = new PatientScreeningRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository
+        {
+            get
+            {
+                return _patientTreatmentTrackerLookupRepository??(_patientTreatmentTrackerLookupRepository=new PatientTreatmentTrackerLookupRepository((LookupContext)_context));
             }
         }
 

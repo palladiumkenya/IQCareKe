@@ -120,7 +120,7 @@
                     <hr />
                 </div>
                 <div class="col-md-12">
-                    <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Detail</asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="btnAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-default btn-lg fa fa-plus-circle"> Add Detail</asp:LinkButton>
                 </div>
                 <div class="col-md-12">
                     <hr />
@@ -179,7 +179,7 @@
                 </tbody>
             </table>
             <div class="col-md-12">
-                <asp:LinkButton runat="server" ID="PatientConsentAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa-plus-circle"> Add Consent</asp:LinkButton>
+                <asp:LinkButton runat="server" ID="PatientConsentAdd" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-default btn-lg fa fa-plus-circle"> Add Consent</asp:LinkButton>
             </div>
         </div>
     </div>
@@ -256,7 +256,6 @@
             var consentDate = consent.consentDate;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            debugger;
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientService.asmx/AddPatientConsent",

@@ -20,7 +20,7 @@ namespace IQCare.Web.CCC.UC
             var myDate = DateTime.Now.Year;
             var myDateMonth = DateTime.Now.Month;
 
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
@@ -38,6 +38,8 @@ namespace IQCare.Web.CCC.UC
             if (null != thisPatient)
             {
                 DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+                Session["PatientId"] = thisPatient.ptn_pk;
+                Session["SystemId"] = 1;
                 Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
                 //Don't decrypt at this level. the use Logic project for this
 
@@ -47,7 +49,7 @@ namespace IQCare.Web.CCC.UC
                 lblPatientNames.Text= (thisPatient.LastName) + ", " + (thisPatient.FirstName) + " " +  (thisPatient.MiddleName)+" ";
 
                 //    lblLastName.Text = "<strong><i>" + _utility.Decrypt(x.LastName) + "</i></strong>";
-                if (thisPatient.Active)
+                if (thisPatient.PatientStatus.Equals("Active"))
                 {
                     lblPatientStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
                 }

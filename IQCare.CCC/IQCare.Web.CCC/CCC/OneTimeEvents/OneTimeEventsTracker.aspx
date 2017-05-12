@@ -18,6 +18,9 @@
 
                     <div class="col-md-12 form-group">
                         <asp:HiddenField ID="Age" runat="server" ClientIDMode="Static"></asp:HiddenField>
+                        <asp:HiddenField ID="dob" runat="server" ClientIDMode="Static" />
+                        <asp:HiddenField ID="enrollmentDate" runat="server" ClientIDMode="Static" />
+
                               <div class="col-md-2"><label class="pull-left"><small>Disclosure To </small> <i class="fa fa-angle-double-right" aria-hidden="true"></i></label></div>
                               <div class="col-md-1"><label class="control-label pull-left"> Adolescents</label></div>
                               <div class="col-md-7">
@@ -937,7 +940,72 @@
                     var CompletionDate = $("#CompletionDate").datepicker('getDate');
                     var StopDate = $("#StopDate").datepicker('getDate');
                     var INHStartDate = $("#INHStartDatePicker").datepicker('getDate');
+                    var dob = $("#dob").val();
+                    var enrollmentDate = $("#enrollmentDate").val();
+                    dob = moment(dob);
 
+                    var isBeforeDobCompletionDate = moment(CompletionDate).isBefore(dob);
+                    var isBeforedobStopDate = moment(StopDate).isBefore(dob);
+                    var isBeforeINHStartDate = moment(INHStartDate).isBefore(dob);
+
+                    var isBeforeStage1 = moment(Stage1).isBefore(dob);
+                    var isBeforeStage2 = moment(Stage2).isBefore(dob);
+                    var isBeforeStage3 = moment(Stage3).isBefore(dob);
+                    var isBeforeSexPartner = moment(SexPartner).isBefore(dob);
+
+                    //var isCompletionDateBeforeEnrollmentDate = moment(CompletionDate).isBefore(enrollmentDate);
+                    //var isStopDateBeforeEnrollmentDate = moment(StopDate).isBefore(enrollmentDate);
+                    //var isBeforeEnrollmentDate = moment(INHStartDate).isBefore(enrollmentDate);
+
+                    var isCompletionDateBeforeINHStartDate = moment(CompletionDate).isBefore(INHStartDate);
+                    var isStopDateBeforeINHStartDate = moment(CompletionDate).isBefore(INHStartDate);
+
+                    if (isBeforeStage1) {
+                        toastr.error("Disclosure stage 1 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeStage2) {
+                        toastr.error("Disclosure stage 2 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeStage3) {
+                        toastr.error("Disclosure stage 3 date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeSexPartner) {
+                        toastr.error("Disclosure Sex Partner date should not before dob", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isCompletionDateBeforeINHStartDate) {
+                        toastr.error("Completion date should not before INH start date", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isStopDateBeforeINHStartDate) {
+                        toastr.error("Stop date should not before date INH start date", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeINHStartDate) {
+                        toastr.error("INH start date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforeDobCompletionDate) {
+                        toastr.error("Completion Date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    if (isBeforedobStopDate) {
+                        toastr.error("Stop Date should not before date of birth", "One Time Event Tracker");
+                        return false;
+                    }
+
+                    
                     //alert(document.getElementById("CompletionNo").Value);
                     //alert(document.getElementById("CompletionYes").Value);
                     var INH = $('input[name="ctl00$IQCareContentPlaceHolder$INH"]:checked').val();

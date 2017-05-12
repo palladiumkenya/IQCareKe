@@ -142,13 +142,13 @@ namespace IQCare.Web.CCC.WebService
                     var maritalStatus = new PersonMaritalStatusManager();
                     var _matStatus = maritalStatus.GetInitialPatientMaritalStatus(personId);
 
-                    int matStatusId = 0;
-                    var lookUpLogic = new LookupLogic();
-                    matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                    //int matStatusId = 0;
+                    //var lookUpLogic = new LookupLogic();
+                    //matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
 
-                    if (_matStatus != null)
+                    if (_matStatus != null && maritalStatusId > 0)
                     {
-                        _matStatus.MaritalStatusId = matStatusId;
+                        _matStatus.MaritalStatusId = maritalStatusId;
                         _matStatus.CreatedBy = userId;
 
                         Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
@@ -165,6 +165,24 @@ namespace IQCare.Web.CCC.WebService
                             }
                         }
 
+                    }
+                    else if (_matStatus != null && maritalStatusId == 0)
+                    {
+                        _matStatus.DeleteFlag = true;
+
+                        Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
+                        if (Result > 0)
+                        {
+                            Msg += "<p>Person Marital Status Updated Successfully!</p>";
+                            Session["PersonDob"] = DateTime.Parse(dob);
+                            Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
+                        }
                     }
                     else
                     {
@@ -197,16 +215,24 @@ namespace IQCare.Web.CCC.WebService
                         var maritalStatus = new PersonMaritalStatusManager();
                         var lookUpLogic = new LookupLogic();
 
-                        if (maritalStatusId == 0)
+                        if (maritalStatusId > 0)
                         {
-                            maritalStatusId =
-                                lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                            Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId, userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Marital Status Added Successfully!</p>";
+                                Session["PersonDob"] = DateTime.Parse(dob);
+                                Session["NationalId"] = nationalId;
+                                Session["PatientType"] = patientType;
+                                var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                                if (patType == "Transit")
+                                {
+                                    Session["NationalId"] = 99999999;
+                                }
+                            }
                         }
-
-                        Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId, userId);
-                        if (Result > 0)
+                        else
                         {
-                            Msg += "<p>Person Marital Status Added Successfully!</p>";
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
                             Session["PatientType"] = patientType;
@@ -341,7 +367,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
-                var PatientId = Convert.ToInt32(Session["PatientId"]);
+                var PatientId = Convert.ToInt32(Session["PatientPK"]);
 
                 if (PersonId > 0 || PatientId > 0)
                 {
