@@ -1913,11 +1913,15 @@
                         $("#<%=bioPatientPopulation.ClientID%>").val(populationType);
 
                         var names = null;
-                        names = patientDetails.tsFname +
-                            " " +
-                            patientDetails.tsMiddleName +
-                            " " +
-                            patientDetails.tsLastName;
+                        if (patientDetails.tsFname == null && patientDetails.tsLastName == null) {
+                            names = 'unknown';
+                        } else {
+                            names = patientDetails.tsFname +
+                                " " +
+                                patientDetails.tsMiddleName +
+                                " " +
+                                patientDetails.tsLastName;
+                        }
 
                         var ISContacts = "";
                         if (patientDetails.ISContacts != null && patientDetails.ISContacts != "") {

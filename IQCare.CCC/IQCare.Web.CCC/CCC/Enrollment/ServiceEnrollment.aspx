@@ -404,7 +404,7 @@
             getPatientEnrollments();
 
             $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
             });
 
 
