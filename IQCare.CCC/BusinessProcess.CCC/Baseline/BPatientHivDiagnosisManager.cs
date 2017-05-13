@@ -32,10 +32,10 @@ namespace BusinessProcess.CCC.Baseline
                 var patientDiagnosis =unitOfWork.PatientDiagnosisHivHistoryRepository.FindBy(x => x.PatientId == patientHivDiagnosis.PatientId & !x.DeleteFlag).FirstOrDefault();
                 if (patientDiagnosis != null)
                 {
-                    if (patientDiagnosis.ArtInitiationDate != null)
-                    {
+                    //if (patientDiagnosis.ArtInitiationDate != null)
+                    //{
                         patientDiagnosis.ArtInitiationDate = patientHivDiagnosis.ArtInitiationDate;
-                    }
+                    //}
                     patientDiagnosis.EnrollmentDate = patientHivDiagnosis.EnrollmentDate;
                     patientDiagnosis.EnrollmentWhoStage = patientHivDiagnosis.EnrollmentWhoStage;
                     patientDiagnosis.HivDiagnosisDate = patientHivDiagnosis.HivDiagnosisDate;

@@ -12,10 +12,19 @@ namespace IQCare.CCC.UILogic.Baseline
         private int _recordId=0;
         private int _result = 0;
 
-        public int ManagePatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,DateTime artInitiationDate,int userId)
+        public int ManagePatientHivDiagnosis(int id,int patientId,int patientMasterVisitId,DateTime hivDiagnosisDate,DateTime enrollmentDate,int enrollmentWhoStage,string artInitiationDate,int userId)
         {
             _recordId = _patientHivDiagnosisManager.CheckIfDiagnosisExists(patientId);
-            
+
+            DateTime? artDate = null;
+            if (!String.IsNullOrEmpty(artInitiationDate))
+            {
+                artDate = DateTime.Parse(artInitiationDate);
+            }
+            else
+            {
+                artDate = null;
+            }
 
             var patienHivDiagnosisInsert = new PatientHivDiagnosis
             {
@@ -25,17 +34,20 @@ namespace IQCare.CCC.UILogic.Baseline
                 HivDiagnosisDate = hivDiagnosisDate,
                 EnrollmentDate = enrollmentDate,
                 EnrollmentWhoStage = enrollmentWhoStage,
+                ArtInitiationDate = artDate,
                 CreatedBy = userId
             };
-            DateTime temp;
 
-            if (DateTime.TryParse(artInitiationDate.ToString("yy-mm-dd-"), out temp) == true)
-            {
-                patienHivDiagnosisInsert.ArtInitiationDate = artInitiationDate;
-            }
+            //if (artDate.HasValue) patienHivDiagnosisInsert.ArtInitiationDate = artDate.Value;
+            //DateTime temp;
+
+            //if (DateTime.TryParse(artInitiationDate.ToString("yy-mm-dd"), out temp) == true)
+            //{
+            //    patienHivDiagnosisInsert.ArtInitiationDate = temp;
+            //}
   
            
-            _result=(_recordId>0)? _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert) : _patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert);
+            _result =(_recordId>0)? _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert) : _patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert);
             return _result;
         }
 
