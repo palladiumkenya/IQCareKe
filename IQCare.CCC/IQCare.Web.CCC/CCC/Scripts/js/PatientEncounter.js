@@ -494,3 +494,23 @@ function AddDrugPrescription() {
         $('#chkProphylaxis').attr('checked', false);
     }
 }
+
+function ValidateDispensedDate()
+{
+    var start = new Date($("#txtPrescriptionDate").val());
+    var end = new Date($("#txtDateDispensed").val());
+    if (end < start)
+    {
+        toastr.error("Error", "Dispense date cannot be less than Prescribed Date.");
+        $("#txtDateDispensed").val("");
+    }
+}
+
+function ValidatePrescriptionDate() {
+    var start = new Date($("#txtPrescriptionDate").val());
+    var end = new Date($("#txtDateDispensed").val());
+    if (start > end) {
+        toastr.error("Error", "Prescription date cannot be greater than dispensed Date.");
+        $("#txtPrescriptionDate").val("");
+    }
+}

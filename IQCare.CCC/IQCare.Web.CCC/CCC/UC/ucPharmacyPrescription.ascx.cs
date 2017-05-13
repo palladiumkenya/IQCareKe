@@ -36,7 +36,15 @@ namespace IQCare.Web.CCC.UC
                 //lookUp.populateDDL(ddlTreatmentProgram, "TreatmentProgram");
                 lookUp.populateDDL(ddlPeriodTaken, "PeriodDrugsTaken");
                 lookUp.populateDDL(ddlTreatmentPlan, "TreatmentPlan");
-                lookUp.populateDDL(regimenLine, "RegimenClassification");//RegimenLines
+                if(Convert.ToInt32(Session["Age"]) > 14)
+                {
+                    lookUp.populateDDL(regimenLine, "RegimenClassificationAdult");
+                }
+                else
+                {
+                    lookUp.populateDDL(regimenLine, "RegimenClassificationPaeds");
+                }
+                
                 lookUp.getPharmacyDrugFrequency(ddlFreq);
 
                 PatientEncounterLogic pel = new PatientEncounterLogic();
