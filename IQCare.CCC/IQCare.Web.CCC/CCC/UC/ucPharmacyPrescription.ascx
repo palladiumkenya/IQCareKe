@@ -691,7 +691,7 @@
                 }
                 catch (err) { }
 
-                //try {
+                try {
                     //var regExp = /\(([^)]+)\)/;
                     //var matches = regExp.exec(regimenText);
                     var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
@@ -703,8 +703,8 @@
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                     }
 
-                //}
-                //catch (err) { alert(err.message) }
+                }
+                catch (err) {  }
            
                 
                 if (sumAllAbbr > 0) {
@@ -732,6 +732,7 @@
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
                                 toastr.success(data.d, "Saved successfully");
+                                //$('#pharmacyModal').modal('hide');
                             },
                             error: function (data) {
                                 toastr.error(data.d, "Error");
