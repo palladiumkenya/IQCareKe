@@ -31,7 +31,7 @@ namespace Entities.CCC.Visit
         public int LabOrderTestId { get; set; }
         public string ResultUnits { get; set; }
 
-        public DateTime ResultDate { get; set; }
+        public DateTime? ResultDate { get; set; }
 
 
 

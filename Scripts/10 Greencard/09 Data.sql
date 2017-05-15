@@ -3558,11 +3558,11 @@ INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcounty
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (127, 6, N'TAITA TAVETA', 26, N'VOI', 127, N'KALOLENI')
 GO
-INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (128, 6, N'TAITA TAVETA', 26, N'VOI', 128, N'MARUNGU')
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (128, 6, N'TAITA TAVETA', 26, N'VOI', 128, N'MAUNGU')
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (129, 6, N'TAITA TAVETA', 26, N'VOI', 129, N'KASIGAU')
 GO
-INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (130, 6, N'TAITA TAVETA', 26, N'VOI', 130, N'NGOLIA')
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (130, 6, N'TAITA TAVETA', 26, N'VOI', 130, N'NGULIA')
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (131, 7, N'GARISSA', 27, N'GARISSA TOWNSHIP', 131, N'WABERI')
 GO

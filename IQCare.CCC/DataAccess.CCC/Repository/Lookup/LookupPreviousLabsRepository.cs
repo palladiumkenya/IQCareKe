@@ -39,12 +39,13 @@ namespace DataAccess.CCC.Repository.Lookup
                 x.PatientId == patientId &               
                 x.Results == complete);
 
-            //////int maxLabOrderId = myList.Max(x => x.LabOrderId);
-            //var maxLabDate = myList.Max(x => x.ResultDate.ToString("dd-mmm-yyyy"));
-            //////gets max laborder           
-            //var list = myList.Where(x => x.ResultDate.ToString("dd-mmm-yyyy") == maxLabDate);
+          
+            DateTime? maxLabDate = null;
+            if (myList.ToList().Count > 0) {
 
-            var maxLabDate = myList.Max(x => x.ResultDate);
+                maxLabDate = myList.Max(x => x.ResultDate);
+            }
+            
             ////gets max laborder           
             var list = myList.Where(x => x.ResultDate == maxLabDate);
 

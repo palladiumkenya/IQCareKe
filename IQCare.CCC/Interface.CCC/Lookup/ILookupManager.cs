@@ -33,6 +33,8 @@ namespace Interface.CCC.Lookup
         string GetCountyNameBySubCountyId(int subCountyId);
         string GetWardNameByWardId(int wardId);
         List<PatientLabTracker> GetVlPendingCount(int facilityId);
+        List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId);
+        List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId);
         List<PatientLabTracker> GetVlCompleteCount(int facilityId);
 
         PatientRegimenLookup GetCurentPatientRegimen(int patientId);

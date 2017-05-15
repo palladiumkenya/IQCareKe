@@ -1614,7 +1614,6 @@
                 }
             });
 
-
             var jan_vl = "";
             var feb_vl = "";
             var mar_vl = "";
@@ -1671,7 +1670,7 @@
                     cache: false,
                     success: function (response) {
                         console.log(response.d);
-                        var items = response.d;
+                        console.log(response.d);
                         items.forEach(function (item, i) {
 
                             if (item.Month === 1) {

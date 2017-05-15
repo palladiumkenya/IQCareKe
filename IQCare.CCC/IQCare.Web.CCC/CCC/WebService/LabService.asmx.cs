@@ -23,6 +23,16 @@ namespace IQCare.Web.CCC.WebService
         public decimal? DetectionLimit { get; set; }
         public int Month { get; set; }
     }
+    public class ViralSuppression
+    {
+        public int Id { get; set; }
+       
+        public decimal? ResultValue { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool? Undetectable { get; set; }
+        public decimal? DetectionLimit { get; set; }
+        public int Month { get; set; }
+    }
 
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -143,6 +153,43 @@ namespace IQCare.Web.CCC.WebService
             }
                    return patientViralDetails;
 
+        }
+      
+        [WebMethod(EnableSession = true)]
+        public int GetFacilityViralLoadSuppressed()
+        {
+            int count = 0;
+
+            List<PatientLabTracker> suppressedVL = new List<PatientLabTracker>();
+            try
+            {
+                var facilitySuppressedVL = new PatientLabOrderManager();
+                suppressedVL = facilitySuppressedVL.GetFacilityVLSuppressed(facilityId);
+                count = suppressedVL.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
+        }
+        [WebMethod(EnableSession = true)]
+        public int GetFacilityViralLoadUnSuppressed()
+        {
+            int count = 0;
+
+            List<PatientLabTracker> unsuppressedVL = new List<PatientLabTracker>();
+            try
+            {
+                var facilitySuppressedVL = new PatientLabOrderManager();
+                unsuppressedVL = facilitySuppressedVL.GetFacilityVLUnSuppressed(facilityId);
+                count = unsuppressedVL.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
         }
         [WebMethod(EnableSession = true)]
         public int GetFacilityVLPendingCount(int facilityId)

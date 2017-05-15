@@ -11,5 +11,7 @@ namespace DataAccess.CCC.Interface.visit
     {
         List<PatientLabTracker> GetVlPendingCount(int facilityId);
         List<PatientLabTracker> GetVlCompleteCount(int facilityId);
+        List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId);
+        List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId);
     }
 }
