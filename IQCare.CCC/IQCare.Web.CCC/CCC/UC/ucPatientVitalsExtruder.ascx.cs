@@ -32,7 +32,7 @@ namespace IQCare.Web.CCC.UC
             if (patientTriage != null)
             {
 
-                lblVitalsDate.Text = "<span class='label label-primary'>Date Taken :" + patientTriage.CreateDate.ToString("dd-MMM-yyyy")+"</span>";
+                lblVitalsDate.Text = "<span class='label label-primary'>Date Taken :" + Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy")+"</span>";
                 vitalHeight.Text = Convert.ToString(patientTriage.Height);
                 vitalsWeight.Text = patientTriage.Weight.ToString();
                 vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();

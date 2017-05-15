@@ -7,7 +7,7 @@
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="col-md-6" style="padding:1px">
-                                <label class="control-label pull-left fa fa-sort-amount-asc">Filter by Date</label>
+                                <label class="control-label pull-left fa fa-sort-amount-asc"> Filter by Date </label>
                             </div>
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group" id="AppointmentDate">
@@ -146,7 +146,7 @@
         </div><!-- .col-md-8 -->
         <div class="col-md-4 col-xs-12 col-xs-12">
             <div class="col-md-12 label label-info">
-               <h5><label class="label label-info pull-left fa fa-line-chart fa-2x"> Facility Viral Load Order/Results Tracker</label></h5> 
+               <label class="label label-info pull-left fa fa-line-chart fa-2x"> Facility Viral Load Order/Results Tracker</label>
             </div>
             <div class="col-md-12"><hr /></div>
             <div class="col-md-12">
@@ -189,7 +189,7 @@
     <div class="col-md-12 col-xs-12 col-sm-12">
          <div class="col-md-4 col-xs-12 col-sm-12">
                 <div class="col-md-12 label label-info">
-                  <h5><label class="label label-info pull-left fa fa-bar-chart fa-2x"> Facility Summary </label></h5>
+                  <label class="label label-info pull-left fa fa-bar-chart fa-2x"> Facility Summary </label>
                 </div>
                 <div class="col-md-12" style="padding-bottom:2%"></div>
                 <div class="col-md-12">
@@ -240,7 +240,7 @@
          
              <div class="col-md-4 col-xs-12 col-sm-12">
                 <div class="col-md-12 label label-info">
-                  <h5><label class="label label-info pull-left fa fa-pie-chart fa-2x"> Care Ending Summary </label></h5>
+                  <label class="label label-info pull-left fa fa-pie-chart fa-2x"> Care Ending Summary </label>
                 </div>
                 <div class="col-md-12" style="padding-bottom:2%"></div>
                 <div class="col-md-12">

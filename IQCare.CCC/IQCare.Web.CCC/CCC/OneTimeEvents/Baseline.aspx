@@ -1216,6 +1216,7 @@
             var gender = "<%=Gender%>";
             var age = "<%=Age%>";
             var dob = "#<%=DateOfBirth%>";
+            var pgStatus = "<%=PregnancyStatus%>";
 
             var whostage = '';
             var cD4Count = '';
@@ -1561,21 +1562,30 @@
                 var purpose = $("#<%=RegimenPurpose.ClientID%>").val();
                 // var regimenId = $("#<%=HistoryRegimen%>").find(":selected").val();
                 var regimen = $("#<%=HistoryRegimen.ClientID%>").val();
-                var dateLastUsed = $("#DLUsed").datepicker('getDate');
+                var dateLastUsed = moment($("#DLUsed").datepicker('getDate'));
+               
+                if (!dateLastUsed.isValid()) {
+                    toastr.warning("Date last used is Required!");
+                    return false;
+                }
+                if (regimen.length===0) {
+                    toastr.warning("Please provide Regimen Name");
+                    return false;
+                }
 
-                if (moment('' + dateLastUsed + '').isAfter()) {
+                if (moment(dateLastUsed).isAfter()) {
 
-                    toastr.warning("Future dates not allowed for baseline assessment.", "Baseline Assessment");
+                    toastr.warning("Future dates not allowed for baseline assessment.");
                     return false;
                 }
 
                 if (regimenId < 1) {
-                    toastr.warning("Select at least 1 ARV regimen used!", "Baseline Assessment");
+                    toastr.warning("Select at least 1 ARV regimen used!");
                     return false;
                 }
 
                 if (purpose.length < 1) {
-                    toastr.warning("ARV use Purpose is required!", "Baseline Assessment");
+                    toastr.warning("ARV use Purpose is required!");
                     return false;
                 }
                 pusposeFound = $.inArray("" + purpose + "", purposeList);
@@ -1634,6 +1644,12 @@
                 $("#<%=BaselineMUAC.ClientID%>").prop('disabled', false);
             } else {
                 $("#<%=BaselineMUAC.ClientID%>").prop('disabled', true);
+            }
+
+            if (pgStatus > 0) {
+                $("#<%=BaselineMUAC.ClientID%>").prop('disabled', false);
+            } else {
+                 $("#<%=BaselineMUAC.ClientID%>").prop('disabled', true);
             }
             /* when checked */
             // $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });

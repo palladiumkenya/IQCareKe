@@ -402,7 +402,9 @@ namespace IQCare.Web.CCC.WebService
                         enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
                     entityEnrollment.CareEnded = true;
                     enrollmentManager.updatePatientEnrollment(entityEnrollment);
-
+                    Session["EncounterStatusId"] = 0;
+                    Session["PatientEditId"] = 0;
+                    Session["PatientPK"] = 0;
                     Msg = "Patient has been successfully care ended";
                 }
                 else

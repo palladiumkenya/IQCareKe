@@ -264,15 +264,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var age = "<%=patientAge%>";
-        var gender = "<%=patientGender%>";
-        var visitDate;
+        var age = "<%=PatientAge%>";
+        var gender = "<%=PatientGender%>";
+        var pregnancyStatus = <%=PregnancyStatus%>;
 
-      //if (Gender === 'male') {
-          
-      //}else if (Gender == 'Female') {
-          
-      //}
+        var visitDate;
+        $("#muacs").prop("disabled", true);
+            $('#circumference').prop("disabled", true);
+
 
         if(age > 15)
         {
@@ -290,7 +289,17 @@
                         momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
                         //restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
         });
+        if (age > 15 && gender === 'Female' && pregnancyStatus > 0) {
 
+            $("#muacs").prop("disabled", false);
+        }
+        else if (age < 15 && pregnancyStatus<1) {
+             $("#muacs").prop("disabled", false);
+        }
+        else if (age > 15 || gender==='Male') {
+            $("#muacs").prop("disabled", true);
+            $('#circumference').prop("disabled", true);
+        }
 
 
         $("#btnSaveTriage").click(function() {

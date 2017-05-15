@@ -8,6 +8,7 @@ using Interface.CCC.Enrollment;
 using Interface.CCC.Lookup;
 using Interface.CCC.Patient;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Triage;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
@@ -42,6 +43,15 @@ namespace IQCare.Web.CCC.OneTimeEvents
         protected DateTime DateOfBirth
         {
             get { return Convert.ToDateTime(Session["DateOfBirth"]); }
+        }
+
+        protected int PregnancyStatus
+        {
+            get
+            {
+                var pgstatus = new PatientPregnancyManager();
+                return pgstatus.CheckIfPatientPregnancyExisists(PatientId);
+            }
         }
        
         protected void Page_Load(object sender, EventArgs e)

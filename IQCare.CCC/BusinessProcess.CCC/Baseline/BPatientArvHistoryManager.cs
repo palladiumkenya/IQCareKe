@@ -15,22 +15,22 @@ namespace BusinessProcess.CCC.Baseline
 
         public int AddPatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientArvHistoryRepository.Add(patientArtUseHistory);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
         }
 
         public int UpdatePatientArvHistory(PatientArvHistory patientArtUseHistory)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                _unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
-                Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientArvHistoryRepository.Update(patientArtUseHistory);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return Result;
             }
            
@@ -38,26 +38,26 @@ namespace BusinessProcess.CCC.Baseline
 
         public int DeletePatientArvHistory(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var partArtHistory = _unitOfWork.PatientArvHistoryRepository.GetById(id);
-                _unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
-                 Result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                var partArtHistory = unitOfWork.PatientArvHistoryRepository.GetById(id);
+                unitOfWork.PatientArvHistoryRepository.Remove(partArtHistory);
+                 Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                     return Result;
             }
         }
 
         public List<PatientArvHistory> GetPatientArvHistory(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var patientArtHistory =
-                        _unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                        unitOfWork.PatientArvHistoryRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                             .OrderByDescending(x => x.Id)
                             .Distinct()
                             .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return patientArtHistory;
             }
 

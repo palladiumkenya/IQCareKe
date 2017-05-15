@@ -14,6 +14,7 @@ namespace IQCare.Web.CCC.Patient
            //reset encounterstatus;
             Session["EncounterStatusId"] = 0;
             Session["PatientEditId"] = 0;
+            Session["PatientPK"] = 0;
 
             //ILookupRepository l=new LookupRepository();
             //l.GetDropdownValue(Sex,"Gender");
