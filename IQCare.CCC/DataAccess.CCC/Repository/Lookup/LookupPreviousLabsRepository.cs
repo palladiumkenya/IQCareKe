@@ -28,20 +28,33 @@ namespace DataAccess.CCC.Repository.Lookup
 
             return results.ToList();
         }
-
+       
         public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
         {
             ILookupPreviousLabs completelabsrepository = new LookupPreviousLabsRepository();
-            // var list = previouslabsrepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.TestName);
-            //return list.ToList();         
+           
             var complete = "Complete";
             var myList = completelabsrepository.FindBy(
                 x =>
                 x.PatientId == patientId &               
                 x.Results == complete);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First());
-            return list.Distinct().ToList();
+
+            //////int maxLabOrderId = myList.Max(x => x.LabOrderId);
+            //var maxLabDate = myList.Max(x => x.ResultDate.ToString("dd-mmm-yyyy"));
+            //////gets max laborder           
+            //var list = myList.Where(x => x.ResultDate.ToString("dd-mmm-yyyy") == maxLabDate);
+
+            var maxLabDate = myList.Max(x => x.ResultDate);
+            ////gets max laborder           
+            var list = myList.Where(x => x.ResultDate == maxLabDate);
+
+            return list.ToList();
+
+
+
         }
+
+
         public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
         {
             ILookupPreviousLabs previouslabsrepository = new LookupPreviousLabsRepository();

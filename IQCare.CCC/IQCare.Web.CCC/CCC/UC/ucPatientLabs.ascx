@@ -250,8 +250,9 @@
                         <asp:LinkButton runat="server" ID="btnResetOrder" OnClientClick="return false" CssClass="btn btn-warning fa fa-refresh" ClientIDMode="Static"> Reset Order</asp:LinkButton>
                     </div>
                     <div class="col-md-3">
+                         <button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Lab Order</button>
                         <%--<asp:LinkButton runat="server" ID="btnCancelOrder" OnClientClick="return false" CssClass="btn btn-danger fa fa-times" ClientIDMode="Static"> Cancel Order</asp:LinkButton>--%>
-                       <asp:LinkButton runat="server" ID="btnClose" OnClientClick="return false" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal" ClientIDMode="Static">Close Lab Order</asp:LinkButton>
+                      <%-- <asp:LinkButton runat="server" ID="btnClose" OnClientClick="return false" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal" ClientIDMode="Static">Close Lab Order</asp:LinkButton>--%>
                     </div>
                 </div>
 
@@ -471,9 +472,9 @@
                 resetLabOrder();
             });
 
-            $("#btnClose").click(function (e) {
+            <%--$("#btnClose").click(function (e) {
                window.location.href = '<%=ResolveClientUrl("../Patient/patientHome.aspx") %>';
-            });
+            });--%>
             function resetLabOrder(parameters) {
                 $("#labTestTypes").val("");
                 $("#orderReason").val("");
