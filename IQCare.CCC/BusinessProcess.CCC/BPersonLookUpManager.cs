@@ -26,6 +26,7 @@ namespace BusinessProcess.CCC
                 results =
                     results.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()));//.ToList();
 
+                if(!System.String.IsNullOrEmpty(middleName))
                 results =
                     results.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()));//.ToList();
 

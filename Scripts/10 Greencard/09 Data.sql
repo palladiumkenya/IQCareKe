@@ -3554,7 +3554,7 @@ INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcounty
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (125, 6, N'TAITA TAVETA', 26, N'VOI', 125, N'MBOLOLO')
 GO
-INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (126, 6, N'TAITA TAVETA', 26, N'VOI', 126, N'SAGALLA')
+INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (126, 6, N'TAITA TAVETA', 26, N'VOI', 126, N'SAGALA')
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (127, 6, N'TAITA TAVETA', 26, N'VOI', 127, N'KALOLENI')
 GO
