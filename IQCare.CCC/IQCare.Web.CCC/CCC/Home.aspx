@@ -167,7 +167,14 @@
             <div class="col-md-12">
                 <div class="col-md-7"><label class="control-label pull-left text-danger">Total Suppressed </label></div>
                 <div class="col-md-5 pull-right">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="lblsupressed" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                </div>
+            </div>
+              <div class="col-md-12">
+                   <div class="col-md-12"><hr /></div>
+                <div class="col-md-7"><label class="control-label pull-left text-danger">Total Unsuppressed </label></div>
+                <div class="col-md-5 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblunsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr></div>
@@ -475,7 +482,11 @@
             //console.log("get viral load  called");     
             var pending=0;
             var complete=0;
-            var percentage=0;       
+            var percentage = 0;
+            var suppressed = 0;
+            var unsuppressed = 0;
+            var percentage_suppressed = 0;
+            var percentage_unsuppressed = 0;
  
       
         $(document).ready(function () {  
@@ -491,7 +502,7 @@
                 contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
                     pending = response.d;
                     document.getElementById("pendingVL").innerHTML= "<span class='badge'>"+ response.d + "</span>";
 
@@ -507,7 +518,7 @@
                 contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function (response) {
-                    console.log(response.d);
+                    //console.log(response.d);
                     complete = response.d;
                     document.getElementById("completeVL").innerHTML = "<span class='badge'> " + response.d + " </span>";
                     percentage = ((complete / (pending + complete)) * 100);
@@ -518,6 +529,51 @@
                 }
 
             });
+
+            //suppression
+              $.ajax({
+                  url: 'WebService/LabService.asmx/GetFacilityViralLoadSuppressed',
+                data: "{'facilityId':'" + facilityId + "'}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                success: function (response) {
+                    console.log(response.d);
+                    suppressed = response.d;                   
+                  
+                    document.getElementById("lblsuppressed").innerHTML = "<span class='badge'> " + suppressed + " </span>";
+                    !isNaN(suppressed) ? suppressed.toFixed(2) : suppressed = 0;
+
+                }
+
+              });
+              $.ajax({
+                  url: 'WebService/LabService.asmx/GetFacilityViralLoadUnSuppressed',
+                data: "{'facilityId':'" + facilityId + "'}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                success: function (response) {
+                    console.log(response.d);
+                    unsuppressed = response.d;
+                    document.getElementById("lblunsuppressed").innerHTML = "<span class='badge'> " + unsuppressed + " </span>";
+                    !isNaN(unsuppressed) ? unsuppressed.toFixed(2) : unsuppressed = 0;
+
+                    //Percentages
+                   // document.getElementById("lblsuppressed").innerHTML = "<span class='badge'> " + percentage_suppressed + "%" + " </span>";                  
+                   // percentage_unsuppressed = ((unsuppressed / (suppressed + unsuppressed)) * 100);
+                   // percentage_suppressed = ((suppressed / (suppressed + unsuppressed)) * 100);
+                    //document.getElementById("lblunsuppressed").innerHTML = "<span class='badge'> " + percentage_unsuppressed + "%" + " </span>";
+                    //document.getElementById("lblsuppressed").innerHTML = "<span class='badge'> " + percentage_suppressed + "%" + " </span>";
+                   
+         
+
+                }
+
+            });
+            //.suppression
 
            });
         });

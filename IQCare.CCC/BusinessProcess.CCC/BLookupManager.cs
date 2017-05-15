@@ -305,7 +305,30 @@ namespace BusinessProcess.CCC
 
             }
         }
+        public List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientLabTracker> facilityVl =
+                    unitOfWork.PatientLabTrackerRepository.GetFacilityVLSuppressed(facilityId);
+                unitOfWork.Dispose();
+                return facilityVl;
 
+
+            }
+        }
+        public List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientLabTracker> facilityVl =
+                    unitOfWork.PatientLabTrackerRepository.GetFacilityVLUnSuppressed(facilityId);
+                unitOfWork.Dispose();
+                return facilityVl;
+
+
+            }
+        }
         public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

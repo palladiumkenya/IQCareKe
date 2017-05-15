@@ -100,7 +100,7 @@ namespace BusinessProcess.CCC.visit
             }
    
         }
-
+       
         public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
