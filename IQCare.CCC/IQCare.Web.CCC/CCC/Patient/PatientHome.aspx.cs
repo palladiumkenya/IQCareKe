@@ -292,40 +292,45 @@ namespace IQCare.Web.CCC.Patient
                         }
                         DateTime sampleDate = Convert.ToDateTime(labOrder.SampleDate.ToString());
                         //if (sampleDate.Subtract(DateTime.Today).Days > 30)
-                        if (labOrder.Results == "Complete")
+
+                        if ((labOrder.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days > 30))
                         {
-                            if (DateTime.Today.Subtract(sampleDate).Days > 30)
-                            {
-                                lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-
-                            }
-                            else
-                            {
-                                lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-
-                            }
+                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
 
                         }
-                        else
+                        else if ((labOrder.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
                         {
-                            var patientEnrollment = new PatientEnrollmentManager();
-                            var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                            DateTime today = DateTime.Today;
-                            TimeSpan difference = today.Date - enrolDate.Date;
-                            int days = (int)difference.TotalDays;
+                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
 
-                            if (days < 10)
-                            {
-                                lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                                lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Request VL NOW! </strong></span>";
-
-                            }
-                            else
-                            {
-                                lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                                lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
-                            }
                         }
+                    
+                        else if (labOrder.Results == "Complete")
+                        {
+
+                        lblVL.Text = "<span class='label label-success' > Complete | Results date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+
+                  
+                }
+                else
+                {
+                    var patientEnrollment = new PatientEnrollmentManager();
+                    var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                    DateTime today = DateTime.Today;
+                    TimeSpan difference = today.Date - enrolDate.Date;
+                    int days = (int)difference.TotalDays;
+
+                    if (days < 10)
+                    {
+                        lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Request VL NOW! </strong></span>";
+
+                    }
+                    else
+                    {
+                        lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
+                    }
+                }
                     }
                     else
                     {
