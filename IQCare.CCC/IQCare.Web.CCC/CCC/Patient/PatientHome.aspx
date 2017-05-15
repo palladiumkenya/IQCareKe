@@ -1694,8 +1694,8 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        console.log(response.d);
-                        console.log(response.d);
+                        //console.log(response.d);
+                        var items = response.d;
                         items.forEach(function (item, i) {
 
                             if (item.Month === 1) {
