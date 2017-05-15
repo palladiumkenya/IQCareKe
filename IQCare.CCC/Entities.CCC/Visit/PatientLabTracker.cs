@@ -29,7 +29,9 @@ namespace Entities.CCC.Visit
         public decimal ResultValues { get; set; }
         public string ResultTexts { get; set; }
         public int LabOrderTestId { get; set; }
-     
+        public string ResultUnits { get; set; }
+
+        public DateTime ResultDate { get; set; }
 
 
 
