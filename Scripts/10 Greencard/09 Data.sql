@@ -1,105 +1,104 @@
 Set Nocount on
 Go
 --Lookup master
-If Not Exists(Select 1 From LookupMaster where Name='FPMethod') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPMethod',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Entrypoint') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Entrypoint',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='VisitType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VisitType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='TBStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TBStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ScreeningCategory') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ScreeningCategory',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='VLReasons') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VLReasons',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ARTUse') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARTUse',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='MaritalStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('MaritalStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PopulationType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PopulationType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='KeyPopulation') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('KeyPopulation',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='WHOStage') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('WHOStage',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='NutritionStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('NutritionStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Adherance') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Adherance',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AppointmentType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Regimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Regimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='TBRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TBRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Gender') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Gender',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='YesNo') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('YesNo',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='FPStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ModuleMaster') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ModuleMaster',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='DrugInterruptions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugInterruptions',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='DrugSubstitutions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugSubstitutions',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PregnancyStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PregnancyStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Tier') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Tier',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='CaCxScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CaCxScreening',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='STIScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('STIScreening',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='STIPartnerNotification') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('STIPartnerNotification',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ADRSeverity') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ADRSeverity',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='VisitBy') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VisitBy',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='NoFamilyPlanning') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('NoFamilyPlanning',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PhysicalExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PhysicalExamination',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ExaminationType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ExaminationType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PHDP') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PHDP',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ARVAdherence') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARVAdherence',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='CTXAdherence') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CTXAdherence',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ChronicIllness') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ChronicIllness',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Vaccinations') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Vaccinations',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='VaccinationStages') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VaccinationStages',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AdultFirstLineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultFirstLineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AdultSecondlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultSecondlineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AdultThirdlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultThirdlineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PaedsFirstLineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsFirstLineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PaedsSecondlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsSecondlineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PMTCTRegimens') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PMTCTRegimens',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Infants') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Infants',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PrEPRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PrEPRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PePRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PePRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='OIRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('OIRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PaedsThirdlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsThirdlineRegimen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='UniversalProphylaxis') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('UniversalProphylaxis',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='IPT') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('IPT',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Fluconazole') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Fluconazole',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='RegimenClassification') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassification',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AppointmentStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PatientIdentifier') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PatientIdentifier',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='BaseLineHivStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BaseLineHivStatus',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='HivTestingResult') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HivTestingResult',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='LabOrderReason') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('LabOrderReason',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Vaccine') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Vaccine',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='BCG') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BCG',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PV',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Measles') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Measles',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PCV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PCV',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Penta') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Penta',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='FluVaccine') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FluVaccine',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='HBV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HBV',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AppointmentReason') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentReason',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='DifferentiatedCare') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DifferentiatedCare',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Relationship') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Relationship',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ServiceArea') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ServiceArea',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PatientType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PatientType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='CareEnded') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CareEnded',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AdverseEventsActions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdverseEventsActions',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ConsentType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ConsentType',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='DrugSwitches') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugSwitches',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='RegimenLines') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenLines',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='TreatmentPlan') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TreatmentPlan',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='TreatmentProgram') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TreatmentProgram',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PeriodDrugsTaken') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PeriodDrugsTaken',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ReviewOfSystems') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ReviewOfSystems',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Skin') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Skin',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Eyes') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Eyes',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ENT') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ENT',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Chest') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Chest',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='CVS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CVS',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Abdomen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Abdomen',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='CNS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CNS',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='GUS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GUS',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='ICD10') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ICD10',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PresentingComplaints',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Allergies') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Allergies',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AllergyReactions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AllergyReactions',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='GeneralExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GeneralExamination',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PresentingComplaints',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='Allergies') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Allergies',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='AdheranceMeasurement') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdheranceMeasurement',null,0); End
-If Not Exists(Select 1 From LookupMaster where Name='IptOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('IptOutcome',null,0); End
+If Not Exists(Select 1 From LookupMaster where Name='FPMethod') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPMethod','FP Method',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Entrypoint') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Entrypoint','Entry point',0); End
+If Not Exists(Select 1 From LookupMaster where Name='VisitType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VisitType','Visit Type',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TBStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TBStatus','TB Status',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ScreeningCategory') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ScreeningCategory','Screening Category',0); End
+If Not Exists(Select 1 From LookupMaster where Name='VLReasons') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VLReasons','VL Reasons',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ARTUse') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARTUse','ART Use',0); End
+If Not Exists(Select 1 From LookupMaster where Name='MaritalStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('MaritalStatus','Marital Status',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PopulationType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PopulationType','PopulationType',0); End
+If Not Exists(Select 1 From LookupMaster where Name='KeyPopulation') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('KeyPopulation','Key Population',0); End
+If Not Exists(Select 1 From LookupMaster where Name='WHOStage') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('WHOStage','WHOStage',0); End
+If Not Exists(Select 1 From LookupMaster where Name='NutritionStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('NutritionStatus','Nutrition Status',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Adherance') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Adherance','Adherance',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AppointmentType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentType','Appointment Type',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Regimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Regimen','Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TBRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TBRegimen','TB Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Gender') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Gender','Gender',0); End
+If Not Exists(Select 1 From LookupMaster where Name='YesNo') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('YesNo','YesNo',0); End
+If Not Exists(Select 1 From LookupMaster where Name='FPStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FPStatus','FP Status',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ModuleMaster') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ModuleMaster','Module Master',0); End
+If Not Exists(Select 1 From LookupMaster where Name='DrugInterruptions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugInterruptions','Drug Interruptions',0); End
+If Not Exists(Select 1 From LookupMaster where Name='DrugSubstitutions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugSubstitutions','Drug Substitutions',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PregnancyStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PregnancyStatus','Pregnancy Status',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Tier') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Tier','Tier',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CaCxScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CaCxScreening','CaCx Screening',0); End
+If Not Exists(Select 1 From LookupMaster where Name='STIScreening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('STIScreening','STI Screening',0); End
+If Not Exists(Select 1 From LookupMaster where Name='STIPartnerNotification') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('STIPartnerNotification','STI Partner Notification',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ADRSeverity') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ADRSeverity','ADR Severity',0); End
+If Not Exists(Select 1 From LookupMaster where Name='VisitBy') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VisitBy','Visit By',0); End
+If Not Exists(Select 1 From LookupMaster where Name='NoFamilyPlanning') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('NoFamilyPlanning','No Family Planning',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PhysicalExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PhysicalExamination','Physical Examination',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ExaminationType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ExaminationType','Examination Type',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PHDP') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PHDP','PHDP',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ARVAdherence') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ARVAdherence','ARV Adherence',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CTXAdherence') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CTXAdherence','CTX Adherence',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ChronicIllness') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ChronicIllness','ChronicIllness',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Vaccinations') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Vaccinations','Vaccinations',0); End
+If Not Exists(Select 1 From LookupMaster where Name='VaccinationStages') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('VaccinationStages','Vaccination Stages',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AdultFirstLineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultFirstLineRegimen','Adult Firstline Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AdultSecondlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultSecondlineRegimen','Adult Secondline Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AdultThirdlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdultThirdlineRegimen','Adult Thirdline Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PaedsFirstLineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsFirstLineRegimen','Paeds Firstline Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PaedsSecondlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsSecondlineRegimen','Paeds SecondLine Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PMTCTRegimens') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PMTCTRegimens','PMTCT Regimens',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Infants') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Infants','Infants',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PrEPRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PrEPRegimen','Pre-Exposure Prophylaxis (PrEP)',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PePRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PePRegimen','Post Exposure Prophylaxis (PEP)',0); End
+If Not Exists(Select 1 From LookupMaster where Name='OIRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('OIRegimen','Management of Opportunistic infections (OIs)',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PaedsThirdlineRegimen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PaedsThirdlineRegimen','Paeds Thirdline Regimen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='UniversalProphylaxis') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('UniversalProphylaxis','Universal prophylaxis',0); End
+If Not Exists(Select 1 From LookupMaster where Name='IPT') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('IPT','Isoniazid Prophylaxis Therapy (IPT)',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Fluconazole') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Fluconazole','Fluconazole (treatment & prophylaxis)',0); End
+If Not Exists(Select 1 From LookupMaster where Name='RegimenClassification') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassification','Regimen Classification',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AppointmentStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentStatus','NULL',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PatientIdentifier') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PatientIdentifier','NULL',0); End
+If Not Exists(Select 1 From LookupMaster where Name='BaseLineHivStatus') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BaseLineHivStatus','BaseLineHivStatus',0); End
+If Not Exists(Select 1 From LookupMaster where Name='HivTestingResult') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HivTestingResult','HivTestingResult',0); End
+If Not Exists(Select 1 From LookupMaster where Name='LabOrderReason') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('LabOrderReason','LabOrderReason',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Vaccine') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Vaccine','Vaccine',0); End
+If Not Exists(Select 1 From LookupMaster where Name='BCG') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BCG','BCG',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PV','PV',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Measles') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Measles','Measles',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PCV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PCV','PCV',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Penta') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Penta','Penta',0); End
+If Not Exists(Select 1 From LookupMaster where Name='FluVaccine') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('FluVaccine','FluVaccine',0); End
+If Not Exists(Select 1 From LookupMaster where Name='HBV') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('HBV','HBV',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AppointmentReason') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AppointmentReason','Appointment Reason',0); End
+If Not Exists(Select 1 From LookupMaster where Name='DifferentiatedCare') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DifferentiatedCare','Differentiated Care',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Relationship') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Relationship','Relationship',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ServiceArea') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ServiceArea','Service Area',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PatientType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PatientType','Patient Type',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CareEnded') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CareEnded','CareEnded',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AdverseEventsActions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdverseEventsActions','Adverse Events Actions',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ConsentType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ConsentType','Consent Type',0); End
+If Not Exists(Select 1 From LookupMaster where Name='DrugSwitches') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugSwitches','DrugSwitches',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Regimen Lines') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Regimen Lines','RegimenLines',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TreatmentPlan') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TreatmentPlan','Treatment Plan',0); End
+If Not Exists(Select 1 From LookupMaster where Name='TreatmentProgram') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('TreatmentProgram','Treatment Program',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PeriodDrugsTaken') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PeriodDrugsTaken','PeriodDrugsTaken',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ReviewOfSystems') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ReviewOfSystems','Review Of Systems',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Skin') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Skin','Skin',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Eyes') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Eyes','Eyes',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ENT') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ENT','ENT',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Chest') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Chest','Chest',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CVS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CVS','CVS',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Abdomen') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Abdomen','Abdomen',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CNS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CNS','CNS',0); End
+If Not Exists(Select 1 From LookupMaster where Name='GUS') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GUS','GUS',0); End
+If Not Exists(Select 1 From LookupMaster where Name='ICD10') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ICD10','ICD10',0); End
+If Not Exists(Select 1 From LookupMaster where Name='PresentingComplaints') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PresentingComplaints','Presenting Complaints',0); End
+If Not Exists(Select 1 From LookupMaster where Name='Allergies') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Allergies','Allergies',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AllergyReactions') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AllergyReactions','Allergy Reactions',0); End
+If Not Exists(Select 1 From LookupMaster where Name='GeneralExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('GeneralExamination','General Examination',0); End
+If Not Exists(Select 1 From LookupMaster where Name='AdheranceMeasurement') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('AdheranceMeasurement','Adherance Measurement',0); End
+If Not Exists(Select 1 From LookupMaster where Name='IptOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('IptOutcome','Ipt Outcome',0); End
 If Not Exists(Select 1 From LookupMaster where Name='Unknown') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Unknown','Unknown',0); End
-
+If Not Exists(Select 1 From LookupMaster where Name='RegimenClassificationAdult') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassificationAdult','Regimen Classification Adult',0); End
+If Not Exists(Select 1 From LookupMaster where Name='RegimenClassificationPaeds') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('RegimenClassificationPaeds','Regimen Classification Paeds',0); End
 
 --Lookup items
 If Not Exists(Select 1 From LookupItem where Name='FP') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('FP','Family Planning',0); End
@@ -3282,6 +3281,13 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'No Family Planning',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='NOFP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Family Planning',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='FP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  )         ItemId  FROM LookupMaster  WHERE Name='Unknown') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Adult Thirdline Regimen',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='AdultARTThirdLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationAdult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Adult Secondline Regimen',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='AdultARTSecondLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationAdult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Adult FirstLine Regimen',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='AdultARTFirstLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationAdult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'PMTCT Regimens',4 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PMTCTRegimens'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationAdult') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Paeds FirstLine Regimen',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PaedsARTFirstLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationPaeds') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Paeds Secondline Regimen',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PaedsARTSecondLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationPaeds') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
+Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Paeds Thirdline Regimen',3 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='PaedsARTThirdLine'  )         ItemId  FROM LookupMaster  WHERE Name='RegimenClassificationPaeds') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
 if not exists(select 1 from lookupmasteritem where lookupmasterid = 79 and lookupitemid = 282)
 begin 
