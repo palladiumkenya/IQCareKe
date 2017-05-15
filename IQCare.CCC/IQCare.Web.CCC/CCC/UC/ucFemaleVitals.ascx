@@ -406,7 +406,7 @@
           <div class="col-md-12" id="btnFemaleVitals">
         <div class="col-md-6">
             <div class="col-md-4">
-                 <asp:LinkButton runat="server" ID="btnPregnancyOutCome" CssClass="btn btn-primary fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Set Pregnancy Outcome </asp:LinkButton>
+                 <%--<asp:LinkButton runat="server" ID="btnPregnancyOutCome" CssClass="btn btn-primary fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Set Pregnancy Outcome </asp:LinkButton>--%>
 
             </div>
              <div class="col-md-4"></div>
