@@ -55,11 +55,11 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'AuditData'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_LabOrderTestResult ADD AuditData xml NULL;
     END;
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'AuditData'AND Object_ID = OBJECT_ID(N'dtl_LabOrderTest'))
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreateDate'AND Object_ID = OBJECT_ID(N'dtl_LabOrderTest'))
     BEGIN
         ALTER TABLE dtl_LabOrderTest ADD CreateDate datetime NULL;
     END;
-IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'AuditData'AND Object_ID = OBJECT_ID(N'dtl_LabOrderTest'))
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreatedBy'AND Object_ID = OBJECT_ID(N'dtl_LabOrderTest'))
     BEGIN
         ALTER TABLE dtl_LabOrderTest ADD CreatedBy int NULL;
     END;
