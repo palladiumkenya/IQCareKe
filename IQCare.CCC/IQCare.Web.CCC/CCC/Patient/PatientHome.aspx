@@ -1178,13 +1178,13 @@
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedYes">
                                     <input class="sr-only" type="checkbox" value="option1">
-                                    <span class="checkbox-label pull-left">Yes </span>
+                                    <span class="checkbox-label pull-left">Done </span>
                                 </label>
                             </div>
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedNo">
                                     <input class="sr-only" type="checkbox" value="option1">
-                                    <span class="checkbox-label pull-left">NO </span>
+                                    <span class="checkbox-label pull-left">Not Done </span>
                                 </label>
                             </div>
                         </div>
@@ -1195,7 +1195,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12" id="divPregnant">
+<%--                        <div class="col-md-12" id="divPregnant">
                             <div class="col-md-6">
                                 <label class="control-lable pull-left">Pregnant </label>
                             </div>
@@ -1211,7 +1211,7 @@
                                     <span class="checkbox-label pull-left">NO </span>
                                 </label>
                             </div>
-                        </div>
+                        </div>--%>
 
                         <div class="col-md-12" id="divPGhr">
                             <div class="col-md-12">
@@ -1563,13 +1563,13 @@
                                     $("#lblHbvInfectedYes").checkbox('check');
                                 }
 
-                                if (!itemList.Pregnant) {
-                                    $("#lblPregnantNo").checkbox('check');
-                                    $("#lblPregnantYes").checkbox('uncheck');
-                                } else {
-                                    $("#lblPregnantNo").checkbox('uncheck');
-                                    $("#lblPregnantYes").checkbox('check');
-                                }
+                                //if (!itemList.Pregnant) {
+                                //    $("#lblPregnantNo").checkbox('check');
+                                //    $("#lblPregnantYes").checkbox('uncheck');
+                                //} else {
+                                //    $("#lblPregnantNo").checkbox('uncheck');
+                                //    $("#lblPregnantYes").checkbox('check');
+                                //}
 
                                 if (!itemList.TBinfected) {
                                     $("#lblTBInfectedNo").checkbox('check');
