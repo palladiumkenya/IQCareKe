@@ -1176,15 +1176,15 @@
                             <div class="col-md-6">
                                 <label class="control-lable pull-left">HBV Infected</label></div>
                             <div class="col-md-3">
-                                <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedYes">
-                                    <input class="sr-only" type="checkbox" value="option1">
+                                <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedYes" aria-readonly="true">
+                                    <input class="sr-only" type="checkbox" value="option1" disabled="disabled">
                                     <span class="checkbox-label pull-left">Done </span>
                                 </label>
                             </div>
                             <div class="col-md-3">
-                                <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedNo">
-                                    <input class="sr-only" type="checkbox" value="option1">
-                                    <span class="checkbox-label pull-left">Not Done </span>
+                                <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblHbvInfectedNo" aria-disabled="true">
+                                    <input class="sr-only" type="checkbox" value="option1"  disabled="disabled">
+                                    <span class="checkbox-label pull-left">Not </span>
                                 </label>
                             </div>
                         </div>
@@ -1224,13 +1224,13 @@
                                 <label class="control-lable pull-left">TB Infected</label></div>
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblTBInfectedYes">
-                                    <input class="sr-only" type="checkbox" value="option1">
+                                    <input class="sr-only" type="checkbox" value="option1"  disabled="disabled">
                                     <span class="checkbox-label pull-left">Yes </span>
                                 </label>
                             </div>
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblTBInfectedNo">
-                                    <input class="sr-only" type="checkbox" value="option1">
+                                    <input class="sr-only" type="checkbox" value="option1"  disabled="disabled">
                                     <span class="checkbox-label pull-left">NO </span>
                                 </label>
                             </div>
@@ -1247,13 +1247,13 @@
                                 <label class="control-lable pull-left">BreastFeeding</label></div>
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblBreastfeedingYes">
-                                    <input class="sr-only" type="checkbox" value="option1">
+                                    <input class="sr-only" type="checkbox" value="option1"  disabled="disabled">
                                     <span class="checkbox-label pull-left">Yes </span>
                                 </label>
                             </div>
                             <div class="col-md-3">
                                 <label class="checkbox-custom checkbox-inline" data-initialize="checkbox" id="lblBreastfeedingNo">
-                                    <input class="sr-only" type="checkbox" value="option1">
+                                    <input class="sr-only" type="checkbox" value="option1"  disabled="disabled">
                                     <span class="checkbox-label pull-left">NO </span>
                                 </label>
                             </div>
@@ -1487,9 +1487,27 @@
                                     $("#<%=lblARTInitiationDate.ClientID%>")
                                         .text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 }
-                                $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
-                                $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
-                                $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
+                                if(itemList.ARTInitiationDate==='Invalid Date'){
+                                    $("#<%=lblDateOfARTInitiation.ClientID%>").text("Not Taken");
+                                }else{
+                                           $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
+
+                                }
+
+                         
+                                if(itemList.WHOStageName){
+                                    $("#<%=lblwhostage2.ClientID%>").text(itemList.WHOStageName);
+                                }else{
+                                     $("#<%=lblwhostage2.ClientID%>").text("Not Taken");
+                                }
+                                
+                               
+                                if(itemList.CD4Count){
+                                    $("#<%=lblcd4.ClientID%>").text(itemList.CD4Count);
+                                } else{
+                                    $("#<%=lblcd4.ClientID%>").text("Not Taken");
+                                }
+                               
 
                                 if (patientType === 'Transfer-In') {
                                     /*check if patient patient is new or transferIN*/
@@ -1527,17 +1545,24 @@
 
                                 }
 
-                            $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
+                                $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
                                 $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
                                 $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
+                                $("#divPGhr").hide('fast');
                                 if (gender === 'Female') {
                                     $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
                                     $("#<%=lblBreastFeeding.ClientID%>").text(itemList.BreastFeeding);
                                 }else if (gender === 'Male') {
 
-                                    $("#divBreastFeeding").hide('fast');$("#divBFhr").hide('fast');$("#divPregnant").hide('fast');$("#divPGhr").hide('fast');
+                                    $("#divBreastFeeding").hide('fast');$("#divBFhr").hide('fast');$("#divPregnant").hide('fast');
                                 }
-                                $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
+                                if(itemList.CD4Count){
+                                    $("#<%=lblCD4Count.ClientID%>").text(itemList.CD4Count);
+                                    
+                                }else {
+                                    $("#<%=lblCD4Count.ClientID%>").text("Not Taken");  
+                                }
+                              
 
 
                                 if (patientType === 'Transfer-In') {
@@ -1669,8 +1694,8 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        console.log(response.d);
-                        console.log(response.d);
+                        //console.log(response.d);
+                        var items = response.d;
                         items.forEach(function (item, i) {
 
                             if (item.Month === 1) {
