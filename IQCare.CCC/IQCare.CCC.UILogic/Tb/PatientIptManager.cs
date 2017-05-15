@@ -45,6 +45,7 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIpt patientIpt = new PatientIpt()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 Weight = p.Weight,
