@@ -102,7 +102,8 @@ namespace IQCare.CCC.UILogic
                         LabOrderId = orderId,
                         LabTestId = t.LabNameId,  //parameter
                         LabOrderTestId = testId,  //uniquely identifies a particular test
-                        FacilityId = facilityID
+                        FacilityId = facilityID,
+                        ResultDate= orderDate
                     };
 
                     _mgr.AddPatientLabTracker(labTracker);
