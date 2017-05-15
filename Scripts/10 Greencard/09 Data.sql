@@ -3283,6 +3283,19 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Family Planning',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='FP'  )         ItemId  FROM LookupMaster  WHERE Name='FPStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  )         ItemId  FROM LookupMaster  WHERE Name='Unknown') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
+if not exists(select 1 from lookupmasteritem where lookupmasterid = 79 and lookupitemid = 282)
+begin 
+insert into lookupmasteritem values(79,282,'During Pregnancy',1) 
+end
+if not exists(select 1 from lookupmasteritem where lookupmasterid = 79 and lookupitemid = 283)
+begin 
+insert into lookupmasteritem values(79,283,'During Labour',2)
+end
+if not exists(select 1 from lookupmasteritem where lookupmasterid = 79 and lookupitemid = 284)
+begin 
+insert into lookupmasteritem values(79,284,'Post Natal',3)
+end
+
 TRUNCATE TABLE [dbo].[County]
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1, 1, N'MOMBASA', 1, N'CHANGAMWE', 1, N'PORT REITZ')

@@ -103,6 +103,23 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList LoadWorkPlan()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPatientWorkPlan(Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["visitDate"].ToString(), row["clinicalNotes"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetChronicIllness()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();

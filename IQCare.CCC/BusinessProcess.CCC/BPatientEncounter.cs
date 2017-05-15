@@ -528,6 +528,19 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public DataTable getPatientWorkPlan(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientWorkPlan", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
         public ZScoresParameters GetZScoreValues(string PatientID, string gender, string height)
         {
             lock (this)
