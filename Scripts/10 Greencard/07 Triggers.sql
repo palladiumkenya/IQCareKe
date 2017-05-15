@@ -1,5 +1,11 @@
+-- Author:  <pwangoo>
+-- Create date: <20042017>
+-- Description: <Insert labresults to patientlab tracker>
+-- =============================================
+
+
 CREATE TRIGGER [dbo].[Insert_Results_LabTracker]
-ON dbo.dtl_LabOrderTestResult
+ON [dbo].[dtl_LabOrderTestResult]
 
  AFTER UPDATE
 AS
@@ -8,8 +14,9 @@ AS
       UPDATE c
             SET ResultValues = isnull(i.ResultValue,0),
           ResultTexts = i.ResultText,
-	     ResultUnits = i.ResultUnit,
-         Results = 'Complete'    
+	      ResultDate = i.StatusDate,
+		    ResultUnits = i.ResultUnit,
+          Results = 'Complete'    
         FROM PatientLabTracker AS c
           JOIN inserted AS i
             ON i.LabOrderTestId = c.LabOrderTestId     -- use the appropriate column for joining

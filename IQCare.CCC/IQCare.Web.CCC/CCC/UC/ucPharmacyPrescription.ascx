@@ -732,7 +732,8 @@
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
                                 toastr.success(data.d, "Saved successfully");
-                                //$('#pharmacyModal').modal('hide');
+                                //$('#pharmacyModal').modal('hide');
+
                             },
                             error: function (data) {
                                 toastr.error(data.d, "Error");
