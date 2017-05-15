@@ -490,6 +490,16 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        drugNameArr.splice(index, 1);
+                    }
+
+                    var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                    if (index1 > -1) {
+                        batchNoArr.splice(index1, 1);
+                    }
                 });
        
               
