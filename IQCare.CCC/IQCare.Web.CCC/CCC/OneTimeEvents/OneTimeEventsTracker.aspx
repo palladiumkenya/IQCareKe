@@ -29,7 +29,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage1">
                                                <div class="input-group">
-                                                    <input  class="form-control input-sm" id="Stage1Date" type="text" runat="server" ClientIDMode="Static" />
+                                                    <input  class="form-control input-sm" id="Stage1Date" type="text" runat="server" ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -114,7 +114,7 @@
                                        <div class="col-md-7">
                                             <div class="datepicker fuelux form-group" id="Stage2">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" runat="server"  ClientIDMode="Static" />
+                                                                                  <input class="form-control input-sm" id="Stage2Date" type="text" runat="server"  ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -199,7 +199,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="Stage3">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" runat="server" ClientIDMode="Static" />
+                                                                                  <input class="form-control input-sm" id="Stage3Date" type="text" runat="server" ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -291,7 +291,7 @@
                                        <div class="col-md-7">
                                           <div class="datepicker fuelux form-group" id="SexPartner">
                                                <div class="input-group">
-                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" runat="server" ClientIDMode="Static"  />
+                                                                                  <input class="form-control input-sm" id="SexPartnerDate" type="text" runat="server" ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -384,7 +384,7 @@
                                           <div class="datepicker fuelux form-group" id="INHStartDatePicker">
                                                <div class="input-group">
                                                                                   <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
-                                                                                    <asp:TextBox runat="server" ID="INHStartDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
+                                                                                    <asp:TextBox runat="server" ID="INHStartDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                                                   <div class="input-group-btn">
                                                                                      <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -486,7 +486,7 @@
                                           <div class="datepicker fuelux form-group" id="CompletionDate">
                                                <div class="input-group">
                                                     <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
-                                                    <asp:TextBox runat="server" ID="INHCompletionDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ID="INHCompletionDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -572,7 +572,7 @@
                                           <div class="datepicker fuelux form-group" id="StopDate">
                                                <div class="input-group">
                                                     <!--<input class="form-control input-sm" id="INHStartDate" type="text" data-parsley-required="true" />-->
-                                                    <asp:TextBox runat="server" ID="INHStopDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ID="INHStopDate" CssClass="form-control input-sm" ClientIDMode="Static" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>

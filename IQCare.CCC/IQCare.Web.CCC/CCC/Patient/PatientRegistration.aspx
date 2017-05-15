@@ -134,7 +134,7 @@
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="MyDateOfBirth">
                                                     <div class="input-group">
-                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB" data-parsley-required="true"></asp:TextBox>        
+                                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonDoB" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                                         <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">

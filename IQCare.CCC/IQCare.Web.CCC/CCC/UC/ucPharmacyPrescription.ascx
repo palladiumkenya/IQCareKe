@@ -130,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();" data-parsley-required="true"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -230,7 +230,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="DispenseDate">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();DateFormat(this,this.value,event,false,'3');" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -649,6 +649,12 @@
                 var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
                 var datePrescribed = $("#txtPrescriptionDate").val();
                 var dateDispensed = $("#txtDateDispensed").val();
+
+                if (!DrugPrescriptionTable.data().any()) {
+                    toastr.error("Drug Prescription Error", "Add drugs to prescribe.");
+                    //evt.preventDefault();
+                    return false;
+                }
                 
                 if (regimen === undefined)
                     regimen = '0';

@@ -377,12 +377,12 @@ function EnableDisableEDD()
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  
         document.getElementById("ExpectedDateOfChildBirth").removeAttribute('disabled');
-        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat(edd);
+        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat1(edd);
     }
     
 }
 
-function DateFormat(date)
+function DateFormat1(date)
 {
     var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
 
@@ -399,8 +399,19 @@ function DateFormat(date)
 
 function ChkQtyDispensed()
 {
-    var qtyPres = $("#txtQuantityPres").val();
-    var qtyDisp = $("#txtQuantityDisp").val();
+    var vPres = $("#txtQuantityPres").val();
+    var vDisp = $("#txtQuantityDisp").val();
+
+    if (vPres != "")
+        var qtyPres = parseFloat(vPres);
+    else
+        var qtyPres = 0;
+
+    if (vDisp != "")
+        var qtyDisp = parseFloat(vDisp);
+    else
+        var qtyDisp = 0;
+
 
     if(qtyDisp > qtyPres)
     {

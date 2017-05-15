@@ -95,7 +95,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux" id="TIDate">
                                         <div class="input-group">
-                                            <input class="form-control input-sm" id="TransferInDate" type="text" data-parsley-required="true" />
+                                            <input class="form-control input-sm" id="TransferInDate" type="text" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                    <%-- <span class="glyphicon glyphicon-calendar"></span>--%>
@@ -194,7 +194,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux" id="TIARTStartDate">
                                         <div class="input-group">
-                                            <input class="form-control input-sm" id="StartDateART" type="text" data-parsley-required="true" />
+                                            <input class="form-control input-sm" id="StartDateART" type="text" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -358,7 +358,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DHID">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" data-parsley-required="true" />
+                                                <input class="form-control input-sm" id="DateOfHIVDiagnosis" type="text" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -455,7 +455,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DOE">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="DateOfEnrollment" type="text" data-parsley-required="true" />
+                                                <input class="form-control input-sm" id="DateOfEnrollment" type="text" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -562,7 +562,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DARTI">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text"  />
+                                                <input class="form-control input-sm" id="DateOfARTInitiation" type="text" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -726,7 +726,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux" id="DLUsed">
                                         <div class="input-group">
-                                            <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" data-parsley-required="true" />
+                                            <input class="form-control input-sm" id="RegimenDateLastUsed" type="text" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -966,7 +966,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="DateStartedOnFirstLine">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" data-parsley-require="true" /><div class="input-group-btn">
+                                                <input class="form-control input-sm" id="TreatmeantInitiationDateStartedOn1stLine" type="text" data-parsley-require="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" /><div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                         <span class="sr-only">Toggle Calendar</span>
@@ -1076,7 +1076,7 @@
                                     <div class="col-md-12">
                                         <div class="datepicker fuelux" id="BaselineViralloadDate">
                                             <div class="input-group">
-                                                <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" />
+                                                <input class="form-control input-sm" id="TreatmeantInitiationBaselineViralloadDate" type="text" data-parsley-require="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                         <span class="glyphicon glyphicon-calendar"></span>
