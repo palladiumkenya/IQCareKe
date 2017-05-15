@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucExtruder.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucExtruder" %>
 <%@ Register Src="~/CCC/UC/ucPatientVitalsExtruder.ascx" TagPrefix="IQ" TagName="ucPatientVitalsExtruder" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabsExtruder.ascx" TagPrefix="IQ" TagName="ucPatientLabsExtruder" %>
+<%@ Register Src="~/CCC/UC/ucPatientWorkPlan.ascx" TagPrefix="IQ" TagName="ucPatientWorkPlan" %>
+
 
 
 <script type="text/javascript">
@@ -55,8 +57,8 @@
             <IQ:ucPatientLabsExtruder runat="server" id="ucPatientLabsExtruder" />
         </div>
 
-        <div id="extruderLeft2" class="{title:'Clinical Notes'}">
-
+        <div id="extruderLeft2" class="{title:'Work Plan'}">
+            <IQ:ucPatientWorkPlan runat="server" id="ucPatientWorkPlan" />
         </div>
     </div>
 

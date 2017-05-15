@@ -130,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" data-parsley-required="true"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();" data-parsley-required="true"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -230,7 +230,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="DispenseDate">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -331,8 +331,6 @@
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>--%>
-                        <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
                         <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
@@ -350,6 +348,10 @@
     var pmscmFlag = "0";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
+    //Date processing
+    var today = new Date();
+    var tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
 
     if (prescriptionDate == '' || prescriptionDate == '01-Jan-1900')
         prescriptionDate = 0;
@@ -380,14 +382,17 @@
         $('#PrescriptionDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: prescriptionDate
+            date: prescriptionDate,
+            restricted: [{ from: tomorrow, to: Infinity }]
         });
 
         $('#DispenseDate').datepicker({
             allowPastDates: true,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-            date: dispenseDate
+            date: dispenseDate,
+            restricted: [{ from: tomorrow, to: Infinity }]
         });
+
     });
 
     $(function () {
@@ -535,6 +540,13 @@
         $("#txtPrescriptionDate").val("");
         $("#txtDateDispensed").val("");
 
+        $("#ddlBatch").val("0");
+        $("#txtDose").val("");
+        $("#ddlFreq").val("0");
+        $("#txtDuration").val("");
+        $("#txtQuantityDisp").val("");
+        $("#txtQuantityPres").val("");
+        
         DrugPrescriptionTable
                     .clear()
                     .draw();
@@ -679,7 +691,7 @@
                 }
                 catch (err) { }
 
-                //try {
+                try {
                     //var regExp = /\(([^)]+)\)/;
                     //var matches = regExp.exec(regimenText);
                     var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
@@ -691,8 +703,8 @@
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                     }
 
-                //}
-                //catch (err) { alert(err.message) }
+                }
+                catch (err) {  }
            
                 
                 if (sumAllAbbr > 0) {
@@ -720,6 +732,8 @@
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
                                 toastr.success(data.d, "Saved successfully");
+                                //$('#pharmacyModal').modal('hide');
+
                             },
                             error: function (data) {
                                 toastr.error(data.d, "Error");
@@ -823,5 +837,8 @@
         }
 
     }
+
+    
+    
 
 </script>

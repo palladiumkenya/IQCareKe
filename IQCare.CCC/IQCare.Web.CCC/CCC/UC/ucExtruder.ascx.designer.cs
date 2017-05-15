@@ -29,5 +29,14 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientLabsExtruder ucPatientLabsExtruder;
+        
+        /// <summary>
+        /// ucPatientWorkPlan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucPatientWorkPlan ucPatientWorkPlan;
     }
 }

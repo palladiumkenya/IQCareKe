@@ -41,6 +41,7 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIcfAction patientIcfAction = new PatientIcfAction()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 ChestXray = p.ChestXray,

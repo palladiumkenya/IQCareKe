@@ -1,6 +1,7 @@
 ﻿using Entities.CCC.Tb;
 using IQCare.CCC.UILogic.Tb;
 using System;
+using System.Linq;
 using System.Web.Services;
 
 namespace IQCare.Web.CCC.WebService
@@ -35,10 +36,19 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var icf = new PatientIcfManager();
-                Result = icf.AddPatientIcf(patientIcf);
+                var x = icf.GetByPatientId(patientId).FirstOrDefault(m => m.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = icf.AddPatientIcf(patientIcf);
+                }
+                else
+                {
+                    patientIcf.Id = x.Id;
+                    Result = icf.UpdatePatientIcf(patientIcf);
+                }
                 if (Result > 0)
                 {
-                    Msg = "Patient ICF added successfully!";
+                    Msg = "Patient ICF saved successfully!";
                 }
             }
             catch (Exception e)
@@ -70,10 +80,19 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var ipt = new PatientIptManager();
-                Result = ipt.AddPatientIpt(patientIpt);
+                var x = ipt.GetByPatientId(patientId).FirstOrDefault(m => m.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = ipt.AddPatientIpt(patientIpt);
+                }
+                else
+                {
+                    patientIpt.Id = x.Id;
+                    Result = ipt.UpdatePatientIpt(patientIpt);
+                }
                 if (Result > 0)
                 {
-                    Msg = "Patient IPT added successfully!";
+                    Msg = "Patient IPT saved successfully!";
                 }
             }
             catch (Exception e)
@@ -99,10 +118,19 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var icfAction = new PatientIcfActionManager();
-                Result = icfAction.AddPatientIcfAction(patientIcfAction);
+                var x = icfAction.GetByPatientId(patientId).FirstOrDefault(n => n.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = icfAction.AddPatientIcfAction(patientIcfAction);
+                }
+                else
+                {
+                    patientIcfAction.Id = x.Id;
+                    Result = icfAction.UpdatePatientIcfAction(patientIcfAction);
+                }
                 if (Result > 0)
                 {
-                    Msg = "Patient ICF Action added successfully!";
+                    Msg = "Patient ICF Action saved successfully!";
                 }
             }
             catch (Exception e)
@@ -128,10 +156,19 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptWorkup = new PatientIptWorkupManager();
-                Result = iptWorkup.AddPatientIptWorkup(patientIptWorkup);
+                var x = iptWorkup.GetByPatientId(patientId).FirstOrDefault(n => n.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = iptWorkup.AddPatientIptWorkup(patientIptWorkup);
+                }
+                else
+                {
+                    patientIptWorkup.Id = x.Id;
+                    Result = iptWorkup.UpdatePatientIptWorkup(patientIptWorkup);
+                }
                 if (Result > 0)
                 {
-                    Msg = "Patient IPT Workup added successfully!";
+                    Msg = "Patient IPT Workup saved successfully!";
                 }
             }
             catch (Exception e)
@@ -154,10 +191,19 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                Result = iptOutcome.AddPatientIptOutcome(patientIptOutcome);
+                var x = iptOutcome.GetByPatientId(patientId).FirstOrDefault(n => n.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = iptOutcome.AddPatientIptOutcome(patientIptOutcome);
+                }
+                else
+                {
+                    patientIptOutcome.Id = x.Id;
+                    Result = iptOutcome.UpdatePatientIptOutcome(patientIptOutcome);
+                }
                 if (Result > 0)
                 {
-                    Msg = "Patient IPT Outcome added successfully!";
+                    Msg = "Patient IPT Outcome saved successfully!";
                 }
             }
             catch (Exception e)

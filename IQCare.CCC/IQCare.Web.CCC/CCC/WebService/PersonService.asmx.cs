@@ -186,10 +186,8 @@ namespace IQCare.Web.CCC.WebService
                     }
                     else
                     {
-                        Result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId, userId);
-                        if (Result > 0)
+                        if (maritalStatusId == 0)
                         {
-                            Msg += "<p>Person Marital Status Added Successfully!</p>";
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
                             Session["PatientType"] = patientType;
@@ -197,6 +195,22 @@ namespace IQCare.Web.CCC.WebService
                             if (patType == "Transit")
                             {
                                 Session["NationalId"] = 99999999;
+                            }
+                        }
+                        else
+                        {
+                            Result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId, userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Marital Status Added Successfully!</p>";
+                                Session["PersonDob"] = DateTime.Parse(dob);
+                                Session["NationalId"] = nationalId;
+                                Session["PatientType"] = patientType;
+                                var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                                if (patType == "Transit")
+                                {
+                                    Session["NationalId"] = 99999999;
+                                }
                             }
                         }
                     }                      

@@ -14,7 +14,7 @@ namespace IQCare.Web.CCC
         protected void Page_Load(object sender, EventArgs e)
         {
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
-           var facilityStatistics= _lookupManager.GetLookupFacilityStatistics();
+            var facilityStatistics= _lookupManager.GetLookupFacilityStatistics();
             foreach (var item in facilityStatistics)
             {
                 lblTotalPatients.Text = "<span class='badge pull-right'>" + item.TotalCumulativePatients.ToString()+"</span>";

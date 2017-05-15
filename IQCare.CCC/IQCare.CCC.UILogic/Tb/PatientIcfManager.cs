@@ -40,6 +40,7 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIcf patientIcf = new PatientIcf()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 Cough = p.Cough,

@@ -699,7 +699,7 @@
                     </div>
 
                     <div class="col-md-12 form-group">
-                        <div class="col-md-12">
+                        
                             <div class="col-md-12">
                                 <div class="panel panel-info">
 
@@ -776,7 +776,7 @@
                                 </div>
                                 <%--.panel--%>
                             </div>
-                        </div>
+                        
                         <%--col-md-11--%>
                     </div>
                     </div>
@@ -1823,52 +1823,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Gender validations
         var male = "Male";
-        <%--     if (gender == "Male") {
-                
-            $("#lmp").val("");
-            $("#examinationPregnancyStatus").val("");
-            $("#ExpectedDateOfChildBirth").val("");
-            $("#cacxscreening").val("");
 
-            $("#<%=lmp.ClientID%>").prop('disabled', true);
-                $("#btnFemaleLMP").prop('disabled', true);
-                $("#FemaleLMP").addClass('noevents');
-
-                $("#btnEDD").prop('disabled', true);
-                $("#EDCD").addClass('noevents');
-                $("#ancYes").prop('disabled', true);
-                $("#ancNo").prop('disabled', true);
-                
-            } else {
-                $("#<%=lmp.ClientID%>").prop('disabled', false);
-                $("#btnFemaleLMP").prop('disabled', false);
-                $("#<%=examinationPregnancyStatus.ClientID%>").prop('disabled', false);
-                $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
-                $("#btnEDD").prop('disabled', false);
-                $("#ancYes").prop('disabled', false);
-                $("#ancNo").prop('disabled', false);
-                $("#<%=cacxscreening.ClientID%>").prop('disabled', false);
-
-            }--%>
-        //.gender validation
-        //pregnancy validations
-       
-        <%--var pregnant = "Pregnant";
-
-        var pregnancy = $("#<%=examinationPregnancyStatus.ClientID%>").find(':selected').text();
-
-        if (pregnancy !== pregnant) {
-                
-            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', true);
-               
-        } else {
-                
-            $("#<%=ExpectedDateOfChildBirth.ClientID%>").prop('disabled', false);
-              
-
-        }--%>
-
-        //.pregnancy validation
         var advEventsTable = $('#dtlAdverseEvents').DataTable({
             ajax: {
                 type: "POST",
@@ -2276,15 +2231,15 @@
             var complaints = $("#<%=complaints.ClientID%>").val();
             var tbscreening = $("#<%=tbscreeningstatus.ClientID%>").find(":selected").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
-                <%--var LMP = $("#<%=lmp.ClientID%>").val();
-                var pregStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
-                var EDD = $("#<%=ExpectedDateOfChildBirth.ClientID%>").val();
-                var onFP = $("#<%=onFP.ClientID%>").find(":selected").val();
-                var FPMethod = getSelectedItemsList('fpMethod');
-                var ReasonNotOnFP = $("#<%=ddlNoFP.ClientID%>").find(":selected").val();
-                var CaCx = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
-                var STIScreening = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-                var STIPartnerNotification = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();--%>
+            
+            /////////////////////////////////////////////////////
+            if(anyComplaints == 1)
+            {
+                if ( ! presentingComplaintsTable.data().any() ) {
+                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                    evt.preventDefault();
+                }
+            }
                 
             ///////////////////////////////////////////////////////
             var rowCount = $('#dtlAdverseEvents tbody tr').length;
@@ -2301,6 +2256,8 @@
                 }
             }
             catch (ex) {  }
+
+            
 
             var rowCount = $('#dtlPresentingComplaints tbody tr').length;
             var presentingComplaintsArray = new Array();
@@ -2803,6 +2760,14 @@
         } else {
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(35);
+            $("#btnAddIptWorkUp").prop("disabled",false);
+            $("#btnAddIpt").prop("disabled",false);
+            $("#sputum").val("");
+            $("#chest").val("");
+            $("#antiTb").val("");
+            $("#contactsInvitation").val("");
+            $("#iptEvaluation").val("");
+
         }
     }
 
@@ -3022,7 +2987,7 @@
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
             var visitBy = $("#<%=ddlVisitBy.ClientID%>").find(":selected").val();
-        alert('here');
+        
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/savePatientEncounterTS",

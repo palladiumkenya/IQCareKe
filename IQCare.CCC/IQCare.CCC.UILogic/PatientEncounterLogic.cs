@@ -157,6 +157,13 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public DataTable getPatientWorkPlan(string patientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientWorkPlan(patientID);
+
+        }
+
         public string getPharmacyDrugMultiplier(string frequencyID)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
@@ -357,7 +364,7 @@ namespace IQCare.CCC.UILogic
                         //    }
                         //}
 
-                        if(theDR["VisitName"].ToString() == "Green Card")
+                        if(theDR["VisitName"].ToString() == "Encounter")
                         {
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                         }
@@ -365,7 +372,11 @@ namespace IQCare.CCC.UILogic
                         {
                             theFrmRoot.NavigateUrl = "PharmacyPrescription.aspx?visitId=" + theDR["visitID"].ToString();
                         }
-                        
+                        else if (theDR["VisitName"].ToString() == "Lab Order")
+                        {
+                            theFrmRoot.NavigateUrl = "LabOrder.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+
                         theFrmRoot.Value = "";// Convert.ToInt32(PId) + "%" + theDR["OrderNo"].ToString() + "%" + theDR["LocationID"].ToString() + "%" + PtnARTStatus + "%" + theDR["Module"].ToString() + "%" + theDR["VisitName"].ToString();
                         theMRoot.ChildNodes.Add(theFrmRoot);
                     }
