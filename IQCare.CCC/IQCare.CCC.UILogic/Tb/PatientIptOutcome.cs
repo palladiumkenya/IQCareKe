@@ -36,6 +36,7 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 IptEvent = p.IptEvent,
