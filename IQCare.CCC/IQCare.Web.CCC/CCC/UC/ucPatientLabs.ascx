@@ -299,8 +299,30 @@
                         var day = currentTime.getDate();
                         var year = currentTime.getFullYear();
                         var sampleDate = day + "-" + month + "-" + year;
+
+                        var resultValues = itemList.ResultValues;
+                        var resultTexts = itemList.ResultTexts;
+                        var resultUnits = itemList.ResultUnits;
+
+                        var labResults;
+
+                        //if (itemList.LabTestId == 1 || itemList.LabTestId == 3 && itemList.ResultValues == 0) {
+                        //    labResults = "LDL";
+                        //}
+                        if (resultUnits == null) {
+                            resultUnits = "";
+                        } else {
+                            resultUnits = resultUnits;
+
+                        }
+                        if (resultTexts == null) {
+                            labResults = resultValues;
+                        } else {
+                            labResults = resultTexts;
+
+                        }
                           
-                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
+                        table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults + " " + resultUnits + '</td></tr>';
                    
                     });
                                
