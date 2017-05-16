@@ -21,7 +21,7 @@ namespace IQCare.Web.CCC.UC
         public int PatientId;
         public int PatientMasterVisitId;
         public int age;
-
+        public string Weight;
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -67,7 +67,8 @@ namespace IQCare.Web.CCC.UC
                 PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
                 if(patientTriage != null)
                 {
-                    txtWeight.Text = patientTriage.Weight.ToString();
+                    Weight = patientTriage.Weight.ToString();
+                    txtWeight.Text = Weight;
                     txtHeight.Text = patientTriage.Height.ToString();
                     txtBMI.Text = patientTriage.BMI.ToString();
                 }

@@ -1736,6 +1736,10 @@
             $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Overweight/Obese';}).prop('selected', true);
         }
 
+        //set IPT weight
+        var weightVal = <%=Weight%>;
+        $("#weight").val(weightVal);
+
         if(Age > 14)
         {
             document.getElementById('divAntigenToday').style.display = 'none';
