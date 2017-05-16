@@ -1,5 +1,4 @@
 ﻿using Entities.CCC.Lookup;
-using Entities.CCC.Encounter;
 using Entities.CCC.Visit;
 using System.Collections.Generic;
 
@@ -22,16 +21,26 @@ namespace Interface.CCC.Lookup
         List<LookupPreviousLabs> GetLookupVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
+        List<LookupTestParameter> GetTestParameter(int LabTestId);
         LookupFacility GetFacility();
-        PatientLookup GetPatientPtn_pk(int patientId);
+        PatientLookup GetPatientById(int patientId);
         LookupItemView GetPatientGender(int genderId);        
         string GetLookupNameFromId(int id);
         List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName);
         int GetRegimenCategory(int regimenId);
-        LookupLabs GetLabTestId(string labType);
+        LookupLabs GetLabTestId(string labType);      
         string GetCountyByCountyId(int countyId);
         string GetCountyNameBySubCountyId(int subCountyId);
         string GetWardNameByWardId(int wardId);
+        List<PatientLabTracker> GetVlPendingCount(int facilityId);
+        List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId);
+        List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId);
+        List<PatientLabTracker> GetVlCompleteCount(int facilityId);
+
+        PatientRegimenLookup GetCurentPatientRegimen(int patientId);
+        List<PatientRegimenLookup> GetPatientRegimenList(int patientId);
+        LookupPatientAdherence GetPatientAdherence(int patientId);
+        List<LookupFacilityStatistics> GetLookupFacilityStatistics();
 
     }
 

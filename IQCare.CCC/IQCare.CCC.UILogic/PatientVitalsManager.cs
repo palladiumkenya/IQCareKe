@@ -24,7 +24,12 @@ namespace IQCare.CCC.UILogic
                 Temperature = p.Temperature,
                 Weight = p.Weight,
                 BMI = p.BMI,
-                HeadCircumference = p.HeadCircumference
+                HeadCircumference = p.HeadCircumference,
+                BMIZ = p.BMIZ,
+                WeightForHeight = p.WeightForHeight,
+                WeightForAge = p.WeightForAge,
+                VisitDate = p.VisitDate
+               
             };
             return _vitals.AddPatientVitals(patientVital);
         }
@@ -56,7 +61,8 @@ namespace IQCare.CCC.UILogic
                 Temperature = p.Temperature,
                 Weight = p.Weight,
                 BMI = p.BMI,
-                HeadCircumference = p.HeadCircumference
+                HeadCircumference = p.HeadCircumference,
+                VisitDate = p.VisitDate
             };
             return _vitals.UpdatePatientVitals(patientVital);
         }
@@ -78,6 +84,21 @@ namespace IQCare.CCC.UILogic
                 Console.WriteLine(e);
                 throw;
             }           
+        }
+
+        public PatientVital GetPatientVitalsBaseline(int patientId)
+        {
+            try
+            {
+                var ptnVitals = _vitals.GetPatientVitalsBaseline(patientId);
+                return ptnVitals;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+              
         }
     }
 }

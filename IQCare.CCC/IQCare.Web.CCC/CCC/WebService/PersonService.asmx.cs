@@ -12,6 +12,7 @@ using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
 using Application.Common;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Enrollment;
 using Microsoft.JScript;
 using Convert = System.Convert;
 
@@ -23,11 +24,17 @@ namespace IQCare.Web.CCC.WebService
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public int Gender { get; set; }
+        public string GenderString { get; set; }
         public string PersonDoB { get; set; }
+        public string EnrollmentNumber { get; set; }
+        public string EnrollmentDate { get; set; }
         public int ChildOrphan { get; set; }
+        public string ChildOrphanString { get; set; }
         public int Inschool { get; set; }
+        public string InschoolString { get; set; }
         public string NationalId { get; set; }
         public int MaritalStatusId { get; set; }
+        public string MaritalStatusString { get; set; }
         public string GurdianFNames { get; set; }
         public string GurdianMName { get; set; }
         public string GurdianLName { get; set; }
@@ -51,10 +58,14 @@ namespace IQCare.Web.CCC.WebService
         public string tsLastName { get; internal set; }
         public string tsMiddleName { get; internal set; }
         public string population { get; internal set; }
+        public int populationTypeId { get; internal set; }
         public int PopulationCategoryId { get; internal set; }
+        public string PopulationCategoryString { get; set; }
         public int GuardianId { get; set; }
         public int PatientTreatmentSupporterId { get; set; }
         public int PatientType { get; set; }
+        public string PatientTypeString { get; set; }
+        public string EntryPoint { get; set; }
 
         public string GetAge(DateTime DateOfBirth)
         {
@@ -83,7 +94,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         private List<PatientLookup> Patient { get; set; }
-        Utility _utility = new Utility();
+       // Utility _utility = new Utility();
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
 
         [WebMethod(EnableSession = true)]
@@ -118,7 +129,7 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                        personId = patient[0].PersonId;
+                        personId = patient.PersonId;
                     }
 
                     personManager.UpdatePerson(firstname, middlename, lastname, gender, userId , personId);
@@ -131,13 +142,13 @@ namespace IQCare.Web.CCC.WebService
                     var maritalStatus = new PersonMaritalStatusManager();
                     var _matStatus = maritalStatus.GetInitialPatientMaritalStatus(personId);
 
-                    int matStatusId = 0;
-                    var lookUpLogic = new LookupLogic();
-                    matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                    //int matStatusId = 0;
+                    //var lookUpLogic = new LookupLogic();
+                    //matStatusId = maritalStatusId > 0 ? maritalStatusId : lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
 
-                    if (_matStatus != null)
+                    if (_matStatus != null && maritalStatusId > 0)
                     {
-                        _matStatus.MaritalStatusId = matStatusId;
+                        _matStatus.MaritalStatusId = maritalStatusId;
                         _matStatus.CreatedBy = userId;
 
                         Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
@@ -155,12 +166,14 @@ namespace IQCare.Web.CCC.WebService
                         }
 
                     }
-                    else
+                    else if (_matStatus != null && maritalStatusId == 0)
                     {
-                        Result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId, userId);
+                        _matStatus.DeleteFlag = true;
+
+                        Result = maritalStatus.UpdatePatientMaritalStatus(_matStatus);
                         if (Result > 0)
                         {
-                            Msg += "<p>Person Marital Status Added Successfully!</p>";
+                            Msg += "<p>Person Marital Status Updated Successfully!</p>";
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
                             Session["PatientType"] = patientType;
@@ -168,6 +181,36 @@ namespace IQCare.Web.CCC.WebService
                             if (patType == "Transit")
                             {
                                 Session["NationalId"] = 99999999;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (maritalStatusId == 0)
+                        {
+                            Session["PersonDob"] = DateTime.Parse(dob);
+                            Session["NationalId"] = nationalId;
+                            Session["PatientType"] = patientType;
+                            var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                            if (patType == "Transit")
+                            {
+                                Session["NationalId"] = 99999999;
+                            }
+                        }
+                        else
+                        {
+                            Result = maritalStatus.AddPatientMaritalStatus(personId, maritalStatusId, userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Marital Status Added Successfully!</p>";
+                                Session["PersonDob"] = DateTime.Parse(dob);
+                                Session["NationalId"] = nationalId;
+                                Session["PatientType"] = patientType;
+                                var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                                if (patType == "Transit")
+                                {
+                                    Session["NationalId"] = 99999999;
+                                }
                             }
                         }
                     }                      
@@ -186,16 +229,24 @@ namespace IQCare.Web.CCC.WebService
                         var maritalStatus = new PersonMaritalStatusManager();
                         var lookUpLogic = new LookupLogic();
 
-                        if (maritalStatusId == 0)
+                        if (maritalStatusId > 0)
                         {
-                            maritalStatusId =
-                                lookUpLogic.GetItemIdByGroupAndItemName("MaritalStatus", "Single")[0].ItemId;
+                            Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId, userId);
+                            if (Result > 0)
+                            {
+                                Msg += "<p>Person Marital Status Added Successfully!</p>";
+                                Session["PersonDob"] = DateTime.Parse(dob);
+                                Session["NationalId"] = nationalId;
+                                Session["PatientType"] = patientType;
+                                var patType = LookupLogic.GetLookupNameById(int.Parse(patientType));
+                                if (patType == "Transit")
+                                {
+                                    Session["NationalId"] = 99999999;
+                                }
+                            }
                         }
-
-                        Result = maritalStatus.AddPatientMaritalStatus(PersonId, maritalStatusId, userId);
-                        if (Result > 0)
+                        else
                         {
-                            Msg += "<p>Person Marital Status Added Successfully!</p>";
                             Session["PersonDob"] = DateTime.Parse(dob);
                             Session["NationalId"] = nationalId;
                             Session["PatientType"] = patientType;
@@ -243,7 +294,7 @@ namespace IQCare.Web.CCC.WebService
                     var personOvcStatusManager = new PersonOvcStatusManager();
                     var personLookUpManager = new PersonLookUpManager();
                     PersonLookUp Guardian;
-                    var patient = new List<PatientLookup>();
+                    PatientLookup patient = new PatientLookup();
 
                     PersonId = Convert.ToInt32(Session["PersonId"]);
 
@@ -254,9 +305,9 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                        if (patient.Count > 0)
+                        if (null!=patient)
                         {
-                            PersonId = patient[0].PersonId;
+                            PersonId = patient.PersonId;
                         }
                     }
 
@@ -330,7 +381,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PersonId = Convert.ToInt32(Session["PersonId"]);
-                var PatientId = Convert.ToInt32(Session["PatientId"]);
+                var PatientId = Convert.ToInt32(Session["PatientPK"]);
 
                 if (PersonId > 0 || PatientId > 0)
                 {
@@ -339,7 +390,7 @@ namespace IQCare.Web.CCC.WebService
                     {
                         var patientLogic = new PatientLookupManager();
                         var patient = patientLogic.GetPatientDetailSummary(PatientId);
-                        PersonId = patient[0].PersonId;
+                        PersonId = patient.PersonId;
                     }
                     
 
@@ -402,27 +453,27 @@ namespace IQCare.Web.CCC.WebService
                     {
                         var patientLogic = new PatientLookupManager();
                         var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                        PersonId = patient[0].PersonId;
+                        PersonId = patient.PersonId;
                     }
 
                     var contacts = personContactLookUp.GetPersonContactByPersonId(PersonId);
 
                     if (contacts.Count > 0)
                     {
-                        if (alternativeNumber != null)
-                        {
-                            alternativeNumber = _utility.Encrypt(alternativeNumber);
-                        }
-                        if (emailAddress != null)
-                        {
-                            emailAddress = _utility.Encrypt(emailAddress);
-                        }
+                        //if (alternativeNumber != null)
+                        //{
+                        //    alternativeNumber = (alternativeNumber);
+                        //}
+                        //if (emailAddress != null)
+                        //{
+                        //    emailAddress = (emailAddress);
+                        //}
 
                         PersonContact perContact = new PersonContact();
                         perContact.Id = contacts[0].Id;
                         perContact.PersonId = contacts[0].PersonId;
-                        perContact.PhysicalAddress = _utility.Encrypt(physicalAddress);
-                        perContact.MobileNumber = _utility.Encrypt(mobileNumber);
+                        perContact.PhysicalAddress = (physicalAddress);
+                        perContact.MobileNumber = (mobileNumber);
                         perContact.AlternativeNumber = alternativeNumber;
                         perContact.EmailAddress = emailAddress;
 
@@ -481,6 +532,7 @@ namespace IQCare.Web.CCC.WebService
                     var personLogic = new PersonManager();
                     var patientLogic = new PatientLookupManager();
                     var patientTreatmentSupporter = new PatientTreatmentSupporterManager();
+                    var patientTreatmentlookupManager = new PatientTreatmentSupporterLookupManager();
                     int personId = 0;
 
                     if (supporterId > 0)
@@ -490,10 +542,11 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientid));
-                        personId = patient[0].PersonId;
+                        personId = patient.PersonId;
                     }
                     
-                    var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
+                    //var listPatientTreatmentSupporter = patientTreatmentSupporter.GetPatientTreatmentSupporter(personId);
+                    var listPatientTreatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
 
                     if (listPatientTreatmentSupporter.Count > 0)
                     {
@@ -505,14 +558,25 @@ namespace IQCare.Web.CCC.WebService
                         if (listPatientTreatmentSupporter[0].SupporterId > 0)
                         {
                             var treatmentSupporterManager = new PatientTreatmentSupporterManager();
-                            var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                            //var treatmentSupporter = treatmentSupporterManager.GetPatientTreatmentSupporter(personId);
+                            var treatmentSupporter = patientTreatmentlookupManager.GetAllPatientTreatmentSupporter(personId);
                             if (treatmentSupporter.Count > 0)
                             {
-                                treatmentSupporter[0].PersonId = personId;
-                                treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
-                                treatmentSupporter[0].MobileContact = mobileContact;
+                                //treatmentSupporter[0].PersonId = personId;
+                                //treatmentSupporter[0].SupporterId = listPatientTreatmentSupporter[0].SupporterId;
+                                //treatmentSupporter[0].MobileContact = mobileContact;
 
-                                treatmentSupporterManager.UpdatePatientTreatmentSupporter(treatmentSupporter[0]);
+                                PatientTreatmentSupporter supporter = new PatientTreatmentSupporter()
+                                {
+                                    Id = treatmentSupporter[0].Id,
+                                    PersonId = personId,
+                                    SupporterId = listPatientTreatmentSupporter[0].SupporterId,
+                                    MobileContact = mobileContact,
+                                    CreatedBy = treatmentSupporter[0].CreatedBy,
+                                    DeleteFlag = treatmentSupporter[0].DeleteFlag
+                                };
+
+                                treatmentSupporterManager.UpdatePatientTreatmentSupporter(supporter);
 
                                 Msg += "<p>Person Treatement Supported Updated Successfully</p>";
                             }
@@ -622,7 +686,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     var patientLogic = new PatientLookupManager();
                     var patient = patientLogic.GetPatientDetailSummary(int.Parse(patientId));
-                    PersonId = patient[0].PersonId;
+                    PersonId = patient.PersonId;
                 }
 
                 var personPoulation = new PatientPopulationManager();
@@ -664,9 +728,9 @@ namespace IQCare.Web.CCC.WebService
                 if (guardian!=null)
                 {
                     PatientDetails patientDetails = new PatientDetails();
-                    patientDetails.FirstName = _utility.Decrypt(guardian.FirstName);
-                    patientDetails.MiddleName = _utility.Decrypt(guardian.MiddleName);
-                    patientDetails.LastName = _utility.Decrypt(guardian.LastName);
+                    patientDetails.FirstName = (guardian.FirstName);
+                    patientDetails.MiddleName = (guardian.MiddleName);
+                    patientDetails.LastName = (guardian.LastName);
                     patientDetails.Gender = guardian.Sex;
 
 
@@ -699,62 +763,86 @@ namespace IQCare.Web.CCC.WebService
                 var personContacts = new List<PersonContactLookUp>();
                 var personContactLookUpManager = new PersonContactLookUpManager();
                 var patientTreatmentSupporterManager = new PatientTreatmentSupporterManager();
-                var patientTreatmentSupporter = new List<PatientTreatmentSupporter>();
+                var patientTreatmentSupporterLookupManager = new PatientTreatmentSupporterLookupManager();
+                var patientTreatmentSupporter = new List<PatientTreatmentSupporterLookup>();
                 var keyPopulationManager = new PatientPopulationManager();
                 var keyPopulation = new List<PatientPopulation>();
+                var patientEntryPoint = new PatientEntryPointManager();
+                var entryPoints = new List<PatientEntryPoint>();
 
+            PatientLookup thisPatient = patientLookManager.GetPatientDetailSummary(PatientId);
 
-                Patient = patientLookManager.GetPatientDetailSummary(PatientId);
-
-                if (Patient.Count > 0)
+                if (null!= thisPatient)
                 {
-                    var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(Patient[0].PersonId);
-                    var perLocation = personLocation.GetCurrentPersonLocation(Patient[0].PersonId);
+                    var personOVC = personOvcStatusManager.GetSpecificPatientOvcStatus(thisPatient.PersonId);
+                    var perLocation = personLocation.GetCurrentPersonLocation(thisPatient.PersonId);
 
                     PersonLookUp Guardian = null;
                     if (personOVC != null)
                         Guardian = personLookUpManager.GetPersonById(personOVC.GuardianId);
-                    maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(Patient[0].PersonId);
-                    personContacts = personContactLookUpManager.GetPersonContactByPersonId(Patient[0].PersonId);
-                    patientTreatmentSupporter =
-                        patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(Patient[0].PersonId);
-                    keyPopulation = keyPopulationManager.GetAllPatientPopulations(Patient[0].PersonId);
+                    maritalsStatus = personMaritalStatus.GetAllMaritalStatuses(thisPatient.PersonId);
+                    personContacts = personContactLookUpManager.GetPersonContactByPersonId(thisPatient.PersonId);
+                    /*patientTreatmentSupporter =
+                        patientTreatmentSupporterManager.GetAllPatientTreatmentSupporter(thisPatient.PersonId);*/
+                    patientTreatmentSupporter = patientTreatmentSupporterLookupManager.GetAllPatientTreatmentSupporter(thisPatient.PersonId);
+                keyPopulation = keyPopulationManager.GetAllPatientPopulations(thisPatient.PersonId);
+                    entryPoints = patientEntryPoint.GetPatientEntryPoints(thisPatient.Id);
 
-                    patientDetails.FirstName = _utility.Decrypt(Patient[0].FirstName);
-                    patientDetails.MiddleName = _utility.Decrypt(Patient[0].MiddleName);
-                    patientDetails.LastName = _utility.Decrypt(Patient[0].LastName);
-                    patientDetails.PatientType = Patient[0].PatientType; 
+                    patientDetails.FirstName = (thisPatient.FirstName);
+                    patientDetails.MiddleName = (thisPatient.MiddleName);
+                    patientDetails.LastName = (thisPatient.LastName);
+                    patientDetails.PatientType = thisPatient.PatientType;
+                    patientDetails.PatientTypeString = LookupLogic.GetLookupNameById(thisPatient.PatientType);
+                    patientDetails.EnrollmentNumber = thisPatient.EnrollmentNumber;
 
-                    patientDetails.Gender = Patient[0].Sex;
-                    patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", Patient[0].DateOfBirth);
-                    patientDetails.Age = patientDetails.GetAge(Patient[0].DateOfBirth);
+                    patientDetails.Gender = thisPatient.Sex;
+                    patientDetails.GenderString = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                    patientDetails.PersonDoB = String.Format("{0:dd-MMM-yyyy}", thisPatient.DateOfBirth);
+                    patientDetails.EnrollmentDate = String.Format("{0:dd-MMM-yyyy}", thisPatient.EnrollmentDate);
+                    patientDetails.Age = patientDetails.GetAge(thisPatient.DateOfBirth);
 
                     //OVC
                     if (personOVC != null && personOVC.Orphan)
                     {
                         var item = lookupLogic.GetItemIdByGroupAndItemName("YesNo", "Yes");
-                        patientDetails.ChildOrphan = item[0].ItemId;
+                        if (null != item && item.Count > 0)
+                        {
+                            patientDetails.ChildOrphan = item[0].ItemId;
+                            patientDetails.ChildOrphanString = "Yes";
+                        }
                     }
                     else
                     {
                         var item = lookupLogic.GetItemIdByGroupAndItemName("YesNo", "No");
-                        patientDetails.ChildOrphan = item[0].ItemId;
+                        if (null != item && item.Count > 0)
+                        {
+                            patientDetails.ChildOrphan = item[0].ItemId;
+                            patientDetails.ChildOrphanString = "No";
+                        }
                     }
 
                     patientDetails.Inschool = (personOVC != null && personOVC.InSchool)
                         ? lookupLogic.GetItemIdByGroupAndItemName("YesNo", "Yes")[0].ItemId
                         : lookupLogic.GetItemIdByGroupAndItemName("YesNo", "No")[0].ItemId;
 
-                    patientDetails.NationalId = _utility.Decrypt(Patient[0].NationalId);
+                    patientDetails.InschoolString = (personOVC != null && personOVC.InSchool)
+                        ? "Yes"
+                        : "No";
+
+                    patientDetails.NationalId = (thisPatient.NationalId);
 
                     if (maritalsStatus.Count > 0)
+                    {
                         patientDetails.MaritalStatusId = maritalsStatus[0].MaritalStatusId;
+                        patientDetails.MaritalStatusString =
+                            LookupLogic.GetLookupNameById(maritalsStatus[0].MaritalStatusId);
+                    }
 
                     if (Guardian != null)
                     {
-                        patientDetails.GurdianFNames = _utility.Decrypt(Guardian.FirstName);
-                        patientDetails.GurdianMName = _utility.Decrypt(Guardian.MiddleName);
-                        patientDetails.GurdianLName = _utility.Decrypt(Guardian.LastName);
+                        patientDetails.GurdianFNames = (Guardian.FirstName);
+                        patientDetails.GurdianMName = (Guardian.MiddleName);
+                        patientDetails.GurdianLName = (Guardian.LastName);
 
                         patientDetails.GuardianGender = Guardian.Sex;
                         patientDetails.GuardianId = Guardian.Id;
@@ -775,10 +863,10 @@ namespace IQCare.Web.CCC.WebService
                     //Person Contacts
                     if (personContacts.Count > 0)
                     {
-                        patientDetails.PatientPostalAddress = _utility.Decrypt(personContacts[0].PhysicalAddress);
-                        patientDetails.MobileNumber = _utility.Decrypt(personContacts[0].MobileNumber);
-                        patientDetails.AlternativeNumber = _utility.Decrypt(personContacts[0].AlternativeNumber);
-                        patientDetails.EmailAddress = _utility.Decrypt(personContacts[0].EmailAddress);
+                        patientDetails.PatientPostalAddress = (personContacts[0].PhysicalAddress);
+                        patientDetails.MobileNumber = (personContacts[0].MobileNumber);
+                        patientDetails.AlternativeNumber = (personContacts[0].AlternativeNumber);
+                        patientDetails.EmailAddress = (personContacts[0].EmailAddress);
                     }
                     //Treatment Supporter
                     if (patientTreatmentSupporter.Count > 0)
@@ -786,9 +874,9 @@ namespace IQCare.Web.CCC.WebService
                         supporter = personLookUpManager.GetPersonById(patientTreatmentSupporter[0].SupporterId);
                         if (supporter != null)
                         {
-                            patientDetails.tsFname = _utility.Decrypt(supporter.FirstName);
-                            patientDetails.tsMiddleName = _utility.Decrypt(supporter.MiddleName);
-                            patientDetails.tsLastName = _utility.Decrypt(supporter.LastName);
+                            patientDetails.tsFname = (supporter.FirstName);
+                            patientDetails.tsMiddleName = (supporter.MiddleName);
+                            patientDetails.tsLastName = (supporter.LastName);
                             patientDetails.tsGender = supporter.Sex;
                             patientDetails.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
                             patientDetails.PatientTreatmentSupporterId = supporter.Id;
@@ -800,6 +888,33 @@ namespace IQCare.Web.CCC.WebService
                     {
                         patientDetails.population = keyPopulation[0].PopulationType;
                         patientDetails.PopulationCategoryId = keyPopulation[0].PopulationCategory;
+                        patientDetails.PopulationCategoryString =
+                            LookupLogic.GetLookupNameById(keyPopulation[0].PopulationCategory);
+
+                        if (keyPopulation[0].PopulationType == "General Population")
+                        {
+                            var items = lookupLogic.GetItemIdByGroupAndItemName("PopulationType",
+                                "Gen.Pop");
+                            if (items.Count > 0)
+                            {
+                                patientDetails.populationTypeId = items[0].ItemId;
+                            }
+                            
+                        }
+                        else
+                        {
+                            var items = lookupLogic.GetItemIdByGroupAndItemName("PopulationType",
+                                "Key.Pop");
+                            if (items.Count > 0)
+                            {
+                                patientDetails.populationTypeId = items[0].ItemId;
+                            }
+                        }
+                    }
+                    //Entry Point
+                    if (entryPoints.Count > 0)
+                    {
+                        patientDetails.EntryPoint = LookupLogic.GetLookupNameById(entryPoints[0].EntryPointId);
                     }
                 }
 
@@ -825,9 +940,9 @@ namespace IQCare.Web.CCC.WebService
                 var newresults = results.Select(x => new string[]
                    {
                         x.Id.ToString(),
-                        _utility.Decrypt(x.FirstName),
-                        _utility.Decrypt(x.MiddleName),
-                        _utility.Decrypt(x.LastName),
+                        (x.FirstName),
+                        (x.MiddleName),
+                        (x.LastName),
                         patientLookup.GetDobByPersonId(x.Id),
                         LookupLogic.GetLookupNameById(x.Sex),
                         patientLookup.isPatientExists(x.Id).ToString(),

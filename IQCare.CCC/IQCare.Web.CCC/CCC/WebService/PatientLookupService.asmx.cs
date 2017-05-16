@@ -66,19 +66,19 @@ namespace IQCare.Web.CCC.WebService
                     if (!string.IsNullOrWhiteSpace(firstName))
                     {
                         jsonData =
-                            jsonData.Where(x => utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower()))
+                            jsonData.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()))
                                 .ToList();
                     }
                     if (!string.IsNullOrWhiteSpace(lastName))
                     {
                         jsonData =
-                            jsonData.Where(x => utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower()))
+                            jsonData.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()))
                                 .ToList();
                     }
                     if (!string.IsNullOrWhiteSpace(middleName))
                     {
                         jsonData =
-                            jsonData.Where(x => utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower()))
+                            jsonData.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()))
                                 .ToList();
                     }
 
@@ -98,18 +98,18 @@ namespace IQCare.Web.CCC.WebService
                             break;
                         case 2:
                             jsonData = (sortDir == "desc")
-                                ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.FirstName)).ToList()
-                                : jsonData.OrderBy(x => utility.Decrypt(x.FirstName)).ToList();
+                                ? jsonData = jsonData.OrderByDescending(x => x.FirstName).ToList()
+                                : jsonData.OrderBy(x => x.FirstName).ToList();
                             break;
                         case 3:
                             jsonData = (sortDir == "desc")
-                                ? jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.MiddleName)).ToList()
-                                : jsonData.OrderBy(x => utility.Decrypt(x.MiddleName)).ToList();
+                                ? jsonData = jsonData.OrderByDescending(x => x.MiddleName).ToList()
+                                : jsonData.OrderBy(x => x.MiddleName).ToList();
                             break;
                         case 4:
                             jsonData = (sortDir == "desc")
-                                ? jsonData.OrderBy(x => utility.Decrypt(x.LastName)).ToList()
-                                : jsonData = jsonData.OrderByDescending(x => utility.Decrypt(x.LastName)).ToList();
+                                ? jsonData.OrderBy(x => x.LastName).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.LastName).ToList();
                             break;
                         case 5:
                             jsonData = (sortDir == "desc")
@@ -135,19 +135,19 @@ namespace IQCare.Web.CCC.WebService
                     if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
                     {
                         jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
-                                                       utility.Decrypt(x.FirstName)
+                                                       x.FirstName
                                                            .ToLower()
                                                            .Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.MiddleName)
+                                                       x.MiddleName
                                                            .ToLower()
                                                            .Contains(searchString.ToLower()) ||
-                                                       utility.Decrypt(x.LastName)
+                                                       x.LastName
                                                            .ToLower()
                                                            .Contains(searchString.ToLower()) ||
                                                        LookupLogic.GetLookupNameById(x.Sex)
                                                            .Contains(searchString.ToLower()) ||
                                                        x.EnrollmentNumber.Contains(searchString.ToString()) ||
-                                                       utility.Decrypt(x.MobileNumber).Contains(searchString)
+                                                       x.MobileNumber.Contains(searchString)
                             )
                             .ToList();
                         filteredRecords = jsonData.Count();
@@ -176,9 +176,9 @@ namespace IQCare.Web.CCC.WebService
 
                             x.Id.ToString(),
                             x.EnrollmentNumber.ToString(),
-                            utility.Decrypt(x.FirstName),
-                            utility.Decrypt(x.MiddleName),
-                            utility.Decrypt(x.LastName),
+                            x.FirstName,
+                            x.MiddleName,
+                            x.LastName,
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
@@ -202,48 +202,7 @@ namespace IQCare.Web.CCC.WebService
             return output;
         }
 
-        //[WebMethod]
-        //public string PatientFinder()
-        //{
-        //    string patientList = null;
-
-        //    try
-        //    {
-        //        PatientLookupManager patientLookup = new PatientLookupManager();
-        //        var patientLookups = patientLookup.GetPatientSearchListPayload().ToList();
-
-        //        if (patientLookups.Count > 0)
-        //        {
-        //            var json = new
-        //            {
-
-        //                draw = 1,
-        //                recordsTotal = 1, // Convert.ToInt32(patientLookups.Count()),
-        //                recordsFiltered = 1, // Convert.ToInt32(patientLookups.Count()),
-        //                data = patientLookups.Select(x => new string[]
-        //                {
-        //                    x.Id.ToString(),
-        //                    x.PatientIndex.ToString(),
-        //                    x.FirstName,
-        //                    x.MiddleName,
-        //                    x.LastName,
-        //                    x.DateOfBirth.ToShortDateString(),
-        //                    x.Sex.ToString(),
-        //                    x.RegistrationDate.ToShortDateString(),
-        //                    x.PatientStatus.ToString()
-        //                })
-        //            };
-        //            patientList = json.ToString();
-        //        }
-        //    }
-        //    catch (Exception var )
-        //    {
-        //        Console.WriteLine(var );
-        //        throw;
-        //    }
-
-        //    return JsonConvert.SerializeObject(patientList);
-        //}
+        
         
 
         [WebMethod]
@@ -285,14 +244,14 @@ namespace IQCare.Web.CCC.WebService
                         {
                             x.Id.ToString(),
                             x.EnrollmentNumber,
-                            utility.Decrypt(x.FirstName),
-                            utility.Decrypt(x.MiddleName),
-                            utility.Decrypt(x.LastName),
+                            x.FirstName,
+                            x.MiddleName,
+                            x.LastName,
                             x.DateOfBirth.ToString("MMM-dd-yyyy"),
                             x.Sex.ToString(),
                             x.RegistrationDate.ToString("MMM-dd-yyyy"),
                             x.PatientStatus.ToString(),
-                            utility.Decrypt(x.MobileNumber.ToString())
+                            x.MobileNumber.ToString()
                         })
                     };
                     patientList= json;

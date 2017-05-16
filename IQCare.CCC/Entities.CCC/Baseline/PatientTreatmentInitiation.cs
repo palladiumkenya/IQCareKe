@@ -20,7 +20,13 @@ namespace Entities.CCC.Baseline
         public int PatientMasterVisitId { get; set; }
         public DateTime DateStartedOnFirstline { get; set; }
         public string Cohort { get; set; }
-        public int Regimen { get; set; }
+        public int? Regimen { get; set; }
+        /// <summary>
+        /// Column contains the regimen
+        /// to cater for instances where regimens
+        /// cannot be mapped in the lookup table
+        /// </summary>
+        public string RegimenCode { get; set; }
         public decimal BaselineViralload { get; set; }
         public DateTime BaselineViralloadDate { get; set; }
         [ForeignKey("PatientId")]

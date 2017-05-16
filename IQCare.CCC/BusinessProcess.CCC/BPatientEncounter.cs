@@ -11,7 +11,7 @@ namespace BusinessProcess.CCC
 {
     public class BPatientEncounter : ProcessBase, IPatientEncounter
     {
-        public int savePresentingComplaints(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, List<AdverseEvents> adverseEvents)
+        public int savePresentingComplaints(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, List<AdverseEvents> adverseEvents, List<PresentingComplaints> presentingComplaints)
         {
            
             try
@@ -26,9 +26,11 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@VisitDate", SqlDbType.VarChar, VisitDate);
                     ClsUtility.AddParameters("@VisitScheduled", SqlDbType.VarChar, VisitScheduled);
                     ClsUtility.AddParameters("@VisitBy", SqlDbType.VarChar, VisitBy);
-                    ClsUtility.AddParameters("@Complaints", SqlDbType.VarChar, Complaints);
+                    ClsUtility.AddParameters("@anyPresentingComplaints", SqlDbType.VarChar, anyComplaints);
+                    ClsUtility.AddParameters("@ComplaintsNotes", SqlDbType.VarChar, Complaints);
                     ClsUtility.AddParameters("@TBScreening", SqlDbType.VarChar, TBScreening.ToString());
                     ClsUtility.AddParameters("@NutritionalStatus", SqlDbType.VarChar, NutritionalStatus.ToString());
+                    ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userId.ToString());
 
                     DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPresentingComplaints", ClsUtility.ObjectEnum.DataRow);
                     int masterVisitID = Int32.Parse(dr[0].ToString());
@@ -53,8 +55,35 @@ namespace BusinessProcess.CCC
                             ClsUtility.AddParameters("@medicineCausingAE", SqlDbType.VarChar, advEvnts.medicineCausingAE);
                             ClsUtility.AddParameters("@adverseSeverity", SqlDbType.VarChar, advEvnts.adverseSeverityID);
                             ClsUtility.AddParameters("@adverseAction", SqlDbType.VarChar, advEvnts.adverseAction);
+                            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userId.ToString());
 
                             int i = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterAdverseEvents", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                        }
+                    }
+
+
+                    ///
+                    ClsObject delPComplaints = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                    int k = (int)delPComplaints.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterComplaints", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+
+                    foreach (var PC in presentingComplaints)
+                    {
+                        if (PC.presentingComplaintID != "")
+                        {
+                            ClsObject advEvents = new ClsObject();
+                            ClsUtility.Init_Hashtable();
+                            ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
+                            ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                            ClsUtility.AddParameters("@presentingComplaintID", SqlDbType.VarChar, PC.presentingComplaintID);
+                            ClsUtility.AddParameters("@onsetDate", SqlDbType.VarChar, PC.onsetDate);
+                            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userId.ToString());
+
+                            int i = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterComplaints", ClsUtility.ObjectEnum.ExecuteNonQuery);
                         }
                     }
 
@@ -68,8 +97,36 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public int savePresentingComplaintsTS(string PatientMasterVisitID, string PatientID, string ServiceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
+        {
 
-        public int saveChronicIllness(string masterVisitID, string patientID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines, List<Allergies> allergies)
+            try
+            {
+                lock (this)
+                {
+                    ClsObject PatientEncounter = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                    ClsUtility.AddParameters("@ServiceID", SqlDbType.Int, ServiceID);
+                    ClsUtility.AddParameters("@VisitDate", SqlDbType.VarChar, VisitDate);
+                    ClsUtility.AddParameters("@VisitScheduled", SqlDbType.VarChar, VisitScheduled);
+                    ClsUtility.AddParameters("@VisitBy", SqlDbType.VarChar, VisitBy);
+                    ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userId.ToString());
+
+                    DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterTS", ClsUtility.ObjectEnum.DataRow);
+                    int masterVisitID = Int32.Parse(dr[0].ToString());
+
+                    return masterVisitID;
+                }
+            }
+            catch //Exception ex)
+            {
+
+                return 0;
+            }
+        }
+        public int saveChronicIllness(string masterVisitID, string patientID, string userID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines, List<Allergies> allergies)
         {
             try
             {
@@ -91,7 +148,9 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@chronicIllness", SqlDbType.VarChar, chrIll.chronicIllnessID);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, chrIll.treatment);
                         ClsUtility.AddParameters("@dose", SqlDbType.VarChar, chrIll.dose);
-                        ClsUtility.AddParameters("@duration", SqlDbType.VarChar, chrIll.duration);
+                        ClsUtility.AddParameters("@onsetDate", SqlDbType.VarChar, chrIll.OnsetDate);
+                        ClsUtility.AddParameters("@active", SqlDbType.VarChar, chrIll.Active);
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                         int i = (int)chrIllness.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterChronicIllness", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
@@ -130,9 +189,11 @@ namespace BusinessProcess.CCC
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
-                        ClsUtility.AddParameters("@allergy", SqlDbType.VarChar, all.allergy);
-                        ClsUtility.AddParameters("@allergyResponse", SqlDbType.VarChar, all.allergyResponse);
-                        ClsUtility.AddParameters("@allergyDate", SqlDbType.VarChar, all.allergyDate);
+                        ClsUtility.AddParameters("@allergy", SqlDbType.VarChar, all.allergyID);
+                        ClsUtility.AddParameters("@allergyReaction", SqlDbType.VarChar, all.reactionID);
+                        ClsUtility.AddParameters("@allergySeverity", SqlDbType.VarChar, all.severityID);
+                        ClsUtility.AddParameters("@allergyOnsetDate", SqlDbType.VarChar, all.onsetDate);
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                         int i = (int)allerg.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterAllergies", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
@@ -146,33 +207,52 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public int savePhysicalEaxminations(string masterVisitID, string patientID, List<PhysicalExamination> physicalExam)
+        public int savePhysicalEaxminations(string masterVisitID, string patientID, string userID, List<PhysicalExamination> physicalExam, List<string> generalExam)
         {
             try
             {
                 lock (this)
                 {
-                    //if (physicalExam.Count > 0)
-                    //{
-                        ClsObject obj = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                    ClsObject obj = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
 
-                        int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterPhysicalExam", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                    //}
+                    int a = (int)obj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterPhysicalExam", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    
 
                     foreach (var pe in physicalExam)
                     {
                         ClsObject PEObj = new ClsObject();
                         ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID.ToString());
+                        ClsUtility.AddParameters("@MasterVisitID", SqlDbType.Int, masterVisitID.ToString());
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
                         ClsUtility.AddParameters("@examType", SqlDbType.VarChar, pe.examTypeID);
                         ClsUtility.AddParameters("@exam", SqlDbType.VarChar, pe.examID);
                         ClsUtility.AddParameters("@findings", SqlDbType.VarChar, pe.findings);
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                         int i = (int)PEObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPhysicalExam", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    }
+
+                    //generalExam
+                    ClsObject objj = new ClsObject();
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, masterVisitID);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                    int c = (int)objj.ReturnObject(ClsUtility.theParams, "sp_deletePatientEncounterGeneralExam", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+
+                    for (int k = 0; k < generalExam.Count; k++)
+                    {
+                        ClsObject geObj = new ClsObject();
+                        ClsUtility.Init_Hashtable();
+                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, masterVisitID);
+                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+                        ClsUtility.AddParameters("@Exam", SqlDbType.VarChar, generalExam[k].ToString());
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
+
+                        int j = (int)geObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterGeneralExam", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
                     return 0;
                 }
@@ -183,7 +263,7 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public int savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, List<string> phdp, List<Diagnosis> diagnosis)
+        public int savePatientManagement(string PatientMasterVisitID, string PatientID, string userID, string workplan, string ARVAdherence, string CTXAdherence, List<string> phdp, List<Diagnosis> diagnosis)
         {
             try
             {
@@ -195,9 +275,8 @@ namespace BusinessProcess.CCC
                     ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
                     ClsUtility.AddParameters("@ARVAdherence", SqlDbType.VarChar, ARVAdherence);
                     ClsUtility.AddParameters("@CTXAdherence", SqlDbType.VarChar, CTXAdherence);
-                    ClsUtility.AddParameters("@nextAppointment", SqlDbType.VarChar, nextAppointment);
-                    ClsUtility.AddParameters("@appointmentType", SqlDbType.VarChar, appointmentType);
-                    //ClsUtility.AddParameters("@ANC", SqlDbType.VarChar, phdp);
+                    ClsUtility.AddParameters("@WorkPlan", SqlDbType.VarChar, workplan);
+                    ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                     int a = (int)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPatientManagement", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     //int masterVisitID = Int32.Parse(dr[0].ToString());
@@ -216,6 +295,7 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
                         ClsUtility.AddParameters("@phdp", SqlDbType.VarChar, phdp[i].ToString());
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
                         int j = (int)phdpObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPHDP", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
@@ -239,7 +319,8 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
                         ClsUtility.AddParameters("@diagnosis", SqlDbType.VarChar, diag.diagnosis);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, diag.treatment);
-                        
+                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
+
                         int d = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
 
@@ -275,83 +356,66 @@ namespace BusinessProcess.CCC
 
                 if (theDS.Tables[1].Rows.Count > 0)
                 {
+                    pce.anyComplaint = theDS.Tables[1].Rows[0]["anyComplaint"].ToString();
                     pce.complaints = theDS.Tables[1].Rows[0]["PresentingComplaint"].ToString();
                 }
 
-                //if (theDS.Tables[2].Rows.Count > 0)
-                //{
-                //    string lmp = theDS.Tables[2].Rows[0]["FemaleLMP"].ToString();
-                //    string edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
-                //    if (lmp != "")
-                //    {
-                //        DateTime dtLmp = DateTime.Parse(lmp);
-                //        pce.lmp = dtLmp.ToString("dd-MMM-yyyy");
-                //    }
+                pce.generalExams = new string[theDS.Tables[2].Rows.Count];
+                for (int k = 0; k < theDS.Tables[2].Rows.Count; k++)
+                {
+                    pce.generalExams[k] = theDS.Tables[2].Rows[k]["ExamId"].ToString();
+                }
 
-                //    if(edd != "")
-                //    {
-                //        DateTime dtEdd = DateTime.Parse(edd);
-                //        pce.edd = dtEdd.ToString("dd-MMM-yyyy");
-                //    }
-                    
-                //    pce.pregStatus = theDS.Tables[2].Rows[0]["PregnancyStatus"].ToString();
-                //    //pce.edd = theDS.Tables[2].Rows[0]["ExpectedDateOfChild"].ToString();
-                //    pce.STIPartnerNotification = theDS.Tables[2].Rows[0]["STIPartnerNotification"].ToString();
-                //    pce.ancProfile = theDS.Tables[2].Rows[0]["ANCPNCProfile"].ToString();
-                //}
+                if (theDS.Tables[3].Rows.Count > 0)
+                {
+                    pce.tbScreening = theDS.Tables[3].Rows[0]["ScreeningValueId"].ToString();
+                }
 
-                //if (theDS.Tables[3].Rows.Count > 0)
-                //{
-                //    pce.tbScreening = theDS.Tables[3].Rows[0]["ScreeningValueId"].ToString();
-                //}
+                if (theDS.Tables[4].Rows.Count > 0)
+                {
+                    pce.nutritionStatus = theDS.Tables[4].Rows[0]["ScreeningValueId"].ToString();
+                }
 
-                //if (theDS.Tables[4].Rows.Count > 0)
-                //{
-                //    pce.nutritionStatus = theDS.Tables[4].Rows[0]["ScreeningValueId"].ToString();
-                //}
 
-                //if (theDS.Tables[5].Rows.Count > 0)
-                //{
-                //    pce.CaCX = theDS.Tables[5].Rows[0]["ScreeningValueId"].ToString();
-                //}
 
-                //if (theDS.Tables[6].Rows.Count > 0)
-                //{
-                //    pce.STIScreening = theDS.Tables[6].Rows[0]["ScreeningValueId"].ToString();
-                //}
+                pce.phdp = new string[theDS.Tables[5].Rows.Count];
+                for (int k = 0; k < theDS.Tables[5].Rows.Count; k++)
+                {
+                    pce.phdp[k] = theDS.Tables[5].Rows[k]["phdp"].ToString();
+                }
 
-                //if (theDS.Tables[7].Rows.Count > 0)
-                //{
-                //    pce.onFP = theDS.Tables[7].Rows[0]["FPStatusId"].ToString();
-                //    pce.reasonNotOnFP = theDS.Tables[7].Rows[0]["ReasonNotOnFPId"].ToString();
-                //}
+                if (theDS.Tables[6].Rows.Count > 0)
+                {
+                    pce.ARVAdherence = theDS.Tables[6].Rows[0]["Score"].ToString();
+                }
 
-                //pce.fpMethod = new string[theDS.Tables[8].Rows.Count];
-                //for (int k = 0; k < theDS.Tables[8].Rows.Count; k++)
-                //{
-                //    pce.fpMethod[k] = theDS.Tables[8].Rows[k]["FPMethodId"].ToString();
-                //}
+                if (theDS.Tables[7].Rows.Count > 0)
+                {
+                    pce.CTXAdherence = theDS.Tables[7].Rows[0]["Score"].ToString();
+                }
+
+                if (theDS.Tables[8].Rows.Count > 0)
+                {
+                    pce.WorkPlan = theDS.Tables[8].Rows[0]["ClinicalNotes"].ToString();
+                }
 
                 if (theDS.Tables[9].Rows.Count > 0)
                 {
-                    pce.nextAppointmentDate = ((DateTime)theDS.Tables[9].Rows[0]["AppointmentDate"]).ToString("dd-MMM-yyyy");
-                    pce.nextAppointmentType = theDS.Tables[9].Rows[0]["ReasonID"].ToString();
+                    pce.Cough = theDS.Tables[9].Rows[0]["Cough"].ToString();
+                    pce.Fever = theDS.Tables[9].Rows[0]["Fever"].ToString();
+                    pce.NoticeableWeightLoss = theDS.Tables[9].Rows[0]["WeightLoss"].ToString();
+                    pce.NightSweats = theDS.Tables[9].Rows[0]["NightSweats"].ToString();
+                    pce.OnAntiTB = theDS.Tables[9].Rows[0]["OnAntiTBDrugs"].ToString();
+                    pce.OnIPT = theDS.Tables[9].Rows[0]["OnIpt"].ToString();
                 }
 
-                pce.phdp = new string[theDS.Tables[10].Rows.Count];
-                for (int k = 0; k < theDS.Tables[10].Rows.Count; k++)
+                if (theDS.Tables[10].Rows.Count > 0)
                 {
-                    pce.phdp[k] = theDS.Tables[10].Rows[k]["phdp"].ToString();
-                }
-
-                if (theDS.Tables[11].Rows.Count > 0)
-                {
-                    pce.ARVAdherence = theDS.Tables[11].Rows[0]["Score"].ToString();
-                }
-
-                if (theDS.Tables[12].Rows.Count > 0)
-                {
-                    pce.CTXAdherence = theDS.Tables[12].Rows[0]["Score"].ToString();
+                    pce.SputumSmear = theDS.Tables[10].Rows[0]["SputumSmear"].ToString();
+                    pce.ChestXray = theDS.Tables[10].Rows[0]["ChestXRay"].ToString();
+                    pce.startAntiTB = theDS.Tables[10].Rows[0]["StartAntiTb"].ToString();
+                    pce.InvitationOfContacts = theDS.Tables[10].Rows[0]["InvitationOfContacts"].ToString();
+                    pce.EvaluatedForIPT = theDS.Tables[10].Rows[0]["EvaluatedForIPT"].ToString();
                 }
 
 
@@ -381,6 +445,20 @@ namespace BusinessProcess.CCC
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterAdverseEvents", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
+        public DataTable getPatientEncounterComplaints(string PatientMasterVisitID, string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientEncounterComplaints", ClsUtility.ObjectEnum.DataTable);
 
             }
         }
@@ -450,6 +528,58 @@ namespace BusinessProcess.CCC
             }
         }
 
-        
+        public DataTable getPatientWorkPlan(string PatientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientWorkPlan", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
+        public ZScoresParameters GetZScoreValues(string PatientID, string gender, string height)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                ClsUtility.AddParameters("@sex", SqlDbType.VarChar, gender);
+                ClsUtility.AddParameters("@height", SqlDbType.VarChar, height);
+
+                DataSet ZScoreDS = (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getZScores", ClsUtility.ObjectEnum.DataSet);
+
+                ZScoresParameters zs = new ZScoresParameters();
+
+                if(ZScoreDS.Tables[0].Rows.Count > 0)
+                {
+                    zs.L_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["L"].ToString());
+                    zs.M_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["M"].ToString());
+                    zs.S_WA = Convert.ToDouble(ZScoreDS.Tables[0].Rows[0]["S"].ToString());
+                }
+
+                if (ZScoreDS.Tables[1].Rows.Count > 0)
+                {
+                    zs.L_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["L"].ToString());
+                    zs.M_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["M"].ToString());
+                    zs.S_WH = Convert.ToDouble(ZScoreDS.Tables[1].Rows[0]["S"].ToString());
+                }
+
+                //if (ZScoreDS.Tables[2].Rows.Count > 0)
+                {
+                    zs.L_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["L"].ToString());
+                    zs.M_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["M"].ToString());
+                    zs.S_BMIz = Convert.ToDouble(ZScoreDS.Tables[2].Rows[0]["S"].ToString());
+                }
+
+                return zs;
+            }
+        }
+
+
     }
 }

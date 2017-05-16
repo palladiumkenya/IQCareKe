@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Interface.CCC.Lookup;
+using IQCare.Web.UILogic;
+using System;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-
-using Interface.CCC.Lookup;
-using Application.Presentation;
-using Entities.CCC.Lookup;
-using IQCare.Web.UILogic;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -19,6 +14,7 @@ namespace IQCare.Web.CCC.Patient
            //reset encounterstatus;
             Session["EncounterStatusId"] = 0;
             Session["PatientEditId"] = 0;
+            Session["PatientPK"] = 0;
 
             //ILookupRepository l=new LookupRepository();
             //l.GetDropdownValue(Sex,"Gender");
@@ -40,11 +36,20 @@ namespace IQCare.Web.CCC.Patient
             PopulateFacilityList();
         }
 
+        [System.Web.Services.WebMethod(EnableSession =true)]
+        public static void SetSelectedPatient(int patientId)
+        {
+                      HttpContext.Current.Session["PatientPK"] = patientId;
+
+        }
+
+            
+
         void PopulateFacilityList()
         {
             try
             {
-                SystemSetting.CurrentSystem.Facilities.Where(f => f.DeleteFlag == false);
+                SystemSetting.CurrentSystem.Facilities.Where(f => !f.DeleteFlag);
 
                 Facility.DataSource = SystemSetting.CurrentSystem.Facilities.OrderBy(f => f.Id);
                 Facility.DataTextField = "Name";

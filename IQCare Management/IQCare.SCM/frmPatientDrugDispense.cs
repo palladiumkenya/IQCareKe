@@ -274,10 +274,12 @@ namespace IQCare.SCM
             DataTable theDTProvider = theDV.ToTable();
             theBindManager.Win_BindCombo(cmbProvider, theDTProvider, "Name", "Id");
 
-            theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
-            theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
-            DataTable theDTRegimenLine = theDV.ToTable();
-            theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
+            //theDV = new DataView(XMLDS.Tables["mst_RegimenLine"]);
+            //theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
+            //DataTable theDTRegimenLine = theDV.ToTable();
+            //theBindManager.Win_BindCombo(cmbRegimenLine, theDTRegimenLine, "Name", "Id");
+            IDrug regimen = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+            theBindManager.Win_BindCombo(cmbRegimenLine, regimen.GetPharmacyRegimenClassification(), "DisplayName", "LookUpItemId");
 
             theDV = new DataView(XMLDS.Tables["mst_Decode"]);
             theDV.RowFilter = "CodeId = 26 and (DeleteFlag =0 or DeleteFlag is null)";
@@ -1077,7 +1079,7 @@ namespace IQCare.SCM
 
                         theDR["Dose"] = txtDose.Text;
                         theDR["Duration"] = txtDuration.Text;
-                        theDR["Valid"] = true;
+                        //theDR["Valid"] = true;
                         theDR["DataStatus"] = "1";
 
                         //if (chkPrintPrescription.Checked)
@@ -2347,8 +2349,8 @@ namespace IQCare.SCM
                 this.makeGridEditable = "Yes";
 
             textPrescriptionNote.ReadOnly = true;
-            textPrescriptionNote.Text = existingRecordDetails.Tables[1].Rows[0]["PharmacyNotes"].ToString();
-            labelOrderValue.Text = existingRecordDetails.Tables[1].Rows[0]["ReportingID"].ToString();
+            //textPrescriptionNote.Text = existingRecordDetails.Tables[1].Rows[0]["PharmacyNotes"].ToString();
+            //labelOrderValue.Text = existingRecordDetails.Tables[1].Rows[0]["ReportingID"].ToString();
             BindPharmacyDispenseGrid(existingRecordDetails.Tables[0]);
 
             //btnART.Enabled = false;

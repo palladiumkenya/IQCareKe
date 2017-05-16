@@ -82,18 +82,18 @@ function AddChronicIllness() {
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
     var treatmentDose = $('#treatmentDose').val();
-    var treatmentDuration = $('#treatmentDuration').val();
+    var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;
 
-    if (chronicIllness == "") {
+    if (chronicIllness == "" || chronicIllness == "Select") {
         toastr.error("Error", "Please enter chronic illness");
         return false;
     }
-   if (!IsNumeric(treatmentDose)) {
-       toastr.error("Error", "Treatment dose should be numeric.");
-       return false;
-   }
+   //if (!IsNumeric(treatmentDose)) {
+   //    toastr.error("Error", "Treatment dose should be numeric.");
+   //    return false;
+   //}
 
    chronicIllnessFound = $.inArray("" + chronicIllness + "", chronicIllnessList);
 
@@ -107,21 +107,26 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, treatmentDuration, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, onSet,
+            "<input type='checkbox' id='chkChronic" + chronicIllnessID + "' >", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
 
         $('#ChronicIllnessName').val("0");
         $("#illnessTreatment").val("");
         $('#treatmentDose').val("");
-        $('#treatmentDuration').val("");
+        $('#txtOnsetDate').val("");
     }
 }
 
 var AllergyList = new Array();
 function AddAllergy() {
+    var allergyID = $('#txtAllergyId').val();
     var allergy = $('#txtAllergy').val();
-    var allergyResponse = $('#txtAllergyResponse').val();
+    var allergyReactionID = $('#txtReactionTypeID').val();
+    var allergyReaction = $('#txtReactionType').val();
+    var severityId = $('#ddlAllergySeverity').find(":selected").val();
+    var severity = $('#ddlAllergySeverity').find(":selected").text();
     var allergyDate = $("#txtAllergyDate").val();
 
     //Validate duplication
@@ -144,12 +149,13 @@ function AddAllergy() {
 
         AllergyList.push("" + allergy + "");
         arrAllergyUI = [];
-        arrAllergyUI.push([allergy, allergyResponse, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
+        arrAllergyUI.push([allergyID, allergyReactionID, severityId, allergy, allergyReaction, severity, allergyDate, "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
 
         DrawDataTable("dtlAllergy", arrAllergyUI);
 
         $('#txtAllergy').val("");
-        $("#txtAllergyResponse").val("");
+        $("#txtReactionType").val("");
+        $("#ddlAllergySeverity").val("0");
         $('#txtAllergyDate').val("");
     }
 }
@@ -258,6 +264,7 @@ var diagnosisList = new Array();
 var treatmentList = new Array();
 
 function AddDiagnosis() {
+    var diagnosisID = $('#txtDiagnosisID').val();
     var diagnosis = $('#Diagnosis').val();
     var treatment = $('#DiagnosisTreatment').val();
 
@@ -270,7 +277,7 @@ function AddDiagnosis() {
         return false;
     }
 
-    diagnosisFound = $.inArray("" + diagnosis + "", diagnosisList);
+    diagnosisFound = $.inArray("" + diagnosisID + "", diagnosisList);
     treatmentFound = $.inArray("" + treatment + "", treatmentList);
 
     if (diagnosisFound > -1) {
@@ -280,20 +287,62 @@ function AddDiagnosis() {
     } else {
 
 
-        diagnosisList.push("" + diagnosis + "");
+        diagnosisList.push("" + diagnosisID + "");
         treatmentList.push("" + treatment + "");
 
         arrDiagnosisUI = [];
 
         arrDiagnosisUI.push([
-            diagnosis, treatment,
+            diagnosisID, diagnosis, treatment,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
 
         DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
+        $('#txtDiagnosisID').val("");
         $('#Diagnosis').val("");
         $('#DiagnosisTreatment').val("");
+        
+    }
+}
+
+var PresentingComplaintsList = new Array();
+function AddPresentingComplaints() {
+    var presentingComplaintsID = $("#txtPresentingComplaintsID").val();
+    
+    var presentingComplaints = $('#txtPresentingComplaints').val();
+    var onsetDate = $('#txtPCOnsetDate').val();
+
+    //Validate duplication
+    var presentingComplaintFound = 0;
+
+    if (presentingComplaints == "") {
+        toastr.error("Error", "Please enter Presenting Complaint");
+        return false;
+    }
+
+    presentingComplaintFound = $.inArray("" + presentingComplaints + "", PresentingComplaintsList);
+
+    if (presentingComplaintFound > -1) {
+        toastr.error("Error", "Presenting Complaint already exists.");
+        return false;
+
+    } else {
+
+
+        PresentingComplaintsList.push("" + presentingComplaints + "");
+
+        arrPresentingComplaintUI = [];
+
+        arrPresentingComplaintUI.push([
+            presentingComplaintsID, presentingComplaints,onsetDate,
+            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        ]);
+
+        DrawDataTable("dtlPresentingComplaints", arrPresentingComplaintUI);
+
+        $('#txtPresentingComplaints').val("");
+        $('#txtPCOnsetDate').val("");
     }
 }
 
@@ -328,12 +377,12 @@ function EnableDisableEDD()
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  
         document.getElementById("ExpectedDateOfChildBirth").removeAttribute('disabled');
-        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat(edd);
+        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat1(edd);
     }
     
 }
 
-function DateFormat(date)
+function DateFormat1(date)
 {
     var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
 
@@ -350,18 +399,34 @@ function DateFormat(date)
 
 function ChkQtyDispensed()
 {
-    var qtyPres = $("#txtQuantityPres").val();
-    var qtyDisp = $("#txtQuantityDisp").val();
+    var vPres = $("#txtQuantityPres").val();
+    var vDisp = $("#txtQuantityDisp").val();
+
+    if (vPres != "")
+        var qtyPres = parseFloat(vPres);
+    else
+        var qtyPres = 0;
+
+    if (vDisp != "")
+        var qtyDisp = parseFloat(vDisp);
+    else
+        var qtyDisp = 0;
+
 
     if(qtyDisp > qtyPres)
     {
         $("#txtQuantityDisp").val("0");
         document.getElementById("txtQuantityDisp").focus();
         toastr.error("Error", "Quantity dispensed cannot be greater than quantity prescribed.");
+        $("#btnAddDrugs").prop('disabled', true);
+    }
+    else {
+        $("#btnAddDrugs").prop('disabled', false);
     }
 }
 
-var drugList = new Array();
+var drugNameArr = new Array();
+var batchNoArr = new Array();
 function AddDrugPrescription() {
     var drugId = $("#drugID").val();
     var drugAbbr = $("#drugAbbr").val();
@@ -390,13 +455,14 @@ function AddDrugPrescription() {
         batchId = 0;
 
     var drugFound = 0;
+    var batchFound = 0;
 
     if (drugName == "") {
         toastr.error("Error", "Please select drug");
         return false;
     }
 
-    if (dose == "") {
+    if (dose == "" || dose == "0") {
         toastr.error("Error", "Please enter the dose");
         return false;
     }
@@ -406,20 +472,28 @@ function AddDrugPrescription() {
         return false;
     }
 
-    if (duration == "0") {
+    if (duration == "0" || duration == "") {
         toastr.error("Error", "Please enter the duration");
         return false;
     }
 
-    drugFound = $.inArray("" + drugName + "", drugList);
+    if (quantityPres == "0" || quantityPres == "") {
+        toastr.error("Error", "Please enter the quantity prescribed");
+        return false;
+    }
+
+    drugFound = $.inArray("" + drugName + "", drugNameArr);
+    batchFound = $.inArray("" + batchText + "", batchNoArr);
+
     
-    if (drugFound > -1) {
-        toastr.error("Error", drugName + " already exists in the List");
+    
+    if (drugFound > -1 && batchFound > -1) {
+        toastr.error("Error", drugName + " and/or batch no. " + batchText + " already exists in the List");
         return false; // message box herer
     }
     else {
-        //drugList.push("" + drug + "");
-
+        drugNameArr.push("" + drugName + "");
+        batchNoArr.push("" + batchText + "");
 
         arrDrugPrescriptionUI = [];
 
@@ -439,5 +513,25 @@ function AddDrugPrescription() {
         $("#txtQuantityPres").val("0");
         $("#txtQuantityDisp").val("0");
         $('#chkProphylaxis').attr('checked', false);
+    }
+}
+
+function ValidateDispensedDate()
+{
+    var start = new Date($("#txtPrescriptionDate").val());
+    var end = new Date($("#txtDateDispensed").val());
+    if (end < start)
+    {
+        toastr.error("Error", "Dispense date cannot be less than Prescribed Date.");
+        $("#txtDateDispensed").val("");
+    }
+}
+
+function ValidatePrescriptionDate() {
+    var start = new Date($("#txtPrescriptionDate").val());
+    var end = new Date($("#txtDateDispensed").val());
+    if (start > end) {
+        toastr.error("Error", "Prescription date cannot be greater than dispensed Date.");
+        $("#txtPrescriptionDate").val("");
     }
 }

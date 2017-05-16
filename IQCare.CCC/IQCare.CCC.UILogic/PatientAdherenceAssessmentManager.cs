@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Presentation;
 using Entities.CCC.Encounter;
 using Interface.CCC.Encounter;
@@ -11,9 +8,7 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientAdherenceAssessmentManager
     {
-        private IPatientAdherenceAssessessment mgr =
-            (IPatientAdherenceAssessessment)
-            ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientAdherenceAssessment, BusinessProcess.CCC");
+        private readonly IPatientAdherenceAssessessment _patientAdherenceAssessessment =(IPatientAdherenceAssessessment)  ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientAdherenceAssessment, BusinessProcess.CCC");
 
         public int AddPatientAdherenceAssessment(int patientId, int patientMasterVisitId, int createdBy,bool feelBetter, bool carelessAboutMedicine, bool feelWorse, bool forgetMedicine)
         {
@@ -33,7 +28,7 @@ namespace IQCare.CCC.UILogic
                 adherenceAssessment.CreatedBy = createdBy;
                 adherenceAssessment.CreateDate = DateTime.Now;
 
-                return mgr.AddPatientAdherenceAssessment(adherenceAssessment);
+                return _patientAdherenceAssessessment.AddPatientAdherenceAssessment(adherenceAssessment);
             }
             catch (Exception e)
             {
@@ -41,5 +36,34 @@ namespace IQCare.CCC.UILogic
                 throw;
             }
         }
+
+        public int UpdateAdherenceAssessment(PatientAdherenceAssessment patientAdherenceAssessment)
+        {
+            try
+            {
+                return _patientAdherenceAssessessment.UpdateAdherenceAssessment(patientAdherenceAssessment);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public PatientAdherenceAssessment GetCurrentAdheranceStatus(int patientId)
+        {
+            return _patientAdherenceAssessessment.GetPatientCurrentAdheranceStatus(patientId);
+        }
+
+        public List<PatientAdherenceAssessment> GetPatientAdheranceHistory(int patientId)
+        {
+            return _patientAdherenceAssessessment.GetAdherenceAssessmentsList(patientId);
+        }
+
+        public List<PatientAdherenceAssessment> GetActiveAdherenceAssessment(int patientId)
+        {
+            return _patientAdherenceAssessessment.GetActiveAdherenceAssessment(patientId);
+        }
+
     }
 }

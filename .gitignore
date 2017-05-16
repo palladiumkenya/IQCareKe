@@ -27,6 +27,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 aspnet_client/
+DataAccess/RemServer/app.config
 
 #logs
 [Ll]ogs/
@@ -197,6 +198,7 @@ UpgradeLog*.htm
 # SQL Server files
 *.mdf
 *.ldf
+build.bat
 
 # Business Intelligence projects
 *.rdl.data
@@ -221,3 +223,5 @@ _Pvt_Extensions/
 ModelManifest.xml
 */RemServer/app.config
 /*.con
+/Presentation/aspnet_client
+*.zip

@@ -5450,6 +5450,7 @@ begin
 			a.DisplayName,
 			a.CanEnroll,
 			a.ModuleName,
+			isnull(a.ModuleFlag,0) ModuleFlag,
 			a.PharmacyFlag,
 			Z.StrongPassFlag,
 			Z.ExpPwdFlag,
@@ -5463,11 +5464,26 @@ begin
 			a.ExpPwdFlag,
 			a.ExpPwdDays
 		From mst_Facility a
-			Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID
+				Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID -- and b.ModuleID <> 203
 	) Z
 	Inner Join mst_module a On Z.ModuleID = a.ModuleID
 	Where a.Status = 2
-	And FacilityID = @LocationId                            
+	And FacilityID = @LocationId     
+	Union
+	Select
+			a.FacilityID,
+			b.ModuleID,
+			'Green Card (2016)' As DisplayName,
+			1 CanEnroll,
+			'CCC' As ModuleName,
+			1 As ModuleFlag,
+			M.PharmacyFlag,
+			a.StrongPassFlag,
+			a.ExpPwdFlag,
+			a.ExpPwdDays
+		From mst_Facility a
+			Inner Join lnk_FacilityModule b On a.FacilityID = b.FacilityID  And a.FacilityID = @LocationId       and  b.ModuleID=203
+		Inner Join mst_module M On M.ModuleID=b.ModuleID and M.ModuleID=203 and M.Status=2                           
               
 --4                                
   Select GetDate()[CurrentDate]    

@@ -14,7 +14,10 @@ namespace IQCare.CCC.UILogic
     public class ListLabOrder
     {
         
-        public string LabType { get; set; }
+        public string LabName{ get; set; }
+        public int LabNameId { get; set; }
+        public int VisitId { get; set; }
+        public int FacilityId { get; set; }
         public string OrderReason { get; set; }
         public string Results { get; set; }
         public DateTime LabOrderDate { get; set; }
@@ -28,72 +31,129 @@ namespace IQCare.CCC.UILogic
         private string Msg { get; set; }
         IPatientLabOrderManager _mgr = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
         ILookupManager _lookupTest = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        private readonly IPatientVisitManager _visitManager = (IPatientVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientVisit, BusinessProcess.CCC");
 
-
-        public int savePatientLabOrder(int patient_ID, int patient_Pk, int userId, int facilityID, int patientMasterVisitId, string patientLabOrder)
+        public void savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder)
         {
-            int returnLabOrderSuccess = 0;
-            try
+            int visitId = 0;
+            int orderId = 0;
+            int testId = 0;
+            int _paramId = 0;
+            DateTime orderDate = Convert.ToDateTime(labOrderDate);
+            // DateTime orderDate = DateTime.Now;
+            //DateTime orderDate = DateTime.Parse(labOrderDate);
+            var pending = "Pending";
+            var jss = new JavaScriptSerializer();
+            IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+
+            if (patientID > 0)
             {
-                var jss = new JavaScriptSerializer();
-                IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
-
-                if (patient_ID > 0)
+                PatientVisit visit = new PatientVisit()
                 {
-                   
-                  
-                    var pending = "Pending";
-                    foreach (ListLabOrder t in data)
+                    Ptn_Pk = patient_Pk,
+                    LocationID = facilityID,
+                    UserID = userId,
+                    TypeofVisit = 6,
+                    VisitDate = DateTime.Now,
+                    ModuleId = moduleId,
+                    VisitType = 6
+                };
+                visitId = _visitManager.AddPatientVisit(visit);
+
+                LabOrderEntity labOrder = new LabOrderEntity()
+                {
+                    Ptn_pk = patient_Pk,
+                    PatientId = patientID,
+                    LocationId = facilityID,
+                    VisitId = visitId,
+                    ModuleId = moduleId,
+                    OrderedBy = userId,
+                    ClinicalOrderNotes = orderNotes,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    OrderStatus = pending,
+                    OrderDate = orderDate,
+                    UserId = userId
+                };
+                orderId = _mgr.AddPatientLabOrder(labOrder);
+
+                foreach (ListLabOrder t in data)
+                {
+                    LabDetailsEntity labDetails = new LabDetailsEntity()
                     {
-                                // Get LabTestID
-                                string labType = t.LabType;
-                                if (labType != null)
-                                {
-                                LookupLabs testId = _lookupTest.GetLabTestId(labType);
-                                int labTestId = testId.Id;
+                        LabOrderId = orderId,
+                        LabTestId = t.LabNameId,
+                        TestNotes = t.LabNotes,
+                        UserId = userId,
+                        CreatedBy = userId,
+                        StatusDate = DateTime.Now
 
-                            LabOrderEntity labOrder = new LabOrderEntity()
+                    };
+                    testId = _mgr.AddLabOrderDetails(labDetails);
+
+                    PatientLabTracker labTracker = new PatientLabTracker()
+                    {
+                        PatientId = patientID,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        LabName = t.LabName,
+                        SampleDate = orderDate,
+                        Reasons = t.OrderReason,
+                        CreatedBy = userId,
+                        Results = pending,
+                        LabOrderId = orderId,
+                        LabTestId = t.LabNameId,  //parameter
+                        LabOrderTestId = testId,  //uniquely identifies a particular test
+                        FacilityId = facilityID,
+                        ResultDate= orderDate
+                    };
+
+                    _mgr.AddPatientLabTracker(labTracker);
+                    //add to dtlresults
+
+                    List<LookupTestParameter> _parameters = _lookupTest.GetTestParameter(t.LabNameId);
+                    if (_parameters != null)
+                    {
+
+                        foreach (LookupTestParameter p in _parameters)
+                        {
+
+                            LabResultsEntity labresults = new LabResultsEntity()
                             {
-                                Ptn_pk = patient_Pk,
-                                LocationId = facilityID,
-                                ModuleId = 211,
-                                OrderedBy = userId,
-                                LabTestId = labTestId,
-                                PatientMasterVisitId = patientMasterVisitId,
-                                ClinicalOrderNotes = t.LabNotes,
-                                OrderStatus = pending,
-                                OrderDate = t.LabOrderDate,
-                                CreatedBy = userId,
+                                LabOrderId = orderId,
+                                LabTestId = t.LabNameId,
+                                LabOrderTestId = testId,
+                                ParameterId = p.Id,
                                 UserId = userId,
-                                PreClinicLabDate = t.LabOrderDate,
-                                LabName = t.LabType,
-                                patientId = patient_ID,
-                                Reason = t.OrderReason
+                                CreatedBy = userId,
+                                StatusDate = DateTime.Now
+
                             };
-                          returnLabOrderSuccess = _mgr.AddPatientLabOrder(labOrder);
-                            return returnLabOrderSuccess;
-
-
-
+                            _mgr.AddPatientLabResults(labresults);
                         }
                     }
+
                 }
             }
-            catch (Exception ex)
-             {
-                Msg = ex.Message + ' ' + ex.InnerException;
-             }
-
-            return int.Parse(Msg);
         }
-        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
+         
+        public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
-            var pendingLabs = _mgr.GetVlPendingCount(facilityId);
+            var pendingLabs = _lookupTest.GetVlPendingCount(facilityId);
             return pendingLabs;
         }
-        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
+
+        public List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId)
         {
-            var completeLabs = _mgr.GetVlCompleteCount(facilityId);
+            var facilityVLsuppressed = _lookupTest.GetFacilityVLSuppressed(facilityId);
+            return facilityVLsuppressed;
+        }
+        public List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId)
+        {
+            var facilityVLunsuppressed = _lookupTest.GetFacilityVLUnSuppressed(facilityId);
+            return facilityVLunsuppressed;
+        }
+        public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
+        {
+            var completeLabs = _lookupTest.GetVlCompleteCount(facilityId);
             return completeLabs;
         }
     }

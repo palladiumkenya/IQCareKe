@@ -19,7 +19,7 @@
 
 
  <div class="col-md-12 bs-callout bs-callout-info">
-                         <h4 class="pull-left"> <strong>Complete Labs:</strong> </h4>             
+                         <h4 class="pull-left"> <strong>Latest Labs Results:</strong> </h4>             
     <table class="table table-striped table-condensed" id="xtblCompleteLabs" clientidmode="Static" runat="server">
         <thead>
             <tr >
@@ -98,9 +98,32 @@
                     var month = monthNames[currentTime.getMonth()];
                     var day = currentTime.getDate();
                     var year = currentTime.getFullYear();
-                    var sampleDate = day + "-" + month + "-" + year;
+                    var sampleDate = day + "-" + month + "-" + year;                  
 
-                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + itemList.ResultValues + '</td></tr>';
+                    var resultValues = itemList.ResultValues;
+                    var resultTexts = itemList.ResultTexts;
+                    var resultUnits = itemList.ResultUnits;
+                   
+                    var labResults;
+
+                    //if (itemList.LabTestId == 1 || itemList.LabTestId == 3 && itemList.ResultValues == 0) {
+                    //    labResults = "LDL";
+                    //}
+                    if (resultUnits == null) {
+                        resultUnits = "";
+                    } else {
+                        resultUnits = resultUnits;
+
+                    }
+                    if (resultTexts == null) {
+                        labResults = resultValues;
+                    } else {
+                        labResults = resultTexts;
+
+                    }
+
+
+                    table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults +" "+ resultUnits + '</td></tr>';
 
                 });
                 $("#xtblCompleteLabs td").parent().remove();

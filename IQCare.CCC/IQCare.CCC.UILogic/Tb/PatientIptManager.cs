@@ -22,6 +22,10 @@ namespace IQCare.CCC.UILogic.Tb
                 IptDueDate = p.IptDueDate,
                 Peripheralneoropathy = p.Peripheralneoropathy,
                 Rash = p.Rash,
+                HepatotoxicityAction = p.HepatotoxicityAction,
+                PeripheralneoropathyAction = p.PeripheralneoropathyAction,
+                RashAction = p.RashAction,
+                AdheranceMeasurementAction = p.AdheranceMeasurementAction,
             };
             return _patientIpt.AddPatientIpt(patientIpt);
         }
@@ -41,6 +45,7 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIpt patientIpt = new PatientIpt()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 Weight = p.Weight,
@@ -50,6 +55,10 @@ namespace IQCare.CCC.UILogic.Tb
                 IptDueDate = p.IptDueDate,
                 Peripheralneoropathy = p.Peripheralneoropathy,
                 Rash = p.Rash,
+                HepatotoxicityAction = p.HepatotoxicityAction,
+                PeripheralneoropathyAction = p.PeripheralneoropathyAction,
+                RashAction = p.RashAction,
+                AdheranceMeasurementAction = p.AdheranceMeasurementAction,
             };
             return _patientIpt.UpdatePatientIpt(patientIpt);
         }

@@ -36,15 +36,20 @@ namespace Entities.CCC.Encounter
             public string chronicIllness { get; set; }
             public string treatment { get; set; }
             public string dose { get; set; }
-            public string duration { get; set; }
+            public string OnsetDate { get; set; }
+            public string Active { get; set; }
         }
 
         [Serializable]
         public class Allergies
         {
+            public string allergyID { get; set; }
+            public string reactionID { get; set; }
+            public string severityID { get; set; }
             public string allergy { get; set; }
-            public string allergyResponse { get; set; }
-            public string allergyDate { get; set; }
+            public string reaction { get; set; }
+            public string severity { get; set; }
+            public string onsetDate { get; set; }
         }
 
         [Serializable]
@@ -65,11 +70,12 @@ namespace Entities.CCC.Encounter
         }
 
         [Serializable]
-        public class PresentingComplaintsEntity
+        public class PresentingComplaintsEntity : ICF_IPT
         {
             public string visitDate { get; set; }
             public string visitScheduled { get; set; }
             public string visitBy { get; set; }
+            public string anyComplaint { get; set; }
             public string complaints { get; set; }
             public string tbScreening { get; set; }
             public string nutritionStatus { get; set; }
@@ -83,11 +89,46 @@ namespace Entities.CCC.Encounter
             public string CaCX { get; set; }
             public string STIScreening { get; set; }
             public string STIPartnerNotification { get; set; }
+            public string WorkPlan { get; set; }
             public string ARVAdherence { get; set; }
             public string CTXAdherence { get; set; }
             public string nextAppointmentDate { get; set; }
             public string nextAppointmentType { get; set; }
             public string[] phdp { get; set; }
+            public string[] generalExams { get; set; }
+            
+            
+
+        }
+
+        [Serializable]
+        public class ICF_IPT
+        {
+            public string OnAntiTB { get; set; }
+            public string OnIPT { get; set; }
+            public string Cough { get; set; }
+            public string Fever { get; set; }
+            public string NoticeableWeightLoss { get; set; }
+            public string NightSweats { get; set; }
+            public string SputumSmear { get; set; }
+            public string ChestXray { get; set; }
+            public string startAntiTB { get; set; }
+            public string InvitationOfContacts { get; set; }
+            public string EvaluatedForIPT { get; set; }
+            public string IPTDueDate { get; set; }
+            public string IPTCollectedDate { get; set; }
+            public string Weight { get; set; }
+            public string Hepatoxicity { get; set; }
+            public string Peripheralneoropathy { get; set; }
+            public string Rash { get; set; }
+            public string AdherenceMeasurement { get; set; }
+            public string IPTEvent { get; set; }
+            public string ReasonForDiscontinuation { get; set; }
+            public string YellowColouredUrine { get; set; }
+            public string Numbness { get; set; }
+            public string YellownessOfEyes { get; set; }
+            public string AdominalTenderness { get; set; }
+            public string LiverFunctionTests { get; set; }
         }
 
         [Serializable]
@@ -128,6 +169,45 @@ namespace Entities.CCC.Encounter
             public string TreatmentPlanReason { get; set; }
             public string RegimenLine { get; set; }
             public string Regimen { get; set; }
+            public string prescriptionDate { get; set; }
+            public string dispenseDate { get; set; }
+        }
+
+        [Serializable]
+        public class ZScoresParameters
+        {
+            public double L_WA { get; set; }
+            public double M_WA { get; set; }
+            public double S_WA { get; set; }
+            public double L_WH { get; set; }
+            public double M_WH { get; set; }
+            public double S_WH { get; set; }
+            public double L_BMIz { get; set; }
+            public double M_BMIz { get; set; }
+            public double S_BMIz { get; set; }
+        }
+
+        [Serializable]
+        public class ZScores
+        {
+            public double weightForAge { get; set; }
+            public double weightForHeight { get; set; }
+            public double BMIz { get; set; }
+        }
+
+        [Serializable]
+        public class KeyValue
+        {
+            public string ItemId { get; set; }
+            public string DisplayName { get; set; }
+        }
+
+        [Serializable]
+        public class PresentingComplaints
+        {
+            public string presentingComplaintID { get; set; }
+            public string presentingComplaint { get; set; }
+            public string onsetDate { get; set; }
         }
     }
 }

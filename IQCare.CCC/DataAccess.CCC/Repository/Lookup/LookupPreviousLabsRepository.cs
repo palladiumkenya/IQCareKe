@@ -28,20 +28,34 @@ namespace DataAccess.CCC.Repository.Lookup
 
             return results.ToList();
         }
-
+       
         public List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId)
         {
             ILookupPreviousLabs completelabsrepository = new LookupPreviousLabsRepository();
-            // var list = previouslabsrepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.TestName);
-            //return list.ToList();         
+           
             var complete = "Complete";
             var myList = completelabsrepository.FindBy(
                 x =>
                 x.PatientId == patientId &               
                 x.Results == complete);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First());
-            return list.Distinct().ToList();
+
+          
+            DateTime? maxLabDate = null;
+            if (myList.ToList().Count > 0) {
+
+                maxLabDate = myList.Max(x => x.ResultDate);
+            }
+            
+            ////gets max laborder           
+            var list = myList.Where(x => x.ResultDate == maxLabDate);
+
+            return list.ToList();
+
+
+
         }
+
+
         public List<LookupPreviousLabs> GetExtruderPendingLabs(int patientId)
         {
             ILookupPreviousLabs previouslabsrepository = new LookupPreviousLabsRepository();
@@ -81,7 +95,7 @@ namespace DataAccess.CCC.Repository.Lookup
                 x =>
                   x.PatientId == patientId &
                   x.Results == pending);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName).Where(x => x.LabName != vl);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName != vl);
             return list.Distinct().ToList();
         }
         public List<LookupPreviousLabs> GetVlLabs(int patientId)
@@ -91,7 +105,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var complete = "Complete";
 
             var myList = previouslabsvl.FindBy(x => x.PatientId == patientId);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName).Where(x => x.LabName == vl).Where(x => x.Results == complete);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName == vl).Where(x => x.Results == complete);
             return list.Distinct().ToList();
         }
 
@@ -101,7 +115,7 @@ namespace DataAccess.CCC.Repository.Lookup
             var vl = "Viral Load";
             var pending = "Pending";
             var myList = pendingvllabs.FindBy(x => x.PatientId == patientId);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.LabName).Where(x => x.LabName == vl).Where(x => x.Results == pending);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName == vl).Where(x => x.Results == pending);
             return list.Distinct().ToList();
             //.Where(x => x.Results == pending)
         }

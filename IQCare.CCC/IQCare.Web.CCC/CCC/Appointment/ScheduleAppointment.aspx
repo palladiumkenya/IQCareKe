@@ -30,7 +30,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux form-group" id="PersonAppointmentDate">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -158,7 +158,7 @@
                                     <label for="description" class="control-label pull-left">Description</label>
                                 </div>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" required="true" />
+                                    <asp:TextBox runat="server" ID="description" CssClass="form-control input-sm" ClientIDMode="Static" minlength="5" data-parsley-minlength-message="Description cannot be less than 5 characters"/>
                                 </div>
                             </div>
                         </div>
@@ -211,12 +211,13 @@
 
     <script type="text/javascript">
         $('#PersonAppointmentDate').datepicker({
-            allowPastDates: false,
+            allowPastDates: true,
             Date: 0,
             momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
         });
 
         $(document).ready(function () {
+            $("#AppointmentDate").val("");
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -239,10 +240,24 @@
         });
 
         $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
             AppointmentCount();
         });
 
         $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function(event,date) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
             AppointmentCount();
         });
 

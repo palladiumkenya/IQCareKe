@@ -24,13 +24,14 @@ namespace BusinessProcess.CCC
                 //DateTime dobDateTime = DateTime.Parse(dob);
 
                 results =
-                    results.Where(x => _utility.Decrypt(x.FirstName).ToLower().Contains(firstName.ToLower()));//.ToList();
+                    results.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()));//.ToList();
+
+                if(!System.String.IsNullOrEmpty(middleName))
+                results =
+                    results.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()));//.ToList();
 
                 results =
-                    results.Where(x => _utility.Decrypt(x.MiddleName).ToLower().Contains(middleName.ToLower()));//.ToList();
-
-                results =
-                    results.Where(x => _utility.Decrypt(x.LastName).ToLower().Contains(lastName.ToLower()));//.ToList();
+                    results.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()));//.ToList();
 
                 //foreach (var item in results)
                 //{

@@ -6,51 +6,27 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.Web.Laboratory;
 
 namespace IQCare.Web.CCC.Encounter
 {
     public partial class PatientEncounter : System.Web.UI.Page
     {
-        public int PatientId;
-        public int VisitId;
+        public int PatientId;       
         public int PatientMasterVisitId;
-        public int UserId;
-        public int Ptn_pk;
-        public int patientId;
-        public int locationId;
+        public int UserId;     
+        public int patientId;              
         public string Msg { get; set; }
         public int Result { get; set; }
-      
 
-
-
-        private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-        private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-        private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //VisitId = Convert.ToInt32(HttpContext.Current.Session["VisitId"]);
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+          
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
-
-            PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(PatientId);
-            if (ptpk.ptn_pk != null)
-            {
-                Ptn_pk = ptpk.ptn_pk.Value;
-            }
-
-            LookupFacility facility = _lookupManager.GetFacility();
-            locationId = facility.FacilityID;
-            
-
-            if (!IsPostBack)
-            {
-                LookupLogic lookUp = new LookupLogic();
-                lookUp.populateDDL(orderReason, "LabOrderReason");
-
-            }
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);           
+           
 
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 

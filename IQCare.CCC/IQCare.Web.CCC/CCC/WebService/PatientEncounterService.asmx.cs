@@ -25,11 +25,20 @@ namespace IQCare.Web.CCC.WebService
     {
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
-        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string VisitDate,string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), "211",VisitDate,VisitScheduled,VisitBy, Complaints,TBScreening,NutritionalStatus, adverseEvent);
+            int val = patientEncounter.savePatientEncounterPresentingComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), "203",VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints,TBScreening,NutritionalStatus, Convert.ToInt32(Session["AppUserId"].ToString()), adverseEvent, presentingComplaints);
+            return val;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int savePatientEncounterTS(string VisitDate, string VisitScheduled, string VisitBy)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            int val = patientEncounter.savePatientEncounterTS(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), "203", VisitDate, VisitScheduled, VisitBy, Convert.ToInt32(Session["AppUserId"].ToString()));
             return val;
         }
 
@@ -39,23 +48,23 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), chronicIllness,vaccines,allergies);
+            patientEncounter.savePatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), chronicIllness,vaccines,allergies);
         }
 
         [WebMethod(EnableSession = true)]
-        public void savePatientPhysicalExam(string physicalExam)
+        public void savePatientPhysicalExam(string physicalExam, string generalExam)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), physicalExam);
+            patientEncounter.savePatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), physicalExam, generalExam);
         }
 
         [WebMethod(EnableSession = true)]
-        public void savePatientManagement(string phdp,string ARVAdherence,string CTXAdherence,string appointmentDate,string appointmentType,string diagnosis)
+        public void savePatientManagement(string workplan, string phdp,string ARVAdherence,string CTXAdherence,string diagnosis)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientManagement(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(), ARVAdherence,CTXAdherence,appointmentDate,appointmentType,phdp,diagnosis);
+            patientEncounter.savePatientManagement(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), workplan, ARVAdherence,CTXAdherence,phdp,diagnosis);
         }
 
         [WebMethod(EnableSession = true)]
@@ -64,7 +73,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -77,16 +86,58 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetChronicIllness()
+        public ArrayList LoadComplaints()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterComplaints(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[6] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["dose"].ToString(), row["duration"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                string[] i = new string[4] { row["presentingComplaintsId"].ToString(), row["complaint"].ToString(), row["onsetDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList LoadWorkPlan()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPatientWorkPlan(Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["visitDate"].ToString(), row["clinicalNotes"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetChronicIllness()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.loadPatientEncounterChronicIllness(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string active = "";
+                if (row["active"].ToString() == "1")
+                    active = "checked";
+                else
+                    active = "";
+
+                string[] i = new string[7] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["dose"].ToString(), row["OnsetDate"].ToString(),
+                    "<input type='checkbox' id='chkChronic" + row["chronicIllnessID"].ToString() + "' " + active + " >",
+                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
             }
             return rows;
@@ -98,12 +149,14 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterAllergies(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterAllergies(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[4] { row["Allergen"].ToString(), row["AllergyResponse"].ToString(), "21-Mar-2017", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                string[] i = new string[8] { row["allergyId"].ToString(), row["reactionId"].ToString(), row["severityId"].ToString(),
+                    row["allergy"].ToString(), row["reaction"].ToString(), row["severity"].ToString(),
+                    row["onsetDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
             }
             return rows;
@@ -115,7 +168,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterVaccines(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterVaccines(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -132,7 +185,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterPhysicalExam(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -149,12 +202,12 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientEncounterDiagnosis(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.loadPatientEncounterDiagnosis(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[3] { row["Diagnosis"].ToString(), row["ManagementPlan"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                string[] i = new string[4] { row["Diagnosis"].ToString(), row["DisplayName"].ToString(), row["ManagementPlan"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
             }
             return rows;
@@ -204,7 +257,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyPendingPrescriptions(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString());
+            DataTable theDT = patientEncounter.getPharmacyPendingPrescriptions(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
@@ -237,12 +290,89 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPresentingComplaints()
+        {
+            //PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            var result = LookupLogic.GetLookUpItemViewByMasterName("PresentingComplaints");
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var presentingComplaints = parser.Deserialize<List<KeyValue>>(result);
+
+            ArrayList rows = new ArrayList();
+
+            for(int i = 0; i < presentingComplaints.Count; i++)
+            {
+                string[] j = new string[2] { presentingComplaints[i].ItemId + "~" + presentingComplaints[i].DisplayName, presentingComplaints[i].DisplayName };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList loadAllergies()
+        {
+            var result = LookupLogic.GetLookUpItemViewByMasterName("Allergies");
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var allergies = parser.Deserialize<List<KeyValue>>(result);
+
+            ArrayList rows = new ArrayList();
+
+            for (int i = 0; i < allergies.Count; i++)
+            {
+                string[] j = new string[2] { allergies[i].ItemId + "~" + allergies[i].DisplayName, allergies[i].DisplayName };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList loadAllergyReactions()
+        {
+            var result = LookupLogic.GetLookUpItemViewByMasterName("AllergyReactions");
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var allergyReactions = parser.Deserialize<List<KeyValue>>(result);
+
+            ArrayList rows = new ArrayList();
+
+            for (int i = 0; i < allergyReactions.Count; i++)
+            {
+                string[] j = new string[2] { allergyReactions[i].ItemId + "~" + allergyReactions[i].DisplayName, allergyReactions[i].DisplayName };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList loadDiagnosis()
+        {
+            var result = LookupLogic.GetLookUpItemViewByMasterName("ICD10");
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var diagnosis = parser.Deserialize<List<KeyValue>>(result);
+
+            ArrayList rows = new ArrayList();
+
+            for (int i = 0; i < diagnosis.Count; i++)
+            {
+                string[] j = new string[2] { diagnosis[i].ItemId + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
+                rows.Add(j);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetCurrentRegimen()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             List<PharmacyFields> lst = new List<PharmacyFields>();
-            lst = patientEncounter.getPharmacyCurrentRegimen(Session["PatientId"].ToString());
+            lst = patientEncounter.getPharmacyCurrentRegimen(Session["PatientPK"].ToString());
 
             ArrayList rows = new ArrayList();
 
@@ -293,30 +423,47 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            //PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //ArrayList rows = new ArrayList();
+
+            //foreach (DataRow row in theDT.Rows)
+            //{
+            //    string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+            //    rows.Add(i);
+            //}
+            //return rows;
+
+            /////////////////////
+            var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            var regimen = parser.Deserialize<List<KeyValue>>(result);
+
             ArrayList rows = new ArrayList();
 
-            foreach (DataRow row in theDT.Rows)
+            for (int i = 0; i < regimen.Count; i++)
             {
-                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
-                rows.Add(i);
+                string[] j = new string[2] { regimen[i].ItemId, regimen[i].DisplayName };
+                rows.Add(j);
             }
             return rows;
+
         }
 
         [WebMethod(EnableSession = true)]
         public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan, 
-            string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string drugPrescription,
-            string regimenText)
+            string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string PrescriptionDate,
+            string DispensedDate, string drugPrescription, string regimenText)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientId"].ToString(),
+            int val = patientEncounter.saveUpdatePharmacy(Session["PatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
                 Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(), 
                 Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
-                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText);
+                TreatmentProgram,PeriodTaken,TreatmentPlan,TreatmentPlanReason,Regimen, regimenText, PrescriptionDate,
+                DispensedDate);
             return val;
         }
 
@@ -328,13 +475,181 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public ArrayList getZScoreValues(string height, string weight)
+        {
+            ArrayList result = new ArrayList();
+            string weightForAgeResult="", weightForHeight="", BMIz = "";
+            if (height != "" && weight != "")
+            {
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+                ZScores zsValues = new ZScores();
+                zsValues = patientEncounter.getZScores(Session["PatientPK"].ToString(), Convert.ToDouble(Session["Age"].ToString()), Session["Gender"].ToString(), Convert.ToDouble(height), Convert.ToDouble(weight));
+
+                if (zsValues != null)
+                {
+
+                    //weight for age
+                    if (zsValues.weightForAge >= 4)
+                    {
+                        weightForAgeResult = "4 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 3 && zsValues.weightForAge < 4)
+                    {
+                        weightForAgeResult = "3 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 2 && zsValues.weightForAge < 3)
+                    {
+                        weightForAgeResult = "2 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge >= 1 && zsValues.weightForAge < 2)
+                    {
+                        weightForAgeResult = "1 (Overweight)";
+                    }
+                    else if (zsValues.weightForAge > -1 && zsValues.weightForAge < 1)
+                    {
+                        weightForAgeResult = "0 (Normal)";
+                    }
+                    else if (zsValues.weightForAge <= -1 && zsValues.weightForAge > -2)
+                    {
+                        weightForAgeResult = "-1 (Mild)";
+                    }
+                    else if (zsValues.weightForAge <= -2 && zsValues.weightForAge > -3)
+                    {
+                        weightForAgeResult = "-2 (Moderate)";
+                    }
+                    else if (zsValues.weightForAge <= -3 && zsValues.weightForAge > -4)
+                    {
+                        weightForAgeResult = "-3 (Severe)";
+                    }
+                    else if (zsValues.weightForAge <= -4)
+                    {
+                        weightForAgeResult = "-4 (Severe)";
+                    }
+                    else
+                    {
+                        weightForAgeResult = "Out of Range";
+                    }
+
+                    //weight for height
+                    if (zsValues.weightForHeight >= 4)
+                    {
+                        weightForHeight = "4 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 3 && zsValues.weightForHeight < 4)
+                    {
+                        weightForHeight = "3 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 2 && zsValues.weightForHeight < 3)
+                    {
+                        weightForHeight = "2 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight >= 1 && zsValues.weightForHeight < 2)
+                    {
+                        weightForHeight = "1 (Overweight)";
+                        
+                    }
+                    else if (zsValues.weightForHeight > -1 && zsValues.weightForHeight < 1)
+                    {
+                        weightForHeight = "0 (Normal)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -1 && zsValues.weightForHeight > -2)
+                    {
+                        weightForHeight = "-1 (Mild)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -2 && zsValues.weightForHeight > -3)
+                    {
+                        weightForHeight = "-2 (Moderate)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -3 && zsValues.weightForHeight > -4)
+                    {
+                        weightForHeight = "-3 (Severe)";
+                        
+                    }
+                    else if (zsValues.weightForHeight <= -4)
+                    {
+                        weightForHeight = "-4 (Severe)";
+                        
+                    }
+                    else
+                    {
+                        weightForHeight = "Out of Range";
+                    }
+
+                    //BMIz
+                    if (zsValues.BMIz >= 4)
+                    {
+                        BMIz = "4 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 3 && zsValues.BMIz < 4)
+                    {
+                        BMIz = "3 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 2 && zsValues.BMIz < 3)
+                    {
+                        BMIz = "2 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz >= 1 && zsValues.BMIz < 2)
+                    {
+                        BMIz = "1 (Overweight)";
+                        
+                    }
+                    else if (zsValues.BMIz > -1 && zsValues.BMIz < 1)
+                    {
+                        BMIz = "0 (Normal)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -1 && zsValues.BMIz > -2)
+                    {
+                        BMIz = "-1 (Mild)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -2 && zsValues.BMIz > -3)
+                    {
+                        BMIz = "-2 (Moderate)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -3 && zsValues.BMIz > -4)
+                    {
+                        BMIz = "-3 (Severe)";
+                        
+                    }
+                    else if (zsValues.BMIz <= -4)
+                    {
+                        BMIz = "-4 (Severe)";
+                        
+                    }
+                    else
+                    {
+                        BMIz = "Out of Range";
+                    }
+
+
+
+                    string[] i = new string[3] { weightForAgeResult, weightForHeight, BMIz };
+                    result.Add(i);
+                }
+            }
+            return result;
+
+        }
+
+        [WebMethod(EnableSession = true)]
         public string SavePatientAdherenceAssessment(string feelBetter, string carelessAboutMedicine, string feelWorse, string forgetMedicine)
         {
             PatientAdherenceAssessmentManager patientAdherenceAssessment = new PatientAdherenceAssessmentManager();
             int adherenceScore = 0;
             string adherenceRating = null;
 
-            int patientId = Convert.ToInt32(Session["PatientId"].ToString());
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitId"].ToString());
             int createdBy = Convert.ToInt32(Session["AppUserId"].ToString());
             bool feel_Better = Convert.ToBoolean(Convert.ToInt32(feelBetter));
@@ -348,15 +663,24 @@ namespace IQCare.Web.CCC.WebService
             if (adherenceScore == 0)
             {
                 adherenceRating = "Good";
-            }else if (adherenceScore >= 1 || adherenceScore <= 2)
+            }else if (adherenceScore >= 1 && adherenceScore <= 2)
             {
                 adherenceRating = "Fair";
-            }else if (adherenceScore >= 3 || adherenceScore <= 4)
+            }else if (adherenceScore >= 3 && adherenceScore <= 4)
             {
                 adherenceRating = "Poor";
             }
 
+            var history = patientAdherenceAssessment.GetActiveAdherenceAssessment(patientId);
+
+            if (history.Count > 0)
+            {
+                history[0].DeleteFlag = true;
+                patientAdherenceAssessment.UpdateAdherenceAssessment(history[0]);
+            }
+
             int result = patientAdherenceAssessment.AddPatientAdherenceAssessment(patientId, patientMasterVisitId, createdBy, feel_Better, careless_Medicine, feel_Worse, forget_Medicine);
+
             if (result > 0)
             {
                 var lookUpLogic =  new LookupLogic();

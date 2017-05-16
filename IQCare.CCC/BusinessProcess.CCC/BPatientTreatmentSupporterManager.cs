@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using DataAccess.Base;
 using Entities.PatientCore;
 using Interface.CCC;
@@ -20,11 +23,29 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
+                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+                personIdParameter.Value = patientTreatmentSupporter.PersonId;
 
-                _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                SqlParameter supporterIdParameter = new SqlParameter("supporterIdParameter", SqlDbType.Int);
+                supporterIdParameter.Value = patientTreatmentSupporter.SupporterId;
+
+                SqlParameter mobileNumberParameter = new SqlParameter("mobileNumberParameter", SqlDbType.VarBinary);
+                mobileNumberParameter.Value = Encoding.ASCII.GetBytes(patientTreatmentSupporter.MobileContact);
+
+                SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
+                userId.Value = patientTreatmentSupporter.CreatedBy;
+
+                _unitOfWork.PersonContactRepository.ExecuteProcedure(
+                    "exec PatientTreatmentSupporter_Insert @personIdParameter, @supporterIdParameter, @mobileNumberParameter,@UserId",
+                    personIdParameter, supporterIdParameter, mobileNumberParameter, userId);
                 _result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
                 return _result;
+
+                //_unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                //_result = _unitOfWork.Complete();
+                //_unitOfWork.Dispose();
+                //return _result;
             }
         }
 
@@ -32,11 +53,35 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new PersonContext()))
             {
+                SqlParameter personIdParameter = new SqlParameter("personIdParameter", SqlDbType.Int);
+                personIdParameter.Value = patientTreatmentSupporter.PersonId;
 
-                _unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
-                 _result = _unitOfWork.Complete();
+                SqlParameter supporterIdParameter = new SqlParameter("supporterIdParameter", SqlDbType.Int);
+                supporterIdParameter.Value = patientTreatmentSupporter.SupporterId;
+
+                SqlParameter mobileNumberParameter = new SqlParameter("mobileNumberParameter", SqlDbType.VarBinary);
+                mobileNumberParameter.Value = Encoding.ASCII.GetBytes(patientTreatmentSupporter.MobileContact);
+
+                SqlParameter userId = new SqlParameter("UserId", SqlDbType.Int);
+                userId.Value = patientTreatmentSupporter.CreatedBy;
+
+                SqlParameter deleteFlag = new SqlParameter("DeleteFlag", SqlDbType.Bit);
+                deleteFlag.Value = patientTreatmentSupporter.DeleteFlag;
+
+                SqlParameter id = new SqlParameter("Id", SqlDbType.Int);
+                id.Value = patientTreatmentSupporter.Id;
+
+                _unitOfWork.PersonContactRepository.ExecuteProcedure(
+                    "exec PatientTreatmentSupporter_Update @personIdParameter, @supporterIdParameter, @mobileNumberParameter, @UserId, @DeleteFlag, @Id",
+                    personIdParameter, supporterIdParameter, mobileNumberParameter, userId, deleteFlag, id);
+                _result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
                 return _result;
+
+                //_unitOfWork.PatientTreatmentSupporterRepository.Add(patientTreatmentSupporter);
+                // _result = _unitOfWork.Complete();
+                //_unitOfWork.Dispose();
+                //return _result;
             }
         }
 

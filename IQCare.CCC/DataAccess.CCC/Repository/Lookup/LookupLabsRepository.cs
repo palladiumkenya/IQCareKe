@@ -32,7 +32,7 @@ namespace DataAccess.CCC.Repository.Lookup
         public List<LookupLabs> GetLabs()
         {
             ILookupLabs labsRepository = new LookupLabsRepository();
-            var list = labsRepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.Name);
+            var list = labsRepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.Id);
             return list.ToList();
         }
 

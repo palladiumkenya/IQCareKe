@@ -19,6 +19,8 @@ namespace IQCare.CCC.UILogic.Tb
                 Fever = p.Fever,
                 NightSweats = p.NightSweats,
                 WeightLoss = p.WeightLoss,
+                OnAntiTbDrugs = p.OnAntiTbDrugs,
+                OnIpt = p.OnIpt
             };
             return _patientIcf.AddPatientIcf(patientIcf);
         }
@@ -38,12 +40,15 @@ namespace IQCare.CCC.UILogic.Tb
         {
             PatientIcf patientIcf = new PatientIcf()
             {
+                Id = p.Id,
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 Cough = p.Cough,
                 Fever = p.Fever,
                 NightSweats = p.NightSweats,
                 WeightLoss = p.WeightLoss,
+                OnIpt = p.OnIpt,
+                OnAntiTbDrugs = p.OnAntiTbDrugs
             };
             return _patientIcf.UpdatePatientIcf(patientIcf);
         }

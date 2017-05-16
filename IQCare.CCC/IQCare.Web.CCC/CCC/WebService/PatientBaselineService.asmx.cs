@@ -35,7 +35,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                _patientId = Convert.ToInt32(HttpContext.Current.Session["patientId"]);
+                _patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 _patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
 
                 var patientTranfersInManager = new PatientTransferInmanager();
@@ -56,13 +56,12 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public string ManagePatientHivDiagnosis(int id,int patientId, int patientMasterVisitId, DateTime hivDiagnosisDate,
-            DateTime enrollmentDate, int enrollmentWhoStage, DateTime artInitiationDate, int userId)
+            DateTime enrollmentDate, int enrollmentWhoStage, string artInitiationStr, int userId)
         {
             try
             {
-                var patientHivDiagnosis = new PatientHivDiagnosisManager();
-
-                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationDate, userId);
+                var patientHivDiagnosis = new PatientHivDiagnosisManager(); 
+                _result = patientHivDiagnosis.ManagePatientHivDiagnosis(0, patientId, patientMasterVisitId, hivDiagnosisDate,enrollmentDate, enrollmentWhoStage, artInitiationStr, userId);
                 if (_result > 0)
                 {
                     _jsonMessage = "Patient HIV Diagnosis Complete!";
@@ -231,7 +230,7 @@ namespace IQCare.Web.CCC.WebService
                 var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
                 foreach (var item in arvHistory)
                 {
-                    _jsonMessage += "<tr> <td align='left'>" + item.Purpose + "</td> <td align='left'>" + item.Regimen + "</td> <td align='left'>" + item.DateLastUsed.ToString("dd-mmm-yyy") + "</td> </tr>";
+                    _jsonMessage += "<tr> <td align='left'>" + item.Purpose + "</td> <td align='left'>" + item.Regimen + "</td> <td align='left'>" + item.DateLastUsed.ToString("dd-MMM-yyyy") + "</td> </tr>";
                 }
                // _jsonMessage=JsonConvert.SerializeObject(patientArvHistory.GetPatientArtUseHistory(patientId))
             }
@@ -255,6 +254,38 @@ namespace IQCare.Web.CCC.WebService
                 _jsonMessage = e.Message;
             }
 
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession =true)]
+        public string GetCurrentPatientARVUseHistory(int patientId)
+        {
+            try
+            {
+                var patientArvHistory = new PatientArvHistoryManager();
+                var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
+                _jsonMessage = JsonConvert.SerializeObject(arvHistory);
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetNewPatientBaselineVitals(int patientId)
+        {
+            try
+            {
+                var vitalsBaseline=new PatientVitalsManager();
+                _jsonMessage = JsonConvert.SerializeObject(vitalsBaseline.GetPatientVitalsBaseline(patientId));
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
             return _jsonMessage;
         }
     }

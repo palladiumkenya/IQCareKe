@@ -85,15 +85,15 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
 
-                List<LookupItemView> keyPopulationList = mgr.GetLookItemByGroup("KeyPopulation");
-                if (keyPopulationList != null && keyPopulationList.Count > 0)
-                {
-                    KeyPopulationCategoryId.Items.Add(new ListItem("select", "0"));
-                    foreach (var item in keyPopulationList)
-                    {
-                        KeyPopulationCategoryId.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
-                    }
-                }
+                //List<LookupItemView> keyPopulationList = mgr.GetLookItemByGroup("KeyPopulation");
+                //if (keyPopulationList != null && keyPopulationList.Count > 0)
+                //{
+                //    KeyPopulationCategoryId.Items.Add(new ListItem("select", "0"));
+                //    foreach (var item in keyPopulationList)
+                //    {
+                //        KeyPopulationCategoryId.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                //    }
+                //}
 
                 List<LookupItemView> patientTypes = mgr.GetLookItemByGroup("PatientType");
                 if (patientTypes != null && patientTypes.Count > 0)
@@ -101,6 +101,15 @@ namespace IQCare.Web.CCC.Patient
                     foreach (var item in patientTypes)
                     {
                         PatientTypeId.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
+                List<LookupItemView> popTypes = mgr.GetLookItemByGroup("PopulationType");
+                if (popTypes != null && popTypes.Count > 0)
+                {
+                    foreach (var item in popTypes)
+                    {
+                        PopulationType.Items.Add(new ListItem(item.DisplayName, item.ItemId.ToString()));
                     }
                 }
             }

@@ -1882,5 +1882,13 @@ namespace BusinessProcess.Clinical
             return s;
 
         }
+
+        public void BlueCardToGreenCardSyncronise(int ptn_Pk)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, ptn_Pk);         
+            ClsObject obClsObject = new ClsObject();
+            obClsObject.ReturnObject(ClsUtility.theParams, "SP_Bluecard_ToGreenCard", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
     }
 }

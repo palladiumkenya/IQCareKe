@@ -83,6 +83,8 @@
     <Compile Include="Lookup\IPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\IPatientLookupmanager.cs" />
     <Compile Include="Lookup\IPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\IPatientTreatmentSupporterLookupManager.cs" />
+    <Compile Include="Lookup\IPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\IPersonContactLookUpManager.cs" />
     <Compile Include="Lookup\IPersonLookUpManager.cs" />
     <Compile Include="OneTimeEvent\IOneTimeEventsTrackerManager.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Visit\IPatientIdentifierManager.cs" />
     <Compile Include="Visit\IPatientLabOrderManager.cs" />
     <Compile Include="Visit\IPatientMasterVisitManager.cs" />
+    <Compile Include="Visit\IPatientVisitManager.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

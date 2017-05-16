@@ -24,7 +24,7 @@ namespace IQCare.Web.CCC.WebService
             int result = 0;
             try
             {
-                int patientId = Convert.ToInt32(Session["patientId"]);
+                int patientId = Convert.ToInt32(Session["PatientPK"]);
                 int userId = Convert.ToInt32(Session["AppUserId"]);
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
                 result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId);
@@ -47,12 +47,13 @@ namespace IQCare.Web.CCC.WebService
             int result = 0;
             try
             {
-                int patientId = Convert.ToInt32(Session["patientId"]);
+                int patientId = Convert.ToInt32(Session["PatientPK"]);
                 int visitId = Convert.ToInt32(Session["patientMasterVisitId"]);
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
                 result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
                 Session["EncounterStatusId"] = 0;
                 Session["PatientEditId"] = 0;
+                Session["PatientPK"] = 0;
             }
             catch (Exception e)
             {
@@ -68,7 +69,7 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
-                int patientId = Convert.ToInt32(Session["patientId"]);
+                int patientId = Convert.ToInt32(Session["PatientPK"]);
                 PatientCareEndingManager patientCareEnding=new PatientCareEndingManager();
                 _jsonMessage = JsonConvert.SerializeObject(patientCareEnding.GetPatientCareEndings(patientId));
             }

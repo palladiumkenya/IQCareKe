@@ -57,7 +57,7 @@ namespace IQCare.Web.Laboratory.Request
         void FindPatient_PatientEnrollmentChanged(object sender, CommandEventArgs e)
         {
             List<KeyValuePair<string, int>> param = e.CommandArgument as List<KeyValuePair<string, int>>;
-            this.PatientId = param.Find(l => l.Key == "PatientID").Value;
+            this.PatientPk = param.Find(l => l.Key == "PatientID").Value;
             this.LocationId = param.Find(l => l.Key == "LocationID").Value;
             this.ModuleId = param.Find(l => l.Key == "ModuleID").Value;
         }
@@ -71,7 +71,7 @@ namespace IQCare.Web.Laboratory.Request
         void FindPatient_SelectedPatientChanged(object sender, CommandEventArgs e)
         {
             List<KeyValuePair<string, object>> param = e.CommandArgument as List<KeyValuePair<string, object>>;
-            PatientId = (int)param.Find(l => l.Key == "PatientID").Value;
+            PatientPk = (int)param.Find(l => l.Key == "PatientID").Value;
             LocationId = (int)param.Find(l => l.Key == "LocationID").Value;
 
             if (this.LocationId == Convert.ToInt32(base.Session["AppLocationId"]))
@@ -133,7 +133,7 @@ namespace IQCare.Web.Laboratory.Request
         /// <value>
         /// The patient identifier.
         /// </value>
-        protected int PatientId
+        protected int PatientPk
         {
             get
             {
@@ -196,7 +196,7 @@ namespace IQCare.Web.Laboratory.Request
             string theUrl = "";
             if (formName == "FindLabPatient")
             {
-                theUrl = string.Format("{0}?PatientId={1}", "./FindLabOrder.aspx", PatientId);
+                theUrl = string.Format("{0}?PatientId={1}", "./FindLabOrder.aspx", PatientPk);
                 Response.Redirect(theUrl);
             }
            

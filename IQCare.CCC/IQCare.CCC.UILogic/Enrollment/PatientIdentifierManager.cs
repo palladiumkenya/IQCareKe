@@ -3,9 +3,6 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Enrollment;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IQCare.CCC.UILogic.Enrollment
 {
@@ -24,6 +21,19 @@ namespace IQCare.CCC.UILogic.Enrollment
             int identifierTypeId)
         {
             return _mgr.GetPatientEntityIdentifiers(patientId, patientEnrollmentId, identifierTypeId);
+        }
+
+        public List<PatientEntityIdentifier> CheckIfIdentifierNumberIsUsed(string identifierValue, int identifierTypeId)
+        {
+            try
+            {
+                return _mgr.CheckIfIdentifierNumberIsUsed(identifierValue, identifierTypeId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using Application.Common;
 using Application.Presentation;
 using Entities.CCC.Baseline;
@@ -8,6 +9,7 @@ using Entities.CCC.Lookup;
 using Entities.Common;
 using Interface.CCC;
 using Interface.CCC.Baseline;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Baseline
 {
@@ -19,17 +21,19 @@ namespace IQCare.CCC.UILogic.Baseline
         PersonLookUpManager personLookUp = new PersonLookUpManager();
         Utility _utility = new Utility();
 
-        public int AddPatientFamilyTestings(PatientFamilyTesting p)
+        public int AddPatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
-            Person person = new Person()
-            {
-                FirstName = _utility.Encrypt(p.FirstName),
-                MidName = _utility.Encrypt(p.MiddleName),
-                LastName = _utility.Encrypt(p.LastName),
-                Sex = p.Sex,
-                //DateOfBirth = p.DateOfBirth,
-            };
-            int personId = _personManager.AddPerson(person);
+            PersonManager pm = new PersonManager();
+            int personId =  pm.AddPersonUiLogic(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId);
+            //Person person = new Person()
+            //{
+            //    FirstName = _utility.Encrypt(p.FirstName),
+            //    MidName = _utility.Encrypt(p.MiddleName),
+            //    LastName = _utility.Encrypt(p.LastName),
+            //    Sex = p.Sex,
+            //    //DateOfBirth = p.DateOfBirth,
+            //};
+            //int personId = _personManager.AddPerson(person);
 
             PersonRelationship relationship = new PersonRelationship()
             {
@@ -58,6 +62,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 CccNumber = p.CccReferaalNumber
             };
             int hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
+            pm = null;
             return hivTestingId;
         }
 
@@ -72,20 +77,24 @@ namespace IQCare.CCC.UILogic.Baseline
             _hivTestingManager.DeletePatientHivTesting(id);
         }
 
-        public int UpdatePatientFamilyTestings(PatientFamilyTesting p)
+        public int UpdatePatientFamilyTestings(PatientFamilyTesting p, int userId)
         {
-            Person person = new Person()
-            {
-                FirstName = _utility.Encrypt(p.FirstName),
-                MidName = _utility.Encrypt(p.MiddleName),
-                LastName = _utility.Encrypt(p.LastName),
-                Sex = p.Sex,
-                //DateOfBirth = p.DateOfBirth,
-            };
-            int personId = _personManager.UpdatePerson(person, p.PersonId);
+            PersonManager pm = new PersonManager();
+            int personId = p.PersonId;
+            pm.UpdatePerson(p.FirstName, p.MiddleName, p.LastName, p.Sex, userId, p.PersonId);
+            //Person person = new Person()
+            //{
+            //    FirstName = _utility.Encrypt(p.FirstName),
+            //    MidName = _utility.Encrypt(p.MiddleName),
+            //    LastName = _utility.Encrypt(p.LastName),
+            //    Sex = p.Sex,
+            //    //DateOfBirth = p.DateOfBirth,
+            //};
+           // int personId = _personManager.UpdatePerson(person, p.PersonId);
 
             PersonRelationship relationship = new PersonRelationship()
             {
+                Id = p.PersonRelationshipId,
                 PersonId = personId,
                 RelatedTo = p.PatientId,
                 RelationshipTypeId = p.RelationshipId
@@ -94,6 +103,7 @@ namespace IQCare.CCC.UILogic.Baseline
 
             PatientHivTesting familyTesting = new PatientHivTesting()
             {
+                Id = p.HivTestingId,
                 PersonId = personId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 BaselineResult = p.BaseLineHivStatusId,
@@ -104,10 +114,12 @@ namespace IQCare.CCC.UILogic.Baseline
                 CccNumber = p.CccReferaalNumber
             };
             int hivTestingId = _hivTestingManager.UpdatePatientHivTesting(familyTesting);
+            pm = null;
+            familyTesting = null;
             return hivTestingId;
         }
 
-        public List<PatientFamilyTesting> GetPatienFamilyList(int patientId)
+        public List<PatientFamilyTesting> GetPatientFamilyList(int patientId)
         {
             List<PatientFamilyTesting> patientFamilyTestings = new List<PatientFamilyTesting>();
             PatientFamilyTesting familyTesting = null;
@@ -121,9 +133,9 @@ namespace IQCare.CCC.UILogic.Baseline
                     if (hivTesting != null)
                         familyTesting = new PatientFamilyTesting()
                         {
-                            FirstName = utility.Decrypt(person.FirstName),
-                            MiddleName = utility.Decrypt(person.MiddleName),
-                            LastName = utility.Decrypt(person.LastName),
+                            FirstName = (person.FirstName),
+                            MiddleName = (person.MiddleName),
+                            LastName = (person.LastName),
                             Sex = person.Sex,
                             //DateOfBirth = person.DateOfBirth,
                             PersonId = relationship.PersonId,
@@ -133,14 +145,16 @@ namespace IQCare.CCC.UILogic.Baseline
                             HivTestingResultsId = hivTesting.TestingResult,
                             HivTestingResultsDate = hivTesting.TestingDate,
                             CccReferal = hivTesting.ReferredToCare,
-                            CccReferaalNumber = hivTesting.CccNumber
+                            CccReferaalNumber = hivTesting.CccNumber,
+                            PersonRelationshipId = relationship.Id,
+                            HivTestingId = hivTesting.Id
                         };
                 patientFamilyTestings.Add(familyTesting);
             }
             return patientFamilyTestings;
         }
 
-        public int GetPatienFamilyCount(int patientId)
+        public int GetPatientFamilyCount(int patientId)
         {
             List<PatientFamilyTesting> patientFamilyTestings = new List<PatientFamilyTesting>();
             int personRelationshipsCount = _personRelationshipManager.GetAllPersonRelationship(patientId).Count;

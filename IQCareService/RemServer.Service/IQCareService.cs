@@ -113,7 +113,7 @@ namespace RemServer.Service
         void UpdateNextRunDate(string taskName, int offSet)
         {
 
-            using (ClsObject obj = new ClsObject())
+            ClsObject obj = new ClsObject();
             {
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddExtendedParameters("@NextRunDate", SqlDbType.DateTime, DateTime.Now.AddMinutes(offSet));
@@ -121,6 +121,7 @@ namespace RemServer.Service
                 ClsUtility.AddParameters("@TaskName", SqlDbType.VarChar, taskName);
                 obj.ReturnObject(ClsUtility.theParams, "Schedule_UpdateTask", ClsUtility.ObjectEnum.ExecuteNonQuery);
             }
+            obj = null;
         }
 
         public void DBEntry(Object Message)
@@ -155,8 +156,7 @@ namespace RemServer.Service
                 //Get scheduled jobs
                 try
                 {
-                    using (ClsObject obj = new ClsObject())
-                    {
+                   ClsObject obj = new ClsObject();
                         ClsUtility.Init_Hashtable();
 
                         DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Schedule_GetTask", ClsUtility.ObjectEnum.DataTable);
@@ -171,7 +171,7 @@ namespace RemServer.Service
                             });
                         }
 
-                    };
+                    obj = null; 
                 }
                 catch (Exception ex)
                 {
@@ -392,6 +392,7 @@ namespace RemServer.Service
 
                 DoDelayedTasks();
                 RemotingConfiguration.Configure(Config, false);
+                RemotingConfiguration.ApplicationName = "IQCAREEMR";
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(BusinessServerFactory), "BusinessProcess.rem", WellKnownObjectMode.Singleton);
                 theLog.WriteEntry(string.Format("{0} Started", theSRV_Name));
             }
@@ -726,6 +727,16 @@ namespace RemServer.Service
             foreach (Facility facility in array)
             {
                 using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella", connectionEMR))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@locationid", facility.ID));
+                    command.Parameters.Add(new SqlParameter("@Currentdate", DateTime.Now));
+                    if (connectionEMR.State == ConnectionState.Closed)
+                        connectionEMR.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatus", connectionEMR))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@locationid", facility.ID));

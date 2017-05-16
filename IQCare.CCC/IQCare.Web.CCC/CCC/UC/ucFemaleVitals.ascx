@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucFemaleVitals.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucFemaleVitals" %>
 
-<div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-primary well well-sm">
+<div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-primary well well-sm" id="divFemalVitals">
     
-     <div class="col-md-12" id="FemaleVitals">
+   <div class="col-md-12" id="FemaleVitals" data-parsley-validate="true" data-show-errors="true">
 
           <div class="col-md-12">
                <h2 class=" control-label pull-left"> Reproductive History |</h2> <h6><label class="control-label text-primary pull-left text-muted">Routine Female ONLY observations </label></h6>
@@ -12,8 +12,114 @@
                <hr />
           </div>
 
-          <div class="col-md-12">
-                                            <div class="col-md-4">
+          <div class="col-md-12 form-group">
+              
+               <div class="col-md-4">
+                   <div class="col-md-12"><label class="control-label pull-left">Visit Date </label></div>
+                   <div class="col-md-12">
+                        <div class="datepicker fuelux" id="FemaleVisitDate">
+                             <div class="input-group">
+                                 <input class="form-control input-sm" id="femaleDateOfVisit" type="text" runat="server" ClientIDMode="Static" data-parsley-required="true" />
+                                  <div class="input-group-btn">
+                                                                    <button id="btnFemaleLMP" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                        <span class="sr-only">Toggle Calendar</span>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                                        <div class="datepicker-calendar">
+                                                                            <div class="datepicker-calendar-header">
+                                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                                <button type="button" class="title" data-month="11" data-year="2014">
+                                                                                    <span class="month">
+                                                                                        <span data-month="0">January</span>
+                                                                                        <span data-month="1">February</span>
+                                                                                        <span data-month="2">March</span>
+                                                                                        <span data-month="3">April</span>
+                                                                                        <span data-month="4">May</span>
+                                                                                        <span data-month="5">June</span>
+                                                                                        <span data-month="6">July</span>
+                                                                                        <span data-month="7">August</span>
+                                                                                        <span data-month="8">September</span>
+                                                                                        <span data-month="9">October</span>
+                                                                                        <span data-month="10">November</span>
+                                                                                        <span data-month="11" class="current">December</span>
+                                                                                    </span><span class="year">2014</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <table class="datepicker-calendar-days">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Su</th>
+                                                                                        <th>Mo</th>
+                                                                                        <th>Tu</th>
+                                                                                        <th>We</th>
+                                                                                        <th>Th</th>
+                                                                                        <th>Fr</th>
+                                                                                        <th>Sa</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody></tbody>
+                                                                            </table>
+                                                                            <div class="datepicker-calendar-footer">
+                                                                                <button type="button" class="datepicker-today">Today</button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="datepicker-wheels" aria-hidden="true">
+                                                                            <div class="datepicker-wheels-month">
+                                                                                <h2 class="header">Month</h2>
+                                                                                <ul>
+                                                                                    <li data-month="0">
+                                                                                        <button type="button">Jan</button></li>
+                                                                                    <li data-month="1">
+                                                                                        <button type="button">Feb</button></li>
+                                                                                    <li data-month="2">
+                                                                                        <button type="button">Mar</button></li>
+                                                                                    <li data-month="3">
+                                                                                        <button type="button">Apr</button></li>
+                                                                                    <li data-month="4">
+                                                                                        <button type="button">May</button></li>
+                                                                                    <li data-month="5">
+                                                                                        <button type="button">Jun</button></li>
+                                                                                    <li data-month="6">
+                                                                                        <button type="button">Jul</button></li>
+                                                                                    <li data-month="7">
+                                                                                        <button type="button">Aug</button></li>
+                                                                                    <li data-month="8">
+                                                                                        <button type="button">Sep</button></li>
+                                                                                    <li data-month="9">
+                                                                                        <button type="button">Oct</button></li>
+                                                                                    <li data-month="10">
+                                                                                        <button type="button">Nov</button></li>
+                                                                                    <li data-month="11">
+                                                                                        <button type="button">Dec</button></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="datepicker-wheels-year">
+                                                                                <h2 class="header">Year</h2>
+                                                                                <ul></ul>
+                                                                            </div>
+                                                                            <div class="datepicker-wheels-footer clearfix">
+                                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-4"></div>
+               <div class="col-md-4"></div>
+          </div>
+        
+          <div class="col-md-12 form-group">
+            <div class="col-md-12"><hr/></div>
+        </div>
+
+          <div class="col-md-12 form-group">
+               <div class="col-md-4">
                                                  <div class="col-md-12 form-group">
                                                     <div class="col-md-12">
                                                         <label class="control-label  pull-left">Pregnancy Status</label>
@@ -29,7 +135,7 @@
                                                     <div class="col-md-12">
                                                         <div class="datepicker fuelux" id="FemaleLMP">
                                                             <div class="input-group">
-                                                                <input class="form-control input-sm" id="lmp" type="text" runat="server" ClientIDMode="Static" />
+                                                                <input class="form-control input-sm" id="lmp" type="text" runat="server" ClientIDMode="Static" data-parsley-required="true" />
                                                                 <div class="input-group-btn">
                                                                     <button id="btnFemaleLMP" type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -220,11 +326,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+               
+               <div class="col-md-4">
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12">
                                                         <label class="control-label  pull-left">ANC/PNC Profile</label>
                                                     </div>
+
                                                     <div class="col-md-12 pull-left">
                                                         <label class="pull-left" style="padding-right:10px">
                                                             <input id="ancYes" runat="server" type="radio" name="ANC" value="yes" ClientIDMode="Static"  runat="server" />Yes
@@ -261,7 +369,8 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-md-4">
+               
+              <div class="col-md-4">
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12">
                                                         <label class="control-label  pull-left">CaCX Screeing</label>
@@ -287,31 +396,40 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                         
-     </div><!-- .col-md-12-->
-        
-    <div class="col-md-12">
+
+           </div><!-- .col-md-12 -->
+       
+          <div class="col-md-12">
         <hr />
     </div>
-        <div class="col-md-12">
-             <div class="col-md-8"></div>
-             <div class="col-md-4">
+       
+          <div class="col-md-12" id="btnFemaleVitals">
+        <div class="col-md-6">
+            <div class="col-md-4">
+                 <%--<asp:LinkButton runat="server" ID="btnPregnancyOutCome" CssClass="btn btn-primary fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Set Pregnancy Outcome </asp:LinkButton>--%>
+
+            </div>
+             <div class="col-md-4"></div>
+             <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-6">
             <div class="col-md-4 col-xs-12 col-sm-12">
-                <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save </asp:LinkButton>
+                 <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Save History </asp:LinkButton>
             </div>
 
             <div class="col-md-4 col-xs-12 col-sm-12">
-                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset </asp:LinkButton>
+                <asp:LinkButton runat="server" ID="btnReset" CssClass="btn btn-warning  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Reset History </asp:LinkButton>
             </div>
 
             <div class="col-md-4 col-xs-12 col-sm-12">
-                <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close </asp:LinkButton>
-            </div>
+                    <asp:LinkButton runat="server" ID="btnCancel" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close History </asp:LinkButton>
+             </div>
         </div>
 
-       </div> <!-- .col-md-12 -->
-
+     </div>
+                         
+    </div><!-- .col-md-12-->
+        
 </div><!-- .col-md-12 col-xs-12 col-sm-12-->
  <script type="text/javascript">
         $(document).ready(function(){
@@ -326,6 +444,14 @@
             var ancprofile=0;
             var patientId="<%=PatientId%>";
             var patientMasterVisitId = "<%=PatientMasterVisitId%>";
+
+            var patientGender = "<%=PatientGender%>";
+            var patientAge = "<%=PatientAge%>";
+            var today = new Date();
+            var visitDate;
+
+            //alert(patientAge);
+            //alert(patientGender);
             $("#divNoFP").hide("fast");
 
             $("#FemaleLMP").datepicker({
@@ -333,6 +459,14 @@
                   allowPastDates: true,
                   momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
+
+            $("#FemaleVisitDate").datepicker({
+                  date: null,
+                  allowPastDates: true,
+                  momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            });
+
+            
 
             $("#EDCD").datepicker({
                   date: null,
@@ -348,12 +482,30 @@
                     $("#EDCD").datepicker('setDate',moment(lmp).add(280,'days'));
                 });
 
+           $('#FemaleVisitDate').on('changed.fu.datepicker dateClicked.fu.datepicker',
+                function(event, date) {
 
-            $("#<%=ancYes.ClientID%>").on('click', function () {
-                ancprofile = "true";
-            })
+                    var vDate = $("#FemaleVisitDate").datepicker('getDate');
+                    var futuredate = moment(vDate).isAfter(today);
+                    if (futuredate) {
+                        $("#<%=femaleDateOfVisit.ClientID%>").val('');
+                        toastr.error("Future dates not allowed!");
+                        return false;
+                    } else {
+                        visitDate = $("#FemaleVisitDate").datepicker('getDate');
+                        visitDate = moment(visitDate).format('DD-MMM-YYYY');
+                    }
+
+                });
+
+
+            $("#<%=ancYes.ClientID%>").on('click',
+                function() {
+                    ancprofile = true;
+                });
+
             $("#<%=ancNo.ClientID%>").on('click', function () {
-                ancprofile = "false";
+                ancprofile = false;
             });
             //$('#EDCD').on('changed.fu.datepicker dateClicked.fu.datepicker',
             //    function(event, date) {
@@ -366,7 +518,11 @@
             $("#<%=onFP.ClientID%>").on('change', function () {
                 var fp = $(this).find(":selected").text();
                
-                if (fp === 'No Family Planning(NOFP)') {$("#divNoFP").show("fast");}else { $("#divNoFP").hide("fast"); }
+                if (fp === 'No Family Planning(NOFP)') {
+                    $("#divOnFP").hide("fast", function() { $("#divNoFP").show("fast"); });
+                } else {
+                     $("#divOnFP").show("fast", function() { $("#divNoFP").hide("fast"); });
+                }
                
             });
 
@@ -376,11 +532,14 @@
             $("#<%=examinationPregnancyStatus.ClientID%>").on("change", function () {
                 pgStatus = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").val();
                 if ($(this).find(":selected").text() === 'Pregnant(PG)') {
+                    $("#ancYes").prop("checked", true);
+                    //$("#ancNo").prop("checked", false);
                     $("#divEDD").show("fast");
-                    $("#divOnFP").hide("fast", function () { $("#FP").hide("fast");})
+                    $("#divOnFP").hide("fast", function() { $("#FP").hide("fast"); });
                 } else {
-                    $("#divOnFP").show("fast", function () { $("#FP").show("fast"); })
-                     $("#divEDD").hide("fast");
+                    $("#ancNo").prop("checked", true);
+                    $("#divOnFP").show("fast", function () { $("#FP").show("fast"); });
+                    $("#divEDD").hide("fast");
                 }
             });
 
@@ -397,7 +556,7 @@
             //    var ancprofile = $(this).val();
             //});
 
-            function AddPregnancy() {
+            function addPregnancy() {
 
                 var eddDate = moment($("#EDCD").datepicker('getDate')).format("DD-MMM-YYYY");
                 if (dateOfOutcome == null) { dateOfOutcome = '15-Jun-1900'; }
@@ -418,13 +577,14 @@
                });
             }
 
-            function AddPregnancyIndicator()
+            function addPregnancyIndicator()
             {
+               
                  var eddDate = moment($("#EDCD").datepicker('getDate')).format("DD-MMM-YYYY");
                $.ajax({
 		            type: "POST",
 		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIndicator",
-		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','lmp':'" + lmpDate + "','edd':'" + eddDate + "','pregnancyStatusId':'"+pgStatus+"','ancProfile':'"+ancprofile+"','ancProfileDate':'"+lmpDate+"','userId':'0'}",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','visitDate':'"+visitDate+"','lmp':'" + lmpDate + "','edd':'" + eddDate + "','pregnancyStatusId':'"+pgStatus+"','ancProfile':'"+ancprofile+"','ancProfileDate':'"+lmpDate+"','userId':'0'}",
 		            contentType: "application/json; charset=utf-8",
 		            dataType: "json",
 		            success: function(response) {
@@ -437,7 +597,7 @@
                });
             }
 
-            function AddFamilyPlanning() {
+            function addFamilyPlanning() {
 
                 fpId = $("#<%=onFP.ClientID%>").find(":selected").val();
                 notOnFpId=$("#<%=ddlNoFP.ClientID%>").find(":selected").val();
@@ -445,7 +605,7 @@
                 $.ajax({
 		            type: "POST",
 		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientFamilyPlanning",
-		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','FamilyPlanningStatusId':'" + fpId + "','ReasonNoOnFp':'" + notOnFpId + "','userId':'0'}",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','visitDate':'"+visitDate+"','FamilyPlanningStatusId':'" + fpId + "','ReasonNoOnFp':'" + notOnFpId + "','userId':'0'}",
 		            contentType: "application/json; charset=utf-8",
 		            dataType: "json",
 		            success: function(response) {
@@ -458,16 +618,19 @@
                });
             }
 
-            function AddFamilyPlanningMethod() {
+            function addFamilyPlanningMethod() {
+                
                 $.each(fpMethod, function (index, value) {
-                      $.ajax({
+                    alert(value);
+                    $.ajax({
 		                type: "POST",
 		                url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientFamilyPlanningMethod",
 		                data: "{'patientId':'" + patientId + "','PatientFPId':'" + value + "','userId':'0'}",
 		                contentType: "application/json; charset=utf-8",
 		                dataType: "json",
 		                success: function(response) {
-		                        toastr.success(response.d);   
+                            alert(response.d);
+		                    toastr.success(response.d);
 		                },
 		                error: function(xhr, errorType, exception) {
 		                    var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -477,11 +640,75 @@
                 });
             }
 
-            function AddPatientScreenig() {
+            //screening
 
+            /*-- CaCX Screening --*/
+           function addPatientScreeningcacx() {
+
+               var cacxId = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
+             
+               var screeningTypeId = 44;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'"+visitDate+"','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+cacxId+"','comment':'null','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
+           }
+
+           function addPatientScreeningSti() {
+
+               var stiId= $("#<%=stiScreening.ClientID%>").find(":selected").val();
+               var screeningTypeId = 45;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'"+visitDate+"','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+stiId+"','comment':'null','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
+           }
+
+            function addPatientScreeningStiNotification() {
+
+               var stiNotificationId= $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
+               var screeningTypeId = 87;
+               var screeningDone = 1;
+                $.ajax({
+		            type: "POST",
+		            url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+		            data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'"+visitDate+"','screeningTypeId':'" +screeningTypeId  + "', 'screeningDone':'"+screeningDone+"', 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'"+stiNotificationId+"','comment':'null','userId':'0'}",
+		            contentType: "application/json; charset=utf-8",
+		            dataType: "json",
+		            success: function(response) {
+		                    toastr.success(response.d);   
+		            },
+		            error: function(xhr, errorType, exception) {
+		                var jsonError = jQuery.parseJSON(xhr.responseText);
+		                toastr.error("" + xhr.status + "" + jsonError.Message);
+		            }
+               });
             }
 
-            $("#btnSave").click(function () {
+
+            $("#btnSave").click(function() {
 
                 if ($('#FemaleVitals').parsley().validate()) {
 
@@ -494,19 +721,22 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function(response) {
+
                             /* check if patient already has pregagncy without outcome.*/
                             if (response.d > 0) {
-                                AddPregnancyIndicator();
-                            } else {  
+                                toastr.info("Patient has a pregnant entry with no Outcome!");
+                                addPregnancyIndicator();
+                            } else {
                                 //insert the preganacy indicator and check if preganant insert into pregnancy table
-                                if (fName === 'Pregnant(PG)') {
-                                    $.when(AddPregnancyIndicator()).then(AddPregnancy());
+                              
+                                if (fName ==='Pregnant(PG)') {
+                                    $.when(addPregnancyIndicator()).then(addPregnancy());
                                 } else {
-                                    AddPregnancyIndicator();
+                                    addPregnancyIndicator();
                                 }
-		                        
+
                             }
-		               
+
                         },
                         error: function(xhr, errorType, exception) {
                             var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -515,22 +745,30 @@
                     });
 
                     /* save family planning */
-                    if (fpName !== 'Pregnant(PG)') {
-                        
-                        if (fpName === "No Family Planning(NOFP)" ) {
-                            AddFamilyPlanning();
-                        } else {
 
-                            $.when(AddFamilyPlanning()).then(AddFamilyPlanningMethod());
+                    if (fName !== 'Pregnant(PG)') {
+
+                        if (fpName === "No Family Planning(NOFP)") {
+                            addFamilyPlanning();
+                        } else {
+                            $.when(addFamilyPlanning()).then(addFamilyPlanningMethod());
+                           
                         }
                     }
 
                     /* patient screening*/
+                    $.when(addPatientScreeningcacx()).then(addPatientScreeningSti());
+                    $.when(addPatientScreeningStiNotification()).then(function()
+                    {
+                        $("#FemaleVitals").hide("fast");
+                    });
 
-                   }else{
-                        return false;
-                    }
-                });/* -- end button */
+        }else{
+                        stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+             }
+        });/* -- end button */
  
 
         });

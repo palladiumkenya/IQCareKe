@@ -1,5 +1,4 @@
-﻿using System;
-using DataAccess.Base;
+﻿using DataAccess.Base;
 using Entities.CCC.Triage;
 using Interface.CCC;
 using System.Collections.Generic;
@@ -15,12 +14,12 @@ namespace BusinessProcess.CCC
         private int _result;
         public int AddPatientVitals(PatientVital p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
 
-                _unitOfWork.PatientVitalsRepository.Add(p);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientVitalsRepository.Add(p);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
      
@@ -28,13 +27,13 @@ namespace BusinessProcess.CCC
 
         public PatientVital GetPatientVitals(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                            unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
                                 .OrderBy(x => x.Id)
                                 .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return vitals;
             }
 
@@ -42,19 +41,19 @@ namespace BusinessProcess.CCC
 
         public void DeletePatientVitals(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientVital vital = _unitOfWork.PatientVitalsRepository.GetById(id);
-                _unitOfWork.PatientVitalsRepository.Remove(vital);
-                _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                PatientVital vital = unitOfWork.PatientVitalsRepository.GetById(id);
+                unitOfWork.PatientVitalsRepository.Remove(vital);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
             }
     
         }
 
         public int UpdatePatientVitals(PatientVital p)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals = new PatientVital()
                 {
@@ -66,12 +65,17 @@ namespace BusinessProcess.CCC
                     Height = p.Height,
                     Weight = p.Weight,
                     Muac = p.Muac,
-                    SpO2 = p.SpO2
+                    SpO2 = p.SpO2,
+                    BMIZ = p.BMIZ,
+                    WeightForAge = p.WeightForAge,
+                    WeightForHeight = p.WeightForHeight,
+                    VisitDate = p.VisitDate
+
 
                 };
-                _unitOfWork.PatientVitalsRepository.Update(vitals);
-                _result = _unitOfWork.Complete();
-                _unitOfWork.Dispose();
+                unitOfWork.PatientVitalsRepository.Update(vitals);
+                _result = unitOfWork.Complete();
+                unitOfWork.Dispose();
                 return _result;
             }
 
@@ -79,13 +83,13 @@ namespace BusinessProcess.CCC
 
         public PatientVital GetByPatientId(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 PatientVital vital =
-                                        _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
+                                        unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag)
                                             .OrderByDescending(x => x.Id)
                                             .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return vital;
             }
       
@@ -93,13 +97,13 @@ namespace BusinessProcess.CCC
 
         public List<PatientVital> GetCurrentPatientVital(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                            _unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                            unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
                                 .OrderBy(x => x.Id)
                                 .ToList();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return vitals;
             }
         }
@@ -111,6 +115,19 @@ namespace BusinessProcess.CCC
                 var vitals =
                     unitOfWork.PatientVitalsRepository.FindBy(
                             x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId)
+                        .OrderByDescending(x => x.Id)
+                        .FirstOrDefault();
+                unitOfWork.Dispose();
+                return vitals;
+            }
+        }
+
+        public PatientVital GetPatientVitalsBaseline(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vitals =
+                    unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
                         .OrderBy(x => x.Id)
                         .FirstOrDefault();
                 unitOfWork.Dispose();

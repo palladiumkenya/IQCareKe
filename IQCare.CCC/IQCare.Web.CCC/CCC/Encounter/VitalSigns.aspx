@@ -3,6 +3,8 @@
 <%@ Register TagPrefix="uc" TagName="PatientTriage" Src="~/CCC/UC/ucPatientTriage.ascx" %>
 <%@ Register TagPrefix="uc" TagName="FemalVitals" Src="~/CCC/UC/ucFemaleVitals.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriageSummary" Src="~/CCC/UC/ucPatientTriageSummary.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -20,22 +22,27 @@
         <uc:FemalVitals ID="ptnFemaleVitals" runat="server" />
     </div>
 
+    <uc:ucExtruder runat="server" ID="ucExtruder" />
+
     <script type="text/javascript">
     $(document).ready(function () {
 
-        var Gender = "<%=Gender%>";
+        var gender = "<%=Gender%>";
+  
 
-        if (Gender === 'male') { $("#btnFemalVitals").prop("disabled",true); }
-        else {
-            $("#btnFemalVitals").prop("disabled",false);
+        if (gender === 'Male') {
+            $("#divBtnVitals").hide("fast");
+        } else if (gender === 'Female') {
+             $("#divBtnVitals").show("fast");
         }
 
         $("#femaleVitals").hide("fast");
+        $("#PatientVitals").hide("fast");
 
         
          $("#btnFemalVitals").click(function () {
 
-             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast");})
+             $("#PatientVitals").hide("fast", function() { $("#femaleVitals").show("fast"); });
          });
 
          $("#btnLoadTriage").click(function () {

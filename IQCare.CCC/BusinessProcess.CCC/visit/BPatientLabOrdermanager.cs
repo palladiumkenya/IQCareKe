@@ -9,6 +9,7 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Base;
 using DataAccess.CCC.Interface;
+using Entities.CCC.Lookup;
 
 namespace BusinessProcess.CCC.visit
 {
@@ -34,10 +35,29 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.PatientLabOrderRepository.Add(labOrderEntity);
                 Result = _unitOfWork.Complete();
                 _unitOfWork.Dispose();
-                return Result;
+                return labOrderEntity.Id;                
             }           
         }
-
+        public int AddLabOrderDetails(LabDetailsEntity labDetailsEntity)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientLabDetailsRepository.Add(labDetailsEntity);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return labDetailsEntity.Id;
+            }
+        }
+        public int AddPatientLabResults(LabResultsEntity labResultsEntity)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientLabResultsRepository.Add(labResultsEntity);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
+        }
         public int UpdatePatientLabOrder(PatientLabTracker patientLabTracker)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -80,7 +100,7 @@ namespace BusinessProcess.CCC.visit
             }
    
         }
-
+       
         public List<PatientLabTracker> GetPatientLabOrdersAll(int patientId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -96,71 +116,52 @@ namespace BusinessProcess.CCC.visit
             }
 
         }
-        public List<LabResultsEntity> GetPatientVL(int labOrderId)
+        public List<PatientLabTracker> GetPatientVL(int patientId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-               var patientVL= _unitOfWork.PatientLabResultsRepository.FindBy(
-               x =>
-                 x.LabOrderId == labOrderId &
-                 x.LabTestId == 3 & 
-                 x.HasResult)                
-                .OrderBy(x => x.Id)
-                .ToList();
+                var patientVL = _unitOfWork.PatientLabTrackerRepository.FindBy(
+                x =>
+                  x.PatientId == patientId &
+                  x.LabTestId == 3)                 
+                 .OrderBy(x => x.Id)
+                 .ToList();
 
                 _unitOfWork.Dispose();
                 return patientVL;
             }
         }
 
-        public LabOrderEntity GetPatientLabOrder(int ptnPk)
+        public PatientLabTracker GetPatientLabTestId(int patientId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-               var labOrder= _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk)
-                        .Where(x => x.LabTestId == 3)
+               var labTestId= _unitOfWork.PatientLabTrackerRepository.FindBy(x => x.PatientId == patientId)
+                        .Where(x => x.LabTestId == 3 &
+                         x.ResultValues >= 0)
+                        .OrderByDescending(x => x.Id)
                         .FirstOrDefault();
                 _unitOfWork.Dispose();
-                return labOrder;
+                return labTestId;
             }
 
         }
 
-        public LabOrderEntity GetPatientCurrentviralLoadInfo(int ptnPk)
+        public PatientLabTracker GetPatientCurrentviralLoadInfo(int patientId)
         {
  
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var vlInfo = _unitOfWork.PatientLabOrderRepository.FindBy(x => x.Ptn_pk == ptnPk).OrderByDescending(x => x.Id).FirstOrDefault();
-                _unitOfWork.Dispose();
+                var vlInfo = _unitOfWork.PatientLabTrackerRepository.FindBy(x => x.PatientId == patientId)
+                     .Where(x => x.LabTestId == 3)
+                    .OrderByDescending(x => x.Id)
+                    .FirstOrDefault();
+                 _unitOfWork.Dispose();
                 return vlInfo;
             }
         }
 
-        public List<LabOrderEntity> GetVlPendingCount(int facilityId)
-        {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
-            { 
-                    List<LabOrderEntity> facilityVlPending = _unitOfWork.PatientLabOrderRepository.GetVlPendingCount(facilityId);
-                   _unitOfWork.Dispose();
-                   return facilityVlPending;
-              
-                    
-             }
-        }
-
-        public List<LabOrderEntity> GetVlCompleteCount(int facilityId)
-        {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
-              
-                {
-                    List<LabOrderEntity> facilityVlComplete = _unitOfWork.PatientLabOrderRepository.GetVlCompleteCount(facilityId);
-                     _unitOfWork.Dispose();
-                   return facilityVlComplete;
-                }
-               
-           
-        }
+      
     }
 }
 

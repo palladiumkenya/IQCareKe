@@ -143,9 +143,9 @@ namespace BusinessProcess.Scheduler
                     SaveAppointment.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId.ToString());
-                    ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
-                    ClsUtility.AddParameters("@VisitId", SqlDbType.Int, VisitId.ToString());
+                    ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
+                    ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                    ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, VisitId);
 
                     theAffectedRows = (int)SaveAppointment.ReturnObject(ClsUtility.theParams, "pr_Scheduler_DeletePatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
@@ -183,8 +183,8 @@ namespace BusinessProcess.Scheduler
             {
                 ClsUtility.Init_Hashtable();
                 ClsObject aMGR = new ClsObject();
-                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
-                ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
+                ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, LocationId);
+                //ClsUtility.AddParameters("@password", SqlDbType.VarChar, ApplicationAccess.DBSecurity);
                 if (AppStatus.HasValue)
                     ClsUtility.AddExtendedParameters("@AppStatus", SqlDbType.Int, AppStatus.Value);
                 if (FromDate.HasValue)
@@ -268,8 +268,8 @@ namespace BusinessProcess.Scheduler
             {
                 try
                 {
-                    this.Connection = DataMgr.GetConnection();
-                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                     ClsObject obj = new ClsObject();
                     //obj.Connection = this.Connection;
@@ -287,11 +287,7 @@ namespace BusinessProcess.Scheduler
                     //  DataMgr.RollBackTransation(this.Transaction);
                     throw;
                 }
-                finally
-                {
-                    if (this.Connection != null)
-                        DataMgr.ReleaseConnection(this.Connection);
-                }
+              
             }
         }
 
@@ -315,12 +311,12 @@ namespace BusinessProcess.Scheduler
                 try
                 {
                     int theAffectedRows = 0;
-                    this.Connection = DataMgr.GetConnection();
-                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
-                    ClsObject SaveAppointment = new ClsObject();
-                    SaveAppointment.Connection = this.Connection;
-                    SaveAppointment.Transaction = this.Transaction;
+                    ClsObject obj = new ClsObject();
+                    //SaveAppointment.Connection = this.Connection;
+                    //SaveAppointment.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
                     ClsUtility.AddExtendedParameters("@PatientId", SqlDbType.Int, PatientId);
@@ -336,22 +332,19 @@ namespace BusinessProcess.Scheduler
                     {
                         ClsUtility.AddParameters("@AppNote", SqlDbType.VarChar, AppNote);
                     }
-                    theAffectedRows = (int)SaveAppointment.ReturnObject(ClsUtility.theParams, "pr_Scheduler_SaveAppointment_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    theAffectedRows = (int)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_SaveAppointment_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
-                    DataMgr.CommitTransaction(this.Transaction);
-                    DataMgr.ReleaseConnection(this.Connection);
+                    //DataMgr.CommitTransaction(this.Transaction);
+                    //DataMgr.ReleaseConnection(this.Connection);
+                    obj = null;
                     return theAffectedRows;
                 }
                 catch
                 {
-                    DataMgr.RollBackTransation(this.Transaction);
+                   // DataMgr.RollBackTransation(this.Transaction);
                     throw;
                 }
-                finally
-                {
-                    if (this.Connection != null)
-                        DataMgr.ReleaseConnection(this.Connection);
-                }
+                
             }
         }
 
@@ -436,12 +429,12 @@ namespace BusinessProcess.Scheduler
         {
             try
             {
-                this.Connection = DataMgr.GetConnection();
-                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+               // this.Connection = DataMgr.GetConnection();
+              //  this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                 ClsObject SchedulerMgr = new ClsObject();
-                SchedulerMgr.Connection = this.Connection;
-                SchedulerMgr.Transaction = this.Transaction;
+                //SchedulerMgr.Connection = this.Connection;
+                //SchedulerMgr.Transaction = this.Transaction;
 
                 ClsUtility.AddParameters("@LastName", SqlDbType.VarChar, LName);
                 ClsUtility.AddParameters("@FirstName", SqlDbType.VarChar, FName);
@@ -453,20 +446,14 @@ namespace BusinessProcess.Scheduler
 
                 DataSet SchedulerDR;
                 SchedulerDR = (DataSet)SchedulerMgr.ReturnObject(ClsUtility.theParams, "pr_Scheduler_Search_PatientAppointment_Constella", ClsUtility.ObjectEnum.DataSet);
-
+                SchedulerMgr = null;
                 return SchedulerDR;
             }
             catch
             {
                 throw;
             }
-            finally
-            {
-                if (this.Connection != null)
-                {
-                    DataMgr.ReleaseConnection(this.Connection);
-                }
-            }
+           
         }
 
         /// <summary>
@@ -493,12 +480,12 @@ namespace BusinessProcess.Scheduler
                     }
 
                     int theAffectedRows = 0;
-                    this.Connection = DataMgr.GetConnection();
-                    this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                    //this.Connection = DataMgr.GetConnection();
+                    //this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
                     ClsObject obj = new ClsObject();
-                    obj.Connection = this.Connection;
-                    obj.Transaction = this.Transaction;
+                    //obj.Connection = this.Connection;
+                    //obj.Transaction = this.Transaction;
 
                     ClsUtility.Init_Hashtable();
                     ClsUtility.AddExtendedParameters("@AppointmentId", SqlDbType.Int, appointment.AppointmentId);
@@ -516,20 +503,17 @@ namespace BusinessProcess.Scheduler
                     ClsUtility.AddParameters("@AppNote", SqlDbType.VarChar, appointment.Notes);
                     theAffectedRows = (int)obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_UpdatePatientAppointmentDetails_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
 
-                    DataMgr.CommitTransaction(this.Transaction);
-                    DataMgr.ReleaseConnection(this.Connection);
+                    obj = null;
+                    //DataMgr.CommitTransaction(this.Transaction);
+                    //DataMgr.ReleaseConnection(this.Connection);
                     return theAffectedRows;
                 }
                 catch
                 {
-                    DataMgr.RollBackTransation(this.Transaction);
+                  //  DataMgr.RollBackTransation(this.Transaction);
                     throw;
                 }
-                finally
-                {
-                    if (this.Connection != null)
-                        DataMgr.ReleaseConnection(this.Connection);
-                }
+               
             }
         }
 

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Application.Presentation;
+using DataAccess.CCC.Context;
+using DataAccess.CCC.Repository;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -380,11 +382,36 @@ namespace IQCare.CCC.UILogic
             }
         }
 
-        public PatientLookup GetPatientPtn_pk(int patientId)
+        public PatientLookup GetPatientById(int patientId)
 
         {
             ILookupManager lookuplist = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
-            return lookuplist.GetPatientPtn_pk(patientId);
+            return lookuplist.GetPatientById(patientId);
+        }
+
+        public static string GetPatientCurrentRegimen(int patientId)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            var regimen = lookupManager.GetCurentPatientRegimen(patientId);
+
+            return jsonObject = (regimen != null) ? new JavaScriptSerializer().Serialize(regimen) : jsonObject = "[]";
+        }
+
+        public static string GetPatientRegimenList(int patientId)
+        {
+            string jsonObject = "[]";
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            var regimen = lookupManager.GetPatientRegimenList(patientId);
+
+            return jsonObject = (regimen != null) ? new JavaScriptSerializer().Serialize(regimen) : jsonObject = "[]";
+        }
+
+        public List<LookupFacilityStatistics> GetLookupFacilityStatistics()
+        {
+            ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            var facilityStats = lookupManager.GetLookupFacilityStatistics();
+            return facilityStats;
         }
     }
 }

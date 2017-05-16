@@ -36,10 +36,12 @@
 	<link href="<%# ResolveUrl("~/CCC/Scripts/css/customCss.css") %>" rel="stylesheet" type="text/css" />
 	<link href="<%# ResolveUrl("~/CCC/Scripts/css/style-267.css") %>" rel="stylesheet" type="text/css" />
 	<link href="<%# ResolveUrl("~/CCC/Scripts/css/style-291.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%# ResolveUrl("~/CCC/Scripts/css/mdb.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%# ResolveUrl("~/CCC/Scripts/css/style.css") %>" rel="stylesheet" type="text/css" />
-
-
+<%--    <link href="<%# ResolveUrl("~/CCC/Scripts/css/mdb.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/style.css") %>" rel="stylesheet" type="text/css" />--%>
+    
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/chosen.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%# ResolveUrl("~/CCC/Scripts/css/patientSummary.css") %>" rel="stylesheet" type="text/css" />
+    
 
 	<script src="<%# ResolveUrl("~/Incl/jquery-1.9.1.js")%>" type="text/javascript" ></script>
 	<script src="<%# ResolveUrl("~/Content/js/bootstrap.js") %>" type="text/javascript"></script>
@@ -60,14 +62,17 @@
 	<script src="<%# ResolveUrl("~/Content/js/parsley-fields-comparison-validators.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/mbExtruder.js")%>" type="text/javascript"></script>
 	<script src="<%# ResolveUrl("~/CCC/Scripts/js/jquery.mb.flipText.js")%>" type="text/javascript"></script>
-	 <script src="<%# ResolveUrl("~/CCC/Scripts/js/bootbox.js")%>" type="text/javascript"></script>
-	
-	  <script src="<%# ResolveUrl("~/CCC/Scripts/js/placeholder.js")%>" type="text/javascript"></script>
-	  <script src="<%# ResolveUrl("~/CCC/Scripts/js/respond.min.js")%>" type="text/javascript"></script>
-	  <script src="<%# ResolveUrl("~/CCC/Scripts/js/html5shiv.js")%>" type="text/javascript"></script>
-     <script src="<%# ResolveUrl("~/CCC/Scripts/js/tether.js")%>" type="text/javascript"></script>
-     <script src="<%# ResolveUrl("~/CCC/Scripts/js/mdb.js")%>" type="text/javascript"></script>
- 
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/bootbox.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/PatientEncounter.js")%>" type="text/javascript"></script>
+  
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/placeholder.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/respond.min.js")%>" type="text/javascript"></script>
+	<script src="<%# ResolveUrl("~/CCC/Scripts/js/html5shiv.js")%>" type="text/javascript"></script>
+<%--    <script src="<%# ResolveUrl("~/CCC/Scripts/js/tether.js")%>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/mdb.js")%>" type="text/javascript"></script>--%>
+    
+    <script src="<%# ResolveUrl("~/CCC/Scripts/js/chosen.jquery.js") %>" type="text/javascript"></script>
+    <script src="<%# ResolveUrl("~/Incl/dateformat.js") %>" type="text/javascript"></script>
 
 </head>
 
@@ -195,14 +200,24 @@
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
 
+                               <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
+								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuLabOrder" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuLabOrder_Click" >
+								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
+                             
 	 
 							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
 									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
 								</a>
 
-
+                          
 							  <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
 								  <span class="fa fa-file-text-o fa-2x pull-left text-info"></span><strong class="text-info">Encounter History</strong></asp:LinkButton>
+
+                             		<a href='<%=ResolveClientUrl("~/ClinicalForms/frmPatient_History.aspx") %>' class="list-group-item" id="menuMoH257">
+									<span class="iq iq-awareness-ribbon fa-2x  text-info pull-left"></span><strong class="text-info">Bluecard Encounters </strong>
+								</a>
 
 								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
 									<span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
@@ -277,10 +292,17 @@
 				encounterStatusId = 0;
 				$("#menuPatientHome").hide();
 				$("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+				$("#menuMoH257").hide();
+				$("#titlePatientEncounter").hide();
+			    $('#menuStartEncounter').hide();
 
 			} else {
 				$("#menuPatientHome").show();
 				$("#LinkButton2").show();
+				$("#menuStartEncounter").show();
+				$("#menuMoH257").show();
+                $("#titlePatientEncounter").show();
 			}
 
 			if(encounterStatusId>0 & patientId>0){   encounterStarted();} else { encounterStopped(); }
@@ -371,7 +393,7 @@
 					return false;
 				}
 				if (startEncounter < 0) {
-					toastr.error("No Active Encounter to Stop,", "Encounter Stop Alert");
+					toastr.error("No Active Encounter to Stop");
 					return false;
 				}
 
@@ -383,8 +405,11 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(response) {
-						encounterStopped();
-						$("#menuStartEncounter").show();
+					    
+					    // encounterStatusId = 0;
+					    //encounterStopped();
+					    //$("#menuStartEncounter").show();
+					   // checkOut();
 						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
 					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 					    toastr.info("Patient Service Checkedout successfully!");
@@ -413,25 +438,33 @@
 				$("#menuScheduleAppointments").hide();
 				$("#menuCaptureVitals").hide();
 				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
 				$("#menuPatientVitals").hide();
-			   //$("#LinkButton2").hide();
-				$("#menuStartEncounter").show();
-				<%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+			  // $("#LinkButton2").show();
+				//$("#menuStartEncounter").show();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+			    <%-- // window.open("<%=ResolveUrl("patient/patientfinder.aspx")%>");--%>
+
 			}
 
-			function encounterStarted() {
+		    function encounterStarted() {
+                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
 				$("#titlePatientBaseline").show();
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();
 				$("#MenuOneTimeEventsTracker").show();
 				$("#menuStopEncounter").show();
-				$("#menuNewEncounter").hide();
+				//$("#menuNewEncounter").hide();
 				$("#menuPatientHome").show();
 				$("#menuPatientAppointments").show();
 				$("#menuPatientCareEnded").show();
 				$("#menuScheduleAppointments").show();
 				$("#menuCaptureVitals").show();
 				$("#menuNewEncounter").show();
+				$("#menuPharmacyPrescription").show();
+				$("#menuLabOrder").show();
+				
 				$("#menuStartEncounter").hide();
 				startEncounter = 1;
 				stopEncounter = 0;
@@ -439,7 +472,29 @@
 				$("#menuPatientVitals").show();
 				$("#LinkButton2").show();
 
-			}
+		    }
+
+		    function checkOut() {
+		        
+                $("#titlePatientBaseline").hide();
+				$("#menuBaseline").hide();
+				$("#menuFamilyTesting").hide();
+				$("#MenuOneTimeEventsTracker").hide();
+				$("#menuStopEncounter").hide();
+		        $("#titlePatientEncounter").hide();
+			    $("#menuPatientHome").hide();
+				$("#menuPatientAppointments").hide();
+				$("#menuPatientCareEnded").hide();
+				$("#menuScheduleAppointments").hide();
+				$("#menuCaptureVitals").hide();
+				$("#menuNewEncounter").hide();
+				$("#menuPharmacyPrescription").hide();
+				$("#menuLabOrder").hide();
+				$("#menuPatientVitals").hide();
+			    $("#LinkButton2").hide();
+				$("#menuStartEncounter").hide();
+                $('#<%=lblRegistration.ClientID%>').text("Register Patient");
+		    }
 
 		});
 	</script>

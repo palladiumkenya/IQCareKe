@@ -12,7 +12,8 @@ namespace Interface.CCC
         int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string RegimenType, string DispensedBy, string RegimenLine, string ModuleID,
             List<DrugPrescription> drugPrescription, string pmscmFlag, string TreatmentProgram,
-            string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen);
+            string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen, string prescriptionDate,
+            string dispensedDate);
         DataTable getPharmacyDrugList(string PMSCM);
         List<DrugFrequency> getPharmacyDrugFrequency();
         List<DrugBatch> getPharmacyDrugBatch(string DrugPk);
@@ -22,5 +23,6 @@ namespace Interface.CCC
         DataTable getPharmacyRegimens(string regimenLine);
         List<PharmacyFields> getPharmacyFields(string patientMasterVisitID);
         List<PharmacyFields> getPharmacyCurrentRegimen(string patientId);
+        List<KeyValue> getPharmacyTreatmentProgram();
     }
 }

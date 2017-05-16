@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using Application.Common;
-using Application.Presentation;
+﻿using Application.Common;
 using Entities.CCC.Lookup;
-using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
+using System;
+using System.Web;
+using Application.Presentation;
+using Interface.CCC;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -13,36 +12,44 @@ namespace IQCare.Web.CCC.UC
     {
         Utility _utility = new Utility();
 
-        readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        //readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
-
+        protected IPatientMaritalStatusManager PatientMaritalStatusManager = (IPatientMaritalStatusManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
         protected void Page_Load(object sender, EventArgs e)
         {
             var myDate = DateTime.Now.Year;
             var myDateMonth = DateTime.Now.Month;
 
-            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
-            if (Request.QueryString["patient"] != null)
-            {
-                patientId = Convert.ToInt32(Request.QueryString["patient"]);
-                Session["patientId"] = patientId;
-            }
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            
+            //if (Request.QueryString["patient"] != null)
+            //{
+            //    patientId = Convert.ToInt32(Request.QueryString["patient"]);
+            //    Session["patientId"] = patientId;
+            //}
 
             DateTime DoB;
+            PatientLookupManager pMgr = new PatientLookupManager();
+            //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
-            IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
-
-            List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
-            foreach (var x in patientLookups)
+           // List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummary(patientId);
+            pMgr = null;
+            if (null != thisPatient)
             {
-                DoB = Convert.ToDateTime(x.DateOfBirth);
-                Session["DateOfBirth"] = x.DateOfBirth.ToString("dd-MMM-yyyy");
+                DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+                Session["PatientId"] = thisPatient.ptn_pk;
+                Session["SystemId"] = 1;
+                Session["DateOfBirth"] = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                //Don't decrypt at this level. the use Logic project for this
 
-                lblPatientNames.Text = _utility.Decrypt(x.LastName) + ", " + _utility.Decrypt(x.FirstName) + " " +
-                                       _utility.Decrypt(x.MiddleName)+" ";
+                //lblPatientNames.Text = _utility.Decrypt(thisPatient.LastName) + ", " + _utility.Decrypt(x.FirstName) + " " +
+                //                       _utility.Decrypt(thisPatient.MiddleName)+" ";
+
+                lblPatientNames.Text= (thisPatient.LastName) + ", " + (thisPatient.FirstName) + " " +  (thisPatient.MiddleName)+" ";
 
                 //    lblLastName.Text = "<strong><i>" + _utility.Decrypt(x.LastName) + "</i></strong>";
-                if (x.Active)
+                if (thisPatient.PatientStatus.Equals("Active"))
                 {
                     lblPatientStatus.Text = "<i class=fa fa-user-o text-success' aria-hidden='true'></i><strong class='label label-info fa-1x'>Patient Active</strong>";
                 }
@@ -53,18 +60,36 @@ namespace IQCare.Web.CCC.UC
                 // string femaleIcon = "<i class='fa fa-female' aria-hidden='true'></i>";
                 // string maleIcon = "<i class='fa fa-male' aria-hidden='true'></i>";
 
-                if (x.Sex == 62)
-                {
-                    lblGender.Text = _lookupManager.GetLookupNameFromId(x.Sex);
-                    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
-                }
-                if (x.Sex == 61)
-                {
-                    lblGender.Text =_lookupManager.GetLookupNameFromId(x.Sex);
-                    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
-                }
+                //todo patientManagershould have the lookups resolved
+                //if (x.Sex == 62)
+                //{
+                   Session["Gender"] = lblGender.Text = LookupLogic.GetLookupNameById(thisPatient.Sex);
+                //_lookupManager.GetLookupNameFromId(thisPatient.Sex);
+                //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
+                //}
+                //if (x.Sex == 61)
+                //{
+                //    lblGender.Text =_lookupManager.GetLookupNameFromId(x.Sex);
+                //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
+                //}
+                //todo patientManagershould have the lookups resolved
+                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.PatientType).ToUpper();
+                // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
-                lblDOB.Text = x.DateOfBirth.ToString("dd-MMM-yyyy");
+                //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
+                var ptnMaritalStatus = PatientMaritalStatusManager.GetCurrentPatientMaritalStatus(thisPatient.PersonId);
+                if (ptnMaritalStatus != null)
+                {
+                    lblmstatus.Text =
+                        LookupLogic.GetLookupNameById(ptnMaritalStatus.MaritalStatusId)
+                            .ToString()
+                            .ToUpper();
+                }
+                else
+                {
+                    lblmstatus.Text = "<span class='label label-danger'> N/A </span>";
+                }
+            
 
                 //    lblOtherNames.Text = "<strong></i>" + _utility.Decrypt(x.FirstName) + ' ' + _utility.Decrypt(x.MiddleName) + "</i></strong>";
 
@@ -74,8 +99,8 @@ namespace IQCare.Web.CCC.UC
                 lblAge.Text = "<strong><i>" + age.Replace("Age:","") + "</i></strong>";
                 Session["Age"] = Convert.ToString(myDate - DoB.Year);
                 // lblCCCReg.Text = x.EnrollmentNumber;
-                lblCCCRegNo.Text = " (" + x.EnrollmentNumber+") ";
-                lblEnrollmentDate.Text = "" + x.EnrollmentDate.ToString("dd-MMM-yyyy");
+                lblCCCRegNo.Text = " (" + thisPatient.EnrollmentNumber+") ";
+                lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
 
             }
 

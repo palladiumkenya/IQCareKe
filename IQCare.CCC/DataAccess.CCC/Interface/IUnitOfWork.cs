@@ -8,10 +8,13 @@ using DataAccess.CCC.Interface.Patient;
 using DataAccess.CCC.Interface.Tb;
 using DataAccess.CCC.Interface.visit;
 using DataAccess.CCC.Interface.Triage;
+using DataAccess.CCC.Interface.Encounter;
+using DataAccess.CCC.Repository.person;
+using Interface.CCC.Lookup;
 
 namespace DataAccess.CCC.Interface
 {
-    public interface _unitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         int Complete();
         
@@ -23,6 +26,9 @@ namespace DataAccess.CCC.Interface
         IPatientLookupRepository PatientLookupRepository { get; }
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
         IPatientBaselineLookupRepository PatientBaselineLookupRepository { get; }
+        ILookupFacilityStatisticsRepository LookupFacilityStatisticsRepository { get; }
+        IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository { get; } 
+        //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
 
         /* person and patient */
         IPersonRepository PersonRepository { get; }
@@ -38,7 +44,7 @@ namespace DataAccess.CCC.Interface
         IPatientMasterVisitRepository PatientMasterVisitRepository { get; }
         IPatientEncounterRepository PatientEncounterRepository { get; }
         IPatientLabTrackerRepository PatientLabTrackerRepository { get; }
-       
+        IPatientLabDetailsRepository PatientLabDetailsRepository { get; }
 
         /* Enrollment */
         IPatientEnrollmentRepository PatientEnrollmentRepository { get; }

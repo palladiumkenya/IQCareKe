@@ -44,7 +44,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen Line </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="regimenLine" ClientIDMode="Static" onChange="selectRegimens(this.value);" />
                                     </div>                        
                                 </div> 
                                 <div class="col-md-3 form-group">                  
@@ -119,6 +119,210 @@
                                         </div>
                                 </div>            
                 </div>
+    
+                <div class="col-md-12">
+                    <hr />
+                    <div class="col-md-6 pull-left">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Date Prescribed :</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
+                                    <div class="input-group pull-left">
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="sr-only">Toggle Calendar</span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                <div class="datepicker-calendar">
+                                                    <div class="datepicker-calendar-header">
+                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                            <span class="month">
+                                                                <span data-month="0">January</span>
+                                                                <span data-month="1">February</span>
+                                                                <span data-month="2">March</span>
+                                                                <span data-month="3">April</span>
+                                                                <span data-month="4">May</span>
+                                                                <span data-month="5">June</span>
+                                                                <span data-month="6">July</span>
+                                                                <span data-month="7">August</span>
+                                                                <span data-month="8">September</span>
+                                                                <span data-month="9">October</span>
+                                                                <span data-month="10">November</span>
+                                                                <span data-month="11" class="current">December</span>
+                                                            </span><span class="year">2017</span>
+                                                        </button>
+                                                    </div>
+                                                    <table class="datepicker-calendar-days">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Su</th>
+                                                                <th>Mo</th>
+                                                                <th>Tu</th>
+                                                                <th>We</th>
+                                                                <th>Th</th>
+                                                                <th>Fr</th>
+                                                                <th>Sa</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div class="datepicker-calendar-footer">
+                                                        <button type="button" class="datepicker-today">Today</button>
+                                                    </div>
+                                                </div>
+                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                    <div class="datepicker-wheels-month">
+                                                        <h2 class="header">Month</h2>
+                                                        <ul>
+                                                            <li data-month="0">
+                                                                <button type="button">Jan</button></li>
+                                                            <li data-month="1">
+                                                                <button type="button">Feb</button></li>
+                                                            <li data-month="2">
+                                                                <button type="button">Mar</button></li>
+                                                            <li data-month="3">
+                                                                <button type="button">Apr</button></li>
+                                                            <li data-month="4">
+                                                                <button type="button">May</button></li>
+                                                            <li data-month="5">
+                                                                <button type="button">Jun</button></li>
+                                                            <li data-month="6">
+                                                                <button type="button">Jul</button></li>
+                                                            <li data-month="7">
+                                                                <button type="button">Aug</button></li>
+                                                            <li data-month="8">
+                                                                <button type="button">Sep</button></li>
+                                                            <li data-month="9">
+                                                                <button type="button">Oct</button></li>
+                                                            <li data-month="10">
+                                                                <button type="button">Nov</button></li>
+                                                            <li data-month="11">
+                                                                <button type="button">Dec</button></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-year">
+                                                        <h2 class="header">Year</h2>
+                                                        <ul></ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-footer clearfix">
+                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Date Dispensed :</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="datepicker fuelux form-group pull-left" id="DispenseDate">
+                                    <div class="input-group">
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtDateDispensed" onBlur="ValidateDispensedDate();DateFormat(this,this.value,event,false,'3');" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="sr-only">Toggle Calendar</span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                <div class="datepicker-calendar">
+                                                    <div class="datepicker-calendar-header">
+                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                            <span class="month">
+                                                                <span data-month="0">January</span>
+                                                                <span data-month="1">February</span>
+                                                                <span data-month="2">March</span>
+                                                                <span data-month="3">April</span>
+                                                                <span data-month="4">May</span>
+                                                                <span data-month="5">June</span>
+                                                                <span data-month="6">July</span>
+                                                                <span data-month="7">August</span>
+                                                                <span data-month="8">September</span>
+                                                                <span data-month="9">October</span>
+                                                                <span data-month="10">November</span>
+                                                                <span data-month="11" class="current">December</span>
+                                                            </span><span class="year">2017</span>
+                                                        </button>
+                                                    </div>
+                                                    <table class="datepicker-calendar-days">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Su</th>
+                                                                <th>Mo</th>
+                                                                <th>Tu</th>
+                                                                <th>We</th>
+                                                                <th>Th</th>
+                                                                <th>Fr</th>
+                                                                <th>Sa</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div class="datepicker-calendar-footer">
+                                                        <button type="button" class="datepicker-today">Today</button>
+                                                    </div>
+                                                </div>
+                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                    <div class="datepicker-wheels-month">
+                                                        <h2 class="header">Month</h2>
+                                                        <ul>
+                                                            <li data-month="0">
+                                                                <button type="button">Jan</button></li>
+                                                            <li data-month="1">
+                                                                <button type="button">Feb</button></li>
+                                                            <li data-month="2">
+                                                                <button type="button">Mar</button></li>
+                                                            <li data-month="3">
+                                                                <button type="button">Apr</button></li>
+                                                            <li data-month="4">
+                                                                <button type="button">May</button></li>
+                                                            <li data-month="5">
+                                                                <button type="button">Jun</button></li>
+                                                            <li data-month="6">
+                                                                <button type="button">Jul</button></li>
+                                                            <li data-month="7">
+                                                                <button type="button">Aug</button></li>
+                                                            <li data-month="8">
+                                                                <button type="button">Sep</button></li>
+                                                            <li data-month="9">
+                                                                <button type="button">Oct</button></li>
+                                                            <li data-month="10">
+                                                                <button type="button">Nov</button></li>
+                                                            <li data-month="11">
+                                                                <button type="button">Dec</button></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-year">
+                                                        <h2 class="header">Year</h2>
+                                                        <ul></ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-footer clearfix">
+                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                                          
             <div class="col-md-12">
                     <div class="col-md-12"><hr/></div>
@@ -127,9 +331,8 @@
                     <div class="col-md-8">
                     <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
                         <div class="col-md-2"><button type="button" Class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-primary btn-sm  fa fa-print"> Print Prescription</asp:LinkButton></div>
-                        <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-warning btn-sm fa fa-refresh"> Reset Prescription</asp:LinkButton></div>
-                    <div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-danger btn-sm  fa fa-times"> Close Prescription</asp:LinkButton></div>
+                        <div class="col-md-2"><button type="button" Class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
+                        <div class="col-md-2"><button type="button" Class="btn btn-danger btn-sm  fa fa-times" data-dismiss="modal">Close Prescription</button></div>
                     </div>
                                              
             </div>
@@ -143,17 +346,29 @@
     var pmscm = "<%=PMSCM%>";
     var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
     var pmscmFlag = "0";
+    var prescriptionDate = "<%= this.prescriptionDate %>";
+    var dispenseDate = "<%= this.dispenseDate %>";
+    //Date processing
+    var today = new Date();
+    var tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    if (prescriptionDate == '' || prescriptionDate == '01-Jan-1900')
+        prescriptionDate = 0;
+
+    if (dispenseDate == '' || dispenseDate == '01-Jan-1900')
+        dispenseDate = 0;
     
     $(document).ready(function () {
         
         //alert(pmscmSamePointDispense);
-        if (pmscmSamePointDispense == "PM/SCM With Same point dispense") {
+        if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
             pmscmFlag = "1";
             drugList(1);
             $("#ddlBatch").prop('disabled', false);
             $("#txtQuantityDisp").prop('disabled', false);
         }
-        else if (pmscm == "PM/SCM") {
+        else if (pmscm === "PM/SCM") {
             drugList(1);
             $("#ddlBatch").prop('disabled', true);
             $("#txtQuantityDisp").prop('disabled', true);
@@ -161,8 +376,23 @@
         else {
             drugList(0);
             $("#ddlBatch").prop('disabled', true);
-            $("#txtQuantityDisp").prop('disabled', true);
+            $("#txtQuantityDisp").prop('disabled', false);
         }
+
+        $('#PrescriptionDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            date: prescriptionDate,
+            restricted: [{ from: tomorrow, to: Infinity }]
+        });
+
+        $('#DispenseDate').datepicker({
+            allowPastDates: true,
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+            date: dispenseDate,
+            restricted: [{ from: tomorrow, to: Infinity }]
+        });
+
     });
 
     $(function () {
@@ -260,6 +490,16 @@
                         .row($(this).parents('tr'))
                         .remove()
                         .draw();
+
+                    var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                    if (index > -1) {
+                        drugNameArr.splice(index, 1);
+                    }
+
+                    var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                    if (index1 > -1) {
+                        batchNoArr.splice(index1, 1);
+                    }
                 });
        
               
@@ -299,6 +539,28 @@
                 
            }
            
+    function resetPharmacyForm()
+    {
+        $("#ddlTreatmentProgram").val("0");
+        $("#ddlPeriodTaken").val("0");
+        $("#ddlTreatmentPlan").val("0");
+        $("#ddlSwitchInterruptionReason").val("0");
+        $("#regimenLine").val("0");
+        $("#ddlRegimen").val("0");
+        $("#txtPrescriptionDate").val("");
+        $("#txtDateDispensed").val("");
+
+        $("#ddlBatch").val("0");
+        $("#txtDose").val("");
+        $("#ddlFreq").val("0");
+        $("#txtDuration").val("");
+        $("#txtQuantityDisp").val("");
+        $("#txtQuantityPres").val("");
+        
+        DrugPrescriptionTable
+                    .clear()
+                    .draw();
+    }
 
        function getBatches(drugPk)
        {
@@ -310,7 +572,7 @@
                contentType: "application/json; charset=utf-8",
            
                success: function (data) {
-                   if(pmscmFlag == "1")
+                   if(pmscmFlag === "1")
                    {
                        var serverData = data.d;
                        var batchList = [];
@@ -355,6 +617,7 @@
        function selectRegimens(regimenLine)
        {
            var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
+           
            if(valSelected === "Select")
            {
                 $("#<%=ddlRegimen.ClientID%>").prop('disabled', true);
@@ -362,12 +625,14 @@
            else{
                $("#<%=ddlRegimen.ClientID%>").prop('disabled', false);
            }
-           
+
+           valSelected = valSelected.replace(/\s/g, '');
+
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetRegimensBasedOnRegimenLine',
                type: 'POST',
                dataType: 'json',
-               data: "{'RegimenLine':'" + regimenLine + "'}",
+               data: "{'RegimenLine':'" + valSelected + "'}",
                contentType: "application/json; charset=utf-8",
                success: function (data) {
                    var serverData = data.d;
@@ -392,6 +657,18 @@
                 var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
                 var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
                 var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+                var datePrescribed = $("#txtPrescriptionDate").val();
+                var dateDispensed = $("#txtDateDispensed").val();
+
+                if (!DrugPrescriptionTable.data().any()) {
+                    toastr.error("Drug Prescription Error", "Add drugs to prescribe.");
+                    //evt.preventDefault();
+                    return false;
+                }
+                
+                if (regimen === undefined)
+                    regimen = '0';
+                
 
                 var allAbbr = "";
                 ///////////////////////////////////////////////////////////////////
@@ -420,28 +697,42 @@
                 catch (ex) { }
                 //////////////////////////////////////////////////////////////////
                 allAbbr = allAbbr.replace(/\/$/, "");
+                
                 var sumAllAbbr = 0;
                 var sumSelectedRegimen = 0;
                 try {
-                    var regExp = /\(([^)]+)\)/;
-                    var matches = regExp.exec(regimenText);
-
-                    var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
-
                     for (var i = 0; i < allAbbr.length; i++) {
                         sumAllAbbr += allAbbr.charCodeAt(i);
                     }
+                }
+                catch (err) { }
 
+                try {
+                    //var regExp = /\(([^)]+)\)/;
+                    //var matches = regExp.exec(regimenText);
+                    var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
+                    //alert(rmv);
+                    //alert(matches);
+                    //var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+                    //alert(selectedRegimen);
                     for (var i = 0; i < selectedRegimen.length; i++) {
                         sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                     }
 
                 }
-                catch (err) { }
-
+                catch (err) {  }
+           
+                
                 if (sumAllAbbr > 0) {
+                    if (regimenLine == "0")
+                    {
+                        toastr.error("Error", "Please select the Regimen Line");
+                        return;
+                    }
+                    
+
                     if (sumAllAbbr != sumSelectedRegimen) {
-                        alert('Selected Regimen is not equal to Prescribed Regimen!');
+                        toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                         return;
                     }
                     else {
@@ -451,11 +742,14 @@
                             dataType: 'json',
                             data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
                                 treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                                regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
+                                regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                                datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
                                 JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
                                 toastr.success(data.d, "Saved successfully");
+                                //$('#pharmacyModal').modal('hide');
+
                             },
                             error: function (data) {
                                 toastr.error(data.d, "Error");
@@ -469,9 +763,10 @@
                         type: 'POST',
                         dataType: 'json',
                         data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
-                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                            regimenLine + "','Regimen':'" + regimen + "', 'pmscm':'" + pmscmFlag + "', 'drugPrescription':'" +
-                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                                treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                                regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                                datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
+                                JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             toastr.success(data.d, "Saved successfully");
@@ -534,17 +829,21 @@
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    var serverData = data.d;
-                    $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
-                    selectRegimens(serverData[0][0]);
+                    try{
+                        var serverData = data.d;
+                        $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
+                        selectRegimens(serverData[0][0]);
 
-                    function waitForRegimens(callback) {
-                        window.setTimeout(function () {  //acting like this is an Ajax call
-                            $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
-                        }, 1000);
+                        function waitForRegimens(callback) {
+                            window.setTimeout(function () {  //acting like this is an Ajax call
+                                $("#<%=ddlRegimen.ClientID%>").val(serverData[0][1]);
+                            }, 1000);
+                        }
+
+                        waitForRegimens();
                     }
-
-                    waitForRegimens();
+                    catch(err){}
+                    
 
                 },
                 error: function (data) {
@@ -554,5 +853,8 @@
         }
 
     }
+
+    
+    
 
 </script>

@@ -102,6 +102,13 @@ namespace BusinessProcess.SCM
             return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetExistingPharmacyDispense_Futures", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable GetPharmacyRegimenClassification()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject theManager = new ClsObject();
+            return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "sp_getRegimenClassification", ClsUtility.ObjectEnum.DataTable);
+        }
+
         /// <summary>
         /// Gets the pharmacy existing record details.
         /// </summary>
@@ -195,7 +202,7 @@ namespace BusinessProcess.SCM
             return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures", ClsUtility.ObjectEnum.DataSet);
         }
         public DataTable SavePharmacyDispense(
-            int patientId,
+            int patientPk,
             int theLocationId,
             int storeId,
             int theUserId,
@@ -220,15 +227,15 @@ namespace BusinessProcess.SCM
                 this.Transaction = DataMgr.BeginTransaction(this.Connection);
                 ClsObject clsObject = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, patientId.ToString());
-                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, theLocationId.ToString());
-                ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, theUserId.ToString());
+                ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, patientPk);
+                ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, theLocationId);
+                ClsUtility.AddExtendedParameters("@DispensedBy", SqlDbType.Int, theUserId);
                 ClsUtility.AddExtendedParameters("@DispensedByDate", SqlDbType.DateTime, theDispDate);
                 ClsUtility.AddParameters("@OrderType", SqlDbType.Int, theOrderType.ToString());
                 ClsUtility.AddParameters("@ProgramId", SqlDbType.Int, theProgramId.ToString()); 
                 ClsUtility.AddParameters("@StoreId", SqlDbType.Int, storeId.ToString());
                 ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, theRegimen);
-                ClsUtility.AddParameters("@UserId", SqlDbType.Int, theUserId.ToString());
+                ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, theUserId);
                 ClsUtility.AddParameters("@OrderId", SqlDbType.Int, orderId.ToString());
                 if (PeriodTaken.HasValue)
                 {
@@ -260,7 +267,7 @@ namespace BusinessProcess.SCM
                 if (PharmacyRefillDate.HasValue)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddExtendedParameters("@PtnPk", SqlDbType.Int, patientId);
+                    ClsUtility.AddExtendedParameters("@PtnPk", SqlDbType.Int, patientPk);
                     ClsUtility.AddExtendedParameters("@LocationId", SqlDbType.Int, theLocationId);
                     ClsUtility.AddExtendedParameters("@VisitPk", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["VisitId"]));
                     ClsUtility.AddExtendedParameters("@AppDate", SqlDbType.DateTime, PharmacyRefillDate.Value);
@@ -271,7 +278,7 @@ namespace BusinessProcess.SCM
                 foreach (DataRow row in (InternalDataCollectionBase)theDT.Rows)
                 {
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, Convert.ToInt32(patientId));
+                    ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, Convert.ToInt32(patientPk));
                     ClsUtility.AddExtendedParameters("@StoreId", SqlDbType.Int, Convert.ToInt32(storeId));
                     ClsUtility.AddExtendedParameters("@VisitId", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["VisitId"]));
                     ClsUtility.AddExtendedParameters("@Ptn_Pharmacy_Pk", SqlDbType.Int, Convert.ToInt32(dataTable.Rows[0]["Ptn_Pharmacy_Pk"]));

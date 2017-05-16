@@ -121,10 +121,10 @@
             </div>
             
             <div class="col-xs-3">
-                <div class="col-md-12"><label class="required control-label pull-left">National Id/Passport No</label></div>
+                <div class="col-md-12"><label class="control-label pull-left">National Id/Passport No</label></div>
                 <div class="col-sm-10">
                     <asp:HiddenField ID="IsCCCEnrolled" runat="server" ClientIDMode="Static" />
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[8,8]" />
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="NationalId" ClientIDMode="Static" data-parsley-length="[7,8]" />
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
                 <div class="col-md-12">
                     <div class="datepicker fuelux form-group" id="EnrollmentDate">
                         <div class="input-group">
-                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DateOfEnrollment" data-parsley-required="true"></asp:TextBox>        
+                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DateOfEnrollment" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                             <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -259,7 +259,7 @@
             <div class="col-md-3">
                 <div class="col-md-12"><label id="enrollmentLabel" class="required pull-left  control-label">Enrollment No.#</label></div>
                 <div class="col-md-12" style="padding-left: 0;">
-                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-min="5"></asp:TextBox>
+                    <asp:TextBox runat="server" CssClass="form-control input-sm" ClientIDMode="Static" ID="IdentifierValue" Placeholder="Registration No#..." data-parsley-type="digits" data-parsley-required="true" data-parsley-minlength="5"></asp:TextBox>
                 </div>
             </div>
 
@@ -328,8 +328,7 @@
             $('#EnrollmentDate').datepicker({
                 date:null,
                 allowPastDates: true,
-                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
-                restricted: [{ from: '01-01-2013', to: '01-01-2014' }]
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
             $("#DateOfBirth").datepicker({
@@ -405,7 +404,7 @@
             getPatientEnrollments();
 
             $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>';
+                window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
             });
 
 
@@ -465,12 +464,11 @@
                     identifierFound = $.inArray("" + identifier + "", identifierList);
                     enrollmentNoFound = $.inArray("" + enrollmentNo + "", enrollmentNoList);
 
+                    console.log(enrollmentNoList); 
+
                     if (identifierFound > -1) {
 
                         toastr.error("error", identifier + " Identifier already exists in the List");
-                        return false; // message box herer
-                    } else if (enrollmentNoFound > -1) {
-                        toastr.error("error", enrollmentNo + " Enrollment No already exists in the List");
                         return false; // message box herer
                     } else {
 
@@ -518,8 +516,20 @@
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
                 var isCCCenrolled = $("#IsCCCEnrolled").val();
-                console.log(cccRegNumber);
-                console.log(isCCCenrolled);
+                //console.log(cccRegNumber);
+                //console.log(isCCCenrolled);
+
+                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateBeforeDob) {
+                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
+                    return false;
+                }
+
+
                 if (cccRegNumber == -1 && isCCCenrolled!="CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
@@ -540,6 +550,10 @@
                     var mflCode = $('#txtAppPosID').val();
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
 
+                    if (nationalId == null || nationalId == '') {
+                        nationalId = 99999999;
+                    }
+
                     addPatientRegister(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
                 }
             });
@@ -559,8 +573,18 @@
 
                 var cccRegNumber = $.inArray("CCC Registration Number", identifierList);
                 var isCCCenrolled = $("#IsCCCEnrolled").val();
-                console.log(cccRegNumber);
-                console.log(isCCCenrolled);
+                var enrollmentDate = $('#EnrollmentDate').datepicker('getDate');
+                var personDateOfBirth = $("#DateOfBirth").datepicker('getDate');
+
+                //console.log(cccRegNumber);
+                //console.log(isCCCenrolled);
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate).format('DD-MMM-YYYY')).isBefore(moment(personDateOfBirth).format('DD-MMM-YYYY'));
+
+                if (isEnrollmentDateBeforeDob) {
+                    toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
+                    return false;
+                }
+
                 if (cccRegNumber == -1 && isCCCenrolled != "CCC") {
                     toastr.error("error", "You have not listed CCC Registraion Number as an identifier.");
                     return false;
@@ -581,6 +605,10 @@
                     var mflCode = $('#txtAppPosID').val();
                     var dobPrecision = '<%=Session["DobPrecision"]%>';
 
+                    if (nationalId == null || nationalId == '') {
+                        nationalId = 99999999;
+                    }
+
                     console.log(_fp);
                     addPatient(_fp, entryPointId, moment(enrollmentDate).format('DD-MMM-YYYY'), moment(personDateOfBirth).format('DD-MMM-YYYY'), nationalId, patientType, mflCode, dobPrecision);
                 }
@@ -599,8 +627,15 @@
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
-                        toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx")%>';
+                        var messageResponse = JSON.parse(response.d);
+
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg , "Patient Enrollment");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Enrollment");
+                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx")%>';
+                        }
                     },
                     error: function (response) {
                         //generate('error', response.d);
@@ -622,8 +657,16 @@
                     dataType: "json",
                     success: function (response) {
                         //generate('success', '<p>,</p>' + response.d);
-                        toastr.success(response.d, "Patient Enrollment");
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                        var messageResponse = JSON.parse(response.d);
+
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg , "Patient Enrollment");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Patient Enrollment");
+                            window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
+                        }
+                        
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -676,7 +719,7 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "TransferIn") {
+                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "Transfer-In") {
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {

@@ -102,5 +102,7 @@ namespace Interface.Clinical
         DataTable GetPatientsOnWaitingList(int listId, int moduleId);
         void ChangeWaitingListStatus(int waitingListId, int rowStatus, int userId);
         ServiceArea GetServiceAreaById(int id, int locationId);
-      }
+
+        void BlueCardToGreenCardSyncronise(int ptn_Pk);
+    }
 }

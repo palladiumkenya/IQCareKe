@@ -111,13 +111,13 @@ namespace IQCare.Web.Home
                 else if (landScape.ClickAction == RedirectAction.ModuleAction)
                 {
                     string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty);
-                    //if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
-                    //{
+                    if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
+                    {
                         Guid g = Guid.NewGuid();
                         row["ResourceUrl"] = string.Format("../{1}/Home.aspx?key={0}", g.ToString(), folderName);
 
-                    //}
-                    //else { continue; }
+                    }
+                    else { row["ResourceUrl"] = ""; }
                 }
                 theDT.Rows.Add(row);
 
@@ -158,10 +158,19 @@ namespace IQCare.Web.Home
             {
                 ThisSession.SetCurrentModule(moduleid);
 
-                HomePageLandScape home = ThisSession.CurrentLandScape.Where(m => m.MenuId == moduleid).FirstOrDefault();
+                LinkButton button = (sender as LinkButton);
+                RepeaterItem item = button.NamingContainer as RepeaterItem;
+                string url = (item.FindControl("linkUrl") as Label).Text;
+                if (url != "")
+                {
+                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    Response.Redirect(url, false);
+                }
+
+              /*  HomePageLandScape home = ThisSession.CurrentLandScape.Where(m => m.MenuId == moduleid).FirstOrDefault();
                 if (home != null)
                 {
-                    string url = "";
+                  ///  string url = "";
                     if (home.ClickAction == RedirectAction.FindAddPatient)
                     {
                         url = String.Format("~/Patient/FindAdd.aspx?srvNm={0}&mod={1}", home.MenuName, home.MenuId);
@@ -182,10 +191,11 @@ namespace IQCare.Web.Home
                         HttpContext.Current.ApplicationInstance.CompleteRequest();
                         Response.Redirect(url, false);
                     }
-                }
+                }*/
             }
             
         }
+        
     }
 }
 

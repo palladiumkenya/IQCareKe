@@ -2,6 +2,9 @@
 using DataAccess.CCC.Interface.visit;
 using DataAccess.Context;
 using Entities.CCC.Visit;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace DataAccess.CCC.Repository.visit
 {
@@ -18,6 +21,42 @@ namespace DataAccess.CCC.Repository.visit
        {
             _context = context;
         }
+        public List<PatientLabTracker> GetVlPendingCount(int facilityId)
+        {
+            var pending = "Pending";
+            IPatientLabTrackerRepository patientLabTrackerRepository = new PatientLabTrackerRepository();
+            List<PatientLabTracker> pendingVLCount = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &
+                                                                                 p.Results == pending &
+                                                                                 p.LabTestId == 3).ToList();
+            return pendingVLCount;
+        }
+        public List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId)
+        {
+          
+            IPatientLabTrackerRepository patientLabTrackerRepository = new PatientLabTrackerRepository();
+            List<PatientLabTracker> facilityVLUnSuppressed = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &
+                                                                                    p.ResultValues > 1000 &
+                                                                                    p.LabTestId == 3).ToList();
+            return facilityVLUnSuppressed;
+        }
 
+        public List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId)
+        {
+
+            IPatientLabTrackerRepository patientLabTrackerRepository = new PatientLabTrackerRepository();
+            List<PatientLabTracker> facilityVLSuppressed = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &
+                                                                                    p.ResultValues < 1000 &
+                                                                                    p.LabTestId == 3).ToList();
+            return facilityVLSuppressed;
+        }
+        public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
+        {
+            var complete = "Complete";
+            IPatientLabTrackerRepository patientLabTrackerRepository = new PatientLabTrackerRepository();
+            List<PatientLabTracker> completeVLCount = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &
+                                                                                 p.Results == complete &
+                                                                                 p.LabTestId == 3).ToList();
+            return completeVLCount;
+        }
     }
 }

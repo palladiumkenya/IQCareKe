@@ -52,17 +52,22 @@
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Encounter\EncounterHistory.aspx" />
+    <Content Include="CCC\Encounter\LabOrder.aspx" />
+    <Content Include="CCC\Encounter\PharmacyPrescription.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap.css" />
+    <Content Include="CCC\Scripts\css\chosen.css" />
     <Content Include="CCC\Scripts\css\customCss.css" />
     <Content Include="CCC\Scripts\css\jquery-ui-1.9.1.css" />
     <Content Include="CCC\Scripts\css\mbExtruder.css" />
     <Content Include="CCC\Scripts\css\mdb.css" />
+    <Content Include="CCC\Scripts\css\patientSummary.css" />
     <Content Include="CCC\Scripts\css\style.css" />
     <Content Include="CCC\Scripts\css\typeaheadjs.css" />
     <Content Include="CCC\Encounter\VitalSigns.aspx" />
     <Content Include="CCC\Scripts\js\bootbox.js" />
+    <Content Include="CCC\Scripts\js\chosen.jquery.js" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.css" />
     <Content Include="CCC\Scripts\js\jquery-ui.min.js" />
     <Content Include="CCC\Scripts\js\jquery.hoverIntent.min.js" />
@@ -101,10 +106,12 @@
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
+    <Content Include="CCC\UC\ucPatientLabs.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientTriage.ascx" />
     <Content Include="CCC\UC\ucPatientTriageSummary.ascx" />
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
+    <Content Include="CCC\UC\ucPatientWorkPlan.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
@@ -177,12 +184,26 @@
     <Compile Include="CCC\Encounter\EncounterHistory.aspx.designer.cs">
       <DependentUpon>EncounterHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Encounter\LabOrder.aspx.cs">
+      <DependentUpon>LabOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\LabOrder.aspx.designer.cs">
+      <DependentUpon>LabOrder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\Encounter\PatientEncounter.aspx.designer.cs">
       <DependentUpon>PatientEncounter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Encounter\PharmacyPrescription.aspx.cs">
+      <DependentUpon>PharmacyPrescription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Encounter\PharmacyPrescription.aspx.designer.cs">
+      <DependentUpon>PharmacyPrescription.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Encounter\StartEncounter.aspx.cs">
       <DependentUpon>StartEncounter.aspx</DependentUpon>
@@ -345,6 +366,13 @@
     <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
       <DependentUpon>ucPatientDetails.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucPatientLabs.ascx.cs">
+      <DependentUpon>ucPatientLabs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientLabs.ascx.designer.cs">
+      <DependentUpon>ucPatientLabs.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucPatientLabsExtruder.ascx.cs">
       <DependentUpon>ucPatientLabsExtruder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -372,6 +400,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientVitalsExtruder.ascx.designer.cs">
       <DependentUpon>ucPatientVitalsExtruder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientWorkPlan.ascx.cs">
+      <DependentUpon>ucPatientWorkPlan.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientWorkPlan.ascx.designer.cs">
+      <DependentUpon>ucPatientWorkPlan.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.cs">
       <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
@@ -456,10 +491,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessProcess.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\BusinessProcess.CCC.dll</HintPath>
-    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine">
       <HintPath>..\..\Library\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
     </Reference>
@@ -512,7 +543,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Interface.Security.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.CCC.UILogic">
+    <Reference Include="IQCare.CCC.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.CCC.UILogic.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

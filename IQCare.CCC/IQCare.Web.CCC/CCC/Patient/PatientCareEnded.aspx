@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="PatientCareEnded.aspx.cs" Inherits="IQCare.Web.CCC.Patient.PatientCareEnded" %>
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
+<%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12">
     <uc:PatientDetails runat="server" />
@@ -52,7 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux form-group" id="DateOfDeath">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DeathDate"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="DeathDates" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -152,7 +154,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker fuelux form-group" id="CareEndDate">
                                         <div class="input-group">
-                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate"></asp:TextBox>
+                                            <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -289,7 +291,7 @@
 
     </div>
 
-    
+        <uc:ucExtruder runat="server" ID="ucExtruder" />
 </div>
     
     <script type="text/javascript">
@@ -314,45 +316,86 @@
 
          $("#DateOfDeath").datepicker('disable');
 
-         $('#DateOfDeath').on('changed.fu.datepicker', function (evt, date) {
 
+        /* validate future dates for date of death */
+
+         $('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
+        
              var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+             var today = new Date();
+            
              futuredate= moment(dateofDeath).isAfter(today);
              if (futuredate) {
-                 toastr.error("Future Dates NOT allowed!");
+                $('#DeathDates').val('');
+                 toastr.error("Future Dates not allowed !");                
                  return false;
              }
          });
 
-            $('#DateOfDeath').on('changed.fu.datepicker',function(evt, date) {
+            /* validate future dates for date of exit */
+         $('#CareEndDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
+        
+             var careEndDate = $('#CareEndDate').datepicker('getDate');
+             var dateofDeath = $('#DateOfDeath').datepicker('getDate');
 
-                var exitDate = $("#CareEndDate").datepicker('getDate');
-                var dateofDeath = $('#DateOfDeath').datepicker('getDate');
-                futuredate= moment(exitDate).isAfter(today);
-                if (futuredate) {
-                    toastr.error("Future Dates NOT allowed!");
-                    return false;
-                }
-                futuredate= moment(exitDate).isBefore(dateofDeath);
-                if (futuredate) {
+             var dateVar = moment(dateofDeath, 'YYYY-MM-DD');
+             var reason = $(this).find(":selected").text();
+
+             if (!dateVar.isValid() && reason != "Death") {
+                 dateofDeath = '';
+             }
+            
+             futuredate= moment(careEndDate).isAfter(today);
+             if (futuredate) {
+                 toastr.error("Future dates not allowed!");     
+                 $('#AppointmentDate').val('');            
+                 return false;
+             }
+
+             futuredate = moment(careEndDate).isBefore(dateofDeath);
+             if (futuredate) {
+                  $('#AppointmentDate').val('');
                     toastr.error("Exit Date CANNOT be before date of death");
                     return false;
                 }
-            });
+         });
+
+         //$('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker',function(evt, date) {
+
+         //       var exitDate = $("#CareEndDate").datepicker('getDate');
+         //       var dateofDeath = $('#DateOfDeath').datepicker('getDate');
+
+         //       futuredate= moment(dateofDeath).isAfter(today);
+         //       if (futuredate) {
+         //           $('#DateOfDeath').val('');
+         //           toastr.error("Future Dates NOT allowed for Date of Death!");
+         //           return false;
+         //       }
+         //       futuredate= moment(exitDate).isBefore(dateofDeath);
+         //       if (futuredate) {
+         //           toastr.error("Exit Date CANNOT be before date of death");
+         //           return false;
+         //       }
+         //   });
 
             /*careenging reason */
             $("#<%=Reason.ClientID%>").change(
                 function() {
                     var reason = $(this).find(":selected").text();
                     if (reason === 'Transfer Out') {
-                        $("#DaDeathDatete").val('');
+                        $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('disable');
                         $("#Facility").val('');
                         $("#Facility").prop("disabled", false);
                     }
                     else if (reason === 'Death') {
-                        $("#DaDeathDatete").val('');
+                        $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('enable');
+                        $("#Facility").val('');
+                        $("#Facility").prop("disabled", true);
+                    } else {
+                        $("#DeathDates").val('');
+                        $("#DateOfDeath").datepicker('disable');
                         $("#Facility").val('');
                         $("#Facility").prop("disabled", true);
                     }
@@ -363,7 +406,7 @@
                 if ($("#CareEndedForm").parsley().validate()) {
                     $.when(endCare()).then(function() {
                         setTimeout(function() {
-                               $.when(getCareEnded()) .then (window.location.href=<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>);
+                                getCareEnded();
                             },
                             2000);
                     });
@@ -384,14 +427,23 @@
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
 
+                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {
+                    dateOfDeath = '';
+                } else {
+                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
+                }
+
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/EndPatientCare",
-                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility  + "','dateOfDeath':'" + moment(dateOfDeath).format('DD-MMM-YYYY') + "'}",
+                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility + "','dateOfDeath':'" + dateOfDeath + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        toastr.success(response.d, "Care Ended");
+                         window.location.href = '<%=ResolveClientUrl( "~/CCC/Home.aspx")%>';
+                        toastr.success(response.d);
+                           <%-- window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';--%>
+                           
                     },
                     error: function (xhr, errorType, exception) {
                         var jsonError = jQuery.parseJSON(xhr.responseText);

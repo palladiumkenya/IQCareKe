@@ -55,5 +55,6 @@ namespace Interface.SCM
         DataTable GetPrescriptionList(int locationId, DateTime prescriptionDate, int orderStatus);
         DataSet SaveHivTreatementPharmacyField(int orderId, string weight, string height, int program, int periodTaken, int provider, int regimenLine, DateTime nextAppDate, int reason);
         DataSet GetPharmacyPrescriptionDetails(int pharmacyId, int patientId, int IQCareFlag);
+        DataTable GetPharmacyRegimenClassification();
     }
 }

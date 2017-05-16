@@ -3,13 +3,10 @@ using System.Web;
 using System.Web.Services;
 using IQCare.CCC.UILogic;
 using Interface.CCC.Visit;
-using Entities.CCC.Encounter;
 using Application.Presentation;
-using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
-using IQCare.Web.Laboratory;
-
+using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -20,6 +17,16 @@ namespace IQCare.Web.CCC.WebService
         public int LabTestId { get; set; }
         public int LabOrderTestId { get; set; }
         public int ParameterId { get; set; }
+        public decimal? ResultValue { get; set; }
+        public DateTime CreateDate { get; set; }
+        public bool? Undetectable { get; set; }
+        public decimal? DetectionLimit { get; set; }
+        public int Month { get; set; }
+    }
+    public class ViralSuppression
+    {
+        public int Id { get; set; }
+       
         public decimal? ResultValue { get; set; }
         public DateTime CreateDate { get; set; }
         public bool? Undetectable { get; set; }
@@ -38,37 +45,41 @@ namespace IQCare.Web.CCC.WebService
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
-        private int facilityId { get; set; }      
-        private int _labOrderId;      
+      
+        private int _labTestId;
+        List<string>_vlResults;
         private string Msg { get; set; }
         private int Result { get; set; }
         private int _ptnPk;
+        int moduleId = 203;
 
-        int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+        int patientPk = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+        int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
         int userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+        int facilityId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
+        //int moduleId = Convert.ToInt32(HttpContext.Current.Session["ModuleId"]);
 
 
         [WebMethod(EnableSession = true)]
-        public string AddLabOrder(int patientPk, int patientMasterVisitId, string patientLabOrder)
+        public string AddLabOrder(int patientPk, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder)
         {
-            
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
 
-            try
+
+
+            var labOrder = new PatientLabOrderManager();
+            if (patientPk > 0)
             {
+                labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, moduleId, patientMasterVisitId, labOrderDate, orderNotes, patientLabOrder);
 
-                var labOrder = new PatientLabOrderManager();
-                Result = labOrder.savePatientLabOrder(patientId, patientPk, userId, facilityId, patientMasterVisitId, patientLabOrder);
-               if (Result > 0)
-                {
-                    Msg = "Patient Lab Order Recorded Successfully .";
-                }
+                Msg = "Patient Lab Order Recorded Successfully .";
+
 
             }
-            catch (Exception e)
+            else
             {
-                Msg = "Error Message: " + e.Message + ' ' + " Exception: " + e.InnerException;
+
+                Msg = "Patient Lab Order Not Recorded Successfully .";
+               
             }
             return Msg;
         }
@@ -124,21 +135,9 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public List<PatientViralLoad> GetViralLoad()
         {
-           
-            PatientLookup ptpk = _lookupManager.GetPatientPtn_pk(patientId);
-            if (ptpk.ptn_pk != null)
-            {
-                _ptnPk = ptpk.ptn_pk.Value;
-            }
-
-            LabOrderEntity labId = _lookupData.GetPatientLabOrder(_ptnPk);
-            if (labId != null)
-            {
-                _labOrderId = labId.Id;
-            }
-
+                     
             List<PatientViralLoad> patientViralDetails = new List<PatientViralLoad>();
-            List<LabResultsEntity> list_vl = _lookupData.GetPatientVL(_labOrderId);
+            List<PatientLabTracker> list_vl = _lookupData.GetPatientVL(patientId);
 
             if (list_vl != null)
             {
@@ -146,23 +145,58 @@ namespace IQCare.Web.CCC.WebService
                 {
                     PatientViralLoad vl = new PatientViralLoad();
 
-                    vl.ResultValue = item.ResultValue;
+                    vl.ResultValue = item.ResultValues;
                     vl.Month = item.CreateDate.Month;
 
                     patientViralDetails.Add(vl);
                 }
             }
-            return patientViralDetails;
+                   return patientViralDetails;
 
         }
+      
         [WebMethod(EnableSession = true)]
-        public int GetFacilityVLPendingCount()
+        public int GetFacilityViralLoadSuppressed()
         {
             int count = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
 
-            List<LabOrderEntity> facilityVLPending = new List<LabOrderEntity>();
+            List<PatientLabTracker> suppressedVL = new List<PatientLabTracker>();
+            try
+            {
+                var facilitySuppressedVL = new PatientLabOrderManager();
+                suppressedVL = facilitySuppressedVL.GetFacilityVLSuppressed(facilityId);
+                count = suppressedVL.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
+        }
+        [WebMethod(EnableSession = true)]
+        public int GetFacilityViralLoadUnSuppressed()
+        {
+            int count = 0;
+
+            List<PatientLabTracker> unsuppressedVL = new List<PatientLabTracker>();
+            try
+            {
+                var facilitySuppressedVL = new PatientLabOrderManager();
+                unsuppressedVL = facilitySuppressedVL.GetFacilityVLUnSuppressed(facilityId);
+                count = unsuppressedVL.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
+        }
+        [WebMethod(EnableSession = true)]
+        public int GetFacilityVLPendingCount(int facilityId)
+        {
+            int count = 0;        
+
+            List<PatientLabTracker> facilityVLPending = new List<PatientLabTracker>();
             try
             {
                 var facilityPendingVL = new PatientLabOrderManager();
@@ -176,13 +210,11 @@ namespace IQCare.Web.CCC.WebService
             return count;
         }
         [WebMethod(EnableSession = true)]
-        public int GetFacilityVLCompleteCount()
+        public int GetFacilityVLCompleteCount(int facilityId)
         { 
-        int count = 0;
-            LookupFacility facility = _lookupManager.GetFacility();
-            facilityId = facility.FacilityID;
+        int count = 0;          
 
-            List<LabOrderEntity> facilityVLComplete = new List<LabOrderEntity>();
+            List<PatientLabTracker> facilityVLComplete = new List<PatientLabTracker>();
             try
             {
                 var facilityCompleteVL = new PatientLabOrderManager();

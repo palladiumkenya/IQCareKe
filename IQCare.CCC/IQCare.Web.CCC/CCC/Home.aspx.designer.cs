@@ -85,13 +85,22 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.Label completeVL;
         
         /// <summary>
-        /// lblsupressed control.
+        /// lblsuppressed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblsupressed;
+        protected global::System.Web.UI.WebControls.Label lblsuppressed;
+        
+        /// <summary>
+        /// lblunsuppressed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblunsuppressed;
         
         /// <summary>
         /// lblvl control.
@@ -130,31 +139,58 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.Label lblctx;
         
         /// <summary>
-        /// lblTransit control.
+        /// lbltransit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTransit;
+        protected global::System.Web.UI.WebControls.Label lbltransit;
         
         /// <summary>
-        /// lbltransferins control.
+        /// lbltransferin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltransferins;
+        protected global::System.Web.UI.WebControls.Label lbltransferin;
         
         /// <summary>
-        /// lbltransferouts control.
+        /// lblundocumentedltf control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltransferouts;
+        protected global::System.Web.UI.WebControls.Label lblundocumentedltf;
+        
+        /// <summary>
+        /// lbldead control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbldead;
+        
+        /// <summary>
+        /// lbltransferout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltransferout;
+        
+        /// <summary>
+        /// totalltu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label totalltu;
         
         /// <summary>
         /// lblstable control.

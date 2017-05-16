@@ -109,6 +109,8 @@
     <Compile Include="Enrollment\BPatientEnrollment.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
+    <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />
     <Compile Include="PatientOvcStatusManager.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="visit\BPatientIdentifierManager.cs" />
     <Compile Include="visit\BPatientLabOrdermanager.cs" />
     <Compile Include="visit\BPatientmasterVisit.cs" />
+    <Compile Include="visit\BPatientVisit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">

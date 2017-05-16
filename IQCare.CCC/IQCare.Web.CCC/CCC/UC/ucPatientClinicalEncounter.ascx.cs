@@ -1,5 +1,6 @@
 ﻿using Application.Presentation;
 using Entities.CCC.Lookup;
+using Entities.CCC.Triage;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using System;
@@ -19,15 +20,16 @@ namespace IQCare.Web.CCC.UC
         public string gender = "";
         public int PatientId;
         public int PatientMasterVisitId;
-
+        public int age;
+        public string Weight;
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
         private readonly ILookupManager _lookupItemManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientId"]);
+            age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             if (Request.QueryString["visitId"] != null)
             {
@@ -35,7 +37,7 @@ namespace IQCare.Web.CCC.UC
             }
 
             // Get Gender
-            PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientId"]));
+            PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientPK"]));
             if (genderId != null)
                 genderID = genderId.Sex;
 
@@ -54,11 +56,23 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlVaccine, "Vaccinations");
                 lookUp.populateDDL(ddlVaccineStage, "VaccinationStages");
                 lookUp.populateDDL(ddlExaminationType, "ReviewOfSystems");
-                lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                //lookUp.populateDDL(ddlExamination, "PhysicalExamination");
+                lookUp.populateCBL(cblGeneralExamination, "GeneralExamination");
                 lookUp.populateCBL(cblPHDP, "PHDP");
-                lookUp.populateDDL(ddlReferredFor, "AppointmentType");
                 lookUp.populateDDL(arvAdherance, "ARVAdherence");
                 lookUp.populateDDL(ctxAdherance, "CTXAdherence");
+                lookUp.populateDDL(ddlAllergySeverity, "ADRSeverity");
+
+                var patientVitals = new PatientVitalsManager();
+                PatientVital patientTriage = patientVitals.GetByPatientId(Convert.ToInt32(Session["PatientPK"].ToString()));
+                if(patientTriage != null)
+                {
+                    Weight = patientTriage.Weight.ToString();
+                    txtWeight.Text = Weight;
+                    txtHeight.Text = patientTriage.Height.ToString();
+                    txtBMI.Text = patientTriage.BMI.ToString();
+                }
+                
 
                 if (Convert.ToInt32(Session["PatientMasterVisitId"]) > 0)
                     loadPatientEncounter();
@@ -69,7 +83,7 @@ namespace IQCare.Web.CCC.UC
         private void loadPatientEncounter()
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
-            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientId"].ToString());
+            pce = PEL.loadPatientEncounter(Session["PatientMasterVisitId"].ToString(), Session["PatientPK"].ToString());
 
             /////PRESENTING COMPLAINTS
             visitdateval = pce.visitDate;
@@ -83,10 +97,31 @@ namespace IQCare.Web.CCC.UC
 
             //rblVisitScheduled.SelectedValue = pce.visitScheduled;
             ddlVisitBy.SelectedValue = pce.visitBy;
+
+            if (pce.anyComplaint == "1")
+                rdAnyComplaintsYes.Checked = true;
+            else if (pce.anyComplaint == "0")
+                rdAnyComplaintsNo.Checked = true;
+
             complaints.Value = pce.complaints;
+            tbInfected.SelectedValue = pce.OnAntiTB;
+            onIpt.SelectedValue = pce.OnIPT;
+
             tbscreeningstatus.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
+            txtWorkPlan.Text = pce.WorkPlan;
+            foreach (ListItem item in cblGeneralExamination.Items)
+            {
+                for (int i = 0; i < pce.generalExams.Length; i++)
+                {
+                    if (item.Value == pce.generalExams[i])
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
 
+            
 
             ////PATIENT MANAGEMENT
             foreach (ListItem item in cblPHDP.Items)
@@ -102,7 +137,6 @@ namespace IQCare.Web.CCC.UC
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
-            ddlReferredFor.SelectedValue = pce.nextAppointmentType;
 
         }
     }

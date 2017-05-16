@@ -16,41 +16,50 @@ namespace IQCare.CCC.UILogic
 {
     public class PatientEncounterLogic
     {
-        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent)
+        public int savePatientEncounterPresentingComplaints(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, int userId, string adverseEvent, string presentingComplaints)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var advEvent = parser.Deserialize<List<AdverseEvents>>(adverseEvent);
-            //string[] fpMethodArray = fpMethod.Split(',');
-            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, Complaints, TBScreening, NutritionalStatus, advEvent);
+            var pComplaints = parser.Deserialize<List<PresentingComplaints>>(presentingComplaints);
+            int val = patientEncounter.savePresentingComplaints(patientMasterVisitID, patientID, serviceID,VisitDate,VisitScheduled,VisitBy, anyComplaints, Complaints, TBScreening, NutritionalStatus, userId, advEvent, pComplaints);
             return val;
         }
 
-        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string chronicIllness, string Vaccines, string Allergies)
+        public int savePatientEncounterTS(string patientMasterVisitID, string patientID, string serviceID, string VisitDate, string VisitScheduled, string VisitBy, int userId)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+
+            int val = patientEncounter.savePresentingComplaintsTS(patientMasterVisitID, patientID, serviceID, VisitDate, VisitScheduled, VisitBy, userId);
+            return val;
+        }
+
+        public void savePatientEncounterChronicIllness(string masterVisitID, string patientID, string userID, string chronicIllness, string Vaccines, string Allergies)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var chrIllness = parser.Deserialize<List<ChronicIlness>>(chronicIllness);
             var vacc = parser.Deserialize<List<Vaccines>>(Vaccines);
             var allergy = parser.Deserialize<List<Allergies>>(Allergies);
-            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, chrIllness, vacc, allergy);
+            int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, userID, chrIllness, vacc, allergy);
         }
 
-        public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string physicalExam)
+        public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string userID, string physicalExam, string generalExam)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var phyExam = parser.Deserialize<List<PhysicalExamination>>(physicalExam);
-            int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, phyExam);
+            List<string> generalExamList = generalExam.Split(',').ToList();
+            int val = patientEncounter.savePhysicalEaxminations(masterVisitID, patientID, userID, phyExam, generalExamList);
         }
 
-        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string ARVAdherence, string CTXAdherence, string nextAppointment, string appointmentType, string phdp, string diagnosis)
+        public void savePatientManagement(string PatientMasterVisitID, string PatientID, string userID, string workplan, string ARVAdherence, string CTXAdherence, string phdp, string diagnosis)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var diag = parser.Deserialize<List<Diagnosis>>(diagnosis);
             List<string> PHDPList = phdp.Split(',').ToList();
-            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID,ARVAdherence,CTXAdherence,nextAppointment,appointmentType, PHDPList, diag);
+            int val = patientEncounter.savePatientManagement(PatientMasterVisitID,PatientID, userID, workplan, ARVAdherence,CTXAdherence, PHDPList, diag);
         }
 
         public PresentingComplaintsEntity loadPatientEncounter(string PatientMasterVisitID, string PatientID)
@@ -63,6 +72,12 @@ namespace IQCare.CCC.UILogic
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
             return patientEncounter.getPatientEncounterAdverseEvents(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientEncounterComplaints(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientEncounterComplaints(PatientMasterVisitID, PatientID);
         }
 
         public DataTable loadPatientEncounterChronicIllness(string PatientMasterVisitID, string PatientID)
@@ -142,6 +157,13 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public DataTable getPatientWorkPlan(string patientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientWorkPlan(patientID);
+
+        }
+
         public string getPharmacyDrugMultiplier(string frequencyID)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
@@ -160,10 +182,25 @@ namespace IQCare.CCC.UILogic
             return drg;
         }
 
+        public void getPharmacyTreatmentProgram(DropDownList ddl)
+        {
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<KeyValue> kv = patientEncounter.getPharmacyTreatmentProgram();
+
+            ddl.Items.Add(new ListItem("Select", "0"));
+            if (kv != null && kv.Count > 0)
+            {
+                foreach (var item in kv)
+                {
+                    ddl.Items.Add(new ListItem(item.DisplayName, item.ItemId));
+                }
+            }
+        }
+
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
             string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
-            string regimenText)
+            string regimenText, string prescriptionDate, string dispensedDate)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
             JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -182,7 +219,8 @@ namespace IQCare.CCC.UILogic
 
             return patientEncounter.saveUpdatePharmacy(PatientMasterVisitID, PatientId, LocationID, OrderedBy,
                 UserID, RegimenType.TrimEnd('/'), DispensedBy, RegimenLine, ModuleID, drugPrescription, pmscmFlag,
-                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen);
+                TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, prescriptionDate,
+                dispensedDate);
 
         }
 
@@ -325,7 +363,20 @@ namespace IQCare.CCC.UILogic
                         //        theFrmRoot.SelectAction = TreeNodeSelectAction.None;
                         //    }
                         //}
-                        theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+
+                        if(theDR["VisitName"].ToString() == "Encounter")
+                        {
+                            theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+                        else if(theDR["VisitName"].ToString() == "Pharmacy")
+                        {
+                            theFrmRoot.NavigateUrl = "PharmacyPrescription.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+                        else if (theDR["VisitName"].ToString() == "Lab Order")
+                        {
+                            theFrmRoot.NavigateUrl = "LabOrder.aspx?visitId=" + theDR["visitID"].ToString();
+                        }
+
                         theFrmRoot.Value = "";// Convert.ToInt32(PId) + "%" + theDR["OrderNo"].ToString() + "%" + theDR["LocationID"].ToString() + "%" + PtnARTStatus + "%" + theDR["Module"].ToString() + "%" + theDR["VisitName"].ToString();
                         theMRoot.ChildNodes.Add(theFrmRoot);
                     }
@@ -335,5 +386,92 @@ namespace IQCare.CCC.UILogic
 
         }
 
+        public ZScores getZScores(string patientId, double age, string gender, double height, double weight)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+
+            ZScoresParameters zsParam = new ZScoresParameters();
+            ZScores zsValues = new ZScores();
+
+            if (age < 15)
+            {
+                double bmi = 0;
+
+                zsParam = patientEncounter.GetZScoreValues(patientId, gender, height.ToString());
+
+                //////weight for Age//////////
+
+                if (zsParam != null)
+                {
+                    //Weight for age calculation
+                    if (zsParam.L_WA != 0 && weight != 0)
+                        zsValues.weightForAge = ((Math.Pow((weight / zsParam.M_WA), zsParam.L_WA)) - 1) / (zsParam.S_WA * zsParam.L_WA);
+                    else
+                        zsValues.weightForAge = (Math.Log(weight / zsParam.M_WA)) / zsParam.S_WA;
+
+                }
+                else
+                {
+                    //lblWAClassification.Text = "Out of range";
+                }
+
+                ///////Weight for height calculation//////////////////////////////
+
+                if (height <= 120 && height >= 45)
+                {
+                    try
+                    {
+                        if (zsParam != null)
+                        {
+
+                            if (zsParam.L_WH != 0 && weight != 0)
+                                zsValues.weightForHeight = ((Math.Pow((weight / zsParam.M_WH), zsParam.L_WH)) - 1) / (zsParam.S_WH * zsParam.L_WH);
+                            else
+                                zsValues.weightForHeight = (Math.Log(weight / zsParam.M_WH)) / zsParam.S_WH;
+
+                        }
+                    }
+
+                    catch (Exception)
+                    {
+
+                    }
+                }
+
+                ////BMIz (Z-Score Calculation)////////////////////////////
+
+                if (zsParam != null)
+                {
+
+                    if (height != 0 && weight != 0)
+                        bmi = weight / ((height / 100) * (height / 100));
+                    else
+                        bmi = 0;
+
+                    if (zsParam.L_BMIz != 0)
+                        zsValues.BMIz = ((Math.Pow((bmi / zsParam.M_BMIz), zsParam.L_BMIz)) - 1) / (zsParam.S_BMIz * zsParam.L_BMIz);
+                    else
+                        zsValues.BMIz = (Math.Log(bmi / zsParam.M_BMIz)) / zsParam.S_BMIz;
+
+                    //lblBMIz.Text = string.Format("{0:f2}", BMIz);
+
+                }
+
+
+            }
+
+            return zsValues;
+            
+            /////////////////////////////////////////////////////////
+
+            ///////Height for age calculation/////////////////////////////
+            //if (L != 0)
+            //    HAz = ((Math.Pow((heightInCm / M), L)) - 1) / (S * L);
+            //else
+            //    HAz = (Math.Log(heightInCm / M)) / S;
+
+            /////////////////////////////////////////////////////////////
+
+        }
     }
 }
