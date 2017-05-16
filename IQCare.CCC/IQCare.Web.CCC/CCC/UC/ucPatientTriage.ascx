@@ -119,7 +119,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger">*</small> Height(cm)</span>
-                            <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10" Max="250" data-parsley-range="[10, 250]" data-parsley-range-message="Height is out of reasonable range"></asp:TextBox>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
-                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="30" data-parsley-range="[1, 30]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
                         </div>
                     </div>
 
@@ -326,14 +326,14 @@
     $("#Heights").change(function () {
         var bmi = calcBMI();
         var weight = '';
-        if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
+        if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
         document.getElementById("bmivalue").value = bmi+weight;
         calcZScore();
     });
     $("#weights").change(function () {
         var bmi = calcBMI();
         var weight = '';
-        if(bmi<18.5){weight = '(Under weight)'}else if(bmi>=18.5<25){weight = '(Normal weight)'}else if(bmi>=25<30){weight = '(Over weight)'}else{weight = '(Obese)'}
+        if (bmi < 18.5) {weight = '(Under weight)';} else if (bmi >= 18.5 && bmi < 25) {weight = '(Normal weight)';} else if (bmi >= 25 && bmi < 30) {weight = '(Over weight)';} else {weight = '(Obese)';}
         document.getElementById("bmivalue").value = bmi+weight;
         calcZScore();
     });
@@ -378,7 +378,6 @@
         if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
         if (boSaturation === '') { boSaturation = 0 }
-        debugger;
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/AddpatientVitals",

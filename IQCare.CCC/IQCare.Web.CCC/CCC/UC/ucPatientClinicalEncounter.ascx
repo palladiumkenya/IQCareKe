@@ -1722,6 +1722,20 @@
         showHidePresentingComplaintsDivs();
         showHideVisitByTS();
 
+
+        //set nutrition status
+
+        var txtBmi = $("#<%=txtBMI.ClientID%>").val();
+        if (txtBmi < 16) {
+            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Severe Acute Malnutrition';}).prop('selected', true);
+        } else if (txtBmi >= 16 && txtBmi < 18.5) {
+            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Moderate Acute Malnutrition';}).prop('selected', true);
+        }else if (txtBmi >= 18.5 && txtBmi < 25) {
+            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Normal';}).prop('selected', true);
+        } else if(txtBmi >= 25) {
+            $("#nutritionscreeningstatus option").filter(function() {return $(this).text() === 'Overweight/Obese';}).prop('selected', true);
+        }
+
         if(Age > 14)
         {
             document.getElementById('divAntigenToday').style.display = 'none';
@@ -2748,8 +2762,10 @@
     function onIptChange() {
         if ($("#onIpt").val() === 'False') {
             $("#btnAddIptWorkUp").prop("disabled",false);
+            $("#btnAddIptOutcome").prop("disabled",true);
         } else {
             $("#btnAddIptWorkUp").prop("disabled",true);
+            $("#btnAddIptOutcome").prop("disabled",false);
         }
             
     }
@@ -2775,11 +2791,11 @@
         if (($("#sputum").val() === 'True')||($("#chest").val() === 'True')||($("#antiTb").val() === 'True')||($("#contactsInvitation").val() === 'True')||($("#iptEvaluation").val() === 'True')) {
             $("#btnAddIptWorkUp").prop("disabled",true);
             $("#btnAddIpt").prop("disabled",true);
-            $("#tbscreeningstatus").val(34);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'PrTB';}).prop('selected', true);
         } else {
             $("#btnAddIptWorkUp").prop("disabled",false);
             $("#btnAddIpt").prop("disabled",false);
-            $("#tbscreeningstatus").val(35);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
         }
     }
 
