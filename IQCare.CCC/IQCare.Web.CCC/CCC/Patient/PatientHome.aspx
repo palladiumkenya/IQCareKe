@@ -1593,7 +1593,7 @@
 
                                 $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
                                 $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
-                                $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
+                                $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WHOStageName);
                                 $("#divPGhr").hide('fast');
                                 if (gender === 'Female') {
                                     $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
