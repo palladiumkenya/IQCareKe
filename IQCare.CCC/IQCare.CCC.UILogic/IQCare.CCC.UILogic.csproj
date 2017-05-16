@@ -111,6 +111,7 @@
     <Compile Include="PatientVitalsManager.cs" />
     <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />
+    <Compile Include="PersonGreenCardLookupManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />
     <Compile Include="PersonManager.cs" />
