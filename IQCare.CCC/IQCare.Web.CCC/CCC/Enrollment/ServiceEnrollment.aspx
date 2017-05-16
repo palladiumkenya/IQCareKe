@@ -719,7 +719,7 @@
             $("#IdentifierTypeId").change(function() {
                 if ($("#<%=IdentifierTypeId.ClientID%>").find(":selected").text() == "CCC Registration Number") {
                     $("#AppPosID").show();
-                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "TransferIn") {
+                    if ('<%=patType%>' == "Transit" || '<%=patType%>' == "Transfer-In") {
                         $('#txtAppPosID').val("");
                         $('#txtAppPosID').removeAttr('readonly');
                     } else {
