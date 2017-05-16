@@ -263,7 +263,7 @@ namespace BusinessProcess.Laboratory
 
         public LabOrder SaveLabOrder(LabOrder labOrder, int UserId, int LocationId)
         {
-            // this.Connection = DataMgr.GetConnection();
+            // this.Connection = DataMgr.GetConnection(); 
             // this.Transaction = DataMgr.BeginTransaction(this.Connection);
 
             ClsObject obj = new ClsObject();
