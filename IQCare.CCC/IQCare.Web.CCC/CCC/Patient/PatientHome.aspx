@@ -761,11 +761,6 @@
                                                         <div class="cell">
                                                             Date of ART Initiation
                                                         </div>
-
-                                                        <div class="cell">
-                                                            History of ART Use
-                                                        </div>
-
                                                     </div>
 
                                                     <div class="rowa">
@@ -787,6 +782,51 @@
 
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
+                                                        <label class="control-label text-primary pull-left text-muted">History of ART Use</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="table">
+                                                    <div class="rowa header blue">
+                                                        <div class="cell">
+                                                            Treatment Type
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Purpose
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Regimen
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            Date Last Used
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="rowa">
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblTreatmentType" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblPurpose" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblRegimen" runat="server"></asp:Label>
+                                                        </div>
+
+                                                        <div class="cell">
+                                                            <asp:Label ID="lblDateLastUsed" runat="server"></asp:Label>
+                                                        </div>
+                                                    </div>
+
+                                            </div>
 
                                                 <div class="col-md-12">
                                                     <div class="col-md-12">
@@ -1478,20 +1518,26 @@
                                 }
 
                                 /*patient Diagnosis */
-                                $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
-                                $("#<%=lblDateOfHivDiagnosisA.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
-                                $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
-                                $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
-                                $("#<%=lblWHOStageAtEnrollment.ClientID%>").text(itemList.EnrollmentWHOStageName);
+                                if (itemList.HivDiagnosisDate != null && itemList.HivDiagnosisDate!="")
+                                    $("#<%=lblDateOfHivDiagnosis.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
+                                if (itemList.HivDiagnosisDate != null && itemList.HivDiagnosisDate!="")
+                                    $("#<%=lblDateOfHivDiagnosisA.ClientID%>").text(moment(itemList.HivDiagnosisDate).format("DD-MMM-YYYY"));
+                                if (itemList.EnrollmentDate != null && itemList.EnrollmentDate!="")
+                                    $("#<%=lblDateOfEnrollment.ClientID%>").text(moment(itemList.EnrollmentDate).format("DD-MMM-YYYY"));
+                                if (itemList.EnrollmentWHOStageName != null && itemList.EnrollmentWHOStageName!="")
+                                    $("#<%=lblWhoStage.ClientID%>").text(itemList.EnrollmentWHOStageName);
+                                if (itemList.EnrollmentWHOStageName != null && itemList.EnrollmentWHOStageName!="")
+                                    $("#<%=lblWHOStageAtEnrollment.ClientID%>").text(itemList.EnrollmentWHOStageName);
                                 if (patientType === 'Transfer-In') {
                                     $("#<%=lblARTInitiationDate.ClientID%>")
                                         .text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 }
-                                if(itemList.ARTInitiationDate==='Invalid Date'){
+                                //console.log("inittia");
+                                //console.log(itemList.ARTInitiationDate);
+                                if (itemList.ARTInitiationDate == null || itemList.ARTInitiationDate == "") {
                                     $("#<%=lblDateOfARTInitiation.ClientID%>").text("Not Taken");
-                                }else{
-                                           $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
-
+                                } else {
+                                    $("#<%=lblDateOfARTInitiation.ClientID%>").text(moment(itemList.ARTInitiationDate).format("DD-MMM-YYYY"));
                                 }
 
                          
@@ -1547,7 +1593,7 @@
 
                                 $("#<%=lblHIVInfected.ClientID%>").text(itemList.HBVInfected);
                                 $("#<%=lblTBInfected.ClientID%>").text(itemList.TBinfected);
-                                $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WhoStageName);
+                                $("#<%=lblWHOStageNow.ClientID%>").text(itemList.WHOStageName);
                                 $("#divPGhr").hide('fast');
                                 if (gender === 'Female') {
                                     $("#<%=lblPregnant.ClientID%>").text(itemList.Pregnant);
@@ -1612,7 +1658,30 @@
                                     $("#lblBreastfeedingYes").checkbox('check');
                                 }
 
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../WebService/PatientBaselineService.asmx/GetCurrentPatientARVUseHistory",
+                                    data: "{'patientId':'" + patientId + "'}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (response) {
+                                        var itemList = JSON.parse(response.d);
 
+                                        console.log(itemList);
+
+                                        if (itemList.length > 0) {
+                                            $("#<%=lblTreatmentType.ClientID%>").text(itemList[0].TreatmentType);
+                                            $("#<%=lblPurpose.ClientID%>").text(itemList[0].Purpose);
+                                            $("#<%=lblRegimen.ClientID%>").text(itemList[0].Regimen);
+                                            if (itemList[0].DateLastUsed != null && itemList[0].DateLastUsed != "")
+                                                $("#<%=lblDateLastUsed.ClientID%>").text(moment(itemList[0].DateLastUsed).format("DD-MMM-YYYY"));
+                                        }
+                                    },
+                                    error: function (xhr, errorType, exception) {
+                                        var jsonError = jQuery.parseJSON(xhr.responseText);
+                                        toastr.error("" + xhr.status + "" + jsonError.Message);
+                                    }
+                                });
 
 
                             }
@@ -1922,15 +1991,21 @@
 
                         
                         $("#<%=bioFirstName.ClientID%>").val(patientDetails.FirstName);
-                        $("#<%=lblFirstNameP.ClientID%>").text(patientDetails.FirstName);
+                        if (patientDetails.FirstName != null && patientDetails.FirstName != "")
+                            $("#<%=lblFirstNameP.ClientID%>").text(patientDetails.FirstName);
                         
                         $("#<%=bioMiddleName.ClientID%>").val(patientDetails.MiddleName);
-                        $("#<%=lblMiddleNameP.ClientID%>").text(patientDetails.MiddleName);
+
+                        if (patientDetails.MiddleName != null && patientDetails.MiddleName != "")
+                            $("#<%=lblMiddleNameP.ClientID%>").text(patientDetails.MiddleName);
 
                         $("#<%=bioLastName.ClientID%>").val(patientDetails.LastName);
-                        $("#<%=lblLastNameP.ClientID%>").text(patientDetails.LastName);
 
-                        $("#<%=lblCCC.ClientID%>").text(patientDetails.EnrollmentNumber);
+                        if (patientDetails.LastName != null && patientDetails.LastName != "")
+                            $("#<%=lblLastNameP.ClientID%>").text(patientDetails.LastName);
+
+                        if (patientDetails.EnrollmentNumber != null && patientDetails.EnrollmentNumber != "")
+                            $("#<%=lblCCC.ClientID%>").text(patientDetails.EnrollmentNumber);
                         
                         //var populationType = 0;
                         //if (patientDetails.population === "General Population") {
@@ -1941,7 +2016,8 @@
                         //}
                         //console.log(populationType);
 
-                        $("#<%=bioPatientPopulation.ClientID%>").val(patientDetails.populationTypeId);
+                        if (patientDetails.populationTypeId != null && patientDetails.populationTypeId != "")
+                            $("#<%=bioPatientPopulation.ClientID%>").val(patientDetails.populationTypeId);
 
                         var names = null;
                         if (patientDetails.tsFname == null && patientDetails.tsLastName == null) {
@@ -2000,22 +2076,35 @@
                         $("#<%=patAlternativeMobile.ClientID%>").val(patientDetails.AlternativeNumber);
                         $("#<%=bioPatientKeyPopulation.ClientID%>").val(patientDetails.PopulationCategoryId);
                         $("#<%=Gender.ClientID%>").val(patientDetails.Gender);
-                        $("#<%=lblSexP.ClientID%>").text(patientDetails.GenderString);
-                        $("#<%=lblDobP.ClientID%>").text(patientDetails.PersonDoB);
+                        if (patientDetails.GenderString != null && patientDetails.GenderString != "")
+                            $("#<%=lblSexP.ClientID%>").text(patientDetails.GenderString);
 
+                        if (patientDetails.PersonDoB != null && patientDetails.PersonDoB != "")
+                            $("#<%=lblDobP.ClientID%>").text(patientDetails.PersonDoB);
 
-                        $("#<%=lblParent_GuardianP.ClientID%>").text(patientDetails.GurdianFNames + " " + patientDetails.GurdianMName + " " + patientDetails.GurdianLName);
-                        $("#<%=lblInSchoolP.ClientID%>").text(patientDetails.InschoolString);
-                        $("#<%=lblOrphanP.ClientID%>").text(patientDetails.ChildOrphanString);
+                        var guardian_Names = "";
+                        if ((patientDetails.GurdianFNames != null && patientDetails.GurdianFNames != "") && (patientDetails.GurdianLName != null && patientDetails.GurdianLName != "")) {
+                            guardian_Names = patientDetails.GurdianFNames + " " + patientDetails.GurdianMName + " " + patientDetails.GurdianLName;
+                        }
 
-                        $("#<%=lblIdNumber.ClientID%>").text(patientDetails.NationalId);
+                        $("#<%=lblParent_GuardianP.ClientID%>").text(guardian_Names);
+                        if (patientDetails.InschoolString != null && patientDetails.InschoolString != "")
+                            $("#<%=lblInSchoolP.ClientID%>").text(patientDetails.InschoolString);
+                        if (patientDetails.ChildOrphanString != null && patientDetails.ChildOrphanString != "")
+                            $("#<%=lblOrphanP.ClientID%>").text(patientDetails.ChildOrphanString);
 
-                        $("#<%=lblMaritalStatus.ClientID%>").text(patientDetails.MaritalStatusString);
-                        $("#<%=lblPopulationTypeA.ClientID%>").text(patientDetails.population);
-                        $("#<%=lblKeyPopType.ClientID%>").text(patientDetails.PopulationCategoryString);
-                        
+                        if (patientDetails.NationalId != null && patientDetails.NationalId != "")
+                            $("#<%=lblIdNumber.ClientID%>").text(patientDetails.NationalId);
 
-                        $("#<%=lblEntryPointP.ClientID%>").text(patientDetails.EntryPoint);
+                        if (patientDetails.MaritalStatusString != null && patientDetails.MaritalStatusString != "")
+                            $("#<%=lblMaritalStatus.ClientID%>").text(patientDetails.MaritalStatusString);
+                        if (patientDetails.population != null && patientDetails.population != "")
+                            $("#<%=lblPopulationTypeA.ClientID%>").text(patientDetails.population);
+                        if (patientDetails.PopulationCategoryString != null && patientDetails.PopulationCategoryString != "")
+                            $("#<%=lblKeyPopType.ClientID%>").text(patientDetails.PopulationCategoryString);
+
+                        if (patientDetails.EntryPoint != null && patientDetails.EntryPoint != "")
+                            $("#<%=lblEntryPointP.ClientID%>").text(patientDetails.EntryPoint);
 
                         $("#<%=lblEnrollmentDateP.ClientID%>").text(patientDetails.EnrollmentDate);
 
