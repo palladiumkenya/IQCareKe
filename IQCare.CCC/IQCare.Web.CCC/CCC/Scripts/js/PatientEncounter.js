@@ -377,12 +377,12 @@ function EnableDisableEDD()
         var edd = new Date(lmpJSDate.getTime() + 24192000000);
  
         document.getElementById("ExpectedDateOfChildBirth").removeAttribute('disabled');
-        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat(edd);
+        document.getElementById("ExpectedDateOfChildBirth").value = DateFormat1(edd);
     }
     
 }
 
-function DateFormat(date)
+function DateFormat1(date)
 {
     var m_names = new Array("Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec");
 
@@ -399,8 +399,19 @@ function DateFormat(date)
 
 function ChkQtyDispensed()
 {
-    var qtyPres = $("#txtQuantityPres").val();
-    var qtyDisp = $("#txtQuantityDisp").val();
+    var vPres = $("#txtQuantityPres").val();
+    var vDisp = $("#txtQuantityDisp").val();
+
+    if (vPres != "")
+        var qtyPres = parseFloat(vPres);
+    else
+        var qtyPres = 0;
+
+    if (vDisp != "")
+        var qtyDisp = parseFloat(vDisp);
+    else
+        var qtyDisp = 0;
+
 
     if(qtyDisp > qtyPres)
     {
@@ -414,7 +425,8 @@ function ChkQtyDispensed()
     }
 }
 
-var drugList = new Array();
+var drugNameArr = new Array();
+var batchNoArr = new Array();
 function AddDrugPrescription() {
     var drugId = $("#drugID").val();
     var drugAbbr = $("#drugAbbr").val();
@@ -443,13 +455,14 @@ function AddDrugPrescription() {
         batchId = 0;
 
     var drugFound = 0;
+    var batchFound = 0;
 
     if (drugName == "") {
         toastr.error("Error", "Please select drug");
         return false;
     }
 
-    if (dose == "") {
+    if (dose == "" || dose == "0") {
         toastr.error("Error", "Please enter the dose");
         return false;
     }
@@ -459,20 +472,28 @@ function AddDrugPrescription() {
         return false;
     }
 
-    if (duration == "0") {
+    if (duration == "0" || duration == "") {
         toastr.error("Error", "Please enter the duration");
         return false;
     }
 
-    drugFound = $.inArray("" + drugName + "", drugList);
+    if (quantityPres == "0" || quantityPres == "") {
+        toastr.error("Error", "Please enter the quantity prescribed");
+        return false;
+    }
+
+    drugFound = $.inArray("" + drugName + "", drugNameArr);
+    batchFound = $.inArray("" + batchText + "", batchNoArr);
+
     
-    if (drugFound > -1) {
-        toastr.error("Error", drugName + " already exists in the List");
+    
+    if (drugFound > -1 && batchFound > -1) {
+        toastr.error("Error", drugName + " and/or batch no. " + batchText + " already exists in the List");
         return false; // message box herer
     }
     else {
-        //drugList.push("" + drug + "");
-
+        drugNameArr.push("" + drugName + "");
+        batchNoArr.push("" + batchText + "");
 
         arrDrugPrescriptionUI = [];
 

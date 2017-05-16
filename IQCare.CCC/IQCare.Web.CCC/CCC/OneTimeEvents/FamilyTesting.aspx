@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group" id="DateOfBirth">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -180,7 +180,7 @@
                             <div class="col-md-12">
                                 <div class="datepicker fuelux form-group" id="BaselineHIVStatusD">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="BaselineHIVStatusDate"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="BaselineHIVStatusDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnBaselineHIVStatusDate">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -290,7 +290,7 @@
                             <div class="col-md-12">
                                 <div class="datepicker fuelux form-group" id="TestingDate">
                                     <div class="input-group">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="HIVTestingDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnHIVTestingDate">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -551,7 +551,7 @@
                                         <div class="col-md-6">
                                             <div class="datepicker fuelux form-group" id="DateOfBirthMod">
                                                 <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="dobMod"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="dobMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                             <span class="glyphicon glyphicon-calendar"></span>
@@ -665,7 +665,7 @@
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="BaselineHIVStatusDMod">
                                                 <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="bHivStatusDateMod"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="bHivStatusDateMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnBaselineHIVStatusDate">
                                                             <span class="glyphicon glyphicon-calendar"></span>
@@ -775,7 +775,7 @@
                                         <div class="col-md-12">
                                             <div class="datepicker fuelux form-group" id="TestingDateMod">
                                                 <div class="input-group">
-                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="testingStatusDateMod"></asp:TextBox>
+                                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="testingStatusDateMod" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown" clientidmode="Static" id="btnHIVTestingDate">
                                                             <span class="glyphicon glyphicon-calendar"></span>

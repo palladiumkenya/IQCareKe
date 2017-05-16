@@ -57,7 +57,7 @@
                                 <div class="col-md-12">
                                     <div class="datepicker" id="DateOfVisit">
                                         <div class="input-group">
-                                            <asp:TextBox ID="VisitDate" runat="server" class="form-control input-sm" data-parsley-required="true"></asp:TextBox>
+                                            <asp:TextBox ID="VisitDate" runat="server" class="form-control input-sm" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                             <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -238,7 +238,7 @@
                                                 <div class="col-md-12">
                                         <div class="datepicker" id="PCDateOfOnset">
                                             <div class="input-group">
-                                                <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" ></asp:TextBox>
+                                                <asp:TextBox ID="txtPCOnsetDate" runat="server" class="form-control input-sm" ClientIDMode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                                 <%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
@@ -830,7 +830,7 @@
                                                 <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="ChronicIllnessOnsetDate">
                                                     <div class="input-group pull-left">
-                                                        <input class="form-control input-sm pull-left" id="txtOnsetDate" type="text" runat="server" clientidmode="Static" />
+                                                        <input class="form-control input-sm pull-left" id="txtOnsetDate" type="text" runat="server" clientidmode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1001,7 +1001,7 @@
                                             <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="AllergyDate">
                                                     <div class="input-group">
-                                                        <input class="form-control input-sm" id="txtAllergyDate" type="text" runat="server" clientidmode="Static" />
+                                                        <input class="form-control input-sm" id="txtAllergyDate" type="text" runat="server" clientidmode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -1161,7 +1161,7 @@
                                             <div class="col-md-12">
                                                 <div class="datepicker fuelux" id="vaccineDate">
                                                     <div class="input-group">
-                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" clientidmode="Static" />
+                                                        <input class="form-control input-sm" id="txtVaccinationDate" type="text" runat="server" clientidmode="Static" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" />
                                                         <div class="input-group-btn">
                                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                                 <span class="glyphicon glyphicon-calendar"></span>
