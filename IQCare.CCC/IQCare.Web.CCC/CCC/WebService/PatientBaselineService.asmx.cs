@@ -257,6 +257,23 @@ namespace IQCare.Web.CCC.WebService
             return _jsonMessage;
         }
 
+        [WebMethod(EnableSession =true)]
+        public string GetCurrentPatientARVUseHistory(int patientId)
+        {
+            try
+            {
+                var patientArvHistory = new PatientArvHistoryManager();
+                var arvHistory = patientArvHistory.GetPatientArtUseHistory(patientId);
+                _jsonMessage = JsonConvert.SerializeObject(arvHistory);
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
         [WebMethod(EnableSession = true)]
         public string GetNewPatientBaselineVitals(int patientId)
         {
