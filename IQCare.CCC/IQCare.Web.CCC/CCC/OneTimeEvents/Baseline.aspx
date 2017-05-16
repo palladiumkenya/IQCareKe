@@ -1295,6 +1295,12 @@
                     $("#<%=BaselineBMI.ClientID%>").val(bmi);
                 });
 
+            $("#<%=WHOStageAtEnrollment.ClientID%>").on('change',function(){
+            
+                var who=$(this).find(":selected").val();
+                $("#<%=bwhoStage.ClientID%>").val(who);
+            
+            })
             function calcBmi() {
                 var weight = document.getElementById('BaselineWeight').value;
                 var height = document.getElementById('BaselineHeight').value / 100;
