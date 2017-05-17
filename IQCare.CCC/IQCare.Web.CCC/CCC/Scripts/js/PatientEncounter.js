@@ -180,10 +180,10 @@ function AddVaccine() {
         return false;
     }
 
-    if (vaccineStageID == "0") {
-        toastr.error("Error", "Please enter vaccine stage");
-        return false;
-    }
+    //if (vaccineStageID == "0") {
+    //    toastr.error("Error", "Please enter vaccine stage");
+    //    return false;
+    //}
     if (vaccinationDate == "") {
         toastr.error("Error","Please enter vaccine date");
         return false;
@@ -523,6 +523,7 @@ function ValidateDispensedDate()
     if (end < start)
     {
         toastr.error("Error", "Dispense date cannot be less than Prescribed Date.");
+        $("#txtPrescriptionDate").val("");
         $("#txtDateDispensed").val("");
     }
 }
@@ -532,6 +533,7 @@ function ValidatePrescriptionDate() {
     var end = new Date($("#txtDateDispensed").val());
     if (start > end) {
         toastr.error("Error", "Prescription date cannot be greater than dispensed Date.");
+        $("#txtPrescriptionDate").val("");
         $("#txtPrescriptionDate").val("");
     }
 }

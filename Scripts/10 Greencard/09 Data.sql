@@ -3302,6 +3302,12 @@ begin
 insert into lookupmasteritem values(79,284,'Post Natal',3)
 end
 
+if not exists(select 1 from lookupitem where name = 'Drug Substitution')
+begin
+insert into lookupitem values('Drug Substitution','Drug Substitution',0)
+insert into lookupmasteritem values(77,ident_current('lookupitem'),'Drug Substitution',5)
+end
+
 TRUNCATE TABLE [dbo].[County]
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1, 1, N'MOMBASA', 1, N'CHANGAMWE', 1, N'PORT REITZ')
