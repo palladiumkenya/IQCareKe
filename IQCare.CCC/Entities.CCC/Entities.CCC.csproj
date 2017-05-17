@@ -100,6 +100,7 @@
     <Compile Include="Encounter\LabOrderEntity.cs" />
     <Compile Include="Lookup\LookupFacility.cs" />
     <Compile Include="Lookup\LookupFacilityStatistics.cs" />
+    <Compile Include="Lookup\LookupFacilityViralLoad.cs" />
     <Compile Include="Lookup\LookupPatientAdherence.cs" />
     <Compile Include="Lookup\LookupPreviousLabs.cs" />
     <Compile Include="Lookup\LookupLabs.cs" />

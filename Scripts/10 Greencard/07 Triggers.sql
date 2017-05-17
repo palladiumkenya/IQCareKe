@@ -14,8 +14,9 @@ AS
       UPDATE c
             SET ResultValues = isnull(i.ResultValue,0),
           ResultTexts = i.ResultText,
+		  ResultOptions = i.ResultOption,
 	      ResultDate = i.StatusDate,
-		    ResultUnits = i.ResultUnit,
+		  ResultUnits = i.ResultUnit,
           Results = 'Complete'    
         FROM PatientLabTracker AS c
           JOIN inserted AS i
@@ -26,6 +27,8 @@ AS
          OR d.ResultValue IS NULL)
     OR ( i.ResultText <> d.ResultText
                   OR d.ResultText IS NULL)
+    OR ( i.ResultOption <> d.ResultOption
+                  OR d.ResultOption IS NULL)
          );
     END ;
 GO
