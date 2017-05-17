@@ -173,6 +173,8 @@ namespace IQCare.Web.CCC.WebService
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientEnrollment);
                         patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientEntryPoint);
                         var patient_person_details = personLookUp.GetPersonById(PersonId);
+                        var greencardlookup = new PersonGreenCardLookupManager();
+                        var greencardptnpk = greencardlookup.GetPtnPkByPersonId(PersonId);
 
 
 
@@ -215,21 +217,28 @@ namespace IQCare.Web.CCC.WebService
                                 }
                             }
 
+                            if (greencardptnpk.Count == 0)
+                            {
+                                ptn_Pk = mstPatientLogic.InsertMstPatient(
+                                    (patient_person_details.FirstName),
+                                    (patient_person_details.LastName),
+                                    (patient_person_details.MiddleName),
+                                    facility.FacilityID, enrollmentBlueCardId, entryPointId,
+                                    patientEnrollment.EnrollmentDate, sex,
+                                    patient.DateOfBirth,
+                                    1, MaritalStatusId,
+                                    address, phone, userId, Session["AppPosID"].ToString(),
+                                    203, patientEnrollment.EnrollmentDate, DateTime.Now);
 
-
-                            ptn_Pk = mstPatientLogic.InsertMstPatient(
-                                (patient_person_details.FirstName), 
-                                (patient_person_details.LastName),
-                                (patient_person_details.MiddleName),
-                                facility.FacilityID, enrollmentBlueCardId, entryPointId,
-                                patientEnrollment.EnrollmentDate, sex,
-                                patient.DateOfBirth,
-                                1, MaritalStatusId,
-                                address, phone, userId, Session["AppPosID"].ToString(),
-                                203, patientEnrollment.EnrollmentDate, DateTime.Now);
-
-                            patient.ptn_pk = ptn_Pk;
-                            patientManager.UpdatePatient(patient, patientId);
+                                patient.ptn_pk = ptn_Pk;
+                                patientManager.UpdatePatient(patient, patientId);
+                            }
+                            else
+                            {
+                                ptn_Pk = greencardptnpk[0].Ptn_Pk;
+                                patient.ptn_pk = greencardptnpk[0].Ptn_Pk;
+                                patientManager.UpdatePatient(patient, patientId);
+                            }
                         }
 
                         
@@ -250,7 +259,8 @@ namespace IQCare.Web.CCC.WebService
                                 };
 
                                 patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientidentifier);
-                                mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, visit.Start, patientIdentifierId, userId, DateTime.Now, 203);
+                                if (greencardptnpk.Count == 0)
+                                    mstPatientLogic.AddOrdVisit(ptn_Pk, facilityId, visit.Start, patientIdentifierId, userId, DateTime.Now, 203);
                             }
 
                             message.errorcode = 0;

@@ -341,7 +341,7 @@
              var dateVar = moment(dateofDeath, 'YYYY-MM-DD');
              var reason = $(this).find(":selected").text();
 
-             if (!dateVar.isValid() && reason != "Death") {
+             if (!dateVar.isValid() && reason !== "Death") {
                  dateofDeath = '';
              }
             

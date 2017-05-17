@@ -13,6 +13,7 @@ using Entities.CCC.Appointment;
 using Entities.CCC.Tb;
 using Entities.PatientCore;
 using Interface.CCC.Encounter;
+using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Context
 {
@@ -36,6 +37,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientEntryPoint> PatientEntryPoint { get; set; }
         public DbSet<PatientEntityIdentifier> PatientIdentifiers { get; set; }
         public DbSet<PatientEntityEnrollment> PatientEntityEnrollments { get; set; }
+        public DbSet<PersonGreenCardLookup> PersonGreenCardLookup { get; set; }
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }

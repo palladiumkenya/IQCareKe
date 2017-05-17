@@ -182,7 +182,7 @@ namespace IQCare.Web.CCC.WebService
                             x.DateOfBirth.ToString("dd-MMM-yyyy"),
                             LookupLogic.GetLookupNameById(x.Sex),
                             //x.RegistrationDate.ToString("dd-MMM-yyyy"),
-                            x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                            x.EnrollmentDate.ToString("dd-MMM-yyyy"),
                             x.PatientStatus.ToString()
                             //,utility.Decrypt(x.MobileNumber)
                         })
@@ -249,7 +249,7 @@ namespace IQCare.Web.CCC.WebService
                             x.LastName,
                             x.DateOfBirth.ToString("MMM-dd-yyyy"),
                             x.Sex.ToString(),
-                            x.RegistrationDate.ToString("MMM-dd-yyyy"),
+                            x.EnrollmentDate.ToString("MMM-dd-yyyy"),
                             x.PatientStatus.ToString(),
                             x.MobileNumber.ToString()
                         })
