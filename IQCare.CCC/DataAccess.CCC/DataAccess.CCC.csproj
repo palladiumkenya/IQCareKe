@@ -87,9 +87,11 @@
     <Compile Include="Interface\enrollment\IPatientEntryPointRepository.cs" />
     <Compile Include="Interface\enrollment\IPatientIdentifierRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
+    <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
     <Compile Include="Interface\Lookup\ILookupParameter.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientAdherenceRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientRegimenMap.cs" />
+    <Compile Include="Interface\Lookup\Interface1.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
@@ -149,6 +151,8 @@
     <Compile Include="Repository\Enrollment\PatientEntrypointRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupFacilityViralLoadRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupLabsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupParameterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupPatientRegimenMapRepository.cs" />
     <Compile Include="Repository\Lookup\PatientBaselineLookupRepository.cs" />
@@ -168,7 +172,6 @@
     <Compile Include="Repository\Patient\PatientRepository.cs" />
     <Compile Include="Interface\Patient\IPatientVitalsRepository.cs" />
     <Compile Include="Repository\Patient\PatientVitalsRepository.cs" />
-    <Compile Include="Repository\Lookup\LookupLabsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupPreviousLabsRepository.cs" />
     <Compile Include="Repository\person\PatientPopulationRepository.cs" />
     <Compile Include="Repository\person\PatientMaritalStatusRepository.cs" />

@@ -302,25 +302,30 @@
 
                         var resultValues = itemList.ResultValues;
                         var resultTexts = itemList.ResultTexts;
+                        var resultOptions = itemList.ResultOptions;
                         var resultUnits = itemList.ResultUnits;
 
                         var labResults;
 
-                        //if (itemList.LabTestId == 1 || itemList.LabTestId == 3 && itemList.ResultValues == 0) {
-                        //    labResults = "LDL";
-                        //}
+                        //Results units
                         if (resultUnits == null) {
                             resultUnits = "";
                         } else {
                             resultUnits = resultUnits;
-
                         }
-                        if (resultTexts == null) {
+
+                        //Results values==>Text==>Options
+                        if (resultTexts == null && resultOptions == null) {
                             labResults = resultValues;
-                        } else {
+
+                        } else if (resultTexts != null && resultOptions == null) {
                             labResults = resultTexts;
 
+                        } else if (resultTexts == null && resultOptions != null) {
+                            labResults = resultOptions;
+
                         }
+
                           
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults + " " + resultUnits + '</td></tr>';
                    
@@ -589,7 +594,7 @@
                 }
 
               
-                $("#tblAddLabs td").parent().remove();
+               // $("#tblAddLabs td").parent().remove();
             });
 
             function addLabOrder(_fp,labOrderDate,orderNotes) {

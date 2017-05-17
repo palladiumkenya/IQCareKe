@@ -29,6 +29,7 @@ namespace Entities.CCC.Lookup
         public int FacilityId { get; set; }
         public int LabOrderId { get; set; }
         public string ResultTexts { get; set; }
+        public string ResultOptions { get; set; }
         public string ResultUnits { get; set; }
         public DateTime? ResultDate { get; set; }
     }

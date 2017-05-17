@@ -141,20 +141,22 @@ namespace IQCare.CCC.UILogic
             return pendingLabs;
         }
 
-        public List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId)
-        {
-            var facilityVLsuppressed = _lookupTest.GetFacilityVLSuppressed(facilityId);
-            return facilityVLsuppressed;
-        }
-        public List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId)
-        {
-            var facilityVLunsuppressed = _lookupTest.GetFacilityVLUnSuppressed(facilityId);
-            return facilityVLunsuppressed;
-        }
+      
         public List<PatientLabTracker> GetVlCompleteCount(int facilityId)
         {
             var completeLabs = _lookupTest.GetVlCompleteCount(facilityId);
             return completeLabs;
+        }
+
+        public List<LookupFacilityViralLoad> GetFacilityVLSuppressed(int facilityId)
+        {
+            var facilityVLsuppressed = _lookupTest.GetFacilityVLSuppressed(facilityId);
+            return facilityVLsuppressed;
+        }
+        public List<LookupFacilityViralLoad> GetFacilityVLUnSuppressed(int facilityId)
+        {
+            var facilityVLunsuppressed = _lookupTest.GetFacilityVLUnSuppressed(facilityId);
+            return facilityVLunsuppressed;
         }
     }
    }

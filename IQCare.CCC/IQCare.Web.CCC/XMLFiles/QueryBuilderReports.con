@@ -22,14 +22,14 @@
   <QueryBuilderReports>
     <CategoryId>1</CategoryId>
     <CategoryName>Billing</CategoryName>
-    <ReportId>1</ReportId>
+    <ReportId>3</ReportId>
     <ReportName>Total Collections by Type</ReportName>
     <ReportDescription>Total Collections by Type</ReportDescription>
   </QueryBuilderReports>
   <QueryBuilderReports>
     <CategoryId>1</CategoryId>
     <CategoryName>Billing</CategoryName>
-    <ReportId>2</ReportId>
+    <ReportId>4</ReportId>
     <ReportName>Receipt Analysis</ReportName>
     <ReportDescription>Receipt Analysis</ReportDescription>
   </QueryBuilderReports>
