@@ -1686,7 +1686,7 @@
 			/* when checked */
 			// $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });
 			// $("#lblCD4Count").on('checked.fu.checkbox', function () { cD4Count = true; });
-			//$("#lblBVCoInfection").on('checked.fu.checkbox', function() { bVCoInfection = true; });
+			$("#lblBVCoInfection").on('checked.fu.checkbox', function() { bVCoInfection = true; });
 			//$("#lblPregnancy").on('checked.fu.checkbox', function () { pregnancy = true; });
 			//$("#lblBreastFeeding").on('checked.fu.checkbox', function () { breastfeeding = true; });
 			//$("#lblBHIV").on('checked.fu.checkbox', function() { bHiV = true; });
@@ -1695,7 +1695,7 @@
 			/* when unchecked */
 			// $("#lblwhostage").on('unchecked.fu.checkbox', function () { whostage = false; });
 			//$("#lblCD4Count").on('unchecked.fu.checkbox', function () { cD4Count = false; });
-			//$("#lblBVCoInfection").on('unchecked.fu.checkbox', function() { bVCoInfection = false; });
+			$("#lblBVCoInfection").on('unchecked.fu.checkbox', function() { bVCoInfection = false; });
 			//$("#lblPregnancy").on('unchecked.fu.checkbox', function () { pregnancy = false; });
 			//$("#lblBreastFeeding").on('unchecked.fu.checkbox', function () { breastfeeding = false; });
 			//$("#lblBHIV").on('unchecked.fu.checkbox', function() { bHiV = false; });
@@ -2023,7 +2023,7 @@
 						else
 							previousStep = nextStep -= 1;
 						if (data.step === 1) {
-
+                           
 							$('#datastep1').parsley().destroy();
 							$('#datastep1').parsley({
 								excluded:
@@ -2031,7 +2031,7 @@
 							});
 
 							if ($("#datastep1").parsley().validate()) {
-
+                                  
 								if (transferIn === 1) {
 									$.when(addPatientTransferIn()).then(managePatientHivDiagnosis());
 									managePatientArvHistory();
@@ -2048,24 +2048,33 @@
 						}
 
 						else if (data.step === 2) {
-							$('#datastep2').parsley().destroy();
+							
+						    $('#datastep2').parsley().destroy();
 							$('#datastep2').parsley({
 								excluded:
 									"input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
 							});
 
 							if ($("#datastep2").parsley().validate()) {
-							   
+
+							    
 								if (transferIn === 1) {
 									$.when(managePatientBaselineAssessment()).then(managePatientTreatmentInitiation());
-									window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+								    
+                                    if (data.direction === 'next') {
+                                               window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+								                 toastr.success("Patient Baseline Assessment and Treatment initiation Completed successfully...");
+                                    }
+								 
+								   
 								} else {
-								  $.when(managePatientBaselineAssessment()).then(function() {
-									  window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									toastr
-										.success("Patient Baseline Assessment and ARV History Completed successfully...");
-								  }); 
+								    $.when(managePatientBaselineAssessment()).then()
+                                        
+                                            if (data.direction === 'next') {
+                                                window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                            toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+                                            }
+								  
 								}
 								
 							} else {
@@ -2087,7 +2096,7 @@
 		})
 	.on('finished.fu.wizard',
 		function (e) {
-			toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+			
 		});
 
 			/*filter regimens*/
@@ -2282,6 +2291,7 @@
 					height = 0;}
 				var ptnId = patientId;
 				var ptnmasterVisitId = patientMasterVisitId;
+			    
 				// var datas = [{"id": id ,"patientId": ptnId  ,"patientMasterVisitId": ptnmasterVisitId ,"pregnant": pregnancy,"hbvInfected":bVCoInfection,"tbInfected":tbInfection,"whoStage": whostage,"breastfeeding": breastfeeding ,"cd4Count":cD4Count,"muac": muac,"weight":weight,"height":height,"userId": userId }];
 				$.ajax({
 					type: "POST",
@@ -2290,7 +2300,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function (response) {
-						toastr.success(response.d);
+						//toastr.success(response.d);
 					},
 					error: function (xhr, errorType, exception) {
 						var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -2320,7 +2330,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function (response) {
-					   // window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');
+					   // <%--window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');--%>
 						toastr.success(response.d);
 						
 					},

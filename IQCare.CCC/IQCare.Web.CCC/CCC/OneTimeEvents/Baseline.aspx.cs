@@ -84,7 +84,16 @@ namespace IQCare.Web.CCC.OneTimeEvents
             }
 
             /* Regimen classification*/
-            List<LookupItemView> lookupItem = mgr.GetLookItemByGroup("RegimenClassification");
+            List<LookupItemView> lookupItem;
+            if (Age > 15)
+            {
+                lookupItem = mgr.GetLookItemByGroup("RegimenClassificationAdult");
+            }
+            else
+            {
+                lookupItem = mgr.GetLookItemByGroup("RegimenClassificationPaeds");
+            }
+            //List<LookupItemView> lookupItem = mgr.GetLookItemByGroup("RegimenClassification");
             if (lookupItem != null && lookupItem.Count > 0)
             {
                 regimenCategory.Items.Add(new ListItem("select", "0"));

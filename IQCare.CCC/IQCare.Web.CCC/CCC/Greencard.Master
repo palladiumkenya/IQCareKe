@@ -185,9 +185,7 @@
 									<span class="fa fa-home fa-2x pull-left text-info"></span> <strong class="text-info">Patient Home</strong>
 								</a>
 							  
-							   <a  href='<%=ResolveClientUrl("~/CCC/Encounter/VitalSigns.aspx") %>' class="list-group-item" id="menuPatientVitals" >
-									<span class="fa fa-heartbeat fa-2x pull-left text-info"></span><strong class="text-info">Patient Vital Signs</strong>
-								</a>
+							 
 
 <%--                              <asp:LinkButton ID="LinkButton1" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-arrow-circle-o-right fa-2x pull-left text-info"></span>Start Encounter</asp:LinkButton>--%>
@@ -199,6 +197,10 @@
 								
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
+                             
+                               <a  href='<%=ResolveClientUrl("~/CCC/Encounter/VitalSigns.aspx") %>' class="list-group-item" id="menuPatientVitals" >
+									<span class="fa fa-heartbeat fa-2x pull-left text-info"></span><strong class="text-info">Patient Vital Signs</strong>
+								</a>
 
                                <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
 								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
@@ -207,9 +209,7 @@
 								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
                              
 	 
-							   <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
-									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
-								</a>
+							
 
                           
 							  <asp:LinkButton ID="LinkButton2" ClientIDMode="Static"  runat="server" OnClick="EncounterHistory_Click" CssClass="list-group-item">
@@ -229,6 +229,10 @@
 								<a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="menuPatientCareEnded">
 									<span class="fa fa-user-times fa-2x pull-left text-danger"></span><strong class="text-info">Patient Care Ending</strong>
 								</a>
+                             
+                                <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx?reset=1") %>' id="menuStopEncounter" onclick="return false" class="list-group-item" >
+									<span class="fa fa-sign-out fa-2x pull-left text-danger"></span><strong class="text-danger"> Patient Checkout </strong>
+								</a>
 
 						  </div>
 					</div>
@@ -247,7 +251,7 @@
 			  <div class="row" style="padding-top:3px">
 					  
                     <div class="col-md-1 pull-left">
-                        <img src="../Images/kenya_small.png" />
+                        <img src="<%= Page.ResolveClientUrl("~/Images/kenya_small.png") %>" />
 					</div>
 					 <div class="col-md-1">
 						   <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>
