@@ -8,9 +8,23 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.Services.Protocols;
+using Newtonsoft.Json;
 
 namespace IQCare.Web.CCC.WebService
 {
+    public class OneTimeEventsDetails
+    {
+        public string Stage1Date { get; set; }
+        public string Stage2Date { get; set; }
+        public string Stage3Date { get; set; }
+        public string SexPartner { get; set; }
+        public string StartDate { get; set; }
+        public int Complete { get; set; }
+        public string CompletionDate { get; set; }
+        public string HBV { get; set; }
+        public string FluVaccine { get; set; }
+        public string OtherVaccination { get; set; }
+    }
     public class ListVaccination
     {
         public string vaccineType { get; set; }
@@ -190,6 +204,85 @@ namespace IQCare.Web.CCC.WebService
             catch (SoapException ex)
             {
                 Msg = ex.Message + ' ' + ex.InnerException;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetOneTimeEventsTrackerDetails()
+        {
+            try
+            {
+                int patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+                PatientDisclosureManager disclosure = new PatientDisclosureManager();
+                INHProphylaxisManager inhProphylaxis = new INHProphylaxisManager();
+                PatientVaccinationManager vaccinationManager = new PatientVaccinationManager();
+                OneTimeEventsDetails oneTimeEventsDetails = new OneTimeEventsDetails();
+
+
+                List<PatientDisclosure> patientDisclosures = disclosure.GetAllPatientDisclosures(patientId);
+                List<INHProphylaxis> inhListsProphylaxes = inhProphylaxis.GetPatientProphylaxes(patientId);
+                var vaccinations = vaccinationManager.GetPatientVaccinations(patientId);
+
+                if (patientDisclosures.Count > 0)
+                {
+                    foreach (var itemDisclosure in patientDisclosures)
+                    {
+                        if (itemDisclosure.Category == "Adolescents" && itemDisclosure.DisclosureStage == "Stage1")
+                        {
+                            oneTimeEventsDetails.Stage1Date = itemDisclosure.DisclosureDate.ToString();
+                        }
+
+                        if (itemDisclosure.Category == "Adolescents" && itemDisclosure.DisclosureStage == "Stage2")
+                        {
+                            oneTimeEventsDetails.Stage2Date = itemDisclosure.DisclosureDate.ToString();
+                        }
+
+                        if (itemDisclosure.Category == "Adolescents" && itemDisclosure.DisclosureStage == "Stage3")
+                        {
+                            oneTimeEventsDetails.Stage3Date = itemDisclosure.DisclosureDate.ToString();
+                        }
+
+                        if (itemDisclosure.Category == "Adolescents" && itemDisclosure.DisclosureStage == "SexPartner")
+                        {
+                            oneTimeEventsDetails.SexPartner = itemDisclosure.DisclosureDate.ToString();
+                        }
+                    }
+                }
+
+                if (inhListsProphylaxes.Count > 0)
+                {
+                    oneTimeEventsDetails.StartDate = inhListsProphylaxes[0].StartDate.ToString();
+                    oneTimeEventsDetails.Complete = Convert.ToInt32(inhListsProphylaxes[0].Complete);
+                    oneTimeEventsDetails.CompletionDate = inhListsProphylaxes[0].CompletionDate.ToString();
+                }
+
+                if (vaccinations.Count > 0)
+                {
+                    foreach (var itemVaccination in vaccinations)
+                    {
+                        if (itemVaccination.VaccineStage == "FluVaccine")
+                        {
+                            oneTimeEventsDetails.FluVaccine = "1";
+                        }
+
+                        if (itemVaccination.VaccineStage == "HBV")
+                        {
+                            oneTimeEventsDetails.HBV = "1";
+                        }
+
+                        if (itemVaccination.Vaccine == 0)
+                        {
+                            oneTimeEventsDetails.OtherVaccination = itemVaccination.VaccineStage;
+                        }
+                    }
+                }
+
+                Msg = JsonConvert.SerializeObject(oneTimeEventsDetails);
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
             }
             return Msg;
         }

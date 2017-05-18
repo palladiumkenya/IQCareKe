@@ -292,7 +292,7 @@
 
                             <div class="col-md-12 form-group">
                                 <div class="col-md-3">
-                                    <div class="col-md-12"><label for="NationalId" class="required control-label pull-left">ID Number</label></div>
+                                    <div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
                                     <div class="col-md-12">
                                         <asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" data-parsley-length="[7,8]"  />
                                     </div>
