@@ -286,6 +286,8 @@
     <Content Include="frmFacilityHome.aspx" />
     <Content Include="Home\Default.aspx" />
     <Content Include="Images\iq_logo_small.gif" />
+    <Content Include="Images\kenya1.png" />
+    <Content Include="Images\kenya_small.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mb_hand.gif" />
     <Content Include="MasterPage\levelTwoNavigationUserControl.ascx" />
