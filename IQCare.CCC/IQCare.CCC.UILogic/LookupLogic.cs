@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Application.Presentation;
-using DataAccess.CCC.Context;
-using DataAccess.CCC.Repository;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.CCC.UILogic
@@ -278,6 +276,26 @@ namespace IQCare.CCC.UILogic
             return masterId;
         }
 
+        public static string GetLookupItemId(string lookupItemName)
+        {
+            
+            ILookupManager lookupManager =
+                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            string masterId = lookupManager.GetLookupItemId(lookupItemName).ToString();
+
+            return masterId;
+        }
+
+        public static string GetLookUpMasterNameFromId(int masterId)
+        {
+         
+            ILookupManager lookupManager =
+                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+           string masterName = lookupManager.GetLookUpMasterNameFromId(masterId);
+
+            return masterName;
+        }
+
         public static string GetLookupNameById(int id)
         {
             string lookupName = null;
@@ -310,6 +328,23 @@ namespace IQCare.CCC.UILogic
             }
 
             return id;
+        }
+
+        public string GetRegimenCategoryByRegimenName(string regimenName)
+        {
+            string masterName;
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                masterName = lookupManager.GetRegimenCategoryByRegimenName(regimenName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return masterName;
         }
 
         public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
@@ -405,6 +440,23 @@ namespace IQCare.CCC.UILogic
             var regimen = lookupManager.GetPatientRegimenList(patientId);
 
             return jsonObject = (regimen != null) ? new JavaScriptSerializer().Serialize(regimen) : jsonObject = "[]";
+        }
+
+        public List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName)
+        {
+
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                var displayMasterName = lookupManager.GetRegimenCategoryListByRegimenName(regimenName);
+                return displayMasterName;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         public List<LookupFacilityStatistics> GetLookupFacilityStatistics()

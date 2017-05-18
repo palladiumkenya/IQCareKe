@@ -9,12 +9,12 @@ namespace IQCare.CCC.UILogic.Baseline
     public class PatientTreatmentInitiationManager
     {
         private readonly IPatientTreatmentInitiationManager _patientTreatmentInitiation = (IPatientTreatmentInitiationManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientTreatmentInitiationManager, BusinessProcess.CCC");
-        private int Id = 0;
-        private int Result =0;
+        private int _id = 0;
+        private int _result =0;
 
         public int ManagePatientTreatmentInititation(int id,int patientId,int patientMasterVisitid,DateTime dateStartedOnFirstLine,string cohort,int regimen,decimal baselineViralload,DateTime baselineViralLoadDate,int userId)
         {
-            Id = _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
+            _id = _patientTreatmentInitiation.CheckIfPatientTreatmentExists(patientId);
 
             var patientTreatmentInitiationInsert = new PatientTreatmentInitiation
             {
@@ -29,9 +29,9 @@ namespace IQCare.CCC.UILogic.Baseline
                 CreatedBy = userId
             };
 
-            Result = (Id > 0)
+            _result = (_id > 0)
                 ? _patientTreatmentInitiation.UpdatePatientTreatmentInitiation(patientTreatmentInitiationInsert): _patientTreatmentInitiation.AddPatientTreatmentInitiation(patientTreatmentInitiationInsert);
-            return Result;
+            return _result;
         }
 
         public int UpdatePatientTreatmentInititation(int id,int patientId, int patientMasterVisitid, DateTime dateStartedOnFirstLine, string cohort, int regimen, decimal baselineViralload, DateTime baselineViralLoadDate)

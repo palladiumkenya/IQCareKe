@@ -14,6 +14,8 @@ namespace Interface.CCC.Lookup
         List<LookupItemView> GetLookUpItemViewByMasterName(string masterName);
         List<LookupItemView> GetLookUpItemViewByMasterId(int id);
         int GetLookUpMasterId(string masterName);
+        string GetLookUpMasterNameFromId(int masterId);
+        string GetLookupItemId(string lookupItemName);
         List<LookupLabs> GetLookupLabs();
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
         List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId);
@@ -21,7 +23,7 @@ namespace Interface.CCC.Lookup
         List<LookupPreviousLabs> GetLookupVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
-        List<LookupTestParameter> GetTestParameter(int LabTestId);
+        List<LookupTestParameter> GetTestParameter(int labTestId);
         LookupFacility GetFacility();
         PatientLookup GetPatientById(int patientId);
         LookupItemView GetPatientGender(int genderId);        
@@ -41,6 +43,8 @@ namespace Interface.CCC.Lookup
         List<PatientRegimenLookup> GetPatientRegimenList(int patientId);
         LookupPatientAdherence GetPatientAdherence(int patientId);
         List<LookupFacilityStatistics> GetLookupFacilityStatistics();
+        string GetRegimenCategoryByRegimenName(string regimenNaame);
+       List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName);
 
     }
 

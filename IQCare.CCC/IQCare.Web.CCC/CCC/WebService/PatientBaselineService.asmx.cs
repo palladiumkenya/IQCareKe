@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.Services;
-using Entities.CCC.Baseline;
 using IQCare.CCC.UILogic.Baseline;
 using Newtonsoft.Json;
 using IQCare.CCC.UILogic;
@@ -212,6 +211,38 @@ namespace IQCare.Web.CCC.WebService
             {
                 var lookupManager=new LookupLogic();
                 _jsonMessage = LookupLogic.GetRegimenCategory(regimenId).ToString();
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetRegimenCategoryByRegimenName(string regimenName)
+        {
+            try
+            {
+                var lookupManager = new LookupLogic();
+                _jsonMessage = lookupManager.GetRegimenCategoryByRegimenName(regimenName).ToString();
+            }
+            catch (Exception e)
+            {
+                _jsonMessage = e.Message;
+            }
+
+            return _jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetRegimenCategoryListByRegimenName(string regimenName)
+        {
+            try
+            {
+                var lookupManager = new LookupLogic();
+                _jsonMessage = lookupManager.GetRegimenCategoryListByRegimenName(regimenName).ToString();
             }
             catch (Exception e)
             {

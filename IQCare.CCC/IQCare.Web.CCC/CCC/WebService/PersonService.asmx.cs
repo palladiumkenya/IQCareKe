@@ -945,7 +945,7 @@ namespace IQCare.Web.CCC.WebService
                         (x.LastName),
                         patientLookup.GetDobByPersonId(x.Id),
                         LookupLogic.GetLookupNameById(x.Sex),
-                        patientLookup.isPatientExists(x.Id).ToString(),
+                        patientLookup.IsPatientExists(x.Id).ToString(),
                         patientLookup.PatientId(x.Id).ToString()
                    });
 

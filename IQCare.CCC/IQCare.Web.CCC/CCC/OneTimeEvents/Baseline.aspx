@@ -1295,12 +1295,13 @@
 					$("#<%=BaselineBMI.ClientID%>").val(bmi);
 				});
 
-			$("#<%=WHOStageAtEnrollment.ClientID%>").on('change',function(){
-			
-				var who=$(this).find(":selected").val();
-				$("#<%=bwhoStage.ClientID%>").val(who);
-			
-			})
+		    $("#<%=WHOStageAtEnrollment.ClientID%>").on('change',
+		        function() {
+
+		            var who = $(this).find(":selected").val();
+		            $("#<%=bwhoStage.ClientID%>").val(who);
+
+		        });
 			function calcBmi() {
 				var weight = document.getElementById('BaselineWeight').value;
 				var height = document.getElementById('BaselineHeight').value / 100;
@@ -1333,6 +1334,8 @@
 					var tiDate = $('#TIDate').datepicker('getDate');
 					var doe = $('#DOE').datepicker('getDate');
 
+
+                    $("#DARTI").datepicker('setDate',moment(artStartDate).format('DD-MMM-YYYY'));
 
 					var futureDate = moment(artStartDate).isAfter(today); /* -- validate future dates -- */
 					if (futureDate) {
@@ -1394,7 +1397,7 @@
 					var dhid = $("#DHID").datepicker('getDate');
 					var tidate = $("#TIDate").datepicker('getDate');
 					var artStartDate = $('#TIARTStartDate').datepicker('getDate');
-					var doe = $('#doe').datepicker('getDate');
+					var doe = $('#DOE').datepicker('getDate');
 					//validate dates
 
 					var futureDate = moment(dhid).isAfter(today);
@@ -1427,6 +1430,13 @@
 						toastr.error("Date OF HIV Diagnosis CANNOT be after ART Start date");
 						return false;
 					}
+
+					futureDate=moment(dhid).isAfter(doe);
+                    if (futureDate) {
+                        $("#DateOfHIVDiagnosis").val('');
+						toastr.error("Date OF HIV Diagnosis CANNOT be after Enrollment Date");
+						return false;
+                    }
 				});
 
 			/*DateOfEnrollment*/
@@ -1447,6 +1457,22 @@
 						return false;
 					}
 				});
+
+		    /* date of ART Initiation */
+		    $("#DARTI").on('changed.fu.datepicker dateClicked.fu.datepicker',
+		        function(event, date) {
+		            
+		            var darti = $("#DARTI").datepicker('getDate');
+		            var artStartDate = $('#TIARTStartDate').datepicker('getDate');
+
+		            var futureDate = moment(darti).isAfter(artStartDate);
+                    if (futureDate) {
+                        $("#DateOfARTInitiation").val('');
+						toastr("ART Initiation Date CANNOT be Afer ART Start Date");
+						return false;
+                    }
+
+		        });
 
 			/* limit future dates viralload baseline date*/
 			$("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',
@@ -1660,19 +1686,19 @@
 			/* when checked */
 			// $("#lblwhostage").on('checked.fu.checkbox',function () { whostage = true; });
 			// $("#lblCD4Count").on('checked.fu.checkbox', function () { cD4Count = true; });
-			$("#lblBVCoInfection").on('checked.fu.checkbox', function() { bVCoInfection = true; });
+			//$("#lblBVCoInfection").on('checked.fu.checkbox', function() { bVCoInfection = true; });
 			//$("#lblPregnancy").on('checked.fu.checkbox', function () { pregnancy = true; });
 			//$("#lblBreastFeeding").on('checked.fu.checkbox', function () { breastfeeding = true; });
-			$("#lblBHIV").on('checked.fu.checkbox', function() { bHiV = true; });
+			//$("#lblBHIV").on('checked.fu.checkbox', function() { bHiV = true; });
 			//$("#lblTbInfection").on('checked.fu.checkbox', function () { tbInfection = true; });
 
 			/* when unchecked */
 			// $("#lblwhostage").on('unchecked.fu.checkbox', function () { whostage = false; });
 			//$("#lblCD4Count").on('unchecked.fu.checkbox', function () { cD4Count = false; });
-			$("#lblBVCoInfection").on('unchecked.fu.checkbox', function() { bVCoInfection = false; });
+			//$("#lblBVCoInfection").on('unchecked.fu.checkbox', function() { bVCoInfection = false; });
 			//$("#lblPregnancy").on('unchecked.fu.checkbox', function () { pregnancy = false; });
 			//$("#lblBreastFeeding").on('unchecked.fu.checkbox', function () { breastfeeding = false; });
-			$("#lblBHIV").on('unchecked.fu.checkbox', function() { bHiV = false; });
+			//$("#lblBHIV").on('unchecked.fu.checkbox', function() { bHiV = false; });
 			//$("#lblTbInfection").on('unchecked.fu.checkbox', function () { tbInfection = false; });
 
 			<%--         $("#<%=.ClientID%>").prop('disabled', true);
@@ -1729,10 +1755,10 @@
 				$("#<%=AddPriorHistory.ClientID%>").removeAttr("disabled");
 			}
 
-			$("#lblBVCoInfection").checkbox('uncheck');
+			//$("#lblBVCoInfection").checkbox('uncheck');
 			//$("#lblPregnancy").checkbox('uncheck');
 			//$("#lblBreastFeeding").checkbox('uncheck');
-			$("#lblBHIV").checkbox('uncheck');
+			//$("#lblBHIV").checkbox('uncheck');
 			//$("#lblTbInfection").checkbox('uncheck');
 
 			/*get Patient EnrollmentDate*/
@@ -1800,9 +1826,9 @@
 									$("#<%=BaselineBMI.ClientID%>").val(obj.BMI);
 
 									if (obj.HBVInfected) {
-										$("#lblHBV").checkbox('check');
+										$("#lblBVCoInfection").checkbox('check');
 									} else {
-										$("#lblHBV").checkbox('uncheck');
+										$("#lblBVCoInfection").checkbox('uncheck');
 									}
 									//if (obj.Pregnant) {$("#lblPregnancy").checkbox('check');}else{$("#lblPregnancy").checkbox('uncheck');}
 									//if (obj.TBinfected) {$("#lblTbInfected").checkbox('check');}else{ $("#lblTbInfected").checkbox('uncheck');}
@@ -1819,48 +1845,104 @@
 									// $("#").datepicker('setDate',moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
 									$.ajax({
 										type: "POST",
-										url: "../WebService/PatientBaselineService.asmx/GetRegimenCategory",
-										data: "{'regimenId':'" + obj.CurrentTreatment + "'}",
+										url: "../WebService/PatientBaselineService.asmx/GetRegimenCategoryByRegimenName",
+										data: "{'regimenName':'" + obj.CurrentTreatmentName.substr(0,4) + "'}",
 										contentType: "application/json; charset=utf-8",
 										dataType: "json",
 										success: function(response) {
-											$("#<%=regimenCategory.ClientID%>").val(response.d);
 
-											var reg = $("#<%=regimenCategory.ClientID%>").find(":selected").text();
-											var str = reg.replace(/\s+/g, '');
-											//var x = $("#<%=regimenCategory.ClientID%>").find(":selected").text();
-
-											$.ajax({
+										    var masterId = response.d;
+										   
+										    /* Get the LookupMaster Name*/
+                                            $.ajax({
 												type: "POST",
-												url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
-												data: "{'masterName':'" + str + "'}",
+												url: "../WebService/LookupService.asmx/GetLookUpMasterNameFromId",
+												data: "{'masterId':'" + masterId + "'}",
 												contentType: "application/json; charset=utf-8",
 												dataType: "json",
 												success: function(response) {
-													var itemList = JSON.parse(response.d);
-													$("#<%=RegimenId.ClientID%>").find('option').remove().end();
-													$("#<%=RegimenId.ClientID%>")
-														.append('<option value="0">Select</option>');
-													$.each(itemList,
-														function(index, itemList) {
-															$("#<%=RegimenId.ClientID%>")
-																.append('<option value="' +
-																	itemList.ItemId +
-																	'">' +
-																	itemList.ItemName +
-																	"(" +
-																	itemList.ItemDisplayName +
-																	")" +
-																	'</option>');
-														});
-													$("#<%=RegimenId.ClientID%>").val(obj.CurrentTreatment);
+
+												    var itemNameSource = response.d;
+												    var itemName = response.d;
+												    if (itemName === 'AdultFirstLineRegimen') {
+												        itemName='AdultARTFirstLine';
+												    }
+
+												  
+												    if (itemName === 'AdultSecondlineRegimen') {
+												        itemName = 'AdultARTSecondLine';
+												    }
+												    if (itemName === 'AdultThirdlineRegimen') {
+                                                            itemName = 'AdultARTThirdLine';
+                                                        }
+												    if (itemName === 'PaedsFirstLineRegimen') {
+												        itemName = 'PaedsARTFirstLine';
+												    }
+												    if (itemName === 'PaedsSecondlineRegimen') {
+												        itemName = 'PaedsARTSecondLine';
+												    }
+
+                                                    
+                                                        $.ajax({
+												        type: "POST",
+												        url: "../WebService/LookupService.asmx/GetLookupItemId",
+												        data: "{'lookupItemName':'" + itemName + "'}",
+												        contentType: "application/json; charset=utf-8",
+												        dataType: "json",
+												        success: function(response) {
+												            var itemList = response.d;
+												            $("#<%=regimenCategory.ClientID%>").val(itemList);
+
+                                                            ////////////////////////////////////////////////
+												            $.ajax({
+												                type: "POST",
+												                url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+												                data: "{'masterName':'" + itemNameSource + "'}",
+												                contentType: "application/json; charset=utf-8",
+												                dataType: "json",
+												                success: function(response) {
+												                    var itemList = JSON.parse(response.d);
+												    
+													                $("#<%=RegimenId.ClientID%>").find('option').remove().end();
+													                $("#<%=RegimenId.ClientID%>")
+														                .append('<option value="0">Select</option>');
+													                $.each(itemList,
+														                function(index, itemList) {
+															                $("#<%=RegimenId.ClientID%>")
+																                .append('<option value="' +
+																	                itemList.ItemId +
+																	                '">' +
+																	                itemList.ItemName +
+																	                "(" +
+																	                itemList.ItemDisplayName +
+																	                ")" +
+																	                '</option>');
+														                });
+													                $("#<%=RegimenId.ClientID%>").val(obj.CurrentTreatment);
+												                },
+												                error: function(response) {
+													                toastr
+														                .error("Error in Fetching Ward list " + response.d);
+												                }
+											                }); // ajax end
+										
+												        },
+												        error: function(response) {
+													        toastr
+														        .error("Error in Fetching Lookupmaster " + response.d);
+												        }
+											        }); // ajax end
+												    
+												   
+											
+												/////////////////////
 												},
 												error: function(response) {
 													toastr
-														.error("Error in Fetching Ward list " + response.d,
-															"Fetching Ward List");
+														.error("Error in Fetching Ward list " + response.d);
 												}
-											}); // ajax end
+                                            }); // ajax end
+
 										},
 										error: function(response) {}
 									}); //ajax end 
@@ -2001,6 +2083,7 @@
 	.on('stepclicked.fu.wizard',
 		function () {
 
+           
 		})
 	.on('finished.fu.wizard',
 		function (e) {
@@ -2041,7 +2124,7 @@
 					});
 				});
 
-			function OnInitiationRegimen() {
+			function onInitiationRegimen() {
 				var reg = $(this).find(":selected").text();
 				var str =reg.replace(/\s+/g,''); 
 				//reg =reg.replace("/+/g", "");
@@ -2074,10 +2157,10 @@
 
 			$("#InitiationRegimen").on("change", function() {
 				$("#InitiationRegimen").off();
-				$("#InitiationRegimen").on("change", OnInitiationRegimen);
+				$("#InitiationRegimen").on("change", onInitiationRegimen);
 			});                      
 
-			$("#InitiationRegimen").on("change", OnInitiationRegimen);
+			$("#InitiationRegimen").on("change", onInitiationRegimen);
 
 			/* datat persistence functions */
 			function addPatientTransferIn() {

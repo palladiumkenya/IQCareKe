@@ -7,6 +7,7 @@ using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
 using Entities.CCC.Visit;
+using System;
 
 namespace BusinessProcess.CCC
 {
@@ -65,6 +66,19 @@ namespace BusinessProcess.CCC
             {
                 var item = unitOfWork.LookupRepository.FindBy(x => x.MasterName == masterName)
                     .Select(x => x.MasterId)
+                    .FirstOrDefault();
+                unitOfWork.Dispose();
+
+                return item;
+            }
+        }
+
+        public string GetLookUpMasterNameFromId(int  masterId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item = unitOfWork.LookupRepository.FindBy(x => x.MasterId == masterId)
+                    .Select(x => x.MasterName)
                     .FirstOrDefault();
                 unitOfWork.Dispose();
 
@@ -192,6 +206,8 @@ namespace BusinessProcess.CCC
             }
         }
 
+       
+
         public List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
@@ -236,12 +252,12 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public List<LookupTestParameter> GetTestParameter(int LabTestId)
+        public List<LookupTestParameter> GetTestParameter(int labTestId)
 
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var item = unitOfWork.LookupParameterRepository.GetTestParameter(LabTestId);
+                var item = unitOfWork.LookupParameterRepository.GetTestParameter(labTestId);
                 unitOfWork.Dispose();
                 return item;
             }
@@ -274,6 +290,24 @@ namespace BusinessProcess.CCC
             }
 
         }
+
+        public string GetRegimenCategoryByRegimenName(string regimenNaame)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                string masterName =
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemName == regimenNaame)
+                        .Select(x => x.MasterId)
+                        .FirstOrDefault().ToString();
+                //int regmineId = unitOfWork.LookupRepository.FindBy(x => x.ItemName == masterName)
+                //    .Select(x => x.ItemId)
+                //    .FirstOrDefault();
+                unitOfWork.Dispose();
+                return masterName;
+            }
+
+        }
+
 
         public string GetCountyByCountyId(int countyId)
         {
@@ -368,6 +402,30 @@ namespace BusinessProcess.CCC
                var facilityStats= unitOfWork.LookupFacilityStatisticsRepository.GetFacilityStatistics();
                 unitOfWork.Dispose();
                 return facilityStats;
+            }
+        }
+
+
+        public List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                List<LookupItemView> masterName =
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemName == regimenName).ToList();
+
+                unitOfWork.Dispose();
+                return masterName;
+            }
+        }
+
+        public string GetLookupItemId(string lookupItemName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var item =
+                    unitOfWork.LookupRepository.FindBy(x => x.ItemName == lookupItemName).Select(x => x.ItemId).FirstOrDefault().ToString();
+                unitOfWork.Dispose();
+                return item;
             }
         }
 
