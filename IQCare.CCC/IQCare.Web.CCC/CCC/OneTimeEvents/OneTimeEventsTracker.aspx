@@ -1112,6 +1112,66 @@
                     }
                 });
             }
+            $.ajax({
+                type: "POST",
+                url: "../WebService/OneTimeEventsTrackerService.asmx/GetOneTimeEventsTrackerDetails",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var oneTimeEvents = JSON.parse(response.d);
+                    console.log(oneTimeEvents);
+
+                    $("#Stage1").datepicker('setDate', moment(oneTimeEvents.Stage1Date).format('DD-MMM-YYYY'));
+                    $("#Stage2").datepicker('setDate', moment(oneTimeEvents.Stage2Date).format('DD-MMM-YYYY'));
+                    $("#Stage3").datepicker('setDate', moment(oneTimeEvents.Stage3Date).format('DD-MMM-YYYY'));
+                    $("#SexPartner").datepicker('setDate', moment(oneTimeEvents.SexPartner).format('DD-MMM-YYYY'));
+                    $("#INHStartDatePicker").datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
+                    $("#HBV").datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
+                    
+                    if (oneTimeEvents.Complete == 0) {              
+                        $("#CompletionNo").prop("checked", true);
+                        $("#lblCompletionNo").addClass("checked");
+                        $("#ISCompletionDate").hide();
+                        $("#ISStopDate").show();
+                        $("#INHCompletionDate").val('');
+                        $("#StopDate").datepicker('setDate', moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
+                    }
+
+                    if (oneTimeEvents.Complete == 1) {
+                        $("#CompletionYes").prop("checked", true);
+                        $("#lblCompletionYes").addClass("checked");
+                        $("#ISCompletionDate").show();
+                        $("#ISStopDate").hide();
+                        $("#INHStopDate").val('');
+                        $("#CompletionDate").datepicker('setDate', moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
+                    }
+
+                    if (oneTimeEvents.HBV == "1") {
+                        $("#lblHBV").addClass("checked");
+                        $("#HBV").prop("checked", true);
+                    } else {
+                        $("#lblHBV").removeClass("checked");
+                        $("#HBV").prop("checked", false);
+                    }
+
+                    if (oneTimeEvents.FluVaccine == "1") {
+                        $("#lblFluVaccine").addClass("checked");
+                        $("#FluVaccine").prop("checked", true);
+                    } else {
+                        $("#lblFluVaccine").removeClass("checked");
+                        $("#FluVaccine").prop("checked", false);
+                    }
+
+                    if (oneTimeEvents.OtherVaccination!="") {
+                        $("#vaccinationotheradult").val(oneTimeEvents.OtherVaccination);
+                    }
+                    
+                },
+                error: function (response) {
+                    //generate('error', response.d);
+                    toastr.error(response.d, "One Time Events Tracker");
+                }
+            });
         });
 
             $('#Stage1').datepicker({

@@ -38,5 +38,10 @@ namespace IQCare.CCC.UILogic
         {
             return _mgr.GetPatientDisclosures(patientId, category, disclosureStage);
         }
+
+        public List<PatientDisclosure> GetAllPatientDisclosures(int patientId)
+        {
+            return _mgr.GetAllPatientDisclosures(patientId);
+        }
     }
 }
