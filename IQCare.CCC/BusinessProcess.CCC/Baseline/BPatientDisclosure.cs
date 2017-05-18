@@ -5,6 +5,7 @@ using DataAccess.CCC.Repository;
 using DataAccess.Base;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace BusinessProcess.CCC.Baseline
 {
@@ -57,6 +58,16 @@ namespace BusinessProcess.CCC.Baseline
                   .ToList();
                 _unitOfWork.Dispose();
                 return patientDisclosureList;
+            }
+        }
+
+        public List<PatientDisclosure> GetAllPatientDisclosures(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var disclosures = unitOfWork.PatientDisclosureRepository.FindBy(x => x.PatientId == patientId).ToList();
+                unitOfWork.Dispose();
+                return disclosures;
             }
         }
     }

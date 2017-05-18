@@ -3253,7 +3253,7 @@ BEGIN
 
 	DECLARE @ptn_pk int, @FirstName varbinary(max), @MiddleName varbinary(max), @LastName varbinary(max), @Sex int, @Status bit , @DeleteFlag bit, 
 		@CreateDate datetime, @UserID int,  @message varchar(80), @PersonId int, @PatientFacilityId varchar(50), @PatientType int, 
-		@FacilityId varchar(10), @DateOfBirth datetime, @DobPrecision int, @NationalId varbinary(max), @PatientId int,  
+		@FacilityId varchar(10), @DateOfBirth datetime, @DobPrecision int, @NationalId varbinary(max), @IDNumber varchar(100), @PatientId int,  
 		@ARTStartDate date,@transferIn int,@CCCNumber varchar(20), @entryPoint int, @ReferredFrom int, @RegistrationDate datetime,
 		@MaritalStatusId int, @MaritalStatus int, @DistrictName varchar(50), @CountyID int, @SubCountyID int, @WardID int,
 		@Address varbinary(max), @Phone varbinary(max), @EnrollmentId int, @PatientIdentifierId int, @ServiceEntryPointId int,
@@ -3271,7 +3271,7 @@ BEGIN
 	OPEN mstPatient_cursor;
   
 	FETCH NEXT FROM mstPatient_cursor   
-	INTO @ptn_pk, @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @NationalId,@CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone, @LocationID
+	INTO @ptn_pk, @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @IDNumber,@CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone, @LocationID
   
 	WHILE @@FETCH_STATUS = 0  
 	BEGIN
@@ -3292,8 +3292,8 @@ BEGIN
 		ELSE
 			SELECT @Status = 1
 
-		IF @NationalId IS NULL
-			SET @NationalId = 999999999;
+		IF @IDNumber IS NULL
+			SET @IDNumber = 999999999;
 
 		IF @Sex IS NOT NULL
 			BEGIN
@@ -3313,7 +3313,7 @@ BEGIN
 		-- SELECT @PatientType = 1285
 
 		--encrypt nationalid
-		SELECT @NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@NationalId);
+		SET @NationalId=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),@IDNumber);
 
 		Insert into Person(FirstName, MidName, LastName, Sex, Active, DeleteFlag, CreateDate, CreatedBy)
 		Values(@FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID);
@@ -3765,7 +3765,7 @@ BEGIN
 		COMMIT;
 		-- Get the next mst_patient.
 		FETCH NEXT FROM mstPatient_cursor   
-		INTO @ptn_pk, @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @NationalId, @CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone, @LocationID
+		INTO @ptn_pk, @FirstName, @MiddleName, @LastName, @Sex, @Status, @DeleteFlag, @CreateDate, @UserID, @PatientFacilityId, @FacilityId, @DateOfBirth, @DobPrecision, @IDNumber, @CCCNumber, @ReferredFrom, @RegistrationDate, @MaritalStatus , @DistrictName, @Address, @Phone, @LocationID
 	END   
 	CLOSE mstPatient_cursor;  
 	DEALLOCATE mstPatient_cursor;

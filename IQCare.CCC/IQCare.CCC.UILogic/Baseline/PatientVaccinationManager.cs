@@ -1,4 +1,6 @@
-﻿using Application.Presentation;
+﻿using System;
+using System.Collections.Generic;
+using Application.Presentation;
 using Entities.CCC.Encounter;
 using Interface.CCC.Baseline;
 
@@ -17,6 +19,19 @@ namespace IQCare.CCC.UILogic.Baseline
         public int UpdatePatientVaccination(PatientVaccination patientVaccination)
         {
             return _retval = _mgr.updatePatientVaccination(patientVaccination);
+        }
+
+        public List<PatientVaccination> GetPatientVaccinations(int patientId)
+        {
+            try
+            {
+                return _mgr.GetPatientVaccinations(patientId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

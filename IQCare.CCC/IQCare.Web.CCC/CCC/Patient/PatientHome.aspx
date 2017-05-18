@@ -174,7 +174,7 @@
                                                     <div class="col-md-3">
                                                         <label class="control-label pull-left">Patient Population:</label></div>
                                                     <div class="col-md-6">
-                                                        <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control" required="true" data-parsley-min="1"></asp:DropDownList>
+                                                        <asp:DropDownList ID="bioPatientPopulation" runat="server" ClientIDMode="Static" CssClass="pull-left form-control"></asp:DropDownList>
                                                     </div>
                                                 </div>
 
@@ -2148,8 +2148,18 @@
 
                 var sex = $("#<%=Gender.ClientID%>").find('option:selected').text();
                 var optionType = $("#<%=bioPatientKeyPopulation.ClientID%>").find('option:selected').text();
+                var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text();
                 console.log(sex);
                 console.log(optionType);
+
+                if (bioPatientPopulation == "select" && patientType !="Transit") {
+                    toastr.error("Select Patient Population Type", "Person Population Error");
+                    return false;
+                }
+
+                if (bioPatientPopulation == "select" && patientType == "Transit") {
+                    bioPatientPopulation = "";
+                }
 
                 if (sex === "Male" && optionType==="Female Sex Worker") {
                     toastr.error("Cannot select 'Female Sex Worker (FSW)' for a male person", "Person Population Error");
@@ -2164,7 +2174,7 @@
                 var bioFirstName = escape($("#<%=bioFirstName.ClientID%>").val().trim());
                 var bioMiddleName = escape($("#<%=bioMiddleName.ClientID%>").val().trim());
                 var bioLastName = escape($("#<%=bioLastName.ClientID%>").val().trim());
-                var bioPatientPopulation = $("#<%=bioPatientPopulation.ClientID%>").find('option:selected').text();
+                
                 var keyPop = $("#<%=bioPatientKeyPopulation.ClientID%>").val();
                 var userId = <%=UserId%>;
 

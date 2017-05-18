@@ -11,5 +11,6 @@ namespace Interface.CCC.Baseline
         int addPatientVaccination(PatientVaccination patientVaccination);
         int updatePatientVaccination(PatientVaccination patientVaccination);
         int DeletePatientVaccination(int id);
+        List<PatientVaccination> GetPatientVaccinations(int patientId);
     }
 }
