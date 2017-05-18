@@ -284,7 +284,8 @@ namespace IQCare.Web.CCC.Patient
                                 }
                                 else
                                 {
-                                    lblvlDueDate.Text = ((DateTime)labOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy");
+                                    
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
                                 }
                                 break;
                             default:
@@ -306,8 +307,8 @@ namespace IQCare.Web.CCC.Patient
 
                         else if (labOrder.Results == "Complete")
                         {
-
-                            lblVL.Text = "<span class='label label-success' > Complete | Results date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                        
+                            lblVL.Text = "<span class='label label-success' > Complete | Results : " + labOrder.ResultValues + " " + labOrder.ResultUnits + "</span>";
 
 
                         }

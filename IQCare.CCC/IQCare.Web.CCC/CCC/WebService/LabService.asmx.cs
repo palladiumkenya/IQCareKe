@@ -7,6 +7,7 @@ using Application.Presentation;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
 using Entities.CCC.Visit;
+using Entities.CCC.Lookup;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -160,7 +161,7 @@ namespace IQCare.Web.CCC.WebService
         {
             int count = 0;
 
-            List<PatientLabTracker> suppressedVL = new List<PatientLabTracker>();
+            List<LookupFacilityViralLoad> suppressedVL = new List<LookupFacilityViralLoad>();
             try
             {
                 var facilitySuppressedVL = new PatientLabOrderManager();
@@ -178,7 +179,7 @@ namespace IQCare.Web.CCC.WebService
         {
             int count = 0;
 
-            List<PatientLabTracker> unsuppressedVL = new List<PatientLabTracker>();
+            List<LookupFacilityViralLoad> unsuppressedVL = new List<LookupFacilityViralLoad>();
             try
             {
                 var facilitySuppressedVL = new PatientLabOrderManager();

@@ -30,7 +30,7 @@ namespace Entities.CCC.Visit
         public string ResultTexts { get; set; }
         public int LabOrderTestId { get; set; }
         public string ResultUnits { get; set; }
-
+        public string ResultOptions { get; set; }
         public DateTime? ResultDate { get; set; }
 
 

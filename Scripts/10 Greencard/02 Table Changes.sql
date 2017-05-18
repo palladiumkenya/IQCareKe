@@ -35,6 +35,10 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ResultDate'AND Object_ID 
     BEGIN
         ALTER TABLE PatientLabTracker ADD ResultDate DATETIME;
     END;	
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'ResultOptions'AND Object_ID = OBJECT_ID(N'PatientLabTracker'))
+    BEGIN
+        ALTER TABLE PatientLabTracker ADD ResultOptions varchar(50) NULL;
+    END;	
 IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'AuditData'AND Object_ID = OBJECT_ID(N'ord_Visit'))
     BEGIN
         ALTER TABLE ord_Visit ADD AuditData xml NULL;

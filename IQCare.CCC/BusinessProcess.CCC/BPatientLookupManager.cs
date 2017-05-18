@@ -17,9 +17,9 @@ namespace BusinessProcess.CCC
 
         public PatientLookup GetPatientDetailsLookup(int id)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientDetails = _unitOfWork.PatientLookupRepository
+                var patientDetails = unitOfWork.PatientLookupRepository
                 .FindBy(x => x.Id == id ).DefaultIfEmpty(null).FirstOrDefault();
 
                 return patientDetails;
@@ -37,9 +37,9 @@ namespace BusinessProcess.CCC
       
         public List<PatientLookup> GetPatientSearchPayload()
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var patientSearchDetails = _unitOfWork.PatientLookupRepository
+                var patientSearchDetails = unitOfWork.PatientLookupRepository
                     .GetAll()
                 //    .Select(x=> new PatientLookup 
                 //{
@@ -61,9 +61,9 @@ namespace BusinessProcess.CCC
 
         public List<PatientLookup> GetPatientSearchPayloadWithParameter(string patientId, string fname, string mname, string lname, DateTime doB, int sex, int facility,  int start, int length)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                var result = _unitOfWork.PatientLookupRepository.GetAll();
+                var result = unitOfWork.PatientLookupRepository.GetAll();
 
                 //if (!string.IsNullOrWhiteSpace(patientId))
                 //{
@@ -94,7 +94,7 @@ namespace BusinessProcess.CCC
                 //{
                 //    result = result.Where(x => x.FacilityId == facility);
                 //}
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
                 return result.ToList();
             }
         }
@@ -102,11 +102,11 @@ namespace BusinessProcess.CCC
         public int GetTotalpatientCount()
         {
             int totalCount = 0;
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                totalCount = _unitOfWork.PatientLookupRepository.GetAll().Count();
+                totalCount = unitOfWork.PatientLookupRepository.GetAll().Count();
 
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
 
             }
             return totalCount;
@@ -114,11 +114,11 @@ namespace BusinessProcess.CCC
         }
         public PatientLookup GetGenderID(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                PatientLookup ptnLookup =_unitOfWork.PatientLookupRepository.GetGenderId(patientId);
+                PatientLookup ptnLookup =unitOfWork.PatientLookupRepository.GetGenderId(patientId);
 
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
 
                 return ptnLookup;
             }
@@ -126,14 +126,14 @@ namespace BusinessProcess.CCC
 
         public int GetPatientTypeId(int patientId)
         {
-            using (UnitOfWork _unitOfWork = new UnitOfWork(new LookupContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                int PatientTypeId= _unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
+                int patientTypeId= unitOfWork.PatientLookupRepository.FindBy(x => x.Id == patientId)
                             .Select(x => x.PatientType)
                             .FirstOrDefault();
-                _unitOfWork.Dispose();
+                unitOfWork.Dispose();
 
-                return PatientTypeId;
+                return patientTypeId;
             }
         }
     }

@@ -8,7 +8,7 @@ using Entities.CCC.Lookup;
 
 namespace DataAccess.CCC.Repository.Lookup
 {
-   public class LookupLabsRepository : BaseRepository<LookupLabs>, ILookupLabs
+    public class LookupLabsRepository : BaseRepository<LookupLabs>, ILookupLabs
     {
         private readonly LookupContext _context;
 
@@ -17,14 +17,14 @@ namespace DataAccess.CCC.Repository.Lookup
         }
 
         public LookupLabsRepository(LookupContext context) : base(context)
-       {
+        {
             _context = context;
         }
 
         public List<LookupLabs> FindBy(Func<LookupLabs, bool> p)
         {
             var results = _context.LookupLaboratories.Where(p);
-           
+
 
             return results.ToList();
         }

@@ -305,25 +305,25 @@ namespace BusinessProcess.CCC
 
             }
         }
-        public List<PatientLabTracker> GetFacilityVLSuppressed(int facilityId)
+        public List<LookupFacilityViralLoad> GetFacilityVLSuppressed(int facilityId)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                List<PatientLabTracker> facilityVl =
-                    unitOfWork.PatientLabTrackerRepository.GetFacilityVLSuppressed(facilityId);
+                List<LookupFacilityViralLoad> facilityVl =
+                    unitOfWork.LookupFacilityViralLoadRepository.GetFacilityVLSuppressed(facilityId);
                 unitOfWork.Dispose();
                 return facilityVl;
 
 
             }
         }
-        public List<PatientLabTracker> GetFacilityVLUnSuppressed(int facilityId)
+        public List<LookupFacilityViralLoad> GetFacilityVLUnSuppressed(int facilityId)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
-                List<PatientLabTracker> facilityVl =
-                    unitOfWork.PatientLabTrackerRepository.GetFacilityVLUnSuppressed(facilityId);
-                unitOfWork.Dispose();
+                List<LookupFacilityViralLoad> facilityVl =
+                    unitOfWork.LookupFacilityViralLoadRepository.GetFacilityVLUnSuppressed(facilityId);
+                   unitOfWork.Dispose();
                 return facilityVl;
 
 

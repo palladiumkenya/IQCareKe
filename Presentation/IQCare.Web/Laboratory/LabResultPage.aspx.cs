@@ -683,8 +683,9 @@ namespace IQCare.Web.Laboratory
                 if (e.CommandName == "EnterResult")
                 {
                     int labtesOrderId = Convert.ToInt32(e.CommandArgument);
-                    //this.LabOrderId
+                  
                     LabOrderTest thisTest = thisLabOrder.OrderedTest.DefaultIfEmpty(null).FirstOrDefault(t => t.Id == labtesOrderId);
+                   
                     if (thisTest != null)
                     {
                         Guid g = Guid.NewGuid();

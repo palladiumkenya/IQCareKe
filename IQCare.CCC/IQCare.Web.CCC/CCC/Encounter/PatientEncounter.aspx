@@ -20,8 +20,8 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i>Clinical Encounter</a></li>
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i>Viraload Tracker</a></li>
-            <li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>
-            <li role="presentation"><a href="#Pharmacy" aria-controls="Pharmacy" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Pharmacy</a></li>
+            <%--<li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>
+            <li role="presentation"><a href="#Pharmacy" aria-controls="Pharmacy" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Pharmacy</a></li>--%>
         </ul>
     </div>
     <!-- .col-md-12 -->
@@ -91,24 +91,7 @@
             <%--       <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> --%>
                       <!-- pw .implementation of viral load tracker line graph here-->
                 </div><!-- .viraload tracker-->
-             <!-- uc  -laboratory -->   
-            <div role="tabpanel" class="tab-pane fade" id="Laboratory">
-                <%--<uc:ucPatientLabs runat="server" id="ucPatientLabs" />--%>
-            </div>
-           <!--  </div> -->
-           
-             <!-- .uc  -laboratory -->    
-
-           <%-- <div role="tabpanel" class="tab-pane fade" id="Pharmacy">
-               <uc:ucPharmacyPrescription runat="server" id="ucPharmacyPrescription" />
-            </div><!-- .pharmacy-->--%>
-
-            <%--<div  role="tabpanel"    class="tab-pane fade"      id="history">
-                           
-                       </div>--%><!-- .history-->
-            <%--</div>--%><!-- .tab-content-->
-            
-
+    
         </div>
     </div>
    <uc:ucExtruder runat="server" ID="ucExtruder" />

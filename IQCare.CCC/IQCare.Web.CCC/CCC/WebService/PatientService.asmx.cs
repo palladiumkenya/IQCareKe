@@ -275,6 +275,32 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public PatientAppointmentDisplay GetExistingPatientAppointment(string patientId, DateTime appointmentDate, int serviceAreaId, int reasonId)
+        {
+            PatientAppointmentDisplay appointmentDisplay = new PatientAppointmentDisplay();
+            PatientAppointment appointment = new PatientAppointment();
+            try
+            {
+                var patientAppointment = new PatientAppointmentManager();
+                int id = Convert.ToInt32(patientId);
+                appointment = patientAppointment.GetByPatientId(id).FirstOrDefault(n=>n.AppointmentDate.Date==appointmentDate.Date && n.ServiceAreaId==serviceAreaId && n.ReasonId==reasonId);
+                if (appointment != null)
+                {
+                    appointmentDisplay = Mapappointments(appointment);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return appointmentDisplay;
+        }
+
+        [WebMethod]
         public List<PatientFamilyDisplay> GetFamilyTestings(string patientId)
         {
             List<PatientFamilyDisplay> familyDisplays = new List<PatientFamilyDisplay>();

@@ -229,9 +229,10 @@ namespace IQCare.Web.Laboratory
                 else
                 {
                     LabOrderTest selectedLab = (LabOrderTest)Session[SessionKey.SelectedLabTestOrder];
-                    this.LabTestId = selectedLab.TestId;
+                 
+                    this.LabTestId = selectedLab.Test.Id;
                     this.LabOrderTestId = selectedLab.Id;
-                    this.LabOrderTestId = selectedLab.LabOrderId;
+                   // this.LabOrderTestId = selectedLab.LabOrderId;
                     this.PopulateLabDetails(selectedLab);
                     this.BindDropdownResultBy() ;
                      txtlabReportedbyDate.Text =  DateTime.Now.ToString("dd-MMM-yyyy");
@@ -264,9 +265,9 @@ namespace IQCare.Web.Laboratory
                 labelTestOrderStatus.Text = thisTestOrder.TestOrderStatus;
                 labelTestNotes.Text = thisTestOrder.TestNotes;
                 showNotes = !string.IsNullOrEmpty(thisTestOrder.TestNotes.Trim())? "" : "none";
-                this.LabTestId = thisTestOrder.TestId;
+                this.LabTestId = thisTestOrder.Test.Id;
                 this.LabOrderTestId = thisTestOrder.Id;
-                this.LabOrderTestId = thisTestOrder.LabOrderId;
+                //this.LabOrderTestId = thisTestOrder.LabOrderId;
                 this.BindTests();               
             }
             catch (Exception ex)

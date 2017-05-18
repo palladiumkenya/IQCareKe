@@ -2446,6 +2446,26 @@
     <UnitId>135</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
+  <Lnk_ParameterResult>
+    <ResultId>40</ResultId>
+    <ParameterId>145</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>39</ResultId>
+    <ParameterId>145</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>42</ResultId>
+    <ParameterId>147</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>41</ResultId>
+    <ParameterId>147</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
     <SubTestName>CD4</SubTestName>
