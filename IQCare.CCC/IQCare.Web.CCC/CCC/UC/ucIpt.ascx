@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucIpt.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucIpt" %>
 
-<div class="col-md-12 form-group">
+<div class="col-md-12 form-group" clientidmode = "Static" id = "IptFormDetails" data-parsley-validate="true" data-show-errors="true">
     <div class="col-md-12 form-group">
         <div class="col-md-12">
                 <div class="col-md-12">
@@ -215,9 +215,10 @@
                 <label class="control-label pull-left">Hepatotoxicity</label>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="hepatotoxicity" ClientIDMode="Static" onChange="HepatotoxicityChange();">
+                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="hepatotoxicity" ClientIDMode="Static" onChange="HepatotoxicityChange();" required = "true">
+                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                    <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
@@ -236,9 +237,10 @@
                 <label class="control-label pull-left">Peripheral Neoropathy</label>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="peripheralNeoropathy" ClientIDMode="Static" onChange="PeripheralNeoropathyChange();">
+                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="peripheralNeoropathy" ClientIDMode="Static" onChange="PeripheralNeoropathyChange();" required ="true">
+                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                    <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
@@ -257,9 +259,10 @@
                 <label class="control-label pull-left">Rash?</label>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="rash" ClientIDMode="Static" onChange="RashChange();">
+                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="rash" ClientIDMode="Static" onChange="RashChange();" required ="true">
+                    <asp:ListItem Text="Select" Value="" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="Yes" Value="True"></asp:ListItem>
-                    <asp:ListItem Text="No" Value="False" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="No" Value="False"></asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
@@ -278,7 +281,7 @@
                 <label class="control-label pull-left">Adherence Measurement</label>
             </div>
             <div class="col-md-12">
-                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="adheranceMeasurement" ClientIDMode="Static" onChange="AdheranceMeasurementChange();" />
+                <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="adheranceMeasurement" ClientIDMode="Static" onChange="AdheranceMeasurementChange();" required ="true"/>
             </div>
         </div>
         <div class="col-md-7">
@@ -343,7 +346,7 @@
     $('#DateCollected').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
         var iptDateCollected = moment($("#IptDateCollected").val()).format('DD-MMM-YYYY');
         if (moment('' + iptDateCollected + '').isAfter()) {
-                toastr.error("Appointment date cannot be a future date");
+                toastr.error("Future dates not allowed");
                 $('#DateCollected').val("");
                 return false;
             }
