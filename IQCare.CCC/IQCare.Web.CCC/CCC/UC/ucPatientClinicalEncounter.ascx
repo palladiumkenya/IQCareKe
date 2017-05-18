@@ -2184,7 +2184,17 @@
                     else
                         previousStep = nextStep -= 1;
                     if (data.step === 1) {
-
+                        $("#peripheralNeoropathy").prop('required',false);
+                        $("#rash").prop('required',false);
+                        $("#hepatotoxicity").prop('required',false);
+                        if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+                            $("#sputum").prop('required',true);
+                            $("#chest").prop('required',true);
+                            $("#antiTb").prop('required',true);
+                            $("#contactsInvitation").prop('required',true);
+                            $("#iptEvaluation").prop('required',true);
+                        }
+                        
                         /* add constraints based on age*/
 
                         if ($('#datastep1').parsley().validate()) {
@@ -2781,7 +2791,6 @@
 
     function IcfChange() {
         if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
-            $("#IcfActionForm").show();
         } else {
             $("#IcfActionForm").hide();
             $("#tbscreeningstatus").val(35);
