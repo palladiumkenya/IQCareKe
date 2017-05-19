@@ -1295,12 +1295,13 @@
 					$("#<%=BaselineBMI.ClientID%>").val(bmi);
 				});
 
-			$("#<%=WHOStageAtEnrollment.ClientID%>").on('change',function(){
-			
-				var who=$(this).find(":selected").val();
-				$("#<%=bwhoStage.ClientID%>").val(who);
-			
-			})
+		    $("#<%=WHOStageAtEnrollment.ClientID%>").on('change',
+		        function() {
+
+		            var who = $(this).find(":selected").val();
+		            $("#<%=bwhoStage.ClientID%>").val(who);
+
+		        });
 			function calcBmi() {
 				var weight = document.getElementById('BaselineWeight').value;
 				var height = document.getElementById('BaselineHeight').value / 100;
@@ -1333,6 +1334,8 @@
 					var tiDate = $('#TIDate').datepicker('getDate');
 					var doe = $('#DOE').datepicker('getDate');
 
+
+                    $("#DARTI").datepicker('setDate',moment(artStartDate).format('DD-MMM-YYYY'));
 
 					var futureDate = moment(artStartDate).isAfter(today); /* -- validate future dates -- */
 					if (futureDate) {
@@ -1394,7 +1397,7 @@
 					var dhid = $("#DHID").datepicker('getDate');
 					var tidate = $("#TIDate").datepicker('getDate');
 					var artStartDate = $('#TIARTStartDate').datepicker('getDate');
-					var doe = $('#doe').datepicker('getDate');
+					var doe = $('#DOE').datepicker('getDate');
 					//validate dates
 
 					var futureDate = moment(dhid).isAfter(today);
@@ -1427,6 +1430,13 @@
 						toastr.error("Date OF HIV Diagnosis CANNOT be after ART Start date");
 						return false;
 					}
+
+					futureDate=moment(dhid).isAfter(doe);
+                    if (futureDate) {
+                        $("#DateOfHIVDiagnosis").val('');
+						toastr.error("Date OF HIV Diagnosis CANNOT be after Enrollment Date");
+						return false;
+                    }
 				});
 
 			/*DateOfEnrollment*/
@@ -1447,6 +1457,22 @@
 						return false;
 					}
 				});
+
+		    /* date of ART Initiation */
+		    $("#DARTI").on('changed.fu.datepicker dateClicked.fu.datepicker',
+		        function(event, date) {
+		            
+		            var darti = $("#DARTI").datepicker('getDate');
+		            var artStartDate = $('#TIARTStartDate').datepicker('getDate');
+
+		            var futureDate = moment(darti).isAfter(artStartDate);
+                    if (futureDate) {
+                        $("#DateOfARTInitiation").val('');
+						toastr("ART Initiation Date CANNOT be Afer ART Start Date");
+						return false;
+                    }
+
+		        });
 
 			/* limit future dates viralload baseline date*/
 			$("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',
@@ -1663,7 +1689,7 @@
 			$("#lblBVCoInfection").on('checked.fu.checkbox', function() { bVCoInfection = true; });
 			//$("#lblPregnancy").on('checked.fu.checkbox', function () { pregnancy = true; });
 			//$("#lblBreastFeeding").on('checked.fu.checkbox', function () { breastfeeding = true; });
-			$("#lblBHIV").on('checked.fu.checkbox', function() { bHiV = true; });
+			//$("#lblBHIV").on('checked.fu.checkbox', function() { bHiV = true; });
 			//$("#lblTbInfection").on('checked.fu.checkbox', function () { tbInfection = true; });
 
 			/* when unchecked */
@@ -1672,7 +1698,7 @@
 			$("#lblBVCoInfection").on('unchecked.fu.checkbox', function() { bVCoInfection = false; });
 			//$("#lblPregnancy").on('unchecked.fu.checkbox', function () { pregnancy = false; });
 			//$("#lblBreastFeeding").on('unchecked.fu.checkbox', function () { breastfeeding = false; });
-			$("#lblBHIV").on('unchecked.fu.checkbox', function() { bHiV = false; });
+			//$("#lblBHIV").on('unchecked.fu.checkbox', function() { bHiV = false; });
 			//$("#lblTbInfection").on('unchecked.fu.checkbox', function () { tbInfection = false; });
 
 			<%--         $("#<%=.ClientID%>").prop('disabled', true);
@@ -1729,10 +1755,10 @@
 				$("#<%=AddPriorHistory.ClientID%>").removeAttr("disabled");
 			}
 
-			$("#lblBVCoInfection").checkbox('uncheck');
+			//$("#lblBVCoInfection").checkbox('uncheck');
 			//$("#lblPregnancy").checkbox('uncheck');
 			//$("#lblBreastFeeding").checkbox('uncheck');
-			$("#lblBHIV").checkbox('uncheck');
+			//$("#lblBHIV").checkbox('uncheck');
 			//$("#lblTbInfection").checkbox('uncheck');
 
 			/*get Patient EnrollmentDate*/
@@ -1800,9 +1826,9 @@
 									$("#<%=BaselineBMI.ClientID%>").val(obj.BMI);
 
 									if (obj.HBVInfected) {
-										$("#lblHBV").checkbox('check');
+										$("#lblBVCoInfection").checkbox('check');
 									} else {
-										$("#lblHBV").checkbox('uncheck');
+										$("#lblBVCoInfection").checkbox('uncheck');
 									}
 									//if (obj.Pregnant) {$("#lblPregnancy").checkbox('check');}else{$("#lblPregnancy").checkbox('uncheck');}
 									//if (obj.TBinfected) {$("#lblTbInfected").checkbox('check');}else{ $("#lblTbInfected").checkbox('uncheck');}
@@ -1819,48 +1845,104 @@
 									// $("#").datepicker('setDate',moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
 									$.ajax({
 										type: "POST",
-										url: "../WebService/PatientBaselineService.asmx/GetRegimenCategory",
-										data: "{'regimenId':'" + obj.CurrentTreatment + "'}",
+										url: "../WebService/PatientBaselineService.asmx/GetRegimenCategoryByRegimenName",
+										data: "{'regimenName':'" + obj.CurrentTreatmentName.substr(0,4) + "'}",
 										contentType: "application/json; charset=utf-8",
 										dataType: "json",
 										success: function(response) {
-											$("#<%=regimenCategory.ClientID%>").val(response.d);
 
-											var reg = $("#<%=regimenCategory.ClientID%>").find(":selected").text();
-											var str = reg.replace(/\s+/g, '');
-											//var x = $("#<%=regimenCategory.ClientID%>").find(":selected").text();
-
-											$.ajax({
+										    var masterId = response.d;
+										   
+										    /* Get the LookupMaster Name*/
+                                            $.ajax({
 												type: "POST",
-												url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
-												data: "{'masterName':'" + str + "'}",
+												url: "../WebService/LookupService.asmx/GetLookUpMasterNameFromId",
+												data: "{'masterId':'" + masterId + "'}",
 												contentType: "application/json; charset=utf-8",
 												dataType: "json",
 												success: function(response) {
-													var itemList = JSON.parse(response.d);
-													$("#<%=RegimenId.ClientID%>").find('option').remove().end();
-													$("#<%=RegimenId.ClientID%>")
-														.append('<option value="0">Select</option>');
-													$.each(itemList,
-														function(index, itemList) {
-															$("#<%=RegimenId.ClientID%>")
-																.append('<option value="' +
-																	itemList.ItemId +
-																	'">' +
-																	itemList.ItemName +
-																	"(" +
-																	itemList.ItemDisplayName +
-																	")" +
-																	'</option>');
-														});
-													$("#<%=RegimenId.ClientID%>").val(obj.CurrentTreatment);
+
+												    var itemNameSource = response.d;
+												    var itemName = response.d;
+												    if (itemName === 'AdultFirstLineRegimen') {
+												        itemName='AdultARTFirstLine';
+												    }
+
+												  
+												    if (itemName === 'AdultSecondlineRegimen') {
+												        itemName ='AdultARTSecondLine';
+												    }
+												    if (itemName === 'AdultThirdlineRegimen') {
+                                                            itemName ='AdultARTThirdLine';
+                                                        }
+												    if (itemName === 'PaedsFirstLineRegimen') {
+												        itemName = 'PaedsARTFirstLine';
+												    }
+												    if (itemName === 'PaedsSecondlineRegimen') {
+												        itemName = 'PaedsARTSecondLine';
+												    }
+
+                                                    
+                                                        $.ajax({
+												        type: "POST",
+												        url: "../WebService/LookupService.asmx/GetLookupItemId",
+												        data: "{'lookupItemName':'" + itemName + "'}",
+												        contentType: "application/json; charset=utf-8",
+												        dataType: "json",
+												        success: function(response) {
+												            var itemList = response.d;
+												            $("#<%=regimenCategory.ClientID%>").val(itemList);
+
+                                                            ////////////////////////////////////////////////
+												            $.ajax({
+												                type: "POST",
+												                url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
+												                data: "{'masterName':'" + itemNameSource + "'}",
+												                contentType: "application/json; charset=utf-8",
+												                dataType: "json",
+												                success: function(response) {
+												                    var itemList = JSON.parse(response.d);
+												    
+													                $("#<%=RegimenId.ClientID%>").find('option').remove().end();
+													                $("#<%=RegimenId.ClientID%>")
+														                .append('<option value="0">Select</option>');
+													                $.each(itemList,
+														                function(index, itemList) {
+															                $("#<%=RegimenId.ClientID%>")
+																                .append('<option value="' +
+																	                itemList.ItemId +
+																	                '">' +
+																	                itemList.ItemName +
+																	                "(" +
+																	                itemList.ItemDisplayName +
+																	                ")" +
+																	                '</option>');
+														                });
+													                $("#<%=RegimenId.ClientID%>").val(obj.CurrentTreatment);
+												                },
+												                error: function(response) {
+													                toastr
+														                .error("Error in Fetching Ward list " + response.d);
+												                }
+											                }); // ajax end
+										
+												        },
+												        error: function(response) {
+													        toastr
+														        .error("Error in Fetching Lookupmaster " + response.d);
+												        }
+											        }); // ajax end
+												    
+												   
+											
+												/////////////////////
 												},
 												error: function(response) {
 													toastr
-														.error("Error in Fetching Ward list " + response.d,
-															"Fetching Ward List");
+														.error("Error in Fetching Ward list " + response.d);
 												}
-											}); // ajax end
+                                            }); // ajax end
+
 										},
 										error: function(response) {}
 									}); //ajax end 
@@ -1941,7 +2023,7 @@
 						else
 							previousStep = nextStep -= 1;
 						if (data.step === 1) {
-
+                           
 							$('#datastep1').parsley().destroy();
 							$('#datastep1').parsley({
 								excluded:
@@ -1949,7 +2031,7 @@
 							});
 
 							if ($("#datastep1").parsley().validate()) {
-
+                                  
 								if (transferIn === 1) {
 									$.when(addPatientTransferIn()).then(managePatientHivDiagnosis());
 									managePatientArvHistory();
@@ -1966,24 +2048,33 @@
 						}
 
 						else if (data.step === 2) {
-							$('#datastep2').parsley().destroy();
+							
+						    $('#datastep2').parsley().destroy();
 							$('#datastep2').parsley({
 								excluded:
 									"input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
 							});
 
 							if ($("#datastep2").parsley().validate()) {
-							   
+
+							    
 								if (transferIn === 1) {
 									$.when(managePatientBaselineAssessment()).then(managePatientTreatmentInitiation());
-									window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+								    
+                                    if (data.direction === 'next') {
+                                               window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+								                 toastr.success("Patient Baseline Assessment and Treatment initiation Completed successfully...");
+                                    }
+								 
+								   
 								} else {
-								  $.when(managePatientBaselineAssessment()).then(function() {
-									  window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									toastr
-										.success("Patient Baseline Assessment and ARV History Completed successfully...");
-								  }); 
+								    $.when(managePatientBaselineAssessment()).then()
+                                        
+                                            if (data.direction === 'next') {
+                                                window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                            toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+                                            }
+								  
 								}
 								
 							} else {
@@ -2001,10 +2092,11 @@
 	.on('stepclicked.fu.wizard',
 		function () {
 
+           
 		})
 	.on('finished.fu.wizard',
 		function (e) {
-			toastr.success("Patient Baseline Assessment and ARV History Completed successfully...");
+			
 		});
 
 			/*filter regimens*/
@@ -2041,7 +2133,7 @@
 					});
 				});
 
-			function OnInitiationRegimen() {
+			function onInitiationRegimen() {
 				var reg = $(this).find(":selected").text();
 				var str =reg.replace(/\s+/g,''); 
 				//reg =reg.replace("/+/g", "");
@@ -2074,10 +2166,10 @@
 
 			$("#InitiationRegimen").on("change", function() {
 				$("#InitiationRegimen").off();
-				$("#InitiationRegimen").on("change", OnInitiationRegimen);
+				$("#InitiationRegimen").on("change", onInitiationRegimen);
 			});                      
 
-			$("#InitiationRegimen").on("change", OnInitiationRegimen);
+			$("#InitiationRegimen").on("change", onInitiationRegimen);
 
 			/* datat persistence functions */
 			function addPatientTransferIn() {
@@ -2199,6 +2291,7 @@
 					height = 0;}
 				var ptnId = patientId;
 				var ptnmasterVisitId = patientMasterVisitId;
+			    
 				// var datas = [{"id": id ,"patientId": ptnId  ,"patientMasterVisitId": ptnmasterVisitId ,"pregnant": pregnancy,"hbvInfected":bVCoInfection,"tbInfected":tbInfection,"whoStage": whostage,"breastfeeding": breastfeeding ,"cd4Count":cD4Count,"muac": muac,"weight":weight,"height":height,"userId": userId }];
 				$.ajax({
 					type: "POST",
@@ -2207,7 +2300,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function (response) {
-						toastr.success(response.d);
+						//toastr.success(response.d);
 					},
 					error: function (xhr, errorType, exception) {
 						var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -2237,7 +2330,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function (response) {
-					   // window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');
+					   // <%--window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');--%>
 						toastr.success(response.d);
 						
 					},

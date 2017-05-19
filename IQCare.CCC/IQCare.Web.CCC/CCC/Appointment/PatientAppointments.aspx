@@ -50,7 +50,6 @@
                 dataType: "json",
                 cache: false,
                 success: function (response) {
-                    console.log(response.d);
                     var itemList = response.d;
                     var table = '';
                     itemList.forEach(function (item, i) {

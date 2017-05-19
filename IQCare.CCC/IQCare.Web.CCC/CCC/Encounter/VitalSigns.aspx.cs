@@ -13,6 +13,10 @@ namespace IQCare.Web.CCC.Encounter
         {
             get { return Convert.ToString(Session["Gender"]); }
         }
+        protected int PatientAge
+        {
+            get { return Convert.ToInt32(Session["Age"]); }
+        }
 
 
         protected void Page_Load(object sender, EventArgs e)

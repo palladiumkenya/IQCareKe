@@ -14,6 +14,7 @@ namespace Interface.CCC.Baseline
 
         int DeletePatientDisclosure(int id);
         List<PatientDisclosure> GetPatientDisclosures(int patientId, string category, string disclosureStage);
+        List<PatientDisclosure> GetAllPatientDisclosures(int patientId);
         //List<PatientDisclosure> GetPatientDisclosureAll(int patientId);
     }
 }

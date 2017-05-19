@@ -220,7 +220,7 @@
                
                  <div class="row" style="padding-top:3px">
                      <div class="col-md-1">
-                         <img src="../Images/kenya_small.png" />
+                         <img src="<%= Page.ResolveClientUrl("~/Images/kenya_small.png") %>" />
                        </div> 
                      <div class="col-md-1">
                            <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>

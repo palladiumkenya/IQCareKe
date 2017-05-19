@@ -4,6 +4,8 @@ using System;
 using Entities.CCC.Encounter;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC.Baseline
 {
@@ -26,6 +28,16 @@ namespace BusinessProcess.CCC.Baseline
         public int DeletePatientVaccination(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<PatientVaccination> GetPatientVaccinations(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vaccinations = unitOfWork.PatientVaccinationRepository.FindBy(x => x.PatientId == patientId).ToList();
+                unitOfWork.Dispose();
+                return vaccinations;
+            }
         }
 
         public int updatePatientVaccination(PatientVaccination patientVaccination)

@@ -28,11 +28,12 @@
     $(document).ready(function () {
 
         var gender = "<%=Gender%>";
+        var patientAge = "<%=PatientAge%>";
   
 
         if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");
-        } else if (gender === 'Female') {
+        } else if (gender === 'Female' && patientAge>13) {
              $("#divBtnVitals").show("fast");
         }
 

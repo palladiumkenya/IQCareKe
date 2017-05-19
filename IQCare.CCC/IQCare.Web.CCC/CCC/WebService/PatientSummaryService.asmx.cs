@@ -50,22 +50,26 @@ namespace IQCare.Web.CCC.WebService
 
                 var personPoulation = new PatientPopulationManager();
                 var population = personPoulation.GetCurrentPatientPopulations(personId);
-                if (population.Count > 0)
+                if (bioPatientPopulation != "")
                 {
-                    population[0].PopulationCategory = keyPop;
-                    population[0].PopulationType = bioPatientPopulation;
-
-                    personPoulation.UpdatePatientPopulation(population[0]);
-
-                    msg += "<p>Person Population Edited Successfully.</p>";
-
-                }
-                else
-                {
-                    int Result = personPoulation.AddPatientPopulation(personId, bioPatientPopulation, keyPop, userId);
-                    if (Result > 0)
+                    if (population.Count > 0)
                     {
-                        msg += "<p>Person Population Status Recorded Successfully!</p>";
+                        population[0].PopulationCategory = keyPop;
+                        population[0].PopulationType = bioPatientPopulation;
+
+                        personPoulation.UpdatePatientPopulation(population[0]);
+
+                        msg += "<p>Person Population Edited Successfully.</p>";
+
+                    }
+                    else
+                    {
+                        int Result =
+                            personPoulation.AddPatientPopulation(personId, bioPatientPopulation, keyPop, userId);
+                        if (Result > 0)
+                        {
+                            msg += "<p>Person Population Status Recorded Successfully!</p>";
+                        }
                     }
                 }
 

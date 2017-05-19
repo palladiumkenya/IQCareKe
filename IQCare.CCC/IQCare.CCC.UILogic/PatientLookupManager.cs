@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Application.Common;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -69,7 +68,7 @@ namespace IQCare.CCC.UILogic
             }
         }
 
-        public int isPatientExists(int personId)
+        public int IsPatientExists(int personId)
         {
             var person = _patientLookupmanager.GetPatientByPersonId(personId);
             var retVal = person.Count > 0 ? 1 : 0;
