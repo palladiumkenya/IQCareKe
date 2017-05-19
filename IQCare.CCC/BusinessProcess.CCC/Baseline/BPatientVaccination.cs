@@ -44,17 +44,5 @@ namespace BusinessProcess.CCC.Baseline
         {
             throw new NotImplementedException();
         }
-
-        public List<PatientVaccination> VaccineExists(int patientId, int vaccine, string vaccineStage)
-        {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
-            {
-                var vaccinations = unitOfWork.PatientVaccinationRepository
-                    .FindBy(x => x.PatientId == patientId && x.Vaccine == vaccine && x.VaccineStage == vaccineStage)
-                    .ToList();
-                unitOfWork.Dispose();
-                return vaccinations;
-            }
-        }
     }
 }

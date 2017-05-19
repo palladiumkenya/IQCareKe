@@ -834,14 +834,9 @@
                     return false;
                 }
                 //console.log(vaccinesList);
-                //console.log(vaccineTypeId);
-                //console.log(vaccineStageId);
-
                 //vaccineFound = $.inArray("" + vaccineStageId + "", vaccinesList);
                 for (var key in vaccinesList) {
-                    //console.log(key);
-                    //console.log(vaccinesList[key]);
-                    if ((key == vaccineStage) && (vaccinesList[key] == vaccineStageId)) {
+                    if ((key == vaccineTypeId) && (vaccinesList[key] == vaccineStageId)) {
                         vaccineFound = -1;
                     }
                 }
@@ -851,10 +846,9 @@
                     toastr.error("error", vaccineStage + " Vaccine already exists in the List");
                     return false; // message box herer
                 } else {
+                    
                     //vaccinesList.push("" + vaccineStageId + "");
-                    //vaccinesList[vaccineTypeId] = vaccineStageId;
-                    vaccinesList[vaccineStage] = vaccineStageId;
-                    console.log(vaccinesList);
+                    vaccinesList[vaccineTypeId] = vaccineStageId;
 
                     var tr = "<tr><td align='left'></td><td align='left'>" + vaccineType + "</td><td align='left'>" + vaccineStage + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                     $("#tblVaccines>tbody:first").append('' + tr + '');
@@ -865,12 +859,9 @@
 
             $("#tblVaccines").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();
-                var x = $(this).closest('tr').find('td').eq(2).html();
-                var exists = vaccinesList[x];
-                if (typeof exists != 'undefined' && exists > 0) {
-                    delete vaccinesList[x];
-                    //vaccinesList.splice(x, 1);
-                }             
+                var x = $(this).closest('tr').find('td').eq(0).html();
+
+                vaccinesList.splice($.inArray(x, vaccinesList), 1);
             });
 
             $("#VaccineType").on('change', function (e) {
@@ -1021,15 +1012,11 @@
                     if (INH == 'CompletionYes') {
                         INHCompletion = true;
                         //INHCompletionDateValue = $("#INHCompletionDate").val();
-                        if ($("#INHCompletionDate").val() != "" && $("#INHCompletionDate").val() != null) {
-                            INHCompletionDateValue = moment(CompletionDate).format("DD-MMM-YYYY");
-                        }
+                        INHCompletionDateValue = moment(CompletionDate).format("DD-MMM-YYYY");
                     } else if (INH == 'CompletionNo') {
                         INHCompletion = false;
                         //INHCompletionDateValue = $("#INHCompletionDate").val();
-                        if ($("#INHStopDate").val() != "" && $("#INHStopDate").val() != null) {
-                            INHCompletionDateValue = moment(StopDate).format("DD-MMM-YYYY");
-                        }                 
+                        INHCompletionDateValue = moment(StopDate).format("DD-MMM-YYYY");
                     }
 
                     var vaccineAdult = [];
@@ -1125,87 +1112,66 @@
                     }
                 });
             }
+            $.ajax({
+                type: "POST",
+                url: "../WebService/OneTimeEventsTrackerService.asmx/GetOneTimeEventsTrackerDetails",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var oneTimeEvents = JSON.parse(response.d);
+                    console.log(oneTimeEvents);
 
-            getOneTimeTrackerDetails();
-
-            function getOneTimeTrackerDetails() {
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/OneTimeEventsTrackerService.asmx/GetOneTimeEventsTrackerDetails",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        var oneTimeEvents = JSON.parse(response.d);
-                        //console.log(oneTimeEvents);
-
-                        if (oneTimeEvents.PatientId > 0) {
-
-                            $("#Stage1").datepicker('setDate', moment(oneTimeEvents.Stage1Date).format('DD-MMM-YYYY'));
-                            $("#Stage2").datepicker('setDate', moment(oneTimeEvents.Stage2Date).format('DD-MMM-YYYY'));
-                            $("#Stage3").datepicker('setDate', moment(oneTimeEvents.Stage3Date).format('DD-MMM-YYYY'));
-                            $("#SexPartner").datepicker('setDate',
-                                moment(oneTimeEvents.SexPartner).format('DD-MMM-YYYY'));
-                            $("#INHStartDatePicker")
-                                .datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
-                            $("#HBV").datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
-
-                            if (oneTimeEvents.Complete == 0) {
-                                $("#CompletionNo").prop("checked", true);
-                                $("#lblCompletionNo").addClass("checked");
-                                $("#ISCompletionDate").hide();
-                                $("#ISStopDate").show();
-                                $("#INHCompletionDate").val('');
-                                $("#StopDate").datepicker('setDate',
-                                    moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
-                            }
-
-                            if (oneTimeEvents.Complete == 1) {
-                                $("#CompletionYes").prop("checked", true);
-                                $("#lblCompletionYes").addClass("checked");
-                                $("#ISCompletionDate").show();
-                                $("#ISStopDate").hide();
-                                $("#INHStopDate").val('');
-                                $("#CompletionDate")
-                                    .datepicker('setDate', moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
-                            }
-
-                            if (oneTimeEvents.HBV == "1") {
-                                $("#lblHBV").addClass("checked");
-                                $("#HBV").prop("checked", true);
-                            } else {
-                                $("#lblHBV").removeClass("checked");
-                                $("#HBV").prop("checked", false);
-                            }
-
-                            if (oneTimeEvents.FluVaccine == "1") {
-                                $("#lblFluVaccine").addClass("checked");
-                                $("#FluVaccine").prop("checked", true);
-                            } else {
-                                $("#lblFluVaccine").removeClass("checked");
-                                $("#FluVaccine").prop("checked", false);
-                            }
-
-                            if (oneTimeEvents.OtherVaccination != "") {
-                                $("#vaccinationotheradult").val(oneTimeEvents.OtherVaccination);
-                            }
-
-                            $.each(oneTimeEvents.ChildVaccination, function (index, value) {
-                                //console.log(value);
-                                vaccinesList[value.VaccineStage] = value.Vaccine;
-                                var tr = "<tr><td align='left'></td><td align='left'>" + value.Name + "</td><td align='left'>" + value.VaccineStage + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
-                                $("#tblVaccines>tbody:first").append('' + tr + '');
-                            });
-
-                            console.log(vaccinesList);
-                        }
-                    },
-                    error: function (response) {
-                        //generate('error', response.d);
-                        toastr.error(response.d, "One Time Events Tracker");
+                    $("#Stage1").datepicker('setDate', moment(oneTimeEvents.Stage1Date).format('DD-MMM-YYYY'));
+                    $("#Stage2").datepicker('setDate', moment(oneTimeEvents.Stage2Date).format('DD-MMM-YYYY'));
+                    $("#Stage3").datepicker('setDate', moment(oneTimeEvents.Stage3Date).format('DD-MMM-YYYY'));
+                    $("#SexPartner").datepicker('setDate', moment(oneTimeEvents.SexPartner).format('DD-MMM-YYYY'));
+                    $("#INHStartDatePicker").datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
+                    $("#HBV").datepicker('setDate', moment(oneTimeEvents.StartDate).format('DD-MMM-YYYY'));
+                    
+                    if (oneTimeEvents.Complete == 0) {              
+                        $("#CompletionNo").prop("checked", true);
+                        $("#lblCompletionNo").addClass("checked");
+                        $("#ISCompletionDate").hide();
+                        $("#ISStopDate").show();
+                        $("#INHCompletionDate").val('');
+                        $("#StopDate").datepicker('setDate', moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
                     }
-                });
-            }
-            
+
+                    if (oneTimeEvents.Complete == 1) {
+                        $("#CompletionYes").prop("checked", true);
+                        $("#lblCompletionYes").addClass("checked");
+                        $("#ISCompletionDate").show();
+                        $("#ISStopDate").hide();
+                        $("#INHStopDate").val('');
+                        $("#CompletionDate").datepicker('setDate', moment(oneTimeEvents.CompletionDate).format('DD-MMM-YYYY'));
+                    }
+
+                    if (oneTimeEvents.HBV == "1") {
+                        $("#lblHBV").addClass("checked");
+                        $("#HBV").prop("checked", true);
+                    } else {
+                        $("#lblHBV").removeClass("checked");
+                        $("#HBV").prop("checked", false);
+                    }
+
+                    if (oneTimeEvents.FluVaccine == "1") {
+                        $("#lblFluVaccine").addClass("checked");
+                        $("#FluVaccine").prop("checked", true);
+                    } else {
+                        $("#lblFluVaccine").removeClass("checked");
+                        $("#FluVaccine").prop("checked", false);
+                    }
+
+                    if (oneTimeEvents.OtherVaccination!="") {
+                        $("#vaccinationotheradult").val(oneTimeEvents.OtherVaccination);
+                    }
+                    
+                },
+                error: function (response) {
+                    //generate('error', response.d);
+                    toastr.error(response.d, "One Time Events Tracker");
+                }
+            });
         });
 
             $('#Stage1').datepicker({
