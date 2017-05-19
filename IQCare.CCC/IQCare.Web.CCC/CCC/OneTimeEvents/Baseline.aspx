@@ -1351,9 +1351,8 @@
 						$('#StartDateART').val('');
 						return false;
 					}
-					if (moment(artStartDate).isAfter(doe)) {
+					if (moment(artStartDate).isBefore(doe)) {
 
-					} else {
 						$('#StartDateART').val('');
 						toastr.error('ART Start Date CANNOT be before Enrollment Date');
 						return false;
