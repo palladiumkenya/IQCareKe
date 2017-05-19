@@ -1818,7 +1818,6 @@ If Not Exists(Select 1 From LookupItem where Name='M9982/1') Begin INSERT INTO L
 If Not Exists(Select 1 From LookupItem where Name='M9983/1') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('M9983/1','Refractory anaemia with excess of blasts  ',0); End
 If Not Exists(Select 1 From LookupItem where Name='M9984/1') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('M9984/1','Refractory anaemia with excess of blasts with transformation  ',0); End
 If Not Exists(Select 1 From LookupItem where Name='M9989/1') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('M9989/1','Myelodysplastic syndrome NOS  ',0); End
-If Not Exists(Select 1 From LookupItem where Name='HIV Negative') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('HIV Negative','HIV Negative',0); End
 If Not Exists(Select 1 From LookupItem where Name='Widowed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Widowed','Widowed',0); End
 If Not Exists(Select 1 From LookupItem where Name='Drug Substitution') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Drug Substitution','Drug Substitution',0); End
 
@@ -6162,7 +6161,6 @@ GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1424, 47, N'NAIROBI', 285, N'EMBAKASI EAST', 1424, N'UTAWALA')
 GO
 
-Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'HIV Negative',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='HIV Negative'  ) ItemId FROM LookupMaster  WHERE Name='CareEnded') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Unknown',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Unknown'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'Widowed',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='Widowed'  ) ItemId FROM LookupMaster  WHERE Name='MaritalStatus') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'IPD-Adult',1 FROM ( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='IPD-Adult'  ) ItemId FROM LookupMaster  WHERE Name='Entrypoint') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
