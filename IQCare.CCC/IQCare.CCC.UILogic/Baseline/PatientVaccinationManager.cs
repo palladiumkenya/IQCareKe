@@ -33,5 +33,18 @@ namespace IQCare.CCC.UILogic.Baseline
                 throw;
             }
         }
+
+        public List<PatientVaccination> VaccineExists(int patientId, int vaccine, string vaccineStage)
+        {
+            try
+            {
+                return _mgr.VaccineExists(patientId, vaccine, vaccineStage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Web;
 using Entities.CCC.Triage;
 using IQCare.CCC.UILogic;
 using Entities.CCC.Appointment;
+using Entities.CCC.Lookup;
 
 namespace IQCare.Web.CCC.UC
 {
@@ -24,18 +25,25 @@ namespace IQCare.Web.CCC.UC
         protected void Page_Load(object sender, EventArgs e)
         {
             double bmi = 0.0;
+            string bmiZ;
             decimal diastolic = 0;
             decimal systolic = 0;
             string bmiAnalysis = "";
             string bpAnalysis = "";
 
             var patientVitals = new PatientVitalsManager();
+            PatientLookupManager pMgr = new PatientLookupManager();
             PatientVital patientTriage = patientVitals.GetByPatientId(PatientId);
-            lblAge.Text = Session["Age"].ToString() + "Years";
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummary(PatientId);
+            int age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
+            DateTime DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+            var patientAge = PatientManager.CalculateYourAge(DoB);
+            lblAge.Text = "<strong><i>" + patientAge.Replace("Age:", "") + "</i></strong>";
             if (patientTriage != null)
             {
                 lblDatetaken.Text = "Date Taken : "+ Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy");
                 bmi = Convert.ToDouble(patientTriage.BMI);
+                bmiZ = Convert.ToString(patientTriage.BMIZ);
                 diastolic = Convert.ToDecimal(patientTriage.Bpdiastolic);
                 systolic = Convert.ToDecimal(patientTriage.BpSystolic);
 
@@ -127,27 +135,38 @@ namespace IQCare.Web.CCC.UC
 
                     lblbloodpressure.Text = bpAnalysis;
                 }
-
-                if (bmi < 18.5)
+                if (age > 15)
                 {
-                    bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
-                                  " | Under weight</span>";
-                }
-                else if (bmi >= 18.5 & bmi < 25.0)
-                {
-                    bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
-                                  " | Normal weight</span>";
-                }
-                else if (bmi >= 25 & bmi < 30.0)
-                {
-                    bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
-                                  " | Over weight<span>";
+                    if (bmi < 18.5)
+                    {
+                        bmiAnalysis = "<span class='label label-danger'>" + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Under weight</span>";
+                    }
+                    else if (bmi >= 18.5 & bmi < 25.0)
+                    {
+                        bmiAnalysis = "<span class='label label-success'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Normal weight</span>";
+                    }
+                    else if (bmi >= 25 & bmi < 30.0)
+                    {
+                        bmiAnalysis = "<span class='label label-warning'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Over weight<span>";
+                    }
+                    else
+                    {
+                        bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) +
+                                      "Kg/M2" +
+                                      " | Obese<span>";
+                    }
                 }
                 else
                 {
-                    bmiAnalysis = "<span class='label label-danger'> " + Convert.ToString(patientTriage.BMI) + "Kg/M2" +
-                                  " | Obese<span>";
+                    bmiAnalysis = bmiZ;
                 }
+                
 
 
                 lblBMI.Text = bmiAnalysis;
