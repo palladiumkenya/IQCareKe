@@ -2771,7 +2771,7 @@
             $("#IptForm").hide(); 
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
-            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'PrTB';}).prop('selected', true);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'TBRx';}).prop('selected', true);
             $("#onIpt").prop("disabled",true);
             $("#onIpt").val("False");
         }
