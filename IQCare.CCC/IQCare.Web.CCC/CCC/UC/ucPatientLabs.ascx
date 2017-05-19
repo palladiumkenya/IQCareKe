@@ -4,7 +4,7 @@
                          <div class="col-md-12 bs-callout bs-callout-danger">
                                 <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4> 
                              <div class="col-md-12 form-group ">
-                              <div id ="tblPendingLabsScrollable" style="overflow: scroll; height:150px;"">                          
+                              <div id ="tblPendingLabsScrollable" style="overflow: scroll; height:150px;">                          
                                 <table class="table table-striped table-condensed" id="tblPendingLabs" clientidmode="Static" runat="server">
                                     
                                                            <thead>
@@ -38,7 +38,7 @@
                       <!--pw implementation of previous labs laboratory module here  previous orders-->
                                         
                                         <div class="col-md-12 form-group ">
-                                               <div id ="tblCompleteLabsScrollable" style="overflow: scroll; height:200px;"">
+                                               <div id ="tblCompleteLabsScrollable" style="overflow: scroll; height:200px;">
                                               <table class="table table-striped table-condensed" id="tblPrevLabs" clientidmode="Static" runat="server">                                               
                                                    <thead>
                                                                 <tr>
@@ -557,6 +557,7 @@
                 });
                 _fp.shift();
 
+
                 if ($.isEmptyObject(_fp)) {
                     toastr.error("You have not added any lab order");
                  
@@ -571,8 +572,7 @@
                   
                     addLabOrder(_fp,labOrderDate,orderNotes);       
                   
-                                      
-                    $('#tblAddLabs tr:first').remove();
+
                     var data = $('#tblAddLabs tr').each(function (row, tr) {
                         _fp[row] = {
                                 "labNameId": $(tr).find('td:eq(1)').text()
@@ -581,22 +581,27 @@
                              , "labNotes": $(tr).find('td:eq(4)').text()
 
                         }                      
-                    
+                        $("#tblAddLabs tr:gt(0)").remove();
+                        
+                       // $('#tblPendingLabs tr').find('th:last, td:last').remove();
                         table ="<tr><td></td><td>" + $(tr).find('td:eq(2)').text() + "</td><td>" + $(tr).find('td:eq(3)').text() + "</td><td>" +labOrderDate+ "</td><td>" + "Pending" + "</td></tr>";
-                        $("#tblPendingLabs>tbody:first").append(table);              
+
+                        $('#tblPendingLabs tr:last').remove();
+                        $("#tblPendingLabs>tbody:first").append(table);
 
                         $('#tblPendingLabs tr:not(:first-child').each(function(idx){
                             $(this).children("td:eq(0)").html(idx + 1);
-                        }); 
+                        });
 
+                        
                     }); 
-
                 }
 
               
-               // $("#tblAddLabs td").parent().remove();
+               // $("#tblAddLabs tr:gt(0)").remove();
             });
-
+           
+           
             function addLabOrder(_fp,labOrderDate,orderNotes) {
                 var labOrder = JSON.stringify(_fp);
                 //console.log(labOrderDate);
@@ -611,6 +616,8 @@
                     success: function (response) {
 
                         toastr.success(response.d, "Lab order successful");
+
+                        //location.reload();
                     },
                     
                 });
