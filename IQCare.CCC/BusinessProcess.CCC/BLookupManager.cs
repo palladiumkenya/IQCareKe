@@ -7,7 +7,6 @@ using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
 using Entities.CCC.Visit;
-using System;
 
 namespace BusinessProcess.CCC
 {
@@ -426,6 +425,27 @@ namespace BusinessProcess.CCC
                     unitOfWork.LookupRepository.FindBy(x => x.ItemName == lookupItemName).Select(x => x.ItemId).FirstOrDefault().ToString();
                 unitOfWork.Dispose();
                 return item;
+            }
+        }
+
+        public string GetLookupMasterNameByMasterIdDisplayName(int itemId, string displayName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var masterName = unitOfWork.LookupRepository.FindBy(x => x.ItemId == itemId && x.DisplayName == displayName).FirstOrDefault()
+                    .MasterName;
+                unitOfWork.Dispose();
+                return masterName;
+            }
+        }
+
+        public List<LookupItemView> GetItemIdByGroupAndDisplayName(string groupName, string displayName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var items = unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.DisplayName == displayName);
+                unitOfWork.Dispose();
+                return items;
             }
         }
 

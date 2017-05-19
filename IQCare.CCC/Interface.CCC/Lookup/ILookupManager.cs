@@ -14,8 +14,7 @@ namespace Interface.CCC.Lookup
         List<LookupItemView> GetLookUpItemViewByMasterName(string masterName);
         List<LookupItemView> GetLookUpItemViewByMasterId(int id);
         int GetLookUpMasterId(string masterName);
-        string GetLookUpMasterNameFromId(int masterId);
-        string GetLookupItemId(string lookupItemName);
+        string GetLookupMasterNameByMasterIdDisplayName(int itemId, string displayName);
         List<LookupLabs> GetLookupLabs();
         List<LookupPreviousLabs> GetLookupPreviousLabs(int patientId);
         List<LookupPreviousLabs> GetExtruderCompleteLabs(int patientId);
@@ -26,11 +25,12 @@ namespace Interface.CCC.Lookup
         List<LookupTestParameter> GetTestParameter(int labTestId);
         LookupFacility GetFacility();
         PatientLookup GetPatientById(int patientId);
-        LookupItemView GetPatientGender(int genderId);        
+        LookupItemView GetPatientGender(int genderId);
         string GetLookupNameFromId(int id);
         List<LookupItemView> GetItemIdByGroupAndItemName(string groupName, string itemName);
+        List<LookupItemView> GetItemIdByGroupAndDisplayName(string groupName, string displayName);
         int GetRegimenCategory(int regimenId);
-        LookupLabs GetLabTestId(string labType);      
+        LookupLabs GetLabTestId(string labType);
         string GetCountyByCountyId(int countyId);
         string GetCountyNameBySubCountyId(int subCountyId);
         string GetWardNameByWardId(int wardId);
@@ -44,7 +44,10 @@ namespace Interface.CCC.Lookup
         LookupPatientAdherence GetPatientAdherence(int patientId);
         List<LookupFacilityStatistics> GetLookupFacilityStatistics();
         string GetRegimenCategoryByRegimenName(string regimenNaame);
-       List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName);
+        List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName);
+        string GetLookUpMasterNameFromId(int masterId);
+        string GetLookupItemId(string lookupItemName);
+
 
     }
 
