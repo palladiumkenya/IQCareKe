@@ -1870,10 +1870,10 @@
 
 												  
 												    if (itemName === 'AdultSecondlineRegimen') {
-												        itemName = 'AdultARTSecondLine';
+												        itemName ='AdultARTSecondLine';
 												    }
 												    if (itemName === 'AdultThirdlineRegimen') {
-                                                            itemName = 'AdultARTThirdLine';
+                                                            itemName ='AdultARTThirdLine';
                                                         }
 												    if (itemName === 'PaedsFirstLineRegimen') {
 												        itemName = 'PaedsARTFirstLine';
