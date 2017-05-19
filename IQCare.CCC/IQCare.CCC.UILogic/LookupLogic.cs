@@ -473,5 +473,15 @@ namespace IQCare.CCC.UILogic
             var facilityStats = lookupManager.GetLookupFacilityStatistics();
             return facilityStats;
         }
+
+        public static string GetLookUpMasterNameFromId(int masterId)
+        {
+
+            ILookupManager lookupManager =
+                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+            string masterName = lookupManager.GetLookUpMasterNameFromId(masterId);
+
+            return masterName;
+        }
     }
 }

@@ -428,6 +428,27 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public string GetLookupMasterNameByMasterIdDisplayName(int itemId, string displayName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var masterName = unitOfWork.LookupRepository.FindBy(x => x.ItemId == itemId && x.DisplayName == displayName).FirstOrDefault()
+                    .MasterName;
+                unitOfWork.Dispose();
+                return masterName;
+            }
+        }
+
+        public List<LookupItemView> GetItemIdByGroupAndDisplayName(string groupName, string displayName)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                var items = unitOfWork.LookupRepository.FindBy(x => x.MasterName == groupName && x.DisplayName == displayName);
+                unitOfWork.Dispose();
+                return items;
+            }
+        }
+
 
         //    public LookupPatientAdherence GetPatientAdherence(int patientId)
         //    {
