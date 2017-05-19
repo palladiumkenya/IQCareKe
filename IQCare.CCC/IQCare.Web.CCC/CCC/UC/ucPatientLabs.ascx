@@ -326,6 +326,11 @@
 
                         }
 
+                        //Undetectable vl
+                        if (UndetectableVl == 3 && resultValues == 0) {
+                            labResults = "Undetectable";
+                        }
+
                           
                         table += '<tr><td></td><td>' + itemList.LabName + '</td><td>' + itemList.Reasons + '</td><td>' + sampleDate + '</td><td>' + labResults + " " + resultUnits + '</td></tr>';
                    
