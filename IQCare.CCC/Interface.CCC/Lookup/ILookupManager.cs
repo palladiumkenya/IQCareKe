@@ -22,7 +22,7 @@ namespace Interface.CCC.Lookup
         List<LookupPreviousLabs> GetLookupVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingVllabs(int patientId);
         List<LookupPreviousLabs> GetLookupPendingLabs(int patientId);
-        List<LookupTestParameter> GetTestParameter(int LabTestId);
+        List<LookupTestParameter> GetTestParameter(int labTestId);
         LookupFacility GetFacility();
         PatientLookup GetPatientById(int patientId);
         LookupItemView GetPatientGender(int genderId);        
@@ -43,6 +43,8 @@ namespace Interface.CCC.Lookup
         List<PatientRegimenLookup> GetPatientRegimenList(int patientId);
         LookupPatientAdherence GetPatientAdherence(int patientId);
         List<LookupFacilityStatistics> GetLookupFacilityStatistics();
+        string GetRegimenCategoryByRegimenName(string regimenNaame);
+       List<LookupItemView> GetRegimenCategoryListByRegimenName(string regimenName);
 
     }
 

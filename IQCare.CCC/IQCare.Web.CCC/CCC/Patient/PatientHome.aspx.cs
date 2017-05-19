@@ -341,8 +341,8 @@ namespace IQCare.Web.CCC.Patient
                         lblvlDueDate.Text = "<span class='label label-danger'><strong> Not Available </strong></span>";
                         var patientEnrollment = new PatientEnrollmentManager();
                         var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                        lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                    }
+                       lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
+                }
                     }
                 }
             }

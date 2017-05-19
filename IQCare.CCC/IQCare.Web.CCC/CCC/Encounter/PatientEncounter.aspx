@@ -390,6 +390,7 @@
                 AppointmentCount();
             });
 
+            $("#AppointmentDate").val("");
             $("#btnSaveAppointment").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -398,7 +399,7 @@
                         toastr.error("Appointment date cannot be set to over 7 months");
                         return false;
                     }
-                    addPatientAppointment();
+                    checkExistingAppointment();
                 } else {
                     return false;
                 }
@@ -545,6 +546,35 @@
         });
        
         ////////////////////////////////////End doc ready///////////////////////////////////////////////////////////////////////////////
+
+        function checkExistingAppointment() {
+            var patientId = "<%=PatientId%>";
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+            var reason = $("#<%=Reason.ClientID%>").val();
+            jQuery.support.cors = true;
+            $.ajax(
+            {
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
+                data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async:false,
+                cache: false,
+                success: function (response) {
+                    if (response.d != null) {
+                        toastr.error("Appointment already exists");
+                        return false;
+                    }
+                    addPatientAppointment();
+                },
+                error: function (msg) {
+                    alert(msg.responseText);
+                }
+            });
+        }
+        
         function addPatientAppointment() {
             var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
             var reason = $("#<%=Reason.ClientID%>").val();

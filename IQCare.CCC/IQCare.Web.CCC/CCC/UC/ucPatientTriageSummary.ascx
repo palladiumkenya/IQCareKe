@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-xs-12 col-sm-12">
-                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> BMI :</asp:Label></h5></div>
+                    <div class="col-md-12"><h5 class="pull-left"><asp:Label runat="server"> BMI(Z) :</asp:Label></h5></div>
                     <div class="col-md-12">
                         <h6> <asp:Label runat="server" ID="lblBMI" CssClass="text-info pull-left"> 0 Kg/M2</asp:Label></h6>
                     </div>
