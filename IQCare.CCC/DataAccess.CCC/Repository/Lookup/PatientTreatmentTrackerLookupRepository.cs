@@ -26,7 +26,7 @@ namespace DataAccess.CCC.Repository.Lookup
         {
             
             var patientRegimen =
-                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Start Treatment" || x.TreatmentStatus == "DrugSwitches" || x.TreatmentStatus == "Continue current treatment" || x.TreatmentStatus == "Drug Substitution")
+                _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Start Treatment" || x.TreatmentStatus == "DrugSwitches" || x.TreatmentStatus == "Continue current treatment" || x.TreatmentStatus == "Drug Substitution" || x.TreatmentStatus == "Drug Interactions")
                     .OrderByDescending(x => x.Id)
                     .FirstOrDefault();
             return patientRegimen;
@@ -35,7 +35,7 @@ namespace DataAccess.CCC.Repository.Lookup
         public PatientTreamentTrackerLookup GetPatientbaselineRegimenLookup(int patientId)
         {
             var patientRegimen =
-                 _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Start Treatment" || x.TreatmentStatus == "DrugSwitches" || x.TreatmentStatus == "Continue current treatment" || x.TreatmentStatus == "Drug Substitution")
+                 _context.PatientTreamentTrackerLookups.Where(x => x.PatientId == patientId & x.TreatmentStatus == "Start Treatment" || x.TreatmentStatus == "DrugSwitches" || x.TreatmentStatus == "Continue current treatment" || x.TreatmentStatus == "Drug Substitution" || x.TreatmentStatus == "Drug Interactions")
                      .OrderBy(x => x.Id)
                      .FirstOrDefault();
             return patientRegimen;
