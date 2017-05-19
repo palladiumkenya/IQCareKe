@@ -54,8 +54,10 @@ namespace IQCare.Web.CCC.WebService
                     Weight = weight,
                     BMI = bmi,
                     HeadCircumference = headCircumference,
-                    VisitDate = visitDate
-                    
+                    VisitDate = visitDate,
+                    BMIZ = bmiz,
+                    WeightForAge = weightForAge,
+                    WeightForHeight = weightForHeight,
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital);
