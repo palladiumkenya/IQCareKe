@@ -14,6 +14,7 @@ namespace IQCare.Web.CCC.WebService
 {
     public class OneTimeEventsDetails
     {
+        public int PatientId { get; set; }
         public string Stage1Date { get; set; }
         public string Stage2Date { get; set; }
         public string Stage3Date { get; set; }
@@ -24,6 +25,12 @@ namespace IQCare.Web.CCC.WebService
         public string HBV { get; set; }
         public string FluVaccine { get; set; }
         public string OtherVaccination { get; set; }
+        public List<object> ChildVaccination { get; set; }
+
+        public void AddChildVaccination(object item)
+        {
+            this.ChildVaccination.Add(item);
+        }
     }
     public class ListVaccination
     {
@@ -52,7 +59,7 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public string addOneTimeEventsTracker(string Stage1DateValue, string Stage2DateValue, string Stage3DateValue,
-    string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
+            string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
         {
             try
             {
@@ -97,12 +104,13 @@ namespace IQCare.Web.CCC.WebService
 
                 if (!String.IsNullOrWhiteSpace(Stage1DateValue))
                 {
-                    List<PatientDisclosure> patientDisclosures =  disclosure.GetPatientDisclosure(patientId, "Adolescents", "Stage1");
+                    List<PatientDisclosure> patientDisclosures = disclosure.GetPatientDisclosure(patientId, "Adolescents", "Stage1");
                     if (patientDisclosures.Count > 0)
                     {
                         patientDisclosures[0].DisclosureDate = DateTime.Parse(Stage1DateValue);
                         disclosure.UpdatePatientDisclosure(patientDisclosures[0]);
-                    }else
+                    }
+                    else
                         disclosure.AddPatientDisclosure(patientId, patientMasterVisitId, "Adolescents", "Stage1", DateTime.Parse(Stage1DateValue));
                 }
 
@@ -163,26 +171,33 @@ namespace IQCare.Web.CCC.WebService
 
                     inhProphylaxis.addINHProphylaxis(prophylaxis);
                 }
+                var lookup = new LookupLogic();
 
                 for (var i = 0; i < data.Count; i++)
                 {
+
                     PatientVaccination patientVaccine = new PatientVaccination()
                     {
                         PatientId = patientId,
                         PatientMasterVisitId = patientMasterVisitId,
-                        Vaccine = LookupLogic.GetLookUpMasterId(data[i].vaccineType),
+                        Vaccine = lookup.GetItemIdByGroupAndDisplayName(data[i].vaccineType, data[i].vaccineStage)[0].ItemId,// LookupLogic.GetLookUpMasterId(data[i].vaccineType),
                         VaccineStage = data[i].vaccineStage
                     };
-
-                    patientVaccination.addPatientVaccination(patientVaccine);
+                    var vaccineExistsChild =
+                        patientVaccination.VaccineExists(patientId, patientVaccine.Vaccine, data[i].vaccineStage);
+                    if (vaccineExistsChild.Count == 0)
+                        patientVaccination.addPatientVaccination(patientVaccine);
                 }
 
                 for (var i = 0; i < dataAdult.Count; i++)
                 {
+
                     int vaccine = 0;
                     if (dataAdult[i].ToString() == "FluVaccine" || dataAdult[i].ToString() == "HBV")
                     {
-                        vaccine = LookupLogic.GetLookUpMasterId(dataAdult[i].ToString());
+                        vaccine = lookup.GetItemIdByGroupAndDisplayName(dataAdult[i].ToString(),
+                                dataAdult[i].ToString())[0]
+                            .ItemId; //LookupLogic.GetLookUpMasterId(dataAdult[i].ToString());
                     }
 
                     if (dataAdult[i].ToString() != "")
@@ -195,7 +210,9 @@ namespace IQCare.Web.CCC.WebService
                             VaccineStage = dataAdult[i].ToString()
                         };
 
-                        patientVaccination.addPatientVaccination(patientVaccine);
+                        var vaccineExists = patientVaccination.VaccineExists(patientId, vaccine, dataAdult[i].ToString());
+                        if (vaccineExists.Count == 0)
+                            patientVaccination.addPatientVaccination(patientVaccine);
                     }
                 }
 
@@ -218,14 +235,18 @@ namespace IQCare.Web.CCC.WebService
                 INHProphylaxisManager inhProphylaxis = new INHProphylaxisManager();
                 PatientVaccinationManager vaccinationManager = new PatientVaccinationManager();
                 OneTimeEventsDetails oneTimeEventsDetails = new OneTimeEventsDetails();
-
+                oneTimeEventsDetails.ChildVaccination = new List<object>();
 
                 List<PatientDisclosure> patientDisclosures = disclosure.GetAllPatientDisclosures(patientId);
                 List<INHProphylaxis> inhListsProphylaxes = inhProphylaxis.GetPatientProphylaxes(patientId);
                 var vaccinations = vaccinationManager.GetPatientVaccinations(patientId);
+                oneTimeEventsDetails.PatientId = 0;
+
+                int checkOneTimeEventsdone = 0;
 
                 if (patientDisclosures.Count > 0)
                 {
+                    checkOneTimeEventsdone++;
                     foreach (var itemDisclosure in patientDisclosures)
                     {
                         if (itemDisclosure.Category == "Adolescents" && itemDisclosure.DisclosureStage == "Stage1")
@@ -247,11 +268,14 @@ namespace IQCare.Web.CCC.WebService
                         {
                             oneTimeEventsDetails.SexPartner = itemDisclosure.DisclosureDate.ToString();
                         }
+
+
                     }
                 }
 
                 if (inhListsProphylaxes.Count > 0)
                 {
+                    checkOneTimeEventsdone++;
                     oneTimeEventsDetails.StartDate = inhListsProphylaxes[0].StartDate.ToString();
                     oneTimeEventsDetails.Complete = Convert.ToInt32(inhListsProphylaxes[0].Complete);
                     oneTimeEventsDetails.CompletionDate = inhListsProphylaxes[0].CompletionDate.ToString();
@@ -259,23 +283,36 @@ namespace IQCare.Web.CCC.WebService
 
                 if (vaccinations.Count > 0)
                 {
+                    checkOneTimeEventsdone++;
                     foreach (var itemVaccination in vaccinations)
                     {
                         if (itemVaccination.VaccineStage == "FluVaccine")
                         {
                             oneTimeEventsDetails.FluVaccine = "1";
                         }
-
-                        if (itemVaccination.VaccineStage == "HBV")
+                        else if (itemVaccination.VaccineStage == "HBV")
                         {
                             oneTimeEventsDetails.HBV = "1";
                         }
-
-                        if (itemVaccination.Vaccine == 0)
+                        else if (itemVaccination.Vaccine == 0)
                         {
                             oneTimeEventsDetails.OtherVaccination = itemVaccination.VaccineStage;
                         }
+                        else
+                        {
+                            //var lookuplogic = new LookupLogic();
+                            itemVaccination.Name = LookupLogic.GetLookupMasterNameByMasterIdDisplayName(itemVaccination.Vaccine, itemVaccination.VaccineStage);
+                            //var ItemId = lookuplogic.GetItemIdByGroupAndItemName("Vaccinations", itemVaccination.Name);
+                            itemVaccination.Id = itemVaccination.Vaccine;
+                            oneTimeEventsDetails.AddChildVaccination(itemVaccination);
+                            //oneTimeEventsDetails.ChildVaccination.Add(oneTimeEventsDetails);
+                        }
                     }
+                }
+
+                if (checkOneTimeEventsdone > 0)
+                {
+                    oneTimeEventsDetails.PatientId = patientId;
                 }
 
                 Msg = JsonConvert.SerializeObject(oneTimeEventsDetails);
