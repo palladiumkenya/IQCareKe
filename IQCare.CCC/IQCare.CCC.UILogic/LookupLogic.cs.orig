@@ -276,6 +276,7 @@ namespace IQCare.CCC.UILogic
             return masterId;
         }
 
+<<<<<<< HEAD
         public static string GetLookupItemId(string lookupItemName)
         {
             
@@ -304,6 +305,8 @@ namespace IQCare.CCC.UILogic
             return items;
         }
 
+=======
+>>>>>>> parent of c3ee29a... bug fixes
         public static string GetLookupNameById(int id)
         {
             string lookupName = null;
@@ -472,16 +475,6 @@ namespace IQCare.CCC.UILogic
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             var facilityStats = lookupManager.GetLookupFacilityStatistics();
             return facilityStats;
-        }
-
-        public static string GetLookUpMasterNameFromId(int masterId)
-        {
-
-            ILookupManager lookupManager =
-                (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
-            string masterName = lookupManager.GetLookUpMasterNameFromId(masterId);
-
-            return masterName;
         }
     }
 }
