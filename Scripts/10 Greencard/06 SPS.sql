@@ -257,22 +257,8 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_Update]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientTreatmentSupporter_Update]
 GO
-/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_Update]    Script Date: 5/12/2017 11:08:49 AM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_Update]') AND type in (N'P', N'PC'))
-BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientTreatmentSupporter_Update] AS' 
-END
--- =============================================
--- Author: Felix
--- Create date: Update Treatment supporter
--- Description:	Apr-2017
--- =============================================
-ALTER PROCEDURE [dbo].[PatientTreatmentSupporter_Update] 
+CREATE PROCEDURE [dbo].[PatientTreatmentSupporter_Update] 
 	-- Add the parameters for the stored procedure here
 	@PersonId int, 
 	@SupporterId int,
@@ -842,7 +828,11 @@ end
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/22/2017 1:02:45 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Scheduler_UpdateAppointmentStatus]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Scheduler_UpdateAppointmentStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/22/2017 1:02:45 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -853,7 +843,7 @@ EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[pr_Scheduler_Updat
 END
 GO
 ALTER PROCEDURE [dbo].[pr_Scheduler_UpdateAppointmentStatus]
-(@Currentdate VARCHAR(11),
+(@Currentdate DATETIME,
  @locationid  INT
 )
 AS      
@@ -870,12 +860,12 @@ AS
      (
          SELECT MIN(VisitDate)
          FROM PatientMasterVisit c
-         WHERE(c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE(c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                   (
                                       SELECT appgraceperiod
                                       FROM mst_facility
                                       WHERE facilityid = @locationid
-                                  )) AND(PatientAppointment.StatusDate +
+                                  )) AND(PatientAppointment.AppointmentDate +
                                         (
                                             SELECT appgraceperiod
                                             FROM mst_facility
@@ -898,12 +888,12 @@ AS
      (
          SELECT c.PatientId
          FROM PatientMasterVisit c
-         WHERE((c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE((c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                    (
                                        SELECT appgraceperiod
                                        FROM mst_facility
                                        WHERE facilityid = @locationid
-                                   )) AND(PatientAppointment.StatusDate +
+                                   )) AND(PatientAppointment.AppointmentDate +
                                          (
                                              SELECT appgraceperiod
                                              FROM mst_facility
@@ -926,12 +916,12 @@ AS
      (
          SELECT MIN(VisitDate)
          FROM PatientMasterVisit c
-         WHERE(c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE(c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                   (
                                       SELECT appgraceperiod
                                       FROM mst_facility
                                       WHERE facilityid = @locationid
-                                  )) AND(PatientAppointment.StatusDate +
+                                  )) AND(PatientAppointment.AppointmentDate +
                                         (
                                             SELECT appgraceperiod
                                             FROM mst_facility
@@ -954,12 +944,12 @@ AS
      (
          SELECT c.Ptn_Pk
          FROM ord_patientlaborder c
-         WHERE((c.createdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE((c.createdate BETWEEN(PatientAppointment.AppointmentDate -
                                     (
                                         SELECT appgraceperiod
                                         FROM mst_facility
                                         WHERE facilityid = @locationid
-                                    )) AND(PatientAppointment.StatusDate +
+                                    )) AND(PatientAppointment.AppointmentDate +
                                           (
                                               SELECT appgraceperiod
                                               FROM mst_facility
@@ -968,8 +958,6 @@ AS
               AND c.Ptn_Pk = PatientAppointment.PatientId
               AND c.locationid = @locationid
      );
-
-
      ---- -----------------------Update Missed status--------------------------      
      UPDATE PatientAppointment
        SET
@@ -1000,7 +988,7 @@ AS
          )
                AND PatientId = PatientAppointment.PatientId
                AND StatusDate = PatientAppointment.StatusDate
-               AND (PatientAppointment.StatusDate +
+               AND (PatientAppointment.AppointmentDate +
                    (
                        SELECT appgraceperiod
                        FROM mst_facility
@@ -1033,9 +1021,7 @@ AS
          WHERE DisplayName LIKE 'Pending'
      )
      );
-
-     -----------------------------------------------------------------------------------------------------------      ------update status of all those active patients(previously inactive) who have careended appointments, to missed and      -----Then compare StatusDate with currentdate if curentdate is less then (StatusDate + graceperoiddate) then mark StatusId pending      
-
+     ----update status of all those active patients(previously inactive) who have careended appointments, to missed and      -----Then compare StatusDate with currentdate if curentdate is less then (StatusDate + graceperoiddate) then mark StatusId pending      
      UPDATE PatientAppointment
        SET
            StatusId =
@@ -1066,12 +1052,13 @@ AS
          SELECT LookupItemId
          FROM LookupMasterItem
          WHERE DisplayName LIKE 'Pending'
-     )
+     ),
+	StatusDate = @Currentdate
      WHERE StatusId =
      (
          SELECT LookupItemId
          FROM LookupMasterItem
-         WHERE DisplayName LIKE 'Missed'
+         WHERE DisplayName LIKE 'CareEnded'
      )
            AND (deleteflag IS NULL
                 OR deleteflag != 1)
@@ -1101,7 +1088,7 @@ AS
      )
            AND (deleteflag IS NULL
                 OR deleteflag != 1)
-           AND PatientAppointment.StatusDate <
+           AND PatientAppointment.AppointmentDate <
      (
          SELECT MAX(b.StatusDate)
          FROM PatientAppointment b
@@ -1123,7 +1110,9 @@ AS
                     OR deleteflag != 1)
      );
      --End
+
 GO
+
 /****** Object:  StoredProcedure [dbo].[pr_selectedListValue_Futures]    Script Date: 5/9/2017 3:16:05 PM ******/
 SET ANSI_NULLS ON
 GO
