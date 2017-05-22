@@ -15,5 +15,6 @@ namespace Entities.CCC.Lookup
        public int TotalOnCtxDapson { get; set; }
        public int TotalPatientsDead { get;set; }
        public int TotalPatientsTransferedOut { get;set; }
+        public int LostToFollowUp { get; set; }
     }
 }
