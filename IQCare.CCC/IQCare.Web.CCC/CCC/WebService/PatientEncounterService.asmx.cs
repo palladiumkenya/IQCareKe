@@ -413,7 +413,7 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[2] { row["ItemId"].ToString(), row["ItemName"].ToString() };
+                string[] i = new string[2] { row["ItemId"].ToString(), row["DisplayName"].ToString() };
                 rows.Add(i);
             }
             return rows;

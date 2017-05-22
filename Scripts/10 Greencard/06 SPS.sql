@@ -2848,7 +2848,7 @@ End
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugSwitchSubReasons]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugSwitchSubReasons]    Script Date: 5/22/2017 6:10:43 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2858,32 +2858,26 @@ BEGIN
 EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPharmacyDrugSwitchSubReasons] AS' 
 END
 GO
--- =============================================
--- Author:		John Macharia
--- Create date: 8th Mar 2017
--- Description:	get pharmacy drug switch, substitution reasons
--- =============================================
+-- =============================================-- Author:		John Macharia-- Create date: 8th Mar 2017-- Description:	get pharmacy drug switch, substitution reasons-- =============================================
 ALTER PROCEDURE [dbo].[sp_getPharmacyDrugSwitchSubReasons]
-	-- Add the parameters for the stored procedure here
-	@TreatmentPlan int = null
-
+-- Add the parameters for the stored procedure here
+@TreatmentPlan VARCHAR(50) = NULL
 AS
-BEGIN
--- SET NOCOUNT ON added to prevent extra result sets from
--- interfering with SELECT statements.
-Set Nocount On;
+     BEGIN
+         -- SET NOCOUNT ON added to prevent extra result sets from-- interfering with SELECT statements.
+         SET NOCOUNT ON;
 
-	select LookupItemId, DisplayName from LookupMasterItem where LookupMasterId = @TreatmentPlan
-	order by OrdRank
-End
-
-
-
-
-
-
-
-
+         --select LookupItemId, DisplayName from LookupMasterItem where DisplayName = @TreatmentPlan
+         SELECT ItemId,
+                DisplayName
+         FROM LookupItemView
+         WHERE MasterId =
+         (
+             SELECT Id
+             FROM LookupMaster
+             WHERE DisplayName = @TreatmentPlan
+         ) ORDER BY OrdRank;
+     END;
 GO
 /****** Object:  StoredProcedure [dbo].[sp_getPharmacyFields]    Script Date: 5/9/2017 3:16:05 PM ******/
 SET ANSI_NULLS ON
