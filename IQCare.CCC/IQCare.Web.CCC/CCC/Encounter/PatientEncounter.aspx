@@ -406,6 +406,9 @@
             });
 
             $("#AddAppointment").click(function () {
+                $("#peripheralNeoropathy").prop('required',false);
+                $("#rash").prop('required',false);
+                $("#hepatotoxicity").prop('required',false);
                 $('#AppointmentModal').modal('show');
                 $('#AppointmentDate').val('');
             });

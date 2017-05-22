@@ -33,8 +33,10 @@
 
         if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");
-        } else if (gender === 'Female' && patientAge>13) {
+        } else if (gender === 'Female' && patientAge>10) {
              $("#divBtnVitals").show("fast");
+        }else if (gender === 'Female' && patientAge < 10) {
+             $("#divBtnVitals").hide("fast");
         }
 
         $("#femaleVitals").hide("fast");
