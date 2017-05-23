@@ -284,7 +284,7 @@ namespace IQCare.Web.CCC.Patient
                                 }
                                 else
                                 {
-                                    
+
                                     lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
                                 }
                                 break;
@@ -307,46 +307,37 @@ namespace IQCare.Web.CCC.Patient
 
                         else if (labOrder.Results == "Complete")
                         {
-                        
+
                             lblVL.Text = "<span class='label label-success' > Complete | Results : " + labOrder.ResultValues + " " + labOrder.ResultUnits + "</span>";
 
 
                         }
                     }
-                    else
-                    {
-                        var patientEnrollment = new PatientEnrollmentManager();
-                        var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                        DateTime today = DateTime.Today;
-                        TimeSpan difference = today.Date - enrolDate.Date;
-                        int days = (int)difference.TotalDays;
-
-                        if (days < 10)
-                        {
-                            lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                            lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Request VL NOW! </strong></span>";
-
-                        }
-                        else
-                        {
-                            lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                            lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
-                        }
-                    }
-                    }
-
-                    else
-                    {
-                        lblVL.Text = "<span class='label label-danger'> VL Not Requested </span>";
-                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Not Available </strong></span>";
-                        var patientEnrollment = new PatientEnrollmentManager();
-                        var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                       lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                 }
+                else
+                {
+                    var patientEnrollment = new PatientEnrollmentManager();
+                    var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                    DateTime today = DateTime.Today;
+                    TimeSpan difference = today.Date - enrolDate.Date;
+                    int days = (int)difference.TotalDays;
+
+                    if (days < 10)
+                    {
+                        lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+
+                    }
+                    else
+                    {
+
+                        lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                     }
                 }
             }
-        }
-  
-
+        }                        
+      }
+   }
+       
 
