@@ -257,22 +257,8 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_Update]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[PatientTreatmentSupporter_Update]
 GO
-/****** Object:  StoredProcedure [dbo].[PatientTreatmentSupporter_Update]    Script Date: 5/12/2017 11:08:49 AM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientTreatmentSupporter_Update]') AND type in (N'P', N'PC'))
-BEGIN
-EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[PatientTreatmentSupporter_Update] AS' 
-END
--- =============================================
--- Author: Felix
--- Create date: Update Treatment supporter
--- Description:	Apr-2017
--- =============================================
-ALTER PROCEDURE [dbo].[PatientTreatmentSupporter_Update] 
+CREATE PROCEDURE [dbo].[PatientTreatmentSupporter_Update] 
 	-- Add the parameters for the stored procedure here
 	@PersonId int, 
 	@SupporterId int,
@@ -842,7 +828,11 @@ end
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/22/2017 1:02:45 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Scheduler_UpdateAppointmentStatus]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Scheduler_UpdateAppointmentStatus]
+GO
+/****** Object:  StoredProcedure [dbo].[pr_Scheduler_UpdateAppointmentStatus]    Script Date: 5/22/2017 1:02:45 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -853,7 +843,7 @@ EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[pr_Scheduler_Updat
 END
 GO
 ALTER PROCEDURE [dbo].[pr_Scheduler_UpdateAppointmentStatus]
-(@Currentdate VARCHAR(11),
+(@Currentdate DATETIME,
  @locationid  INT
 )
 AS      
@@ -870,12 +860,12 @@ AS
      (
          SELECT MIN(VisitDate)
          FROM PatientMasterVisit c
-         WHERE(c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE(c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                   (
                                       SELECT appgraceperiod
                                       FROM mst_facility
                                       WHERE facilityid = @locationid
-                                  )) AND(PatientAppointment.StatusDate +
+                                  )) AND(PatientAppointment.AppointmentDate +
                                         (
                                             SELECT appgraceperiod
                                             FROM mst_facility
@@ -898,12 +888,12 @@ AS
      (
          SELECT c.PatientId
          FROM PatientMasterVisit c
-         WHERE((c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE((c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                    (
                                        SELECT appgraceperiod
                                        FROM mst_facility
                                        WHERE facilityid = @locationid
-                                   )) AND(PatientAppointment.StatusDate +
+                                   )) AND(PatientAppointment.AppointmentDate +
                                          (
                                              SELECT appgraceperiod
                                              FROM mst_facility
@@ -926,12 +916,12 @@ AS
      (
          SELECT MIN(VisitDate)
          FROM PatientMasterVisit c
-         WHERE(c.visitdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE(c.visitdate BETWEEN(PatientAppointment.AppointmentDate -
                                   (
                                       SELECT appgraceperiod
                                       FROM mst_facility
                                       WHERE facilityid = @locationid
-                                  )) AND(PatientAppointment.StatusDate +
+                                  )) AND(PatientAppointment.AppointmentDate +
                                         (
                                             SELECT appgraceperiod
                                             FROM mst_facility
@@ -954,12 +944,12 @@ AS
      (
          SELECT c.Ptn_Pk
          FROM ord_patientlaborder c
-         WHERE((c.createdate BETWEEN(PatientAppointment.StatusDate -
+         WHERE((c.createdate BETWEEN(PatientAppointment.AppointmentDate -
                                     (
                                         SELECT appgraceperiod
                                         FROM mst_facility
                                         WHERE facilityid = @locationid
-                                    )) AND(PatientAppointment.StatusDate +
+                                    )) AND(PatientAppointment.AppointmentDate +
                                           (
                                               SELECT appgraceperiod
                                               FROM mst_facility
@@ -968,8 +958,6 @@ AS
               AND c.Ptn_Pk = PatientAppointment.PatientId
               AND c.locationid = @locationid
      );
-
-
      ---- -----------------------Update Missed status--------------------------      
      UPDATE PatientAppointment
        SET
@@ -1000,7 +988,7 @@ AS
          )
                AND PatientId = PatientAppointment.PatientId
                AND StatusDate = PatientAppointment.StatusDate
-               AND (PatientAppointment.StatusDate +
+               AND (PatientAppointment.AppointmentDate +
                    (
                        SELECT appgraceperiod
                        FROM mst_facility
@@ -1033,9 +1021,7 @@ AS
          WHERE DisplayName LIKE 'Pending'
      )
      );
-
-     -----------------------------------------------------------------------------------------------------------      ------update status of all those active patients(previously inactive) who have careended appointments, to missed and      -----Then compare StatusDate with currentdate if curentdate is less then (StatusDate + graceperoiddate) then mark StatusId pending      
-
+     ----update status of all those active patients(previously inactive) who have careended appointments, to missed and      -----Then compare StatusDate with currentdate if curentdate is less then (StatusDate + graceperoiddate) then mark StatusId pending      
      UPDATE PatientAppointment
        SET
            StatusId =
@@ -1066,12 +1052,13 @@ AS
          SELECT LookupItemId
          FROM LookupMasterItem
          WHERE DisplayName LIKE 'Pending'
-     )
+     ),
+	StatusDate = @Currentdate
      WHERE StatusId =
      (
          SELECT LookupItemId
          FROM LookupMasterItem
-         WHERE DisplayName LIKE 'Missed'
+         WHERE DisplayName LIKE 'CareEnded'
      )
            AND (deleteflag IS NULL
                 OR deleteflag != 1)
@@ -1101,7 +1088,7 @@ AS
      )
            AND (deleteflag IS NULL
                 OR deleteflag != 1)
-           AND PatientAppointment.StatusDate <
+           AND PatientAppointment.AppointmentDate <
      (
          SELECT MAX(b.StatusDate)
          FROM PatientAppointment b
@@ -1123,7 +1110,9 @@ AS
                     OR deleteflag != 1)
      );
      --End
+
 GO
+
 /****** Object:  StoredProcedure [dbo].[pr_selectedListValue_Futures]    Script Date: 5/9/2017 3:16:05 PM ******/
 SET ANSI_NULLS ON
 GO
@@ -2859,7 +2848,7 @@ End
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugSwitchSubReasons]    Script Date: 5/9/2017 3:16:05 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_getPharmacyDrugSwitchSubReasons]    Script Date: 5/22/2017 6:10:43 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2869,32 +2858,26 @@ BEGIN
 EXEC dbo.sp_executesql @statement = N'CREATE PROCEDURE [dbo].[sp_getPharmacyDrugSwitchSubReasons] AS' 
 END
 GO
--- =============================================
--- Author:		John Macharia
--- Create date: 8th Mar 2017
--- Description:	get pharmacy drug switch, substitution reasons
--- =============================================
+-- =============================================-- Author:		John Macharia-- Create date: 8th Mar 2017-- Description:	get pharmacy drug switch, substitution reasons-- =============================================
 ALTER PROCEDURE [dbo].[sp_getPharmacyDrugSwitchSubReasons]
-	-- Add the parameters for the stored procedure here
-	@TreatmentPlan int = null
-
+-- Add the parameters for the stored procedure here
+@TreatmentPlan VARCHAR(50) = NULL
 AS
-BEGIN
--- SET NOCOUNT ON added to prevent extra result sets from
--- interfering with SELECT statements.
-Set Nocount On;
+     BEGIN
+         -- SET NOCOUNT ON added to prevent extra result sets from-- interfering with SELECT statements.
+         SET NOCOUNT ON;
 
-	select LookupItemId, DisplayName from LookupMasterItem where LookupMasterId = @TreatmentPlan
-	order by OrdRank
-End
-
-
-
-
-
-
-
-
+         --select LookupItemId, DisplayName from LookupMasterItem where DisplayName = @TreatmentPlan
+         SELECT ItemId,
+                DisplayName
+         FROM LookupItemView
+         WHERE MasterId =
+         (
+             SELECT Id
+             FROM LookupMaster
+             WHERE DisplayName = @TreatmentPlan
+         ) ORDER BY OrdRank;
+     END;
 GO
 /****** Object:  StoredProcedure [dbo].[sp_getPharmacyFields]    Script Date: 5/9/2017 3:16:05 PM ******/
 SET ANSI_NULLS ON
@@ -3548,14 +3531,17 @@ BEGIN
 			END
 
 		--Starting baseline
+		print 'starting baseline';
 
-		DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @BreastFeeding bit, 
+		DECLARE @HBVInfected bit, @Pregnant bit, @TBinfected bit, @WHOStage int, @WHOStageString varchar(50), @BreastFeeding bit, 
 				@CD4Count decimal , @MUAC decimal, @Weight decimal, @Height decimal, @artstart datetime,
 				@ClosestARVDate datetime, @PatientMasterVisitId int, @HIVDiagnosisDate datetime, @EnrollmentDate datetime,
-				@EnrollmentWHOStage int, @VisitDate datetime, @Cohort varchar(50), @visit_id int;
+				@EnrollmentWHOStage int, @EnrollmentWHOStageString varchar(50), @VisitDate datetime, @Cohort varchar(50), @visit_id int;
 
 		Select TOP 1 @artstart = ARTStartDate	From mst_Patient	Where Ptn_Pk = @ptn_pk	And LocationID = @LocationId;
 		select TOP 1 @visit_id = visit_id from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId;
+		
+		print 'set @artstart and @visit_id';
 
 		SET @Pregnant = 0;
 
@@ -3568,6 +3554,8 @@ BEGIN
 					END
 			END
 			
+		print 'set @Sex';
+
 		If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id ) Begin
 			SET @Weight = (Select Top (1) dtl.[Weight]
 			From ord_Visit As ord
@@ -3581,6 +3569,8 @@ BEGIN
 			SET @Weight = NULL;
 		End
 		
+		print 'set @Weight';
+
 		If exists (SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
 			SET @Height = (Select Top 1 dtl.Height
 			From Ord_visit ord
@@ -3594,6 +3584,8 @@ BEGIN
 			SET @Height = NULL;
 		End
 		
+		print 'set @Height';
+
 		If EXISTS(SELECT * FROM dtl_PatientVitals dtl WHERE dtl.Visit_pk = @visit_id) Begin
 			SET @MUAC = (Select Top (1) dtl.Muac
 			From ord_Visit As ord
@@ -3604,38 +3596,59 @@ BEGIN
 			And (ord.Visit_Id = @visit_id));
 		End
 		
+		print 'set @MUAC';
+
 		SET @TBinfected = 0;
 		IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'TB/HIV')
 			BEGIN
 				SET @TBinfected = 1;
 			END
 			
+		print 'set @TBinfected';
+
 		SET @BreastFeeding = 0;
 		IF EXISTS(select TOP 1 Name from mst_Decode where id=(select TOP 1 eligibleThrough from dtl_PatientARVEligibility where ptn_pk = @ptn_pk And LocationID = @LocationId) and name like 'BreastFeeding')
 			BEGIN
 				SET @TBinfected = 1;
 			END
 			
+		print 'set @BreastFeeding';
+
 		SET @HIVDiagnosisDate = (select top 1 ConfirmHIVPosDate from dtl_PatientHivPrevCareEnrollment where ptn_pk = @ptn_pk);
+		print 'set @HIVDiagnosisDate';
 		SET @EnrollmentDate = (select TOP 1 DateEnrolledInCare from dtl_PatientHivPrevCareEnrollment where ptn_pk=@ptn_pk);
-		SET @EnrollmentWHOStage = (SELECT TOP 1 Name FROM mst_Decode WHERE ID = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where WHOStage > 0 AND ptn_pk=@ptn_pk) and codeid=22);
+		print 'set @EnrollmentDate';
+		SET @EnrollmentWHOStageString = (SELECT TOP 1 Name FROM mst_Decode WHERE ID = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where WHOStage > 0 AND ptn_pk=@ptn_pk) and codeid=22 AND Name <> 'N/A');
+		print 'set @EnrollmentWHOStage';
 		SET @Cohort = (select  TOP 1 convert(char(3),[FirstLineRegStDate] , 0) + ' ' + CONVERT(varchar(10), year([FirstLineRegStDate])) from [dbo].[dtl_PatientARTCare] WHERE ptn_pk = @ptn_pk);
+		print 'set @Cohort';
 		SET @CD4Count = (SELECT top 1 CD4 FROM dtl_PatientARVEligibility WHERE ptn_pk = @ptn_pk)
-		SET @WHOStage = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where ptn_pk = @ptn_pk);
+		print 'set @CD4Count';
+		SET @WHOStageString = (SELECT TOP 1 WHOStage FROM dtl_PatientARVEligibility where ptn_pk = @ptn_pk);
+
+		print 'set @HIVDiagnosisDate, @EnrollmentDate, @EnrollmentWHOStage, @Cohort, @CD4Count, @WHOStage';
 		
-		SELECT @EnrollmentWHOStage = CASE @EnrollmentWHOStage  
-			 WHEN 1 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-			 WHEN 2 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-			 WHEN 3 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-			 WHEN 4 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')  
+		SET @EnrollmentWHOStage = CASE @EnrollmentWHOStageString  
+			 WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+			 WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+			 WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+			 WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+			 WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+			 WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+			 WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+			 WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
 			 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
 		  END
 		  
-		SELECT @WHOStage = CASE @WHOStage  
-			 WHEN 1 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
-			 WHEN 2 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
-			 WHEN 3 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
-			 WHEN 4 THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')  
+		SET @WHOStage = CASE @WHOStageString  
+			 WHEN '1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+			 WHEN '2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+			 WHEN '3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+			 WHEN '4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
+			 WHEN 'T1' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '1') 
+			 WHEN 'T2' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '2')   
+			 WHEN 'T3' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '3')   
+			 WHEN 'T4' THEN (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName ='WHOStage' AND ItemName = 'Stage' + '4')
 			 ELSE (select TOP 1 ItemId from LookupItemView where MasterName = 'Unknown' and ItemName = 'Unknown')
 		  END
 		  
@@ -3647,7 +3660,7 @@ BEGIN
 
 		SELECT @PatientMasterVisitId = SCOPE_IDENTITY();
 
-		IF (@Weight IS NOT NULL AND @Height IS NOT NULL  )
+		IF (@Weight IS NOT NULL AND @Height IS NOT NULL AND @Weight > 0 AND @Height > 0)
 		BEGIN
 			INSERT INTO [dbo].[PatientBaselineAssessment]([PatientId], [PatientMasterVisitId], [HBVInfected], [Pregnant], [TBinfected], [WHOStage], [BreastFeeding], [CD4Count], [MUAC], [Weight], [Height], [DeleteFlag], [CreatedBy], [CreateDate] )
 			VALUES(@PatientId, @PatientMasterVisitId, 0, @Pregnant, @TBinfected, @WHOStage, @BreastFeeding, @CD4Count, @MUAC, @Weight, @Height, 0 , @UserID, GETDATE());
@@ -3698,14 +3711,16 @@ BEGIN
 			BEGIN
 				DECLARE @TreatmentType varchar(50), @Purpose varchar(50), @Regimen varchar(50), @DateLastUsed datetime;
 			
-				SET @TreatmentType = (select TOP 1 [Name] from mst_Decode where codeID=33 AND ID = (Select a.PurposeId From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk));
+				SET @TreatmentType = (select TOP 1 [Name] from mst_Decode where codeID=33 AND ID = (Select top 1 a.PurposeId From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk));
 				SET @Purpose = (select TOP 1 b.Name [Purpose] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
 				SET @Regimen = (select TOP 1 a.Regimen [Regimen] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
 				SET @DateLastUsed = (select TOP 1 a.DateLastUsed [RegLastUsed] From dtl_PatientBlueCardPriorART a Inner Join Mst_Decode b On a.PurposeID = b.ID WHERE ptn_pk = @ptn_pk);
 
-				INSERT INTO [dbo].[PatientARVHistory]([PatientId], [PatientMasterVisitId], [TreatmentType], [Purpose] , [Regimen], [DateLastUsed], [DeleteFlag] , [CreatedBy] , [CreateDate])
-				VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, @DateLastUsed, 0, @UserID, @CreateDate);
-
+				IF @TreatmentType IS NOT NULL AND @Purpose IS NOT NULL AND @Regimen IS NOT NULL AND @DateLastUsed IS NOT NULL
+					BEGIN
+					INSERT INTO [dbo].[PatientARVHistory]([PatientId], [PatientMasterVisitId], [TreatmentType], [Purpose] , [Regimen], [DateLastUsed], [DeleteFlag] , [CreatedBy] , [CreateDate])
+					VALUES(@PatientId, @PatientMasterVisitId, @TreatmentType, @Purpose, @Regimen, @DateLastUsed, 0, @UserID, @CreateDate);
+					END
 				IF @@ERROR <> 0
 					BEGIN
 						-- Rollback the transaction

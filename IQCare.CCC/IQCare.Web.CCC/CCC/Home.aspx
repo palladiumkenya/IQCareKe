@@ -262,7 +262,7 @@
                 <div class="col-md-12">
                     <div class="col-md-7"><label class="control-label pull-left">Total Documented LTFU :</label></div>
                     <div class="col-md-5 pull-right">
-                        <asp:Label runat="server" ClientIDMode="Static" ID="totalltu" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                        <asp:Label runat="server" ClientIDMode="Static" ID="totalDocumetedLTFU" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                     </div>
                 </div>
                 <div class="col-md-12"><hr></div>

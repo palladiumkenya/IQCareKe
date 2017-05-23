@@ -26,7 +26,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason();getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -597,8 +597,10 @@
         }
     }
 
-       function drugSwitchInterruptionReason(treatmentPlan)
+       function drugSwitchInterruptionReason()
        {
+           var treatmentPlan = $("#ddlTreatmentPlan option:selected").text();
+
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
            if (valSelected === "Continue current treatment" || valSelected === "Select" || valSelected === "Start Treatment")
            {
