@@ -396,6 +396,7 @@ namespace IQCare.Web.Laboratory
 
                     thisParam.ResultValue = string.IsNullOrEmpty(txtResultValue.Text) ? nullDecimal : Convert.ToDecimal(txtResultValue.Text.Trim());
                     thisParam.Undetectable = cBox.Checked;
+                 
                     thisParam.DetectionLimit = string.IsNullOrEmpty(txtLimit.Text) ? nullDecimal : Convert.ToDecimal(txtLimit.Text.Trim());
                     try
                     {
@@ -517,7 +518,7 @@ namespace IQCare.Web.Laboratory
                     if (null != item)
                     {
                         item.Selected = true;
-                        textLimit.Text = item.Attributes["detection_limit"];
+                        textLimit.Text = item.Attributes["detection_limit"];   //here
                     }
                 }
             }

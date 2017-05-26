@@ -328,7 +328,7 @@
                         }
 
                         //Undetectable vl
-                        if ((undetectable == 3 || undetectable == 1) && resultValues == 0) {
+                        if ((undetectable == 3 || undetectable == 1) && resultValues <= 50) {
                             labResults = "Undetectable";
                         }
 
