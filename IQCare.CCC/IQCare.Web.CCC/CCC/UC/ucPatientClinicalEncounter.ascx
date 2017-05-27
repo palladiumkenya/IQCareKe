@@ -3033,9 +3033,18 @@
             success: function (response) {
                             
                 console.log(response.d);
-                if (response.d > 0)
-                               
+                if (response.d > 0)    
+                {
                     toastr.success(response.d, "Presenting Complaints");
+
+                    setTimeout(function() {
+                        window.location
+                            .href =
+                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                    },
+                                    2000);
+                }
+                        
                 else
                            
                     toastr.error(response.d,"Error occured while saving Presenting Complaints");
