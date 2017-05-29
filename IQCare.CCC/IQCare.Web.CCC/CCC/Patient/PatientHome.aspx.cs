@@ -234,26 +234,24 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 // viral Load Alerts
-                //PatientLookup _patientlookup= mgr.GetPatientPtn_pk(PatientId);
-                //if (_patientlookup != null)
-                //{
-                //    ptnPk = Convert.ToInt16(_patientlookup.ptn_pk);
-                //}
-                PatientLabTracker vltestId = _lookupData.GetPatientLabTestId(PatientId);
+               
+                PatientLabTracker vltestId = _lookupData.GetPatientLabTestId(PatientId);  //check patient has vl lab
+              
                 if (vltestId != null)
                 {
                     labTestId = vltestId.LabTestId;
                 }
-                if (labTestId > 0)
+                if (labTestId > 0)  
                 {
-                    var labOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);
+                    var labOrder = _lookupData.GetPatientCurrentviralLoadInfo(PatientId);  //get vl lab details for patient
 
                     if (labOrder != null)
                     {
-                        foreach (var item in _lookupData.GetPatientVL(labOrder.Id))
+                        foreach (var item in _lookupData.GetPatientVlById(labOrder.Id))
                         {
                             vlValue = item.ResultValues;
-                        }
+                        }                              
+
                         // vlValue = Convert.ToDecimal(_lookupData.GetPatientVL(LabOrder.Id));
                         if (PatientType == "New")
                         {
@@ -272,81 +270,76 @@ namespace IQCare.Web.CCC.Patient
 
                             case "Pending":
                                 var pendingDueDate = Convert.ToDateTime(labOrder.SampleDate);
-                                lblVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                lblbaselineVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-                                lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
-                                break;
-                            case "Complete":
-                                if (vlValue > 1000)
+                                DateTime sampleDate = Convert.ToDateTime(labOrder.SampleDate.ToString());
+
+                                if ((DateTime.Today.Subtract(sampleDate).Days > 30))
                                 {
-                                    lblVL.Text = "<span class='label label-danger'>" + vlValue + " copies/ml</span>";
-                                    lblvlDueDate.Text = ((DateTime)labOrder.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy");
+                                    lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
+                                }
+                                else if ((labOrder.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
+                                {
+                                    lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success'> " + pendingDueDate.AddMonths(6).ToString("dd-MMM-yyy") + " </span>";
                                 }
                                 else
                                 {
-                                    
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+
+                                    lblVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
+                                    lblbaselineVL.Text = "<span class='label label-warning'>" + labOrder.Results + "| Date: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
                                 }
                                 break;
-                            default:
+
+                            case "Complete":
+                                if (vlValue >= 1000)
+                                {
+                                    lblVL.Text = "<span class='label label-danger'>" + vlValue + " copies/ml</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                                }
+                               else if (vlValue <= 50)
+                                {
+
+                                    lblVL.Text = "<span class='label label-success'> Undetectable VL</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+
+                                }
+                                else
+                                {
+                                    lblVL.Text = "<span class='label label-success' > Complete | Results : " + vlValue + " copies/ml</span>";
+                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)labOrder.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                                   
+                                }
+                                break;
+                                default:
                                 break;
                         }
-                        DateTime sampleDate = Convert.ToDateTime(labOrder.SampleDate.ToString());
-
-
-                        if ((labOrder.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days > 30))
-                        {
-                            lblVL.Text = "<span class='label label-danger' > Overdue | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-
-                        }
-                        else if ((labOrder.Results == "Pending") && (DateTime.Today.Subtract(sampleDate).Days < 30))
-                        {
-                            lblVL.Text = "<span class='label label-warning'> Pending | Ordered On: " + ((DateTime)labOrder.SampleDate).ToString("dd-MMM-yyyy") + "</span>";
-
-                        }
-
-                        else if (labOrder.Results == "Complete")
-                        {
-                        
-                            lblVL.Text = "<span class='label label-success' > Complete | Results : " + labOrder.ResultValues + " " + labOrder.ResultUnits + "</span>";
-
-
-                        }
+                  
                     }
-                    else
-                    {
-                        var patientEnrollment = new PatientEnrollmentManager();
-                        var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                        DateTime today = DateTime.Today;
-                        TimeSpan difference = today.Date - enrolDate.Date;
-                        int days = (int)difference.TotalDays;
-
-                        if (days < 10)
-                        {
-                            lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                            lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Request VL NOW! </strong></span>";
-
-                        }
-                        else
-                        {
-                            lblvlDueDate.Text = "<span class='label label-success'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
-                            lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong> Not Done/Pending </strong></span>";
-                        }
-                    }
-                    }
-
-                    else
-                    {
-                        lblVL.Text = "<span class='label label-danger'> VL Not Requested </span>";
-                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Not Available </strong></span>";
-                        var patientEnrollment = new PatientEnrollmentManager();
-                        var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
-                       lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                 }
+                else
+                {
+                    var patientEnrollment = new PatientEnrollmentManager();
+                    var enrolDate = patientEnrollment.GetPatientEnrollmentDate(PatientId);
+                    DateTime today = DateTime.Today;
+                    TimeSpan difference = today.Date - enrolDate.Date;
+                    int days = (int)difference.TotalDays;
+
+                    if (days < 10)
+                    {
+                        lblvlDueDate.Text = "<span class='label label-danger'>" + enrolDate.AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
+                        lblVL.Text = "<span class='label label-danger fa fa-exclamation'><strong>  VL Not Requested  </strong></span>";
+
+                    }
+                    else
+                    {
+
+                        lblVL.Text = "<span class='label label-danger'> Not Available </span>";
+                        lblvlDueDate.Text = "<span class='label label-danger'><strong> Overdue </strong></span>";
                     }
                 }
             }
-        }
-  
-
+        }                        
+      }
+   }
+       
 

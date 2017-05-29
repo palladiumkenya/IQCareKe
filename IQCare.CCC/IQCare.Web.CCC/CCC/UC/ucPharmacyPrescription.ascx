@@ -609,6 +609,8 @@
            else{
                $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
            }
+
+           treatmentPlan = treatmentPlan.replace(/\s/g, '');
            
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetDrugSwitchReasons',
