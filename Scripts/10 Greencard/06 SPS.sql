@@ -1343,7 +1343,7 @@ BEGIN
 		END
 
 	IF @NationalId IS NULL
-		SET @IDNational = CONVERT(varbinary, '99999999');
+		SET @NationalId = 99999999;
 
 	IF @Sex IS NOT NULL
 		SET @Sex = (SELECT TOP 1 ItemId FROM LookupItemView WHERE MasterName like '%gender%' and ItemName like (select Name from mst_Decode where id = @Sex) + '%');
