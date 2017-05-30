@@ -18,6 +18,7 @@ namespace Interface.CCC.Visit
         PatientLabTracker GetPatientLabTestId(int patientId);
         int  AddLabOrderDetails(LabDetailsEntity labDetailsEntity);       
         List<PatientLabTracker> GetPatientVL(int patientId);
+        List<PatientLabTracker> GetPatientVlById(int Id);
         PatientLabTracker GetPatientCurrentviralLoadInfo(int patientId);
       
 

@@ -406,37 +406,20 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDrugSwitchReasons(string TreatmentPlan)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-
-            DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
-            ArrayList rows = new ArrayList();
-
-            foreach (DataRow row in theDT.Rows)
-            {
-                string[] i = new string[2] { row["ItemId"].ToString(), row["DisplayName"].ToString() };
-                rows.Add(i);
-            }
-            return rows;
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
-        {
             //PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            //DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
             //ArrayList rows = new ArrayList();
 
             //foreach (DataRow row in theDT.Rows)
             //{
-            //    string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+            //    string[] i = new string[2] { row["ItemId"].ToString(), row["DisplayName"].ToString() };
             //    rows.Add(i);
             //}
             //return rows;
 
             /////////////////////
-            var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+            var result = LookupLogic.GetLookUpItemViewByMasterName(TreatmentPlan);
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var regimen = parser.Deserialize<List<KeyValue>>(result);
@@ -449,6 +432,38 @@ namespace IQCare.Web.CCC.WebService
                 rows.Add(j);
             }
             return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+
+            /////////////////////
+            //var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+
+            //JavaScriptSerializer parser = new JavaScriptSerializer();
+            //var regimen = parser.Deserialize<List<KeyValue>>(result);
+
+            //ArrayList rows = new ArrayList();
+
+            //for (int i = 0; i < regimen.Count; i++)
+            //{
+            //    string[] j = new string[2] { regimen[i].ItemId, regimen[i].DisplayName };
+            //    rows.Add(j);
+            //}
+            //return rows;
 
         }
 
