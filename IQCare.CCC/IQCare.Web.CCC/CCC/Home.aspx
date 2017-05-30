@@ -110,25 +110,25 @@
 
                         <div class="col-md-12 col-xs-12 col-sm-12">
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
-                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Booked:</asp:Label></h5></div>
+                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Scheduled :</asp:Label></h5></div>
                                 <div class="col-md-6">
                                     <h6> <asp:Label runat="server" ID="lblbooked" CssClass="text-info pull-left"><span class="badge">0</span></asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
-                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Visited:</asp:Label></h5></div>
+                                <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Seen :</asp:Label></h5></div>
                                 <div class="col-md-6">
                                      <h6><asp:Label runat="server" ID="lblvisited" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
-                                <div class="col-md-8" ><h5 class="pull-left"><asp:Label runat="server">Not Visited :</asp:Label></h5></div>
+                                <div class="col-md-8" ><h5 class="pull-left"><asp:Label runat="server">Missed :</asp:Label></h5></div>
                                 <div class="col-md-3">
                                     <h6> <asp:Label runat="server" ID="lblpending" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
-                                <div class="col-md-8"><h5 class="pull-left"><asp:Label runat="server">Walk-ins :</asp:Label></h5></div>
+                                <div class="col-md-8"><h5 class="pull-left"><asp:Label runat="server">Unscheduled :</asp:Label></h5></div>
                                 <div class="col-md-4">
                                     <h6> <asp:Label runat="server" ID="lblwalkins" CssClass="text-info pull-left"> <span class="badge"> 0 </span></asp:Label></h6>
                                 </div>
@@ -230,7 +230,7 @@
                 </div>
              <div class="col-md-12"><hr></div>
                 <div class="col-md-12">
-                    <div class="col-md-7"><label class="control-label pull-left">Total Undcoumented LTF :</label></div>
+                    <div class="col-md-7"><label class="control-label pull-left">Total Undocumented LTF :</label></div>
                     <div class="col-md-5 pull-right">
                         <asp:Label runat="server" ClientIDMode="Static" ID="lblundocumentedltf" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
                     </div>
