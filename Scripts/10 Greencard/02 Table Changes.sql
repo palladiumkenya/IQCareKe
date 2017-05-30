@@ -67,3 +67,7 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreatedBy'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_LabOrderTest ADD CreatedBy int NULL;
     END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'RegimenCode'AND Object_ID = OBJECT_ID(N'PatientTreatmentInitiation'))
+    BEGIN
+        ALTER TABLE PatientTreatmentInitiation ADD RegimenCode int NULL;
+    END;
