@@ -126,9 +126,7 @@
             <!-- .row -->
             <hr />
             <div class="row">
-                 <div class="col-md-1 pull-left">
-                     <img src="Images/kenya_small.png" />
-                </div>
+
                 <div class="col-md-1 ">
                     <a href="http://thepalladiumgroup.com/ " onclick="window.open('http://thepalladiumgroup.com/ '); return false;">
                         <img src="./Images/FGI.jpg" width="99" style="margin-left: 10.5%" alt="" /></a>

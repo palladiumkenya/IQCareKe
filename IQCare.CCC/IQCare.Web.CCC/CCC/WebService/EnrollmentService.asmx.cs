@@ -211,7 +211,7 @@ namespace IQCare.Web.CCC.WebService
 
                             foreach (var item in data)
                             {
-                                if (item.identifierId == "1248")
+                                if (item.enrollmentIdentifier == "CCC Registration Number")
                                 {
                                     enrollmentBlueCardId = item.enrollmentNo;
                                 }

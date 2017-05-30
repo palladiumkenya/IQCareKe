@@ -61,11 +61,10 @@
             // 
             this.lblStore.AutoSize = true;
             this.lblStore.Location = new System.Drawing.Point(18, 47);
-            this.lblStore.MaximumSize = new System.Drawing.Size(100, 0);
             this.lblStore.Name = "lblStore";
-            this.lblStore.Size = new System.Drawing.Size(66, 13);
+            this.lblStore.Size = new System.Drawing.Size(122, 13);
             this.lblStore.TabIndex = 2;
-            this.lblStore.Text = "Store Name:";
+            this.lblStore.Text = "Destination Store Name:";
             // 
             // ddlStoreName
             // 
@@ -75,15 +74,15 @@
             "--Select--",
             "Active",
             "Passive"});
-            this.ddlStoreName.Location = new System.Drawing.Point(99, 44);
+            this.ddlStoreName.Location = new System.Drawing.Point(150, 44);
             this.ddlStoreName.Name = "ddlStoreName";
-            this.ddlStoreName.Size = new System.Drawing.Size(168, 21);
+            this.ddlStoreName.Size = new System.Drawing.Size(197, 21);
             this.ddlStoreName.TabIndex = 44;
             this.ddlStoreName.Tag = "ddlDropDownList";
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(71, 81);
+            this.btnOK.Location = new System.Drawing.Point(150, 84);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(80, 25);
             this.btnOK.TabIndex = 45;
@@ -94,7 +93,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(150, 81);
+            this.btnClose.Location = new System.Drawing.Point(229, 84);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(80, 25);
             this.btnClose.TabIndex = 46;
@@ -109,7 +108,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(291, 121);
+            this.ClientSize = new System.Drawing.Size(461, 121);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.ddlStoreName);

@@ -61,7 +61,8 @@
             // 
             // basePanel
             // 
-            this.basePanel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.basePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.basePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(208)))), ((int)(((byte)(255)))));
             this.basePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.basePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -70,7 +71,7 @@
             this.basePanel.Location = new System.Drawing.Point(0, 457);
             this.basePanel.Margin = new System.Windows.Forms.Padding(0);
             this.basePanel.Name = "basePanel";
-            this.basePanel.Size = new System.Drawing.Size(852, 47);
+            this.basePanel.Size = new System.Drawing.Size(934, 47);
             this.basePanel.TabIndex = 40;
             this.basePanel.Tag = "pnlSubPanel";
             // 
@@ -106,6 +107,8 @@
             this.dgwStockLevelDetails.AllowUserToDeleteRows = false;
             this.dgwStockLevelDetails.AllowUserToResizeColumns = false;
             this.dgwStockLevelDetails.AllowUserToResizeRows = false;
+            this.dgwStockLevelDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwStockLevelDetails.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -134,7 +137,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgwStockLevelDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgwStockLevelDetails.Size = new System.Drawing.Size(852, 300);
+            this.dgwStockLevelDetails.Size = new System.Drawing.Size(934, 300);
             this.dgwStockLevelDetails.TabIndex = 20;
             this.dgwStockLevelDetails.Tag = "dgwDataGridView";
             this.dgwStockLevelDetails.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwStockLevelDetails_CellEndEdit);
@@ -152,9 +155,8 @@
             // 
             // lblPreparedby
             // 
-            this.lblPreparedby.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPreparedby.AutoSize = true;
-            this.lblPreparedby.Location = new System.Drawing.Point(60, 11);
+            this.lblPreparedby.Location = new System.Drawing.Point(64, 11);
             this.lblPreparedby.Name = "lblPreparedby";
             this.lblPreparedby.Size = new System.Drawing.Size(68, 13);
             this.lblPreparedby.TabIndex = 1;
@@ -173,9 +175,8 @@
             // 
             // lblAuthorizedBy
             // 
-            this.lblAuthorizedBy.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAuthorizedBy.AutoSize = true;
-            this.lblAuthorizedBy.Location = new System.Drawing.Point(490, 11);
+            this.lblAuthorizedBy.Location = new System.Drawing.Point(493, 11);
             this.lblAuthorizedBy.Name = "lblAuthorizedBy";
             this.lblAuthorizedBy.Size = new System.Drawing.Size(81, 13);
             this.lblAuthorizedBy.TabIndex = 50;
@@ -196,7 +197,6 @@
             // 
             // lblAdjReason
             // 
-            this.lblAdjReason.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdjReason.AutoSize = true;
             this.lblAdjReason.Location = new System.Drawing.Point(30, 93);
             this.lblAdjReason.Name = "lblAdjReason";
@@ -230,15 +230,19 @@
             // 
             // pnl_ButtonSubmit
             // 
+            this.pnl_ButtonSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_ButtonSubmit.Controls.Add(this.btnSubmit);
             this.pnl_ButtonSubmit.Location = new System.Drawing.Point(0, 58);
             this.pnl_ButtonSubmit.Name = "pnl_ButtonSubmit";
-            this.pnl_ButtonSubmit.Size = new System.Drawing.Size(852, 56);
+            this.pnl_ButtonSubmit.Size = new System.Drawing.Size(934, 56);
             this.pnl_ButtonSubmit.TabIndex = 10;
             this.pnl_ButtonSubmit.Tag = "pnlPanel";
             // 
             // pnlTopPanel
             // 
+            this.pnlTopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTopPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlTopPanel.Controls.Add(this.lblStore);
             this.pnlTopPanel.Controls.Add(this.lblDateFeild);
@@ -246,12 +250,11 @@
             this.pnlTopPanel.Controls.Add(this.dtpEffectiveDate);
             this.pnlTopPanel.Location = new System.Drawing.Point(0, 1);
             this.pnlTopPanel.Name = "pnlTopPanel";
-            this.pnlTopPanel.Size = new System.Drawing.Size(852, 52);
+            this.pnlTopPanel.Size = new System.Drawing.Size(934, 52);
             this.pnlTopPanel.TabIndex = 1;
             // 
             // lblStore
             // 
-            this.lblStore.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblStore.AutoSize = true;
             this.lblStore.Location = new System.Drawing.Point(63, 18);
             this.lblStore.Name = "lblStore";
@@ -262,9 +265,8 @@
             // 
             // lblDateFeild
             // 
-            this.lblDateFeild.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDateFeild.AutoSize = true;
-            this.lblDateFeild.Location = new System.Drawing.Point(510, 18);
+            this.lblDateFeild.Location = new System.Drawing.Point(511, 18);
             this.lblDateFeild.Name = "lblDateFeild";
             this.lblDateFeild.Size = new System.Drawing.Size(62, 13);
             this.lblDateFeild.TabIndex = 50;
@@ -296,6 +298,8 @@
             // 
             // pnl_PreparedBy
             // 
+            this.pnl_PreparedBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_PreparedBy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_PreparedBy.Controls.Add(this.lblPreparedby);
             this.pnl_PreparedBy.Controls.Add(this.ddlPreparedBy);
@@ -303,7 +307,7 @@
             this.pnl_PreparedBy.Controls.Add(this.ddlAuthoriseBy);
             this.pnl_PreparedBy.Location = new System.Drawing.Point(0, 420);
             this.pnl_PreparedBy.Name = "pnl_PreparedBy";
-            this.pnl_PreparedBy.Size = new System.Drawing.Size(852, 34);
+            this.pnl_PreparedBy.Size = new System.Drawing.Size(934, 34);
             this.pnl_PreparedBy.TabIndex = 30;
             // 
             // chkUpdateStockFlag
@@ -325,7 +329,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(852, 504);
+            this.ClientSize = new System.Drawing.Size(934, 504);
             this.Controls.Add(this.pnl_PreparedBy);
             this.Controls.Add(this.pnlTopPanel);
             this.Controls.Add(this.chkAdjReason);

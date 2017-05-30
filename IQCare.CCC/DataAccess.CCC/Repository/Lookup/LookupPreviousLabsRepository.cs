@@ -75,27 +75,26 @@ namespace DataAccess.CCC.Repository.Lookup
             ILookupPreviousLabs previouslabsrepository = new LookupPreviousLabsRepository();
             // var list = previouslabsrepository.GetAll().GroupBy(x => x.Id).Select(x => x.First()).OrderBy(l => l.TestName);
             //return list.ToList();
-            var vl = "Viral Load";
+            //var vl = "Viral Load";
             var complete = "Complete";
-
             var myList = previouslabsrepository.FindBy(
                 x =>
                 x.PatientId == patientId &
-                x.LabName != vl &
+                //x.LabName != vl &
                 x.Results == complete);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First());
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id);
             return list.Distinct().ToList();
         }
         public List<LookupPreviousLabs> GetPendingLabs(int patientId)
         {
             ILookupPreviousLabs pendinglabsrepository = new LookupPreviousLabsRepository();
-           var vl = "Viral Load";
+          // var vl = "Viral Load";
            var pending = "Pending";
            var myList = pendinglabsrepository.FindBy(
                 x =>
                   x.PatientId == patientId &
                   x.Results == pending);
-            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id).Where(x => x.LabName != vl);
+            var list = myList.GroupBy(x => x.Id).Select(x => x.First()).OrderBy(x => x.Id);
             return list.Distinct().ToList();
         }
         public List<LookupPreviousLabs> GetVlLabs(int patientId)

@@ -33,7 +33,7 @@ Alter table dtl_LabTestParameterConfig alter column [MaxNormalRange] [decimal](1
 Go	
 Alter table dtl_LabTestParameterConfig alter column [DetectionLimit] [decimal](18, 2) NULL
 Go
-Alter table dtl_LabOrderTestResult add  [HasResult]  AS (CONVERT([bit],case when [resultvalue] IS NULL AND [resulttext] IS NULL AND [resultoption] IS NULL then (0) else (1) end,(0)))
+Alter table dtl_LabOrderTestResult add  [HasResult]  AS (CONVERT([bit],case when [resultvalue] IS NULL AND [resulttext] IS NULL AND [resultoption] IS NULL AND [Undetectable] IS NULL AND [DetectionLimit] IS NULL then (0) else (1) end,(0)))
 Go
 --Migrate the ART History filled in district from int to text
 If not Exists (Select * From sys.columns Where Name = N'FromDistrict' And Object_ID = Object_id(N'dtl_PatientHivPrevCareIE') And system_type_id=TYPE_ID('varchar'))    

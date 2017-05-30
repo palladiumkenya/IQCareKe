@@ -432,7 +432,7 @@ namespace IQCare.Management
             // masterListToolStripMenuItem
             // 
             this.masterListToolStripMenuItem.Name = "masterListToolStripMenuItem";
-            this.masterListToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.masterListToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
             this.masterListToolStripMenuItem.Text = "Master Lists";
             this.masterListToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.masterListToolStripMenuItem.Click += new System.EventHandler(this.masterListToolStripMenuItem_Click);
@@ -440,120 +440,120 @@ namespace IQCare.Management
             // mnuPatientDrugDispense
             // 
             this.mnuPatientDrugDispense.Name = "mnuPatientDrugDispense";
-            this.mnuPatientDrugDispense.Size = new System.Drawing.Size(192, 22);
+            this.mnuPatientDrugDispense.Size = new System.Drawing.Size(278, 22);
             this.mnuPatientDrugDispense.Text = "Dispense Drugs ";
             this.mnuPatientDrugDispense.Click += new System.EventHandler(this.mnuPatientDrugDispense_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(275, 6);
             // 
             // mnuPurchaseOrder
             // 
             this.mnuPurchaseOrder.Name = "mnuPurchaseOrder";
-            this.mnuPurchaseOrder.Size = new System.Drawing.Size(192, 22);
-            this.mnuPurchaseOrder.Text = "Purchase Order";
+            this.mnuPurchaseOrder.Size = new System.Drawing.Size(278, 22);
+            this.mnuPurchaseOrder.Text = "Purchase Order/Delivery Note";
             this.mnuPurchaseOrder.Click += new System.EventHandler(this.purchaseOrderToolStripMenuItem_Click);
             // 
             // mnuGoodReceivedNote
             // 
             this.mnuGoodReceivedNote.Name = "mnuGoodReceivedNote";
-            this.mnuGoodReceivedNote.Size = new System.Drawing.Size(192, 22);
+            this.mnuGoodReceivedNote.Size = new System.Drawing.Size(278, 22);
             this.mnuGoodReceivedNote.Text = "Goods Received Note";
             this.mnuGoodReceivedNote.Click += new System.EventHandler(this.goodsRecievedNoteToolStripMenuItem_Click);
             // 
             // counterRequisitionToolStripMenuItem
             // 
             this.counterRequisitionToolStripMenuItem.Name = "counterRequisitionToolStripMenuItem";
-            this.counterRequisitionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.counterRequisitionToolStripMenuItem.Text = "Counter Requisition";
+            this.counterRequisitionToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
+            this.counterRequisitionToolStripMenuItem.Text = "Counter Requisition and Issue Voucher";
             this.counterRequisitionToolStripMenuItem.Click += new System.EventHandler(this.counterRequisitionToolStripMenuItem_Click);
             // 
             // issueVoucherToolStripMenuItem
             // 
             this.issueVoucherToolStripMenuItem.Name = "issueVoucherToolStripMenuItem";
-            this.issueVoucherToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.issueVoucherToolStripMenuItem.Size = new System.Drawing.Size(278, 22);
             this.issueVoucherToolStripMenuItem.Text = "Issue Voucher";
             this.issueVoucherToolStripMenuItem.Click += new System.EventHandler(this.issueVoucherToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(275, 6);
             // 
             // mnuOpeningStock
             // 
             this.mnuOpeningStock.Name = "mnuOpeningStock";
-            this.mnuOpeningStock.Size = new System.Drawing.Size(192, 22);
+            this.mnuOpeningStock.Size = new System.Drawing.Size(278, 22);
             this.mnuOpeningStock.Text = "Opening Stock";
             this.mnuOpeningStock.Click += new System.EventHandler(this.openingStoreToolStripMenuItem_Click);
             // 
             // mnuAdjustStock
             // 
             this.mnuAdjustStock.Name = "mnuAdjustStock";
-            this.mnuAdjustStock.Size = new System.Drawing.Size(192, 22);
+            this.mnuAdjustStock.Size = new System.Drawing.Size(278, 22);
             this.mnuAdjustStock.Text = "Adjust Stock Level";
             this.mnuAdjustStock.Click += new System.EventHandler(this.adjustStockLevelToolStripMenuItem_Click);
             // 
             // mnuDisposeItem
             // 
             this.mnuDisposeItem.Name = "mnuDisposeItem";
-            this.mnuDisposeItem.Size = new System.Drawing.Size(192, 22);
+            this.mnuDisposeItem.Size = new System.Drawing.Size(278, 22);
             this.mnuDisposeItem.Text = "Dispose Items";
             this.mnuDisposeItem.Click += new System.EventHandler(this.frmDisposeItemDrugsToolStripMenuItem_Click);
             // 
             // mnuBatchSummary
             // 
             this.mnuBatchSummary.Name = "mnuBatchSummary";
-            this.mnuBatchSummary.Size = new System.Drawing.Size(192, 22);
+            this.mnuBatchSummary.Size = new System.Drawing.Size(278, 22);
             this.mnuBatchSummary.Text = "Batch Summary";
             this.mnuBatchSummary.Click += new System.EventHandler(this.batchSummaryToolStripMenuItem_Click);
             // 
             // mnuStockSummary
             // 
             this.mnuStockSummary.Name = "mnuStockSummary";
-            this.mnuStockSummary.Size = new System.Drawing.Size(192, 22);
+            this.mnuStockSummary.Size = new System.Drawing.Size(278, 22);
             this.mnuStockSummary.Text = "Stock Summary";
             this.mnuStockSummary.Click += new System.EventHandler(this.stockSummaryToolStripMenuItem_Click);
             // 
             // mnuExpiryReport
             // 
             this.mnuExpiryReport.Name = "mnuExpiryReport";
-            this.mnuExpiryReport.Size = new System.Drawing.Size(192, 22);
+            this.mnuExpiryReport.Size = new System.Drawing.Size(278, 22);
             this.mnuExpiryReport.Text = "Expiry Report";
             this.mnuExpiryReport.Click += new System.EventHandler(this.expiryReportToolStripMenuItem_Click);
             // 
             // mnuReports
             // 
             this.mnuReports.Name = "mnuReports";
-            this.mnuReports.Size = new System.Drawing.Size(192, 22);
+            this.mnuReports.Size = new System.Drawing.Size(278, 22);
             this.mnuReports.Text = "Reports";
             this.mnuReports.Click += new System.EventHandler(this.ReportsToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(275, 6);
             // 
             // mnuConfigureBudget
             // 
             this.mnuConfigureBudget.Name = "mnuConfigureBudget";
-            this.mnuConfigureBudget.Size = new System.Drawing.Size(192, 22);
+            this.mnuConfigureBudget.Size = new System.Drawing.Size(278, 22);
             this.mnuConfigureBudget.Text = "Configure Budget";
             this.mnuConfigureBudget.Click += new System.EventHandler(this.configureBudgetToolStripMenuItem_Click);
             // 
             // mnuVisitConfiguration
             // 
             this.mnuVisitConfiguration.Name = "mnuVisitConfiguration";
-            this.mnuVisitConfiguration.Size = new System.Drawing.Size(192, 22);
+            this.mnuVisitConfiguration.Size = new System.Drawing.Size(278, 22);
             this.mnuVisitConfiguration.Text = "Configure Patient Visit";
             this.mnuVisitConfiguration.Click += new System.EventHandler(this.configurePatientVisitToolStripMenuItem_Click);
             // 
             // mnuBudgetView
             // 
             this.mnuBudgetView.Name = "mnuBudgetView";
-            this.mnuBudgetView.Size = new System.Drawing.Size(192, 22);
+            this.mnuBudgetView.Size = new System.Drawing.Size(278, 22);
             this.mnuBudgetView.Text = "Budget View";
             this.mnuBudgetView.Click += new System.EventHandler(this.holisticBudgetViewToolStripMenuItem_Click);
             // 
@@ -782,7 +782,7 @@ namespace IQCare.Management
             this.customizeToolStripMenuItem,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             this.toolsToolStripMenuItem.Visible = false;
             // 

@@ -8,7 +8,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using Application.Presentation;
 using Interface.CCC.Visit;
-using static Entities.CCC.Encounter.PatientEncounter;
+//using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -253,6 +253,28 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetLatestPharmacyPrescriptionDetails()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.loadPatientLatestPharmacyPrescription(Session["PatientPK"].ToString(), Session["AppLocationId"].ToString());
+            ArrayList rows = new ArrayList();
+            string remove = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                rows.Add(i);
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetPharmacyPendingPrescriptions()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
@@ -296,7 +318,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("PresentingComplaints");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var presentingComplaints = parser.Deserialize<List<KeyValue>>(result);
+            var presentingComplaints = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -315,7 +337,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("Allergies");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var allergies = parser.Deserialize<List<KeyValue>>(result);
+            var allergies = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -334,7 +356,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("AllergyReactions");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var allergyReactions = parser.Deserialize<List<KeyValue>>(result);
+            var allergyReactions = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -353,7 +375,7 @@ namespace IQCare.Web.CCC.WebService
             var result = LookupLogic.GetLookUpItemViewByMasterName("ICD10");
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var diagnosis = parser.Deserialize<List<KeyValue>>(result);
+            var diagnosis = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -371,7 +393,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            List<PharmacyFields> lst = new List<PharmacyFields>();
+            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = new List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields>();
             lst = patientEncounter.getPharmacyCurrentRegimen(Session["PatientPK"].ToString());
 
             ArrayList rows = new ArrayList();
@@ -406,40 +428,23 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetDrugSwitchReasons(string TreatmentPlan)
         {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-
-            DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
-            ArrayList rows = new ArrayList();
-
-            foreach (DataRow row in theDT.Rows)
-            {
-                string[] i = new string[2] { row["ItemId"].ToString(), row["DisplayName"].ToString() };
-                rows.Add(i);
-            }
-            return rows;
-        }
-
-        [WebMethod(EnableSession = true)]
-        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
-        {
             //PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            //DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            //DataTable theDT = patientEncounter.getPharmacyDrugSwitchInterruptionReason(TreatmentPlan);
             //ArrayList rows = new ArrayList();
 
             //foreach (DataRow row in theDT.Rows)
             //{
-            //    string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+            //    string[] i = new string[2] { row["ItemId"].ToString(), row["DisplayName"].ToString() };
             //    rows.Add(i);
             //}
             //return rows;
 
             /////////////////////
-            var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+            var result = LookupLogic.GetLookUpItemViewByMasterName(TreatmentPlan);
 
             JavaScriptSerializer parser = new JavaScriptSerializer();
-            var regimen = parser.Deserialize<List<KeyValue>>(result);
+            var regimen = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
@@ -449,6 +454,38 @@ namespace IQCare.Web.CCC.WebService
                 rows.Add(j);
             }
             return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetRegimensBasedOnRegimenLine(string RegimenLine)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            DataTable theDT = patientEncounter.getPharmacyRegimens(RegimenLine);
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[2] { row["LookupItemId"].ToString(), row["DisplayName"].ToString() };
+                rows.Add(i);
+            }
+            return rows;
+
+            /////////////////////
+            //var result = LookupLogic.GetLookUpItemViewByMasterName(RegimenLine);
+
+            //JavaScriptSerializer parser = new JavaScriptSerializer();
+            //var regimen = parser.Deserialize<List<KeyValue>>(result);
+
+            //ArrayList rows = new ArrayList();
+
+            //for (int i = 0; i < regimen.Count; i++)
+            //{
+            //    string[] j = new string[2] { regimen[i].ItemId, regimen[i].DisplayName };
+            //    rows.Add(j);
+            //}
+            //return rows;
 
         }
 
@@ -482,7 +519,7 @@ namespace IQCare.Web.CCC.WebService
             if (height != "" && weight != "")
             {
                 PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-                ZScores zsValues = new ZScores();
+                Entities.CCC.Encounter.PatientEncounter.ZScores zsValues = new Entities.CCC.Encounter.PatientEncounter.ZScores();
                 zsValues = patientEncounter.getZScores(Session["PatientPK"].ToString(), Convert.ToDouble(Session["Age"].ToString()), Session["Gender"].ToString(), Convert.ToDouble(height), Convert.ToDouble(weight));
 
                 if (zsValues != null)

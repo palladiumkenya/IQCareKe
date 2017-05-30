@@ -56,13 +56,12 @@
             // 
             this.dgwMasterList.AllowUserToAddRows = false;
             this.dgwMasterList.AllowUserToDeleteRows = false;
-            this.dgwMasterList.AllowUserToResizeColumns = false;
-            this.dgwMasterList.AllowUserToResizeRows = false;
+            this.dgwMasterList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgwMasterList.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgwMasterList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwMasterList.Location = new System.Drawing.Point(4, 2);
             this.dgwMasterList.Name = "dgwMasterList";
-            this.dgwMasterList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgwMasterList.Size = new System.Drawing.Size(840, 436);
             this.dgwMasterList.TabIndex = 43;
             this.dgwMasterList.Tag = "dgwDataGridView";
@@ -102,8 +101,6 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmMasterList";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
