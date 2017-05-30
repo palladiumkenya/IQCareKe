@@ -711,7 +711,7 @@
             catch (ex) { }
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
-
+            
             var sumAllAbbr = 0;
             var sumSelectedRegimen = 0;
             try {
@@ -723,6 +723,7 @@
 
             try {
                 //var regExp = /\(([^)]+)\)/;
+                var regimenText = regimenText.match(/\(([^)]+)\)/)[1];
                 //var matches = regExp.exec(regimenText);
                 var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
                 //alert(rmv);
@@ -735,7 +736,6 @@
 
             }
             catch (err) { }
-
 
             if (sumAllAbbr > 0) {
                 if (regimenLine == "0") {
@@ -844,6 +844,7 @@
                         var serverData = data.d;
                         $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
                         selectRegimens(serverData[0][0]);
+                        loadDataContinueCurrentTreatment();
 
                         function waitForRegimens(callback) {
                             window.setTimeout(function () {  //acting like this is an Ajax call
@@ -863,6 +864,50 @@
             });
         }
 
+    }
+
+    function loadDataContinueCurrentTreatment() {
+        if (pmscmSamePointDispense != "PM/SCM With Same point dispense") {
+            DrugPrescriptionTable.destroy();
+
+            DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+                ajax: {
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/GetLatestPharmacyPrescriptionDetails",
+                    //data: "{'PMSCM':'" + pmscm + "'}",
+                    dataSrc: 'd',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                },
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false,
+                columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [3],
+                    "visible": false,
+                    "searchable": false
+                }
+                ]
+            });
+        }
+        
     }
 
     

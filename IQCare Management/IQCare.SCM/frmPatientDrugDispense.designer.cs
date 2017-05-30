@@ -37,9 +37,23 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -63,20 +77,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPatientDrugDispense));
             this.DispenseTab = new System.Windows.Forms.TabPage();
             this.grpHivCareTrtPharmacyField = new System.Windows.Forms.GroupBox();
@@ -176,6 +176,15 @@
             this.FindPatientTab = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.grdResultView = new System.Windows.Forms.DataGridView();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dob = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FacilityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpDOB = new System.Windows.Forms.DateTimePicker();
@@ -200,6 +209,20 @@
             this.PendingTab = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.gridPendingOrder = new System.Windows.Forms.DataGridView();
+            this.P_PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrescriptionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrescribedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ptnPk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnFindOrder = new System.Windows.Forms.Button();
             this.dtpFilterDate = new System.Windows.Forms.DateTimePicker();
@@ -258,29 +281,6 @@
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dob = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FacilityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.P_PatientFacilityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrescriptionNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrescribedBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ptnPk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DispenseTab.SuspendLayout();
             this.grpHivCareTrtPharmacyField.SuspendLayout();
             this.grpExistingRec.SuspendLayout();
@@ -327,7 +327,7 @@
             this.DispenseTab.Location = new System.Drawing.Point(4, 34);
             this.DispenseTab.Name = "DispenseTab";
             this.DispenseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DispenseTab.Size = new System.Drawing.Size(1263, 722);
+            this.DispenseTab.Size = new System.Drawing.Size(1263, 654);
             this.DispenseTab.TabIndex = 1;
             this.DispenseTab.Tag = "pnlSubPanel";
             this.DispenseTab.Text = "Dispense";
@@ -547,7 +547,7 @@
             this.panel4.Controls.Add(this.txtExpirydate);
             this.panel4.Controls.Add(this.txtQtyDispensed);
             this.panel4.Controls.Add(this.checkProphylaxis);
-            this.panel4.Location = new System.Drawing.Point(2, 214);
+            this.panel4.Location = new System.Drawing.Point(2, 206);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1256, 184);
             this.panel4.TabIndex = 71;
@@ -888,7 +888,7 @@
             this.grpBoxLastDispense.Controls.Add(this.cmdPeriodTaken);
             this.grpBoxLastDispense.Controls.Add(this.labelDrugProvider);
             this.grpBoxLastDispense.Controls.Add(this.labelRegimenLine);
-            this.grpBoxLastDispense.Location = new System.Drawing.Point(-4, 95);
+            this.grpBoxLastDispense.Location = new System.Drawing.Point(-4, 90);
             this.grpBoxLastDispense.Margin = new System.Windows.Forms.Padding(0);
             this.grpBoxLastDispense.Name = "grpBoxLastDispense";
             this.grpBoxLastDispense.Padding = new System.Windows.Forms.Padding(0);
@@ -1228,7 +1228,7 @@
             this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.label29);
             this.groupBox1.Controls.Add(this.lblPatientName);
-            this.groupBox1.Location = new System.Drawing.Point(6, 53);
+            this.groupBox1.Location = new System.Drawing.Point(6, 51);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1245, 37);
             this.groupBox1.TabIndex = 63;
@@ -1287,7 +1287,7 @@
             this.dtDispensedDate.CustomFormat = "dd-MMM-yyyy";
             this.dtDispensedDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtDispensedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDispensedDate.Location = new System.Drawing.Point(677, 12);
+            this.dtDispensedDate.Location = new System.Drawing.Point(677, 9);
             this.dtDispensedDate.Name = "dtDispensedDate";
             this.dtDispensedDate.Size = new System.Drawing.Size(151, 24);
             this.dtDispensedDate.TabIndex = 1;
@@ -1517,7 +1517,7 @@
             this.FindPatientTab.Location = new System.Drawing.Point(4, 34);
             this.FindPatientTab.Name = "FindPatientTab";
             this.FindPatientTab.Padding = new System.Windows.Forms.Padding(3);
-            this.FindPatientTab.Size = new System.Drawing.Size(1263, 722);
+            this.FindPatientTab.Size = new System.Drawing.Size(1263, 654);
             this.FindPatientTab.TabIndex = 0;
             this.FindPatientTab.Tag = "pnlSubPanel";
             this.FindPatientTab.Text = "Find Patient ";
@@ -1586,11 +1586,99 @@
             this.grdResultView.RowHeadersWidth = 30;
             this.grdResultView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdResultView.ShowEditingIcon = false;
-            this.grdResultView.Size = new System.Drawing.Size(1216, 378);
+            this.grdResultView.Size = new System.Drawing.Size(1216, 348);
             this.grdResultView.TabIndex = 47;
             this.grdResultView.Tag = "dgwDataGridView";
             this.grdResultView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdResultView_CellContentClick);
             this.grdResultView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grdResultView_CellMouseDoubleClick);
+            // 
+            // FirstName
+            // 
+            this.FirstName.DataPropertyName = "FirstName";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.FirstName.DefaultCellStyle = dataGridViewCellStyle8;
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.ReadOnly = true;
+            this.FirstName.Width = 200;
+            // 
+            // MiddleName
+            // 
+            this.MiddleName.DataPropertyName = "Middlename";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.MiddleName.DefaultCellStyle = dataGridViewCellStyle9;
+            this.MiddleName.HeaderText = "Middle Name";
+            this.MiddleName.Name = "MiddleName";
+            this.MiddleName.ReadOnly = true;
+            this.MiddleName.Width = 200;
+            // 
+            // LastName
+            // 
+            this.LastName.DataPropertyName = "LastName";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.LastName.DefaultCellStyle = dataGridViewCellStyle10;
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.ReadOnly = true;
+            this.LastName.Width = 200;
+            // 
+            // PatientFacilityId
+            // 
+            this.PatientFacilityId.DataPropertyName = "PatientFacilityId";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle11;
+            this.PatientFacilityId.HeaderText = "Patient #";
+            this.PatientFacilityId.Name = "PatientFacilityId";
+            this.PatientFacilityId.ReadOnly = true;
+            this.PatientFacilityId.Width = 150;
+            // 
+            // Sex
+            // 
+            this.Sex.DataPropertyName = "Sex";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Sex.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Sex.HeaderText = "Sex";
+            this.Sex.Name = "Sex";
+            this.Sex.ReadOnly = true;
+            this.Sex.Width = 150;
+            // 
+            // dob
+            // 
+            this.dob.DataPropertyName = "dob";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.Format = "dd-MMM-yyyy";
+            dataGridViewCellStyle13.NullValue = null;
+            this.dob.DefaultCellStyle = dataGridViewCellStyle13;
+            this.dob.HeaderText = "DOB";
+            this.dob.Name = "dob";
+            this.dob.ReadOnly = true;
+            this.dob.Width = 150;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "status";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Status.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
+            // FacilityName
+            // 
+            this.FacilityName.DataPropertyName = "FacilityName";
+            this.FacilityName.HeaderText = "Facility Name";
+            this.FacilityName.Name = "FacilityName";
+            this.FacilityName.ReadOnly = true;
+            this.FacilityName.Visible = false;
+            // 
+            // PatientId
+            // 
+            this.PatientId.DataPropertyName = "PatientId";
+            this.PatientId.HeaderText = "PatientId";
+            this.PatientId.Name = "PatientId";
+            this.PatientId.ReadOnly = true;
+            this.PatientId.Visible = false;
+            this.PatientId.Width = 10;
             // 
             // flowLayoutPanel3
             // 
@@ -1733,7 +1821,7 @@
             // 
             this.btnFind.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFind.Location = new System.Drawing.Point(230, 90);
+            this.btnFind.Location = new System.Drawing.Point(283, 94);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(122, 25);
             this.btnFind.TabIndex = 46;
@@ -1845,7 +1933,7 @@
             this.MainTab.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainTab.RightToLeftLayout = true;
             this.MainTab.SelectedIndex = 0;
-            this.MainTab.Size = new System.Drawing.Size(1271, 760);
+            this.MainTab.Size = new System.Drawing.Size(1271, 692);
             this.MainTab.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainTab.TabIndex = 0;
             this.MainTab.Tag = "pnlPanel";
@@ -1858,7 +1946,7 @@
             this.PendingTab.Location = new System.Drawing.Point(4, 34);
             this.PendingTab.Name = "PendingTab";
             this.PendingTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PendingTab.Size = new System.Drawing.Size(1263, 722);
+            this.PendingTab.Size = new System.Drawing.Size(1263, 654);
             this.PendingTab.TabIndex = 5;
             this.PendingTab.Text = "Pending Orders";
             this.PendingTab.UseVisualStyleBackColor = true;
@@ -1937,6 +2025,152 @@
             this.gridPendingOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellClick);
             this.gridPendingOrder.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPendingOrder_CellContentDoubleClick);
             // 
+            // P_PatientFacilityId
+            // 
+            this.P_PatientFacilityId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.P_PatientFacilityId.DataPropertyName = "PatientFacilityId";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.P_PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle18;
+            this.P_PatientFacilityId.FillWeight = 284.2639F;
+            this.P_PatientFacilityId.HeaderText = "Patient #";
+            this.P_PatientFacilityId.Name = "P_PatientFacilityId";
+            this.P_PatientFacilityId.ReadOnly = true;
+            this.P_PatientFacilityId.Width = 70;
+            // 
+            // pFirstName
+            // 
+            this.pFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pFirstName.DataPropertyName = "FirstName";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pFirstName.DefaultCellStyle = dataGridViewCellStyle19;
+            this.pFirstName.FillWeight = 35.77122F;
+            this.pFirstName.HeaderText = "First Name";
+            this.pFirstName.Name = "pFirstName";
+            this.pFirstName.ReadOnly = true;
+            this.pFirstName.Width = 120;
+            // 
+            // pMiddleName
+            // 
+            this.pMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pMiddleName.DataPropertyName = "MiddleName";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pMiddleName.DefaultCellStyle = dataGridViewCellStyle20;
+            this.pMiddleName.FillWeight = 35.77122F;
+            this.pMiddleName.HeaderText = "Middle Name";
+            this.pMiddleName.Name = "pMiddleName";
+            this.pMiddleName.ReadOnly = true;
+            this.pMiddleName.Width = 120;
+            // 
+            // pLastName
+            // 
+            this.pLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pLastName.DataPropertyName = "LastName";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pLastName.DefaultCellStyle = dataGridViewCellStyle21;
+            this.pLastName.FillWeight = 35.77122F;
+            this.pLastName.HeaderText = "Last Name";
+            this.pLastName.Name = "pLastName";
+            this.pLastName.ReadOnly = true;
+            this.pLastName.Width = 120;
+            // 
+            // pSex
+            // 
+            this.pSex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.pSex.DataPropertyName = "Sex";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.pSex.DefaultCellStyle = dataGridViewCellStyle22;
+            this.pSex.FillWeight = 35.77122F;
+            this.pSex.HeaderText = "Sex";
+            this.pSex.Name = "pSex";
+            this.pSex.ReadOnly = true;
+            this.pSex.Width = 70;
+            // 
+            // Age
+            // 
+            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.ReadOnly = true;
+            this.Age.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "CreateDate";
+            dataGridViewCellStyle23.Format = "d";
+            dataGridViewCellStyle23.NullValue = null;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dataGridViewTextBoxColumn9.FillWeight = 31.2364F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Prescription Date";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Duration";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dataGridViewTextBoxColumn8.FillWeight = 363.3851F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Duration";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 72;
+            // 
+            // PrescriptionNumber
+            // 
+            this.PrescriptionNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PrescriptionNumber.DataPropertyName = "PrescriptionNumber";
+            this.PrescriptionNumber.FillWeight = 46.79312F;
+            this.PrescriptionNumber.HeaderText = "Prescription #";
+            this.PrescriptionNumber.Name = "PrescriptionNumber";
+            this.PrescriptionNumber.ReadOnly = true;
+            // 
+            // PrescribedBy
+            // 
+            this.PrescribedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PrescribedBy.DataPropertyName = "PrescribedBy";
+            this.PrescribedBy.FillWeight = 31.2364F;
+            this.PrescribedBy.HeaderText = "Prescribed By";
+            this.PrescribedBy.Name = "PrescribedBy";
+            this.PrescribedBy.ReadOnly = true;
+            this.PrescribedBy.Width = 160;
+            // 
+            // ptnPk
+            // 
+            this.ptnPk.DataPropertyName = "Ptn_pk";
+            this.ptnPk.HeaderText = "Ptn_pk";
+            this.ptnPk.Name = "ptnPk";
+            this.ptnPk.ReadOnly = true;
+            this.ptnPk.Visible = false;
+            // 
+            // OrderId
+            // 
+            this.OrderId.DataPropertyName = "OrderId";
+            this.OrderId.HeaderText = "OrderId";
+            this.OrderId.Name = "OrderId";
+            this.OrderId.ReadOnly = true;
+            this.OrderId.Visible = false;
+            // 
+            // patDOB
+            // 
+            this.patDOB.DataPropertyName = "dob";
+            this.patDOB.HeaderText = "dob";
+            this.patDOB.Name = "patDOB";
+            this.patDOB.ReadOnly = true;
+            this.patDOB.Visible = false;
+            // 
+            // pStatus
+            // 
+            this.pStatus.DataPropertyName = "Status";
+            this.pStatus.HeaderText = "Status";
+            this.pStatus.Name = "pStatus";
+            this.pStatus.ReadOnly = true;
+            this.pStatus.Visible = false;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnFindOrder);
@@ -2002,7 +2236,7 @@
             this.ReturnTab.Location = new System.Drawing.Point(4, 34);
             this.ReturnTab.Name = "ReturnTab";
             this.ReturnTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ReturnTab.Size = new System.Drawing.Size(1263, 722);
+            this.ReturnTab.Size = new System.Drawing.Size(1263, 654);
             this.ReturnTab.TabIndex = 3;
             this.ReturnTab.Tag = "pnlSubPanel";
             this.ReturnTab.Text = "Return";
@@ -2297,7 +2531,7 @@
             this.IQCareWeb.Controls.Add(this.IQBrowser);
             this.IQCareWeb.Location = new System.Drawing.Point(4, 34);
             this.IQCareWeb.Name = "IQCareWeb";
-            this.IQCareWeb.Size = new System.Drawing.Size(1263, 722);
+            this.IQCareWeb.Size = new System.Drawing.Size(1263, 654);
             this.IQCareWeb.TabIndex = 4;
             this.IQCareWeb.Text = "IQCare";
             this.IQCareWeb.UseVisualStyleBackColor = true;
@@ -2308,7 +2542,7 @@
             this.IQBrowser.Location = new System.Drawing.Point(0, 0);
             this.IQBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.IQBrowser.Name = "IQBrowser";
-            this.IQBrowser.Size = new System.Drawing.Size(1263, 722);
+            this.IQBrowser.Size = new System.Drawing.Size(1263, 654);
             this.IQBrowser.TabIndex = 2;
             this.IQBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.IQBrowser_DocumentCompleted);
             // 
@@ -2371,7 +2605,7 @@
             this.panelSave.Controls.Add(this.cmdSave);
             this.panelSave.Controls.Add(this.cmdClose);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSave.Location = new System.Drawing.Point(0, 706);
+            this.panelSave.Location = new System.Drawing.Point(0, 638);
             this.panelSave.Margin = new System.Windows.Forms.Padding(0);
             this.panelSave.Name = "panelSave";
             this.panelSave.Size = new System.Drawing.Size(1271, 54);
@@ -2582,6 +2816,8 @@
             this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle42;
             this.dataGridViewTextBoxColumn14.HeaderText = "Patient #";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Visible = false;
             this.dataGridViewTextBoxColumn14.Width = 150;
             // 
             // dataGridViewTextBoxColumn15
@@ -2678,247 +2914,13 @@
             this.dataGridViewTextBoxColumn23.Visible = false;
             this.dataGridViewTextBoxColumn23.Width = 10;
             // 
-            // FirstName
-            // 
-            this.FirstName.DataPropertyName = "FirstName";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.FirstName.DefaultCellStyle = dataGridViewCellStyle8;
-            this.FirstName.HeaderText = "First Name";
-            this.FirstName.Name = "FirstName";
-            this.FirstName.ReadOnly = true;
-            this.FirstName.Width = 200;
-            // 
-            // MiddleName
-            // 
-            this.MiddleName.DataPropertyName = "Middlename";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.MiddleName.DefaultCellStyle = dataGridViewCellStyle9;
-            this.MiddleName.HeaderText = "Middle Name";
-            this.MiddleName.Name = "MiddleName";
-            this.MiddleName.ReadOnly = true;
-            this.MiddleName.Width = 200;
-            // 
-            // LastName
-            // 
-            this.LastName.DataPropertyName = "LastName";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.LastName.DefaultCellStyle = dataGridViewCellStyle10;
-            this.LastName.HeaderText = "Last Name";
-            this.LastName.Name = "LastName";
-            this.LastName.ReadOnly = true;
-            this.LastName.Width = 200;
-            // 
-            // PatientFacilityId
-            // 
-            this.PatientFacilityId.DataPropertyName = "PatientFacilityId";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle11;
-            this.PatientFacilityId.HeaderText = "Patient #";
-            this.PatientFacilityId.Name = "PatientFacilityId";
-            this.PatientFacilityId.ReadOnly = true;
-            this.PatientFacilityId.Width = 150;
-            // 
-            // Sex
-            // 
-            this.Sex.DataPropertyName = "Sex";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Sex.DefaultCellStyle = dataGridViewCellStyle12;
-            this.Sex.HeaderText = "Sex";
-            this.Sex.Name = "Sex";
-            this.Sex.ReadOnly = true;
-            this.Sex.Width = 150;
-            // 
-            // dob
-            // 
-            this.dob.DataPropertyName = "dob";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.Format = "dd-MMM-yyyy";
-            dataGridViewCellStyle13.NullValue = null;
-            this.dob.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dob.HeaderText = "DOB";
-            this.dob.Name = "dob";
-            this.dob.ReadOnly = true;
-            this.dob.Width = 150;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "status";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Status.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            // 
-            // FacilityName
-            // 
-            this.FacilityName.DataPropertyName = "FacilityName";
-            this.FacilityName.HeaderText = "Facility Name";
-            this.FacilityName.Name = "FacilityName";
-            this.FacilityName.ReadOnly = true;
-            this.FacilityName.Visible = false;
-            // 
-            // PatientId
-            // 
-            this.PatientId.DataPropertyName = "PatientId";
-            this.PatientId.HeaderText = "PatientId";
-            this.PatientId.Name = "PatientId";
-            this.PatientId.ReadOnly = true;
-            this.PatientId.Visible = false;
-            this.PatientId.Width = 10;
-            // 
-            // P_PatientFacilityId
-            // 
-            this.P_PatientFacilityId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.P_PatientFacilityId.DataPropertyName = "PatientFacilityId";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.P_PatientFacilityId.DefaultCellStyle = dataGridViewCellStyle18;
-            this.P_PatientFacilityId.FillWeight = 284.2639F;
-            this.P_PatientFacilityId.HeaderText = "Patient #";
-            this.P_PatientFacilityId.Name = "P_PatientFacilityId";
-            this.P_PatientFacilityId.ReadOnly = true;
-            this.P_PatientFacilityId.Width = 70;
-            // 
-            // pFirstName
-            // 
-            this.pFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pFirstName.DataPropertyName = "FirstName";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pFirstName.DefaultCellStyle = dataGridViewCellStyle19;
-            this.pFirstName.FillWeight = 35.77122F;
-            this.pFirstName.HeaderText = "First Name";
-            this.pFirstName.Name = "pFirstName";
-            this.pFirstName.ReadOnly = true;
-            this.pFirstName.Width = 120;
-            // 
-            // pMiddleName
-            // 
-            this.pMiddleName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pMiddleName.DataPropertyName = "MiddleName";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pMiddleName.DefaultCellStyle = dataGridViewCellStyle20;
-            this.pMiddleName.FillWeight = 35.77122F;
-            this.pMiddleName.HeaderText = "Middle Name";
-            this.pMiddleName.Name = "pMiddleName";
-            this.pMiddleName.ReadOnly = true;
-            this.pMiddleName.Width = 120;
-            // 
-            // pLastName
-            // 
-            this.pLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pLastName.DataPropertyName = "LastName";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pLastName.DefaultCellStyle = dataGridViewCellStyle21;
-            this.pLastName.FillWeight = 35.77122F;
-            this.pLastName.HeaderText = "Last Name";
-            this.pLastName.Name = "pLastName";
-            this.pLastName.ReadOnly = true;
-            this.pLastName.Width = 120;
-            // 
-            // pSex
-            // 
-            this.pSex.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.pSex.DataPropertyName = "Sex";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.pSex.DefaultCellStyle = dataGridViewCellStyle22;
-            this.pSex.FillWeight = 35.77122F;
-            this.pSex.HeaderText = "Sex";
-            this.pSex.Name = "pSex";
-            this.pSex.ReadOnly = true;
-            this.pSex.Width = 70;
-            // 
-            // Age
-            // 
-            this.Age.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Age.DataPropertyName = "Age";
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            this.Age.ReadOnly = true;
-            this.Age.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "CreateDate";
-            dataGridViewCellStyle23.Format = "d";
-            dataGridViewCellStyle23.NullValue = null;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dataGridViewTextBoxColumn9.FillWeight = 31.2364F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Prescription Date";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Duration";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle24;
-            this.dataGridViewTextBoxColumn8.FillWeight = 363.3851F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Duration";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 72;
-            // 
-            // PrescriptionNumber
-            // 
-            this.PrescriptionNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.PrescriptionNumber.DataPropertyName = "PrescriptionNumber";
-            this.PrescriptionNumber.FillWeight = 46.79312F;
-            this.PrescriptionNumber.HeaderText = "Prescription #";
-            this.PrescriptionNumber.Name = "PrescriptionNumber";
-            this.PrescriptionNumber.ReadOnly = true;
-            // 
-            // PrescribedBy
-            // 
-            this.PrescribedBy.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.PrescribedBy.DataPropertyName = "PrescribedBy";
-            this.PrescribedBy.FillWeight = 31.2364F;
-            this.PrescribedBy.HeaderText = "Prescribed By";
-            this.PrescribedBy.Name = "PrescribedBy";
-            this.PrescribedBy.ReadOnly = true;
-            this.PrescribedBy.Width = 160;
-            // 
-            // ptnPk
-            // 
-            this.ptnPk.DataPropertyName = "Ptn_pk";
-            this.ptnPk.HeaderText = "Ptn_pk";
-            this.ptnPk.Name = "ptnPk";
-            this.ptnPk.ReadOnly = true;
-            this.ptnPk.Visible = false;
-            // 
-            // OrderId
-            // 
-            this.OrderId.DataPropertyName = "OrderId";
-            this.OrderId.HeaderText = "OrderId";
-            this.OrderId.Name = "OrderId";
-            this.OrderId.ReadOnly = true;
-            this.OrderId.Visible = false;
-            // 
-            // patDOB
-            // 
-            this.patDOB.DataPropertyName = "dob";
-            this.patDOB.HeaderText = "dob";
-            this.patDOB.Name = "patDOB";
-            this.patDOB.ReadOnly = true;
-            this.patDOB.Visible = false;
-            // 
-            // pStatus
-            // 
-            this.pStatus.DataPropertyName = "Status";
-            this.pStatus.HeaderText = "Status";
-            this.pStatus.Name = "pStatus";
-            this.pStatus.ReadOnly = true;
-            this.pStatus.Visible = false;
-            // 
             // frmPatientDrugDispense
             // 
             this.AcceptButton = this.btnFind;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1271, 760);
+            this.ClientSize = new System.Drawing.Size(1271, 692);
             this.Controls.Add(this.panelSave);
             this.Controls.Add(this.MainTab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

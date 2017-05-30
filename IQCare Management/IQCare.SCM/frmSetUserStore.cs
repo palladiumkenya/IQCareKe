@@ -31,6 +31,7 @@ namespace IQCare.SCM
             lblUserName.Text = GblIQCare.AppUserName;
             BindStoreNameDropdown(GblIQCare.AppUserId);
             if (GblIQCare.theArea == "IV") lblStore.Text = "Select Source Store";
+            if(GblIQCare.theArea == "Dispense") lblStore.Text = "Select Dispensing Store";
         }
         private void BindStoreNameDropdown(int UserID)
         {

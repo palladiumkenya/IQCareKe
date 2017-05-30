@@ -587,7 +587,11 @@
   <Message Id ="PurchaseOrder" Type ="!" Buttons ="" Text ="Purchase Ordered date cannot be less than current date."/>
   <Message Id ="PurchaseOrderItem" Type ="!" Buttons ="" Text ="At least one item  should be placed in a purchase order."/>
   <Message Id ="PurchaseOrderQuantityZero" Type ="!" Buttons ="" Text ="Please Enter Ordered Quantity."/>
+  <Message Id ="PurchaseOrderIssuedQuantityZero" Type ="!" Buttons ="" Text ="Please Enter Issued Quantity."/>
+  <Message Id ="PurchaseOrderIssuedQuantityDUZero" Type ="!" Buttons ="" Text ="Please ensure all items are configured."/>
   <Message Id ="ExpiryDate" Type ="!" Buttons ="" Text ="Expiry Date should be after today's date."/>
+  <Message Id ="MissingExpiryDate" Type ="!" Buttons ="" Text ="Please Enter Expiry Date."/>
+  <Message Id ="MissingBatchNumber" Type ="!" Buttons ="" Text ="Please Enter Batch Number."/>
   <Message Id="DuplicatePOItems" Type ="!" Buttons ="" Text ="&lt;DataElement&gt;Control&lt;/DataElement&gt; already exists in the Purchase Order. Please try again."/>
   <Message Id="MissingSellingPrice" Type ="!" Buttons ="" Text ="Selling Price not configured. Please move to the Item Configuration to configure the selling price."/>
   <Message Id="DrugDispenseQtyCompare" Type ="!" Buttons ="" Text ="Dispensing quantity cannot be greater than the available quantity."/>

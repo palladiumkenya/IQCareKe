@@ -67,3 +67,12 @@ IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'CreatedBy'AND Object_ID =
     BEGIN
         ALTER TABLE dtl_LabOrderTest ADD CreatedBy int NULL;
     END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'IssuedQuantity'AND Object_ID = OBJECT_ID(N'Dtl_PurchaseItem'))
+    BEGIN
+        ALTER TABLE Dtl_PurchaseItem ADD IssuedQuantity int;
+    END;
+IF NOT EXISTS(SELECT * FROM sys.columns WHERE Name = N'transactionType'AND Object_ID = OBJECT_ID(N'dtl_stocktransaction'))
+    BEGIN
+        ALTER TABLE dtl_stocktransaction ADD transactionType nvarchar(50);
+    END;
+

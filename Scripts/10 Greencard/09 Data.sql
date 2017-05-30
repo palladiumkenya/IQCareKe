@@ -3295,6 +3295,14 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='TreatmentPlan'),(SELECT Id FROM LookupItem WHERE Name='Drug Substitutions'),'Drug Substitutions',5)
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='TreatmentPlan'),(SELECT Id FROM LookupItem WHERE Name='N/A'),'N/A',6)
 
+--insert PM/SCM With Same point dispense module
+SET IDENTITY_INSERT mst_module ON
+
+INSERT INTO mst_module (ModuleID,ModuleName,DeleteFlag,UserId,CreateDate,UpdateDate,Status,UpdateFlag,Identifier,PharmacyFlag,CanEnroll,DisplayName)
+values(30, 'PM/SCM With Same point dispense',0,1,getdate(),getdate(),2,0,1,0,0,'PM/SCM With Same point dispense')
+
+SET IDENTITY_INSERT mst_module OFF
+
 TRUNCATE TABLE [dbo].[County]
 GO
 INSERT [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) VALUES (1, 1, N'MOMBASA', 1, N'CHANGAMWE', 1, N'PORT REITZ')
