@@ -7,14 +7,14 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static Entities.CCC.Encounter.PatientEncounter;
+//using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace IQCare.Web.CCC.UC
 {
     public partial class ucPharmacyPrescription : System.Web.UI.UserControl
     {
-        public string PMSCM = "";
-        public string PMSCMSAmePointDispense = "";
+        public string PMSCM = "0";
+        public string PMSCMSAmePointDispense = "0";
         public string prescriptionDate = "";
         public string dispenseDate = "";
         protected void Page_Load(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace IQCare.Web.CCC.UC
         {
             LookupLogic lookUp = new LookupLogic();
             PatientEncounterLogic encounterLogic = new PatientEncounterLogic();
-            List<PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
+            List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["PatientMasterVisitId"].ToString());
             if (lst.Count > 0)
             {
                 ddlTreatmentProgram.SelectedValue = lst[0].TreatmentProgram;
@@ -79,15 +79,28 @@ namespace IQCare.Web.CCC.UC
 
                 //var masterName = Regex.Replace(regimenLine.SelectedItem.Text, @"\s+", "");
                 var masterName = regimenLine.SelectedItem.Text.Replace(" ", String.Empty);
-                var result = LookupLogic.GetLookUpItemViewByMasterName(masterName);
 
-                JavaScriptSerializer parser = new JavaScriptSerializer();
-                var regimen = parser.Deserialize<List<KeyValue>>(result);
+                ///////////////////////////////////////////////////////////////////////////
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+                DataTable theDTReg = patientEncounter.getPharmacyRegimens(masterName);
                 ddlRegimen.Items.Add(new ListItem("Select", "0"));
-                for (int i = 0; i < regimen.Count; i++)
+
+                foreach (DataRow row in theDTReg.Rows)
                 {
-                    ddlRegimen.Items.Add(new ListItem(regimen[i].DisplayName, regimen[i].ItemId));
+                    ddlRegimen.Items.Add(new ListItem(row["DisplayName"].ToString(), row["LookupItemId"].ToString()));
                 }
+                ////////////////////////////////////////////
+
+                //var result = LookupLogic.GetLookUpItemViewByMasterName(masterName);
+
+                //JavaScriptSerializer parser = new JavaScriptSerializer();
+                //var regimen = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
+                //ddlRegimen.Items.Add(new ListItem("Select", "0"));
+                //for (int i = 0; i < regimen.Count; i++)
+                //{
+                //    ddlRegimen.Items.Add(new ListItem(regimen[i].DisplayName, regimen[i].ItemId));
+                //}
                 /////////////////////////////////////////////////////////////////////////////////////////
                 ddlRegimen.SelectedValue = lst[0].Regimen;
                 txtPrescriptionDate.Text = lst[0].prescriptionDate;
