@@ -769,7 +769,7 @@
         });
 
         var Age = $("#Age").val();
-        if (Age > 14 || Age < 6) {
+        if (Age <= 14 || Age >= 6) {
             $("#<%=Stage1Date.ClientID%>").attr('disabled', 'disbaled');
             $("#Stage1").addClass("noneevents");
             $("#<%=Stage2Date.ClientID%>").attr('disabled', 'disbaled');

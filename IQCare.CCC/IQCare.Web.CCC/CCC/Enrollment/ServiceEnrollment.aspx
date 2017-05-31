@@ -18,6 +18,7 @@
                         <th>Enrollment Number</th>
                         <th>Enrollment Date</th>
                         <th>Status</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -279,7 +280,7 @@
                         <tr >
                             <th>#</th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollement Identifier</i> </th>
-                             <th> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
+                             <th style="display: none;"> <i class="fa fa-arrow-circle-o-right " aria-hidden="true"> Identifier Id</i> </th>
                             <th> <i class="fa fa-arrow-circle-o-right text-primary" aria-hidden="true"> Enrollment Number </i></th>
                             <th><span class="fa fa-times text-danger text-primary pull-right"> Action</span></th>
                         </tr>
@@ -309,6 +310,160 @@
              
     </div>
     
+    <!-- Modal -->
+    <div id="patientEnrollmentUpdateModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <h4 class="modal-title">Update Enrollment</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <label class="control-label pull-left">Service Name:</label></div>
+                            <div class="col-md-6">
+                                <asp:Label ID="lblServiceName" runat="server"></asp:Label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <label class="control-label pull-left">MFL CODE:</label>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Enrollment No#:</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <asp:TextBox ID="updateMflCode" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
+                            </div>
+
+                            <div class="col-md-6">
+                                <asp:TextBox ID="updateEnrollmentNo" runat="server" CssClass="pull-left form-control" ClientIDMode="Static" data-parsley-required="true" data-parsley-length="[5,5]"></asp:TextBox>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <label class="control-label pull-left">Enrollment Date:</label></div>
+                            <div class="col-md-6">
+                                <div class="datepicker fuelux form-group" id="UpDateEnrollmentDate">
+                                    <div class="input-group">
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="UpdatedEnrollmentDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                        <%-- <input ClientIDMode="Static" class="form-control input-sm" runat="server" id="DateOfBirth" type="date" />--%>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="sr-only">Toggle Calendar</span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                <div class="datepicker-calendar">
+                                                    <div class="datepicker-calendar-header">
+                                                        <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                        <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                        <button type="button" class="title" data-month="11" data-year="2014">
+                                                            <span class="month">
+                                                                <span data-month="0">January</span>
+                                                                <span data-month="1">February</span>
+                                                                <span data-month="2">March</span>
+                                                                <span data-month="3">April</span>
+                                                                <span data-month="4">May</span>
+                                                                <span data-month="5">June</span>
+                                                                <span data-month="6">July</span>
+                                                                <span data-month="7">August</span>
+                                                                <span data-month="8">September</span>
+                                                                <span data-month="9">October</span>
+                                                                <span data-month="10">November</span>
+                                                                <span data-month="11" class="current">December</span>
+                                                            </span> <span class="year">2014</span>
+                                                        </button>
+                                                    </div>
+                                                    <table class="datepicker-calendar-days">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Su</th>
+                                                            <th>Mo</th>
+                                                            <th>Tu</th>
+                                                            <th>We</th>
+                                                            <th>Th</th>
+                                                            <th>Fr</th>
+                                                            <th>Sa</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div class="datepicker-calendar-footer">
+                                                        <button type="button" class="datepicker-today">Today</button>
+                                                    </div>
+                                                </div>
+                                                <div class="datepicker-wheels" aria-hidden="true">
+                                                    <div class="datepicker-wheels-month">
+                                                        <h2 class="header">Month</h2>
+                                                        <ul>
+                                                            <li data-month="0"><button type="button">Jan</button></li>
+                                                            <li data-month="1"><button type="button">Feb</button></li>
+                                                            <li data-month="2"><button type="button">Mar</button></li>
+                                                            <li data-month="3"><button type="button">Apr</button></li>
+                                                            <li data-month="4"><button type="button">May</button></li>
+                                                            <li data-month="5"><button type="button">Jun</button></li>
+                                                            <li data-month="6"><button type="button">Jul</button></li>
+                                                            <li data-month="7"><button type="button">Aug</button></li>
+                                                            <li data-month="8"><button type="button">Sep</button></li>
+                                                            <li data-month="9"><button type="button">Oct</button></li>
+                                                            <li data-month="10"><button type="button">Nov</button></li>
+                                                            <li data-month="11"><button type="button">Dec</button></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-year">
+                                                        <h2 class="header">Year</h2>
+                                                        <ul></ul>
+                                                    </div>
+                                                    <div class="datepicker-wheels-footer clearfix">
+                                                        <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                        <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12 form-group">
+
+                        <div class="col-md-6">
+                            <button type="button" id="btnSaveEnrollmentUpdate" class="btn btn-default" onclientclick="return false;">Save</button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button type="button" id="btnCancelEnrollmentUpdate" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -332,6 +487,12 @@
             });
 
             $("#DateOfBirth").datepicker({
+                date: null,
+                allowPastDates: true,
+                momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
+            });
+
+            $("#UpDateEnrollmentDate").datepicker({
                 date: null,
                 allowPastDates: true,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
@@ -412,8 +573,11 @@
             $("#btnAdd").click(function (e) {
 
                 if (!$('#enrollmentTab').parsley().validate()) {
+                    console.log("there");
                     return false;
                 } else {
+
+                    console.log("here");
 
                     var identifierCount = 0;
                     var identifierFound = 0;
@@ -436,10 +600,10 @@
                         return false;
                     }
 
-                    if (identifier == "CCC Registration Number" && (mflcode.length < 5 || mflcode.length > 5)) {
-                        toastr.error("error", "MFL CODE should be Five Characters");
-                        return false;
-                    }
+                    //if (identifier == "CCC Registration Number" && (mflcode.length < 5 || mflcode.length > 5)) {
+                    //    toastr.error("error", "MFL CODE should be Five Characters");
+                    //    return false;
+                    //}
 
                     if (identifier == "CCC Registration Number") {
                         enrollmentNo = mflcode + "-" + enrollmentNo;
@@ -476,7 +640,7 @@
                         enrollmentNoList.push("" + enrollmentNo + "");
                         var tr = "<tr><td align='left'></td><td align='left'>" +
                             identifier +
-                            "</td><td align='left'>" +
+                            "</td><td style='display:none;' align='left'>" +
                             identifierId +
                             "</td><td align='left'>" +
                             enrollmentNo +
@@ -694,10 +858,18 @@
                         itemList.forEach(function (item, i) {
                             n = i + 1;
                             if (item.PatientId) {
-                                table += '<tr><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align:left">' + item.EnrollmentNumber + '</td><td style="text-align: left">' + moment(item.EnrollmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.PatientStatus + '</td></tr>';
+                                table += '<tr><td style="text-align: left">' + item.ServiceArea + '</td><td style="text-align:left">' + item.EnrollmentNumber + '</td><td style="text-align: left">' + moment(item.EnrollmentDate).format('DD-MMM-YYYY') + '</td><td style="text-align: left">' + item.PatientStatus + '</td><td><button type="button" class="btn btn-info btn-sm pull-left fa fa-cog" data-toggle="modal" data-target="#patientEnrollmentUpdateModal">Update Enrollment</button></td></tr>';
                                 if (item.ServiceArea == "CCC Registration Number") {
                                     $("#IsCCCEnrolled").val("CCC");
-                                }                             
+                                }
+                                $("#<%=lblServiceName.ClientID%>").text(item.ServiceArea);
+                                console.log(item.EnrollmentNumber.split("-"));
+                                var mfl_code = item.EnrollmentNumber.split("-")[0];
+                                var enrollment_no = item.EnrollmentNumber.split("-")[1];
+
+                                $("#<%=updateMflCode.ClientID%>").val(mfl_code);
+                                $("#<%=updateEnrollmentNo.ClientID%>").val(enrollment_no);
+                                $('#UpDateEnrollmentDate').datepicker('setDate', moment(item.EnrollmentDate).format('DD-MMM-YYYY'));
                             }
                                 
                         });
@@ -729,6 +901,39 @@
                 } else {
                     $("#AppPosID").css("display", 'none');
                 }
+            });
+
+            $("#btnSaveEnrollmentUpdate").click(function() {
+                if (!$('#patientEnrollmentUpdateModal').parsley().validate()) {
+                    return false;
+                }
+
+                var enrollment_no = $("#<%=updateEnrollmentNo.ClientID%>").val();
+                var mfl_code = $("#<%=updateMflCode.ClientID%>").val();
+
+                var enrollmentNo = mfl_code + "-" + enrollment_no;
+
+                var enrollment_date = moment($('#UpDateEnrollmentDate').datepicker('getDate')).format('DD-MMM-YYYY');
+                var service_name = document.getElementById("<%=lblServiceName.ClientID %>").innerHTML;
+
+                console.log(enrollmentNo);
+                console.log(enrollment_date);
+                console.log(service_name);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/EnrollmentService.asmx/UpdatePatientEnrollment",
+                    data: "{'enrollmentNo':'" + enrollmentNo + "', 'enrollmentDate':'" + enrollment_date + "', 'serviceName':'" + service_name + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response.d);
+                        toastr.success(response.d, "Update Enrollment");
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "Error Updating Enrollment");
+                    }
+                });
             });
 
         });

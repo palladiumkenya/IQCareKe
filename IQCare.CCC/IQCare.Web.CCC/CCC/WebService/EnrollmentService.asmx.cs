@@ -1,9 +1,13 @@
 ﻿using IQCare.CCC.UILogic;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
+using System.Xml;
+using System.Xml.Serialization;
 using Application.Common;
 using Entities.CCC.Visit;
 using IQCare.CCC.UILogic.Visit;
@@ -33,6 +37,14 @@ namespace IQCare.Web.CCC.WebService
         public string msg { get; set; }
         public int errorcode { get; set; }
     }
+
+    [XmlRoot("PatientHistoryIdentifiers")]
+    public class PatientHistoryIdentifiers
+    {
+        [XmlElement(ElementName = "PatientIdentifier")]
+        public List<PatientEntityIdentifier> PatientIdentifiers { get; set; }
+    }
+
     /// <summary>
     /// Summary description for EnrollmentService
     /// </summary>
@@ -374,6 +386,94 @@ namespace IQCare.Web.CCC.WebService
             }
 
             return Msg = new JavaScriptSerializer().Serialize(message);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string UpdatePatientEnrollment(string enrollmentNo , string enrollmentDate, string serviceName)
+        {
+            var patientPK = Convert.ToInt32(Session["PatientPK"]);
+            var patientManager = new PatientManager();
+            var patientEnrollment = new PatientEnrollmentManager();
+            var patientIdentifier = new PatientIdentifierManager();
+
+            StringBuilder sbData = new StringBuilder();
+            StringWriter swWriter;
+            List<PatientEntityIdentifier> listIdentifiers = new List<PatientEntityIdentifier>();
+            List<PatientEntityEnrollment> listEnrollments = new List<PatientEntityEnrollment>();
+
+            List<PatientEntityEnrollment> entityEnrollments = new List<PatientEntityEnrollment>();
+
+            if (patientPK > 0)
+            {
+                entityEnrollments = patientEnrollment.GetPatientEnrollmentByPatientId(patientPK);
+
+                if (entityEnrollments.Count > 0)
+                {
+                    var lookupLogic = new LookupLogic();
+                    var patientIdentifiers = lookupLogic.GetItemIdByGroupAndDisplayName("PatientIdentifier", serviceName);
+                    var identifierId = 0;
+                    if (patientIdentifiers.Count > 0)
+                    {
+                        identifierId = patientIdentifiers[0].ItemId;
+                    }
+
+                    var identifiers = patientIdentifier.GetPatientEntityIdentifiers(patientPK, entityEnrollments[0].Id, identifierId);
+
+                    if (identifiers.Count > 0)
+                    {
+                        XmlSerializer idenfierSerializer = new XmlSerializer(identifiers.GetType());
+
+                        if (identifiers[0].AuditData != null)
+                        {
+                            sbData = new StringBuilder();
+                            listIdentifiers =
+                                (List<PatientEntityIdentifier>)idenfierSerializer.Deserialize(
+                                    new StringReader(identifiers[0].AuditData));
+
+                            listIdentifiers.Add(identifiers[0]);
+                        }
+                        else
+                        {
+                            listIdentifiers.Add(identifiers[0]);
+                        }
+
+                        swWriter = new StringWriter(sbData);
+                        idenfierSerializer.Serialize(swWriter, listIdentifiers);
+
+                        identifiers[0].IdentifierValue = enrollmentNo;
+                        identifiers[0].AuditData = sbData.ToString();
+
+                        patientIdentifier.UpdatePatientIdentifier(identifiers[0]);
+                    }
+
+                    XmlSerializer enrollmentSerializer = new XmlSerializer(entityEnrollments.GetType());
+
+                    if (entityEnrollments[0].AuditData != null)
+                    {
+                        sbData = new StringBuilder();
+                        listEnrollments =
+                            (List<PatientEntityEnrollment>) enrollmentSerializer.Deserialize(
+                                new StringReader(entityEnrollments[0].AuditData));
+
+                        listEnrollments.Add(entityEnrollments[0]);
+                    }
+                    else
+                    {
+                        sbData = new StringBuilder();
+                        listEnrollments.Add(entityEnrollments[0]);
+                    }
+
+                    swWriter = new StringWriter(sbData);
+                    enrollmentSerializer.Serialize(swWriter, listEnrollments);
+
+                    entityEnrollments[0].EnrollmentDate = DateTime.Parse(enrollmentDate);
+                    entityEnrollments[0].AuditData = sbData.ToString();
+
+                    patientEnrollment.updatePatientEnrollment(entityEnrollments[0]);
+                }
+            }
+
+            return Msg;
         }
 
         [WebMethod(EnableSession = true)]

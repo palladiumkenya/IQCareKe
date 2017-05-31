@@ -3276,7 +3276,7 @@ BEGIN
 			SELECT @Status = 1
 
 		IF @IDNumber IS NULL
-			SET @IDNumber = 999999999;
+			SET @IDNumber = 99999999;
 
 		IF @Sex IS NOT NULL
 			BEGIN
