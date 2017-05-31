@@ -928,7 +928,17 @@
                     dataType: "json",
                     success: function (response) {
                         console.log(response.d);
-                        toastr.success(response.d, "Update Enrollment");
+                        var messageResponse = JSON.parse(response.d);
+
+                        if (messageResponse.errorcode == 1) {
+                            toastr.error(messageResponse.msg, "Update Enrollment");
+                            return false;
+                        } else {
+                            toastr.success(messageResponse.msg, "Update Enrollment");
+                            $("#patientEnrollmentUpdateModal").modal('hide');
+                            getPatientEnrollments();
+                            return false;
+                        }
                     },
                     error: function (response) {
                         toastr.error(response.d, "Error Updating Enrollment");
