@@ -64,5 +64,17 @@ namespace IQCare.CCC.UILogic.Visit
             _result = _patientMasterVisitManager.PatientMasterVisitCheckout(patientId, id,visitSchedule,visitBy,visitType,visitDate);
             return _result > 0 ? _result : 0;
         }
+
+        public List<PatientMasterVisit> GetNonEnrollmentVisits(int patientId, int visitType)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetNonEnrollmentVisits(patientId, visitType);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
