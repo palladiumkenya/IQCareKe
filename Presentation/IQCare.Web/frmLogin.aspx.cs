@@ -333,7 +333,7 @@ namespace IQCare.Web
                         Session["SCMModule"] = theSCMDV[0]["ModuleName"];
 
                     DataView theSamePointDispenseDV = new DataView(theDS.Tables[3]);
-                    theSamePointDispenseDV.RowFilter = "ModuleId=20";
+                    theSamePointDispenseDV.RowFilter = "ModuleId=30";
                     if (theSamePointDispenseDV.Count > 0)
                         Session["SCMSamePointDispense"] = theSamePointDispenseDV[0]["ModuleName"];
 

@@ -33,8 +33,10 @@
 
         if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");
-        } else if (gender === 'Female' && patientAge>13) {
+        } else if (gender === 'Female' && patientAge>10) {
              $("#divBtnVitals").show("fast");
+        }else if (gender === 'Female' && patientAge < 10) {
+             $("#divBtnVitals").hide("fast");
         }
 
         $("#femaleVitals").hide("fast");
@@ -43,11 +45,13 @@
         
          $("#btnFemalVitals").click(function () {
 
-             $("#PatientVitals").hide("fast", function() { $("#femaleVitals").show("fast"); });
+             $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast");$(window).scrollTop($('#femaleVitals').offset().top) });
+             //;
          });
 
          $("#btnLoadTriage").click(function () {
-              $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast");});
+             $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast");$(window).scrollTop($('#PatientVitals').offset().top) });
+             //$("#PatientVitals").attr("tabindex",-1).focus();
          });
 
 

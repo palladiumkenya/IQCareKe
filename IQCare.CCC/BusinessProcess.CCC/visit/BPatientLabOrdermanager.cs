@@ -120,9 +120,11 @@ namespace BusinessProcess.CCC.visit
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
+                var complete = "Complete";
                 var patientVL = _unitOfWork.PatientLabTrackerRepository.FindBy(
                 x =>
                   x.PatientId == patientId &
+                  x.Results == complete &
                   x.LabTestId == 3)                 
                  .OrderBy(x => x.Id)
                  .ToList();
@@ -131,7 +133,21 @@ namespace BusinessProcess.CCC.visit
                 return patientVL;
             }
         }
+        public List<PatientLabTracker> GetPatientVlById(int Id)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var patientVL = _unitOfWork.PatientLabTrackerRepository.FindBy(
+                x =>
+                  x.Id == Id &
+                  x.LabTestId == 3)
+                 .OrderBy(x => x.Id)
+                 .ToList();
 
+                _unitOfWork.Dispose();
+                return patientVL;
+            }
+        }
         public PatientLabTracker GetPatientLabTestId(int patientId)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))

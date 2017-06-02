@@ -207,6 +207,20 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public DataTable getLatestPharmacyPrescriptionDetails(string PatientID, string FacilityID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientID);
+                ClsUtility.AddParameters("@FacilityId", SqlDbType.Int, FacilityID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientLatestPharmacyPrescription", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
         public DataTable getPharmacyPendingPrescriptions(string patientMasterVisitID, string PatientID)
         {
             lock (this)

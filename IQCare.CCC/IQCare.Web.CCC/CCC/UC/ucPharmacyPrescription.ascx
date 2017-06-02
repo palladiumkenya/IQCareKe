@@ -26,7 +26,7 @@
                                     <div class="col-md-3 form-group">  
                                         <div class="col-md-12"><label class="control-label pull-left">Treatment Plan</label></div>
                                         <div class="col-md-12 pull-right">
-                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason(this.value);getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
+                                            <asp:DropDownList runat="server" CssClass="form-control input-sm " id="ddlTreatmentPlan" ClientIDMode="Static" onChange="drugSwitchInterruptionReason();getCurrentRegimen();" data-parsley-min="1" data-parsley-min-message="Value Required" />
                                         </div>                    
                                     </div>   
                                     <div class="col-md-3 form-group">
@@ -597,8 +597,10 @@
         }
     }
 
-       function drugSwitchInterruptionReason(treatmentPlan)
+       function drugSwitchInterruptionReason()
        {
+           var treatmentPlan = $("#ddlTreatmentPlan option:selected").text();
+
            var valSelected = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
            if (valSelected === "Continue current treatment" || valSelected === "Select" || valSelected === "Start Treatment")
            {
@@ -607,6 +609,8 @@
            else{
                $("#<%=ddlSwitchInterruptionReason.ClientID%>").prop('disabled', false);
            }
+
+           treatmentPlan = treatmentPlan.replace(/\s/g, '');
            
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetDrugSwitchReasons',
@@ -707,7 +711,7 @@
             catch (ex) { }
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
-
+            
             var sumAllAbbr = 0;
             var sumSelectedRegimen = 0;
             try {
@@ -719,6 +723,7 @@
 
             try {
                 //var regExp = /\(([^)]+)\)/;
+                var regimenText = regimenText.match(/\(([^)]+)\)/)[1];
                 //var matches = regExp.exec(regimenText);
                 var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
                 //alert(rmv);
@@ -731,7 +736,6 @@
 
             }
             catch (err) { }
-
 
             if (sumAllAbbr > 0) {
                 if (regimenLine == "0") {
@@ -840,6 +844,7 @@
                         var serverData = data.d;
                         $("#<%=regimenLine.ClientID%>").val(serverData[0][0]);
                         selectRegimens(serverData[0][0]);
+                        loadDataContinueCurrentTreatment();
 
                         function waitForRegimens(callback) {
                             window.setTimeout(function () {  //acting like this is an Ajax call
@@ -859,6 +864,50 @@
             });
         }
 
+    }
+
+    function loadDataContinueCurrentTreatment() {
+        if (pmscmSamePointDispense != "PM/SCM With Same point dispense") {
+            DrugPrescriptionTable.destroy();
+
+            DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+                ajax: {
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/GetLatestPharmacyPrescriptionDetails",
+                    //data: "{'PMSCM':'" + pmscm + "'}",
+                    dataSrc: 'd',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                },
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false,
+                columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [3],
+                    "visible": false,
+                    "searchable": false
+                }
+                ]
+            });
+        }
+        
     }
 
     

@@ -2765,13 +2765,13 @@
         if ($("#tbInfected").val() === 'False') {
             $("#IptForm").show();
             $("#IcfForm").show();
-            $("#tbscreeningstatus").val(35);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
             $("#onIpt").prop("disabled",false);
         } else {
             $("#IptForm").hide(); 
             $("#IcfForm").hide();
             $("#IcfActionForm").hide();
-            $("#tbscreeningstatus").val(37);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'TBRx';}).prop('selected', true);
             $("#onIpt").prop("disabled",true);
             $("#onIpt").val("False");
         }
@@ -2791,9 +2791,11 @@
 
     function IcfChange() {
         if (($("#cough").val() === 'True')||($("#fever").val() === 'True')||($("#weightLoss").val() === 'True')||($("#nightSweats").val() === 'True')) {
+            $("#IcfActionForm").show();
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'PrTB';}).prop('selected', true);
         } else {
             $("#IcfActionForm").hide();
-            $("#tbscreeningstatus").val(35);
+            $("#tbscreeningstatus option").filter(function() {return $(this).text() === 'NoTB';}).prop('selected', true);
             $("#btnAddIptWorkUp").prop("disabled",false);
             $("#btnAddIpt").prop("disabled",false);
             $("#sputum").val("");
@@ -3031,9 +3033,18 @@
             success: function (response) {
                             
                 console.log(response.d);
-                if (response.d > 0)
-                               
+                if (response.d > 0)    
+                {
                     toastr.success(response.d, "Presenting Complaints");
+
+                    setTimeout(function() {
+                        window.location
+                            .href =
+                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                    },
+                                    2000);
+                }
+                        
                 else
                            
                     toastr.error(response.d,"Error occured while saving Presenting Complaints");

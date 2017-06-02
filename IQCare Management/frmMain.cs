@@ -682,7 +682,8 @@ namespace IQCare.Management
             theForm.Left = 0;
             theForm.Top = 2;
             theForm.Show();
-
+            //theForm.WindowState = FormWindowState.Minimized;
+            //theForm.WindowState = FormWindowState.Maximized;
         }
 
         //private void supplyToolStripMenuItem_Click(object sender, EventArgs e)

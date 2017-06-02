@@ -101,6 +101,7 @@
                     var sampleDate = day + "-" + month + "-" + year;                  
 
                     var resultValues = itemList.ResultValues;
+                    var undetectable = itemList.LabTestId;
                     var resultTexts = itemList.ResultTexts;
                     var resultOptions = itemList.ResultOptions;
                     var resultUnits = itemList.ResultUnits;
@@ -112,7 +113,7 @@
                     } else {
                         resultUnits = resultUnits;
                     }
-
+                    
                     //Results values==>Text==>Options
                     if (resultTexts == null && resultOptions == null) {
                         labResults = resultValues;
@@ -122,7 +123,11 @@
 
                     } else if (resultTexts == null && resultOptions != null) {
                         labResults = resultOptions;
+                    }
 
+                    //Undetectable vl
+                    if ((undetectable == 3 || undetectable == 1) && resultValues <= 50) {
+                        labResults = "Undetectable";
                     }
 
                

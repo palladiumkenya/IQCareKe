@@ -1351,9 +1351,8 @@
 						$('#StartDateART').val('');
 						return false;
 					}
-					if (moment(artStartDate).isAfter(doe)) {
+					if (moment(artStartDate).isBefore(doe)) {
 
-					} else {
 						$('#StartDateART').val('');
 						toastr.error('ART Start Date CANNOT be before Enrollment Date');
 						return false;
@@ -1870,10 +1869,10 @@
 
 												  
 												    if (itemName === 'AdultSecondlineRegimen') {
-												        itemName = 'AdultARTSecondLine';
+												        itemName ='AdultARTSecondLine';
 												    }
 												    if (itemName === 'AdultThirdlineRegimen') {
-                                                            itemName = 'AdultARTThirdLine';
+                                                            itemName ='AdultARTThirdLine';
                                                         }
 												    if (itemName === 'PaedsFirstLineRegimen') {
 												        itemName = 'PaedsARTFirstLine';

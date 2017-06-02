@@ -43,14 +43,7 @@ namespace BusinessProcess.CCC.Enrollment
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var identifier = new PatientEntityIdentifier()
-                {
-                    PatientEnrollmentId = patientIdentifier.PatientEnrollmentId,
-                    IdentifierTypeId = patientIdentifier.IdentifierTypeId,
-                    IdentifierValue = patientIdentifier.IdentifierValue
-                };
-
-                _unitOfWork.PatientIdentifierRepository.Update(identifier);
+                _unitOfWork.PatientIdentifierRepository.Update(patientIdentifier);
                 Result= _unitOfWork.Complete();
                 _unitOfWork.Dispose();
                 return Result;
