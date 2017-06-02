@@ -405,8 +405,9 @@
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12" clientidmode="Static" id="IcfForm">
-                                                <div class="col-md-3">
+                                            <div class="col-md-12 form-group" clientidmode="Static" id="IcfForm">
+                                                
+                                                <div class="col-md-3 form-group">
                                                     <div class="col-md-12">
                                                         <label class="control-label pull-left">Cough</label>
                                                     </div>
@@ -417,9 +418,10 @@
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+
+                                                <div class="col-md-3 form-group">
                                                     <div class="col-md-12">
-                                                        <label class="control-label">Fever</label>
+                                                        <label class="control-label pull-left">Fever</label>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="fever" ClientIDMode="Static" onChange="IcfChange();">
