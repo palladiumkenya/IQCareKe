@@ -86,7 +86,7 @@ namespace IQCare.Web.Patient
             patientId = (int)param.Find(l => l.Key == "PatientID").Value;
             locationId = (int)param.Find(l => l.Key == "LocationID").Value;
 
-            if (locationId == SessionManager.PatientId)
+            if (locationId == SessionManager.FacilityId)
             {
                 openPatientDetails(patientId);
             }
