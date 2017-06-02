@@ -726,15 +726,18 @@ namespace RemServer.Service
             Facility[] array = state as Facility[];
             foreach (Facility facility in array)
             {
-                using (SqlCommand command = new SqlCommand("pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella", connectionEMR))
+                try
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add(new SqlParameter("@locationid", facility.ID));
-                    command.Parameters.Add(new SqlParameter("@Currentdate", DateTime.Now));
-                    if (connectionEMR.State == ConnectionState.Closed)
-                        connectionEMR.Open();
-                    command.ExecuteNonQuery();
+                    ClsObject obj = new ClsObject();
+                    {
+                        ClsUtility.Init_Hashtable();
+                        ClsUtility.AddExtendedParameters("@locationid", SqlDbType.Int, facility.ID);
+                        ClsUtility.AddExtendedParameters("@CurrentDate", SqlDbType.DateTime, DateTime.Now);                        
+                        obj.ReturnObject(ClsUtility.theParams, "pr_Scheduler_UpdateAppointmentStatusMissedAndMet_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                    }
+                    obj = null;                    
                 }
+                catch (Exception err) { theLog.WriteEntry(err.Message + err.StackTrace + (err.InnerException!=null? err.InnerException.Message : "")); }
             }
 
 
