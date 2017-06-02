@@ -394,12 +394,16 @@ namespace IQCare.Web.UILogic
                     this.UserDetail = ds;
                     this.UserRights = ds.Tables[1];
                     CurrentLandScape = this.GetLandScape();
+                    SessionManager.UserId = user.Id;
+                    SessionManager.FacilityId = facility.Id;
+                    SessionManager.SystemId = facility.SystemId;
 
                 }
             }
             else
             {
                 _responseCode = LoginResponseCode.InvalidLogin;
+                SessionManager.Dispose();
             }
         }
         public static DateTime SystemDate()
@@ -471,7 +475,8 @@ namespace IQCare.Web.UILogic
         {
             int moduleId = CurrentServiceArea.Id;
             CurrentSession session = this;
-           
+            SessionManager.ModuleId = moduleId;
+            SessionManager.CurrentUser = session;
             return SetCurrentPatient(patientId, moduleId);
         }
         /// <summary>
@@ -489,7 +494,9 @@ namespace IQCare.Web.UILogic
             session.CurrentServiceArea = service.CurrentServiceArea;
             session.CurrentFormSet = service.Formset;
             session.hasPatient = true;
-
+            SessionManager.PatientId = patientId;
+            SessionManager.ModuleId = moduleId;
+            SessionManager.CurrentUser = session;
             HttpContext.Current.Session["CurrentUser"] = session;
             return session;
         }
@@ -515,13 +522,14 @@ namespace IQCare.Web.UILogic
         /// </summary>
         public static void Logout()
         {
+            SessionManager.Dispose();
             if (Current != null)
             {
                 // pre loggout 
                 HttpContext.Current.Session.Clear();
                 HttpContext.Current.Session.Abandon();
             }
-
+           
         }
         /// <summary>
         /// Logins the specified sender.

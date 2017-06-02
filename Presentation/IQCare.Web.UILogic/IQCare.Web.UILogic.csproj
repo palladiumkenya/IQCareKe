@@ -74,6 +74,7 @@
     <Compile Include="EnrollmentService.cs" />
     <Compile Include="PatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionManager.cs" />
     <Compile Include="SystemService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
