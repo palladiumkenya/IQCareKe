@@ -37,8 +37,8 @@ namespace Application.Presentation
         public static DateTime dtmAppVersion;
 
         #region "Application Parameters"
-        public static string AppVersion = "Ver 1.0 Kenya HMIS";
-        public static string DbVersion = "Ver 1.0 Kenya HMIS";
+        public static string AppVersion = "Ver 1.0.0.1 Kenya HMIS";
+        public static string DbVersion = "Ver 1.0.0.1 Kenya HMIS";
         public static string ReleaseDate = "01-May-2017";
         public static string VersionName = "Kenya HMIS Ver 1.0.0.1";
         #endregion
