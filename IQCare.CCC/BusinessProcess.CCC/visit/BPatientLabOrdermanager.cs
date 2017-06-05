@@ -120,9 +120,11 @@ namespace BusinessProcess.CCC.visit
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
+                var complete = "Complete";
                 var patientVL = _unitOfWork.PatientLabTrackerRepository.FindBy(
                 x =>
                   x.PatientId == patientId &
+                  x.Results == complete &
                   x.LabTestId == 3)                 
                  .OrderBy(x => x.Id)
                  .ToList();

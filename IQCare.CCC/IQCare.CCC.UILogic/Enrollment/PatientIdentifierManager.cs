@@ -17,6 +17,19 @@ namespace IQCare.CCC.UILogic.Enrollment
             return returnValue;
         }
 
+        public int UpdatePatientIdentifier(PatientEntityIdentifier patientIdentifier)
+        {
+            try
+            {
+                return _mgr.UpdatePatientIdentifier(patientIdentifier);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public List<PatientEntityIdentifier> GetPatientEntityIdentifiers(int patientId, int patientEnrollmentId,
             int identifierTypeId)
         {
