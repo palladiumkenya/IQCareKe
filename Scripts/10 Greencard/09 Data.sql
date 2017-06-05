@@ -1,3 +1,9 @@
+TRUNCATE TABLE [dbo].[LookupMaster]
+GO
+TRUNCATE TABLE [dbo].[LookupItem]
+GO
+TRUNCATE TABLE [dbo].[LookupMasterItem]
+GO
 Set Nocount on
 Go
 --Lookup master
