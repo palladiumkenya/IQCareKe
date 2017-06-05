@@ -3298,6 +3298,10 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'During Labour',1 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='During Labour'  )         ItemId  FROM LookupMaster  WHERE Name='PeriodDrugsTaken') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) SELECT MasterId, ItemId,'During Pregnancy',2 FROM( SELECT Id MasterId, ( SELECT TOP 1 Id  FROM LookupItem   WHERE Name='During Pregnancy'  )         ItemId  FROM LookupMaster  WHERE Name='PeriodDrugsTaken') X where (select count(*) from LookupMasterItem where lookupMasterId=x.MasterId and LookupItemId=x.ItemId )=0;
 
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Pregnancy'),'During Pregnancy',1)
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Labour'),'During Labour',2)
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='Post Natal'),'Post Natal',3)
+
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON
 
