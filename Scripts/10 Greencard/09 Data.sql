@@ -3295,6 +3295,10 @@ Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank) 
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='TreatmentPlan'),(SELECT Id FROM LookupItem WHERE Name='Drug Substitutions'),'Drug Substitutions',5)
 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='TreatmentPlan'),(SELECT Id FROM LookupItem WHERE Name='N/A'),'N/A',6)
 
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Pregnancy'),'During Pregnancy',1)
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='During Labour'),'During Labour',2)
+INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT Id from lookupmaster WHERE Name='PeriodDrugsTaken'),(SELECT Id FROM LookupItem WHERE Name='Post Natal'),'Post Natal',3)
+
 --insert PM/SCM With Same point dispense module
 SET IDENTITY_INSERT mst_module ON
 
